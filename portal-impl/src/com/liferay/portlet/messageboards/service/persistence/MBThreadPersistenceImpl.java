@@ -58,9 +58,19 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       MBThreadPersistence
- * @see       MBThreadUtil
+ * The persistence for the message boards thread service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see MBThreadPersistence
+ * @see MBThreadUtil
  * @generated
  */
 public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
@@ -188,11 +198,21 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			MBThreadModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the message boards thread in the entity cache if it is enabled.
+	 *
+	 * @param mbThread the message boards thread to cache
+	 */
 	public void cacheResult(MBThread mbThread) {
 		EntityCacheUtil.putResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
 			MBThreadImpl.class, mbThread.getPrimaryKey(), mbThread);
 	}
 
+	/**
+	 * Caches the message boards threads in the entity cache if it is enabled.
+	 *
+	 * @param mbThreads the message boards threads to cache
+	 */
 	public void cacheResult(List<MBThread> mbThreads) {
 		for (MBThread mbThread : mbThreads) {
 			if (EntityCacheUtil.getResult(
@@ -203,6 +223,13 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Clears the cache for all message boards threads.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(MBThreadImpl.class.getName());
 		EntityCacheUtil.clearCache(MBThreadImpl.class.getName());
@@ -210,11 +237,24 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the message boards thread.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(MBThread mbThread) {
 		EntityCacheUtil.removeResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
 			MBThreadImpl.class, mbThread.getPrimaryKey());
 	}
 
+	/**
+	 * Creates a new message boards thread with the primary key.
+	 *
+	 * @param threadId the primary key for the new message boards thread
+	 * @return the new message boards thread
+	 */
 	public MBThread create(long threadId) {
 		MBThread mbThread = new MBThreadImpl();
 
@@ -224,11 +264,27 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return mbThread;
 	}
 
+	/**
+	 * Removes the message boards thread with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the message boards thread to remove
+	 * @return the message boards thread that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a message boards thread with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the message boards thread with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param threadId the primary key of the message boards thread to remove
+	 * @return the message boards thread that was removed
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread remove(long threadId)
 		throws NoSuchThreadException, SystemException {
 		Session session = null;
@@ -353,11 +409,27 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return mbThreadImpl;
 	}
 
+	/**
+	 * Finds the message boards thread with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the message boards thread to find
+	 * @return the message boards thread
+	 * @throws com.liferay.portal.NoSuchModelException if a message boards thread with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the message boards thread with the primary key or throws a {@link com.liferay.portlet.messageboards.NoSuchThreadException} if it could not be found.
+	 *
+	 * @param threadId the primary key of the message boards thread to find
+	 * @return the message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread findByPrimaryKey(long threadId)
 		throws NoSuchThreadException, SystemException {
 		MBThread mbThread = fetchByPrimaryKey(threadId);
@@ -374,11 +446,25 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return mbThread;
 	}
 
+	/**
+	 * Finds the message boards thread with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the message boards thread to find
+	 * @return the message boards thread, or <code>null</code> if a message boards thread with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the message boards thread with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param threadId the primary key of the message boards thread to find
+	 * @return the message boards thread, or <code>null</code> if a message boards thread with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread fetchByPrimaryKey(long threadId) throws SystemException {
 		MBThread mbThread = (MBThread)EntityCacheUtil.getResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
 				MBThreadImpl.class, threadId, this);
@@ -407,15 +493,49 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return mbThread;
 	}
 
+	/**
+	 * Finds all the message boards threads where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByGroupId(long groupId) throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the message boards threads where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @return the range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the message boards threads where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -488,6 +608,19 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return list;
 	}
 
+	/**
+	 * Finds the first message boards thread in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -510,6 +643,19 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds the last message boards thread in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -535,6 +681,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds the message boards threads before and after the current message boards thread in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param threadId the primary key of the current message boards thread
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread[] findByGroupId_PrevAndNext(long threadId, long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -669,17 +829,54 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds all the message boards threads where groupId = &#63; and categoryId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @return the matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_C(long groupId, long categoryId)
 		throws SystemException {
 		return findByG_C(groupId, categoryId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the message boards threads where groupId = &#63; and categoryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @return the range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_C(long groupId, long categoryId, int start,
 		int end) throws SystemException {
 		return findByG_C(groupId, categoryId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the message boards threads where groupId = &#63; and categoryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_C(long groupId, long categoryId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -756,6 +953,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return list;
 	}
 
+	/**
+	 * Finds the first message boards thread in the ordered set where groupId = &#63; and categoryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread findByG_C_First(long groupId, long categoryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -782,6 +993,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds the last message boards thread in the ordered set where groupId = &#63; and categoryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread findByG_C_Last(long groupId, long categoryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -810,6 +1035,21 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds the message boards threads before and after the current message boards thread in the ordered set where groupId = &#63; and categoryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param threadId the primary key of the current message boards thread
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread[] findByG_C_PrevAndNext(long threadId, long groupId,
 		long categoryId, OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -948,17 +1188,58 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds all the message boards threads where groupId = &#63; and categoryId = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryIds the category ids to search with
+	 * @return the matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_C(long groupId, long[] categoryIds)
 		throws SystemException {
 		return findByG_C(groupId, categoryIds, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the message boards threads where groupId = &#63; and categoryId = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryIds the category ids to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @return the range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_C(long groupId, long[] categoryIds,
 		int start, int end) throws SystemException {
 		return findByG_C(groupId, categoryIds, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the message boards threads where groupId = &#63; and categoryId = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryIds the category ids to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_C(long groupId, long[] categoryIds,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1056,17 +1337,54 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return list;
 	}
 
+	/**
+	 * Finds all the message boards threads where groupId = &#63; and categoryId &ne; &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @return the matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_NotC(long groupId, long categoryId)
 		throws SystemException {
 		return findByG_NotC(groupId, categoryId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the message boards threads where groupId = &#63; and categoryId &ne; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @return the range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_NotC(long groupId, long categoryId,
 		int start, int end) throws SystemException {
 		return findByG_NotC(groupId, categoryId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the message boards threads where groupId = &#63; and categoryId &ne; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_NotC(long groupId, long categoryId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1144,6 +1462,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return list;
 	}
 
+	/**
+	 * Finds the first message boards thread in the ordered set where groupId = &#63; and categoryId &ne; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread findByG_NotC_First(long groupId, long categoryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -1170,6 +1502,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds the last message boards thread in the ordered set where groupId = &#63; and categoryId &ne; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread findByG_NotC_Last(long groupId, long categoryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -1198,6 +1544,21 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds the message boards threads before and after the current message boards thread in the ordered set where groupId = &#63; and categoryId &ne; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param threadId the primary key of the current message boards thread
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread[] findByG_NotC_PrevAndNext(long threadId, long groupId,
 		long categoryId, OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -1336,17 +1697,54 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds all the message boards threads where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param status the status to search with
+	 * @return the matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_S(long groupId, int status)
 		throws SystemException {
 		return findByG_S(groupId, status, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the message boards threads where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @return the range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_S(long groupId, int status, int start, int end)
 		throws SystemException {
 		return findByG_S(groupId, status, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the message boards threads where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_S(long groupId, int status, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1423,6 +1821,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return list;
 	}
 
+	/**
+	 * Finds the first message boards thread in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread findByG_S_First(long groupId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -1448,6 +1860,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds the last message boards thread in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread findByG_S_Last(long groupId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -1476,6 +1902,21 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds the message boards threads before and after the current message boards thread in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param threadId the primary key of the current message boards thread
+	 * @param groupId the group id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread[] findByG_S_PrevAndNext(long threadId, long groupId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -1614,17 +2055,54 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds all the message boards threads where categoryId = &#63; and priority = &#63;.
+	 *
+	 * @param categoryId the category id to search with
+	 * @param priority the priority to search with
+	 * @return the matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByC_P(long categoryId, double priority)
 		throws SystemException {
 		return findByC_P(categoryId, priority, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the message boards threads where categoryId = &#63; and priority = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param categoryId the category id to search with
+	 * @param priority the priority to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @return the range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByC_P(long categoryId, double priority,
 		int start, int end) throws SystemException {
 		return findByC_P(categoryId, priority, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the message boards threads where categoryId = &#63; and priority = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param categoryId the category id to search with
+	 * @param priority the priority to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByC_P(long categoryId, double priority,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1702,6 +2180,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return list;
 	}
 
+	/**
+	 * Finds the first message boards thread in the ordered set where categoryId = &#63; and priority = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param categoryId the category id to search with
+	 * @param priority the priority to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread findByC_P_First(long categoryId, double priority,
 		OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -1728,6 +2220,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds the last message boards thread in the ordered set where categoryId = &#63; and priority = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param categoryId the category id to search with
+	 * @param priority the priority to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread findByC_P_Last(long categoryId, double priority,
 		OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -1756,6 +2262,21 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds the message boards threads before and after the current message boards thread in the ordered set where categoryId = &#63; and priority = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param threadId the primary key of the current message boards thread
+	 * @param categoryId the category id to search with
+	 * @param priority the priority to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread[] findByC_P_PrevAndNext(long threadId, long categoryId,
 		double priority, OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -1894,17 +2415,57 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds all the message boards threads where groupId = &#63; and categoryId = &#63; and lastPostDate = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param lastPostDate the last post date to search with
+	 * @return the matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_C_L(long groupId, long categoryId,
 		Date lastPostDate) throws SystemException {
 		return findByG_C_L(groupId, categoryId, lastPostDate,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the message boards threads where groupId = &#63; and categoryId = &#63; and lastPostDate = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param lastPostDate the last post date to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @return the range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_C_L(long groupId, long categoryId,
 		Date lastPostDate, int start, int end) throws SystemException {
 		return findByG_C_L(groupId, categoryId, lastPostDate, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the message boards threads where groupId = &#63; and categoryId = &#63; and lastPostDate = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param lastPostDate the last post date to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_C_L(long groupId, long categoryId,
 		Date lastPostDate, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -1993,6 +2554,21 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return list;
 	}
 
+	/**
+	 * Finds the first message boards thread in the ordered set where groupId = &#63; and categoryId = &#63; and lastPostDate = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param lastPostDate the last post date to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread findByG_C_L_First(long groupId, long categoryId,
 		Date lastPostDate, OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -2022,6 +2598,21 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds the last message boards thread in the ordered set where groupId = &#63; and categoryId = &#63; and lastPostDate = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param lastPostDate the last post date to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread findByG_C_L_Last(long groupId, long categoryId,
 		Date lastPostDate, OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -2053,6 +2644,22 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds the message boards threads before and after the current message boards thread in the ordered set where groupId = &#63; and categoryId = &#63; and lastPostDate = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param threadId the primary key of the current message boards thread
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param lastPostDate the last post date to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread[] findByG_C_L_PrevAndNext(long threadId, long groupId,
 		long categoryId, Date lastPostDate, OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -2202,17 +2809,57 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds all the message boards threads where groupId = &#63; and categoryId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param status the status to search with
+	 * @return the matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_C_S(long groupId, long categoryId, int status)
 		throws SystemException {
 		return findByG_C_S(groupId, categoryId, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the message boards threads where groupId = &#63; and categoryId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @return the range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_C_S(long groupId, long categoryId,
 		int status, int start, int end) throws SystemException {
 		return findByG_C_S(groupId, categoryId, status, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the message boards threads where groupId = &#63; and categoryId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_C_S(long groupId, long categoryId,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2294,6 +2941,21 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return list;
 	}
 
+	/**
+	 * Finds the first message boards thread in the ordered set where groupId = &#63; and categoryId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread findByG_C_S_First(long groupId, long categoryId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -2323,6 +2985,21 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds the last message boards thread in the ordered set where groupId = &#63; and categoryId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread findByG_C_S_Last(long groupId, long categoryId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -2354,6 +3031,22 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds the message boards threads before and after the current message boards thread in the ordered set where groupId = &#63; and categoryId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param threadId the primary key of the current message boards thread
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread[] findByG_C_S_PrevAndNext(long threadId, long groupId,
 		long categoryId, int status, OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -2496,17 +3189,61 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds all the message boards threads where groupId = &#63; and categoryId = any &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryIds the category ids to search with
+	 * @param status the status to search with
+	 * @return the matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_C_S(long groupId, long[] categoryIds,
 		int status) throws SystemException {
 		return findByG_C_S(groupId, categoryIds, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the message boards threads where groupId = &#63; and categoryId = any &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryIds the category ids to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @return the range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_C_S(long groupId, long[] categoryIds,
 		int status, int start, int end) throws SystemException {
 		return findByG_C_S(groupId, categoryIds, status, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the message boards threads where groupId = &#63; and categoryId = any &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryIds the category ids to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_C_S(long groupId, long[] categoryIds,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2614,17 +3351,57 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return list;
 	}
 
+	/**
+	 * Finds all the message boards threads where groupId = &#63; and categoryId &ne; &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param status the status to search with
+	 * @return the matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_NotC_S(long groupId, long categoryId,
 		int status) throws SystemException {
 		return findByG_NotC_S(groupId, categoryId, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the message boards threads where groupId = &#63; and categoryId &ne; &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @return the range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_NotC_S(long groupId, long categoryId,
 		int status, int start, int end) throws SystemException {
 		return findByG_NotC_S(groupId, categoryId, status, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the message boards threads where groupId = &#63; and categoryId &ne; &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findByG_NotC_S(long groupId, long categoryId,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2706,6 +3483,21 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return list;
 	}
 
+	/**
+	 * Finds the first message boards thread in the ordered set where groupId = &#63; and categoryId &ne; &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread findByG_NotC_S_First(long groupId, long categoryId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -2735,6 +3527,21 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds the last message boards thread in the ordered set where groupId = &#63; and categoryId &ne; &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread findByG_NotC_S_Last(long groupId, long categoryId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -2766,6 +3573,22 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds the message boards threads before and after the current message boards thread in the ordered set where groupId = &#63; and categoryId &ne; &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param threadId the primary key of the current message boards thread
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next message boards thread
+	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBThread[] findByG_NotC_S_PrevAndNext(long threadId, long groupId,
 		long categoryId, int status, OrderByComparator orderByComparator)
 		throws NoSuchThreadException, SystemException {
@@ -2908,14 +3731,45 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Finds all the message boards threads.
+	 *
+	 * @return the message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the message boards threads.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @return the range of message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the message boards threads.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of message boards threads to return
+	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBThread> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2982,12 +3836,25 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return list;
 	}
 
+	/**
+	 * Removes all the message boards threads where groupId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (MBThread mbThread : findByGroupId(groupId)) {
 			remove(mbThread);
 		}
 	}
 
+	/**
+	 * Removes all the message boards threads where groupId = &#63; and categoryId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_C(long groupId, long categoryId)
 		throws SystemException {
 		for (MBThread mbThread : findByG_C(groupId, categoryId)) {
@@ -2995,6 +3862,13 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Removes all the message boards threads where groupId = &#63; and categoryId &ne; &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_NotC(long groupId, long categoryId)
 		throws SystemException {
 		for (MBThread mbThread : findByG_NotC(groupId, categoryId)) {
@@ -3002,12 +3876,26 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Removes all the message boards threads where groupId = &#63; and status = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_S(long groupId, int status) throws SystemException {
 		for (MBThread mbThread : findByG_S(groupId, status)) {
 			remove(mbThread);
 		}
 	}
 
+	/**
+	 * Removes all the message boards threads where categoryId = &#63; and priority = &#63; from the database.
+	 *
+	 * @param categoryId the category id to search with
+	 * @param priority the priority to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_P(long categoryId, double priority)
 		throws SystemException {
 		for (MBThread mbThread : findByC_P(categoryId, priority)) {
@@ -3015,6 +3903,14 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Removes all the message boards threads where groupId = &#63; and categoryId = &#63; and lastPostDate = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param lastPostDate the last post date to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_C_L(long groupId, long categoryId, Date lastPostDate)
 		throws SystemException {
 		for (MBThread mbThread : findByG_C_L(groupId, categoryId, lastPostDate)) {
@@ -3022,6 +3918,14 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Removes all the message boards threads where groupId = &#63; and categoryId = &#63; and status = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_C_S(long groupId, long categoryId, int status)
 		throws SystemException {
 		for (MBThread mbThread : findByG_C_S(groupId, categoryId, status)) {
@@ -3029,6 +3933,14 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Removes all the message boards threads where groupId = &#63; and categoryId &ne; &#63; and status = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_NotC_S(long groupId, long categoryId, int status)
 		throws SystemException {
 		for (MBThread mbThread : findByG_NotC_S(groupId, categoryId, status)) {
@@ -3036,12 +3948,24 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Removes all the message boards threads from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (MBThread mbThread : findAll()) {
 			remove(mbThread);
 		}
 	}
 
+	/**
+	 * Counts all the message boards threads where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the number of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId };
 
@@ -3088,6 +4012,14 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the message boards threads where groupId = &#63; and categoryId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @return the number of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_C(long groupId, long categoryId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, categoryId };
@@ -3139,6 +4071,14 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the message boards threads where groupId = &#63; and categoryId = any &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryIds the category ids to search with
+	 * @return the number of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_C(long groupId, long[] categoryIds)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -3220,6 +4160,14 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the message boards threads where groupId = &#63; and categoryId &ne; &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @return the number of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_NotC(long groupId, long categoryId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, categoryId };
@@ -3271,6 +4219,14 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the message boards threads where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param status the status to search with
+	 * @return the number of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_S(long groupId, int status) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, status };
 
@@ -3321,6 +4277,14 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the message boards threads where categoryId = &#63; and priority = &#63;.
+	 *
+	 * @param categoryId the category id to search with
+	 * @param priority the priority to search with
+	 * @return the number of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_P(long categoryId, double priority)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { categoryId, priority };
@@ -3372,6 +4336,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the message boards threads where groupId = &#63; and categoryId = &#63; and lastPostDate = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param lastPostDate the last post date to search with
+	 * @return the number of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_C_L(long groupId, long categoryId, Date lastPostDate)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, categoryId, lastPostDate };
@@ -3434,6 +4407,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the message boards threads where groupId = &#63; and categoryId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param status the status to search with
+	 * @return the number of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_C_S(long groupId, long categoryId, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, categoryId, status };
@@ -3489,6 +4471,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the message boards threads where groupId = &#63; and categoryId = any &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryIds the category ids to search with
+	 * @param status the status to search with
+	 * @return the number of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_C_S(long groupId, long[] categoryIds, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -3580,6 +4571,15 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the message boards threads where groupId = &#63; and categoryId &ne; &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @param status the status to search with
+	 * @return the number of matching message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_NotC_S(long groupId, long categoryId, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, categoryId, status };
@@ -3635,6 +4635,12 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the message boards threads.
+	 *
+	 * @return the number of message boards threads
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -3669,6 +4675,9 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the message boards thread persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

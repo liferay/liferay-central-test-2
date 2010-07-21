@@ -15,20 +15,16 @@
 package com.liferay.counter.model;
 
 /**
- * <p>
- * This interface is a model that represents the Counter table in the
- * database.
- * </p>
+ * The model interface for the Counter service. Represents a row in the &quot;Counter&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.counter.model.impl.CounterImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.counter.model.impl.CounterImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       CounterModel
- * @see       com.liferay.counter.model.impl.CounterImpl
- * @see       com.liferay.counter.model.impl.CounterModelImpl
+ * @author Brian Wing Shun Chan
+ * @see CounterModel
+ * @see com.liferay.counter.model.impl.CounterImpl
+ * @see com.liferay.counter.model.impl.CounterModelImpl
  * @generated
  */
 public interface Counter extends CounterModel {

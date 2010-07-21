@@ -49,9 +49,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       ImagePersistence
- * @see       ImageUtil
+ * The persistence for the image service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see ImagePersistence
+ * @see ImageUtil
  * @generated
  */
 public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
@@ -78,11 +88,21 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 			ImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the image in the entity cache if it is enabled.
+	 *
+	 * @param image the image to cache
+	 */
 	public void cacheResult(Image image) {
 		EntityCacheUtil.putResult(ImageModelImpl.ENTITY_CACHE_ENABLED,
 			ImageImpl.class, image.getPrimaryKey(), image);
 	}
 
+	/**
+	 * Caches the images in the entity cache if it is enabled.
+	 *
+	 * @param images the images to cache
+	 */
 	public void cacheResult(List<Image> images) {
 		for (Image image : images) {
 			if (EntityCacheUtil.getResult(ImageModelImpl.ENTITY_CACHE_ENABLED,
@@ -92,6 +112,13 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		}
 	}
 
+	/**
+	 * Clears the cache for all images.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(ImageImpl.class.getName());
 		EntityCacheUtil.clearCache(ImageImpl.class.getName());
@@ -99,11 +126,24 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the image.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(Image image) {
 		EntityCacheUtil.removeResult(ImageModelImpl.ENTITY_CACHE_ENABLED,
 			ImageImpl.class, image.getPrimaryKey());
 	}
 
+	/**
+	 * Creates a new image with the primary key.
+	 *
+	 * @param imageId the primary key for the new image
+	 * @return the new image
+	 */
 	public Image create(long imageId) {
 		Image image = new ImageImpl();
 
@@ -113,11 +153,27 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		return image;
 	}
 
+	/**
+	 * Removes the image with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the image to remove
+	 * @return the image that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Image remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the image with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param imageId the primary key of the image to remove
+	 * @return the image that was removed
+	 * @throws com.liferay.portal.NoSuchImageException if a image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Image remove(long imageId)
 		throws NoSuchImageException, SystemException {
 		Session session = null;
@@ -234,11 +290,27 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		return imageImpl;
 	}
 
+	/**
+	 * Finds the image with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the image to find
+	 * @return the image
+	 * @throws com.liferay.portal.NoSuchModelException if a image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Image findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the image with the primary key or throws a {@link com.liferay.portal.NoSuchImageException} if it could not be found.
+	 *
+	 * @param imageId the primary key of the image to find
+	 * @return the image
+	 * @throws com.liferay.portal.NoSuchImageException if a image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Image findByPrimaryKey(long imageId)
 		throws NoSuchImageException, SystemException {
 		Image image = fetchByPrimaryKey(imageId);
@@ -255,11 +327,25 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		return image;
 	}
 
+	/**
+	 * Finds the image with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the image to find
+	 * @return the image, or <code>null</code> if a image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Image fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the image with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param imageId the primary key of the image to find
+	 * @return the image, or <code>null</code> if a image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Image fetchByPrimaryKey(long imageId) throws SystemException {
 		Image image = (Image)EntityCacheUtil.getResult(ImageModelImpl.ENTITY_CACHE_ENABLED,
 				ImageImpl.class, imageId, this);
@@ -287,15 +373,49 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		return image;
 	}
 
+	/**
+	 * Finds all the images where size &lt; &#63;.
+	 *
+	 * @param size the size to search with
+	 * @return the matching images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Image> findByLtSize(int size) throws SystemException {
 		return findByLtSize(size, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the images where size &lt; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param size the size to search with
+	 * @param start the lower bound of the range of images to return
+	 * @param end the upper bound of the range of images to return (not inclusive)
+	 * @return the range of matching images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Image> findByLtSize(int size, int start, int end)
 		throws SystemException {
 		return findByLtSize(size, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the images where size &lt; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param size the size to search with
+	 * @param start the lower bound of the range of images to return
+	 * @param end the upper bound of the range of images to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Image> findByLtSize(int size, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -367,6 +487,19 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		return list;
 	}
 
+	/**
+	 * Finds the first image in the ordered set where size &lt; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param size the size to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching image
+	 * @throws com.liferay.portal.NoSuchImageException if a matching image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Image findByLtSize_First(int size,
 		OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
@@ -389,6 +522,19 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		}
 	}
 
+	/**
+	 * Finds the last image in the ordered set where size &lt; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param size the size to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching image
+	 * @throws com.liferay.portal.NoSuchImageException if a matching image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Image findByLtSize_Last(int size, OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
 		int count = countByLtSize(size);
@@ -413,6 +559,20 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		}
 	}
 
+	/**
+	 * Finds the images before and after the current image in the ordered set where size &lt; &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param imageId the primary key of the current image
+	 * @param size the size to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next image
+	 * @throws com.liferay.portal.NoSuchImageException if a image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Image[] findByLtSize_PrevAndNext(long imageId, int size,
 		OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
@@ -546,14 +706,45 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		}
 	}
 
+	/**
+	 * Finds all the images.
+	 *
+	 * @return the images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Image> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the images.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of images to return
+	 * @param end the upper bound of the range of images to return (not inclusive)
+	 * @return the range of images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Image> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the images.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of images to return
+	 * @param end the upper bound of the range of images to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Image> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -620,18 +811,36 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		return list;
 	}
 
+	/**
+	 * Removes all the images where size &lt; &#63; from the database.
+	 *
+	 * @param size the size to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByLtSize(int size) throws SystemException {
 		for (Image image : findByLtSize(size)) {
 			remove(image);
 		}
 	}
 
+	/**
+	 * Removes all the images from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (Image image : findAll()) {
 			remove(image);
 		}
 	}
 
+	/**
+	 * Counts all the images where size &lt; &#63;.
+	 *
+	 * @param size the size to search with
+	 * @return the number of matching images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByLtSize(int size) throws SystemException {
 		Object[] finderArgs = new Object[] { size };
 
@@ -678,6 +887,12 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the images.
+	 *
+	 * @return the number of images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -712,6 +927,9 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the image persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

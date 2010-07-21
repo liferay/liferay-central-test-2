@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the Subscription table in the
- * database.
- * </p>
+ * The model interface for the Subscription service. Represents a row in the &quot;Subscription&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.SubscriptionImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.SubscriptionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       SubscriptionModel
- * @see       com.liferay.portal.model.impl.SubscriptionImpl
- * @see       com.liferay.portal.model.impl.SubscriptionModelImpl
+ * @author Brian Wing Shun Chan
+ * @see SubscriptionModel
+ * @see com.liferay.portal.model.impl.SubscriptionImpl
+ * @see com.liferay.portal.model.impl.SubscriptionModelImpl
  * @generated
  */
 public interface Subscription extends SubscriptionModel {

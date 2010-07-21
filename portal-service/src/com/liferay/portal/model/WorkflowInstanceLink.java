@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the WorkflowInstanceLink table in the
- * database.
- * </p>
+ * The model interface for the WorkflowInstanceLink service. Represents a row in the &quot;WorkflowInstanceLink&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.WorkflowInstanceLinkImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.WorkflowInstanceLinkImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       WorkflowInstanceLinkModel
- * @see       com.liferay.portal.model.impl.WorkflowInstanceLinkImpl
- * @see       com.liferay.portal.model.impl.WorkflowInstanceLinkModelImpl
+ * @author Brian Wing Shun Chan
+ * @see WorkflowInstanceLinkModel
+ * @see com.liferay.portal.model.impl.WorkflowInstanceLinkImpl
+ * @see com.liferay.portal.model.impl.WorkflowInstanceLinkModelImpl
  * @generated
  */
 public interface WorkflowInstanceLink extends WorkflowInstanceLinkModel {

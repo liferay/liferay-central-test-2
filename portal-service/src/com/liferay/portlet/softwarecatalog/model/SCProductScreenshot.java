@@ -15,20 +15,16 @@
 package com.liferay.portlet.softwarecatalog.model;
 
 /**
- * <p>
- * This interface is a model that represents the SCProductScreenshot table in the
- * database.
- * </p>
+ * The model interface for the SCProductScreenshot service. Represents a row in the &quot;SCProductScreenshot&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       SCProductScreenshotModel
- * @see       com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl
- * @see       com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotModelImpl
+ * @author Brian Wing Shun Chan
+ * @see SCProductScreenshotModel
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotModelImpl
  * @generated
  */
 public interface SCProductScreenshot extends SCProductScreenshotModel {

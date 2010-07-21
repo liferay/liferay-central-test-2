@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the UserGroupGroupRole table in the
- * database.
- * </p>
+ * The model interface for the UserGroupGroupRole service. Represents a row in the &quot;UserGroupGroupRole&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.UserGroupGroupRoleImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.UserGroupGroupRoleImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       UserGroupGroupRoleModel
- * @see       com.liferay.portal.model.impl.UserGroupGroupRoleImpl
- * @see       com.liferay.portal.model.impl.UserGroupGroupRoleModelImpl
+ * @author Brian Wing Shun Chan
+ * @see UserGroupGroupRoleModel
+ * @see com.liferay.portal.model.impl.UserGroupGroupRoleImpl
+ * @see com.liferay.portal.model.impl.UserGroupGroupRoleModelImpl
  * @generated
  */
 public interface UserGroupGroupRole extends UserGroupGroupRoleModel {

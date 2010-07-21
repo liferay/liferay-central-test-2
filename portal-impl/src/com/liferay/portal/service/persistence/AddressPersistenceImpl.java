@@ -47,9 +47,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       AddressPersistence
- * @see       AddressUtil
+ * The persistence for the address service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see AddressPersistence
+ * @see AddressUtil
  * @generated
  */
 public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
@@ -150,11 +160,21 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			AddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the address in the entity cache if it is enabled.
+	 *
+	 * @param address the address to cache
+	 */
 	public void cacheResult(Address address) {
 		EntityCacheUtil.putResult(AddressModelImpl.ENTITY_CACHE_ENABLED,
 			AddressImpl.class, address.getPrimaryKey(), address);
 	}
 
+	/**
+	 * Caches the addresses in the entity cache if it is enabled.
+	 *
+	 * @param addresses the addresses to cache
+	 */
 	public void cacheResult(List<Address> addresses) {
 		for (Address address : addresses) {
 			if (EntityCacheUtil.getResult(
@@ -165,6 +185,13 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Clears the cache for all addresses.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(AddressImpl.class.getName());
 		EntityCacheUtil.clearCache(AddressImpl.class.getName());
@@ -172,11 +199,24 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the address.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(Address address) {
 		EntityCacheUtil.removeResult(AddressModelImpl.ENTITY_CACHE_ENABLED,
 			AddressImpl.class, address.getPrimaryKey());
 	}
 
+	/**
+	 * Creates a new address with the primary key.
+	 *
+	 * @param addressId the primary key for the new address
+	 * @return the new address
+	 */
 	public Address create(long addressId) {
 		Address address = new AddressImpl();
 
@@ -186,11 +226,27 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return address;
 	}
 
+	/**
+	 * Removes the address with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the address to remove
+	 * @return the address that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the address with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param addressId the primary key of the address to remove
+	 * @return the address that was removed
+	 * @throws com.liferay.portal.NoSuchAddressException if a address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address remove(long addressId)
 		throws NoSuchAddressException, SystemException {
 		Session session = null;
@@ -319,11 +375,27 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return addressImpl;
 	}
 
+	/**
+	 * Finds the address with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the address to find
+	 * @return the address
+	 * @throws com.liferay.portal.NoSuchModelException if a address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the address with the primary key or throws a {@link com.liferay.portal.NoSuchAddressException} if it could not be found.
+	 *
+	 * @param addressId the primary key of the address to find
+	 * @return the address
+	 * @throws com.liferay.portal.NoSuchAddressException if a address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address findByPrimaryKey(long addressId)
 		throws NoSuchAddressException, SystemException {
 		Address address = fetchByPrimaryKey(addressId);
@@ -340,11 +412,25 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return address;
 	}
 
+	/**
+	 * Finds the address with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the address to find
+	 * @return the address, or <code>null</code> if a address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the address with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param addressId the primary key of the address to find
+	 * @return the address, or <code>null</code> if a address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address fetchByPrimaryKey(long addressId) throws SystemException {
 		Address address = (Address)EntityCacheUtil.getResult(AddressModelImpl.ENTITY_CACHE_ENABLED,
 				AddressImpl.class, addressId, this);
@@ -373,17 +459,51 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return address;
 	}
 
+	/**
+	 * Finds all the addresses where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the addresses where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of addresses to return
+	 * @param end the upper bound of the range of addresses to return (not inclusive)
+	 * @return the range of matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the addresses where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of addresses to return
+	 * @param end the upper bound of the range of addresses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -455,6 +575,19 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return list;
 	}
 
+	/**
+	 * Finds the first address in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching address
+	 * @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
@@ -477,6 +610,19 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Finds the last address in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching address
+	 * @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
@@ -502,6 +648,20 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Finds the addresses before and after the current address in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param addressId the primary key of the current address
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next address
+	 * @throws com.liferay.portal.NoSuchAddressException if a address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address[] findByCompanyId_PrevAndNext(long addressId,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
@@ -636,15 +796,49 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Finds all the addresses where userId = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @return the matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findByUserId(long userId) throws SystemException {
 		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the addresses where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of addresses to return
+	 * @param end the upper bound of the range of addresses to return (not inclusive)
+	 * @return the range of matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findByUserId(long userId, int start, int end)
 		throws SystemException {
 		return findByUserId(userId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the addresses where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of addresses to return
+	 * @param end the upper bound of the range of addresses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -716,6 +910,19 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return list;
 	}
 
+	/**
+	 * Finds the first address in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching address
+	 * @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address findByUserId_First(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
@@ -738,6 +945,19 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Finds the last address in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching address
+	 * @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address findByUserId_Last(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
@@ -763,6 +983,20 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Finds the addresses before and after the current address in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param addressId the primary key of the current address
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next address
+	 * @throws com.liferay.portal.NoSuchAddressException if a address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address[] findByUserId_PrevAndNext(long addressId, long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
@@ -896,17 +1130,54 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Finds all the addresses where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findByC_C(long companyId, long classNameId)
 		throws SystemException {
 		return findByC_C(companyId, classNameId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the addresses where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param start the lower bound of the range of addresses to return
+	 * @param end the upper bound of the range of addresses to return (not inclusive)
+	 * @return the range of matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findByC_C(long companyId, long classNameId, int start,
 		int end) throws SystemException {
 		return findByC_C(companyId, classNameId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the addresses where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param start the lower bound of the range of addresses to return
+	 * @param end the upper bound of the range of addresses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findByC_C(long companyId, long classNameId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -982,6 +1253,20 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return list;
 	}
 
+	/**
+	 * Finds the first address in the ordered set where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching address
+	 * @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address findByC_C_First(long companyId, long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
@@ -1008,6 +1293,20 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Finds the last address in the ordered set where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching address
+	 * @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address findByC_C_Last(long companyId, long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
@@ -1036,6 +1335,21 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Finds the addresses before and after the current address in the ordered set where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param addressId the primary key of the current address
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next address
+	 * @throws com.liferay.portal.NoSuchAddressException if a address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address[] findByC_C_PrevAndNext(long addressId, long companyId,
 		long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
@@ -1174,17 +1488,57 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Finds all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findByC_C_C(long companyId, long classNameId,
 		long classPK) throws SystemException {
 		return findByC_C_C(companyId, classNameId, classPK, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param start the lower bound of the range of addresses to return
+	 * @param end the upper bound of the range of addresses to return (not inclusive)
+	 * @return the range of matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findByC_C_C(long companyId, long classNameId,
 		long classPK, int start, int end) throws SystemException {
 		return findByC_C_C(companyId, classNameId, classPK, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param start the lower bound of the range of addresses to return
+	 * @param end the upper bound of the range of addresses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findByC_C_C(long companyId, long classNameId,
 		long classPK, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1265,6 +1619,21 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return list;
 	}
 
+	/**
+	 * Finds the first address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching address
+	 * @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address findByC_C_C_First(long companyId, long classNameId,
 		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
@@ -1294,6 +1663,21 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Finds the last address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching address
+	 * @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address findByC_C_C_Last(long companyId, long classNameId,
 		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
@@ -1325,6 +1709,22 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Finds the addresses before and after the current address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param addressId the primary key of the current address
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next address
+	 * @throws com.liferay.portal.NoSuchAddressException if a address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address[] findByC_C_C_PrevAndNext(long addressId, long companyId,
 		long classNameId, long classPK, OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
@@ -1467,12 +1867,38 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Finds all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and mailing = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param mailing the mailing to search with
+	 * @return the matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findByC_C_C_M(long companyId, long classNameId,
 		long classPK, boolean mailing) throws SystemException {
 		return findByC_C_C_M(companyId, classNameId, classPK, mailing,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and mailing = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param mailing the mailing to search with
+	 * @param start the lower bound of the range of addresses to return
+	 * @param end the upper bound of the range of addresses to return (not inclusive)
+	 * @return the range of matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findByC_C_C_M(long companyId, long classNameId,
 		long classPK, boolean mailing, int start, int end)
 		throws SystemException {
@@ -1480,6 +1906,23 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and mailing = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param mailing the mailing to search with
+	 * @param start the lower bound of the range of addresses to return
+	 * @param end the upper bound of the range of addresses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findByC_C_C_M(long companyId, long classNameId,
 		long classPK, boolean mailing, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -1564,6 +2007,22 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return list;
 	}
 
+	/**
+	 * Finds the first address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and mailing = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param mailing the mailing to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching address
+	 * @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address findByC_C_C_M_First(long companyId, long classNameId,
 		long classPK, boolean mailing, OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
@@ -1596,6 +2055,22 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Finds the last address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and mailing = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param mailing the mailing to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching address
+	 * @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address findByC_C_C_M_Last(long companyId, long classNameId,
 		long classPK, boolean mailing, OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
@@ -1630,6 +2105,23 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Finds the addresses before and after the current address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and mailing = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param addressId the primary key of the current address
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param mailing the mailing to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next address
+	 * @throws com.liferay.portal.NoSuchAddressException if a address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address[] findByC_C_C_M_PrevAndNext(long addressId, long companyId,
 		long classNameId, long classPK, boolean mailing,
 		OrderByComparator orderByComparator)
@@ -1777,12 +2269,38 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Finds all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @return the matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary) throws SystemException {
 		return findByC_C_C_P(companyId, classNameId, classPK, primary,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @param start the lower bound of the range of addresses to return
+	 * @param end the upper bound of the range of addresses to return (not inclusive)
+	 * @return the range of matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary, int start, int end)
 		throws SystemException {
@@ -1790,6 +2308,23 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @param start the lower bound of the range of addresses to return
+	 * @param end the upper bound of the range of addresses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -1874,6 +2409,22 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return list;
 	}
 
+	/**
+	 * Finds the first address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching address
+	 * @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address findByC_C_C_P_First(long companyId, long classNameId,
 		long classPK, boolean primary, OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
@@ -1906,6 +2457,22 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Finds the last address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching address
+	 * @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address findByC_C_C_P_Last(long companyId, long classNameId,
 		long classPK, boolean primary, OrderByComparator orderByComparator)
 		throws NoSuchAddressException, SystemException {
@@ -1940,6 +2507,23 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Finds the addresses before and after the current address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param addressId the primary key of the current address
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next address
+	 * @throws com.liferay.portal.NoSuchAddressException if a address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Address[] findByC_C_C_P_PrevAndNext(long addressId, long companyId,
 		long classNameId, long classPK, boolean primary,
 		OrderByComparator orderByComparator)
@@ -2087,14 +2671,45 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Finds all the addresses.
+	 *
+	 * @return the addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the addresses.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of addresses to return
+	 * @param end the upper bound of the range of addresses to return (not inclusive)
+	 * @return the range of addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the addresses.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of addresses to return
+	 * @param end the upper bound of the range of addresses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Address> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2161,18 +2776,37 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return list;
 	}
 
+	/**
+	 * Removes all the addresses where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (Address address : findByCompanyId(companyId)) {
 			remove(address);
 		}
 	}
 
+	/**
+	 * Removes all the addresses where userId = &#63; from the database.
+	 *
+	 * @param userId the user id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (Address address : findByUserId(userId)) {
 			remove(address);
 		}
 	}
 
+	/**
+	 * Removes all the addresses where companyId = &#63; and classNameId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C(long companyId, long classNameId)
 		throws SystemException {
 		for (Address address : findByC_C(companyId, classNameId)) {
@@ -2180,6 +2814,14 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Removes all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		for (Address address : findByC_C_C(companyId, classNameId, classPK)) {
@@ -2187,6 +2829,15 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Removes all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and mailing = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param mailing the mailing to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C_C_M(long companyId, long classNameId, long classPK,
 		boolean mailing) throws SystemException {
 		for (Address address : findByC_C_C_M(companyId, classNameId, classPK,
@@ -2195,6 +2846,15 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Removes all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C_C_P(long companyId, long classNameId, long classPK,
 		boolean primary) throws SystemException {
 		for (Address address : findByC_C_C_P(companyId, classNameId, classPK,
@@ -2203,12 +2863,24 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		}
 	}
 
+	/**
+	 * Removes all the addresses from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (Address address : findAll()) {
 			remove(address);
 		}
 	}
 
+	/**
+	 * Counts all the addresses where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the number of matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId };
 
@@ -2255,6 +2927,13 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the addresses where userId = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @return the number of matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUserId(long userId) throws SystemException {
 		Object[] finderArgs = new Object[] { userId };
 
@@ -2301,6 +2980,14 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the addresses where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the number of matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C(long companyId, long classNameId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, classNameId };
@@ -2352,6 +3039,15 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the number of matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, classNameId, classPK };
@@ -2407,6 +3103,16 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and mailing = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param mailing the mailing to search with
+	 * @return the number of matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C_C_M(long companyId, long classNameId, long classPK,
 		boolean mailing) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2468,6 +3174,16 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @return the number of matching addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C_C_P(long companyId, long classNameId, long classPK,
 		boolean primary) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2529,6 +3245,12 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the addresses.
+	 *
+	 * @return the number of addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -2563,6 +3285,9 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the address persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

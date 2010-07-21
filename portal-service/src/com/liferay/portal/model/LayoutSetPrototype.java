@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the LayoutSetPrototype table in the
- * database.
- * </p>
+ * The model interface for the LayoutSetPrototype service. Represents a row in the &quot;LayoutSetPrototype&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.LayoutSetPrototypeImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.LayoutSetPrototypeImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       LayoutSetPrototypeModel
- * @see       com.liferay.portal.model.impl.LayoutSetPrototypeImpl
- * @see       com.liferay.portal.model.impl.LayoutSetPrototypeModelImpl
+ * @author Brian Wing Shun Chan
+ * @see LayoutSetPrototypeModel
+ * @see com.liferay.portal.model.impl.LayoutSetPrototypeImpl
+ * @see com.liferay.portal.model.impl.LayoutSetPrototypeModelImpl
  * @generated
  */
 public interface LayoutSetPrototype extends LayoutSetPrototypeModel {

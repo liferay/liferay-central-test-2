@@ -53,9 +53,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       PollsChoicePersistence
- * @see       PollsChoiceUtil
+ * The persistence for the polls choice service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see PollsChoicePersistence
+ * @see PollsChoiceUtil
  * @generated
  */
 public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
@@ -102,6 +112,11 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 			PollsChoiceModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the polls choice in the entity cache if it is enabled.
+	 *
+	 * @param pollsChoice the polls choice to cache
+	 */
 	public void cacheResult(PollsChoice pollsChoice) {
 		EntityCacheUtil.putResult(PollsChoiceModelImpl.ENTITY_CACHE_ENABLED,
 			PollsChoiceImpl.class, pollsChoice.getPrimaryKey(), pollsChoice);
@@ -114,6 +129,11 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 			}, pollsChoice);
 	}
 
+	/**
+	 * Caches the polls choices in the entity cache if it is enabled.
+	 *
+	 * @param pollsChoices the polls choices to cache
+	 */
 	public void cacheResult(List<PollsChoice> pollsChoices) {
 		for (PollsChoice pollsChoice : pollsChoices) {
 			if (EntityCacheUtil.getResult(
@@ -124,6 +144,13 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		}
 	}
 
+	/**
+	 * Clears the cache for all polls choices.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(PollsChoiceImpl.class.getName());
 		EntityCacheUtil.clearCache(PollsChoiceImpl.class.getName());
@@ -131,6 +158,13 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the polls choice.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(PollsChoice pollsChoice) {
 		EntityCacheUtil.removeResult(PollsChoiceModelImpl.ENTITY_CACHE_ENABLED,
 			PollsChoiceImpl.class, pollsChoice.getPrimaryKey());
@@ -143,6 +177,12 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 			});
 	}
 
+	/**
+	 * Creates a new polls choice with the primary key.
+	 *
+	 * @param choiceId the primary key for the new polls choice
+	 * @return the new polls choice
+	 */
 	public PollsChoice create(long choiceId) {
 		PollsChoice pollsChoice = new PollsChoiceImpl();
 
@@ -156,11 +196,27 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		return pollsChoice;
 	}
 
+	/**
+	 * Removes the polls choice with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the polls choice to remove
+	 * @return the polls choice that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a polls choice with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PollsChoice remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the polls choice with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param choiceId the primary key of the polls choice to remove
+	 * @return the polls choice that was removed
+	 * @throws com.liferay.portlet.polls.NoSuchChoiceException if a polls choice with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PollsChoice remove(long choiceId)
 		throws NoSuchChoiceException, SystemException {
 		Session session = null;
@@ -321,11 +377,27 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		return pollsChoiceImpl;
 	}
 
+	/**
+	 * Finds the polls choice with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the polls choice to find
+	 * @return the polls choice
+	 * @throws com.liferay.portal.NoSuchModelException if a polls choice with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PollsChoice findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the polls choice with the primary key or throws a {@link com.liferay.portlet.polls.NoSuchChoiceException} if it could not be found.
+	 *
+	 * @param choiceId the primary key of the polls choice to find
+	 * @return the polls choice
+	 * @throws com.liferay.portlet.polls.NoSuchChoiceException if a polls choice with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PollsChoice findByPrimaryKey(long choiceId)
 		throws NoSuchChoiceException, SystemException {
 		PollsChoice pollsChoice = fetchByPrimaryKey(choiceId);
@@ -342,11 +414,25 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		return pollsChoice;
 	}
 
+	/**
+	 * Finds the polls choice with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the polls choice to find
+	 * @return the polls choice, or <code>null</code> if a polls choice with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PollsChoice fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the polls choice with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param choiceId the primary key of the polls choice to find
+	 * @return the polls choice, or <code>null</code> if a polls choice with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PollsChoice fetchByPrimaryKey(long choiceId)
 		throws SystemException {
 		PollsChoice pollsChoice = (PollsChoice)EntityCacheUtil.getResult(PollsChoiceModelImpl.ENTITY_CACHE_ENABLED,
@@ -376,15 +462,49 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		return pollsChoice;
 	}
 
+	/**
+	 * Finds all the polls choices where uuid = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @return the matching polls choices
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PollsChoice> findByUuid(String uuid) throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the polls choices where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param start the lower bound of the range of polls choices to return
+	 * @param end the upper bound of the range of polls choices to return (not inclusive)
+	 * @return the range of matching polls choices
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PollsChoice> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the polls choices where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param start the lower bound of the range of polls choices to return
+	 * @param end the upper bound of the range of polls choices to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching polls choices
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PollsChoice> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -469,6 +589,19 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		return list;
 	}
 
+	/**
+	 * Finds the first polls choice in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching polls choice
+	 * @throws com.liferay.portlet.polls.NoSuchChoiceException if a matching polls choice could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PollsChoice findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchChoiceException, SystemException {
@@ -491,6 +624,19 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		}
 	}
 
+	/**
+	 * Finds the last polls choice in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching polls choice
+	 * @throws com.liferay.portlet.polls.NoSuchChoiceException if a matching polls choice could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PollsChoice findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchChoiceException, SystemException {
@@ -516,6 +662,20 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		}
 	}
 
+	/**
+	 * Finds the polls choices before and after the current polls choice in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param choiceId the primary key of the current polls choice
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next polls choice
+	 * @throws com.liferay.portlet.polls.NoSuchChoiceException if a polls choice with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PollsChoice[] findByUuid_PrevAndNext(long choiceId, String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchChoiceException, SystemException {
@@ -662,17 +822,51 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		}
 	}
 
+	/**
+	 * Finds all the polls choices where questionId = &#63;.
+	 *
+	 * @param questionId the question id to search with
+	 * @return the matching polls choices
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PollsChoice> findByQuestionId(long questionId)
 		throws SystemException {
 		return findByQuestionId(questionId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the polls choices where questionId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param questionId the question id to search with
+	 * @param start the lower bound of the range of polls choices to return
+	 * @param end the upper bound of the range of polls choices to return (not inclusive)
+	 * @return the range of matching polls choices
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PollsChoice> findByQuestionId(long questionId, int start,
 		int end) throws SystemException {
 		return findByQuestionId(questionId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the polls choices where questionId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param questionId the question id to search with
+	 * @param start the lower bound of the range of polls choices to return
+	 * @param end the upper bound of the range of polls choices to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching polls choices
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PollsChoice> findByQuestionId(long questionId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -745,6 +939,19 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		return list;
 	}
 
+	/**
+	 * Finds the first polls choice in the ordered set where questionId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param questionId the question id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching polls choice
+	 * @throws com.liferay.portlet.polls.NoSuchChoiceException if a matching polls choice could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PollsChoice findByQuestionId_First(long questionId,
 		OrderByComparator orderByComparator)
 		throws NoSuchChoiceException, SystemException {
@@ -768,6 +975,19 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		}
 	}
 
+	/**
+	 * Finds the last polls choice in the ordered set where questionId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param questionId the question id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching polls choice
+	 * @throws com.liferay.portlet.polls.NoSuchChoiceException if a matching polls choice could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PollsChoice findByQuestionId_Last(long questionId,
 		OrderByComparator orderByComparator)
 		throws NoSuchChoiceException, SystemException {
@@ -793,6 +1013,20 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		}
 	}
 
+	/**
+	 * Finds the polls choices before and after the current polls choice in the ordered set where questionId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param choiceId the primary key of the current polls choice
+	 * @param questionId the question id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next polls choice
+	 * @throws com.liferay.portlet.polls.NoSuchChoiceException if a polls choice with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PollsChoice[] findByQuestionId_PrevAndNext(long choiceId,
 		long questionId, OrderByComparator orderByComparator)
 		throws NoSuchChoiceException, SystemException {
@@ -927,6 +1161,15 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		}
 	}
 
+	/**
+	 * Finds the polls choice where questionId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.polls.NoSuchChoiceException} if it could not be found.
+	 *
+	 * @param questionId the question id to search with
+	 * @param name the name to search with
+	 * @return the matching polls choice
+	 * @throws com.liferay.portlet.polls.NoSuchChoiceException if a matching polls choice could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PollsChoice findByQ_N(long questionId, String name)
 		throws NoSuchChoiceException, SystemException {
 		PollsChoice pollsChoice = fetchByQ_N(questionId, name);
@@ -954,11 +1197,27 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		return pollsChoice;
 	}
 
+	/**
+	 * Finds the polls choice where questionId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param questionId the question id to search with
+	 * @param name the name to search with
+	 * @return the matching polls choice, or <code>null</code> if a matching polls choice could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PollsChoice fetchByQ_N(long questionId, String name)
 		throws SystemException {
 		return fetchByQ_N(questionId, name, true);
 	}
 
+	/**
+	 * Finds the polls choice where questionId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param questionId the question id to search with
+	 * @param name the name to search with
+	 * @return the matching polls choice, or <code>null</code> if a matching polls choice could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PollsChoice fetchByQ_N(long questionId, String name,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { questionId, name };
@@ -1055,15 +1314,46 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		}
 	}
 
+	/**
+	 * Finds all the polls choices.
+	 *
+	 * @return the polls choices
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PollsChoice> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the polls choices.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of polls choices to return
+	 * @param end the upper bound of the range of polls choices to return (not inclusive)
+	 * @return the range of polls choices
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PollsChoice> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the polls choices.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of polls choices to return
+	 * @param end the upper bound of the range of polls choices to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of polls choices
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PollsChoice> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1130,18 +1420,37 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		return list;
 	}
 
+	/**
+	 * Removes all the polls choices where uuid = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (PollsChoice pollsChoice : findByUuid(uuid)) {
 			remove(pollsChoice);
 		}
 	}
 
+	/**
+	 * Removes all the polls choices where questionId = &#63; from the database.
+	 *
+	 * @param questionId the question id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByQuestionId(long questionId) throws SystemException {
 		for (PollsChoice pollsChoice : findByQuestionId(questionId)) {
 			remove(pollsChoice);
 		}
 	}
 
+	/**
+	 * Removes the polls choice where questionId = &#63; and name = &#63; from the database.
+	 *
+	 * @param questionId the question id to search with
+	 * @param name the name to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByQ_N(long questionId, String name)
 		throws NoSuchChoiceException, SystemException {
 		PollsChoice pollsChoice = findByQ_N(questionId, name);
@@ -1149,12 +1458,24 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		remove(pollsChoice);
 	}
 
+	/**
+	 * Removes all the polls choices from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (PollsChoice pollsChoice : findAll()) {
 			remove(pollsChoice);
 		}
 	}
 
+	/**
+	 * Counts all the polls choices where uuid = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @return the number of matching polls choices
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUuid(String uuid) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid };
 
@@ -1213,6 +1534,13 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the polls choices where questionId = &#63;.
+	 *
+	 * @param questionId the question id to search with
+	 * @return the number of matching polls choices
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByQuestionId(long questionId) throws SystemException {
 		Object[] finderArgs = new Object[] { questionId };
 
@@ -1259,6 +1587,14 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the polls choices where questionId = &#63; and name = &#63;.
+	 *
+	 * @param questionId the question id to search with
+	 * @param name the name to search with
+	 * @return the number of matching polls choices
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByQ_N(long questionId, String name)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { questionId, name };
@@ -1322,6 +1658,12 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the polls choices.
+	 *
+	 * @return the number of polls choices
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -1356,6 +1698,9 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the polls choice persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the ResourcePermission table in the
- * database.
- * </p>
+ * The model interface for the ResourcePermission service. Represents a row in the &quot;ResourcePermission&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.ResourcePermissionImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.ResourcePermissionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       ResourcePermissionModel
- * @see       com.liferay.portal.model.impl.ResourcePermissionImpl
- * @see       com.liferay.portal.model.impl.ResourcePermissionModelImpl
+ * @author Brian Wing Shun Chan
+ * @see ResourcePermissionModel
+ * @see com.liferay.portal.model.impl.ResourcePermissionImpl
+ * @see com.liferay.portal.model.impl.ResourcePermissionModelImpl
  * @generated
  */
 public interface ResourcePermission extends ResourcePermissionModel {

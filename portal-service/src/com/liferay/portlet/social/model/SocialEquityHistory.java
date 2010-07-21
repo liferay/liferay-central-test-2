@@ -15,20 +15,16 @@
 package com.liferay.portlet.social.model;
 
 /**
- * <p>
- * This interface is a model that represents the SocialEquityHistory table in the
- * database.
- * </p>
+ * The model interface for the SocialEquityHistory service. Represents a row in the &quot;SocialEquityHistory&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.social.model.impl.SocialEquityHistoryImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.social.model.impl.SocialEquityHistoryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       SocialEquityHistoryModel
- * @see       com.liferay.portlet.social.model.impl.SocialEquityHistoryImpl
- * @see       com.liferay.portlet.social.model.impl.SocialEquityHistoryModelImpl
+ * @author Brian Wing Shun Chan
+ * @see SocialEquityHistoryModel
+ * @see com.liferay.portlet.social.model.impl.SocialEquityHistoryImpl
+ * @see com.liferay.portlet.social.model.impl.SocialEquityHistoryModelImpl
  * @generated
  */
 public interface SocialEquityHistory extends SocialEquityHistoryModel {

@@ -56,9 +56,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       AssetVocabularyPersistence
- * @see       AssetVocabularyUtil
+ * The persistence for the asset vocabulary service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see AssetVocabularyPersistence
+ * @see AssetVocabularyUtil
  * @generated
  */
 public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVocabulary>
@@ -128,6 +138,11 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			AssetVocabularyModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
+	/**
+	 * Caches the asset vocabulary in the entity cache if it is enabled.
+	 *
+	 * @param assetVocabulary the asset vocabulary to cache
+	 */
 	public void cacheResult(AssetVocabulary assetVocabulary) {
 		EntityCacheUtil.putResult(AssetVocabularyModelImpl.ENTITY_CACHE_ENABLED,
 			AssetVocabularyImpl.class, assetVocabulary.getPrimaryKey(),
@@ -147,6 +162,11 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			}, assetVocabulary);
 	}
 
+	/**
+	 * Caches the asset vocabularies in the entity cache if it is enabled.
+	 *
+	 * @param assetVocabularies the asset vocabularies to cache
+	 */
 	public void cacheResult(List<AssetVocabulary> assetVocabularies) {
 		for (AssetVocabulary assetVocabulary : assetVocabularies) {
 			if (EntityCacheUtil.getResult(
@@ -158,6 +178,13 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		}
 	}
 
+	/**
+	 * Clears the cache for all asset vocabularies.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(AssetVocabularyImpl.class.getName());
 		EntityCacheUtil.clearCache(AssetVocabularyImpl.class.getName());
@@ -165,6 +192,13 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the asset vocabulary.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(AssetVocabulary assetVocabulary) {
 		EntityCacheUtil.removeResult(AssetVocabularyModelImpl.ENTITY_CACHE_ENABLED,
 			AssetVocabularyImpl.class, assetVocabulary.getPrimaryKey());
@@ -183,6 +217,12 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 			});
 	}
 
+	/**
+	 * Creates a new asset vocabulary with the primary key.
+	 *
+	 * @param vocabularyId the primary key for the new asset vocabulary
+	 * @return the new asset vocabulary
+	 */
 	public AssetVocabulary create(long vocabularyId) {
 		AssetVocabulary assetVocabulary = new AssetVocabularyImpl();
 
@@ -196,11 +236,27 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		return assetVocabulary;
 	}
 
+	/**
+	 * Removes the asset vocabulary with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the asset vocabulary to remove
+	 * @return the asset vocabulary that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a asset vocabulary with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the asset vocabulary with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param vocabularyId the primary key of the asset vocabulary to remove
+	 * @return the asset vocabulary that was removed
+	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a asset vocabulary with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary remove(long vocabularyId)
 		throws NoSuchVocabularyException, SystemException {
 		Session session = null;
@@ -398,11 +454,27 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		return assetVocabularyImpl;
 	}
 
+	/**
+	 * Finds the asset vocabulary with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the asset vocabulary to find
+	 * @return the asset vocabulary
+	 * @throws com.liferay.portal.NoSuchModelException if a asset vocabulary with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the asset vocabulary with the primary key or throws a {@link com.liferay.portlet.asset.NoSuchVocabularyException} if it could not be found.
+	 *
+	 * @param vocabularyId the primary key of the asset vocabulary to find
+	 * @return the asset vocabulary
+	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a asset vocabulary with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary findByPrimaryKey(long vocabularyId)
 		throws NoSuchVocabularyException, SystemException {
 		AssetVocabulary assetVocabulary = fetchByPrimaryKey(vocabularyId);
@@ -419,11 +491,25 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		return assetVocabulary;
 	}
 
+	/**
+	 * Finds the asset vocabulary with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the asset vocabulary to find
+	 * @return the asset vocabulary, or <code>null</code> if a asset vocabulary with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the asset vocabulary with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param vocabularyId the primary key of the asset vocabulary to find
+	 * @return the asset vocabulary, or <code>null</code> if a asset vocabulary with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary fetchByPrimaryKey(long vocabularyId)
 		throws SystemException {
 		AssetVocabulary assetVocabulary = (AssetVocabulary)EntityCacheUtil.getResult(AssetVocabularyModelImpl.ENTITY_CACHE_ENABLED,
@@ -453,16 +539,50 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		return assetVocabulary;
 	}
 
+	/**
+	 * Finds all the asset vocabularies where uuid = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @return the matching asset vocabularies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetVocabulary> findByUuid(String uuid)
 		throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the asset vocabularies where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param start the lower bound of the range of asset vocabularies to return
+	 * @param end the upper bound of the range of asset vocabularies to return (not inclusive)
+	 * @return the range of matching asset vocabularies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetVocabulary> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the asset vocabularies where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param start the lower bound of the range of asset vocabularies to return
+	 * @param end the upper bound of the range of asset vocabularies to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching asset vocabularies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetVocabulary> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -547,6 +667,19 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		return list;
 	}
 
+	/**
+	 * Finds the first asset vocabulary in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching asset vocabulary
+	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -569,6 +702,19 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		}
 	}
 
+	/**
+	 * Finds the last asset vocabulary in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching asset vocabulary
+	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -594,6 +740,20 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		}
 	}
 
+	/**
+	 * Finds the asset vocabularies before and after the current asset vocabulary in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param vocabularyId the primary key of the current asset vocabulary
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next asset vocabulary
+	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a asset vocabulary with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary[] findByUuid_PrevAndNext(long vocabularyId,
 		String uuid, OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -740,6 +900,15 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		}
 	}
 
+	/**
+	 * Finds the asset vocabulary where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchVocabularyException} if it could not be found.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching asset vocabulary
+	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary findByUUID_G(String uuid, long groupId)
 		throws NoSuchVocabularyException, SystemException {
 		AssetVocabulary assetVocabulary = fetchByUUID_G(uuid, groupId);
@@ -767,11 +936,27 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		return assetVocabulary;
 	}
 
+	/**
+	 * Finds the asset vocabulary where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching asset vocabulary, or <code>null</code> if a matching asset vocabulary could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
 	}
 
+	/**
+	 * Finds the asset vocabulary where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching asset vocabulary, or <code>null</code> if a matching asset vocabulary could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -868,16 +1053,50 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		}
 	}
 
+	/**
+	 * Finds all the asset vocabularies where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the matching asset vocabularies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetVocabulary> findByGroupId(long groupId)
 		throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the asset vocabularies where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of asset vocabularies to return
+	 * @param end the upper bound of the range of asset vocabularies to return (not inclusive)
+	 * @return the range of matching asset vocabularies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetVocabulary> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the asset vocabularies where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of asset vocabularies to return
+	 * @param end the upper bound of the range of asset vocabularies to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching asset vocabularies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetVocabulary> findByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -950,6 +1169,19 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		return list;
 	}
 
+	/**
+	 * Finds the first asset vocabulary in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching asset vocabulary
+	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -973,6 +1205,19 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		}
 	}
 
+	/**
+	 * Finds the last asset vocabulary in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching asset vocabulary
+	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -998,6 +1243,20 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		}
 	}
 
+	/**
+	 * Finds the asset vocabularies before and after the current asset vocabulary in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param vocabularyId the primary key of the current asset vocabulary
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next asset vocabulary
+	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a asset vocabulary with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary[] findByGroupId_PrevAndNext(long vocabularyId,
 		long groupId, OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -1132,17 +1391,51 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the asset vocabularies where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the matching asset vocabularies that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetVocabulary> filterFindByGroupId(long groupId)
 		throws SystemException {
 		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the asset vocabularies where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of asset vocabularies to return
+	 * @param end the upper bound of the range of asset vocabularies to return (not inclusive)
+	 * @return the range of matching asset vocabularies that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetVocabulary> filterFindByGroupId(long groupId, int start,
 		int end) throws SystemException {
 		return filterFindByGroupId(groupId, start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the asset vocabularies where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of asset vocabularies to return
+	 * @param end the upper bound of the range of asset vocabularies to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching asset vocabularies that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetVocabulary> filterFindByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -1200,17 +1493,51 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		}
 	}
 
+	/**
+	 * Finds all the asset vocabularies where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the matching asset vocabularies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetVocabulary> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the asset vocabularies where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of asset vocabularies to return
+	 * @param end the upper bound of the range of asset vocabularies to return (not inclusive)
+	 * @return the range of matching asset vocabularies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetVocabulary> findByCompanyId(long companyId, int start,
 		int end) throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the asset vocabularies where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of asset vocabularies to return
+	 * @param end the upper bound of the range of asset vocabularies to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching asset vocabularies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetVocabulary> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1283,6 +1610,19 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		return list;
 	}
 
+	/**
+	 * Finds the first asset vocabulary in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching asset vocabulary
+	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -1306,6 +1646,19 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		}
 	}
 
+	/**
+	 * Finds the last asset vocabulary in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching asset vocabulary
+	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -1331,6 +1684,20 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		}
 	}
 
+	/**
+	 * Finds the asset vocabularies before and after the current asset vocabulary in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param vocabularyId the primary key of the current asset vocabulary
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next asset vocabulary
+	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a asset vocabulary with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary[] findByCompanyId_PrevAndNext(long vocabularyId,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchVocabularyException, SystemException {
@@ -1465,6 +1832,15 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		}
 	}
 
+	/**
+	 * Finds the asset vocabulary where groupId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchVocabularyException} if it could not be found.
+	 *
+	 * @param groupId the group id to search with
+	 * @param name the name to search with
+	 * @return the matching asset vocabulary
+	 * @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary findByG_N(long groupId, String name)
 		throws NoSuchVocabularyException, SystemException {
 		AssetVocabulary assetVocabulary = fetchByG_N(groupId, name);
@@ -1492,11 +1868,27 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		return assetVocabulary;
 	}
 
+	/**
+	 * Finds the asset vocabulary where groupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param name the name to search with
+	 * @return the matching asset vocabulary, or <code>null</code> if a matching asset vocabulary could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary fetchByG_N(long groupId, String name)
 		throws SystemException {
 		return fetchByG_N(groupId, name, true);
 	}
 
+	/**
+	 * Finds the asset vocabulary where groupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param name the name to search with
+	 * @return the matching asset vocabulary, or <code>null</code> if a matching asset vocabulary could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetVocabulary fetchByG_N(long groupId, String name,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, name };
@@ -1593,15 +1985,46 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		}
 	}
 
+	/**
+	 * Finds all the asset vocabularies.
+	 *
+	 * @return the asset vocabularies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetVocabulary> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the asset vocabularies.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of asset vocabularies to return
+	 * @param end the upper bound of the range of asset vocabularies to return (not inclusive)
+	 * @return the range of asset vocabularies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetVocabulary> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the asset vocabularies.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of asset vocabularies to return
+	 * @param end the upper bound of the range of asset vocabularies to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of asset vocabularies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetVocabulary> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1668,12 +2091,25 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		return list;
 	}
 
+	/**
+	 * Removes all the asset vocabularies where uuid = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (AssetVocabulary assetVocabulary : findByUuid(uuid)) {
 			remove(assetVocabulary);
 		}
 	}
 
+	/**
+	 * Removes the asset vocabulary where uuid = &#63; and groupId = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUUID_G(String uuid, long groupId)
 		throws NoSuchVocabularyException, SystemException {
 		AssetVocabulary assetVocabulary = findByUUID_G(uuid, groupId);
@@ -1681,18 +2117,37 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		remove(assetVocabulary);
 	}
 
+	/**
+	 * Removes all the asset vocabularies where groupId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (AssetVocabulary assetVocabulary : findByGroupId(groupId)) {
 			remove(assetVocabulary);
 		}
 	}
 
+	/**
+	 * Removes all the asset vocabularies where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (AssetVocabulary assetVocabulary : findByCompanyId(companyId)) {
 			remove(assetVocabulary);
 		}
 	}
 
+	/**
+	 * Removes the asset vocabulary where groupId = &#63; and name = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param name the name to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_N(long groupId, String name)
 		throws NoSuchVocabularyException, SystemException {
 		AssetVocabulary assetVocabulary = findByG_N(groupId, name);
@@ -1700,12 +2155,24 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		remove(assetVocabulary);
 	}
 
+	/**
+	 * Removes all the asset vocabularies from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (AssetVocabulary assetVocabulary : findAll()) {
 			remove(assetVocabulary);
 		}
 	}
 
+	/**
+	 * Counts all the asset vocabularies where uuid = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @return the number of matching asset vocabularies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUuid(String uuid) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid };
 
@@ -1764,6 +2231,14 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the asset vocabularies where uuid = &#63; and groupId = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the number of matching asset vocabularies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -1827,6 +2302,13 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the asset vocabularies where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the number of matching asset vocabularies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId };
 
@@ -1873,6 +2355,13 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the asset vocabularies where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the number of matching asset vocabularies that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByGroupId(long groupId) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByGroupId(groupId);
@@ -1914,6 +2403,13 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		}
 	}
 
+	/**
+	 * Counts all the asset vocabularies where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the number of matching asset vocabularies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId };
 
@@ -1960,6 +2456,14 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the asset vocabularies where groupId = &#63; and name = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param name the name to search with
+	 * @return the number of matching asset vocabularies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_N(long groupId, String name) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, name };
 
@@ -2022,6 +2526,14 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the asset vocabularies where groupId = &#63; and name = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param name the name to search with
+	 * @return the number of matching asset vocabularies that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByG_N(long groupId, String name)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -2080,6 +2592,12 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		}
 	}
 
+	/**
+	 * Counts all the asset vocabularies.
+	 *
+	 * @return the number of asset vocabularies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -2114,6 +2632,9 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the asset vocabulary persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

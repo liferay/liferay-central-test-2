@@ -24,9 +24,15 @@ import com.liferay.portal.service.ServiceContext;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       PortletPersistence
- * @see       PortletPersistenceImpl
+ * The persistence utility for the portlet service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see PortletPersistence
+ * @see PortletPersistenceImpl
  * @generated
  */
 public class PortletUtil {
@@ -103,19 +109,43 @@ public class PortletUtil {
 		return getPersistence().update(portlet, merge, serviceContext);
 	}
 
+	/**
+	* Caches the portlet in the entity cache if it is enabled.
+	*
+	* @param portlet the portlet to cache
+	*/
 	public static void cacheResult(com.liferay.portal.model.Portlet portlet) {
 		getPersistence().cacheResult(portlet);
 	}
 
+	/**
+	* Caches the portlets in the entity cache if it is enabled.
+	*
+	* @param portlets the portlets to cache
+	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.Portlet> portlets) {
 		getPersistence().cacheResult(portlets);
 	}
 
+	/**
+	* Creates a new portlet with the primary key.
+	*
+	* @param id the primary key for the new portlet
+	* @return the new portlet
+	*/
 	public static com.liferay.portal.model.Portlet create(long id) {
 		return getPersistence().create(id);
 	}
 
+	/**
+	* Removes the portlet with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param id the primary key of the portlet to remove
+	* @return the portlet that was removed
+	* @throws com.liferay.portal.NoSuchPortletException if a portlet with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Portlet remove(long id)
 		throws com.liferay.portal.NoSuchPortletException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -128,29 +158,78 @@ public class PortletUtil {
 		return getPersistence().updateImpl(portlet, merge);
 	}
 
+	/**
+	* Finds the portlet with the primary key or throws a {@link com.liferay.portal.NoSuchPortletException} if it could not be found.
+	*
+	* @param id the primary key of the portlet to find
+	* @return the portlet
+	* @throws com.liferay.portal.NoSuchPortletException if a portlet with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Portlet findByPrimaryKey(long id)
 		throws com.liferay.portal.NoSuchPortletException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByPrimaryKey(id);
 	}
 
+	/**
+	* Finds the portlet with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param id the primary key of the portlet to find
+	* @return the portlet, or <code>null</code> if a portlet with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Portlet fetchByPrimaryKey(long id)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(id);
 	}
 
+	/**
+	* Finds all the portlets where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the matching portlets
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.Portlet> findByCompanyId(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByCompanyId(companyId);
 	}
 
+	/**
+	* Finds a range of all the portlets where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of portlets to return
+	* @param end the upper bound of the range of portlets to return (not inclusive)
+	* @return the range of matching portlets
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.Portlet> findByCompanyId(
 		long companyId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByCompanyId(companyId, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the portlets where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of portlets to return
+	* @param end the upper bound of the range of portlets to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching portlets
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.Portlet> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -159,6 +238,19 @@ public class PortletUtil {
 				   .findByCompanyId(companyId, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first portlet in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching portlet
+	* @throws com.liferay.portal.NoSuchPortletException if a matching portlet could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Portlet findByCompanyId_First(
 		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -168,6 +260,19 @@ public class PortletUtil {
 				   .findByCompanyId_First(companyId, orderByComparator);
 	}
 
+	/**
+	* Finds the last portlet in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching portlet
+	* @throws com.liferay.portal.NoSuchPortletException if a matching portlet could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Portlet findByCompanyId_Last(
 		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -177,6 +282,20 @@ public class PortletUtil {
 				   .findByCompanyId_Last(companyId, orderByComparator);
 	}
 
+	/**
+	* Finds the portlets before and after the current portlet in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param id the primary key of the current portlet
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next portlet
+	* @throws com.liferay.portal.NoSuchPortletException if a portlet with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Portlet[] findByCompanyId_PrevAndNext(
 		long id, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -186,6 +305,15 @@ public class PortletUtil {
 				   .findByCompanyId_PrevAndNext(id, companyId, orderByComparator);
 	}
 
+	/**
+	* Finds the portlet where companyId = &#63; and portletId = &#63; or throws a {@link com.liferay.portal.NoSuchPortletException} if it could not be found.
+	*
+	* @param companyId the company id to search with
+	* @param portletId the portlet id to search with
+	* @return the matching portlet
+	* @throws com.liferay.portal.NoSuchPortletException if a matching portlet could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Portlet findByC_P(long companyId,
 		java.lang.String portletId)
 		throws com.liferay.portal.NoSuchPortletException,
@@ -193,12 +321,28 @@ public class PortletUtil {
 		return getPersistence().findByC_P(companyId, portletId);
 	}
 
+	/**
+	* Finds the portlet where companyId = &#63; and portletId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param companyId the company id to search with
+	* @param portletId the portlet id to search with
+	* @return the matching portlet, or <code>null</code> if a matching portlet could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Portlet fetchByC_P(long companyId,
 		java.lang.String portletId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByC_P(companyId, portletId);
 	}
 
+	/**
+	* Finds the portlet where companyId = &#63; and portletId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param companyId the company id to search with
+	* @param portletId the portlet id to search with
+	* @return the matching portlet, or <code>null</code> if a matching portlet could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Portlet fetchByC_P(long companyId,
 		java.lang.String portletId, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -206,17 +350,48 @@ public class PortletUtil {
 				   .fetchByC_P(companyId, portletId, retrieveFromCache);
 	}
 
+	/**
+	* Finds all the portlets.
+	*
+	* @return the portlets
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.Portlet> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
+	/**
+	* Finds a range of all the portlets.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of portlets to return
+	* @param end the upper bound of the range of portlets to return (not inclusive)
+	* @return the range of portlets
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.Portlet> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the portlets.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of portlets to return
+	* @param end the upper bound of the range of portlets to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of portlets
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.Portlet> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -224,32 +399,71 @@ public class PortletUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
+	/**
+	* Removes all the portlets where companyId = &#63; from the database.
+	*
+	* @param companyId the company id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
+	/**
+	* Removes the portlet where companyId = &#63; and portletId = &#63; from the database.
+	*
+	* @param companyId the company id to search with
+	* @param portletId the portlet id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByC_P(long companyId, java.lang.String portletId)
 		throws com.liferay.portal.NoSuchPortletException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByC_P(companyId, portletId);
 	}
 
+	/**
+	* Removes all the portlets from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
+	/**
+	* Counts all the portlets where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the number of matching portlets
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByCompanyId(companyId);
 	}
 
+	/**
+	* Counts all the portlets where companyId = &#63; and portletId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @param portletId the portlet id to search with
+	* @return the number of matching portlets
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByC_P(long companyId, java.lang.String portletId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_P(companyId, portletId);
 	}
 
+	/**
+	* Counts all the portlets.
+	*
+	* @return the number of portlets
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();

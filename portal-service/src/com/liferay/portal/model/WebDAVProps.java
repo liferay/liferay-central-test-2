@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the WebDAVProps table in the
- * database.
- * </p>
+ * The model interface for the WebDAVProps service. Represents a row in the &quot;WebDAVProps&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.WebDAVPropsImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.WebDAVPropsImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       WebDAVPropsModel
- * @see       com.liferay.portal.model.impl.WebDAVPropsImpl
- * @see       com.liferay.portal.model.impl.WebDAVPropsModelImpl
+ * @author Brian Wing Shun Chan
+ * @see WebDAVPropsModel
+ * @see com.liferay.portal.model.impl.WebDAVPropsImpl
+ * @see com.liferay.portal.model.impl.WebDAVPropsModelImpl
  * @generated
  */
 public interface WebDAVProps extends WebDAVPropsModel {

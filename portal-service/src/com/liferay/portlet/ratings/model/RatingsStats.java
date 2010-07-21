@@ -15,20 +15,16 @@
 package com.liferay.portlet.ratings.model;
 
 /**
- * <p>
- * This interface is a model that represents the RatingsStats table in the
- * database.
- * </p>
+ * The model interface for the RatingsStats service. Represents a row in the &quot;RatingsStats&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.ratings.model.impl.RatingsStatsImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.ratings.model.impl.RatingsStatsImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       RatingsStatsModel
- * @see       com.liferay.portlet.ratings.model.impl.RatingsStatsImpl
- * @see       com.liferay.portlet.ratings.model.impl.RatingsStatsModelImpl
+ * @author Brian Wing Shun Chan
+ * @see RatingsStatsModel
+ * @see com.liferay.portlet.ratings.model.impl.RatingsStatsImpl
+ * @see com.liferay.portlet.ratings.model.impl.RatingsStatsModelImpl
  * @generated
  */
 public interface RatingsStats extends RatingsStatsModel {

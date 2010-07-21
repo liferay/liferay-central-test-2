@@ -25,9 +25,15 @@ import com.liferay.portlet.expando.model.ExpandoRow;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       ExpandoRowPersistence
- * @see       ExpandoRowPersistenceImpl
+ * The persistence utility for the expando row service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see ExpandoRowPersistence
+ * @see ExpandoRowPersistenceImpl
  * @generated
  */
 public class ExpandoRowUtil {
@@ -105,21 +111,45 @@ public class ExpandoRowUtil {
 		return getPersistence().update(expandoRow, merge, serviceContext);
 	}
 
+	/**
+	* Caches the expando row in the entity cache if it is enabled.
+	*
+	* @param expandoRow the expando row to cache
+	*/
 	public static void cacheResult(
 		com.liferay.portlet.expando.model.ExpandoRow expandoRow) {
 		getPersistence().cacheResult(expandoRow);
 	}
 
+	/**
+	* Caches the expando rows in the entity cache if it is enabled.
+	*
+	* @param expandoRows the expando rows to cache
+	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.expando.model.ExpandoRow> expandoRows) {
 		getPersistence().cacheResult(expandoRows);
 	}
 
+	/**
+	* Creates a new expando row with the primary key.
+	*
+	* @param rowId the primary key for the new expando row
+	* @return the new expando row
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoRow create(
 		long rowId) {
 		return getPersistence().create(rowId);
 	}
 
+	/**
+	* Removes the expando row with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param rowId the primary key of the expando row to remove
+	* @return the expando row that was removed
+	* @throws com.liferay.portlet.expando.NoSuchRowException if a expando row with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoRow remove(
 		long rowId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -133,6 +163,14 @@ public class ExpandoRowUtil {
 		return getPersistence().updateImpl(expandoRow, merge);
 	}
 
+	/**
+	* Finds the expando row with the primary key or throws a {@link com.liferay.portlet.expando.NoSuchRowException} if it could not be found.
+	*
+	* @param rowId the primary key of the expando row to find
+	* @return the expando row
+	* @throws com.liferay.portlet.expando.NoSuchRowException if a expando row with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoRow findByPrimaryKey(
 		long rowId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -140,23 +178,64 @@ public class ExpandoRowUtil {
 		return getPersistence().findByPrimaryKey(rowId);
 	}
 
+	/**
+	* Finds the expando row with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param rowId the primary key of the expando row to find
+	* @return the expando row, or <code>null</code> if a expando row with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoRow fetchByPrimaryKey(
 		long rowId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(rowId);
 	}
 
+	/**
+	* Finds all the expando rows where tableId = &#63;.
+	*
+	* @param tableId the table id to search with
+	* @return the matching expando rows
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findByTableId(
 		long tableId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByTableId(tableId);
 	}
 
+	/**
+	* Finds a range of all the expando rows where tableId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param tableId the table id to search with
+	* @param start the lower bound of the range of expando rows to return
+	* @param end the upper bound of the range of expando rows to return (not inclusive)
+	* @return the range of matching expando rows
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findByTableId(
 		long tableId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByTableId(tableId, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the expando rows where tableId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param tableId the table id to search with
+	* @param start the lower bound of the range of expando rows to return
+	* @param end the upper bound of the range of expando rows to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching expando rows
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findByTableId(
 		long tableId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -165,6 +244,19 @@ public class ExpandoRowUtil {
 				   .findByTableId(tableId, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first expando row in the ordered set where tableId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param tableId the table id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching expando row
+	* @throws com.liferay.portlet.expando.NoSuchRowException if a matching expando row could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoRow findByTableId_First(
 		long tableId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -173,6 +265,19 @@ public class ExpandoRowUtil {
 		return getPersistence().findByTableId_First(tableId, orderByComparator);
 	}
 
+	/**
+	* Finds the last expando row in the ordered set where tableId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param tableId the table id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching expando row
+	* @throws com.liferay.portlet.expando.NoSuchRowException if a matching expando row could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoRow findByTableId_Last(
 		long tableId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -181,6 +286,20 @@ public class ExpandoRowUtil {
 		return getPersistence().findByTableId_Last(tableId, orderByComparator);
 	}
 
+	/**
+	* Finds the expando rows before and after the current expando row in the ordered set where tableId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param rowId the primary key of the current expando row
+	* @param tableId the table id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next expando row
+	* @throws com.liferay.portlet.expando.NoSuchRowException if a expando row with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoRow[] findByTableId_PrevAndNext(
 		long rowId, long tableId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -190,6 +309,15 @@ public class ExpandoRowUtil {
 				   .findByTableId_PrevAndNext(rowId, tableId, orderByComparator);
 	}
 
+	/**
+	* Finds the expando row where tableId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.expando.NoSuchRowException} if it could not be found.
+	*
+	* @param tableId the table id to search with
+	* @param classPK the class p k to search with
+	* @return the matching expando row
+	* @throws com.liferay.portlet.expando.NoSuchRowException if a matching expando row could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoRow findByT_C(
 		long tableId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -197,29 +325,76 @@ public class ExpandoRowUtil {
 		return getPersistence().findByT_C(tableId, classPK);
 	}
 
+	/**
+	* Finds the expando row where tableId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param tableId the table id to search with
+	* @param classPK the class p k to search with
+	* @return the matching expando row, or <code>null</code> if a matching expando row could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoRow fetchByT_C(
 		long tableId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByT_C(tableId, classPK);
 	}
 
+	/**
+	* Finds the expando row where tableId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param tableId the table id to search with
+	* @param classPK the class p k to search with
+	* @return the matching expando row, or <code>null</code> if a matching expando row could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoRow fetchByT_C(
 		long tableId, long classPK, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByT_C(tableId, classPK, retrieveFromCache);
 	}
 
+	/**
+	* Finds all the expando rows.
+	*
+	* @return the expando rows
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
+	/**
+	* Finds a range of all the expando rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of expando rows to return
+	* @param end the upper bound of the range of expando rows to return (not inclusive)
+	* @return the range of expando rows
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the expando rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of expando rows to return
+	* @param end the upper bound of the range of expando rows to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of expando rows
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -227,32 +402,71 @@ public class ExpandoRowUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
+	/**
+	* Removes all the expando rows where tableId = &#63; from the database.
+	*
+	* @param tableId the table id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByTableId(long tableId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByTableId(tableId);
 	}
 
+	/**
+	* Removes the expando row where tableId = &#63; and classPK = &#63; from the database.
+	*
+	* @param tableId the table id to search with
+	* @param classPK the class p k to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByT_C(long tableId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.expando.NoSuchRowException {
 		getPersistence().removeByT_C(tableId, classPK);
 	}
 
+	/**
+	* Removes all the expando rows from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
+	/**
+	* Counts all the expando rows where tableId = &#63;.
+	*
+	* @param tableId the table id to search with
+	* @return the number of matching expando rows
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByTableId(long tableId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByTableId(tableId);
 	}
 
+	/**
+	* Counts all the expando rows where tableId = &#63; and classPK = &#63;.
+	*
+	* @param tableId the table id to search with
+	* @param classPK the class p k to search with
+	* @return the number of matching expando rows
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByT_C(long tableId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByT_C(tableId, classPK);
 	}
 
+	/**
+	* Counts all the expando rows.
+	*
+	* @return the number of expando rows
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();

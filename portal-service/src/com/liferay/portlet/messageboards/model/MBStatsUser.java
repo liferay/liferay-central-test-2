@@ -15,20 +15,16 @@
 package com.liferay.portlet.messageboards.model;
 
 /**
- * <p>
- * This interface is a model that represents the MBStatsUser table in the
- * database.
- * </p>
+ * The model interface for the MBStatsUser service. Represents a row in the &quot;MBStatsUser&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       MBStatsUserModel
- * @see       com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl
- * @see       com.liferay.portlet.messageboards.model.impl.MBStatsUserModelImpl
+ * @author Brian Wing Shun Chan
+ * @see MBStatsUserModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBStatsUserModelImpl
  * @generated
  */
 public interface MBStatsUser extends MBStatsUserModel {

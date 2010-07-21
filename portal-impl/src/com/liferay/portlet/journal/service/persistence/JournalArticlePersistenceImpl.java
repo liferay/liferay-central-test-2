@@ -67,9 +67,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       JournalArticlePersistence
- * @see       JournalArticleUtil
+ * The persistence for the journal article service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see JournalArticlePersistence
+ * @see JournalArticleUtil
  * @generated
  */
 public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalArticle>
@@ -296,6 +306,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
+	/**
+	 * Caches the journal article in the entity cache if it is enabled.
+	 *
+	 * @param journalArticle the journal article to cache
+	 */
 	public void cacheResult(JournalArticle journalArticle) {
 		EntityCacheUtil.putResult(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleImpl.class, journalArticle.getPrimaryKey(),
@@ -315,6 +330,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			}, journalArticle);
 	}
 
+	/**
+	 * Caches the journal articles in the entity cache if it is enabled.
+	 *
+	 * @param journalArticles the journal articles to cache
+	 */
 	public void cacheResult(List<JournalArticle> journalArticles) {
 		for (JournalArticle journalArticle : journalArticles) {
 			if (EntityCacheUtil.getResult(
@@ -326,6 +346,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Clears the cache for all journal articles.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(JournalArticleImpl.class.getName());
 		EntityCacheUtil.clearCache(JournalArticleImpl.class.getName());
@@ -333,6 +360,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the journal article.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(JournalArticle journalArticle) {
 		EntityCacheUtil.removeResult(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleImpl.class, journalArticle.getPrimaryKey());
@@ -351,6 +385,12 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			});
 	}
 
+	/**
+	 * Creates a new journal article with the primary key.
+	 *
+	 * @param id the primary key for the new journal article
+	 * @return the new journal article
+	 */
 	public JournalArticle create(long id) {
 		JournalArticle journalArticle = new JournalArticleImpl();
 
@@ -364,11 +404,27 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return journalArticle;
 	}
 
+	/**
+	 * Removes the journal article with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the journal article to remove
+	 * @return the journal article that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the journal article with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param id the primary key of the journal article to remove
+	 * @return the journal article that was removed
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle remove(long id)
 		throws NoSuchArticleException, SystemException {
 		Session session = null;
@@ -587,11 +643,27 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return journalArticleImpl;
 	}
 
+	/**
+	 * Finds the journal article with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the journal article to find
+	 * @return the journal article
+	 * @throws com.liferay.portal.NoSuchModelException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the journal article with the primary key or throws a {@link com.liferay.portlet.journal.NoSuchArticleException} if it could not be found.
+	 *
+	 * @param id the primary key of the journal article to find
+	 * @return the journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByPrimaryKey(long id)
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = fetchByPrimaryKey(id);
@@ -608,11 +680,25 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return journalArticle;
 	}
 
+	/**
+	 * Finds the journal article with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the journal article to find
+	 * @return the journal article, or <code>null</code> if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the journal article with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param id the primary key of the journal article to find
+	 * @return the journal article, or <code>null</code> if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle fetchByPrimaryKey(long id) throws SystemException {
 		JournalArticle journalArticle = (JournalArticle)EntityCacheUtil.getResult(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 				JournalArticleImpl.class, id, this);
@@ -641,16 +727,50 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return journalArticle;
 	}
 
+	/**
+	 * Finds all the journal articles where uuid = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @return the matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByUuid(String uuid)
 		throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the journal articles where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal articles where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -735,6 +855,19 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return list;
 	}
 
+	/**
+	 * Finds the first journal article in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -757,6 +890,19 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the last journal article in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -782,6 +928,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the journal articles before and after the current journal article in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current journal article
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle[] findByUuid_PrevAndNext(long id, String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -928,6 +1088,15 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the journal article where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchArticleException} if it could not be found.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByUUID_G(String uuid, long groupId)
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = fetchByUUID_G(uuid, groupId);
@@ -955,11 +1124,27 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return journalArticle;
 	}
 
+	/**
+	 * Finds the journal article where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching journal article, or <code>null</code> if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
 	}
 
+	/**
+	 * Finds the journal article where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching journal article, or <code>null</code> if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -1056,17 +1241,51 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds all the journal articles where resourcePrimKey = &#63;.
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @return the matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByResourcePrimKey(long resourcePrimKey)
 		throws SystemException {
 		return findByResourcePrimKey(resourcePrimKey, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the journal articles where resourcePrimKey = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByResourcePrimKey(long resourcePrimKey,
 		int start, int end) throws SystemException {
 		return findByResourcePrimKey(resourcePrimKey, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal articles where resourcePrimKey = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByResourcePrimKey(long resourcePrimKey,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1140,6 +1359,19 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return list;
 	}
 
+	/**
+	 * Finds the first journal article in the ordered set where resourcePrimKey = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByResourcePrimKey_First(long resourcePrimKey,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -1163,6 +1395,19 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the last journal article in the ordered set where resourcePrimKey = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByResourcePrimKey_Last(long resourcePrimKey,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -1188,6 +1433,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the journal articles before and after the current journal article in the ordered set where resourcePrimKey = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current journal article
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle[] findByResourcePrimKey_PrevAndNext(long id,
 		long resourcePrimKey, OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -1322,16 +1581,50 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds all the journal articles where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByGroupId(long groupId)
 		throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the journal articles where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal articles where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1404,6 +1697,19 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return list;
 	}
 
+	/**
+	 * Finds the first journal article in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -1427,6 +1733,19 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the last journal article in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -1452,6 +1771,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the journal articles before and after the current journal article in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current journal article
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle[] findByGroupId_PrevAndNext(long id, long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -1586,17 +1919,51 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the journal articles where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByGroupId(long groupId)
 		throws SystemException {
 		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the journal articles where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByGroupId(long groupId, int start,
 		int end) throws SystemException {
 		return filterFindByGroupId(groupId, start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the journal articles where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -1654,17 +2021,51 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds all the journal articles where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the journal articles where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByCompanyId(long companyId, int start,
 		int end) throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal articles where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1737,6 +2138,19 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return list;
 	}
 
+	/**
+	 * Finds the first journal article in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -1760,6 +2174,19 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the last journal article in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -1785,6 +2212,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the journal articles before and after the current journal article in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current journal article
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle[] findByCompanyId_PrevAndNext(long id,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -1919,17 +2360,51 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds all the journal articles where smallImageId = &#63;.
+	 *
+	 * @param smallImageId the small image id to search with
+	 * @return the matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findBySmallImageId(long smallImageId)
 		throws SystemException {
 		return findBySmallImageId(smallImageId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the journal articles where smallImageId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param smallImageId the small image id to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findBySmallImageId(long smallImageId,
 		int start, int end) throws SystemException {
 		return findBySmallImageId(smallImageId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal articles where smallImageId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param smallImageId the small image id to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findBySmallImageId(long smallImageId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2003,6 +2478,19 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return list;
 	}
 
+	/**
+	 * Finds the first journal article in the ordered set where smallImageId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param smallImageId the small image id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findBySmallImageId_First(long smallImageId,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -2026,6 +2514,19 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the last journal article in the ordered set where smallImageId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param smallImageId the small image id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findBySmallImageId_Last(long smallImageId,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -2051,6 +2552,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the journal articles before and after the current journal article in the ordered set where smallImageId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current journal article
+	 * @param smallImageId the small image id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle[] findBySmallImageId_PrevAndNext(long id,
 		long smallImageId, OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -2185,17 +2700,54 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds all the journal articles where resourcePrimKey = &#63; and status = &#63;.
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param status the status to search with
+	 * @return the matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByR_ST(long resourcePrimKey, int status)
 		throws SystemException {
 		return findByR_ST(resourcePrimKey, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the journal articles where resourcePrimKey = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByR_ST(long resourcePrimKey, int status,
 		int start, int end) throws SystemException {
 		return findByR_ST(resourcePrimKey, status, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal articles where resourcePrimKey = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByR_ST(long resourcePrimKey, int status,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2273,6 +2825,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return list;
 	}
 
+	/**
+	 * Finds the first journal article in the ordered set where resourcePrimKey = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByR_ST_First(long resourcePrimKey, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -2299,6 +2865,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the last journal article in the ordered set where resourcePrimKey = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByR_ST_Last(long resourcePrimKey, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -2327,6 +2907,21 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the journal articles before and after the current journal article in the ordered set where resourcePrimKey = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current journal article
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle[] findByR_ST_PrevAndNext(long id,
 		long resourcePrimKey, int status, OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -2465,17 +3060,54 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds all the journal articles where groupId = &#63; and articleId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @return the matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_A(long groupId, String articleId)
 		throws SystemException {
 		return findByG_A(groupId, articleId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the journal articles where groupId = &#63; and articleId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_A(long groupId, String articleId,
 		int start, int end) throws SystemException {
 		return findByG_A(groupId, articleId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal articles where groupId = &#63; and articleId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_A(long groupId, String articleId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2565,6 +3197,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return list;
 	}
 
+	/**
+	 * Finds the first journal article in the ordered set where groupId = &#63; and articleId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByG_A_First(long groupId, String articleId,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -2591,6 +3237,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the last journal article in the ordered set where groupId = &#63; and articleId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByG_A_Last(long groupId, String articleId,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -2619,6 +3279,21 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the journal articles before and after the current journal article in the ordered set where groupId = &#63; and articleId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current journal article
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle[] findByG_A_PrevAndNext(long id, long groupId,
 		String articleId, OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -2769,17 +3444,54 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the journal articles where groupId = &#63; and articleId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @return the matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_A(long groupId, String articleId)
 		throws SystemException {
 		return filterFindByG_A(groupId, articleId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the journal articles where groupId = &#63; and articleId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_A(long groupId, String articleId,
 		int start, int end) throws SystemException {
 		return filterFindByG_A(groupId, articleId, start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the journal articles where groupId = &#63; and articleId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_A(long groupId, String articleId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2854,17 +3566,54 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds all the journal articles where groupId = &#63; and structureId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param structureId the structure id to search with
+	 * @return the matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_S(long groupId, String structureId)
 		throws SystemException {
 		return findByG_S(groupId, structureId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the journal articles where groupId = &#63; and structureId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param structureId the structure id to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_S(long groupId, String structureId,
 		int start, int end) throws SystemException {
 		return findByG_S(groupId, structureId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal articles where groupId = &#63; and structureId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param structureId the structure id to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_S(long groupId, String structureId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2954,6 +3703,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return list;
 	}
 
+	/**
+	 * Finds the first journal article in the ordered set where groupId = &#63; and structureId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param structureId the structure id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByG_S_First(long groupId, String structureId,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -2980,6 +3743,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the last journal article in the ordered set where groupId = &#63; and structureId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param structureId the structure id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByG_S_Last(long groupId, String structureId,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -3008,6 +3785,21 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the journal articles before and after the current journal article in the ordered set where groupId = &#63; and structureId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current journal article
+	 * @param groupId the group id to search with
+	 * @param structureId the structure id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle[] findByG_S_PrevAndNext(long id, long groupId,
 		String structureId, OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -3158,17 +3950,54 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the journal articles where groupId = &#63; and structureId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param structureId the structure id to search with
+	 * @return the matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_S(long groupId, String structureId)
 		throws SystemException {
 		return filterFindByG_S(groupId, structureId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the journal articles where groupId = &#63; and structureId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param structureId the structure id to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_S(long groupId,
 		String structureId, int start, int end) throws SystemException {
 		return filterFindByG_S(groupId, structureId, start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the journal articles where groupId = &#63; and structureId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param structureId the structure id to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_S(long groupId,
 		String structureId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -3243,17 +4072,54 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds all the journal articles where groupId = &#63; and templateId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param templateId the template id to search with
+	 * @return the matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_T(long groupId, String templateId)
 		throws SystemException {
 		return findByG_T(groupId, templateId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the journal articles where groupId = &#63; and templateId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param templateId the template id to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_T(long groupId, String templateId,
 		int start, int end) throws SystemException {
 		return findByG_T(groupId, templateId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal articles where groupId = &#63; and templateId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param templateId the template id to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_T(long groupId, String templateId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -3343,6 +4209,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return list;
 	}
 
+	/**
+	 * Finds the first journal article in the ordered set where groupId = &#63; and templateId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param templateId the template id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByG_T_First(long groupId, String templateId,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -3369,6 +4249,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the last journal article in the ordered set where groupId = &#63; and templateId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param templateId the template id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByG_T_Last(long groupId, String templateId,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -3397,6 +4291,21 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the journal articles before and after the current journal article in the ordered set where groupId = &#63; and templateId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current journal article
+	 * @param groupId the group id to search with
+	 * @param templateId the template id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle[] findByG_T_PrevAndNext(long id, long groupId,
 		String templateId, OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -3547,17 +4456,54 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the journal articles where groupId = &#63; and templateId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param templateId the template id to search with
+	 * @return the matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_T(long groupId, String templateId)
 		throws SystemException {
 		return filterFindByG_T(groupId, templateId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the journal articles where groupId = &#63; and templateId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param templateId the template id to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_T(long groupId,
 		String templateId, int start, int end) throws SystemException {
 		return filterFindByG_T(groupId, templateId, start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the journal articles where groupId = &#63; and templateId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param templateId the template id to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_T(long groupId,
 		String templateId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -3632,17 +4578,54 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds all the journal articles where groupId = &#63; and urlTitle = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @return the matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_UT(long groupId, String urlTitle)
 		throws SystemException {
 		return findByG_UT(groupId, urlTitle, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the journal articles where groupId = &#63; and urlTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_UT(long groupId, String urlTitle,
 		int start, int end) throws SystemException {
 		return findByG_UT(groupId, urlTitle, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal articles where groupId = &#63; and urlTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_UT(long groupId, String urlTitle,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -3732,6 +4715,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return list;
 	}
 
+	/**
+	 * Finds the first journal article in the ordered set where groupId = &#63; and urlTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByG_UT_First(long groupId, String urlTitle,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -3758,6 +4755,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the last journal article in the ordered set where groupId = &#63; and urlTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByG_UT_Last(long groupId, String urlTitle,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -3786,6 +4797,21 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the journal articles before and after the current journal article in the ordered set where groupId = &#63; and urlTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current journal article
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle[] findByG_UT_PrevAndNext(long id, long groupId,
 		String urlTitle, OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -3936,17 +4962,54 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the journal articles where groupId = &#63; and urlTitle = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @return the matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_UT(long groupId, String urlTitle)
 		throws SystemException {
 		return filterFindByG_UT(groupId, urlTitle, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the journal articles where groupId = &#63; and urlTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_UT(long groupId, String urlTitle,
 		int start, int end) throws SystemException {
 		return filterFindByG_UT(groupId, urlTitle, start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the journal articles where groupId = &#63; and urlTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_UT(long groupId, String urlTitle,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -4021,17 +5084,54 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds all the journal articles where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param status the status to search with
+	 * @return the matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_ST(long groupId, int status)
 		throws SystemException {
 		return findByG_ST(groupId, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the journal articles where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_ST(long groupId, int status, int start,
 		int end) throws SystemException {
 		return findByG_ST(groupId, status, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal articles where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_ST(long groupId, int status, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -4108,6 +5208,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return list;
 	}
 
+	/**
+	 * Finds the first journal article in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByG_ST_First(long groupId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -4134,6 +5248,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the last journal article in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByG_ST_Last(long groupId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -4162,6 +5290,21 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the journal articles before and after the current journal article in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current journal article
+	 * @param groupId the group id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle[] findByG_ST_PrevAndNext(long id, long groupId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -4300,17 +5443,54 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the journal articles where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param status the status to search with
+	 * @return the matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_ST(long groupId, int status)
 		throws SystemException {
 		return filterFindByG_ST(groupId, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the journal articles where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_ST(long groupId, int status,
 		int start, int end) throws SystemException {
 		return filterFindByG_ST(groupId, status, start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the journal articles where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_ST(long groupId, int status,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -4373,17 +5553,54 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds all the journal articles where companyId = &#63; and status = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param status the status to search with
+	 * @return the matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByC_ST(long companyId, int status)
 		throws SystemException {
 		return findByC_ST(companyId, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the journal articles where companyId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByC_ST(long companyId, int status,
 		int start, int end) throws SystemException {
 		return findByC_ST(companyId, status, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal articles where companyId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByC_ST(long companyId, int status,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -4461,6 +5678,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return list;
 	}
 
+	/**
+	 * Finds the first journal article in the ordered set where companyId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByC_ST_First(long companyId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -4487,6 +5718,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the last journal article in the ordered set where companyId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByC_ST_Last(long companyId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -4515,6 +5760,21 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the journal articles before and after the current journal article in the ordered set where companyId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current journal article
+	 * @param companyId the company id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle[] findByC_ST_PrevAndNext(long id, long companyId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -4653,6 +5913,16 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the journal article where groupId = &#63; and articleId = &#63; and version = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchArticleException} if it could not be found.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param version the version to search with
+	 * @return the matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByG_A_V(long groupId, String articleId,
 		double version) throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = fetchByG_A_V(groupId, articleId, version);
@@ -4683,11 +5953,29 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return journalArticle;
 	}
 
+	/**
+	 * Finds the journal article where groupId = &#63; and articleId = &#63; and version = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param version the version to search with
+	 * @return the matching journal article, or <code>null</code> if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle fetchByG_A_V(long groupId, String articleId,
 		double version) throws SystemException {
 		return fetchByG_A_V(groupId, articleId, version, true);
 	}
 
+	/**
+	 * Finds the journal article where groupId = &#63; and articleId = &#63; and version = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param version the version to search with
+	 * @return the matching journal article, or <code>null</code> if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle fetchByG_A_V(long groupId, String articleId,
 		double version, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, articleId, version };
@@ -4789,17 +6077,57 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds all the journal articles where groupId = &#63; and articleId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param status the status to search with
+	 * @return the matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_A_ST(long groupId, String articleId,
 		int status) throws SystemException {
 		return findByG_A_ST(groupId, articleId, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the journal articles where groupId = &#63; and articleId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_A_ST(long groupId, String articleId,
 		int status, int start, int end) throws SystemException {
 		return findByG_A_ST(groupId, articleId, status, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal articles where groupId = &#63; and articleId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_A_ST(long groupId, String articleId,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -4893,6 +6221,21 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return list;
 	}
 
+	/**
+	 * Finds the first journal article in the ordered set where groupId = &#63; and articleId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByG_A_ST_First(long groupId, String articleId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -4922,6 +6265,21 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the last journal article in the ordered set where groupId = &#63; and articleId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByG_A_ST_Last(long groupId, String articleId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -4953,6 +6311,22 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the journal articles before and after the current journal article in the ordered set where groupId = &#63; and articleId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current journal article
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle[] findByG_A_ST_PrevAndNext(long id, long groupId,
 		String articleId, int status, OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -5107,18 +6481,58 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the journal articles where groupId = &#63; and articleId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param status the status to search with
+	 * @return the matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_A_ST(long groupId,
 		String articleId, int status) throws SystemException {
 		return filterFindByG_A_ST(groupId, articleId, status,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the journal articles where groupId = &#63; and articleId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_A_ST(long groupId,
 		String articleId, int status, int start, int end)
 		throws SystemException {
 		return filterFindByG_A_ST(groupId, articleId, status, start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the journal articles where groupId = &#63; and articleId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_A_ST(long groupId,
 		String articleId, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -5198,17 +6612,57 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds all the journal articles where groupId = &#63; and urlTitle = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @param status the status to search with
+	 * @return the matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_UT_ST(long groupId, String urlTitle,
 		int status) throws SystemException {
 		return findByG_UT_ST(groupId, urlTitle, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the journal articles where groupId = &#63; and urlTitle = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_UT_ST(long groupId, String urlTitle,
 		int status, int start, int end) throws SystemException {
 		return findByG_UT_ST(groupId, urlTitle, status, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal articles where groupId = &#63; and urlTitle = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findByG_UT_ST(long groupId, String urlTitle,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -5302,6 +6756,21 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return list;
 	}
 
+	/**
+	 * Finds the first journal article in the ordered set where groupId = &#63; and urlTitle = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByG_UT_ST_First(long groupId, String urlTitle,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -5331,6 +6800,21 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the last journal article in the ordered set where groupId = &#63; and urlTitle = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle findByG_UT_ST_Last(long groupId, String urlTitle,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -5362,6 +6846,22 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds the journal articles before and after the current journal article in the ordered set where groupId = &#63; and urlTitle = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current journal article
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticle[] findByG_UT_ST_PrevAndNext(long id, long groupId,
 		String urlTitle, int status, OrderByComparator orderByComparator)
 		throws NoSuchArticleException, SystemException {
@@ -5516,18 +7016,58 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the journal articles where groupId = &#63; and urlTitle = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @param status the status to search with
+	 * @return the matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_UT_ST(long groupId,
 		String urlTitle, int status) throws SystemException {
 		return filterFindByG_UT_ST(groupId, urlTitle, status,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the journal articles where groupId = &#63; and urlTitle = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_UT_ST(long groupId,
 		String urlTitle, int status, int start, int end)
 		throws SystemException {
 		return filterFindByG_UT_ST(groupId, urlTitle, status, start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the journal articles where groupId = &#63; and urlTitle = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> filterFindByG_UT_ST(long groupId,
 		String urlTitle, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -5607,15 +7147,46 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Finds all the journal articles.
+	 *
+	 * @return the journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the journal articles.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal articles.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticle> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -5682,12 +7253,25 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return list;
 	}
 
+	/**
+	 * Removes all the journal articles where uuid = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (JournalArticle journalArticle : findByUuid(uuid)) {
 			remove(journalArticle);
 		}
 	}
 
+	/**
+	 * Removes the journal article where uuid = &#63; and groupId = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUUID_G(String uuid, long groupId)
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByUUID_G(uuid, groupId);
@@ -5695,6 +7279,12 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		remove(journalArticle);
 	}
 
+	/**
+	 * Removes all the journal articles where resourcePrimKey = &#63; from the database.
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByResourcePrimKey(long resourcePrimKey)
 		throws SystemException {
 		for (JournalArticle journalArticle : findByResourcePrimKey(
@@ -5703,18 +7293,36 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Removes all the journal articles where groupId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (JournalArticle journalArticle : findByGroupId(groupId)) {
 			remove(journalArticle);
 		}
 	}
 
+	/**
+	 * Removes all the journal articles where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (JournalArticle journalArticle : findByCompanyId(companyId)) {
 			remove(journalArticle);
 		}
 	}
 
+	/**
+	 * Removes all the journal articles where smallImageId = &#63; from the database.
+	 *
+	 * @param smallImageId the small image id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeBySmallImageId(long smallImageId)
 		throws SystemException {
 		for (JournalArticle journalArticle : findBySmallImageId(smallImageId)) {
@@ -5722,6 +7330,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Removes all the journal articles where resourcePrimKey = &#63; and status = &#63; from the database.
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByR_ST(long resourcePrimKey, int status)
 		throws SystemException {
 		for (JournalArticle journalArticle : findByR_ST(resourcePrimKey, status)) {
@@ -5729,6 +7344,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Removes all the journal articles where groupId = &#63; and articleId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_A(long groupId, String articleId)
 		throws SystemException {
 		for (JournalArticle journalArticle : findByG_A(groupId, articleId)) {
@@ -5736,6 +7358,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Removes all the journal articles where groupId = &#63; and structureId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param structureId the structure id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_S(long groupId, String structureId)
 		throws SystemException {
 		for (JournalArticle journalArticle : findByG_S(groupId, structureId)) {
@@ -5743,6 +7372,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Removes all the journal articles where groupId = &#63; and templateId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param templateId the template id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_T(long groupId, String templateId)
 		throws SystemException {
 		for (JournalArticle journalArticle : findByG_T(groupId, templateId)) {
@@ -5750,6 +7386,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Removes all the journal articles where groupId = &#63; and urlTitle = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_UT(long groupId, String urlTitle)
 		throws SystemException {
 		for (JournalArticle journalArticle : findByG_UT(groupId, urlTitle)) {
@@ -5757,6 +7400,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Removes all the journal articles where groupId = &#63; and status = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_ST(long groupId, int status)
 		throws SystemException {
 		for (JournalArticle journalArticle : findByG_ST(groupId, status)) {
@@ -5764,6 +7414,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Removes all the journal articles where companyId = &#63; and status = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_ST(long companyId, int status)
 		throws SystemException {
 		for (JournalArticle journalArticle : findByC_ST(companyId, status)) {
@@ -5771,6 +7428,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Removes the journal article where groupId = &#63; and articleId = &#63; and version = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param version the version to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_A_V(long groupId, String articleId, double version)
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByG_A_V(groupId, articleId, version);
@@ -5778,6 +7443,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		remove(journalArticle);
 	}
 
+	/**
+	 * Removes all the journal articles where groupId = &#63; and articleId = &#63; and status = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_A_ST(long groupId, String articleId, int status)
 		throws SystemException {
 		for (JournalArticle journalArticle : findByG_A_ST(groupId, articleId,
@@ -5786,6 +7459,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Removes all the journal articles where groupId = &#63; and urlTitle = &#63; and status = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_UT_ST(long groupId, String urlTitle, int status)
 		throws SystemException {
 		for (JournalArticle journalArticle : findByG_UT_ST(groupId, urlTitle,
@@ -5794,12 +7475,24 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Removes all the journal articles from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (JournalArticle journalArticle : findAll()) {
 			remove(journalArticle);
 		}
 	}
 
+	/**
+	 * Counts all the journal articles where uuid = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @return the number of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUuid(String uuid) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid };
 
@@ -5858,6 +7551,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the journal articles where uuid = &#63; and groupId = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the number of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -5921,6 +7622,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the journal articles where resourcePrimKey = &#63;.
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @return the number of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByResourcePrimKey(long resourcePrimKey)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { resourcePrimKey };
@@ -5968,6 +7676,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the journal articles where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the number of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId };
 
@@ -6014,6 +7729,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the journal articles where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the number of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByGroupId(long groupId) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByGroupId(groupId);
@@ -6055,6 +7777,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Counts all the journal articles where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the number of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId };
 
@@ -6101,6 +7830,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the journal articles where smallImageId = &#63;.
+	 *
+	 * @param smallImageId the small image id to search with
+	 * @return the number of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countBySmallImageId(long smallImageId) throws SystemException {
 		Object[] finderArgs = new Object[] { smallImageId };
 
@@ -6147,6 +7883,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the journal articles where resourcePrimKey = &#63; and status = &#63;.
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param status the status to search with
+	 * @return the number of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByR_ST(long resourcePrimKey, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { resourcePrimKey, status };
@@ -6198,6 +7942,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the journal articles where groupId = &#63; and articleId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @return the number of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_A(long groupId, String articleId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, articleId };
@@ -6261,6 +8013,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the journal articles where groupId = &#63; and articleId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @return the number of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByG_A(long groupId, String articleId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -6319,6 +8079,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Counts all the journal articles where groupId = &#63; and structureId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param structureId the structure id to search with
+	 * @return the number of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_S(long groupId, String structureId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, structureId };
@@ -6382,6 +8150,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the journal articles where groupId = &#63; and structureId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param structureId the structure id to search with
+	 * @return the number of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByG_S(long groupId, String structureId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -6440,6 +8216,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Counts all the journal articles where groupId = &#63; and templateId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param templateId the template id to search with
+	 * @return the number of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_T(long groupId, String templateId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, templateId };
@@ -6503,6 +8287,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the journal articles where groupId = &#63; and templateId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param templateId the template id to search with
+	 * @return the number of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByG_T(long groupId, String templateId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -6561,6 +8353,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Counts all the journal articles where groupId = &#63; and urlTitle = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @return the number of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_UT(long groupId, String urlTitle)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, urlTitle };
@@ -6624,6 +8424,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the journal articles where groupId = &#63; and urlTitle = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @return the number of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByG_UT(long groupId, String urlTitle)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -6682,6 +8490,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Counts all the journal articles where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param status the status to search with
+	 * @return the number of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_ST(long groupId, int status) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, status };
 
@@ -6732,6 +8548,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the journal articles where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param status the status to search with
+	 * @return the number of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByG_ST(long groupId, int status)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -6778,6 +8602,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Counts all the journal articles where companyId = &#63; and status = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param status the status to search with
+	 * @return the number of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_ST(long companyId, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, status };
@@ -6829,6 +8661,15 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the journal articles where groupId = &#63; and articleId = &#63; and version = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param version the version to search with
+	 * @return the number of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_A_V(long groupId, String articleId, double version)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, articleId, version };
@@ -6896,6 +8737,15 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the journal articles where groupId = &#63; and articleId = &#63; and version = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param version the version to search with
+	 * @return the number of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByG_A_V(long groupId, String articleId, double version)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -6958,6 +8808,15 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Counts all the journal articles where groupId = &#63; and articleId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param status the status to search with
+	 * @return the number of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_A_ST(long groupId, String articleId, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, articleId, status };
@@ -7025,6 +8884,15 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the journal articles where groupId = &#63; and articleId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param status the status to search with
+	 * @return the number of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByG_A_ST(long groupId, String articleId, int status)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -7087,6 +8955,15 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Counts all the journal articles where groupId = &#63; and urlTitle = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @param status the status to search with
+	 * @return the number of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_UT_ST(long groupId, String urlTitle, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, urlTitle, status };
@@ -7154,6 +9031,15 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the journal articles where groupId = &#63; and urlTitle = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param urlTitle the url title to search with
+	 * @param status the status to search with
+	 * @return the number of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByG_UT_ST(long groupId, String urlTitle, int status)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -7216,6 +9102,12 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Counts all the journal articles.
+	 *
+	 * @return the number of journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -7250,6 +9142,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the journal article persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

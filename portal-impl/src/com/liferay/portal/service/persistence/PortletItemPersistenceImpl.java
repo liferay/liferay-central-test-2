@@ -48,9 +48,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       PortletItemPersistence
- * @see       PortletItemUtil
+ * The persistence for the portlet item service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see PortletItemPersistence
+ * @see PortletItemUtil
  * @generated
  */
 public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
@@ -109,6 +119,11 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			PortletItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the portlet item in the entity cache if it is enabled.
+	 *
+	 * @param portletItem the portlet item to cache
+	 */
 	public void cacheResult(PortletItem portletItem) {
 		EntityCacheUtil.putResult(PortletItemModelImpl.ENTITY_CACHE_ENABLED,
 			PortletItemImpl.class, portletItem.getPrimaryKey(), portletItem);
@@ -123,6 +138,11 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			}, portletItem);
 	}
 
+	/**
+	 * Caches the portlet items in the entity cache if it is enabled.
+	 *
+	 * @param portletItems the portlet items to cache
+	 */
 	public void cacheResult(List<PortletItem> portletItems) {
 		for (PortletItem portletItem : portletItems) {
 			if (EntityCacheUtil.getResult(
@@ -133,6 +153,13 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		}
 	}
 
+	/**
+	 * Clears the cache for all portlet items.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(PortletItemImpl.class.getName());
 		EntityCacheUtil.clearCache(PortletItemImpl.class.getName());
@@ -140,6 +167,13 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the portlet item.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(PortletItem portletItem) {
 		EntityCacheUtil.removeResult(PortletItemModelImpl.ENTITY_CACHE_ENABLED,
 			PortletItemImpl.class, portletItem.getPrimaryKey());
@@ -154,6 +188,12 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			});
 	}
 
+	/**
+	 * Creates a new portlet item with the primary key.
+	 *
+	 * @param portletItemId the primary key for the new portlet item
+	 * @return the new portlet item
+	 */
 	public PortletItem create(long portletItemId) {
 		PortletItem portletItem = new PortletItemImpl();
 
@@ -163,11 +203,27 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		return portletItem;
 	}
 
+	/**
+	 * Removes the portlet item with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the portlet item to remove
+	 * @return the portlet item that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a portlet item with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PortletItem remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the portlet item with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param portletItemId the primary key of the portlet item to remove
+	 * @return the portlet item that was removed
+	 * @throws com.liferay.portal.NoSuchPortletItemException if a portlet item with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PortletItem remove(long portletItemId)
 		throws NoSuchPortletItemException, SystemException {
 		Session session = null;
@@ -342,11 +398,27 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		return portletItemImpl;
 	}
 
+	/**
+	 * Finds the portlet item with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the portlet item to find
+	 * @return the portlet item
+	 * @throws com.liferay.portal.NoSuchModelException if a portlet item with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PortletItem findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the portlet item with the primary key or throws a {@link com.liferay.portal.NoSuchPortletItemException} if it could not be found.
+	 *
+	 * @param portletItemId the primary key of the portlet item to find
+	 * @return the portlet item
+	 * @throws com.liferay.portal.NoSuchPortletItemException if a portlet item with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PortletItem findByPrimaryKey(long portletItemId)
 		throws NoSuchPortletItemException, SystemException {
 		PortletItem portletItem = fetchByPrimaryKey(portletItemId);
@@ -363,11 +435,25 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		return portletItem;
 	}
 
+	/**
+	 * Finds the portlet item with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the portlet item to find
+	 * @return the portlet item, or <code>null</code> if a portlet item with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PortletItem fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the portlet item with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param portletItemId the primary key of the portlet item to find
+	 * @return the portlet item, or <code>null</code> if a portlet item with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PortletItem fetchByPrimaryKey(long portletItemId)
 		throws SystemException {
 		PortletItem portletItem = (PortletItem)EntityCacheUtil.getResult(PortletItemModelImpl.ENTITY_CACHE_ENABLED,
@@ -397,17 +483,54 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		return portletItem;
 	}
 
+	/**
+	 * Finds all the portlet items where groupId = &#63; and classNameId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the matching portlet items
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PortletItem> findByG_C(long groupId, long classNameId)
 		throws SystemException {
 		return findByG_C(groupId, classNameId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the portlet items where groupId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @param start the lower bound of the range of portlet items to return
+	 * @param end the upper bound of the range of portlet items to return (not inclusive)
+	 * @return the range of matching portlet items
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PortletItem> findByG_C(long groupId, long classNameId,
 		int start, int end) throws SystemException {
 		return findByG_C(groupId, classNameId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the portlet items where groupId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @param start the lower bound of the range of portlet items to return
+	 * @param end the upper bound of the range of portlet items to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching portlet items
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PortletItem> findByG_C(long groupId, long classNameId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -481,6 +604,20 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		return list;
 	}
 
+	/**
+	 * Finds the first portlet item in the ordered set where groupId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching portlet item
+	 * @throws com.liferay.portal.NoSuchPortletItemException if a matching portlet item could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PortletItem findByG_C_First(long groupId, long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPortletItemException, SystemException {
@@ -507,6 +644,20 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		}
 	}
 
+	/**
+	 * Finds the last portlet item in the ordered set where groupId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching portlet item
+	 * @throws com.liferay.portal.NoSuchPortletItemException if a matching portlet item could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PortletItem findByG_C_Last(long groupId, long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPortletItemException, SystemException {
@@ -535,6 +686,21 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		}
 	}
 
+	/**
+	 * Finds the portlet items before and after the current portlet item in the ordered set where groupId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param portletItemId the primary key of the current portlet item
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next portlet item
+	 * @throws com.liferay.portal.NoSuchPortletItemException if a portlet item with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PortletItem[] findByG_C_PrevAndNext(long portletItemId,
 		long groupId, long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchPortletItemException, SystemException {
@@ -669,17 +835,57 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		}
 	}
 
+	/**
+	 * Finds all the portlet items where groupId = &#63; and portletId = &#63; and classNameId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param portletId the portlet id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the matching portlet items
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PortletItem> findByG_P_C(long groupId, String portletId,
 		long classNameId) throws SystemException {
 		return findByG_P_C(groupId, portletId, classNameId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the portlet items where groupId = &#63; and portletId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param portletId the portlet id to search with
+	 * @param classNameId the class name id to search with
+	 * @param start the lower bound of the range of portlet items to return
+	 * @param end the upper bound of the range of portlet items to return (not inclusive)
+	 * @return the range of matching portlet items
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PortletItem> findByG_P_C(long groupId, String portletId,
 		long classNameId, int start, int end) throws SystemException {
 		return findByG_P_C(groupId, portletId, classNameId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the portlet items where groupId = &#63; and portletId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param portletId the portlet id to search with
+	 * @param classNameId the class name id to search with
+	 * @param start the lower bound of the range of portlet items to return
+	 * @param end the upper bound of the range of portlet items to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching portlet items
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PortletItem> findByG_P_C(long groupId, String portletId,
 		long classNameId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -769,6 +975,21 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		return list;
 	}
 
+	/**
+	 * Finds the first portlet item in the ordered set where groupId = &#63; and portletId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param portletId the portlet id to search with
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching portlet item
+	 * @throws com.liferay.portal.NoSuchPortletItemException if a matching portlet item could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PortletItem findByG_P_C_First(long groupId, String portletId,
 		long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchPortletItemException, SystemException {
@@ -798,6 +1019,21 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		}
 	}
 
+	/**
+	 * Finds the last portlet item in the ordered set where groupId = &#63; and portletId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param portletId the portlet id to search with
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching portlet item
+	 * @throws com.liferay.portal.NoSuchPortletItemException if a matching portlet item could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PortletItem findByG_P_C_Last(long groupId, String portletId,
 		long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchPortletItemException, SystemException {
@@ -829,6 +1065,22 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		}
 	}
 
+	/**
+	 * Finds the portlet items before and after the current portlet item in the ordered set where groupId = &#63; and portletId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param portletItemId the primary key of the current portlet item
+	 * @param groupId the group id to search with
+	 * @param portletId the portlet id to search with
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next portlet item
+	 * @throws com.liferay.portal.NoSuchPortletItemException if a portlet item with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PortletItem[] findByG_P_C_PrevAndNext(long portletItemId,
 		long groupId, String portletId, long classNameId,
 		OrderByComparator orderByComparator)
@@ -980,6 +1232,17 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		}
 	}
 
+	/**
+	 * Finds the portlet item where groupId = &#63; and name = &#63; and portletId = &#63; and classNameId = &#63; or throws a {@link com.liferay.portal.NoSuchPortletItemException} if it could not be found.
+	 *
+	 * @param groupId the group id to search with
+	 * @param name the name to search with
+	 * @param portletId the portlet id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the matching portlet item
+	 * @throws com.liferay.portal.NoSuchPortletItemException if a matching portlet item could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PortletItem findByG_N_P_C(long groupId, String name,
 		String portletId, long classNameId)
 		throws NoSuchPortletItemException, SystemException {
@@ -1015,11 +1278,31 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		return portletItem;
 	}
 
+	/**
+	 * Finds the portlet item where groupId = &#63; and name = &#63; and portletId = &#63; and classNameId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param name the name to search with
+	 * @param portletId the portlet id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the matching portlet item, or <code>null</code> if a matching portlet item could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PortletItem fetchByG_N_P_C(long groupId, String name,
 		String portletId, long classNameId) throws SystemException {
 		return fetchByG_N_P_C(groupId, name, portletId, classNameId, true);
 	}
 
+	/**
+	 * Finds the portlet item where groupId = &#63; and name = &#63; and portletId = &#63; and classNameId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param name the name to search with
+	 * @param portletId the portlet id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the matching portlet item, or <code>null</code> if a matching portlet item could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PortletItem fetchByG_N_P_C(long groupId, String name,
 		String portletId, long classNameId, boolean retrieveFromCache)
 		throws SystemException {
@@ -1138,15 +1421,46 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		}
 	}
 
+	/**
+	 * Finds all the portlet items.
+	 *
+	 * @return the portlet items
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PortletItem> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the portlet items.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of portlet items to return
+	 * @param end the upper bound of the range of portlet items to return (not inclusive)
+	 * @return the range of portlet items
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PortletItem> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the portlet items.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of portlet items to return
+	 * @param end the upper bound of the range of portlet items to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of portlet items
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PortletItem> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1213,6 +1527,13 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		return list;
 	}
 
+	/**
+	 * Removes all the portlet items where groupId = &#63; and classNameId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_C(long groupId, long classNameId)
 		throws SystemException {
 		for (PortletItem portletItem : findByG_C(groupId, classNameId)) {
@@ -1220,6 +1541,14 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		}
 	}
 
+	/**
+	 * Removes all the portlet items where groupId = &#63; and portletId = &#63; and classNameId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param portletId the portlet id to search with
+	 * @param classNameId the class name id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_P_C(long groupId, String portletId, long classNameId)
 		throws SystemException {
 		for (PortletItem portletItem : findByG_P_C(groupId, portletId,
@@ -1228,6 +1557,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		}
 	}
 
+	/**
+	 * Removes the portlet item where groupId = &#63; and name = &#63; and portletId = &#63; and classNameId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param name the name to search with
+	 * @param portletId the portlet id to search with
+	 * @param classNameId the class name id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_N_P_C(long groupId, String name, String portletId,
 		long classNameId) throws NoSuchPortletItemException, SystemException {
 		PortletItem portletItem = findByG_N_P_C(groupId, name, portletId,
@@ -1236,12 +1574,25 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		remove(portletItem);
 	}
 
+	/**
+	 * Removes all the portlet items from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (PortletItem portletItem : findAll()) {
 			remove(portletItem);
 		}
 	}
 
+	/**
+	 * Counts all the portlet items where groupId = &#63; and classNameId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the number of matching portlet items
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_C(long groupId, long classNameId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, classNameId };
@@ -1293,6 +1644,15 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the portlet items where groupId = &#63; and portletId = &#63; and classNameId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param portletId the portlet id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the number of matching portlet items
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_P_C(long groupId, String portletId, long classNameId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, portletId, classNameId };
@@ -1360,6 +1720,16 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the portlet items where groupId = &#63; and name = &#63; and portletId = &#63; and classNameId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param name the name to search with
+	 * @param portletId the portlet id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the number of matching portlet items
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_N_P_C(long groupId, String name, String portletId,
 		long classNameId) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, name, portletId, classNameId };
@@ -1443,6 +1813,12 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the portlet items.
+	 *
+	 * @return the number of portlet items
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -1477,6 +1853,9 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the portlet item persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

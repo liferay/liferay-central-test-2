@@ -15,20 +15,16 @@
 package com.liferay.portlet.announcements.model;
 
 /**
- * <p>
- * This interface is a model that represents the AnnouncementsDelivery table in the
- * database.
- * </p>
+ * The model interface for the AnnouncementsDelivery service. Represents a row in the &quot;AnnouncementsDelivery&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       AnnouncementsDeliveryModel
- * @see       com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl
- * @see       com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl
+ * @author Brian Wing Shun Chan
+ * @see AnnouncementsDeliveryModel
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl
  * @generated
  */
 public interface AnnouncementsDelivery extends AnnouncementsDeliveryModel {

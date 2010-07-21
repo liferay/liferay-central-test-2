@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the Resource_ table in the
- * database.
- * </p>
+ * The model interface for the Resource service. Represents a row in the &quot;Resource_&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.ResourceImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.ResourceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       ResourceModel
- * @see       com.liferay.portal.model.impl.ResourceImpl
- * @see       com.liferay.portal.model.impl.ResourceModelImpl
+ * @author Brian Wing Shun Chan
+ * @see ResourceModel
+ * @see com.liferay.portal.model.impl.ResourceImpl
+ * @see com.liferay.portal.model.impl.ResourceModelImpl
  * @generated
  */
 public interface Resource extends ResourceModel {

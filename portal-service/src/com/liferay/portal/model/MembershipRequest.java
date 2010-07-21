@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the MembershipRequest table in the
- * database.
- * </p>
+ * The model interface for the MembershipRequest service. Represents a row in the &quot;MembershipRequest&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.MembershipRequestImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.MembershipRequestImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       MembershipRequestModel
- * @see       com.liferay.portal.model.impl.MembershipRequestImpl
- * @see       com.liferay.portal.model.impl.MembershipRequestModelImpl
+ * @author Brian Wing Shun Chan
+ * @see MembershipRequestModel
+ * @see com.liferay.portal.model.impl.MembershipRequestImpl
+ * @see com.liferay.portal.model.impl.MembershipRequestModelImpl
  * @generated
  */
 public interface MembershipRequest extends MembershipRequestModel {

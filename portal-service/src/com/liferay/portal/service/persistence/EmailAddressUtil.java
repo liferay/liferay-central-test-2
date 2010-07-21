@@ -24,9 +24,15 @@ import com.liferay.portal.service.ServiceContext;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       EmailAddressPersistence
- * @see       EmailAddressPersistenceImpl
+ * The persistence utility for the email address service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see EmailAddressPersistence
+ * @see EmailAddressPersistenceImpl
  * @generated
  */
 public class EmailAddressUtil {
@@ -104,21 +110,45 @@ public class EmailAddressUtil {
 		return getPersistence().update(emailAddress, merge, serviceContext);
 	}
 
+	/**
+	* Caches the email address in the entity cache if it is enabled.
+	*
+	* @param emailAddress the email address to cache
+	*/
 	public static void cacheResult(
 		com.liferay.portal.model.EmailAddress emailAddress) {
 		getPersistence().cacheResult(emailAddress);
 	}
 
+	/**
+	* Caches the email addresses in the entity cache if it is enabled.
+	*
+	* @param emailAddresses the email addresses to cache
+	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses) {
 		getPersistence().cacheResult(emailAddresses);
 	}
 
+	/**
+	* Creates a new email address with the primary key.
+	*
+	* @param emailAddressId the primary key for the new email address
+	* @return the new email address
+	*/
 	public static com.liferay.portal.model.EmailAddress create(
 		long emailAddressId) {
 		return getPersistence().create(emailAddressId);
 	}
 
+	/**
+	* Removes the email address with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param emailAddressId the primary key of the email address to remove
+	* @return the email address that was removed
+	* @throws com.liferay.portal.NoSuchEmailAddressException if a email address with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.EmailAddress remove(
 		long emailAddressId)
 		throws com.liferay.portal.NoSuchEmailAddressException,
@@ -132,6 +162,14 @@ public class EmailAddressUtil {
 		return getPersistence().updateImpl(emailAddress, merge);
 	}
 
+	/**
+	* Finds the email address with the primary key or throws a {@link com.liferay.portal.NoSuchEmailAddressException} if it could not be found.
+	*
+	* @param emailAddressId the primary key of the email address to find
+	* @return the email address
+	* @throws com.liferay.portal.NoSuchEmailAddressException if a email address with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.EmailAddress findByPrimaryKey(
 		long emailAddressId)
 		throws com.liferay.portal.NoSuchEmailAddressException,
@@ -139,24 +177,65 @@ public class EmailAddressUtil {
 		return getPersistence().findByPrimaryKey(emailAddressId);
 	}
 
+	/**
+	* Finds the email address with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param emailAddressId the primary key of the email address to find
+	* @return the email address, or <code>null</code> if a email address with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.EmailAddress fetchByPrimaryKey(
 		long emailAddressId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(emailAddressId);
 	}
 
+	/**
+	* Finds all the email addresses where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the matching email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.EmailAddress> findByCompanyId(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByCompanyId(companyId);
 	}
 
+	/**
+	* Finds a range of all the email addresses where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of email addresses to return
+	* @param end the upper bound of the range of email addresses to return (not inclusive)
+	* @return the range of matching email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.EmailAddress> findByCompanyId(
 		long companyId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByCompanyId(companyId, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the email addresses where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of email addresses to return
+	* @param end the upper bound of the range of email addresses to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.EmailAddress> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -165,6 +244,19 @@ public class EmailAddressUtil {
 				   .findByCompanyId(companyId, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first email address in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching email address
+	* @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.EmailAddress findByCompanyId_First(
 		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -174,6 +266,19 @@ public class EmailAddressUtil {
 				   .findByCompanyId_First(companyId, orderByComparator);
 	}
 
+	/**
+	* Finds the last email address in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching email address
+	* @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.EmailAddress findByCompanyId_Last(
 		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -183,6 +288,20 @@ public class EmailAddressUtil {
 				   .findByCompanyId_Last(companyId, orderByComparator);
 	}
 
+	/**
+	* Finds the email addresses before and after the current email address in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param emailAddressId the primary key of the current email address
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next email address
+	* @throws com.liferay.portal.NoSuchEmailAddressException if a email address with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.EmailAddress[] findByCompanyId_PrevAndNext(
 		long emailAddressId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -193,17 +312,51 @@ public class EmailAddressUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds all the email addresses where userId = &#63;.
+	*
+	* @param userId the user id to search with
+	* @return the matching email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.EmailAddress> findByUserId(
 		long userId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUserId(userId);
 	}
 
+	/**
+	* Finds a range of all the email addresses where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param start the lower bound of the range of email addresses to return
+	* @param end the upper bound of the range of email addresses to return (not inclusive)
+	* @return the range of matching email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.EmailAddress> findByUserId(
 		long userId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUserId(userId, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the email addresses where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param start the lower bound of the range of email addresses to return
+	* @param end the upper bound of the range of email addresses to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.EmailAddress> findByUserId(
 		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -212,6 +365,19 @@ public class EmailAddressUtil {
 				   .findByUserId(userId, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first email address in the ordered set where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching email address
+	* @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.EmailAddress findByUserId_First(
 		long userId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -220,6 +386,19 @@ public class EmailAddressUtil {
 		return getPersistence().findByUserId_First(userId, orderByComparator);
 	}
 
+	/**
+	* Finds the last email address in the ordered set where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching email address
+	* @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.EmailAddress findByUserId_Last(
 		long userId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -228,6 +407,20 @@ public class EmailAddressUtil {
 		return getPersistence().findByUserId_Last(userId, orderByComparator);
 	}
 
+	/**
+	* Finds the email addresses before and after the current email address in the ordered set where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param emailAddressId the primary key of the current email address
+	* @param userId the user id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next email address
+	* @throws com.liferay.portal.NoSuchEmailAddressException if a email address with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.EmailAddress[] findByUserId_PrevAndNext(
 		long emailAddressId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -238,18 +431,55 @@ public class EmailAddressUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds all the email addresses where companyId = &#63; and classNameId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @return the matching email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.EmailAddress> findByC_C(
 		long companyId, long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByC_C(companyId, classNameId);
 	}
 
+	/**
+	* Finds a range of all the email addresses where companyId = &#63; and classNameId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param start the lower bound of the range of email addresses to return
+	* @param end the upper bound of the range of email addresses to return (not inclusive)
+	* @return the range of matching email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.EmailAddress> findByC_C(
 		long companyId, long classNameId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByC_C(companyId, classNameId, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the email addresses where companyId = &#63; and classNameId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param start the lower bound of the range of email addresses to return
+	* @param end the upper bound of the range of email addresses to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.EmailAddress> findByC_C(
 		long companyId, long classNameId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -259,6 +489,20 @@ public class EmailAddressUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds the first email address in the ordered set where companyId = &#63; and classNameId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching email address
+	* @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.EmailAddress findByC_C_First(
 		long companyId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -268,6 +512,20 @@ public class EmailAddressUtil {
 				   .findByC_C_First(companyId, classNameId, orderByComparator);
 	}
 
+	/**
+	* Finds the last email address in the ordered set where companyId = &#63; and classNameId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching email address
+	* @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.EmailAddress findByC_C_Last(
 		long companyId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -277,6 +535,21 @@ public class EmailAddressUtil {
 				   .findByC_C_Last(companyId, classNameId, orderByComparator);
 	}
 
+	/**
+	* Finds the email addresses before and after the current email address in the ordered set where companyId = &#63; and classNameId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param emailAddressId the primary key of the current email address
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next email address
+	* @throws com.liferay.portal.NoSuchEmailAddressException if a email address with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.EmailAddress[] findByC_C_PrevAndNext(
 		long emailAddressId, long companyId, long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -287,12 +560,36 @@ public class EmailAddressUtil {
 			classNameId, orderByComparator);
 	}
 
+	/**
+	* Finds all the email addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @return the matching email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.EmailAddress> findByC_C_C(
 		long companyId, long classNameId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByC_C_C(companyId, classNameId, classPK);
 	}
 
+	/**
+	* Finds a range of all the email addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param start the lower bound of the range of email addresses to return
+	* @param end the upper bound of the range of email addresses to return (not inclusive)
+	* @return the range of matching email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.EmailAddress> findByC_C_C(
 		long companyId, long classNameId, long classPK, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -300,6 +597,22 @@ public class EmailAddressUtil {
 				   .findByC_C_C(companyId, classNameId, classPK, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the email addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param start the lower bound of the range of email addresses to return
+	* @param end the upper bound of the range of email addresses to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.EmailAddress> findByC_C_C(
 		long companyId, long classNameId, long classPK, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -309,6 +622,21 @@ public class EmailAddressUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds the first email address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching email address
+	* @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.EmailAddress findByC_C_C_First(
 		long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -319,6 +647,21 @@ public class EmailAddressUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds the last email address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching email address
+	* @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.EmailAddress findByC_C_C_Last(
 		long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -329,6 +672,22 @@ public class EmailAddressUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds the email addresses before and after the current email address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param emailAddressId the primary key of the current email address
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next email address
+	* @throws com.liferay.portal.NoSuchEmailAddressException if a email address with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.EmailAddress[] findByC_C_C_PrevAndNext(
 		long emailAddressId, long companyId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -339,6 +698,16 @@ public class EmailAddressUtil {
 			classNameId, classPK, orderByComparator);
 	}
 
+	/**
+	* Finds all the email addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param primary the primary to search with
+	* @return the matching email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.EmailAddress> findByC_C_C_P(
 		long companyId, long classNameId, long classPK, boolean primary)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -346,6 +715,22 @@ public class EmailAddressUtil {
 				   .findByC_C_C_P(companyId, classNameId, classPK, primary);
 	}
 
+	/**
+	* Finds a range of all the email addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param primary the primary to search with
+	* @param start the lower bound of the range of email addresses to return
+	* @param end the upper bound of the range of email addresses to return (not inclusive)
+	* @return the range of matching email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.EmailAddress> findByC_C_C_P(
 		long companyId, long classNameId, long classPK, boolean primary,
 		int start, int end)
@@ -355,6 +740,23 @@ public class EmailAddressUtil {
 			start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the email addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param primary the primary to search with
+	* @param start the lower bound of the range of email addresses to return
+	* @param end the upper bound of the range of email addresses to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.EmailAddress> findByC_C_C_P(
 		long companyId, long classNameId, long classPK, boolean primary,
 		int start, int end,
@@ -365,6 +767,22 @@ public class EmailAddressUtil {
 			start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first email address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param primary the primary to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching email address
+	* @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.EmailAddress findByC_C_C_P_First(
 		long companyId, long classNameId, long classPK, boolean primary,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -375,6 +793,22 @@ public class EmailAddressUtil {
 			primary, orderByComparator);
 	}
 
+	/**
+	* Finds the last email address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param primary the primary to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching email address
+	* @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.EmailAddress findByC_C_C_P_Last(
 		long companyId, long classNameId, long classPK, boolean primary,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -385,6 +819,23 @@ public class EmailAddressUtil {
 			primary, orderByComparator);
 	}
 
+	/**
+	* Finds the email addresses before and after the current email address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param emailAddressId the primary key of the current email address
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param primary the primary to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next email address
+	* @throws com.liferay.portal.NoSuchEmailAddressException if a email address with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.EmailAddress[] findByC_C_C_P_PrevAndNext(
 		long emailAddressId, long companyId, long classNameId, long classPK,
 		boolean primary,
@@ -396,17 +847,48 @@ public class EmailAddressUtil {
 			classNameId, classPK, primary, orderByComparator);
 	}
 
+	/**
+	* Finds all the email addresses.
+	*
+	* @return the email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.EmailAddress> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
+	/**
+	* Finds a range of all the email addresses.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of email addresses to return
+	* @param end the upper bound of the range of email addresses to return (not inclusive)
+	* @return the range of email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.EmailAddress> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the email addresses.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of email addresses to return
+	* @param end the upper bound of the range of email addresses to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.EmailAddress> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -414,27 +896,63 @@ public class EmailAddressUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
+	/**
+	* Removes all the email addresses where companyId = &#63; from the database.
+	*
+	* @param companyId the company id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
+	/**
+	* Removes all the email addresses where userId = &#63; from the database.
+	*
+	* @param userId the user id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByUserId(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByUserId(userId);
 	}
 
+	/**
+	* Removes all the email addresses where companyId = &#63; and classNameId = &#63; from the database.
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByC_C(long companyId, long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByC_C(companyId, classNameId);
 	}
 
+	/**
+	* Removes all the email addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByC_C_C(long companyId, long classNameId,
 		long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByC_C_C(companyId, classNameId, classPK);
 	}
 
+	/**
+	* Removes all the email addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63; from the database.
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param primary the primary to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -442,32 +960,78 @@ public class EmailAddressUtil {
 			.removeByC_C_C_P(companyId, classNameId, classPK, primary);
 	}
 
+	/**
+	* Removes all the email addresses from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
+	/**
+	* Counts all the email addresses where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the number of matching email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByCompanyId(companyId);
 	}
 
+	/**
+	* Counts all the email addresses where userId = &#63;.
+	*
+	* @param userId the user id to search with
+	* @return the number of matching email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByUserId(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByUserId(userId);
 	}
 
+	/**
+	* Counts all the email addresses where companyId = &#63; and classNameId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @return the number of matching email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByC_C(long companyId, long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_C(companyId, classNameId);
 	}
 
+	/**
+	* Counts all the email addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @return the number of matching email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByC_C_C(long companyId, long classNameId,
 		long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_C_C(companyId, classNameId, classPK);
 	}
 
+	/**
+	* Counts all the email addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param primary the primary to search with
+	* @return the number of matching email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -475,6 +1039,12 @@ public class EmailAddressUtil {
 				   .countByC_C_C_P(companyId, classNameId, classPK, primary);
 	}
 
+	/**
+	* Counts all the email addresses.
+	*
+	* @return the number of email addresses
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();

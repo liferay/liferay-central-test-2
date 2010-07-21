@@ -15,20 +15,16 @@
 package com.liferay.portlet.messageboards.model;
 
 /**
- * <p>
- * This interface is a model that represents the MBCategory table in the
- * database.
- * </p>
+ * The model interface for the MBCategory service. Represents a row in the &quot;MBCategory&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.messageboards.model.impl.MBCategoryImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.messageboards.model.impl.MBCategoryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       MBCategoryModel
- * @see       com.liferay.portlet.messageboards.model.impl.MBCategoryImpl
- * @see       com.liferay.portlet.messageboards.model.impl.MBCategoryModelImpl
+ * @author Brian Wing Shun Chan
+ * @see MBCategoryModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBCategoryImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBCategoryModelImpl
  * @generated
  */
 public interface MBCategory extends MBCategoryModel {

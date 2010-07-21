@@ -25,9 +25,15 @@ import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       AnnouncementsDeliveryPersistence
- * @see       AnnouncementsDeliveryPersistenceImpl
+ * The persistence utility for the announcements delivery service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see AnnouncementsDeliveryPersistence
+ * @see AnnouncementsDeliveryPersistenceImpl
  * @generated
  */
 public class AnnouncementsDeliveryUtil {
@@ -108,21 +114,45 @@ public class AnnouncementsDeliveryUtil {
 				   .update(announcementsDelivery, merge, serviceContext);
 	}
 
+	/**
+	* Caches the announcements delivery in the entity cache if it is enabled.
+	*
+	* @param announcementsDelivery the announcements delivery to cache
+	*/
 	public static void cacheResult(
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery) {
 		getPersistence().cacheResult(announcementsDelivery);
 	}
 
+	/**
+	* Caches the announcements deliveries in the entity cache if it is enabled.
+	*
+	* @param announcementsDeliveries the announcements deliveries to cache
+	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> announcementsDeliveries) {
 		getPersistence().cacheResult(announcementsDeliveries);
 	}
 
+	/**
+	* Creates a new announcements delivery with the primary key.
+	*
+	* @param deliveryId the primary key for the new announcements delivery
+	* @return the new announcements delivery
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery create(
 		long deliveryId) {
 		return getPersistence().create(deliveryId);
 	}
 
+	/**
+	* Removes the announcements delivery with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param deliveryId the primary key of the announcements delivery to remove
+	* @return the announcements delivery that was removed
+	* @throws com.liferay.portlet.announcements.NoSuchDeliveryException if a announcements delivery with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery remove(
 		long deliveryId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -137,6 +167,14 @@ public class AnnouncementsDeliveryUtil {
 		return getPersistence().updateImpl(announcementsDelivery, merge);
 	}
 
+	/**
+	* Finds the announcements delivery with the primary key or throws a {@link com.liferay.portlet.announcements.NoSuchDeliveryException} if it could not be found.
+	*
+	* @param deliveryId the primary key of the announcements delivery to find
+	* @return the announcements delivery
+	* @throws com.liferay.portlet.announcements.NoSuchDeliveryException if a announcements delivery with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery findByPrimaryKey(
 		long deliveryId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -144,23 +182,64 @@ public class AnnouncementsDeliveryUtil {
 		return getPersistence().findByPrimaryKey(deliveryId);
 	}
 
+	/**
+	* Finds the announcements delivery with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param deliveryId the primary key of the announcements delivery to find
+	* @return the announcements delivery, or <code>null</code> if a announcements delivery with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery fetchByPrimaryKey(
 		long deliveryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(deliveryId);
 	}
 
+	/**
+	* Finds all the announcements deliveries where userId = &#63;.
+	*
+	* @param userId the user id to search with
+	* @return the matching announcements deliveries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> findByUserId(
 		long userId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUserId(userId);
 	}
 
+	/**
+	* Finds a range of all the announcements deliveries where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param start the lower bound of the range of announcements deliveries to return
+	* @param end the upper bound of the range of announcements deliveries to return (not inclusive)
+	* @return the range of matching announcements deliveries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> findByUserId(
 		long userId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUserId(userId, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the announcements deliveries where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param start the lower bound of the range of announcements deliveries to return
+	* @param end the upper bound of the range of announcements deliveries to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching announcements deliveries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> findByUserId(
 		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -169,6 +248,19 @@ public class AnnouncementsDeliveryUtil {
 				   .findByUserId(userId, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first announcements delivery in the ordered set where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching announcements delivery
+	* @throws com.liferay.portlet.announcements.NoSuchDeliveryException if a matching announcements delivery could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery findByUserId_First(
 		long userId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -177,6 +269,19 @@ public class AnnouncementsDeliveryUtil {
 		return getPersistence().findByUserId_First(userId, orderByComparator);
 	}
 
+	/**
+	* Finds the last announcements delivery in the ordered set where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching announcements delivery
+	* @throws com.liferay.portlet.announcements.NoSuchDeliveryException if a matching announcements delivery could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery findByUserId_Last(
 		long userId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -185,6 +290,20 @@ public class AnnouncementsDeliveryUtil {
 		return getPersistence().findByUserId_Last(userId, orderByComparator);
 	}
 
+	/**
+	* Finds the announcements deliveries before and after the current announcements delivery in the ordered set where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param deliveryId the primary key of the current announcements delivery
+	* @param userId the user id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next announcements delivery
+	* @throws com.liferay.portlet.announcements.NoSuchDeliveryException if a announcements delivery with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery[] findByUserId_PrevAndNext(
 		long deliveryId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -195,6 +314,15 @@ public class AnnouncementsDeliveryUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds the announcements delivery where userId = &#63; and type = &#63; or throws a {@link com.liferay.portlet.announcements.NoSuchDeliveryException} if it could not be found.
+	*
+	* @param userId the user id to search with
+	* @param type the type to search with
+	* @return the matching announcements delivery
+	* @throws com.liferay.portlet.announcements.NoSuchDeliveryException if a matching announcements delivery could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery findByU_T(
 		long userId, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -202,29 +330,76 @@ public class AnnouncementsDeliveryUtil {
 		return getPersistence().findByU_T(userId, type);
 	}
 
+	/**
+	* Finds the announcements delivery where userId = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param userId the user id to search with
+	* @param type the type to search with
+	* @return the matching announcements delivery, or <code>null</code> if a matching announcements delivery could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery fetchByU_T(
 		long userId, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByU_T(userId, type);
 	}
 
+	/**
+	* Finds the announcements delivery where userId = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param userId the user id to search with
+	* @param type the type to search with
+	* @return the matching announcements delivery, or <code>null</code> if a matching announcements delivery could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery fetchByU_T(
 		long userId, java.lang.String type, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByU_T(userId, type, retrieveFromCache);
 	}
 
+	/**
+	* Finds all the announcements deliveries.
+	*
+	* @return the announcements deliveries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
+	/**
+	* Finds a range of all the announcements deliveries.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of announcements deliveries to return
+	* @param end the upper bound of the range of announcements deliveries to return (not inclusive)
+	* @return the range of announcements deliveries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the announcements deliveries.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of announcements deliveries to return
+	* @param end the upper bound of the range of announcements deliveries to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of announcements deliveries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -232,32 +407,71 @@ public class AnnouncementsDeliveryUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
+	/**
+	* Removes all the announcements deliveries where userId = &#63; from the database.
+	*
+	* @param userId the user id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByUserId(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByUserId(userId);
 	}
 
+	/**
+	* Removes the announcements delivery where userId = &#63; and type = &#63; from the database.
+	*
+	* @param userId the user id to search with
+	* @param type the type to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByU_T(long userId, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchDeliveryException {
 		getPersistence().removeByU_T(userId, type);
 	}
 
+	/**
+	* Removes all the announcements deliveries from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
+	/**
+	* Counts all the announcements deliveries where userId = &#63;.
+	*
+	* @param userId the user id to search with
+	* @return the number of matching announcements deliveries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByUserId(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByUserId(userId);
 	}
 
+	/**
+	* Counts all the announcements deliveries where userId = &#63; and type = &#63;.
+	*
+	* @param userId the user id to search with
+	* @param type the type to search with
+	* @return the number of matching announcements deliveries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByU_T(long userId, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByU_T(userId, type);
 	}
 
+	/**
+	* Counts all the announcements deliveries.
+	*
+	* @return the number of announcements deliveries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();

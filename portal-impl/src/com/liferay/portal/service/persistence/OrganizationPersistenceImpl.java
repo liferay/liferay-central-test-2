@@ -59,9 +59,19 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       OrganizationPersistence
- * @see       OrganizationUtil
+ * The persistence for the organization service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see OrganizationPersistence
+ * @see OrganizationUtil
  * @generated
  */
 public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organization>
@@ -121,6 +131,11 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			OrganizationModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the organization in the entity cache if it is enabled.
+	 *
+	 * @param organization the organization to cache
+	 */
 	public void cacheResult(Organization organization) {
 		EntityCacheUtil.putResult(OrganizationModelImpl.ENTITY_CACHE_ENABLED,
 			OrganizationImpl.class, organization.getPrimaryKey(), organization);
@@ -133,6 +148,11 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			}, organization);
 	}
 
+	/**
+	 * Caches the organizations in the entity cache if it is enabled.
+	 *
+	 * @param organizations the organizations to cache
+	 */
 	public void cacheResult(List<Organization> organizations) {
 		for (Organization organization : organizations) {
 			if (EntityCacheUtil.getResult(
@@ -144,6 +164,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Clears the cache for all organizations.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(OrganizationImpl.class.getName());
 		EntityCacheUtil.clearCache(OrganizationImpl.class.getName());
@@ -151,6 +178,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the organization.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(Organization organization) {
 		EntityCacheUtil.removeResult(OrganizationModelImpl.ENTITY_CACHE_ENABLED,
 			OrganizationImpl.class, organization.getPrimaryKey());
@@ -163,6 +197,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			});
 	}
 
+	/**
+	 * Creates a new organization with the primary key.
+	 *
+	 * @param organizationId the primary key for the new organization
+	 * @return the new organization
+	 */
 	public Organization create(long organizationId) {
 		Organization organization = new OrganizationImpl();
 
@@ -172,11 +212,27 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		return organization;
 	}
 
+	/**
+	 * Removes the organization with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the organization to remove
+	 * @return the organization that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a organization with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Organization remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the organization with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param organizationId the primary key of the organization to remove
+	 * @return the organization that was removed
+	 * @throws com.liferay.portal.NoSuchOrganizationException if a organization with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Organization remove(long organizationId)
 		throws NoSuchOrganizationException, SystemException {
 		Session session = null;
@@ -371,11 +427,27 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		return organizationImpl;
 	}
 
+	/**
+	 * Finds the organization with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the organization to find
+	 * @return the organization
+	 * @throws com.liferay.portal.NoSuchModelException if a organization with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Organization findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the organization with the primary key or throws a {@link com.liferay.portal.NoSuchOrganizationException} if it could not be found.
+	 *
+	 * @param organizationId the primary key of the organization to find
+	 * @return the organization
+	 * @throws com.liferay.portal.NoSuchOrganizationException if a organization with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Organization findByPrimaryKey(long organizationId)
 		throws NoSuchOrganizationException, SystemException {
 		Organization organization = fetchByPrimaryKey(organizationId);
@@ -392,11 +464,25 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		return organization;
 	}
 
+	/**
+	 * Finds the organization with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the organization to find
+	 * @return the organization, or <code>null</code> if a organization with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Organization fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the organization with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param organizationId the primary key of the organization to find
+	 * @return the organization, or <code>null</code> if a organization with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Organization fetchByPrimaryKey(long organizationId)
 		throws SystemException {
 		Organization organization = (Organization)EntityCacheUtil.getResult(OrganizationModelImpl.ENTITY_CACHE_ENABLED,
@@ -426,17 +512,51 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		return organization;
 	}
 
+	/**
+	 * Finds all the organizations where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the matching organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Organization> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the organizations where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of organizations to return
+	 * @param end the upper bound of the range of organizations to return (not inclusive)
+	 * @return the range of matching organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Organization> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the organizations where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of organizations to return
+	 * @param end the upper bound of the range of organizations to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Organization> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -509,6 +629,19 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		return list;
 	}
 
+	/**
+	 * Finds the first organization in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching organization
+	 * @throws com.liferay.portal.NoSuchOrganizationException if a matching organization could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Organization findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchOrganizationException, SystemException {
@@ -532,6 +665,19 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Finds the last organization in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching organization
+	 * @throws com.liferay.portal.NoSuchOrganizationException if a matching organization could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Organization findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchOrganizationException, SystemException {
@@ -557,6 +703,20 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Finds the organizations before and after the current organization in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param organizationId the primary key of the current organization
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next organization
+	 * @throws com.liferay.portal.NoSuchOrganizationException if a organization with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Organization[] findByCompanyId_PrevAndNext(long organizationId,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchOrganizationException, SystemException {
@@ -691,17 +851,51 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Finds all the organizations where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the matching organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Organization> findByLocations(long companyId)
 		throws SystemException {
 		return findByLocations(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the organizations where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of organizations to return
+	 * @param end the upper bound of the range of organizations to return (not inclusive)
+	 * @return the range of matching organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Organization> findByLocations(long companyId, int start, int end)
 		throws SystemException {
 		return findByLocations(companyId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the organizations where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of organizations to return
+	 * @param end the upper bound of the range of organizations to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Organization> findByLocations(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -774,6 +968,19 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		return list;
 	}
 
+	/**
+	 * Finds the first organization in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching organization
+	 * @throws com.liferay.portal.NoSuchOrganizationException if a matching organization could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Organization findByLocations_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchOrganizationException, SystemException {
@@ -797,6 +1004,19 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Finds the last organization in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching organization
+	 * @throws com.liferay.portal.NoSuchOrganizationException if a matching organization could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Organization findByLocations_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchOrganizationException, SystemException {
@@ -822,6 +1042,20 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Finds the organizations before and after the current organization in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param organizationId the primary key of the current organization
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next organization
+	 * @throws com.liferay.portal.NoSuchOrganizationException if a organization with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Organization[] findByLocations_PrevAndNext(long organizationId,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchOrganizationException, SystemException {
@@ -956,18 +1190,55 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Finds all the organizations where companyId = &#63; and parentOrganizationId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param parentOrganizationId the parent organization id to search with
+	 * @return the matching organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Organization> findByC_P(long companyId,
 		long parentOrganizationId) throws SystemException {
 		return findByC_P(companyId, parentOrganizationId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the organizations where companyId = &#63; and parentOrganizationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param parentOrganizationId the parent organization id to search with
+	 * @param start the lower bound of the range of organizations to return
+	 * @param end the upper bound of the range of organizations to return (not inclusive)
+	 * @return the range of matching organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Organization> findByC_P(long companyId,
 		long parentOrganizationId, int start, int end)
 		throws SystemException {
 		return findByC_P(companyId, parentOrganizationId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the organizations where companyId = &#63; and parentOrganizationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param parentOrganizationId the parent organization id to search with
+	 * @param start the lower bound of the range of organizations to return
+	 * @param end the upper bound of the range of organizations to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Organization> findByC_P(long companyId,
 		long parentOrganizationId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -1045,6 +1316,20 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		return list;
 	}
 
+	/**
+	 * Finds the first organization in the ordered set where companyId = &#63; and parentOrganizationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param parentOrganizationId the parent organization id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching organization
+	 * @throws com.liferay.portal.NoSuchOrganizationException if a matching organization could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Organization findByC_P_First(long companyId,
 		long parentOrganizationId, OrderByComparator orderByComparator)
 		throws NoSuchOrganizationException, SystemException {
@@ -1071,6 +1356,20 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Finds the last organization in the ordered set where companyId = &#63; and parentOrganizationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param parentOrganizationId the parent organization id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching organization
+	 * @throws com.liferay.portal.NoSuchOrganizationException if a matching organization could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Organization findByC_P_Last(long companyId,
 		long parentOrganizationId, OrderByComparator orderByComparator)
 		throws NoSuchOrganizationException, SystemException {
@@ -1099,6 +1398,21 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Finds the organizations before and after the current organization in the ordered set where companyId = &#63; and parentOrganizationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param organizationId the primary key of the current organization
+	 * @param companyId the company id to search with
+	 * @param parentOrganizationId the parent organization id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next organization
+	 * @throws com.liferay.portal.NoSuchOrganizationException if a organization with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Organization[] findByC_P_PrevAndNext(long organizationId,
 		long companyId, long parentOrganizationId,
 		OrderByComparator orderByComparator)
@@ -1238,6 +1552,15 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Finds the organization where companyId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchOrganizationException} if it could not be found.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @return the matching organization
+	 * @throws com.liferay.portal.NoSuchOrganizationException if a matching organization could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Organization findByC_N(long companyId, String name)
 		throws NoSuchOrganizationException, SystemException {
 		Organization organization = fetchByC_N(companyId, name);
@@ -1265,11 +1588,27 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		return organization;
 	}
 
+	/**
+	 * Finds the organization where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @return the matching organization, or <code>null</code> if a matching organization could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Organization fetchByC_N(long companyId, String name)
 		throws SystemException {
 		return fetchByC_N(companyId, name, true);
 	}
 
+	/**
+	 * Finds the organization where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @return the matching organization, or <code>null</code> if a matching organization could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Organization fetchByC_N(long companyId, String name,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, name };
@@ -1366,15 +1705,46 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Finds all the organizations.
+	 *
+	 * @return the organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Organization> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the organizations.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of organizations to return
+	 * @param end the upper bound of the range of organizations to return (not inclusive)
+	 * @return the range of organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Organization> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the organizations.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of organizations to return
+	 * @param end the upper bound of the range of organizations to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Organization> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1441,18 +1811,37 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		return list;
 	}
 
+	/**
+	 * Removes all the organizations where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (Organization organization : findByCompanyId(companyId)) {
 			remove(organization);
 		}
 	}
 
+	/**
+	 * Removes all the organizations where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByLocations(long companyId) throws SystemException {
 		for (Organization organization : findByLocations(companyId)) {
 			remove(organization);
 		}
 	}
 
+	/**
+	 * Removes all the organizations where companyId = &#63; and parentOrganizationId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param parentOrganizationId the parent organization id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_P(long companyId, long parentOrganizationId)
 		throws SystemException {
 		for (Organization organization : findByC_P(companyId,
@@ -1461,6 +1850,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Removes the organization where companyId = &#63; and name = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_N(long companyId, String name)
 		throws NoSuchOrganizationException, SystemException {
 		Organization organization = findByC_N(companyId, name);
@@ -1468,12 +1864,24 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		remove(organization);
 	}
 
+	/**
+	 * Removes all the organizations from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (Organization organization : findAll()) {
 			remove(organization);
 		}
 	}
 
+	/**
+	 * Counts all the organizations where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the number of matching organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId };
 
@@ -1520,6 +1928,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the organizations where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the number of matching organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByLocations(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId };
 
@@ -1566,6 +1981,14 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the organizations where companyId = &#63; and parentOrganizationId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param parentOrganizationId the parent organization id to search with
+	 * @return the number of matching organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_P(long companyId, long parentOrganizationId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, parentOrganizationId };
@@ -1617,6 +2040,14 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the organizations where companyId = &#63; and name = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @return the number of matching organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_N(long companyId, String name)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, name };
@@ -1680,6 +2111,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the organizations.
+	 *
+	 * @return the number of organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -1714,11 +2151,31 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		return count.intValue();
 	}
 
+	/**
+	 * Gets all the groups associated with the organization.
+	 *
+	 * @param pk the primary key of the organization to get the associated groups for
+	 * @return the groups associated with the organization
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.Group> getGroups(long pk)
 		throws SystemException {
 		return getGroups(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
+	/**
+	 * Gets a range of all the groups associated with the organization.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the organization to get the associated groups for
+	 * @param start the lower bound of the range of organizations to return
+	 * @param end the upper bound of the range of organizations to return (not inclusive)
+	 * @return the range of groups associated with the organization
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
 		int end) throws SystemException {
 		return getGroups(pk, start, end, null);
@@ -1732,6 +2189,20 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
 
+	/**
+	 * Gets an ordered range of all the groups associated with the organization.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the organization to get the associated groups for
+	 * @param start the lower bound of the range of organizations to return
+	 * @param end the upper bound of the range of organizations to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of groups associated with the organization
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1795,6 +2266,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			OrganizationModelImpl.MAPPING_TABLE_GROUPS_ORGS_NAME,
 			"getGroupsSize", new String[] { Long.class.getName() });
 
+	/**
+	 * Gets the number of groups associated with the organization.
+	 *
+	 * @param pk the primary key of the organization to get the number of associated groups for
+	 * @return the number of groups associated with the organization
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int getGroupsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -1842,6 +2320,14 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			"containsGroup",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
+	/**
+	 * Determines whether the group is associated with the organization.
+	 *
+	 * @param pk the primary key of the organization
+	 * @param groupPK the primary key of the group
+	 * @return whether the group is associated with the organization
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsGroup(long pk, long groupPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { pk, groupPK };
@@ -1869,6 +2355,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		return value.booleanValue();
 	}
 
+	/**
+	 * Determines whether the organization has any groups associated with it.
+	 *
+	 * @param pk the primary key of the organization to check for associations with groups
+	 * @return whether the organization has any groups associated with it
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsGroups(long pk) throws SystemException {
 		if (getGroupsSize(pk) > 0) {
 			return true;
@@ -1878,6 +2371,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Adds an association between the organization and the group. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization
+	 * @param groupPK the primary key of the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addGroup(long pk, long groupPK) throws SystemException {
 		try {
 			addGroup.add(pk, groupPK);
@@ -1890,6 +2390,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Adds an association between the organization and the group. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization
+	 * @param group the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addGroup(long pk, com.liferay.portal.model.Group group)
 		throws SystemException {
 		try {
@@ -1903,6 +2410,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Adds an association between the organization and the groups. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization
+	 * @param groupPKs the primary keys of the groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addGroups(long pk, long[] groupPKs) throws SystemException {
 		try {
 			for (long groupPK : groupPKs) {
@@ -1917,6 +2431,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Adds an association between the organization and the groups. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization
+	 * @param groups the groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addGroups(long pk, List<com.liferay.portal.model.Group> groups)
 		throws SystemException {
 		try {
@@ -1932,6 +2453,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Clears all associations between the organization and its groups. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization to clear the associated groups from
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void clearGroups(long pk) throws SystemException {
 		try {
 			clearGroups.clear(pk);
@@ -1944,6 +2471,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Removes the association between the organization and the group. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization
+	 * @param groupPK the primary key of the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeGroup(long pk, long groupPK) throws SystemException {
 		try {
 			removeGroup.remove(pk, groupPK);
@@ -1956,6 +2490,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Removes the association between the organization and the group. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization
+	 * @param group the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeGroup(long pk, com.liferay.portal.model.Group group)
 		throws SystemException {
 		try {
@@ -1969,6 +2510,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Removes the association between the organization and the groups. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization
+	 * @param groupPKs the primary keys of the groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeGroups(long pk, long[] groupPKs)
 		throws SystemException {
 		try {
@@ -1984,6 +2532,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Removes the association between the organization and the groups. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization
+	 * @param groups the groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeGroups(long pk,
 		List<com.liferay.portal.model.Group> groups) throws SystemException {
 		try {
@@ -1999,6 +2554,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Sets the groups associated with the organization, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization to set the associations for
+	 * @param groupPKs the primary keys of the groups to be associated with the organization
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setGroups(long pk, long[] groupPKs) throws SystemException {
 		try {
 			Set<Long> groupPKSet = SetUtil.fromArray(groupPKs);
@@ -2023,6 +2585,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Sets the groups associated with the organization, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization to set the associations for
+	 * @param groups the groups to be associated with the organization
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setGroups(long pk, List<com.liferay.portal.model.Group> groups)
 		throws SystemException {
 		try {
@@ -2044,11 +2613,31 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Gets all the users associated with the organization.
+	 *
+	 * @param pk the primary key of the organization to get the associated users for
+	 * @return the users associated with the organization
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.User> getUsers(long pk)
 		throws SystemException {
 		return getUsers(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
+	/**
+	 * Gets a range of all the users associated with the organization.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the organization to get the associated users for
+	 * @param start the lower bound of the range of organizations to return
+	 * @param end the upper bound of the range of organizations to return (not inclusive)
+	 * @return the range of users associated with the organization
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end) throws SystemException {
 		return getUsers(pk, start, end, null);
@@ -2062,6 +2651,20 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
 
+	/**
+	 * Gets an ordered range of all the users associated with the organization.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the organization to get the associated users for
+	 * @param start the lower bound of the range of organizations to return
+	 * @param end the upper bound of the range of organizations to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of users associated with the organization
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2125,6 +2728,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			OrganizationModelImpl.MAPPING_TABLE_USERS_ORGS_NAME,
 			"getUsersSize", new String[] { Long.class.getName() });
 
+	/**
+	 * Gets the number of users associated with the organization.
+	 *
+	 * @param pk the primary key of the organization to get the number of associated users for
+	 * @return the number of users associated with the organization
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int getUsersSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -2172,6 +2782,14 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			"containsUser",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
+	/**
+	 * Determines whether the user is associated with the organization.
+	 *
+	 * @param pk the primary key of the organization
+	 * @param userPK the primary key of the user
+	 * @return whether the user is associated with the organization
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsUser(long pk, long userPK) throws SystemException {
 		Object[] finderArgs = new Object[] { pk, userPK };
 
@@ -2198,6 +2816,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		return value.booleanValue();
 	}
 
+	/**
+	 * Determines whether the organization has any users associated with it.
+	 *
+	 * @param pk the primary key of the organization to check for associations with users
+	 * @return whether the organization has any users associated with it
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsUsers(long pk) throws SystemException {
 		if (getUsersSize(pk) > 0) {
 			return true;
@@ -2207,6 +2832,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Adds an association between the organization and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization
+	 * @param userPK the primary key of the user
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addUser(long pk, long userPK) throws SystemException {
 		try {
 			addUser.add(pk, userPK);
@@ -2219,6 +2851,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Adds an association between the organization and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization
+	 * @param user the user
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addUser(long pk, com.liferay.portal.model.User user)
 		throws SystemException {
 		try {
@@ -2232,6 +2871,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Adds an association between the organization and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization
+	 * @param userPKs the primary keys of the users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			for (long userPK : userPKs) {
@@ -2246,6 +2892,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Adds an association between the organization and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization
+	 * @param users the users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws SystemException {
 		try {
@@ -2261,6 +2914,12 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Clears all associations between the organization and its users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization to clear the associated users from
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void clearUsers(long pk) throws SystemException {
 		try {
 			clearUsers.clear(pk);
@@ -2273,6 +2932,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Removes the association between the organization and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization
+	 * @param userPK the primary key of the user
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeUser(long pk, long userPK) throws SystemException {
 		try {
 			removeUser.remove(pk, userPK);
@@ -2285,6 +2951,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Removes the association between the organization and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization
+	 * @param user the user
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeUser(long pk, com.liferay.portal.model.User user)
 		throws SystemException {
 		try {
@@ -2298,6 +2971,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Removes the association between the organization and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization
+	 * @param userPKs the primary keys of the users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			for (long userPK : userPKs) {
@@ -2312,6 +2992,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Removes the association between the organization and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization
+	 * @param users the users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws SystemException {
 		try {
@@ -2327,6 +3014,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Sets the users associated with the organization, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization to set the associations for
+	 * @param userPKs the primary keys of the users to be associated with the organization
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			Set<Long> userPKSet = SetUtil.fromArray(userPKs);
@@ -2351,6 +3045,13 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Sets the users associated with the organization, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the organization to set the associations for
+	 * @param users the users to be associated with the organization
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws SystemException {
 		try {
@@ -2372,6 +3073,16 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	/**
+	 * Rebuilds the organizations tree for the scope using the modified pre-order tree traversal algorithm.
+	 *
+	 * <p>
+	 * Only call this method if the tree has become stale through operations other than normal CRUD. Under normal circumstances the tree is automatically rebuilt whenver necessary.
+	 * </p>
+	 *
+	 * @param companyId the id of the scope to rebuild the tree for
+	 * @param force whether to force the rebuild even if the tree is not stale
+	 */
 	public void rebuildTree(long companyId, boolean force)
 		throws SystemException {
 		if (force || (countOrphanTreeNodes(companyId) > 0)) {
@@ -2544,6 +3255,9 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Initializes the organization persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

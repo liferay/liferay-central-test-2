@@ -65,9 +65,19 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       SCProductEntryPersistence
- * @see       SCProductEntryUtil
+ * The persistence for the s c product entry service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see SCProductEntryPersistence
+ * @see SCProductEntryUtil
  * @generated
  */
 public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProductEntry>
@@ -129,6 +139,11 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			SCProductEntryModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
+	/**
+	 * Caches the s c product entry in the entity cache if it is enabled.
+	 *
+	 * @param scProductEntry the s c product entry to cache
+	 */
 	public void cacheResult(SCProductEntry scProductEntry) {
 		EntityCacheUtil.putResult(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
 			SCProductEntryImpl.class, scProductEntry.getPrimaryKey(),
@@ -142,6 +157,11 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			}, scProductEntry);
 	}
 
+	/**
+	 * Caches the s c product entries in the entity cache if it is enabled.
+	 *
+	 * @param scProductEntries the s c product entries to cache
+	 */
 	public void cacheResult(List<SCProductEntry> scProductEntries) {
 		for (SCProductEntry scProductEntry : scProductEntries) {
 			if (EntityCacheUtil.getResult(
@@ -153,6 +173,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Clears the cache for all s c product entries.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(SCProductEntryImpl.class.getName());
 		EntityCacheUtil.clearCache(SCProductEntryImpl.class.getName());
@@ -160,6 +187,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the s c product entry.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(SCProductEntry scProductEntry) {
 		EntityCacheUtil.removeResult(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
 			SCProductEntryImpl.class, scProductEntry.getPrimaryKey());
@@ -172,6 +206,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			});
 	}
 
+	/**
+	 * Creates a new s c product entry with the primary key.
+	 *
+	 * @param productEntryId the primary key for the new s c product entry
+	 * @return the new s c product entry
+	 */
 	public SCProductEntry create(long productEntryId) {
 		SCProductEntry scProductEntry = new SCProductEntryImpl();
 
@@ -181,11 +221,27 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		return scProductEntry;
 	}
 
+	/**
+	 * Removes the s c product entry with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the s c product entry to remove
+	 * @return the s c product entry that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a s c product entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCProductEntry remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the s c product entry with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param productEntryId the primary key of the s c product entry to remove
+	 * @return the s c product entry that was removed
+	 * @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a s c product entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCProductEntry remove(long productEntryId)
 		throws NoSuchProductEntryException, SystemException {
 		Session session = null;
@@ -365,11 +421,27 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		return scProductEntryImpl;
 	}
 
+	/**
+	 * Finds the s c product entry with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the s c product entry to find
+	 * @return the s c product entry
+	 * @throws com.liferay.portal.NoSuchModelException if a s c product entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCProductEntry findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the s c product entry with the primary key or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductEntryException} if it could not be found.
+	 *
+	 * @param productEntryId the primary key of the s c product entry to find
+	 * @return the s c product entry
+	 * @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a s c product entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCProductEntry findByPrimaryKey(long productEntryId)
 		throws NoSuchProductEntryException, SystemException {
 		SCProductEntry scProductEntry = fetchByPrimaryKey(productEntryId);
@@ -386,11 +458,25 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		return scProductEntry;
 	}
 
+	/**
+	 * Finds the s c product entry with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the s c product entry to find
+	 * @return the s c product entry, or <code>null</code> if a s c product entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCProductEntry fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the s c product entry with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param productEntryId the primary key of the s c product entry to find
+	 * @return the s c product entry, or <code>null</code> if a s c product entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCProductEntry fetchByPrimaryKey(long productEntryId)
 		throws SystemException {
 		SCProductEntry scProductEntry = (SCProductEntry)EntityCacheUtil.getResult(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -420,16 +506,50 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		return scProductEntry;
 	}
 
+	/**
+	 * Finds all the s c product entries where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the matching s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCProductEntry> findByGroupId(long groupId)
 		throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the s c product entries where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of s c product entries to return
+	 * @param end the upper bound of the range of s c product entries to return (not inclusive)
+	 * @return the range of matching s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCProductEntry> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the s c product entries where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of s c product entries to return
+	 * @param end the upper bound of the range of s c product entries to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCProductEntry> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -502,6 +622,19 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		return list;
 	}
 
+	/**
+	 * Finds the first s c product entry in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching s c product entry
+	 * @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a matching s c product entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCProductEntry findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchProductEntryException, SystemException {
@@ -525,6 +658,19 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Finds the last s c product entry in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching s c product entry
+	 * @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a matching s c product entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCProductEntry findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchProductEntryException, SystemException {
@@ -550,6 +696,20 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Finds the s c product entries before and after the current s c product entry in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param productEntryId the primary key of the current s c product entry
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next s c product entry
+	 * @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a s c product entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCProductEntry[] findByGroupId_PrevAndNext(long productEntryId,
 		long groupId, OrderByComparator orderByComparator)
 		throws NoSuchProductEntryException, SystemException {
@@ -684,17 +844,51 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the s c product entries where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the matching s c product entries that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCProductEntry> filterFindByGroupId(long groupId)
 		throws SystemException {
 		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the s c product entries where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of s c product entries to return
+	 * @param end the upper bound of the range of s c product entries to return (not inclusive)
+	 * @return the range of matching s c product entries that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCProductEntry> filterFindByGroupId(long groupId, int start,
 		int end) throws SystemException {
 		return filterFindByGroupId(groupId, start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the s c product entries where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of s c product entries to return
+	 * @param end the upper bound of the range of s c product entries to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching s c product entries that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCProductEntry> filterFindByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -752,17 +946,51 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Finds all the s c product entries where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the matching s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCProductEntry> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the s c product entries where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of s c product entries to return
+	 * @param end the upper bound of the range of s c product entries to return (not inclusive)
+	 * @return the range of matching s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCProductEntry> findByCompanyId(long companyId, int start,
 		int end) throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the s c product entries where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of s c product entries to return
+	 * @param end the upper bound of the range of s c product entries to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCProductEntry> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -835,6 +1063,19 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		return list;
 	}
 
+	/**
+	 * Finds the first s c product entry in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching s c product entry
+	 * @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a matching s c product entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCProductEntry findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchProductEntryException, SystemException {
@@ -858,6 +1099,19 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Finds the last s c product entry in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching s c product entry
+	 * @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a matching s c product entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCProductEntry findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchProductEntryException, SystemException {
@@ -883,6 +1137,20 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Finds the s c product entries before and after the current s c product entry in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param productEntryId the primary key of the current s c product entry
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next s c product entry
+	 * @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a s c product entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCProductEntry[] findByCompanyId_PrevAndNext(long productEntryId,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchProductEntryException, SystemException {
@@ -1017,17 +1285,54 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Finds all the s c product entries where groupId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @return the matching s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCProductEntry> findByG_U(long groupId, long userId)
 		throws SystemException {
 		return findByG_U(groupId, userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the s c product entries where groupId = &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of s c product entries to return
+	 * @param end the upper bound of the range of s c product entries to return (not inclusive)
+	 * @return the range of matching s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCProductEntry> findByG_U(long groupId, long userId, int start,
 		int end) throws SystemException {
 		return findByG_U(groupId, userId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the s c product entries where groupId = &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of s c product entries to return
+	 * @param end the upper bound of the range of s c product entries to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCProductEntry> findByG_U(long groupId, long userId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1104,6 +1409,20 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		return list;
 	}
 
+	/**
+	 * Finds the first s c product entry in the ordered set where groupId = &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching s c product entry
+	 * @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a matching s c product entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCProductEntry findByG_U_First(long groupId, long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchProductEntryException, SystemException {
@@ -1130,6 +1449,20 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Finds the last s c product entry in the ordered set where groupId = &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching s c product entry
+	 * @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a matching s c product entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCProductEntry findByG_U_Last(long groupId, long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchProductEntryException, SystemException {
@@ -1158,6 +1491,21 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Finds the s c product entries before and after the current s c product entry in the ordered set where groupId = &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param productEntryId the primary key of the current s c product entry
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next s c product entry
+	 * @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a s c product entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCProductEntry[] findByG_U_PrevAndNext(long productEntryId,
 		long groupId, long userId, OrderByComparator orderByComparator)
 		throws NoSuchProductEntryException, SystemException {
@@ -1296,17 +1644,54 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the s c product entries where groupId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @return the matching s c product entries that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCProductEntry> filterFindByG_U(long groupId, long userId)
 		throws SystemException {
 		return filterFindByG_U(groupId, userId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the s c product entries where groupId = &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of s c product entries to return
+	 * @param end the upper bound of the range of s c product entries to return (not inclusive)
+	 * @return the range of matching s c product entries that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCProductEntry> filterFindByG_U(long groupId, long userId,
 		int start, int end) throws SystemException {
 		return filterFindByG_U(groupId, userId, start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the s c product entries where groupId = &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of s c product entries to return
+	 * @param end the upper bound of the range of s c product entries to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching s c product entries that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCProductEntry> filterFindByG_U(long groupId, long userId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1369,6 +1754,15 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Finds the s c product entry where repoGroupId = &#63; and repoArtifactId = &#63; or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchProductEntryException} if it could not be found.
+	 *
+	 * @param repoGroupId the repo group id to search with
+	 * @param repoArtifactId the repo artifact id to search with
+	 * @return the matching s c product entry
+	 * @throws com.liferay.portlet.softwarecatalog.NoSuchProductEntryException if a matching s c product entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCProductEntry findByRG_RA(String repoGroupId, String repoArtifactId)
 		throws NoSuchProductEntryException, SystemException {
 		SCProductEntry scProductEntry = fetchByRG_RA(repoGroupId, repoArtifactId);
@@ -1396,11 +1790,27 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		return scProductEntry;
 	}
 
+	/**
+	 * Finds the s c product entry where repoGroupId = &#63; and repoArtifactId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param repoGroupId the repo group id to search with
+	 * @param repoArtifactId the repo artifact id to search with
+	 * @return the matching s c product entry, or <code>null</code> if a matching s c product entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCProductEntry fetchByRG_RA(String repoGroupId, String repoArtifactId)
 		throws SystemException {
 		return fetchByRG_RA(repoGroupId, repoArtifactId, true);
 	}
 
+	/**
+	 * Finds the s c product entry where repoGroupId = &#63; and repoArtifactId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param repoGroupId the repo group id to search with
+	 * @param repoArtifactId the repo artifact id to search with
+	 * @return the matching s c product entry, or <code>null</code> if a matching s c product entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCProductEntry fetchByRG_RA(String repoGroupId,
 		String repoArtifactId, boolean retrieveFromCache)
 		throws SystemException {
@@ -1512,15 +1922,46 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Finds all the s c product entries.
+	 *
+	 * @return the s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCProductEntry> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the s c product entries.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of s c product entries to return
+	 * @param end the upper bound of the range of s c product entries to return (not inclusive)
+	 * @return the range of s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCProductEntry> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the s c product entries.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of s c product entries to return
+	 * @param end the upper bound of the range of s c product entries to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCProductEntry> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1587,18 +2028,37 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		return list;
 	}
 
+	/**
+	 * Removes all the s c product entries where groupId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (SCProductEntry scProductEntry : findByGroupId(groupId)) {
 			remove(scProductEntry);
 		}
 	}
 
+	/**
+	 * Removes all the s c product entries where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (SCProductEntry scProductEntry : findByCompanyId(companyId)) {
 			remove(scProductEntry);
 		}
 	}
 
+	/**
+	 * Removes all the s c product entries where groupId = &#63; and userId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_U(long groupId, long userId)
 		throws SystemException {
 		for (SCProductEntry scProductEntry : findByG_U(groupId, userId)) {
@@ -1606,6 +2066,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Removes the s c product entry where repoGroupId = &#63; and repoArtifactId = &#63; from the database.
+	 *
+	 * @param repoGroupId the repo group id to search with
+	 * @param repoArtifactId the repo artifact id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByRG_RA(String repoGroupId, String repoArtifactId)
 		throws NoSuchProductEntryException, SystemException {
 		SCProductEntry scProductEntry = findByRG_RA(repoGroupId, repoArtifactId);
@@ -1613,12 +2080,24 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		remove(scProductEntry);
 	}
 
+	/**
+	 * Removes all the s c product entries from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (SCProductEntry scProductEntry : findAll()) {
 			remove(scProductEntry);
 		}
 	}
 
+	/**
+	 * Counts all the s c product entries where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the number of matching s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId };
 
@@ -1665,6 +2144,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the s c product entries where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the number of matching s c product entries that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByGroupId(long groupId) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByGroupId(groupId);
@@ -1706,6 +2192,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Counts all the s c product entries where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the number of matching s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId };
 
@@ -1752,6 +2245,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the s c product entries where groupId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @return the number of matching s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_U(long groupId, long userId) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, userId };
 
@@ -1802,6 +2303,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the s c product entries where groupId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @return the number of matching s c product entries that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByG_U(long groupId, long userId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -1848,6 +2357,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Counts all the s c product entries where repoGroupId = &#63; and repoArtifactId = &#63;.
+	 *
+	 * @param repoGroupId the repo group id to search with
+	 * @param repoArtifactId the repo artifact id to search with
+	 * @return the number of matching s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByRG_RA(String repoGroupId, String repoArtifactId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { repoGroupId, repoArtifactId };
@@ -1923,6 +2440,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the s c product entries.
+	 *
+	 * @return the number of s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -1957,11 +2480,31 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		return count.intValue();
 	}
 
+	/**
+	 * Gets all the s c licenses associated with the s c product entry.
+	 *
+	 * @param pk the primary key of the s c product entry to get the associated s c licenses for
+	 * @return the s c licenses associated with the s c product entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portlet.softwarecatalog.model.SCLicense> getSCLicenses(
 		long pk) throws SystemException {
 		return getSCLicenses(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
+	/**
+	 * Gets a range of all the s c licenses associated with the s c product entry.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the s c product entry to get the associated s c licenses for
+	 * @param start the lower bound of the range of s c product entries to return
+	 * @param end the upper bound of the range of s c product entries to return (not inclusive)
+	 * @return the range of s c licenses associated with the s c product entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portlet.softwarecatalog.model.SCLicense> getSCLicenses(
 		long pk, int start, int end) throws SystemException {
 		return getSCLicenses(pk, start, end, null);
@@ -1976,6 +2519,20 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
 
+	/**
+	 * Gets an ordered range of all the s c licenses associated with the s c product entry.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the s c product entry to get the associated s c licenses for
+	 * @param start the lower bound of the range of s c product entries to return
+	 * @param end the upper bound of the range of s c product entries to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of s c licenses associated with the s c product entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portlet.softwarecatalog.model.SCLicense> getSCLicenses(
 		long pk, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2040,6 +2597,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			SCProductEntryModelImpl.MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME,
 			"getSCLicensesSize", new String[] { Long.class.getName() });
 
+	/**
+	 * Gets the number of s c licenses associated with the s c product entry.
+	 *
+	 * @param pk the primary key of the s c product entry to get the number of associated s c licenses for
+	 * @return the number of s c licenses associated with the s c product entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int getSCLicensesSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -2087,6 +2651,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			"containsSCLicense",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
+	/**
+	 * Determines whether the s c license is associated with the s c product entry.
+	 *
+	 * @param pk the primary key of the s c product entry
+	 * @param scLicensePK the primary key of the s c license
+	 * @return whether the s c license is associated with the s c product entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsSCLicense(long pk, long scLicensePK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { pk, scLicensePK };
@@ -2115,6 +2687,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		return value.booleanValue();
 	}
 
+	/**
+	 * Determines whether the s c product entry has any s c licenses associated with it.
+	 *
+	 * @param pk the primary key of the s c product entry to check for associations with s c licenses
+	 * @return whether the s c product entry has any s c licenses associated with it
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsSCLicenses(long pk) throws SystemException {
 		if (getSCLicensesSize(pk) > 0) {
 			return true;
@@ -2124,6 +2703,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Adds an association between the s c product entry and the s c license. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c product entry
+	 * @param scLicensePK the primary key of the s c license
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addSCLicense(long pk, long scLicensePK)
 		throws SystemException {
 		try {
@@ -2137,6 +2723,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Adds an association between the s c product entry and the s c license. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c product entry
+	 * @param scLicense the s c license
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addSCLicense(long pk,
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws SystemException {
@@ -2151,6 +2744,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Adds an association between the s c product entry and the s c licenses. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c product entry
+	 * @param scLicensePKs the primary keys of the s c licenses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addSCLicenses(long pk, long[] scLicensePKs)
 		throws SystemException {
 		try {
@@ -2166,6 +2766,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Adds an association between the s c product entry and the s c licenses. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c product entry
+	 * @param scLicenses the s c licenses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addSCLicenses(long pk,
 		List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses)
 		throws SystemException {
@@ -2182,6 +2789,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Clears all associations between the s c product entry and its s c licenses. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c product entry to clear the associated s c licenses from
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void clearSCLicenses(long pk) throws SystemException {
 		try {
 			clearSCLicenses.clear(pk);
@@ -2194,6 +2807,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Removes the association between the s c product entry and the s c license. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c product entry
+	 * @param scLicensePK the primary key of the s c license
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeSCLicense(long pk, long scLicensePK)
 		throws SystemException {
 		try {
@@ -2207,6 +2827,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Removes the association between the s c product entry and the s c license. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c product entry
+	 * @param scLicense the s c license
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeSCLicense(long pk,
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws SystemException {
@@ -2221,6 +2848,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Removes the association between the s c product entry and the s c licenses. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c product entry
+	 * @param scLicensePKs the primary keys of the s c licenses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeSCLicenses(long pk, long[] scLicensePKs)
 		throws SystemException {
 		try {
@@ -2236,6 +2870,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Removes the association between the s c product entry and the s c licenses. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c product entry
+	 * @param scLicenses the s c licenses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeSCLicenses(long pk,
 		List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses)
 		throws SystemException {
@@ -2252,6 +2893,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Sets the s c licenses associated with the s c product entry, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c product entry to set the associations for
+	 * @param scLicensePKs the primary keys of the s c licenses to be associated with the s c product entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setSCLicenses(long pk, long[] scLicensePKs)
 		throws SystemException {
 		try {
@@ -2278,6 +2926,13 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Sets the s c licenses associated with the s c product entry, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c product entry to set the associations for
+	 * @param scLicenses the s c licenses to be associated with the s c product entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setSCLicenses(long pk,
 		List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses)
 		throws SystemException {
@@ -2300,6 +2955,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 	}
 
+	/**
+	 * Initializes the s c product entry persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

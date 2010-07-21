@@ -51,9 +51,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       AssetTagStatsPersistence
- * @see       AssetTagStatsUtil
+ * The persistence for the asset tag stats service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see AssetTagStatsPersistence
+ * @see AssetTagStatsUtil
  * @generated
  */
 public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagStats>
@@ -102,6 +112,11 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 			AssetTagStatsModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
+	/**
+	 * Caches the asset tag stats in the entity cache if it is enabled.
+	 *
+	 * @param assetTagStats the asset tag stats to cache
+	 */
 	public void cacheResult(AssetTagStats assetTagStats) {
 		EntityCacheUtil.putResult(AssetTagStatsModelImpl.ENTITY_CACHE_ENABLED,
 			AssetTagStatsImpl.class, assetTagStats.getPrimaryKey(),
@@ -114,6 +129,11 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 			}, assetTagStats);
 	}
 
+	/**
+	 * Caches the asset tag statses in the entity cache if it is enabled.
+	 *
+	 * @param assetTagStatses the asset tag statses to cache
+	 */
 	public void cacheResult(List<AssetTagStats> assetTagStatses) {
 		for (AssetTagStats assetTagStats : assetTagStatses) {
 			if (EntityCacheUtil.getResult(
@@ -125,6 +145,13 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		}
 	}
 
+	/**
+	 * Clears the cache for all asset tag statses.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(AssetTagStatsImpl.class.getName());
 		EntityCacheUtil.clearCache(AssetTagStatsImpl.class.getName());
@@ -132,6 +159,13 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the asset tag stats.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(AssetTagStats assetTagStats) {
 		EntityCacheUtil.removeResult(AssetTagStatsModelImpl.ENTITY_CACHE_ENABLED,
 			AssetTagStatsImpl.class, assetTagStats.getPrimaryKey());
@@ -143,6 +177,12 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 			});
 	}
 
+	/**
+	 * Creates a new asset tag stats with the primary key.
+	 *
+	 * @param tagStatsId the primary key for the new asset tag stats
+	 * @return the new asset tag stats
+	 */
 	public AssetTagStats create(long tagStatsId) {
 		AssetTagStats assetTagStats = new AssetTagStatsImpl();
 
@@ -152,11 +192,27 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		return assetTagStats;
 	}
 
+	/**
+	 * Removes the asset tag stats with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the asset tag stats to remove
+	 * @return the asset tag stats that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a asset tag stats with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetTagStats remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the asset tag stats with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param tagStatsId the primary key of the asset tag stats to remove
+	 * @return the asset tag stats that was removed
+	 * @throws com.liferay.portlet.asset.NoSuchTagStatsException if a asset tag stats with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetTagStats remove(long tagStatsId)
 		throws NoSuchTagStatsException, SystemException {
 		Session session = null;
@@ -306,11 +362,27 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		return assetTagStatsImpl;
 	}
 
+	/**
+	 * Finds the asset tag stats with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the asset tag stats to find
+	 * @return the asset tag stats
+	 * @throws com.liferay.portal.NoSuchModelException if a asset tag stats with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetTagStats findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the asset tag stats with the primary key or throws a {@link com.liferay.portlet.asset.NoSuchTagStatsException} if it could not be found.
+	 *
+	 * @param tagStatsId the primary key of the asset tag stats to find
+	 * @return the asset tag stats
+	 * @throws com.liferay.portlet.asset.NoSuchTagStatsException if a asset tag stats with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetTagStats findByPrimaryKey(long tagStatsId)
 		throws NoSuchTagStatsException, SystemException {
 		AssetTagStats assetTagStats = fetchByPrimaryKey(tagStatsId);
@@ -327,11 +399,25 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		return assetTagStats;
 	}
 
+	/**
+	 * Finds the asset tag stats with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the asset tag stats to find
+	 * @return the asset tag stats, or <code>null</code> if a asset tag stats with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetTagStats fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the asset tag stats with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param tagStatsId the primary key of the asset tag stats to find
+	 * @return the asset tag stats, or <code>null</code> if a asset tag stats with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetTagStats fetchByPrimaryKey(long tagStatsId)
 		throws SystemException {
 		AssetTagStats assetTagStats = (AssetTagStats)EntityCacheUtil.getResult(AssetTagStatsModelImpl.ENTITY_CACHE_ENABLED,
@@ -361,16 +447,50 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		return assetTagStats;
 	}
 
+	/**
+	 * Finds all the asset tag statses where tagId = &#63;.
+	 *
+	 * @param tagId the tag id to search with
+	 * @return the matching asset tag statses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetTagStats> findByTagId(long tagId)
 		throws SystemException {
 		return findByTagId(tagId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the asset tag statses where tagId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param tagId the tag id to search with
+	 * @param start the lower bound of the range of asset tag statses to return
+	 * @param end the upper bound of the range of asset tag statses to return (not inclusive)
+	 * @return the range of matching asset tag statses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetTagStats> findByTagId(long tagId, int start, int end)
 		throws SystemException {
 		return findByTagId(tagId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the asset tag statses where tagId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param tagId the tag id to search with
+	 * @param start the lower bound of the range of asset tag statses to return
+	 * @param end the upper bound of the range of asset tag statses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching asset tag statses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetTagStats> findByTagId(long tagId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -443,6 +563,19 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		return list;
 	}
 
+	/**
+	 * Finds the first asset tag stats in the ordered set where tagId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param tagId the tag id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching asset tag stats
+	 * @throws com.liferay.portlet.asset.NoSuchTagStatsException if a matching asset tag stats could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetTagStats findByTagId_First(long tagId,
 		OrderByComparator orderByComparator)
 		throws NoSuchTagStatsException, SystemException {
@@ -465,6 +598,19 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		}
 	}
 
+	/**
+	 * Finds the last asset tag stats in the ordered set where tagId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param tagId the tag id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching asset tag stats
+	 * @throws com.liferay.portlet.asset.NoSuchTagStatsException if a matching asset tag stats could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetTagStats findByTagId_Last(long tagId,
 		OrderByComparator orderByComparator)
 		throws NoSuchTagStatsException, SystemException {
@@ -490,6 +636,20 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		}
 	}
 
+	/**
+	 * Finds the asset tag statses before and after the current asset tag stats in the ordered set where tagId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param tagStatsId the primary key of the current asset tag stats
+	 * @param tagId the tag id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next asset tag stats
+	 * @throws com.liferay.portlet.asset.NoSuchTagStatsException if a asset tag stats with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetTagStats[] findByTagId_PrevAndNext(long tagStatsId, long tagId,
 		OrderByComparator orderByComparator)
 		throws NoSuchTagStatsException, SystemException {
@@ -624,17 +784,51 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		}
 	}
 
+	/**
+	 * Finds all the asset tag statses where classNameId = &#63;.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @return the matching asset tag statses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetTagStats> findByClassNameId(long classNameId)
 		throws SystemException {
 		return findByClassNameId(classNameId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the asset tag statses where classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param start the lower bound of the range of asset tag statses to return
+	 * @param end the upper bound of the range of asset tag statses to return (not inclusive)
+	 * @return the range of matching asset tag statses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetTagStats> findByClassNameId(long classNameId, int start,
 		int end) throws SystemException {
 		return findByClassNameId(classNameId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the asset tag statses where classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param start the lower bound of the range of asset tag statses to return
+	 * @param end the upper bound of the range of asset tag statses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching asset tag statses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetTagStats> findByClassNameId(long classNameId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -707,6 +901,19 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		return list;
 	}
 
+	/**
+	 * Finds the first asset tag stats in the ordered set where classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching asset tag stats
+	 * @throws com.liferay.portlet.asset.NoSuchTagStatsException if a matching asset tag stats could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetTagStats findByClassNameId_First(long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchTagStatsException, SystemException {
@@ -730,6 +937,19 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		}
 	}
 
+	/**
+	 * Finds the last asset tag stats in the ordered set where classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching asset tag stats
+	 * @throws com.liferay.portlet.asset.NoSuchTagStatsException if a matching asset tag stats could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetTagStats findByClassNameId_Last(long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchTagStatsException, SystemException {
@@ -755,6 +975,20 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		}
 	}
 
+	/**
+	 * Finds the asset tag statses before and after the current asset tag stats in the ordered set where classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param tagStatsId the primary key of the current asset tag stats
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next asset tag stats
+	 * @throws com.liferay.portlet.asset.NoSuchTagStatsException if a asset tag stats with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetTagStats[] findByClassNameId_PrevAndNext(long tagStatsId,
 		long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchTagStatsException, SystemException {
@@ -889,6 +1123,15 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		}
 	}
 
+	/**
+	 * Finds the asset tag stats where tagId = &#63; and classNameId = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchTagStatsException} if it could not be found.
+	 *
+	 * @param tagId the tag id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the matching asset tag stats
+	 * @throws com.liferay.portlet.asset.NoSuchTagStatsException if a matching asset tag stats could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetTagStats findByT_C(long tagId, long classNameId)
 		throws NoSuchTagStatsException, SystemException {
 		AssetTagStats assetTagStats = fetchByT_C(tagId, classNameId);
@@ -916,11 +1159,27 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		return assetTagStats;
 	}
 
+	/**
+	 * Finds the asset tag stats where tagId = &#63; and classNameId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param tagId the tag id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the matching asset tag stats, or <code>null</code> if a matching asset tag stats could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetTagStats fetchByT_C(long tagId, long classNameId)
 		throws SystemException {
 		return fetchByT_C(tagId, classNameId, true);
 	}
 
+	/**
+	 * Finds the asset tag stats where tagId = &#63; and classNameId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param tagId the tag id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the matching asset tag stats, or <code>null</code> if a matching asset tag stats could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetTagStats fetchByT_C(long tagId, long classNameId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { tagId, classNameId };
@@ -1004,15 +1263,46 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		}
 	}
 
+	/**
+	 * Finds all the asset tag statses.
+	 *
+	 * @return the asset tag statses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetTagStats> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the asset tag statses.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of asset tag statses to return
+	 * @param end the upper bound of the range of asset tag statses to return (not inclusive)
+	 * @return the range of asset tag statses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetTagStats> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the asset tag statses.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of asset tag statses to return
+	 * @param end the upper bound of the range of asset tag statses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of asset tag statses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetTagStats> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1079,18 +1369,37 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		return list;
 	}
 
+	/**
+	 * Removes all the asset tag statses where tagId = &#63; from the database.
+	 *
+	 * @param tagId the tag id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByTagId(long tagId) throws SystemException {
 		for (AssetTagStats assetTagStats : findByTagId(tagId)) {
 			remove(assetTagStats);
 		}
 	}
 
+	/**
+	 * Removes all the asset tag statses where classNameId = &#63; from the database.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByClassNameId(long classNameId) throws SystemException {
 		for (AssetTagStats assetTagStats : findByClassNameId(classNameId)) {
 			remove(assetTagStats);
 		}
 	}
 
+	/**
+	 * Removes the asset tag stats where tagId = &#63; and classNameId = &#63; from the database.
+	 *
+	 * @param tagId the tag id to search with
+	 * @param classNameId the class name id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByT_C(long tagId, long classNameId)
 		throws NoSuchTagStatsException, SystemException {
 		AssetTagStats assetTagStats = findByT_C(tagId, classNameId);
@@ -1098,12 +1407,24 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		remove(assetTagStats);
 	}
 
+	/**
+	 * Removes all the asset tag statses from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (AssetTagStats assetTagStats : findAll()) {
 			remove(assetTagStats);
 		}
 	}
 
+	/**
+	 * Counts all the asset tag statses where tagId = &#63;.
+	 *
+	 * @param tagId the tag id to search with
+	 * @return the number of matching asset tag statses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByTagId(long tagId) throws SystemException {
 		Object[] finderArgs = new Object[] { tagId };
 
@@ -1150,6 +1471,13 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the asset tag statses where classNameId = &#63;.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @return the number of matching asset tag statses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByClassNameId(long classNameId) throws SystemException {
 		Object[] finderArgs = new Object[] { classNameId };
 
@@ -1196,6 +1524,14 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the asset tag statses where tagId = &#63; and classNameId = &#63;.
+	 *
+	 * @param tagId the tag id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the number of matching asset tag statses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByT_C(long tagId, long classNameId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { tagId, classNameId };
@@ -1247,6 +1583,12 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the asset tag statses.
+	 *
+	 * @return the number of asset tag statses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -1281,6 +1623,9 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the asset tag stats persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

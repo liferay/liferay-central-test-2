@@ -53,9 +53,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       JournalArticleImagePersistence
- * @see       JournalArticleImageUtil
+ * The persistence for the journal article image service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see JournalArticleImagePersistence
+ * @see JournalArticleImageUtil
  * @generated
  */
 public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<JournalArticleImage>
@@ -129,6 +139,11 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			JournalArticleImageModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
+	/**
+	 * Caches the journal article image in the entity cache if it is enabled.
+	 *
+	 * @param journalArticleImage the journal article image to cache
+	 */
 	public void cacheResult(JournalArticleImage journalArticleImage) {
 		EntityCacheUtil.putResult(JournalArticleImageModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleImageImpl.class, journalArticleImage.getPrimaryKey(),
@@ -149,6 +164,11 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			}, journalArticleImage);
 	}
 
+	/**
+	 * Caches the journal article images in the entity cache if it is enabled.
+	 *
+	 * @param journalArticleImages the journal article images to cache
+	 */
 	public void cacheResult(List<JournalArticleImage> journalArticleImages) {
 		for (JournalArticleImage journalArticleImage : journalArticleImages) {
 			if (EntityCacheUtil.getResult(
@@ -160,6 +180,13 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		}
 	}
 
+	/**
+	 * Clears the cache for all journal article images.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(JournalArticleImageImpl.class.getName());
 		EntityCacheUtil.clearCache(JournalArticleImageImpl.class.getName());
@@ -167,6 +194,13 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the journal article image.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(JournalArticleImage journalArticleImage) {
 		EntityCacheUtil.removeResult(JournalArticleImageModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleImageImpl.class, journalArticleImage.getPrimaryKey());
@@ -186,6 +220,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			});
 	}
 
+	/**
+	 * Creates a new journal article image with the primary key.
+	 *
+	 * @param articleImageId the primary key for the new journal article image
+	 * @return the new journal article image
+	 */
 	public JournalArticleImage create(long articleImageId) {
 		JournalArticleImage journalArticleImage = new JournalArticleImageImpl();
 
@@ -195,11 +235,27 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		return journalArticleImage;
 	}
 
+	/**
+	 * Removes the journal article image with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the journal article image to remove
+	 * @return the journal article image that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a journal article image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticleImage remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the journal article image with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param articleImageId the primary key of the journal article image to remove
+	 * @return the journal article image that was removed
+	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a journal article image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticleImage remove(long articleImageId)
 		throws NoSuchArticleImageException, SystemException {
 		Session session = null;
@@ -396,11 +452,27 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		return journalArticleImageImpl;
 	}
 
+	/**
+	 * Finds the journal article image with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the journal article image to find
+	 * @return the journal article image
+	 * @throws com.liferay.portal.NoSuchModelException if a journal article image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticleImage findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the journal article image with the primary key or throws a {@link com.liferay.portlet.journal.NoSuchArticleImageException} if it could not be found.
+	 *
+	 * @param articleImageId the primary key of the journal article image to find
+	 * @return the journal article image
+	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a journal article image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticleImage findByPrimaryKey(long articleImageId)
 		throws NoSuchArticleImageException, SystemException {
 		JournalArticleImage journalArticleImage = fetchByPrimaryKey(articleImageId);
@@ -417,11 +489,25 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		return journalArticleImage;
 	}
 
+	/**
+	 * Finds the journal article image with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the journal article image to find
+	 * @return the journal article image, or <code>null</code> if a journal article image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticleImage fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the journal article image with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param articleImageId the primary key of the journal article image to find
+	 * @return the journal article image, or <code>null</code> if a journal article image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticleImage fetchByPrimaryKey(long articleImageId)
 		throws SystemException {
 		JournalArticleImage journalArticleImage = (JournalArticleImage)EntityCacheUtil.getResult(JournalArticleImageModelImpl.ENTITY_CACHE_ENABLED,
@@ -451,16 +537,50 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		return journalArticleImage;
 	}
 
+	/**
+	 * Finds all the journal article images where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the matching journal article images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticleImage> findByGroupId(long groupId)
 		throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the journal article images where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of journal article images to return
+	 * @param end the upper bound of the range of journal article images to return (not inclusive)
+	 * @return the range of matching journal article images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticleImage> findByGroupId(long groupId, int start,
 		int end) throws SystemException {
 		return findByGroupId(groupId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal article images where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of journal article images to return
+	 * @param end the upper bound of the range of journal article images to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal article images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticleImage> findByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -529,6 +649,19 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		return list;
 	}
 
+	/**
+	 * Finds the first journal article image in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching journal article image
+	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticleImage findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
@@ -552,6 +685,19 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		}
 	}
 
+	/**
+	 * Finds the last journal article image in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching journal article image
+	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticleImage findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
@@ -577,6 +723,20 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		}
 	}
 
+	/**
+	 * Finds the journal article images before and after the current journal article image in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param articleImageId the primary key of the current journal article image
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next journal article image
+	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a journal article image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticleImage[] findByGroupId_PrevAndNext(
 		long articleImageId, long groupId, OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
@@ -707,17 +867,51 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		}
 	}
 
+	/**
+	 * Finds all the journal article images where tempImage = &#63;.
+	 *
+	 * @param tempImage the temp image to search with
+	 * @return the matching journal article images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticleImage> findByTempImage(boolean tempImage)
 		throws SystemException {
 		return findByTempImage(tempImage, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the journal article images where tempImage = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param tempImage the temp image to search with
+	 * @param start the lower bound of the range of journal article images to return
+	 * @param end the upper bound of the range of journal article images to return (not inclusive)
+	 * @return the range of matching journal article images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticleImage> findByTempImage(boolean tempImage,
 		int start, int end) throws SystemException {
 		return findByTempImage(tempImage, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal article images where tempImage = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param tempImage the temp image to search with
+	 * @param start the lower bound of the range of journal article images to return
+	 * @param end the upper bound of the range of journal article images to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal article images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticleImage> findByTempImage(boolean tempImage,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -787,6 +981,19 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		return list;
 	}
 
+	/**
+	 * Finds the first journal article image in the ordered set where tempImage = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param tempImage the temp image to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching journal article image
+	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticleImage findByTempImage_First(boolean tempImage,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
@@ -810,6 +1017,19 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		}
 	}
 
+	/**
+	 * Finds the last journal article image in the ordered set where tempImage = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param tempImage the temp image to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching journal article image
+	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticleImage findByTempImage_Last(boolean tempImage,
 		OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
@@ -835,6 +1055,20 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		}
 	}
 
+	/**
+	 * Finds the journal article images before and after the current journal article image in the ordered set where tempImage = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param articleImageId the primary key of the current journal article image
+	 * @param tempImage the temp image to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next journal article image
+	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a journal article image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticleImage[] findByTempImage_PrevAndNext(
 		long articleImageId, boolean tempImage,
 		OrderByComparator orderByComparator)
@@ -966,18 +1200,58 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		}
 	}
 
+	/**
+	 * Finds all the journal article images where groupId = &#63; and articleId = &#63; and version = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param version the version to search with
+	 * @return the matching journal article images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticleImage> findByG_A_V(long groupId,
 		String articleId, double version) throws SystemException {
 		return findByG_A_V(groupId, articleId, version, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the journal article images where groupId = &#63; and articleId = &#63; and version = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param version the version to search with
+	 * @param start the lower bound of the range of journal article images to return
+	 * @param end the upper bound of the range of journal article images to return (not inclusive)
+	 * @return the range of matching journal article images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticleImage> findByG_A_V(long groupId,
 		String articleId, double version, int start, int end)
 		throws SystemException {
 		return findByG_A_V(groupId, articleId, version, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal article images where groupId = &#63; and articleId = &#63; and version = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param version the version to search with
+	 * @param start the lower bound of the range of journal article images to return
+	 * @param end the upper bound of the range of journal article images to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal article images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticleImage> findByG_A_V(long groupId,
 		String articleId, double version, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -1067,6 +1341,21 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		return list;
 	}
 
+	/**
+	 * Finds the first journal article image in the ordered set where groupId = &#63; and articleId = &#63; and version = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param version the version to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching journal article image
+	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticleImage findByG_A_V_First(long groupId,
 		String articleId, double version, OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
@@ -1096,6 +1385,21 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		}
 	}
 
+	/**
+	 * Finds the last journal article image in the ordered set where groupId = &#63; and articleId = &#63; and version = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param version the version to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching journal article image
+	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticleImage findByG_A_V_Last(long groupId, String articleId,
 		double version, OrderByComparator orderByComparator)
 		throws NoSuchArticleImageException, SystemException {
@@ -1127,6 +1431,22 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		}
 	}
 
+	/**
+	 * Finds the journal article images before and after the current journal article image in the ordered set where groupId = &#63; and articleId = &#63; and version = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param articleImageId the primary key of the current journal article image
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param version the version to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next journal article image
+	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a journal article image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticleImage[] findByG_A_V_PrevAndNext(long articleImageId,
 		long groupId, String articleId, double version,
 		OrderByComparator orderByComparator)
@@ -1279,6 +1599,19 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		}
 	}
 
+	/**
+	 * Finds the journal article image where groupId = &#63; and articleId = &#63; and version = &#63; and elInstanceId = &#63; and elName = &#63; and languageId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchArticleImageException} if it could not be found.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param version the version to search with
+	 * @param elInstanceId the el instance id to search with
+	 * @param elName the el name to search with
+	 * @param languageId the language id to search with
+	 * @return the matching journal article image
+	 * @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticleImage findByG_A_V_E_E_L(long groupId,
 		String articleId, double version, String elInstanceId, String elName,
 		String languageId) throws NoSuchArticleImageException, SystemException {
@@ -1320,6 +1653,18 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		return journalArticleImage;
 	}
 
+	/**
+	 * Finds the journal article image where groupId = &#63; and articleId = &#63; and version = &#63; and elInstanceId = &#63; and elName = &#63; and languageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param version the version to search with
+	 * @param elInstanceId the el instance id to search with
+	 * @param elName the el name to search with
+	 * @param languageId the language id to search with
+	 * @return the matching journal article image, or <code>null</code> if a matching journal article image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticleImage fetchByG_A_V_E_E_L(long groupId,
 		String articleId, double version, String elInstanceId, String elName,
 		String languageId) throws SystemException {
@@ -1327,6 +1672,18 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			elName, languageId, true);
 	}
 
+	/**
+	 * Finds the journal article image where groupId = &#63; and articleId = &#63; and version = &#63; and elInstanceId = &#63; and elName = &#63; and languageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param version the version to search with
+	 * @param elInstanceId the el instance id to search with
+	 * @param elName the el name to search with
+	 * @param languageId the language id to search with
+	 * @return the matching journal article image, or <code>null</code> if a matching journal article image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalArticleImage fetchByG_A_V_E_E_L(long groupId,
 		String articleId, double version, String elInstanceId, String elName,
 		String languageId, boolean retrieveFromCache) throws SystemException {
@@ -1485,15 +1842,46 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		}
 	}
 
+	/**
+	 * Finds all the journal article images.
+	 *
+	 * @return the journal article images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticleImage> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the journal article images.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of journal article images to return
+	 * @param end the upper bound of the range of journal article images to return (not inclusive)
+	 * @return the range of journal article images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticleImage> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal article images.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of journal article images to return
+	 * @param end the upper bound of the range of journal article images to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of journal article images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalArticleImage> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1560,12 +1948,24 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		return list;
 	}
 
+	/**
+	 * Removes all the journal article images where groupId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (JournalArticleImage journalArticleImage : findByGroupId(groupId)) {
 			remove(journalArticleImage);
 		}
 	}
 
+	/**
+	 * Removes all the journal article images where tempImage = &#63; from the database.
+	 *
+	 * @param tempImage the temp image to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByTempImage(boolean tempImage) throws SystemException {
 		for (JournalArticleImage journalArticleImage : findByTempImage(
 				tempImage)) {
@@ -1573,6 +1973,14 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		}
 	}
 
+	/**
+	 * Removes all the journal article images where groupId = &#63; and articleId = &#63; and version = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param version the version to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_A_V(long groupId, String articleId, double version)
 		throws SystemException {
 		for (JournalArticleImage journalArticleImage : findByG_A_V(groupId,
@@ -1581,6 +1989,17 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		}
 	}
 
+	/**
+	 * Removes the journal article image where groupId = &#63; and articleId = &#63; and version = &#63; and elInstanceId = &#63; and elName = &#63; and languageId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param version the version to search with
+	 * @param elInstanceId the el instance id to search with
+	 * @param elName the el name to search with
+	 * @param languageId the language id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_A_V_E_E_L(long groupId, String articleId,
 		double version, String elInstanceId, String elName, String languageId)
 		throws NoSuchArticleImageException, SystemException {
@@ -1590,12 +2009,24 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		remove(journalArticleImage);
 	}
 
+	/**
+	 * Removes all the journal article images from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (JournalArticleImage journalArticleImage : findAll()) {
 			remove(journalArticleImage);
 		}
 	}
 
+	/**
+	 * Counts all the journal article images where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the number of matching journal article images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId };
 
@@ -1642,6 +2073,13 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the journal article images where tempImage = &#63;.
+	 *
+	 * @param tempImage the temp image to search with
+	 * @return the number of matching journal article images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByTempImage(boolean tempImage) throws SystemException {
 		Object[] finderArgs = new Object[] { tempImage };
 
@@ -1688,6 +2126,15 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the journal article images where groupId = &#63; and articleId = &#63; and version = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param version the version to search with
+	 * @return the number of matching journal article images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_A_V(long groupId, String articleId, double version)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, articleId, version };
@@ -1755,6 +2202,18 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the journal article images where groupId = &#63; and articleId = &#63; and version = &#63; and elInstanceId = &#63; and elName = &#63; and languageId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param articleId the article id to search with
+	 * @param version the version to search with
+	 * @param elInstanceId the el instance id to search with
+	 * @param elName the el name to search with
+	 * @param languageId the language id to search with
+	 * @return the number of matching journal article images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_A_V_E_E_L(long groupId, String articleId,
 		double version, String elInstanceId, String elName, String languageId)
 		throws SystemException {
@@ -1873,6 +2332,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the journal article images.
+	 *
+	 * @return the number of journal article images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -1907,6 +2372,9 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the journal article image persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

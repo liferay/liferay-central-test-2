@@ -52,9 +52,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       AnnouncementsDeliveryPersistence
- * @see       AnnouncementsDeliveryUtil
+ * The persistence for the announcements delivery service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see AnnouncementsDeliveryPersistence
+ * @see AnnouncementsDeliveryUtil
  * @generated
  */
 public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<AnnouncementsDelivery>
@@ -90,6 +100,11 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 			AnnouncementsDeliveryModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
+	/**
+	 * Caches the announcements delivery in the entity cache if it is enabled.
+	 *
+	 * @param announcementsDelivery the announcements delivery to cache
+	 */
 	public void cacheResult(AnnouncementsDelivery announcementsDelivery) {
 		EntityCacheUtil.putResult(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
 			AnnouncementsDeliveryImpl.class,
@@ -103,6 +118,11 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 			}, announcementsDelivery);
 	}
 
+	/**
+	 * Caches the announcements deliveries in the entity cache if it is enabled.
+	 *
+	 * @param announcementsDeliveries the announcements deliveries to cache
+	 */
 	public void cacheResult(List<AnnouncementsDelivery> announcementsDeliveries) {
 		for (AnnouncementsDelivery announcementsDelivery : announcementsDeliveries) {
 			if (EntityCacheUtil.getResult(
@@ -114,6 +134,13 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		}
 	}
 
+	/**
+	 * Clears the cache for all announcements deliveries.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(AnnouncementsDeliveryImpl.class.getName());
 		EntityCacheUtil.clearCache(AnnouncementsDeliveryImpl.class.getName());
@@ -121,6 +148,13 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the announcements delivery.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(AnnouncementsDelivery announcementsDelivery) {
 		EntityCacheUtil.removeResult(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
 			AnnouncementsDeliveryImpl.class,
@@ -134,6 +168,12 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 			});
 	}
 
+	/**
+	 * Creates a new announcements delivery with the primary key.
+	 *
+	 * @param deliveryId the primary key for the new announcements delivery
+	 * @return the new announcements delivery
+	 */
 	public AnnouncementsDelivery create(long deliveryId) {
 		AnnouncementsDelivery announcementsDelivery = new AnnouncementsDeliveryImpl();
 
@@ -143,11 +183,27 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		return announcementsDelivery;
 	}
 
+	/**
+	 * Removes the announcements delivery with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the announcements delivery to remove
+	 * @return the announcements delivery that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a announcements delivery with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AnnouncementsDelivery remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the announcements delivery with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param deliveryId the primary key of the announcements delivery to remove
+	 * @return the announcements delivery that was removed
+	 * @throws com.liferay.portlet.announcements.NoSuchDeliveryException if a announcements delivery with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AnnouncementsDelivery remove(long deliveryId)
 		throws NoSuchDeliveryException, SystemException {
 		Session session = null;
@@ -308,11 +364,27 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		return announcementsDeliveryImpl;
 	}
 
+	/**
+	 * Finds the announcements delivery with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the announcements delivery to find
+	 * @return the announcements delivery
+	 * @throws com.liferay.portal.NoSuchModelException if a announcements delivery with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AnnouncementsDelivery findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the announcements delivery with the primary key or throws a {@link com.liferay.portlet.announcements.NoSuchDeliveryException} if it could not be found.
+	 *
+	 * @param deliveryId the primary key of the announcements delivery to find
+	 * @return the announcements delivery
+	 * @throws com.liferay.portlet.announcements.NoSuchDeliveryException if a announcements delivery with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AnnouncementsDelivery findByPrimaryKey(long deliveryId)
 		throws NoSuchDeliveryException, SystemException {
 		AnnouncementsDelivery announcementsDelivery = fetchByPrimaryKey(deliveryId);
@@ -329,11 +401,25 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		return announcementsDelivery;
 	}
 
+	/**
+	 * Finds the announcements delivery with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the announcements delivery to find
+	 * @return the announcements delivery, or <code>null</code> if a announcements delivery with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AnnouncementsDelivery fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the announcements delivery with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param deliveryId the primary key of the announcements delivery to find
+	 * @return the announcements delivery, or <code>null</code> if a announcements delivery with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AnnouncementsDelivery fetchByPrimaryKey(long deliveryId)
 		throws SystemException {
 		AnnouncementsDelivery announcementsDelivery = (AnnouncementsDelivery)EntityCacheUtil.getResult(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,
@@ -363,16 +449,50 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		return announcementsDelivery;
 	}
 
+	/**
+	 * Finds all the announcements deliveries where userId = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @return the matching announcements deliveries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AnnouncementsDelivery> findByUserId(long userId)
 		throws SystemException {
 		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the announcements deliveries where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of announcements deliveries to return
+	 * @param end the upper bound of the range of announcements deliveries to return (not inclusive)
+	 * @return the range of matching announcements deliveries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AnnouncementsDelivery> findByUserId(long userId, int start,
 		int end) throws SystemException {
 		return findByUserId(userId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the announcements deliveries where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of announcements deliveries to return
+	 * @param end the upper bound of the range of announcements deliveries to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching announcements deliveries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AnnouncementsDelivery> findByUserId(long userId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -441,6 +561,19 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		return list;
 	}
 
+	/**
+	 * Finds the first announcements delivery in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching announcements delivery
+	 * @throws com.liferay.portlet.announcements.NoSuchDeliveryException if a matching announcements delivery could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AnnouncementsDelivery findByUserId_First(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchDeliveryException, SystemException {
@@ -464,6 +597,19 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		}
 	}
 
+	/**
+	 * Finds the last announcements delivery in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching announcements delivery
+	 * @throws com.liferay.portlet.announcements.NoSuchDeliveryException if a matching announcements delivery could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AnnouncementsDelivery findByUserId_Last(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchDeliveryException, SystemException {
@@ -489,6 +635,20 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		}
 	}
 
+	/**
+	 * Finds the announcements deliveries before and after the current announcements delivery in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param deliveryId the primary key of the current announcements delivery
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next announcements delivery
+	 * @throws com.liferay.portlet.announcements.NoSuchDeliveryException if a announcements delivery with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AnnouncementsDelivery[] findByUserId_PrevAndNext(long deliveryId,
 		long userId, OrderByComparator orderByComparator)
 		throws NoSuchDeliveryException, SystemException {
@@ -619,6 +779,15 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		}
 	}
 
+	/**
+	 * Finds the announcements delivery where userId = &#63; and type = &#63; or throws a {@link com.liferay.portlet.announcements.NoSuchDeliveryException} if it could not be found.
+	 *
+	 * @param userId the user id to search with
+	 * @param type the type to search with
+	 * @return the matching announcements delivery
+	 * @throws com.liferay.portlet.announcements.NoSuchDeliveryException if a matching announcements delivery could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AnnouncementsDelivery findByU_T(long userId, String type)
 		throws NoSuchDeliveryException, SystemException {
 		AnnouncementsDelivery announcementsDelivery = fetchByU_T(userId, type);
@@ -646,11 +815,27 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		return announcementsDelivery;
 	}
 
+	/**
+	 * Finds the announcements delivery where userId = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param userId the user id to search with
+	 * @param type the type to search with
+	 * @return the matching announcements delivery, or <code>null</code> if a matching announcements delivery could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AnnouncementsDelivery fetchByU_T(long userId, String type)
 		throws SystemException {
 		return fetchByU_T(userId, type, true);
 	}
 
+	/**
+	 * Finds the announcements delivery where userId = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param userId the user id to search with
+	 * @param type the type to search with
+	 * @return the matching announcements delivery, or <code>null</code> if a matching announcements delivery could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AnnouncementsDelivery fetchByU_T(long userId, String type,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { userId, type };
@@ -745,15 +930,46 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		}
 	}
 
+	/**
+	 * Finds all the announcements deliveries.
+	 *
+	 * @return the announcements deliveries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AnnouncementsDelivery> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the announcements deliveries.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of announcements deliveries to return
+	 * @param end the upper bound of the range of announcements deliveries to return (not inclusive)
+	 * @return the range of announcements deliveries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AnnouncementsDelivery> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the announcements deliveries.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of announcements deliveries to return
+	 * @param end the upper bound of the range of announcements deliveries to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of announcements deliveries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AnnouncementsDelivery> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -820,12 +1036,25 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		return list;
 	}
 
+	/**
+	 * Removes all the announcements deliveries where userId = &#63; from the database.
+	 *
+	 * @param userId the user id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (AnnouncementsDelivery announcementsDelivery : findByUserId(userId)) {
 			remove(announcementsDelivery);
 		}
 	}
 
+	/**
+	 * Removes the announcements delivery where userId = &#63; and type = &#63; from the database.
+	 *
+	 * @param userId the user id to search with
+	 * @param type the type to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByU_T(long userId, String type)
 		throws NoSuchDeliveryException, SystemException {
 		AnnouncementsDelivery announcementsDelivery = findByU_T(userId, type);
@@ -833,12 +1062,24 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		remove(announcementsDelivery);
 	}
 
+	/**
+	 * Removes all the announcements deliveries from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (AnnouncementsDelivery announcementsDelivery : findAll()) {
 			remove(announcementsDelivery);
 		}
 	}
 
+	/**
+	 * Counts all the announcements deliveries where userId = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @return the number of matching announcements deliveries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUserId(long userId) throws SystemException {
 		Object[] finderArgs = new Object[] { userId };
 
@@ -885,6 +1126,14 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the announcements deliveries where userId = &#63; and type = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @param type the type to search with
+	 * @return the number of matching announcements deliveries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByU_T(long userId, String type) throws SystemException {
 		Object[] finderArgs = new Object[] { userId, type };
 
@@ -947,6 +1196,12 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the announcements deliveries.
+	 *
+	 * @return the number of announcements deliveries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -981,6 +1236,9 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the announcements delivery persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

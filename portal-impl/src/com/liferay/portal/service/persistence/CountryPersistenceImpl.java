@@ -48,9 +48,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       CountryPersistence
- * @see       CountryUtil
+ * The persistence for the country service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see CountryPersistence
+ * @see CountryUtil
  * @generated
  */
 public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
@@ -95,6 +105,11 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			CountryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the country in the entity cache if it is enabled.
+	 *
+	 * @param country the country to cache
+	 */
 	public void cacheResult(Country country) {
 		EntityCacheUtil.putResult(CountryModelImpl.ENTITY_CACHE_ENABLED,
 			CountryImpl.class, country.getPrimaryKey(), country);
@@ -109,6 +124,11 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			new Object[] { country.getA3() }, country);
 	}
 
+	/**
+	 * Caches the countries in the entity cache if it is enabled.
+	 *
+	 * @param countries the countries to cache
+	 */
 	public void cacheResult(List<Country> countries) {
 		for (Country country : countries) {
 			if (EntityCacheUtil.getResult(
@@ -119,6 +139,13 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		}
 	}
 
+	/**
+	 * Clears the cache for all countries.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(CountryImpl.class.getName());
 		EntityCacheUtil.clearCache(CountryImpl.class.getName());
@@ -126,6 +153,13 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the country.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(Country country) {
 		EntityCacheUtil.removeResult(CountryModelImpl.ENTITY_CACHE_ENABLED,
 			CountryImpl.class, country.getPrimaryKey());
@@ -140,6 +174,12 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			new Object[] { country.getA3() });
 	}
 
+	/**
+	 * Creates a new country with the primary key.
+	 *
+	 * @param countryId the primary key for the new country
+	 * @return the new country
+	 */
 	public Country create(long countryId) {
 		Country country = new CountryImpl();
 
@@ -149,11 +189,27 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		return country;
 	}
 
+	/**
+	 * Removes the country with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the country to remove
+	 * @return the country that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a country with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Country remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the country with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param countryId the primary key of the country to remove
+	 * @return the country that was removed
+	 * @throws com.liferay.portal.NoSuchCountryException if a country with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Country remove(long countryId)
 		throws NoSuchCountryException, SystemException {
 		Session session = null;
@@ -328,11 +384,27 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		return countryImpl;
 	}
 
+	/**
+	 * Finds the country with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the country to find
+	 * @return the country
+	 * @throws com.liferay.portal.NoSuchModelException if a country with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Country findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the country with the primary key or throws a {@link com.liferay.portal.NoSuchCountryException} if it could not be found.
+	 *
+	 * @param countryId the primary key of the country to find
+	 * @return the country
+	 * @throws com.liferay.portal.NoSuchCountryException if a country with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Country findByPrimaryKey(long countryId)
 		throws NoSuchCountryException, SystemException {
 		Country country = fetchByPrimaryKey(countryId);
@@ -349,11 +421,25 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		return country;
 	}
 
+	/**
+	 * Finds the country with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the country to find
+	 * @return the country, or <code>null</code> if a country with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Country fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the country with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param countryId the primary key of the country to find
+	 * @return the country, or <code>null</code> if a country with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Country fetchByPrimaryKey(long countryId) throws SystemException {
 		Country country = (Country)EntityCacheUtil.getResult(CountryModelImpl.ENTITY_CACHE_ENABLED,
 				CountryImpl.class, countryId, this);
@@ -382,6 +468,14 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		return country;
 	}
 
+	/**
+	 * Finds the country where name = &#63; or throws a {@link com.liferay.portal.NoSuchCountryException} if it could not be found.
+	 *
+	 * @param name the name to search with
+	 * @return the matching country
+	 * @throws com.liferay.portal.NoSuchCountryException if a matching country could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Country findByName(String name)
 		throws NoSuchCountryException, SystemException {
 		Country country = fetchByName(name);
@@ -406,10 +500,24 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		return country;
 	}
 
+	/**
+	 * Finds the country where name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param name the name to search with
+	 * @return the matching country, or <code>null</code> if a matching country could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Country fetchByName(String name) throws SystemException {
 		return fetchByName(name, true);
 	}
 
+	/**
+	 * Finds the country where name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param name the name to search with
+	 * @return the matching country, or <code>null</code> if a matching country could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Country fetchByName(String name, boolean retrieveFromCache)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { name };
@@ -501,6 +609,14 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		}
 	}
 
+	/**
+	 * Finds the country where a2 = &#63; or throws a {@link com.liferay.portal.NoSuchCountryException} if it could not be found.
+	 *
+	 * @param a2 the a2 to search with
+	 * @return the matching country
+	 * @throws com.liferay.portal.NoSuchCountryException if a matching country could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Country findByA2(String a2)
 		throws NoSuchCountryException, SystemException {
 		Country country = fetchByA2(a2);
@@ -525,10 +641,24 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		return country;
 	}
 
+	/**
+	 * Finds the country where a2 = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param a2 the a2 to search with
+	 * @return the matching country, or <code>null</code> if a matching country could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Country fetchByA2(String a2) throws SystemException {
 		return fetchByA2(a2, true);
 	}
 
+	/**
+	 * Finds the country where a2 = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param a2 the a2 to search with
+	 * @return the matching country, or <code>null</code> if a matching country could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Country fetchByA2(String a2, boolean retrieveFromCache)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { a2 };
@@ -620,6 +750,14 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		}
 	}
 
+	/**
+	 * Finds the country where a3 = &#63; or throws a {@link com.liferay.portal.NoSuchCountryException} if it could not be found.
+	 *
+	 * @param a3 the a3 to search with
+	 * @return the matching country
+	 * @throws com.liferay.portal.NoSuchCountryException if a matching country could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Country findByA3(String a3)
 		throws NoSuchCountryException, SystemException {
 		Country country = fetchByA3(a3);
@@ -644,10 +782,24 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		return country;
 	}
 
+	/**
+	 * Finds the country where a3 = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param a3 the a3 to search with
+	 * @return the matching country, or <code>null</code> if a matching country could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Country fetchByA3(String a3) throws SystemException {
 		return fetchByA3(a3, true);
 	}
 
+	/**
+	 * Finds the country where a3 = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param a3 the a3 to search with
+	 * @return the matching country, or <code>null</code> if a matching country could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Country fetchByA3(String a3, boolean retrieveFromCache)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { a3 };
@@ -739,15 +891,49 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		}
 	}
 
+	/**
+	 * Finds all the countries where active = &#63;.
+	 *
+	 * @param active the active to search with
+	 * @return the matching countries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Country> findByActive(boolean active) throws SystemException {
 		return findByActive(active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the countries where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param start the lower bound of the range of countries to return
+	 * @param end the upper bound of the range of countries to return (not inclusive)
+	 * @return the range of matching countries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Country> findByActive(boolean active, int start, int end)
 		throws SystemException {
 		return findByActive(active, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the countries where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param start the lower bound of the range of countries to return
+	 * @param end the upper bound of the range of countries to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching countries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Country> findByActive(boolean active, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -819,6 +1005,19 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		return list;
 	}
 
+	/**
+	 * Finds the first country in the ordered set where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching country
+	 * @throws com.liferay.portal.NoSuchCountryException if a matching country could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Country findByActive_First(boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchCountryException, SystemException {
@@ -841,6 +1040,19 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		}
 	}
 
+	/**
+	 * Finds the last country in the ordered set where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching country
+	 * @throws com.liferay.portal.NoSuchCountryException if a matching country could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Country findByActive_Last(boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchCountryException, SystemException {
@@ -866,6 +1078,20 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		}
 	}
 
+	/**
+	 * Finds the countries before and after the current country in the ordered set where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param countryId the primary key of the current country
+	 * @param active the active to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next country
+	 * @throws com.liferay.portal.NoSuchCountryException if a country with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Country[] findByActive_PrevAndNext(long countryId, boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchCountryException, SystemException {
@@ -999,14 +1225,45 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		}
 	}
 
+	/**
+	 * Finds all the countries.
+	 *
+	 * @return the countries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Country> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the countries.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of countries to return
+	 * @param end the upper bound of the range of countries to return (not inclusive)
+	 * @return the range of countries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Country> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the countries.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of countries to return
+	 * @param end the upper bound of the range of countries to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of countries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Country> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1073,6 +1330,12 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		return list;
 	}
 
+	/**
+	 * Removes the country where name = &#63; from the database.
+	 *
+	 * @param name the name to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByName(String name)
 		throws NoSuchCountryException, SystemException {
 		Country country = findByName(name);
@@ -1080,6 +1343,12 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		remove(country);
 	}
 
+	/**
+	 * Removes the country where a2 = &#63; from the database.
+	 *
+	 * @param a2 the a2 to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByA2(String a2)
 		throws NoSuchCountryException, SystemException {
 		Country country = findByA2(a2);
@@ -1087,6 +1356,12 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		remove(country);
 	}
 
+	/**
+	 * Removes the country where a3 = &#63; from the database.
+	 *
+	 * @param a3 the a3 to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByA3(String a3)
 		throws NoSuchCountryException, SystemException {
 		Country country = findByA3(a3);
@@ -1094,18 +1369,36 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		remove(country);
 	}
 
+	/**
+	 * Removes all the countries where active = &#63; from the database.
+	 *
+	 * @param active the active to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByActive(boolean active) throws SystemException {
 		for (Country country : findByActive(active)) {
 			remove(country);
 		}
 	}
 
+	/**
+	 * Removes all the countries from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (Country country : findAll()) {
 			remove(country);
 		}
 	}
 
+	/**
+	 * Counts all the countries where name = &#63;.
+	 *
+	 * @param name the name to search with
+	 * @return the number of matching countries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByName(String name) throws SystemException {
 		Object[] finderArgs = new Object[] { name };
 
@@ -1164,6 +1457,13 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the countries where a2 = &#63;.
+	 *
+	 * @param a2 the a2 to search with
+	 * @return the number of matching countries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByA2(String a2) throws SystemException {
 		Object[] finderArgs = new Object[] { a2 };
 
@@ -1222,6 +1522,13 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the countries where a3 = &#63;.
+	 *
+	 * @param a3 the a3 to search with
+	 * @return the number of matching countries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByA3(String a3) throws SystemException {
 		Object[] finderArgs = new Object[] { a3 };
 
@@ -1280,6 +1587,13 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the countries where active = &#63;.
+	 *
+	 * @param active the active to search with
+	 * @return the number of matching countries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByActive(boolean active) throws SystemException {
 		Object[] finderArgs = new Object[] { active };
 
@@ -1326,6 +1640,12 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the countries.
+	 *
+	 * @return the number of countries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -1360,6 +1680,9 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the country persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

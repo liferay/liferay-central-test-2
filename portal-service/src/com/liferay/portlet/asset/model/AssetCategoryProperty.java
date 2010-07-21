@@ -15,20 +15,16 @@
 package com.liferay.portlet.asset.model;
 
 /**
- * <p>
- * This interface is a model that represents the AssetCategoryProperty table in the
- * database.
- * </p>
+ * The model interface for the AssetCategoryProperty service. Represents a row in the &quot;AssetCategoryProperty&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.asset.model.impl.AssetCategoryPropertyImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.asset.model.impl.AssetCategoryPropertyImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       AssetCategoryPropertyModel
- * @see       com.liferay.portlet.asset.model.impl.AssetCategoryPropertyImpl
- * @see       com.liferay.portlet.asset.model.impl.AssetCategoryPropertyModelImpl
+ * @author Brian Wing Shun Chan
+ * @see AssetCategoryPropertyModel
+ * @see com.liferay.portlet.asset.model.impl.AssetCategoryPropertyImpl
+ * @see com.liferay.portlet.asset.model.impl.AssetCategoryPropertyModelImpl
  * @generated
  */
 public interface AssetCategoryProperty extends AssetCategoryPropertyModel {

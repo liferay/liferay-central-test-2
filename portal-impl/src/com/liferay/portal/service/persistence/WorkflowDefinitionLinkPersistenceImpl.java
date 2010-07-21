@@ -47,9 +47,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       WorkflowDefinitionLinkPersistence
- * @see       WorkflowDefinitionLinkUtil
+ * The persistence for the workflow definition link service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see WorkflowDefinitionLinkPersistence
+ * @see WorkflowDefinitionLinkUtil
  * @generated
  */
 public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<WorkflowDefinitionLink>
@@ -106,6 +116,11 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 			WorkflowDefinitionLinkModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
+	/**
+	 * Caches the workflow definition link in the entity cache if it is enabled.
+	 *
+	 * @param workflowDefinitionLink the workflow definition link to cache
+	 */
 	public void cacheResult(WorkflowDefinitionLink workflowDefinitionLink) {
 		EntityCacheUtil.putResult(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			WorkflowDefinitionLinkImpl.class,
@@ -119,6 +134,11 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 			}, workflowDefinitionLink);
 	}
 
+	/**
+	 * Caches the workflow definition links in the entity cache if it is enabled.
+	 *
+	 * @param workflowDefinitionLinks the workflow definition links to cache
+	 */
 	public void cacheResult(
 		List<WorkflowDefinitionLink> workflowDefinitionLinks) {
 		for (WorkflowDefinitionLink workflowDefinitionLink : workflowDefinitionLinks) {
@@ -131,6 +151,13 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		}
 	}
 
+	/**
+	 * Clears the cache for all workflow definition links.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(WorkflowDefinitionLinkImpl.class.getName());
 		EntityCacheUtil.clearCache(WorkflowDefinitionLinkImpl.class.getName());
@@ -138,6 +165,13 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the workflow definition link.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(WorkflowDefinitionLink workflowDefinitionLink) {
 		EntityCacheUtil.removeResult(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			WorkflowDefinitionLinkImpl.class,
@@ -151,6 +185,12 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 			});
 	}
 
+	/**
+	 * Creates a new workflow definition link with the primary key.
+	 *
+	 * @param workflowDefinitionLinkId the primary key for the new workflow definition link
+	 * @return the new workflow definition link
+	 */
 	public WorkflowDefinitionLink create(long workflowDefinitionLinkId) {
 		WorkflowDefinitionLink workflowDefinitionLink = new WorkflowDefinitionLinkImpl();
 
@@ -160,11 +200,27 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		return workflowDefinitionLink;
 	}
 
+	/**
+	 * Removes the workflow definition link with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the workflow definition link to remove
+	 * @return the workflow definition link that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a workflow definition link with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WorkflowDefinitionLink remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the workflow definition link with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param workflowDefinitionLinkId the primary key of the workflow definition link to remove
+	 * @return the workflow definition link that was removed
+	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a workflow definition link with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WorkflowDefinitionLink remove(long workflowDefinitionLinkId)
 		throws NoSuchWorkflowDefinitionLinkException, SystemException {
 		Session session = null;
@@ -330,11 +386,27 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		return workflowDefinitionLinkImpl;
 	}
 
+	/**
+	 * Finds the workflow definition link with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the workflow definition link to find
+	 * @return the workflow definition link
+	 * @throws com.liferay.portal.NoSuchModelException if a workflow definition link with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WorkflowDefinitionLink findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the workflow definition link with the primary key or throws a {@link com.liferay.portal.NoSuchWorkflowDefinitionLinkException} if it could not be found.
+	 *
+	 * @param workflowDefinitionLinkId the primary key of the workflow definition link to find
+	 * @return the workflow definition link
+	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a workflow definition link with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WorkflowDefinitionLink findByPrimaryKey(
 		long workflowDefinitionLinkId)
 		throws NoSuchWorkflowDefinitionLinkException, SystemException {
@@ -353,11 +425,25 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		return workflowDefinitionLink;
 	}
 
+	/**
+	 * Finds the workflow definition link with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the workflow definition link to find
+	 * @return the workflow definition link, or <code>null</code> if a workflow definition link with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WorkflowDefinitionLink fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the workflow definition link with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param workflowDefinitionLinkId the primary key of the workflow definition link to find
+	 * @return the workflow definition link, or <code>null</code> if a workflow definition link with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WorkflowDefinitionLink fetchByPrimaryKey(
 		long workflowDefinitionLinkId) throws SystemException {
 		WorkflowDefinitionLink workflowDefinitionLink = (WorkflowDefinitionLink)EntityCacheUtil.getResult(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
@@ -387,17 +473,51 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		return workflowDefinitionLink;
 	}
 
+	/**
+	 * Finds all the workflow definition links where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the matching workflow definition links
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WorkflowDefinitionLink> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the workflow definition links where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of workflow definition links to return
+	 * @param end the upper bound of the range of workflow definition links to return (not inclusive)
+	 * @return the range of matching workflow definition links
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WorkflowDefinitionLink> findByCompanyId(long companyId,
 		int start, int end) throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the workflow definition links where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of workflow definition links to return
+	 * @param end the upper bound of the range of workflow definition links to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching workflow definition links
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WorkflowDefinitionLink> findByCompanyId(long companyId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -471,6 +591,19 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		return list;
 	}
 
+	/**
+	 * Finds the first workflow definition link in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching workflow definition link
+	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a matching workflow definition link could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WorkflowDefinitionLink findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchWorkflowDefinitionLinkException, SystemException {
@@ -494,6 +627,19 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		}
 	}
 
+	/**
+	 * Finds the last workflow definition link in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching workflow definition link
+	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a matching workflow definition link could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WorkflowDefinitionLink findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchWorkflowDefinitionLinkException, SystemException {
@@ -519,6 +665,20 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		}
 	}
 
+	/**
+	 * Finds the workflow definition links before and after the current workflow definition link in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param workflowDefinitionLinkId the primary key of the current workflow definition link
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next workflow definition link
+	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a workflow definition link with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WorkflowDefinitionLink[] findByCompanyId_PrevAndNext(
 		long workflowDefinitionLinkId, long companyId,
 		OrderByComparator orderByComparator)
@@ -654,6 +814,16 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		}
 	}
 
+	/**
+	 * Finds the workflow definition link where groupId = &#63; and companyId = &#63; and classNameId = &#63; or throws a {@link com.liferay.portal.NoSuchWorkflowDefinitionLinkException} if it could not be found.
+	 *
+	 * @param groupId the group id to search with
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the matching workflow definition link
+	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a matching workflow definition link could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WorkflowDefinitionLink findByG_C_C(long groupId, long companyId,
 		long classNameId)
 		throws NoSuchWorkflowDefinitionLinkException, SystemException {
@@ -686,11 +856,29 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		return workflowDefinitionLink;
 	}
 
+	/**
+	 * Finds the workflow definition link where groupId = &#63; and companyId = &#63; and classNameId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the matching workflow definition link, or <code>null</code> if a matching workflow definition link could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WorkflowDefinitionLink fetchByG_C_C(long groupId, long companyId,
 		long classNameId) throws SystemException {
 		return fetchByG_C_C(groupId, companyId, classNameId, true);
 	}
 
+	/**
+	 * Finds the workflow definition link where groupId = &#63; and companyId = &#63; and classNameId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the matching workflow definition link, or <code>null</code> if a matching workflow definition link could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WorkflowDefinitionLink fetchByG_C_C(long groupId, long companyId,
 		long classNameId, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, companyId, classNameId };
@@ -779,6 +967,15 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		}
 	}
 
+	/**
+	 * Finds all the workflow definition links where companyId = &#63; and workflowDefinitionName = &#63; and workflowDefinitionVersion = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param workflowDefinitionName the workflow definition name to search with
+	 * @param workflowDefinitionVersion the workflow definition version to search with
+	 * @return the matching workflow definition links
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WorkflowDefinitionLink> findByC_W_W(long companyId,
 		String workflowDefinitionName, int workflowDefinitionVersion)
 		throws SystemException {
@@ -787,6 +984,21 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 			null);
 	}
 
+	/**
+	 * Finds a range of all the workflow definition links where companyId = &#63; and workflowDefinitionName = &#63; and workflowDefinitionVersion = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param workflowDefinitionName the workflow definition name to search with
+	 * @param workflowDefinitionVersion the workflow definition version to search with
+	 * @param start the lower bound of the range of workflow definition links to return
+	 * @param end the upper bound of the range of workflow definition links to return (not inclusive)
+	 * @return the range of matching workflow definition links
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WorkflowDefinitionLink> findByC_W_W(long companyId,
 		String workflowDefinitionName, int workflowDefinitionVersion,
 		int start, int end) throws SystemException {
@@ -794,6 +1006,22 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 			workflowDefinitionVersion, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the workflow definition links where companyId = &#63; and workflowDefinitionName = &#63; and workflowDefinitionVersion = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param workflowDefinitionName the workflow definition name to search with
+	 * @param workflowDefinitionVersion the workflow definition version to search with
+	 * @param start the lower bound of the range of workflow definition links to return
+	 * @param end the upper bound of the range of workflow definition links to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching workflow definition links
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WorkflowDefinitionLink> findByC_W_W(long companyId,
 		String workflowDefinitionName, int workflowDefinitionVersion,
 		int start, int end, OrderByComparator orderByComparator)
@@ -888,6 +1116,21 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		return list;
 	}
 
+	/**
+	 * Finds the first workflow definition link in the ordered set where companyId = &#63; and workflowDefinitionName = &#63; and workflowDefinitionVersion = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param workflowDefinitionName the workflow definition name to search with
+	 * @param workflowDefinitionVersion the workflow definition version to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching workflow definition link
+	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a matching workflow definition link could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WorkflowDefinitionLink findByC_W_W_First(long companyId,
 		String workflowDefinitionName, int workflowDefinitionVersion,
 		OrderByComparator orderByComparator)
@@ -919,6 +1162,21 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		}
 	}
 
+	/**
+	 * Finds the last workflow definition link in the ordered set where companyId = &#63; and workflowDefinitionName = &#63; and workflowDefinitionVersion = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param workflowDefinitionName the workflow definition name to search with
+	 * @param workflowDefinitionVersion the workflow definition version to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching workflow definition link
+	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a matching workflow definition link could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WorkflowDefinitionLink findByC_W_W_Last(long companyId,
 		String workflowDefinitionName, int workflowDefinitionVersion,
 		OrderByComparator orderByComparator)
@@ -953,6 +1211,22 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		}
 	}
 
+	/**
+	 * Finds the workflow definition links before and after the current workflow definition link in the ordered set where companyId = &#63; and workflowDefinitionName = &#63; and workflowDefinitionVersion = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param workflowDefinitionLinkId the primary key of the current workflow definition link
+	 * @param companyId the company id to search with
+	 * @param workflowDefinitionName the workflow definition name to search with
+	 * @param workflowDefinitionVersion the workflow definition version to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next workflow definition link
+	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a workflow definition link with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WorkflowDefinitionLink[] findByC_W_W_PrevAndNext(
 		long workflowDefinitionLinkId, long companyId,
 		String workflowDefinitionName, int workflowDefinitionVersion,
@@ -1112,15 +1386,46 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		}
 	}
 
+	/**
+	 * Finds all the workflow definition links.
+	 *
+	 * @return the workflow definition links
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WorkflowDefinitionLink> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the workflow definition links.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of workflow definition links to return
+	 * @param end the upper bound of the range of workflow definition links to return (not inclusive)
+	 * @return the range of workflow definition links
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WorkflowDefinitionLink> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the workflow definition links.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of workflow definition links to return
+	 * @param end the upper bound of the range of workflow definition links to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of workflow definition links
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WorkflowDefinitionLink> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1187,6 +1492,12 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		return list;
 	}
 
+	/**
+	 * Removes all the workflow definition links where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (WorkflowDefinitionLink workflowDefinitionLink : findByCompanyId(
 				companyId)) {
@@ -1194,6 +1505,14 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		}
 	}
 
+	/**
+	 * Removes the workflow definition link where groupId = &#63; and companyId = &#63; and classNameId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_C_C(long groupId, long companyId, long classNameId)
 		throws NoSuchWorkflowDefinitionLinkException, SystemException {
 		WorkflowDefinitionLink workflowDefinitionLink = findByG_C_C(groupId,
@@ -1202,6 +1521,14 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		remove(workflowDefinitionLink);
 	}
 
+	/**
+	 * Removes all the workflow definition links where companyId = &#63; and workflowDefinitionName = &#63; and workflowDefinitionVersion = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param workflowDefinitionName the workflow definition name to search with
+	 * @param workflowDefinitionVersion the workflow definition version to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_W_W(long companyId, String workflowDefinitionName,
 		int workflowDefinitionVersion) throws SystemException {
 		for (WorkflowDefinitionLink workflowDefinitionLink : findByC_W_W(
@@ -1210,12 +1537,24 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		}
 	}
 
+	/**
+	 * Removes all the workflow definition links from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (WorkflowDefinitionLink workflowDefinitionLink : findAll()) {
 			remove(workflowDefinitionLink);
 		}
 	}
 
+	/**
+	 * Counts all the workflow definition links where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the number of matching workflow definition links
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId };
 
@@ -1262,6 +1601,15 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the workflow definition links where groupId = &#63; and companyId = &#63; and classNameId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the number of matching workflow definition links
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_C_C(long groupId, long companyId, long classNameId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, companyId, classNameId };
@@ -1317,6 +1665,15 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the workflow definition links where companyId = &#63; and workflowDefinitionName = &#63; and workflowDefinitionVersion = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param workflowDefinitionName the workflow definition name to search with
+	 * @param workflowDefinitionVersion the workflow definition version to search with
+	 * @return the number of matching workflow definition links
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_W_W(long companyId, String workflowDefinitionName,
 		int workflowDefinitionVersion) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1386,6 +1743,12 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the workflow definition links.
+	 *
+	 * @return the number of workflow definition links
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -1420,6 +1783,9 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the workflow definition link persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

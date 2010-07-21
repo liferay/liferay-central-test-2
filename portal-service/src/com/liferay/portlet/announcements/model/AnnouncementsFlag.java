@@ -15,20 +15,16 @@
 package com.liferay.portlet.announcements.model;
 
 /**
- * <p>
- * This interface is a model that represents the AnnouncementsFlag table in the
- * database.
- * </p>
+ * The model interface for the AnnouncementsFlag service. Represents a row in the &quot;AnnouncementsFlag&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       AnnouncementsFlagModel
- * @see       com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl
- * @see       com.liferay.portlet.announcements.model.impl.AnnouncementsFlagModelImpl
+ * @author Brian Wing Shun Chan
+ * @see AnnouncementsFlagModel
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsFlagModelImpl
  * @generated
  */
 public interface AnnouncementsFlag extends AnnouncementsFlagModel {

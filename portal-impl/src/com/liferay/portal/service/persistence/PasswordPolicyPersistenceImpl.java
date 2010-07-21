@@ -48,9 +48,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       PasswordPolicyPersistence
- * @see       PasswordPolicyUtil
+ * The persistence for the password policy service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see PasswordPolicyPersistence
+ * @see PasswordPolicyUtil
  * @generated
  */
 public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordPolicy>
@@ -81,6 +91,11 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 			PasswordPolicyModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
+	/**
+	 * Caches the password policy in the entity cache if it is enabled.
+	 *
+	 * @param passwordPolicy the password policy to cache
+	 */
 	public void cacheResult(PasswordPolicy passwordPolicy) {
 		EntityCacheUtil.putResult(PasswordPolicyModelImpl.ENTITY_CACHE_ENABLED,
 			PasswordPolicyImpl.class, passwordPolicy.getPrimaryKey(),
@@ -100,6 +115,11 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 			}, passwordPolicy);
 	}
 
+	/**
+	 * Caches the password policies in the entity cache if it is enabled.
+	 *
+	 * @param passwordPolicies the password policies to cache
+	 */
 	public void cacheResult(List<PasswordPolicy> passwordPolicies) {
 		for (PasswordPolicy passwordPolicy : passwordPolicies) {
 			if (EntityCacheUtil.getResult(
@@ -111,6 +131,13 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		}
 	}
 
+	/**
+	 * Clears the cache for all password policies.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(PasswordPolicyImpl.class.getName());
 		EntityCacheUtil.clearCache(PasswordPolicyImpl.class.getName());
@@ -118,6 +145,13 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the password policy.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(PasswordPolicy passwordPolicy) {
 		EntityCacheUtil.removeResult(PasswordPolicyModelImpl.ENTITY_CACHE_ENABLED,
 			PasswordPolicyImpl.class, passwordPolicy.getPrimaryKey());
@@ -136,6 +170,12 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 			});
 	}
 
+	/**
+	 * Creates a new password policy with the primary key.
+	 *
+	 * @param passwordPolicyId the primary key for the new password policy
+	 * @return the new password policy
+	 */
 	public PasswordPolicy create(long passwordPolicyId) {
 		PasswordPolicy passwordPolicy = new PasswordPolicyImpl();
 
@@ -145,11 +185,27 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		return passwordPolicy;
 	}
 
+	/**
+	 * Removes the password policy with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the password policy to remove
+	 * @return the password policy that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a password policy with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordPolicy remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the password policy with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param passwordPolicyId the primary key of the password policy to remove
+	 * @return the password policy that was removed
+	 * @throws com.liferay.portal.NoSuchPasswordPolicyException if a password policy with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordPolicy remove(long passwordPolicyId)
 		throws NoSuchPasswordPolicyException, SystemException {
 		Session session = null;
@@ -361,11 +417,27 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		return passwordPolicyImpl;
 	}
 
+	/**
+	 * Finds the password policy with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the password policy to find
+	 * @return the password policy
+	 * @throws com.liferay.portal.NoSuchModelException if a password policy with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordPolicy findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the password policy with the primary key or throws a {@link com.liferay.portal.NoSuchPasswordPolicyException} if it could not be found.
+	 *
+	 * @param passwordPolicyId the primary key of the password policy to find
+	 * @return the password policy
+	 * @throws com.liferay.portal.NoSuchPasswordPolicyException if a password policy with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordPolicy findByPrimaryKey(long passwordPolicyId)
 		throws NoSuchPasswordPolicyException, SystemException {
 		PasswordPolicy passwordPolicy = fetchByPrimaryKey(passwordPolicyId);
@@ -382,11 +454,25 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		return passwordPolicy;
 	}
 
+	/**
+	 * Finds the password policy with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the password policy to find
+	 * @return the password policy, or <code>null</code> if a password policy with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordPolicy fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the password policy with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param passwordPolicyId the primary key of the password policy to find
+	 * @return the password policy, or <code>null</code> if a password policy with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordPolicy fetchByPrimaryKey(long passwordPolicyId)
 		throws SystemException {
 		PasswordPolicy passwordPolicy = (PasswordPolicy)EntityCacheUtil.getResult(PasswordPolicyModelImpl.ENTITY_CACHE_ENABLED,
@@ -416,6 +502,15 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		return passwordPolicy;
 	}
 
+	/**
+	 * Finds the password policy where companyId = &#63; and defaultPolicy = &#63; or throws a {@link com.liferay.portal.NoSuchPasswordPolicyException} if it could not be found.
+	 *
+	 * @param companyId the company id to search with
+	 * @param defaultPolicy the default policy to search with
+	 * @return the matching password policy
+	 * @throws com.liferay.portal.NoSuchPasswordPolicyException if a matching password policy could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordPolicy findByC_DP(long companyId, boolean defaultPolicy)
 		throws NoSuchPasswordPolicyException, SystemException {
 		PasswordPolicy passwordPolicy = fetchByC_DP(companyId, defaultPolicy);
@@ -443,11 +538,27 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		return passwordPolicy;
 	}
 
+	/**
+	 * Finds the password policy where companyId = &#63; and defaultPolicy = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param defaultPolicy the default policy to search with
+	 * @return the matching password policy, or <code>null</code> if a matching password policy could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordPolicy fetchByC_DP(long companyId, boolean defaultPolicy)
 		throws SystemException {
 		return fetchByC_DP(companyId, defaultPolicy, true);
 	}
 
+	/**
+	 * Finds the password policy where companyId = &#63; and defaultPolicy = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param defaultPolicy the default policy to search with
+	 * @return the matching password policy, or <code>null</code> if a matching password policy could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordPolicy fetchByC_DP(long companyId, boolean defaultPolicy,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, defaultPolicy };
@@ -529,6 +640,15 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		}
 	}
 
+	/**
+	 * Finds the password policy where companyId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchPasswordPolicyException} if it could not be found.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @return the matching password policy
+	 * @throws com.liferay.portal.NoSuchPasswordPolicyException if a matching password policy could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordPolicy findByC_N(long companyId, String name)
 		throws NoSuchPasswordPolicyException, SystemException {
 		PasswordPolicy passwordPolicy = fetchByC_N(companyId, name);
@@ -556,11 +676,27 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		return passwordPolicy;
 	}
 
+	/**
+	 * Finds the password policy where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @return the matching password policy, or <code>null</code> if a matching password policy could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordPolicy fetchByC_N(long companyId, String name)
 		throws SystemException {
 		return fetchByC_N(companyId, name, true);
 	}
 
+	/**
+	 * Finds the password policy where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @return the matching password policy, or <code>null</code> if a matching password policy could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordPolicy fetchByC_N(long companyId, String name,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, name };
@@ -655,15 +791,46 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		}
 	}
 
+	/**
+	 * Finds all the password policies.
+	 *
+	 * @return the password policies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PasswordPolicy> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the password policies.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of password policies to return
+	 * @param end the upper bound of the range of password policies to return (not inclusive)
+	 * @return the range of password policies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PasswordPolicy> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the password policies.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of password policies to return
+	 * @param end the upper bound of the range of password policies to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of password policies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PasswordPolicy> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -730,6 +897,13 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		return list;
 	}
 
+	/**
+	 * Removes the password policy where companyId = &#63; and defaultPolicy = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param defaultPolicy the default policy to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_DP(long companyId, boolean defaultPolicy)
 		throws NoSuchPasswordPolicyException, SystemException {
 		PasswordPolicy passwordPolicy = findByC_DP(companyId, defaultPolicy);
@@ -737,6 +911,13 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		remove(passwordPolicy);
 	}
 
+	/**
+	 * Removes the password policy where companyId = &#63; and name = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_N(long companyId, String name)
 		throws NoSuchPasswordPolicyException, SystemException {
 		PasswordPolicy passwordPolicy = findByC_N(companyId, name);
@@ -744,12 +925,25 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		remove(passwordPolicy);
 	}
 
+	/**
+	 * Removes all the password policies from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (PasswordPolicy passwordPolicy : findAll()) {
 			remove(passwordPolicy);
 		}
 	}
 
+	/**
+	 * Counts all the password policies where companyId = &#63; and defaultPolicy = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param defaultPolicy the default policy to search with
+	 * @return the number of matching password policies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_DP(long companyId, boolean defaultPolicy)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, defaultPolicy };
@@ -801,6 +995,14 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the password policies where companyId = &#63; and name = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @return the number of matching password policies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_N(long companyId, String name)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, name };
@@ -864,6 +1066,12 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the password policies.
+	 *
+	 * @return the number of password policies
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -898,6 +1106,9 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the password policy persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

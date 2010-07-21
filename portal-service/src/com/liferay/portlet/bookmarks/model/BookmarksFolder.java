@@ -15,20 +15,16 @@
 package com.liferay.portlet.bookmarks.model;
 
 /**
- * <p>
- * This interface is a model that represents the BookmarksFolder table in the
- * database.
- * </p>
+ * The model interface for the BookmarksFolder service. Represents a row in the &quot;BookmarksFolder&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       BookmarksFolderModel
- * @see       com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl
- * @see       com.liferay.portlet.bookmarks.model.impl.BookmarksFolderModelImpl
+ * @author Brian Wing Shun Chan
+ * @see BookmarksFolderModel
+ * @see com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl
+ * @see com.liferay.portlet.bookmarks.model.impl.BookmarksFolderModelImpl
  * @generated
  */
 public interface BookmarksFolder extends BookmarksFolderModel {

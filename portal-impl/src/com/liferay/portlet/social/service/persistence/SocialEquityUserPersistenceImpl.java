@@ -51,9 +51,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       SocialEquityUserPersistence
- * @see       SocialEquityUserUtil
+ * The persistence for the social equity user service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see SocialEquityUserPersistence
+ * @see SocialEquityUserUtil
  * @generated
  */
 public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialEquityUser>
@@ -141,6 +151,11 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 			SocialEquityUserModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
+	/**
+	 * Caches the social equity user in the entity cache if it is enabled.
+	 *
+	 * @param socialEquityUser the social equity user to cache
+	 */
 	public void cacheResult(SocialEquityUser socialEquityUser) {
 		EntityCacheUtil.putResult(SocialEquityUserModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityUserImpl.class, socialEquityUser.getPrimaryKey(),
@@ -153,6 +168,11 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 			}, socialEquityUser);
 	}
 
+	/**
+	 * Caches the social equity users in the entity cache if it is enabled.
+	 *
+	 * @param socialEquityUsers the social equity users to cache
+	 */
 	public void cacheResult(List<SocialEquityUser> socialEquityUsers) {
 		for (SocialEquityUser socialEquityUser : socialEquityUsers) {
 			if (EntityCacheUtil.getResult(
@@ -164,6 +184,13 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		}
 	}
 
+	/**
+	 * Clears the cache for all social equity users.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(SocialEquityUserImpl.class.getName());
 		EntityCacheUtil.clearCache(SocialEquityUserImpl.class.getName());
@@ -171,6 +198,13 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the social equity user.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(SocialEquityUser socialEquityUser) {
 		EntityCacheUtil.removeResult(SocialEquityUserModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityUserImpl.class, socialEquityUser.getPrimaryKey());
@@ -182,6 +216,12 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 			});
 	}
 
+	/**
+	 * Creates a new social equity user with the primary key.
+	 *
+	 * @param equityUserId the primary key for the new social equity user
+	 * @return the new social equity user
+	 */
 	public SocialEquityUser create(long equityUserId) {
 		SocialEquityUser socialEquityUser = new SocialEquityUserImpl();
 
@@ -191,11 +231,27 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return socialEquityUser;
 	}
 
+	/**
+	 * Removes the social equity user with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the social equity user to remove
+	 * @return the social equity user that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a social equity user with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the social equity user with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param equityUserId the primary key of the social equity user to remove
+	 * @return the social equity user that was removed
+	 * @throws com.liferay.portlet.social.NoSuchEquityUserException if a social equity user with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser remove(long equityUserId)
 		throws NoSuchEquityUserException, SystemException {
 		Session session = null;
@@ -352,11 +408,27 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return socialEquityUserImpl;
 	}
 
+	/**
+	 * Finds the social equity user with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the social equity user to find
+	 * @return the social equity user
+	 * @throws com.liferay.portal.NoSuchModelException if a social equity user with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the social equity user with the primary key or throws a {@link com.liferay.portlet.social.NoSuchEquityUserException} if it could not be found.
+	 *
+	 * @param equityUserId the primary key of the social equity user to find
+	 * @return the social equity user
+	 * @throws com.liferay.portlet.social.NoSuchEquityUserException if a social equity user with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser findByPrimaryKey(long equityUserId)
 		throws NoSuchEquityUserException, SystemException {
 		SocialEquityUser socialEquityUser = fetchByPrimaryKey(equityUserId);
@@ -373,11 +445,25 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return socialEquityUser;
 	}
 
+	/**
+	 * Finds the social equity user with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the social equity user to find
+	 * @return the social equity user, or <code>null</code> if a social equity user with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the social equity user with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param equityUserId the primary key of the social equity user to find
+	 * @return the social equity user, or <code>null</code> if a social equity user with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser fetchByPrimaryKey(long equityUserId)
 		throws SystemException {
 		SocialEquityUser socialEquityUser = (SocialEquityUser)EntityCacheUtil.getResult(SocialEquityUserModelImpl.ENTITY_CACHE_ENABLED,
@@ -407,16 +493,50 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return socialEquityUser;
 	}
 
+	/**
+	 * Finds all the social equity users where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquityUser> findByGroupId(long groupId)
 		throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the social equity users where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of social equity users to return
+	 * @param end the upper bound of the range of social equity users to return (not inclusive)
+	 * @return the range of matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquityUser> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social equity users where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of social equity users to return
+	 * @param end the upper bound of the range of social equity users to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquityUser> findByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -485,6 +605,19 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return list;
 	}
 
+	/**
+	 * Finds the first social equity user in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social equity user
+	 * @throws com.liferay.portlet.social.NoSuchEquityUserException if a matching social equity user could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEquityUserException, SystemException {
@@ -508,6 +641,19 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		}
 	}
 
+	/**
+	 * Finds the last social equity user in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social equity user
+	 * @throws com.liferay.portlet.social.NoSuchEquityUserException if a matching social equity user could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEquityUserException, SystemException {
@@ -533,6 +679,20 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		}
 	}
 
+	/**
+	 * Finds the social equity users before and after the current social equity user in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param equityUserId the primary key of the current social equity user
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social equity user
+	 * @throws com.liferay.portlet.social.NoSuchEquityUserException if a social equity user with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser[] findByGroupId_PrevAndNext(long equityUserId,
 		long groupId, OrderByComparator orderByComparator)
 		throws NoSuchEquityUserException, SystemException {
@@ -663,17 +823,51 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		}
 	}
 
+	/**
+	 * Finds all the social equity users where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquityUser> findByGroupRanked(long groupId)
 		throws SystemException {
 		return findByGroupRanked(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the social equity users where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of social equity users to return
+	 * @param end the upper bound of the range of social equity users to return (not inclusive)
+	 * @return the range of matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquityUser> findByGroupRanked(long groupId, int start,
 		int end) throws SystemException {
 		return findByGroupRanked(groupId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social equity users where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of social equity users to return
+	 * @param end the upper bound of the range of social equity users to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquityUser> findByGroupRanked(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -742,6 +936,19 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return list;
 	}
 
+	/**
+	 * Finds the first social equity user in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social equity user
+	 * @throws com.liferay.portlet.social.NoSuchEquityUserException if a matching social equity user could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser findByGroupRanked_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEquityUserException, SystemException {
@@ -765,6 +972,19 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		}
 	}
 
+	/**
+	 * Finds the last social equity user in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social equity user
+	 * @throws com.liferay.portlet.social.NoSuchEquityUserException if a matching social equity user could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser findByGroupRanked_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEquityUserException, SystemException {
@@ -790,6 +1010,20 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		}
 	}
 
+	/**
+	 * Finds the social equity users before and after the current social equity user in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param equityUserId the primary key of the current social equity user
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social equity user
+	 * @throws com.liferay.portlet.social.NoSuchEquityUserException if a social equity user with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser[] findByGroupRanked_PrevAndNext(long equityUserId,
 		long groupId, OrderByComparator orderByComparator)
 		throws NoSuchEquityUserException, SystemException {
@@ -920,16 +1154,50 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		}
 	}
 
+	/**
+	 * Finds all the social equity users where userId = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @return the matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquityUser> findByUserId(long userId)
 		throws SystemException {
 		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the social equity users where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of social equity users to return
+	 * @param end the upper bound of the range of social equity users to return (not inclusive)
+	 * @return the range of matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquityUser> findByUserId(long userId, int start, int end)
 		throws SystemException {
 		return findByUserId(userId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social equity users where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of social equity users to return
+	 * @param end the upper bound of the range of social equity users to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquityUser> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -998,6 +1266,19 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return list;
 	}
 
+	/**
+	 * Finds the first social equity user in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social equity user
+	 * @throws com.liferay.portlet.social.NoSuchEquityUserException if a matching social equity user could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser findByUserId_First(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEquityUserException, SystemException {
@@ -1021,6 +1302,19 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		}
 	}
 
+	/**
+	 * Finds the last social equity user in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social equity user
+	 * @throws com.liferay.portlet.social.NoSuchEquityUserException if a matching social equity user could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser findByUserId_Last(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEquityUserException, SystemException {
@@ -1046,6 +1340,20 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		}
 	}
 
+	/**
+	 * Finds the social equity users before and after the current social equity user in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param equityUserId the primary key of the current social equity user
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social equity user
+	 * @throws com.liferay.portlet.social.NoSuchEquityUserException if a social equity user with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser[] findByUserId_PrevAndNext(long equityUserId,
 		long userId, OrderByComparator orderByComparator)
 		throws NoSuchEquityUserException, SystemException {
@@ -1176,16 +1484,50 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		}
 	}
 
+	/**
+	 * Finds all the social equity users where rank = &#63;.
+	 *
+	 * @param rank the rank to search with
+	 * @return the matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquityUser> findByRank(int rank)
 		throws SystemException {
 		return findByRank(rank, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the social equity users where rank = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param rank the rank to search with
+	 * @param start the lower bound of the range of social equity users to return
+	 * @param end the upper bound of the range of social equity users to return (not inclusive)
+	 * @return the range of matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquityUser> findByRank(int rank, int start, int end)
 		throws SystemException {
 		return findByRank(rank, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social equity users where rank = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param rank the rank to search with
+	 * @param start the lower bound of the range of social equity users to return
+	 * @param end the upper bound of the range of social equity users to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquityUser> findByRank(int rank, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1254,6 +1596,19 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return list;
 	}
 
+	/**
+	 * Finds the first social equity user in the ordered set where rank = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param rank the rank to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social equity user
+	 * @throws com.liferay.portlet.social.NoSuchEquityUserException if a matching social equity user could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser findByRank_First(int rank,
 		OrderByComparator orderByComparator)
 		throws NoSuchEquityUserException, SystemException {
@@ -1276,6 +1631,19 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		}
 	}
 
+	/**
+	 * Finds the last social equity user in the ordered set where rank = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param rank the rank to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social equity user
+	 * @throws com.liferay.portlet.social.NoSuchEquityUserException if a matching social equity user could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser findByRank_Last(int rank,
 		OrderByComparator orderByComparator)
 		throws NoSuchEquityUserException, SystemException {
@@ -1301,6 +1669,20 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		}
 	}
 
+	/**
+	 * Finds the social equity users before and after the current social equity user in the ordered set where rank = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param equityUserId the primary key of the current social equity user
+	 * @param rank the rank to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social equity user
+	 * @throws com.liferay.portlet.social.NoSuchEquityUserException if a social equity user with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser[] findByRank_PrevAndNext(long equityUserId,
 		int rank, OrderByComparator orderByComparator)
 		throws NoSuchEquityUserException, SystemException {
@@ -1431,6 +1813,15 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		}
 	}
 
+	/**
+	 * Finds the social equity user where groupId = &#63; and userId = &#63; or throws a {@link com.liferay.portlet.social.NoSuchEquityUserException} if it could not be found.
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @return the matching social equity user
+	 * @throws com.liferay.portlet.social.NoSuchEquityUserException if a matching social equity user could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser findByG_U(long groupId, long userId)
 		throws NoSuchEquityUserException, SystemException {
 		SocialEquityUser socialEquityUser = fetchByG_U(groupId, userId);
@@ -1458,11 +1849,27 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return socialEquityUser;
 	}
 
+	/**
+	 * Finds the social equity user where groupId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @return the matching social equity user, or <code>null</code> if a matching social equity user could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser fetchByG_U(long groupId, long userId)
 		throws SystemException {
 		return fetchByG_U(groupId, userId, true);
 	}
 
+	/**
+	 * Finds the social equity user where groupId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @return the matching social equity user, or <code>null</code> if a matching social equity user could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser fetchByG_U(long groupId, long userId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, userId };
@@ -1544,17 +1951,54 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		}
 	}
 
+	/**
+	 * Finds all the social equity users where groupId = &#63; and rank = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param rank the rank to search with
+	 * @return the matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquityUser> findByG_R(long groupId, int rank)
 		throws SystemException {
 		return findByG_R(groupId, rank, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the social equity users where groupId = &#63; and rank = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param rank the rank to search with
+	 * @param start the lower bound of the range of social equity users to return
+	 * @param end the upper bound of the range of social equity users to return (not inclusive)
+	 * @return the range of matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquityUser> findByG_R(long groupId, int rank, int start,
 		int end) throws SystemException {
 		return findByG_R(groupId, rank, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social equity users where groupId = &#63; and rank = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param rank the rank to search with
+	 * @param start the lower bound of the range of social equity users to return
+	 * @param end the upper bound of the range of social equity users to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquityUser> findByG_R(long groupId, int rank, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1627,6 +2071,20 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return list;
 	}
 
+	/**
+	 * Finds the first social equity user in the ordered set where groupId = &#63; and rank = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param rank the rank to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social equity user
+	 * @throws com.liferay.portlet.social.NoSuchEquityUserException if a matching social equity user could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser findByG_R_First(long groupId, int rank,
 		OrderByComparator orderByComparator)
 		throws NoSuchEquityUserException, SystemException {
@@ -1653,6 +2111,20 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		}
 	}
 
+	/**
+	 * Finds the last social equity user in the ordered set where groupId = &#63; and rank = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param rank the rank to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social equity user
+	 * @throws com.liferay.portlet.social.NoSuchEquityUserException if a matching social equity user could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser findByG_R_Last(long groupId, int rank,
 		OrderByComparator orderByComparator)
 		throws NoSuchEquityUserException, SystemException {
@@ -1681,6 +2153,21 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		}
 	}
 
+	/**
+	 * Finds the social equity users before and after the current social equity user in the ordered set where groupId = &#63; and rank = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param equityUserId the primary key of the current social equity user
+	 * @param groupId the group id to search with
+	 * @param rank the rank to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social equity user
+	 * @throws com.liferay.portlet.social.NoSuchEquityUserException if a social equity user with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquityUser[] findByG_R_PrevAndNext(long equityUserId,
 		long groupId, int rank, OrderByComparator orderByComparator)
 		throws NoSuchEquityUserException, SystemException {
@@ -1815,15 +2302,46 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		}
 	}
 
+	/**
+	 * Finds all the social equity users.
+	 *
+	 * @return the social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquityUser> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the social equity users.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of social equity users to return
+	 * @param end the upper bound of the range of social equity users to return (not inclusive)
+	 * @return the range of social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquityUser> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social equity users.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of social equity users to return
+	 * @param end the upper bound of the range of social equity users to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquityUser> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1890,30 +2408,61 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return list;
 	}
 
+	/**
+	 * Removes all the social equity users where groupId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (SocialEquityUser socialEquityUser : findByGroupId(groupId)) {
 			remove(socialEquityUser);
 		}
 	}
 
+	/**
+	 * Removes all the social equity users where groupId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByGroupRanked(long groupId) throws SystemException {
 		for (SocialEquityUser socialEquityUser : findByGroupRanked(groupId)) {
 			remove(socialEquityUser);
 		}
 	}
 
+	/**
+	 * Removes all the social equity users where userId = &#63; from the database.
+	 *
+	 * @param userId the user id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (SocialEquityUser socialEquityUser : findByUserId(userId)) {
 			remove(socialEquityUser);
 		}
 	}
 
+	/**
+	 * Removes all the social equity users where rank = &#63; from the database.
+	 *
+	 * @param rank the rank to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByRank(int rank) throws SystemException {
 		for (SocialEquityUser socialEquityUser : findByRank(rank)) {
 			remove(socialEquityUser);
 		}
 	}
 
+	/**
+	 * Removes the social equity user where groupId = &#63; and userId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_U(long groupId, long userId)
 		throws NoSuchEquityUserException, SystemException {
 		SocialEquityUser socialEquityUser = findByG_U(groupId, userId);
@@ -1921,18 +2470,37 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		remove(socialEquityUser);
 	}
 
+	/**
+	 * Removes all the social equity users where groupId = &#63; and rank = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param rank the rank to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_R(long groupId, int rank) throws SystemException {
 		for (SocialEquityUser socialEquityUser : findByG_R(groupId, rank)) {
 			remove(socialEquityUser);
 		}
 	}
 
+	/**
+	 * Removes all the social equity users from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (SocialEquityUser socialEquityUser : findAll()) {
 			remove(socialEquityUser);
 		}
 	}
 
+	/**
+	 * Counts all the social equity users where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the number of matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId };
 
@@ -1979,6 +2547,13 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social equity users where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the number of matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByGroupRanked(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId };
 
@@ -2025,6 +2600,13 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social equity users where userId = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @return the number of matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUserId(long userId) throws SystemException {
 		Object[] finderArgs = new Object[] { userId };
 
@@ -2071,6 +2653,13 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social equity users where rank = &#63;.
+	 *
+	 * @param rank the rank to search with
+	 * @return the number of matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByRank(int rank) throws SystemException {
 		Object[] finderArgs = new Object[] { rank };
 
@@ -2117,6 +2706,14 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social equity users where groupId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @return the number of matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_U(long groupId, long userId) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, userId };
 
@@ -2167,6 +2764,14 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social equity users where groupId = &#63; and rank = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param rank the rank to search with
+	 * @return the number of matching social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_R(long groupId, int rank) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, rank };
 
@@ -2217,6 +2822,12 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social equity users.
+	 *
+	 * @return the number of social equity users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -2251,6 +2862,9 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the social equity user persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

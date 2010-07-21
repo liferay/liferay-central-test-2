@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the PluginSetting table in the
- * database.
- * </p>
+ * The model interface for the PluginSetting service. Represents a row in the &quot;PluginSetting&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.PluginSettingImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.PluginSettingImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       PluginSettingModel
- * @see       com.liferay.portal.model.impl.PluginSettingImpl
- * @see       com.liferay.portal.model.impl.PluginSettingModelImpl
+ * @author Brian Wing Shun Chan
+ * @see PluginSettingModel
+ * @see com.liferay.portal.model.impl.PluginSettingImpl
+ * @see com.liferay.portal.model.impl.PluginSettingModelImpl
  * @generated
  */
 public interface PluginSetting extends PluginSettingModel {
@@ -56,7 +52,7 @@ public interface PluginSetting extends PluginSettingModel {
 
 	/**
 	* Returns <code>true</code> if the plugin has a role with the specified
-	name.
+	* name.
 	*
 	* @return <code>true</code> if the plugin has a role with the specified
 	name

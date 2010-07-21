@@ -52,9 +52,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       ExpandoTablePersistence
- * @see       ExpandoTableUtil
+ * The persistence for the expando table service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see ExpandoTablePersistence
+ * @see ExpandoTableUtil
  * @generated
  */
 public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTable>
@@ -96,6 +106,11 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 			ExpandoTableModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the expando table in the entity cache if it is enabled.
+	 *
+	 * @param expandoTable the expando table to cache
+	 */
 	public void cacheResult(ExpandoTable expandoTable) {
 		EntityCacheUtil.putResult(ExpandoTableModelImpl.ENTITY_CACHE_ENABLED,
 			ExpandoTableImpl.class, expandoTable.getPrimaryKey(), expandoTable);
@@ -109,6 +124,11 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 			}, expandoTable);
 	}
 
+	/**
+	 * Caches the expando tables in the entity cache if it is enabled.
+	 *
+	 * @param expandoTables the expando tables to cache
+	 */
 	public void cacheResult(List<ExpandoTable> expandoTables) {
 		for (ExpandoTable expandoTable : expandoTables) {
 			if (EntityCacheUtil.getResult(
@@ -120,6 +140,13 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		}
 	}
 
+	/**
+	 * Clears the cache for all expando tables.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(ExpandoTableImpl.class.getName());
 		EntityCacheUtil.clearCache(ExpandoTableImpl.class.getName());
@@ -127,6 +154,13 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the expando table.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(ExpandoTable expandoTable) {
 		EntityCacheUtil.removeResult(ExpandoTableModelImpl.ENTITY_CACHE_ENABLED,
 			ExpandoTableImpl.class, expandoTable.getPrimaryKey());
@@ -140,6 +174,12 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 			});
 	}
 
+	/**
+	 * Creates a new expando table with the primary key.
+	 *
+	 * @param tableId the primary key for the new expando table
+	 * @return the new expando table
+	 */
 	public ExpandoTable create(long tableId) {
 		ExpandoTable expandoTable = new ExpandoTableImpl();
 
@@ -149,11 +189,27 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		return expandoTable;
 	}
 
+	/**
+	 * Removes the expando table with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the expando table to remove
+	 * @return the expando table that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a expando table with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ExpandoTable remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the expando table with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param tableId the primary key of the expando table to remove
+	 * @return the expando table that was removed
+	 * @throws com.liferay.portlet.expando.NoSuchTableException if a expando table with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ExpandoTable remove(long tableId)
 		throws NoSuchTableException, SystemException {
 		Session session = null;
@@ -312,11 +368,27 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		return expandoTableImpl;
 	}
 
+	/**
+	 * Finds the expando table with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the expando table to find
+	 * @return the expando table
+	 * @throws com.liferay.portal.NoSuchModelException if a expando table with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ExpandoTable findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the expando table with the primary key or throws a {@link com.liferay.portlet.expando.NoSuchTableException} if it could not be found.
+	 *
+	 * @param tableId the primary key of the expando table to find
+	 * @return the expando table
+	 * @throws com.liferay.portlet.expando.NoSuchTableException if a expando table with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ExpandoTable findByPrimaryKey(long tableId)
 		throws NoSuchTableException, SystemException {
 		ExpandoTable expandoTable = fetchByPrimaryKey(tableId);
@@ -333,11 +405,25 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		return expandoTable;
 	}
 
+	/**
+	 * Finds the expando table with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the expando table to find
+	 * @return the expando table, or <code>null</code> if a expando table with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ExpandoTable fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the expando table with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param tableId the primary key of the expando table to find
+	 * @return the expando table, or <code>null</code> if a expando table with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ExpandoTable fetchByPrimaryKey(long tableId)
 		throws SystemException {
 		ExpandoTable expandoTable = (ExpandoTable)EntityCacheUtil.getResult(ExpandoTableModelImpl.ENTITY_CACHE_ENABLED,
@@ -367,17 +453,54 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		return expandoTable;
 	}
 
+	/**
+	 * Finds all the expando tables where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the matching expando tables
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<ExpandoTable> findByC_C(long companyId, long classNameId)
 		throws SystemException {
 		return findByC_C(companyId, classNameId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the expando tables where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param start the lower bound of the range of expando tables to return
+	 * @param end the upper bound of the range of expando tables to return (not inclusive)
+	 * @return the range of matching expando tables
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<ExpandoTable> findByC_C(long companyId, long classNameId,
 		int start, int end) throws SystemException {
 		return findByC_C(companyId, classNameId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the expando tables where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param start the lower bound of the range of expando tables to return
+	 * @param end the upper bound of the range of expando tables to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching expando tables
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<ExpandoTable> findByC_C(long companyId, long classNameId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -451,6 +574,20 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		return list;
 	}
 
+	/**
+	 * Finds the first expando table in the ordered set where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching expando table
+	 * @throws com.liferay.portlet.expando.NoSuchTableException if a matching expando table could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ExpandoTable findByC_C_First(long companyId, long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchTableException, SystemException {
@@ -477,6 +614,20 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		}
 	}
 
+	/**
+	 * Finds the last expando table in the ordered set where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching expando table
+	 * @throws com.liferay.portlet.expando.NoSuchTableException if a matching expando table could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ExpandoTable findByC_C_Last(long companyId, long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchTableException, SystemException {
@@ -505,6 +656,21 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		}
 	}
 
+	/**
+	 * Finds the expando tables before and after the current expando table in the ordered set where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param tableId the primary key of the current expando table
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next expando table
+	 * @throws com.liferay.portlet.expando.NoSuchTableException if a expando table with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ExpandoTable[] findByC_C_PrevAndNext(long tableId, long companyId,
 		long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchTableException, SystemException {
@@ -639,6 +805,16 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		}
 	}
 
+	/**
+	 * Finds the expando table where companyId = &#63; and classNameId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.expando.NoSuchTableException} if it could not be found.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param name the name to search with
+	 * @return the matching expando table
+	 * @throws com.liferay.portlet.expando.NoSuchTableException if a matching expando table could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ExpandoTable findByC_C_N(long companyId, long classNameId,
 		String name) throws NoSuchTableException, SystemException {
 		ExpandoTable expandoTable = fetchByC_C_N(companyId, classNameId, name);
@@ -669,11 +845,29 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		return expandoTable;
 	}
 
+	/**
+	 * Finds the expando table where companyId = &#63; and classNameId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param name the name to search with
+	 * @return the matching expando table, or <code>null</code> if a matching expando table could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ExpandoTable fetchByC_C_N(long companyId, long classNameId,
 		String name) throws SystemException {
 		return fetchByC_C_N(companyId, classNameId, name, true);
 	}
 
+	/**
+	 * Finds the expando table where companyId = &#63; and classNameId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param name the name to search with
+	 * @return the matching expando table, or <code>null</code> if a matching expando table could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ExpandoTable fetchByC_C_N(long companyId, long classNameId,
 		String name, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, classNameId, name };
@@ -773,15 +967,46 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		}
 	}
 
+	/**
+	 * Finds all the expando tables.
+	 *
+	 * @return the expando tables
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<ExpandoTable> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the expando tables.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of expando tables to return
+	 * @param end the upper bound of the range of expando tables to return (not inclusive)
+	 * @return the range of expando tables
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<ExpandoTable> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the expando tables.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of expando tables to return
+	 * @param end the upper bound of the range of expando tables to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of expando tables
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<ExpandoTable> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -848,6 +1073,13 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		return list;
 	}
 
+	/**
+	 * Removes all the expando tables where companyId = &#63; and classNameId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C(long companyId, long classNameId)
 		throws SystemException {
 		for (ExpandoTable expandoTable : findByC_C(companyId, classNameId)) {
@@ -855,6 +1087,14 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		}
 	}
 
+	/**
+	 * Removes the expando table where companyId = &#63; and classNameId = &#63; and name = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param name the name to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C_N(long companyId, long classNameId, String name)
 		throws NoSuchTableException, SystemException {
 		ExpandoTable expandoTable = findByC_C_N(companyId, classNameId, name);
@@ -862,12 +1102,25 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		remove(expandoTable);
 	}
 
+	/**
+	 * Removes all the expando tables from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (ExpandoTable expandoTable : findAll()) {
 			remove(expandoTable);
 		}
 	}
 
+	/**
+	 * Counts all the expando tables where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the number of matching expando tables
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C(long companyId, long classNameId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, classNameId };
@@ -919,6 +1172,15 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the expando tables where companyId = &#63; and classNameId = &#63; and name = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param name the name to search with
+	 * @return the number of matching expando tables
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C_N(long companyId, long classNameId, String name)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, classNameId, name };
@@ -986,6 +1248,12 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the expando tables.
+	 *
+	 * @return the number of expando tables
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -1020,6 +1288,9 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the expando table persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

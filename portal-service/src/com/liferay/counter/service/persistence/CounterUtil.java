@@ -25,9 +25,15 @@ import com.liferay.portal.service.ServiceContext;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       CounterPersistence
- * @see       CounterPersistenceImpl
+ * The persistence utility for the counter service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see CounterPersistence
+ * @see CounterPersistenceImpl
  * @generated
  */
 public class CounterUtil {
@@ -104,20 +110,44 @@ public class CounterUtil {
 		return getPersistence().update(counter, merge, serviceContext);
 	}
 
+	/**
+	* Caches the counter in the entity cache if it is enabled.
+	*
+	* @param counter the counter to cache
+	*/
 	public static void cacheResult(com.liferay.counter.model.Counter counter) {
 		getPersistence().cacheResult(counter);
 	}
 
+	/**
+	* Caches the counters in the entity cache if it is enabled.
+	*
+	* @param counters the counters to cache
+	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.counter.model.Counter> counters) {
 		getPersistence().cacheResult(counters);
 	}
 
+	/**
+	* Creates a new counter with the primary key.
+	*
+	* @param name the primary key for the new counter
+	* @return the new counter
+	*/
 	public static com.liferay.counter.model.Counter create(
 		java.lang.String name) {
 		return getPersistence().create(name);
 	}
 
+	/**
+	* Removes the counter with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param name the primary key of the counter to remove
+	* @return the counter that was removed
+	* @throws com.liferay.counter.NoSuchCounterException if a counter with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.counter.model.Counter remove(
 		java.lang.String name)
 		throws com.liferay.counter.NoSuchCounterException,
@@ -131,6 +161,14 @@ public class CounterUtil {
 		return getPersistence().updateImpl(counter, merge);
 	}
 
+	/**
+	* Finds the counter with the primary key or throws a {@link com.liferay.counter.NoSuchCounterException} if it could not be found.
+	*
+	* @param name the primary key of the counter to find
+	* @return the counter
+	* @throws com.liferay.counter.NoSuchCounterException if a counter with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.counter.model.Counter findByPrimaryKey(
 		java.lang.String name)
 		throws com.liferay.counter.NoSuchCounterException,
@@ -138,23 +176,61 @@ public class CounterUtil {
 		return getPersistence().findByPrimaryKey(name);
 	}
 
+	/**
+	* Finds the counter with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param name the primary key of the counter to find
+	* @return the counter, or <code>null</code> if a counter with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.counter.model.Counter fetchByPrimaryKey(
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(name);
 	}
 
+	/**
+	* Finds all the counters.
+	*
+	* @return the counters
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.counter.model.Counter> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
+	/**
+	* Finds a range of all the counters.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of counters to return
+	* @param end the upper bound of the range of counters to return (not inclusive)
+	* @return the range of counters
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.counter.model.Counter> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the counters.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of counters to return
+	* @param end the upper bound of the range of counters to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of counters
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.counter.model.Counter> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -162,11 +238,22 @@ public class CounterUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
+	/**
+	* Removes all the counters from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
+	/**
+	* Counts all the counters.
+	*
+	* @return the number of counters
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();

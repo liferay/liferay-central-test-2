@@ -19,20 +19,50 @@ import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portlet.tasks.model.TasksProposal;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       TasksProposalPersistenceImpl
- * @see       TasksProposalUtil
+ * The persistence interface for the tasks proposal service.
+ *
+ * <p>
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see TasksProposalPersistenceImpl
+ * @see TasksProposalUtil
  * @generated
  */
 public interface TasksProposalPersistence extends BasePersistence<TasksProposal> {
+	/**
+	* Caches the tasks proposal in the entity cache if it is enabled.
+	*
+	* @param tasksProposal the tasks proposal to cache
+	*/
 	public void cacheResult(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal);
 
+	/**
+	* Caches the tasks proposals in the entity cache if it is enabled.
+	*
+	* @param tasksProposals the tasks proposals to cache
+	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.tasks.model.TasksProposal> tasksProposals);
 
+	/**
+	* Creates a new tasks proposal with the primary key.
+	*
+	* @param proposalId the primary key for the new tasks proposal
+	* @return the new tasks proposal
+	*/
 	public com.liferay.portlet.tasks.model.TasksProposal create(long proposalId);
 
+	/**
+	* Removes the tasks proposal with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param proposalId the primary key of the tasks proposal to remove
+	* @return the tasks proposal that was removed
+	* @throws com.liferay.portlet.tasks.NoSuchProposalException if a tasks proposal with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.tasks.model.TasksProposal remove(long proposalId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
@@ -42,156 +72,521 @@ public interface TasksProposalPersistence extends BasePersistence<TasksProposal>
 		boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the tasks proposal with the primary key or throws a {@link com.liferay.portlet.tasks.NoSuchProposalException} if it could not be found.
+	*
+	* @param proposalId the primary key of the tasks proposal to find
+	* @return the tasks proposal
+	* @throws com.liferay.portlet.tasks.NoSuchProposalException if a tasks proposal with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.tasks.model.TasksProposal findByPrimaryKey(
 		long proposalId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
+	/**
+	* Finds the tasks proposal with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param proposalId the primary key of the tasks proposal to find
+	* @return the tasks proposal, or <code>null</code> if a tasks proposal with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.tasks.model.TasksProposal fetchByPrimaryKey(
 		long proposalId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds all the tasks proposals where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the matching tasks proposals
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByGroupId(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the tasks proposals where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of tasks proposals to return
+	* @param end the upper bound of the range of tasks proposals to return (not inclusive)
+	* @return the range of matching tasks proposals
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the tasks proposals where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of tasks proposals to return
+	* @param end the upper bound of the range of tasks proposals to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching tasks proposals
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first tasks proposal in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching tasks proposal
+	* @throws com.liferay.portlet.tasks.NoSuchProposalException if a matching tasks proposal could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.tasks.model.TasksProposal findByGroupId_First(
 		long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
+	/**
+	* Finds the last tasks proposal in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching tasks proposal
+	* @throws com.liferay.portlet.tasks.NoSuchProposalException if a matching tasks proposal could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.tasks.model.TasksProposal findByGroupId_Last(
 		long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
+	/**
+	* Finds the tasks proposals before and after the current tasks proposal in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param proposalId the primary key of the current tasks proposal
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next tasks proposal
+	* @throws com.liferay.portlet.tasks.NoSuchProposalException if a tasks proposal with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.tasks.model.TasksProposal[] findByGroupId_PrevAndNext(
 		long proposalId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
+	/**
+	* Filters by the user's permissions and finds all the tasks proposals where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the matching tasks proposals that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> filterFindByGroupId(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and finds a range of all the tasks proposals where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of tasks proposals to return
+	* @param end the upper bound of the range of tasks proposals to return (not inclusive)
+	* @return the range of matching tasks proposals that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> filterFindByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the tasks proposals where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of tasks proposals to return
+	* @param end the upper bound of the range of tasks proposals to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching tasks proposals that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> filterFindByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds all the tasks proposals where groupId = &#63; and userId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @return the matching tasks proposals
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByG_U(
 		long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the tasks proposals where groupId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @param start the lower bound of the range of tasks proposals to return
+	* @param end the upper bound of the range of tasks proposals to return (not inclusive)
+	* @return the range of matching tasks proposals
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByG_U(
 		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the tasks proposals where groupId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @param start the lower bound of the range of tasks proposals to return
+	* @param end the upper bound of the range of tasks proposals to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching tasks proposals
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByG_U(
 		long groupId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first tasks proposal in the ordered set where groupId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching tasks proposal
+	* @throws com.liferay.portlet.tasks.NoSuchProposalException if a matching tasks proposal could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.tasks.model.TasksProposal findByG_U_First(
 		long groupId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
+	/**
+	* Finds the last tasks proposal in the ordered set where groupId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching tasks proposal
+	* @throws com.liferay.portlet.tasks.NoSuchProposalException if a matching tasks proposal could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.tasks.model.TasksProposal findByG_U_Last(
 		long groupId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
+	/**
+	* Finds the tasks proposals before and after the current tasks proposal in the ordered set where groupId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param proposalId the primary key of the current tasks proposal
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next tasks proposal
+	* @throws com.liferay.portlet.tasks.NoSuchProposalException if a tasks proposal with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.tasks.model.TasksProposal[] findByG_U_PrevAndNext(
 		long proposalId, long groupId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
+	/**
+	* Filters by the user's permissions and finds all the tasks proposals where groupId = &#63; and userId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @return the matching tasks proposals that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> filterFindByG_U(
 		long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and finds a range of all the tasks proposals where groupId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @param start the lower bound of the range of tasks proposals to return
+	* @param end the upper bound of the range of tasks proposals to return (not inclusive)
+	* @return the range of matching tasks proposals that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> filterFindByG_U(
 		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the tasks proposals where groupId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @param start the lower bound of the range of tasks proposals to return
+	* @param end the upper bound of the range of tasks proposals to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching tasks proposals that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> filterFindByG_U(
 		long groupId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the tasks proposal where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.tasks.NoSuchProposalException} if it could not be found.
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @return the matching tasks proposal
+	* @throws com.liferay.portlet.tasks.NoSuchProposalException if a matching tasks proposal could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.tasks.model.TasksProposal findByC_C(
 		long classNameId, java.lang.String classPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
+	/**
+	* Finds the tasks proposal where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @return the matching tasks proposal, or <code>null</code> if a matching tasks proposal could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.tasks.model.TasksProposal fetchByC_C(
 		long classNameId, java.lang.String classPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the tasks proposal where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @return the matching tasks proposal, or <code>null</code> if a matching tasks proposal could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.tasks.model.TasksProposal fetchByC_C(
 		long classNameId, java.lang.String classPK, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds all the tasks proposals.
+	*
+	* @return the tasks proposals
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the tasks proposals.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of tasks proposals to return
+	* @param end the upper bound of the range of tasks proposals to return (not inclusive)
+	* @return the range of tasks proposals
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the tasks proposals.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of tasks proposals to return
+	* @param end the upper bound of the range of tasks proposals to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of tasks proposals
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the tasks proposals where groupId = &#63; from the database.
+	*
+	* @param groupId the group id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the tasks proposals where groupId = &#63; and userId = &#63; from the database.
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByG_U(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the tasks proposal where classNameId = &#63; and classPK = &#63; from the database.
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByC_C(long classNameId, java.lang.String classPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
+	/**
+	* Removes all the tasks proposals from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the tasks proposals where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the number of matching tasks proposals
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and counts all the tasks proposals where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the number of matching tasks proposals that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the tasks proposals where groupId = &#63; and userId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @return the number of matching tasks proposals
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and counts all the tasks proposals where groupId = &#63; and userId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @return the number of matching tasks proposals that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public int filterCountByG_U(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the tasks proposals where classNameId = &#63; and classPK = &#63;.
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @return the number of matching tasks proposals
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByC_C(long classNameId, java.lang.String classPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the tasks proposals.
+	*
+	* @return the number of tasks proposals
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

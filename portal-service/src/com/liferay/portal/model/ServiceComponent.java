@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the ServiceComponent table in the
- * database.
- * </p>
+ * The model interface for the ServiceComponent service. Represents a row in the &quot;ServiceComponent&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.ServiceComponentImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.ServiceComponentImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       ServiceComponentModel
- * @see       com.liferay.portal.model.impl.ServiceComponentImpl
- * @see       com.liferay.portal.model.impl.ServiceComponentModelImpl
+ * @author Brian Wing Shun Chan
+ * @see ServiceComponentModel
+ * @see com.liferay.portal.model.impl.ServiceComponentImpl
+ * @see com.liferay.portal.model.impl.ServiceComponentModelImpl
  * @generated
  */
 public interface ServiceComponent extends ServiceComponentModel {

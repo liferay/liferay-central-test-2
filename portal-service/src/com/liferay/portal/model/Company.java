@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the Company table in the
- * database.
- * </p>
+ * The model interface for the Company service. Represents a row in the &quot;Company&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.CompanyImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.CompanyImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       CompanyModel
- * @see       com.liferay.portal.model.impl.CompanyImpl
- * @see       com.liferay.portal.model.impl.CompanyModelImpl
+ * @author Brian Wing Shun Chan
+ * @see CompanyModel
+ * @see com.liferay.portal.model.impl.CompanyImpl
+ * @see com.liferay.portal.model.impl.CompanyModelImpl
  * @generated
  */
 public interface Company extends CompanyModel {

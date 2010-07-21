@@ -47,9 +47,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       OrgLaborPersistence
- * @see       OrgLaborUtil
+ * The persistence for the org labor service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see OrgLaborPersistence
+ * @see OrgLaborUtil
  * @generated
  */
 public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
@@ -76,11 +86,21 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 			OrgLaborModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the org labor in the entity cache if it is enabled.
+	 *
+	 * @param orgLabor the org labor to cache
+	 */
 	public void cacheResult(OrgLabor orgLabor) {
 		EntityCacheUtil.putResult(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
 			OrgLaborImpl.class, orgLabor.getPrimaryKey(), orgLabor);
 	}
 
+	/**
+	 * Caches the org labors in the entity cache if it is enabled.
+	 *
+	 * @param orgLabors the org labors to cache
+	 */
 	public void cacheResult(List<OrgLabor> orgLabors) {
 		for (OrgLabor orgLabor : orgLabors) {
 			if (EntityCacheUtil.getResult(
@@ -91,6 +111,13 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		}
 	}
 
+	/**
+	 * Clears the cache for all org labors.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(OrgLaborImpl.class.getName());
 		EntityCacheUtil.clearCache(OrgLaborImpl.class.getName());
@@ -98,11 +125,24 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the org labor.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(OrgLabor orgLabor) {
 		EntityCacheUtil.removeResult(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
 			OrgLaborImpl.class, orgLabor.getPrimaryKey());
 	}
 
+	/**
+	 * Creates a new org labor with the primary key.
+	 *
+	 * @param orgLaborId the primary key for the new org labor
+	 * @return the new org labor
+	 */
 	public OrgLabor create(long orgLaborId) {
 		OrgLabor orgLabor = new OrgLaborImpl();
 
@@ -112,11 +152,27 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		return orgLabor;
 	}
 
+	/**
+	 * Removes the org labor with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the org labor to remove
+	 * @return the org labor that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a org labor with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public OrgLabor remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the org labor with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param orgLaborId the primary key of the org labor to remove
+	 * @return the org labor that was removed
+	 * @throws com.liferay.portal.NoSuchOrgLaborException if a org labor with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public OrgLabor remove(long orgLaborId)
 		throws NoSuchOrgLaborException, SystemException {
 		Session session = null;
@@ -244,11 +300,27 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		return orgLaborImpl;
 	}
 
+	/**
+	 * Finds the org labor with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the org labor to find
+	 * @return the org labor
+	 * @throws com.liferay.portal.NoSuchModelException if a org labor with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public OrgLabor findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the org labor with the primary key or throws a {@link com.liferay.portal.NoSuchOrgLaborException} if it could not be found.
+	 *
+	 * @param orgLaborId the primary key of the org labor to find
+	 * @return the org labor
+	 * @throws com.liferay.portal.NoSuchOrgLaborException if a org labor with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public OrgLabor findByPrimaryKey(long orgLaborId)
 		throws NoSuchOrgLaborException, SystemException {
 		OrgLabor orgLabor = fetchByPrimaryKey(orgLaborId);
@@ -265,11 +337,25 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		return orgLabor;
 	}
 
+	/**
+	 * Finds the org labor with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the org labor to find
+	 * @return the org labor, or <code>null</code> if a org labor with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public OrgLabor fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the org labor with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param orgLaborId the primary key of the org labor to find
+	 * @return the org labor, or <code>null</code> if a org labor with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public OrgLabor fetchByPrimaryKey(long orgLaborId)
 		throws SystemException {
 		OrgLabor orgLabor = (OrgLabor)EntityCacheUtil.getResult(OrgLaborModelImpl.ENTITY_CACHE_ENABLED,
@@ -299,17 +385,51 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		return orgLabor;
 	}
 
+	/**
+	 * Finds all the org labors where organizationId = &#63;.
+	 *
+	 * @param organizationId the organization id to search with
+	 * @return the matching org labors
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<OrgLabor> findByOrganizationId(long organizationId)
 		throws SystemException {
 		return findByOrganizationId(organizationId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the org labors where organizationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param organizationId the organization id to search with
+	 * @param start the lower bound of the range of org labors to return
+	 * @param end the upper bound of the range of org labors to return (not inclusive)
+	 * @return the range of matching org labors
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<OrgLabor> findByOrganizationId(long organizationId, int start,
 		int end) throws SystemException {
 		return findByOrganizationId(organizationId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the org labors where organizationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param organizationId the organization id to search with
+	 * @param start the lower bound of the range of org labors to return
+	 * @param end the upper bound of the range of org labors to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching org labors
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<OrgLabor> findByOrganizationId(long organizationId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -382,6 +502,19 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		return list;
 	}
 
+	/**
+	 * Finds the first org labor in the ordered set where organizationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param organizationId the organization id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching org labor
+	 * @throws com.liferay.portal.NoSuchOrgLaborException if a matching org labor could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public OrgLabor findByOrganizationId_First(long organizationId,
 		OrderByComparator orderByComparator)
 		throws NoSuchOrgLaborException, SystemException {
@@ -405,6 +538,19 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		}
 	}
 
+	/**
+	 * Finds the last org labor in the ordered set where organizationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param organizationId the organization id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching org labor
+	 * @throws com.liferay.portal.NoSuchOrgLaborException if a matching org labor could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public OrgLabor findByOrganizationId_Last(long organizationId,
 		OrderByComparator orderByComparator)
 		throws NoSuchOrgLaborException, SystemException {
@@ -430,6 +576,20 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		}
 	}
 
+	/**
+	 * Finds the org labors before and after the current org labor in the ordered set where organizationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param orgLaborId the primary key of the current org labor
+	 * @param organizationId the organization id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next org labor
+	 * @throws com.liferay.portal.NoSuchOrgLaborException if a org labor with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public OrgLabor[] findByOrganizationId_PrevAndNext(long orgLaborId,
 		long organizationId, OrderByComparator orderByComparator)
 		throws NoSuchOrgLaborException, SystemException {
@@ -564,14 +724,45 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		}
 	}
 
+	/**
+	 * Finds all the org labors.
+	 *
+	 * @return the org labors
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<OrgLabor> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the org labors.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of org labors to return
+	 * @param end the upper bound of the range of org labors to return (not inclusive)
+	 * @return the range of org labors
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<OrgLabor> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the org labors.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of org labors to return
+	 * @param end the upper bound of the range of org labors to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of org labors
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<OrgLabor> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -638,6 +829,12 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		return list;
 	}
 
+	/**
+	 * Removes all the org labors where organizationId = &#63; from the database.
+	 *
+	 * @param organizationId the organization id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByOrganizationId(long organizationId)
 		throws SystemException {
 		for (OrgLabor orgLabor : findByOrganizationId(organizationId)) {
@@ -645,12 +842,24 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		}
 	}
 
+	/**
+	 * Removes all the org labors from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (OrgLabor orgLabor : findAll()) {
 			remove(orgLabor);
 		}
 	}
 
+	/**
+	 * Counts all the org labors where organizationId = &#63;.
+	 *
+	 * @param organizationId the organization id to search with
+	 * @return the number of matching org labors
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByOrganizationId(long organizationId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { organizationId };
@@ -698,6 +907,12 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the org labors.
+	 *
+	 * @return the number of org labors
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -732,6 +947,9 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the org labor persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the PasswordPolicy table in the
- * database.
- * </p>
+ * The model interface for the PasswordPolicy service. Represents a row in the &quot;PasswordPolicy&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.PasswordPolicyImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.PasswordPolicyImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       PasswordPolicyModel
- * @see       com.liferay.portal.model.impl.PasswordPolicyImpl
- * @see       com.liferay.portal.model.impl.PasswordPolicyModelImpl
+ * @author Brian Wing Shun Chan
+ * @see PasswordPolicyModel
+ * @see com.liferay.portal.model.impl.PasswordPolicyImpl
+ * @see com.liferay.portal.model.impl.PasswordPolicyModelImpl
  * @generated
  */
 public interface PasswordPolicy extends PasswordPolicyModel {

@@ -15,20 +15,16 @@
 package com.liferay.portlet.journal.model;
 
 /**
- * <p>
- * This interface is a model that represents the JournalArticle table in the
- * database.
- * </p>
+ * The model interface for the JournalArticle service. Represents a row in the &quot;JournalArticle&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.journal.model.impl.JournalArticleImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.journal.model.impl.JournalArticleImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       JournalArticleModel
- * @see       com.liferay.portlet.journal.model.impl.JournalArticleImpl
- * @see       com.liferay.portlet.journal.model.impl.JournalArticleModelImpl
+ * @author Brian Wing Shun Chan
+ * @see JournalArticleModel
+ * @see com.liferay.portlet.journal.model.impl.JournalArticleImpl
+ * @see com.liferay.portlet.journal.model.impl.JournalArticleModelImpl
  * @generated
  */
 public interface JournalArticle extends JournalArticleModel {

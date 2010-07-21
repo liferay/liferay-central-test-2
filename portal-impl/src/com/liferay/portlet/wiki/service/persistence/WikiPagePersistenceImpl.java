@@ -65,9 +65,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       WikiPagePersistence
- * @see       WikiPageUtil
+ * The persistence for the wiki page service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see WikiPagePersistence
+ * @see WikiPageUtil
  * @generated
  */
 public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
@@ -351,6 +361,11 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			WikiPageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the wiki page in the entity cache if it is enabled.
+	 *
+	 * @param wikiPage the wiki page to cache
+	 */
 	public void cacheResult(WikiPage wikiPage) {
 		EntityCacheUtil.putResult(WikiPageModelImpl.ENTITY_CACHE_ENABLED,
 			WikiPageImpl.class, wikiPage.getPrimaryKey(), wikiPage);
@@ -374,6 +389,11 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			}, wikiPage);
 	}
 
+	/**
+	 * Caches the wiki pages in the entity cache if it is enabled.
+	 *
+	 * @param wikiPages the wiki pages to cache
+	 */
 	public void cacheResult(List<WikiPage> wikiPages) {
 		for (WikiPage wikiPage : wikiPages) {
 			if (EntityCacheUtil.getResult(
@@ -384,6 +404,13 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Clears the cache for all wiki pages.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(WikiPageImpl.class.getName());
 		EntityCacheUtil.clearCache(WikiPageImpl.class.getName());
@@ -391,6 +418,13 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the wiki page.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(WikiPage wikiPage) {
 		EntityCacheUtil.removeResult(WikiPageModelImpl.ENTITY_CACHE_ENABLED,
 			WikiPageImpl.class, wikiPage.getPrimaryKey());
@@ -413,6 +447,12 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			});
 	}
 
+	/**
+	 * Creates a new wiki page with the primary key.
+	 *
+	 * @param pageId the primary key for the new wiki page
+	 * @return the new wiki page
+	 */
 	public WikiPage create(long pageId) {
 		WikiPage wikiPage = new WikiPageImpl();
 
@@ -426,11 +466,27 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return wikiPage;
 	}
 
+	/**
+	 * Removes the wiki page with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the wiki page to remove
+	 * @return the wiki page that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the wiki page with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param pageId the primary key of the wiki page to remove
+	 * @return the wiki page that was removed
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage remove(long pageId)
 		throws NoSuchPageException, SystemException {
 		Session session = null;
@@ -669,11 +725,27 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return wikiPageImpl;
 	}
 
+	/**
+	 * Finds the wiki page with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the wiki page to find
+	 * @return the wiki page
+	 * @throws com.liferay.portal.NoSuchModelException if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the wiki page with the primary key or throws a {@link com.liferay.portlet.wiki.NoSuchPageException} if it could not be found.
+	 *
+	 * @param pageId the primary key of the wiki page to find
+	 * @return the wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByPrimaryKey(long pageId)
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = fetchByPrimaryKey(pageId);
@@ -690,11 +762,25 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return wikiPage;
 	}
 
+	/**
+	 * Finds the wiki page with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the wiki page to find
+	 * @return the wiki page, or <code>null</code> if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the wiki page with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param pageId the primary key of the wiki page to find
+	 * @return the wiki page, or <code>null</code> if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage fetchByPrimaryKey(long pageId) throws SystemException {
 		WikiPage wikiPage = (WikiPage)EntityCacheUtil.getResult(WikiPageModelImpl.ENTITY_CACHE_ENABLED,
 				WikiPageImpl.class, pageId, this);
@@ -723,15 +809,49 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return wikiPage;
 	}
 
+	/**
+	 * Finds all the wiki pages where uuid = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @return the matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByUuid(String uuid) throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the wiki pages where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @return the range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the wiki pages where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -816,6 +936,19 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return list;
 	}
 
+	/**
+	 * Finds the first wiki page in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -838,6 +971,19 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the last wiki page in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -863,6 +1009,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the wiki pages before and after the current wiki page in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pageId the primary key of the current wiki page
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage[] findByUuid_PrevAndNext(long pageId, String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -1009,6 +1169,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the wiki page where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.wiki.NoSuchPageException} if it could not be found.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByUUID_G(String uuid, long groupId)
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = fetchByUUID_G(uuid, groupId);
@@ -1036,11 +1205,27 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return wikiPage;
 	}
 
+	/**
+	 * Finds the wiki page where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
 	}
 
+	/**
+	 * Finds the wiki page where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -1137,15 +1322,49 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds all the wiki pages where nodeId = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @return the matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByNodeId(long nodeId) throws SystemException {
 		return findByNodeId(nodeId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the wiki pages where nodeId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @return the range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByNodeId(long nodeId, int start, int end)
 		throws SystemException {
 		return findByNodeId(nodeId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the wiki pages where nodeId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByNodeId(long nodeId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1218,6 +1437,19 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return list;
 	}
 
+	/**
+	 * Finds the first wiki page in the ordered set where nodeId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByNodeId_First(long nodeId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -1240,6 +1472,19 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the last wiki page in the ordered set where nodeId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByNodeId_Last(long nodeId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -1265,6 +1510,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the wiki pages before and after the current wiki page in the ordered set where nodeId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pageId the primary key of the current wiki page
+	 * @param nodeId the node id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage[] findByNodeId_PrevAndNext(long pageId, long nodeId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -1399,15 +1658,49 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds all the wiki pages where format = &#63;.
+	 *
+	 * @param format the format to search with
+	 * @return the matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByFormat(String format) throws SystemException {
 		return findByFormat(format, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the wiki pages where format = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param format the format to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @return the range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByFormat(String format, int start, int end)
 		throws SystemException {
 		return findByFormat(format, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the wiki pages where format = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param format the format to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByFormat(String format, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1492,6 +1785,19 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return list;
 	}
 
+	/**
+	 * Finds the first wiki page in the ordered set where format = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param format the format to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByFormat_First(String format,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -1514,6 +1820,19 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the last wiki page in the ordered set where format = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param format the format to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByFormat_Last(String format,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -1539,6 +1858,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the wiki pages before and after the current wiki page in the ordered set where format = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pageId the primary key of the current wiki page
+	 * @param format the format to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage[] findByFormat_PrevAndNext(long pageId, String format,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -1685,17 +2018,54 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds all the wiki pages where resourcePrimKey = &#63; and nodeId = &#63;.
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @return the matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByR_N(long resourcePrimKey, long nodeId)
 		throws SystemException {
 		return findByR_N(resourcePrimKey, nodeId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the wiki pages where resourcePrimKey = &#63; and nodeId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @return the range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByR_N(long resourcePrimKey, long nodeId,
 		int start, int end) throws SystemException {
 		return findByR_N(resourcePrimKey, nodeId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the wiki pages where resourcePrimKey = &#63; and nodeId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByR_N(long resourcePrimKey, long nodeId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1773,6 +2143,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return list;
 	}
 
+	/**
+	 * Finds the first wiki page in the ordered set where resourcePrimKey = &#63; and nodeId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByR_N_First(long resourcePrimKey, long nodeId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -1799,6 +2183,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the last wiki page in the ordered set where resourcePrimKey = &#63; and nodeId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByR_N_Last(long resourcePrimKey, long nodeId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -1827,6 +2225,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the wiki pages before and after the current wiki page in the ordered set where resourcePrimKey = &#63; and nodeId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pageId the primary key of the current wiki page
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage[] findByR_N_PrevAndNext(long pageId, long resourcePrimKey,
 		long nodeId, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -1965,17 +2378,54 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds all the wiki pages where nodeId = &#63; and title = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @return the matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_T(long nodeId, String title)
 		throws SystemException {
 		return findByN_T(nodeId, title, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the wiki pages where nodeId = &#63; and title = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @return the range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_T(long nodeId, String title, int start,
 		int end) throws SystemException {
 		return findByN_T(nodeId, title, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the wiki pages where nodeId = &#63; and title = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_T(long nodeId, String title, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2064,6 +2514,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return list;
 	}
 
+	/**
+	 * Finds the first wiki page in the ordered set where nodeId = &#63; and title = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_T_First(long nodeId, String title,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -2089,6 +2553,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the last wiki page in the ordered set where nodeId = &#63; and title = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_T_Last(long nodeId, String title,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -2117,6 +2595,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the wiki pages before and after the current wiki page in the ordered set where nodeId = &#63; and title = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pageId the primary key of the current wiki page
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage[] findByN_T_PrevAndNext(long pageId, long nodeId,
 		String title, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -2267,17 +2760,54 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds all the wiki pages where nodeId = &#63; and head = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @return the matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_H(long nodeId, boolean head)
 		throws SystemException {
 		return findByN_H(nodeId, head, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the wiki pages where nodeId = &#63; and head = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @return the range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_H(long nodeId, boolean head, int start,
 		int end) throws SystemException {
 		return findByN_H(nodeId, head, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the wiki pages where nodeId = &#63; and head = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_H(long nodeId, boolean head, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2354,6 +2884,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return list;
 	}
 
+	/**
+	 * Finds the first wiki page in the ordered set where nodeId = &#63; and head = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_H_First(long nodeId, boolean head,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -2379,6 +2923,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the last wiki page in the ordered set where nodeId = &#63; and head = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_H_Last(long nodeId, boolean head,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -2407,6 +2965,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the wiki pages before and after the current wiki page in the ordered set where nodeId = &#63; and head = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pageId the primary key of the current wiki page
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage[] findByN_H_PrevAndNext(long pageId, long nodeId,
 		boolean head, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -2545,17 +3118,54 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds all the wiki pages where nodeId = &#63; and parentTitle = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param parentTitle the parent title to search with
+	 * @return the matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_P(long nodeId, String parentTitle)
 		throws SystemException {
 		return findByN_P(nodeId, parentTitle, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the wiki pages where nodeId = &#63; and parentTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param parentTitle the parent title to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @return the range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_P(long nodeId, String parentTitle, int start,
 		int end) throws SystemException {
 		return findByN_P(nodeId, parentTitle, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the wiki pages where nodeId = &#63; and parentTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param parentTitle the parent title to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_P(long nodeId, String parentTitle, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2644,6 +3254,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return list;
 	}
 
+	/**
+	 * Finds the first wiki page in the ordered set where nodeId = &#63; and parentTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param parentTitle the parent title to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_P_First(long nodeId, String parentTitle,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -2670,6 +3294,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the last wiki page in the ordered set where nodeId = &#63; and parentTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param parentTitle the parent title to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_P_Last(long nodeId, String parentTitle,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -2698,6 +3336,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the wiki pages before and after the current wiki page in the ordered set where nodeId = &#63; and parentTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pageId the primary key of the current wiki page
+	 * @param nodeId the node id to search with
+	 * @param parentTitle the parent title to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage[] findByN_P_PrevAndNext(long pageId, long nodeId,
 		String parentTitle, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -2848,17 +3501,54 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds all the wiki pages where nodeId = &#63; and redirectTitle = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param redirectTitle the redirect title to search with
+	 * @return the matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_R(long nodeId, String redirectTitle)
 		throws SystemException {
 		return findByN_R(nodeId, redirectTitle, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the wiki pages where nodeId = &#63; and redirectTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param redirectTitle the redirect title to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @return the range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_R(long nodeId, String redirectTitle,
 		int start, int end) throws SystemException {
 		return findByN_R(nodeId, redirectTitle, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the wiki pages where nodeId = &#63; and redirectTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param redirectTitle the redirect title to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_R(long nodeId, String redirectTitle,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2948,6 +3638,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return list;
 	}
 
+	/**
+	 * Finds the first wiki page in the ordered set where nodeId = &#63; and redirectTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param redirectTitle the redirect title to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_R_First(long nodeId, String redirectTitle,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -2974,6 +3678,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the last wiki page in the ordered set where nodeId = &#63; and redirectTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param redirectTitle the redirect title to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_R_Last(long nodeId, String redirectTitle,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -3002,6 +3720,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the wiki pages before and after the current wiki page in the ordered set where nodeId = &#63; and redirectTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pageId the primary key of the current wiki page
+	 * @param nodeId the node id to search with
+	 * @param redirectTitle the redirect title to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage[] findByN_R_PrevAndNext(long pageId, long nodeId,
 		String redirectTitle, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -3152,17 +3885,54 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds all the wiki pages where nodeId = &#63; and status = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @return the matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_S(long nodeId, int status)
 		throws SystemException {
 		return findByN_S(nodeId, status, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the wiki pages where nodeId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @return the range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_S(long nodeId, int status, int start, int end)
 		throws SystemException {
 		return findByN_S(nodeId, status, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the wiki pages where nodeId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_S(long nodeId, int status, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -3239,6 +4009,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return list;
 	}
 
+	/**
+	 * Finds the first wiki page in the ordered set where nodeId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_S_First(long nodeId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -3264,6 +4048,20 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the last wiki page in the ordered set where nodeId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_S_Last(long nodeId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -3292,6 +4090,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the wiki pages before and after the current wiki page in the ordered set where nodeId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pageId the primary key of the current wiki page
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage[] findByN_S_PrevAndNext(long pageId, long nodeId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -3430,6 +4243,16 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the wiki page where resourcePrimKey = &#63; and nodeId = &#63; and version = &#63; or throws a {@link com.liferay.portlet.wiki.NoSuchPageException} if it could not be found.
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @param version the version to search with
+	 * @return the matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByR_N_V(long resourcePrimKey, long nodeId,
 		double version) throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = fetchByR_N_V(resourcePrimKey, nodeId, version);
@@ -3460,11 +4283,29 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return wikiPage;
 	}
 
+	/**
+	 * Finds the wiki page where resourcePrimKey = &#63; and nodeId = &#63; and version = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @param version the version to search with
+	 * @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage fetchByR_N_V(long resourcePrimKey, long nodeId,
 		double version) throws SystemException {
 		return fetchByR_N_V(resourcePrimKey, nodeId, version, true);
 	}
 
+	/**
+	 * Finds the wiki page where resourcePrimKey = &#63; and nodeId = &#63; and version = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @param version the version to search with
+	 * @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage fetchByR_N_V(long resourcePrimKey, long nodeId,
 		double version, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { resourcePrimKey, nodeId, version };
@@ -3553,17 +4394,57 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds all the wiki pages where resourcePrimKey = &#63; and nodeId = &#63; and status = &#63;.
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @return the matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByR_N_S(long resourcePrimKey, long nodeId,
 		int status) throws SystemException {
 		return findByR_N_S(resourcePrimKey, nodeId, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the wiki pages where resourcePrimKey = &#63; and nodeId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @return the range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByR_N_S(long resourcePrimKey, long nodeId,
 		int status, int start, int end) throws SystemException {
 		return findByR_N_S(resourcePrimKey, nodeId, status, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the wiki pages where resourcePrimKey = &#63; and nodeId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByR_N_S(long resourcePrimKey, long nodeId,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -3645,6 +4526,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return list;
 	}
 
+	/**
+	 * Finds the first wiki page in the ordered set where resourcePrimKey = &#63; and nodeId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByR_N_S_First(long resourcePrimKey, long nodeId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -3674,6 +4570,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the last wiki page in the ordered set where resourcePrimKey = &#63; and nodeId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByR_N_S_Last(long resourcePrimKey, long nodeId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -3705,6 +4616,22 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the wiki pages before and after the current wiki page in the ordered set where resourcePrimKey = &#63; and nodeId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pageId the primary key of the current wiki page
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage[] findByR_N_S_PrevAndNext(long pageId,
 		long resourcePrimKey, long nodeId, int status,
 		OrderByComparator orderByComparator)
@@ -3848,17 +4775,57 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds all the wiki pages where userId = &#63; and nodeId = &#63; and status = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @return the matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByU_N_S(long userId, long nodeId, int status)
 		throws SystemException {
 		return findByU_N_S(userId, nodeId, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the wiki pages where userId = &#63; and nodeId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @return the range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByU_N_S(long userId, long nodeId, int status,
 		int start, int end) throws SystemException {
 		return findByU_N_S(userId, nodeId, status, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the wiki pages where userId = &#63; and nodeId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByU_N_S(long userId, long nodeId, int status,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -3940,6 +4907,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return list;
 	}
 
+	/**
+	 * Finds the first wiki page in the ordered set where userId = &#63; and nodeId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByU_N_S_First(long userId, long nodeId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -3969,6 +4951,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the last wiki page in the ordered set where userId = &#63; and nodeId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByU_N_S_Last(long userId, long nodeId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -4000,6 +4997,22 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the wiki pages before and after the current wiki page in the ordered set where userId = &#63; and nodeId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pageId the primary key of the current wiki page
+	 * @param userId the user id to search with
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage[] findByU_N_S_PrevAndNext(long pageId, long userId,
 		long nodeId, int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -4142,6 +5155,16 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the wiki page where nodeId = &#63; and title = &#63; and version = &#63; or throws a {@link com.liferay.portlet.wiki.NoSuchPageException} if it could not be found.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param version the version to search with
+	 * @return the matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_T_V(long nodeId, String title, double version)
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = fetchByN_T_V(nodeId, title, version);
@@ -4172,11 +5195,29 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return wikiPage;
 	}
 
+	/**
+	 * Finds the wiki page where nodeId = &#63; and title = &#63; and version = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param version the version to search with
+	 * @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage fetchByN_T_V(long nodeId, String title, double version)
 		throws SystemException {
 		return fetchByN_T_V(nodeId, title, version, true);
 	}
 
+	/**
+	 * Finds the wiki page where nodeId = &#63; and title = &#63; and version = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param version the version to search with
+	 * @return the matching wiki page, or <code>null</code> if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage fetchByN_T_V(long nodeId, String title, double version,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { nodeId, title, version };
@@ -4278,17 +5319,57 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds all the wiki pages where nodeId = &#63; and title = &#63; and head = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param head the head to search with
+	 * @return the matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_T_H(long nodeId, String title, boolean head)
 		throws SystemException {
 		return findByN_T_H(nodeId, title, head, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the wiki pages where nodeId = &#63; and title = &#63; and head = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param head the head to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @return the range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_T_H(long nodeId, String title, boolean head,
 		int start, int end) throws SystemException {
 		return findByN_T_H(nodeId, title, head, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the wiki pages where nodeId = &#63; and title = &#63; and head = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param head the head to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_T_H(long nodeId, String title, boolean head,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -4382,6 +5463,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return list;
 	}
 
+	/**
+	 * Finds the first wiki page in the ordered set where nodeId = &#63; and title = &#63; and head = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param head the head to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_T_H_First(long nodeId, String title, boolean head,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -4411,6 +5507,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the last wiki page in the ordered set where nodeId = &#63; and title = &#63; and head = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param head the head to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_T_H_Last(long nodeId, String title, boolean head,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -4442,6 +5553,22 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the wiki pages before and after the current wiki page in the ordered set where nodeId = &#63; and title = &#63; and head = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pageId the primary key of the current wiki page
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param head the head to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage[] findByN_T_H_PrevAndNext(long pageId, long nodeId,
 		String title, boolean head, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -4596,17 +5723,57 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds all the wiki pages where nodeId = &#63; and title = &#63; and status = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param status the status to search with
+	 * @return the matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_T_S(long nodeId, String title, int status)
 		throws SystemException {
 		return findByN_T_S(nodeId, title, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the wiki pages where nodeId = &#63; and title = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @return the range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_T_S(long nodeId, String title, int status,
 		int start, int end) throws SystemException {
 		return findByN_T_S(nodeId, title, status, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the wiki pages where nodeId = &#63; and title = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_T_S(long nodeId, String title, int status,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -4700,6 +5867,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return list;
 	}
 
+	/**
+	 * Finds the first wiki page in the ordered set where nodeId = &#63; and title = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_T_S_First(long nodeId, String title, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -4729,6 +5911,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the last wiki page in the ordered set where nodeId = &#63; and title = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_T_S_Last(long nodeId, String title, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -4760,6 +5957,22 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the wiki pages before and after the current wiki page in the ordered set where nodeId = &#63; and title = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pageId the primary key of the current wiki page
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage[] findByN_T_S_PrevAndNext(long pageId, long nodeId,
 		String title, int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -4914,17 +6127,57 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds all the wiki pages where nodeId = &#63; and head = &#63; and parentTitle = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param parentTitle the parent title to search with
+	 * @return the matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_H_P(long nodeId, boolean head,
 		String parentTitle) throws SystemException {
 		return findByN_H_P(nodeId, head, parentTitle, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the wiki pages where nodeId = &#63; and head = &#63; and parentTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param parentTitle the parent title to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @return the range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_H_P(long nodeId, boolean head,
 		String parentTitle, int start, int end) throws SystemException {
 		return findByN_H_P(nodeId, head, parentTitle, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the wiki pages where nodeId = &#63; and head = &#63; and parentTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param parentTitle the parent title to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_H_P(long nodeId, boolean head,
 		String parentTitle, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -5018,6 +6271,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return list;
 	}
 
+	/**
+	 * Finds the first wiki page in the ordered set where nodeId = &#63; and head = &#63; and parentTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param parentTitle the parent title to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_H_P_First(long nodeId, boolean head,
 		String parentTitle, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -5047,6 +6315,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the last wiki page in the ordered set where nodeId = &#63; and head = &#63; and parentTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param parentTitle the parent title to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_H_P_Last(long nodeId, boolean head,
 		String parentTitle, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -5078,6 +6361,22 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the wiki pages before and after the current wiki page in the ordered set where nodeId = &#63; and head = &#63; and parentTitle = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pageId the primary key of the current wiki page
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param parentTitle the parent title to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage[] findByN_H_P_PrevAndNext(long pageId, long nodeId,
 		boolean head, String parentTitle, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -5232,17 +6531,57 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds all the wiki pages where nodeId = &#63; and head = &#63; and status = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param status the status to search with
+	 * @return the matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_H_S(long nodeId, boolean head, int status)
 		throws SystemException {
 		return findByN_H_S(nodeId, head, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the wiki pages where nodeId = &#63; and head = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @return the range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_H_S(long nodeId, boolean head, int status,
 		int start, int end) throws SystemException {
 		return findByN_H_S(nodeId, head, status, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the wiki pages where nodeId = &#63; and head = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_H_S(long nodeId, boolean head, int status,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -5324,6 +6663,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return list;
 	}
 
+	/**
+	 * Finds the first wiki page in the ordered set where nodeId = &#63; and head = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_H_S_First(long nodeId, boolean head, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -5353,6 +6707,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the last wiki page in the ordered set where nodeId = &#63; and head = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_H_S_Last(long nodeId, boolean head, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -5384,6 +6753,22 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the wiki pages before and after the current wiki page in the ordered set where nodeId = &#63; and head = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pageId the primary key of the current wiki page
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage[] findByN_H_S_PrevAndNext(long pageId, long nodeId,
 		boolean head, int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -5526,18 +6911,61 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds all the wiki pages where nodeId = &#63; and head = &#63; and parentTitle = &#63; and status = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param parentTitle the parent title to search with
+	 * @param status the status to search with
+	 * @return the matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_H_P_S(long nodeId, boolean head,
 		String parentTitle, int status) throws SystemException {
 		return findByN_H_P_S(nodeId, head, parentTitle, status,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the wiki pages where nodeId = &#63; and head = &#63; and parentTitle = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param parentTitle the parent title to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @return the range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_H_P_S(long nodeId, boolean head,
 		String parentTitle, int status, int start, int end)
 		throws SystemException {
 		return findByN_H_P_S(nodeId, head, parentTitle, status, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the wiki pages where nodeId = &#63; and head = &#63; and parentTitle = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param parentTitle the parent title to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findByN_H_P_S(long nodeId, boolean head,
 		String parentTitle, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -5635,6 +7063,22 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return list;
 	}
 
+	/**
+	 * Finds the first wiki page in the ordered set where nodeId = &#63; and head = &#63; and parentTitle = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param parentTitle the parent title to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_H_P_S_First(long nodeId, boolean head,
 		String parentTitle, int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -5667,6 +7111,22 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the last wiki page in the ordered set where nodeId = &#63; and head = &#63; and parentTitle = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param parentTitle the parent title to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage findByN_H_P_S_Last(long nodeId, boolean head,
 		String parentTitle, int status, OrderByComparator orderByComparator)
 		throws NoSuchPageException, SystemException {
@@ -5701,6 +7161,23 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds the wiki pages before and after the current wiki page in the ordered set where nodeId = &#63; and head = &#63; and parentTitle = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pageId the primary key of the current wiki page
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param parentTitle the parent title to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next wiki page
+	 * @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WikiPage[] findByN_H_P_S_PrevAndNext(long pageId, long nodeId,
 		boolean head, String parentTitle, int status,
 		OrderByComparator orderByComparator)
@@ -5860,14 +7337,45 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Finds all the wiki pages.
+	 *
+	 * @return the wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the wiki pages.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @return the range of wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the wiki pages.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of wiki pages to return
+	 * @param end the upper bound of the range of wiki pages to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WikiPage> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -5934,12 +7442,25 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return list;
 	}
 
+	/**
+	 * Removes all the wiki pages where uuid = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (WikiPage wikiPage : findByUuid(uuid)) {
 			remove(wikiPage);
 		}
 	}
 
+	/**
+	 * Removes the wiki page where uuid = &#63; and groupId = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUUID_G(String uuid, long groupId)
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByUUID_G(uuid, groupId);
@@ -5947,18 +7468,37 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		remove(wikiPage);
 	}
 
+	/**
+	 * Removes all the wiki pages where nodeId = &#63; from the database.
+	 *
+	 * @param nodeId the node id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByNodeId(long nodeId) throws SystemException {
 		for (WikiPage wikiPage : findByNodeId(nodeId)) {
 			remove(wikiPage);
 		}
 	}
 
+	/**
+	 * Removes all the wiki pages where format = &#63; from the database.
+	 *
+	 * @param format the format to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByFormat(String format) throws SystemException {
 		for (WikiPage wikiPage : findByFormat(format)) {
 			remove(wikiPage);
 		}
 	}
 
+	/**
+	 * Removes all the wiki pages where resourcePrimKey = &#63; and nodeId = &#63; from the database.
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByR_N(long resourcePrimKey, long nodeId)
 		throws SystemException {
 		for (WikiPage wikiPage : findByR_N(resourcePrimKey, nodeId)) {
@@ -5966,6 +7506,13 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Removes all the wiki pages where nodeId = &#63; and title = &#63; from the database.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByN_T(long nodeId, String title)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_T(nodeId, title)) {
@@ -5973,6 +7520,13 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Removes all the wiki pages where nodeId = &#63; and head = &#63; from the database.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByN_H(long nodeId, boolean head)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_H(nodeId, head)) {
@@ -5980,6 +7534,13 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Removes all the wiki pages where nodeId = &#63; and parentTitle = &#63; from the database.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param parentTitle the parent title to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByN_P(long nodeId, String parentTitle)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_P(nodeId, parentTitle)) {
@@ -5987,6 +7548,13 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Removes all the wiki pages where nodeId = &#63; and redirectTitle = &#63; from the database.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param redirectTitle the redirect title to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByN_R(long nodeId, String redirectTitle)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_R(nodeId, redirectTitle)) {
@@ -5994,12 +7562,27 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Removes all the wiki pages where nodeId = &#63; and status = &#63; from the database.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByN_S(long nodeId, int status) throws SystemException {
 		for (WikiPage wikiPage : findByN_S(nodeId, status)) {
 			remove(wikiPage);
 		}
 	}
 
+	/**
+	 * Removes the wiki page where resourcePrimKey = &#63; and nodeId = &#63; and version = &#63; from the database.
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @param version the version to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByR_N_V(long resourcePrimKey, long nodeId, double version)
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByR_N_V(resourcePrimKey, nodeId, version);
@@ -6007,6 +7590,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		remove(wikiPage);
 	}
 
+	/**
+	 * Removes all the wiki pages where resourcePrimKey = &#63; and nodeId = &#63; and status = &#63; from the database.
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByR_N_S(long resourcePrimKey, long nodeId, int status)
 		throws SystemException {
 		for (WikiPage wikiPage : findByR_N_S(resourcePrimKey, nodeId, status)) {
@@ -6014,6 +7605,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Removes all the wiki pages where userId = &#63; and nodeId = &#63; and status = &#63; from the database.
+	 *
+	 * @param userId the user id to search with
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByU_N_S(long userId, long nodeId, int status)
 		throws SystemException {
 		for (WikiPage wikiPage : findByU_N_S(userId, nodeId, status)) {
@@ -6021,6 +7620,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Removes the wiki page where nodeId = &#63; and title = &#63; and version = &#63; from the database.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param version the version to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByN_T_V(long nodeId, String title, double version)
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByN_T_V(nodeId, title, version);
@@ -6028,6 +7635,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		remove(wikiPage);
 	}
 
+	/**
+	 * Removes all the wiki pages where nodeId = &#63; and title = &#63; and head = &#63; from the database.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param head the head to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByN_T_H(long nodeId, String title, boolean head)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_T_H(nodeId, title, head)) {
@@ -6035,6 +7650,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Removes all the wiki pages where nodeId = &#63; and title = &#63; and status = &#63; from the database.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByN_T_S(long nodeId, String title, int status)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_T_S(nodeId, title, status)) {
@@ -6042,6 +7665,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Removes all the wiki pages where nodeId = &#63; and head = &#63; and parentTitle = &#63; from the database.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param parentTitle the parent title to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByN_H_P(long nodeId, boolean head, String parentTitle)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_H_P(nodeId, head, parentTitle)) {
@@ -6049,6 +7680,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Removes all the wiki pages where nodeId = &#63; and head = &#63; and status = &#63; from the database.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByN_H_S(long nodeId, boolean head, int status)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_H_S(nodeId, head, status)) {
@@ -6056,6 +7695,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Removes all the wiki pages where nodeId = &#63; and head = &#63; and parentTitle = &#63; and status = &#63; from the database.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param parentTitle the parent title to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByN_H_P_S(long nodeId, boolean head, String parentTitle,
 		int status) throws SystemException {
 		for (WikiPage wikiPage : findByN_H_P_S(nodeId, head, parentTitle, status)) {
@@ -6063,12 +7711,24 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		}
 	}
 
+	/**
+	 * Removes all the wiki pages from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (WikiPage wikiPage : findAll()) {
 			remove(wikiPage);
 		}
 	}
 
+	/**
+	 * Counts all the wiki pages where uuid = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @return the number of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUuid(String uuid) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid };
 
@@ -6127,6 +7787,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the wiki pages where uuid = &#63; and groupId = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the number of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -6190,6 +7858,13 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the wiki pages where nodeId = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @return the number of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByNodeId(long nodeId) throws SystemException {
 		Object[] finderArgs = new Object[] { nodeId };
 
@@ -6236,6 +7911,13 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the wiki pages where format = &#63;.
+	 *
+	 * @param format the format to search with
+	 * @return the number of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByFormat(String format) throws SystemException {
 		Object[] finderArgs = new Object[] { format };
 
@@ -6294,6 +7976,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the wiki pages where resourcePrimKey = &#63; and nodeId = &#63;.
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @return the number of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByR_N(long resourcePrimKey, long nodeId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { resourcePrimKey, nodeId };
@@ -6345,6 +8035,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the wiki pages where nodeId = &#63; and title = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @return the number of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByN_T(long nodeId, String title) throws SystemException {
 		Object[] finderArgs = new Object[] { nodeId, title };
 
@@ -6407,6 +8105,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the wiki pages where nodeId = &#63; and head = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @return the number of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByN_H(long nodeId, boolean head) throws SystemException {
 		Object[] finderArgs = new Object[] { nodeId, head };
 
@@ -6457,6 +8163,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the wiki pages where nodeId = &#63; and parentTitle = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param parentTitle the parent title to search with
+	 * @return the number of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByN_P(long nodeId, String parentTitle)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { nodeId, parentTitle };
@@ -6520,6 +8234,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the wiki pages where nodeId = &#63; and redirectTitle = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param redirectTitle the redirect title to search with
+	 * @return the number of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByN_R(long nodeId, String redirectTitle)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { nodeId, redirectTitle };
@@ -6583,6 +8305,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the wiki pages where nodeId = &#63; and status = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @return the number of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByN_S(long nodeId, int status) throws SystemException {
 		Object[] finderArgs = new Object[] { nodeId, status };
 
@@ -6633,6 +8363,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the wiki pages where resourcePrimKey = &#63; and nodeId = &#63; and version = &#63;.
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @param version the version to search with
+	 * @return the number of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByR_N_V(long resourcePrimKey, long nodeId, double version)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { resourcePrimKey, nodeId, version };
@@ -6688,6 +8427,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the wiki pages where resourcePrimKey = &#63; and nodeId = &#63; and status = &#63;.
+	 *
+	 * @param resourcePrimKey the resource prim key to search with
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @return the number of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByR_N_S(long resourcePrimKey, long nodeId, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { resourcePrimKey, nodeId, status };
@@ -6743,6 +8491,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the wiki pages where userId = &#63; and nodeId = &#63; and status = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @param nodeId the node id to search with
+	 * @param status the status to search with
+	 * @return the number of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByU_N_S(long userId, long nodeId, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { userId, nodeId, status };
@@ -6798,6 +8555,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the wiki pages where nodeId = &#63; and title = &#63; and version = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param version the version to search with
+	 * @return the number of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByN_T_V(long nodeId, String title, double version)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { nodeId, title, version };
@@ -6865,6 +8631,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the wiki pages where nodeId = &#63; and title = &#63; and head = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param head the head to search with
+	 * @return the number of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByN_T_H(long nodeId, String title, boolean head)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { nodeId, title, head };
@@ -6932,6 +8707,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the wiki pages where nodeId = &#63; and title = &#63; and status = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param title the title to search with
+	 * @param status the status to search with
+	 * @return the number of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByN_T_S(long nodeId, String title, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { nodeId, title, status };
@@ -6999,6 +8783,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the wiki pages where nodeId = &#63; and head = &#63; and parentTitle = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param parentTitle the parent title to search with
+	 * @return the number of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByN_H_P(long nodeId, boolean head, String parentTitle)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { nodeId, head, parentTitle };
@@ -7066,6 +8859,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the wiki pages where nodeId = &#63; and head = &#63; and status = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param status the status to search with
+	 * @return the number of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByN_H_S(long nodeId, boolean head, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { nodeId, head, status };
@@ -7121,6 +8923,16 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the wiki pages where nodeId = &#63; and head = &#63; and parentTitle = &#63; and status = &#63;.
+	 *
+	 * @param nodeId the node id to search with
+	 * @param head the head to search with
+	 * @param parentTitle the parent title to search with
+	 * @param status the status to search with
+	 * @return the number of matching wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByN_H_P_S(long nodeId, boolean head, String parentTitle,
 		int status) throws SystemException {
 		Object[] finderArgs = new Object[] { nodeId, head, parentTitle, status };
@@ -7192,6 +9004,12 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the wiki pages.
+	 *
+	 * @return the number of wiki pages
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -7226,6 +9044,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the wiki page persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

@@ -72,9 +72,19 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       AssetEntryPersistence
- * @see       AssetEntryUtil
+ * The persistence for the asset entry service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see AssetEntryPersistence
+ * @see AssetEntryUtil
  * @generated
  */
 public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
@@ -117,6 +127,11 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			AssetEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the asset entry in the entity cache if it is enabled.
+	 *
+	 * @param assetEntry the asset entry to cache
+	 */
 	public void cacheResult(AssetEntry assetEntry) {
 		EntityCacheUtil.putResult(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetEntryImpl.class, assetEntry.getPrimaryKey(), assetEntry);
@@ -135,6 +150,11 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			}, assetEntry);
 	}
 
+	/**
+	 * Caches the asset entries in the entity cache if it is enabled.
+	 *
+	 * @param assetEntries the asset entries to cache
+	 */
 	public void cacheResult(List<AssetEntry> assetEntries) {
 		for (AssetEntry assetEntry : assetEntries) {
 			if (EntityCacheUtil.getResult(
@@ -145,6 +165,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Clears the cache for all asset entries.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(AssetEntryImpl.class.getName());
 		EntityCacheUtil.clearCache(AssetEntryImpl.class.getName());
@@ -152,6 +179,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the asset entry.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(AssetEntry assetEntry) {
 		EntityCacheUtil.removeResult(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetEntryImpl.class, assetEntry.getPrimaryKey());
@@ -170,6 +204,12 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			});
 	}
 
+	/**
+	 * Creates a new asset entry with the primary key.
+	 *
+	 * @param entryId the primary key for the new asset entry
+	 * @return the new asset entry
+	 */
 	public AssetEntry create(long entryId) {
 		AssetEntry assetEntry = new AssetEntryImpl();
 
@@ -179,11 +219,27 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		return assetEntry;
 	}
 
+	/**
+	 * Removes the asset entry with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the asset entry to remove
+	 * @return the asset entry that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a asset entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetEntry remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the asset entry with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param entryId the primary key of the asset entry to remove
+	 * @return the asset entry that was removed
+	 * @throws com.liferay.portlet.asset.NoSuchEntryException if a asset entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetEntry remove(long entryId)
 		throws NoSuchEntryException, SystemException {
 		Session session = null;
@@ -403,11 +459,27 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		return assetEntryImpl;
 	}
 
+	/**
+	 * Finds the asset entry with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the asset entry to find
+	 * @return the asset entry
+	 * @throws com.liferay.portal.NoSuchModelException if a asset entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetEntry findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the asset entry with the primary key or throws a {@link com.liferay.portlet.asset.NoSuchEntryException} if it could not be found.
+	 *
+	 * @param entryId the primary key of the asset entry to find
+	 * @return the asset entry
+	 * @throws com.liferay.portlet.asset.NoSuchEntryException if a asset entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetEntry findByPrimaryKey(long entryId)
 		throws NoSuchEntryException, SystemException {
 		AssetEntry assetEntry = fetchByPrimaryKey(entryId);
@@ -424,11 +496,25 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		return assetEntry;
 	}
 
+	/**
+	 * Finds the asset entry with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the asset entry to find
+	 * @return the asset entry, or <code>null</code> if a asset entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetEntry fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the asset entry with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param entryId the primary key of the asset entry to find
+	 * @return the asset entry, or <code>null</code> if a asset entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetEntry fetchByPrimaryKey(long entryId) throws SystemException {
 		AssetEntry assetEntry = (AssetEntry)EntityCacheUtil.getResult(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
 				AssetEntryImpl.class, entryId, this);
@@ -457,17 +543,51 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		return assetEntry;
 	}
 
+	/**
+	 * Finds all the asset entries where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the matching asset entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetEntry> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the asset entries where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of asset entries to return
+	 * @param end the upper bound of the range of asset entries to return (not inclusive)
+	 * @return the range of matching asset entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetEntry> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the asset entries where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of asset entries to return
+	 * @param end the upper bound of the range of asset entries to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching asset entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetEntry> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -536,6 +656,19 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		return list;
 	}
 
+	/**
+	 * Finds the first asset entry in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching asset entry
+	 * @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetEntry findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEntryException, SystemException {
@@ -559,6 +692,19 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Finds the last asset entry in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching asset entry
+	 * @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetEntry findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEntryException, SystemException {
@@ -584,6 +730,20 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Finds the asset entries before and after the current asset entry in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param entryId the primary key of the current asset entry
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next asset entry
+	 * @throws com.liferay.portlet.asset.NoSuchEntryException if a asset entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetEntry[] findByCompanyId_PrevAndNext(long entryId,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchEntryException, SystemException {
@@ -714,6 +874,15 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Finds the asset entry where groupId = &#63; and classUuid = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchEntryException} if it could not be found.
+	 *
+	 * @param groupId the group id to search with
+	 * @param classUuid the class uuid to search with
+	 * @return the matching asset entry
+	 * @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetEntry findByG_CU(long groupId, String classUuid)
 		throws NoSuchEntryException, SystemException {
 		AssetEntry assetEntry = fetchByG_CU(groupId, classUuid);
@@ -741,11 +910,27 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		return assetEntry;
 	}
 
+	/**
+	 * Finds the asset entry where groupId = &#63; and classUuid = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param classUuid the class uuid to search with
+	 * @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetEntry fetchByG_CU(long groupId, String classUuid)
 		throws SystemException {
 		return fetchByG_CU(groupId, classUuid, true);
 	}
 
+	/**
+	 * Finds the asset entry where groupId = &#63; and classUuid = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param classUuid the class uuid to search with
+	 * @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetEntry fetchByG_CU(long groupId, String classUuid,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, classUuid };
@@ -840,6 +1025,15 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Finds the asset entry where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchEntryException} if it could not be found.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching asset entry
+	 * @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetEntry findByC_C(long classNameId, long classPK)
 		throws NoSuchEntryException, SystemException {
 		AssetEntry assetEntry = fetchByC_C(classNameId, classPK);
@@ -867,11 +1061,27 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		return assetEntry;
 	}
 
+	/**
+	 * Finds the asset entry where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetEntry fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
 		return fetchByC_C(classNameId, classPK, true);
 	}
 
+	/**
+	 * Finds the asset entry where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetEntry fetchByC_C(long classNameId, long classPK,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { classNameId, classPK };
@@ -953,15 +1163,46 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Finds all the asset entries.
+	 *
+	 * @return the asset entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetEntry> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the asset entries.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of asset entries to return
+	 * @param end the upper bound of the range of asset entries to return (not inclusive)
+	 * @return the range of asset entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetEntry> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the asset entries.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of asset entries to return
+	 * @param end the upper bound of the range of asset entries to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of asset entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetEntry> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1028,12 +1269,25 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		return list;
 	}
 
+	/**
+	 * Removes all the asset entries where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (AssetEntry assetEntry : findByCompanyId(companyId)) {
 			remove(assetEntry);
 		}
 	}
 
+	/**
+	 * Removes the asset entry where groupId = &#63; and classUuid = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param classUuid the class uuid to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_CU(long groupId, String classUuid)
 		throws NoSuchEntryException, SystemException {
 		AssetEntry assetEntry = findByG_CU(groupId, classUuid);
@@ -1041,6 +1295,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		remove(assetEntry);
 	}
 
+	/**
+	 * Removes the asset entry where classNameId = &#63; and classPK = &#63; from the database.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C(long classNameId, long classPK)
 		throws NoSuchEntryException, SystemException {
 		AssetEntry assetEntry = findByC_C(classNameId, classPK);
@@ -1048,12 +1309,24 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		remove(assetEntry);
 	}
 
+	/**
+	 * Removes all the asset entries from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (AssetEntry assetEntry : findAll()) {
 			remove(assetEntry);
 		}
 	}
 
+	/**
+	 * Counts all the asset entries where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the number of matching asset entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId };
 
@@ -1100,6 +1373,14 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the asset entries where groupId = &#63; and classUuid = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param classUuid the class uuid to search with
+	 * @return the number of matching asset entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_CU(long groupId, String classUuid)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, classUuid };
@@ -1163,6 +1444,14 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the asset entries where classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the number of matching asset entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { classNameId, classPK };
@@ -1214,6 +1503,12 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the asset entries.
+	 *
+	 * @return the number of asset entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -1248,11 +1543,31 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		return count.intValue();
 	}
 
+	/**
+	 * Gets all the asset categories associated with the asset entry.
+	 *
+	 * @param pk the primary key of the asset entry to get the associated asset categories for
+	 * @return the asset categories associated with the asset entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portlet.asset.model.AssetCategory> getAssetCategories(
 		long pk) throws SystemException {
 		return getAssetCategories(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
+	/**
+	 * Gets a range of all the asset categories associated with the asset entry.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the asset entry to get the associated asset categories for
+	 * @param start the lower bound of the range of asset entries to return
+	 * @param end the upper bound of the range of asset entries to return (not inclusive)
+	 * @return the range of asset categories associated with the asset entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portlet.asset.model.AssetCategory> getAssetCategories(
 		long pk, int start, int end) throws SystemException {
 		return getAssetCategories(pk, start, end, null);
@@ -1267,6 +1582,20 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
 
+	/**
+	 * Gets an ordered range of all the asset categories associated with the asset entry.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the asset entry to get the associated asset categories for
+	 * @param start the lower bound of the range of asset entries to return
+	 * @param end the upper bound of the range of asset entries to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of asset categories associated with the asset entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portlet.asset.model.AssetCategory> getAssetCategories(
 		long pk, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1331,6 +1660,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME,
 			"getAssetCategoriesSize", new String[] { Long.class.getName() });
 
+	/**
+	 * Gets the number of asset categories associated with the asset entry.
+	 *
+	 * @param pk the primary key of the asset entry to get the number of associated asset categories for
+	 * @return the number of asset categories associated with the asset entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int getAssetCategoriesSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -1378,6 +1714,14 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			"containsAssetCategory",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
+	/**
+	 * Determines whether the asset category is associated with the asset entry.
+	 *
+	 * @param pk the primary key of the asset entry
+	 * @param assetCategoryPK the primary key of the asset category
+	 * @return whether the asset category is associated with the asset entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsAssetCategory(long pk, long assetCategoryPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { pk, assetCategoryPK };
@@ -1406,6 +1750,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		return value.booleanValue();
 	}
 
+	/**
+	 * Determines whether the asset entry has any asset categories associated with it.
+	 *
+	 * @param pk the primary key of the asset entry to check for associations with asset categories
+	 * @return whether the asset entry has any asset categories associated with it
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsAssetCategories(long pk) throws SystemException {
 		if (getAssetCategoriesSize(pk) > 0) {
 			return true;
@@ -1415,6 +1766,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Adds an association between the asset entry and the asset category. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry
+	 * @param assetCategoryPK the primary key of the asset category
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addAssetCategory(long pk, long assetCategoryPK)
 		throws SystemException {
 		try {
@@ -1428,6 +1786,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Adds an association between the asset entry and the asset category. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry
+	 * @param assetCategory the asset category
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addAssetCategory(long pk,
 		com.liferay.portlet.asset.model.AssetCategory assetCategory)
 		throws SystemException {
@@ -1442,6 +1807,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Adds an association between the asset entry and the asset categories. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry
+	 * @param assetCategoryPKs the primary keys of the asset categories
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addAssetCategories(long pk, long[] assetCategoryPKs)
 		throws SystemException {
 		try {
@@ -1457,6 +1829,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Adds an association between the asset entry and the asset categories. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry
+	 * @param assetCategories the asset categories
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addAssetCategories(long pk,
 		List<com.liferay.portlet.asset.model.AssetCategory> assetCategories)
 		throws SystemException {
@@ -1473,6 +1852,12 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Clears all associations between the asset entry and its asset categories. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry to clear the associated asset categories from
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void clearAssetCategories(long pk) throws SystemException {
 		try {
 			clearAssetCategories.clear(pk);
@@ -1485,6 +1870,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Removes the association between the asset entry and the asset category. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry
+	 * @param assetCategoryPK the primary key of the asset category
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAssetCategory(long pk, long assetCategoryPK)
 		throws SystemException {
 		try {
@@ -1498,6 +1890,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Removes the association between the asset entry and the asset category. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry
+	 * @param assetCategory the asset category
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAssetCategory(long pk,
 		com.liferay.portlet.asset.model.AssetCategory assetCategory)
 		throws SystemException {
@@ -1512,6 +1911,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Removes the association between the asset entry and the asset categories. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry
+	 * @param assetCategoryPKs the primary keys of the asset categories
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAssetCategories(long pk, long[] assetCategoryPKs)
 		throws SystemException {
 		try {
@@ -1527,6 +1933,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Removes the association between the asset entry and the asset categories. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry
+	 * @param assetCategories the asset categories
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAssetCategories(long pk,
 		List<com.liferay.portlet.asset.model.AssetCategory> assetCategories)
 		throws SystemException {
@@ -1543,6 +1956,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Sets the asset categories associated with the asset entry, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry to set the associations for
+	 * @param assetCategoryPKs the primary keys of the asset categories to be associated with the asset entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setAssetCategories(long pk, long[] assetCategoryPKs)
 		throws SystemException {
 		try {
@@ -1568,6 +1988,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Sets the asset categories associated with the asset entry, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry to set the associations for
+	 * @param assetCategories the asset categories to be associated with the asset entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setAssetCategories(long pk,
 		List<com.liferay.portlet.asset.model.AssetCategory> assetCategories)
 		throws SystemException {
@@ -1590,11 +2017,31 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Gets all the asset tags associated with the asset entry.
+	 *
+	 * @param pk the primary key of the asset entry to get the associated asset tags for
+	 * @return the asset tags associated with the asset entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portlet.asset.model.AssetTag> getAssetTags(long pk)
 		throws SystemException {
 		return getAssetTags(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
+	/**
+	 * Gets a range of all the asset tags associated with the asset entry.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the asset entry to get the associated asset tags for
+	 * @param start the lower bound of the range of asset entries to return
+	 * @param end the upper bound of the range of asset entries to return (not inclusive)
+	 * @return the range of asset tags associated with the asset entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portlet.asset.model.AssetTag> getAssetTags(
 		long pk, int start, int end) throws SystemException {
 		return getAssetTags(pk, start, end, null);
@@ -1609,6 +2056,20 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
 
+	/**
+	 * Gets an ordered range of all the asset tags associated with the asset entry.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the asset entry to get the associated asset tags for
+	 * @param start the lower bound of the range of asset entries to return
+	 * @param end the upper bound of the range of asset entries to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of asset tags associated with the asset entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portlet.asset.model.AssetTag> getAssetTags(
 		long pk, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1673,6 +2134,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME,
 			"getAssetTagsSize", new String[] { Long.class.getName() });
 
+	/**
+	 * Gets the number of asset tags associated with the asset entry.
+	 *
+	 * @param pk the primary key of the asset entry to get the number of associated asset tags for
+	 * @return the number of asset tags associated with the asset entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int getAssetTagsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -1720,6 +2188,14 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			"containsAssetTag",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
+	/**
+	 * Determines whether the asset tag is associated with the asset entry.
+	 *
+	 * @param pk the primary key of the asset entry
+	 * @param assetTagPK the primary key of the asset tag
+	 * @return whether the asset tag is associated with the asset entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsAssetTag(long pk, long assetTagPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { pk, assetTagPK };
@@ -1747,6 +2223,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		return value.booleanValue();
 	}
 
+	/**
+	 * Determines whether the asset entry has any asset tags associated with it.
+	 *
+	 * @param pk the primary key of the asset entry to check for associations with asset tags
+	 * @return whether the asset entry has any asset tags associated with it
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsAssetTags(long pk) throws SystemException {
 		if (getAssetTagsSize(pk) > 0) {
 			return true;
@@ -1756,6 +2239,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Adds an association between the asset entry and the asset tag. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry
+	 * @param assetTagPK the primary key of the asset tag
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addAssetTag(long pk, long assetTagPK) throws SystemException {
 		try {
 			addAssetTag.add(pk, assetTagPK);
@@ -1768,6 +2258,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Adds an association between the asset entry and the asset tag. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry
+	 * @param assetTag the asset tag
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addAssetTag(long pk,
 		com.liferay.portlet.asset.model.AssetTag assetTag)
 		throws SystemException {
@@ -1782,6 +2279,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Adds an association between the asset entry and the asset tags. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry
+	 * @param assetTagPKs the primary keys of the asset tags
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addAssetTags(long pk, long[] assetTagPKs)
 		throws SystemException {
 		try {
@@ -1797,6 +2301,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Adds an association between the asset entry and the asset tags. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry
+	 * @param assetTags the asset tags
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addAssetTags(long pk,
 		List<com.liferay.portlet.asset.model.AssetTag> assetTags)
 		throws SystemException {
@@ -1813,6 +2324,12 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Clears all associations between the asset entry and its asset tags. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry to clear the associated asset tags from
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void clearAssetTags(long pk) throws SystemException {
 		try {
 			clearAssetTags.clear(pk);
@@ -1825,6 +2342,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Removes the association between the asset entry and the asset tag. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry
+	 * @param assetTagPK the primary key of the asset tag
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAssetTag(long pk, long assetTagPK)
 		throws SystemException {
 		try {
@@ -1838,6 +2362,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Removes the association between the asset entry and the asset tag. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry
+	 * @param assetTag the asset tag
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAssetTag(long pk,
 		com.liferay.portlet.asset.model.AssetTag assetTag)
 		throws SystemException {
@@ -1852,6 +2383,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Removes the association between the asset entry and the asset tags. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry
+	 * @param assetTagPKs the primary keys of the asset tags
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAssetTags(long pk, long[] assetTagPKs)
 		throws SystemException {
 		try {
@@ -1867,6 +2405,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Removes the association between the asset entry and the asset tags. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry
+	 * @param assetTags the asset tags
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAssetTags(long pk,
 		List<com.liferay.portlet.asset.model.AssetTag> assetTags)
 		throws SystemException {
@@ -1883,6 +2428,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Sets the asset tags associated with the asset entry, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry to set the associations for
+	 * @param assetTagPKs the primary keys of the asset tags to be associated with the asset entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setAssetTags(long pk, long[] assetTagPKs)
 		throws SystemException {
 		try {
@@ -1908,6 +2460,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Sets the asset tags associated with the asset entry, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the asset entry to set the associations for
+	 * @param assetTags the asset tags to be associated with the asset entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setAssetTags(long pk,
 		List<com.liferay.portlet.asset.model.AssetTag> assetTags)
 		throws SystemException {
@@ -1930,6 +2489,9 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Initializes the asset entry persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the Contact_ table in the
- * database.
- * </p>
+ * The model interface for the Contact service. Represents a row in the &quot;Contact_&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.ContactImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.ContactImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       ContactModel
- * @see       com.liferay.portal.model.impl.ContactImpl
- * @see       com.liferay.portal.model.impl.ContactModelImpl
+ * @author Brian Wing Shun Chan
+ * @see ContactModel
+ * @see com.liferay.portal.model.impl.ContactImpl
+ * @see com.liferay.portal.model.impl.ContactModelImpl
  * @generated
  */
 public interface Contact extends ContactModel {

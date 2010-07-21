@@ -19,20 +19,50 @@ import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portlet.calendar.model.CalEvent;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       CalEventPersistenceImpl
- * @see       CalEventUtil
+ * The persistence interface for the cal event service.
+ *
+ * <p>
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see CalEventPersistenceImpl
+ * @see CalEventUtil
  * @generated
  */
 public interface CalEventPersistence extends BasePersistence<CalEvent> {
+	/**
+	* Caches the cal event in the entity cache if it is enabled.
+	*
+	* @param calEvent the cal event to cache
+	*/
 	public void cacheResult(
 		com.liferay.portlet.calendar.model.CalEvent calEvent);
 
+	/**
+	* Caches the cal events in the entity cache if it is enabled.
+	*
+	* @param calEvents the cal events to cache
+	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.calendar.model.CalEvent> calEvents);
 
+	/**
+	* Creates a new cal event with the primary key.
+	*
+	* @param eventId the primary key for the new cal event
+	* @return the new cal event
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent create(long eventId);
 
+	/**
+	* Removes the cal event with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param eventId the primary key of the cal event to remove
+	* @return the cal event that was removed
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent remove(long eventId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
@@ -41,320 +71,1086 @@ public interface CalEventPersistence extends BasePersistence<CalEvent> {
 		com.liferay.portlet.calendar.model.CalEvent calEvent, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the cal event with the primary key or throws a {@link com.liferay.portlet.calendar.NoSuchEventException} if it could not be found.
+	*
+	* @param eventId the primary key of the cal event to find
+	* @return the cal event
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent findByPrimaryKey(
 		long eventId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Finds the cal event with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param eventId the primary key of the cal event to find
+	* @return the cal event, or <code>null</code> if a cal event with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent fetchByPrimaryKey(
 		long eventId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds all the cal events where uuid = &#63;.
+	*
+	* @param uuid the uuid to search with
+	* @return the matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByUuid(
 		java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the cal events where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @return the range of matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByUuid(
 		java.lang.String uuid, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the cal events where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByUuid(
 		java.lang.String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first cal event in the ordered set where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching cal event
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Finds the last cal event in the ordered set where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching cal event
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Finds the cal events before and after the current cal event in the ordered set where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param eventId the primary key of the current cal event
+	* @param uuid the uuid to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next cal event
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent[] findByUuid_PrevAndNext(
 		long eventId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Finds the cal event where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.calendar.NoSuchEventException} if it could not be found.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group id to search with
+	* @return the matching cal event
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent findByUUID_G(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Finds the cal event where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group id to search with
+	* @return the matching cal event, or <code>null</code> if a matching cal event could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent fetchByUUID_G(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the cal event where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group id to search with
+	* @return the matching cal event, or <code>null</code> if a matching cal event could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent fetchByUUID_G(
 		java.lang.String uuid, long groupId, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds all the cal events where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByCompanyId(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the cal events where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @return the range of matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByCompanyId(
 		long companyId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the cal events where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first cal event in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching cal event
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent findByCompanyId_First(
 		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Finds the last cal event in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching cal event
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent findByCompanyId_Last(
 		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Finds the cal events before and after the current cal event in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param eventId the primary key of the current cal event
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next cal event
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent[] findByCompanyId_PrevAndNext(
 		long eventId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Finds all the cal events where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByGroupId(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the cal events where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @return the range of matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the cal events where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first cal event in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching cal event
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent findByGroupId_First(
 		long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Finds the last cal event in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching cal event
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent findByGroupId_Last(
 		long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Finds the cal events before and after the current cal event in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param eventId the primary key of the current cal event
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next cal event
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent[] findByGroupId_PrevAndNext(
 		long eventId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Filters by the user's permissions and finds all the cal events where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the matching cal events that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> filterFindByGroupId(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and finds a range of all the cal events where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @return the range of matching cal events that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> filterFindByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the cal events where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching cal events that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> filterFindByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds all the cal events where remindBy &ne; &#63;.
+	*
+	* @param remindBy the remind by to search with
+	* @return the matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByNotRemindBy(
 		int remindBy)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the cal events where remindBy &ne; &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param remindBy the remind by to search with
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @return the range of matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByNotRemindBy(
 		int remindBy, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the cal events where remindBy &ne; &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param remindBy the remind by to search with
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByNotRemindBy(
 		int remindBy, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first cal event in the ordered set where remindBy &ne; &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param remindBy the remind by to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching cal event
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent findByNotRemindBy_First(
 		int remindBy,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Finds the last cal event in the ordered set where remindBy &ne; &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param remindBy the remind by to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching cal event
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent findByNotRemindBy_Last(
 		int remindBy,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Finds the cal events before and after the current cal event in the ordered set where remindBy &ne; &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param eventId the primary key of the current cal event
+	* @param remindBy the remind by to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next cal event
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent[] findByNotRemindBy_PrevAndNext(
 		long eventId, int remindBy,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Finds all the cal events where groupId = &#63; and type = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param type the type to search with
+	* @return the matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_T(
 		long groupId, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the cal events where groupId = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param type the type to search with
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @return the range of matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_T(
 		long groupId, java.lang.String type, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the cal events where groupId = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param type the type to search with
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_T(
 		long groupId, java.lang.String type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first cal event in the ordered set where groupId = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching cal event
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent findByG_T_First(
 		long groupId, java.lang.String type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Finds the last cal event in the ordered set where groupId = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching cal event
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent findByG_T_Last(
 		long groupId, java.lang.String type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Finds the cal events before and after the current cal event in the ordered set where groupId = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param eventId the primary key of the current cal event
+	* @param groupId the group id to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next cal event
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent[] findByG_T_PrevAndNext(
 		long eventId, long groupId, java.lang.String type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Filters by the user's permissions and finds all the cal events where groupId = &#63; and type = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param type the type to search with
+	* @return the matching cal events that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> filterFindByG_T(
 		long groupId, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and finds a range of all the cal events where groupId = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param type the type to search with
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @return the range of matching cal events that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> filterFindByG_T(
 		long groupId, java.lang.String type, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the cal events where groupId = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param type the type to search with
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching cal events that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> filterFindByG_T(
 		long groupId, java.lang.String type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds all the cal events where groupId = &#63; and repeating = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param repeating the repeating to search with
+	* @return the matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_R(
 		long groupId, boolean repeating)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the cal events where groupId = &#63; and repeating = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param repeating the repeating to search with
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @return the range of matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_R(
 		long groupId, boolean repeating, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the cal events where groupId = &#63; and repeating = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param repeating the repeating to search with
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_R(
 		long groupId, boolean repeating, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first cal event in the ordered set where groupId = &#63; and repeating = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param repeating the repeating to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching cal event
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent findByG_R_First(
 		long groupId, boolean repeating,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Finds the last cal event in the ordered set where groupId = &#63; and repeating = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param repeating the repeating to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching cal event
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent findByG_R_Last(
 		long groupId, boolean repeating,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Finds the cal events before and after the current cal event in the ordered set where groupId = &#63; and repeating = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param eventId the primary key of the current cal event
+	* @param groupId the group id to search with
+	* @param repeating the repeating to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next cal event
+	* @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent[] findByG_R_PrevAndNext(
 		long eventId, long groupId, boolean repeating,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Filters by the user's permissions and finds all the cal events where groupId = &#63; and repeating = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param repeating the repeating to search with
+	* @return the matching cal events that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> filterFindByG_R(
 		long groupId, boolean repeating)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and finds a range of all the cal events where groupId = &#63; and repeating = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param repeating the repeating to search with
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @return the range of matching cal events that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> filterFindByG_R(
 		long groupId, boolean repeating, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the cal events where groupId = &#63; and repeating = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param repeating the repeating to search with
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching cal events that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> filterFindByG_R(
 		long groupId, boolean repeating, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds all the cal events.
+	*
+	* @return the cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the cal events.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @return the range of cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the cal events.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the cal events where uuid = &#63; from the database.
+	*
+	* @param uuid the uuid to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByUuid(java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the cal event where uuid = &#63; and groupId = &#63; from the database.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.calendar.NoSuchEventException;
 
+	/**
+	* Removes all the cal events where companyId = &#63; from the database.
+	*
+	* @param companyId the company id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the cal events where groupId = &#63; from the database.
+	*
+	* @param groupId the group id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the cal events where remindBy &ne; &#63; from the database.
+	*
+	* @param remindBy the remind by to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByNotRemindBy(int remindBy)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the cal events where groupId = &#63; and type = &#63; from the database.
+	*
+	* @param groupId the group id to search with
+	* @param type the type to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByG_T(long groupId, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the cal events where groupId = &#63; and repeating = &#63; from the database.
+	*
+	* @param groupId the group id to search with
+	* @param repeating the repeating to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByG_R(long groupId, boolean repeating)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the cal events from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the cal events where uuid = &#63;.
+	*
+	* @param uuid the uuid to search with
+	* @return the number of matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByUuid(java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the cal events where uuid = &#63; and groupId = &#63;.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group id to search with
+	* @return the number of matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the cal events where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the number of matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the cal events where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the number of matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and counts all the cal events where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the number of matching cal events that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the cal events where remindBy &ne; &#63;.
+	*
+	* @param remindBy the remind by to search with
+	* @return the number of matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByNotRemindBy(int remindBy)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the cal events where groupId = &#63; and type = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param type the type to search with
+	* @return the number of matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByG_T(long groupId, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and counts all the cal events where groupId = &#63; and type = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param type the type to search with
+	* @return the number of matching cal events that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public int filterCountByG_T(long groupId, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the cal events where groupId = &#63; and repeating = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param repeating the repeating to search with
+	* @return the number of matching cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByG_R(long groupId, boolean repeating)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and counts all the cal events where groupId = &#63; and repeating = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param repeating the repeating to search with
+	* @return the number of matching cal events that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public int filterCountByG_R(long groupId, boolean repeating)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the cal events.
+	*
+	* @return the number of cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

@@ -15,20 +15,16 @@
 package com.liferay.portlet.wiki.model;
 
 /**
- * <p>
- * This interface is a model that represents the WikiNode table in the
- * database.
- * </p>
+ * The model interface for the WikiNode service. Represents a row in the &quot;WikiNode&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.wiki.model.impl.WikiNodeImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.wiki.model.impl.WikiNodeImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       WikiNodeModel
- * @see       com.liferay.portlet.wiki.model.impl.WikiNodeImpl
- * @see       com.liferay.portlet.wiki.model.impl.WikiNodeModelImpl
+ * @author Brian Wing Shun Chan
+ * @see WikiNodeModel
+ * @see com.liferay.portlet.wiki.model.impl.WikiNodeImpl
+ * @see com.liferay.portlet.wiki.model.impl.WikiNodeModelImpl
  * @generated
  */
 public interface WikiNode extends WikiNodeModel {

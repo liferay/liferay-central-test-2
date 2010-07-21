@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the ResourceCode table in the
- * database.
- * </p>
+ * The model interface for the ResourceCode service. Represents a row in the &quot;ResourceCode&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.ResourceCodeImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.ResourceCodeImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       ResourceCodeModel
- * @see       com.liferay.portal.model.impl.ResourceCodeImpl
- * @see       com.liferay.portal.model.impl.ResourceCodeModelImpl
+ * @author Brian Wing Shun Chan
+ * @see ResourceCodeModel
+ * @see com.liferay.portal.model.impl.ResourceCodeImpl
+ * @see com.liferay.portal.model.impl.ResourceCodeModelImpl
  * @generated
  */
 public interface ResourceCode extends ResourceCodeModel {

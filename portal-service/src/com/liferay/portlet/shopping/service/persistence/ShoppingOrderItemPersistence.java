@@ -19,21 +19,51 @@ import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portlet.shopping.model.ShoppingOrderItem;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       ShoppingOrderItemPersistenceImpl
- * @see       ShoppingOrderItemUtil
+ * The persistence interface for the shopping order item service.
+ *
+ * <p>
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see ShoppingOrderItemPersistenceImpl
+ * @see ShoppingOrderItemUtil
  * @generated
  */
 public interface ShoppingOrderItemPersistence extends BasePersistence<ShoppingOrderItem> {
+	/**
+	* Caches the shopping order item in the entity cache if it is enabled.
+	*
+	* @param shoppingOrderItem the shopping order item to cache
+	*/
 	public void cacheResult(
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem);
 
+	/**
+	* Caches the shopping order items in the entity cache if it is enabled.
+	*
+	* @param shoppingOrderItems the shopping order items to cache
+	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> shoppingOrderItems);
 
+	/**
+	* Creates a new shopping order item with the primary key.
+	*
+	* @param orderItemId the primary key for the new shopping order item
+	* @return the new shopping order item
+	*/
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem create(
 		long orderItemId);
 
+	/**
+	* Removes the shopping order item with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param orderItemId the primary key of the shopping order item to remove
+	* @return the shopping order item that was removed
+	* @throws com.liferay.portlet.shopping.NoSuchOrderItemException if a shopping order item with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem remove(
 		long orderItemId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -44,67 +74,211 @@ public interface ShoppingOrderItemPersistence extends BasePersistence<ShoppingOr
 		boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the shopping order item with the primary key or throws a {@link com.liferay.portlet.shopping.NoSuchOrderItemException} if it could not be found.
+	*
+	* @param orderItemId the primary key of the shopping order item to find
+	* @return the shopping order item
+	* @throws com.liferay.portlet.shopping.NoSuchOrderItemException if a shopping order item with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem findByPrimaryKey(
 		long orderItemId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderItemException;
 
+	/**
+	* Finds the shopping order item with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param orderItemId the primary key of the shopping order item to find
+	* @return the shopping order item, or <code>null</code> if a shopping order item with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem fetchByPrimaryKey(
 		long orderItemId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds all the shopping order items where orderId = &#63;.
+	*
+	* @param orderId the order id to search with
+	* @return the matching shopping order items
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> findByOrderId(
 		long orderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the shopping order items where orderId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param orderId the order id to search with
+	* @param start the lower bound of the range of shopping order items to return
+	* @param end the upper bound of the range of shopping order items to return (not inclusive)
+	* @return the range of matching shopping order items
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> findByOrderId(
 		long orderId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the shopping order items where orderId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param orderId the order id to search with
+	* @param start the lower bound of the range of shopping order items to return
+	* @param end the upper bound of the range of shopping order items to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching shopping order items
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> findByOrderId(
 		long orderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first shopping order item in the ordered set where orderId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param orderId the order id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching shopping order item
+	* @throws com.liferay.portlet.shopping.NoSuchOrderItemException if a matching shopping order item could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem findByOrderId_First(
 		long orderId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderItemException;
 
+	/**
+	* Finds the last shopping order item in the ordered set where orderId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param orderId the order id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching shopping order item
+	* @throws com.liferay.portlet.shopping.NoSuchOrderItemException if a matching shopping order item could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem findByOrderId_Last(
 		long orderId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderItemException;
 
+	/**
+	* Finds the shopping order items before and after the current shopping order item in the ordered set where orderId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param orderItemId the primary key of the current shopping order item
+	* @param orderId the order id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next shopping order item
+	* @throws com.liferay.portlet.shopping.NoSuchOrderItemException if a shopping order item with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.shopping.model.ShoppingOrderItem[] findByOrderId_PrevAndNext(
 		long orderItemId, long orderId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderItemException;
 
+	/**
+	* Finds all the shopping order items.
+	*
+	* @return the shopping order items
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the shopping order items.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of shopping order items to return
+	* @param end the upper bound of the range of shopping order items to return (not inclusive)
+	* @return the range of shopping order items
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the shopping order items.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of shopping order items to return
+	* @param end the upper bound of the range of shopping order items to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of shopping order items
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the shopping order items where orderId = &#63; from the database.
+	*
+	* @param orderId the order id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByOrderId(long orderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the shopping order items from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the shopping order items where orderId = &#63;.
+	*
+	* @param orderId the order id to search with
+	* @return the number of matching shopping order items
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByOrderId(long orderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the shopping order items.
+	*
+	* @return the number of shopping order items
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

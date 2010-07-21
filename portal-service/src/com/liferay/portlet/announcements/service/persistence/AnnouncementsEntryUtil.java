@@ -25,9 +25,15 @@ import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       AnnouncementsEntryPersistence
- * @see       AnnouncementsEntryPersistenceImpl
+ * The persistence utility for the announcements entry service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see AnnouncementsEntryPersistence
+ * @see AnnouncementsEntryPersistenceImpl
  * @generated
  */
 public class AnnouncementsEntryUtil {
@@ -107,21 +113,45 @@ public class AnnouncementsEntryUtil {
 		return getPersistence().update(announcementsEntry, merge, serviceContext);
 	}
 
+	/**
+	* Caches the announcements entry in the entity cache if it is enabled.
+	*
+	* @param announcementsEntry the announcements entry to cache
+	*/
 	public static void cacheResult(
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry) {
 		getPersistence().cacheResult(announcementsEntry);
 	}
 
+	/**
+	* Caches the announcements entries in the entity cache if it is enabled.
+	*
+	* @param announcementsEntries the announcements entries to cache
+	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> announcementsEntries) {
 		getPersistence().cacheResult(announcementsEntries);
 	}
 
+	/**
+	* Creates a new announcements entry with the primary key.
+	*
+	* @param entryId the primary key for the new announcements entry
+	* @return the new announcements entry
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry create(
 		long entryId) {
 		return getPersistence().create(entryId);
 	}
 
+	/**
+	* Removes the announcements entry with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param entryId the primary key of the announcements entry to remove
+	* @return the announcements entry that was removed
+	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a announcements entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry remove(
 		long entryId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -136,6 +166,14 @@ public class AnnouncementsEntryUtil {
 		return getPersistence().updateImpl(announcementsEntry, merge);
 	}
 
+	/**
+	* Finds the announcements entry with the primary key or throws a {@link com.liferay.portlet.announcements.NoSuchEntryException} if it could not be found.
+	*
+	* @param entryId the primary key of the announcements entry to find
+	* @return the announcements entry
+	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a announcements entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByPrimaryKey(
 		long entryId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -143,24 +181,65 @@ public class AnnouncementsEntryUtil {
 		return getPersistence().findByPrimaryKey(entryId);
 	}
 
+	/**
+	* Finds the announcements entry with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param entryId the primary key of the announcements entry to find
+	* @return the announcements entry, or <code>null</code> if a announcements entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry fetchByPrimaryKey(
 		long entryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(entryId);
 	}
 
+	/**
+	* Finds all the announcements entries where uuid = &#63;.
+	*
+	* @param uuid the uuid to search with
+	* @return the matching announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByUuid(
 		java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUuid(uuid);
 	}
 
+	/**
+	* Finds a range of all the announcements entries where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param start the lower bound of the range of announcements entries to return
+	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @return the range of matching announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByUuid(
 		java.lang.String uuid, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUuid(uuid, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the announcements entries where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param start the lower bound of the range of announcements entries to return
+	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByUuid(
 		java.lang.String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -168,6 +247,19 @@ public class AnnouncementsEntryUtil {
 		return getPersistence().findByUuid(uuid, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first announcements entry in the ordered set where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching announcements entry
+	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a matching announcements entry could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -176,6 +268,19 @@ public class AnnouncementsEntryUtil {
 		return getPersistence().findByUuid_First(uuid, orderByComparator);
 	}
 
+	/**
+	* Finds the last announcements entry in the ordered set where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching announcements entry
+	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a matching announcements entry could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -184,6 +289,20 @@ public class AnnouncementsEntryUtil {
 		return getPersistence().findByUuid_Last(uuid, orderByComparator);
 	}
 
+	/**
+	* Finds the announcements entries before and after the current announcements entry in the ordered set where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId the primary key of the current announcements entry
+	* @param uuid the uuid to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next announcements entry
+	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a announcements entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry[] findByUuid_PrevAndNext(
 		long entryId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -193,17 +312,51 @@ public class AnnouncementsEntryUtil {
 				   .findByUuid_PrevAndNext(entryId, uuid, orderByComparator);
 	}
 
+	/**
+	* Finds all the announcements entries where userId = &#63;.
+	*
+	* @param userId the user id to search with
+	* @return the matching announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByUserId(
 		long userId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUserId(userId);
 	}
 
+	/**
+	* Finds a range of all the announcements entries where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param start the lower bound of the range of announcements entries to return
+	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @return the range of matching announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByUserId(
 		long userId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUserId(userId, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the announcements entries where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param start the lower bound of the range of announcements entries to return
+	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByUserId(
 		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -212,6 +365,19 @@ public class AnnouncementsEntryUtil {
 				   .findByUserId(userId, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first announcements entry in the ordered set where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching announcements entry
+	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a matching announcements entry could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByUserId_First(
 		long userId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -220,6 +386,19 @@ public class AnnouncementsEntryUtil {
 		return getPersistence().findByUserId_First(userId, orderByComparator);
 	}
 
+	/**
+	* Finds the last announcements entry in the ordered set where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching announcements entry
+	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a matching announcements entry could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByUserId_Last(
 		long userId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -228,6 +407,20 @@ public class AnnouncementsEntryUtil {
 		return getPersistence().findByUserId_Last(userId, orderByComparator);
 	}
 
+	/**
+	* Finds the announcements entries before and after the current announcements entry in the ordered set where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId the primary key of the current announcements entry
+	* @param userId the user id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next announcements entry
+	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a announcements entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry[] findByUserId_PrevAndNext(
 		long entryId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -237,18 +430,55 @@ public class AnnouncementsEntryUtil {
 				   .findByUserId_PrevAndNext(entryId, userId, orderByComparator);
 	}
 
+	/**
+	* Finds all the announcements entries where classNameId = &#63; and classPK = &#63;.
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @return the matching announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByC_C(
 		long classNameId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByC_C(classNameId, classPK);
 	}
 
+	/**
+	* Finds a range of all the announcements entries where classNameId = &#63; and classPK = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param start the lower bound of the range of announcements entries to return
+	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @return the range of matching announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByC_C(
 		long classNameId, long classPK, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByC_C(classNameId, classPK, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the announcements entries where classNameId = &#63; and classPK = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param start the lower bound of the range of announcements entries to return
+	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByC_C(
 		long classNameId, long classPK, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -258,6 +488,20 @@ public class AnnouncementsEntryUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds the first announcements entry in the ordered set where classNameId = &#63; and classPK = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching announcements entry
+	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a matching announcements entry could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByC_C_First(
 		long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -267,6 +511,20 @@ public class AnnouncementsEntryUtil {
 				   .findByC_C_First(classNameId, classPK, orderByComparator);
 	}
 
+	/**
+	* Finds the last announcements entry in the ordered set where classNameId = &#63; and classPK = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching announcements entry
+	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a matching announcements entry could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByC_C_Last(
 		long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -276,6 +534,21 @@ public class AnnouncementsEntryUtil {
 				   .findByC_C_Last(classNameId, classPK, orderByComparator);
 	}
 
+	/**
+	* Finds the announcements entries before and after the current announcements entry in the ordered set where classNameId = &#63; and classPK = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId the primary key of the current announcements entry
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next announcements entry
+	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a announcements entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry[] findByC_C_PrevAndNext(
 		long entryId, long classNameId, long classPK,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -286,12 +559,36 @@ public class AnnouncementsEntryUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param alert the alert to search with
+	* @return the matching announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByC_C_A(
 		long classNameId, long classPK, boolean alert)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByC_C_A(classNameId, classPK, alert);
 	}
 
+	/**
+	* Finds a range of all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param alert the alert to search with
+	* @param start the lower bound of the range of announcements entries to return
+	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @return the range of matching announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByC_C_A(
 		long classNameId, long classPK, boolean alert, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -299,6 +596,22 @@ public class AnnouncementsEntryUtil {
 				   .findByC_C_A(classNameId, classPK, alert, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param alert the alert to search with
+	* @param start the lower bound of the range of announcements entries to return
+	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByC_C_A(
 		long classNameId, long classPK, boolean alert, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -308,6 +621,21 @@ public class AnnouncementsEntryUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds the first announcements entry in the ordered set where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param alert the alert to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching announcements entry
+	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a matching announcements entry could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByC_C_A_First(
 		long classNameId, long classPK, boolean alert,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -318,6 +646,21 @@ public class AnnouncementsEntryUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds the last announcements entry in the ordered set where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param alert the alert to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching announcements entry
+	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a matching announcements entry could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry findByC_C_A_Last(
 		long classNameId, long classPK, boolean alert,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -328,6 +671,22 @@ public class AnnouncementsEntryUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds the announcements entries before and after the current announcements entry in the ordered set where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId the primary key of the current announcements entry
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param alert the alert to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next announcements entry
+	* @throws com.liferay.portlet.announcements.NoSuchEntryException if a announcements entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry[] findByC_C_A_PrevAndNext(
 		long entryId, long classNameId, long classPK, boolean alert,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -338,17 +697,48 @@ public class AnnouncementsEntryUtil {
 			alert, orderByComparator);
 	}
 
+	/**
+	* Finds all the announcements entries.
+	*
+	* @return the announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
+	/**
+	* Finds a range of all the announcements entries.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of announcements entries to return
+	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @return the range of announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the announcements entries.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of announcements entries to return
+	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -356,52 +746,121 @@ public class AnnouncementsEntryUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
+	/**
+	* Removes all the announcements entries where uuid = &#63; from the database.
+	*
+	* @param uuid the uuid to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByUuid(java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByUuid(uuid);
 	}
 
+	/**
+	* Removes all the announcements entries where userId = &#63; from the database.
+	*
+	* @param userId the user id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByUserId(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByUserId(userId);
 	}
 
+	/**
+	* Removes all the announcements entries where classNameId = &#63; and classPK = &#63; from the database.
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByC_C(classNameId, classPK);
 	}
 
+	/**
+	* Removes all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63; from the database.
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param alert the alert to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByC_C_A(long classNameId, long classPK,
 		boolean alert)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByC_C_A(classNameId, classPK, alert);
 	}
 
+	/**
+	* Removes all the announcements entries from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
+	/**
+	* Counts all the announcements entries where uuid = &#63;.
+	*
+	* @param uuid the uuid to search with
+	* @return the number of matching announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByUuid(java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByUuid(uuid);
 	}
 
+	/**
+	* Counts all the announcements entries where userId = &#63;.
+	*
+	* @param userId the user id to search with
+	* @return the number of matching announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByUserId(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByUserId(userId);
 	}
 
+	/**
+	* Counts all the announcements entries where classNameId = &#63; and classPK = &#63;.
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @return the number of matching announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_C(classNameId, classPK);
 	}
 
+	/**
+	* Counts all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param alert the alert to search with
+	* @return the number of matching announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByC_C_A(long classNameId, long classPK, boolean alert)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_C_A(classNameId, classPK, alert);
 	}
 
+	/**
+	* Counts all the announcements entries.
+	*
+	* @return the number of announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();

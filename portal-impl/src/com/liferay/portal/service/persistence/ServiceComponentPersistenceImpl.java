@@ -48,9 +48,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       ServiceComponentPersistence
- * @see       ServiceComponentUtil
+ * The persistence for the service component service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see ServiceComponentPersistence
+ * @see ServiceComponentUtil
  * @generated
  */
 public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<ServiceComponent>
@@ -86,6 +96,11 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			ServiceComponentModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
+	/**
+	 * Caches the service component in the entity cache if it is enabled.
+	 *
+	 * @param serviceComponent the service component to cache
+	 */
 	public void cacheResult(ServiceComponent serviceComponent) {
 		EntityCacheUtil.putResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
 			ServiceComponentImpl.class, serviceComponent.getPrimaryKey(),
@@ -98,6 +113,11 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			}, serviceComponent);
 	}
 
+	/**
+	 * Caches the service components in the entity cache if it is enabled.
+	 *
+	 * @param serviceComponents the service components to cache
+	 */
 	public void cacheResult(List<ServiceComponent> serviceComponents) {
 		for (ServiceComponent serviceComponent : serviceComponents) {
 			if (EntityCacheUtil.getResult(
@@ -109,6 +129,13 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		}
 	}
 
+	/**
+	 * Clears the cache for all service components.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(ServiceComponentImpl.class.getName());
 		EntityCacheUtil.clearCache(ServiceComponentImpl.class.getName());
@@ -116,6 +143,13 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the service component.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(ServiceComponent serviceComponent) {
 		EntityCacheUtil.removeResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
 			ServiceComponentImpl.class, serviceComponent.getPrimaryKey());
@@ -127,6 +161,12 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			});
 	}
 
+	/**
+	 * Creates a new service component with the primary key.
+	 *
+	 * @param serviceComponentId the primary key for the new service component
+	 * @return the new service component
+	 */
 	public ServiceComponent create(long serviceComponentId) {
 		ServiceComponent serviceComponent = new ServiceComponentImpl();
 
@@ -136,11 +176,27 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		return serviceComponent;
 	}
 
+	/**
+	 * Removes the service component with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the service component to remove
+	 * @return the service component that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a service component with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ServiceComponent remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the service component with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param serviceComponentId the primary key of the service component to remove
+	 * @return the service component that was removed
+	 * @throws com.liferay.portal.NoSuchServiceComponentException if a service component with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ServiceComponent remove(long serviceComponentId)
 		throws NoSuchServiceComponentException, SystemException {
 		Session session = null;
@@ -296,11 +352,27 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		return serviceComponentImpl;
 	}
 
+	/**
+	 * Finds the service component with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the service component to find
+	 * @return the service component
+	 * @throws com.liferay.portal.NoSuchModelException if a service component with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ServiceComponent findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the service component with the primary key or throws a {@link com.liferay.portal.NoSuchServiceComponentException} if it could not be found.
+	 *
+	 * @param serviceComponentId the primary key of the service component to find
+	 * @return the service component
+	 * @throws com.liferay.portal.NoSuchServiceComponentException if a service component with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ServiceComponent findByPrimaryKey(long serviceComponentId)
 		throws NoSuchServiceComponentException, SystemException {
 		ServiceComponent serviceComponent = fetchByPrimaryKey(serviceComponentId);
@@ -318,11 +390,25 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		return serviceComponent;
 	}
 
+	/**
+	 * Finds the service component with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the service component to find
+	 * @return the service component, or <code>null</code> if a service component with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ServiceComponent fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the service component with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param serviceComponentId the primary key of the service component to find
+	 * @return the service component, or <code>null</code> if a service component with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ServiceComponent fetchByPrimaryKey(long serviceComponentId)
 		throws SystemException {
 		ServiceComponent serviceComponent = (ServiceComponent)EntityCacheUtil.getResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
@@ -352,17 +438,51 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		return serviceComponent;
 	}
 
+	/**
+	 * Finds all the service components where buildNamespace = &#63;.
+	 *
+	 * @param buildNamespace the build namespace to search with
+	 * @return the matching service components
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<ServiceComponent> findByBuildNamespace(String buildNamespace)
 		throws SystemException {
 		return findByBuildNamespace(buildNamespace, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the service components where buildNamespace = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param buildNamespace the build namespace to search with
+	 * @param start the lower bound of the range of service components to return
+	 * @param end the upper bound of the range of service components to return (not inclusive)
+	 * @return the range of matching service components
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<ServiceComponent> findByBuildNamespace(String buildNamespace,
 		int start, int end) throws SystemException {
 		return findByBuildNamespace(buildNamespace, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the service components where buildNamespace = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param buildNamespace the build namespace to search with
+	 * @param start the lower bound of the range of service components to return
+	 * @param end the upper bound of the range of service components to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching service components
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<ServiceComponent> findByBuildNamespace(String buildNamespace,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -448,6 +568,19 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		return list;
 	}
 
+	/**
+	 * Finds the first service component in the ordered set where buildNamespace = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param buildNamespace the build namespace to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching service component
+	 * @throws com.liferay.portal.NoSuchServiceComponentException if a matching service component could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ServiceComponent findByBuildNamespace_First(String buildNamespace,
 		OrderByComparator orderByComparator)
 		throws NoSuchServiceComponentException, SystemException {
@@ -471,6 +604,19 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		}
 	}
 
+	/**
+	 * Finds the last service component in the ordered set where buildNamespace = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param buildNamespace the build namespace to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching service component
+	 * @throws com.liferay.portal.NoSuchServiceComponentException if a matching service component could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ServiceComponent findByBuildNamespace_Last(String buildNamespace,
 		OrderByComparator orderByComparator)
 		throws NoSuchServiceComponentException, SystemException {
@@ -496,6 +642,20 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		}
 	}
 
+	/**
+	 * Finds the service components before and after the current service component in the ordered set where buildNamespace = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param serviceComponentId the primary key of the current service component
+	 * @param buildNamespace the build namespace to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next service component
+	 * @throws com.liferay.portal.NoSuchServiceComponentException if a service component with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ServiceComponent[] findByBuildNamespace_PrevAndNext(
 		long serviceComponentId, String buildNamespace,
 		OrderByComparator orderByComparator)
@@ -644,6 +804,15 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		}
 	}
 
+	/**
+	 * Finds the service component where buildNamespace = &#63; and buildNumber = &#63; or throws a {@link com.liferay.portal.NoSuchServiceComponentException} if it could not be found.
+	 *
+	 * @param buildNamespace the build namespace to search with
+	 * @param buildNumber the build number to search with
+	 * @return the matching service component
+	 * @throws com.liferay.portal.NoSuchServiceComponentException if a matching service component could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ServiceComponent findByBNS_BNU(String buildNamespace,
 		long buildNumber)
 		throws NoSuchServiceComponentException, SystemException {
@@ -673,11 +842,27 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		return serviceComponent;
 	}
 
+	/**
+	 * Finds the service component where buildNamespace = &#63; and buildNumber = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param buildNamespace the build namespace to search with
+	 * @param buildNumber the build number to search with
+	 * @return the matching service component, or <code>null</code> if a matching service component could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ServiceComponent fetchByBNS_BNU(String buildNamespace,
 		long buildNumber) throws SystemException {
 		return fetchByBNS_BNU(buildNamespace, buildNumber, true);
 	}
 
+	/**
+	 * Finds the service component where buildNamespace = &#63; and buildNumber = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param buildNamespace the build namespace to search with
+	 * @param buildNumber the build number to search with
+	 * @return the matching service component, or <code>null</code> if a matching service component could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ServiceComponent fetchByBNS_BNU(String buildNamespace,
 		long buildNumber, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { buildNamespace, buildNumber };
@@ -775,15 +960,46 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		}
 	}
 
+	/**
+	 * Finds all the service components.
+	 *
+	 * @return the service components
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<ServiceComponent> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the service components.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of service components to return
+	 * @param end the upper bound of the range of service components to return (not inclusive)
+	 * @return the range of service components
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<ServiceComponent> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the service components.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of service components to return
+	 * @param end the upper bound of the range of service components to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of service components
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<ServiceComponent> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -850,6 +1066,12 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		return list;
 	}
 
+	/**
+	 * Removes all the service components where buildNamespace = &#63; from the database.
+	 *
+	 * @param buildNamespace the build namespace to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByBuildNamespace(String buildNamespace)
 		throws SystemException {
 		for (ServiceComponent serviceComponent : findByBuildNamespace(
@@ -858,6 +1080,13 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		}
 	}
 
+	/**
+	 * Removes the service component where buildNamespace = &#63; and buildNumber = &#63; from the database.
+	 *
+	 * @param buildNamespace the build namespace to search with
+	 * @param buildNumber the build number to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByBNS_BNU(String buildNamespace, long buildNumber)
 		throws NoSuchServiceComponentException, SystemException {
 		ServiceComponent serviceComponent = findByBNS_BNU(buildNamespace,
@@ -866,12 +1095,24 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		remove(serviceComponent);
 	}
 
+	/**
+	 * Removes all the service components from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (ServiceComponent serviceComponent : findAll()) {
 			remove(serviceComponent);
 		}
 	}
 
+	/**
+	 * Counts all the service components where buildNamespace = &#63;.
+	 *
+	 * @param buildNamespace the build namespace to search with
+	 * @return the number of matching service components
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByBuildNamespace(String buildNamespace)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { buildNamespace };
@@ -931,6 +1172,14 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the service components where buildNamespace = &#63; and buildNumber = &#63;.
+	 *
+	 * @param buildNamespace the build namespace to search with
+	 * @param buildNumber the build number to search with
+	 * @return the number of matching service components
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByBNS_BNU(String buildNamespace, long buildNumber)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { buildNamespace, buildNumber };
@@ -994,6 +1243,12 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the service components.
+	 *
+	 * @return the number of service components
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -1028,6 +1283,9 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the service component persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

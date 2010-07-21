@@ -48,9 +48,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       ClassNamePersistence
- * @see       ClassNameUtil
+ * The persistence for the class name service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see ClassNamePersistence
+ * @see ClassNameUtil
  * @generated
  */
 public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
@@ -71,6 +81,11 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 			ClassNameModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the class name in the entity cache if it is enabled.
+	 *
+	 * @param className the class name to cache
+	 */
 	public void cacheResult(ClassName className) {
 		EntityCacheUtil.putResult(ClassNameModelImpl.ENTITY_CACHE_ENABLED,
 			ClassNameImpl.class, className.getPrimaryKey(), className);
@@ -79,6 +94,11 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 			new Object[] { className.getValue() }, className);
 	}
 
+	/**
+	 * Caches the class names in the entity cache if it is enabled.
+	 *
+	 * @param classNames the class names to cache
+	 */
 	public void cacheResult(List<ClassName> classNames) {
 		for (ClassName className : classNames) {
 			if (EntityCacheUtil.getResult(
@@ -89,6 +109,13 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		}
 	}
 
+	/**
+	 * Clears the cache for all class names.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(ClassNameImpl.class.getName());
 		EntityCacheUtil.clearCache(ClassNameImpl.class.getName());
@@ -96,6 +123,13 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the class name.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(ClassName className) {
 		EntityCacheUtil.removeResult(ClassNameModelImpl.ENTITY_CACHE_ENABLED,
 			ClassNameImpl.class, className.getPrimaryKey());
@@ -104,6 +138,12 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 			new Object[] { className.getValue() });
 	}
 
+	/**
+	 * Creates a new class name with the primary key.
+	 *
+	 * @param classNameId the primary key for the new class name
+	 * @return the new class name
+	 */
 	public ClassName create(long classNameId) {
 		ClassName className = new ClassNameImpl();
 
@@ -113,11 +153,27 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		return className;
 	}
 
+	/**
+	 * Removes the class name with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the class name to remove
+	 * @return the class name that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a class name with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ClassName remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the class name with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param classNameId the primary key of the class name to remove
+	 * @return the class name that was removed
+	 * @throws com.liferay.portal.NoSuchClassNameException if a class name with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ClassName remove(long classNameId)
 		throws NoSuchClassNameException, SystemException {
 		Session session = null;
@@ -254,11 +310,27 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		return classNameImpl;
 	}
 
+	/**
+	 * Finds the class name with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the class name to find
+	 * @return the class name
+	 * @throws com.liferay.portal.NoSuchModelException if a class name with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ClassName findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the class name with the primary key or throws a {@link com.liferay.portal.NoSuchClassNameException} if it could not be found.
+	 *
+	 * @param classNameId the primary key of the class name to find
+	 * @return the class name
+	 * @throws com.liferay.portal.NoSuchClassNameException if a class name with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ClassName findByPrimaryKey(long classNameId)
 		throws NoSuchClassNameException, SystemException {
 		ClassName className = fetchByPrimaryKey(classNameId);
@@ -275,11 +347,25 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		return className;
 	}
 
+	/**
+	 * Finds the class name with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the class name to find
+	 * @return the class name, or <code>null</code> if a class name with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ClassName fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the class name with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param classNameId the primary key of the class name to find
+	 * @return the class name, or <code>null</code> if a class name with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ClassName fetchByPrimaryKey(long classNameId)
 		throws SystemException {
 		ClassName className = (ClassName)EntityCacheUtil.getResult(ClassNameModelImpl.ENTITY_CACHE_ENABLED,
@@ -309,6 +395,14 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		return className;
 	}
 
+	/**
+	 * Finds the class name where value = &#63; or throws a {@link com.liferay.portal.NoSuchClassNameException} if it could not be found.
+	 *
+	 * @param value the value to search with
+	 * @return the matching class name
+	 * @throws com.liferay.portal.NoSuchClassNameException if a matching class name could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ClassName findByValue(String value)
 		throws NoSuchClassNameException, SystemException {
 		ClassName className = fetchByValue(value);
@@ -333,10 +427,24 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		return className;
 	}
 
+	/**
+	 * Finds the class name where value = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param value the value to search with
+	 * @return the matching class name, or <code>null</code> if a matching class name could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ClassName fetchByValue(String value) throws SystemException {
 		return fetchByValue(value, true);
 	}
 
+	/**
+	 * Finds the class name where value = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param value the value to search with
+	 * @return the matching class name, or <code>null</code> if a matching class name could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ClassName fetchByValue(String value, boolean retrieveFromCache)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { value };
@@ -426,15 +534,46 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		}
 	}
 
+	/**
+	 * Finds all the class names.
+	 *
+	 * @return the class names
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<ClassName> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the class names.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of class names to return
+	 * @param end the upper bound of the range of class names to return (not inclusive)
+	 * @return the range of class names
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<ClassName> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the class names.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of class names to return
+	 * @param end the upper bound of the range of class names to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of class names
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<ClassName> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -501,6 +640,12 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		return list;
 	}
 
+	/**
+	 * Removes the class name where value = &#63; from the database.
+	 *
+	 * @param value the value to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByValue(String value)
 		throws NoSuchClassNameException, SystemException {
 		ClassName className = findByValue(value);
@@ -508,12 +653,24 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		remove(className);
 	}
 
+	/**
+	 * Removes all the class names from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (ClassName className : findAll()) {
 			remove(className);
 		}
 	}
 
+	/**
+	 * Counts all the class names where value = &#63;.
+	 *
+	 * @param value the value to search with
+	 * @return the number of matching class names
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByValue(String value) throws SystemException {
 		Object[] finderArgs = new Object[] { value };
 
@@ -572,6 +729,12 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the class names.
+	 *
+	 * @return the number of class names
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -606,6 +769,9 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the class name persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

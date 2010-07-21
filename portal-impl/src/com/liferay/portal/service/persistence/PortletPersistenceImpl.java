@@ -48,9 +48,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       PortletPersistence
- * @see       PortletUtil
+ * The persistence for the portlet service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see PortletPersistence
+ * @see PortletUtil
  * @generated
  */
 public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
@@ -85,6 +95,11 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 			PortletModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the portlet in the entity cache if it is enabled.
+	 *
+	 * @param portlet the portlet to cache
+	 */
 	public void cacheResult(Portlet portlet) {
 		EntityCacheUtil.putResult(PortletModelImpl.ENTITY_CACHE_ENABLED,
 			PortletImpl.class, portlet.getPrimaryKey(), portlet);
@@ -97,6 +112,11 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 			}, portlet);
 	}
 
+	/**
+	 * Caches the portlets in the entity cache if it is enabled.
+	 *
+	 * @param portlets the portlets to cache
+	 */
 	public void cacheResult(List<Portlet> portlets) {
 		for (Portlet portlet : portlets) {
 			if (EntityCacheUtil.getResult(
@@ -107,6 +127,13 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		}
 	}
 
+	/**
+	 * Clears the cache for all portlets.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(PortletImpl.class.getName());
 		EntityCacheUtil.clearCache(PortletImpl.class.getName());
@@ -114,6 +141,13 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the portlet.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(Portlet portlet) {
 		EntityCacheUtil.removeResult(PortletModelImpl.ENTITY_CACHE_ENABLED,
 			PortletImpl.class, portlet.getPrimaryKey());
@@ -126,6 +160,12 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 			});
 	}
 
+	/**
+	 * Creates a new portlet with the primary key.
+	 *
+	 * @param id the primary key for the new portlet
+	 * @return the new portlet
+	 */
 	public Portlet create(long id) {
 		Portlet portlet = new PortletImpl();
 
@@ -135,11 +175,27 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		return portlet;
 	}
 
+	/**
+	 * Removes the portlet with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the portlet to remove
+	 * @return the portlet that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a portlet with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Portlet remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the portlet with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param id the primary key of the portlet to remove
+	 * @return the portlet that was removed
+	 * @throws com.liferay.portal.NoSuchPortletException if a portlet with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Portlet remove(long id)
 		throws NoSuchPortletException, SystemException {
 		Session session = null;
@@ -292,11 +348,27 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		return portletImpl;
 	}
 
+	/**
+	 * Finds the portlet with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the portlet to find
+	 * @return the portlet
+	 * @throws com.liferay.portal.NoSuchModelException if a portlet with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Portlet findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the portlet with the primary key or throws a {@link com.liferay.portal.NoSuchPortletException} if it could not be found.
+	 *
+	 * @param id the primary key of the portlet to find
+	 * @return the portlet
+	 * @throws com.liferay.portal.NoSuchPortletException if a portlet with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Portlet findByPrimaryKey(long id)
 		throws NoSuchPortletException, SystemException {
 		Portlet portlet = fetchByPrimaryKey(id);
@@ -313,11 +385,25 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		return portlet;
 	}
 
+	/**
+	 * Finds the portlet with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the portlet to find
+	 * @return the portlet, or <code>null</code> if a portlet with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Portlet fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the portlet with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param id the primary key of the portlet to find
+	 * @return the portlet, or <code>null</code> if a portlet with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Portlet fetchByPrimaryKey(long id) throws SystemException {
 		Portlet portlet = (Portlet)EntityCacheUtil.getResult(PortletModelImpl.ENTITY_CACHE_ENABLED,
 				PortletImpl.class, id, this);
@@ -345,17 +431,51 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		return portlet;
 	}
 
+	/**
+	 * Finds all the portlets where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the matching portlets
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Portlet> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the portlets where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of portlets to return
+	 * @param end the upper bound of the range of portlets to return (not inclusive)
+	 * @return the range of matching portlets
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Portlet> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the portlets where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of portlets to return
+	 * @param end the upper bound of the range of portlets to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching portlets
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Portlet> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -423,6 +543,19 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		return list;
 	}
 
+	/**
+	 * Finds the first portlet in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching portlet
+	 * @throws com.liferay.portal.NoSuchPortletException if a matching portlet could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Portlet findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPortletException, SystemException {
@@ -445,6 +578,19 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		}
 	}
 
+	/**
+	 * Finds the last portlet in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching portlet
+	 * @throws com.liferay.portal.NoSuchPortletException if a matching portlet could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Portlet findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPortletException, SystemException {
@@ -470,6 +616,20 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		}
 	}
 
+	/**
+	 * Finds the portlets before and after the current portlet in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current portlet
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next portlet
+	 * @throws com.liferay.portal.NoSuchPortletException if a portlet with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Portlet[] findByCompanyId_PrevAndNext(long id, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPortletException, SystemException {
@@ -600,6 +760,15 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		}
 	}
 
+	/**
+	 * Finds the portlet where companyId = &#63; and portletId = &#63; or throws a {@link com.liferay.portal.NoSuchPortletException} if it could not be found.
+	 *
+	 * @param companyId the company id to search with
+	 * @param portletId the portlet id to search with
+	 * @return the matching portlet
+	 * @throws com.liferay.portal.NoSuchPortletException if a matching portlet could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Portlet findByC_P(long companyId, String portletId)
 		throws NoSuchPortletException, SystemException {
 		Portlet portlet = fetchByC_P(companyId, portletId);
@@ -627,11 +796,27 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		return portlet;
 	}
 
+	/**
+	 * Finds the portlet where companyId = &#63; and portletId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param portletId the portlet id to search with
+	 * @return the matching portlet, or <code>null</code> if a matching portlet could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Portlet fetchByC_P(long companyId, String portletId)
 		throws SystemException {
 		return fetchByC_P(companyId, portletId, true);
 	}
 
+	/**
+	 * Finds the portlet where companyId = &#63; and portletId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param portletId the portlet id to search with
+	 * @return the matching portlet, or <code>null</code> if a matching portlet could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Portlet fetchByC_P(long companyId, String portletId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, portletId };
@@ -726,14 +911,45 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		}
 	}
 
+	/**
+	 * Finds all the portlets.
+	 *
+	 * @return the portlets
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Portlet> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the portlets.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of portlets to return
+	 * @param end the upper bound of the range of portlets to return (not inclusive)
+	 * @return the range of portlets
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Portlet> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the portlets.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of portlets to return
+	 * @param end the upper bound of the range of portlets to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of portlets
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Portlet> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -800,12 +1016,25 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		return list;
 	}
 
+	/**
+	 * Removes all the portlets where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (Portlet portlet : findByCompanyId(companyId)) {
 			remove(portlet);
 		}
 	}
 
+	/**
+	 * Removes the portlet where companyId = &#63; and portletId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param portletId the portlet id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_P(long companyId, String portletId)
 		throws NoSuchPortletException, SystemException {
 		Portlet portlet = findByC_P(companyId, portletId);
@@ -813,12 +1042,24 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		remove(portlet);
 	}
 
+	/**
+	 * Removes all the portlets from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (Portlet portlet : findAll()) {
 			remove(portlet);
 		}
 	}
 
+	/**
+	 * Counts all the portlets where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the number of matching portlets
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId };
 
@@ -865,6 +1106,14 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the portlets where companyId = &#63; and portletId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param portletId the portlet id to search with
+	 * @return the number of matching portlets
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_P(long companyId, String portletId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, portletId };
@@ -928,6 +1177,12 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the portlets.
+	 *
+	 * @return the number of portlets
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -962,6 +1217,9 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the portlet persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

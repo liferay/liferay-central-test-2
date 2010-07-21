@@ -49,9 +49,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       CounterPersistence
- * @see       CounterUtil
+ * The persistence for the counter service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see CounterPersistence
+ * @see CounterUtil
  * @generated
  */
 public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
@@ -66,11 +76,21 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 			CounterModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the counter in the entity cache if it is enabled.
+	 *
+	 * @param counter the counter to cache
+	 */
 	public void cacheResult(Counter counter) {
 		EntityCacheUtil.putResult(CounterModelImpl.ENTITY_CACHE_ENABLED,
 			CounterImpl.class, counter.getPrimaryKey(), counter);
 	}
 
+	/**
+	 * Caches the counters in the entity cache if it is enabled.
+	 *
+	 * @param counters the counters to cache
+	 */
 	public void cacheResult(List<Counter> counters) {
 		for (Counter counter : counters) {
 			if (EntityCacheUtil.getResult(
@@ -81,6 +101,13 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 		}
 	}
 
+	/**
+	 * Clears the cache for all counters.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(CounterImpl.class.getName());
 		EntityCacheUtil.clearCache(CounterImpl.class.getName());
@@ -88,11 +115,24 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the counter.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(Counter counter) {
 		EntityCacheUtil.removeResult(CounterModelImpl.ENTITY_CACHE_ENABLED,
 			CounterImpl.class, counter.getPrimaryKey());
 	}
 
+	/**
+	 * Creates a new counter with the primary key.
+	 *
+	 * @param name the primary key for the new counter
+	 * @return the new counter
+	 */
 	public Counter create(String name) {
 		Counter counter = new CounterImpl();
 
@@ -102,11 +142,27 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 		return counter;
 	}
 
+	/**
+	 * Removes the counter with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the counter to remove
+	 * @return the counter that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a counter with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Counter remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove((String)primaryKey);
 	}
 
+	/**
+	 * Removes the counter with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param name the primary key of the counter to remove
+	 * @return the counter that was removed
+	 * @throws com.liferay.counter.NoSuchCounterException if a counter with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Counter remove(String name)
 		throws NoSuchCounterException, SystemException {
 		Session session = null;
@@ -218,11 +274,27 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 		return counterImpl;
 	}
 
+	/**
+	 * Finds the counter with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the counter to find
+	 * @return the counter
+	 * @throws com.liferay.portal.NoSuchModelException if a counter with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Counter findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey((String)primaryKey);
 	}
 
+	/**
+	 * Finds the counter with the primary key or throws a {@link com.liferay.counter.NoSuchCounterException} if it could not be found.
+	 *
+	 * @param name the primary key of the counter to find
+	 * @return the counter
+	 * @throws com.liferay.counter.NoSuchCounterException if a counter with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Counter findByPrimaryKey(String name)
 		throws NoSuchCounterException, SystemException {
 		Counter counter = fetchByPrimaryKey(name);
@@ -239,11 +311,25 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 		return counter;
 	}
 
+	/**
+	 * Finds the counter with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the counter to find
+	 * @return the counter, or <code>null</code> if a counter with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Counter fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey((String)primaryKey);
 	}
 
+	/**
+	 * Finds the counter with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param name the primary key of the counter to find
+	 * @return the counter, or <code>null</code> if a counter with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Counter fetchByPrimaryKey(String name) throws SystemException {
 		Counter counter = (Counter)EntityCacheUtil.getResult(CounterModelImpl.ENTITY_CACHE_ENABLED,
 				CounterImpl.class, name, this);
@@ -271,14 +357,45 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 		return counter;
 	}
 
+	/**
+	 * Finds all the counters.
+	 *
+	 * @return the counters
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Counter> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the counters.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of counters to return
+	 * @param end the upper bound of the range of counters to return (not inclusive)
+	 * @return the range of counters
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Counter> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the counters.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of counters to return
+	 * @param end the upper bound of the range of counters to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of counters
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Counter> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -345,12 +462,23 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 		return list;
 	}
 
+	/**
+	 * Removes all the counters from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (Counter counter : findAll()) {
 			remove(counter);
 		}
 	}
 
+	/**
+	 * Counts all the counters.
+	 *
+	 * @return the number of counters
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -385,6 +513,9 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the counter persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

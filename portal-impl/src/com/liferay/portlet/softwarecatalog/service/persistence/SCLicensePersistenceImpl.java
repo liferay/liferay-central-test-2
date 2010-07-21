@@ -59,9 +59,19 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       SCLicensePersistence
- * @see       SCLicenseUtil
+ * The persistence for the s c license service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see SCLicensePersistence
+ * @see SCLicenseUtil
  * @generated
  */
 public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
@@ -101,11 +111,21 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			SCLicenseModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the s c license in the entity cache if it is enabled.
+	 *
+	 * @param scLicense the s c license to cache
+	 */
 	public void cacheResult(SCLicense scLicense) {
 		EntityCacheUtil.putResult(SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
 			SCLicenseImpl.class, scLicense.getPrimaryKey(), scLicense);
 	}
 
+	/**
+	 * Caches the s c licenses in the entity cache if it is enabled.
+	 *
+	 * @param scLicenses the s c licenses to cache
+	 */
 	public void cacheResult(List<SCLicense> scLicenses) {
 		for (SCLicense scLicense : scLicenses) {
 			if (EntityCacheUtil.getResult(
@@ -116,6 +136,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Clears the cache for all s c licenses.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(SCLicenseImpl.class.getName());
 		EntityCacheUtil.clearCache(SCLicenseImpl.class.getName());
@@ -123,11 +150,24 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the s c license.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(SCLicense scLicense) {
 		EntityCacheUtil.removeResult(SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
 			SCLicenseImpl.class, scLicense.getPrimaryKey());
 	}
 
+	/**
+	 * Creates a new s c license with the primary key.
+	 *
+	 * @param licenseId the primary key for the new s c license
+	 * @return the new s c license
+	 */
 	public SCLicense create(long licenseId) {
 		SCLicense scLicense = new SCLicenseImpl();
 
@@ -137,11 +177,27 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		return scLicense;
 	}
 
+	/**
+	 * Removes the s c license with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the s c license to remove
+	 * @return the s c license that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a s c license with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCLicense remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the s c license with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param licenseId the primary key of the s c license to remove
+	 * @return the s c license that was removed
+	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a s c license with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCLicense remove(long licenseId)
 		throws NoSuchLicenseException, SystemException {
 		Session session = null;
@@ -270,11 +326,27 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		return scLicenseImpl;
 	}
 
+	/**
+	 * Finds the s c license with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the s c license to find
+	 * @return the s c license
+	 * @throws com.liferay.portal.NoSuchModelException if a s c license with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCLicense findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the s c license with the primary key or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchLicenseException} if it could not be found.
+	 *
+	 * @param licenseId the primary key of the s c license to find
+	 * @return the s c license
+	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a s c license with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCLicense findByPrimaryKey(long licenseId)
 		throws NoSuchLicenseException, SystemException {
 		SCLicense scLicense = fetchByPrimaryKey(licenseId);
@@ -291,11 +363,25 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		return scLicense;
 	}
 
+	/**
+	 * Finds the s c license with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the s c license to find
+	 * @return the s c license, or <code>null</code> if a s c license with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCLicense fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the s c license with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param licenseId the primary key of the s c license to find
+	 * @return the s c license, or <code>null</code> if a s c license with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCLicense fetchByPrimaryKey(long licenseId)
 		throws SystemException {
 		SCLicense scLicense = (SCLicense)EntityCacheUtil.getResult(SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
@@ -325,16 +411,50 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		return scLicense;
 	}
 
+	/**
+	 * Finds all the s c licenses where active = &#63;.
+	 *
+	 * @param active the active to search with
+	 * @return the matching s c licenses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCLicense> findByActive(boolean active)
 		throws SystemException {
 		return findByActive(active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the s c licenses where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param start the lower bound of the range of s c licenses to return
+	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @return the range of matching s c licenses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCLicense> findByActive(boolean active, int start, int end)
 		throws SystemException {
 		return findByActive(active, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the s c licenses where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param start the lower bound of the range of s c licenses to return
+	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching s c licenses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCLicense> findByActive(boolean active, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -407,6 +527,19 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		return list;
 	}
 
+	/**
+	 * Finds the first s c license in the ordered set where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching s c license
+	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a matching s c license could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCLicense findByActive_First(boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchLicenseException, SystemException {
@@ -429,6 +562,19 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Finds the last s c license in the ordered set where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching s c license
+	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a matching s c license could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCLicense findByActive_Last(boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchLicenseException, SystemException {
@@ -454,6 +600,20 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Finds the s c licenses before and after the current s c license in the ordered set where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param licenseId the primary key of the current s c license
+	 * @param active the active to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next s c license
+	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a s c license with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCLicense[] findByActive_PrevAndNext(long licenseId, boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchLicenseException, SystemException {
@@ -588,17 +748,54 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Finds all the s c licenses where active = &#63; and recommended = &#63;.
+	 *
+	 * @param active the active to search with
+	 * @param recommended the recommended to search with
+	 * @return the matching s c licenses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCLicense> findByA_R(boolean active, boolean recommended)
 		throws SystemException {
 		return findByA_R(active, recommended, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the s c licenses where active = &#63; and recommended = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param recommended the recommended to search with
+	 * @param start the lower bound of the range of s c licenses to return
+	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @return the range of matching s c licenses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCLicense> findByA_R(boolean active, boolean recommended,
 		int start, int end) throws SystemException {
 		return findByA_R(active, recommended, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the s c licenses where active = &#63; and recommended = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param recommended the recommended to search with
+	 * @param start the lower bound of the range of s c licenses to return
+	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching s c licenses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCLicense> findByA_R(boolean active, boolean recommended,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -676,6 +873,20 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		return list;
 	}
 
+	/**
+	 * Finds the first s c license in the ordered set where active = &#63; and recommended = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param recommended the recommended to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching s c license
+	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a matching s c license could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCLicense findByA_R_First(boolean active, boolean recommended,
 		OrderByComparator orderByComparator)
 		throws NoSuchLicenseException, SystemException {
@@ -702,6 +913,20 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Finds the last s c license in the ordered set where active = &#63; and recommended = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param recommended the recommended to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching s c license
+	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a matching s c license could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCLicense findByA_R_Last(boolean active, boolean recommended,
 		OrderByComparator orderByComparator)
 		throws NoSuchLicenseException, SystemException {
@@ -730,6 +955,21 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Finds the s c licenses before and after the current s c license in the ordered set where active = &#63; and recommended = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param licenseId the primary key of the current s c license
+	 * @param active the active to search with
+	 * @param recommended the recommended to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next s c license
+	 * @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a s c license with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SCLicense[] findByA_R_PrevAndNext(long licenseId, boolean active,
 		boolean recommended, OrderByComparator orderByComparator)
 		throws NoSuchLicenseException, SystemException {
@@ -868,15 +1108,46 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Finds all the s c licenses.
+	 *
+	 * @return the s c licenses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCLicense> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the s c licenses.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of s c licenses to return
+	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @return the range of s c licenses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCLicense> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the s c licenses.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of s c licenses to return
+	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of s c licenses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SCLicense> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -943,12 +1214,25 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		return list;
 	}
 
+	/**
+	 * Removes all the s c licenses where active = &#63; from the database.
+	 *
+	 * @param active the active to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByActive(boolean active) throws SystemException {
 		for (SCLicense scLicense : findByActive(active)) {
 			remove(scLicense);
 		}
 	}
 
+	/**
+	 * Removes all the s c licenses where active = &#63; and recommended = &#63; from the database.
+	 *
+	 * @param active the active to search with
+	 * @param recommended the recommended to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByA_R(boolean active, boolean recommended)
 		throws SystemException {
 		for (SCLicense scLicense : findByA_R(active, recommended)) {
@@ -956,12 +1240,24 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Removes all the s c licenses from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (SCLicense scLicense : findAll()) {
 			remove(scLicense);
 		}
 	}
 
+	/**
+	 * Counts all the s c licenses where active = &#63;.
+	 *
+	 * @param active the active to search with
+	 * @return the number of matching s c licenses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByActive(boolean active) throws SystemException {
 		Object[] finderArgs = new Object[] { active };
 
@@ -1008,6 +1304,14 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the s c licenses where active = &#63; and recommended = &#63;.
+	 *
+	 * @param active the active to search with
+	 * @param recommended the recommended to search with
+	 * @return the number of matching s c licenses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByA_R(boolean active, boolean recommended)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { active, recommended };
@@ -1059,6 +1363,12 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the s c licenses.
+	 *
+	 * @return the number of s c licenses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -1093,11 +1403,31 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		return count.intValue();
 	}
 
+	/**
+	 * Gets all the s c product entries associated with the s c license.
+	 *
+	 * @param pk the primary key of the s c license to get the associated s c product entries for
+	 * @return the s c product entries associated with the s c license
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
 		long pk) throws SystemException {
 		return getSCProductEntries(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
+	/**
+	 * Gets a range of all the s c product entries associated with the s c license.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the s c license to get the associated s c product entries for
+	 * @param start the lower bound of the range of s c licenses to return
+	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @return the range of s c product entries associated with the s c license
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
 		long pk, int start, int end) throws SystemException {
 		return getSCProductEntries(pk, start, end, null);
@@ -1112,6 +1442,20 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
 
+	/**
+	 * Gets an ordered range of all the s c product entries associated with the s c license.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the s c license to get the associated s c product entries for
+	 * @param start the lower bound of the range of s c licenses to return
+	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of s c product entries associated with the s c license
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
 		long pk, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1176,6 +1520,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			SCLicenseModelImpl.MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME,
 			"getSCProductEntriesSize", new String[] { Long.class.getName() });
 
+	/**
+	 * Gets the number of s c product entries associated with the s c license.
+	 *
+	 * @param pk the primary key of the s c license to get the number of associated s c product entries for
+	 * @return the number of s c product entries associated with the s c license
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int getSCProductEntriesSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -1223,6 +1574,14 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			"containsSCProductEntry",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
+	/**
+	 * Determines whether the s c product entry is associated with the s c license.
+	 *
+	 * @param pk the primary key of the s c license
+	 * @param scProductEntryPK the primary key of the s c product entry
+	 * @return whether the s c product entry is associated with the s c license
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsSCProductEntry(long pk, long scProductEntryPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { pk, scProductEntryPK };
@@ -1251,6 +1610,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		return value.booleanValue();
 	}
 
+	/**
+	 * Determines whether the s c license has any s c product entries associated with it.
+	 *
+	 * @param pk the primary key of the s c license to check for associations with s c product entries
+	 * @return whether the s c license has any s c product entries associated with it
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsSCProductEntries(long pk) throws SystemException {
 		if (getSCProductEntriesSize(pk) > 0) {
 			return true;
@@ -1260,6 +1626,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Adds an association between the s c license and the s c product entry. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c license
+	 * @param scProductEntryPK the primary key of the s c product entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addSCProductEntry(long pk, long scProductEntryPK)
 		throws SystemException {
 		try {
@@ -1273,6 +1646,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Adds an association between the s c license and the s c product entry. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c license
+	 * @param scProductEntry the s c product entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addSCProductEntry(long pk,
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws SystemException {
@@ -1287,6 +1667,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Adds an association between the s c license and the s c product entries. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c license
+	 * @param scProductEntryPKs the primary keys of the s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addSCProductEntries(long pk, long[] scProductEntryPKs)
 		throws SystemException {
 		try {
@@ -1302,6 +1689,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Adds an association between the s c license and the s c product entries. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c license
+	 * @param scProductEntries the s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addSCProductEntries(long pk,
 		List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries)
 		throws SystemException {
@@ -1318,6 +1712,12 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Clears all associations between the s c license and its s c product entries. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c license to clear the associated s c product entries from
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void clearSCProductEntries(long pk) throws SystemException {
 		try {
 			clearSCProductEntries.clear(pk);
@@ -1330,6 +1730,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Removes the association between the s c license and the s c product entry. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c license
+	 * @param scProductEntryPK the primary key of the s c product entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeSCProductEntry(long pk, long scProductEntryPK)
 		throws SystemException {
 		try {
@@ -1343,6 +1750,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Removes the association between the s c license and the s c product entry. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c license
+	 * @param scProductEntry the s c product entry
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeSCProductEntry(long pk,
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws SystemException {
@@ -1357,6 +1771,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Removes the association between the s c license and the s c product entries. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c license
+	 * @param scProductEntryPKs the primary keys of the s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeSCProductEntries(long pk, long[] scProductEntryPKs)
 		throws SystemException {
 		try {
@@ -1372,6 +1793,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Removes the association between the s c license and the s c product entries. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c license
+	 * @param scProductEntries the s c product entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeSCProductEntries(long pk,
 		List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries)
 		throws SystemException {
@@ -1388,6 +1816,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Sets the s c product entries associated with the s c license, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c license to set the associations for
+	 * @param scProductEntryPKs the primary keys of the s c product entries to be associated with the s c license
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setSCProductEntries(long pk, long[] scProductEntryPKs)
 		throws SystemException {
 		try {
@@ -1415,6 +1850,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Sets the s c product entries associated with the s c license, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the s c license to set the associations for
+	 * @param scProductEntries the s c product entries to be associated with the s c license
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setSCProductEntries(long pk,
 		List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries)
 		throws SystemException {
@@ -1438,6 +1880,9 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Initializes the s c license persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

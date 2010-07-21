@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the Role_ table in the
- * database.
- * </p>
+ * The model interface for the Role service. Represents a row in the &quot;Role_&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.RoleImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.RoleImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       RoleModel
- * @see       com.liferay.portal.model.impl.RoleImpl
- * @see       com.liferay.portal.model.impl.RoleModelImpl
+ * @author Brian Wing Shun Chan
+ * @see RoleModel
+ * @see com.liferay.portal.model.impl.RoleImpl
+ * @see com.liferay.portal.model.impl.RoleModelImpl
  * @generated
  */
 public interface Role extends RoleModel {

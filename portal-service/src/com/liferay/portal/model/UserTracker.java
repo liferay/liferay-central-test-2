@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the UserTracker table in the
- * database.
- * </p>
+ * The model interface for the UserTracker service. Represents a row in the &quot;UserTracker&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.UserTrackerImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.UserTrackerImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       UserTrackerModel
- * @see       com.liferay.portal.model.impl.UserTrackerImpl
- * @see       com.liferay.portal.model.impl.UserTrackerModelImpl
+ * @author Brian Wing Shun Chan
+ * @see UserTrackerModel
+ * @see com.liferay.portal.model.impl.UserTrackerImpl
+ * @see com.liferay.portal.model.impl.UserTrackerModelImpl
  * @generated
  */
 public interface UserTracker extends UserTrackerModel {

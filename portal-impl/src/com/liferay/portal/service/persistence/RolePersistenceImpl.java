@@ -56,9 +56,19 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       RolePersistence
- * @see       RoleUtil
+ * The persistence for the role service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see RolePersistence
+ * @see RoleUtil
  * @generated
  */
 public class RolePersistenceImpl extends BasePersistenceImpl<Role>
@@ -130,6 +140,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			RoleModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the role in the entity cache if it is enabled.
+	 *
+	 * @param role the role to cache
+	 */
 	public void cacheResult(Role role) {
 		EntityCacheUtil.putResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
 			RoleImpl.class, role.getPrimaryKey(), role);
@@ -144,6 +159,11 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			}, role);
 	}
 
+	/**
+	 * Caches the roles in the entity cache if it is enabled.
+	 *
+	 * @param roles the roles to cache
+	 */
 	public void cacheResult(List<Role> roles) {
 		for (Role role : roles) {
 			if (EntityCacheUtil.getResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
@@ -153,6 +173,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Clears the cache for all roles.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(RoleImpl.class.getName());
 		EntityCacheUtil.clearCache(RoleImpl.class.getName());
@@ -160,6 +187,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the role.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(Role role) {
 		EntityCacheUtil.removeResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
 			RoleImpl.class, role.getPrimaryKey());
@@ -174,6 +208,12 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			});
 	}
 
+	/**
+	 * Creates a new role with the primary key.
+	 *
+	 * @param roleId the primary key for the new role
+	 * @return the new role
+	 */
 	public Role create(long roleId) {
 		Role role = new RoleImpl();
 
@@ -183,11 +223,27 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return role;
 	}
 
+	/**
+	 * Removes the role with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the role to remove
+	 * @return the role that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a role with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the role with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param roleId the primary key of the role to remove
+	 * @return the role that was removed
+	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role remove(long roleId) throws NoSuchRoleException, SystemException {
 		Session session = null;
 
@@ -399,11 +455,27 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return roleImpl;
 	}
 
+	/**
+	 * Finds the role with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the role to find
+	 * @return the role
+	 * @throws com.liferay.portal.NoSuchModelException if a role with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the role with the primary key or throws a {@link com.liferay.portal.NoSuchRoleException} if it could not be found.
+	 *
+	 * @param roleId the primary key of the role to find
+	 * @return the role
+	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role findByPrimaryKey(long roleId)
 		throws NoSuchRoleException, SystemException {
 		Role role = fetchByPrimaryKey(roleId);
@@ -420,11 +492,25 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return role;
 	}
 
+	/**
+	 * Finds the role with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the role to find
+	 * @return the role, or <code>null</code> if a role with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the role with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param roleId the primary key of the role to find
+	 * @return the role, or <code>null</code> if a role with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role fetchByPrimaryKey(long roleId) throws SystemException {
 		Role role = (Role)EntityCacheUtil.getResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
 				RoleImpl.class, roleId, this);
@@ -452,16 +538,50 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return role;
 	}
 
+	/**
+	 * Finds all the roles where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the matching roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Role> findByCompanyId(long companyId) throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the roles where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of roles to return
+	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @return the range of matching roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Role> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the roles where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of roles to return
+	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Role> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -533,6 +653,19 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return list;
 	}
 
+	/**
+	 * Finds the first role in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching role
+	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -555,6 +688,19 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Finds the last role in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching role
+	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -580,6 +726,20 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Finds the roles before and after the current role in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param roleId the primary key of the current role
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next role
+	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role[] findByCompanyId_PrevAndNext(long roleId, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -713,15 +873,49 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Finds all the roles where subtype = &#63;.
+	 *
+	 * @param subtype the subtype to search with
+	 * @return the matching roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Role> findBySubtype(String subtype) throws SystemException {
 		return findBySubtype(subtype, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the roles where subtype = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param subtype the subtype to search with
+	 * @param start the lower bound of the range of roles to return
+	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @return the range of matching roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Role> findBySubtype(String subtype, int start, int end)
 		throws SystemException {
 		return findBySubtype(subtype, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the roles where subtype = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param subtype the subtype to search with
+	 * @param start the lower bound of the range of roles to return
+	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Role> findBySubtype(String subtype, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -805,6 +999,19 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return list;
 	}
 
+	/**
+	 * Finds the first role in the ordered set where subtype = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param subtype the subtype to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching role
+	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role findBySubtype_First(String subtype,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -827,6 +1034,19 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Finds the last role in the ordered set where subtype = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param subtype the subtype to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching role
+	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role findBySubtype_Last(String subtype,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -852,6 +1072,20 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Finds the roles before and after the current role in the ordered set where subtype = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param roleId the primary key of the current role
+	 * @param subtype the subtype to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next role
+	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role[] findBySubtype_PrevAndNext(long roleId, String subtype,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -997,6 +1231,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Finds the role where companyId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchRoleException} if it could not be found.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @return the matching role
+	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role findByC_N(long companyId, String name)
 		throws NoSuchRoleException, SystemException {
 		Role role = fetchByC_N(companyId, name);
@@ -1024,11 +1267,27 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return role;
 	}
 
+	/**
+	 * Finds the role where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @return the matching role, or <code>null</code> if a matching role could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role fetchByC_N(long companyId, String name)
 		throws SystemException {
 		return fetchByC_N(companyId, name, true);
 	}
 
+	/**
+	 * Finds the role where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @return the matching role, or <code>null</code> if a matching role could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role fetchByC_N(long companyId, String name,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, name };
@@ -1125,17 +1384,54 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Finds all the roles where type = &#63; and subtype = &#63;.
+	 *
+	 * @param type the type to search with
+	 * @param subtype the subtype to search with
+	 * @return the matching roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Role> findByT_S(int type, String subtype)
 		throws SystemException {
 		return findByT_S(type, subtype, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the roles where type = &#63; and subtype = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param type the type to search with
+	 * @param subtype the subtype to search with
+	 * @param start the lower bound of the range of roles to return
+	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @return the range of matching roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Role> findByT_S(int type, String subtype, int start, int end)
 		throws SystemException {
 		return findByT_S(type, subtype, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the roles where type = &#63; and subtype = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param type the type to search with
+	 * @param subtype the subtype to search with
+	 * @param start the lower bound of the range of roles to return
+	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Role> findByT_S(int type, String subtype, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1223,6 +1519,20 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return list;
 	}
 
+	/**
+	 * Finds the first role in the ordered set where type = &#63; and subtype = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param type the type to search with
+	 * @param subtype the subtype to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching role
+	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role findByT_S_First(int type, String subtype,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -1248,6 +1558,20 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Finds the last role in the ordered set where type = &#63; and subtype = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param type the type to search with
+	 * @param subtype the subtype to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching role
+	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role findByT_S_Last(int type, String subtype,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -1276,6 +1600,21 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Finds the roles before and after the current role in the ordered set where type = &#63; and subtype = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param roleId the primary key of the current role
+	 * @param type the type to search with
+	 * @param subtype the subtype to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next role
+	 * @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role[] findByT_S_PrevAndNext(long roleId, int type, String subtype,
 		OrderByComparator orderByComparator)
 		throws NoSuchRoleException, SystemException {
@@ -1425,6 +1764,16 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Finds the role where companyId = &#63; and classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portal.NoSuchRoleException} if it could not be found.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching role
+	 * @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role findByC_C_C(long companyId, long classNameId, long classPK)
 		throws NoSuchRoleException, SystemException {
 		Role role = fetchByC_C_C(companyId, classNameId, classPK);
@@ -1455,11 +1804,29 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return role;
 	}
 
+	/**
+	 * Finds the role where companyId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching role, or <code>null</code> if a matching role could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role fetchByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		return fetchByC_C_C(companyId, classNameId, classPK, true);
 	}
 
+	/**
+	 * Finds the role where companyId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching role, or <code>null</code> if a matching role could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Role fetchByC_C_C(long companyId, long classNameId, long classPK,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, classNameId, classPK };
@@ -1548,14 +1915,45 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Finds all the roles.
+	 *
+	 * @return the roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Role> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the roles.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of roles to return
+	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @return the range of roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Role> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the roles.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of roles to return
+	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Role> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1622,18 +2020,37 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return list;
 	}
 
+	/**
+	 * Removes all the roles where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (Role role : findByCompanyId(companyId)) {
 			remove(role);
 		}
 	}
 
+	/**
+	 * Removes all the roles where subtype = &#63; from the database.
+	 *
+	 * @param subtype the subtype to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeBySubtype(String subtype) throws SystemException {
 		for (Role role : findBySubtype(subtype)) {
 			remove(role);
 		}
 	}
 
+	/**
+	 * Removes the role where companyId = &#63; and name = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_N(long companyId, String name)
 		throws NoSuchRoleException, SystemException {
 		Role role = findByC_N(companyId, name);
@@ -1641,12 +2058,27 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		remove(role);
 	}
 
+	/**
+	 * Removes all the roles where type = &#63; and subtype = &#63; from the database.
+	 *
+	 * @param type the type to search with
+	 * @param subtype the subtype to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByT_S(int type, String subtype) throws SystemException {
 		for (Role role : findByT_S(type, subtype)) {
 			remove(role);
 		}
 	}
 
+	/**
+	 * Removes the role where companyId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws NoSuchRoleException, SystemException {
 		Role role = findByC_C_C(companyId, classNameId, classPK);
@@ -1654,12 +2086,24 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		remove(role);
 	}
 
+	/**
+	 * Removes all the roles from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (Role role : findAll()) {
 			remove(role);
 		}
 	}
 
+	/**
+	 * Counts all the roles where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the number of matching roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId };
 
@@ -1706,6 +2150,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the roles where subtype = &#63;.
+	 *
+	 * @param subtype the subtype to search with
+	 * @return the number of matching roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countBySubtype(String subtype) throws SystemException {
 		Object[] finderArgs = new Object[] { subtype };
 
@@ -1764,6 +2215,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the roles where companyId = &#63; and name = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @return the number of matching roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_N(long companyId, String name)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, name };
@@ -1827,6 +2286,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the roles where type = &#63; and subtype = &#63;.
+	 *
+	 * @param type the type to search with
+	 * @param subtype the subtype to search with
+	 * @return the number of matching roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByT_S(int type, String subtype) throws SystemException {
 		Object[] finderArgs = new Object[] { type, subtype };
 
@@ -1889,6 +2356,15 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the roles where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the number of matching roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, classNameId, classPK };
@@ -1944,6 +2420,12 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the roles.
+	 *
+	 * @return the number of roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -1978,11 +2460,31 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return count.intValue();
 	}
 
+	/**
+	 * Gets all the groups associated with the role.
+	 *
+	 * @param pk the primary key of the role to get the associated groups for
+	 * @return the groups associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.Group> getGroups(long pk)
 		throws SystemException {
 		return getGroups(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
+	/**
+	 * Gets a range of all the groups associated with the role.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the role to get the associated groups for
+	 * @param start the lower bound of the range of roles to return
+	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @return the range of groups associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
 		int end) throws SystemException {
 		return getGroups(pk, start, end, null);
@@ -1996,6 +2498,20 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
 
+	/**
+	 * Gets an ordered range of all the groups associated with the role.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the role to get the associated groups for
+	 * @param start the lower bound of the range of roles to return
+	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of groups associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.Group> getGroups(long pk, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2059,6 +2575,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			RoleModelImpl.MAPPING_TABLE_GROUPS_ROLES_NAME, "getGroupsSize",
 			new String[] { Long.class.getName() });
 
+	/**
+	 * Gets the number of groups associated with the role.
+	 *
+	 * @param pk the primary key of the role to get the number of associated groups for
+	 * @return the number of groups associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int getGroupsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -2105,6 +2628,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			RoleModelImpl.MAPPING_TABLE_GROUPS_ROLES_NAME, "containsGroup",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
+	/**
+	 * Determines whether the group is associated with the role.
+	 *
+	 * @param pk the primary key of the role
+	 * @param groupPK the primary key of the group
+	 * @return whether the group is associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsGroup(long pk, long groupPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { pk, groupPK };
@@ -2132,6 +2663,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return value.booleanValue();
 	}
 
+	/**
+	 * Determines whether the role has any groups associated with it.
+	 *
+	 * @param pk the primary key of the role to check for associations with groups
+	 * @return whether the role has any groups associated with it
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsGroups(long pk) throws SystemException {
 		if (getGroupsSize(pk) > 0) {
 			return true;
@@ -2141,6 +2679,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Adds an association between the role and the group. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param groupPK the primary key of the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addGroup(long pk, long groupPK) throws SystemException {
 		try {
 			addGroup.add(pk, groupPK);
@@ -2153,6 +2698,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Adds an association between the role and the group. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param group the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addGroup(long pk, com.liferay.portal.model.Group group)
 		throws SystemException {
 		try {
@@ -2166,6 +2718,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Adds an association between the role and the groups. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param groupPKs the primary keys of the groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addGroups(long pk, long[] groupPKs) throws SystemException {
 		try {
 			for (long groupPK : groupPKs) {
@@ -2180,6 +2739,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Adds an association between the role and the groups. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param groups the groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addGroups(long pk, List<com.liferay.portal.model.Group> groups)
 		throws SystemException {
 		try {
@@ -2195,6 +2761,12 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Clears all associations between the role and its groups. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role to clear the associated groups from
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void clearGroups(long pk) throws SystemException {
 		try {
 			clearGroups.clear(pk);
@@ -2207,6 +2779,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Removes the association between the role and the group. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param groupPK the primary key of the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeGroup(long pk, long groupPK) throws SystemException {
 		try {
 			removeGroup.remove(pk, groupPK);
@@ -2219,6 +2798,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Removes the association between the role and the group. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param group the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeGroup(long pk, com.liferay.portal.model.Group group)
 		throws SystemException {
 		try {
@@ -2232,6 +2818,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Removes the association between the role and the groups. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param groupPKs the primary keys of the groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeGroups(long pk, long[] groupPKs)
 		throws SystemException {
 		try {
@@ -2247,6 +2840,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Removes the association between the role and the groups. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param groups the groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeGroups(long pk,
 		List<com.liferay.portal.model.Group> groups) throws SystemException {
 		try {
@@ -2262,6 +2862,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Sets the groups associated with the role, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role to set the associations for
+	 * @param groupPKs the primary keys of the groups to be associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setGroups(long pk, long[] groupPKs) throws SystemException {
 		try {
 			Set<Long> groupPKSet = SetUtil.fromArray(groupPKs);
@@ -2286,6 +2893,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Sets the groups associated with the role, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role to set the associations for
+	 * @param groups the groups to be associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setGroups(long pk, List<com.liferay.portal.model.Group> groups)
 		throws SystemException {
 		try {
@@ -2307,11 +2921,31 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Gets all the permissions associated with the role.
+	 *
+	 * @param pk the primary key of the role to get the associated permissions for
+	 * @return the permissions associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.Permission> getPermissions(long pk)
 		throws SystemException {
 		return getPermissions(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
+	/**
+	 * Gets a range of all the permissions associated with the role.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the role to get the associated permissions for
+	 * @param start the lower bound of the range of roles to return
+	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @return the range of permissions associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.Permission> getPermissions(long pk,
 		int start, int end) throws SystemException {
 		return getPermissions(pk, start, end, null);
@@ -2326,6 +2960,20 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
 
+	/**
+	 * Gets an ordered range of all the permissions associated with the role.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the role to get the associated permissions for
+	 * @param start the lower bound of the range of roles to return
+	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of permissions associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.Permission> getPermissions(long pk,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2390,6 +3038,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			RoleModelImpl.MAPPING_TABLE_ROLES_PERMISSIONS_NAME,
 			"getPermissionsSize", new String[] { Long.class.getName() });
 
+	/**
+	 * Gets the number of permissions associated with the role.
+	 *
+	 * @param pk the primary key of the role to get the number of associated permissions for
+	 * @return the number of permissions associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int getPermissionsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -2437,6 +3092,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			"containsPermission",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
+	/**
+	 * Determines whether the permission is associated with the role.
+	 *
+	 * @param pk the primary key of the role
+	 * @param permissionPK the primary key of the permission
+	 * @return whether the permission is associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsPermission(long pk, long permissionPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { pk, permissionPK };
@@ -2465,6 +3128,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return value.booleanValue();
 	}
 
+	/**
+	 * Determines whether the role has any permissions associated with it.
+	 *
+	 * @param pk the primary key of the role to check for associations with permissions
+	 * @return whether the role has any permissions associated with it
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsPermissions(long pk) throws SystemException {
 		if (getPermissionsSize(pk) > 0) {
 			return true;
@@ -2474,6 +3144,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Adds an association between the role and the permission. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param permissionPK the primary key of the permission
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addPermission(long pk, long permissionPK)
 		throws SystemException {
 		try {
@@ -2487,6 +3164,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Adds an association between the role and the permission. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param permission the permission
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addPermission(long pk,
 		com.liferay.portal.model.Permission permission)
 		throws SystemException {
@@ -2501,6 +3185,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Adds an association between the role and the permissions. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param permissionPKs the primary keys of the permissions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addPermissions(long pk, long[] permissionPKs)
 		throws SystemException {
 		try {
@@ -2516,6 +3207,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Adds an association between the role and the permissions. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param permissions the permissions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addPermissions(long pk,
 		List<com.liferay.portal.model.Permission> permissions)
 		throws SystemException {
@@ -2532,6 +3230,12 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Clears all associations between the role and its permissions. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role to clear the associated permissions from
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void clearPermissions(long pk) throws SystemException {
 		try {
 			clearPermissions.clear(pk);
@@ -2544,6 +3248,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Removes the association between the role and the permission. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param permissionPK the primary key of the permission
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removePermission(long pk, long permissionPK)
 		throws SystemException {
 		try {
@@ -2557,6 +3268,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Removes the association between the role and the permission. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param permission the permission
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removePermission(long pk,
 		com.liferay.portal.model.Permission permission)
 		throws SystemException {
@@ -2571,6 +3289,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Removes the association between the role and the permissions. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param permissionPKs the primary keys of the permissions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removePermissions(long pk, long[] permissionPKs)
 		throws SystemException {
 		try {
@@ -2586,6 +3311,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Removes the association between the role and the permissions. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param permissions the permissions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removePermissions(long pk,
 		List<com.liferay.portal.model.Permission> permissions)
 		throws SystemException {
@@ -2602,6 +3334,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Sets the permissions associated with the role, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role to set the associations for
+	 * @param permissionPKs the primary keys of the permissions to be associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setPermissions(long pk, long[] permissionPKs)
 		throws SystemException {
 		try {
@@ -2627,6 +3366,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Sets the permissions associated with the role, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role to set the associations for
+	 * @param permissions the permissions to be associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setPermissions(long pk,
 		List<com.liferay.portal.model.Permission> permissions)
 		throws SystemException {
@@ -2649,11 +3395,31 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Gets all the users associated with the role.
+	 *
+	 * @param pk the primary key of the role to get the associated users for
+	 * @return the users associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.User> getUsers(long pk)
 		throws SystemException {
 		return getUsers(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
+	/**
+	 * Gets a range of all the users associated with the role.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the role to get the associated users for
+	 * @param start the lower bound of the range of roles to return
+	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @return the range of users associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end) throws SystemException {
 		return getUsers(pk, start, end, null);
@@ -2667,6 +3433,20 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
 
+	/**
+	 * Gets an ordered range of all the users associated with the role.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the role to get the associated users for
+	 * @param start the lower bound of the range of roles to return
+	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of users associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2730,6 +3510,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			RoleModelImpl.MAPPING_TABLE_USERS_ROLES_NAME, "getUsersSize",
 			new String[] { Long.class.getName() });
 
+	/**
+	 * Gets the number of users associated with the role.
+	 *
+	 * @param pk the primary key of the role to get the number of associated users for
+	 * @return the number of users associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int getUsersSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -2776,6 +3563,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			RoleModelImpl.MAPPING_TABLE_USERS_ROLES_NAME, "containsUser",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
+	/**
+	 * Determines whether the user is associated with the role.
+	 *
+	 * @param pk the primary key of the role
+	 * @param userPK the primary key of the user
+	 * @return whether the user is associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsUser(long pk, long userPK) throws SystemException {
 		Object[] finderArgs = new Object[] { pk, userPK };
 
@@ -2802,6 +3597,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		return value.booleanValue();
 	}
 
+	/**
+	 * Determines whether the role has any users associated with it.
+	 *
+	 * @param pk the primary key of the role to check for associations with users
+	 * @return whether the role has any users associated with it
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsUsers(long pk) throws SystemException {
 		if (getUsersSize(pk) > 0) {
 			return true;
@@ -2811,6 +3613,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Adds an association between the role and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param userPK the primary key of the user
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addUser(long pk, long userPK) throws SystemException {
 		try {
 			addUser.add(pk, userPK);
@@ -2823,6 +3632,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Adds an association between the role and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param user the user
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addUser(long pk, com.liferay.portal.model.User user)
 		throws SystemException {
 		try {
@@ -2836,6 +3652,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Adds an association between the role and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param userPKs the primary keys of the users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			for (long userPK : userPKs) {
@@ -2850,6 +3673,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Adds an association between the role and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param users the users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws SystemException {
 		try {
@@ -2865,6 +3695,12 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Clears all associations between the role and its users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role to clear the associated users from
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void clearUsers(long pk) throws SystemException {
 		try {
 			clearUsers.clear(pk);
@@ -2877,6 +3713,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Removes the association between the role and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param userPK the primary key of the user
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeUser(long pk, long userPK) throws SystemException {
 		try {
 			removeUser.remove(pk, userPK);
@@ -2889,6 +3732,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Removes the association between the role and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param user the user
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeUser(long pk, com.liferay.portal.model.User user)
 		throws SystemException {
 		try {
@@ -2902,6 +3752,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Removes the association between the role and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param userPKs the primary keys of the users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			for (long userPK : userPKs) {
@@ -2916,6 +3773,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Removes the association between the role and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role
+	 * @param users the users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws SystemException {
 		try {
@@ -2931,6 +3795,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Sets the users associated with the role, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role to set the associations for
+	 * @param userPKs the primary keys of the users to be associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			Set<Long> userPKSet = SetUtil.fromArray(userPKs);
@@ -2955,6 +3826,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Sets the users associated with the role, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the role to set the associations for
+	 * @param users the users to be associated with the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws SystemException {
 		try {
@@ -2976,6 +3854,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Initializes the role persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

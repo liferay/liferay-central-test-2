@@ -52,9 +52,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       TasksReviewPersistence
- * @see       TasksReviewUtil
+ * The persistence for the tasks review service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see TasksReviewPersistence
+ * @see TasksReviewUtil
  * @generated
  */
 public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
@@ -148,6 +158,11 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			TasksReviewModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the tasks review in the entity cache if it is enabled.
+	 *
+	 * @param tasksReview the tasks review to cache
+	 */
 	public void cacheResult(TasksReview tasksReview) {
 		EntityCacheUtil.putResult(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
 			TasksReviewImpl.class, tasksReview.getPrimaryKey(), tasksReview);
@@ -159,6 +174,11 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			}, tasksReview);
 	}
 
+	/**
+	 * Caches the tasks reviews in the entity cache if it is enabled.
+	 *
+	 * @param tasksReviews the tasks reviews to cache
+	 */
 	public void cacheResult(List<TasksReview> tasksReviews) {
 		for (TasksReview tasksReview : tasksReviews) {
 			if (EntityCacheUtil.getResult(
@@ -169,6 +189,13 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	/**
+	 * Clears the cache for all tasks reviews.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(TasksReviewImpl.class.getName());
 		EntityCacheUtil.clearCache(TasksReviewImpl.class.getName());
@@ -176,6 +203,13 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the tasks review.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(TasksReview tasksReview) {
 		EntityCacheUtil.removeResult(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
 			TasksReviewImpl.class, tasksReview.getPrimaryKey());
@@ -187,6 +221,12 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			});
 	}
 
+	/**
+	 * Creates a new tasks review with the primary key.
+	 *
+	 * @param reviewId the primary key for the new tasks review
+	 * @return the new tasks review
+	 */
 	public TasksReview create(long reviewId) {
 		TasksReview tasksReview = new TasksReviewImpl();
 
@@ -196,11 +236,27 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		return tasksReview;
 	}
 
+	/**
+	 * Removes the tasks review with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the tasks review to remove
+	 * @return the tasks review that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a tasks review with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the tasks review with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param reviewId the primary key of the tasks review to remove
+	 * @return the tasks review that was removed
+	 * @throws com.liferay.portlet.tasks.NoSuchReviewException if a tasks review with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview remove(long reviewId)
 		throws NoSuchReviewException, SystemException {
 		Session session = null;
@@ -358,11 +414,27 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		return tasksReviewImpl;
 	}
 
+	/**
+	 * Finds the tasks review with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the tasks review to find
+	 * @return the tasks review
+	 * @throws com.liferay.portal.NoSuchModelException if a tasks review with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the tasks review with the primary key or throws a {@link com.liferay.portlet.tasks.NoSuchReviewException} if it could not be found.
+	 *
+	 * @param reviewId the primary key of the tasks review to find
+	 * @return the tasks review
+	 * @throws com.liferay.portlet.tasks.NoSuchReviewException if a tasks review with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview findByPrimaryKey(long reviewId)
 		throws NoSuchReviewException, SystemException {
 		TasksReview tasksReview = fetchByPrimaryKey(reviewId);
@@ -379,11 +451,25 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		return tasksReview;
 	}
 
+	/**
+	 * Finds the tasks review with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the tasks review to find
+	 * @return the tasks review, or <code>null</code> if a tasks review with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the tasks review with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param reviewId the primary key of the tasks review to find
+	 * @return the tasks review, or <code>null</code> if a tasks review with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview fetchByPrimaryKey(long reviewId)
 		throws SystemException {
 		TasksReview tasksReview = (TasksReview)EntityCacheUtil.getResult(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
@@ -413,16 +499,50 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		return tasksReview;
 	}
 
+	/**
+	 * Finds all the tasks reviews where userId = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @return the matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<TasksReview> findByUserId(long userId)
 		throws SystemException {
 		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the tasks reviews where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of tasks reviews to return
+	 * @param end the upper bound of the range of tasks reviews to return (not inclusive)
+	 * @return the range of matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<TasksReview> findByUserId(long userId, int start, int end)
 		throws SystemException {
 		return findByUserId(userId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the tasks reviews where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of tasks reviews to return
+	 * @param end the upper bound of the range of tasks reviews to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<TasksReview> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -495,6 +615,19 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		return list;
 	}
 
+	/**
+	 * Finds the first tasks review in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching tasks review
+	 * @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview findByUserId_First(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
@@ -517,6 +650,19 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	/**
+	 * Finds the last tasks review in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching tasks review
+	 * @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview findByUserId_Last(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
@@ -542,6 +688,20 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	/**
+	 * Finds the tasks reviews before and after the current tasks review in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param reviewId the primary key of the current tasks review
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next tasks review
+	 * @throws com.liferay.portlet.tasks.NoSuchReviewException if a tasks review with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview[] findByUserId_PrevAndNext(long reviewId, long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
@@ -676,17 +836,51 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	/**
+	 * Finds all the tasks reviews where proposalId = &#63;.
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @return the matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<TasksReview> findByProposalId(long proposalId)
 		throws SystemException {
 		return findByProposalId(proposalId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the tasks reviews where proposalId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param start the lower bound of the range of tasks reviews to return
+	 * @param end the upper bound of the range of tasks reviews to return (not inclusive)
+	 * @return the range of matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<TasksReview> findByProposalId(long proposalId, int start,
 		int end) throws SystemException {
 		return findByProposalId(proposalId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the tasks reviews where proposalId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param start the lower bound of the range of tasks reviews to return
+	 * @param end the upper bound of the range of tasks reviews to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<TasksReview> findByProposalId(long proposalId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -759,6 +953,19 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		return list;
 	}
 
+	/**
+	 * Finds the first tasks review in the ordered set where proposalId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching tasks review
+	 * @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview findByProposalId_First(long proposalId,
 		OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
@@ -782,6 +989,19 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	/**
+	 * Finds the last tasks review in the ordered set where proposalId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching tasks review
+	 * @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview findByProposalId_Last(long proposalId,
 		OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
@@ -807,6 +1027,20 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	/**
+	 * Finds the tasks reviews before and after the current tasks review in the ordered set where proposalId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param reviewId the primary key of the current tasks review
+	 * @param proposalId the proposal id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next tasks review
+	 * @throws com.liferay.portlet.tasks.NoSuchReviewException if a tasks review with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview[] findByProposalId_PrevAndNext(long reviewId,
 		long proposalId, OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
@@ -941,6 +1175,15 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	/**
+	 * Finds the tasks review where userId = &#63; and proposalId = &#63; or throws a {@link com.liferay.portlet.tasks.NoSuchReviewException} if it could not be found.
+	 *
+	 * @param userId the user id to search with
+	 * @param proposalId the proposal id to search with
+	 * @return the matching tasks review
+	 * @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview findByU_P(long userId, long proposalId)
 		throws NoSuchReviewException, SystemException {
 		TasksReview tasksReview = fetchByU_P(userId, proposalId);
@@ -968,11 +1211,27 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		return tasksReview;
 	}
 
+	/**
+	 * Finds the tasks review where userId = &#63; and proposalId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param userId the user id to search with
+	 * @param proposalId the proposal id to search with
+	 * @return the matching tasks review, or <code>null</code> if a matching tasks review could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview fetchByU_P(long userId, long proposalId)
 		throws SystemException {
 		return fetchByU_P(userId, proposalId, true);
 	}
 
+	/**
+	 * Finds the tasks review where userId = &#63; and proposalId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param userId the user id to search with
+	 * @param proposalId the proposal id to search with
+	 * @return the matching tasks review, or <code>null</code> if a matching tasks review could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview fetchByU_P(long userId, long proposalId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { userId, proposalId };
@@ -1056,17 +1315,54 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	/**
+	 * Finds all the tasks reviews where proposalId = &#63; and stage = &#63;.
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @return the matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<TasksReview> findByP_S(long proposalId, int stage)
 		throws SystemException {
 		return findByP_S(proposalId, stage, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the tasks reviews where proposalId = &#63; and stage = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param start the lower bound of the range of tasks reviews to return
+	 * @param end the upper bound of the range of tasks reviews to return (not inclusive)
+	 * @return the range of matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<TasksReview> findByP_S(long proposalId, int stage, int start,
 		int end) throws SystemException {
 		return findByP_S(proposalId, stage, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the tasks reviews where proposalId = &#63; and stage = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param start the lower bound of the range of tasks reviews to return
+	 * @param end the upper bound of the range of tasks reviews to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<TasksReview> findByP_S(long proposalId, int stage, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1143,6 +1439,20 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		return list;
 	}
 
+	/**
+	 * Finds the first tasks review in the ordered set where proposalId = &#63; and stage = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching tasks review
+	 * @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview findByP_S_First(long proposalId, int stage,
 		OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
@@ -1169,6 +1479,20 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	/**
+	 * Finds the last tasks review in the ordered set where proposalId = &#63; and stage = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching tasks review
+	 * @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview findByP_S_Last(long proposalId, int stage,
 		OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
@@ -1197,6 +1521,21 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	/**
+	 * Finds the tasks reviews before and after the current tasks review in the ordered set where proposalId = &#63; and stage = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param reviewId the primary key of the current tasks review
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next tasks review
+	 * @throws com.liferay.portlet.tasks.NoSuchReviewException if a tasks review with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview[] findByP_S_PrevAndNext(long reviewId, long proposalId,
 		int stage, OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
@@ -1335,17 +1674,57 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	/**
+	 * Finds all the tasks reviews where proposalId = &#63; and stage = &#63; and completed = &#63;.
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param completed the completed to search with
+	 * @return the matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<TasksReview> findByP_S_C(long proposalId, int stage,
 		boolean completed) throws SystemException {
 		return findByP_S_C(proposalId, stage, completed, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the tasks reviews where proposalId = &#63; and stage = &#63; and completed = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param completed the completed to search with
+	 * @param start the lower bound of the range of tasks reviews to return
+	 * @param end the upper bound of the range of tasks reviews to return (not inclusive)
+	 * @return the range of matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<TasksReview> findByP_S_C(long proposalId, int stage,
 		boolean completed, int start, int end) throws SystemException {
 		return findByP_S_C(proposalId, stage, completed, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the tasks reviews where proposalId = &#63; and stage = &#63; and completed = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param completed the completed to search with
+	 * @param start the lower bound of the range of tasks reviews to return
+	 * @param end the upper bound of the range of tasks reviews to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<TasksReview> findByP_S_C(long proposalId, int stage,
 		boolean completed, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -1427,6 +1806,21 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		return list;
 	}
 
+	/**
+	 * Finds the first tasks review in the ordered set where proposalId = &#63; and stage = &#63; and completed = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param completed the completed to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching tasks review
+	 * @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview findByP_S_C_First(long proposalId, int stage,
 		boolean completed, OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
@@ -1456,6 +1850,21 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	/**
+	 * Finds the last tasks review in the ordered set where proposalId = &#63; and stage = &#63; and completed = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param completed the completed to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching tasks review
+	 * @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview findByP_S_C_Last(long proposalId, int stage,
 		boolean completed, OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
@@ -1487,6 +1896,22 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	/**
+	 * Finds the tasks reviews before and after the current tasks review in the ordered set where proposalId = &#63; and stage = &#63; and completed = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param reviewId the primary key of the current tasks review
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param completed the completed to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next tasks review
+	 * @throws com.liferay.portlet.tasks.NoSuchReviewException if a tasks review with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview[] findByP_S_C_PrevAndNext(long reviewId,
 		long proposalId, int stage, boolean completed,
 		OrderByComparator orderByComparator)
@@ -1630,12 +2055,38 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	/**
+	 * Finds all the tasks reviews where proposalId = &#63; and stage = &#63; and completed = &#63; and rejected = &#63;.
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param completed the completed to search with
+	 * @param rejected the rejected to search with
+	 * @return the matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<TasksReview> findByP_S_C_R(long proposalId, int stage,
 		boolean completed, boolean rejected) throws SystemException {
 		return findByP_S_C_R(proposalId, stage, completed, rejected,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the tasks reviews where proposalId = &#63; and stage = &#63; and completed = &#63; and rejected = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param completed the completed to search with
+	 * @param rejected the rejected to search with
+	 * @param start the lower bound of the range of tasks reviews to return
+	 * @param end the upper bound of the range of tasks reviews to return (not inclusive)
+	 * @return the range of matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<TasksReview> findByP_S_C_R(long proposalId, int stage,
 		boolean completed, boolean rejected, int start, int end)
 		throws SystemException {
@@ -1643,6 +2094,23 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the tasks reviews where proposalId = &#63; and stage = &#63; and completed = &#63; and rejected = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param completed the completed to search with
+	 * @param rejected the rejected to search with
+	 * @param start the lower bound of the range of tasks reviews to return
+	 * @param end the upper bound of the range of tasks reviews to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<TasksReview> findByP_S_C_R(long proposalId, int stage,
 		boolean completed, boolean rejected, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -1728,6 +2196,22 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		return list;
 	}
 
+	/**
+	 * Finds the first tasks review in the ordered set where proposalId = &#63; and stage = &#63; and completed = &#63; and rejected = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param completed the completed to search with
+	 * @param rejected the rejected to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching tasks review
+	 * @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview findByP_S_C_R_First(long proposalId, int stage,
 		boolean completed, boolean rejected, OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
@@ -1760,6 +2244,22 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	/**
+	 * Finds the last tasks review in the ordered set where proposalId = &#63; and stage = &#63; and completed = &#63; and rejected = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param completed the completed to search with
+	 * @param rejected the rejected to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching tasks review
+	 * @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview findByP_S_C_R_Last(long proposalId, int stage,
 		boolean completed, boolean rejected, OrderByComparator orderByComparator)
 		throws NoSuchReviewException, SystemException {
@@ -1794,6 +2294,23 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	/**
+	 * Finds the tasks reviews before and after the current tasks review in the ordered set where proposalId = &#63; and stage = &#63; and completed = &#63; and rejected = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param reviewId the primary key of the current tasks review
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param completed the completed to search with
+	 * @param rejected the rejected to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next tasks review
+	 * @throws com.liferay.portlet.tasks.NoSuchReviewException if a tasks review with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public TasksReview[] findByP_S_C_R_PrevAndNext(long reviewId,
 		long proposalId, int stage, boolean completed, boolean rejected,
 		OrderByComparator orderByComparator)
@@ -1943,15 +2460,46 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	/**
+	 * Finds all the tasks reviews.
+	 *
+	 * @return the tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<TasksReview> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the tasks reviews.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of tasks reviews to return
+	 * @param end the upper bound of the range of tasks reviews to return (not inclusive)
+	 * @return the range of tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<TasksReview> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the tasks reviews.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of tasks reviews to return
+	 * @param end the upper bound of the range of tasks reviews to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<TasksReview> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2018,18 +2566,37 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		return list;
 	}
 
+	/**
+	 * Removes all the tasks reviews where userId = &#63; from the database.
+	 *
+	 * @param userId the user id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (TasksReview tasksReview : findByUserId(userId)) {
 			remove(tasksReview);
 		}
 	}
 
+	/**
+	 * Removes all the tasks reviews where proposalId = &#63; from the database.
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByProposalId(long proposalId) throws SystemException {
 		for (TasksReview tasksReview : findByProposalId(proposalId)) {
 			remove(tasksReview);
 		}
 	}
 
+	/**
+	 * Removes the tasks review where userId = &#63; and proposalId = &#63; from the database.
+	 *
+	 * @param userId the user id to search with
+	 * @param proposalId the proposal id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByU_P(long userId, long proposalId)
 		throws NoSuchReviewException, SystemException {
 		TasksReview tasksReview = findByU_P(userId, proposalId);
@@ -2037,6 +2604,13 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		remove(tasksReview);
 	}
 
+	/**
+	 * Removes all the tasks reviews where proposalId = &#63; and stage = &#63; from the database.
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByP_S(long proposalId, int stage)
 		throws SystemException {
 		for (TasksReview tasksReview : findByP_S(proposalId, stage)) {
@@ -2044,6 +2618,14 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	/**
+	 * Removes all the tasks reviews where proposalId = &#63; and stage = &#63; and completed = &#63; from the database.
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param completed the completed to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByP_S_C(long proposalId, int stage, boolean completed)
 		throws SystemException {
 		for (TasksReview tasksReview : findByP_S_C(proposalId, stage, completed)) {
@@ -2051,6 +2633,15 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	/**
+	 * Removes all the tasks reviews where proposalId = &#63; and stage = &#63; and completed = &#63; and rejected = &#63; from the database.
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param completed the completed to search with
+	 * @param rejected the rejected to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByP_S_C_R(long proposalId, int stage, boolean completed,
 		boolean rejected) throws SystemException {
 		for (TasksReview tasksReview : findByP_S_C_R(proposalId, stage,
@@ -2059,12 +2650,24 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	/**
+	 * Removes all the tasks reviews from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (TasksReview tasksReview : findAll()) {
 			remove(tasksReview);
 		}
 	}
 
+	/**
+	 * Counts all the tasks reviews where userId = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @return the number of matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUserId(long userId) throws SystemException {
 		Object[] finderArgs = new Object[] { userId };
 
@@ -2111,6 +2714,13 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the tasks reviews where proposalId = &#63;.
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @return the number of matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByProposalId(long proposalId) throws SystemException {
 		Object[] finderArgs = new Object[] { proposalId };
 
@@ -2157,6 +2767,14 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the tasks reviews where userId = &#63; and proposalId = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @param proposalId the proposal id to search with
+	 * @return the number of matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByU_P(long userId, long proposalId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { userId, proposalId };
@@ -2208,6 +2826,14 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the tasks reviews where proposalId = &#63; and stage = &#63;.
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @return the number of matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByP_S(long proposalId, int stage) throws SystemException {
 		Object[] finderArgs = new Object[] { proposalId, stage };
 
@@ -2258,6 +2884,15 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the tasks reviews where proposalId = &#63; and stage = &#63; and completed = &#63;.
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param completed the completed to search with
+	 * @return the number of matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByP_S_C(long proposalId, int stage, boolean completed)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { proposalId, stage, completed };
@@ -2313,6 +2948,16 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the tasks reviews where proposalId = &#63; and stage = &#63; and completed = &#63; and rejected = &#63;.
+	 *
+	 * @param proposalId the proposal id to search with
+	 * @param stage the stage to search with
+	 * @param completed the completed to search with
+	 * @param rejected the rejected to search with
+	 * @return the number of matching tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByP_S_C_R(long proposalId, int stage, boolean completed,
 		boolean rejected) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2374,6 +3019,12 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the tasks reviews.
+	 *
+	 * @return the number of tasks reviews
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -2408,6 +3059,9 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the tasks review persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

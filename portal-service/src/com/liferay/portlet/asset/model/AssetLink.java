@@ -15,20 +15,16 @@
 package com.liferay.portlet.asset.model;
 
 /**
- * <p>
- * This interface is a model that represents the AssetLink table in the
- * database.
- * </p>
+ * The model interface for the AssetLink service. Represents a row in the &quot;AssetLink&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.asset.model.impl.AssetLinkImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.asset.model.impl.AssetLinkImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       AssetLinkModel
- * @see       com.liferay.portlet.asset.model.impl.AssetLinkImpl
- * @see       com.liferay.portlet.asset.model.impl.AssetLinkModelImpl
+ * @author Brian Wing Shun Chan
+ * @see AssetLinkModel
+ * @see com.liferay.portlet.asset.model.impl.AssetLinkImpl
+ * @see com.liferay.portlet.asset.model.impl.AssetLinkModelImpl
  * @generated
  */
 public interface AssetLink extends AssetLinkModel {

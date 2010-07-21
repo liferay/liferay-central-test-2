@@ -53,9 +53,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       SocialRequestPersistence
- * @see       SocialRequestUtil
+ * The persistence for the social request service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see SocialRequestPersistence
+ * @see SocialRequestUtil
  * @generated
  */
 public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequest>
@@ -206,6 +216,11 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			SocialRequestModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
+	/**
+	 * Caches the social request in the entity cache if it is enabled.
+	 *
+	 * @param socialRequest the social request to cache
+	 */
 	public void cacheResult(SocialRequest socialRequest) {
 		EntityCacheUtil.putResult(SocialRequestModelImpl.ENTITY_CACHE_ENABLED,
 			SocialRequestImpl.class, socialRequest.getPrimaryKey(),
@@ -226,6 +241,11 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			}, socialRequest);
 	}
 
+	/**
+	 * Caches the social requests in the entity cache if it is enabled.
+	 *
+	 * @param socialRequests the social requests to cache
+	 */
 	public void cacheResult(List<SocialRequest> socialRequests) {
 		for (SocialRequest socialRequest : socialRequests) {
 			if (EntityCacheUtil.getResult(
@@ -237,6 +257,13 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Clears the cache for all social requests.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(SocialRequestImpl.class.getName());
 		EntityCacheUtil.clearCache(SocialRequestImpl.class.getName());
@@ -244,6 +271,13 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the social request.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(SocialRequest socialRequest) {
 		EntityCacheUtil.removeResult(SocialRequestModelImpl.ENTITY_CACHE_ENABLED,
 			SocialRequestImpl.class, socialRequest.getPrimaryKey());
@@ -263,6 +297,12 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			});
 	}
 
+	/**
+	 * Creates a new social request with the primary key.
+	 *
+	 * @param requestId the primary key for the new social request
+	 * @return the new social request
+	 */
 	public SocialRequest create(long requestId) {
 		SocialRequest socialRequest = new SocialRequestImpl();
 
@@ -276,11 +316,27 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return socialRequest;
 	}
 
+	/**
+	 * Removes the social request with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the social request to remove
+	 * @return the social request that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a social request with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the social request with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param requestId the primary key of the social request to remove
+	 * @return the social request that was removed
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a social request with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest remove(long requestId)
 		throws NoSuchRequestException, SystemException {
 		Session session = null;
@@ -488,11 +544,27 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return socialRequestImpl;
 	}
 
+	/**
+	 * Finds the social request with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the social request to find
+	 * @return the social request
+	 * @throws com.liferay.portal.NoSuchModelException if a social request with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the social request with the primary key or throws a {@link com.liferay.portlet.social.NoSuchRequestException} if it could not be found.
+	 *
+	 * @param requestId the primary key of the social request to find
+	 * @return the social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a social request with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest findByPrimaryKey(long requestId)
 		throws NoSuchRequestException, SystemException {
 		SocialRequest socialRequest = fetchByPrimaryKey(requestId);
@@ -509,11 +581,25 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return socialRequest;
 	}
 
+	/**
+	 * Finds the social request with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the social request to find
+	 * @return the social request, or <code>null</code> if a social request with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the social request with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param requestId the primary key of the social request to find
+	 * @return the social request, or <code>null</code> if a social request with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest fetchByPrimaryKey(long requestId)
 		throws SystemException {
 		SocialRequest socialRequest = (SocialRequest)EntityCacheUtil.getResult(SocialRequestModelImpl.ENTITY_CACHE_ENABLED,
@@ -543,16 +629,50 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return socialRequest;
 	}
 
+	/**
+	 * Finds all the social requests where uuid = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @return the matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByUuid(String uuid)
 		throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the social requests where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param start the lower bound of the range of social requests to return
+	 * @param end the upper bound of the range of social requests to return (not inclusive)
+	 * @return the range of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social requests where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param start the lower bound of the range of social requests to return
+	 * @param end the upper bound of the range of social requests to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -637,6 +757,19 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return list;
 	}
 
+	/**
+	 * Finds the first social request in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
@@ -659,6 +792,19 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds the last social request in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
@@ -684,6 +830,20 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds the social requests before and after the current social request in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param requestId the primary key of the current social request
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a social request with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest[] findByUuid_PrevAndNext(long requestId, String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
@@ -830,6 +990,15 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds the social request where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.social.NoSuchRequestException} if it could not be found.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest findByUUID_G(String uuid, long groupId)
 		throws NoSuchRequestException, SystemException {
 		SocialRequest socialRequest = fetchByUUID_G(uuid, groupId);
@@ -857,11 +1026,27 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return socialRequest;
 	}
 
+	/**
+	 * Finds the social request where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching social request, or <code>null</code> if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
 	}
 
+	/**
+	 * Finds the social request where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching social request, or <code>null</code> if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -958,17 +1143,51 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds all the social requests where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the social requests where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of social requests to return
+	 * @param end the upper bound of the range of social requests to return (not inclusive)
+	 * @return the range of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByCompanyId(long companyId, int start,
 		int end) throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social requests where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of social requests to return
+	 * @param end the upper bound of the range of social requests to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1041,6 +1260,19 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return list;
 	}
 
+	/**
+	 * Finds the first social request in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
@@ -1064,6 +1296,19 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds the last social request in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
@@ -1089,6 +1334,20 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds the social requests before and after the current social request in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param requestId the primary key of the current social request
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a social request with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest[] findByCompanyId_PrevAndNext(long requestId,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
@@ -1223,16 +1482,50 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds all the social requests where userId = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @return the matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByUserId(long userId)
 		throws SystemException {
 		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the social requests where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of social requests to return
+	 * @param end the upper bound of the range of social requests to return (not inclusive)
+	 * @return the range of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByUserId(long userId, int start, int end)
 		throws SystemException {
 		return findByUserId(userId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social requests where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of social requests to return
+	 * @param end the upper bound of the range of social requests to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1305,6 +1598,19 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return list;
 	}
 
+	/**
+	 * Finds the first social request in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest findByUserId_First(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
@@ -1327,6 +1633,19 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds the last social request in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest findByUserId_Last(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
@@ -1352,6 +1671,20 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds the social requests before and after the current social request in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param requestId the primary key of the current social request
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a social request with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest[] findByUserId_PrevAndNext(long requestId,
 		long userId, OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
@@ -1486,17 +1819,51 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds all the social requests where receiverUserId = &#63;.
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @return the matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByReceiverUserId(long receiverUserId)
 		throws SystemException {
 		return findByReceiverUserId(receiverUserId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the social requests where receiverUserId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @param start the lower bound of the range of social requests to return
+	 * @param end the upper bound of the range of social requests to return (not inclusive)
+	 * @return the range of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByReceiverUserId(long receiverUserId,
 		int start, int end) throws SystemException {
 		return findByReceiverUserId(receiverUserId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social requests where receiverUserId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @param start the lower bound of the range of social requests to return
+	 * @param end the upper bound of the range of social requests to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByReceiverUserId(long receiverUserId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1570,6 +1937,19 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return list;
 	}
 
+	/**
+	 * Finds the first social request in the ordered set where receiverUserId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest findByReceiverUserId_First(long receiverUserId,
 		OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
@@ -1593,6 +1973,19 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds the last social request in the ordered set where receiverUserId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest findByReceiverUserId_Last(long receiverUserId,
 		OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
@@ -1618,6 +2011,20 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds the social requests before and after the current social request in the ordered set where receiverUserId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param requestId the primary key of the current social request
+	 * @param receiverUserId the receiver user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a social request with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest[] findByReceiverUserId_PrevAndNext(long requestId,
 		long receiverUserId, OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
@@ -1752,17 +2159,54 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds all the social requests where userId = &#63; and status = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @param status the status to search with
+	 * @return the matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByU_S(long userId, int status)
 		throws SystemException {
 		return findByU_S(userId, status, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the social requests where userId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of social requests to return
+	 * @param end the upper bound of the range of social requests to return (not inclusive)
+	 * @return the range of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByU_S(long userId, int status, int start,
 		int end) throws SystemException {
 		return findByU_S(userId, status, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social requests where userId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of social requests to return
+	 * @param end the upper bound of the range of social requests to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByU_S(long userId, int status, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1839,6 +2283,20 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return list;
 	}
 
+	/**
+	 * Finds the first social request in the ordered set where userId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest findByU_S_First(long userId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
@@ -1865,6 +2323,20 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds the last social request in the ordered set where userId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest findByU_S_Last(long userId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
@@ -1893,6 +2365,21 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds the social requests before and after the current social request in the ordered set where userId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param requestId the primary key of the current social request
+	 * @param userId the user id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a social request with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest[] findByU_S_PrevAndNext(long requestId, long userId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
@@ -2031,17 +2518,54 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds all the social requests where receiverUserId = &#63; and status = &#63;.
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @param status the status to search with
+	 * @return the matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByR_S(long receiverUserId, int status)
 		throws SystemException {
 		return findByR_S(receiverUserId, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the social requests where receiverUserId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of social requests to return
+	 * @param end the upper bound of the range of social requests to return (not inclusive)
+	 * @return the range of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByR_S(long receiverUserId, int status,
 		int start, int end) throws SystemException {
 		return findByR_S(receiverUserId, status, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social requests where receiverUserId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of social requests to return
+	 * @param end the upper bound of the range of social requests to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByR_S(long receiverUserId, int status,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2119,6 +2643,20 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return list;
 	}
 
+	/**
+	 * Finds the first social request in the ordered set where receiverUserId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest findByR_S_First(long receiverUserId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
@@ -2145,6 +2683,20 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds the last social request in the ordered set where receiverUserId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest findByR_S_Last(long receiverUserId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
@@ -2173,6 +2725,21 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds the social requests before and after the current social request in the ordered set where receiverUserId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param requestId the primary key of the current social request
+	 * @param receiverUserId the receiver user id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a social request with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest[] findByR_S_PrevAndNext(long requestId,
 		long receiverUserId, int status, OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
@@ -2311,6 +2878,18 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds the social request where userId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63; and receiverUserId = &#63; or throws a {@link com.liferay.portlet.social.NoSuchRequestException} if it could not be found.
+	 *
+	 * @param userId the user id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param receiverUserId the receiver user id to search with
+	 * @return the matching social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest findByU_C_C_T_R(long userId, long classNameId,
 		long classPK, int type, long receiverUserId)
 		throws NoSuchRequestException, SystemException {
@@ -2349,12 +2928,34 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return socialRequest;
 	}
 
+	/**
+	 * Finds the social request where userId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63; and receiverUserId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param userId the user id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param receiverUserId the receiver user id to search with
+	 * @return the matching social request, or <code>null</code> if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest fetchByU_C_C_T_R(long userId, long classNameId,
 		long classPK, int type, long receiverUserId) throws SystemException {
 		return fetchByU_C_C_T_R(userId, classNameId, classPK, type,
 			receiverUserId, true);
 	}
 
+	/**
+	 * Finds the social request where userId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63; and receiverUserId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param userId the user id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param receiverUserId the receiver user id to search with
+	 * @return the matching social request, or <code>null</code> if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest fetchByU_C_C_T_R(long userId, long classNameId,
 		long classPK, int type, long receiverUserId, boolean retrieveFromCache)
 		throws SystemException {
@@ -2456,12 +3057,40 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds all the social requests where userId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63; and status = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param status the status to search with
+	 * @return the matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByU_C_C_T_S(long userId, long classNameId,
 		long classPK, int type, int status) throws SystemException {
 		return findByU_C_C_T_S(userId, classNameId, classPK, type, status,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the social requests where userId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of social requests to return
+	 * @param end the upper bound of the range of social requests to return (not inclusive)
+	 * @return the range of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByU_C_C_T_S(long userId, long classNameId,
 		long classPK, int type, int status, int start, int end)
 		throws SystemException {
@@ -2469,6 +3098,24 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social requests where userId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of social requests to return
+	 * @param end the upper bound of the range of social requests to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByU_C_C_T_S(long userId, long classNameId,
 		long classPK, int type, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -2558,6 +3205,23 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return list;
 	}
 
+	/**
+	 * Finds the first social request in the ordered set where userId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest findByU_C_C_T_S_First(long userId, long classNameId,
 		long classPK, int type, int status, OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
@@ -2593,6 +3257,23 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds the last social request in the ordered set where userId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest findByU_C_C_T_S_Last(long userId, long classNameId,
 		long classPK, int type, int status, OrderByComparator orderByComparator)
 		throws NoSuchRequestException, SystemException {
@@ -2630,6 +3311,24 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds the social requests before and after the current social request in the ordered set where userId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param requestId the primary key of the current social request
+	 * @param userId the user id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a social request with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest[] findByU_C_C_T_S_PrevAndNext(long requestId,
 		long userId, long classNameId, long classPK, int type, int status,
 		OrderByComparator orderByComparator)
@@ -2784,12 +3483,40 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds all the social requests where classNameId = &#63; and classPK = &#63; and type = &#63; and receiverUserId = &#63; and status = &#63;.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param receiverUserId the receiver user id to search with
+	 * @param status the status to search with
+	 * @return the matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByC_C_T_R_S(long classNameId, long classPK,
 		int type, long receiverUserId, int status) throws SystemException {
 		return findByC_C_T_R_S(classNameId, classPK, type, receiverUserId,
 			status, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the social requests where classNameId = &#63; and classPK = &#63; and type = &#63; and receiverUserId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param receiverUserId the receiver user id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of social requests to return
+	 * @param end the upper bound of the range of social requests to return (not inclusive)
+	 * @return the range of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByC_C_T_R_S(long classNameId, long classPK,
 		int type, long receiverUserId, int status, int start, int end)
 		throws SystemException {
@@ -2797,6 +3524,24 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 			status, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social requests where classNameId = &#63; and classPK = &#63; and type = &#63; and receiverUserId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param receiverUserId the receiver user id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of social requests to return
+	 * @param end the upper bound of the range of social requests to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findByC_C_T_R_S(long classNameId, long classPK,
 		int type, long receiverUserId, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -2886,6 +3631,23 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return list;
 	}
 
+	/**
+	 * Finds the first social request in the ordered set where classNameId = &#63; and classPK = &#63; and type = &#63; and receiverUserId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param receiverUserId the receiver user id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest findByC_C_T_R_S_First(long classNameId, long classPK,
 		int type, long receiverUserId, int status,
 		OrderByComparator orderByComparator)
@@ -2922,6 +3684,23 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds the last social request in the ordered set where classNameId = &#63; and classPK = &#63; and type = &#63; and receiverUserId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param receiverUserId the receiver user id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest findByC_C_T_R_S_Last(long classNameId, long classPK,
 		int type, long receiverUserId, int status,
 		OrderByComparator orderByComparator)
@@ -2961,6 +3740,24 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds the social requests before and after the current social request in the ordered set where classNameId = &#63; and classPK = &#63; and type = &#63; and receiverUserId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param requestId the primary key of the current social request
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param receiverUserId the receiver user id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social request
+	 * @throws com.liferay.portlet.social.NoSuchRequestException if a social request with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialRequest[] findByC_C_T_R_S_PrevAndNext(long requestId,
 		long classNameId, long classPK, int type, long receiverUserId,
 		int status, OrderByComparator orderByComparator)
@@ -3115,15 +3912,46 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Finds all the social requests.
+	 *
+	 * @return the social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the social requests.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of social requests to return
+	 * @param end the upper bound of the range of social requests to return (not inclusive)
+	 * @return the range of social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social requests.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of social requests to return
+	 * @param end the upper bound of the range of social requests to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialRequest> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -3190,12 +4018,25 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return list;
 	}
 
+	/**
+	 * Removes all the social requests where uuid = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (SocialRequest socialRequest : findByUuid(uuid)) {
 			remove(socialRequest);
 		}
 	}
 
+	/**
+	 * Removes the social request where uuid = &#63; and groupId = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUUID_G(String uuid, long groupId)
 		throws NoSuchRequestException, SystemException {
 		SocialRequest socialRequest = findByUUID_G(uuid, groupId);
@@ -3203,18 +4044,36 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		remove(socialRequest);
 	}
 
+	/**
+	 * Removes all the social requests where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (SocialRequest socialRequest : findByCompanyId(companyId)) {
 			remove(socialRequest);
 		}
 	}
 
+	/**
+	 * Removes all the social requests where userId = &#63; from the database.
+	 *
+	 * @param userId the user id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (SocialRequest socialRequest : findByUserId(userId)) {
 			remove(socialRequest);
 		}
 	}
 
+	/**
+	 * Removes all the social requests where receiverUserId = &#63; from the database.
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByReceiverUserId(long receiverUserId)
 		throws SystemException {
 		for (SocialRequest socialRequest : findByReceiverUserId(receiverUserId)) {
@@ -3222,12 +4081,26 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Removes all the social requests where userId = &#63; and status = &#63; from the database.
+	 *
+	 * @param userId the user id to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByU_S(long userId, int status) throws SystemException {
 		for (SocialRequest socialRequest : findByU_S(userId, status)) {
 			remove(socialRequest);
 		}
 	}
 
+	/**
+	 * Removes all the social requests where receiverUserId = &#63; and status = &#63; from the database.
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByR_S(long receiverUserId, int status)
 		throws SystemException {
 		for (SocialRequest socialRequest : findByR_S(receiverUserId, status)) {
@@ -3235,6 +4108,16 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Removes the social request where userId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63; and receiverUserId = &#63; from the database.
+	 *
+	 * @param userId the user id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param receiverUserId the receiver user id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByU_C_C_T_R(long userId, long classNameId, long classPK,
 		int type, long receiverUserId)
 		throws NoSuchRequestException, SystemException {
@@ -3244,6 +4127,16 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		remove(socialRequest);
 	}
 
+	/**
+	 * Removes all the social requests where userId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63; and status = &#63; from the database.
+	 *
+	 * @param userId the user id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByU_C_C_T_S(long userId, long classNameId, long classPK,
 		int type, int status) throws SystemException {
 		for (SocialRequest socialRequest : findByU_C_C_T_S(userId, classNameId,
@@ -3252,6 +4145,16 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Removes all the social requests where classNameId = &#63; and classPK = &#63; and type = &#63; and receiverUserId = &#63; and status = &#63; from the database.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param receiverUserId the receiver user id to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C_T_R_S(long classNameId, long classPK, int type,
 		long receiverUserId, int status) throws SystemException {
 		for (SocialRequest socialRequest : findByC_C_T_R_S(classNameId,
@@ -3260,12 +4163,24 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		}
 	}
 
+	/**
+	 * Removes all the social requests from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (SocialRequest socialRequest : findAll()) {
 			remove(socialRequest);
 		}
 	}
 
+	/**
+	 * Counts all the social requests where uuid = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @return the number of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUuid(String uuid) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid };
 
@@ -3324,6 +4239,14 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social requests where uuid = &#63; and groupId = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the number of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -3387,6 +4310,13 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social requests where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the number of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId };
 
@@ -3433,6 +4363,13 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social requests where userId = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @return the number of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUserId(long userId) throws SystemException {
 		Object[] finderArgs = new Object[] { userId };
 
@@ -3479,6 +4416,13 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social requests where receiverUserId = &#63;.
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @return the number of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByReceiverUserId(long receiverUserId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { receiverUserId };
@@ -3526,6 +4470,14 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social requests where userId = &#63; and status = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @param status the status to search with
+	 * @return the number of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByU_S(long userId, int status) throws SystemException {
 		Object[] finderArgs = new Object[] { userId, status };
 
@@ -3576,6 +4528,14 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social requests where receiverUserId = &#63; and status = &#63;.
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @param status the status to search with
+	 * @return the number of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByR_S(long receiverUserId, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { receiverUserId, status };
@@ -3627,6 +4587,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social requests where userId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63; and receiverUserId = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param receiverUserId the receiver user id to search with
+	 * @return the number of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByU_C_C_T_R(long userId, long classNameId, long classPK,
 		int type, long receiverUserId) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -3692,6 +4663,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social requests where userId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63; and status = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param status the status to search with
+	 * @return the number of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByU_C_C_T_S(long userId, long classNameId, long classPK,
 		int type, int status) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -3757,6 +4739,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social requests where classNameId = &#63; and classPK = &#63; and type = &#63; and receiverUserId = &#63; and status = &#63;.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param receiverUserId the receiver user id to search with
+	 * @param status the status to search with
+	 * @return the number of matching social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C_T_R_S(long classNameId, long classPK, int type,
 		long receiverUserId, int status) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -3822,6 +4815,12 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social requests.
+	 *
+	 * @return the number of social requests
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -3856,6 +4855,9 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the social request persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

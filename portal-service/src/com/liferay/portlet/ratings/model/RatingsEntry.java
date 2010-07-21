@@ -15,20 +15,16 @@
 package com.liferay.portlet.ratings.model;
 
 /**
- * <p>
- * This interface is a model that represents the RatingsEntry table in the
- * database.
- * </p>
+ * The model interface for the RatingsEntry service. Represents a row in the &quot;RatingsEntry&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.ratings.model.impl.RatingsEntryImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.ratings.model.impl.RatingsEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       RatingsEntryModel
- * @see       com.liferay.portlet.ratings.model.impl.RatingsEntryImpl
- * @see       com.liferay.portlet.ratings.model.impl.RatingsEntryModelImpl
+ * @author Brian Wing Shun Chan
+ * @see RatingsEntryModel
+ * @see com.liferay.portlet.ratings.model.impl.RatingsEntryImpl
+ * @see com.liferay.portlet.ratings.model.impl.RatingsEntryModelImpl
  * @generated
  */
 public interface RatingsEntry extends RatingsEntryModel {

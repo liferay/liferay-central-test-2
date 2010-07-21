@@ -19,21 +19,51 @@ import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       SCFrameworkVersionPersistenceImpl
- * @see       SCFrameworkVersionUtil
+ * The persistence interface for the s c framework version service.
+ *
+ * <p>
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see SCFrameworkVersionPersistenceImpl
+ * @see SCFrameworkVersionUtil
  * @generated
  */
 public interface SCFrameworkVersionPersistence extends BasePersistence<SCFrameworkVersion> {
+	/**
+	* Caches the s c framework version in the entity cache if it is enabled.
+	*
+	* @param scFrameworkVersion the s c framework version to cache
+	*/
 	public void cacheResult(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion);
 
+	/**
+	* Caches the s c framework versions in the entity cache if it is enabled.
+	*
+	* @param scFrameworkVersions the s c framework versions to cache
+	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> scFrameworkVersions);
 
+	/**
+	* Creates a new s c framework version with the primary key.
+	*
+	* @param frameworkVersionId the primary key for the new s c framework version
+	* @return the new s c framework version
+	*/
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion create(
 		long frameworkVersionId);
 
+	/**
+	* Removes the s c framework version with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param frameworkVersionId the primary key of the s c framework version to remove
+	* @return the s c framework version that was removed
+	* @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a s c framework version with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion remove(
 		long frameworkVersionId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -44,231 +74,775 @@ public interface SCFrameworkVersionPersistence extends BasePersistence<SCFramewo
 		boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the s c framework version with the primary key or throws a {@link com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException} if it could not be found.
+	*
+	* @param frameworkVersionId the primary key of the s c framework version to find
+	* @return the s c framework version
+	* @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a s c framework version with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion findByPrimaryKey(
 		long frameworkVersionId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
+	/**
+	* Finds the s c framework version with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param frameworkVersionId the primary key of the s c framework version to find
+	* @return the s c framework version, or <code>null</code> if a s c framework version with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion fetchByPrimaryKey(
 		long frameworkVersionId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds all the s c framework versions where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the matching s c framework versions
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findByGroupId(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the s c framework versions where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of s c framework versions to return
+	* @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	* @return the range of matching s c framework versions
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the s c framework versions where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of s c framework versions to return
+	* @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching s c framework versions
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first s c framework version in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching s c framework version
+	* @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a matching s c framework version could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion findByGroupId_First(
 		long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
+	/**
+	* Finds the last s c framework version in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching s c framework version
+	* @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a matching s c framework version could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion findByGroupId_Last(
 		long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
+	/**
+	* Finds the s c framework versions before and after the current s c framework version in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param frameworkVersionId the primary key of the current s c framework version
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next s c framework version
+	* @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a s c framework version with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion[] findByGroupId_PrevAndNext(
 		long frameworkVersionId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
+	/**
+	* Filters by the user's permissions and finds all the s c framework versions where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the matching s c framework versions that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> filterFindByGroupId(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and finds a range of all the s c framework versions where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of s c framework versions to return
+	* @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	* @return the range of matching s c framework versions that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> filterFindByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the s c framework versions where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of s c framework versions to return
+	* @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching s c framework versions that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> filterFindByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds all the s c framework versions where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the matching s c framework versions
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findByCompanyId(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the s c framework versions where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of s c framework versions to return
+	* @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	* @return the range of matching s c framework versions
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findByCompanyId(
 		long companyId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the s c framework versions where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of s c framework versions to return
+	* @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching s c framework versions
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first s c framework version in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching s c framework version
+	* @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a matching s c framework version could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion findByCompanyId_First(
 		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
+	/**
+	* Finds the last s c framework version in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching s c framework version
+	* @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a matching s c framework version could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion findByCompanyId_Last(
 		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
+	/**
+	* Finds the s c framework versions before and after the current s c framework version in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param frameworkVersionId the primary key of the current s c framework version
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next s c framework version
+	* @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a s c framework version with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion[] findByCompanyId_PrevAndNext(
 		long frameworkVersionId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
+	/**
+	* Finds all the s c framework versions where groupId = &#63; and active = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param active the active to search with
+	* @return the matching s c framework versions
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findByG_A(
 		long groupId, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the s c framework versions where groupId = &#63; and active = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param active the active to search with
+	* @param start the lower bound of the range of s c framework versions to return
+	* @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	* @return the range of matching s c framework versions
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findByG_A(
 		long groupId, boolean active, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the s c framework versions where groupId = &#63; and active = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param active the active to search with
+	* @param start the lower bound of the range of s c framework versions to return
+	* @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching s c framework versions
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findByG_A(
 		long groupId, boolean active, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first s c framework version in the ordered set where groupId = &#63; and active = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param active the active to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching s c framework version
+	* @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a matching s c framework version could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion findByG_A_First(
 		long groupId, boolean active,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
+	/**
+	* Finds the last s c framework version in the ordered set where groupId = &#63; and active = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param active the active to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching s c framework version
+	* @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a matching s c framework version could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion findByG_A_Last(
 		long groupId, boolean active,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
+	/**
+	* Finds the s c framework versions before and after the current s c framework version in the ordered set where groupId = &#63; and active = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param frameworkVersionId the primary key of the current s c framework version
+	* @param groupId the group id to search with
+	* @param active the active to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next s c framework version
+	* @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a s c framework version with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion[] findByG_A_PrevAndNext(
 		long frameworkVersionId, long groupId, boolean active,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException;
 
+	/**
+	* Filters by the user's permissions and finds all the s c framework versions where groupId = &#63; and active = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param active the active to search with
+	* @return the matching s c framework versions that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> filterFindByG_A(
 		long groupId, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and finds a range of all the s c framework versions where groupId = &#63; and active = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param active the active to search with
+	* @param start the lower bound of the range of s c framework versions to return
+	* @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	* @return the range of matching s c framework versions that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> filterFindByG_A(
 		long groupId, boolean active, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the s c framework versions where groupId = &#63; and active = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param active the active to search with
+	* @param start the lower bound of the range of s c framework versions to return
+	* @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching s c framework versions that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> filterFindByG_A(
 		long groupId, boolean active, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds all the s c framework versions.
+	*
+	* @return the s c framework versions
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the s c framework versions.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of s c framework versions to return
+	* @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	* @return the range of s c framework versions
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the s c framework versions.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of s c framework versions to return
+	* @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of s c framework versions
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the s c framework versions where groupId = &#63; from the database.
+	*
+	* @param groupId the group id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the s c framework versions where companyId = &#63; from the database.
+	*
+	* @param companyId the company id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the s c framework versions where groupId = &#63; and active = &#63; from the database.
+	*
+	* @param groupId the group id to search with
+	* @param active the active to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByG_A(long groupId, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the s c framework versions from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the s c framework versions where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the number of matching s c framework versions
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and counts all the s c framework versions where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the number of matching s c framework versions that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the s c framework versions where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the number of matching s c framework versions
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the s c framework versions where groupId = &#63; and active = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param active the active to search with
+	* @return the number of matching s c framework versions
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByG_A(long groupId, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and counts all the s c framework versions where groupId = &#63; and active = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param active the active to search with
+	* @return the number of matching s c framework versions that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public int filterCountByG_A(long groupId, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the s c framework versions.
+	*
+	* @return the number of s c framework versions
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets all the s c product versions associated with the s c framework version.
+	*
+	* @param pk the primary key of the s c framework version to get the associated s c product versions for
+	* @return the s c product versions associated with the s c framework version
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getSCProductVersions(
 		long pk) throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets a range of all the s c product versions associated with the s c framework version.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param pk the primary key of the s c framework version to get the associated s c product versions for
+	* @param start the lower bound of the range of s c framework versions to return
+	* @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	* @return the range of s c product versions associated with the s c framework version
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getSCProductVersions(
 		long pk, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets an ordered range of all the s c product versions associated with the s c framework version.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param pk the primary key of the s c framework version to get the associated s c product versions for
+	* @param start the lower bound of the range of s c framework versions to return
+	* @param end the upper bound of the range of s c framework versions to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of s c product versions associated with the s c framework version
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getSCProductVersions(
 		long pk, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets the number of s c product versions associated with the s c framework version.
+	*
+	* @param pk the primary key of the s c framework version to get the number of associated s c product versions for
+	* @return the number of s c product versions associated with the s c framework version
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getSCProductVersionsSize(long pk)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Determines whether the s c product version is associated with the s c framework version.
+	*
+	* @param pk the primary key of the s c framework version
+	* @param scProductVersionPK the primary key of the s c product version
+	* @return whether the s c product version is associated with the s c framework version
+	* @throws SystemException if a system exception occurred
+	*/
 	public boolean containsSCProductVersion(long pk, long scProductVersionPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Determines whether the s c framework version has any s c product versions associated with it.
+	*
+	* @param pk the primary key of the s c framework version to check for associations with s c product versions
+	* @return whether the s c framework version has any s c product versions associated with it
+	* @throws SystemException if a system exception occurred
+	*/
 	public boolean containsSCProductVersions(long pk)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Adds an association between the s c framework version and the s c product version. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the s c framework version
+	* @param scProductVersionPK the primary key of the s c product version
+	* @throws SystemException if a system exception occurred
+	*/
 	public void addSCProductVersion(long pk, long scProductVersionPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Adds an association between the s c framework version and the s c product version. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the s c framework version
+	* @param scProductVersion the s c product version
+	* @throws SystemException if a system exception occurred
+	*/
 	public void addSCProductVersion(long pk,
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Adds an association between the s c framework version and the s c product versions. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the s c framework version
+	* @param scProductVersionPKs the primary keys of the s c product versions
+	* @throws SystemException if a system exception occurred
+	*/
 	public void addSCProductVersions(long pk, long[] scProductVersionPKs)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Adds an association between the s c framework version and the s c product versions. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the s c framework version
+	* @param scProductVersions the s c product versions
+	* @throws SystemException if a system exception occurred
+	*/
 	public void addSCProductVersions(long pk,
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> scProductVersions)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Clears all associations between the s c framework version and its s c product versions. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the s c framework version to clear the associated s c product versions from
+	* @throws SystemException if a system exception occurred
+	*/
 	public void clearSCProductVersions(long pk)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the association between the s c framework version and the s c product version. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the s c framework version
+	* @param scProductVersionPK the primary key of the s c product version
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeSCProductVersion(long pk, long scProductVersionPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the association between the s c framework version and the s c product version. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the s c framework version
+	* @param scProductVersion the s c product version
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeSCProductVersion(long pk,
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the association between the s c framework version and the s c product versions. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the s c framework version
+	* @param scProductVersionPKs the primary keys of the s c product versions
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeSCProductVersions(long pk, long[] scProductVersionPKs)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the association between the s c framework version and the s c product versions. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the s c framework version
+	* @param scProductVersions the s c product versions
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeSCProductVersions(long pk,
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> scProductVersions)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Sets the s c product versions associated with the s c framework version, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the s c framework version to set the associations for
+	* @param scProductVersionPKs the primary keys of the s c product versions to be associated with the s c framework version
+	* @throws SystemException if a system exception occurred
+	*/
 	public void setSCProductVersions(long pk, long[] scProductVersionPKs)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Sets the s c product versions associated with the s c framework version, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the s c framework version to set the associations for
+	* @param scProductVersions the s c product versions to be associated with the s c framework version
+	* @throws SystemException if a system exception occurred
+	*/
 	public void setSCProductVersions(long pk,
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> scProductVersions)
 		throws com.liferay.portal.kernel.exception.SystemException;

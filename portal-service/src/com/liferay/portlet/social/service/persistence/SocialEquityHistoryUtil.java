@@ -25,9 +25,15 @@ import com.liferay.portlet.social.model.SocialEquityHistory;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       SocialEquityHistoryPersistence
- * @see       SocialEquityHistoryPersistenceImpl
+ * The persistence utility for the social equity history service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see SocialEquityHistoryPersistence
+ * @see SocialEquityHistoryPersistenceImpl
  * @generated
  */
 public class SocialEquityHistoryUtil {
@@ -108,21 +114,45 @@ public class SocialEquityHistoryUtil {
 				   .update(socialEquityHistory, merge, serviceContext);
 	}
 
+	/**
+	* Caches the social equity history in the entity cache if it is enabled.
+	*
+	* @param socialEquityHistory the social equity history to cache
+	*/
 	public static void cacheResult(
 		com.liferay.portlet.social.model.SocialEquityHistory socialEquityHistory) {
 		getPersistence().cacheResult(socialEquityHistory);
 	}
 
+	/**
+	* Caches the social equity histories in the entity cache if it is enabled.
+	*
+	* @param socialEquityHistories the social equity histories to cache
+	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.social.model.SocialEquityHistory> socialEquityHistories) {
 		getPersistence().cacheResult(socialEquityHistories);
 	}
 
+	/**
+	* Creates a new social equity history with the primary key.
+	*
+	* @param equityHistoryId the primary key for the new social equity history
+	* @return the new social equity history
+	*/
 	public static com.liferay.portlet.social.model.SocialEquityHistory create(
 		long equityHistoryId) {
 		return getPersistence().create(equityHistoryId);
 	}
 
+	/**
+	* Removes the social equity history with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param equityHistoryId the primary key of the social equity history to remove
+	* @return the social equity history that was removed
+	* @throws com.liferay.portlet.social.NoSuchEquityHistoryException if a social equity history with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialEquityHistory remove(
 		long equityHistoryId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -137,6 +167,14 @@ public class SocialEquityHistoryUtil {
 		return getPersistence().updateImpl(socialEquityHistory, merge);
 	}
 
+	/**
+	* Finds the social equity history with the primary key or throws a {@link com.liferay.portlet.social.NoSuchEquityHistoryException} if it could not be found.
+	*
+	* @param equityHistoryId the primary key of the social equity history to find
+	* @return the social equity history
+	* @throws com.liferay.portlet.social.NoSuchEquityHistoryException if a social equity history with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialEquityHistory findByPrimaryKey(
 		long equityHistoryId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -144,23 +182,61 @@ public class SocialEquityHistoryUtil {
 		return getPersistence().findByPrimaryKey(equityHistoryId);
 	}
 
+	/**
+	* Finds the social equity history with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param equityHistoryId the primary key of the social equity history to find
+	* @return the social equity history, or <code>null</code> if a social equity history with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialEquityHistory fetchByPrimaryKey(
 		long equityHistoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(equityHistoryId);
 	}
 
+	/**
+	* Finds all the social equity histories.
+	*
+	* @return the social equity histories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialEquityHistory> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
+	/**
+	* Finds a range of all the social equity histories.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of social equity histories to return
+	* @param end the upper bound of the range of social equity histories to return (not inclusive)
+	* @return the range of social equity histories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialEquityHistory> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the social equity histories.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of social equity histories to return
+	* @param end the upper bound of the range of social equity histories to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of social equity histories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialEquityHistory> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -168,11 +244,22 @@ public class SocialEquityHistoryUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
+	/**
+	* Removes all the social equity histories from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
+	/**
+	* Counts all the social equity histories.
+	*
+	* @return the number of social equity histories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();

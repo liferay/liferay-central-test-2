@@ -15,20 +15,16 @@
 package com.liferay.portlet.shopping.model;
 
 /**
- * <p>
- * This interface is a model that represents the ShoppingCategory table in the
- * database.
- * </p>
+ * The model interface for the ShoppingCategory service. Represents a row in the &quot;ShoppingCategory&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       ShoppingCategoryModel
- * @see       com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl
- * @see       com.liferay.portlet.shopping.model.impl.ShoppingCategoryModelImpl
+ * @author Brian Wing Shun Chan
+ * @see ShoppingCategoryModel
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingCategoryModelImpl
  * @generated
  */
 public interface ShoppingCategory extends ShoppingCategoryModel {

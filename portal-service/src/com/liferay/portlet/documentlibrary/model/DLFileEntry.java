@@ -15,20 +15,16 @@
 package com.liferay.portlet.documentlibrary.model;
 
 /**
- * <p>
- * This interface is a model that represents the DLFileEntry table in the
- * database.
- * </p>
+ * The model interface for the DLFileEntry service. Represents a row in the &quot;DLFileEntry&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       DLFileEntryModel
- * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl
- * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl
+ * @author Brian Wing Shun Chan
+ * @see DLFileEntryModel
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl
  * @generated
  */
 public interface DLFileEntry extends DLFileEntryModel {

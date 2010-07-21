@@ -24,9 +24,15 @@ import com.liferay.portal.service.ServiceContext;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       ImagePersistence
- * @see       ImagePersistenceImpl
+ * The persistence utility for the image service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see ImagePersistence
+ * @see ImagePersistenceImpl
  * @generated
  */
 public class ImageUtil {
@@ -102,19 +108,43 @@ public class ImageUtil {
 		return getPersistence().update(image, merge, serviceContext);
 	}
 
+	/**
+	* Caches the image in the entity cache if it is enabled.
+	*
+	* @param image the image to cache
+	*/
 	public static void cacheResult(com.liferay.portal.model.Image image) {
 		getPersistence().cacheResult(image);
 	}
 
+	/**
+	* Caches the images in the entity cache if it is enabled.
+	*
+	* @param images the images to cache
+	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portal.model.Image> images) {
 		getPersistence().cacheResult(images);
 	}
 
+	/**
+	* Creates a new image with the primary key.
+	*
+	* @param imageId the primary key for the new image
+	* @return the new image
+	*/
 	public static com.liferay.portal.model.Image create(long imageId) {
 		return getPersistence().create(imageId);
 	}
 
+	/**
+	* Removes the image with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param imageId the primary key of the image to remove
+	* @return the image that was removed
+	* @throws com.liferay.portal.NoSuchImageException if a image with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Image remove(long imageId)
 		throws com.liferay.portal.NoSuchImageException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -127,28 +157,77 @@ public class ImageUtil {
 		return getPersistence().updateImpl(image, merge);
 	}
 
+	/**
+	* Finds the image with the primary key or throws a {@link com.liferay.portal.NoSuchImageException} if it could not be found.
+	*
+	* @param imageId the primary key of the image to find
+	* @return the image
+	* @throws com.liferay.portal.NoSuchImageException if a image with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Image findByPrimaryKey(long imageId)
 		throws com.liferay.portal.NoSuchImageException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByPrimaryKey(imageId);
 	}
 
+	/**
+	* Finds the image with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param imageId the primary key of the image to find
+	* @return the image, or <code>null</code> if a image with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Image fetchByPrimaryKey(long imageId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(imageId);
 	}
 
+	/**
+	* Finds all the images where size &lt; &#63;.
+	*
+	* @param size the size to search with
+	* @return the matching images
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.Image> findByLtSize(
 		int size) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByLtSize(size);
 	}
 
+	/**
+	* Finds a range of all the images where size &lt; &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param size the size to search with
+	* @param start the lower bound of the range of images to return
+	* @param end the upper bound of the range of images to return (not inclusive)
+	* @return the range of matching images
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.Image> findByLtSize(
 		int size, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByLtSize(size, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the images where size &lt; &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param size the size to search with
+	* @param start the lower bound of the range of images to return
+	* @param end the upper bound of the range of images to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching images
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.Image> findByLtSize(
 		int size, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -156,6 +235,19 @@ public class ImageUtil {
 		return getPersistence().findByLtSize(size, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first image in the ordered set where size &lt; &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param size the size to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching image
+	* @throws com.liferay.portal.NoSuchImageException if a matching image could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Image findByLtSize_First(int size,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchImageException,
@@ -163,6 +255,19 @@ public class ImageUtil {
 		return getPersistence().findByLtSize_First(size, orderByComparator);
 	}
 
+	/**
+	* Finds the last image in the ordered set where size &lt; &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param size the size to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching image
+	* @throws com.liferay.portal.NoSuchImageException if a matching image could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Image findByLtSize_Last(int size,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchImageException,
@@ -170,6 +275,20 @@ public class ImageUtil {
 		return getPersistence().findByLtSize_Last(size, orderByComparator);
 	}
 
+	/**
+	* Finds the images before and after the current image in the ordered set where size &lt; &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param imageId the primary key of the current image
+	* @param size the size to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next image
+	* @throws com.liferay.portal.NoSuchImageException if a image with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Image[] findByLtSize_PrevAndNext(
 		long imageId, int size,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -179,17 +298,48 @@ public class ImageUtil {
 				   .findByLtSize_PrevAndNext(imageId, size, orderByComparator);
 	}
 
+	/**
+	* Finds all the images.
+	*
+	* @return the images
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.Image> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
+	/**
+	* Finds a range of all the images.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of images to return
+	* @param end the upper bound of the range of images to return (not inclusive)
+	* @return the range of images
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.Image> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the images.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of images to return
+	* @param end the upper bound of the range of images to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of images
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.Image> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -197,21 +347,45 @@ public class ImageUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
+	/**
+	* Removes all the images where size &lt; &#63; from the database.
+	*
+	* @param size the size to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByLtSize(int size)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByLtSize(size);
 	}
 
+	/**
+	* Removes all the images from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
+	/**
+	* Counts all the images where size &lt; &#63;.
+	*
+	* @param size the size to search with
+	* @return the number of matching images
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByLtSize(int size)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByLtSize(size);
 	}
 
+	/**
+	* Counts all the images.
+	*
+	* @return the number of images
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();

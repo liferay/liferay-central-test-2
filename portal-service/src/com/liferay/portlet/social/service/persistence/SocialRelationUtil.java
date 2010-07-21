@@ -25,9 +25,15 @@ import com.liferay.portlet.social.model.SocialRelation;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       SocialRelationPersistence
- * @see       SocialRelationPersistenceImpl
+ * The persistence utility for the social relation service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see SocialRelationPersistence
+ * @see SocialRelationPersistenceImpl
  * @generated
  */
 public class SocialRelationUtil {
@@ -105,21 +111,45 @@ public class SocialRelationUtil {
 		return getPersistence().update(socialRelation, merge, serviceContext);
 	}
 
+	/**
+	* Caches the social relation in the entity cache if it is enabled.
+	*
+	* @param socialRelation the social relation to cache
+	*/
 	public static void cacheResult(
 		com.liferay.portlet.social.model.SocialRelation socialRelation) {
 		getPersistence().cacheResult(socialRelation);
 	}
 
+	/**
+	* Caches the social relations in the entity cache if it is enabled.
+	*
+	* @param socialRelations the social relations to cache
+	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.social.model.SocialRelation> socialRelations) {
 		getPersistence().cacheResult(socialRelations);
 	}
 
+	/**
+	* Creates a new social relation with the primary key.
+	*
+	* @param relationId the primary key for the new social relation
+	* @return the new social relation
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation create(
 		long relationId) {
 		return getPersistence().create(relationId);
 	}
 
+	/**
+	* Removes the social relation with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param relationId the primary key of the social relation to remove
+	* @return the social relation that was removed
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation remove(
 		long relationId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -134,6 +164,14 @@ public class SocialRelationUtil {
 		return getPersistence().updateImpl(socialRelation, merge);
 	}
 
+	/**
+	* Finds the social relation with the primary key or throws a {@link com.liferay.portlet.social.NoSuchRelationException} if it could not be found.
+	*
+	* @param relationId the primary key of the social relation to find
+	* @return the social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation findByPrimaryKey(
 		long relationId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -141,24 +179,65 @@ public class SocialRelationUtil {
 		return getPersistence().findByPrimaryKey(relationId);
 	}
 
+	/**
+	* Finds the social relation with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param relationId the primary key of the social relation to find
+	* @return the social relation, or <code>null</code> if a social relation with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation fetchByPrimaryKey(
 		long relationId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(relationId);
 	}
 
+	/**
+	* Finds all the social relations where uuid = &#63;.
+	*
+	* @param uuid the uuid to search with
+	* @return the matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUuid(
 		java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUuid(uuid);
 	}
 
+	/**
+	* Finds a range of all the social relations where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param start the lower bound of the range of social relations to return
+	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @return the range of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUuid(
 		java.lang.String uuid, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUuid(uuid, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the social relations where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param start the lower bound of the range of social relations to return
+	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUuid(
 		java.lang.String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -166,6 +245,19 @@ public class SocialRelationUtil {
 		return getPersistence().findByUuid(uuid, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first social relation in the ordered set where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -174,6 +266,19 @@ public class SocialRelationUtil {
 		return getPersistence().findByUuid_First(uuid, orderByComparator);
 	}
 
+	/**
+	* Finds the last social relation in the ordered set where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -182,6 +287,20 @@ public class SocialRelationUtil {
 		return getPersistence().findByUuid_Last(uuid, orderByComparator);
 	}
 
+	/**
+	* Finds the social relations before and after the current social relation in the ordered set where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param relationId the primary key of the current social relation
+	* @param uuid the uuid to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation[] findByUuid_PrevAndNext(
 		long relationId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -191,18 +310,52 @@ public class SocialRelationUtil {
 				   .findByUuid_PrevAndNext(relationId, uuid, orderByComparator);
 	}
 
+	/**
+	* Finds all the social relations where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByCompanyId(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByCompanyId(companyId);
 	}
 
+	/**
+	* Finds a range of all the social relations where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of social relations to return
+	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @return the range of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByCompanyId(
 		long companyId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByCompanyId(companyId, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the social relations where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of social relations to return
+	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -211,6 +364,19 @@ public class SocialRelationUtil {
 				   .findByCompanyId(companyId, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first social relation in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation findByCompanyId_First(
 		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -220,6 +386,19 @@ public class SocialRelationUtil {
 				   .findByCompanyId_First(companyId, orderByComparator);
 	}
 
+	/**
+	* Finds the last social relation in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation findByCompanyId_Last(
 		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -229,6 +408,20 @@ public class SocialRelationUtil {
 				   .findByCompanyId_Last(companyId, orderByComparator);
 	}
 
+	/**
+	* Finds the social relations before and after the current social relation in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param relationId the primary key of the current social relation
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation[] findByCompanyId_PrevAndNext(
 		long relationId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -239,18 +432,52 @@ public class SocialRelationUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds all the social relations where userId1 = &#63;.
+	*
+	* @param userId1 the user id1 to search with
+	* @return the matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUserId1(
 		long userId1)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUserId1(userId1);
 	}
 
+	/**
+	* Finds a range of all the social relations where userId1 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId1 the user id1 to search with
+	* @param start the lower bound of the range of social relations to return
+	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @return the range of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUserId1(
 		long userId1, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUserId1(userId1, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the social relations where userId1 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId1 the user id1 to search with
+	* @param start the lower bound of the range of social relations to return
+	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUserId1(
 		long userId1, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -259,6 +486,19 @@ public class SocialRelationUtil {
 				   .findByUserId1(userId1, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first social relation in the ordered set where userId1 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId1 the user id1 to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation findByUserId1_First(
 		long userId1,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -267,6 +507,19 @@ public class SocialRelationUtil {
 		return getPersistence().findByUserId1_First(userId1, orderByComparator);
 	}
 
+	/**
+	* Finds the last social relation in the ordered set where userId1 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId1 the user id1 to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation findByUserId1_Last(
 		long userId1,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -275,6 +528,20 @@ public class SocialRelationUtil {
 		return getPersistence().findByUserId1_Last(userId1, orderByComparator);
 	}
 
+	/**
+	* Finds the social relations before and after the current social relation in the ordered set where userId1 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param relationId the primary key of the current social relation
+	* @param userId1 the user id1 to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation[] findByUserId1_PrevAndNext(
 		long relationId, long userId1,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -285,18 +552,52 @@ public class SocialRelationUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds all the social relations where userId2 = &#63;.
+	*
+	* @param userId2 the user id2 to search with
+	* @return the matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUserId2(
 		long userId2)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUserId2(userId2);
 	}
 
+	/**
+	* Finds a range of all the social relations where userId2 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId2 the user id2 to search with
+	* @param start the lower bound of the range of social relations to return
+	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @return the range of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUserId2(
 		long userId2, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUserId2(userId2, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the social relations where userId2 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId2 the user id2 to search with
+	* @param start the lower bound of the range of social relations to return
+	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByUserId2(
 		long userId2, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -305,6 +606,19 @@ public class SocialRelationUtil {
 				   .findByUserId2(userId2, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first social relation in the ordered set where userId2 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId2 the user id2 to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation findByUserId2_First(
 		long userId2,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -313,6 +627,19 @@ public class SocialRelationUtil {
 		return getPersistence().findByUserId2_First(userId2, orderByComparator);
 	}
 
+	/**
+	* Finds the last social relation in the ordered set where userId2 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId2 the user id2 to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation findByUserId2_Last(
 		long userId2,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -321,6 +648,20 @@ public class SocialRelationUtil {
 		return getPersistence().findByUserId2_Last(userId2, orderByComparator);
 	}
 
+	/**
+	* Finds the social relations before and after the current social relation in the ordered set where userId2 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param relationId the primary key of the current social relation
+	* @param userId2 the user id2 to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation[] findByUserId2_PrevAndNext(
 		long relationId, long userId2,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -331,17 +672,51 @@ public class SocialRelationUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds all the social relations where type = &#63;.
+	*
+	* @param type the type to search with
+	* @return the matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByType(
 		int type) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByType(type);
 	}
 
+	/**
+	* Finds a range of all the social relations where type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param type the type to search with
+	* @param start the lower bound of the range of social relations to return
+	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @return the range of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByType(
 		int type, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByType(type, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the social relations where type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param type the type to search with
+	* @param start the lower bound of the range of social relations to return
+	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByType(
 		int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -349,6 +724,19 @@ public class SocialRelationUtil {
 		return getPersistence().findByType(type, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first social relation in the ordered set where type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation findByType_First(
 		int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -357,6 +745,19 @@ public class SocialRelationUtil {
 		return getPersistence().findByType_First(type, orderByComparator);
 	}
 
+	/**
+	* Finds the last social relation in the ordered set where type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation findByType_Last(
 		int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -365,6 +766,20 @@ public class SocialRelationUtil {
 		return getPersistence().findByType_Last(type, orderByComparator);
 	}
 
+	/**
+	* Finds the social relations before and after the current social relation in the ordered set where type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param relationId the primary key of the current social relation
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation[] findByType_PrevAndNext(
 		long relationId, int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -374,18 +789,55 @@ public class SocialRelationUtil {
 				   .findByType_PrevAndNext(relationId, type, orderByComparator);
 	}
 
+	/**
+	* Finds all the social relations where companyId = &#63; and type = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @param type the type to search with
+	* @return the matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByC_T(
 		long companyId, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByC_T(companyId, type);
 	}
 
+	/**
+	* Finds a range of all the social relations where companyId = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param type the type to search with
+	* @param start the lower bound of the range of social relations to return
+	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @return the range of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByC_T(
 		long companyId, int type, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByC_T(companyId, type, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the social relations where companyId = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param type the type to search with
+	* @param start the lower bound of the range of social relations to return
+	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByC_T(
 		long companyId, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -394,6 +846,20 @@ public class SocialRelationUtil {
 				   .findByC_T(companyId, type, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first social relation in the ordered set where companyId = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation findByC_T_First(
 		long companyId, int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -403,6 +869,20 @@ public class SocialRelationUtil {
 				   .findByC_T_First(companyId, type, orderByComparator);
 	}
 
+	/**
+	* Finds the last social relation in the ordered set where companyId = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation findByC_T_Last(
 		long companyId, int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -412,6 +892,21 @@ public class SocialRelationUtil {
 				   .findByC_T_Last(companyId, type, orderByComparator);
 	}
 
+	/**
+	* Finds the social relations before and after the current social relation in the ordered set where companyId = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param relationId the primary key of the current social relation
+	* @param companyId the company id to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation[] findByC_T_PrevAndNext(
 		long relationId, long companyId, int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -422,18 +917,55 @@ public class SocialRelationUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds all the social relations where userId1 = &#63; and type = &#63;.
+	*
+	* @param userId1 the user id1 to search with
+	* @param type the type to search with
+	* @return the matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByU1_T(
 		long userId1, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByU1_T(userId1, type);
 	}
 
+	/**
+	* Finds a range of all the social relations where userId1 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId1 the user id1 to search with
+	* @param type the type to search with
+	* @param start the lower bound of the range of social relations to return
+	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @return the range of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByU1_T(
 		long userId1, int type, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByU1_T(userId1, type, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the social relations where userId1 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId1 the user id1 to search with
+	* @param type the type to search with
+	* @param start the lower bound of the range of social relations to return
+	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByU1_T(
 		long userId1, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -442,6 +974,20 @@ public class SocialRelationUtil {
 				   .findByU1_T(userId1, type, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first social relation in the ordered set where userId1 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId1 the user id1 to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation findByU1_T_First(
 		long userId1, int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -451,6 +997,20 @@ public class SocialRelationUtil {
 				   .findByU1_T_First(userId1, type, orderByComparator);
 	}
 
+	/**
+	* Finds the last social relation in the ordered set where userId1 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId1 the user id1 to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation findByU1_T_Last(
 		long userId1, int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -459,6 +1019,21 @@ public class SocialRelationUtil {
 		return getPersistence().findByU1_T_Last(userId1, type, orderByComparator);
 	}
 
+	/**
+	* Finds the social relations before and after the current social relation in the ordered set where userId1 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param relationId the primary key of the current social relation
+	* @param userId1 the user id1 to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation[] findByU1_T_PrevAndNext(
 		long relationId, long userId1, int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -469,18 +1044,55 @@ public class SocialRelationUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds all the social relations where userId2 = &#63; and type = &#63;.
+	*
+	* @param userId2 the user id2 to search with
+	* @param type the type to search with
+	* @return the matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByU2_T(
 		long userId2, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByU2_T(userId2, type);
 	}
 
+	/**
+	* Finds a range of all the social relations where userId2 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId2 the user id2 to search with
+	* @param type the type to search with
+	* @param start the lower bound of the range of social relations to return
+	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @return the range of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByU2_T(
 		long userId2, int type, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByU2_T(userId2, type, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the social relations where userId2 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId2 the user id2 to search with
+	* @param type the type to search with
+	* @param start the lower bound of the range of social relations to return
+	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findByU2_T(
 		long userId2, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -489,6 +1101,20 @@ public class SocialRelationUtil {
 				   .findByU2_T(userId2, type, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first social relation in the ordered set where userId2 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId2 the user id2 to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation findByU2_T_First(
 		long userId2, int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -498,6 +1124,20 @@ public class SocialRelationUtil {
 				   .findByU2_T_First(userId2, type, orderByComparator);
 	}
 
+	/**
+	* Finds the last social relation in the ordered set where userId2 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId2 the user id2 to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation findByU2_T_Last(
 		long userId2, int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -506,6 +1146,21 @@ public class SocialRelationUtil {
 		return getPersistence().findByU2_T_Last(userId2, type, orderByComparator);
 	}
 
+	/**
+	* Finds the social relations before and after the current social relation in the ordered set where userId2 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param relationId the primary key of the current social relation
+	* @param userId2 the user id2 to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation[] findByU2_T_PrevAndNext(
 		long relationId, long userId2, int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -516,6 +1171,16 @@ public class SocialRelationUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds the social relation where userId1 = &#63; and userId2 = &#63; and type = &#63; or throws a {@link com.liferay.portlet.social.NoSuchRelationException} if it could not be found.
+	*
+	* @param userId1 the user id1 to search with
+	* @param userId2 the user id2 to search with
+	* @param type the type to search with
+	* @return the matching social relation
+	* @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation findByU1_U2_T(
 		long userId1, long userId2, int type)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -523,12 +1188,30 @@ public class SocialRelationUtil {
 		return getPersistence().findByU1_U2_T(userId1, userId2, type);
 	}
 
+	/**
+	* Finds the social relation where userId1 = &#63; and userId2 = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param userId1 the user id1 to search with
+	* @param userId2 the user id2 to search with
+	* @param type the type to search with
+	* @return the matching social relation, or <code>null</code> if a matching social relation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation fetchByU1_U2_T(
 		long userId1, long userId2, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByU1_U2_T(userId1, userId2, type);
 	}
 
+	/**
+	* Finds the social relation where userId1 = &#63; and userId2 = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param userId1 the user id1 to search with
+	* @param userId2 the user id2 to search with
+	* @param type the type to search with
+	* @return the matching social relation, or <code>null</code> if a matching social relation could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialRelation fetchByU1_U2_T(
 		long userId1, long userId2, int type, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -536,17 +1219,48 @@ public class SocialRelationUtil {
 				   .fetchByU1_U2_T(userId1, userId2, type, retrieveFromCache);
 	}
 
+	/**
+	* Finds all the social relations.
+	*
+	* @return the social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
+	/**
+	* Finds a range of all the social relations.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of social relations to return
+	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @return the range of social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the social relations.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of social relations to return
+	* @param end the upper bound of the range of social relations to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -554,102 +1268,240 @@ public class SocialRelationUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
+	/**
+	* Removes all the social relations where uuid = &#63; from the database.
+	*
+	* @param uuid the uuid to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByUuid(java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByUuid(uuid);
 	}
 
+	/**
+	* Removes all the social relations where companyId = &#63; from the database.
+	*
+	* @param companyId the company id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
+	/**
+	* Removes all the social relations where userId1 = &#63; from the database.
+	*
+	* @param userId1 the user id1 to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByUserId1(long userId1)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByUserId1(userId1);
 	}
 
+	/**
+	* Removes all the social relations where userId2 = &#63; from the database.
+	*
+	* @param userId2 the user id2 to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByUserId2(long userId2)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByUserId2(userId2);
 	}
 
+	/**
+	* Removes all the social relations where type = &#63; from the database.
+	*
+	* @param type the type to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByType(int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByType(type);
 	}
 
+	/**
+	* Removes all the social relations where companyId = &#63; and type = &#63; from the database.
+	*
+	* @param companyId the company id to search with
+	* @param type the type to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByC_T(long companyId, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByC_T(companyId, type);
 	}
 
+	/**
+	* Removes all the social relations where userId1 = &#63; and type = &#63; from the database.
+	*
+	* @param userId1 the user id1 to search with
+	* @param type the type to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByU1_T(long userId1, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByU1_T(userId1, type);
 	}
 
+	/**
+	* Removes all the social relations where userId2 = &#63; and type = &#63; from the database.
+	*
+	* @param userId2 the user id2 to search with
+	* @param type the type to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByU2_T(long userId2, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByU2_T(userId2, type);
 	}
 
+	/**
+	* Removes the social relation where userId1 = &#63; and userId2 = &#63; and type = &#63; from the database.
+	*
+	* @param userId1 the user id1 to search with
+	* @param userId2 the user id2 to search with
+	* @param type the type to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByU1_U2_T(long userId1, long userId2, int type)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchRelationException {
 		getPersistence().removeByU1_U2_T(userId1, userId2, type);
 	}
 
+	/**
+	* Removes all the social relations from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
+	/**
+	* Counts all the social relations where uuid = &#63;.
+	*
+	* @param uuid the uuid to search with
+	* @return the number of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByUuid(java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByUuid(uuid);
 	}
 
+	/**
+	* Counts all the social relations where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the number of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByCompanyId(companyId);
 	}
 
+	/**
+	* Counts all the social relations where userId1 = &#63;.
+	*
+	* @param userId1 the user id1 to search with
+	* @return the number of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByUserId1(long userId1)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByUserId1(userId1);
 	}
 
+	/**
+	* Counts all the social relations where userId2 = &#63;.
+	*
+	* @param userId2 the user id2 to search with
+	* @return the number of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByUserId2(long userId2)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByUserId2(userId2);
 	}
 
+	/**
+	* Counts all the social relations where type = &#63;.
+	*
+	* @param type the type to search with
+	* @return the number of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByType(int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByType(type);
 	}
 
+	/**
+	* Counts all the social relations where companyId = &#63; and type = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @param type the type to search with
+	* @return the number of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByC_T(long companyId, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_T(companyId, type);
 	}
 
+	/**
+	* Counts all the social relations where userId1 = &#63; and type = &#63;.
+	*
+	* @param userId1 the user id1 to search with
+	* @param type the type to search with
+	* @return the number of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByU1_T(long userId1, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByU1_T(userId1, type);
 	}
 
+	/**
+	* Counts all the social relations where userId2 = &#63; and type = &#63;.
+	*
+	* @param userId2 the user id2 to search with
+	* @param type the type to search with
+	* @return the number of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByU2_T(long userId2, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByU2_T(userId2, type);
 	}
 
+	/**
+	* Counts all the social relations where userId1 = &#63; and userId2 = &#63; and type = &#63;.
+	*
+	* @param userId1 the user id1 to search with
+	* @param userId2 the user id2 to search with
+	* @param type the type to search with
+	* @return the number of matching social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByU1_U2_T(long userId1, long userId2, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByU1_U2_T(userId1, userId2, type);
 	}
 
+	/**
+	* Counts all the social relations.
+	*
+	* @return the number of social relations
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();

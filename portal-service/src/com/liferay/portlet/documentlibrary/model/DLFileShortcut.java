@@ -15,20 +15,16 @@
 package com.liferay.portlet.documentlibrary.model;
 
 /**
- * <p>
- * This interface is a model that represents the DLFileShortcut table in the
- * database.
- * </p>
+ * The model interface for the DLFileShortcut service. Represents a row in the &quot;DLFileShortcut&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       DLFileShortcutModel
- * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl
- * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutModelImpl
+ * @author Brian Wing Shun Chan
+ * @see DLFileShortcutModel
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutModelImpl
  * @generated
  */
 public interface DLFileShortcut extends DLFileShortcutModel {

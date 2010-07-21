@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the Portlet table in the
- * database.
- * </p>
+ * The model interface for the Portlet service. Represents a row in the &quot;Portlet&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.PortletImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.PortletImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       PortletModel
- * @see       com.liferay.portal.model.impl.PortletImpl
- * @see       com.liferay.portal.model.impl.PortletModelImpl
+ * @author Brian Wing Shun Chan
+ * @see PortletModel
+ * @see com.liferay.portal.model.impl.PortletImpl
+ * @see com.liferay.portal.model.impl.PortletModelImpl
  * @generated
  */
 public interface Portlet extends PortletModel {
@@ -328,7 +324,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Gets the class loader resource path to the friendly URL routes of the
-	portlet.
+	* portlet.
 	*
 	* @return the class loader resource path to the friendly URL routes of the
 	portlet
@@ -337,7 +333,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Sets the class loader resource path to the friendly URL routes of the
-	portlet.
+	* portlet.
 	*
 	* @param friendlyURLRoutes the class loader resource path to the friendly
 	URL routes of the portlet
@@ -565,7 +561,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Gets the name of the category of the Control Panel where the portlet will
-	be shown.
+	* be shown.
 	*
 	* @return the name of of the category of the Control Panel where the
 	portlet will be shown
@@ -574,7 +570,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Set the name of the category of the Control Panel where the portlet will
-	be shown.
+	* be shown.
 	*
 	* @param controlPanelEntryCategory the name of the category of the Control
 	Panel where the portlet will be shown
@@ -584,7 +580,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Gets the relative weight of the portlet with respect to the other
-	portlets in the same category of the Control Panel.
+	* portlets in the same category of the Control Panel.
 	*
 	* @return the relative weight of the portlet with respect to the other
 	portlets in the same category of the Control Panel
@@ -593,7 +589,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Sets the relative weight of the portlet with respect to the other
-	portlets in the same category of the Control Panel.
+	* portlets in the same category of the Control Panel.
 	*
 	* @param controlPanelEntryWeight the relative weight of the portlet with
 	respect to the other portlets in the same category of the Control
@@ -603,7 +599,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Gets the name of the class that will control when the portlet will be
-	shown in the Control Panel.
+	* shown in the Control Panel.
 	*
 	* @return the name of the class that will control when the portlet will be
 	shown in the Control Panel
@@ -612,7 +608,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Sets the name of the class that will control when the portlet will be
-	shown in the Control Panel.
+	* shown in the Control Panel.
 	*
 	* @param controlPanelEntryClass the name of the class that will control
 	when the portlet will be shown in the Control Panel
@@ -622,7 +618,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Gets an instance of the class that will control when the portlet will be
-	shown in the Control Panel.
+	* shown in the Control Panel.
 	*
 	* @return the instance of the class that will control when the portlet will
 	be shown in the Control Panel
@@ -631,7 +627,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Gets the names of the classes that represent asset types associated to
-	the portlet.
+	* the portlet.
 	*
 	* @return the names of the classes that represent asset types associated to
 	the portlet
@@ -640,7 +636,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Sets the name of the classes that represent asset types associated to the
-	portlet.
+	* portlet.
 	*
 	* @param assetRendererFactoryClasses the names of the classes that
 	represent asset types associated to the portlet
@@ -657,7 +653,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Gets the names of the classes that represent custom attribute displays
-	associated to the portlet.
+	* associated to the portlet.
 	*
 	* @return the names of the classes that represent asset types associated to
 	the portlet
@@ -666,7 +662,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Sets the name of the classes that represent custom attribute displays
-	associated to the portlet.
+	* associated to the portlet.
 	*
 	* @param customAttributesDisplayClasses the names of the classes that
 	represent custom attribute displays associated to the portlet
@@ -683,7 +679,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Gets the names of the classes that represent workflow handlers associated
-	to the portlet.
+	* to the portlet.
 	*
 	* @return the names of the classes that represent workflow handlers
 	associated to the portlet
@@ -692,7 +688,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Sets the name of the classes that represent workflow handlers associated
-	to the portlet.
+	* to the portlet.
 	*
 	* @param workflowHandlerClasses the names of the classes that represent
 	workflow handlers associated to the portlet
@@ -738,7 +734,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if preferences are shared across the entire
-	company.
+	* company.
 	*
 	* @return <code>true</code> if preferences are shared across the entire
 	company
@@ -747,7 +743,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if preferences are shared across the entire
-	company.
+	* company.
 	*
 	* @return <code>true</code> if preferences are shared across the entire
 	company
@@ -756,7 +752,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Set to <code>true</code> if preferences are shared across the entire
-	company.
+	* company.
 	*
 	* @param preferencesCompanyWide boolean value for whether preferences are
 	shared across the entire company
@@ -788,8 +784,8 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if preferences are owned by the group when the
-	portlet is shown in a group layout. Returns <code>false</code> if
-	preferences are owned by the user at all times.
+	* portlet is shown in a group layout. Returns <code>false</code> if
+	* preferences are owned by the user at all times.
 	*
 	* @return <code>true</code> if preferences are owned by the group when the
 	portlet is shown in a group layout; <code>false</code> if
@@ -799,8 +795,8 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if preferences are owned by the group when the
-	portlet is shown in a group layout. Returns <code>false</code> if
-	preferences are owned by the user at all times.
+	* portlet is shown in a group layout. Returns <code>false</code> if
+	* preferences are owned by the user at all times.
 	*
 	* @return <code>true</code> if preferences are owned by the group when the
 	portlet is shown in a group layout; <code>false</code> if
@@ -810,8 +806,8 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Set to <code>true</code> if preferences are owned by the group when the
-	portlet is shown in a group layout. Set to <code>false</code> if
-	preferences are owned by the user at all times.
+	* portlet is shown in a group layout. Set to <code>false</code> if
+	* preferences are owned by the user at all times.
 	*
 	* @param preferencesOwnedByGroup boolean value for whether preferences are
 	owned by the group when the portlet is shown in a group layout or
@@ -843,7 +839,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if users are shown that they do not have access
-	to the portlet.
+	* to the portlet.
 	*
 	* @return <code>true</code> if users are shown that they do not have access
 	to the portlet
@@ -852,7 +848,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if users are shown that they do not have access
-	to the portlet.
+	* to the portlet.
 	*
 	* @return <code>true</code> if users are shown that they do not have access
 	to the portlet
@@ -861,7 +857,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Set to <code>true</code> if users are shown that they do not have access
-	to the portlet.
+	* to the portlet.
 	*
 	* @param showPortletAccessDenied boolean value for whether users are shown
 	that they do not have access to the portlet
@@ -870,7 +866,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if users are shown that the portlet is
-	inactive.
+	* inactive.
 	*
 	* @return <code>true</code> if users are shown that the portlet is inactive
 	*/
@@ -878,7 +874,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if users are shown that the portlet is
-	inactive.
+	* inactive.
 	*
 	* @return <code>true</code> if users are shown that the portlet is inactive
 	*/
@@ -894,7 +890,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if an action URL for this portlet should cause
-	an auto redirect.
+	* an auto redirect.
 	*
 	* @return <code>true</code> if an action URL for this portlet should cause
 	an auto redirect
@@ -903,7 +899,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if an action URL for this portlet should cause
-	an auto redirect.
+	* an auto redirect.
 	*
 	* @return <code>true</code> if an action URL for this portlet should cause
 	an auto redirect
@@ -912,7 +908,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Set to <code>true</code> if an action URL for this portlet should cause
-	an auto redirect.
+	* an auto redirect.
 	*
 	* @param actionURLRedirect boolean value for whether an action URL for this
 	portlet should cause an auto redirect
@@ -921,7 +917,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet restores to the current view
-	from the maximized state.
+	* from the maximized state.
 	*
 	* @return <code>true</code> if the portlet restores to the current view
 	from the maximized state
@@ -930,7 +926,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet restores to the current view
-	from the maximized state.
+	* from the maximized state.
 	*
 	* @return <code>true</code> if the portlet restores to the current view
 	from the maximized state
@@ -939,7 +935,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Set to <code>true</code> if the portlet restores to the current view from
-	the maximized state.
+	* the maximized state.
 	*
 	* @param restoreCurrentView boolean value for whether the portlet restores
 	to the current view from the maximized state
@@ -948,7 +944,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet goes into the maximized state
-	when the user goes into the edit mode.
+	* when the user goes into the edit mode.
 	*
 	* @return <code>true</code> if the portlet goes into the maximized state
 	when the user goes into the edit mode
@@ -957,7 +953,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet goes into the maximized state
-	when the user goes into the edit mode.
+	* when the user goes into the edit mode.
 	*
 	* @return <code>true</code> if the portlet goes into the maximized state
 	when the user goes into the edit mode
@@ -966,7 +962,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Set to <code>true</code> if the portlet goes into the maximized state
-	when the user goes into the edit mode.
+	* when the user goes into the edit mode.
 	*
 	* @param maximizeEdit boolean value for whether the portlet goes into the
 	maximized state when the user goes into the edit mode
@@ -975,7 +971,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet goes into the maximized state
-	when the user goes into the help mode.
+	* when the user goes into the help mode.
 	*
 	* @return <code>true</code> if the portlet goes into the maximized state
 	when the user goes into the help mode
@@ -984,7 +980,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet goes into the maximized state
-	when the user goes into the help mode.
+	* when the user goes into the help mode.
 	*
 	* @return <code>true</code> if the portlet goes into the maximized state
 	when the user goes into the help mode
@@ -993,7 +989,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Set to <code>true</code> if the portlet goes into the maximized state
-	when the user goes into the help mode.
+	* when the user goes into the help mode.
 	*
 	* @param maximizeHelp boolean value for whether the portlet goes into the
 	maximized state when the user goes into the help mode
@@ -1002,7 +998,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet goes into the pop up state when
-	the user goes into the print mode.
+	* the user goes into the print mode.
 	*
 	* @return <code>true</code> if the portlet goes into the pop up state when
 	the user goes into the print mode
@@ -1011,7 +1007,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet goes into the pop up state when
-	the user goes into the print mode.
+	* the user goes into the print mode.
 	*
 	* @return <code>true</code> if the portlet goes into the pop up state when
 	the user goes into the print mode
@@ -1020,7 +1016,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Set to <code>true</code> if the portlet goes into the pop up state when
-	the user goes into the print mode.
+	* the user goes into the print mode.
 	*
 	* @param popUpPrint boolean value for whether the portlet goes into the pop
 	up state when the user goes into the print mode
@@ -1029,7 +1025,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> to allow the portlet to be cached within the
-	layout.
+	* layout.
 	*
 	* @return <code>true</code> if the portlet can be cached within the layout
 	*/
@@ -1037,7 +1033,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> to allow the portlet to be cached within the
-	layout.
+	* layout.
 	*
 	* @return <code>true</code> if the portlet can be cached within the layout
 	*/
@@ -1045,7 +1041,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Set to <code>true</code> to allow the portlet to be cached within the
-	layout.
+	* layout.
 	*
 	* @param layoutCacheable boolean value for whether the portlet can be
 	cached within the layout
@@ -1054,7 +1050,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet can be added multiple times to a
-	layout.
+	* layout.
 	*
 	* @return <code>true</code> if the portlet can be added multiple times to a
 	layout
@@ -1063,7 +1059,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet can be added multiple times to a
-	layout.
+	* layout.
 	*
 	* @return <code>true</code> if the portlet can be added multiple times to a
 	layout
@@ -1072,7 +1068,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Set to <code>true</code> if the portlet can be added multiple times to a
-	layout.
+	* layout.
 	*
 	* @param instanceable boolean value for whether the portlet can be added
 	multiple times to a layout
@@ -1139,7 +1135,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet does not share request
-	attributes with the portal or portlets from another WAR.
+	* attributes with the portal or portlets from another WAR.
 	*
 	* @return <code>true</code> if the portlet does not share request
 	attributes with the portal or portlets from another WAR
@@ -1148,7 +1144,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet does not share request
-	attributes with the portal or portlets from another WAR.
+	* attributes with the portal or portlets from another WAR.
 	*
 	* @return <code>true</code> if the portlet does not share request
 	attributes with the portal or portlets from another WAR
@@ -1157,7 +1153,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Set to <code>true</code> if the portlet does not share request attributes
-	with the portal or portlets from another WAR.
+	* with the portal or portlets from another WAR.
 	*
 	* @param privateRequestAttributes boolean value for whether the portlet
 	shares request attributes with the portal or portlets from another
@@ -1167,7 +1163,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet does not share session
-	attributes with the portal.
+	* attributes with the portal.
 	*
 	* @return <code>true</code> if the portlet does not share session
 	attributes with the portal
@@ -1176,7 +1172,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet does not share session
-	attributes with the portal.
+	* attributes with the portal.
 	*
 	* @return <code>true</code> if the portlet does not share session
 	attributes with the portal
@@ -1185,7 +1181,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Set to <code>true</code> if the portlet does not share session attributes
-	with the portal.
+	* with the portal.
 	*
 	* @param privateSessionAttributes boolean value for whether the portlet
 	shares session attributes with the portal
@@ -1230,7 +1226,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Gets a list of CSS files that will be referenced from the page's header
-	relative to the portal's context path.
+	* relative to the portal's context path.
 	*
 	* @return a list of CSS files that will be referenced from the page's
 	header relative to the portal's context path
@@ -1239,7 +1235,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Sets a list of CSS files that will be referenced from the page's header
-	relative to the portal's context path.
+	* relative to the portal's context path.
 	*
 	* @param headerPortalCss a list of CSS files that will be referenced from
 	the page's header relative to the portal's context path
@@ -1249,7 +1245,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Gets a list of CSS files that will be referenced from the page's header
-	relative to the portlet's context path.
+	* relative to the portlet's context path.
 	*
 	* @return a list of CSS files that will be referenced from the page's
 	header relative to the portlet's context path
@@ -1258,7 +1254,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Sets a list of CSS files that will be referenced from the page's header
-	relative to the portlet's context path.
+	* relative to the portlet's context path.
 	*
 	* @param headerPortletCss a list of CSS files that will be referenced from
 	the page's header relative to the portlet's context path
@@ -1268,7 +1264,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Gets a list of JavaScript files that will be referenced from the page's
-	header relative to the portal's context path.
+	* header relative to the portal's context path.
 	*
 	* @return a list of JavaScript files that will be referenced from the
 	page's header relative to the portal's context path
@@ -1277,7 +1273,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Sets a list of JavaScript files that will be referenced from the page's
-	header relative to the portal's context path.
+	* header relative to the portal's context path.
 	*
 	* @param headerPortalJavaScript a list of JavaScript files that will be
 	referenced from the page's header relative to the portal's context
@@ -1288,7 +1284,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Gets a list of JavaScript files that will be referenced from the page's
-	header relative to the portlet's context path.
+	* header relative to the portlet's context path.
 	*
 	* @return a list of JavaScript files that will be referenced from the
 	page's header relative to the portlet's context path
@@ -1297,7 +1293,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Sets a list of JavaScript files that will be referenced from the page's
-	header relative to the portlet's context path.
+	* header relative to the portlet's context path.
 	*
 	* @param headerPortletJavaScript a list of JavaScript files that will be
 	referenced from the page's header relative to the portlet's
@@ -1308,7 +1304,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Gets a list of CSS files that will be referenced from the page's footer
-	relative to the portal's context path.
+	* relative to the portal's context path.
 	*
 	* @return a list of CSS files that will be referenced from the page's
 	footer relative to the portal's context path
@@ -1317,7 +1313,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Sets a list of CSS files that will be referenced from the page's footer
-	relative to the portal's context path.
+	* relative to the portal's context path.
 	*
 	* @param footerPortalCss a list of CSS files that will be referenced from
 	the page's footer relative to the portal's context path
@@ -1327,7 +1323,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Gets a list of CSS files that will be referenced from the page's footer
-	relative to the portlet's context path.
+	* relative to the portlet's context path.
 	*
 	* @return a list of CSS files that will be referenced from the page's
 	footer relative to the portlet's context path
@@ -1336,7 +1332,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Sets a list of CSS files that will be referenced from the page's footer
-	relative to the portlet's context path.
+	* relative to the portlet's context path.
 	*
 	* @param footerPortletCss a list of CSS files that will be referenced from
 	the page's footer relative to the portlet's context path
@@ -1346,7 +1342,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Gets a list of JavaScript files that will be referenced from the page's
-	footer relative to the portal's context path.
+	* footer relative to the portal's context path.
 	*
 	* @return a list of JavaScript files that will be referenced from the
 	page's footer relative to the portal's context path
@@ -1355,7 +1351,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Sets a list of JavaScript files that will be referenced from the page's
-	footer relative to the portal's context path.
+	* footer relative to the portal's context path.
 	*
 	* @param footerPortalJavaScript a list of JavaScript files that will be
 	referenced from the page's footer relative to the portal's context
@@ -1366,7 +1362,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Gets a list of JavaScript files that will be referenced from the page's
-	footer relative to the portlet's context path.
+	* footer relative to the portlet's context path.
 	*
 	* @return a list of JavaScript files that will be referenced from the
 	page's footer relative to the portlet's context path
@@ -1375,7 +1371,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Sets a list of JavaScript files that will be referenced from the page's
-	footer relative to the portlet's context path.
+	* footer relative to the portlet's context path.
 	*
 	* @param footerPortletJavaScript a list of JavaScript files that will be
 	referenced from the page's footer relative to the portlet's
@@ -1386,7 +1382,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Gets the name of the CSS class that will be injected in the DIV that
-	wraps this portlet.
+	* wraps this portlet.
 	*
 	* @return the name of the CSS class that will be injected in the DIV that
 	wraps this portlet
@@ -1395,7 +1391,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Sets the name of the CSS class that will be injected in the DIV that
-	wraps this portlet.
+	* wraps this portlet.
 	*
 	* @param cssClassWrapper the name of the CSS class that will be injected in
 	the DIV that wraps this portlet
@@ -1418,7 +1414,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if default resources for the portlet are added
-	to a page.
+	* to a page.
 	*
 	* @return <code>true</code> if default resources for the portlet are added
 	to a page
@@ -1427,7 +1423,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if default resources for the portlet are added
-	to a page.
+	* to a page.
 	*
 	* @return <code>true</code> if default resources for the portlet are added
 	to a page
@@ -1436,7 +1432,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Set to <code>true</code> if default resources for the portlet are added
-	to a page.
+	* to a page.
 	*
 	* @param addDefaultResource boolean value for whether or not default
 	resources for the portlet are added to a page
@@ -1495,13 +1491,13 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Link the role names set in portlet.xml with the Liferay roles set in
-	liferay-portlet.xml.
+	* liferay-portlet.xml.
 	*/
 	public void linkRoles();
 
 	/**
 	* Returns <code>true</code> if the portlet has a role with the specified
-	name.
+	* name.
 	*
 	* @return <code>true</code> if the portlet has a role with the specified
 	name
@@ -1510,7 +1506,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the user has the permission to add the
-	portlet to a layout.
+	* portlet to a layout.
 	*
 	* @return <code>true</code> if the user has the permission to add the
 	portlet to a layout
@@ -1519,7 +1515,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet is a system portlet that a user
-	cannot manually add to their page.
+	* cannot manually add to their page.
 	*
 	* @return <code>true</code> if the portlet is a system portlet that a user
 	cannot manually add to their page
@@ -1528,7 +1524,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet is a system portlet that a user
-	cannot manually add to their page.
+	* cannot manually add to their page.
 	*
 	* @return <code>true</code> if the portlet is a system portlet that a user
 	cannot manually add to their page
@@ -1537,7 +1533,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Set to <code>true</code> if the portlet is a system portlet that a user
-	cannot manually add to their page.
+	* cannot manually add to their page.
 	*
 	* @param system boolean value for whether the portlet is a system portlet
 	that a user cannot manually add to their page
@@ -1546,7 +1542,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> to include the portlet and make it available to
-	be made active.
+	* be made active.
 	*
 	* @return <code>true</code> to include the portlet and make it available to
 	be made active
@@ -1555,7 +1551,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> to include the portlet and make it available to
-	be made active.
+	* be made active.
 	*
 	* @return <code>true</code> to include the portlet and make it available to
 	be made active
@@ -1564,7 +1560,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Set to <code>true</code> to include the portlet and make it available to
-	be made active.
+	* be made active.
 	*
 	* @param include boolean value for whether to include the portlet and make
 	it available to be made active
@@ -1617,7 +1613,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet supports the specified mime type
-	and portlet mode.
+	* and portlet mode.
 	*
 	* @return <code>true</code> if the portlet supports the specified mime type
 	and portlet mode
@@ -1634,7 +1630,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet supports more than one mime
-	type.
+	* type.
 	*
 	* @return <code>true</code> if the portlet supports more than one mime type
 	*/
@@ -1657,7 +1653,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet supports the specified mime type
-	and window state.
+	* and window state.
 	*
 	* @return <code>true</code> if the portlet supports the specified mime type
 	and window state
@@ -1738,7 +1734,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Gets the supported processing event from a namespace URI and a local
-	part.
+	* part.
 	*
 	* @return the supported processing event from a namespace URI and a local
 	part
@@ -1800,7 +1796,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Gets the supported public render parameter from a namespace URI and a
-	local part.
+	* local part.
 	*
 	* @return the supported public render parameter from a namespace URI and a
 	local part
@@ -1856,7 +1852,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet is a static portlet that is
-	cannot be moved.
+	* cannot be moved.
 	*
 	* @return <code>true</code> if the portlet is a static portlet that is
 	cannot be moved
@@ -1865,7 +1861,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet is a static portlet that is
-	cannot be moved.
+	* cannot be moved.
 	*
 	* @return <code>true</code> if the portlet is a static portlet that is
 	cannot be moved
@@ -1874,7 +1870,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Set to <code>true</code> if the portlet is a static portlet that is
-	cannot be moved.
+	* cannot be moved.
 	*
 	* @param staticPortlet boolean value for whether the portlet is a static
 	portlet that cannot be moved
@@ -1883,7 +1879,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet is a static portlet at the start
-	of a list of portlets.
+	* of a list of portlets.
 	*
 	* @return <code>true</code> if the portlet is a static portlet at the start
 	of a list of portlets
@@ -1892,7 +1888,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet is a static portlet at the start
-	of a list of portlets.
+	* of a list of portlets.
 	*
 	* @return <code>true</code> if the portlet is a static portlet at the start
 	of a list of portlets
@@ -1901,7 +1897,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Set to <code>true</code> if the portlet is a static portlet at the start
-	of a list of portlets.
+	* of a list of portlets.
 	*
 	* @param staticPortletStart boolean value for whether the portlet is a
 	static portlet at the start of a list of portlets
@@ -1910,7 +1906,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet is a static portlet at the end
-	of a list of portlets.
+	* of a list of portlets.
 	*
 	* @return <code>true</code> if the portlet is a static portlet at the end
 	of a list of portlets
@@ -1919,7 +1915,7 @@ public interface Portlet extends PortletModel {
 
 	/**
 	* Returns <code>true</code> if the portlet is a static portlet at the end
-	of a list of portlets.
+	* of a list of portlets.
 	*
 	* @return <code>true</code> if the portlet is a static portlet at the end
 	of a list of portlets

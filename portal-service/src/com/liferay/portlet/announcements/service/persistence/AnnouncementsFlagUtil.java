@@ -25,9 +25,15 @@ import com.liferay.portlet.announcements.model.AnnouncementsFlag;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       AnnouncementsFlagPersistence
- * @see       AnnouncementsFlagPersistenceImpl
+ * The persistence utility for the announcements flag service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see AnnouncementsFlagPersistence
+ * @see AnnouncementsFlagPersistenceImpl
  * @generated
  */
 public class AnnouncementsFlagUtil {
@@ -107,21 +113,45 @@ public class AnnouncementsFlagUtil {
 		return getPersistence().update(announcementsFlag, merge, serviceContext);
 	}
 
+	/**
+	* Caches the announcements flag in the entity cache if it is enabled.
+	*
+	* @param announcementsFlag the announcements flag to cache
+	*/
 	public static void cacheResult(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag) {
 		getPersistence().cacheResult(announcementsFlag);
 	}
 
+	/**
+	* Caches the announcements flags in the entity cache if it is enabled.
+	*
+	* @param announcementsFlags the announcements flags to cache
+	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> announcementsFlags) {
 		getPersistence().cacheResult(announcementsFlags);
 	}
 
+	/**
+	* Creates a new announcements flag with the primary key.
+	*
+	* @param flagId the primary key for the new announcements flag
+	* @return the new announcements flag
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag create(
 		long flagId) {
 		return getPersistence().create(flagId);
 	}
 
+	/**
+	* Removes the announcements flag with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param flagId the primary key of the announcements flag to remove
+	* @return the announcements flag that was removed
+	* @throws com.liferay.portlet.announcements.NoSuchFlagException if a announcements flag with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag remove(
 		long flagId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -136,6 +166,14 @@ public class AnnouncementsFlagUtil {
 		return getPersistence().updateImpl(announcementsFlag, merge);
 	}
 
+	/**
+	* Finds the announcements flag with the primary key or throws a {@link com.liferay.portlet.announcements.NoSuchFlagException} if it could not be found.
+	*
+	* @param flagId the primary key of the announcements flag to find
+	* @return the announcements flag
+	* @throws com.liferay.portlet.announcements.NoSuchFlagException if a announcements flag with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag findByPrimaryKey(
 		long flagId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -143,23 +181,64 @@ public class AnnouncementsFlagUtil {
 		return getPersistence().findByPrimaryKey(flagId);
 	}
 
+	/**
+	* Finds the announcements flag with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param flagId the primary key of the announcements flag to find
+	* @return the announcements flag, or <code>null</code> if a announcements flag with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag fetchByPrimaryKey(
 		long flagId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(flagId);
 	}
 
+	/**
+	* Finds all the announcements flags where entryId = &#63;.
+	*
+	* @param entryId the entry id to search with
+	* @return the matching announcements flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findByEntryId(
 		long entryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByEntryId(entryId);
 	}
 
+	/**
+	* Finds a range of all the announcements flags where entryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId the entry id to search with
+	* @param start the lower bound of the range of announcements flags to return
+	* @param end the upper bound of the range of announcements flags to return (not inclusive)
+	* @return the range of matching announcements flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findByEntryId(
 		long entryId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByEntryId(entryId, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the announcements flags where entryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId the entry id to search with
+	* @param start the lower bound of the range of announcements flags to return
+	* @param end the upper bound of the range of announcements flags to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching announcements flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findByEntryId(
 		long entryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -168,6 +247,19 @@ public class AnnouncementsFlagUtil {
 				   .findByEntryId(entryId, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first announcements flag in the ordered set where entryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId the entry id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching announcements flag
+	* @throws com.liferay.portlet.announcements.NoSuchFlagException if a matching announcements flag could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag findByEntryId_First(
 		long entryId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -176,6 +268,19 @@ public class AnnouncementsFlagUtil {
 		return getPersistence().findByEntryId_First(entryId, orderByComparator);
 	}
 
+	/**
+	* Finds the last announcements flag in the ordered set where entryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId the entry id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching announcements flag
+	* @throws com.liferay.portlet.announcements.NoSuchFlagException if a matching announcements flag could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag findByEntryId_Last(
 		long entryId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -184,6 +289,20 @@ public class AnnouncementsFlagUtil {
 		return getPersistence().findByEntryId_Last(entryId, orderByComparator);
 	}
 
+	/**
+	* Finds the announcements flags before and after the current announcements flag in the ordered set where entryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param flagId the primary key of the current announcements flag
+	* @param entryId the entry id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next announcements flag
+	* @throws com.liferay.portlet.announcements.NoSuchFlagException if a announcements flag with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag[] findByEntryId_PrevAndNext(
 		long flagId, long entryId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -193,6 +312,16 @@ public class AnnouncementsFlagUtil {
 				   .findByEntryId_PrevAndNext(flagId, entryId, orderByComparator);
 	}
 
+	/**
+	* Finds the announcements flag where userId = &#63; and entryId = &#63; and value = &#63; or throws a {@link com.liferay.portlet.announcements.NoSuchFlagException} if it could not be found.
+	*
+	* @param userId the user id to search with
+	* @param entryId the entry id to search with
+	* @param value the value to search with
+	* @return the matching announcements flag
+	* @throws com.liferay.portlet.announcements.NoSuchFlagException if a matching announcements flag could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag findByU_E_V(
 		long userId, long entryId, int value)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -200,12 +329,30 @@ public class AnnouncementsFlagUtil {
 		return getPersistence().findByU_E_V(userId, entryId, value);
 	}
 
+	/**
+	* Finds the announcements flag where userId = &#63; and entryId = &#63; and value = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param userId the user id to search with
+	* @param entryId the entry id to search with
+	* @param value the value to search with
+	* @return the matching announcements flag, or <code>null</code> if a matching announcements flag could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag fetchByU_E_V(
 		long userId, long entryId, int value)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByU_E_V(userId, entryId, value);
 	}
 
+	/**
+	* Finds the announcements flag where userId = &#63; and entryId = &#63; and value = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param userId the user id to search with
+	* @param entryId the entry id to search with
+	* @param value the value to search with
+	* @return the matching announcements flag, or <code>null</code> if a matching announcements flag could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag fetchByU_E_V(
 		long userId, long entryId, int value, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -213,17 +360,48 @@ public class AnnouncementsFlagUtil {
 				   .fetchByU_E_V(userId, entryId, value, retrieveFromCache);
 	}
 
+	/**
+	* Finds all the announcements flags.
+	*
+	* @return the announcements flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
+	/**
+	* Finds a range of all the announcements flags.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of announcements flags to return
+	* @param end the upper bound of the range of announcements flags to return (not inclusive)
+	* @return the range of announcements flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the announcements flags.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of announcements flags to return
+	* @param end the upper bound of the range of announcements flags to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of announcements flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -231,32 +409,73 @@ public class AnnouncementsFlagUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
+	/**
+	* Removes all the announcements flags where entryId = &#63; from the database.
+	*
+	* @param entryId the entry id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByEntryId(long entryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByEntryId(entryId);
 	}
 
+	/**
+	* Removes the announcements flag where userId = &#63; and entryId = &#63; and value = &#63; from the database.
+	*
+	* @param userId the user id to search with
+	* @param entryId the entry id to search with
+	* @param value the value to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByU_E_V(long userId, long entryId, int value)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchFlagException {
 		getPersistence().removeByU_E_V(userId, entryId, value);
 	}
 
+	/**
+	* Removes all the announcements flags from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
+	/**
+	* Counts all the announcements flags where entryId = &#63;.
+	*
+	* @param entryId the entry id to search with
+	* @return the number of matching announcements flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByEntryId(long entryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByEntryId(entryId);
 	}
 
+	/**
+	* Counts all the announcements flags where userId = &#63; and entryId = &#63; and value = &#63;.
+	*
+	* @param userId the user id to search with
+	* @param entryId the entry id to search with
+	* @param value the value to search with
+	* @return the number of matching announcements flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByU_E_V(long userId, long entryId, int value)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByU_E_V(userId, entryId, value);
 	}
 
+	/**
+	* Counts all the announcements flags.
+	*
+	* @return the number of announcements flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();

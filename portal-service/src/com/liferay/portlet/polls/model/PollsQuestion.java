@@ -15,20 +15,16 @@
 package com.liferay.portlet.polls.model;
 
 /**
- * <p>
- * This interface is a model that represents the PollsQuestion table in the
- * database.
- * </p>
+ * The model interface for the PollsQuestion service. Represents a row in the &quot;PollsQuestion&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.polls.model.impl.PollsQuestionImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.polls.model.impl.PollsQuestionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       PollsQuestionModel
- * @see       com.liferay.portlet.polls.model.impl.PollsQuestionImpl
- * @see       com.liferay.portlet.polls.model.impl.PollsQuestionModelImpl
+ * @author Brian Wing Shun Chan
+ * @see PollsQuestionModel
+ * @see com.liferay.portlet.polls.model.impl.PollsQuestionImpl
+ * @see com.liferay.portlet.polls.model.impl.PollsQuestionModelImpl
  * @generated
  */
 public interface PollsQuestion extends PollsQuestionModel {

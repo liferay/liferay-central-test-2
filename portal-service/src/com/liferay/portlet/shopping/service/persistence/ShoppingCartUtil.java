@@ -25,9 +25,15 @@ import com.liferay.portlet.shopping.model.ShoppingCart;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       ShoppingCartPersistence
- * @see       ShoppingCartPersistenceImpl
+ * The persistence utility for the shopping cart service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see ShoppingCartPersistence
+ * @see ShoppingCartPersistenceImpl
  * @generated
  */
 public class ShoppingCartUtil {
@@ -105,21 +111,45 @@ public class ShoppingCartUtil {
 		return getPersistence().update(shoppingCart, merge, serviceContext);
 	}
 
+	/**
+	* Caches the shopping cart in the entity cache if it is enabled.
+	*
+	* @param shoppingCart the shopping cart to cache
+	*/
 	public static void cacheResult(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart) {
 		getPersistence().cacheResult(shoppingCart);
 	}
 
+	/**
+	* Caches the shopping carts in the entity cache if it is enabled.
+	*
+	* @param shoppingCarts the shopping carts to cache
+	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> shoppingCarts) {
 		getPersistence().cacheResult(shoppingCarts);
 	}
 
+	/**
+	* Creates a new shopping cart with the primary key.
+	*
+	* @param cartId the primary key for the new shopping cart
+	* @return the new shopping cart
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingCart create(
 		long cartId) {
 		return getPersistence().create(cartId);
 	}
 
+	/**
+	* Removes the shopping cart with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param cartId the primary key of the shopping cart to remove
+	* @return the shopping cart that was removed
+	* @throws com.liferay.portlet.shopping.NoSuchCartException if a shopping cart with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingCart remove(
 		long cartId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -134,6 +164,14 @@ public class ShoppingCartUtil {
 		return getPersistence().updateImpl(shoppingCart, merge);
 	}
 
+	/**
+	* Finds the shopping cart with the primary key or throws a {@link com.liferay.portlet.shopping.NoSuchCartException} if it could not be found.
+	*
+	* @param cartId the primary key of the shopping cart to find
+	* @return the shopping cart
+	* @throws com.liferay.portlet.shopping.NoSuchCartException if a shopping cart with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingCart findByPrimaryKey(
 		long cartId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -141,23 +179,64 @@ public class ShoppingCartUtil {
 		return getPersistence().findByPrimaryKey(cartId);
 	}
 
+	/**
+	* Finds the shopping cart with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param cartId the primary key of the shopping cart to find
+	* @return the shopping cart, or <code>null</code> if a shopping cart with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingCart fetchByPrimaryKey(
 		long cartId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(cartId);
 	}
 
+	/**
+	* Finds all the shopping carts where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the matching shopping carts
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> findByGroupId(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByGroupId(groupId);
 	}
 
+	/**
+	* Finds a range of all the shopping carts where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of shopping carts to return
+	* @param end the upper bound of the range of shopping carts to return (not inclusive)
+	* @return the range of matching shopping carts
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> findByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByGroupId(groupId, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the shopping carts where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of shopping carts to return
+	* @param end the upper bound of the range of shopping carts to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching shopping carts
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> findByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -166,6 +245,19 @@ public class ShoppingCartUtil {
 				   .findByGroupId(groupId, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first shopping cart in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching shopping cart
+	* @throws com.liferay.portlet.shopping.NoSuchCartException if a matching shopping cart could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingCart findByGroupId_First(
 		long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -174,6 +266,19 @@ public class ShoppingCartUtil {
 		return getPersistence().findByGroupId_First(groupId, orderByComparator);
 	}
 
+	/**
+	* Finds the last shopping cart in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching shopping cart
+	* @throws com.liferay.portlet.shopping.NoSuchCartException if a matching shopping cart could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingCart findByGroupId_Last(
 		long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -182,6 +287,20 @@ public class ShoppingCartUtil {
 		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
 	}
 
+	/**
+	* Finds the shopping carts before and after the current shopping cart in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param cartId the primary key of the current shopping cart
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next shopping cart
+	* @throws com.liferay.portlet.shopping.NoSuchCartException if a shopping cart with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingCart[] findByGroupId_PrevAndNext(
 		long cartId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -191,17 +310,51 @@ public class ShoppingCartUtil {
 				   .findByGroupId_PrevAndNext(cartId, groupId, orderByComparator);
 	}
 
+	/**
+	* Finds all the shopping carts where userId = &#63;.
+	*
+	* @param userId the user id to search with
+	* @return the matching shopping carts
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> findByUserId(
 		long userId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUserId(userId);
 	}
 
+	/**
+	* Finds a range of all the shopping carts where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param start the lower bound of the range of shopping carts to return
+	* @param end the upper bound of the range of shopping carts to return (not inclusive)
+	* @return the range of matching shopping carts
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> findByUserId(
 		long userId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUserId(userId, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the shopping carts where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param start the lower bound of the range of shopping carts to return
+	* @param end the upper bound of the range of shopping carts to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching shopping carts
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> findByUserId(
 		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -210,6 +363,19 @@ public class ShoppingCartUtil {
 				   .findByUserId(userId, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first shopping cart in the ordered set where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching shopping cart
+	* @throws com.liferay.portlet.shopping.NoSuchCartException if a matching shopping cart could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingCart findByUserId_First(
 		long userId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -218,6 +384,19 @@ public class ShoppingCartUtil {
 		return getPersistence().findByUserId_First(userId, orderByComparator);
 	}
 
+	/**
+	* Finds the last shopping cart in the ordered set where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching shopping cart
+	* @throws com.liferay.portlet.shopping.NoSuchCartException if a matching shopping cart could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingCart findByUserId_Last(
 		long userId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -226,6 +405,20 @@ public class ShoppingCartUtil {
 		return getPersistence().findByUserId_Last(userId, orderByComparator);
 	}
 
+	/**
+	* Finds the shopping carts before and after the current shopping cart in the ordered set where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param cartId the primary key of the current shopping cart
+	* @param userId the user id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next shopping cart
+	* @throws com.liferay.portlet.shopping.NoSuchCartException if a shopping cart with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingCart[] findByUserId_PrevAndNext(
 		long cartId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -235,6 +428,15 @@ public class ShoppingCartUtil {
 				   .findByUserId_PrevAndNext(cartId, userId, orderByComparator);
 	}
 
+	/**
+	* Finds the shopping cart where groupId = &#63; and userId = &#63; or throws a {@link com.liferay.portlet.shopping.NoSuchCartException} if it could not be found.
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @return the matching shopping cart
+	* @throws com.liferay.portlet.shopping.NoSuchCartException if a matching shopping cart could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingCart findByG_U(
 		long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -242,29 +444,76 @@ public class ShoppingCartUtil {
 		return getPersistence().findByG_U(groupId, userId);
 	}
 
+	/**
+	* Finds the shopping cart where groupId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @return the matching shopping cart, or <code>null</code> if a matching shopping cart could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingCart fetchByG_U(
 		long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByG_U(groupId, userId);
 	}
 
+	/**
+	* Finds the shopping cart where groupId = &#63; and userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @return the matching shopping cart, or <code>null</code> if a matching shopping cart could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingCart fetchByG_U(
 		long groupId, long userId, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByG_U(groupId, userId, retrieveFromCache);
 	}
 
+	/**
+	* Finds all the shopping carts.
+	*
+	* @return the shopping carts
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
+	/**
+	* Finds a range of all the shopping carts.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of shopping carts to return
+	* @param end the upper bound of the range of shopping carts to return (not inclusive)
+	* @return the range of shopping carts
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the shopping carts.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of shopping carts to return
+	* @param end the upper bound of the range of shopping carts to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of shopping carts
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -272,42 +521,94 @@ public class ShoppingCartUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
+	/**
+	* Removes all the shopping carts where groupId = &#63; from the database.
+	*
+	* @param groupId the group id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByGroupId(groupId);
 	}
 
+	/**
+	* Removes all the shopping carts where userId = &#63; from the database.
+	*
+	* @param userId the user id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByUserId(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByUserId(userId);
 	}
 
+	/**
+	* Removes the shopping cart where groupId = &#63; and userId = &#63; from the database.
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByG_U(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchCartException {
 		getPersistence().removeByG_U(groupId, userId);
 	}
 
+	/**
+	* Removes all the shopping carts from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
+	/**
+	* Counts all the shopping carts where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the number of matching shopping carts
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByGroupId(groupId);
 	}
 
+	/**
+	* Counts all the shopping carts where userId = &#63;.
+	*
+	* @param userId the user id to search with
+	* @return the number of matching shopping carts
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByUserId(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByUserId(userId);
 	}
 
+	/**
+	* Counts all the shopping carts where groupId = &#63; and userId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @return the number of matching shopping carts
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_U(groupId, userId);
 	}
 
+	/**
+	* Counts all the shopping carts.
+	*
+	* @return the number of shopping carts
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();

@@ -15,20 +15,16 @@
 package com.liferay.portlet.social.model;
 
 /**
- * <p>
- * This interface is a model that represents the SocialEquitySetting table in the
- * database.
- * </p>
+ * The model interface for the SocialEquitySetting service. Represents a row in the &quot;SocialEquitySetting&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.social.model.impl.SocialEquitySettingImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.social.model.impl.SocialEquitySettingImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       SocialEquitySettingModel
- * @see       com.liferay.portlet.social.model.impl.SocialEquitySettingImpl
- * @see       com.liferay.portlet.social.model.impl.SocialEquitySettingModelImpl
+ * @author Brian Wing Shun Chan
+ * @see SocialEquitySettingModel
+ * @see com.liferay.portlet.social.model.impl.SocialEquitySettingImpl
+ * @see com.liferay.portlet.social.model.impl.SocialEquitySettingModelImpl
  * @generated
  */
 public interface SocialEquitySetting extends SocialEquitySettingModel {

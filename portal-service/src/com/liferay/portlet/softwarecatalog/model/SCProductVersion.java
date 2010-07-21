@@ -15,20 +15,16 @@
 package com.liferay.portlet.softwarecatalog.model;
 
 /**
- * <p>
- * This interface is a model that represents the SCProductVersion table in the
- * database.
- * </p>
+ * The model interface for the SCProductVersion service. Represents a row in the &quot;SCProductVersion&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       SCProductVersionModel
- * @see       com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl
- * @see       com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl
+ * @author Brian Wing Shun Chan
+ * @see SCProductVersionModel
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl
  * @generated
  */
 public interface SCProductVersion extends SCProductVersionModel {

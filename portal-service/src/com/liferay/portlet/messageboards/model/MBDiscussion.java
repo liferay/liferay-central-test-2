@@ -15,20 +15,16 @@
 package com.liferay.portlet.messageboards.model;
 
 /**
- * <p>
- * This interface is a model that represents the MBDiscussion table in the
- * database.
- * </p>
+ * The model interface for the MBDiscussion service. Represents a row in the &quot;MBDiscussion&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       MBDiscussionModel
- * @see       com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl
- * @see       com.liferay.portlet.messageboards.model.impl.MBDiscussionModelImpl
+ * @author Brian Wing Shun Chan
+ * @see MBDiscussionModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBDiscussionModelImpl
  * @generated
  */
 public interface MBDiscussion extends MBDiscussionModel {

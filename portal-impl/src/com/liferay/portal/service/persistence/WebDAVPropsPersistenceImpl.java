@@ -47,9 +47,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       WebDAVPropsPersistence
- * @see       WebDAVPropsUtil
+ * The persistence for the web d a v props service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see WebDAVPropsPersistence
+ * @see WebDAVPropsUtil
  * @generated
  */
 public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
@@ -72,6 +82,11 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 			WebDAVPropsModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the web d a v props in the entity cache if it is enabled.
+	 *
+	 * @param webDAVProps the web d a v props to cache
+	 */
 	public void cacheResult(WebDAVProps webDAVProps) {
 		EntityCacheUtil.putResult(WebDAVPropsModelImpl.ENTITY_CACHE_ENABLED,
 			WebDAVPropsImpl.class, webDAVProps.getPrimaryKey(), webDAVProps);
@@ -83,6 +98,11 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 			}, webDAVProps);
 	}
 
+	/**
+	 * Caches the web d a v propses in the entity cache if it is enabled.
+	 *
+	 * @param webDAVPropses the web d a v propses to cache
+	 */
 	public void cacheResult(List<WebDAVProps> webDAVPropses) {
 		for (WebDAVProps webDAVProps : webDAVPropses) {
 			if (EntityCacheUtil.getResult(
@@ -93,6 +113,13 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		}
 	}
 
+	/**
+	 * Clears the cache for all web d a v propses.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(WebDAVPropsImpl.class.getName());
 		EntityCacheUtil.clearCache(WebDAVPropsImpl.class.getName());
@@ -100,6 +127,13 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the web d a v props.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(WebDAVProps webDAVProps) {
 		EntityCacheUtil.removeResult(WebDAVPropsModelImpl.ENTITY_CACHE_ENABLED,
 			WebDAVPropsImpl.class, webDAVProps.getPrimaryKey());
@@ -111,6 +145,12 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 			});
 	}
 
+	/**
+	 * Creates a new web d a v props with the primary key.
+	 *
+	 * @param webDavPropsId the primary key for the new web d a v props
+	 * @return the new web d a v props
+	 */
 	public WebDAVProps create(long webDavPropsId) {
 		WebDAVProps webDAVProps = new WebDAVPropsImpl();
 
@@ -120,11 +160,27 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		return webDAVProps;
 	}
 
+	/**
+	 * Removes the web d a v props with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the web d a v props to remove
+	 * @return the web d a v props that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a web d a v props with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WebDAVProps remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the web d a v props with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param webDavPropsId the primary key of the web d a v props to remove
+	 * @return the web d a v props that was removed
+	 * @throws com.liferay.portal.NoSuchWebDAVPropsException if a web d a v props with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WebDAVProps remove(long webDavPropsId)
 		throws NoSuchWebDAVPropsException, SystemException {
 		Session session = null;
@@ -276,11 +332,27 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		return webDAVPropsImpl;
 	}
 
+	/**
+	 * Finds the web d a v props with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the web d a v props to find
+	 * @return the web d a v props
+	 * @throws com.liferay.portal.NoSuchModelException if a web d a v props with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WebDAVProps findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the web d a v props with the primary key or throws a {@link com.liferay.portal.NoSuchWebDAVPropsException} if it could not be found.
+	 *
+	 * @param webDavPropsId the primary key of the web d a v props to find
+	 * @return the web d a v props
+	 * @throws com.liferay.portal.NoSuchWebDAVPropsException if a web d a v props with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WebDAVProps findByPrimaryKey(long webDavPropsId)
 		throws NoSuchWebDAVPropsException, SystemException {
 		WebDAVProps webDAVProps = fetchByPrimaryKey(webDavPropsId);
@@ -297,11 +369,25 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		return webDAVProps;
 	}
 
+	/**
+	 * Finds the web d a v props with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the web d a v props to find
+	 * @return the web d a v props, or <code>null</code> if a web d a v props with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WebDAVProps fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the web d a v props with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param webDavPropsId the primary key of the web d a v props to find
+	 * @return the web d a v props, or <code>null</code> if a web d a v props with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WebDAVProps fetchByPrimaryKey(long webDavPropsId)
 		throws SystemException {
 		WebDAVProps webDAVProps = (WebDAVProps)EntityCacheUtil.getResult(WebDAVPropsModelImpl.ENTITY_CACHE_ENABLED,
@@ -331,6 +417,15 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		return webDAVProps;
 	}
 
+	/**
+	 * Finds the web d a v props where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portal.NoSuchWebDAVPropsException} if it could not be found.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching web d a v props
+	 * @throws com.liferay.portal.NoSuchWebDAVPropsException if a matching web d a v props could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WebDAVProps findByC_C(long classNameId, long classPK)
 		throws NoSuchWebDAVPropsException, SystemException {
 		WebDAVProps webDAVProps = fetchByC_C(classNameId, classPK);
@@ -358,11 +453,27 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		return webDAVProps;
 	}
 
+	/**
+	 * Finds the web d a v props where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching web d a v props, or <code>null</code> if a matching web d a v props could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WebDAVProps fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
 		return fetchByC_C(classNameId, classPK, true);
 	}
 
+	/**
+	 * Finds the web d a v props where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching web d a v props, or <code>null</code> if a matching web d a v props could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public WebDAVProps fetchByC_C(long classNameId, long classPK,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { classNameId, classPK };
@@ -444,15 +555,46 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		}
 	}
 
+	/**
+	 * Finds all the web d a v propses.
+	 *
+	 * @return the web d a v propses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WebDAVProps> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the web d a v propses.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of web d a v propses to return
+	 * @param end the upper bound of the range of web d a v propses to return (not inclusive)
+	 * @return the range of web d a v propses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WebDAVProps> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the web d a v propses.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of web d a v propses to return
+	 * @param end the upper bound of the range of web d a v propses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of web d a v propses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<WebDAVProps> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -519,6 +661,13 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		return list;
 	}
 
+	/**
+	 * Removes the web d a v props where classNameId = &#63; and classPK = &#63; from the database.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C(long classNameId, long classPK)
 		throws NoSuchWebDAVPropsException, SystemException {
 		WebDAVProps webDAVProps = findByC_C(classNameId, classPK);
@@ -526,12 +675,25 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		remove(webDAVProps);
 	}
 
+	/**
+	 * Removes all the web d a v propses from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (WebDAVProps webDAVProps : findAll()) {
 			remove(webDAVProps);
 		}
 	}
 
+	/**
+	 * Counts all the web d a v propses where classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the number of matching web d a v propses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { classNameId, classPK };
@@ -583,6 +745,12 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the web d a v propses.
+	 *
+	 * @return the number of web d a v propses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -617,6 +785,9 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the web d a v props persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

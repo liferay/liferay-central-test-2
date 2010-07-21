@@ -53,9 +53,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       SocialEquitySettingPersistence
- * @see       SocialEquitySettingUtil
+ * The persistence for the social equity setting service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see SocialEquitySettingPersistence
+ * @see SocialEquitySettingUtil
  * @generated
  */
 public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<SocialEquitySetting>
@@ -101,6 +111,11 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 			SocialEquitySettingModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
+	/**
+	 * Caches the social equity setting in the entity cache if it is enabled.
+	 *
+	 * @param socialEquitySetting the social equity setting to cache
+	 */
 	public void cacheResult(SocialEquitySetting socialEquitySetting) {
 		EntityCacheUtil.putResult(SocialEquitySettingModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquitySettingImpl.class, socialEquitySetting.getPrimaryKey(),
@@ -116,6 +131,11 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 			}, socialEquitySetting);
 	}
 
+	/**
+	 * Caches the social equity settings in the entity cache if it is enabled.
+	 *
+	 * @param socialEquitySettings the social equity settings to cache
+	 */
 	public void cacheResult(List<SocialEquitySetting> socialEquitySettings) {
 		for (SocialEquitySetting socialEquitySetting : socialEquitySettings) {
 			if (EntityCacheUtil.getResult(
@@ -127,6 +147,13 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		}
 	}
 
+	/**
+	 * Clears the cache for all social equity settings.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(SocialEquitySettingImpl.class.getName());
 		EntityCacheUtil.clearCache(SocialEquitySettingImpl.class.getName());
@@ -134,6 +161,13 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the social equity setting.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(SocialEquitySetting socialEquitySetting) {
 		EntityCacheUtil.removeResult(SocialEquitySettingModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquitySettingImpl.class, socialEquitySetting.getPrimaryKey());
@@ -148,6 +182,12 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 			});
 	}
 
+	/**
+	 * Creates a new social equity setting with the primary key.
+	 *
+	 * @param equitySettingId the primary key for the new social equity setting
+	 * @return the new social equity setting
+	 */
 	public SocialEquitySetting create(long equitySettingId) {
 		SocialEquitySetting socialEquitySetting = new SocialEquitySettingImpl();
 
@@ -157,11 +197,27 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		return socialEquitySetting;
 	}
 
+	/**
+	 * Removes the social equity setting with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the social equity setting to remove
+	 * @return the social equity setting that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a social equity setting with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquitySetting remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the social equity setting with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param equitySettingId the primary key of the social equity setting to remove
+	 * @return the social equity setting that was removed
+	 * @throws com.liferay.portlet.social.NoSuchEquitySettingException if a social equity setting with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquitySetting remove(long equitySettingId)
 		throws NoSuchEquitySettingException, SystemException {
 		Session session = null;
@@ -335,11 +391,27 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		return socialEquitySettingImpl;
 	}
 
+	/**
+	 * Finds the social equity setting with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the social equity setting to find
+	 * @return the social equity setting
+	 * @throws com.liferay.portal.NoSuchModelException if a social equity setting with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquitySetting findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the social equity setting with the primary key or throws a {@link com.liferay.portlet.social.NoSuchEquitySettingException} if it could not be found.
+	 *
+	 * @param equitySettingId the primary key of the social equity setting to find
+	 * @return the social equity setting
+	 * @throws com.liferay.portlet.social.NoSuchEquitySettingException if a social equity setting with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquitySetting findByPrimaryKey(long equitySettingId)
 		throws NoSuchEquitySettingException, SystemException {
 		SocialEquitySetting socialEquitySetting = fetchByPrimaryKey(equitySettingId);
@@ -356,11 +428,25 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		return socialEquitySetting;
 	}
 
+	/**
+	 * Finds the social equity setting with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the social equity setting to find
+	 * @return the social equity setting, or <code>null</code> if a social equity setting with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquitySetting fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the social equity setting with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param equitySettingId the primary key of the social equity setting to find
+	 * @return the social equity setting, or <code>null</code> if a social equity setting with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquitySetting fetchByPrimaryKey(long equitySettingId)
 		throws SystemException {
 		SocialEquitySetting socialEquitySetting = (SocialEquitySetting)EntityCacheUtil.getResult(SocialEquitySettingModelImpl.ENTITY_CACHE_ENABLED,
@@ -390,18 +476,58 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		return socialEquitySetting;
 	}
 
+	/**
+	 * Finds all the social equity settings where groupId = &#63; and classNameId = &#63; and actionId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @param actionId the action id to search with
+	 * @return the matching social equity settings
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquitySetting> findByG_C_A(long groupId,
 		long classNameId, String actionId) throws SystemException {
 		return findByG_C_A(groupId, classNameId, actionId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the social equity settings where groupId = &#63; and classNameId = &#63; and actionId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @param actionId the action id to search with
+	 * @param start the lower bound of the range of social equity settings to return
+	 * @param end the upper bound of the range of social equity settings to return (not inclusive)
+	 * @return the range of matching social equity settings
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquitySetting> findByG_C_A(long groupId,
 		long classNameId, String actionId, int start, int end)
 		throws SystemException {
 		return findByG_C_A(groupId, classNameId, actionId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social equity settings where groupId = &#63; and classNameId = &#63; and actionId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @param actionId the action id to search with
+	 * @param start the lower bound of the range of social equity settings to return
+	 * @param end the upper bound of the range of social equity settings to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social equity settings
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquitySetting> findByG_C_A(long groupId,
 		long classNameId, String actionId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -491,6 +617,21 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		return list;
 	}
 
+	/**
+	 * Finds the first social equity setting in the ordered set where groupId = &#63; and classNameId = &#63; and actionId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @param actionId the action id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social equity setting
+	 * @throws com.liferay.portlet.social.NoSuchEquitySettingException if a matching social equity setting could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquitySetting findByG_C_A_First(long groupId,
 		long classNameId, String actionId, OrderByComparator orderByComparator)
 		throws NoSuchEquitySettingException, SystemException {
@@ -520,6 +661,21 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		}
 	}
 
+	/**
+	 * Finds the last social equity setting in the ordered set where groupId = &#63; and classNameId = &#63; and actionId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @param actionId the action id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social equity setting
+	 * @throws com.liferay.portlet.social.NoSuchEquitySettingException if a matching social equity setting could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquitySetting findByG_C_A_Last(long groupId, long classNameId,
 		String actionId, OrderByComparator orderByComparator)
 		throws NoSuchEquitySettingException, SystemException {
@@ -551,6 +707,22 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		}
 	}
 
+	/**
+	 * Finds the social equity settings before and after the current social equity setting in the ordered set where groupId = &#63; and classNameId = &#63; and actionId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param equitySettingId the primary key of the current social equity setting
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @param actionId the action id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social equity setting
+	 * @throws com.liferay.portlet.social.NoSuchEquitySettingException if a social equity setting with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquitySetting[] findByG_C_A_PrevAndNext(long equitySettingId,
 		long groupId, long classNameId, String actionId,
 		OrderByComparator orderByComparator)
@@ -703,6 +875,17 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		}
 	}
 
+	/**
+	 * Finds the social equity setting where groupId = &#63; and classNameId = &#63; and actionId = &#63; and type = &#63; or throws a {@link com.liferay.portlet.social.NoSuchEquitySettingException} if it could not be found.
+	 *
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @param actionId the action id to search with
+	 * @param type the type to search with
+	 * @return the matching social equity setting
+	 * @throws com.liferay.portlet.social.NoSuchEquitySettingException if a matching social equity setting could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquitySetting findByG_C_A_T(long groupId, long classNameId,
 		String actionId, int type)
 		throws NoSuchEquitySettingException, SystemException {
@@ -738,11 +921,31 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		return socialEquitySetting;
 	}
 
+	/**
+	 * Finds the social equity setting where groupId = &#63; and classNameId = &#63; and actionId = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @param actionId the action id to search with
+	 * @param type the type to search with
+	 * @return the matching social equity setting, or <code>null</code> if a matching social equity setting could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquitySetting fetchByG_C_A_T(long groupId, long classNameId,
 		String actionId, int type) throws SystemException {
 		return fetchByG_C_A_T(groupId, classNameId, actionId, type, true);
 	}
 
+	/**
+	 * Finds the social equity setting where groupId = &#63; and classNameId = &#63; and actionId = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @param actionId the action id to search with
+	 * @param type the type to search with
+	 * @return the matching social equity setting, or <code>null</code> if a matching social equity setting could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialEquitySetting fetchByG_C_A_T(long groupId, long classNameId,
 		String actionId, int type, boolean retrieveFromCache)
 		throws SystemException {
@@ -848,15 +1051,46 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		}
 	}
 
+	/**
+	 * Finds all the social equity settings.
+	 *
+	 * @return the social equity settings
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquitySetting> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the social equity settings.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of social equity settings to return
+	 * @param end the upper bound of the range of social equity settings to return (not inclusive)
+	 * @return the range of social equity settings
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquitySetting> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social equity settings.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of social equity settings to return
+	 * @param end the upper bound of the range of social equity settings to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of social equity settings
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialEquitySetting> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -923,6 +1157,14 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		return list;
 	}
 
+	/**
+	 * Removes all the social equity settings where groupId = &#63; and classNameId = &#63; and actionId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @param actionId the action id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_C_A(long groupId, long classNameId, String actionId)
 		throws SystemException {
 		for (SocialEquitySetting socialEquitySetting : findByG_C_A(groupId,
@@ -931,6 +1173,15 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		}
 	}
 
+	/**
+	 * Removes the social equity setting where groupId = &#63; and classNameId = &#63; and actionId = &#63; and type = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @param actionId the action id to search with
+	 * @param type the type to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_C_A_T(long groupId, long classNameId,
 		String actionId, int type)
 		throws NoSuchEquitySettingException, SystemException {
@@ -940,12 +1191,26 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		remove(socialEquitySetting);
 	}
 
+	/**
+	 * Removes all the social equity settings from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (SocialEquitySetting socialEquitySetting : findAll()) {
 			remove(socialEquitySetting);
 		}
 	}
 
+	/**
+	 * Counts all the social equity settings where groupId = &#63; and classNameId = &#63; and actionId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @param actionId the action id to search with
+	 * @return the number of matching social equity settings
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_C_A(long groupId, long classNameId, String actionId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, classNameId, actionId };
@@ -1013,6 +1278,16 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social equity settings where groupId = &#63; and classNameId = &#63; and actionId = &#63; and type = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param classNameId the class name id to search with
+	 * @param actionId the action id to search with
+	 * @param type the type to search with
+	 * @return the number of matching social equity settings
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_C_A_T(long groupId, long classNameId, String actionId,
 		int type) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, classNameId, actionId, type };
@@ -1084,6 +1359,12 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social equity settings.
+	 *
+	 * @return the number of social equity settings
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -1118,6 +1399,9 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the social equity setting persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

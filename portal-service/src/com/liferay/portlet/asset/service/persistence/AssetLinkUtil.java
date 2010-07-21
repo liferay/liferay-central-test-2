@@ -25,9 +25,15 @@ import com.liferay.portlet.asset.model.AssetLink;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       AssetLinkPersistence
- * @see       AssetLinkPersistenceImpl
+ * The persistence utility for the asset link service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see AssetLinkPersistence
+ * @see AssetLinkPersistenceImpl
  * @generated
  */
 public class AssetLinkUtil {
@@ -105,20 +111,44 @@ public class AssetLinkUtil {
 		return getPersistence().update(assetLink, merge, serviceContext);
 	}
 
+	/**
+	* Caches the asset link in the entity cache if it is enabled.
+	*
+	* @param assetLink the asset link to cache
+	*/
 	public static void cacheResult(
 		com.liferay.portlet.asset.model.AssetLink assetLink) {
 		getPersistence().cacheResult(assetLink);
 	}
 
+	/**
+	* Caches the asset links in the entity cache if it is enabled.
+	*
+	* @param assetLinks the asset links to cache
+	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.asset.model.AssetLink> assetLinks) {
 		getPersistence().cacheResult(assetLinks);
 	}
 
+	/**
+	* Creates a new asset link with the primary key.
+	*
+	* @param linkId the primary key for the new asset link
+	* @return the new asset link
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink create(long linkId) {
 		return getPersistence().create(linkId);
 	}
 
+	/**
+	* Removes the asset link with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param linkId the primary key of the asset link to remove
+	* @return the asset link that was removed
+	* @throws com.liferay.portlet.asset.NoSuchLinkException if a asset link with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink remove(long linkId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchLinkException {
@@ -131,6 +161,14 @@ public class AssetLinkUtil {
 		return getPersistence().updateImpl(assetLink, merge);
 	}
 
+	/**
+	* Finds the asset link with the primary key or throws a {@link com.liferay.portlet.asset.NoSuchLinkException} if it could not be found.
+	*
+	* @param linkId the primary key of the asset link to find
+	* @return the asset link
+	* @throws com.liferay.portlet.asset.NoSuchLinkException if a asset link with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink findByPrimaryKey(
 		long linkId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -138,23 +176,64 @@ public class AssetLinkUtil {
 		return getPersistence().findByPrimaryKey(linkId);
 	}
 
+	/**
+	* Finds the asset link with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param linkId the primary key of the asset link to find
+	* @return the asset link, or <code>null</code> if a asset link with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink fetchByPrimaryKey(
 		long linkId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(linkId);
 	}
 
+	/**
+	* Finds all the asset links where entryId1 = &#63;.
+	*
+	* @param entryId1 the entry id1 to search with
+	* @return the matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE1(
 		long entryId1)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByE1(entryId1);
 	}
 
+	/**
+	* Finds a range of all the asset links where entryId1 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param start the lower bound of the range of asset links to return
+	* @param end the upper bound of the range of asset links to return (not inclusive)
+	* @return the range of matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE1(
 		long entryId1, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByE1(entryId1, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the asset links where entryId1 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param start the lower bound of the range of asset links to return
+	* @param end the upper bound of the range of asset links to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE1(
 		long entryId1, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -162,6 +241,19 @@ public class AssetLinkUtil {
 		return getPersistence().findByE1(entryId1, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first asset link in the ordered set where entryId1 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching asset link
+	* @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink findByE1_First(
 		long entryId1,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -170,6 +262,19 @@ public class AssetLinkUtil {
 		return getPersistence().findByE1_First(entryId1, orderByComparator);
 	}
 
+	/**
+	* Finds the last asset link in the ordered set where entryId1 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching asset link
+	* @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink findByE1_Last(
 		long entryId1,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -178,6 +283,20 @@ public class AssetLinkUtil {
 		return getPersistence().findByE1_Last(entryId1, orderByComparator);
 	}
 
+	/**
+	* Finds the asset links before and after the current asset link in the ordered set where entryId1 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param linkId the primary key of the current asset link
+	* @param entryId1 the entry id1 to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next asset link
+	* @throws com.liferay.portlet.asset.NoSuchLinkException if a asset link with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink[] findByE1_PrevAndNext(
 		long linkId, long entryId1,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -187,18 +306,52 @@ public class AssetLinkUtil {
 				   .findByE1_PrevAndNext(linkId, entryId1, orderByComparator);
 	}
 
+	/**
+	* Finds all the asset links where entryId2 = &#63;.
+	*
+	* @param entryId2 the entry id2 to search with
+	* @return the matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE2(
 		long entryId2)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByE2(entryId2);
 	}
 
+	/**
+	* Finds a range of all the asset links where entryId2 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId2 the entry id2 to search with
+	* @param start the lower bound of the range of asset links to return
+	* @param end the upper bound of the range of asset links to return (not inclusive)
+	* @return the range of matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE2(
 		long entryId2, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByE2(entryId2, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the asset links where entryId2 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId2 the entry id2 to search with
+	* @param start the lower bound of the range of asset links to return
+	* @param end the upper bound of the range of asset links to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE2(
 		long entryId2, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -206,6 +359,19 @@ public class AssetLinkUtil {
 		return getPersistence().findByE2(entryId2, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first asset link in the ordered set where entryId2 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId2 the entry id2 to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching asset link
+	* @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink findByE2_First(
 		long entryId2,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -214,6 +380,19 @@ public class AssetLinkUtil {
 		return getPersistence().findByE2_First(entryId2, orderByComparator);
 	}
 
+	/**
+	* Finds the last asset link in the ordered set where entryId2 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId2 the entry id2 to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching asset link
+	* @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink findByE2_Last(
 		long entryId2,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -222,6 +401,20 @@ public class AssetLinkUtil {
 		return getPersistence().findByE2_Last(entryId2, orderByComparator);
 	}
 
+	/**
+	* Finds the asset links before and after the current asset link in the ordered set where entryId2 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param linkId the primary key of the current asset link
+	* @param entryId2 the entry id2 to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next asset link
+	* @throws com.liferay.portlet.asset.NoSuchLinkException if a asset link with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink[] findByE2_PrevAndNext(
 		long linkId, long entryId2,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -231,18 +424,55 @@ public class AssetLinkUtil {
 				   .findByE2_PrevAndNext(linkId, entryId2, orderByComparator);
 	}
 
+	/**
+	* Finds all the asset links where entryId1 = &#63; and entryId2 = &#63;.
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param entryId2 the entry id2 to search with
+	* @return the matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE_E(
 		long entryId1, long entryId2)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByE_E(entryId1, entryId2);
 	}
 
+	/**
+	* Finds a range of all the asset links where entryId1 = &#63; and entryId2 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param entryId2 the entry id2 to search with
+	* @param start the lower bound of the range of asset links to return
+	* @param end the upper bound of the range of asset links to return (not inclusive)
+	* @return the range of matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE_E(
 		long entryId1, long entryId2, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByE_E(entryId1, entryId2, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the asset links where entryId1 = &#63; and entryId2 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param entryId2 the entry id2 to search with
+	* @param start the lower bound of the range of asset links to return
+	* @param end the upper bound of the range of asset links to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE_E(
 		long entryId1, long entryId2, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -251,6 +481,20 @@ public class AssetLinkUtil {
 				   .findByE_E(entryId1, entryId2, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first asset link in the ordered set where entryId1 = &#63; and entryId2 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param entryId2 the entry id2 to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching asset link
+	* @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink findByE_E_First(
 		long entryId1, long entryId2,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -260,6 +504,20 @@ public class AssetLinkUtil {
 				   .findByE_E_First(entryId1, entryId2, orderByComparator);
 	}
 
+	/**
+	* Finds the last asset link in the ordered set where entryId1 = &#63; and entryId2 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param entryId2 the entry id2 to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching asset link
+	* @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink findByE_E_Last(
 		long entryId1, long entryId2,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -269,6 +527,21 @@ public class AssetLinkUtil {
 				   .findByE_E_Last(entryId1, entryId2, orderByComparator);
 	}
 
+	/**
+	* Finds the asset links before and after the current asset link in the ordered set where entryId1 = &#63; and entryId2 = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param linkId the primary key of the current asset link
+	* @param entryId1 the entry id1 to search with
+	* @param entryId2 the entry id2 to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next asset link
+	* @throws com.liferay.portlet.asset.NoSuchLinkException if a asset link with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink[] findByE_E_PrevAndNext(
 		long linkId, long entryId1, long entryId2,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -279,18 +552,55 @@ public class AssetLinkUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds all the asset links where entryId1 = &#63; and type = &#63;.
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param type the type to search with
+	* @return the matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE1_T(
 		long entryId1, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByE1_T(entryId1, type);
 	}
 
+	/**
+	* Finds a range of all the asset links where entryId1 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param type the type to search with
+	* @param start the lower bound of the range of asset links to return
+	* @param end the upper bound of the range of asset links to return (not inclusive)
+	* @return the range of matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE1_T(
 		long entryId1, int type, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByE1_T(entryId1, type, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the asset links where entryId1 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param type the type to search with
+	* @param start the lower bound of the range of asset links to return
+	* @param end the upper bound of the range of asset links to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE1_T(
 		long entryId1, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -299,6 +609,20 @@ public class AssetLinkUtil {
 				   .findByE1_T(entryId1, type, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first asset link in the ordered set where entryId1 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching asset link
+	* @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink findByE1_T_First(
 		long entryId1, int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -308,6 +632,20 @@ public class AssetLinkUtil {
 				   .findByE1_T_First(entryId1, type, orderByComparator);
 	}
 
+	/**
+	* Finds the last asset link in the ordered set where entryId1 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching asset link
+	* @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink findByE1_T_Last(
 		long entryId1, int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -317,6 +655,21 @@ public class AssetLinkUtil {
 				   .findByE1_T_Last(entryId1, type, orderByComparator);
 	}
 
+	/**
+	* Finds the asset links before and after the current asset link in the ordered set where entryId1 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param linkId the primary key of the current asset link
+	* @param entryId1 the entry id1 to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next asset link
+	* @throws com.liferay.portlet.asset.NoSuchLinkException if a asset link with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink[] findByE1_T_PrevAndNext(
 		long linkId, long entryId1, int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -327,18 +680,55 @@ public class AssetLinkUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds all the asset links where entryId2 = &#63; and type = &#63;.
+	*
+	* @param entryId2 the entry id2 to search with
+	* @param type the type to search with
+	* @return the matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE2_T(
 		long entryId2, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByE2_T(entryId2, type);
 	}
 
+	/**
+	* Finds a range of all the asset links where entryId2 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId2 the entry id2 to search with
+	* @param type the type to search with
+	* @param start the lower bound of the range of asset links to return
+	* @param end the upper bound of the range of asset links to return (not inclusive)
+	* @return the range of matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE2_T(
 		long entryId2, int type, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByE2_T(entryId2, type, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the asset links where entryId2 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId2 the entry id2 to search with
+	* @param type the type to search with
+	* @param start the lower bound of the range of asset links to return
+	* @param end the upper bound of the range of asset links to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE2_T(
 		long entryId2, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -347,6 +737,20 @@ public class AssetLinkUtil {
 				   .findByE2_T(entryId2, type, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first asset link in the ordered set where entryId2 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId2 the entry id2 to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching asset link
+	* @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink findByE2_T_First(
 		long entryId2, int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -356,6 +760,20 @@ public class AssetLinkUtil {
 				   .findByE2_T_First(entryId2, type, orderByComparator);
 	}
 
+	/**
+	* Finds the last asset link in the ordered set where entryId2 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId2 the entry id2 to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching asset link
+	* @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink findByE2_T_Last(
 		long entryId2, int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -365,6 +783,21 @@ public class AssetLinkUtil {
 				   .findByE2_T_Last(entryId2, type, orderByComparator);
 	}
 
+	/**
+	* Finds the asset links before and after the current asset link in the ordered set where entryId2 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param linkId the primary key of the current asset link
+	* @param entryId2 the entry id2 to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next asset link
+	* @throws com.liferay.portlet.asset.NoSuchLinkException if a asset link with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink[] findByE2_T_PrevAndNext(
 		long linkId, long entryId2, int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -375,18 +808,58 @@ public class AssetLinkUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds all the asset links where entryId1 = &#63; and entryId2 = &#63; and type = &#63;.
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param entryId2 the entry id2 to search with
+	* @param type the type to search with
+	* @return the matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE_E_T(
 		long entryId1, long entryId2, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByE_E_T(entryId1, entryId2, type);
 	}
 
+	/**
+	* Finds a range of all the asset links where entryId1 = &#63; and entryId2 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param entryId2 the entry id2 to search with
+	* @param type the type to search with
+	* @param start the lower bound of the range of asset links to return
+	* @param end the upper bound of the range of asset links to return (not inclusive)
+	* @return the range of matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE_E_T(
 		long entryId1, long entryId2, int type, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByE_E_T(entryId1, entryId2, type, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the asset links where entryId1 = &#63; and entryId2 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param entryId2 the entry id2 to search with
+	* @param type the type to search with
+	* @param start the lower bound of the range of asset links to return
+	* @param end the upper bound of the range of asset links to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE_E_T(
 		long entryId1, long entryId2, int type, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -396,6 +869,21 @@ public class AssetLinkUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds the first asset link in the ordered set where entryId1 = &#63; and entryId2 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param entryId2 the entry id2 to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching asset link
+	* @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink findByE_E_T_First(
 		long entryId1, long entryId2, int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -406,6 +894,21 @@ public class AssetLinkUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds the last asset link in the ordered set where entryId1 = &#63; and entryId2 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param entryId2 the entry id2 to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching asset link
+	* @throws com.liferay.portlet.asset.NoSuchLinkException if a matching asset link could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink findByE_E_T_Last(
 		long entryId1, long entryId2, int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -415,6 +918,22 @@ public class AssetLinkUtil {
 				   .findByE_E_T_Last(entryId1, entryId2, type, orderByComparator);
 	}
 
+	/**
+	* Finds the asset links before and after the current asset link in the ordered set where entryId1 = &#63; and entryId2 = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param linkId the primary key of the current asset link
+	* @param entryId1 the entry id1 to search with
+	* @param entryId2 the entry id2 to search with
+	* @param type the type to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next asset link
+	* @throws com.liferay.portlet.asset.NoSuchLinkException if a asset link with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetLink[] findByE_E_T_PrevAndNext(
 		long linkId, long entryId1, long entryId2, int type,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -425,17 +944,48 @@ public class AssetLinkUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds all the asset links.
+	*
+	* @return the asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
+	/**
+	* Finds a range of all the asset links.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of asset links to return
+	* @param end the upper bound of the range of asset links to return (not inclusive)
+	* @return the range of asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the asset links.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of asset links to return
+	* @param end the upper bound of the range of asset links to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -443,71 +993,170 @@ public class AssetLinkUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
+	/**
+	* Removes all the asset links where entryId1 = &#63; from the database.
+	*
+	* @param entryId1 the entry id1 to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByE1(long entryId1)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByE1(entryId1);
 	}
 
+	/**
+	* Removes all the asset links where entryId2 = &#63; from the database.
+	*
+	* @param entryId2 the entry id2 to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByE2(long entryId2)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByE2(entryId2);
 	}
 
+	/**
+	* Removes all the asset links where entryId1 = &#63; and entryId2 = &#63; from the database.
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param entryId2 the entry id2 to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByE_E(long entryId1, long entryId2)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByE_E(entryId1, entryId2);
 	}
 
+	/**
+	* Removes all the asset links where entryId1 = &#63; and type = &#63; from the database.
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param type the type to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByE1_T(long entryId1, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByE1_T(entryId1, type);
 	}
 
+	/**
+	* Removes all the asset links where entryId2 = &#63; and type = &#63; from the database.
+	*
+	* @param entryId2 the entry id2 to search with
+	* @param type the type to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByE2_T(long entryId2, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByE2_T(entryId2, type);
 	}
 
+	/**
+	* Removes all the asset links where entryId1 = &#63; and entryId2 = &#63; and type = &#63; from the database.
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param entryId2 the entry id2 to search with
+	* @param type the type to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByE_E_T(long entryId1, long entryId2, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByE_E_T(entryId1, entryId2, type);
 	}
 
+	/**
+	* Removes all the asset links from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
+	/**
+	* Counts all the asset links where entryId1 = &#63;.
+	*
+	* @param entryId1 the entry id1 to search with
+	* @return the number of matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByE1(long entryId1)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByE1(entryId1);
 	}
 
+	/**
+	* Counts all the asset links where entryId2 = &#63;.
+	*
+	* @param entryId2 the entry id2 to search with
+	* @return the number of matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByE2(long entryId2)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByE2(entryId2);
 	}
 
+	/**
+	* Counts all the asset links where entryId1 = &#63; and entryId2 = &#63;.
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param entryId2 the entry id2 to search with
+	* @return the number of matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByE_E(long entryId1, long entryId2)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByE_E(entryId1, entryId2);
 	}
 
+	/**
+	* Counts all the asset links where entryId1 = &#63; and type = &#63;.
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param type the type to search with
+	* @return the number of matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByE1_T(long entryId1, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByE1_T(entryId1, type);
 	}
 
+	/**
+	* Counts all the asset links where entryId2 = &#63; and type = &#63;.
+	*
+	* @param entryId2 the entry id2 to search with
+	* @param type the type to search with
+	* @return the number of matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByE2_T(long entryId2, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByE2_T(entryId2, type);
 	}
 
+	/**
+	* Counts all the asset links where entryId1 = &#63; and entryId2 = &#63; and type = &#63;.
+	*
+	* @param entryId1 the entry id1 to search with
+	* @param entryId2 the entry id2 to search with
+	* @param type the type to search with
+	* @return the number of matching asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByE_E_T(long entryId1, long entryId2, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByE_E_T(entryId1, entryId2, type);
 	}
 
+	/**
+	* Counts all the asset links.
+	*
+	* @return the number of asset links
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();

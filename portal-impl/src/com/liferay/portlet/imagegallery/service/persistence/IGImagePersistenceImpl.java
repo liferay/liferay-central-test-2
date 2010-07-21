@@ -61,9 +61,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       IGImagePersistence
- * @see       IGImageUtil
+ * The persistence for the i g image service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see IGImagePersistence
+ * @see IGImageUtil
  * @generated
  */
 public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
@@ -177,6 +187,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			IGImageModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the i g image in the entity cache if it is enabled.
+	 *
+	 * @param igImage the i g image to cache
+	 */
 	public void cacheResult(IGImage igImage) {
 		EntityCacheUtil.putResult(IGImageModelImpl.ENTITY_CACHE_ENABLED,
 			IGImageImpl.class, igImage.getPrimaryKey(), igImage);
@@ -198,6 +213,11 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			new Object[] { new Long(igImage.getCustom2ImageId()) }, igImage);
 	}
 
+	/**
+	 * Caches the i g images in the entity cache if it is enabled.
+	 *
+	 * @param igImages the i g images to cache
+	 */
 	public void cacheResult(List<IGImage> igImages) {
 		for (IGImage igImage : igImages) {
 			if (EntityCacheUtil.getResult(
@@ -208,6 +228,13 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Clears the cache for all i g images.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(IGImageImpl.class.getName());
 		EntityCacheUtil.clearCache(IGImageImpl.class.getName());
@@ -215,6 +242,13 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the i g image.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(IGImage igImage) {
 		EntityCacheUtil.removeResult(IGImageModelImpl.ENTITY_CACHE_ENABLED,
 			IGImageImpl.class, igImage.getPrimaryKey());
@@ -235,6 +269,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			new Object[] { new Long(igImage.getCustom2ImageId()) });
 	}
 
+	/**
+	 * Creates a new i g image with the primary key.
+	 *
+	 * @param imageId the primary key for the new i g image
+	 * @return the new i g image
+	 */
 	public IGImage create(long imageId) {
 		IGImage igImage = new IGImageImpl();
 
@@ -248,11 +288,27 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return igImage;
 	}
 
+	/**
+	 * Removes the i g image with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the i g image to remove
+	 * @return the i g image that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a i g image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the i g image with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param imageId the primary key of the i g image to remove
+	 * @return the i g image that was removed
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a i g image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage remove(long imageId)
 		throws NoSuchImageException, SystemException {
 		Session session = null;
@@ -484,11 +540,27 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return igImageImpl;
 	}
 
+	/**
+	 * Finds the i g image with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the i g image to find
+	 * @return the i g image
+	 * @throws com.liferay.portal.NoSuchModelException if a i g image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the i g image with the primary key or throws a {@link com.liferay.portlet.imagegallery.NoSuchImageException} if it could not be found.
+	 *
+	 * @param imageId the primary key of the i g image to find
+	 * @return the i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a i g image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage findByPrimaryKey(long imageId)
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = fetchByPrimaryKey(imageId);
@@ -505,11 +577,25 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return igImage;
 	}
 
+	/**
+	 * Finds the i g image with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the i g image to find
+	 * @return the i g image, or <code>null</code> if a i g image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the i g image with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param imageId the primary key of the i g image to find
+	 * @return the i g image, or <code>null</code> if a i g image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage fetchByPrimaryKey(long imageId) throws SystemException {
 		IGImage igImage = (IGImage)EntityCacheUtil.getResult(IGImageModelImpl.ENTITY_CACHE_ENABLED,
 				IGImageImpl.class, imageId, this);
@@ -538,15 +624,49 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return igImage;
 	}
 
+	/**
+	 * Finds all the i g images where uuid = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @return the matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findByUuid(String uuid) throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the i g images where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @return the range of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the i g images where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -630,6 +750,19 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return list;
 	}
 
+	/**
+	 * Finds the first i g image in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
@@ -652,6 +785,19 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds the last i g image in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
@@ -677,6 +823,20 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds the i g images before and after the current i g image in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param imageId the primary key of the current i g image
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a i g image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage[] findByUuid_PrevAndNext(long imageId, String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
@@ -822,6 +982,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds the i g image where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.imagegallery.NoSuchImageException} if it could not be found.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage findByUUID_G(String uuid, long groupId)
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = fetchByUUID_G(uuid, groupId);
@@ -849,11 +1018,27 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return igImage;
 	}
 
+	/**
+	 * Finds the i g image where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching i g image, or <code>null</code> if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
 	}
 
+	/**
+	 * Finds the i g image where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching i g image, or <code>null</code> if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -950,15 +1135,49 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds all the i g images where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findByGroupId(long groupId) throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the i g images where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @return the range of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the i g images where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1030,6 +1249,19 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return list;
 	}
 
+	/**
+	 * Finds the first i g image in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
@@ -1052,6 +1284,19 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds the last i g image in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
@@ -1077,6 +1322,20 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds the i g images before and after the current i g image in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param imageId the primary key of the current i g image
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a i g image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage[] findByGroupId_PrevAndNext(long imageId, long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
@@ -1211,17 +1470,51 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the i g images where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the matching i g images that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> filterFindByGroupId(long groupId)
 		throws SystemException {
 		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the i g images where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @return the range of matching i g images that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> filterFindByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return filterFindByGroupId(groupId, start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the i g images where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching i g images that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> filterFindByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -1278,6 +1571,14 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds the i g image where smallImageId = &#63; or throws a {@link com.liferay.portlet.imagegallery.NoSuchImageException} if it could not be found.
+	 *
+	 * @param smallImageId the small image id to search with
+	 * @return the matching i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage findBySmallImageId(long smallImageId)
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = fetchBySmallImageId(smallImageId);
@@ -1302,11 +1603,25 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return igImage;
 	}
 
+	/**
+	 * Finds the i g image where smallImageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param smallImageId the small image id to search with
+	 * @return the matching i g image, or <code>null</code> if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage fetchBySmallImageId(long smallImageId)
 		throws SystemException {
 		return fetchBySmallImageId(smallImageId, true);
 	}
 
+	/**
+	 * Finds the i g image where smallImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param smallImageId the small image id to search with
+	 * @return the matching i g image, or <code>null</code> if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage fetchBySmallImageId(long smallImageId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { smallImageId };
@@ -1385,6 +1700,14 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds the i g image where largeImageId = &#63; or throws a {@link com.liferay.portlet.imagegallery.NoSuchImageException} if it could not be found.
+	 *
+	 * @param largeImageId the large image id to search with
+	 * @return the matching i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage findByLargeImageId(long largeImageId)
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = fetchByLargeImageId(largeImageId);
@@ -1409,11 +1732,25 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return igImage;
 	}
 
+	/**
+	 * Finds the i g image where largeImageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param largeImageId the large image id to search with
+	 * @return the matching i g image, or <code>null</code> if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage fetchByLargeImageId(long largeImageId)
 		throws SystemException {
 		return fetchByLargeImageId(largeImageId, true);
 	}
 
+	/**
+	 * Finds the i g image where largeImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param largeImageId the large image id to search with
+	 * @return the matching i g image, or <code>null</code> if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage fetchByLargeImageId(long largeImageId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { largeImageId };
@@ -1492,6 +1829,14 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds the i g image where custom1ImageId = &#63; or throws a {@link com.liferay.portlet.imagegallery.NoSuchImageException} if it could not be found.
+	 *
+	 * @param custom1ImageId the custom1 image id to search with
+	 * @return the matching i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage findByCustom1ImageId(long custom1ImageId)
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = fetchByCustom1ImageId(custom1ImageId);
@@ -1516,11 +1861,25 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return igImage;
 	}
 
+	/**
+	 * Finds the i g image where custom1ImageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param custom1ImageId the custom1 image id to search with
+	 * @return the matching i g image, or <code>null</code> if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage fetchByCustom1ImageId(long custom1ImageId)
 		throws SystemException {
 		return fetchByCustom1ImageId(custom1ImageId, true);
 	}
 
+	/**
+	 * Finds the i g image where custom1ImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param custom1ImageId the custom1 image id to search with
+	 * @return the matching i g image, or <code>null</code> if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage fetchByCustom1ImageId(long custom1ImageId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { custom1ImageId };
@@ -1599,6 +1958,14 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds the i g image where custom2ImageId = &#63; or throws a {@link com.liferay.portlet.imagegallery.NoSuchImageException} if it could not be found.
+	 *
+	 * @param custom2ImageId the custom2 image id to search with
+	 * @return the matching i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage findByCustom2ImageId(long custom2ImageId)
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = fetchByCustom2ImageId(custom2ImageId);
@@ -1623,11 +1990,25 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return igImage;
 	}
 
+	/**
+	 * Finds the i g image where custom2ImageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param custom2ImageId the custom2 image id to search with
+	 * @return the matching i g image, or <code>null</code> if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage fetchByCustom2ImageId(long custom2ImageId)
 		throws SystemException {
 		return fetchByCustom2ImageId(custom2ImageId, true);
 	}
 
+	/**
+	 * Finds the i g image where custom2ImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param custom2ImageId the custom2 image id to search with
+	 * @return the matching i g image, or <code>null</code> if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage fetchByCustom2ImageId(long custom2ImageId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { custom2ImageId };
@@ -1706,17 +2087,54 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds all the i g images where groupId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @return the matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findByG_U(long groupId, long userId)
 		throws SystemException {
 		return findByG_U(groupId, userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the i g images where groupId = &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @return the range of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findByG_U(long groupId, long userId, int start, int end)
 		throws SystemException {
 		return findByG_U(groupId, userId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the i g images where groupId = &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findByG_U(long groupId, long userId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1792,6 +2210,20 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return list;
 	}
 
+	/**
+	 * Finds the first i g image in the ordered set where groupId = &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage findByG_U_First(long groupId, long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
@@ -1817,6 +2249,20 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds the last i g image in the ordered set where groupId = &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage findByG_U_Last(long groupId, long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
@@ -1845,6 +2291,21 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds the i g images before and after the current i g image in the ordered set where groupId = &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param imageId the primary key of the current i g image
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a i g image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage[] findByG_U_PrevAndNext(long imageId, long groupId,
 		long userId, OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
@@ -1983,17 +2444,54 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the i g images where groupId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @return the matching i g images that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> filterFindByG_U(long groupId, long userId)
 		throws SystemException {
 		return filterFindByG_U(groupId, userId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the i g images where groupId = &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @return the range of matching i g images that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> filterFindByG_U(long groupId, long userId, int start,
 		int end) throws SystemException {
 		return filterFindByG_U(groupId, userId, start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the i g images where groupId = &#63; and userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching i g images that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> filterFindByG_U(long groupId, long userId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -2054,17 +2552,54 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds all the i g images where groupId = &#63; and folderId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @return the matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findByG_F(long groupId, long folderId)
 		throws SystemException {
 		return findByG_F(groupId, folderId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the i g images where groupId = &#63; and folderId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @return the range of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findByG_F(long groupId, long folderId, int start,
 		int end) throws SystemException {
 		return findByG_F(groupId, folderId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the i g images where groupId = &#63; and folderId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findByG_F(long groupId, long folderId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2140,6 +2675,20 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return list;
 	}
 
+	/**
+	 * Finds the first i g image in the ordered set where groupId = &#63; and folderId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage findByG_F_First(long groupId, long folderId,
 		OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
@@ -2166,6 +2715,20 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds the last i g image in the ordered set where groupId = &#63; and folderId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage findByG_F_Last(long groupId, long folderId,
 		OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
@@ -2194,6 +2757,21 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds the i g images before and after the current i g image in the ordered set where groupId = &#63; and folderId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param imageId the primary key of the current i g image
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a i g image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage[] findByG_F_PrevAndNext(long imageId, long groupId,
 		long folderId, OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
@@ -2332,17 +2910,58 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds all the i g images where groupId = &#63; and folderId = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderIds the folder ids to search with
+	 * @return the matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findByG_F(long groupId, long[] folderIds)
 		throws SystemException {
 		return findByG_F(groupId, folderIds, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the i g images where groupId = &#63; and folderId = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderIds the folder ids to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @return the range of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findByG_F(long groupId, long[] folderIds, int start,
 		int end) throws SystemException {
 		return findByG_F(groupId, folderIds, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the i g images where groupId = &#63; and folderId = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderIds the folder ids to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findByG_F(long groupId, long[] folderIds, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2438,17 +3057,54 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return list;
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the i g images where groupId = &#63; and folderId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @return the matching i g images that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> filterFindByG_F(long groupId, long folderId)
 		throws SystemException {
 		return filterFindByG_F(groupId, folderId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the i g images where groupId = &#63; and folderId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @return the range of matching i g images that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> filterFindByG_F(long groupId, long folderId,
 		int start, int end) throws SystemException {
 		return filterFindByG_F(groupId, folderId, start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the i g images where groupId = &#63; and folderId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching i g images that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> filterFindByG_F(long groupId, long folderId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2510,17 +3166,58 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the i g images where groupId = &#63; and folderId = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderIds the folder ids to search with
+	 * @return the matching i g images that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> filterFindByG_F(long groupId, long[] folderIds)
 		throws SystemException {
 		return filterFindByG_F(groupId, folderIds, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the i g images where groupId = &#63; and folderId = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderIds the folder ids to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @return the range of matching i g images that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> filterFindByG_F(long groupId, long[] folderIds,
 		int start, int end) throws SystemException {
 		return filterFindByG_F(groupId, folderIds, start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the i g images where groupId = &#63; and folderId = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderIds the folder ids to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching i g images that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> filterFindByG_F(long groupId, long[] folderIds,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2602,17 +3299,57 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds all the i g images where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @return the matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findByG_F_N(long groupId, long folderId, String name)
 		throws SystemException {
 		return findByG_F_N(groupId, folderId, name, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the i g images where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @return the range of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findByG_F_N(long groupId, long folderId, String name,
 		int start, int end) throws SystemException {
 		return findByG_F_N(groupId, folderId, name, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the i g images where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findByG_F_N(long groupId, long folderId, String name,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2705,6 +3442,21 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return list;
 	}
 
+	/**
+	 * Finds the first i g image in the ordered set where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage findByG_F_N_First(long groupId, long folderId, String name,
 		OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
@@ -2734,6 +3486,21 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds the last i g image in the ordered set where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage findByG_F_N_Last(long groupId, long folderId, String name,
 		OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
@@ -2765,6 +3532,22 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds the i g images before and after the current i g image in the ordered set where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param imageId the primary key of the current i g image
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next i g image
+	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a i g image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public IGImage[] findByG_F_N_PrevAndNext(long imageId, long groupId,
 		long folderId, String name, OrderByComparator orderByComparator)
 		throws NoSuchImageException, SystemException {
@@ -2919,17 +3702,57 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the i g images where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @return the matching i g images that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> filterFindByG_F_N(long groupId, long folderId,
 		String name) throws SystemException {
 		return filterFindByG_F_N(groupId, folderId, name, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the i g images where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @return the range of matching i g images that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> filterFindByG_F_N(long groupId, long folderId,
 		String name, int start, int end) throws SystemException {
 		return filterFindByG_F_N(groupId, folderId, name, start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the i g images where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching i g images that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> filterFindByG_F_N(long groupId, long folderId,
 		String name, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -3008,14 +3831,45 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Finds all the i g images.
+	 *
+	 * @return the i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the i g images.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @return the range of i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the i g images.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of i g images to return
+	 * @param end the upper bound of the range of i g images to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<IGImage> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -3082,12 +3936,25 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return list;
 	}
 
+	/**
+	 * Removes all the i g images where uuid = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (IGImage igImage : findByUuid(uuid)) {
 			remove(igImage);
 		}
 	}
 
+	/**
+	 * Removes the i g image where uuid = &#63; and groupId = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUUID_G(String uuid, long groupId)
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = findByUUID_G(uuid, groupId);
@@ -3095,12 +3962,24 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		remove(igImage);
 	}
 
+	/**
+	 * Removes all the i g images where groupId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (IGImage igImage : findByGroupId(groupId)) {
 			remove(igImage);
 		}
 	}
 
+	/**
+	 * Removes the i g image where smallImageId = &#63; from the database.
+	 *
+	 * @param smallImageId the small image id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeBySmallImageId(long smallImageId)
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = findBySmallImageId(smallImageId);
@@ -3108,6 +3987,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		remove(igImage);
 	}
 
+	/**
+	 * Removes the i g image where largeImageId = &#63; from the database.
+	 *
+	 * @param largeImageId the large image id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByLargeImageId(long largeImageId)
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = findByLargeImageId(largeImageId);
@@ -3115,6 +4000,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		remove(igImage);
 	}
 
+	/**
+	 * Removes the i g image where custom1ImageId = &#63; from the database.
+	 *
+	 * @param custom1ImageId the custom1 image id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCustom1ImageId(long custom1ImageId)
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = findByCustom1ImageId(custom1ImageId);
@@ -3122,6 +4013,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		remove(igImage);
 	}
 
+	/**
+	 * Removes the i g image where custom2ImageId = &#63; from the database.
+	 *
+	 * @param custom2ImageId the custom2 image id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCustom2ImageId(long custom2ImageId)
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = findByCustom2ImageId(custom2ImageId);
@@ -3129,6 +4026,13 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		remove(igImage);
 	}
 
+	/**
+	 * Removes all the i g images where groupId = &#63; and userId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_U(long groupId, long userId)
 		throws SystemException {
 		for (IGImage igImage : findByG_U(groupId, userId)) {
@@ -3136,6 +4040,13 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Removes all the i g images where groupId = &#63; and folderId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_F(long groupId, long folderId)
 		throws SystemException {
 		for (IGImage igImage : findByG_F(groupId, folderId)) {
@@ -3143,6 +4054,14 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Removes all the i g images where groupId = &#63; and folderId = &#63; and name = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_F_N(long groupId, long folderId, String name)
 		throws SystemException {
 		for (IGImage igImage : findByG_F_N(groupId, folderId, name)) {
@@ -3150,12 +4069,24 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Removes all the i g images from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (IGImage igImage : findAll()) {
 			remove(igImage);
 		}
 	}
 
+	/**
+	 * Counts all the i g images where uuid = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @return the number of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUuid(String uuid) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid };
 
@@ -3214,6 +4145,14 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the i g images where uuid = &#63; and groupId = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the number of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -3277,6 +4216,13 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the i g images where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the number of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId };
 
@@ -3323,6 +4269,13 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the i g images where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the number of matching i g images that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByGroupId(long groupId) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByGroupId(groupId);
@@ -3364,6 +4317,13 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Counts all the i g images where smallImageId = &#63;.
+	 *
+	 * @param smallImageId the small image id to search with
+	 * @return the number of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countBySmallImageId(long smallImageId) throws SystemException {
 		Object[] finderArgs = new Object[] { smallImageId };
 
@@ -3410,6 +4370,13 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the i g images where largeImageId = &#63;.
+	 *
+	 * @param largeImageId the large image id to search with
+	 * @return the number of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByLargeImageId(long largeImageId) throws SystemException {
 		Object[] finderArgs = new Object[] { largeImageId };
 
@@ -3456,6 +4423,13 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the i g images where custom1ImageId = &#63;.
+	 *
+	 * @param custom1ImageId the custom1 image id to search with
+	 * @return the number of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCustom1ImageId(long custom1ImageId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { custom1ImageId };
@@ -3503,6 +4477,13 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the i g images where custom2ImageId = &#63;.
+	 *
+	 * @param custom2ImageId the custom2 image id to search with
+	 * @return the number of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCustom2ImageId(long custom2ImageId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { custom2ImageId };
@@ -3550,6 +4531,14 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the i g images where groupId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @return the number of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_U(long groupId, long userId) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, userId };
 
@@ -3600,6 +4589,14 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the i g images where groupId = &#63; and userId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @return the number of matching i g images that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByG_U(long groupId, long userId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -3646,6 +4643,14 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Counts all the i g images where groupId = &#63; and folderId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @return the number of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_F(long groupId, long folderId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, folderId };
@@ -3697,6 +4702,14 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the i g images where groupId = &#63; and folderId = any &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderIds the folder ids to search with
+	 * @return the number of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_F(long groupId, long[] folderIds)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, StringUtil.merge(folderIds) };
@@ -3776,6 +4789,14 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the i g images where groupId = &#63; and folderId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @return the number of matching i g images that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByG_F(long groupId, long folderId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -3822,6 +4843,14 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the i g images where groupId = &#63; and folderId = any &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderIds the folder ids to search with
+	 * @return the number of matching i g images that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByG_F(long groupId, long[] folderIds)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -3896,6 +4925,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Counts all the i g images where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @return the number of matching i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_F_N(long groupId, long folderId, String name)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, folderId, name };
@@ -3963,6 +5001,15 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the i g images where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @return the number of matching i g images that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByG_F_N(long groupId, long folderId, String name)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -4025,6 +5072,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Counts all the i g images.
+	 *
+	 * @return the number of i g images
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -4059,6 +5112,9 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the i g image persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

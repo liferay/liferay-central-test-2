@@ -15,20 +15,16 @@
 package com.liferay.portlet.calendar.model;
 
 /**
- * <p>
- * This interface is a model that represents the CalEvent table in the
- * database.
- * </p>
+ * The model interface for the CalEvent service. Represents a row in the &quot;CalEvent&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.calendar.model.impl.CalEventImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.calendar.model.impl.CalEventImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       CalEventModel
- * @see       com.liferay.portlet.calendar.model.impl.CalEventImpl
- * @see       com.liferay.portlet.calendar.model.impl.CalEventModelImpl
+ * @author Brian Wing Shun Chan
+ * @see CalEventModel
+ * @see com.liferay.portlet.calendar.model.impl.CalEventImpl
+ * @see com.liferay.portlet.calendar.model.impl.CalEventModelImpl
  * @generated
  */
 public interface CalEvent extends CalEventModel {

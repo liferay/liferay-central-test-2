@@ -15,20 +15,16 @@
 package com.liferay.portlet.social.model;
 
 /**
- * <p>
- * This interface is a model that represents the SocialActivity table in the
- * database.
- * </p>
+ * The model interface for the SocialActivity service. Represents a row in the &quot;SocialActivity&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.social.model.impl.SocialActivityImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.social.model.impl.SocialActivityImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       SocialActivityModel
- * @see       com.liferay.portlet.social.model.impl.SocialActivityImpl
- * @see       com.liferay.portlet.social.model.impl.SocialActivityModelImpl
+ * @author Brian Wing Shun Chan
+ * @see SocialActivityModel
+ * @see com.liferay.portlet.social.model.impl.SocialActivityImpl
+ * @see com.liferay.portlet.social.model.impl.SocialActivityModelImpl
  * @generated
  */
 public interface SocialActivity extends SocialActivityModel {

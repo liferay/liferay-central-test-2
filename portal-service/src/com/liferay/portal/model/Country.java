@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the Country table in the
- * database.
- * </p>
+ * The model interface for the Country service. Represents a row in the &quot;Country&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.CountryImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.CountryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       CountryModel
- * @see       com.liferay.portal.model.impl.CountryImpl
- * @see       com.liferay.portal.model.impl.CountryModelImpl
+ * @author Brian Wing Shun Chan
+ * @see CountryModel
+ * @see com.liferay.portal.model.impl.CountryImpl
+ * @see com.liferay.portal.model.impl.CountryModelImpl
  * @generated
  */
 public interface Country extends CountryModel {

@@ -25,9 +25,15 @@ import com.liferay.portlet.messageboards.model.MBCategory;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       MBCategoryPersistence
- * @see       MBCategoryPersistenceImpl
+ * The persistence utility for the message boards category service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see MBCategoryPersistence
+ * @see MBCategoryPersistenceImpl
  * @generated
  */
 public class MBCategoryUtil {
@@ -105,21 +111,45 @@ public class MBCategoryUtil {
 		return getPersistence().update(mbCategory, merge, serviceContext);
 	}
 
+	/**
+	* Caches the message boards category in the entity cache if it is enabled.
+	*
+	* @param mbCategory the message boards category to cache
+	*/
 	public static void cacheResult(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory) {
 		getPersistence().cacheResult(mbCategory);
 	}
 
+	/**
+	* Caches the message boards categories in the entity cache if it is enabled.
+	*
+	* @param mbCategories the message boards categories to cache
+	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.messageboards.model.MBCategory> mbCategories) {
 		getPersistence().cacheResult(mbCategories);
 	}
 
+	/**
+	* Creates a new message boards category with the primary key.
+	*
+	* @param categoryId the primary key for the new message boards category
+	* @return the new message boards category
+	*/
 	public static com.liferay.portlet.messageboards.model.MBCategory create(
 		long categoryId) {
 		return getPersistence().create(categoryId);
 	}
 
+	/**
+	* Removes the message boards category with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param categoryId the primary key of the message boards category to remove
+	* @return the message boards category that was removed
+	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a message boards category with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBCategory remove(
 		long categoryId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -134,6 +164,14 @@ public class MBCategoryUtil {
 		return getPersistence().updateImpl(mbCategory, merge);
 	}
 
+	/**
+	* Finds the message boards category with the primary key or throws a {@link com.liferay.portlet.messageboards.NoSuchCategoryException} if it could not be found.
+	*
+	* @param categoryId the primary key of the message boards category to find
+	* @return the message boards category
+	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a message boards category with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBCategory findByPrimaryKey(
 		long categoryId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -141,24 +179,65 @@ public class MBCategoryUtil {
 		return getPersistence().findByPrimaryKey(categoryId);
 	}
 
+	/**
+	* Finds the message boards category with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param categoryId the primary key of the message boards category to find
+	* @return the message boards category, or <code>null</code> if a message boards category with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBCategory fetchByPrimaryKey(
 		long categoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(categoryId);
 	}
 
+	/**
+	* Finds all the message boards categories where uuid = &#63;.
+	*
+	* @param uuid the uuid to search with
+	* @return the matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByUuid(
 		java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUuid(uuid);
 	}
 
+	/**
+	* Finds a range of all the message boards categories where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param start the lower bound of the range of message boards categories to return
+	* @param end the upper bound of the range of message boards categories to return (not inclusive)
+	* @return the range of matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByUuid(
 		java.lang.String uuid, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUuid(uuid, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the message boards categories where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param start the lower bound of the range of message boards categories to return
+	* @param end the upper bound of the range of message boards categories to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByUuid(
 		java.lang.String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -166,6 +245,19 @@ public class MBCategoryUtil {
 		return getPersistence().findByUuid(uuid, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first message boards category in the ordered set where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching message boards category
+	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBCategory findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -174,6 +266,19 @@ public class MBCategoryUtil {
 		return getPersistence().findByUuid_First(uuid, orderByComparator);
 	}
 
+	/**
+	* Finds the last message boards category in the ordered set where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching message boards category
+	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBCategory findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -182,6 +287,20 @@ public class MBCategoryUtil {
 		return getPersistence().findByUuid_Last(uuid, orderByComparator);
 	}
 
+	/**
+	* Finds the message boards categories before and after the current message boards category in the ordered set where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param categoryId the primary key of the current message boards category
+	* @param uuid the uuid to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next message boards category
+	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a message boards category with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBCategory[] findByUuid_PrevAndNext(
 		long categoryId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -191,6 +310,15 @@ public class MBCategoryUtil {
 				   .findByUuid_PrevAndNext(categoryId, uuid, orderByComparator);
 	}
 
+	/**
+	* Finds the message boards category where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchCategoryException} if it could not be found.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group id to search with
+	* @return the matching message boards category
+	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBCategory findByUUID_G(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -198,30 +326,80 @@ public class MBCategoryUtil {
 		return getPersistence().findByUUID_G(uuid, groupId);
 	}
 
+	/**
+	* Finds the message boards category where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group id to search with
+	* @return the matching message boards category, or <code>null</code> if a matching message boards category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBCategory fetchByUUID_G(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByUUID_G(uuid, groupId);
 	}
 
+	/**
+	* Finds the message boards category where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group id to search with
+	* @return the matching message boards category, or <code>null</code> if a matching message boards category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBCategory fetchByUUID_G(
 		java.lang.String uuid, long groupId, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
 	}
 
+	/**
+	* Finds all the message boards categories where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByGroupId(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByGroupId(groupId);
 	}
 
+	/**
+	* Finds a range of all the message boards categories where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of message boards categories to return
+	* @param end the upper bound of the range of message boards categories to return (not inclusive)
+	* @return the range of matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByGroupId(groupId, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the message boards categories where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of message boards categories to return
+	* @param end the upper bound of the range of message boards categories to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -230,6 +408,19 @@ public class MBCategoryUtil {
 				   .findByGroupId(groupId, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first message boards category in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching message boards category
+	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBCategory findByGroupId_First(
 		long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -238,6 +429,19 @@ public class MBCategoryUtil {
 		return getPersistence().findByGroupId_First(groupId, orderByComparator);
 	}
 
+	/**
+	* Finds the last message boards category in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching message boards category
+	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBCategory findByGroupId_Last(
 		long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -246,6 +450,20 @@ public class MBCategoryUtil {
 		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
 	}
 
+	/**
+	* Finds the message boards categories before and after the current message boards category in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param categoryId the primary key of the current message boards category
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next message boards category
+	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a message boards category with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBCategory[] findByGroupId_PrevAndNext(
 		long categoryId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -256,18 +474,52 @@ public class MBCategoryUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Filters by the user's permissions and finds all the message boards categories where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the matching message boards categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByGroupId(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().filterFindByGroupId(groupId);
 	}
 
+	/**
+	* Filters by the user's permissions and finds a range of all the message boards categories where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of message boards categories to return
+	* @param end the upper bound of the range of message boards categories to return (not inclusive)
+	* @return the range of matching message boards categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().filterFindByGroupId(groupId, start, end);
 	}
 
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the message boards categories where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of message boards categories to return
+	* @param end the upper bound of the range of message boards categories to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching message boards categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -276,18 +528,52 @@ public class MBCategoryUtil {
 				   .filterFindByGroupId(groupId, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds all the message boards categories where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByCompanyId(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByCompanyId(companyId);
 	}
 
+	/**
+	* Finds a range of all the message boards categories where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of message boards categories to return
+	* @param end the upper bound of the range of message boards categories to return (not inclusive)
+	* @return the range of matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByCompanyId(
 		long companyId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByCompanyId(companyId, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the message boards categories where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of message boards categories to return
+	* @param end the upper bound of the range of message boards categories to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -296,6 +582,19 @@ public class MBCategoryUtil {
 				   .findByCompanyId(companyId, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first message boards category in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching message boards category
+	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBCategory findByCompanyId_First(
 		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -305,6 +604,19 @@ public class MBCategoryUtil {
 				   .findByCompanyId_First(companyId, orderByComparator);
 	}
 
+	/**
+	* Finds the last message boards category in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching message boards category
+	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBCategory findByCompanyId_Last(
 		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -314,6 +626,20 @@ public class MBCategoryUtil {
 				   .findByCompanyId_Last(companyId, orderByComparator);
 	}
 
+	/**
+	* Finds the message boards categories before and after the current message boards category in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param categoryId the primary key of the current message boards category
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next message boards category
+	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a message boards category with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBCategory[] findByCompanyId_PrevAndNext(
 		long categoryId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -324,18 +650,55 @@ public class MBCategoryUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds all the message boards categories where groupId = &#63; and parentCategoryId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param parentCategoryId the parent category id to search with
+	* @return the matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByG_P(
 		long groupId, long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByG_P(groupId, parentCategoryId);
 	}
 
+	/**
+	* Finds a range of all the message boards categories where groupId = &#63; and parentCategoryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param parentCategoryId the parent category id to search with
+	* @param start the lower bound of the range of message boards categories to return
+	* @param end the upper bound of the range of message boards categories to return (not inclusive)
+	* @return the range of matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByG_P(
 		long groupId, long parentCategoryId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByG_P(groupId, parentCategoryId, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the message boards categories where groupId = &#63; and parentCategoryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param parentCategoryId the parent category id to search with
+	* @param start the lower bound of the range of message boards categories to return
+	* @param end the upper bound of the range of message boards categories to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByG_P(
 		long groupId, long parentCategoryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -345,6 +708,20 @@ public class MBCategoryUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds the first message boards category in the ordered set where groupId = &#63; and parentCategoryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param parentCategoryId the parent category id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching message boards category
+	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBCategory findByG_P_First(
 		long groupId, long parentCategoryId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -354,6 +731,20 @@ public class MBCategoryUtil {
 				   .findByG_P_First(groupId, parentCategoryId, orderByComparator);
 	}
 
+	/**
+	* Finds the last message boards category in the ordered set where groupId = &#63; and parentCategoryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param parentCategoryId the parent category id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching message boards category
+	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBCategory findByG_P_Last(
 		long groupId, long parentCategoryId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -363,6 +754,21 @@ public class MBCategoryUtil {
 				   .findByG_P_Last(groupId, parentCategoryId, orderByComparator);
 	}
 
+	/**
+	* Finds the message boards categories before and after the current message boards category in the ordered set where groupId = &#63; and parentCategoryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param categoryId the primary key of the current message boards category
+	* @param groupId the group id to search with
+	* @param parentCategoryId the parent category id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next message boards category
+	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a message boards category with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBCategory[] findByG_P_PrevAndNext(
 		long categoryId, long groupId, long parentCategoryId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -373,18 +779,59 @@ public class MBCategoryUtil {
 			parentCategoryId, orderByComparator);
 	}
 
+	/**
+	* Finds all the message boards categories where groupId = &#63; and parentCategoryId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param parentCategoryIds the parent category ids to search with
+	* @return the matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByG_P(
 		long groupId, long[] parentCategoryIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByG_P(groupId, parentCategoryIds);
 	}
 
+	/**
+	* Finds a range of all the message boards categories where groupId = &#63; and parentCategoryId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param parentCategoryIds the parent category ids to search with
+	* @param start the lower bound of the range of message boards categories to return
+	* @param end the upper bound of the range of message boards categories to return (not inclusive)
+	* @return the range of matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByG_P(
 		long groupId, long[] parentCategoryIds, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByG_P(groupId, parentCategoryIds, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the message boards categories where groupId = &#63; and parentCategoryId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param parentCategoryIds the parent category ids to search with
+	* @param start the lower bound of the range of message boards categories to return
+	* @param end the upper bound of the range of message boards categories to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByG_P(
 		long groupId, long[] parentCategoryIds, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -394,12 +841,34 @@ public class MBCategoryUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Filters by the user's permissions and finds all the message boards categories where groupId = &#63; and parentCategoryId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param parentCategoryId the parent category id to search with
+	* @return the matching message boards categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByG_P(
 		long groupId, long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().filterFindByG_P(groupId, parentCategoryId);
 	}
 
+	/**
+	* Filters by the user's permissions and finds a range of all the message boards categories where groupId = &#63; and parentCategoryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param parentCategoryId the parent category id to search with
+	* @param start the lower bound of the range of message boards categories to return
+	* @param end the upper bound of the range of message boards categories to return (not inclusive)
+	* @return the range of matching message boards categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByG_P(
 		long groupId, long parentCategoryId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -407,6 +876,21 @@ public class MBCategoryUtil {
 				   .filterFindByG_P(groupId, parentCategoryId, start, end);
 	}
 
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the message boards categories where groupId = &#63; and parentCategoryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param parentCategoryId the parent category id to search with
+	* @param start the lower bound of the range of message boards categories to return
+	* @param end the upper bound of the range of message boards categories to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching message boards categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByG_P(
 		long groupId, long parentCategoryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -416,12 +900,38 @@ public class MBCategoryUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Filters by the user's permissions and finds all the message boards categories where groupId = &#63; and parentCategoryId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param parentCategoryIds the parent category ids to search with
+	* @return the matching message boards categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByG_P(
 		long groupId, long[] parentCategoryIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().filterFindByG_P(groupId, parentCategoryIds);
 	}
 
+	/**
+	* Filters by the user's permissions and finds a range of all the message boards categories where groupId = &#63; and parentCategoryId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param parentCategoryIds the parent category ids to search with
+	* @param start the lower bound of the range of message boards categories to return
+	* @param end the upper bound of the range of message boards categories to return (not inclusive)
+	* @return the range of matching message boards categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByG_P(
 		long groupId, long[] parentCategoryIds, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -429,6 +939,21 @@ public class MBCategoryUtil {
 				   .filterFindByG_P(groupId, parentCategoryIds, start, end);
 	}
 
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the message boards categories where groupId = &#63; and parentCategoryId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param parentCategoryIds the parent category ids to search with
+	* @param start the lower bound of the range of message boards categories to return
+	* @param end the upper bound of the range of message boards categories to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching message boards categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> filterFindByG_P(
 		long groupId, long[] parentCategoryIds, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -438,17 +963,48 @@ public class MBCategoryUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds all the message boards categories.
+	*
+	* @return the message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
+	/**
+	* Finds a range of all the message boards categories.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of message boards categories to return
+	* @param end the upper bound of the range of message boards categories to return (not inclusive)
+	* @return the range of message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the message boards categories.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of message boards categories to return
+	* @param end the upper bound of the range of message boards categories to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -456,82 +1012,193 @@ public class MBCategoryUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
+	/**
+	* Removes all the message boards categories where uuid = &#63; from the database.
+	*
+	* @param uuid the uuid to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByUuid(java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByUuid(uuid);
 	}
 
+	/**
+	* Removes the message boards category where uuid = &#63; and groupId = &#63; from the database.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchCategoryException {
 		getPersistence().removeByUUID_G(uuid, groupId);
 	}
 
+	/**
+	* Removes all the message boards categories where groupId = &#63; from the database.
+	*
+	* @param groupId the group id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByGroupId(groupId);
 	}
 
+	/**
+	* Removes all the message boards categories where companyId = &#63; from the database.
+	*
+	* @param companyId the company id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
+	/**
+	* Removes all the message boards categories where groupId = &#63; and parentCategoryId = &#63; from the database.
+	*
+	* @param groupId the group id to search with
+	* @param parentCategoryId the parent category id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByG_P(long groupId, long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByG_P(groupId, parentCategoryId);
 	}
 
+	/**
+	* Removes all the message boards categories from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
+	/**
+	* Counts all the message boards categories where uuid = &#63;.
+	*
+	* @param uuid the uuid to search with
+	* @return the number of matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByUuid(java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByUuid(uuid);
 	}
 
+	/**
+	* Counts all the message boards categories where uuid = &#63; and groupId = &#63;.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group id to search with
+	* @return the number of matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByUUID_G(uuid, groupId);
 	}
 
+	/**
+	* Counts all the message boards categories where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the number of matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByGroupId(groupId);
 	}
 
+	/**
+	* Filters by the user's permissions and counts all the message boards categories where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the number of matching message boards categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().filterCountByGroupId(groupId);
 	}
 
+	/**
+	* Counts all the message boards categories where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the number of matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByCompanyId(companyId);
 	}
 
+	/**
+	* Counts all the message boards categories where groupId = &#63; and parentCategoryId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param parentCategoryId the parent category id to search with
+	* @return the number of matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByG_P(long groupId, long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_P(groupId, parentCategoryId);
 	}
 
+	/**
+	* Counts all the message boards categories where groupId = &#63; and parentCategoryId = any &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param parentCategoryIds the parent category ids to search with
+	* @return the number of matching message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByG_P(long groupId, long[] parentCategoryIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_P(groupId, parentCategoryIds);
 	}
 
+	/**
+	* Filters by the user's permissions and counts all the message boards categories where groupId = &#63; and parentCategoryId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param parentCategoryId the parent category id to search with
+	* @return the number of matching message boards categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int filterCountByG_P(long groupId, long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().filterCountByG_P(groupId, parentCategoryId);
 	}
 
+	/**
+	* Filters by the user's permissions and counts all the message boards categories where groupId = &#63; and parentCategoryId = any &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param parentCategoryIds the parent category ids to search with
+	* @return the number of matching message boards categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int filterCountByG_P(long groupId, long[] parentCategoryIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().filterCountByG_P(groupId, parentCategoryIds);
 	}
 
+	/**
+	* Counts all the message boards categories.
+	*
+	* @return the number of message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();

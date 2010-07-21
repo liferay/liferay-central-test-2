@@ -15,20 +15,16 @@
 package com.liferay.portlet.wiki.model;
 
 /**
- * <p>
- * This interface is a model that represents the WikiPage table in the
- * database.
- * </p>
+ * The model interface for the WikiPage service. Represents a row in the &quot;WikiPage&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.wiki.model.impl.WikiPageImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.wiki.model.impl.WikiPageImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       WikiPageModel
- * @see       com.liferay.portlet.wiki.model.impl.WikiPageImpl
- * @see       com.liferay.portlet.wiki.model.impl.WikiPageModelImpl
+ * @author Brian Wing Shun Chan
+ * @see WikiPageModel
+ * @see com.liferay.portlet.wiki.model.impl.WikiPageImpl
+ * @see com.liferay.portlet.wiki.model.impl.WikiPageModelImpl
  * @generated
  */
 public interface WikiPage extends WikiPageModel {

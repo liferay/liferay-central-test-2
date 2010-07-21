@@ -53,9 +53,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       MBMailingListPersistence
- * @see       MBMailingListUtil
+ * The persistence for the message boards mailing list service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see MBMailingListPersistence
+ * @see MBMailingListUtil
  * @generated
  */
 public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingList>
@@ -112,6 +122,11 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 			MBMailingListModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
+	/**
+	 * Caches the message boards mailing list in the entity cache if it is enabled.
+	 *
+	 * @param mbMailingList the message boards mailing list to cache
+	 */
 	public void cacheResult(MBMailingList mbMailingList) {
 		EntityCacheUtil.putResult(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
 			MBMailingListImpl.class, mbMailingList.getPrimaryKey(),
@@ -129,6 +144,11 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 			}, mbMailingList);
 	}
 
+	/**
+	 * Caches the message boards mailing lists in the entity cache if it is enabled.
+	 *
+	 * @param mbMailingLists the message boards mailing lists to cache
+	 */
 	public void cacheResult(List<MBMailingList> mbMailingLists) {
 		for (MBMailingList mbMailingList : mbMailingLists) {
 			if (EntityCacheUtil.getResult(
@@ -140,6 +160,13 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		}
 	}
 
+	/**
+	 * Clears the cache for all message boards mailing lists.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(MBMailingListImpl.class.getName());
 		EntityCacheUtil.clearCache(MBMailingListImpl.class.getName());
@@ -147,6 +174,13 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the message boards mailing list.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(MBMailingList mbMailingList) {
 		EntityCacheUtil.removeResult(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
 			MBMailingListImpl.class, mbMailingList.getPrimaryKey());
@@ -163,6 +197,12 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 			});
 	}
 
+	/**
+	 * Creates a new message boards mailing list with the primary key.
+	 *
+	 * @param mailingListId the primary key for the new message boards mailing list
+	 * @return the new message boards mailing list
+	 */
 	public MBMailingList create(long mailingListId) {
 		MBMailingList mbMailingList = new MBMailingListImpl();
 
@@ -176,11 +216,27 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		return mbMailingList;
 	}
 
+	/**
+	 * Removes the message boards mailing list with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the message boards mailing list to remove
+	 * @return the message boards mailing list that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a message boards mailing list with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBMailingList remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the message boards mailing list with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param mailingListId the primary key of the message boards mailing list to remove
+	 * @return the message boards mailing list that was removed
+	 * @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a message boards mailing list with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBMailingList remove(long mailingListId)
 		throws NoSuchMailingListException, SystemException {
 		Session session = null;
@@ -385,11 +441,27 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		return mbMailingListImpl;
 	}
 
+	/**
+	 * Finds the message boards mailing list with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the message boards mailing list to find
+	 * @return the message boards mailing list
+	 * @throws com.liferay.portal.NoSuchModelException if a message boards mailing list with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBMailingList findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the message boards mailing list with the primary key or throws a {@link com.liferay.portlet.messageboards.NoSuchMailingListException} if it could not be found.
+	 *
+	 * @param mailingListId the primary key of the message boards mailing list to find
+	 * @return the message boards mailing list
+	 * @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a message boards mailing list with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBMailingList findByPrimaryKey(long mailingListId)
 		throws NoSuchMailingListException, SystemException {
 		MBMailingList mbMailingList = fetchByPrimaryKey(mailingListId);
@@ -406,11 +478,25 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		return mbMailingList;
 	}
 
+	/**
+	 * Finds the message boards mailing list with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the message boards mailing list to find
+	 * @return the message boards mailing list, or <code>null</code> if a message boards mailing list with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBMailingList fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the message boards mailing list with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param mailingListId the primary key of the message boards mailing list to find
+	 * @return the message boards mailing list, or <code>null</code> if a message boards mailing list with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBMailingList fetchByPrimaryKey(long mailingListId)
 		throws SystemException {
 		MBMailingList mbMailingList = (MBMailingList)EntityCacheUtil.getResult(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
@@ -440,16 +526,50 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		return mbMailingList;
 	}
 
+	/**
+	 * Finds all the message boards mailing lists where uuid = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @return the matching message boards mailing lists
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBMailingList> findByUuid(String uuid)
 		throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the message boards mailing lists where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param start the lower bound of the range of message boards mailing lists to return
+	 * @param end the upper bound of the range of message boards mailing lists to return (not inclusive)
+	 * @return the range of matching message boards mailing lists
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBMailingList> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the message boards mailing lists where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param start the lower bound of the range of message boards mailing lists to return
+	 * @param end the upper bound of the range of message boards mailing lists to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching message boards mailing lists
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBMailingList> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -530,6 +650,19 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		return list;
 	}
 
+	/**
+	 * Finds the first message boards mailing list in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching message boards mailing list
+	 * @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a matching message boards mailing list could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBMailingList findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchMailingListException, SystemException {
@@ -552,6 +685,19 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		}
 	}
 
+	/**
+	 * Finds the last message boards mailing list in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching message boards mailing list
+	 * @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a matching message boards mailing list could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBMailingList findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchMailingListException, SystemException {
@@ -577,6 +723,20 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		}
 	}
 
+	/**
+	 * Finds the message boards mailing lists before and after the current message boards mailing list in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param mailingListId the primary key of the current message boards mailing list
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next message boards mailing list
+	 * @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a message boards mailing list with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBMailingList[] findByUuid_PrevAndNext(long mailingListId,
 		String uuid, OrderByComparator orderByComparator)
 		throws NoSuchMailingListException, SystemException {
@@ -719,6 +879,15 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		}
 	}
 
+	/**
+	 * Finds the message boards mailing list where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchMailingListException} if it could not be found.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching message boards mailing list
+	 * @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a matching message boards mailing list could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBMailingList findByUUID_G(String uuid, long groupId)
 		throws NoSuchMailingListException, SystemException {
 		MBMailingList mbMailingList = fetchByUUID_G(uuid, groupId);
@@ -746,11 +915,27 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		return mbMailingList;
 	}
 
+	/**
+	 * Finds the message boards mailing list where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching message boards mailing list, or <code>null</code> if a matching message boards mailing list could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBMailingList fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
 	}
 
+	/**
+	 * Finds the message boards mailing list where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching message boards mailing list, or <code>null</code> if a matching message boards mailing list could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBMailingList fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -845,16 +1030,50 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		}
 	}
 
+	/**
+	 * Finds all the message boards mailing lists where active = &#63;.
+	 *
+	 * @param active the active to search with
+	 * @return the matching message boards mailing lists
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBMailingList> findByActive(boolean active)
 		throws SystemException {
 		return findByActive(active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the message boards mailing lists where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param start the lower bound of the range of message boards mailing lists to return
+	 * @param end the upper bound of the range of message boards mailing lists to return (not inclusive)
+	 * @return the range of matching message boards mailing lists
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBMailingList> findByActive(boolean active, int start, int end)
 		throws SystemException {
 		return findByActive(active, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the message boards mailing lists where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param start the lower bound of the range of message boards mailing lists to return
+	 * @param end the upper bound of the range of message boards mailing lists to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching message boards mailing lists
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBMailingList> findByActive(boolean active, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -923,6 +1142,19 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		return list;
 	}
 
+	/**
+	 * Finds the first message boards mailing list in the ordered set where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching message boards mailing list
+	 * @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a matching message boards mailing list could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBMailingList findByActive_First(boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchMailingListException, SystemException {
@@ -945,6 +1177,19 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		}
 	}
 
+	/**
+	 * Finds the last message boards mailing list in the ordered set where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching message boards mailing list
+	 * @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a matching message boards mailing list could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBMailingList findByActive_Last(boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchMailingListException, SystemException {
@@ -970,6 +1215,20 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		}
 	}
 
+	/**
+	 * Finds the message boards mailing lists before and after the current message boards mailing list in the ordered set where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param mailingListId the primary key of the current message boards mailing list
+	 * @param active the active to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next message boards mailing list
+	 * @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a message boards mailing list with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBMailingList[] findByActive_PrevAndNext(long mailingListId,
 		boolean active, OrderByComparator orderByComparator)
 		throws NoSuchMailingListException, SystemException {
@@ -1100,6 +1359,15 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		}
 	}
 
+	/**
+	 * Finds the message boards mailing list where groupId = &#63; and categoryId = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchMailingListException} if it could not be found.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @return the matching message boards mailing list
+	 * @throws com.liferay.portlet.messageboards.NoSuchMailingListException if a matching message boards mailing list could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBMailingList findByG_C(long groupId, long categoryId)
 		throws NoSuchMailingListException, SystemException {
 		MBMailingList mbMailingList = fetchByG_C(groupId, categoryId);
@@ -1127,11 +1395,27 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		return mbMailingList;
 	}
 
+	/**
+	 * Finds the message boards mailing list where groupId = &#63; and categoryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @return the matching message boards mailing list, or <code>null</code> if a matching message boards mailing list could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBMailingList fetchByG_C(long groupId, long categoryId)
 		throws SystemException {
 		return fetchByG_C(groupId, categoryId, true);
 	}
 
+	/**
+	 * Finds the message boards mailing list where groupId = &#63; and categoryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @return the matching message boards mailing list, or <code>null</code> if a matching message boards mailing list could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public MBMailingList fetchByG_C(long groupId, long categoryId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, categoryId };
@@ -1213,15 +1497,46 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		}
 	}
 
+	/**
+	 * Finds all the message boards mailing lists.
+	 *
+	 * @return the message boards mailing lists
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBMailingList> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the message boards mailing lists.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of message boards mailing lists to return
+	 * @param end the upper bound of the range of message boards mailing lists to return (not inclusive)
+	 * @return the range of message boards mailing lists
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBMailingList> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the message boards mailing lists.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of message boards mailing lists to return
+	 * @param end the upper bound of the range of message boards mailing lists to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of message boards mailing lists
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<MBMailingList> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1288,12 +1603,25 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		return list;
 	}
 
+	/**
+	 * Removes all the message boards mailing lists where uuid = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (MBMailingList mbMailingList : findByUuid(uuid)) {
 			remove(mbMailingList);
 		}
 	}
 
+	/**
+	 * Removes the message boards mailing list where uuid = &#63; and groupId = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUUID_G(String uuid, long groupId)
 		throws NoSuchMailingListException, SystemException {
 		MBMailingList mbMailingList = findByUUID_G(uuid, groupId);
@@ -1301,12 +1629,25 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		remove(mbMailingList);
 	}
 
+	/**
+	 * Removes all the message boards mailing lists where active = &#63; from the database.
+	 *
+	 * @param active the active to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByActive(boolean active) throws SystemException {
 		for (MBMailingList mbMailingList : findByActive(active)) {
 			remove(mbMailingList);
 		}
 	}
 
+	/**
+	 * Removes the message boards mailing list where groupId = &#63; and categoryId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_C(long groupId, long categoryId)
 		throws NoSuchMailingListException, SystemException {
 		MBMailingList mbMailingList = findByG_C(groupId, categoryId);
@@ -1314,12 +1655,24 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		remove(mbMailingList);
 	}
 
+	/**
+	 * Removes all the message boards mailing lists from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (MBMailingList mbMailingList : findAll()) {
 			remove(mbMailingList);
 		}
 	}
 
+	/**
+	 * Counts all the message boards mailing lists where uuid = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @return the number of matching message boards mailing lists
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUuid(String uuid) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid };
 
@@ -1378,6 +1731,14 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the message boards mailing lists where uuid = &#63; and groupId = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the number of matching message boards mailing lists
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -1441,6 +1802,13 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the message boards mailing lists where active = &#63;.
+	 *
+	 * @param active the active to search with
+	 * @return the number of matching message boards mailing lists
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByActive(boolean active) throws SystemException {
 		Object[] finderArgs = new Object[] { active };
 
@@ -1487,6 +1855,14 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the message boards mailing lists where groupId = &#63; and categoryId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param categoryId the category id to search with
+	 * @return the number of matching message boards mailing lists
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_C(long groupId, long categoryId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, categoryId };
@@ -1538,6 +1914,12 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the message boards mailing lists.
+	 *
+	 * @return the number of message boards mailing lists
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -1572,6 +1954,9 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the message boards mailing list persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

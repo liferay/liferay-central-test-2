@@ -262,7 +262,7 @@ public class RoleLocalServiceUtil {
 
 	/**
 	* Returns <code>true</code> if the user has any one of the specified
-	regular roles.
+	* regular roles.
 	*
 	* @return <code>true</code> if the user has the regular role
 	*/

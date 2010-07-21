@@ -15,20 +15,16 @@
 package com.liferay.portlet.messageboards.model;
 
 /**
- * <p>
- * This interface is a model that represents the MBThread table in the
- * database.
- * </p>
+ * The model interface for the MBThread service. Represents a row in the &quot;MBThread&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.messageboards.model.impl.MBThreadImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.messageboards.model.impl.MBThreadImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       MBThreadModel
- * @see       com.liferay.portlet.messageboards.model.impl.MBThreadImpl
- * @see       com.liferay.portlet.messageboards.model.impl.MBThreadModelImpl
+ * @author Brian Wing Shun Chan
+ * @see MBThreadModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBThreadImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBThreadModelImpl
  * @generated
  */
 public interface MBThread extends MBThreadModel {

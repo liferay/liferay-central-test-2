@@ -15,20 +15,16 @@
 package com.liferay.portlet.shopping.model;
 
 /**
- * <p>
- * This interface is a model that represents the ShoppingItemPrice table in the
- * database.
- * </p>
+ * The model interface for the ShoppingItemPrice service. Represents a row in the &quot;ShoppingItemPrice&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       ShoppingItemPriceModel
- * @see       com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl
- * @see       com.liferay.portlet.shopping.model.impl.ShoppingItemPriceModelImpl
+ * @author Brian Wing Shun Chan
+ * @see ShoppingItemPriceModel
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingItemPriceModelImpl
  * @generated
  */
 public interface ShoppingItemPrice extends ShoppingItemPriceModel {

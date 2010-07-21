@@ -15,20 +15,16 @@
 package com.liferay.portlet.social.model;
 
 /**
- * <p>
- * This interface is a model that represents the SocialEquityLog table in the
- * database.
- * </p>
+ * The model interface for the SocialEquityLog service. Represents a row in the &quot;SocialEquityLog&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.social.model.impl.SocialEquityLogImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.social.model.impl.SocialEquityLogImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       SocialEquityLogModel
- * @see       com.liferay.portlet.social.model.impl.SocialEquityLogImpl
- * @see       com.liferay.portlet.social.model.impl.SocialEquityLogModelImpl
+ * @author Brian Wing Shun Chan
+ * @see SocialEquityLogModel
+ * @see com.liferay.portlet.social.model.impl.SocialEquityLogImpl
+ * @see com.liferay.portlet.social.model.impl.SocialEquityLogModelImpl
  * @generated
  */
 public interface SocialEquityLog extends SocialEquityLogModel {

@@ -47,9 +47,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       UserTrackerPathPersistence
- * @see       UserTrackerPathUtil
+ * The persistence for the user tracker path service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see UserTrackerPathPersistence
+ * @see UserTrackerPathUtil
  * @generated
  */
 public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrackerPath>
@@ -77,12 +87,22 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 			UserTrackerPathModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
+	/**
+	 * Caches the user tracker path in the entity cache if it is enabled.
+	 *
+	 * @param userTrackerPath the user tracker path to cache
+	 */
 	public void cacheResult(UserTrackerPath userTrackerPath) {
 		EntityCacheUtil.putResult(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
 			UserTrackerPathImpl.class, userTrackerPath.getPrimaryKey(),
 			userTrackerPath);
 	}
 
+	/**
+	 * Caches the user tracker paths in the entity cache if it is enabled.
+	 *
+	 * @param userTrackerPaths the user tracker paths to cache
+	 */
 	public void cacheResult(List<UserTrackerPath> userTrackerPaths) {
 		for (UserTrackerPath userTrackerPath : userTrackerPaths) {
 			if (EntityCacheUtil.getResult(
@@ -94,6 +114,13 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		}
 	}
 
+	/**
+	 * Clears the cache for all user tracker paths.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(UserTrackerPathImpl.class.getName());
 		EntityCacheUtil.clearCache(UserTrackerPathImpl.class.getName());
@@ -101,11 +128,24 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the user tracker path.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(UserTrackerPath userTrackerPath) {
 		EntityCacheUtil.removeResult(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
 			UserTrackerPathImpl.class, userTrackerPath.getPrimaryKey());
 	}
 
+	/**
+	 * Creates a new user tracker path with the primary key.
+	 *
+	 * @param userTrackerPathId the primary key for the new user tracker path
+	 * @return the new user tracker path
+	 */
 	public UserTrackerPath create(long userTrackerPathId) {
 		UserTrackerPath userTrackerPath = new UserTrackerPathImpl();
 
@@ -115,11 +155,27 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		return userTrackerPath;
 	}
 
+	/**
+	 * Removes the user tracker path with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the user tracker path to remove
+	 * @return the user tracker path that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a user tracker path with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public UserTrackerPath remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the user tracker path with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param userTrackerPathId the primary key of the user tracker path to remove
+	 * @return the user tracker path that was removed
+	 * @throws com.liferay.portal.NoSuchUserTrackerPathException if a user tracker path with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public UserTrackerPath remove(long userTrackerPathId)
 		throws NoSuchUserTrackerPathException, SystemException {
 		Session session = null;
@@ -239,11 +295,27 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		return userTrackerPathImpl;
 	}
 
+	/**
+	 * Finds the user tracker path with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the user tracker path to find
+	 * @return the user tracker path
+	 * @throws com.liferay.portal.NoSuchModelException if a user tracker path with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public UserTrackerPath findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the user tracker path with the primary key or throws a {@link com.liferay.portal.NoSuchUserTrackerPathException} if it could not be found.
+	 *
+	 * @param userTrackerPathId the primary key of the user tracker path to find
+	 * @return the user tracker path
+	 * @throws com.liferay.portal.NoSuchUserTrackerPathException if a user tracker path with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public UserTrackerPath findByPrimaryKey(long userTrackerPathId)
 		throws NoSuchUserTrackerPathException, SystemException {
 		UserTrackerPath userTrackerPath = fetchByPrimaryKey(userTrackerPathId);
@@ -260,11 +332,25 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		return userTrackerPath;
 	}
 
+	/**
+	 * Finds the user tracker path with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the user tracker path to find
+	 * @return the user tracker path, or <code>null</code> if a user tracker path with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public UserTrackerPath fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the user tracker path with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param userTrackerPathId the primary key of the user tracker path to find
+	 * @return the user tracker path, or <code>null</code> if a user tracker path with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public UserTrackerPath fetchByPrimaryKey(long userTrackerPathId)
 		throws SystemException {
 		UserTrackerPath userTrackerPath = (UserTrackerPath)EntityCacheUtil.getResult(UserTrackerPathModelImpl.ENTITY_CACHE_ENABLED,
@@ -294,17 +380,51 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		return userTrackerPath;
 	}
 
+	/**
+	 * Finds all the user tracker paths where userTrackerId = &#63;.
+	 *
+	 * @param userTrackerId the user tracker id to search with
+	 * @return the matching user tracker paths
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<UserTrackerPath> findByUserTrackerId(long userTrackerId)
 		throws SystemException {
 		return findByUserTrackerId(userTrackerId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the user tracker paths where userTrackerId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userTrackerId the user tracker id to search with
+	 * @param start the lower bound of the range of user tracker paths to return
+	 * @param end the upper bound of the range of user tracker paths to return (not inclusive)
+	 * @return the range of matching user tracker paths
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<UserTrackerPath> findByUserTrackerId(long userTrackerId,
 		int start, int end) throws SystemException {
 		return findByUserTrackerId(userTrackerId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the user tracker paths where userTrackerId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userTrackerId the user tracker id to search with
+	 * @param start the lower bound of the range of user tracker paths to return
+	 * @param end the upper bound of the range of user tracker paths to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching user tracker paths
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<UserTrackerPath> findByUserTrackerId(long userTrackerId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -374,6 +494,19 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		return list;
 	}
 
+	/**
+	 * Finds the first user tracker path in the ordered set where userTrackerId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userTrackerId the user tracker id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching user tracker path
+	 * @throws com.liferay.portal.NoSuchUserTrackerPathException if a matching user tracker path could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public UserTrackerPath findByUserTrackerId_First(long userTrackerId,
 		OrderByComparator orderByComparator)
 		throws NoSuchUserTrackerPathException, SystemException {
@@ -397,6 +530,19 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		}
 	}
 
+	/**
+	 * Finds the last user tracker path in the ordered set where userTrackerId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userTrackerId the user tracker id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching user tracker path
+	 * @throws com.liferay.portal.NoSuchUserTrackerPathException if a matching user tracker path could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public UserTrackerPath findByUserTrackerId_Last(long userTrackerId,
 		OrderByComparator orderByComparator)
 		throws NoSuchUserTrackerPathException, SystemException {
@@ -422,6 +568,20 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		}
 	}
 
+	/**
+	 * Finds the user tracker paths before and after the current user tracker path in the ordered set where userTrackerId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userTrackerPathId the primary key of the current user tracker path
+	 * @param userTrackerId the user tracker id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next user tracker path
+	 * @throws com.liferay.portal.NoSuchUserTrackerPathException if a user tracker path with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public UserTrackerPath[] findByUserTrackerId_PrevAndNext(
 		long userTrackerPathId, long userTrackerId,
 		OrderByComparator orderByComparator)
@@ -553,15 +713,46 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		}
 	}
 
+	/**
+	 * Finds all the user tracker paths.
+	 *
+	 * @return the user tracker paths
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<UserTrackerPath> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the user tracker paths.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of user tracker paths to return
+	 * @param end the upper bound of the range of user tracker paths to return (not inclusive)
+	 * @return the range of user tracker paths
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<UserTrackerPath> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the user tracker paths.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of user tracker paths to return
+	 * @param end the upper bound of the range of user tracker paths to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of user tracker paths
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<UserTrackerPath> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -628,6 +819,12 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		return list;
 	}
 
+	/**
+	 * Removes all the user tracker paths where userTrackerId = &#63; from the database.
+	 *
+	 * @param userTrackerId the user tracker id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUserTrackerId(long userTrackerId)
 		throws SystemException {
 		for (UserTrackerPath userTrackerPath : findByUserTrackerId(
@@ -636,12 +833,24 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		}
 	}
 
+	/**
+	 * Removes all the user tracker paths from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (UserTrackerPath userTrackerPath : findAll()) {
 			remove(userTrackerPath);
 		}
 	}
 
+	/**
+	 * Counts all the user tracker paths where userTrackerId = &#63;.
+	 *
+	 * @param userTrackerId the user tracker id to search with
+	 * @return the number of matching user tracker paths
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUserTrackerId(long userTrackerId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { userTrackerId };
@@ -689,6 +898,12 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the user tracker paths.
+	 *
+	 * @return the number of user tracker paths
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -723,6 +938,9 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the user tracker path persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

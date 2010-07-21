@@ -15,20 +15,16 @@
 package com.liferay.portlet.expando.model;
 
 /**
- * <p>
- * This interface is a model that represents the ExpandoColumn table in the
- * database.
- * </p>
+ * The model interface for the ExpandoColumn service. Represents a row in the &quot;ExpandoColumn&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.expando.model.impl.ExpandoColumnImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.expando.model.impl.ExpandoColumnImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       ExpandoColumnModel
- * @see       com.liferay.portlet.expando.model.impl.ExpandoColumnImpl
- * @see       com.liferay.portlet.expando.model.impl.ExpandoColumnModelImpl
+ * @author Brian Wing Shun Chan
+ * @see ExpandoColumnModel
+ * @see com.liferay.portlet.expando.model.impl.ExpandoColumnImpl
+ * @see com.liferay.portlet.expando.model.impl.ExpandoColumnModelImpl
  * @generated
  */
 public interface ExpandoColumn extends ExpandoColumnModel {

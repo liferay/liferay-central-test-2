@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the Shard table in the
- * database.
- * </p>
+ * The model interface for the Shard service. Represents a row in the &quot;Shard&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.ShardImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.ShardImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       ShardModel
- * @see       com.liferay.portal.model.impl.ShardImpl
- * @see       com.liferay.portal.model.impl.ShardModelImpl
+ * @author Brian Wing Shun Chan
+ * @see ShardModel
+ * @see com.liferay.portal.model.impl.ShardImpl
+ * @see com.liferay.portal.model.impl.ShardModelImpl
  * @generated
  */
 public interface Shard extends ShardModel {

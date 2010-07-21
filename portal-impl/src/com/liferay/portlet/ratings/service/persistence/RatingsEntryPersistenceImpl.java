@@ -54,9 +54,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       RatingsEntryPersistence
- * @see       RatingsEntryUtil
+ * The persistence for the ratings entry service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see RatingsEntryPersistence
+ * @see RatingsEntryUtil
  * @generated
  */
 public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntry>
@@ -96,6 +106,11 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 			RatingsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the ratings entry in the entity cache if it is enabled.
+	 *
+	 * @param ratingsEntry the ratings entry to cache
+	 */
 	public void cacheResult(RatingsEntry ratingsEntry) {
 		EntityCacheUtil.putResult(RatingsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			RatingsEntryImpl.class, ratingsEntry.getPrimaryKey(), ratingsEntry);
@@ -108,6 +123,11 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 			}, ratingsEntry);
 	}
 
+	/**
+	 * Caches the ratings entries in the entity cache if it is enabled.
+	 *
+	 * @param ratingsEntries the ratings entries to cache
+	 */
 	public void cacheResult(List<RatingsEntry> ratingsEntries) {
 		for (RatingsEntry ratingsEntry : ratingsEntries) {
 			if (EntityCacheUtil.getResult(
@@ -119,6 +139,13 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		}
 	}
 
+	/**
+	 * Clears the cache for all ratings entries.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(RatingsEntryImpl.class.getName());
 		EntityCacheUtil.clearCache(RatingsEntryImpl.class.getName());
@@ -126,6 +153,13 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the ratings entry.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(RatingsEntry ratingsEntry) {
 		EntityCacheUtil.removeResult(RatingsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			RatingsEntryImpl.class, ratingsEntry.getPrimaryKey());
@@ -138,6 +172,12 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 			});
 	}
 
+	/**
+	 * Creates a new ratings entry with the primary key.
+	 *
+	 * @param entryId the primary key for the new ratings entry
+	 * @return the new ratings entry
+	 */
 	public RatingsEntry create(long entryId) {
 		RatingsEntry ratingsEntry = new RatingsEntryImpl();
 
@@ -147,11 +187,27 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		return ratingsEntry;
 	}
 
+	/**
+	 * Removes the ratings entry with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the ratings entry to remove
+	 * @return the ratings entry that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a ratings entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsEntry remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the ratings entry with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param entryId the primary key of the ratings entry to remove
+	 * @return the ratings entry that was removed
+	 * @throws com.liferay.portlet.ratings.NoSuchEntryException if a ratings entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsEntry remove(long entryId)
 		throws NoSuchEntryException, SystemException {
 		Session session = null;
@@ -310,11 +366,27 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		return ratingsEntryImpl;
 	}
 
+	/**
+	 * Finds the ratings entry with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the ratings entry to find
+	 * @return the ratings entry
+	 * @throws com.liferay.portal.NoSuchModelException if a ratings entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsEntry findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the ratings entry with the primary key or throws a {@link com.liferay.portlet.ratings.NoSuchEntryException} if it could not be found.
+	 *
+	 * @param entryId the primary key of the ratings entry to find
+	 * @return the ratings entry
+	 * @throws com.liferay.portlet.ratings.NoSuchEntryException if a ratings entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsEntry findByPrimaryKey(long entryId)
 		throws NoSuchEntryException, SystemException {
 		RatingsEntry ratingsEntry = fetchByPrimaryKey(entryId);
@@ -331,11 +403,25 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		return ratingsEntry;
 	}
 
+	/**
+	 * Finds the ratings entry with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the ratings entry to find
+	 * @return the ratings entry, or <code>null</code> if a ratings entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsEntry fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the ratings entry with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param entryId the primary key of the ratings entry to find
+	 * @return the ratings entry, or <code>null</code> if a ratings entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsEntry fetchByPrimaryKey(long entryId)
 		throws SystemException {
 		RatingsEntry ratingsEntry = (RatingsEntry)EntityCacheUtil.getResult(RatingsEntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -365,17 +451,54 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		return ratingsEntry;
 	}
 
+	/**
+	 * Finds all the ratings entries where classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching ratings entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<RatingsEntry> findByC_C(long classNameId, long classPK)
 		throws SystemException {
 		return findByC_C(classNameId, classPK, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the ratings entries where classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param start the lower bound of the range of ratings entries to return
+	 * @param end the upper bound of the range of ratings entries to return (not inclusive)
+	 * @return the range of matching ratings entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<RatingsEntry> findByC_C(long classNameId, long classPK,
 		int start, int end) throws SystemException {
 		return findByC_C(classNameId, classPK, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the ratings entries where classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param start the lower bound of the range of ratings entries to return
+	 * @param end the upper bound of the range of ratings entries to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching ratings entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<RatingsEntry> findByC_C(long classNameId, long classPK,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -449,6 +572,20 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		return list;
 	}
 
+	/**
+	 * Finds the first ratings entry in the ordered set where classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching ratings entry
+	 * @throws com.liferay.portlet.ratings.NoSuchEntryException if a matching ratings entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsEntry findByC_C_First(long classNameId, long classPK,
 		OrderByComparator orderByComparator)
 		throws NoSuchEntryException, SystemException {
@@ -475,6 +612,20 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		}
 	}
 
+	/**
+	 * Finds the last ratings entry in the ordered set where classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching ratings entry
+	 * @throws com.liferay.portlet.ratings.NoSuchEntryException if a matching ratings entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsEntry findByC_C_Last(long classNameId, long classPK,
 		OrderByComparator orderByComparator)
 		throws NoSuchEntryException, SystemException {
@@ -503,6 +654,21 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		}
 	}
 
+	/**
+	 * Finds the ratings entries before and after the current ratings entry in the ordered set where classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param entryId the primary key of the current ratings entry
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next ratings entry
+	 * @throws com.liferay.portlet.ratings.NoSuchEntryException if a ratings entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsEntry[] findByC_C_PrevAndNext(long entryId, long classNameId,
 		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchEntryException, SystemException {
@@ -637,6 +803,16 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		}
 	}
 
+	/**
+	 * Finds the ratings entry where userId = &#63; and classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.ratings.NoSuchEntryException} if it could not be found.
+	 *
+	 * @param userId the user id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching ratings entry
+	 * @throws com.liferay.portlet.ratings.NoSuchEntryException if a matching ratings entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsEntry findByU_C_C(long userId, long classNameId, long classPK)
 		throws NoSuchEntryException, SystemException {
 		RatingsEntry ratingsEntry = fetchByU_C_C(userId, classNameId, classPK);
@@ -667,11 +843,29 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		return ratingsEntry;
 	}
 
+	/**
+	 * Finds the ratings entry where userId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param userId the user id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching ratings entry, or <code>null</code> if a matching ratings entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsEntry fetchByU_C_C(long userId, long classNameId, long classPK)
 		throws SystemException {
 		return fetchByU_C_C(userId, classNameId, classPK, true);
 	}
 
+	/**
+	 * Finds the ratings entry where userId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param userId the user id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching ratings entry, or <code>null</code> if a matching ratings entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsEntry fetchByU_C_C(long userId, long classNameId,
 		long classPK, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { userId, classNameId, classPK };
@@ -758,15 +952,46 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		}
 	}
 
+	/**
+	 * Finds all the ratings entries.
+	 *
+	 * @return the ratings entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<RatingsEntry> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the ratings entries.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of ratings entries to return
+	 * @param end the upper bound of the range of ratings entries to return (not inclusive)
+	 * @return the range of ratings entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<RatingsEntry> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the ratings entries.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of ratings entries to return
+	 * @param end the upper bound of the range of ratings entries to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of ratings entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<RatingsEntry> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -833,6 +1058,13 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		return list;
 	}
 
+	/**
+	 * Removes all the ratings entries where classNameId = &#63; and classPK = &#63; from the database.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C(long classNameId, long classPK)
 		throws SystemException {
 		for (RatingsEntry ratingsEntry : findByC_C(classNameId, classPK)) {
@@ -840,6 +1072,14 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		}
 	}
 
+	/**
+	 * Removes the ratings entry where userId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
+	 *
+	 * @param userId the user id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByU_C_C(long userId, long classNameId, long classPK)
 		throws NoSuchEntryException, SystemException {
 		RatingsEntry ratingsEntry = findByU_C_C(userId, classNameId, classPK);
@@ -847,12 +1087,25 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		remove(ratingsEntry);
 	}
 
+	/**
+	 * Removes all the ratings entries from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (RatingsEntry ratingsEntry : findAll()) {
 			remove(ratingsEntry);
 		}
 	}
 
+	/**
+	 * Counts all the ratings entries where classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the number of matching ratings entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { classNameId, classPK };
@@ -904,6 +1157,15 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the ratings entries where userId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the number of matching ratings entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByU_C_C(long userId, long classNameId, long classPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { userId, classNameId, classPK };
@@ -959,6 +1221,12 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the ratings entries.
+	 *
+	 * @return the number of ratings entries
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -993,6 +1261,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the ratings entry persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

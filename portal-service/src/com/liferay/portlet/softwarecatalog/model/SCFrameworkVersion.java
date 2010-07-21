@@ -15,20 +15,16 @@
 package com.liferay.portlet.softwarecatalog.model;
 
 /**
- * <p>
- * This interface is a model that represents the SCFrameworkVersion table in the
- * database.
- * </p>
+ * The model interface for the SCFrameworkVersion service. Represents a row in the &quot;SCFrameworkVersion&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       SCFrameworkVersionModel
- * @see       com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl
- * @see       com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl
+ * @author Brian Wing Shun Chan
+ * @see SCFrameworkVersionModel
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl
  * @generated
  */
 public interface SCFrameworkVersion extends SCFrameworkVersionModel {

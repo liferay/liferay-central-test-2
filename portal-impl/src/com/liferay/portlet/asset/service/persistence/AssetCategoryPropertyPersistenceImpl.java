@@ -52,9 +52,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       AssetCategoryPropertyPersistence
- * @see       AssetCategoryPropertyUtil
+ * The persistence for the asset category property service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see AssetCategoryPropertyPersistence
+ * @see AssetCategoryPropertyUtil
  * @generated
  */
 public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<AssetCategoryProperty>
@@ -116,6 +126,11 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			AssetCategoryPropertyModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
+	/**
+	 * Caches the asset category property in the entity cache if it is enabled.
+	 *
+	 * @param assetCategoryProperty the asset category property to cache
+	 */
 	public void cacheResult(AssetCategoryProperty assetCategoryProperty) {
 		EntityCacheUtil.putResult(AssetCategoryPropertyModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryPropertyImpl.class,
@@ -129,6 +144,11 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			}, assetCategoryProperty);
 	}
 
+	/**
+	 * Caches the asset category properties in the entity cache if it is enabled.
+	 *
+	 * @param assetCategoryProperties the asset category properties to cache
+	 */
 	public void cacheResult(List<AssetCategoryProperty> assetCategoryProperties) {
 		for (AssetCategoryProperty assetCategoryProperty : assetCategoryProperties) {
 			if (EntityCacheUtil.getResult(
@@ -140,6 +160,13 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		}
 	}
 
+	/**
+	 * Clears the cache for all asset category properties.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(AssetCategoryPropertyImpl.class.getName());
 		EntityCacheUtil.clearCache(AssetCategoryPropertyImpl.class.getName());
@@ -147,6 +174,13 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the asset category property.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(AssetCategoryProperty assetCategoryProperty) {
 		EntityCacheUtil.removeResult(AssetCategoryPropertyModelImpl.ENTITY_CACHE_ENABLED,
 			AssetCategoryPropertyImpl.class,
@@ -160,6 +194,12 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			});
 	}
 
+	/**
+	 * Creates a new asset category property with the primary key.
+	 *
+	 * @param categoryPropertyId the primary key for the new asset category property
+	 * @return the new asset category property
+	 */
 	public AssetCategoryProperty create(long categoryPropertyId) {
 		AssetCategoryProperty assetCategoryProperty = new AssetCategoryPropertyImpl();
 
@@ -169,11 +209,27 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		return assetCategoryProperty;
 	}
 
+	/**
+	 * Removes the asset category property with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the asset category property to remove
+	 * @return the asset category property that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a asset category property with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetCategoryProperty remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the asset category property with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param categoryPropertyId the primary key of the asset category property to remove
+	 * @return the asset category property that was removed
+	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a asset category property with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetCategoryProperty remove(long categoryPropertyId)
 		throws NoSuchCategoryPropertyException, SystemException {
 		Session session = null;
@@ -337,11 +393,27 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		return assetCategoryPropertyImpl;
 	}
 
+	/**
+	 * Finds the asset category property with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the asset category property to find
+	 * @return the asset category property
+	 * @throws com.liferay.portal.NoSuchModelException if a asset category property with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetCategoryProperty findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the asset category property with the primary key or throws a {@link com.liferay.portlet.asset.NoSuchCategoryPropertyException} if it could not be found.
+	 *
+	 * @param categoryPropertyId the primary key of the asset category property to find
+	 * @return the asset category property
+	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a asset category property with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetCategoryProperty findByPrimaryKey(long categoryPropertyId)
 		throws NoSuchCategoryPropertyException, SystemException {
 		AssetCategoryProperty assetCategoryProperty = fetchByPrimaryKey(categoryPropertyId);
@@ -359,11 +431,25 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		return assetCategoryProperty;
 	}
 
+	/**
+	 * Finds the asset category property with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the asset category property to find
+	 * @return the asset category property, or <code>null</code> if a asset category property with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetCategoryProperty fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the asset category property with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param categoryPropertyId the primary key of the asset category property to find
+	 * @return the asset category property, or <code>null</code> if a asset category property with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetCategoryProperty fetchByPrimaryKey(long categoryPropertyId)
 		throws SystemException {
 		AssetCategoryProperty assetCategoryProperty = (AssetCategoryProperty)EntityCacheUtil.getResult(AssetCategoryPropertyModelImpl.ENTITY_CACHE_ENABLED,
@@ -393,17 +479,51 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		return assetCategoryProperty;
 	}
 
+	/**
+	 * Finds all the asset category properties where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the matching asset category properties
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetCategoryProperty> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the asset category properties where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of asset category properties to return
+	 * @param end the upper bound of the range of asset category properties to return (not inclusive)
+	 * @return the range of matching asset category properties
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetCategoryProperty> findByCompanyId(long companyId,
 		int start, int end) throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the asset category properties where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of asset category properties to return
+	 * @param end the upper bound of the range of asset category properties to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching asset category properties
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetCategoryProperty> findByCompanyId(long companyId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -477,6 +597,19 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		return list;
 	}
 
+	/**
+	 * Finds the first asset category property in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching asset category property
+	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a matching asset category property could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetCategoryProperty findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchCategoryPropertyException, SystemException {
@@ -500,6 +633,19 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		}
 	}
 
+	/**
+	 * Finds the last asset category property in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching asset category property
+	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a matching asset category property could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetCategoryProperty findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchCategoryPropertyException, SystemException {
@@ -525,6 +671,20 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		}
 	}
 
+	/**
+	 * Finds the asset category properties before and after the current asset category property in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param categoryPropertyId the primary key of the current asset category property
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next asset category property
+	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a asset category property with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetCategoryProperty[] findByCompanyId_PrevAndNext(
 		long categoryPropertyId, long companyId,
 		OrderByComparator orderByComparator)
@@ -660,17 +820,51 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		}
 	}
 
+	/**
+	 * Finds all the asset category properties where categoryId = &#63;.
+	 *
+	 * @param categoryId the category id to search with
+	 * @return the matching asset category properties
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetCategoryProperty> findByCategoryId(long categoryId)
 		throws SystemException {
 		return findByCategoryId(categoryId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the asset category properties where categoryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param categoryId the category id to search with
+	 * @param start the lower bound of the range of asset category properties to return
+	 * @param end the upper bound of the range of asset category properties to return (not inclusive)
+	 * @return the range of matching asset category properties
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetCategoryProperty> findByCategoryId(long categoryId,
 		int start, int end) throws SystemException {
 		return findByCategoryId(categoryId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the asset category properties where categoryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param categoryId the category id to search with
+	 * @param start the lower bound of the range of asset category properties to return
+	 * @param end the upper bound of the range of asset category properties to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching asset category properties
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetCategoryProperty> findByCategoryId(long categoryId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -744,6 +938,19 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		return list;
 	}
 
+	/**
+	 * Finds the first asset category property in the ordered set where categoryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param categoryId the category id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching asset category property
+	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a matching asset category property could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetCategoryProperty findByCategoryId_First(long categoryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchCategoryPropertyException, SystemException {
@@ -767,6 +974,19 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		}
 	}
 
+	/**
+	 * Finds the last asset category property in the ordered set where categoryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param categoryId the category id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching asset category property
+	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a matching asset category property could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetCategoryProperty findByCategoryId_Last(long categoryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchCategoryPropertyException, SystemException {
@@ -792,6 +1012,20 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		}
 	}
 
+	/**
+	 * Finds the asset category properties before and after the current asset category property in the ordered set where categoryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param categoryPropertyId the primary key of the current asset category property
+	 * @param categoryId the category id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next asset category property
+	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a asset category property with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetCategoryProperty[] findByCategoryId_PrevAndNext(
 		long categoryPropertyId, long categoryId,
 		OrderByComparator orderByComparator)
@@ -927,17 +1161,54 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		}
 	}
 
+	/**
+	 * Finds all the asset category properties where companyId = &#63; and key = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param key the key to search with
+	 * @return the matching asset category properties
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetCategoryProperty> findByC_K(long companyId, String key)
 		throws SystemException {
 		return findByC_K(companyId, key, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the asset category properties where companyId = &#63; and key = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param key the key to search with
+	 * @param start the lower bound of the range of asset category properties to return
+	 * @param end the upper bound of the range of asset category properties to return (not inclusive)
+	 * @return the range of matching asset category properties
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetCategoryProperty> findByC_K(long companyId, String key,
 		int start, int end) throws SystemException {
 		return findByC_K(companyId, key, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the asset category properties where companyId = &#63; and key = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param key the key to search with
+	 * @param start the lower bound of the range of asset category properties to return
+	 * @param end the upper bound of the range of asset category properties to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching asset category properties
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetCategoryProperty> findByC_K(long companyId, String key,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1027,6 +1298,20 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		return list;
 	}
 
+	/**
+	 * Finds the first asset category property in the ordered set where companyId = &#63; and key = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param key the key to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching asset category property
+	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a matching asset category property could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetCategoryProperty findByC_K_First(long companyId, String key,
 		OrderByComparator orderByComparator)
 		throws NoSuchCategoryPropertyException, SystemException {
@@ -1053,6 +1338,20 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		}
 	}
 
+	/**
+	 * Finds the last asset category property in the ordered set where companyId = &#63; and key = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param key the key to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching asset category property
+	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a matching asset category property could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetCategoryProperty findByC_K_Last(long companyId, String key,
 		OrderByComparator orderByComparator)
 		throws NoSuchCategoryPropertyException, SystemException {
@@ -1081,6 +1380,21 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		}
 	}
 
+	/**
+	 * Finds the asset category properties before and after the current asset category property in the ordered set where companyId = &#63; and key = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param categoryPropertyId the primary key of the current asset category property
+	 * @param companyId the company id to search with
+	 * @param key the key to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next asset category property
+	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a asset category property with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetCategoryProperty[] findByC_K_PrevAndNext(
 		long categoryPropertyId, long companyId, String key,
 		OrderByComparator orderByComparator)
@@ -1232,6 +1546,15 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		}
 	}
 
+	/**
+	 * Finds the asset category property where categoryId = &#63; and key = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchCategoryPropertyException} if it could not be found.
+	 *
+	 * @param categoryId the category id to search with
+	 * @param key the key to search with
+	 * @return the matching asset category property
+	 * @throws com.liferay.portlet.asset.NoSuchCategoryPropertyException if a matching asset category property could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetCategoryProperty findByCA_K(long categoryId, String key)
 		throws NoSuchCategoryPropertyException, SystemException {
 		AssetCategoryProperty assetCategoryProperty = fetchByCA_K(categoryId,
@@ -1260,11 +1583,27 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		return assetCategoryProperty;
 	}
 
+	/**
+	 * Finds the asset category property where categoryId = &#63; and key = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param categoryId the category id to search with
+	 * @param key the key to search with
+	 * @return the matching asset category property, or <code>null</code> if a matching asset category property could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetCategoryProperty fetchByCA_K(long categoryId, String key)
 		throws SystemException {
 		return fetchByCA_K(categoryId, key, true);
 	}
 
+	/**
+	 * Finds the asset category property where categoryId = &#63; and key = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param categoryId the category id to search with
+	 * @param key the key to search with
+	 * @return the matching asset category property, or <code>null</code> if a matching asset category property could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public AssetCategoryProperty fetchByCA_K(long categoryId, String key,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { categoryId, key };
@@ -1361,15 +1700,46 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		}
 	}
 
+	/**
+	 * Finds all the asset category properties.
+	 *
+	 * @return the asset category properties
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetCategoryProperty> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the asset category properties.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of asset category properties to return
+	 * @param end the upper bound of the range of asset category properties to return (not inclusive)
+	 * @return the range of asset category properties
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetCategoryProperty> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the asset category properties.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of asset category properties to return
+	 * @param end the upper bound of the range of asset category properties to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of asset category properties
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<AssetCategoryProperty> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1436,6 +1806,12 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		return list;
 	}
 
+	/**
+	 * Removes all the asset category properties where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (AssetCategoryProperty assetCategoryProperty : findByCompanyId(
 				companyId)) {
@@ -1443,6 +1819,12 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		}
 	}
 
+	/**
+	 * Removes all the asset category properties where categoryId = &#63; from the database.
+	 *
+	 * @param categoryId the category id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCategoryId(long categoryId) throws SystemException {
 		for (AssetCategoryProperty assetCategoryProperty : findByCategoryId(
 				categoryId)) {
@@ -1450,6 +1832,13 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		}
 	}
 
+	/**
+	 * Removes all the asset category properties where companyId = &#63; and key = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param key the key to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_K(long companyId, String key)
 		throws SystemException {
 		for (AssetCategoryProperty assetCategoryProperty : findByC_K(
@@ -1458,6 +1847,13 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		}
 	}
 
+	/**
+	 * Removes the asset category property where categoryId = &#63; and key = &#63; from the database.
+	 *
+	 * @param categoryId the category id to search with
+	 * @param key the key to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCA_K(long categoryId, String key)
 		throws NoSuchCategoryPropertyException, SystemException {
 		AssetCategoryProperty assetCategoryProperty = findByCA_K(categoryId, key);
@@ -1465,12 +1861,24 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		remove(assetCategoryProperty);
 	}
 
+	/**
+	 * Removes all the asset category properties from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (AssetCategoryProperty assetCategoryProperty : findAll()) {
 			remove(assetCategoryProperty);
 		}
 	}
 
+	/**
+	 * Counts all the asset category properties where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the number of matching asset category properties
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId };
 
@@ -1517,6 +1925,13 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the asset category properties where categoryId = &#63;.
+	 *
+	 * @param categoryId the category id to search with
+	 * @return the number of matching asset category properties
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCategoryId(long categoryId) throws SystemException {
 		Object[] finderArgs = new Object[] { categoryId };
 
@@ -1563,6 +1978,14 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the asset category properties where companyId = &#63; and key = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param key the key to search with
+	 * @return the number of matching asset category properties
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_K(long companyId, String key) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, key };
 
@@ -1625,6 +2048,14 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the asset category properties where categoryId = &#63; and key = &#63;.
+	 *
+	 * @param categoryId the category id to search with
+	 * @param key the key to search with
+	 * @return the number of matching asset category properties
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCA_K(long categoryId, String key)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { categoryId, key };
@@ -1688,6 +2119,12 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the asset category properties.
+	 *
+	 * @return the number of asset category properties
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -1722,6 +2159,9 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the asset category property persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

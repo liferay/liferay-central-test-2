@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the Ticket table in the
- * database.
- * </p>
+ * The model interface for the Ticket service. Represents a row in the &quot;Ticket&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.TicketImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.TicketImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       TicketModel
- * @see       com.liferay.portal.model.impl.TicketImpl
- * @see       com.liferay.portal.model.impl.TicketModelImpl
+ * @author Brian Wing Shun Chan
+ * @see TicketModel
+ * @see com.liferay.portal.model.impl.TicketImpl
+ * @see com.liferay.portal.model.impl.TicketModelImpl
  * @generated
  */
 public interface Ticket extends TicketModel {

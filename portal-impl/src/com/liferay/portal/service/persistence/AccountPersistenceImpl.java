@@ -45,9 +45,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       AccountPersistence
- * @see       AccountUtil
+ * The persistence for the account service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see AccountPersistence
+ * @see AccountUtil
  * @generated
  */
 public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
@@ -62,11 +72,21 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 			AccountModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the account in the entity cache if it is enabled.
+	 *
+	 * @param account the account to cache
+	 */
 	public void cacheResult(Account account) {
 		EntityCacheUtil.putResult(AccountModelImpl.ENTITY_CACHE_ENABLED,
 			AccountImpl.class, account.getPrimaryKey(), account);
 	}
 
+	/**
+	 * Caches the accounts in the entity cache if it is enabled.
+	 *
+	 * @param accounts the accounts to cache
+	 */
 	public void cacheResult(List<Account> accounts) {
 		for (Account account : accounts) {
 			if (EntityCacheUtil.getResult(
@@ -77,6 +97,13 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 		}
 	}
 
+	/**
+	 * Clears the cache for all accounts.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(AccountImpl.class.getName());
 		EntityCacheUtil.clearCache(AccountImpl.class.getName());
@@ -84,11 +111,24 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the account.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(Account account) {
 		EntityCacheUtil.removeResult(AccountModelImpl.ENTITY_CACHE_ENABLED,
 			AccountImpl.class, account.getPrimaryKey());
 	}
 
+	/**
+	 * Creates a new account with the primary key.
+	 *
+	 * @param accountId the primary key for the new account
+	 * @return the new account
+	 */
 	public Account create(long accountId) {
 		Account account = new AccountImpl();
 
@@ -98,11 +138,27 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 		return account;
 	}
 
+	/**
+	 * Removes the account with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the account to remove
+	 * @return the account that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a account with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Account remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the account with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param accountId the primary key of the account to remove
+	 * @return the account that was removed
+	 * @throws com.liferay.portal.NoSuchAccountException if a account with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Account remove(long accountId)
 		throws NoSuchAccountException, SystemException {
 		Session session = null;
@@ -229,11 +285,27 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 		return accountImpl;
 	}
 
+	/**
+	 * Finds the account with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the account to find
+	 * @return the account
+	 * @throws com.liferay.portal.NoSuchModelException if a account with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Account findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the account with the primary key or throws a {@link com.liferay.portal.NoSuchAccountException} if it could not be found.
+	 *
+	 * @param accountId the primary key of the account to find
+	 * @return the account
+	 * @throws com.liferay.portal.NoSuchAccountException if a account with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Account findByPrimaryKey(long accountId)
 		throws NoSuchAccountException, SystemException {
 		Account account = fetchByPrimaryKey(accountId);
@@ -250,11 +322,25 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 		return account;
 	}
 
+	/**
+	 * Finds the account with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the account to find
+	 * @return the account, or <code>null</code> if a account with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Account fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the account with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param accountId the primary key of the account to find
+	 * @return the account, or <code>null</code> if a account with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Account fetchByPrimaryKey(long accountId) throws SystemException {
 		Account account = (Account)EntityCacheUtil.getResult(AccountModelImpl.ENTITY_CACHE_ENABLED,
 				AccountImpl.class, accountId, this);
@@ -283,14 +369,45 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 		return account;
 	}
 
+	/**
+	 * Finds all the accounts.
+	 *
+	 * @return the accounts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Account> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the accounts.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of accounts to return
+	 * @param end the upper bound of the range of accounts to return (not inclusive)
+	 * @return the range of accounts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Account> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the accounts.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of accounts to return
+	 * @param end the upper bound of the range of accounts to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of accounts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Account> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -357,12 +474,23 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 		return list;
 	}
 
+	/**
+	 * Removes all the accounts from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (Account account : findAll()) {
 			remove(account);
 		}
 	}
 
+	/**
+	 * Counts all the accounts.
+	 *
+	 * @return the number of accounts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -397,6 +525,9 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the account persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

@@ -25,9 +25,15 @@ import com.liferay.portlet.shopping.model.ShoppingOrder;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       ShoppingOrderPersistence
- * @see       ShoppingOrderPersistenceImpl
+ * The persistence utility for the shopping order service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see ShoppingOrderPersistence
+ * @see ShoppingOrderPersistenceImpl
  * @generated
  */
 public class ShoppingOrderUtil {
@@ -105,21 +111,45 @@ public class ShoppingOrderUtil {
 		return getPersistence().update(shoppingOrder, merge, serviceContext);
 	}
 
+	/**
+	* Caches the shopping order in the entity cache if it is enabled.
+	*
+	* @param shoppingOrder the shopping order to cache
+	*/
 	public static void cacheResult(
 		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder) {
 		getPersistence().cacheResult(shoppingOrder);
 	}
 
+	/**
+	* Caches the shopping orders in the entity cache if it is enabled.
+	*
+	* @param shoppingOrders the shopping orders to cache
+	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> shoppingOrders) {
 		getPersistence().cacheResult(shoppingOrders);
 	}
 
+	/**
+	* Creates a new shopping order with the primary key.
+	*
+	* @param orderId the primary key for the new shopping order
+	* @return the new shopping order
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingOrder create(
 		long orderId) {
 		return getPersistence().create(orderId);
 	}
 
+	/**
+	* Removes the shopping order with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param orderId the primary key of the shopping order to remove
+	* @return the shopping order that was removed
+	* @throws com.liferay.portlet.shopping.NoSuchOrderException if a shopping order with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingOrder remove(
 		long orderId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -134,6 +164,14 @@ public class ShoppingOrderUtil {
 		return getPersistence().updateImpl(shoppingOrder, merge);
 	}
 
+	/**
+	* Finds the shopping order with the primary key or throws a {@link com.liferay.portlet.shopping.NoSuchOrderException} if it could not be found.
+	*
+	* @param orderId the primary key of the shopping order to find
+	* @return the shopping order
+	* @throws com.liferay.portlet.shopping.NoSuchOrderException if a shopping order with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingOrder findByPrimaryKey(
 		long orderId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -141,24 +179,65 @@ public class ShoppingOrderUtil {
 		return getPersistence().findByPrimaryKey(orderId);
 	}
 
+	/**
+	* Finds the shopping order with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param orderId the primary key of the shopping order to find
+	* @return the shopping order, or <code>null</code> if a shopping order with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingOrder fetchByPrimaryKey(
 		long orderId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(orderId);
 	}
 
+	/**
+	* Finds all the shopping orders where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the matching shopping orders
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByGroupId(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByGroupId(groupId);
 	}
 
+	/**
+	* Finds a range of all the shopping orders where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of shopping orders to return
+	* @param end the upper bound of the range of shopping orders to return (not inclusive)
+	* @return the range of matching shopping orders
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByGroupId(groupId, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the shopping orders where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of shopping orders to return
+	* @param end the upper bound of the range of shopping orders to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching shopping orders
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -167,6 +246,19 @@ public class ShoppingOrderUtil {
 				   .findByGroupId(groupId, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first shopping order in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching shopping order
+	* @throws com.liferay.portlet.shopping.NoSuchOrderException if a matching shopping order could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingOrder findByGroupId_First(
 		long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -175,6 +267,19 @@ public class ShoppingOrderUtil {
 		return getPersistence().findByGroupId_First(groupId, orderByComparator);
 	}
 
+	/**
+	* Finds the last shopping order in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching shopping order
+	* @throws com.liferay.portlet.shopping.NoSuchOrderException if a matching shopping order could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingOrder findByGroupId_Last(
 		long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -183,6 +288,20 @@ public class ShoppingOrderUtil {
 		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
 	}
 
+	/**
+	* Finds the shopping orders before and after the current shopping order in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param orderId the primary key of the current shopping order
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next shopping order
+	* @throws com.liferay.portlet.shopping.NoSuchOrderException if a shopping order with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingOrder[] findByGroupId_PrevAndNext(
 		long orderId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -193,18 +312,52 @@ public class ShoppingOrderUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Filters by the user's permissions and finds all the shopping orders where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the matching shopping orders that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> filterFindByGroupId(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().filterFindByGroupId(groupId);
 	}
 
+	/**
+	* Filters by the user's permissions and finds a range of all the shopping orders where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of shopping orders to return
+	* @param end the upper bound of the range of shopping orders to return (not inclusive)
+	* @return the range of matching shopping orders that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> filterFindByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().filterFindByGroupId(groupId, start, end);
 	}
 
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the shopping orders where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of shopping orders to return
+	* @param end the upper bound of the range of shopping orders to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching shopping orders that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> filterFindByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -213,6 +366,14 @@ public class ShoppingOrderUtil {
 				   .filterFindByGroupId(groupId, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the shopping order where number = &#63; or throws a {@link com.liferay.portlet.shopping.NoSuchOrderException} if it could not be found.
+	*
+	* @param number the number to search with
+	* @return the matching shopping order
+	* @throws com.liferay.portlet.shopping.NoSuchOrderException if a matching shopping order could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingOrder findByNumber(
 		java.lang.String number)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -220,18 +381,40 @@ public class ShoppingOrderUtil {
 		return getPersistence().findByNumber(number);
 	}
 
+	/**
+	* Finds the shopping order where number = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param number the number to search with
+	* @return the matching shopping order, or <code>null</code> if a matching shopping order could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingOrder fetchByNumber(
 		java.lang.String number)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByNumber(number);
 	}
 
+	/**
+	* Finds the shopping order where number = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param number the number to search with
+	* @return the matching shopping order, or <code>null</code> if a matching shopping order could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingOrder fetchByNumber(
 		java.lang.String number, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByNumber(number, retrieveFromCache);
 	}
 
+	/**
+	* Finds the shopping order where ppTxnId = &#63; or throws a {@link com.liferay.portlet.shopping.NoSuchOrderException} if it could not be found.
+	*
+	* @param ppTxnId the pp txn id to search with
+	* @return the matching shopping order
+	* @throws com.liferay.portlet.shopping.NoSuchOrderException if a matching shopping order could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingOrder findByPPTxnId(
 		java.lang.String ppTxnId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -239,24 +422,62 @@ public class ShoppingOrderUtil {
 		return getPersistence().findByPPTxnId(ppTxnId);
 	}
 
+	/**
+	* Finds the shopping order where ppTxnId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param ppTxnId the pp txn id to search with
+	* @return the matching shopping order, or <code>null</code> if a matching shopping order could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingOrder fetchByPPTxnId(
 		java.lang.String ppTxnId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPPTxnId(ppTxnId);
 	}
 
+	/**
+	* Finds the shopping order where ppTxnId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param ppTxnId the pp txn id to search with
+	* @return the matching shopping order, or <code>null</code> if a matching shopping order could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingOrder fetchByPPTxnId(
 		java.lang.String ppTxnId, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPPTxnId(ppTxnId, retrieveFromCache);
 	}
 
+	/**
+	* Finds all the shopping orders where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @param ppPaymentStatus the pp payment status to search with
+	* @return the matching shopping orders
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByG_U_PPPS(
 		long groupId, long userId, java.lang.String ppPaymentStatus)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByG_U_PPPS(groupId, userId, ppPaymentStatus);
 	}
 
+	/**
+	* Finds a range of all the shopping orders where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @param ppPaymentStatus the pp payment status to search with
+	* @param start the lower bound of the range of shopping orders to return
+	* @param end the upper bound of the range of shopping orders to return (not inclusive)
+	* @return the range of matching shopping orders
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByG_U_PPPS(
 		long groupId, long userId, java.lang.String ppPaymentStatus, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
@@ -264,6 +485,22 @@ public class ShoppingOrderUtil {
 				   .findByG_U_PPPS(groupId, userId, ppPaymentStatus, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the shopping orders where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @param ppPaymentStatus the pp payment status to search with
+	* @param start the lower bound of the range of shopping orders to return
+	* @param end the upper bound of the range of shopping orders to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching shopping orders
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByG_U_PPPS(
 		long groupId, long userId, java.lang.String ppPaymentStatus, int start,
 		int end,
@@ -274,6 +511,21 @@ public class ShoppingOrderUtil {
 			end, orderByComparator);
 	}
 
+	/**
+	* Finds the first shopping order in the ordered set where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @param ppPaymentStatus the pp payment status to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching shopping order
+	* @throws com.liferay.portlet.shopping.NoSuchOrderException if a matching shopping order could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingOrder findByG_U_PPPS_First(
 		long groupId, long userId, java.lang.String ppPaymentStatus,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -284,6 +536,21 @@ public class ShoppingOrderUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds the last shopping order in the ordered set where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @param ppPaymentStatus the pp payment status to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching shopping order
+	* @throws com.liferay.portlet.shopping.NoSuchOrderException if a matching shopping order could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingOrder findByG_U_PPPS_Last(
 		long groupId, long userId, java.lang.String ppPaymentStatus,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -294,6 +561,22 @@ public class ShoppingOrderUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds the shopping orders before and after the current shopping order in the ordered set where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param orderId the primary key of the current shopping order
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @param ppPaymentStatus the pp payment status to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next shopping order
+	* @throws com.liferay.portlet.shopping.NoSuchOrderException if a shopping order with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingOrder[] findByG_U_PPPS_PrevAndNext(
 		long orderId, long groupId, long userId,
 		java.lang.String ppPaymentStatus,
@@ -305,6 +588,15 @@ public class ShoppingOrderUtil {
 			ppPaymentStatus, orderByComparator);
 	}
 
+	/**
+	* Filters by the user's permissions and finds all the shopping orders where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @param ppPaymentStatus the pp payment status to search with
+	* @return the matching shopping orders that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> filterFindByG_U_PPPS(
 		long groupId, long userId, java.lang.String ppPaymentStatus)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -312,6 +604,21 @@ public class ShoppingOrderUtil {
 				   .filterFindByG_U_PPPS(groupId, userId, ppPaymentStatus);
 	}
 
+	/**
+	* Filters by the user's permissions and finds a range of all the shopping orders where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @param ppPaymentStatus the pp payment status to search with
+	* @param start the lower bound of the range of shopping orders to return
+	* @param end the upper bound of the range of shopping orders to return (not inclusive)
+	* @return the range of matching shopping orders that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> filterFindByG_U_PPPS(
 		long groupId, long userId, java.lang.String ppPaymentStatus, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
@@ -320,6 +627,22 @@ public class ShoppingOrderUtil {
 			start, end);
 	}
 
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the shopping orders where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @param ppPaymentStatus the pp payment status to search with
+	* @param start the lower bound of the range of shopping orders to return
+	* @param end the upper bound of the range of shopping orders to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching shopping orders that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> filterFindByG_U_PPPS(
 		long groupId, long userId, java.lang.String ppPaymentStatus, int start,
 		int end,
@@ -330,17 +653,48 @@ public class ShoppingOrderUtil {
 			start, end, orderByComparator);
 	}
 
+	/**
+	* Finds all the shopping orders.
+	*
+	* @return the shopping orders
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
+	/**
+	* Finds a range of all the shopping orders.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of shopping orders to return
+	* @param end the upper bound of the range of shopping orders to return (not inclusive)
+	* @return the range of shopping orders
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the shopping orders.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of shopping orders to return
+	* @param end the upper bound of the range of shopping orders to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of shopping orders
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -348,60 +702,137 @@ public class ShoppingOrderUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
+	/**
+	* Removes all the shopping orders where groupId = &#63; from the database.
+	*
+	* @param groupId the group id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByGroupId(groupId);
 	}
 
+	/**
+	* Removes the shopping order where number = &#63; from the database.
+	*
+	* @param number the number to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByNumber(java.lang.String number)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderException {
 		getPersistence().removeByNumber(number);
 	}
 
+	/**
+	* Removes the shopping order where ppTxnId = &#63; from the database.
+	*
+	* @param ppTxnId the pp txn id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByPPTxnId(java.lang.String ppTxnId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.shopping.NoSuchOrderException {
 		getPersistence().removeByPPTxnId(ppTxnId);
 	}
 
+	/**
+	* Removes all the shopping orders where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63; from the database.
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @param ppPaymentStatus the pp payment status to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByG_U_PPPS(long groupId, long userId,
 		java.lang.String ppPaymentStatus)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByG_U_PPPS(groupId, userId, ppPaymentStatus);
 	}
 
+	/**
+	* Removes all the shopping orders from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
+	/**
+	* Counts all the shopping orders where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the number of matching shopping orders
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByGroupId(groupId);
 	}
 
+	/**
+	* Filters by the user's permissions and counts all the shopping orders where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the number of matching shopping orders that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().filterCountByGroupId(groupId);
 	}
 
+	/**
+	* Counts all the shopping orders where number = &#63;.
+	*
+	* @param number the number to search with
+	* @return the number of matching shopping orders
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByNumber(java.lang.String number)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByNumber(number);
 	}
 
+	/**
+	* Counts all the shopping orders where ppTxnId = &#63;.
+	*
+	* @param ppTxnId the pp txn id to search with
+	* @return the number of matching shopping orders
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByPPTxnId(java.lang.String ppTxnId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByPPTxnId(ppTxnId);
 	}
 
+	/**
+	* Counts all the shopping orders where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @param ppPaymentStatus the pp payment status to search with
+	* @return the number of matching shopping orders
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByG_U_PPPS(long groupId, long userId,
 		java.lang.String ppPaymentStatus)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_U_PPPS(groupId, userId, ppPaymentStatus);
 	}
 
+	/**
+	* Filters by the user's permissions and counts all the shopping orders where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param userId the user id to search with
+	* @param ppPaymentStatus the pp payment status to search with
+	* @return the number of matching shopping orders that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int filterCountByG_U_PPPS(long groupId, long userId,
 		java.lang.String ppPaymentStatus)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -409,6 +840,12 @@ public class ShoppingOrderUtil {
 				   .filterCountByG_U_PPPS(groupId, userId, ppPaymentStatus);
 	}
 
+	/**
+	* Counts all the shopping orders.
+	*
+	* @return the number of shopping orders
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();

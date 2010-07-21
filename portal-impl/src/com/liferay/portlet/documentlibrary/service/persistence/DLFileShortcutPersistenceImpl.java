@@ -57,9 +57,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       DLFileShortcutPersistence
- * @see       DLFileShortcutUtil
+ * The persistence for the d l file shortcut service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see DLFileShortcutPersistence
+ * @see DLFileShortcutUtil
  * @generated
  */
 public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileShortcut>
@@ -159,6 +169,11 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			DLFileShortcutModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
+	/**
+	 * Caches the d l file shortcut in the entity cache if it is enabled.
+	 *
+	 * @param dlFileShortcut the d l file shortcut to cache
+	 */
 	public void cacheResult(DLFileShortcut dlFileShortcut) {
 		EntityCacheUtil.putResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileShortcutImpl.class, dlFileShortcut.getPrimaryKey(),
@@ -170,6 +185,11 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			}, dlFileShortcut);
 	}
 
+	/**
+	 * Caches the d l file shortcuts in the entity cache if it is enabled.
+	 *
+	 * @param dlFileShortcuts the d l file shortcuts to cache
+	 */
 	public void cacheResult(List<DLFileShortcut> dlFileShortcuts) {
 		for (DLFileShortcut dlFileShortcut : dlFileShortcuts) {
 			if (EntityCacheUtil.getResult(
@@ -181,6 +201,13 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Clears the cache for all d l file shortcuts.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(DLFileShortcutImpl.class.getName());
 		EntityCacheUtil.clearCache(DLFileShortcutImpl.class.getName());
@@ -188,6 +215,13 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the d l file shortcut.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(DLFileShortcut dlFileShortcut) {
 		EntityCacheUtil.removeResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileShortcutImpl.class, dlFileShortcut.getPrimaryKey());
@@ -198,6 +232,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			});
 	}
 
+	/**
+	 * Creates a new d l file shortcut with the primary key.
+	 *
+	 * @param fileShortcutId the primary key for the new d l file shortcut
+	 * @return the new d l file shortcut
+	 */
 	public DLFileShortcut create(long fileShortcutId) {
 		DLFileShortcut dlFileShortcut = new DLFileShortcutImpl();
 
@@ -211,11 +251,27 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		return dlFileShortcut;
 	}
 
+	/**
+	 * Removes the d l file shortcut with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the d l file shortcut to remove
+	 * @return the d l file shortcut that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a d l file shortcut with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the d l file shortcut with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param fileShortcutId the primary key of the d l file shortcut to remove
+	 * @return the d l file shortcut that was removed
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a d l file shortcut with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut remove(long fileShortcutId)
 		throws NoSuchFileShortcutException, SystemException {
 		Session session = null;
@@ -385,11 +441,27 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		return dlFileShortcutImpl;
 	}
 
+	/**
+	 * Finds the d l file shortcut with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the d l file shortcut to find
+	 * @return the d l file shortcut
+	 * @throws com.liferay.portal.NoSuchModelException if a d l file shortcut with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the d l file shortcut with the primary key or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileShortcutException} if it could not be found.
+	 *
+	 * @param fileShortcutId the primary key of the d l file shortcut to find
+	 * @return the d l file shortcut
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a d l file shortcut with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut findByPrimaryKey(long fileShortcutId)
 		throws NoSuchFileShortcutException, SystemException {
 		DLFileShortcut dlFileShortcut = fetchByPrimaryKey(fileShortcutId);
@@ -406,11 +478,25 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		return dlFileShortcut;
 	}
 
+	/**
+	 * Finds the d l file shortcut with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the d l file shortcut to find
+	 * @return the d l file shortcut, or <code>null</code> if a d l file shortcut with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the d l file shortcut with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param fileShortcutId the primary key of the d l file shortcut to find
+	 * @return the d l file shortcut, or <code>null</code> if a d l file shortcut with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut fetchByPrimaryKey(long fileShortcutId)
 		throws SystemException {
 		DLFileShortcut dlFileShortcut = (DLFileShortcut)EntityCacheUtil.getResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
@@ -440,16 +526,50 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		return dlFileShortcut;
 	}
 
+	/**
+	 * Finds all the d l file shortcuts where uuid = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @return the matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> findByUuid(String uuid)
 		throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the d l file shortcuts where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param start the lower bound of the range of d l file shortcuts to return
+	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	 * @return the range of matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the d l file shortcuts where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param start the lower bound of the range of d l file shortcuts to return
+	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -530,6 +650,19 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		return list;
 	}
 
+	/**
+	 * Finds the first d l file shortcut in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching d l file shortcut
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -552,6 +685,19 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Finds the last d l file shortcut in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching d l file shortcut
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -577,6 +723,20 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Finds the d l file shortcuts before and after the current d l file shortcut in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param fileShortcutId the primary key of the current d l file shortcut
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next d l file shortcut
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a d l file shortcut with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut[] findByUuid_PrevAndNext(long fileShortcutId,
 		String uuid, OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -719,6 +879,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Finds the d l file shortcut where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileShortcutException} if it could not be found.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching d l file shortcut
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut findByUUID_G(String uuid, long groupId)
 		throws NoSuchFileShortcutException, SystemException {
 		DLFileShortcut dlFileShortcut = fetchByUUID_G(uuid, groupId);
@@ -746,11 +915,27 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		return dlFileShortcut;
 	}
 
+	/**
+	 * Finds the d l file shortcut where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching d l file shortcut, or <code>null</code> if a matching d l file shortcut could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
 	}
 
+	/**
+	 * Finds the d l file shortcut where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching d l file shortcut, or <code>null</code> if a matching d l file shortcut could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -845,17 +1030,54 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Finds all the d l file shortcuts where groupId = &#63; and folderId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @return the matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> findByG_F(long groupId, long folderId)
 		throws SystemException {
 		return findByG_F(groupId, folderId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the d l file shortcuts where groupId = &#63; and folderId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param start the lower bound of the range of d l file shortcuts to return
+	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	 * @return the range of matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> findByG_F(long groupId, long folderId,
 		int start, int end) throws SystemException {
 		return findByG_F(groupId, folderId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the d l file shortcuts where groupId = &#63; and folderId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param start the lower bound of the range of d l file shortcuts to return
+	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> findByG_F(long groupId, long folderId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -929,6 +1151,20 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		return list;
 	}
 
+	/**
+	 * Finds the first d l file shortcut in the ordered set where groupId = &#63; and folderId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching d l file shortcut
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut findByG_F_First(long groupId, long folderId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -955,6 +1191,20 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Finds the last d l file shortcut in the ordered set where groupId = &#63; and folderId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching d l file shortcut
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut findByG_F_Last(long groupId, long folderId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -983,6 +1233,21 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Finds the d l file shortcuts before and after the current d l file shortcut in the ordered set where groupId = &#63; and folderId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param fileShortcutId the primary key of the current d l file shortcut
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next d l file shortcut
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a d l file shortcut with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut[] findByG_F_PrevAndNext(long fileShortcutId,
 		long groupId, long folderId, OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -1117,17 +1382,54 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the d l file shortcuts where groupId = &#63; and folderId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @return the matching d l file shortcuts that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> filterFindByG_F(long groupId, long folderId)
 		throws SystemException {
 		return filterFindByG_F(groupId, folderId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the d l file shortcuts where groupId = &#63; and folderId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param start the lower bound of the range of d l file shortcuts to return
+	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	 * @return the range of matching d l file shortcuts that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> filterFindByG_F(long groupId, long folderId,
 		int start, int end) throws SystemException {
 		return filterFindByG_F(groupId, folderId, start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the d l file shortcuts where groupId = &#63; and folderId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param start the lower bound of the range of d l file shortcuts to return
+	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching d l file shortcuts that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> filterFindByG_F(long groupId, long folderId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1186,17 +1488,57 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Finds all the d l file shortcuts where groupId = &#63; and folderId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param status the status to search with
+	 * @return the matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> findByG_F_S(long groupId, long folderId,
 		int status) throws SystemException {
 		return findByG_F_S(groupId, folderId, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the d l file shortcuts where groupId = &#63; and folderId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of d l file shortcuts to return
+	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	 * @return the range of matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> findByG_F_S(long groupId, long folderId,
 		int status, int start, int end) throws SystemException {
 		return findByG_F_S(groupId, folderId, status, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the d l file shortcuts where groupId = &#63; and folderId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of d l file shortcuts to return
+	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> findByG_F_S(long groupId, long folderId,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1274,6 +1616,21 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		return list;
 	}
 
+	/**
+	 * Finds the first d l file shortcut in the ordered set where groupId = &#63; and folderId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching d l file shortcut
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut findByG_F_S_First(long groupId, long folderId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -1303,6 +1660,21 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Finds the last d l file shortcut in the ordered set where groupId = &#63; and folderId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching d l file shortcut
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut findByG_F_S_Last(long groupId, long folderId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -1334,6 +1706,22 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Finds the d l file shortcuts before and after the current d l file shortcut in the ordered set where groupId = &#63; and folderId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param fileShortcutId the primary key of the current d l file shortcut
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next d l file shortcut
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a d l file shortcut with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut[] findByG_F_S_PrevAndNext(long fileShortcutId,
 		long groupId, long folderId, int status,
 		OrderByComparator orderByComparator)
@@ -1473,17 +1861,57 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the d l file shortcuts where groupId = &#63; and folderId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param status the status to search with
+	 * @return the matching d l file shortcuts that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> filterFindByG_F_S(long groupId, long folderId,
 		int status) throws SystemException {
 		return filterFindByG_F_S(groupId, folderId, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the d l file shortcuts where groupId = &#63; and folderId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of d l file shortcuts to return
+	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	 * @return the range of matching d l file shortcuts that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> filterFindByG_F_S(long groupId, long folderId,
 		int status, int start, int end) throws SystemException {
 		return filterFindByG_F_S(groupId, folderId, status, start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the d l file shortcuts where groupId = &#63; and folderId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of d l file shortcuts to return
+	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching d l file shortcuts that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> filterFindByG_F_S(long groupId, long folderId,
 		int status, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1547,17 +1975,57 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Finds all the d l file shortcuts where groupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @return the matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> findByG_TF_TN(long groupId, long toFolderId,
 		String toName) throws SystemException {
 		return findByG_TF_TN(groupId, toFolderId, toName, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the d l file shortcuts where groupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @param start the lower bound of the range of d l file shortcuts to return
+	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	 * @return the range of matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> findByG_TF_TN(long groupId, long toFolderId,
 		String toName, int start, int end) throws SystemException {
 		return findByG_TF_TN(groupId, toFolderId, toName, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the d l file shortcuts where groupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @param start the lower bound of the range of d l file shortcuts to return
+	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> findByG_TF_TN(long groupId, long toFolderId,
 		String toName, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1647,6 +2115,21 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		return list;
 	}
 
+	/**
+	 * Finds the first d l file shortcut in the ordered set where groupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching d l file shortcut
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut findByG_TF_TN_First(long groupId, long toFolderId,
 		String toName, OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -1676,6 +2159,21 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Finds the last d l file shortcut in the ordered set where groupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching d l file shortcut
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut findByG_TF_TN_Last(long groupId, long toFolderId,
 		String toName, OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -1707,6 +2205,22 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Finds the d l file shortcuts before and after the current d l file shortcut in the ordered set where groupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param fileShortcutId the primary key of the current d l file shortcut
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next d l file shortcut
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a d l file shortcut with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut[] findByG_TF_TN_PrevAndNext(long fileShortcutId,
 		long groupId, long toFolderId, String toName,
 		OrderByComparator orderByComparator)
@@ -1858,18 +2372,58 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the d l file shortcuts where groupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @return the matching d l file shortcuts that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> filterFindByG_TF_TN(long groupId,
 		long toFolderId, String toName) throws SystemException {
 		return filterFindByG_TF_TN(groupId, toFolderId, toName,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the d l file shortcuts where groupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @param start the lower bound of the range of d l file shortcuts to return
+	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	 * @return the range of matching d l file shortcuts that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> filterFindByG_TF_TN(long groupId,
 		long toFolderId, String toName, int start, int end)
 		throws SystemException {
 		return filterFindByG_TF_TN(groupId, toFolderId, toName, start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the d l file shortcuts where groupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @param start the lower bound of the range of d l file shortcuts to return
+	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching d l file shortcuts that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> filterFindByG_TF_TN(long groupId,
 		long toFolderId, String toName, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -1945,12 +2499,38 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Finds all the d l file shortcuts where groupId = &#63; and toFolderId = &#63; and toName = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @param status the status to search with
+	 * @return the matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> findByG_TF_TN_S(long groupId, long toFolderId,
 		String toName, int status) throws SystemException {
 		return findByG_TF_TN_S(groupId, toFolderId, toName, status,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the d l file shortcuts where groupId = &#63; and toFolderId = &#63; and toName = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of d l file shortcuts to return
+	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	 * @return the range of matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> findByG_TF_TN_S(long groupId, long toFolderId,
 		String toName, int status, int start, int end)
 		throws SystemException {
@@ -1958,6 +2538,23 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			null);
 	}
 
+	/**
+	 * Finds an ordered range of all the d l file shortcuts where groupId = &#63; and toFolderId = &#63; and toName = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of d l file shortcuts to return
+	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> findByG_TF_TN_S(long groupId, long toFolderId,
 		String toName, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -2051,6 +2648,22 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		return list;
 	}
 
+	/**
+	 * Finds the first d l file shortcut in the ordered set where groupId = &#63; and toFolderId = &#63; and toName = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching d l file shortcut
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut findByG_TF_TN_S_First(long groupId, long toFolderId,
 		String toName, int status, OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -2083,6 +2696,22 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Finds the last d l file shortcut in the ordered set where groupId = &#63; and toFolderId = &#63; and toName = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching d l file shortcut
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut findByG_TF_TN_S_Last(long groupId, long toFolderId,
 		String toName, int status, OrderByComparator orderByComparator)
 		throws NoSuchFileShortcutException, SystemException {
@@ -2117,6 +2746,23 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Finds the d l file shortcuts before and after the current d l file shortcut in the ordered set where groupId = &#63; and toFolderId = &#63; and toName = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param fileShortcutId the primary key of the current d l file shortcut
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next d l file shortcut
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a d l file shortcut with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileShortcut[] findByG_TF_TN_S_PrevAndNext(long fileShortcutId,
 		long groupId, long toFolderId, String toName, int status,
 		OrderByComparator orderByComparator)
@@ -2274,12 +2920,38 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the d l file shortcuts where groupId = &#63; and toFolderId = &#63; and toName = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @param status the status to search with
+	 * @return the matching d l file shortcuts that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> filterFindByG_TF_TN_S(long groupId,
 		long toFolderId, String toName, int status) throws SystemException {
 		return filterFindByG_TF_TN_S(groupId, toFolderId, toName, status,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the d l file shortcuts where groupId = &#63; and toFolderId = &#63; and toName = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of d l file shortcuts to return
+	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	 * @return the range of matching d l file shortcuts that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> filterFindByG_TF_TN_S(long groupId,
 		long toFolderId, String toName, int status, int start, int end)
 		throws SystemException {
@@ -2287,6 +2959,23 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the d l file shortcuts where groupId = &#63; and toFolderId = &#63; and toName = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of d l file shortcuts to return
+	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching d l file shortcuts that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> filterFindByG_TF_TN_S(long groupId,
 		long toFolderId, String toName, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -2366,15 +3055,46 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Finds all the d l file shortcuts.
+	 *
+	 * @return the d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the d l file shortcuts.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of d l file shortcuts to return
+	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	 * @return the range of d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the d l file shortcuts.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of d l file shortcuts to return
+	 * @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileShortcut> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2441,12 +3161,25 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		return list;
 	}
 
+	/**
+	 * Removes all the d l file shortcuts where uuid = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (DLFileShortcut dlFileShortcut : findByUuid(uuid)) {
 			remove(dlFileShortcut);
 		}
 	}
 
+	/**
+	 * Removes the d l file shortcut where uuid = &#63; and groupId = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUUID_G(String uuid, long groupId)
 		throws NoSuchFileShortcutException, SystemException {
 		DLFileShortcut dlFileShortcut = findByUUID_G(uuid, groupId);
@@ -2454,6 +3187,13 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		remove(dlFileShortcut);
 	}
 
+	/**
+	 * Removes all the d l file shortcuts where groupId = &#63; and folderId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_F(long groupId, long folderId)
 		throws SystemException {
 		for (DLFileShortcut dlFileShortcut : findByG_F(groupId, folderId)) {
@@ -2461,6 +3201,14 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Removes all the d l file shortcuts where groupId = &#63; and folderId = &#63; and status = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_F_S(long groupId, long folderId, int status)
 		throws SystemException {
 		for (DLFileShortcut dlFileShortcut : findByG_F_S(groupId, folderId,
@@ -2469,6 +3217,14 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Removes all the d l file shortcuts where groupId = &#63; and toFolderId = &#63; and toName = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_TF_TN(long groupId, long toFolderId, String toName)
 		throws SystemException {
 		for (DLFileShortcut dlFileShortcut : findByG_TF_TN(groupId, toFolderId,
@@ -2477,6 +3233,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Removes all the d l file shortcuts where groupId = &#63; and toFolderId = &#63; and toName = &#63; and status = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_TF_TN_S(long groupId, long toFolderId, String toName,
 		int status) throws SystemException {
 		for (DLFileShortcut dlFileShortcut : findByG_TF_TN_S(groupId,
@@ -2485,12 +3250,24 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Removes all the d l file shortcuts from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (DLFileShortcut dlFileShortcut : findAll()) {
 			remove(dlFileShortcut);
 		}
 	}
 
+	/**
+	 * Counts all the d l file shortcuts where uuid = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @return the number of matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUuid(String uuid) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid };
 
@@ -2549,6 +3326,14 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the d l file shortcuts where uuid = &#63; and groupId = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the number of matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -2612,6 +3397,14 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the d l file shortcuts where groupId = &#63; and folderId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @return the number of matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_F(long groupId, long folderId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, folderId };
@@ -2663,6 +3456,14 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the d l file shortcuts where groupId = &#63; and folderId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @return the number of matching d l file shortcuts that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByG_F(long groupId, long folderId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -2709,6 +3510,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Counts all the d l file shortcuts where groupId = &#63; and folderId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param status the status to search with
+	 * @return the number of matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_F_S(long groupId, long folderId, int status)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, folderId, status };
@@ -2764,6 +3574,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the d l file shortcuts where groupId = &#63; and folderId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param status the status to search with
+	 * @return the number of matching d l file shortcuts that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByG_F_S(long groupId, long folderId, int status)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -2814,6 +3633,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Counts all the d l file shortcuts where groupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @return the number of matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_TF_TN(long groupId, long toFolderId, String toName)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, toFolderId, toName };
@@ -2881,6 +3709,15 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the d l file shortcuts where groupId = &#63; and toFolderId = &#63; and toName = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @return the number of matching d l file shortcuts that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByG_TF_TN(long groupId, long toFolderId, String toName)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -2943,6 +3780,16 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Counts all the d l file shortcuts where groupId = &#63; and toFolderId = &#63; and toName = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @param status the status to search with
+	 * @return the number of matching d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_TF_TN_S(long groupId, long toFolderId, String toName,
 		int status) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, toFolderId, toName, status };
@@ -3014,6 +3861,16 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the d l file shortcuts where groupId = &#63; and toFolderId = &#63; and toName = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param toFolderId the to folder id to search with
+	 * @param toName the to name to search with
+	 * @param status the status to search with
+	 * @return the number of matching d l file shortcuts that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByG_TF_TN_S(long groupId, long toFolderId,
 		String toName, int status) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -3080,6 +3937,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Counts all the d l file shortcuts.
+	 *
+	 * @return the number of d l file shortcuts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -3114,6 +3977,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the d l file shortcut persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

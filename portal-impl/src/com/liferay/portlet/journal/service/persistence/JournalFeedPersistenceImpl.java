@@ -56,9 +56,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       JournalFeedPersistence
- * @see       JournalFeedUtil
+ * The persistence for the journal feed service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see JournalFeedPersistence
+ * @see JournalFeedUtil
  * @generated
  */
 public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
@@ -113,6 +123,11 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 			JournalFeedModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the journal feed in the entity cache if it is enabled.
+	 *
+	 * @param journalFeed the journal feed to cache
+	 */
 	public void cacheResult(JournalFeed journalFeed) {
 		EntityCacheUtil.putResult(JournalFeedModelImpl.ENTITY_CACHE_ENABLED,
 			JournalFeedImpl.class, journalFeed.getPrimaryKey(), journalFeed);
@@ -130,6 +145,11 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 			}, journalFeed);
 	}
 
+	/**
+	 * Caches the journal feeds in the entity cache if it is enabled.
+	 *
+	 * @param journalFeeds the journal feeds to cache
+	 */
 	public void cacheResult(List<JournalFeed> journalFeeds) {
 		for (JournalFeed journalFeed : journalFeeds) {
 			if (EntityCacheUtil.getResult(
@@ -140,6 +160,13 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		}
 	}
 
+	/**
+	 * Clears the cache for all journal feeds.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(JournalFeedImpl.class.getName());
 		EntityCacheUtil.clearCache(JournalFeedImpl.class.getName());
@@ -147,6 +174,13 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the journal feed.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(JournalFeed journalFeed) {
 		EntityCacheUtil.removeResult(JournalFeedModelImpl.ENTITY_CACHE_ENABLED,
 			JournalFeedImpl.class, journalFeed.getPrimaryKey());
@@ -164,6 +198,12 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 			});
 	}
 
+	/**
+	 * Creates a new journal feed with the primary key.
+	 *
+	 * @param id the primary key for the new journal feed
+	 * @return the new journal feed
+	 */
 	public JournalFeed create(long id) {
 		JournalFeed journalFeed = new JournalFeedImpl();
 
@@ -177,11 +217,27 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		return journalFeed;
 	}
 
+	/**
+	 * Removes the journal feed with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the journal feed to remove
+	 * @return the journal feed that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a journal feed with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalFeed remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the journal feed with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param id the primary key of the journal feed to remove
+	 * @return the journal feed that was removed
+	 * @throws com.liferay.portlet.journal.NoSuchFeedException if a journal feed with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalFeed remove(long id)
 		throws NoSuchFeedException, SystemException {
 		Session session = null;
@@ -387,11 +443,27 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		return journalFeedImpl;
 	}
 
+	/**
+	 * Finds the journal feed with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the journal feed to find
+	 * @return the journal feed
+	 * @throws com.liferay.portal.NoSuchModelException if a journal feed with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalFeed findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the journal feed with the primary key or throws a {@link com.liferay.portlet.journal.NoSuchFeedException} if it could not be found.
+	 *
+	 * @param id the primary key of the journal feed to find
+	 * @return the journal feed
+	 * @throws com.liferay.portlet.journal.NoSuchFeedException if a journal feed with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalFeed findByPrimaryKey(long id)
 		throws NoSuchFeedException, SystemException {
 		JournalFeed journalFeed = fetchByPrimaryKey(id);
@@ -408,11 +480,25 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		return journalFeed;
 	}
 
+	/**
+	 * Finds the journal feed with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the journal feed to find
+	 * @return the journal feed, or <code>null</code> if a journal feed with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalFeed fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the journal feed with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param id the primary key of the journal feed to find
+	 * @return the journal feed, or <code>null</code> if a journal feed with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalFeed fetchByPrimaryKey(long id) throws SystemException {
 		JournalFeed journalFeed = (JournalFeed)EntityCacheUtil.getResult(JournalFeedModelImpl.ENTITY_CACHE_ENABLED,
 				JournalFeedImpl.class, id, this);
@@ -441,15 +527,49 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		return journalFeed;
 	}
 
+	/**
+	 * Finds all the journal feeds where uuid = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @return the matching journal feeds
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalFeed> findByUuid(String uuid) throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the journal feeds where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param start the lower bound of the range of journal feeds to return
+	 * @param end the upper bound of the range of journal feeds to return (not inclusive)
+	 * @return the range of matching journal feeds
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalFeed> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal feeds where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param start the lower bound of the range of journal feeds to return
+	 * @param end the upper bound of the range of journal feeds to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal feeds
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalFeed> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -534,6 +654,19 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		return list;
 	}
 
+	/**
+	 * Finds the first journal feed in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching journal feed
+	 * @throws com.liferay.portlet.journal.NoSuchFeedException if a matching journal feed could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalFeed findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchFeedException, SystemException {
@@ -556,6 +689,19 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		}
 	}
 
+	/**
+	 * Finds the last journal feed in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching journal feed
+	 * @throws com.liferay.portlet.journal.NoSuchFeedException if a matching journal feed could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalFeed findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchFeedException, SystemException {
@@ -581,6 +727,20 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		}
 	}
 
+	/**
+	 * Finds the journal feeds before and after the current journal feed in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current journal feed
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next journal feed
+	 * @throws com.liferay.portlet.journal.NoSuchFeedException if a journal feed with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalFeed[] findByUuid_PrevAndNext(long id, String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchFeedException, SystemException {
@@ -727,6 +887,15 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		}
 	}
 
+	/**
+	 * Finds the journal feed where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchFeedException} if it could not be found.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching journal feed
+	 * @throws com.liferay.portlet.journal.NoSuchFeedException if a matching journal feed could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalFeed findByUUID_G(String uuid, long groupId)
 		throws NoSuchFeedException, SystemException {
 		JournalFeed journalFeed = fetchByUUID_G(uuid, groupId);
@@ -754,11 +923,27 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		return journalFeed;
 	}
 
+	/**
+	 * Finds the journal feed where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching journal feed, or <code>null</code> if a matching journal feed could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalFeed fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
 	}
 
+	/**
+	 * Finds the journal feed where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching journal feed, or <code>null</code> if a matching journal feed could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalFeed fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -855,16 +1040,50 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		}
 	}
 
+	/**
+	 * Finds all the journal feeds where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the matching journal feeds
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalFeed> findByGroupId(long groupId)
 		throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the journal feeds where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of journal feeds to return
+	 * @param end the upper bound of the range of journal feeds to return (not inclusive)
+	 * @return the range of matching journal feeds
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalFeed> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal feeds where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of journal feeds to return
+	 * @param end the upper bound of the range of journal feeds to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal feeds
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalFeed> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -937,6 +1156,19 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		return list;
 	}
 
+	/**
+	 * Finds the first journal feed in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching journal feed
+	 * @throws com.liferay.portlet.journal.NoSuchFeedException if a matching journal feed could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalFeed findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFeedException, SystemException {
@@ -959,6 +1191,19 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		}
 	}
 
+	/**
+	 * Finds the last journal feed in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching journal feed
+	 * @throws com.liferay.portlet.journal.NoSuchFeedException if a matching journal feed could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalFeed findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFeedException, SystemException {
@@ -984,6 +1229,20 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		}
 	}
 
+	/**
+	 * Finds the journal feeds before and after the current journal feed in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current journal feed
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next journal feed
+	 * @throws com.liferay.portlet.journal.NoSuchFeedException if a journal feed with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalFeed[] findByGroupId_PrevAndNext(long id, long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchFeedException, SystemException {
@@ -1118,17 +1377,51 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		}
 	}
 
+	/**
+	 * Filters by the user's permissions and finds all the journal feeds where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the matching journal feeds that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalFeed> filterFindByGroupId(long groupId)
 		throws SystemException {
 		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds a range of all the journal feeds where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of journal feeds to return
+	 * @param end the upper bound of the range of journal feeds to return (not inclusive)
+	 * @return the range of matching journal feeds that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalFeed> filterFindByGroupId(long groupId, int start,
 		int end) throws SystemException {
 		return filterFindByGroupId(groupId, start, end, null);
 	}
 
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the journal feeds where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of journal feeds to return
+	 * @param end the upper bound of the range of journal feeds to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching journal feeds that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalFeed> filterFindByGroupId(long groupId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -1185,6 +1478,15 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		}
 	}
 
+	/**
+	 * Finds the journal feed where groupId = &#63; and feedId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchFeedException} if it could not be found.
+	 *
+	 * @param groupId the group id to search with
+	 * @param feedId the feed id to search with
+	 * @return the matching journal feed
+	 * @throws com.liferay.portlet.journal.NoSuchFeedException if a matching journal feed could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalFeed findByG_F(long groupId, String feedId)
 		throws NoSuchFeedException, SystemException {
 		JournalFeed journalFeed = fetchByG_F(groupId, feedId);
@@ -1212,11 +1514,27 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		return journalFeed;
 	}
 
+	/**
+	 * Finds the journal feed where groupId = &#63; and feedId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param feedId the feed id to search with
+	 * @return the matching journal feed, or <code>null</code> if a matching journal feed could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalFeed fetchByG_F(long groupId, String feedId)
 		throws SystemException {
 		return fetchByG_F(groupId, feedId, true);
 	}
 
+	/**
+	 * Finds the journal feed where groupId = &#63; and feedId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param feedId the feed id to search with
+	 * @return the matching journal feed, or <code>null</code> if a matching journal feed could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public JournalFeed fetchByG_F(long groupId, String feedId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, feedId };
@@ -1313,15 +1631,46 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		}
 	}
 
+	/**
+	 * Finds all the journal feeds.
+	 *
+	 * @return the journal feeds
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalFeed> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the journal feeds.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of journal feeds to return
+	 * @param end the upper bound of the range of journal feeds to return (not inclusive)
+	 * @return the range of journal feeds
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalFeed> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the journal feeds.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of journal feeds to return
+	 * @param end the upper bound of the range of journal feeds to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of journal feeds
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<JournalFeed> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1388,12 +1737,25 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		return list;
 	}
 
+	/**
+	 * Removes all the journal feeds where uuid = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (JournalFeed journalFeed : findByUuid(uuid)) {
 			remove(journalFeed);
 		}
 	}
 
+	/**
+	 * Removes the journal feed where uuid = &#63; and groupId = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUUID_G(String uuid, long groupId)
 		throws NoSuchFeedException, SystemException {
 		JournalFeed journalFeed = findByUUID_G(uuid, groupId);
@@ -1401,12 +1763,25 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		remove(journalFeed);
 	}
 
+	/**
+	 * Removes all the journal feeds where groupId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (JournalFeed journalFeed : findByGroupId(groupId)) {
 			remove(journalFeed);
 		}
 	}
 
+	/**
+	 * Removes the journal feed where groupId = &#63; and feedId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param feedId the feed id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_F(long groupId, String feedId)
 		throws NoSuchFeedException, SystemException {
 		JournalFeed journalFeed = findByG_F(groupId, feedId);
@@ -1414,12 +1789,24 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		remove(journalFeed);
 	}
 
+	/**
+	 * Removes all the journal feeds from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (JournalFeed journalFeed : findAll()) {
 			remove(journalFeed);
 		}
 	}
 
+	/**
+	 * Counts all the journal feeds where uuid = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @return the number of matching journal feeds
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUuid(String uuid) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid };
 
@@ -1478,6 +1865,14 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the journal feeds where uuid = &#63; and groupId = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the number of matching journal feeds
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -1541,6 +1936,13 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the journal feeds where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the number of matching journal feeds
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId };
 
@@ -1587,6 +1989,13 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the journal feeds where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the number of matching journal feeds that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByGroupId(long groupId) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
 			return countByGroupId(groupId);
@@ -1628,6 +2037,14 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		}
 	}
 
+	/**
+	 * Counts all the journal feeds where groupId = &#63; and feedId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param feedId the feed id to search with
+	 * @return the number of matching journal feeds
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_F(long groupId, String feedId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, feedId };
@@ -1691,6 +2108,14 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		return count.intValue();
 	}
 
+	/**
+	 * Filters by the user's permissions and counts all the journal feeds where groupId = &#63; and feedId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param feedId the feed id to search with
+	 * @return the number of matching journal feeds that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int filterCountByG_F(long groupId, String feedId)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
@@ -1749,6 +2174,12 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		}
 	}
 
+	/**
+	 * Counts all the journal feeds.
+	 *
+	 * @return the number of journal feeds
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -1783,6 +2214,9 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the journal feed persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

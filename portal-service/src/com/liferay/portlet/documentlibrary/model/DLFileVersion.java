@@ -15,20 +15,16 @@
 package com.liferay.portlet.documentlibrary.model;
 
 /**
- * <p>
- * This interface is a model that represents the DLFileVersion table in the
- * database.
- * </p>
+ * The model interface for the DLFileVersion service. Represents a row in the &quot;DLFileVersion&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       DLFileVersionModel
- * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl
- * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileVersionModelImpl
+ * @author Brian Wing Shun Chan
+ * @see DLFileVersionModel
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileVersionModelImpl
  * @generated
  */
 public interface DLFileVersion extends DLFileVersionModel {

@@ -17,19 +17,49 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.model.Permission;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       PermissionPersistenceImpl
- * @see       PermissionUtil
+ * The persistence interface for the permission service.
+ *
+ * <p>
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see PermissionPersistenceImpl
+ * @see PermissionUtil
  * @generated
  */
 public interface PermissionPersistence extends BasePersistence<Permission> {
+	/**
+	* Caches the permission in the entity cache if it is enabled.
+	*
+	* @param permission the permission to cache
+	*/
 	public void cacheResult(com.liferay.portal.model.Permission permission);
 
+	/**
+	* Caches the permissions in the entity cache if it is enabled.
+	*
+	* @param permissions the permissions to cache
+	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portal.model.Permission> permissions);
 
+	/**
+	* Creates a new permission with the primary key.
+	*
+	* @param permissionId the primary key for the new permission
+	* @return the new permission
+	*/
 	public com.liferay.portal.model.Permission create(long permissionId);
 
+	/**
+	* Removes the permission with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param permissionId the primary key of the permission to remove
+	* @return the permission that was removed
+	* @throws com.liferay.portal.NoSuchPermissionException if a permission with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Permission remove(long permissionId)
 		throws com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -38,257 +68,837 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 		com.liferay.portal.model.Permission permission, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the permission with the primary key or throws a {@link com.liferay.portal.NoSuchPermissionException} if it could not be found.
+	*
+	* @param permissionId the primary key of the permission to find
+	* @return the permission
+	* @throws com.liferay.portal.NoSuchPermissionException if a permission with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Permission findByPrimaryKey(
 		long permissionId)
 		throws com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the permission with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param permissionId the primary key of the permission to find
+	* @return the permission, or <code>null</code> if a permission with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Permission fetchByPrimaryKey(
 		long permissionId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds all the permissions where resourceId = &#63;.
+	*
+	* @param resourceId the resource id to search with
+	* @return the matching permissions
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.Permission> findByResourceId(
 		long resourceId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the permissions where resourceId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param resourceId the resource id to search with
+	* @param start the lower bound of the range of permissions to return
+	* @param end the upper bound of the range of permissions to return (not inclusive)
+	* @return the range of matching permissions
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.Permission> findByResourceId(
 		long resourceId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the permissions where resourceId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param resourceId the resource id to search with
+	* @param start the lower bound of the range of permissions to return
+	* @param end the upper bound of the range of permissions to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching permissions
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.Permission> findByResourceId(
 		long resourceId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first permission in the ordered set where resourceId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param resourceId the resource id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching permission
+	* @throws com.liferay.portal.NoSuchPermissionException if a matching permission could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Permission findByResourceId_First(
 		long resourceId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the last permission in the ordered set where resourceId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param resourceId the resource id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching permission
+	* @throws com.liferay.portal.NoSuchPermissionException if a matching permission could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Permission findByResourceId_Last(
 		long resourceId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the permissions before and after the current permission in the ordered set where resourceId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param permissionId the primary key of the current permission
+	* @param resourceId the resource id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next permission
+	* @throws com.liferay.portal.NoSuchPermissionException if a permission with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Permission[] findByResourceId_PrevAndNext(
 		long permissionId, long resourceId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the permission where actionId = &#63; and resourceId = &#63; or throws a {@link com.liferay.portal.NoSuchPermissionException} if it could not be found.
+	*
+	* @param actionId the action id to search with
+	* @param resourceId the resource id to search with
+	* @return the matching permission
+	* @throws com.liferay.portal.NoSuchPermissionException if a matching permission could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Permission findByA_R(
 		java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the permission where actionId = &#63; and resourceId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param actionId the action id to search with
+	* @param resourceId the resource id to search with
+	* @return the matching permission, or <code>null</code> if a matching permission could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Permission fetchByA_R(
 		java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the permission where actionId = &#63; and resourceId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param actionId the action id to search with
+	* @param resourceId the resource id to search with
+	* @return the matching permission, or <code>null</code> if a matching permission could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Permission fetchByA_R(
 		java.lang.String actionId, long resourceId, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds all the permissions.
+	*
+	* @return the permissions
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.Permission> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the permissions.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of permissions to return
+	* @param end the upper bound of the range of permissions to return (not inclusive)
+	* @return the range of permissions
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.Permission> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the permissions.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of permissions to return
+	* @param end the upper bound of the range of permissions to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of permissions
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.Permission> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the permissions where resourceId = &#63; from the database.
+	*
+	* @param resourceId the resource id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByResourceId(long resourceId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the permission where actionId = &#63; and resourceId = &#63; from the database.
+	*
+	* @param actionId the action id to search with
+	* @param resourceId the resource id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByA_R(java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the permissions from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the permissions where resourceId = &#63;.
+	*
+	* @param resourceId the resource id to search with
+	* @return the number of matching permissions
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByResourceId(long resourceId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the permissions where actionId = &#63; and resourceId = &#63;.
+	*
+	* @param actionId the action id to search with
+	* @param resourceId the resource id to search with
+	* @return the number of matching permissions
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByA_R(java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the permissions.
+	*
+	* @return the number of permissions
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets all the groups associated with the permission.
+	*
+	* @param pk the primary key of the permission to get the associated groups for
+	* @return the groups associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets a range of all the groups associated with the permission.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param pk the primary key of the permission to get the associated groups for
+	* @param start the lower bound of the range of permissions to return
+	* @param end the upper bound of the range of permissions to return (not inclusive)
+	* @return the range of groups associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk,
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets an ordered range of all the groups associated with the permission.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param pk the primary key of the permission to get the associated groups for
+	* @param start the lower bound of the range of permissions to return
+	* @param end the upper bound of the range of permissions to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of groups associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.Group> getGroups(long pk,
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets the number of groups associated with the permission.
+	*
+	* @param pk the primary key of the permission to get the number of associated groups for
+	* @return the number of groups associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getGroupsSize(long pk)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Determines whether the group is associated with the permission.
+	*
+	* @param pk the primary key of the permission
+	* @param groupPK the primary key of the group
+	* @return whether the group is associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public boolean containsGroup(long pk, long groupPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Determines whether the permission has any groups associated with it.
+	*
+	* @param pk the primary key of the permission to check for associations with groups
+	* @return whether the permission has any groups associated with it
+	* @throws SystemException if a system exception occurred
+	*/
 	public boolean containsGroups(long pk)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Adds an association between the permission and the group. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param groupPK the primary key of the group
+	* @throws SystemException if a system exception occurred
+	*/
 	public void addGroup(long pk, long groupPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Adds an association between the permission and the group. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param group the group
+	* @throws SystemException if a system exception occurred
+	*/
 	public void addGroup(long pk, com.liferay.portal.model.Group group)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Adds an association between the permission and the groups. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param groupPKs the primary keys of the groups
+	* @throws SystemException if a system exception occurred
+	*/
 	public void addGroups(long pk, long[] groupPKs)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Adds an association between the permission and the groups. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param groups the groups
+	* @throws SystemException if a system exception occurred
+	*/
 	public void addGroups(long pk,
 		java.util.List<com.liferay.portal.model.Group> groups)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Clears all associations between the permission and its groups. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission to clear the associated groups from
+	* @throws SystemException if a system exception occurred
+	*/
 	public void clearGroups(long pk)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the association between the permission and the group. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param groupPK the primary key of the group
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeGroup(long pk, long groupPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the association between the permission and the group. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param group the group
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeGroup(long pk, com.liferay.portal.model.Group group)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the association between the permission and the groups. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param groupPKs the primary keys of the groups
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeGroups(long pk, long[] groupPKs)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the association between the permission and the groups. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param groups the groups
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeGroups(long pk,
 		java.util.List<com.liferay.portal.model.Group> groups)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Sets the groups associated with the permission, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission to set the associations for
+	* @param groupPKs the primary keys of the groups to be associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public void setGroups(long pk, long[] groupPKs)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Sets the groups associated with the permission, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission to set the associations for
+	* @param groups the groups to be associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public void setGroups(long pk,
 		java.util.List<com.liferay.portal.model.Group> groups)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets all the roles associated with the permission.
+	*
+	* @param pk the primary key of the permission to get the associated roles for
+	* @return the roles associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.Role> getRoles(long pk)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets a range of all the roles associated with the permission.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param pk the primary key of the permission to get the associated roles for
+	* @param start the lower bound of the range of permissions to return
+	* @param end the upper bound of the range of permissions to return (not inclusive)
+	* @return the range of roles associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.Role> getRoles(long pk,
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets an ordered range of all the roles associated with the permission.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param pk the primary key of the permission to get the associated roles for
+	* @param start the lower bound of the range of permissions to return
+	* @param end the upper bound of the range of permissions to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of roles associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.Role> getRoles(long pk,
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets the number of roles associated with the permission.
+	*
+	* @param pk the primary key of the permission to get the number of associated roles for
+	* @return the number of roles associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getRolesSize(long pk)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Determines whether the role is associated with the permission.
+	*
+	* @param pk the primary key of the permission
+	* @param rolePK the primary key of the role
+	* @return whether the role is associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public boolean containsRole(long pk, long rolePK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Determines whether the permission has any roles associated with it.
+	*
+	* @param pk the primary key of the permission to check for associations with roles
+	* @return whether the permission has any roles associated with it
+	* @throws SystemException if a system exception occurred
+	*/
 	public boolean containsRoles(long pk)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Adds an association between the permission and the role. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param rolePK the primary key of the role
+	* @throws SystemException if a system exception occurred
+	*/
 	public void addRole(long pk, long rolePK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Adds an association between the permission and the role. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param role the role
+	* @throws SystemException if a system exception occurred
+	*/
 	public void addRole(long pk, com.liferay.portal.model.Role role)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Adds an association between the permission and the roles. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param rolePKs the primary keys of the roles
+	* @throws SystemException if a system exception occurred
+	*/
 	public void addRoles(long pk, long[] rolePKs)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Adds an association between the permission and the roles. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param roles the roles
+	* @throws SystemException if a system exception occurred
+	*/
 	public void addRoles(long pk,
 		java.util.List<com.liferay.portal.model.Role> roles)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Clears all associations between the permission and its roles. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission to clear the associated roles from
+	* @throws SystemException if a system exception occurred
+	*/
 	public void clearRoles(long pk)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the association between the permission and the role. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param rolePK the primary key of the role
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeRole(long pk, long rolePK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the association between the permission and the role. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param role the role
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeRole(long pk, com.liferay.portal.model.Role role)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the association between the permission and the roles. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param rolePKs the primary keys of the roles
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeRoles(long pk, long[] rolePKs)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the association between the permission and the roles. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param roles the roles
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeRoles(long pk,
 		java.util.List<com.liferay.portal.model.Role> roles)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Sets the roles associated with the permission, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission to set the associations for
+	* @param rolePKs the primary keys of the roles to be associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public void setRoles(long pk, long[] rolePKs)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Sets the roles associated with the permission, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission to set the associations for
+	* @param roles the roles to be associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public void setRoles(long pk,
 		java.util.List<com.liferay.portal.model.Role> roles)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets all the users associated with the permission.
+	*
+	* @param pk the primary key of the permission to get the associated users for
+	* @return the users associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.User> getUsers(long pk)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets a range of all the users associated with the permission.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param pk the primary key of the permission to get the associated users for
+	* @param start the lower bound of the range of permissions to return
+	* @param end the upper bound of the range of permissions to return (not inclusive)
+	* @return the range of users associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.User> getUsers(long pk,
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets an ordered range of all the users associated with the permission.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param pk the primary key of the permission to get the associated users for
+	* @param start the lower bound of the range of permissions to return
+	* @param end the upper bound of the range of permissions to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of users associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.User> getUsers(long pk,
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets the number of users associated with the permission.
+	*
+	* @param pk the primary key of the permission to get the number of associated users for
+	* @return the number of users associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getUsersSize(long pk)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Determines whether the user is associated with the permission.
+	*
+	* @param pk the primary key of the permission
+	* @param userPK the primary key of the user
+	* @return whether the user is associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public boolean containsUser(long pk, long userPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Determines whether the permission has any users associated with it.
+	*
+	* @param pk the primary key of the permission to check for associations with users
+	* @return whether the permission has any users associated with it
+	* @throws SystemException if a system exception occurred
+	*/
 	public boolean containsUsers(long pk)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Adds an association between the permission and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param userPK the primary key of the user
+	* @throws SystemException if a system exception occurred
+	*/
 	public void addUser(long pk, long userPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Adds an association between the permission and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param user the user
+	* @throws SystemException if a system exception occurred
+	*/
 	public void addUser(long pk, com.liferay.portal.model.User user)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Adds an association between the permission and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param userPKs the primary keys of the users
+	* @throws SystemException if a system exception occurred
+	*/
 	public void addUsers(long pk, long[] userPKs)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Adds an association between the permission and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param users the users
+	* @throws SystemException if a system exception occurred
+	*/
 	public void addUsers(long pk,
 		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Clears all associations between the permission and its users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission to clear the associated users from
+	* @throws SystemException if a system exception occurred
+	*/
 	public void clearUsers(long pk)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the association between the permission and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param userPK the primary key of the user
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeUser(long pk, long userPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the association between the permission and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param user the user
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeUser(long pk, com.liferay.portal.model.User user)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the association between the permission and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param userPKs the primary keys of the users
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeUsers(long pk, long[] userPKs)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the association between the permission and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission
+	* @param users the users
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeUsers(long pk,
 		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Sets the users associated with the permission, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission to set the associations for
+	* @param userPKs the primary keys of the users to be associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public void setUsers(long pk, long[] userPKs)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Sets the users associated with the permission, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the permission to set the associations for
+	* @param users the users to be associated with the permission
+	* @throws SystemException if a system exception occurred
+	*/
 	public void setUsers(long pk,
 		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.kernel.exception.SystemException;

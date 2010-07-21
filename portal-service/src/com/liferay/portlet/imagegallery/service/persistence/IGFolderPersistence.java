@@ -19,20 +19,50 @@ import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       IGFolderPersistenceImpl
- * @see       IGFolderUtil
+ * The persistence interface for the i g folder service.
+ *
+ * <p>
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see IGFolderPersistenceImpl
+ * @see IGFolderUtil
  * @generated
  */
 public interface IGFolderPersistence extends BasePersistence<IGFolder> {
+	/**
+	* Caches the i g folder in the entity cache if it is enabled.
+	*
+	* @param igFolder the i g folder to cache
+	*/
 	public void cacheResult(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder);
 
+	/**
+	* Caches the i g folders in the entity cache if it is enabled.
+	*
+	* @param igFolders the i g folders to cache
+	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> igFolders);
 
+	/**
+	* Creates a new i g folder with the primary key.
+	*
+	* @param folderId the primary key for the new i g folder
+	* @return the new i g folder
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder create(long folderId);
 
+	/**
+	* Removes the i g folder with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param folderId the primary key of the i g folder to remove
+	* @return the i g folder that was removed
+	* @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a i g folder with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder remove(long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
@@ -41,257 +71,850 @@ public interface IGFolderPersistence extends BasePersistence<IGFolder> {
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the i g folder with the primary key or throws a {@link com.liferay.portlet.imagegallery.NoSuchFolderException} if it could not be found.
+	*
+	* @param folderId the primary key of the i g folder to find
+	* @return the i g folder
+	* @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a i g folder with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder findByPrimaryKey(
 		long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
+	/**
+	* Finds the i g folder with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param folderId the primary key of the i g folder to find
+	* @return the i g folder, or <code>null</code> if a i g folder with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder fetchByPrimaryKey(
 		long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds all the i g folders where uuid = &#63;.
+	*
+	* @param uuid the uuid to search with
+	* @return the matching i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> findByUuid(
 		java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the i g folders where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param start the lower bound of the range of i g folders to return
+	* @param end the upper bound of the range of i g folders to return (not inclusive)
+	* @return the range of matching i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> findByUuid(
 		java.lang.String uuid, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the i g folders where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param start the lower bound of the range of i g folders to return
+	* @param end the upper bound of the range of i g folders to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> findByUuid(
 		java.lang.String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first i g folder in the ordered set where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching i g folder
+	* @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a matching i g folder could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
+	/**
+	* Finds the last i g folder in the ordered set where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching i g folder
+	* @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a matching i g folder could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
+	/**
+	* Finds the i g folders before and after the current i g folder in the ordered set where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param folderId the primary key of the current i g folder
+	* @param uuid the uuid to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next i g folder
+	* @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a i g folder with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder[] findByUuid_PrevAndNext(
 		long folderId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
+	/**
+	* Finds the i g folder where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.imagegallery.NoSuchFolderException} if it could not be found.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group id to search with
+	* @return the matching i g folder
+	* @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a matching i g folder could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder findByUUID_G(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
+	/**
+	* Finds the i g folder where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group id to search with
+	* @return the matching i g folder, or <code>null</code> if a matching i g folder could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder fetchByUUID_G(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the i g folder where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group id to search with
+	* @return the matching i g folder, or <code>null</code> if a matching i g folder could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder fetchByUUID_G(
 		java.lang.String uuid, long groupId, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds all the i g folders where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the matching i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> findByGroupId(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the i g folders where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of i g folders to return
+	* @param end the upper bound of the range of i g folders to return (not inclusive)
+	* @return the range of matching i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> findByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the i g folders where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of i g folders to return
+	* @param end the upper bound of the range of i g folders to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> findByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first i g folder in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching i g folder
+	* @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a matching i g folder could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder findByGroupId_First(
 		long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
+	/**
+	* Finds the last i g folder in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching i g folder
+	* @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a matching i g folder could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder findByGroupId_Last(
 		long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
+	/**
+	* Finds the i g folders before and after the current i g folder in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param folderId the primary key of the current i g folder
+	* @param groupId the group id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next i g folder
+	* @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a i g folder with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder[] findByGroupId_PrevAndNext(
 		long folderId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
+	/**
+	* Filters by the user's permissions and finds all the i g folders where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the matching i g folders that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> filterFindByGroupId(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and finds a range of all the i g folders where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of i g folders to return
+	* @param end the upper bound of the range of i g folders to return (not inclusive)
+	* @return the range of matching i g folders that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> filterFindByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the i g folders where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of i g folders to return
+	* @param end the upper bound of the range of i g folders to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching i g folders that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> filterFindByGroupId(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds all the i g folders where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the matching i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> findByCompanyId(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the i g folders where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of i g folders to return
+	* @param end the upper bound of the range of i g folders to return (not inclusive)
+	* @return the range of matching i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> findByCompanyId(
 		long companyId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the i g folders where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of i g folders to return
+	* @param end the upper bound of the range of i g folders to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> findByCompanyId(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first i g folder in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching i g folder
+	* @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a matching i g folder could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder findByCompanyId_First(
 		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
+	/**
+	* Finds the last i g folder in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching i g folder
+	* @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a matching i g folder could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder findByCompanyId_Last(
 		long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
+	/**
+	* Finds the i g folders before and after the current i g folder in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param folderId the primary key of the current i g folder
+	* @param companyId the company id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next i g folder
+	* @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a i g folder with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder[] findByCompanyId_PrevAndNext(
 		long folderId, long companyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
+	/**
+	* Finds all the i g folders where groupId = &#63; and parentFolderId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param parentFolderId the parent folder id to search with
+	* @return the matching i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> findByG_P(
 		long groupId, long parentFolderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the i g folders where groupId = &#63; and parentFolderId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param parentFolderId the parent folder id to search with
+	* @param start the lower bound of the range of i g folders to return
+	* @param end the upper bound of the range of i g folders to return (not inclusive)
+	* @return the range of matching i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> findByG_P(
 		long groupId, long parentFolderId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the i g folders where groupId = &#63; and parentFolderId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param parentFolderId the parent folder id to search with
+	* @param start the lower bound of the range of i g folders to return
+	* @param end the upper bound of the range of i g folders to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> findByG_P(
 		long groupId, long parentFolderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first i g folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param parentFolderId the parent folder id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching i g folder
+	* @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a matching i g folder could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder findByG_P_First(
 		long groupId, long parentFolderId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
+	/**
+	* Finds the last i g folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param parentFolderId the parent folder id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching i g folder
+	* @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a matching i g folder could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder findByG_P_Last(
 		long groupId, long parentFolderId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
+	/**
+	* Finds the i g folders before and after the current i g folder in the ordered set where groupId = &#63; and parentFolderId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param folderId the primary key of the current i g folder
+	* @param groupId the group id to search with
+	* @param parentFolderId the parent folder id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next i g folder
+	* @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a i g folder with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder[] findByG_P_PrevAndNext(
 		long folderId, long groupId, long parentFolderId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
+	/**
+	* Filters by the user's permissions and finds all the i g folders where groupId = &#63; and parentFolderId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param parentFolderId the parent folder id to search with
+	* @return the matching i g folders that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> filterFindByG_P(
 		long groupId, long parentFolderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and finds a range of all the i g folders where groupId = &#63; and parentFolderId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param parentFolderId the parent folder id to search with
+	* @param start the lower bound of the range of i g folders to return
+	* @param end the upper bound of the range of i g folders to return (not inclusive)
+	* @return the range of matching i g folders that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> filterFindByG_P(
 		long groupId, long parentFolderId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the i g folders where groupId = &#63; and parentFolderId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param parentFolderId the parent folder id to search with
+	* @param start the lower bound of the range of i g folders to return
+	* @param end the upper bound of the range of i g folders to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching i g folders that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> filterFindByG_P(
 		long groupId, long parentFolderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the i g folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.imagegallery.NoSuchFolderException} if it could not be found.
+	*
+	* @param groupId the group id to search with
+	* @param parentFolderId the parent folder id to search with
+	* @param name the name to search with
+	* @return the matching i g folder
+	* @throws com.liferay.portlet.imagegallery.NoSuchFolderException if a matching i g folder could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder findByG_P_N(
 		long groupId, long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
+	/**
+	* Finds the i g folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param groupId the group id to search with
+	* @param parentFolderId the parent folder id to search with
+	* @param name the name to search with
+	* @return the matching i g folder, or <code>null</code> if a matching i g folder could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder fetchByG_P_N(
 		long groupId, long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the i g folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param groupId the group id to search with
+	* @param parentFolderId the parent folder id to search with
+	* @param name the name to search with
+	* @return the matching i g folder, or <code>null</code> if a matching i g folder could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder fetchByG_P_N(
 		long groupId, long parentFolderId, java.lang.String name,
 		boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds all the i g folders.
+	*
+	* @return the i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the i g folders.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of i g folders to return
+	* @param end the upper bound of the range of i g folders to return (not inclusive)
+	* @return the range of i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the i g folders.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of i g folders to return
+	* @param end the upper bound of the range of i g folders to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the i g folders where uuid = &#63; from the database.
+	*
+	* @param uuid the uuid to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByUuid(java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the i g folder where uuid = &#63; and groupId = &#63; from the database.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
+	/**
+	* Removes all the i g folders where groupId = &#63; from the database.
+	*
+	* @param groupId the group id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the i g folders where companyId = &#63; from the database.
+	*
+	* @param companyId the company id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the i g folders where groupId = &#63; and parentFolderId = &#63; from the database.
+	*
+	* @param groupId the group id to search with
+	* @param parentFolderId the parent folder id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByG_P(long groupId, long parentFolderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the i g folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; from the database.
+	*
+	* @param groupId the group id to search with
+	* @param parentFolderId the parent folder id to search with
+	* @param name the name to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByG_P_N(long groupId, long parentFolderId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchFolderException;
 
+	/**
+	* Removes all the i g folders from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the i g folders where uuid = &#63;.
+	*
+	* @param uuid the uuid to search with
+	* @return the number of matching i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByUuid(java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the i g folders where uuid = &#63; and groupId = &#63;.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group id to search with
+	* @return the number of matching i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByUUID_G(java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the i g folders where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the number of matching i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and counts all the i g folders where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the number of matching i g folders that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public int filterCountByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the i g folders where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the number of matching i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the i g folders where groupId = &#63; and parentFolderId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param parentFolderId the parent folder id to search with
+	* @return the number of matching i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByG_P(long groupId, long parentFolderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and counts all the i g folders where groupId = &#63; and parentFolderId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param parentFolderId the parent folder id to search with
+	* @return the number of matching i g folders that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public int filterCountByG_P(long groupId, long parentFolderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the i g folders where groupId = &#63; and parentFolderId = &#63; and name = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param parentFolderId the parent folder id to search with
+	* @param name the name to search with
+	* @return the number of matching i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByG_P_N(long groupId, long parentFolderId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Filters by the user's permissions and counts all the i g folders where groupId = &#63; and parentFolderId = &#63; and name = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param parentFolderId the parent folder id to search with
+	* @param name the name to search with
+	* @return the number of matching i g folders that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
 	public int filterCountByG_P_N(long groupId, long parentFolderId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the i g folders.
+	*
+	* @return the number of i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

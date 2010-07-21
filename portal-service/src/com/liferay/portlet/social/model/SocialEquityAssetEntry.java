@@ -15,20 +15,16 @@
 package com.liferay.portlet.social.model;
 
 /**
- * <p>
- * This interface is a model that represents the SocialEquityAssetEntry table in the
- * database.
- * </p>
+ * The model interface for the SocialEquityAssetEntry service. Represents a row in the &quot;SocialEquityAssetEntry&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.social.model.impl.SocialEquityAssetEntryImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.social.model.impl.SocialEquityAssetEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       SocialEquityAssetEntryModel
- * @see       com.liferay.portlet.social.model.impl.SocialEquityAssetEntryImpl
- * @see       com.liferay.portlet.social.model.impl.SocialEquityAssetEntryModelImpl
+ * @author Brian Wing Shun Chan
+ * @see SocialEquityAssetEntryModel
+ * @see com.liferay.portlet.social.model.impl.SocialEquityAssetEntryImpl
+ * @see com.liferay.portlet.social.model.impl.SocialEquityAssetEntryModelImpl
  * @generated
  */
 public interface SocialEquityAssetEntry extends SocialEquityAssetEntryModel {

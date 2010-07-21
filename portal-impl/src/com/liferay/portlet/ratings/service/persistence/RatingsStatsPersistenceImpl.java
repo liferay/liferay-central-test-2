@@ -51,9 +51,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       RatingsStatsPersistence
- * @see       RatingsStatsUtil
+ * The persistence for the ratings stats service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see RatingsStatsPersistence
+ * @see RatingsStatsUtil
  * @generated
  */
 public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStats>
@@ -76,6 +86,11 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 			RatingsStatsModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the ratings stats in the entity cache if it is enabled.
+	 *
+	 * @param ratingsStats the ratings stats to cache
+	 */
 	public void cacheResult(RatingsStats ratingsStats) {
 		EntityCacheUtil.putResult(RatingsStatsModelImpl.ENTITY_CACHE_ENABLED,
 			RatingsStatsImpl.class, ratingsStats.getPrimaryKey(), ratingsStats);
@@ -87,6 +102,11 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 			}, ratingsStats);
 	}
 
+	/**
+	 * Caches the ratings statses in the entity cache if it is enabled.
+	 *
+	 * @param ratingsStatses the ratings statses to cache
+	 */
 	public void cacheResult(List<RatingsStats> ratingsStatses) {
 		for (RatingsStats ratingsStats : ratingsStatses) {
 			if (EntityCacheUtil.getResult(
@@ -98,6 +118,13 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 		}
 	}
 
+	/**
+	 * Clears the cache for all ratings statses.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(RatingsStatsImpl.class.getName());
 		EntityCacheUtil.clearCache(RatingsStatsImpl.class.getName());
@@ -105,6 +132,13 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the ratings stats.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(RatingsStats ratingsStats) {
 		EntityCacheUtil.removeResult(RatingsStatsModelImpl.ENTITY_CACHE_ENABLED,
 			RatingsStatsImpl.class, ratingsStats.getPrimaryKey());
@@ -116,6 +150,12 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 			});
 	}
 
+	/**
+	 * Creates a new ratings stats with the primary key.
+	 *
+	 * @param statsId the primary key for the new ratings stats
+	 * @return the new ratings stats
+	 */
 	public RatingsStats create(long statsId) {
 		RatingsStats ratingsStats = new RatingsStatsImpl();
 
@@ -125,11 +165,27 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 		return ratingsStats;
 	}
 
+	/**
+	 * Removes the ratings stats with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the ratings stats to remove
+	 * @return the ratings stats that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a ratings stats with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsStats remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the ratings stats with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param statsId the primary key of the ratings stats to remove
+	 * @return the ratings stats that was removed
+	 * @throws com.liferay.portlet.ratings.NoSuchStatsException if a ratings stats with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsStats remove(long statsId)
 		throws NoSuchStatsException, SystemException {
 		Session session = null;
@@ -280,11 +336,27 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 		return ratingsStatsImpl;
 	}
 
+	/**
+	 * Finds the ratings stats with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the ratings stats to find
+	 * @return the ratings stats
+	 * @throws com.liferay.portal.NoSuchModelException if a ratings stats with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsStats findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the ratings stats with the primary key or throws a {@link com.liferay.portlet.ratings.NoSuchStatsException} if it could not be found.
+	 *
+	 * @param statsId the primary key of the ratings stats to find
+	 * @return the ratings stats
+	 * @throws com.liferay.portlet.ratings.NoSuchStatsException if a ratings stats with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsStats findByPrimaryKey(long statsId)
 		throws NoSuchStatsException, SystemException {
 		RatingsStats ratingsStats = fetchByPrimaryKey(statsId);
@@ -301,11 +373,25 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 		return ratingsStats;
 	}
 
+	/**
+	 * Finds the ratings stats with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the ratings stats to find
+	 * @return the ratings stats, or <code>null</code> if a ratings stats with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsStats fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the ratings stats with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param statsId the primary key of the ratings stats to find
+	 * @return the ratings stats, or <code>null</code> if a ratings stats with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsStats fetchByPrimaryKey(long statsId)
 		throws SystemException {
 		RatingsStats ratingsStats = (RatingsStats)EntityCacheUtil.getResult(RatingsStatsModelImpl.ENTITY_CACHE_ENABLED,
@@ -335,6 +421,15 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 		return ratingsStats;
 	}
 
+	/**
+	 * Finds the ratings stats where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.ratings.NoSuchStatsException} if it could not be found.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching ratings stats
+	 * @throws com.liferay.portlet.ratings.NoSuchStatsException if a matching ratings stats could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsStats findByC_C(long classNameId, long classPK)
 		throws NoSuchStatsException, SystemException {
 		RatingsStats ratingsStats = fetchByC_C(classNameId, classPK);
@@ -362,11 +457,27 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 		return ratingsStats;
 	}
 
+	/**
+	 * Finds the ratings stats where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching ratings stats, or <code>null</code> if a matching ratings stats could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsStats fetchByC_C(long classNameId, long classPK)
 		throws SystemException {
 		return fetchByC_C(classNameId, classPK, true);
 	}
 
+	/**
+	 * Finds the ratings stats where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching ratings stats, or <code>null</code> if a matching ratings stats could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public RatingsStats fetchByC_C(long classNameId, long classPK,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { classNameId, classPK };
@@ -448,15 +559,46 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 		}
 	}
 
+	/**
+	 * Finds all the ratings statses.
+	 *
+	 * @return the ratings statses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<RatingsStats> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the ratings statses.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of ratings statses to return
+	 * @param end the upper bound of the range of ratings statses to return (not inclusive)
+	 * @return the range of ratings statses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<RatingsStats> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the ratings statses.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of ratings statses to return
+	 * @param end the upper bound of the range of ratings statses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of ratings statses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<RatingsStats> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -523,6 +665,13 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 		return list;
 	}
 
+	/**
+	 * Removes the ratings stats where classNameId = &#63; and classPK = &#63; from the database.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C(long classNameId, long classPK)
 		throws NoSuchStatsException, SystemException {
 		RatingsStats ratingsStats = findByC_C(classNameId, classPK);
@@ -530,12 +679,25 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 		remove(ratingsStats);
 	}
 
+	/**
+	 * Removes all the ratings statses from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (RatingsStats ratingsStats : findAll()) {
 			remove(ratingsStats);
 		}
 	}
 
+	/**
+	 * Counts all the ratings statses where classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the number of matching ratings statses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { classNameId, classPK };
@@ -587,6 +749,12 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the ratings statses.
+	 *
+	 * @return the number of ratings statses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -621,6 +789,9 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the ratings stats persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

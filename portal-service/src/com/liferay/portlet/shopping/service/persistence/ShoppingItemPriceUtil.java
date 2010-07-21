@@ -25,9 +25,15 @@ import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       ShoppingItemPricePersistence
- * @see       ShoppingItemPricePersistenceImpl
+ * The persistence utility for the shopping item price service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see ShoppingItemPricePersistence
+ * @see ShoppingItemPricePersistenceImpl
  * @generated
  */
 public class ShoppingItemPriceUtil {
@@ -107,21 +113,45 @@ public class ShoppingItemPriceUtil {
 		return getPersistence().update(shoppingItemPrice, merge, serviceContext);
 	}
 
+	/**
+	* Caches the shopping item price in the entity cache if it is enabled.
+	*
+	* @param shoppingItemPrice the shopping item price to cache
+	*/
 	public static void cacheResult(
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice) {
 		getPersistence().cacheResult(shoppingItemPrice);
 	}
 
+	/**
+	* Caches the shopping item prices in the entity cache if it is enabled.
+	*
+	* @param shoppingItemPrices the shopping item prices to cache
+	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> shoppingItemPrices) {
 		getPersistence().cacheResult(shoppingItemPrices);
 	}
 
+	/**
+	* Creates a new shopping item price with the primary key.
+	*
+	* @param itemPriceId the primary key for the new shopping item price
+	* @return the new shopping item price
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice create(
 		long itemPriceId) {
 		return getPersistence().create(itemPriceId);
 	}
 
+	/**
+	* Removes the shopping item price with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param itemPriceId the primary key of the shopping item price to remove
+	* @return the shopping item price that was removed
+	* @throws com.liferay.portlet.shopping.NoSuchItemPriceException if a shopping item price with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice remove(
 		long itemPriceId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -136,6 +166,14 @@ public class ShoppingItemPriceUtil {
 		return getPersistence().updateImpl(shoppingItemPrice, merge);
 	}
 
+	/**
+	* Finds the shopping item price with the primary key or throws a {@link com.liferay.portlet.shopping.NoSuchItemPriceException} if it could not be found.
+	*
+	* @param itemPriceId the primary key of the shopping item price to find
+	* @return the shopping item price
+	* @throws com.liferay.portlet.shopping.NoSuchItemPriceException if a shopping item price with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice findByPrimaryKey(
 		long itemPriceId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -143,23 +181,64 @@ public class ShoppingItemPriceUtil {
 		return getPersistence().findByPrimaryKey(itemPriceId);
 	}
 
+	/**
+	* Finds the shopping item price with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param itemPriceId the primary key of the shopping item price to find
+	* @return the shopping item price, or <code>null</code> if a shopping item price with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice fetchByPrimaryKey(
 		long itemPriceId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(itemPriceId);
 	}
 
+	/**
+	* Finds all the shopping item prices where itemId = &#63;.
+	*
+	* @param itemId the item id to search with
+	* @return the matching shopping item prices
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> findByItemId(
 		long itemId) throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByItemId(itemId);
 	}
 
+	/**
+	* Finds a range of all the shopping item prices where itemId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param itemId the item id to search with
+	* @param start the lower bound of the range of shopping item prices to return
+	* @param end the upper bound of the range of shopping item prices to return (not inclusive)
+	* @return the range of matching shopping item prices
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> findByItemId(
 		long itemId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByItemId(itemId, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the shopping item prices where itemId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param itemId the item id to search with
+	* @param start the lower bound of the range of shopping item prices to return
+	* @param end the upper bound of the range of shopping item prices to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching shopping item prices
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> findByItemId(
 		long itemId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -168,6 +247,19 @@ public class ShoppingItemPriceUtil {
 				   .findByItemId(itemId, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first shopping item price in the ordered set where itemId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param itemId the item id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching shopping item price
+	* @throws com.liferay.portlet.shopping.NoSuchItemPriceException if a matching shopping item price could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice findByItemId_First(
 		long itemId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -176,6 +268,19 @@ public class ShoppingItemPriceUtil {
 		return getPersistence().findByItemId_First(itemId, orderByComparator);
 	}
 
+	/**
+	* Finds the last shopping item price in the ordered set where itemId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param itemId the item id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching shopping item price
+	* @throws com.liferay.portlet.shopping.NoSuchItemPriceException if a matching shopping item price could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice findByItemId_Last(
 		long itemId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -184,6 +289,20 @@ public class ShoppingItemPriceUtil {
 		return getPersistence().findByItemId_Last(itemId, orderByComparator);
 	}
 
+	/**
+	* Finds the shopping item prices before and after the current shopping item price in the ordered set where itemId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param itemPriceId the primary key of the current shopping item price
+	* @param itemId the item id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next shopping item price
+	* @throws com.liferay.portlet.shopping.NoSuchItemPriceException if a shopping item price with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice[] findByItemId_PrevAndNext(
 		long itemPriceId, long itemId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -194,17 +313,48 @@ public class ShoppingItemPriceUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds all the shopping item prices.
+	*
+	* @return the shopping item prices
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
+	/**
+	* Finds a range of all the shopping item prices.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of shopping item prices to return
+	* @param end the upper bound of the range of shopping item prices to return (not inclusive)
+	* @return the range of shopping item prices
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the shopping item prices.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of shopping item prices to return
+	* @param end the upper bound of the range of shopping item prices to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of shopping item prices
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -212,21 +362,45 @@ public class ShoppingItemPriceUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
+	/**
+	* Removes all the shopping item prices where itemId = &#63; from the database.
+	*
+	* @param itemId the item id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByItemId(long itemId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByItemId(itemId);
 	}
 
+	/**
+	* Removes all the shopping item prices from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
+	/**
+	* Counts all the shopping item prices where itemId = &#63;.
+	*
+	* @param itemId the item id to search with
+	* @return the number of matching shopping item prices
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByItemId(long itemId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByItemId(itemId);
 	}
 
+	/**
+	* Counts all the shopping item prices.
+	*
+	* @return the number of shopping item prices
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();

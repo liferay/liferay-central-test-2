@@ -15,20 +15,16 @@
 package com.liferay.portlet.imagegallery.model;
 
 /**
- * <p>
- * This interface is a model that represents the IGImage table in the
- * database.
- * </p>
+ * The model interface for the IGImage service. Represents a row in the &quot;IGImage&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.imagegallery.model.impl.IGImageImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.imagegallery.model.impl.IGImageImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       IGImageModel
- * @see       com.liferay.portlet.imagegallery.model.impl.IGImageImpl
- * @see       com.liferay.portlet.imagegallery.model.impl.IGImageModelImpl
+ * @author Brian Wing Shun Chan
+ * @see IGImageModel
+ * @see com.liferay.portlet.imagegallery.model.impl.IGImageImpl
+ * @see com.liferay.portlet.imagegallery.model.impl.IGImageModelImpl
  * @generated
  */
 public interface IGImage extends IGImageModel {

@@ -15,20 +15,16 @@
 package com.liferay.portlet.documentlibrary.model;
 
 /**
- * <p>
- * This interface is a model that represents the DLFileRank table in the
- * database.
- * </p>
+ * The model interface for the DLFileRank service. Represents a row in the &quot;DLFileRank&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       DLFileRankModel
- * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl
- * @see       com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl
+ * @author Brian Wing Shun Chan
+ * @see DLFileRankModel
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl
  * @generated
  */
 public interface DLFileRank extends DLFileRankModel {

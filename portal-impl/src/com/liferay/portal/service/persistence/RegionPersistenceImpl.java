@@ -47,9 +47,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       RegionPersistence
- * @see       RegionUtil
+ * The persistence for the region service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see RegionPersistence
+ * @see RegionUtil
  * @generated
  */
 public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
@@ -101,11 +111,21 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 			RegionModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the region in the entity cache if it is enabled.
+	 *
+	 * @param region the region to cache
+	 */
 	public void cacheResult(Region region) {
 		EntityCacheUtil.putResult(RegionModelImpl.ENTITY_CACHE_ENABLED,
 			RegionImpl.class, region.getPrimaryKey(), region);
 	}
 
+	/**
+	 * Caches the regions in the entity cache if it is enabled.
+	 *
+	 * @param regions the regions to cache
+	 */
 	public void cacheResult(List<Region> regions) {
 		for (Region region : regions) {
 			if (EntityCacheUtil.getResult(
@@ -116,6 +136,13 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		}
 	}
 
+	/**
+	 * Clears the cache for all regions.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(RegionImpl.class.getName());
 		EntityCacheUtil.clearCache(RegionImpl.class.getName());
@@ -123,11 +150,24 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the region.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(Region region) {
 		EntityCacheUtil.removeResult(RegionModelImpl.ENTITY_CACHE_ENABLED,
 			RegionImpl.class, region.getPrimaryKey());
 	}
 
+	/**
+	 * Creates a new region with the primary key.
+	 *
+	 * @param regionId the primary key for the new region
+	 * @return the new region
+	 */
 	public Region create(long regionId) {
 		Region region = new RegionImpl();
 
@@ -137,11 +177,27 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		return region;
 	}
 
+	/**
+	 * Removes the region with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the region to remove
+	 * @return the region that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a region with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Region remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the region with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param regionId the primary key of the region to remove
+	 * @return the region that was removed
+	 * @throws com.liferay.portal.NoSuchRegionException if a region with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Region remove(long regionId)
 		throws NoSuchRegionException, SystemException {
 		Session session = null;
@@ -257,11 +313,27 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		return regionImpl;
 	}
 
+	/**
+	 * Finds the region with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the region to find
+	 * @return the region
+	 * @throws com.liferay.portal.NoSuchModelException if a region with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Region findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the region with the primary key or throws a {@link com.liferay.portal.NoSuchRegionException} if it could not be found.
+	 *
+	 * @param regionId the primary key of the region to find
+	 * @return the region
+	 * @throws com.liferay.portal.NoSuchRegionException if a region with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Region findByPrimaryKey(long regionId)
 		throws NoSuchRegionException, SystemException {
 		Region region = fetchByPrimaryKey(regionId);
@@ -278,11 +350,25 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		return region;
 	}
 
+	/**
+	 * Finds the region with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the region to find
+	 * @return the region, or <code>null</code> if a region with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Region fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the region with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param regionId the primary key of the region to find
+	 * @return the region, or <code>null</code> if a region with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Region fetchByPrimaryKey(long regionId) throws SystemException {
 		Region region = (Region)EntityCacheUtil.getResult(RegionModelImpl.ENTITY_CACHE_ENABLED,
 				RegionImpl.class, regionId, this);
@@ -311,17 +397,51 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		return region;
 	}
 
+	/**
+	 * Finds all the regions where countryId = &#63;.
+	 *
+	 * @param countryId the country id to search with
+	 * @return the matching regions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Region> findByCountryId(long countryId)
 		throws SystemException {
 		return findByCountryId(countryId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the regions where countryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param countryId the country id to search with
+	 * @param start the lower bound of the range of regions to return
+	 * @param end the upper bound of the range of regions to return (not inclusive)
+	 * @return the range of matching regions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Region> findByCountryId(long countryId, int start, int end)
 		throws SystemException {
 		return findByCountryId(countryId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the regions where countryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param countryId the country id to search with
+	 * @param start the lower bound of the range of regions to return
+	 * @param end the upper bound of the range of regions to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching regions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Region> findByCountryId(long countryId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -393,6 +513,19 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		return list;
 	}
 
+	/**
+	 * Finds the first region in the ordered set where countryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param countryId the country id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching region
+	 * @throws com.liferay.portal.NoSuchRegionException if a matching region could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Region findByCountryId_First(long countryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchRegionException, SystemException {
@@ -415,6 +548,19 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		}
 	}
 
+	/**
+	 * Finds the last region in the ordered set where countryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param countryId the country id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching region
+	 * @throws com.liferay.portal.NoSuchRegionException if a matching region could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Region findByCountryId_Last(long countryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchRegionException, SystemException {
@@ -440,6 +586,20 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		}
 	}
 
+	/**
+	 * Finds the regions before and after the current region in the ordered set where countryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param regionId the primary key of the current region
+	 * @param countryId the country id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next region
+	 * @throws com.liferay.portal.NoSuchRegionException if a region with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Region[] findByCountryId_PrevAndNext(long regionId, long countryId,
 		OrderByComparator orderByComparator)
 		throws NoSuchRegionException, SystemException {
@@ -573,15 +733,49 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		}
 	}
 
+	/**
+	 * Finds all the regions where active = &#63;.
+	 *
+	 * @param active the active to search with
+	 * @return the matching regions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Region> findByActive(boolean active) throws SystemException {
 		return findByActive(active, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the regions where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param start the lower bound of the range of regions to return
+	 * @param end the upper bound of the range of regions to return (not inclusive)
+	 * @return the range of matching regions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Region> findByActive(boolean active, int start, int end)
 		throws SystemException {
 		return findByActive(active, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the regions where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param start the lower bound of the range of regions to return
+	 * @param end the upper bound of the range of regions to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching regions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Region> findByActive(boolean active, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -653,6 +847,19 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		return list;
 	}
 
+	/**
+	 * Finds the first region in the ordered set where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching region
+	 * @throws com.liferay.portal.NoSuchRegionException if a matching region could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Region findByActive_First(boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchRegionException, SystemException {
@@ -675,6 +882,19 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		}
 	}
 
+	/**
+	 * Finds the last region in the ordered set where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching region
+	 * @throws com.liferay.portal.NoSuchRegionException if a matching region could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Region findByActive_Last(boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchRegionException, SystemException {
@@ -700,6 +920,20 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		}
 	}
 
+	/**
+	 * Finds the regions before and after the current region in the ordered set where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param regionId the primary key of the current region
+	 * @param active the active to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next region
+	 * @throws com.liferay.portal.NoSuchRegionException if a region with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Region[] findByActive_PrevAndNext(long regionId, boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchRegionException, SystemException {
@@ -833,17 +1067,54 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		}
 	}
 
+	/**
+	 * Finds all the regions where countryId = &#63; and active = &#63;.
+	 *
+	 * @param countryId the country id to search with
+	 * @param active the active to search with
+	 * @return the matching regions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Region> findByC_A(long countryId, boolean active)
 		throws SystemException {
 		return findByC_A(countryId, active, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the regions where countryId = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param countryId the country id to search with
+	 * @param active the active to search with
+	 * @param start the lower bound of the range of regions to return
+	 * @param end the upper bound of the range of regions to return (not inclusive)
+	 * @return the range of matching regions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Region> findByC_A(long countryId, boolean active, int start,
 		int end) throws SystemException {
 		return findByC_A(countryId, active, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the regions where countryId = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param countryId the country id to search with
+	 * @param active the active to search with
+	 * @param start the lower bound of the range of regions to return
+	 * @param end the upper bound of the range of regions to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching regions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Region> findByC_A(long countryId, boolean active, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -919,6 +1190,20 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		return list;
 	}
 
+	/**
+	 * Finds the first region in the ordered set where countryId = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param countryId the country id to search with
+	 * @param active the active to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching region
+	 * @throws com.liferay.portal.NoSuchRegionException if a matching region could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Region findByC_A_First(long countryId, boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchRegionException, SystemException {
@@ -944,6 +1229,20 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		}
 	}
 
+	/**
+	 * Finds the last region in the ordered set where countryId = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param countryId the country id to search with
+	 * @param active the active to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching region
+	 * @throws com.liferay.portal.NoSuchRegionException if a matching region could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Region findByC_A_Last(long countryId, boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchRegionException, SystemException {
@@ -972,6 +1271,21 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		}
 	}
 
+	/**
+	 * Finds the regions before and after the current region in the ordered set where countryId = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param regionId the primary key of the current region
+	 * @param countryId the country id to search with
+	 * @param active the active to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next region
+	 * @throws com.liferay.portal.NoSuchRegionException if a region with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Region[] findByC_A_PrevAndNext(long regionId, long countryId,
 		boolean active, OrderByComparator orderByComparator)
 		throws NoSuchRegionException, SystemException {
@@ -1110,14 +1424,45 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		}
 	}
 
+	/**
+	 * Finds all the regions.
+	 *
+	 * @return the regions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Region> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the regions.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of regions to return
+	 * @param end the upper bound of the range of regions to return (not inclusive)
+	 * @return the range of regions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Region> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the regions.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of regions to return
+	 * @param end the upper bound of the range of regions to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of regions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Region> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1184,18 +1529,37 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		return list;
 	}
 
+	/**
+	 * Removes all the regions where countryId = &#63; from the database.
+	 *
+	 * @param countryId the country id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCountryId(long countryId) throws SystemException {
 		for (Region region : findByCountryId(countryId)) {
 			remove(region);
 		}
 	}
 
+	/**
+	 * Removes all the regions where active = &#63; from the database.
+	 *
+	 * @param active the active to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByActive(boolean active) throws SystemException {
 		for (Region region : findByActive(active)) {
 			remove(region);
 		}
 	}
 
+	/**
+	 * Removes all the regions where countryId = &#63; and active = &#63; from the database.
+	 *
+	 * @param countryId the country id to search with
+	 * @param active the active to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_A(long countryId, boolean active)
 		throws SystemException {
 		for (Region region : findByC_A(countryId, active)) {
@@ -1203,12 +1567,24 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		}
 	}
 
+	/**
+	 * Removes all the regions from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (Region region : findAll()) {
 			remove(region);
 		}
 	}
 
+	/**
+	 * Counts all the regions where countryId = &#63;.
+	 *
+	 * @param countryId the country id to search with
+	 * @return the number of matching regions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCountryId(long countryId) throws SystemException {
 		Object[] finderArgs = new Object[] { countryId };
 
@@ -1255,6 +1631,13 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the regions where active = &#63;.
+	 *
+	 * @param active the active to search with
+	 * @return the number of matching regions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByActive(boolean active) throws SystemException {
 		Object[] finderArgs = new Object[] { active };
 
@@ -1301,6 +1684,14 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the regions where countryId = &#63; and active = &#63;.
+	 *
+	 * @param countryId the country id to search with
+	 * @param active the active to search with
+	 * @return the number of matching regions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_A(long countryId, boolean active)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { countryId, active };
@@ -1352,6 +1743,12 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the regions.
+	 *
+	 * @return the number of regions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -1386,6 +1783,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the region persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

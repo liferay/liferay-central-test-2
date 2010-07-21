@@ -15,20 +15,16 @@
 package com.liferay.portlet.documentlibrary.model;
 
 /**
- * <p>
- * This interface is a model that represents the DLFolder table in the
- * database.
- * </p>
+ * The model interface for the DLFolder service. Represents a row in the &quot;DLFolder&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       DLFolderModel
- * @see       com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl
- * @see       com.liferay.portlet.documentlibrary.model.impl.DLFolderModelImpl
+ * @author Brian Wing Shun Chan
+ * @see DLFolderModel
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFolderModelImpl
  * @generated
  */
 public interface DLFolder extends DLFolderModel {

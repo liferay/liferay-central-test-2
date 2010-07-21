@@ -79,9 +79,19 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       GroupPersistence
- * @see       GroupUtil
+ * The persistence for the group service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see GroupPersistence
+ * @see GroupUtil
  * @generated
  */
 public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
@@ -183,6 +193,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			GroupModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the group in the entity cache if it is enabled.
+	 *
+	 * @param group the group to cache
+	 */
 	public void cacheResult(Group group) {
 		EntityCacheUtil.putResult(GroupModelImpl.ENTITY_CACHE_ENABLED,
 			GroupImpl.class, group.getPrimaryKey(), group);
@@ -220,6 +235,11 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			}, group);
 	}
 
+	/**
+	 * Caches the groups in the entity cache if it is enabled.
+	 *
+	 * @param groups the groups to cache
+	 */
 	public void cacheResult(List<Group> groups) {
 		for (Group group : groups) {
 			if (EntityCacheUtil.getResult(GroupModelImpl.ENTITY_CACHE_ENABLED,
@@ -229,6 +249,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Clears the cache for all groups.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(GroupImpl.class.getName());
 		EntityCacheUtil.clearCache(GroupImpl.class.getName());
@@ -236,6 +263,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the group.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(Group group) {
 		EntityCacheUtil.removeResult(GroupModelImpl.ENTITY_CACHE_ENABLED,
 			GroupImpl.class, group.getPrimaryKey());
@@ -271,6 +305,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			});
 	}
 
+	/**
+	 * Creates a new group with the primary key.
+	 *
+	 * @param groupId the primary key for the new group
+	 * @return the new group
+	 */
 	public Group create(long groupId) {
 		Group group = new GroupImpl();
 
@@ -280,11 +320,27 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return group;
 	}
 
+	/**
+	 * Removes the group with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the group to remove
+	 * @return the group that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a group with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the group with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param groupId the primary key of the group to remove
+	 * @return the group that was removed
+	 * @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group remove(long groupId)
 		throws NoSuchGroupException, SystemException {
 		Session session = null;
@@ -645,11 +701,27 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return groupImpl;
 	}
 
+	/**
+	 * Finds the group with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the group to find
+	 * @return the group
+	 * @throws com.liferay.portal.NoSuchModelException if a group with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the group with the primary key or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
+	 *
+	 * @param groupId the primary key of the group to find
+	 * @return the group
+	 * @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group findByPrimaryKey(long groupId)
 		throws NoSuchGroupException, SystemException {
 		Group group = fetchByPrimaryKey(groupId);
@@ -666,11 +738,25 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return group;
 	}
 
+	/**
+	 * Finds the group with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the group to find
+	 * @return the group, or <code>null</code> if a group with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the group with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param groupId the primary key of the group to find
+	 * @return the group, or <code>null</code> if a group with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group fetchByPrimaryKey(long groupId) throws SystemException {
 		Group group = (Group)EntityCacheUtil.getResult(GroupModelImpl.ENTITY_CACHE_ENABLED,
 				GroupImpl.class, groupId, this);
@@ -698,17 +784,51 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return group;
 	}
 
+	/**
+	 * Finds all the groups where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the matching groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Group> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the groups where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of groups to return
+	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @return the range of matching groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Group> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the groups where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of groups to return
+	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Group> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -780,6 +900,19 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return list;
 	}
 
+	/**
+	 * Finds the first group in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching group
+	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -802,6 +935,19 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Finds the last group in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching group
+	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -827,6 +973,20 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Finds the groups before and after the current group in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the primary key of the current group
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next group
+	 * @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group[] findByCompanyId_PrevAndNext(long groupId, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -960,6 +1120,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Finds the group where liveGroupId = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
+	 *
+	 * @param liveGroupId the live group id to search with
+	 * @return the matching group
+	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group findByLiveGroupId(long liveGroupId)
 		throws NoSuchGroupException, SystemException {
 		Group group = fetchByLiveGroupId(liveGroupId);
@@ -984,10 +1152,24 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return group;
 	}
 
+	/**
+	 * Finds the group where liveGroupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param liveGroupId the live group id to search with
+	 * @return the matching group, or <code>null</code> if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group fetchByLiveGroupId(long liveGroupId) throws SystemException {
 		return fetchByLiveGroupId(liveGroupId, true);
 	}
 
+	/**
+	 * Finds the group where liveGroupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param liveGroupId the live group id to search with
+	 * @return the matching group, or <code>null</code> if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group fetchByLiveGroupId(long liveGroupId, boolean retrieveFromCache)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { liveGroupId };
@@ -1066,6 +1248,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Finds the group where companyId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @return the matching group
+	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group findByC_N(long companyId, String name)
 		throws NoSuchGroupException, SystemException {
 		Group group = fetchByC_N(companyId, name);
@@ -1093,11 +1284,27 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return group;
 	}
 
+	/**
+	 * Finds the group where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @return the matching group, or <code>null</code> if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group fetchByC_N(long companyId, String name)
 		throws SystemException {
 		return fetchByC_N(companyId, name, true);
 	}
 
+	/**
+	 * Finds the group where companyId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @return the matching group, or <code>null</code> if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group fetchByC_N(long companyId, String name,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, name };
@@ -1194,6 +1401,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Finds the group where companyId = &#63; and friendlyURL = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
+	 *
+	 * @param companyId the company id to search with
+	 * @param friendlyURL the friendly u r l to search with
+	 * @return the matching group
+	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group findByC_F(long companyId, String friendlyURL)
 		throws NoSuchGroupException, SystemException {
 		Group group = fetchByC_F(companyId, friendlyURL);
@@ -1221,11 +1437,27 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return group;
 	}
 
+	/**
+	 * Finds the group where companyId = &#63; and friendlyURL = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param friendlyURL the friendly u r l to search with
+	 * @return the matching group, or <code>null</code> if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group fetchByC_F(long companyId, String friendlyURL)
 		throws SystemException {
 		return fetchByC_F(companyId, friendlyURL, true);
 	}
 
+	/**
+	 * Finds the group where companyId = &#63; and friendlyURL = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param friendlyURL the friendly u r l to search with
+	 * @return the matching group, or <code>null</code> if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group fetchByC_F(long companyId, String friendlyURL,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, friendlyURL };
@@ -1322,17 +1554,54 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Finds all the groups where type = &#63; and active = &#63;.
+	 *
+	 * @param type the type to search with
+	 * @param active the active to search with
+	 * @return the matching groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Group> findByT_A(int type, boolean active)
 		throws SystemException {
 		return findByT_A(type, active, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the groups where type = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param type the type to search with
+	 * @param active the active to search with
+	 * @param start the lower bound of the range of groups to return
+	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @return the range of matching groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Group> findByT_A(int type, boolean active, int start, int end)
 		throws SystemException {
 		return findByT_A(type, active, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the groups where type = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param type the type to search with
+	 * @param active the active to search with
+	 * @param start the lower bound of the range of groups to return
+	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Group> findByT_A(int type, boolean active, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1408,6 +1677,20 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return list;
 	}
 
+	/**
+	 * Finds the first group in the ordered set where type = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param type the type to search with
+	 * @param active the active to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching group
+	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group findByT_A_First(int type, boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -1433,6 +1716,20 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Finds the last group in the ordered set where type = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param type the type to search with
+	 * @param active the active to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching group
+	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group findByT_A_Last(int type, boolean active,
 		OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -1461,6 +1758,21 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Finds the groups before and after the current group in the ordered set where type = &#63; and active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the primary key of the current group
+	 * @param type the type to search with
+	 * @param active the active to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next group
+	 * @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group[] findByT_A_PrevAndNext(long groupId, int type,
 		boolean active, OrderByComparator orderByComparator)
 		throws NoSuchGroupException, SystemException {
@@ -1599,6 +1911,16 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Finds the group where companyId = &#63; and classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching group
+	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group findByC_C_C(long companyId, long classNameId, long classPK)
 		throws NoSuchGroupException, SystemException {
 		Group group = fetchByC_C_C(companyId, classNameId, classPK);
@@ -1629,11 +1951,29 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return group;
 	}
 
+	/**
+	 * Finds the group where companyId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching group, or <code>null</code> if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group fetchByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		return fetchByC_C_C(companyId, classNameId, classPK, true);
 	}
 
+	/**
+	 * Finds the group where companyId = &#63; and classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching group, or <code>null</code> if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group fetchByC_C_C(long companyId, long classNameId, long classPK,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, classNameId, classPK };
@@ -1722,6 +2062,16 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Finds the group where companyId = &#63; and liveGroupId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
+	 *
+	 * @param companyId the company id to search with
+	 * @param liveGroupId the live group id to search with
+	 * @param name the name to search with
+	 * @return the matching group
+	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group findByC_L_N(long companyId, long liveGroupId, String name)
 		throws NoSuchGroupException, SystemException {
 		Group group = fetchByC_L_N(companyId, liveGroupId, name);
@@ -1752,11 +2102,29 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return group;
 	}
 
+	/**
+	 * Finds the group where companyId = &#63; and liveGroupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param liveGroupId the live group id to search with
+	 * @param name the name to search with
+	 * @return the matching group, or <code>null</code> if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group fetchByC_L_N(long companyId, long liveGroupId, String name)
 		throws SystemException {
 		return fetchByC_L_N(companyId, liveGroupId, name, true);
 	}
 
+	/**
+	 * Finds the group where companyId = &#63; and liveGroupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param liveGroupId the live group id to search with
+	 * @param name the name to search with
+	 * @return the matching group, or <code>null</code> if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group fetchByC_L_N(long companyId, long liveGroupId, String name,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, liveGroupId, name };
@@ -1858,6 +2226,17 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Finds the group where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchGroupException} if it could not be found.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param liveGroupId the live group id to search with
+	 * @param name the name to search with
+	 * @return the matching group
+	 * @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group findByC_C_L_N(long companyId, long classNameId,
 		long liveGroupId, String name)
 		throws NoSuchGroupException, SystemException {
@@ -1892,11 +2271,31 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return group;
 	}
 
+	/**
+	 * Finds the group where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param liveGroupId the live group id to search with
+	 * @param name the name to search with
+	 * @return the matching group, or <code>null</code> if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group fetchByC_C_L_N(long companyId, long classNameId,
 		long liveGroupId, String name) throws SystemException {
 		return fetchByC_C_L_N(companyId, classNameId, liveGroupId, name, true);
 	}
 
+	/**
+	 * Finds the group where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param liveGroupId the live group id to search with
+	 * @param name the name to search with
+	 * @return the matching group, or <code>null</code> if a matching group could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Group fetchByC_C_L_N(long companyId, long classNameId,
 		long liveGroupId, String name, boolean retrieveFromCache)
 		throws SystemException {
@@ -2006,14 +2405,45 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Finds all the groups.
+	 *
+	 * @return the groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Group> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the groups.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of groups to return
+	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @return the range of groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Group> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the groups.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of groups to return
+	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Group> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2080,12 +2510,24 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return list;
 	}
 
+	/**
+	 * Removes all the groups where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (Group group : findByCompanyId(companyId)) {
 			remove(group);
 		}
 	}
 
+	/**
+	 * Removes the group where liveGroupId = &#63; from the database.
+	 *
+	 * @param liveGroupId the live group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByLiveGroupId(long liveGroupId)
 		throws NoSuchGroupException, SystemException {
 		Group group = findByLiveGroupId(liveGroupId);
@@ -2093,6 +2535,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		remove(group);
 	}
 
+	/**
+	 * Removes the group where companyId = &#63; and name = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_N(long companyId, String name)
 		throws NoSuchGroupException, SystemException {
 		Group group = findByC_N(companyId, name);
@@ -2100,6 +2549,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		remove(group);
 	}
 
+	/**
+	 * Removes the group where companyId = &#63; and friendlyURL = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param friendlyURL the friendly u r l to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_F(long companyId, String friendlyURL)
 		throws NoSuchGroupException, SystemException {
 		Group group = findByC_F(companyId, friendlyURL);
@@ -2107,12 +2563,27 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		remove(group);
 	}
 
+	/**
+	 * Removes all the groups where type = &#63; and active = &#63; from the database.
+	 *
+	 * @param type the type to search with
+	 * @param active the active to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByT_A(int type, boolean active) throws SystemException {
 		for (Group group : findByT_A(type, active)) {
 			remove(group);
 		}
 	}
 
+	/**
+	 * Removes the group where companyId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws NoSuchGroupException, SystemException {
 		Group group = findByC_C_C(companyId, classNameId, classPK);
@@ -2120,6 +2591,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		remove(group);
 	}
 
+	/**
+	 * Removes the group where companyId = &#63; and liveGroupId = &#63; and name = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param liveGroupId the live group id to search with
+	 * @param name the name to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_L_N(long companyId, long liveGroupId, String name)
 		throws NoSuchGroupException, SystemException {
 		Group group = findByC_L_N(companyId, liveGroupId, name);
@@ -2127,6 +2606,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		remove(group);
 	}
 
+	/**
+	 * Removes the group where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param liveGroupId the live group id to search with
+	 * @param name the name to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C_L_N(long companyId, long classNameId,
 		long liveGroupId, String name)
 		throws NoSuchGroupException, SystemException {
@@ -2135,12 +2623,24 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		remove(group);
 	}
 
+	/**
+	 * Removes all the groups from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (Group group : findAll()) {
 			remove(group);
 		}
 	}
 
+	/**
+	 * Counts all the groups where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the number of matching groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId };
 
@@ -2187,6 +2687,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the groups where liveGroupId = &#63;.
+	 *
+	 * @param liveGroupId the live group id to search with
+	 * @return the number of matching groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByLiveGroupId(long liveGroupId) throws SystemException {
 		Object[] finderArgs = new Object[] { liveGroupId };
 
@@ -2233,6 +2740,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the groups where companyId = &#63; and name = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @return the number of matching groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_N(long companyId, String name)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, name };
@@ -2296,6 +2811,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the groups where companyId = &#63; and friendlyURL = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param friendlyURL the friendly u r l to search with
+	 * @return the number of matching groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_F(long companyId, String friendlyURL)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, friendlyURL };
@@ -2359,6 +2882,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the groups where type = &#63; and active = &#63;.
+	 *
+	 * @param type the type to search with
+	 * @param active the active to search with
+	 * @return the number of matching groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByT_A(int type, boolean active) throws SystemException {
 		Object[] finderArgs = new Object[] { type, active };
 
@@ -2409,6 +2940,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the groups where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the number of matching groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, classNameId, classPK };
@@ -2464,6 +3004,15 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the groups where companyId = &#63; and liveGroupId = &#63; and name = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param liveGroupId the live group id to search with
+	 * @param name the name to search with
+	 * @return the number of matching groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_L_N(long companyId, long liveGroupId, String name)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, liveGroupId, name };
@@ -2531,6 +3080,16 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the groups where companyId = &#63; and classNameId = &#63; and liveGroupId = &#63; and name = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param liveGroupId the live group id to search with
+	 * @param name the name to search with
+	 * @return the number of matching groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C_L_N(long companyId, long classNameId,
 		long liveGroupId, String name) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2604,6 +3163,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the groups.
+	 *
+	 * @return the number of groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -2638,11 +3203,31 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return count.intValue();
 	}
 
+	/**
+	 * Gets all the organizations associated with the group.
+	 *
+	 * @param pk the primary key of the group to get the associated organizations for
+	 * @return the organizations associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.Organization> getOrganizations(long pk)
 		throws SystemException {
 		return getOrganizations(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
+	/**
+	 * Gets a range of all the organizations associated with the group.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the group to get the associated organizations for
+	 * @param start the lower bound of the range of groups to return
+	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @return the range of organizations associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.Organization> getOrganizations(
 		long pk, int start, int end) throws SystemException {
 		return getOrganizations(pk, start, end, null);
@@ -2656,6 +3241,20 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
 
+	/**
+	 * Gets an ordered range of all the organizations associated with the group.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the group to get the associated organizations for
+	 * @param start the lower bound of the range of groups to return
+	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of organizations associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.Organization> getOrganizations(
 		long pk, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2720,6 +3319,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			GroupModelImpl.MAPPING_TABLE_GROUPS_ORGS_NAME,
 			"getOrganizationsSize", new String[] { Long.class.getName() });
 
+	/**
+	 * Gets the number of organizations associated with the group.
+	 *
+	 * @param pk the primary key of the group to get the number of associated organizations for
+	 * @return the number of organizations associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int getOrganizationsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -2767,6 +3373,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			"containsOrganization",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
+	/**
+	 * Determines whether the organization is associated with the group.
+	 *
+	 * @param pk the primary key of the group
+	 * @param organizationPK the primary key of the organization
+	 * @return whether the organization is associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsOrganization(long pk, long organizationPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { pk, organizationPK };
@@ -2795,6 +3409,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return value.booleanValue();
 	}
 
+	/**
+	 * Determines whether the group has any organizations associated with it.
+	 *
+	 * @param pk the primary key of the group to check for associations with organizations
+	 * @return whether the group has any organizations associated with it
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsOrganizations(long pk) throws SystemException {
 		if (getOrganizationsSize(pk) > 0) {
 			return true;
@@ -2804,6 +3425,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Adds an association between the group and the organization. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param organizationPK the primary key of the organization
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addOrganization(long pk, long organizationPK)
 		throws SystemException {
 		try {
@@ -2817,6 +3445,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Adds an association between the group and the organization. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param organization the organization
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addOrganization(long pk,
 		com.liferay.portal.model.Organization organization)
 		throws SystemException {
@@ -2831,6 +3466,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Adds an association between the group and the organizations. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param organizationPKs the primary keys of the organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addOrganizations(long pk, long[] organizationPKs)
 		throws SystemException {
 		try {
@@ -2846,6 +3488,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Adds an association between the group and the organizations. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param organizations the organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addOrganizations(long pk,
 		List<com.liferay.portal.model.Organization> organizations)
 		throws SystemException {
@@ -2862,6 +3511,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Clears all associations between the group and its organizations. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group to clear the associated organizations from
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void clearOrganizations(long pk) throws SystemException {
 		try {
 			clearOrganizations.clear(pk);
@@ -2874,6 +3529,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Removes the association between the group and the organization. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param organizationPK the primary key of the organization
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeOrganization(long pk, long organizationPK)
 		throws SystemException {
 		try {
@@ -2887,6 +3549,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Removes the association between the group and the organization. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param organization the organization
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeOrganization(long pk,
 		com.liferay.portal.model.Organization organization)
 		throws SystemException {
@@ -2901,6 +3570,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Removes the association between the group and the organizations. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param organizationPKs the primary keys of the organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeOrganizations(long pk, long[] organizationPKs)
 		throws SystemException {
 		try {
@@ -2916,6 +3592,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Removes the association between the group and the organizations. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param organizations the organizations
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeOrganizations(long pk,
 		List<com.liferay.portal.model.Organization> organizations)
 		throws SystemException {
@@ -2932,6 +3615,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Sets the organizations associated with the group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group to set the associations for
+	 * @param organizationPKs the primary keys of the organizations to be associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setOrganizations(long pk, long[] organizationPKs)
 		throws SystemException {
 		try {
@@ -2957,6 +3647,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Sets the organizations associated with the group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group to set the associations for
+	 * @param organizations the organizations to be associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setOrganizations(long pk,
 		List<com.liferay.portal.model.Organization> organizations)
 		throws SystemException {
@@ -2979,11 +3676,31 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Gets all the permissions associated with the group.
+	 *
+	 * @param pk the primary key of the group to get the associated permissions for
+	 * @return the permissions associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.Permission> getPermissions(long pk)
 		throws SystemException {
 		return getPermissions(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
+	/**
+	 * Gets a range of all the permissions associated with the group.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the group to get the associated permissions for
+	 * @param start the lower bound of the range of groups to return
+	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @return the range of permissions associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.Permission> getPermissions(long pk,
 		int start, int end) throws SystemException {
 		return getPermissions(pk, start, end, null);
@@ -2998,6 +3715,20 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
 
+	/**
+	 * Gets an ordered range of all the permissions associated with the group.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the group to get the associated permissions for
+	 * @param start the lower bound of the range of groups to return
+	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of permissions associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.Permission> getPermissions(long pk,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -3062,6 +3793,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			GroupModelImpl.MAPPING_TABLE_GROUPS_PERMISSIONS_NAME,
 			"getPermissionsSize", new String[] { Long.class.getName() });
 
+	/**
+	 * Gets the number of permissions associated with the group.
+	 *
+	 * @param pk the primary key of the group to get the number of associated permissions for
+	 * @return the number of permissions associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int getPermissionsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -3109,6 +3847,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			"containsPermission",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
+	/**
+	 * Determines whether the permission is associated with the group.
+	 *
+	 * @param pk the primary key of the group
+	 * @param permissionPK the primary key of the permission
+	 * @return whether the permission is associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsPermission(long pk, long permissionPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { pk, permissionPK };
@@ -3137,6 +3883,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return value.booleanValue();
 	}
 
+	/**
+	 * Determines whether the group has any permissions associated with it.
+	 *
+	 * @param pk the primary key of the group to check for associations with permissions
+	 * @return whether the group has any permissions associated with it
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsPermissions(long pk) throws SystemException {
 		if (getPermissionsSize(pk) > 0) {
 			return true;
@@ -3146,6 +3899,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Adds an association between the group and the permission. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param permissionPK the primary key of the permission
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addPermission(long pk, long permissionPK)
 		throws SystemException {
 		try {
@@ -3159,6 +3919,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Adds an association between the group and the permission. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param permission the permission
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addPermission(long pk,
 		com.liferay.portal.model.Permission permission)
 		throws SystemException {
@@ -3173,6 +3940,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Adds an association between the group and the permissions. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param permissionPKs the primary keys of the permissions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addPermissions(long pk, long[] permissionPKs)
 		throws SystemException {
 		try {
@@ -3188,6 +3962,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Adds an association between the group and the permissions. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param permissions the permissions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addPermissions(long pk,
 		List<com.liferay.portal.model.Permission> permissions)
 		throws SystemException {
@@ -3204,6 +3985,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Clears all associations between the group and its permissions. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group to clear the associated permissions from
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void clearPermissions(long pk) throws SystemException {
 		try {
 			clearPermissions.clear(pk);
@@ -3216,6 +4003,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Removes the association between the group and the permission. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param permissionPK the primary key of the permission
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removePermission(long pk, long permissionPK)
 		throws SystemException {
 		try {
@@ -3229,6 +4023,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Removes the association between the group and the permission. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param permission the permission
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removePermission(long pk,
 		com.liferay.portal.model.Permission permission)
 		throws SystemException {
@@ -3243,6 +4044,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Removes the association between the group and the permissions. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param permissionPKs the primary keys of the permissions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removePermissions(long pk, long[] permissionPKs)
 		throws SystemException {
 		try {
@@ -3258,6 +4066,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Removes the association between the group and the permissions. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param permissions the permissions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removePermissions(long pk,
 		List<com.liferay.portal.model.Permission> permissions)
 		throws SystemException {
@@ -3274,6 +4089,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Sets the permissions associated with the group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group to set the associations for
+	 * @param permissionPKs the primary keys of the permissions to be associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setPermissions(long pk, long[] permissionPKs)
 		throws SystemException {
 		try {
@@ -3299,6 +4121,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Sets the permissions associated with the group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group to set the associations for
+	 * @param permissions the permissions to be associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setPermissions(long pk,
 		List<com.liferay.portal.model.Permission> permissions)
 		throws SystemException {
@@ -3321,11 +4150,31 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Gets all the roles associated with the group.
+	 *
+	 * @param pk the primary key of the group to get the associated roles for
+	 * @return the roles associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.Role> getRoles(long pk)
 		throws SystemException {
 		return getRoles(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
+	/**
+	 * Gets a range of all the roles associated with the group.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the group to get the associated roles for
+	 * @param start the lower bound of the range of groups to return
+	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @return the range of roles associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.Role> getRoles(long pk, int start,
 		int end) throws SystemException {
 		return getRoles(pk, start, end, null);
@@ -3339,6 +4188,20 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
 
+	/**
+	 * Gets an ordered range of all the roles associated with the group.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the group to get the associated roles for
+	 * @param start the lower bound of the range of groups to return
+	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of roles associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.Role> getRoles(long pk, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -3402,6 +4265,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			GroupModelImpl.MAPPING_TABLE_GROUPS_ROLES_NAME, "getRolesSize",
 			new String[] { Long.class.getName() });
 
+	/**
+	 * Gets the number of roles associated with the group.
+	 *
+	 * @param pk the primary key of the group to get the number of associated roles for
+	 * @return the number of roles associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int getRolesSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -3448,6 +4318,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			GroupModelImpl.MAPPING_TABLE_GROUPS_ROLES_NAME, "containsRole",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
+	/**
+	 * Determines whether the role is associated with the group.
+	 *
+	 * @param pk the primary key of the group
+	 * @param rolePK the primary key of the role
+	 * @return whether the role is associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsRole(long pk, long rolePK) throws SystemException {
 		Object[] finderArgs = new Object[] { pk, rolePK };
 
@@ -3474,6 +4352,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return value.booleanValue();
 	}
 
+	/**
+	 * Determines whether the group has any roles associated with it.
+	 *
+	 * @param pk the primary key of the group to check for associations with roles
+	 * @return whether the group has any roles associated with it
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsRoles(long pk) throws SystemException {
 		if (getRolesSize(pk) > 0) {
 			return true;
@@ -3483,6 +4368,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Adds an association between the group and the role. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param rolePK the primary key of the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addRole(long pk, long rolePK) throws SystemException {
 		try {
 			addRole.add(pk, rolePK);
@@ -3495,6 +4387,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Adds an association between the group and the role. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param role the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addRole(long pk, com.liferay.portal.model.Role role)
 		throws SystemException {
 		try {
@@ -3508,6 +4407,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Adds an association between the group and the roles. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param rolePKs the primary keys of the roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addRoles(long pk, long[] rolePKs) throws SystemException {
 		try {
 			for (long rolePK : rolePKs) {
@@ -3522,6 +4428,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Adds an association between the group and the roles. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param roles the roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addRoles(long pk, List<com.liferay.portal.model.Role> roles)
 		throws SystemException {
 		try {
@@ -3537,6 +4450,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Clears all associations between the group and its roles. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group to clear the associated roles from
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void clearRoles(long pk) throws SystemException {
 		try {
 			clearRoles.clear(pk);
@@ -3549,6 +4468,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Removes the association between the group and the role. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param rolePK the primary key of the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeRole(long pk, long rolePK) throws SystemException {
 		try {
 			removeRole.remove(pk, rolePK);
@@ -3561,6 +4487,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Removes the association between the group and the role. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param role the role
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeRole(long pk, com.liferay.portal.model.Role role)
 		throws SystemException {
 		try {
@@ -3574,6 +4507,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Removes the association between the group and the roles. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param rolePKs the primary keys of the roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeRoles(long pk, long[] rolePKs) throws SystemException {
 		try {
 			for (long rolePK : rolePKs) {
@@ -3588,6 +4528,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Removes the association between the group and the roles. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param roles the roles
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeRoles(long pk, List<com.liferay.portal.model.Role> roles)
 		throws SystemException {
 		try {
@@ -3603,6 +4550,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Sets the roles associated with the group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group to set the associations for
+	 * @param rolePKs the primary keys of the roles to be associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setRoles(long pk, long[] rolePKs) throws SystemException {
 		try {
 			Set<Long> rolePKSet = SetUtil.fromArray(rolePKs);
@@ -3627,6 +4581,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Sets the roles associated with the group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group to set the associations for
+	 * @param roles the roles to be associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setRoles(long pk, List<com.liferay.portal.model.Role> roles)
 		throws SystemException {
 		try {
@@ -3648,11 +4609,31 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Gets all the user groups associated with the group.
+	 *
+	 * @param pk the primary key of the group to get the associated user groups for
+	 * @return the user groups associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.UserGroup> getUserGroups(long pk)
 		throws SystemException {
 		return getUserGroups(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
+	/**
+	 * Gets a range of all the user groups associated with the group.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the group to get the associated user groups for
+	 * @param start the lower bound of the range of groups to return
+	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @return the range of user groups associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.UserGroup> getUserGroups(long pk,
 		int start, int end) throws SystemException {
 		return getUserGroups(pk, start, end, null);
@@ -3667,6 +4648,20 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
 
+	/**
+	 * Gets an ordered range of all the user groups associated with the group.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the group to get the associated user groups for
+	 * @param start the lower bound of the range of groups to return
+	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of user groups associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.UserGroup> getUserGroups(long pk,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -3731,6 +4726,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			GroupModelImpl.MAPPING_TABLE_GROUPS_USERGROUPS_NAME,
 			"getUserGroupsSize", new String[] { Long.class.getName() });
 
+	/**
+	 * Gets the number of user groups associated with the group.
+	 *
+	 * @param pk the primary key of the group to get the number of associated user groups for
+	 * @return the number of user groups associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int getUserGroupsSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -3778,6 +4780,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			"containsUserGroup",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
+	/**
+	 * Determines whether the user group is associated with the group.
+	 *
+	 * @param pk the primary key of the group
+	 * @param userGroupPK the primary key of the user group
+	 * @return whether the user group is associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsUserGroup(long pk, long userGroupPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { pk, userGroupPK };
@@ -3806,6 +4816,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return value.booleanValue();
 	}
 
+	/**
+	 * Determines whether the group has any user groups associated with it.
+	 *
+	 * @param pk the primary key of the group to check for associations with user groups
+	 * @return whether the group has any user groups associated with it
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsUserGroups(long pk) throws SystemException {
 		if (getUserGroupsSize(pk) > 0) {
 			return true;
@@ -3815,6 +4832,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Adds an association between the group and the user group. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param userGroupPK the primary key of the user group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addUserGroup(long pk, long userGroupPK)
 		throws SystemException {
 		try {
@@ -3828,6 +4852,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Adds an association between the group and the user group. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param userGroup the user group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addUserGroup(long pk,
 		com.liferay.portal.model.UserGroup userGroup) throws SystemException {
 		try {
@@ -3841,6 +4872,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Adds an association between the group and the user groups. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param userGroupPKs the primary keys of the user groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addUserGroups(long pk, long[] userGroupPKs)
 		throws SystemException {
 		try {
@@ -3856,6 +4894,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Adds an association between the group and the user groups. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param userGroups the user groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addUserGroups(long pk,
 		List<com.liferay.portal.model.UserGroup> userGroups)
 		throws SystemException {
@@ -3872,6 +4917,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Clears all associations between the group and its user groups. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group to clear the associated user groups from
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void clearUserGroups(long pk) throws SystemException {
 		try {
 			clearUserGroups.clear(pk);
@@ -3884,6 +4935,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Removes the association between the group and the user group. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param userGroupPK the primary key of the user group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeUserGroup(long pk, long userGroupPK)
 		throws SystemException {
 		try {
@@ -3897,6 +4955,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Removes the association between the group and the user group. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param userGroup the user group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeUserGroup(long pk,
 		com.liferay.portal.model.UserGroup userGroup) throws SystemException {
 		try {
@@ -3910,6 +4975,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Removes the association between the group and the user groups. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param userGroupPKs the primary keys of the user groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeUserGroups(long pk, long[] userGroupPKs)
 		throws SystemException {
 		try {
@@ -3925,6 +4997,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Removes the association between the group and the user groups. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param userGroups the user groups
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeUserGroups(long pk,
 		List<com.liferay.portal.model.UserGroup> userGroups)
 		throws SystemException {
@@ -3941,6 +5020,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Sets the user groups associated with the group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group to set the associations for
+	 * @param userGroupPKs the primary keys of the user groups to be associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setUserGroups(long pk, long[] userGroupPKs)
 		throws SystemException {
 		try {
@@ -3966,6 +5052,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Sets the user groups associated with the group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group to set the associations for
+	 * @param userGroups the user groups to be associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setUserGroups(long pk,
 		List<com.liferay.portal.model.UserGroup> userGroups)
 		throws SystemException {
@@ -3988,11 +5081,31 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Gets all the users associated with the group.
+	 *
+	 * @param pk the primary key of the group to get the associated users for
+	 * @return the users associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.User> getUsers(long pk)
 		throws SystemException {
 		return getUsers(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
+	/**
+	 * Gets a range of all the users associated with the group.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the group to get the associated users for
+	 * @param start the lower bound of the range of groups to return
+	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @return the range of users associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end) throws SystemException {
 		return getUsers(pk, start, end, null);
@@ -4006,6 +5119,20 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
 
+	/**
+	 * Gets an ordered range of all the users associated with the group.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the group to get the associated users for
+	 * @param start the lower bound of the range of groups to return
+	 * @param end the upper bound of the range of groups to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of users associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<com.liferay.portal.model.User> getUsers(long pk, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -4069,6 +5196,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			GroupModelImpl.MAPPING_TABLE_USERS_GROUPS_NAME, "getUsersSize",
 			new String[] { Long.class.getName() });
 
+	/**
+	 * Gets the number of users associated with the group.
+	 *
+	 * @param pk the primary key of the group to get the number of associated users for
+	 * @return the number of users associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int getUsersSize(long pk) throws SystemException {
 		Object[] finderArgs = new Object[] { pk };
 
@@ -4115,6 +5249,14 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 			GroupModelImpl.MAPPING_TABLE_USERS_GROUPS_NAME, "containsUser",
 			new String[] { Long.class.getName(), Long.class.getName() });
 
+	/**
+	 * Determines whether the user is associated with the group.
+	 *
+	 * @param pk the primary key of the group
+	 * @param userPK the primary key of the user
+	 * @return whether the user is associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsUser(long pk, long userPK) throws SystemException {
 		Object[] finderArgs = new Object[] { pk, userPK };
 
@@ -4141,6 +5283,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		return value.booleanValue();
 	}
 
+	/**
+	 * Determines whether the group has any users associated with it.
+	 *
+	 * @param pk the primary key of the group to check for associations with users
+	 * @return whether the group has any users associated with it
+	 * @throws SystemException if a system exception occurred
+	 */
 	public boolean containsUsers(long pk) throws SystemException {
 		if (getUsersSize(pk) > 0) {
 			return true;
@@ -4150,6 +5299,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Adds an association between the group and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param userPK the primary key of the user
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addUser(long pk, long userPK) throws SystemException {
 		try {
 			addUser.add(pk, userPK);
@@ -4162,6 +5318,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Adds an association between the group and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param user the user
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addUser(long pk, com.liferay.portal.model.User user)
 		throws SystemException {
 		try {
@@ -4175,6 +5338,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Adds an association between the group and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param userPKs the primary keys of the users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			for (long userPK : userPKs) {
@@ -4189,6 +5359,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Adds an association between the group and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param users the users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws SystemException {
 		try {
@@ -4204,6 +5381,12 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Clears all associations between the group and its users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group to clear the associated users from
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void clearUsers(long pk) throws SystemException {
 		try {
 			clearUsers.clear(pk);
@@ -4216,6 +5399,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Removes the association between the group and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param userPK the primary key of the user
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeUser(long pk, long userPK) throws SystemException {
 		try {
 			removeUser.remove(pk, userPK);
@@ -4228,6 +5418,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Removes the association between the group and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param user the user
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeUser(long pk, com.liferay.portal.model.User user)
 		throws SystemException {
 		try {
@@ -4241,6 +5438,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Removes the association between the group and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param userPKs the primary keys of the users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			for (long userPK : userPKs) {
@@ -4255,6 +5459,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Removes the association between the group and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group
+	 * @param users the users
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws SystemException {
 		try {
@@ -4270,6 +5481,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Sets the users associated with the group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group to set the associations for
+	 * @param userPKs the primary keys of the users to be associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setUsers(long pk, long[] userPKs) throws SystemException {
 		try {
 			Set<Long> userPKSet = SetUtil.fromArray(userPKs);
@@ -4294,6 +5512,13 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Sets the users associated with the group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the group to set the associations for
+	 * @param users the users to be associated with the group
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void setUsers(long pk, List<com.liferay.portal.model.User> users)
 		throws SystemException {
 		try {
@@ -4315,6 +5540,9 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		}
 	}
 
+	/**
+	 * Initializes the group persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

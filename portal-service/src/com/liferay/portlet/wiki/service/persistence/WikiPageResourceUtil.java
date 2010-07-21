@@ -25,9 +25,15 @@ import com.liferay.portlet.wiki.model.WikiPageResource;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       WikiPageResourcePersistence
- * @see       WikiPageResourcePersistenceImpl
+ * The persistence utility for the wiki page resource service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see WikiPageResourcePersistence
+ * @see WikiPageResourcePersistenceImpl
  * @generated
  */
 public class WikiPageResourceUtil {
@@ -105,21 +111,45 @@ public class WikiPageResourceUtil {
 		return getPersistence().update(wikiPageResource, merge, serviceContext);
 	}
 
+	/**
+	* Caches the wiki page resource in the entity cache if it is enabled.
+	*
+	* @param wikiPageResource the wiki page resource to cache
+	*/
 	public static void cacheResult(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource) {
 		getPersistence().cacheResult(wikiPageResource);
 	}
 
+	/**
+	* Caches the wiki page resources in the entity cache if it is enabled.
+	*
+	* @param wikiPageResources the wiki page resources to cache
+	*/
 	public static void cacheResult(
 		java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> wikiPageResources) {
 		getPersistence().cacheResult(wikiPageResources);
 	}
 
+	/**
+	* Creates a new wiki page resource with the primary key.
+	*
+	* @param resourcePrimKey the primary key for the new wiki page resource
+	* @return the new wiki page resource
+	*/
 	public static com.liferay.portlet.wiki.model.WikiPageResource create(
 		long resourcePrimKey) {
 		return getPersistence().create(resourcePrimKey);
 	}
 
+	/**
+	* Removes the wiki page resource with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param resourcePrimKey the primary key of the wiki page resource to remove
+	* @return the wiki page resource that was removed
+	* @throws com.liferay.portlet.wiki.NoSuchPageResourceException if a wiki page resource with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.wiki.model.WikiPageResource remove(
 		long resourcePrimKey)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -134,6 +164,14 @@ public class WikiPageResourceUtil {
 		return getPersistence().updateImpl(wikiPageResource, merge);
 	}
 
+	/**
+	* Finds the wiki page resource with the primary key or throws a {@link com.liferay.portlet.wiki.NoSuchPageResourceException} if it could not be found.
+	*
+	* @param resourcePrimKey the primary key of the wiki page resource to find
+	* @return the wiki page resource
+	* @throws com.liferay.portlet.wiki.NoSuchPageResourceException if a wiki page resource with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.wiki.model.WikiPageResource findByPrimaryKey(
 		long resourcePrimKey)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -141,24 +179,65 @@ public class WikiPageResourceUtil {
 		return getPersistence().findByPrimaryKey(resourcePrimKey);
 	}
 
+	/**
+	* Finds the wiki page resource with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param resourcePrimKey the primary key of the wiki page resource to find
+	* @return the wiki page resource, or <code>null</code> if a wiki page resource with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.wiki.model.WikiPageResource fetchByPrimaryKey(
 		long resourcePrimKey)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(resourcePrimKey);
 	}
 
+	/**
+	* Finds all the wiki page resources where uuid = &#63;.
+	*
+	* @param uuid the uuid to search with
+	* @return the matching wiki page resources
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findByUuid(
 		java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUuid(uuid);
 	}
 
+	/**
+	* Finds a range of all the wiki page resources where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param start the lower bound of the range of wiki page resources to return
+	* @param end the upper bound of the range of wiki page resources to return (not inclusive)
+	* @return the range of matching wiki page resources
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findByUuid(
 		java.lang.String uuid, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByUuid(uuid, start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the wiki page resources where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param start the lower bound of the range of wiki page resources to return
+	* @param end the upper bound of the range of wiki page resources to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching wiki page resources
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findByUuid(
 		java.lang.String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -166,6 +245,19 @@ public class WikiPageResourceUtil {
 		return getPersistence().findByUuid(uuid, start, end, orderByComparator);
 	}
 
+	/**
+	* Finds the first wiki page resource in the ordered set where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching wiki page resource
+	* @throws com.liferay.portlet.wiki.NoSuchPageResourceException if a matching wiki page resource could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.wiki.model.WikiPageResource findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -174,6 +266,19 @@ public class WikiPageResourceUtil {
 		return getPersistence().findByUuid_First(uuid, orderByComparator);
 	}
 
+	/**
+	* Finds the last wiki page resource in the ordered set where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching wiki page resource
+	* @throws com.liferay.portlet.wiki.NoSuchPageResourceException if a matching wiki page resource could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.wiki.model.WikiPageResource findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -182,6 +287,20 @@ public class WikiPageResourceUtil {
 		return getPersistence().findByUuid_Last(uuid, orderByComparator);
 	}
 
+	/**
+	* Finds the wiki page resources before and after the current wiki page resource in the ordered set where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param resourcePrimKey the primary key of the current wiki page resource
+	* @param uuid the uuid to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next wiki page resource
+	* @throws com.liferay.portlet.wiki.NoSuchPageResourceException if a wiki page resource with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.wiki.model.WikiPageResource[] findByUuid_PrevAndNext(
 		long resourcePrimKey, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -192,6 +311,15 @@ public class WikiPageResourceUtil {
 			orderByComparator);
 	}
 
+	/**
+	* Finds the wiki page resource where nodeId = &#63; and title = &#63; or throws a {@link com.liferay.portlet.wiki.NoSuchPageResourceException} if it could not be found.
+	*
+	* @param nodeId the node id to search with
+	* @param title the title to search with
+	* @return the matching wiki page resource
+	* @throws com.liferay.portlet.wiki.NoSuchPageResourceException if a matching wiki page resource could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.wiki.model.WikiPageResource findByN_T(
 		long nodeId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -199,29 +327,76 @@ public class WikiPageResourceUtil {
 		return getPersistence().findByN_T(nodeId, title);
 	}
 
+	/**
+	* Finds the wiki page resource where nodeId = &#63; and title = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param nodeId the node id to search with
+	* @param title the title to search with
+	* @return the matching wiki page resource, or <code>null</code> if a matching wiki page resource could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.wiki.model.WikiPageResource fetchByN_T(
 		long nodeId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByN_T(nodeId, title);
 	}
 
+	/**
+	* Finds the wiki page resource where nodeId = &#63; and title = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param nodeId the node id to search with
+	* @param title the title to search with
+	* @return the matching wiki page resource, or <code>null</code> if a matching wiki page resource could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.wiki.model.WikiPageResource fetchByN_T(
 		long nodeId, java.lang.String title, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByN_T(nodeId, title, retrieveFromCache);
 	}
 
+	/**
+	* Finds all the wiki page resources.
+	*
+	* @return the wiki page resources
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll();
 	}
 
+	/**
+	* Finds a range of all the wiki page resources.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of wiki page resources to return
+	* @param end the upper bound of the range of wiki page resources to return (not inclusive)
+	* @return the range of wiki page resources
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findAll(start, end);
 	}
 
+	/**
+	* Finds an ordered range of all the wiki page resources.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of wiki page resources to return
+	* @param end the upper bound of the range of wiki page resources to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of wiki page resources
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
@@ -229,32 +404,71 @@ public class WikiPageResourceUtil {
 		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
+	/**
+	* Removes all the wiki page resources where uuid = &#63; from the database.
+	*
+	* @param uuid the uuid to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByUuid(java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByUuid(uuid);
 	}
 
+	/**
+	* Removes the wiki page resource where nodeId = &#63; and title = &#63; from the database.
+	*
+	* @param nodeId the node id to search with
+	* @param title the title to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeByN_T(long nodeId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageResourceException {
 		getPersistence().removeByN_T(nodeId, title);
 	}
 
+	/**
+	* Removes all the wiki page resources from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
 	}
 
+	/**
+	* Counts all the wiki page resources where uuid = &#63;.
+	*
+	* @param uuid the uuid to search with
+	* @return the number of matching wiki page resources
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByUuid(java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByUuid(uuid);
 	}
 
+	/**
+	* Counts all the wiki page resources where nodeId = &#63; and title = &#63;.
+	*
+	* @param nodeId the node id to search with
+	* @param title the title to search with
+	* @return the number of matching wiki page resources
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countByN_T(long nodeId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByN_T(nodeId, title);
 	}
 
+	/**
+	* Counts all the wiki page resources.
+	*
+	* @return the number of wiki page resources
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countAll();

@@ -15,20 +15,16 @@
 package com.liferay.portlet.asset.model;
 
 /**
- * <p>
- * This interface is a model that represents the AssetVocabulary table in the
- * database.
- * </p>
+ * The model interface for the AssetVocabulary service. Represents a row in the &quot;AssetVocabulary&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.asset.model.impl.AssetVocabularyImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.asset.model.impl.AssetVocabularyImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       AssetVocabularyModel
- * @see       com.liferay.portlet.asset.model.impl.AssetVocabularyImpl
- * @see       com.liferay.portlet.asset.model.impl.AssetVocabularyModelImpl
+ * @author Brian Wing Shun Chan
+ * @see AssetVocabularyModel
+ * @see com.liferay.portlet.asset.model.impl.AssetVocabularyImpl
+ * @see com.liferay.portlet.asset.model.impl.AssetVocabularyModelImpl
  * @generated
  */
 public interface AssetVocabulary extends AssetVocabularyModel {

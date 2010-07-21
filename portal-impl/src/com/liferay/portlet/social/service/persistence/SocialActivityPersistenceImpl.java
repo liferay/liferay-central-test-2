@@ -53,9 +53,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       SocialActivityPersistence
- * @see       SocialActivityUtil
+ * The persistence for the social activity service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see SocialActivityPersistence
+ * @see SocialActivityUtil
  * @generated
  */
 public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialActivity>
@@ -187,6 +197,11 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			SocialActivityModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
+	/**
+	 * Caches the social activity in the entity cache if it is enabled.
+	 *
+	 * @param socialActivity the social activity to cache
+	 */
 	public void cacheResult(SocialActivity socialActivity) {
 		EntityCacheUtil.putResult(SocialActivityModelImpl.ENTITY_CACHE_ENABLED,
 			SocialActivityImpl.class, socialActivity.getPrimaryKey(),
@@ -208,6 +223,11 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			}, socialActivity);
 	}
 
+	/**
+	 * Caches the social activities in the entity cache if it is enabled.
+	 *
+	 * @param socialActivities the social activities to cache
+	 */
 	public void cacheResult(List<SocialActivity> socialActivities) {
 		for (SocialActivity socialActivity : socialActivities) {
 			if (EntityCacheUtil.getResult(
@@ -219,6 +239,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Clears the cache for all social activities.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(SocialActivityImpl.class.getName());
 		EntityCacheUtil.clearCache(SocialActivityImpl.class.getName());
@@ -226,6 +253,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the social activity.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(SocialActivity socialActivity) {
 		EntityCacheUtil.removeResult(SocialActivityModelImpl.ENTITY_CACHE_ENABLED,
 			SocialActivityImpl.class, socialActivity.getPrimaryKey());
@@ -245,6 +279,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			});
 	}
 
+	/**
+	 * Creates a new social activity with the primary key.
+	 *
+	 * @param activityId the primary key for the new social activity
+	 * @return the new social activity
+	 */
 	public SocialActivity create(long activityId) {
 		SocialActivity socialActivity = new SocialActivityImpl();
 
@@ -254,11 +294,27 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return socialActivity;
 	}
 
+	/**
+	 * Removes the social activity with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the social activity to remove
+	 * @return the social activity that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a social activity with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the social activity with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param activityId the primary key of the social activity to remove
+	 * @return the social activity that was removed
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a social activity with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity remove(long activityId)
 		throws NoSuchActivityException, SystemException {
 		Session session = null;
@@ -460,11 +516,27 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return socialActivityImpl;
 	}
 
+	/**
+	 * Finds the social activity with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the social activity to find
+	 * @return the social activity
+	 * @throws com.liferay.portal.NoSuchModelException if a social activity with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the social activity with the primary key or throws a {@link com.liferay.portlet.social.NoSuchActivityException} if it could not be found.
+	 *
+	 * @param activityId the primary key of the social activity to find
+	 * @return the social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a social activity with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity findByPrimaryKey(long activityId)
 		throws NoSuchActivityException, SystemException {
 		SocialActivity socialActivity = fetchByPrimaryKey(activityId);
@@ -481,11 +553,25 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return socialActivity;
 	}
 
+	/**
+	 * Finds the social activity with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the social activity to find
+	 * @return the social activity, or <code>null</code> if a social activity with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the social activity with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param activityId the primary key of the social activity to find
+	 * @return the social activity, or <code>null</code> if a social activity with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity fetchByPrimaryKey(long activityId)
 		throws SystemException {
 		SocialActivity socialActivity = (SocialActivity)EntityCacheUtil.getResult(SocialActivityModelImpl.ENTITY_CACHE_ENABLED,
@@ -515,16 +601,50 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return socialActivity;
 	}
 
+	/**
+	 * Finds all the social activities where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByGroupId(long groupId)
 		throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the social activities where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of social activities to return
+	 * @param end the upper bound of the range of social activities to return (not inclusive)
+	 * @return the range of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social activities where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of social activities to return
+	 * @param end the upper bound of the range of social activities to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -597,6 +717,19 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return list;
 	}
 
+	/**
+	 * Finds the first social activity in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
@@ -620,6 +753,19 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds the last social activity in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
@@ -645,6 +791,20 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds the social activities before and after the current social activity in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param activityId the primary key of the current social activity
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a social activity with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity[] findByGroupId_PrevAndNext(long activityId,
 		long groupId, OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
@@ -779,17 +939,51 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds all the social activities where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the social activities where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of social activities to return
+	 * @param end the upper bound of the range of social activities to return (not inclusive)
+	 * @return the range of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByCompanyId(long companyId, int start,
 		int end) throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social activities where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of social activities to return
+	 * @param end the upper bound of the range of social activities to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -862,6 +1056,19 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return list;
 	}
 
+	/**
+	 * Finds the first social activity in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
@@ -885,6 +1092,19 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds the last social activity in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
@@ -910,6 +1130,20 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds the social activities before and after the current social activity in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param activityId the primary key of the current social activity
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a social activity with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity[] findByCompanyId_PrevAndNext(long activityId,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
@@ -1044,16 +1278,50 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds all the social activities where userId = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @return the matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByUserId(long userId)
 		throws SystemException {
 		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the social activities where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of social activities to return
+	 * @param end the upper bound of the range of social activities to return (not inclusive)
+	 * @return the range of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByUserId(long userId, int start, int end)
 		throws SystemException {
 		return findByUserId(userId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social activities where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of social activities to return
+	 * @param end the upper bound of the range of social activities to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1126,6 +1394,19 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return list;
 	}
 
+	/**
+	 * Finds the first social activity in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity findByUserId_First(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
@@ -1148,6 +1429,19 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds the last social activity in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity findByUserId_Last(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
@@ -1173,6 +1467,20 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds the social activities before and after the current social activity in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param activityId the primary key of the current social activity
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a social activity with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity[] findByUserId_PrevAndNext(long activityId,
 		long userId, OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
@@ -1307,6 +1615,14 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds the social activity where mirrorActivityId = &#63; or throws a {@link com.liferay.portlet.social.NoSuchActivityException} if it could not be found.
+	 *
+	 * @param mirrorActivityId the mirror activity id to search with
+	 * @return the matching social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity findByMirrorActivityId(long mirrorActivityId)
 		throws NoSuchActivityException, SystemException {
 		SocialActivity socialActivity = fetchByMirrorActivityId(mirrorActivityId);
@@ -1331,11 +1647,25 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return socialActivity;
 	}
 
+	/**
+	 * Finds the social activity where mirrorActivityId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param mirrorActivityId the mirror activity id to search with
+	 * @return the matching social activity, or <code>null</code> if a matching social activity could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity fetchByMirrorActivityId(long mirrorActivityId)
 		throws SystemException {
 		return fetchByMirrorActivityId(mirrorActivityId, true);
 	}
 
+	/**
+	 * Finds the social activity where mirrorActivityId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param mirrorActivityId the mirror activity id to search with
+	 * @return the matching social activity, or <code>null</code> if a matching social activity could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity fetchByMirrorActivityId(long mirrorActivityId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { mirrorActivityId };
@@ -1414,17 +1744,51 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds all the social activities where classNameId = &#63;.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @return the matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByClassNameId(long classNameId)
 		throws SystemException {
 		return findByClassNameId(classNameId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the social activities where classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param start the lower bound of the range of social activities to return
+	 * @param end the upper bound of the range of social activities to return (not inclusive)
+	 * @return the range of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByClassNameId(long classNameId, int start,
 		int end) throws SystemException {
 		return findByClassNameId(classNameId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social activities where classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param start the lower bound of the range of social activities to return
+	 * @param end the upper bound of the range of social activities to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByClassNameId(long classNameId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1497,6 +1861,19 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return list;
 	}
 
+	/**
+	 * Finds the first social activity in the ordered set where classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity findByClassNameId_First(long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
@@ -1520,6 +1897,19 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds the last social activity in the ordered set where classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity findByClassNameId_Last(long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
@@ -1545,6 +1935,20 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds the social activities before and after the current social activity in the ordered set where classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param activityId the primary key of the current social activity
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a social activity with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity[] findByClassNameId_PrevAndNext(long activityId,
 		long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
@@ -1679,17 +2083,51 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds all the social activities where receiverUserId = &#63;.
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @return the matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByReceiverUserId(long receiverUserId)
 		throws SystemException {
 		return findByReceiverUserId(receiverUserId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the social activities where receiverUserId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @param start the lower bound of the range of social activities to return
+	 * @param end the upper bound of the range of social activities to return (not inclusive)
+	 * @return the range of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByReceiverUserId(long receiverUserId,
 		int start, int end) throws SystemException {
 		return findByReceiverUserId(receiverUserId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social activities where receiverUserId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @param start the lower bound of the range of social activities to return
+	 * @param end the upper bound of the range of social activities to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByReceiverUserId(long receiverUserId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1763,6 +2201,19 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return list;
 	}
 
+	/**
+	 * Finds the first social activity in the ordered set where receiverUserId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity findByReceiverUserId_First(long receiverUserId,
 		OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
@@ -1786,6 +2237,19 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds the last social activity in the ordered set where receiverUserId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity findByReceiverUserId_Last(long receiverUserId,
 		OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
@@ -1811,6 +2275,20 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds the social activities before and after the current social activity in the ordered set where receiverUserId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param activityId the primary key of the current social activity
+	 * @param receiverUserId the receiver user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a social activity with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity[] findByReceiverUserId_PrevAndNext(long activityId,
 		long receiverUserId, OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
@@ -1945,17 +2423,54 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds all the social activities where classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByC_C(long classNameId, long classPK)
 		throws SystemException {
 		return findByC_C(classNameId, classPK, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the social activities where classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param start the lower bound of the range of social activities to return
+	 * @param end the upper bound of the range of social activities to return (not inclusive)
+	 * @return the range of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByC_C(long classNameId, long classPK,
 		int start, int end) throws SystemException {
 		return findByC_C(classNameId, classPK, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social activities where classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param start the lower bound of the range of social activities to return
+	 * @param end the upper bound of the range of social activities to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByC_C(long classNameId, long classPK,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2033,6 +2548,20 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return list;
 	}
 
+	/**
+	 * Finds the first social activity in the ordered set where classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity findByC_C_First(long classNameId, long classPK,
 		OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
@@ -2059,6 +2588,20 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds the last social activity in the ordered set where classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity findByC_C_Last(long classNameId, long classPK,
 		OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
@@ -2087,6 +2630,21 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds the social activities before and after the current social activity in the ordered set where classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param activityId the primary key of the current social activity
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a social activity with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity[] findByC_C_PrevAndNext(long activityId,
 		long classNameId, long classPK, OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
@@ -2225,12 +2783,36 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds all the social activities where mirrorActivityId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param mirrorActivityId the mirror activity id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByM_C_C(long mirrorActivityId,
 		long classNameId, long classPK) throws SystemException {
 		return findByM_C_C(mirrorActivityId, classNameId, classPK,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the social activities where mirrorActivityId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param mirrorActivityId the mirror activity id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param start the lower bound of the range of social activities to return
+	 * @param end the upper bound of the range of social activities to return (not inclusive)
+	 * @return the range of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByM_C_C(long mirrorActivityId,
 		long classNameId, long classPK, int start, int end)
 		throws SystemException {
@@ -2238,6 +2820,22 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social activities where mirrorActivityId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param mirrorActivityId the mirror activity id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param start the lower bound of the range of social activities to return
+	 * @param end the upper bound of the range of social activities to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findByM_C_C(long mirrorActivityId,
 		long classNameId, long classPK, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -2319,6 +2917,21 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return list;
 	}
 
+	/**
+	 * Finds the first social activity in the ordered set where mirrorActivityId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param mirrorActivityId the mirror activity id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity findByM_C_C_First(long mirrorActivityId,
 		long classNameId, long classPK, OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
@@ -2348,6 +2961,21 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds the last social activity in the ordered set where mirrorActivityId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param mirrorActivityId the mirror activity id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity findByM_C_C_Last(long mirrorActivityId,
 		long classNameId, long classPK, OrderByComparator orderByComparator)
 		throws NoSuchActivityException, SystemException {
@@ -2379,6 +3007,22 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds the social activities before and after the current social activity in the ordered set where mirrorActivityId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param activityId the primary key of the current social activity
+	 * @param mirrorActivityId the mirror activity id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a social activity with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity[] findByM_C_C_PrevAndNext(long activityId,
 		long mirrorActivityId, long classNameId, long classPK,
 		OrderByComparator orderByComparator)
@@ -2524,6 +3168,20 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds the social activity where groupId = &#63; and userId = &#63; and createDate = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63; and receiverUserId = &#63; or throws a {@link com.liferay.portlet.social.NoSuchActivityException} if it could not be found.
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @param createDate the create date to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param receiverUserId the receiver user id to search with
+	 * @return the matching social activity
+	 * @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity findByG_U_CD_C_C_T_R(long groupId, long userId,
 		long createDate, long classNameId, long classPK, int type,
 		long receiverUserId) throws NoSuchActivityException, SystemException {
@@ -2568,6 +3226,19 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return socialActivity;
 	}
 
+	/**
+	 * Finds the social activity where groupId = &#63; and userId = &#63; and createDate = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63; and receiverUserId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @param createDate the create date to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param receiverUserId the receiver user id to search with
+	 * @return the matching social activity, or <code>null</code> if a matching social activity could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity fetchByG_U_CD_C_C_T_R(long groupId, long userId,
 		long createDate, long classNameId, long classPK, int type,
 		long receiverUserId) throws SystemException {
@@ -2575,6 +3246,19 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 			classPK, type, receiverUserId, true);
 	}
 
+	/**
+	 * Finds the social activity where groupId = &#63; and userId = &#63; and createDate = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63; and receiverUserId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @param createDate the create date to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param receiverUserId the receiver user id to search with
+	 * @return the matching social activity, or <code>null</code> if a matching social activity could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public SocialActivity fetchByG_U_CD_C_C_T_R(long groupId, long userId,
 		long createDate, long classNameId, long classPK, int type,
 		long receiverUserId, boolean retrieveFromCache)
@@ -2688,15 +3372,46 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Finds all the social activities.
+	 *
+	 * @return the social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the social activities.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of social activities to return
+	 * @param end the upper bound of the range of social activities to return (not inclusive)
+	 * @return the range of social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the social activities.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of social activities to return
+	 * @param end the upper bound of the range of social activities to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<SocialActivity> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2763,24 +3478,48 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return list;
 	}
 
+	/**
+	 * Removes all the social activities where groupId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (SocialActivity socialActivity : findByGroupId(groupId)) {
 			remove(socialActivity);
 		}
 	}
 
+	/**
+	 * Removes all the social activities where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (SocialActivity socialActivity : findByCompanyId(companyId)) {
 			remove(socialActivity);
 		}
 	}
 
+	/**
+	 * Removes all the social activities where userId = &#63; from the database.
+	 *
+	 * @param userId the user id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (SocialActivity socialActivity : findByUserId(userId)) {
 			remove(socialActivity);
 		}
 	}
 
+	/**
+	 * Removes the social activity where mirrorActivityId = &#63; from the database.
+	 *
+	 * @param mirrorActivityId the mirror activity id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByMirrorActivityId(long mirrorActivityId)
 		throws NoSuchActivityException, SystemException {
 		SocialActivity socialActivity = findByMirrorActivityId(mirrorActivityId);
@@ -2788,12 +3527,24 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		remove(socialActivity);
 	}
 
+	/**
+	 * Removes all the social activities where classNameId = &#63; from the database.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByClassNameId(long classNameId) throws SystemException {
 		for (SocialActivity socialActivity : findByClassNameId(classNameId)) {
 			remove(socialActivity);
 		}
 	}
 
+	/**
+	 * Removes all the social activities where receiverUserId = &#63; from the database.
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByReceiverUserId(long receiverUserId)
 		throws SystemException {
 		for (SocialActivity socialActivity : findByReceiverUserId(
@@ -2802,6 +3553,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Removes all the social activities where classNameId = &#63; and classPK = &#63; from the database.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C(long classNameId, long classPK)
 		throws SystemException {
 		for (SocialActivity socialActivity : findByC_C(classNameId, classPK)) {
@@ -2809,6 +3567,14 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Removes all the social activities where mirrorActivityId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
+	 *
+	 * @param mirrorActivityId the mirror activity id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByM_C_C(long mirrorActivityId, long classNameId,
 		long classPK) throws SystemException {
 		for (SocialActivity socialActivity : findByM_C_C(mirrorActivityId,
@@ -2817,6 +3583,18 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Removes the social activity where groupId = &#63; and userId = &#63; and createDate = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63; and receiverUserId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @param createDate the create date to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param receiverUserId the receiver user id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_U_CD_C_C_T_R(long groupId, long userId,
 		long createDate, long classNameId, long classPK, int type,
 		long receiverUserId) throws NoSuchActivityException, SystemException {
@@ -2826,12 +3604,24 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		remove(socialActivity);
 	}
 
+	/**
+	 * Removes all the social activities from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (SocialActivity socialActivity : findAll()) {
 			remove(socialActivity);
 		}
 	}
 
+	/**
+	 * Counts all the social activities where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the number of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId };
 
@@ -2878,6 +3668,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social activities where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the number of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId };
 
@@ -2924,6 +3721,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social activities where userId = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @return the number of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUserId(long userId) throws SystemException {
 		Object[] finderArgs = new Object[] { userId };
 
@@ -2970,6 +3774,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social activities where mirrorActivityId = &#63;.
+	 *
+	 * @param mirrorActivityId the mirror activity id to search with
+	 * @return the number of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByMirrorActivityId(long mirrorActivityId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { mirrorActivityId };
@@ -3017,6 +3828,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social activities where classNameId = &#63;.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @return the number of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByClassNameId(long classNameId) throws SystemException {
 		Object[] finderArgs = new Object[] { classNameId };
 
@@ -3063,6 +3881,13 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social activities where receiverUserId = &#63;.
+	 *
+	 * @param receiverUserId the receiver user id to search with
+	 * @return the number of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByReceiverUserId(long receiverUserId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { receiverUserId };
@@ -3110,6 +3935,14 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social activities where classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the number of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C(long classNameId, long classPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { classNameId, classPK };
@@ -3161,6 +3994,15 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social activities where mirrorActivityId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param mirrorActivityId the mirror activity id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the number of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByM_C_C(long mirrorActivityId, long classNameId,
 		long classPK) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -3218,6 +4060,19 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social activities where groupId = &#63; and userId = &#63; and createDate = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63; and receiverUserId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param userId the user id to search with
+	 * @param createDate the create date to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param type the type to search with
+	 * @param receiverUserId the receiver user id to search with
+	 * @return the number of matching social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_U_CD_C_C_T_R(long groupId, long userId,
 		long createDate, long classNameId, long classPK, int type,
 		long receiverUserId) throws SystemException {
@@ -3293,6 +4148,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the social activities.
+	 *
+	 * @return the number of social activities
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -3327,6 +4188,9 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the social activity persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

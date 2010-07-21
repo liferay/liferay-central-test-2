@@ -47,9 +47,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       PasswordTrackerPersistence
- * @see       PasswordTrackerUtil
+ * The persistence for the password tracker service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see PasswordTrackerPersistence
+ * @see PasswordTrackerUtil
  * @generated
  */
 public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<PasswordTracker>
@@ -77,12 +87,22 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 			PasswordTrackerModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
+	/**
+	 * Caches the password tracker in the entity cache if it is enabled.
+	 *
+	 * @param passwordTracker the password tracker to cache
+	 */
 	public void cacheResult(PasswordTracker passwordTracker) {
 		EntityCacheUtil.putResult(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
 			PasswordTrackerImpl.class, passwordTracker.getPrimaryKey(),
 			passwordTracker);
 	}
 
+	/**
+	 * Caches the password trackers in the entity cache if it is enabled.
+	 *
+	 * @param passwordTrackers the password trackers to cache
+	 */
 	public void cacheResult(List<PasswordTracker> passwordTrackers) {
 		for (PasswordTracker passwordTracker : passwordTrackers) {
 			if (EntityCacheUtil.getResult(
@@ -94,6 +114,13 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		}
 	}
 
+	/**
+	 * Clears the cache for all password trackers.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(PasswordTrackerImpl.class.getName());
 		EntityCacheUtil.clearCache(PasswordTrackerImpl.class.getName());
@@ -101,11 +128,24 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the password tracker.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(PasswordTracker passwordTracker) {
 		EntityCacheUtil.removeResult(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
 			PasswordTrackerImpl.class, passwordTracker.getPrimaryKey());
 	}
 
+	/**
+	 * Creates a new password tracker with the primary key.
+	 *
+	 * @param passwordTrackerId the primary key for the new password tracker
+	 * @return the new password tracker
+	 */
 	public PasswordTracker create(long passwordTrackerId) {
 		PasswordTracker passwordTracker = new PasswordTrackerImpl();
 
@@ -115,11 +155,27 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		return passwordTracker;
 	}
 
+	/**
+	 * Removes the password tracker with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the password tracker to remove
+	 * @return the password tracker that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a password tracker with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordTracker remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the password tracker with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param passwordTrackerId the primary key of the password tracker to remove
+	 * @return the password tracker that was removed
+	 * @throws com.liferay.portal.NoSuchPasswordTrackerException if a password tracker with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordTracker remove(long passwordTrackerId)
 		throws NoSuchPasswordTrackerException, SystemException {
 		Session session = null;
@@ -239,11 +295,27 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		return passwordTrackerImpl;
 	}
 
+	/**
+	 * Finds the password tracker with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the password tracker to find
+	 * @return the password tracker
+	 * @throws com.liferay.portal.NoSuchModelException if a password tracker with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordTracker findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the password tracker with the primary key or throws a {@link com.liferay.portal.NoSuchPasswordTrackerException} if it could not be found.
+	 *
+	 * @param passwordTrackerId the primary key of the password tracker to find
+	 * @return the password tracker
+	 * @throws com.liferay.portal.NoSuchPasswordTrackerException if a password tracker with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordTracker findByPrimaryKey(long passwordTrackerId)
 		throws NoSuchPasswordTrackerException, SystemException {
 		PasswordTracker passwordTracker = fetchByPrimaryKey(passwordTrackerId);
@@ -260,11 +332,25 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		return passwordTracker;
 	}
 
+	/**
+	 * Finds the password tracker with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the password tracker to find
+	 * @return the password tracker, or <code>null</code> if a password tracker with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordTracker fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the password tracker with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param passwordTrackerId the primary key of the password tracker to find
+	 * @return the password tracker, or <code>null</code> if a password tracker with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordTracker fetchByPrimaryKey(long passwordTrackerId)
 		throws SystemException {
 		PasswordTracker passwordTracker = (PasswordTracker)EntityCacheUtil.getResult(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
@@ -294,16 +380,50 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		return passwordTracker;
 	}
 
+	/**
+	 * Finds all the password trackers where userId = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @return the matching password trackers
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PasswordTracker> findByUserId(long userId)
 		throws SystemException {
 		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the password trackers where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of password trackers to return
+	 * @param end the upper bound of the range of password trackers to return (not inclusive)
+	 * @return the range of matching password trackers
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PasswordTracker> findByUserId(long userId, int start, int end)
 		throws SystemException {
 		return findByUserId(userId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the password trackers where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of password trackers to return
+	 * @param end the upper bound of the range of password trackers to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching password trackers
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PasswordTracker> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -376,6 +496,19 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		return list;
 	}
 
+	/**
+	 * Finds the first password tracker in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching password tracker
+	 * @throws com.liferay.portal.NoSuchPasswordTrackerException if a matching password tracker could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordTracker findByUserId_First(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPasswordTrackerException, SystemException {
@@ -399,6 +532,19 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		}
 	}
 
+	/**
+	 * Finds the last password tracker in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching password tracker
+	 * @throws com.liferay.portal.NoSuchPasswordTrackerException if a matching password tracker could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordTracker findByUserId_Last(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchPasswordTrackerException, SystemException {
@@ -424,6 +570,20 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		}
 	}
 
+	/**
+	 * Finds the password trackers before and after the current password tracker in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param passwordTrackerId the primary key of the current password tracker
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next password tracker
+	 * @throws com.liferay.portal.NoSuchPasswordTrackerException if a password tracker with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public PasswordTracker[] findByUserId_PrevAndNext(long passwordTrackerId,
 		long userId, OrderByComparator orderByComparator)
 		throws NoSuchPasswordTrackerException, SystemException {
@@ -558,15 +718,46 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		}
 	}
 
+	/**
+	 * Finds all the password trackers.
+	 *
+	 * @return the password trackers
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PasswordTracker> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the password trackers.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of password trackers to return
+	 * @param end the upper bound of the range of password trackers to return (not inclusive)
+	 * @return the range of password trackers
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PasswordTracker> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the password trackers.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of password trackers to return
+	 * @param end the upper bound of the range of password trackers to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of password trackers
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<PasswordTracker> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -633,18 +824,36 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		return list;
 	}
 
+	/**
+	 * Removes all the password trackers where userId = &#63; from the database.
+	 *
+	 * @param userId the user id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (PasswordTracker passwordTracker : findByUserId(userId)) {
 			remove(passwordTracker);
 		}
 	}
 
+	/**
+	 * Removes all the password trackers from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (PasswordTracker passwordTracker : findAll()) {
 			remove(passwordTracker);
 		}
 	}
 
+	/**
+	 * Counts all the password trackers where userId = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @return the number of matching password trackers
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUserId(long userId) throws SystemException {
 		Object[] finderArgs = new Object[] { userId };
 
@@ -691,6 +900,12 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the password trackers.
+	 *
+	 * @return the number of password trackers
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -725,6 +940,9 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the password tracker persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

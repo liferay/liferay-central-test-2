@@ -15,20 +15,16 @@
 package com.liferay.portlet.messageboards.model;
 
 /**
- * <p>
- * This interface is a model that represents the MBMessageFlag table in the
- * database.
- * </p>
+ * The model interface for the MBMessageFlag service. Represents a row in the &quot;MBMessageFlag&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       MBMessageFlagModel
- * @see       com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl
- * @see       com.liferay.portlet.messageboards.model.impl.MBMessageFlagModelImpl
+ * @author Brian Wing Shun Chan
+ * @see MBMessageFlagModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBMessageFlagModelImpl
  * @generated
  */
 public interface MBMessageFlag extends MBMessageFlagModel {

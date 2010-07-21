@@ -15,20 +15,16 @@
 package com.liferay.portlet.shopping.model;
 
 /**
- * <p>
- * This interface is a model that represents the ShoppingCart table in the
- * database.
- * </p>
+ * The model interface for the ShoppingCart service. Represents a row in the &quot;ShoppingCart&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.shopping.model.impl.ShoppingCartImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.shopping.model.impl.ShoppingCartImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       ShoppingCartModel
- * @see       com.liferay.portlet.shopping.model.impl.ShoppingCartImpl
- * @see       com.liferay.portlet.shopping.model.impl.ShoppingCartModelImpl
+ * @author Brian Wing Shun Chan
+ * @see ShoppingCartModel
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingCartImpl
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingCartModelImpl
  * @generated
  */
 public interface ShoppingCart extends ShoppingCartModel {

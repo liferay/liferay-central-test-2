@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the Address table in the
- * database.
- * </p>
+ * The model interface for the Address service. Represents a row in the &quot;Address&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.AddressImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.AddressImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       AddressModel
- * @see       com.liferay.portal.model.impl.AddressImpl
- * @see       com.liferay.portal.model.impl.AddressModelImpl
+ * @author Brian Wing Shun Chan
+ * @see AddressModel
+ * @see com.liferay.portal.model.impl.AddressImpl
+ * @see com.liferay.portal.model.impl.AddressModelImpl
  * @generated
  */
 public interface Address extends AddressModel {

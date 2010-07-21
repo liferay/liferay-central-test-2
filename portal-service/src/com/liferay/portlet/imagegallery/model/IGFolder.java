@@ -15,20 +15,16 @@
 package com.liferay.portlet.imagegallery.model;
 
 /**
- * <p>
- * This interface is a model that represents the IGFolder table in the
- * database.
- * </p>
+ * The model interface for the IGFolder service. Represents a row in the &quot;IGFolder&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.imagegallery.model.impl.IGFolderImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.imagegallery.model.impl.IGFolderImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       IGFolderModel
- * @see       com.liferay.portlet.imagegallery.model.impl.IGFolderImpl
- * @see       com.liferay.portlet.imagegallery.model.impl.IGFolderModelImpl
+ * @author Brian Wing Shun Chan
+ * @see IGFolderModel
+ * @see com.liferay.portlet.imagegallery.model.impl.IGFolderImpl
+ * @see com.liferay.portlet.imagegallery.model.impl.IGFolderModelImpl
  * @generated
  */
 public interface IGFolder extends IGFolderModel {

@@ -53,9 +53,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       DLFileVersionPersistence
- * @see       DLFileVersionUtil
+ * The persistence for the d l file version service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see DLFileVersionPersistence
+ * @see DLFileVersionUtil
  * @generated
  */
 public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVersion>
@@ -118,6 +128,11 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			DLFileVersionModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
 
+	/**
+	 * Caches the d l file version in the entity cache if it is enabled.
+	 *
+	 * @param dlFileVersion the d l file version to cache
+	 */
 	public void cacheResult(DLFileVersion dlFileVersion) {
 		EntityCacheUtil.putResult(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileVersionImpl.class, dlFileVersion.getPrimaryKey(),
@@ -134,6 +149,11 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			}, dlFileVersion);
 	}
 
+	/**
+	 * Caches the d l file versions in the entity cache if it is enabled.
+	 *
+	 * @param dlFileVersions the d l file versions to cache
+	 */
 	public void cacheResult(List<DLFileVersion> dlFileVersions) {
 		for (DLFileVersion dlFileVersion : dlFileVersions) {
 			if (EntityCacheUtil.getResult(
@@ -145,6 +165,13 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		}
 	}
 
+	/**
+	 * Clears the cache for all d l file versions.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(DLFileVersionImpl.class.getName());
 		EntityCacheUtil.clearCache(DLFileVersionImpl.class.getName());
@@ -152,6 +179,13 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the d l file version.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(DLFileVersion dlFileVersion) {
 		EntityCacheUtil.removeResult(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileVersionImpl.class, dlFileVersion.getPrimaryKey());
@@ -167,6 +201,12 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			});
 	}
 
+	/**
+	 * Creates a new d l file version with the primary key.
+	 *
+	 * @param fileVersionId the primary key for the new d l file version
+	 * @return the new d l file version
+	 */
 	public DLFileVersion create(long fileVersionId) {
 		DLFileVersion dlFileVersion = new DLFileVersionImpl();
 
@@ -176,11 +216,27 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		return dlFileVersion;
 	}
 
+	/**
+	 * Removes the d l file version with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the d l file version to remove
+	 * @return the d l file version that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a d l file version with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileVersion remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the d l file version with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param fileVersionId the primary key of the d l file version to remove
+	 * @return the d l file version that was removed
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a d l file version with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileVersion remove(long fileVersionId)
 		throws NoSuchFileVersionException, SystemException {
 		Session session = null;
@@ -365,11 +421,27 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		return dlFileVersionImpl;
 	}
 
+	/**
+	 * Finds the d l file version with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the d l file version to find
+	 * @return the d l file version
+	 * @throws com.liferay.portal.NoSuchModelException if a d l file version with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileVersion findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the d l file version with the primary key or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileVersionException} if it could not be found.
+	 *
+	 * @param fileVersionId the primary key of the d l file version to find
+	 * @return the d l file version
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a d l file version with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileVersion findByPrimaryKey(long fileVersionId)
 		throws NoSuchFileVersionException, SystemException {
 		DLFileVersion dlFileVersion = fetchByPrimaryKey(fileVersionId);
@@ -386,11 +458,25 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		return dlFileVersion;
 	}
 
+	/**
+	 * Finds the d l file version with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the d l file version to find
+	 * @return the d l file version, or <code>null</code> if a d l file version with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileVersion fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the d l file version with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param fileVersionId the primary key of the d l file version to find
+	 * @return the d l file version, or <code>null</code> if a d l file version with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileVersion fetchByPrimaryKey(long fileVersionId)
 		throws SystemException {
 		DLFileVersion dlFileVersion = (DLFileVersion)EntityCacheUtil.getResult(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,
@@ -420,17 +506,57 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		return dlFileVersion;
 	}
 
+	/**
+	 * Finds all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @return the matching d l file versions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileVersion> findByG_F_N(long groupId, long folderId,
 		String name) throws SystemException {
 		return findByG_F_N(groupId, folderId, name, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param start the lower bound of the range of d l file versions to return
+	 * @param end the upper bound of the range of d l file versions to return (not inclusive)
+	 * @return the range of matching d l file versions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileVersion> findByG_F_N(long groupId, long folderId,
 		String name, int start, int end) throws SystemException {
 		return findByG_F_N(groupId, folderId, name, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param start the lower bound of the range of d l file versions to return
+	 * @param end the upper bound of the range of d l file versions to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching d l file versions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileVersion> findByG_F_N(long groupId, long folderId,
 		String name, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -524,6 +650,21 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		return list;
 	}
 
+	/**
+	 * Finds the first d l file version in the ordered set where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching d l file version
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching d l file version could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileVersion findByG_F_N_First(long groupId, long folderId,
 		String name, OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -553,6 +694,21 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		}
 	}
 
+	/**
+	 * Finds the last d l file version in the ordered set where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching d l file version
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching d l file version could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileVersion findByG_F_N_Last(long groupId, long folderId,
 		String name, OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -584,6 +740,22 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		}
 	}
 
+	/**
+	 * Finds the d l file versions before and after the current d l file version in the ordered set where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param fileVersionId the primary key of the current d l file version
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next d l file version
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a d l file version with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileVersion[] findByG_F_N_PrevAndNext(long fileVersionId,
 		long groupId, long folderId, String name,
 		OrderByComparator orderByComparator)
@@ -739,6 +911,17 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		}
 	}
 
+	/**
+	 * Finds the d l file version where groupId = &#63; and folderId = &#63; and name = &#63; and version = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileVersionException} if it could not be found.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param version the version to search with
+	 * @return the matching d l file version
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching d l file version could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileVersion findByG_F_N_V(long groupId, long folderId,
 		String name, String version)
 		throws NoSuchFileVersionException, SystemException {
@@ -774,11 +957,31 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		return dlFileVersion;
 	}
 
+	/**
+	 * Finds the d l file version where groupId = &#63; and folderId = &#63; and name = &#63; and version = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param version the version to search with
+	 * @return the matching d l file version, or <code>null</code> if a matching d l file version could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileVersion fetchByG_F_N_V(long groupId, long folderId,
 		String name, String version) throws SystemException {
 		return fetchByG_F_N_V(groupId, folderId, name, version, true);
 	}
 
+	/**
+	 * Finds the d l file version where groupId = &#63; and folderId = &#63; and name = &#63; and version = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param version the version to search with
+	 * @return the matching d l file version, or <code>null</code> if a matching d l file version could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileVersion fetchByG_F_N_V(long groupId, long folderId,
 		String name, String version, boolean retrieveFromCache)
 		throws SystemException {
@@ -899,17 +1102,60 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		}
 	}
 
+	/**
+	 * Finds all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param status the status to search with
+	 * @return the matching d l file versions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileVersion> findByG_F_N_S(long groupId, long folderId,
 		String name, int status) throws SystemException {
 		return findByG_F_N_S(groupId, folderId, name, status,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of d l file versions to return
+	 * @param end the upper bound of the range of d l file versions to return (not inclusive)
+	 * @return the range of matching d l file versions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileVersion> findByG_F_N_S(long groupId, long folderId,
 		String name, int status, int start, int end) throws SystemException {
 		return findByG_F_N_S(groupId, folderId, name, status, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of d l file versions to return
+	 * @param end the upper bound of the range of d l file versions to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching d l file versions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileVersion> findByG_F_N_S(long groupId, long folderId,
 		String name, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -1007,6 +1253,22 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		return list;
 	}
 
+	/**
+	 * Finds the first d l file version in the ordered set where groupId = &#63; and folderId = &#63; and name = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching d l file version
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching d l file version could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileVersion findByG_F_N_S_First(long groupId, long folderId,
 		String name, int status, OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -1039,6 +1301,22 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		}
 	}
 
+	/**
+	 * Finds the last d l file version in the ordered set where groupId = &#63; and folderId = &#63; and name = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching d l file version
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching d l file version could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileVersion findByG_F_N_S_Last(long groupId, long folderId,
 		String name, int status, OrderByComparator orderByComparator)
 		throws NoSuchFileVersionException, SystemException {
@@ -1073,6 +1351,23 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		}
 	}
 
+	/**
+	 * Finds the d l file versions before and after the current d l file version in the ordered set where groupId = &#63; and folderId = &#63; and name = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param fileVersionId the primary key of the current d l file version
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next d l file version
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a d l file version with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public DLFileVersion[] findByG_F_N_S_PrevAndNext(long fileVersionId,
 		long groupId, long folderId, String name, int status,
 		OrderByComparator orderByComparator)
@@ -1232,15 +1527,46 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		}
 	}
 
+	/**
+	 * Finds all the d l file versions.
+	 *
+	 * @return the d l file versions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileVersion> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the d l file versions.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of d l file versions to return
+	 * @param end the upper bound of the range of d l file versions to return (not inclusive)
+	 * @return the range of d l file versions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileVersion> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the d l file versions.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of d l file versions to return
+	 * @param end the upper bound of the range of d l file versions to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of d l file versions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<DLFileVersion> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1307,6 +1633,14 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		return list;
 	}
 
+	/**
+	 * Removes all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_F_N(long groupId, long folderId, String name)
 		throws SystemException {
 		for (DLFileVersion dlFileVersion : findByG_F_N(groupId, folderId, name)) {
@@ -1314,6 +1648,15 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		}
 	}
 
+	/**
+	 * Removes the d l file version where groupId = &#63; and folderId = &#63; and name = &#63; and version = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param version the version to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_F_N_V(long groupId, long folderId, String name,
 		String version) throws NoSuchFileVersionException, SystemException {
 		DLFileVersion dlFileVersion = findByG_F_N_V(groupId, folderId, name,
@@ -1322,6 +1665,15 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		remove(dlFileVersion);
 	}
 
+	/**
+	 * Removes all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63; and status = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_F_N_S(long groupId, long folderId, String name,
 		int status) throws SystemException {
 		for (DLFileVersion dlFileVersion : findByG_F_N_S(groupId, folderId,
@@ -1330,12 +1682,26 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		}
 	}
 
+	/**
+	 * Removes all the d l file versions from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (DLFileVersion dlFileVersion : findAll()) {
 			remove(dlFileVersion);
 		}
 	}
 
+	/**
+	 * Counts all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @return the number of matching d l file versions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_F_N(long groupId, long folderId, String name)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, folderId, name };
@@ -1403,6 +1769,16 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63; and version = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param version the version to search with
+	 * @return the number of matching d l file versions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_F_N_V(long groupId, long folderId, String name,
 		String version) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, folderId, name, version };
@@ -1486,6 +1862,16 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the d l file versions where groupId = &#63; and folderId = &#63; and name = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param folderId the folder id to search with
+	 * @param name the name to search with
+	 * @param status the status to search with
+	 * @return the number of matching d l file versions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_F_N_S(long groupId, long folderId, String name,
 		int status) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, folderId, name, status };
@@ -1557,6 +1943,12 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the d l file versions.
+	 *
+	 * @return the number of d l file versions
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -1591,6 +1983,9 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the d l file version persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

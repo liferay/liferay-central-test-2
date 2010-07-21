@@ -15,20 +15,16 @@
 package com.liferay.portlet.social.model;
 
 /**
- * <p>
- * This interface is a model that represents the SocialEquityUser table in the
- * database.
- * </p>
+ * The model interface for the SocialEquityUser service. Represents a row in the &quot;SocialEquityUser&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.social.model.impl.SocialEquityUserImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.social.model.impl.SocialEquityUserImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       SocialEquityUserModel
- * @see       com.liferay.portlet.social.model.impl.SocialEquityUserImpl
- * @see       com.liferay.portlet.social.model.impl.SocialEquityUserModelImpl
+ * @author Brian Wing Shun Chan
+ * @see SocialEquityUserModel
+ * @see com.liferay.portlet.social.model.impl.SocialEquityUserImpl
+ * @see com.liferay.portlet.social.model.impl.SocialEquityUserModelImpl
  * @generated
  */
 public interface SocialEquityUser extends SocialEquityUserModel {

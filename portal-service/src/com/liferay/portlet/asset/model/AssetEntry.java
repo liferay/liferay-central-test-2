@@ -15,20 +15,16 @@
 package com.liferay.portlet.asset.model;
 
 /**
- * <p>
- * This interface is a model that represents the AssetEntry table in the
- * database.
- * </p>
+ * The model interface for the AssetEntry service. Represents a row in the &quot;AssetEntry&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.asset.model.impl.AssetEntryImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.asset.model.impl.AssetEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       AssetEntryModel
- * @see       com.liferay.portlet.asset.model.impl.AssetEntryImpl
- * @see       com.liferay.portlet.asset.model.impl.AssetEntryModelImpl
+ * @author Brian Wing Shun Chan
+ * @see AssetEntryModel
+ * @see com.liferay.portlet.asset.model.impl.AssetEntryImpl
+ * @see com.liferay.portlet.asset.model.impl.AssetEntryModelImpl
  * @generated
  */
 public interface AssetEntry extends AssetEntryModel {

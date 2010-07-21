@@ -15,20 +15,16 @@
 package com.liferay.portlet.tasks.model;
 
 /**
- * <p>
- * This interface is a model that represents the TasksReview table in the
- * database.
- * </p>
+ * The model interface for the TasksReview service. Represents a row in the &quot;TasksReview&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portlet.tasks.model.impl.TasksReviewImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portlet.tasks.model.impl.TasksReviewImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       TasksReviewModel
- * @see       com.liferay.portlet.tasks.model.impl.TasksReviewImpl
- * @see       com.liferay.portlet.tasks.model.impl.TasksReviewModelImpl
+ * @author Brian Wing Shun Chan
+ * @see TasksReviewModel
+ * @see com.liferay.portlet.tasks.model.impl.TasksReviewImpl
+ * @see com.liferay.portlet.tasks.model.impl.TasksReviewModelImpl
  * @generated
  */
 public interface TasksReview extends TasksReviewModel {

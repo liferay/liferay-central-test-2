@@ -56,9 +56,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       LayoutPersistence
- * @see       LayoutUtil
+ * The persistence for the layout service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see LayoutPersistence
+ * @see LayoutUtil
  * @generated
  */
 public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
@@ -204,6 +214,11 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			LayoutModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the layout in the entity cache if it is enabled.
+	 *
+	 * @param layout the layout to cache
+	 */
 	public void cacheResult(Layout layout) {
 		EntityCacheUtil.putResult(LayoutModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutImpl.class, layout.getPrimaryKey(), layout);
@@ -234,6 +249,11 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			}, layout);
 	}
 
+	/**
+	 * Caches the layouts in the entity cache if it is enabled.
+	 *
+	 * @param layouts the layouts to cache
+	 */
 	public void cacheResult(List<Layout> layouts) {
 		for (Layout layout : layouts) {
 			if (EntityCacheUtil.getResult(
@@ -244,6 +264,13 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Clears the cache for all layouts.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(LayoutImpl.class.getName());
 		EntityCacheUtil.clearCache(LayoutImpl.class.getName());
@@ -251,6 +278,13 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the layout.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(Layout layout) {
 		EntityCacheUtil.removeResult(LayoutModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutImpl.class, layout.getPrimaryKey());
@@ -280,6 +314,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			});
 	}
 
+	/**
+	 * Creates a new layout with the primary key.
+	 *
+	 * @param plid the primary key for the new layout
+	 * @return the new layout
+	 */
 	public Layout create(long plid) {
 		Layout layout = new LayoutImpl();
 
@@ -293,11 +333,27 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return layout;
 	}
 
+	/**
+	 * Removes the layout with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the layout to remove
+	 * @return the layout that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a layout with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the layout with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param plid the primary key of the layout to remove
+	 * @return the layout that was removed
+	 * @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout remove(long plid)
 		throws NoSuchLayoutException, SystemException {
 		Session session = null;
@@ -566,11 +622,27 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return layoutImpl;
 	}
 
+	/**
+	 * Finds the layout with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the layout to find
+	 * @return the layout
+	 * @throws com.liferay.portal.NoSuchModelException if a layout with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the layout with the primary key or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
+	 *
+	 * @param plid the primary key of the layout to find
+	 * @return the layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout findByPrimaryKey(long plid)
 		throws NoSuchLayoutException, SystemException {
 		Layout layout = fetchByPrimaryKey(plid);
@@ -587,11 +659,25 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return layout;
 	}
 
+	/**
+	 * Finds the layout with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the layout to find
+	 * @return the layout, or <code>null</code> if a layout with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the layout with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param plid the primary key of the layout to find
+	 * @return the layout, or <code>null</code> if a layout with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout fetchByPrimaryKey(long plid) throws SystemException {
 		Layout layout = (Layout)EntityCacheUtil.getResult(LayoutModelImpl.ENTITY_CACHE_ENABLED,
 				LayoutImpl.class, plid, this);
@@ -619,15 +705,49 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return layout;
 	}
 
+	/**
+	 * Finds all the layouts where uuid = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @return the matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findByUuid(String uuid) throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the layouts where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param start the lower bound of the range of layouts to return
+	 * @param end the upper bound of the range of layouts to return (not inclusive)
+	 * @return the range of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the layouts where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param start the lower bound of the range of layouts to return
+	 * @param end the upper bound of the range of layouts to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -711,6 +831,19 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return list;
 	}
 
+	/**
+	 * Finds the first layout in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
@@ -733,6 +866,19 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds the last layout in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
@@ -757,6 +903,20 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds the layouts before and after the current layout in the ordered set where uuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param plid the primary key of the current layout
+	 * @param uuid the uuid to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout[] findByUuid_PrevAndNext(long plid, String uuid,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
@@ -902,6 +1062,15 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds the layout where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout findByUUID_G(String uuid, long groupId)
 		throws NoSuchLayoutException, SystemException {
 		Layout layout = fetchByUUID_G(uuid, groupId);
@@ -929,11 +1098,27 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return layout;
 	}
 
+	/**
+	 * Finds the layout where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching layout, or <code>null</code> if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
 	}
 
+	/**
+	 * Finds the layout where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the matching layout, or <code>null</code> if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -1030,15 +1215,49 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds all the layouts where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findByGroupId(long groupId) throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the layouts where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of layouts to return
+	 * @param end the upper bound of the range of layouts to return (not inclusive)
+	 * @return the range of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the layouts where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param start the lower bound of the range of layouts to return
+	 * @param end the upper bound of the range of layouts to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1110,6 +1329,19 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return list;
 	}
 
+	/**
+	 * Finds the first layout in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
@@ -1132,6 +1364,19 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds the last layout in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
@@ -1157,6 +1402,20 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds the layouts before and after the current layout in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param plid the primary key of the current layout
+	 * @param groupId the group id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout[] findByGroupId_PrevAndNext(long plid, long groupId,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
@@ -1290,17 +1549,51 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds all the layouts where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the layouts where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of layouts to return
+	 * @param end the upper bound of the range of layouts to return (not inclusive)
+	 * @return the range of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the layouts where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of layouts to return
+	 * @param end the upper bound of the range of layouts to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1372,6 +1665,19 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return list;
 	}
 
+	/**
+	 * Finds the first layout in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
@@ -1394,6 +1700,19 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds the last layout in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
@@ -1419,6 +1738,20 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds the layouts before and after the current layout in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param plid the primary key of the current layout
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout[] findByCompanyId_PrevAndNext(long plid, long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
@@ -1552,6 +1885,14 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds the layout where dlFolderId = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
+	 *
+	 * @param dlFolderId the dl folder id to search with
+	 * @return the matching layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout findByDLFolderId(long dlFolderId)
 		throws NoSuchLayoutException, SystemException {
 		Layout layout = fetchByDLFolderId(dlFolderId);
@@ -1576,10 +1917,24 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return layout;
 	}
 
+	/**
+	 * Finds the layout where dlFolderId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param dlFolderId the dl folder id to search with
+	 * @return the matching layout, or <code>null</code> if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout fetchByDLFolderId(long dlFolderId) throws SystemException {
 		return fetchByDLFolderId(dlFolderId, true);
 	}
 
+	/**
+	 * Finds the layout where dlFolderId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param dlFolderId the dl folder id to search with
+	 * @return the matching layout, or <code>null</code> if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout fetchByDLFolderId(long dlFolderId, boolean retrieveFromCache)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { dlFolderId };
@@ -1658,6 +2013,14 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds the layout where iconImageId = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
+	 *
+	 * @param iconImageId the icon image id to search with
+	 * @return the matching layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout findByIconImageId(long iconImageId)
 		throws NoSuchLayoutException, SystemException {
 		Layout layout = fetchByIconImageId(iconImageId);
@@ -1682,11 +2045,25 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return layout;
 	}
 
+	/**
+	 * Finds the layout where iconImageId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param iconImageId the icon image id to search with
+	 * @return the matching layout, or <code>null</code> if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout fetchByIconImageId(long iconImageId)
 		throws SystemException {
 		return fetchByIconImageId(iconImageId, true);
 	}
 
+	/**
+	 * Finds the layout where iconImageId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param iconImageId the icon image id to search with
+	 * @return the matching layout, or <code>null</code> if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout fetchByIconImageId(long iconImageId, boolean retrieveFromCache)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { iconImageId };
@@ -1765,17 +2142,54 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds all the layouts where groupId = &#63; and privateLayout = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @return the matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
 		return findByG_P(groupId, privateLayout, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the layouts where groupId = &#63; and privateLayout = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param start the lower bound of the range of layouts to return
+	 * @param end the upper bound of the range of layouts to return (not inclusive)
+	 * @return the range of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findByG_P(long groupId, boolean privateLayout,
 		int start, int end) throws SystemException {
 		return findByG_P(groupId, privateLayout, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the layouts where groupId = &#63; and privateLayout = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param start the lower bound of the range of layouts to return
+	 * @param end the upper bound of the range of layouts to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findByG_P(long groupId, boolean privateLayout,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1852,6 +2266,20 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return list;
 	}
 
+	/**
+	 * Finds the first layout in the ordered set where groupId = &#63; and privateLayout = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout findByG_P_First(long groupId, boolean privateLayout,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
@@ -1878,6 +2306,20 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds the last layout in the ordered set where groupId = &#63; and privateLayout = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout findByG_P_Last(long groupId, boolean privateLayout,
 		OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
@@ -1906,6 +2348,21 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds the layouts before and after the current layout in the ordered set where groupId = &#63; and privateLayout = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param plid the primary key of the current layout
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout[] findByG_P_PrevAndNext(long plid, long groupId,
 		boolean privateLayout, OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
@@ -2044,6 +2501,16 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds the layout where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param layoutId the layout id to search with
+	 * @return the matching layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout findByG_P_L(long groupId, boolean privateLayout, long layoutId)
 		throws NoSuchLayoutException, SystemException {
 		Layout layout = fetchByG_P_L(groupId, privateLayout, layoutId);
@@ -2074,11 +2541,29 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return layout;
 	}
 
+	/**
+	 * Finds the layout where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param layoutId the layout id to search with
+	 * @return the matching layout, or <code>null</code> if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout fetchByG_P_L(long groupId, boolean privateLayout,
 		long layoutId) throws SystemException {
 		return fetchByG_P_L(groupId, privateLayout, layoutId, true);
 	}
 
+	/**
+	 * Finds the layout where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param layoutId the layout id to search with
+	 * @return the matching layout, or <code>null</code> if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout fetchByG_P_L(long groupId, boolean privateLayout,
 		long layoutId, boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, privateLayout, layoutId };
@@ -2167,18 +2652,58 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param parentLayoutId the parent layout id to search with
+	 * @return the matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findByG_P_P(long groupId, boolean privateLayout,
 		long parentLayoutId) throws SystemException {
 		return findByG_P_P(groupId, privateLayout, parentLayoutId,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param parentLayoutId the parent layout id to search with
+	 * @param start the lower bound of the range of layouts to return
+	 * @param end the upper bound of the range of layouts to return (not inclusive)
+	 * @return the range of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findByG_P_P(long groupId, boolean privateLayout,
 		long parentLayoutId, int start, int end) throws SystemException {
 		return findByG_P_P(groupId, privateLayout, parentLayoutId, start, end,
 			null);
 	}
 
+	/**
+	 * Finds an ordered range of all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param parentLayoutId the parent layout id to search with
+	 * @param start the lower bound of the range of layouts to return
+	 * @param end the upper bound of the range of layouts to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findByG_P_P(long groupId, boolean privateLayout,
 		long parentLayoutId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -2259,6 +2784,21 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return list;
 	}
 
+	/**
+	 * Finds the first layout in the ordered set where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param parentLayoutId the parent layout id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout findByG_P_P_First(long groupId, boolean privateLayout,
 		long parentLayoutId, OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
@@ -2288,6 +2828,21 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds the last layout in the ordered set where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param parentLayoutId the parent layout id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout findByG_P_P_Last(long groupId, boolean privateLayout,
 		long parentLayoutId, OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
@@ -2319,6 +2874,22 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds the layouts before and after the current layout in the ordered set where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param plid the primary key of the current layout
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param parentLayoutId the parent layout id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout[] findByG_P_P_PrevAndNext(long plid, long groupId,
 		boolean privateLayout, long parentLayoutId,
 		OrderByComparator orderByComparator)
@@ -2462,6 +3033,16 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds the layout where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param friendlyURL the friendly u r l to search with
+	 * @return the matching layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout findByG_P_F(long groupId, boolean privateLayout,
 		String friendlyURL) throws NoSuchLayoutException, SystemException {
 		Layout layout = fetchByG_P_F(groupId, privateLayout, friendlyURL);
@@ -2492,11 +3073,29 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return layout;
 	}
 
+	/**
+	 * Finds the layout where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param friendlyURL the friendly u r l to search with
+	 * @return the matching layout, or <code>null</code> if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout fetchByG_P_F(long groupId, boolean privateLayout,
 		String friendlyURL) throws SystemException {
 		return fetchByG_P_F(groupId, privateLayout, friendlyURL, true);
 	}
 
+	/**
+	 * Finds the layout where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param friendlyURL the friendly u r l to search with
+	 * @return the matching layout, or <code>null</code> if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout fetchByG_P_F(long groupId, boolean privateLayout,
 		String friendlyURL, boolean retrieveFromCache)
 		throws SystemException {
@@ -2599,17 +3198,57 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param type the type to search with
+	 * @return the matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findByG_P_T(long groupId, boolean privateLayout,
 		String type) throws SystemException {
 		return findByG_P_T(groupId, privateLayout, type, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param type the type to search with
+	 * @param start the lower bound of the range of layouts to return
+	 * @param end the upper bound of the range of layouts to return (not inclusive)
+	 * @return the range of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findByG_P_T(long groupId, boolean privateLayout,
 		String type, int start, int end) throws SystemException {
 		return findByG_P_T(groupId, privateLayout, type, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param type the type to search with
+	 * @param start the lower bound of the range of layouts to return
+	 * @param end the upper bound of the range of layouts to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findByG_P_T(long groupId, boolean privateLayout,
 		String type, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -2702,6 +3341,21 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return list;
 	}
 
+	/**
+	 * Finds the first layout in the ordered set where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param type the type to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout findByG_P_T_First(long groupId, boolean privateLayout,
 		String type, OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
@@ -2731,6 +3385,21 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds the last layout in the ordered set where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param type the type to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout findByG_P_T_Last(long groupId, boolean privateLayout,
 		String type, OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
@@ -2762,6 +3431,22 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds the layouts before and after the current layout in the ordered set where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param plid the primary key of the current layout
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param type the type to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next layout
+	 * @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Layout[] findByG_P_T_PrevAndNext(long plid, long groupId,
 		boolean privateLayout, String type, OrderByComparator orderByComparator)
 		throws NoSuchLayoutException, SystemException {
@@ -2916,14 +3601,45 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Finds all the layouts.
+	 *
+	 * @return the layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the layouts.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of layouts to return
+	 * @param end the upper bound of the range of layouts to return (not inclusive)
+	 * @return the range of layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the layouts.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of layouts to return
+	 * @param end the upper bound of the range of layouts to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Layout> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2990,12 +3706,25 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return list;
 	}
 
+	/**
+	 * Removes all the layouts where uuid = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (Layout layout : findByUuid(uuid)) {
 			remove(layout);
 		}
 	}
 
+	/**
+	 * Removes the layout where uuid = &#63; and groupId = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUUID_G(String uuid, long groupId)
 		throws NoSuchLayoutException, SystemException {
 		Layout layout = findByUUID_G(uuid, groupId);
@@ -3003,18 +3732,36 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		remove(layout);
 	}
 
+	/**
+	 * Removes all the layouts where groupId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (Layout layout : findByGroupId(groupId)) {
 			remove(layout);
 		}
 	}
 
+	/**
+	 * Removes all the layouts where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (Layout layout : findByCompanyId(companyId)) {
 			remove(layout);
 		}
 	}
 
+	/**
+	 * Removes the layout where dlFolderId = &#63; from the database.
+	 *
+	 * @param dlFolderId the dl folder id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByDLFolderId(long dlFolderId)
 		throws NoSuchLayoutException, SystemException {
 		Layout layout = findByDLFolderId(dlFolderId);
@@ -3022,6 +3769,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		remove(layout);
 	}
 
+	/**
+	 * Removes the layout where iconImageId = &#63; from the database.
+	 *
+	 * @param iconImageId the icon image id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByIconImageId(long iconImageId)
 		throws NoSuchLayoutException, SystemException {
 		Layout layout = findByIconImageId(iconImageId);
@@ -3029,6 +3782,13 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		remove(layout);
 	}
 
+	/**
+	 * Removes all the layouts where groupId = &#63; and privateLayout = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
 		for (Layout layout : findByG_P(groupId, privateLayout)) {
@@ -3036,6 +3796,14 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Removes the layout where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param layoutId the layout id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_P_L(long groupId, boolean privateLayout, long layoutId)
 		throws NoSuchLayoutException, SystemException {
 		Layout layout = findByG_P_L(groupId, privateLayout, layoutId);
@@ -3043,6 +3811,14 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		remove(layout);
 	}
 
+	/**
+	 * Removes all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param parentLayoutId the parent layout id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_P_P(long groupId, boolean privateLayout,
 		long parentLayoutId) throws SystemException {
 		for (Layout layout : findByG_P_P(groupId, privateLayout, parentLayoutId)) {
@@ -3050,6 +3826,14 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Removes the layout where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param friendlyURL the friendly u r l to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_P_F(long groupId, boolean privateLayout,
 		String friendlyURL) throws NoSuchLayoutException, SystemException {
 		Layout layout = findByG_P_F(groupId, privateLayout, friendlyURL);
@@ -3057,6 +3841,14 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		remove(layout);
 	}
 
+	/**
+	 * Removes all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63; from the database.
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param type the type to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByG_P_T(long groupId, boolean privateLayout, String type)
 		throws SystemException {
 		for (Layout layout : findByG_P_T(groupId, privateLayout, type)) {
@@ -3064,12 +3856,24 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 	}
 
+	/**
+	 * Removes all the layouts from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (Layout layout : findAll()) {
 			remove(layout);
 		}
 	}
 
+	/**
+	 * Counts all the layouts where uuid = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @return the number of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUuid(String uuid) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid };
 
@@ -3128,6 +3932,14 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the layouts where uuid = &#63; and groupId = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group id to search with
+	 * @return the number of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
@@ -3191,6 +4003,13 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the layouts where groupId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @return the number of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByGroupId(long groupId) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId };
 
@@ -3237,6 +4056,13 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the layouts where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the number of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId };
 
@@ -3283,6 +4109,13 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the layouts where dlFolderId = &#63;.
+	 *
+	 * @param dlFolderId the dl folder id to search with
+	 * @return the number of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByDLFolderId(long dlFolderId) throws SystemException {
 		Object[] finderArgs = new Object[] { dlFolderId };
 
@@ -3329,6 +4162,13 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the layouts where iconImageId = &#63;.
+	 *
+	 * @param iconImageId the icon image id to search with
+	 * @return the number of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByIconImageId(long iconImageId) throws SystemException {
 		Object[] finderArgs = new Object[] { iconImageId };
 
@@ -3375,6 +4215,14 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the layouts where groupId = &#63; and privateLayout = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @return the number of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, privateLayout };
@@ -3426,6 +4274,15 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the layouts where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param layoutId the layout id to search with
+	 * @return the number of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_P_L(long groupId, boolean privateLayout, long layoutId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, privateLayout, layoutId };
@@ -3481,6 +4338,15 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param parentLayoutId the parent layout id to search with
+	 * @return the number of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_P_P(long groupId, boolean privateLayout,
 		long parentLayoutId) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -3538,6 +4404,15 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the layouts where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param friendlyURL the friendly u r l to search with
+	 * @return the number of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_P_F(long groupId, boolean privateLayout,
 		String friendlyURL) throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, privateLayout, friendlyURL };
@@ -3605,6 +4480,15 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	 *
+	 * @param groupId the group id to search with
+	 * @param privateLayout the private layout to search with
+	 * @param type the type to search with
+	 * @return the number of matching layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByG_P_T(long groupId, boolean privateLayout, String type)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { groupId, privateLayout, type };
@@ -3672,6 +4556,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the layouts.
+	 *
+	 * @return the number of layouts
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -3706,6 +4596,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the layout persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

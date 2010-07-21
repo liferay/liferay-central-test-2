@@ -47,9 +47,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       EmailAddressPersistence
- * @see       EmailAddressUtil
+ * The persistence for the email address service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see EmailAddressPersistence
+ * @see EmailAddressUtil
  * @generated
  */
 public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddress>
@@ -133,11 +143,21 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 			EmailAddressModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the email address in the entity cache if it is enabled.
+	 *
+	 * @param emailAddress the email address to cache
+	 */
 	public void cacheResult(EmailAddress emailAddress) {
 		EntityCacheUtil.putResult(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
 			EmailAddressImpl.class, emailAddress.getPrimaryKey(), emailAddress);
 	}
 
+	/**
+	 * Caches the email addresses in the entity cache if it is enabled.
+	 *
+	 * @param emailAddresses the email addresses to cache
+	 */
 	public void cacheResult(List<EmailAddress> emailAddresses) {
 		for (EmailAddress emailAddress : emailAddresses) {
 			if (EntityCacheUtil.getResult(
@@ -149,6 +169,13 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
+	/**
+	 * Clears the cache for all email addresses.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(EmailAddressImpl.class.getName());
 		EntityCacheUtil.clearCache(EmailAddressImpl.class.getName());
@@ -156,11 +183,24 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the email address.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(EmailAddress emailAddress) {
 		EntityCacheUtil.removeResult(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
 			EmailAddressImpl.class, emailAddress.getPrimaryKey());
 	}
 
+	/**
+	 * Creates a new email address with the primary key.
+	 *
+	 * @param emailAddressId the primary key for the new email address
+	 * @return the new email address
+	 */
 	public EmailAddress create(long emailAddressId) {
 		EmailAddress emailAddress = new EmailAddressImpl();
 
@@ -170,11 +210,27 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		return emailAddress;
 	}
 
+	/**
+	 * Removes the email address with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the email address to remove
+	 * @return the email address that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a email address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the email address with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param emailAddressId the primary key of the email address to remove
+	 * @return the email address that was removed
+	 * @throws com.liferay.portal.NoSuchEmailAddressException if a email address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress remove(long emailAddressId)
 		throws NoSuchEmailAddressException, SystemException {
 		Session session = null;
@@ -299,11 +355,27 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		return emailAddressImpl;
 	}
 
+	/**
+	 * Finds the email address with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the email address to find
+	 * @return the email address
+	 * @throws com.liferay.portal.NoSuchModelException if a email address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the email address with the primary key or throws a {@link com.liferay.portal.NoSuchEmailAddressException} if it could not be found.
+	 *
+	 * @param emailAddressId the primary key of the email address to find
+	 * @return the email address
+	 * @throws com.liferay.portal.NoSuchEmailAddressException if a email address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress findByPrimaryKey(long emailAddressId)
 		throws NoSuchEmailAddressException, SystemException {
 		EmailAddress emailAddress = fetchByPrimaryKey(emailAddressId);
@@ -320,11 +392,25 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		return emailAddress;
 	}
 
+	/**
+	 * Finds the email address with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the email address to find
+	 * @return the email address, or <code>null</code> if a email address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the email address with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param emailAddressId the primary key of the email address to find
+	 * @return the email address, or <code>null</code> if a email address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress fetchByPrimaryKey(long emailAddressId)
 		throws SystemException {
 		EmailAddress emailAddress = (EmailAddress)EntityCacheUtil.getResult(EmailAddressModelImpl.ENTITY_CACHE_ENABLED,
@@ -354,17 +440,51 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		return emailAddress;
 	}
 
+	/**
+	 * Finds all the email addresses where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the matching email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<EmailAddress> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the email addresses where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of email addresses to return
+	 * @param end the upper bound of the range of email addresses to return (not inclusive)
+	 * @return the range of matching email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<EmailAddress> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the email addresses where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of email addresses to return
+	 * @param end the upper bound of the range of email addresses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<EmailAddress> findByCompanyId(long companyId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -437,6 +557,19 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		return list;
 	}
 
+	/**
+	 * Finds the first email address in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching email address
+	 * @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
@@ -460,6 +593,19 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
+	/**
+	 * Finds the last email address in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching email address
+	 * @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
@@ -485,6 +631,20 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
+	/**
+	 * Finds the email addresses before and after the current email address in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param emailAddressId the primary key of the current email address
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next email address
+	 * @throws com.liferay.portal.NoSuchEmailAddressException if a email address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress[] findByCompanyId_PrevAndNext(long emailAddressId,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
@@ -619,16 +779,50 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
+	/**
+	 * Finds all the email addresses where userId = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @return the matching email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<EmailAddress> findByUserId(long userId)
 		throws SystemException {
 		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the email addresses where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of email addresses to return
+	 * @param end the upper bound of the range of email addresses to return (not inclusive)
+	 * @return the range of matching email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<EmailAddress> findByUserId(long userId, int start, int end)
 		throws SystemException {
 		return findByUserId(userId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the email addresses where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of email addresses to return
+	 * @param end the upper bound of the range of email addresses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<EmailAddress> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -701,6 +895,19 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		return list;
 	}
 
+	/**
+	 * Finds the first email address in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching email address
+	 * @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress findByUserId_First(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
@@ -723,6 +930,19 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
+	/**
+	 * Finds the last email address in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching email address
+	 * @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress findByUserId_Last(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
@@ -748,6 +968,20 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
+	/**
+	 * Finds the email addresses before and after the current email address in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param emailAddressId the primary key of the current email address
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next email address
+	 * @throws com.liferay.portal.NoSuchEmailAddressException if a email address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress[] findByUserId_PrevAndNext(long emailAddressId,
 		long userId, OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
@@ -882,17 +1116,54 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
+	/**
+	 * Finds all the email addresses where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the matching email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<EmailAddress> findByC_C(long companyId, long classNameId)
 		throws SystemException {
 		return findByC_C(companyId, classNameId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the email addresses where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param start the lower bound of the range of email addresses to return
+	 * @param end the upper bound of the range of email addresses to return (not inclusive)
+	 * @return the range of matching email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<EmailAddress> findByC_C(long companyId, long classNameId,
 		int start, int end) throws SystemException {
 		return findByC_C(companyId, classNameId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the email addresses where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param start the lower bound of the range of email addresses to return
+	 * @param end the upper bound of the range of email addresses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<EmailAddress> findByC_C(long companyId, long classNameId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -970,6 +1241,20 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		return list;
 	}
 
+	/**
+	 * Finds the first email address in the ordered set where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching email address
+	 * @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress findByC_C_First(long companyId, long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
@@ -996,6 +1281,20 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
+	/**
+	 * Finds the last email address in the ordered set where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching email address
+	 * @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress findByC_C_Last(long companyId, long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
@@ -1024,6 +1323,21 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
+	/**
+	 * Finds the email addresses before and after the current email address in the ordered set where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param emailAddressId the primary key of the current email address
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next email address
+	 * @throws com.liferay.portal.NoSuchEmailAddressException if a email address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress[] findByC_C_PrevAndNext(long emailAddressId,
 		long companyId, long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
@@ -1162,17 +1476,57 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
+	/**
+	 * Finds all the email addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<EmailAddress> findByC_C_C(long companyId, long classNameId,
 		long classPK) throws SystemException {
 		return findByC_C_C(companyId, classNameId, classPK, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the email addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param start the lower bound of the range of email addresses to return
+	 * @param end the upper bound of the range of email addresses to return (not inclusive)
+	 * @return the range of matching email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<EmailAddress> findByC_C_C(long companyId, long classNameId,
 		long classPK, int start, int end) throws SystemException {
 		return findByC_C_C(companyId, classNameId, classPK, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the email addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param start the lower bound of the range of email addresses to return
+	 * @param end the upper bound of the range of email addresses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<EmailAddress> findByC_C_C(long companyId, long classNameId,
 		long classPK, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1254,6 +1608,21 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		return list;
 	}
 
+	/**
+	 * Finds the first email address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching email address
+	 * @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress findByC_C_C_First(long companyId, long classNameId,
 		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
@@ -1283,6 +1652,21 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
+	/**
+	 * Finds the last email address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching email address
+	 * @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress findByC_C_C_Last(long companyId, long classNameId,
 		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
@@ -1314,6 +1698,22 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
+	/**
+	 * Finds the email addresses before and after the current email address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param emailAddressId the primary key of the current email address
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next email address
+	 * @throws com.liferay.portal.NoSuchEmailAddressException if a email address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress[] findByC_C_C_PrevAndNext(long emailAddressId,
 		long companyId, long classNameId, long classPK,
 		OrderByComparator orderByComparator)
@@ -1457,12 +1857,38 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
+	/**
+	 * Finds all the email addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @return the matching email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<EmailAddress> findByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary) throws SystemException {
 		return findByC_C_C_P(companyId, classNameId, classPK, primary,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the email addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @param start the lower bound of the range of email addresses to return
+	 * @param end the upper bound of the range of email addresses to return (not inclusive)
+	 * @return the range of matching email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<EmailAddress> findByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary, int start, int end)
 		throws SystemException {
@@ -1470,6 +1896,23 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 			end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the email addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @param start the lower bound of the range of email addresses to return
+	 * @param end the upper bound of the range of email addresses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<EmailAddress> findByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -1555,6 +1998,22 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		return list;
 	}
 
+	/**
+	 * Finds the first email address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching email address
+	 * @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress findByC_C_C_P_First(long companyId, long classNameId,
 		long classPK, boolean primary, OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
@@ -1587,6 +2046,22 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
+	/**
+	 * Finds the last email address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching email address
+	 * @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress findByC_C_C_P_Last(long companyId, long classNameId,
 		long classPK, boolean primary, OrderByComparator orderByComparator)
 		throws NoSuchEmailAddressException, SystemException {
@@ -1621,6 +2096,23 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
+	/**
+	 * Finds the email addresses before and after the current email address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param emailAddressId the primary key of the current email address
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next email address
+	 * @throws com.liferay.portal.NoSuchEmailAddressException if a email address with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public EmailAddress[] findByC_C_C_P_PrevAndNext(long emailAddressId,
 		long companyId, long classNameId, long classPK, boolean primary,
 		OrderByComparator orderByComparator)
@@ -1771,15 +2263,46 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
+	/**
+	 * Finds all the email addresses.
+	 *
+	 * @return the email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<EmailAddress> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the email addresses.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of email addresses to return
+	 * @param end the upper bound of the range of email addresses to return (not inclusive)
+	 * @return the range of email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<EmailAddress> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the email addresses.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of email addresses to return
+	 * @param end the upper bound of the range of email addresses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<EmailAddress> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1846,18 +2369,37 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		return list;
 	}
 
+	/**
+	 * Removes all the email addresses where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (EmailAddress emailAddress : findByCompanyId(companyId)) {
 			remove(emailAddress);
 		}
 	}
 
+	/**
+	 * Removes all the email addresses where userId = &#63; from the database.
+	 *
+	 * @param userId the user id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (EmailAddress emailAddress : findByUserId(userId)) {
 			remove(emailAddress);
 		}
 	}
 
+	/**
+	 * Removes all the email addresses where companyId = &#63; and classNameId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C(long companyId, long classNameId)
 		throws SystemException {
 		for (EmailAddress emailAddress : findByC_C(companyId, classNameId)) {
@@ -1865,6 +2407,14 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
+	/**
+	 * Removes all the email addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		for (EmailAddress emailAddress : findByC_C_C(companyId, classNameId,
@@ -1873,6 +2423,15 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
+	/**
+	 * Removes all the email addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C_C_P(long companyId, long classNameId, long classPK,
 		boolean primary) throws SystemException {
 		for (EmailAddress emailAddress : findByC_C_C_P(companyId, classNameId,
@@ -1881,12 +2440,24 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		}
 	}
 
+	/**
+	 * Removes all the email addresses from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (EmailAddress emailAddress : findAll()) {
 			remove(emailAddress);
 		}
 	}
 
+	/**
+	 * Counts all the email addresses where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the number of matching email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId };
 
@@ -1933,6 +2504,13 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the email addresses where userId = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @return the number of matching email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUserId(long userId) throws SystemException {
 		Object[] finderArgs = new Object[] { userId };
 
@@ -1979,6 +2557,14 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the email addresses where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the number of matching email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C(long companyId, long classNameId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, classNameId };
@@ -2030,6 +2616,15 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the email addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the number of matching email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, classNameId, classPK };
@@ -2085,6 +2680,16 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the email addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @return the number of matching email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C_C_P(long companyId, long classNameId, long classPK,
 		boolean primary) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2146,6 +2751,12 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the email addresses.
+	 *
+	 * @return the number of email addresses
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -2180,6 +2791,9 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the email address persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(

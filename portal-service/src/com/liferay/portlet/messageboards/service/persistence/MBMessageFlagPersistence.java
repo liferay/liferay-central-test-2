@@ -19,21 +19,51 @@ import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       MBMessageFlagPersistenceImpl
- * @see       MBMessageFlagUtil
+ * The persistence interface for the message boards message flag service.
+ *
+ * <p>
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see MBMessageFlagPersistenceImpl
+ * @see MBMessageFlagUtil
  * @generated
  */
 public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag> {
+	/**
+	* Caches the message boards message flag in the entity cache if it is enabled.
+	*
+	* @param mbMessageFlag the message boards message flag to cache
+	*/
 	public void cacheResult(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag);
 
+	/**
+	* Caches the message boards message flags in the entity cache if it is enabled.
+	*
+	* @param mbMessageFlags the message boards message flags to cache
+	*/
 	public void cacheResult(
 		java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> mbMessageFlags);
 
+	/**
+	* Creates a new message boards message flag with the primary key.
+	*
+	* @param messageFlagId the primary key for the new message boards message flag
+	* @return the new message boards message flag
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag create(
 		long messageFlagId);
 
+	/**
+	* Removes the message boards message flag with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param messageFlagId the primary key of the message boards message flag to remove
+	* @return the message boards message flag that was removed
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a message boards message flag with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag remove(
 		long messageFlagId)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -44,271 +74,927 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 		boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the message boards message flag with the primary key or throws a {@link com.liferay.portlet.messageboards.NoSuchMessageFlagException} if it could not be found.
+	*
+	* @param messageFlagId the primary key of the message boards message flag to find
+	* @return the message boards message flag
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a message boards message flag with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByPrimaryKey(
 		long messageFlagId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Finds the message boards message flag with the primary key or returns <code>null</code> if it could not be found.
+	*
+	* @param messageFlagId the primary key of the message boards message flag to find
+	* @return the message boards message flag, or <code>null</code> if a message boards message flag with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag fetchByPrimaryKey(
 		long messageFlagId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds all the message boards message flags where userId = &#63;.
+	*
+	* @param userId the user id to search with
+	* @return the matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByUserId(
 		long userId) throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the message boards message flags where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param start the lower bound of the range of message boards message flags to return
+	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
+	* @return the range of matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByUserId(
 		long userId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the message boards message flags where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param start the lower bound of the range of message boards message flags to return
+	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByUserId(
 		long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first message boards message flag in the ordered set where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching message boards message flag
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByUserId_First(
 		long userId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Finds the last message boards message flag in the ordered set where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching message boards message flag
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByUserId_Last(
 		long userId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Finds the message boards message flags before and after the current message boards message flag in the ordered set where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageFlagId the primary key of the current message boards message flag
+	* @param userId the user id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next message boards message flag
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a message boards message flag with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag[] findByUserId_PrevAndNext(
 		long messageFlagId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Finds all the message boards message flags where threadId = &#63;.
+	*
+	* @param threadId the thread id to search with
+	* @return the matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByThreadId(
 		long threadId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the message boards message flags where threadId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param threadId the thread id to search with
+	* @param start the lower bound of the range of message boards message flags to return
+	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
+	* @return the range of matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByThreadId(
 		long threadId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the message boards message flags where threadId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param threadId the thread id to search with
+	* @param start the lower bound of the range of message boards message flags to return
+	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByThreadId(
 		long threadId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first message boards message flag in the ordered set where threadId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param threadId the thread id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching message boards message flag
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByThreadId_First(
 		long threadId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Finds the last message boards message flag in the ordered set where threadId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param threadId the thread id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching message boards message flag
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByThreadId_Last(
 		long threadId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Finds the message boards message flags before and after the current message boards message flag in the ordered set where threadId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageFlagId the primary key of the current message boards message flag
+	* @param threadId the thread id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next message boards message flag
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a message boards message flag with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag[] findByThreadId_PrevAndNext(
 		long messageFlagId, long threadId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Finds all the message boards message flags where messageId = &#63;.
+	*
+	* @param messageId the message id to search with
+	* @return the matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByMessageId(
 		long messageId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the message boards message flags where messageId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageId the message id to search with
+	* @param start the lower bound of the range of message boards message flags to return
+	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
+	* @return the range of matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByMessageId(
 		long messageId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the message boards message flags where messageId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageId the message id to search with
+	* @param start the lower bound of the range of message boards message flags to return
+	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByMessageId(
 		long messageId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first message boards message flag in the ordered set where messageId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageId the message id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching message boards message flag
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByMessageId_First(
 		long messageId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Finds the last message boards message flag in the ordered set where messageId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageId the message id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching message boards message flag
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByMessageId_Last(
 		long messageId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Finds the message boards message flags before and after the current message boards message flag in the ordered set where messageId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageFlagId the primary key of the current message boards message flag
+	* @param messageId the message id to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next message boards message flag
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a message boards message flag with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag[] findByMessageId_PrevAndNext(
 		long messageFlagId, long messageId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Finds all the message boards message flags where threadId = &#63; and flag = &#63;.
+	*
+	* @param threadId the thread id to search with
+	* @param flag the flag to search with
+	* @return the matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByT_F(
 		long threadId, int flag)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the message boards message flags where threadId = &#63; and flag = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param threadId the thread id to search with
+	* @param flag the flag to search with
+	* @param start the lower bound of the range of message boards message flags to return
+	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
+	* @return the range of matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByT_F(
 		long threadId, int flag, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the message boards message flags where threadId = &#63; and flag = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param threadId the thread id to search with
+	* @param flag the flag to search with
+	* @param start the lower bound of the range of message boards message flags to return
+	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByT_F(
 		long threadId, int flag, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first message boards message flag in the ordered set where threadId = &#63; and flag = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param threadId the thread id to search with
+	* @param flag the flag to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching message boards message flag
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByT_F_First(
 		long threadId, int flag,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Finds the last message boards message flag in the ordered set where threadId = &#63; and flag = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param threadId the thread id to search with
+	* @param flag the flag to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching message boards message flag
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByT_F_Last(
 		long threadId, int flag,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Finds the message boards message flags before and after the current message boards message flag in the ordered set where threadId = &#63; and flag = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageFlagId the primary key of the current message boards message flag
+	* @param threadId the thread id to search with
+	* @param flag the flag to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next message boards message flag
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a message boards message flag with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag[] findByT_F_PrevAndNext(
 		long messageFlagId, long threadId, int flag,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Finds all the message boards message flags where messageId = &#63; and flag = &#63;.
+	*
+	* @param messageId the message id to search with
+	* @param flag the flag to search with
+	* @return the matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByM_F(
 		long messageId, int flag)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the message boards message flags where messageId = &#63; and flag = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageId the message id to search with
+	* @param flag the flag to search with
+	* @param start the lower bound of the range of message boards message flags to return
+	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
+	* @return the range of matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByM_F(
 		long messageId, int flag, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the message boards message flags where messageId = &#63; and flag = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageId the message id to search with
+	* @param flag the flag to search with
+	* @param start the lower bound of the range of message boards message flags to return
+	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByM_F(
 		long messageId, int flag, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first message boards message flag in the ordered set where messageId = &#63; and flag = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageId the message id to search with
+	* @param flag the flag to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching message boards message flag
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByM_F_First(
 		long messageId, int flag,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Finds the last message boards message flag in the ordered set where messageId = &#63; and flag = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageId the message id to search with
+	* @param flag the flag to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching message boards message flag
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByM_F_Last(
 		long messageId, int flag,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Finds the message boards message flags before and after the current message boards message flag in the ordered set where messageId = &#63; and flag = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageFlagId the primary key of the current message boards message flag
+	* @param messageId the message id to search with
+	* @param flag the flag to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next message boards message flag
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a message boards message flag with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag[] findByM_F_PrevAndNext(
 		long messageFlagId, long messageId, int flag,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Finds all the message boards message flags where userId = &#63; and threadId = &#63; and flag = &#63;.
+	*
+	* @param userId the user id to search with
+	* @param threadId the thread id to search with
+	* @param flag the flag to search with
+	* @return the matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByU_T_F(
 		long userId, long threadId, int flag)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the message boards message flags where userId = &#63; and threadId = &#63; and flag = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param threadId the thread id to search with
+	* @param flag the flag to search with
+	* @param start the lower bound of the range of message boards message flags to return
+	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
+	* @return the range of matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByU_T_F(
 		long userId, long threadId, int flag, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the message boards message flags where userId = &#63; and threadId = &#63; and flag = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param threadId the thread id to search with
+	* @param flag the flag to search with
+	* @param start the lower bound of the range of message boards message flags to return
+	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findByU_T_F(
 		long userId, long threadId, int flag, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the first message boards message flag in the ordered set where userId = &#63; and threadId = &#63; and flag = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param threadId the thread id to search with
+	* @param flag the flag to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the first matching message boards message flag
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByU_T_F_First(
 		long userId, long threadId, int flag,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Finds the last message boards message flag in the ordered set where userId = &#63; and threadId = &#63; and flag = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param threadId the thread id to search with
+	* @param flag the flag to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the last matching message boards message flag
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByU_T_F_Last(
 		long userId, long threadId, int flag,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Finds the message boards message flags before and after the current message boards message flag in the ordered set where userId = &#63; and threadId = &#63; and flag = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageFlagId the primary key of the current message boards message flag
+	* @param userId the user id to search with
+	* @param threadId the thread id to search with
+	* @param flag the flag to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next message boards message flag
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a message boards message flag with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag[] findByU_T_F_PrevAndNext(
 		long messageFlagId, long userId, long threadId, int flag,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Finds the message boards message flag where userId = &#63; and messageId = &#63; and flag = &#63; or throws a {@link com.liferay.portlet.messageboards.NoSuchMessageFlagException} if it could not be found.
+	*
+	* @param userId the user id to search with
+	* @param messageId the message id to search with
+	* @param flag the flag to search with
+	* @return the matching message boards message flag
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag findByU_M_F(
 		long userId, long messageId, int flag)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Finds the message boards message flag where userId = &#63; and messageId = &#63; and flag = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param userId the user id to search with
+	* @param messageId the message id to search with
+	* @param flag the flag to search with
+	* @return the matching message boards message flag, or <code>null</code> if a matching message boards message flag could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag fetchByU_M_F(
 		long userId, long messageId, int flag)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds the message boards message flag where userId = &#63; and messageId = &#63; and flag = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param userId the user id to search with
+	* @param messageId the message id to search with
+	* @param flag the flag to search with
+	* @return the matching message boards message flag, or <code>null</code> if a matching message boards message flag could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBMessageFlag fetchByU_M_F(
 		long userId, long messageId, int flag, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds all the message boards message flags.
+	*
+	* @return the message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds a range of all the message boards message flags.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of message boards message flags to return
+	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
+	* @return the range of message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Finds an ordered range of all the message boards message flags.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of message boards message flags to return
+	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the message boards message flags where userId = &#63; from the database.
+	*
+	* @param userId the user id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByUserId(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the message boards message flags where threadId = &#63; from the database.
+	*
+	* @param threadId the thread id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByThreadId(long threadId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the message boards message flags where messageId = &#63; from the database.
+	*
+	* @param messageId the message id to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByMessageId(long messageId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the message boards message flags where threadId = &#63; and flag = &#63; from the database.
+	*
+	* @param threadId the thread id to search with
+	* @param flag the flag to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByT_F(long threadId, int flag)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the message boards message flags where messageId = &#63; and flag = &#63; from the database.
+	*
+	* @param messageId the message id to search with
+	* @param flag the flag to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByM_F(long messageId, int flag)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes all the message boards message flags where userId = &#63; and threadId = &#63; and flag = &#63; from the database.
+	*
+	* @param userId the user id to search with
+	* @param threadId the thread id to search with
+	* @param flag the flag to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByU_T_F(long userId, long threadId, int flag)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Removes the message boards message flag where userId = &#63; and messageId = &#63; and flag = &#63; from the database.
+	*
+	* @param userId the user id to search with
+	* @param messageId the message id to search with
+	* @param flag the flag to search with
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeByU_M_F(long userId, long messageId, int flag)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
+	/**
+	* Removes all the message boards message flags from the database.
+	*
+	* @throws SystemException if a system exception occurred
+	*/
 	public void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the message boards message flags where userId = &#63;.
+	*
+	* @param userId the user id to search with
+	* @return the number of matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByUserId(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the message boards message flags where threadId = &#63;.
+	*
+	* @param threadId the thread id to search with
+	* @return the number of matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByThreadId(long threadId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the message boards message flags where messageId = &#63;.
+	*
+	* @param messageId the message id to search with
+	* @return the number of matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByMessageId(long messageId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the message boards message flags where threadId = &#63; and flag = &#63;.
+	*
+	* @param threadId the thread id to search with
+	* @param flag the flag to search with
+	* @return the number of matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByT_F(long threadId, int flag)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the message boards message flags where messageId = &#63; and flag = &#63;.
+	*
+	* @param messageId the message id to search with
+	* @param flag the flag to search with
+	* @return the number of matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByM_F(long messageId, int flag)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the message boards message flags where userId = &#63; and threadId = &#63; and flag = &#63;.
+	*
+	* @param userId the user id to search with
+	* @param threadId the thread id to search with
+	* @param flag the flag to search with
+	* @return the number of matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByU_T_F(long userId, long threadId, int flag)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the message boards message flags where userId = &#63; and messageId = &#63; and flag = &#63;.
+	*
+	* @param userId the user id to search with
+	* @param messageId the message id to search with
+	* @param flag the flag to search with
+	* @return the number of matching message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countByU_M_F(long userId, long messageId, int flag)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts all the message boards message flags.
+	*
+	* @return the number of message boards message flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

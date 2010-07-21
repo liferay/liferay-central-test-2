@@ -15,20 +15,16 @@
 package com.liferay.portal.model;
 
 /**
- * <p>
- * This interface is a model that represents the Image table in the
- * database.
- * </p>
+ * The model interface for the Image service. Represents a row in the &quot;Image&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link com.liferay.portal.model.impl.ImageImpl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.ImageImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       ImageModel
- * @see       com.liferay.portal.model.impl.ImageImpl
- * @see       com.liferay.portal.model.impl.ImageModelImpl
+ * @author Brian Wing Shun Chan
+ * @see ImageModel
+ * @see com.liferay.portal.model.impl.ImageImpl
+ * @see com.liferay.portal.model.impl.ImageModelImpl
  * @generated
  */
 public interface Image extends ImageModel {

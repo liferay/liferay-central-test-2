@@ -47,9 +47,19 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author    Brian Wing Shun Chan
- * @see       WebsitePersistence
- * @see       WebsiteUtil
+ * The persistence for the website service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see WebsitePersistence
+ * @see WebsiteUtil
  * @generated
  */
 public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
@@ -133,11 +143,21 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			WebsiteModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
+	/**
+	 * Caches the website in the entity cache if it is enabled.
+	 *
+	 * @param website the website to cache
+	 */
 	public void cacheResult(Website website) {
 		EntityCacheUtil.putResult(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
 			WebsiteImpl.class, website.getPrimaryKey(), website);
 	}
 
+	/**
+	 * Caches the websites in the entity cache if it is enabled.
+	 *
+	 * @param websites the websites to cache
+	 */
 	public void cacheResult(List<Website> websites) {
 		for (Website website : websites) {
 			if (EntityCacheUtil.getResult(
@@ -148,6 +168,13 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
+	/**
+	 * Clears the cache for all websites.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(WebsiteImpl.class.getName());
 		EntityCacheUtil.clearCache(WebsiteImpl.class.getName());
@@ -155,11 +182,24 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the website.
+	 *
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(Website website) {
 		EntityCacheUtil.removeResult(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
 			WebsiteImpl.class, website.getPrimaryKey());
 	}
 
+	/**
+	 * Creates a new website with the primary key.
+	 *
+	 * @param websiteId the primary key for the new website
+	 * @return the new website
+	 */
 	public Website create(long websiteId) {
 		Website website = new WebsiteImpl();
 
@@ -169,11 +209,27 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		return website;
 	}
 
+	/**
+	 * Removes the website with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the website to remove
+	 * @return the website that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a website with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Removes the website with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param websiteId the primary key of the website to remove
+	 * @return the website that was removed
+	 * @throws com.liferay.portal.NoSuchWebsiteException if a website with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website remove(long websiteId)
 		throws NoSuchWebsiteException, SystemException {
 		Session session = null;
@@ -295,11 +351,27 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		return websiteImpl;
 	}
 
+	/**
+	 * Finds the website with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the website to find
+	 * @return the website
+	 * @throws com.liferay.portal.NoSuchModelException if a website with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the website with the primary key or throws a {@link com.liferay.portal.NoSuchWebsiteException} if it could not be found.
+	 *
+	 * @param websiteId the primary key of the website to find
+	 * @return the website
+	 * @throws com.liferay.portal.NoSuchWebsiteException if a website with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website findByPrimaryKey(long websiteId)
 		throws NoSuchWebsiteException, SystemException {
 		Website website = fetchByPrimaryKey(websiteId);
@@ -316,11 +388,25 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		return website;
 	}
 
+	/**
+	 * Finds the website with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the website to find
+	 * @return the website, or <code>null</code> if a website with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
+	/**
+	 * Finds the website with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param websiteId the primary key of the website to find
+	 * @return the website, or <code>null</code> if a website with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website fetchByPrimaryKey(long websiteId) throws SystemException {
 		Website website = (Website)EntityCacheUtil.getResult(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
 				WebsiteImpl.class, websiteId, this);
@@ -349,17 +435,51 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		return website;
 	}
 
+	/**
+	 * Finds all the websites where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the matching websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Website> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
+	/**
+	 * Finds a range of all the websites where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of websites to return
+	 * @param end the upper bound of the range of websites to return (not inclusive)
+	 * @return the range of matching websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Website> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the websites where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of websites to return
+	 * @param end the upper bound of the range of websites to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Website> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -431,6 +551,19 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		return list;
 	}
 
+	/**
+	 * Finds the first website in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching website
+	 * @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
@@ -453,6 +586,19 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
+	/**
+	 * Finds the last website in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching website
+	 * @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
@@ -478,6 +624,20 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
+	/**
+	 * Finds the websites before and after the current website in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param websiteId the primary key of the current website
+	 * @param companyId the company id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next website
+	 * @throws com.liferay.portal.NoSuchWebsiteException if a website with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website[] findByCompanyId_PrevAndNext(long websiteId,
 		long companyId, OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
@@ -612,15 +772,49 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
+	/**
+	 * Finds all the websites where userId = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @return the matching websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Website> findByUserId(long userId) throws SystemException {
 		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the websites where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of websites to return
+	 * @param end the upper bound of the range of websites to return (not inclusive)
+	 * @return the range of matching websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Website> findByUserId(long userId, int start, int end)
 		throws SystemException {
 		return findByUserId(userId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the websites where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param start the lower bound of the range of websites to return
+	 * @param end the upper bound of the range of websites to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Website> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -692,6 +886,19 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		return list;
 	}
 
+	/**
+	 * Finds the first website in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching website
+	 * @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website findByUserId_First(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
@@ -714,6 +921,19 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
+	/**
+	 * Finds the last website in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching website
+	 * @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website findByUserId_Last(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
@@ -739,6 +959,20 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
+	/**
+	 * Finds the websites before and after the current website in the ordered set where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param websiteId the primary key of the current website
+	 * @param userId the user id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next website
+	 * @throws com.liferay.portal.NoSuchWebsiteException if a website with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website[] findByUserId_PrevAndNext(long websiteId, long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
@@ -872,17 +1106,54 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
+	/**
+	 * Finds all the websites where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the matching websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Website> findByC_C(long companyId, long classNameId)
 		throws SystemException {
 		return findByC_C(companyId, classNameId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the websites where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param start the lower bound of the range of websites to return
+	 * @param end the upper bound of the range of websites to return (not inclusive)
+	 * @return the range of matching websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Website> findByC_C(long companyId, long classNameId, int start,
 		int end) throws SystemException {
 		return findByC_C(companyId, classNameId, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the websites where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param start the lower bound of the range of websites to return
+	 * @param end the upper bound of the range of websites to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Website> findByC_C(long companyId, long classNameId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -958,6 +1229,20 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		return list;
 	}
 
+	/**
+	 * Finds the first website in the ordered set where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching website
+	 * @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website findByC_C_First(long companyId, long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
@@ -984,6 +1269,20 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
+	/**
+	 * Finds the last website in the ordered set where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching website
+	 * @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website findByC_C_Last(long companyId, long classNameId,
 		OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
@@ -1012,6 +1311,21 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
+	/**
+	 * Finds the websites before and after the current website in the ordered set where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param websiteId the primary key of the current website
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next website
+	 * @throws com.liferay.portal.NoSuchWebsiteException if a website with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website[] findByC_C_PrevAndNext(long websiteId, long companyId,
 		long classNameId, OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
@@ -1150,17 +1464,57 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
+	/**
+	 * Finds all the websites where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the matching websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Website> findByC_C_C(long companyId, long classNameId,
 		long classPK) throws SystemException {
 		return findByC_C_C(companyId, classNameId, classPK, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the websites where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param start the lower bound of the range of websites to return
+	 * @param end the upper bound of the range of websites to return (not inclusive)
+	 * @return the range of matching websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Website> findByC_C_C(long companyId, long classNameId,
 		long classPK, int start, int end) throws SystemException {
 		return findByC_C_C(companyId, classNameId, classPK, start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the websites where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param start the lower bound of the range of websites to return
+	 * @param end the upper bound of the range of websites to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Website> findByC_C_C(long companyId, long classNameId,
 		long classPK, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
@@ -1241,6 +1595,21 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		return list;
 	}
 
+	/**
+	 * Finds the first website in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching website
+	 * @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website findByC_C_C_First(long companyId, long classNameId,
 		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
@@ -1270,6 +1639,21 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
+	/**
+	 * Finds the last website in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching website
+	 * @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website findByC_C_C_Last(long companyId, long classNameId,
 		long classPK, OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
@@ -1301,6 +1685,22 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
+	/**
+	 * Finds the websites before and after the current website in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param websiteId the primary key of the current website
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next website
+	 * @throws com.liferay.portal.NoSuchWebsiteException if a website with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website[] findByC_C_C_PrevAndNext(long websiteId, long companyId,
 		long classNameId, long classPK, OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
@@ -1443,12 +1843,38 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
+	/**
+	 * Finds all the websites where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @return the matching websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Website> findByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary) throws SystemException {
 		return findByC_C_C_P(companyId, classNameId, classPK, primary,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the websites where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @param start the lower bound of the range of websites to return
+	 * @param end the upper bound of the range of websites to return (not inclusive)
+	 * @return the range of matching websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Website> findByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary, int start, int end)
 		throws SystemException {
@@ -1456,6 +1882,23 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the websites where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @param start the lower bound of the range of websites to return
+	 * @param end the upper bound of the range of websites to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Website> findByC_C_C_P(long companyId, long classNameId,
 		long classPK, boolean primary, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
@@ -1540,6 +1983,22 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		return list;
 	}
 
+	/**
+	 * Finds the first website in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching website
+	 * @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website findByC_C_C_P_First(long companyId, long classNameId,
 		long classPK, boolean primary, OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
@@ -1572,6 +2031,22 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
+	/**
+	 * Finds the last website in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching website
+	 * @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website findByC_C_C_P_Last(long companyId, long classNameId,
 		long classPK, boolean primary, OrderByComparator orderByComparator)
 		throws NoSuchWebsiteException, SystemException {
@@ -1606,6 +2081,23 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
+	/**
+	 * Finds the websites before and after the current website in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param websiteId the primary key of the current website
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next website
+	 * @throws com.liferay.portal.NoSuchWebsiteException if a website with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public Website[] findByC_C_C_P_PrevAndNext(long websiteId, long companyId,
 		long classNameId, long classPK, boolean primary,
 		OrderByComparator orderByComparator)
@@ -1753,14 +2245,45 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
+	/**
+	 * Finds all the websites.
+	 *
+	 * @return the websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Website> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the websites.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of websites to return
+	 * @param end the upper bound of the range of websites to return (not inclusive)
+	 * @return the range of websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Website> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the websites.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of websites to return
+	 * @param end the upper bound of the range of websites to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<Website> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -1827,18 +2350,37 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		return list;
 	}
 
+	/**
+	 * Removes all the websites where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (Website website : findByCompanyId(companyId)) {
 			remove(website);
 		}
 	}
 
+	/**
+	 * Removes all the websites where userId = &#63; from the database.
+	 *
+	 * @param userId the user id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (Website website : findByUserId(userId)) {
 			remove(website);
 		}
 	}
 
+	/**
+	 * Removes all the websites where companyId = &#63; and classNameId = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C(long companyId, long classNameId)
 		throws SystemException {
 		for (Website website : findByC_C(companyId, classNameId)) {
@@ -1846,6 +2388,14 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
+	/**
+	 * Removes all the websites where companyId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		for (Website website : findByC_C_C(companyId, classNameId, classPK)) {
@@ -1853,6 +2403,15 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
+	/**
+	 * Removes all the websites where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63; from the database.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeByC_C_C_P(long companyId, long classNameId, long classPK,
 		boolean primary) throws SystemException {
 		for (Website website : findByC_C_C_P(companyId, classNameId, classPK,
@@ -1861,12 +2420,24 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
+	/**
+	 * Removes all the websites from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (Website website : findAll()) {
 			remove(website);
 		}
 	}
 
+	/**
+	 * Counts all the websites where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the number of matching websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByCompanyId(long companyId) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId };
 
@@ -1913,6 +2484,13 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the websites where userId = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @return the number of matching websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByUserId(long userId) throws SystemException {
 		Object[] finderArgs = new Object[] { userId };
 
@@ -1959,6 +2537,14 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the websites where companyId = &#63; and classNameId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @return the number of matching websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C(long companyId, long classNameId)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, classNameId };
@@ -2010,6 +2596,15 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the websites where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the number of matching websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, classNameId, classPK };
@@ -2065,6 +2660,16 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the websites where companyId = &#63; and classNameId = &#63; and classPK = &#63; and primary = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @param primary the primary to search with
+	 * @return the number of matching websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countByC_C_C_P(long companyId, long classNameId, long classPK,
 		boolean primary) throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -2126,6 +2731,12 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		return count.intValue();
 	}
 
+	/**
+	 * Counts all the websites.
+	 *
+	 * @return the number of websites
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -2160,6 +2771,9 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		return count.intValue();
 	}
 
+	/**
+	 * Initializes the website persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
