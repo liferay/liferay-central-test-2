@@ -94,15 +94,13 @@ public class IGImageServiceWrapper implements IGImageService {
 
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
 		long groupId, long folderId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _igImageService.getImages(groupId, folderId);
 	}
 
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
 		long groupId, long folderId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _igImageService.getImages(groupId, folderId, start, end);
 	}
 

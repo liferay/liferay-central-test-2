@@ -100,15 +100,13 @@ public class IGImageServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
 		long groupId, long folderId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getImages(groupId, folderId);
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
 		long groupId, long folderId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getImages(groupId, folderId, start, end);
 	}
 

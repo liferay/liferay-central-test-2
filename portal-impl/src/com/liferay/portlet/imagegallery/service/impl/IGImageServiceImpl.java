@@ -143,14 +143,14 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 	}
 
 	public List<IGImage> getImages(long groupId, long folderId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return igImagePersistence.filterFindByG_F(groupId, folderId);
 	}
 
 	public List<IGImage> getImages(
 			long groupId, long folderId, int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return igImagePersistence.filterFindByG_F(
 			groupId, folderId, start, end);

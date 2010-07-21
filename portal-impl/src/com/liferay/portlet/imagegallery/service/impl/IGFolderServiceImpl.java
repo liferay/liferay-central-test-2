@@ -102,14 +102,14 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 	}
 
 	public List<IGFolder> getFolders(long groupId, long parentFolderId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return igFolderPersistence.filterFindByG_P(groupId, parentFolderId);
 	}
 
 	public List<IGFolder> getFolders(
 			long groupId, long parentFolderId,  int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return igFolderPersistence.filterFindByG_P(
 			groupId, parentFolderId, start, end);

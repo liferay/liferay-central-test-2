@@ -73,15 +73,13 @@ public class IGFolderServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getFolders(
 		long groupId, long parentFolderId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFolders(groupId, parentFolderId);
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getFolders(
 		long groupId, long parentFolderId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFolders(groupId, parentFolderId, start, end);
 	}
 
