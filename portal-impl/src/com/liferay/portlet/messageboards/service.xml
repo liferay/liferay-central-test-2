@@ -3,7 +3,7 @@
 
 <service-builder package-path="com.liferay.portlet.messageboards">
 	<namespace>MB</namespace>
-	<entity name="MBBan" local-service="true" remote-service="true">
+	<entity name="MBBan" local-service="true" remote-service="true" human-name="message boards ban">
 
 		<!-- PK fields -->
 
@@ -41,7 +41,7 @@
 			<finder-column name="banUserId" />
 		</finder>
 	</entity>
-	<entity name="MBCategory" uuid="true" local-service="true" remote-service="true">
+	<entity name="MBCategory" uuid="true" local-service="true" remote-service="true" human-name="message boards category">
 
 		<!-- PK fields -->
 
@@ -95,7 +95,7 @@
 		<reference package-path="com.liferay.portlet.asset" entity="AssetTag" />
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 	</entity>
-	<entity name="MBDiscussion" local-service="true" remote-service="false">
+	<entity name="MBDiscussion" local-service="true" remote-service="false" human-name="message boards discussion">
 
 		<!-- PK fields -->
 
@@ -120,7 +120,7 @@
 			<finder-column name="classPK" />
 		</finder>
 	</entity>
-	<entity name="MBMailingList" uuid="true" local-service="true" remote-service="false">
+	<entity name="MBMailingList" uuid="true" local-service="true" remote-service="false" human-name="message boards mailing list">
 
 		<!-- PK fields -->
 
@@ -168,7 +168,7 @@
 			<finder-column name="categoryId" />
 		</finder>
 	</entity>
-	<entity name="MBMessage" uuid="true" local-service="true" remote-service="true">
+	<entity name="MBMessage" uuid="true" local-service="true" remote-service="true" human-name="message-boards message">
 
 		<!-- PK fields -->
 
@@ -306,7 +306,7 @@
 		<reference package-path="com.liferay.portlet.social" entity="SocialEquityLog" />
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 	</entity>
-	<entity name="MBMessageFlag" local-service="true" remote-service="true">
+	<entity name="MBMessageFlag" local-service="true" remote-service="true" human-name="message boards message flag">
 
 		<!-- PK fields -->
 
@@ -353,7 +353,7 @@
 			<finder-column name="flag" />
 		</finder>
 	</entity>
-	<entity name="MBStatsUser" local-service="true" remote-service="false">
+	<entity name="MBStatsUser" local-service="true" remote-service="false" human-name="message boards stats user">
 
 		<!-- PK fields -->
 
@@ -395,7 +395,7 @@
 			<finder-column name="messageCount" comparator="!=" />
 		</finder>
 	</entity>
-	<entity name="MBThread" local-service="true" remote-service="true">
+	<entity name="MBThread" local-service="true" remote-service="true" human-name="message boards thread">
 
 		<!-- PK fields -->
 
