@@ -75,6 +75,16 @@ import java.util.Set;
 </#list>
 
 /**
+ * The persistence for the ${entity.humanName} service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
+ * </p>
+ * 
  * @author    ${author}
  * @see       ${entity.name}Persistence
  * @see       ${entity.name}Util
@@ -149,6 +159,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		"countAll",
 		new String[0]);
 
+	/**
+	 * Caches the ${entity.humanName} in the entity cache if it is enabled.
+	 *
+	 * @param ${entity.varName} the ${entity.humanName} to cache
+	 */
 	public void cacheResult(${entity.name} ${entity.varName}) {
 		EntityCacheUtil.putResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.varName}.getPrimaryKey(), ${entity.varName});
 
@@ -182,6 +197,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		</#list>
 	}
 
+	/**
+	 * Caches the ${entity.humanNames} in the entity cache if it is enabled.
+	 *
+	 * @param ${entity.varNames} the ${entity.humanNames} to cache
+	 */
 	public void cacheResult(List<${entity.name}> ${entity.varNames}) {
 		for (${entity.name} ${entity.varName} : ${entity.varNames}) {
 			if (EntityCacheUtil.getResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.varName}.getPrimaryKey(), this) == null) {
@@ -190,6 +210,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		}
 	}
 
+	/**
+	 * Clears the cache for all ${entity.humanNames}.
+	 * 
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache() {
 		CacheRegistryUtil.clear(${entity.name}Impl.class.getName());
 		EntityCacheUtil.clearCache(${entity.name}Impl.class.getName());
@@ -197,6 +224,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	/**
+	 * Clears the cache for the ${entity.humanName}.
+	 * 
+	 * <p>
+	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
+	 * </p>
+	 */
 	public void clearCache(${entity.name} ${entity.varName}) {
 		EntityCacheUtil.removeResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.varName}.getPrimaryKey());
 
@@ -229,6 +263,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		</#list>
 	}
 
+	/**
+	 * Creates a new ${entity.humanName} with the primary key.
+	 *
+	 * @param ${entity.PKVarName} the primary key for the new ${entity.humanName}
+	 * @return the new ${entity.humanName}
+	 */
 	public ${entity.name} create(${entity.PKClassName} ${entity.PKVarName}) {
 		${entity.name} ${entity.varName} = new ${entity.name}Impl();
 
@@ -244,6 +284,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		return ${entity.varName};
 	}
 
+	/**
+	 * Removes the ${entity.humanName} with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param primaryKey the primary key of the ${entity.humanName} to remove
+	 * @return the ${entity.humanName} that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a ${entity.humanName} with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ${entity.name} remove(Serializable primaryKey) throws NoSuchModelException, SystemException {
 		<#if entity.hasPrimitivePK()>
 			return remove(((${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")})primaryKey).${entity.PKClassName}Value());
@@ -252,6 +300,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		</#if>
 	}
 
+	/**
+	 * Removes the ${entity.humanName} with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param ${entity.PKVarName} the primary key of the ${entity.humanName} to remove
+	 * @return the ${entity.humanName} that was removed
+	 * @throws ${packagePath}.${noSuchEntity}Exception if a ${entity.humanName} with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ${entity.name} remove(${entity.PKClassName} ${entity.PKVarName}) throws ${noSuchEntity}Exception, SystemException {
 		Session session = null;
 
@@ -604,6 +660,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		return ${entity.varName}Impl;
 	}
 
+	/**
+	 * Finds the ${entity.humanName} with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the ${entity.humanName} to find
+	 * @return the ${entity.humanName}
+	 * @throws com.liferay.portal.NoSuchModelException if a ${entity.humanName} with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ${entity.name} findByPrimaryKey(Serializable primaryKey) throws NoSuchModelException, SystemException {
 		<#if entity.hasPrimitivePK()>
 			return findByPrimaryKey(((${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")})primaryKey).${entity.PKClassName}Value());
@@ -612,6 +676,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		</#if>
 	}
 
+	/**
+	 * Finds the ${entity.humanName} with the primary key or throws a {@link ${packagePath}.${noSuchEntity}Exception} if it could not be found.
+	 *
+	 * @param ${entity.PKVarName} the primary key of the ${entity.humanName} to find
+	 * @return the ${entity.humanName}
+	 * @throws ${packagePath}.${noSuchEntity}Exception if a ${entity.humanName} with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ${entity.name} findByPrimaryKey(${entity.PKClassName} ${entity.PKVarName}) throws ${noSuchEntity}Exception, SystemException {
 		${entity.name} ${entity.varName} = fetchByPrimaryKey(${entity.PKVarName});
 
@@ -626,6 +698,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		return ${entity.varName};
 	}
 
+	/**
+	 * Finds the ${entity.humanName} with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param primaryKey the primary key of the ${entity.humanName} to find
+	 * @return the ${entity.humanName}, or <code>null</code> if a ${entity.humanName} with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ${entity.name} fetchByPrimaryKey(Serializable primaryKey) throws SystemException {
 		<#if entity.hasPrimitivePK()>
 			return fetchByPrimaryKey(((${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")})primaryKey).${entity.PKClassName}Value());
@@ -634,6 +713,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		</#if>
 	}
 
+	/**
+	 * Finds the ${entity.humanName} with the primary key or returns <code>null</code> if it could not be found.
+	 *
+	 * @param ${entity.PKVarName} the primary key of the ${entity.humanName} to find
+	 * @return the ${entity.humanName}, or <code>null</code> if a ${entity.humanName} with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public ${entity.name} fetchByPrimaryKey(${entity.PKClassName} ${entity.PKVarName}) throws SystemException {
 		${entity.name} ${entity.varName} = (${entity.name})EntityCacheUtil.getResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.PKVarName}, this);
 
@@ -676,6 +762,15 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		<#assign finderColsList = finder.getColumns()>
 
 		<#if finder.isCollection()>
+			/**
+			 * Finds all the ${entity.humanNames} where ${finder.getHumanConditions(false)}.
+			 *
+			<#list finderColsList as finderCol>
+			 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+			</#list>
+			 * @return the matching ${entity.humanNames}
+			 * @throws SystemException if a system exception occurred
+			 */
 			public List<${entity.name}> findBy${finder.name}(
 
 			<#list finderColsList as finderCol>
@@ -696,6 +791,21 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 			}
 
+			/**
+			 * Finds a range of all the ${entity.humanNames} where ${finder.getHumanConditions(false)}.
+			 *
+			 * <p>
+			 * <#include "range_comment.ftl">
+			 * </p>
+			 *
+			<#list finderColsList as finderCol>
+			 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+			</#list>
+			 * @param start the lower bound of the range of ${entity.humanNames} to return
+			 * @param end the upper bound of the range of ${entity.humanNames} to return (not inclusive)
+			 * @return the range of matching ${entity.humanNames}
+			 * @throws SystemException if a system exception occurred
+			 */
 			public List<${entity.name}> findBy${finder.name}(
 
 			<#list finderColsList as finderCol>
@@ -712,6 +822,22 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				start, end, null);
 			}
 
+			/**
+			 * Finds an ordered range of all the ${entity.humanNames} where ${finder.getHumanConditions(false)}.
+			 *
+			 * <p>
+			 * <#include "range_comment.ftl">
+			 * </p>
+			 *
+			<#list finderColsList as finderCol>
+			 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+			</#list>
+			 * @param start the lower bound of the range of ${entity.humanNames} to return
+			 * @param end the upper bound of the range of ${entity.humanNames} to return (not inclusive)
+			 * @param orderByComparator the comparator to order the results by
+			 * @return the ordered range of matching ${entity.humanNames}
+			 * @throws SystemException if a system exception occurred
+			 */
 			public List<${entity.name}> findBy${finder.name}(
 
 			<#list finderColsList as finderCol>
@@ -787,6 +913,21 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				return list;
 			}
 
+			/**
+			 * Finds the first ${entity.humanName} in the ordered set where ${finder.getHumanConditions(false)}.
+			 *
+			 * <p>
+			 * <#include "range_comment.ftl">
+			 * </p>
+			 *
+			<#list finderColsList as finderCol>
+			 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+			</#list>
+			 * @param orderByComparator the comparator to order the set by
+			 * @return the first matching ${entity.humanName}
+			 * @throws ${packagePath}.${noSuchEntity}Exception if a matching ${entity.humanName} could not be found
+			 * @throws SystemException if a system exception occurred
+			 */
 			public ${entity.name} findBy${finder.name}_First(
 
 			<#list finderColsList as finderCol>
@@ -823,6 +964,21 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				}
 			}
 
+			/**
+			 * Finds the last ${entity.humanName} in the ordered set where ${finder.getHumanConditions(false)}.
+			 *
+			 * <p>
+			 * <#include "range_comment.ftl">
+			 * </p>
+			 *
+			<#list finderColsList as finderCol>
+			 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+			</#list>
+			 * @param orderByComparator the comparator to order the set by
+			 * @return the last matching ${entity.humanName}
+			 * @throws ${packagePath}.${noSuchEntity}Exception if a matching ${entity.humanName} could not be found
+			 * @throws SystemException if a system exception occurred
+			 */
 			public ${entity.name} findBy${finder.name}_Last(
 
 			<#list finderColsList as finderCol>
@@ -871,6 +1027,22 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				}
 			}
 
+			/**
+			 * Finds the ${entity.humanNames} before and after the current ${entity.humanName} in the ordered set where ${finder.getHumanConditions(false)}.
+			 *
+			 * <p>
+			 * <#include "range_comment.ftl">
+			 * </p>
+			 *
+			 * @param ${entity.PKVarName} the primary key of the current ${entity.humanName}
+			<#list finderColsList as finderCol>
+			 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+			</#list>
+			 * @param orderByComparator the comparator to order the set by
+			 * @return the previous, current, and next ${entity.humanName}
+			 * @throws ${packagePath}.${noSuchEntity}Exception if a ${entity.humanName} with the primary key could not be found
+			 * @throws SystemException if a system exception occurred
+			 */
 			public ${entity.name}[] findBy${finder.name}_PrevAndNext(${entity.PKClassName} ${entity.PKVarName},
 
 			<#list finderColsList as finderCol>
@@ -1031,6 +1203,23 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			}
 
 			<#if finder.hasArrayableOperator()>
+				/**
+				 * Finds all the ${entity.humanNames} where ${finder.getHumanConditions(true)}.
+				 *
+				 * <p>
+				 * <#include "range_comment.ftl">
+				 * </p>
+				 *
+				<#list finderColsList as finderCol>
+					<#if finderCol.hasArrayableOperator()>
+				 * @param ${finderCol.names} the ${finderCol.humanNames} to search with
+					<#else>
+				 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+					</#if>
+				</#list>
+				 * @return the matching ${entity.humanNames}
+				 * @throws SystemException if a system exception occurred
+				 */
 				public List<${entity.name}> findBy${finder.name}(
 
 				<#list finderColsList as finderCol>
@@ -1059,6 +1248,25 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 				}
 
+				/**
+				 * Finds a range of all the ${entity.humanNames} where ${finder.getHumanConditions(true)}.
+				 *
+				 * <p>
+				 * <#include "range_comment.ftl">
+				 * </p>
+				 *
+				<#list finderColsList as finderCol>
+					<#if finderCol.hasArrayableOperator()>
+				 * @param ${finderCol.names} the ${finderCol.humanNames} to search with
+					<#else>
+				 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+					</#if>
+				</#list>
+				 * @param start the lower bound of the range of ${entity.humanNames} to return
+				 * @param end the upper bound of the range of ${entity.humanNames} to return (not inclusive)
+				 * @return the range of matching ${entity.humanNames}
+				 * @throws SystemException if a system exception occurred
+				 */
 				public List<${entity.name}> findBy${finder.name}(
 
 				<#list finderColsList as finderCol>
@@ -1083,6 +1291,26 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					start, end, null);
 				}
 
+				/**
+				 * Finds an ordered range of all the ${entity.humanNames} where ${finder.getHumanConditions(true)}.
+				 *
+				 * <p>
+				 * <#include "range_comment.ftl">
+				 * </p>
+				 *
+				<#list finderColsList as finderCol>
+					<#if finderCol.hasArrayableOperator()>
+				 * @param ${finderCol.names} the ${finderCol.humanNames} to search with
+					<#else>
+				 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+					</#if>
+				</#list>
+				 * @param start the lower bound of the range of ${entity.humanNames} to return
+				 * @param end the upper bound of the range of ${entity.humanNames} to return (not inclusive)
+				 * @param orderByComparator the comparator to order the results by
+				 * @return the ordered range of matching ${entity.humanNames}
+				 * @throws SystemException if a system exception occurred
+				 */
 				public List<${entity.name}> findBy${finder.name}(
 
 				<#list finderColsList as finderCol>
@@ -1162,6 +1390,15 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			</#if>
 
 			<#if entity.isPermissionCheckEnabled(finder)>
+				/**
+				 * Filters by the user's permissions and finds all the ${entity.humanNames} where ${finder.getHumanConditions(false)}.
+				 *
+				<#list finderColsList as finderCol>
+				 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+				</#list>
+				 * @return the matching ${entity.humanNames} that the user has permission to view
+				 * @throws SystemException if a system exception occurred
+				 */
 				public List<${entity.name}> filterFindBy${finder.name}(
 
 				<#list finderColsList as finderCol>
@@ -1182,6 +1419,21 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 				}
 
+				/**
+				 * Filters by the user's permissions and finds a range of all the ${entity.humanNames} where ${finder.getHumanConditions(false)}.
+				 *
+				 * <p>
+				 * <#include "range_comment.ftl">
+				 * </p>
+				 *
+				<#list finderColsList as finderCol>
+				 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+				</#list>
+				 * @param start the lower bound of the range of ${entity.humanNames} to return
+				 * @param end the upper bound of the range of ${entity.humanNames} to return (not inclusive)
+				 * @return the range of matching ${entity.humanNames} that the user has permission to view
+				 * @throws SystemException if a system exception occurred
+				 */
 				public List<${entity.name}> filterFindBy${finder.name}(
 
 				<#list finderColsList as finderCol>
@@ -1198,6 +1450,22 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					start, end, null);
 				}
 
+				/**
+				 * Filters by the user's permissions and finds an ordered range of all the ${entity.humanNames} where ${finder.getHumanConditions(false)}.
+				 *
+				 * <p>
+				 * <#include "range_comment.ftl">
+				 * </p>
+				 *
+				<#list finderColsList as finderCol>
+				 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+				</#list>
+				 * @param start the lower bound of the range of ${entity.humanNames} to return
+				 * @param end the upper bound of the range of ${entity.humanNames} to return (not inclusive)
+				 * @param orderByComparator the comparator to order the results by
+				 * @return the ordered range of matching ${entity.humanNames} that the user has permission to view
+				 * @throws SystemException if a system exception occurred
+				 */
 				public List<${entity.name}> filterFindBy${finder.name}(
 
 				<#list finderColsList as finderCol>
@@ -1264,6 +1532,23 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				}
 
 				<#if finder.hasArrayableOperator()>
+					/**
+					 * Filters by the user's permissions and finds all the ${entity.humanNames} where ${finder.getHumanConditions(true)}.
+					 *
+					 * <p>
+					 * <#include "range_comment.ftl">
+					 * </p>
+					 *
+					<#list finderColsList as finderCol>
+						<#if finderCol.hasArrayableOperator()>
+					 * @param ${finderCol.names} the ${finderCol.humanNames} to search with
+						<#else>
+					 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+						</#if>
+					</#list>
+					 * @return the matching ${entity.humanNames} that the user has permission to view
+					 * @throws SystemException if a system exception occurred
+					 */
 					public List<${entity.name}> filterFindBy${finder.name}(
 
 					<#list finderColsList as finderCol>
@@ -1292,6 +1577,25 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 					}
 
+					/**
+					 * Filters by the user's permissions and finds a range of all the ${entity.humanNames} where ${finder.getHumanConditions(true)}.
+					 *
+					 * <p>
+					 * <#include "range_comment.ftl">
+					 * </p>
+					 *
+					<#list finderColsList as finderCol>
+						<#if finderCol.hasArrayableOperator()>
+					 * @param ${finderCol.names} the ${finderCol.humanNames} to search with
+						<#else>
+					 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+						</#if>
+					</#list>
+					 * @param start the lower bound of the range of ${entity.humanNames} to return
+					 * @param end the upper bound of the range of ${entity.humanNames} to return (not inclusive)
+					 * @return the range of matching ${entity.humanNames} that the user has permission to view
+					 * @throws SystemException if a system exception occurred
+					 */
 					public List<${entity.name}> filterFindBy${finder.name}(
 
 					<#list finderColsList as finderCol>
@@ -1316,6 +1620,26 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						start, end, null);
 					}
 
+					/**
+					 * Filters by the user's permissions and finds an ordered range of all the ${entity.humanNames} where ${finder.getHumanConditions(true)}.
+					 *
+					 * <p>
+					 * <#include "range_comment.ftl">
+					 * </p>
+					 *
+					<#list finderColsList as finderCol>
+						<#if finderCol.hasArrayableOperator()>
+					 * @param ${finderCol.names} the ${finderCol.humanNames} to search with
+						<#else>
+					 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+						</#if>
+					</#list>
+					 * @param start the lower bound of the range of ${entity.humanNames} to return
+					 * @param end the upper bound of the range of ${entity.humanNames} to return (not inclusive)
+					 * @param orderByComparator the comparator to order the results by
+					 * @return the ordered range of matching ${entity.humanNames} that the user has permission to view
+					 * @throws SystemException if a system exception occurred
+					 */
 					public List<${entity.name}> filterFindBy${finder.name}(
 
 					<#list finderColsList as finderCol>
@@ -1384,6 +1708,16 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				</#if>
 			</#if>
 		<#else>
+			/**
+			 * Finds the ${entity.humanName} where ${finder.getHumanConditions(false)} or throws a {@link ${packagePath}.${noSuchEntity}Exception} if it could not be found.
+			 *
+			<#list finderColsList as finderCol>
+			 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+			</#list>
+			 * @return the matching ${entity.humanName}
+			 * @throws ${packagePath}.${noSuchEntity}Exception if a matching ${entity.humanName} could not be found
+			 * @throws SystemException if a system exception occurred
+			 */
 			public ${entity.name} findBy${finder.name}(
 
 			<#list finderColsList as finderCol>
@@ -1431,6 +1765,15 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				return ${entity.varName};
 			}
 
+			/**
+			 * Finds the ${entity.humanName} where ${finder.getHumanConditions(false)} or returns <code>null</code> if it could not be found. Uses the finder cache.
+			 *
+			<#list finderColsList as finderCol>
+			 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+			</#list>
+			 * @return the matching ${entity.humanName}, or <code>null</code> if a matching ${entity.humanName} could not be found
+			 * @throws SystemException if a system exception occurred
+			 */
 			public ${entity.name} fetchBy${finder.name}(
 
 			<#list finderColsList as finderCol>
@@ -1451,6 +1794,15 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				true);
 			}
 
+			/**
+			 * Finds the ${entity.humanName} where ${finder.getHumanConditions(false)} or returns <code>null</code> if it could not be found, optionally using the finder cache.
+			 *
+			<#list finderColsList as finderCol>
+			 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+			</#list>
+			 * @return the matching ${entity.humanName}, or <code>null</code> if a matching ${entity.humanName} could not be found
+			 * @throws SystemException if a system exception occurred
+			 */
 			public ${entity.name} fetchBy${finder.name}(
 
 			<#list finderColsList as finderCol>
@@ -1559,14 +1911,45 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		</#if>
 	</#list>
 
+	/**
+	 * Finds all the ${entity.humanNames}.
+	 *
+	 * @return the ${entity.humanNames}
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<${entity.name}> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
+	/**
+	 * Finds a range of all the ${entity.humanNames}.
+	 *
+	 * <p>
+	 * <#include "range_comment.ftl">
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of ${entity.humanNames} to return
+	 * @param end the upper bound of the range of ${entity.humanNames} to return (not inclusive)
+	 * @return the range of ${entity.humanNames}
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<${entity.name}> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
 
+	/**
+	 * Finds an ordered range of all the ${entity.humanNames}.
+	 *
+	 * <p>
+	 * <#include "range_comment.ftl">
+	 * </p>
+	 *
+	 * @param start the lower bound of the range of ${entity.humanNames} to return
+	 * @param end the upper bound of the range of ${entity.humanNames} to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of ${entity.humanNames}
+	 * @throws SystemException if a system exception occurred
+	 */
 	public List<${entity.name}> findAll(int start, int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {String.valueOf(start), String.valueOf(end), String.valueOf(orderByComparator)};
 
@@ -1632,6 +2015,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		<#assign finderColsList = finder.getColumns()>
 
 		<#if finder.isCollection()>
+			/**
+			 * Removes all the ${entity.humanNames} where ${finder.getHumanConditions(false)} from the database.
+			 *
+			<#list finderColsList as finderCol>
+			 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+			</#list>
+			 * @throws SystemException if a system exception occurred
+			 */
 			public void removeBy${finder.name}(
 
 			<#list finderColsList as finderCol>
@@ -1654,6 +2045,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				}
 			}
 		<#else>
+			/**
+			 * Removes the ${entity.humanName} where ${finder.getHumanConditions(false)} from the database.
+			 *
+			<#list finderColsList as finderCol>
+			 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+			</#list>
+			 * @throws SystemException if a system exception occurred
+			 */
 			public void removeBy${finder.name}(
 
 			<#list finderColsList as finderCol>
@@ -1682,6 +2081,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		</#if>
 	</#list>
 
+	/**
+	 * Removes all the ${entity.humanNames} from the database.
+	 *
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void removeAll() throws SystemException {
 		for (${entity.name} ${entity.varName} : findAll()) {
 			remove(${entity.varName});
@@ -1691,6 +2095,15 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	<#list entity.getFinderList() as finder>
 		<#assign finderColsList = finder.getColumns()>
 
+		/**
+		 * Counts all the ${entity.humanNames} where ${finder.getHumanConditions(false)}.
+		 *
+		<#list finderColsList as finderCol>
+		 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+		</#list>
+		 * @return the number of matching ${entity.humanNames}
+		 * @throws SystemException if a system exception occurred
+		 */
 		public int countBy${finder.name}(
 
 		<#list finderColsList as finderCol>
@@ -1754,6 +2167,19 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		}
 
 		<#if finder.hasArrayableOperator()>
+			/**
+			 * Counts all the ${entity.humanNames} where ${finder.getHumanConditions(true)}.
+			 *
+			<#list finderColsList as finderCol>
+				<#if finderCol.hasArrayableOperator()>
+			 * @param ${finderCol.names} the ${finderCol.humanNames} to search with
+				<#else>
+			 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+				</#if>
+			</#list>
+			 * @return the number of matching ${entity.humanNames}
+			 * @throws SystemException if a system exception occurred
+			 */
 			public int countBy${finder.name}(
 
 			<#list finderColsList as finderCol>
@@ -1826,6 +2252,15 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		</#if>
 
 		<#if entity.isPermissionCheckEnabled(finder)>
+			/**
+			 * Filters by the user's permissions and counts all the ${entity.humanNames} where ${finder.getHumanConditions(false)}.
+			 *
+			<#list finderColsList as finderCol>
+			 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+			</#list>
+			 * @return the number of matching ${entity.humanNames} that the user has permission to view
+			 * @throws SystemException if a system exception occurred
+			 */
 			public int filterCountBy${finder.name}(
 
 			<#list finderColsList as finderCol>
@@ -1885,6 +2320,19 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			}
 
 			<#if finder.hasArrayableOperator()>
+				/**
+				 * Filters by the user's permissions and counts all the ${entity.humanNames} where ${finder.getHumanConditions(true)}.
+				 *
+				<#list finderColsList as finderCol>
+					<#if finderCol.hasArrayableOperator()>
+				 * @param ${finderCol.names} the ${finderCol.humanNames} to search with
+					<#else>
+				 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+					</#if>
+				</#list>
+				 * @return the number of matching ${entity.humanNames} that the user has permission to view
+				 * @throws SystemException if a system exception occurred
+				 */
 				public int filterCountBy${finder.name}(
 
 				<#list finderColsList as finderCol>
@@ -1954,6 +2402,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		</#if>
 	</#list>
 
+	/**
+	 * Counts all the ${entity.humanNames}.
+	 *
+	 * @return the number of ${entity.humanNames}
+	 * @throws SystemException if a system exception occurred
+	 */
 	public int countAll() throws SystemException {
 		Object[] finderArgs = new Object[0];
 
@@ -1990,10 +2444,30 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		<#if column.isCollection() && (column.isMappingManyToMany() || column.isMappingOneToMany())>
 			<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
 
+			/**
+			 * Gets all the ${tempEntity.humanNames} associated with the ${entity.humanName}.
+			 *
+			 * @param pk the primary key of the ${entity.humanName} to get the associated ${tempEntity.humanNames} for
+			 * @return the ${tempEntity.humanNames} associated with the ${entity.humanName}
+			 * @throws SystemException if a system exception occurred
+			 */
 			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk) throws SystemException {
 				return get${tempEntity.names}(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 			}
 
+			/**
+			 * Gets a range of all the ${tempEntity.humanNames} associated with the ${entity.humanName}.
+			 *
+			 * <p>
+			 * <#include "range_comment.ftl">
+			 * </p>
+			 *
+			 * @param pk the primary key of the ${entity.humanName} to get the associated ${tempEntity.humanNames} for
+			 * @param start the lower bound of the range of ${entity.humanNames} to return
+			 * @param end the upper bound of the range of ${entity.humanNames} to return (not inclusive)
+			 * @return the range of ${tempEntity.humanNames} associated with the ${entity.humanName}
+			 * @throws SystemException if a system exception occurred
+			 */
 			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk, int start, int end) throws SystemException {
 				return get${tempEntity.names}(pk, start, end, null);
 			}
@@ -2024,6 +2498,20 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					.class.getName(), "java.lang.Integer", "java.lang.Integer", "com.liferay.portal.kernel.util.OrderByComparator"
 				});
 
+			/**
+			 * Gets an ordered range of all the ${tempEntity.humanNames} associated with the ${entity.humanName}.
+			 *
+			 * <p>
+			 * <#include "range_comment.ftl">
+			 * </p>
+			 *
+			 * @param pk the primary key of the ${entity.humanName} to get the associated ${tempEntity.humanNames} for
+			 * @param start the lower bound of the range of ${entity.humanNames} to return
+			 * @param end the upper bound of the range of ${entity.humanNames} to return (not inclusive)
+			 * @param orderByComparator the comparator to order the results by
+			 * @return the ordered range of ${tempEntity.humanNames} associated with the ${entity.humanName}
+			 * @throws SystemException if a system exception occurred
+			 */
 			public List<${tempEntity.packagePath}.model.${tempEntity.name}> get${tempEntity.names}(${entity.PKClassName} pk, int start, int end, OrderByComparator orderByComparator) throws SystemException {
 				Object[] finderArgs = new Object[] {
 					pk, String.valueOf(start), String.valueOf(end), String.valueOf(orderByComparator)
@@ -2105,6 +2593,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					.class.getName()
 				});
 
+			/**
+			 * Gets the number of ${tempEntity.humanNames} associated with the ${entity.humanName}.
+			 *
+			 * @param pk the primary key of the ${entity.humanName} to get the number of associated ${tempEntity.humanNames} for
+			 * @return the number of ${tempEntity.humanNames} associated with the ${entity.humanName}
+			 * @throws SystemException if a system exception occurred
+			 */
 			public int get${tempEntity.names}Size(${entity.PKClassName} pk) throws SystemException {
 				Object[] finderArgs = new Object[] {pk};
 
@@ -2177,6 +2672,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					.class.getName()
 				});
 
+			/**
+			 * Determines whether the ${tempEntity.humanName} is associated with the ${entity.humanName}.
+			 *
+			 * @param pk the primary key of the ${entity.humanName}
+			 * @param ${tempEntity.varName}PK the primary key of the ${tempEntity.humanName}
+			 * @return whether the ${tempEntity.humanName} is associated with the ${entity.humanName}
+			 * @throws SystemException if a system exception occurred
+			 */
 			public boolean contains${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.PKClassName} ${tempEntity.varName}PK) throws SystemException {
 				Object[] finderArgs = new Object[] {pk, ${tempEntity.varName}PK};
 
@@ -2201,6 +2704,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				return value.booleanValue();
 			}
 
+			/**
+			 * Determines whether the ${entity.humanName} has any ${tempEntity.humanNames} associated with it.
+			 *
+			 * @param pk the primary key of the ${entity.humanName} to check for associations with ${tempEntity.humanNames}
+			 * @return whether the ${entity.humanName} has any ${tempEntity.humanNames} associated with it
+			 * @throws SystemException if a system exception occurred
+			 */
 			public boolean contains${tempEntity.names}(${entity.PKClassName} pk) throws SystemException {
 				if (get${tempEntity.names}Size(pk)> 0) {
 					return true;
@@ -2213,6 +2723,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			<#if column.isMappingManyToMany()>
 				<#assign noSuchTempEntity = serviceBuilder.getNoSuchEntityException(tempEntity)>
 
+				/**
+				 * Adds an association between the ${entity.humanName} and the ${tempEntity.humanName}. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+				 *
+				 * @param pk the primary key of the ${entity.humanName}
+				 * @param ${tempEntity.varName}PK the primary key of the ${tempEntity.humanName}
+				 * @throws SystemException if a system exception occurred
+				 */
 				public void add${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.PKClassName} ${tempEntity.varName}PK) throws SystemException {
 					try {
 						add${tempEntity.name}.add(pk, ${tempEntity.varName}PK);
@@ -2225,6 +2742,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					}
 				}
 
+				/**
+				 * Adds an association between the ${entity.humanName} and the ${tempEntity.humanName}. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+				 *
+				 * @param pk the primary key of the ${entity.humanName}
+				 * @param ${tempEntity.varName} the ${tempEntity.humanName}
+				 * @throws SystemException if a system exception occurred
+				 */
 				public void add${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName}) throws SystemException {
 					try {
 						add${tempEntity.name}.add(pk, ${tempEntity.varName}.getPrimaryKey());
@@ -2237,6 +2761,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					}
 				}
 
+				/**
+				 * Adds an association between the ${entity.humanName} and the ${tempEntity.humanNames}. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+				 *
+				 * @param pk the primary key of the ${entity.humanName}
+				 * @param ${tempEntity.varName}PKs the primary keys of the ${tempEntity.humanNames}
+				 * @throws SystemException if a system exception occurred
+				 */
 				public void add${tempEntity.names}(${entity.PKClassName} pk, ${tempEntity.PKClassName}[] ${tempEntity.varName}PKs) throws SystemException {
 					try {
 						for (${tempEntity.PKClassName} ${tempEntity.varName}PK : ${tempEntity.varName}PKs) {
@@ -2251,6 +2782,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					}
 				}
 
+				/**
+				 * Adds an association between the ${entity.humanName} and the ${tempEntity.humanNames}. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+				 *
+				 * @param pk the primary key of the ${entity.humanName}
+				 * @param ${tempEntity.varNames} the ${tempEntity.humanNames}
+				 * @throws SystemException if a system exception occurred
+				 */
 				public void add${tempEntity.names}(${entity.PKClassName} pk, List<${tempEntity.packagePath}.model.${tempEntity.name}> ${tempEntity.varNames}) throws SystemException {
 					try {
 						for (${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} : ${tempEntity.varNames}) {
@@ -2265,6 +2803,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					}
 				}
 
+				/**
+				 * Clears all associations between the ${entity.humanName} and its ${tempEntity.humanNames}. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+				 *
+				 * @param pk the primary key of the ${entity.humanName} to clear the associated ${tempEntity.humanNames} from
+				 * @throws SystemException if a system exception occurred
+				 */
 				public void clear${tempEntity.names}(${entity.PKClassName} pk) throws SystemException {
 					try {
 						clear${tempEntity.names}.clear(pk);
@@ -2277,6 +2821,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					}
 				}
 
+				/**
+				 * Removes the association between the ${entity.humanName} and the ${tempEntity.humanName}. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+				 *
+				 * @param pk the primary key of the ${entity.humanName}
+				 * @param ${tempEntity.varName}PK the primary key of the ${tempEntity.humanName}
+				 * @throws SystemException if a system exception occurred
+				 */
 				public void remove${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.PKClassName} ${tempEntity.varName}PK) throws SystemException {
 					try {
 						remove${tempEntity.name}.remove(pk, ${tempEntity.varName}PK);
@@ -2289,6 +2840,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					}
 				}
 
+				/**
+				 * Removes the association between the ${entity.humanName} and the ${tempEntity.humanName}. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+				 *
+				 * @param pk the primary key of the ${entity.humanName}
+				 * @param ${tempEntity.varName} the ${tempEntity.humanName}
+				 * @throws SystemException if a system exception occurred
+				 */
 				public void remove${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName}) throws SystemException {
 					try {
 						remove${tempEntity.name}.remove(pk, ${tempEntity.varName}.getPrimaryKey());
@@ -2301,6 +2859,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					}
 				}
 
+				/**
+				 * Removes the association between the ${entity.humanName} and the ${tempEntity.humanNames}. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+				 *
+				 * @param pk the primary key of the ${entity.humanName}
+				 * @param ${tempEntity.varName}PKs the primary keys of the ${tempEntity.humanNames}
+				 * @throws SystemException if a system exception occurred
+				 */
 				public void remove${tempEntity.names}(${entity.PKClassName} pk, ${tempEntity.PKClassName}[] ${tempEntity.varName}PKs) throws SystemException {
 					try {
 						for (${tempEntity.PKClassName} ${tempEntity.varName}PK : ${tempEntity.varName}PKs) {
@@ -2315,6 +2880,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					}
 				}
 
+				/**
+				 * Removes the association between the ${entity.humanName} and the ${tempEntity.humanNames}. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+				 *
+				 * @param pk the primary key of the ${entity.humanName}
+				 * @param ${tempEntity.varNames} the ${tempEntity.humanNames}
+				 * @throws SystemException if a system exception occurred
+				 */
 				public void remove${tempEntity.names}(${entity.PKClassName} pk, List<${tempEntity.packagePath}.model.${tempEntity.name}> ${tempEntity.varNames}) throws SystemException {
 					try {
 						for (${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} : ${tempEntity.varNames}) {
@@ -2329,6 +2901,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					}
 				}
 
+				/**
+				 * Sets the ${tempEntity.humanNames} associated with the ${entity.humanName}, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+				 *
+				 * @param pk the primary key of the ${entity.humanName} to set the associations for
+				 * @param ${tempEntity.varName}PKs the primary keys of the ${tempEntity.humanNames} to be associated with the ${entity.humanName}
+				 * @throws SystemException if a system exception occurred
+				 */
 				public void set${tempEntity.names}(${entity.PKClassName} pk, ${tempEntity.PKClassName}[] ${tempEntity.varName}PKs) throws SystemException {
 					try {
 						Set<${serviceBuilder.getPrimitiveObj("${tempEntity.PKClassName}")}> ${tempEntity.varName}PKSet = SetUtil.fromArray(${tempEntity.varName}PKs);
@@ -2353,6 +2932,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					}
 				}
 
+				/**
+				 * Sets the ${tempEntity.humanNames} associated with the ${entity.humanName}, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+				 *
+				 * @param pk the primary key of the ${entity.humanName} to set the associations for
+				 * @param ${tempEntity.varNames} the ${tempEntity.humanNames} to be associated with the ${entity.humanName}
+				 * @throws SystemException if a system exception occurred
+				 */
 				public void set${tempEntity.names}(${entity.PKClassName} pk, List<${tempEntity.packagePath}.model.${tempEntity.name}> ${tempEntity.varNames}) throws SystemException {
 					try {
 						${tempEntity.PKClassName}[] ${tempEntity.varName}PKs = new ${tempEntity.PKClassName}[${tempEntity.varNames}.size()];
@@ -2377,6 +2963,16 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	</#list>
 
 	<#if entity.isHierarchicalTree()>
+		/**
+		 * Rebuilds the ${entity.humanNames} tree for the scope using the modified pre-order tree traversal algorithm.
+		 *
+		 * <p>
+		 * Only call this method if the tree has become stale through operations other than normal CRUD. Under normal circumstances the tree is automatically rebuilt whenver necessary.
+		 * </p>
+		 *
+		 * @param ${scopeColumn.name} the id of the scope to rebuild the tree for
+		 * @param force whether to force the rebuild even if the tree is not stale
+		 */
 		public void rebuildTree(long ${scopeColumn.name}, boolean force) throws SystemException {
 			if (force || (countOrphanTreeNodes(${scopeColumn.name}) > 0)) {
 				rebuildTree(${scopeColumn.name}, 0, 1);
@@ -2532,6 +3128,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		}
 	</#if>
 
+	/**
+	 * Initializes the ${entity.humanName} persistence.
+	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(${propsUtil}.get("value.object.listener.${packagePath}.model.${entity.name}")));
 

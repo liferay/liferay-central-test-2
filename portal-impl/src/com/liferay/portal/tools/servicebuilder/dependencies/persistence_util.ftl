@@ -13,6 +13,12 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * The persistence utility for the ${entity.humanName} service.
+ *
+ * <p>
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * </p>
+ *
  * @author    ${author}
  * @see       ${entity.name}Persistence
  * @see       ${entity.name}PersistenceImpl
@@ -85,6 +91,7 @@ public class ${entity.name}Util {
 
 	<#list methods as method>
 		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method) && !serviceBuilder.isBasePersistenceMethod(method)>
+			${serviceBuilder.getJavadocComment(method)}
 			public static ${serviceBuilder.getTypeGenericsName(method.returns)} ${method.name} (
 
 			<#list method.parameters as parameter>

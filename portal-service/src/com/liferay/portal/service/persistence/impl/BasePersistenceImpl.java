@@ -43,6 +43,13 @@ import java.util.List;
 import javax.sql.DataSource;
 
 /**
+ * The base implementation for all persistence classes.
+ *
+ * <p>
+ * Caching information and settings can be found in
+ * <code>portal.properties</code>
+ * </p>
+ *
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */

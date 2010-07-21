@@ -1,14 +1,10 @@
 package ${packagePath}.model;
 
 /**
- * <p>
- * This interface is a model that represents the ${entity.table} table in the
- * database.
- * </p>
+ * The model interface for the ${entity.name} service. Represents a row in the &quot;${entity.table}&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
- * Customize {@link ${packagePath}.model.impl.${entity.name}Impl} and rerun the
- * ServiceBuilder to generate the new methods.
+ * Never modify this interface directly. Add methods to {@link ${packagePath}.model.impl.${entity.name}Impl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
  * @author    ${author}

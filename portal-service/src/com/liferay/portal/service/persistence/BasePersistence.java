@@ -31,6 +31,11 @@ import javax.sql.DataSource;
 /**
  * The base interface for all persistence classes.
  *
+ * <p>
+ * Caching information and settings can be found in
+ * <code>portal.properties</code>
+ * </p>
+ *
  * @author Brian Wing Shun Chan
  * @see	   com.liferay.portal.service.persistence.impl.BasePersistenceImpl
  */
@@ -43,11 +48,6 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link
 	 * com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this
 	 * method.
-	 * </p>
-	 *
-	 * <p>
-	 * Caching information and settings can be found in
-	 * <code>portal.properties</code>
 	 * </p>
 	 */
 	public void clearCache();

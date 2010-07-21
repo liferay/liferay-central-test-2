@@ -11,6 +11,12 @@ import com.liferay.portal.service.persistence.BasePersistence;
 import java.util.Date;
 
 /**
+ * The persistence interface for the ${entity.humanName} service.
+ *
+ * <p>
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * </p>
+ *
  * @author    ${author}
  * @see       ${entity.name}PersistenceImpl
  * @see       ${entity.name}Util
@@ -20,6 +26,7 @@ public interface ${entity.name}Persistence extends BasePersistence<${entity.name
 
 	<#list methods as method>
 		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method) && !serviceBuilder.isBasePersistenceMethod(method)>
+			${serviceBuilder.getJavadocComment(method)}
 			public ${serviceBuilder.getTypeGenericsName(method.returns)} ${method.name} (
 
 			<#assign parameters = method.parameters>
