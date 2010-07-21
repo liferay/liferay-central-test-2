@@ -466,6 +466,15 @@ public class JournalArticleFinderImpl
 			String groupBy = "articleId";
 
 			if (version == null) {
+				StringBundler sb = new StringBundler("id_ AS id");
+
+				for (String field : orderByComparator.getOrderByFields()) {
+					sb.append(", ");
+					sb.append(field);
+				}
+
+				sql = StringUtil.replace(sql, "id_ AS id", sb.toString());
+
 				sql = StringUtil.replace(
 					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
 			}
