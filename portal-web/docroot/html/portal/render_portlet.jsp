@@ -751,6 +751,15 @@ if ((layout.isTypePanel() || layout.isTypeControlPanel()) && !portletDisplay.get
 		cssClasses += " portlet-minimized";
 	}
 
+	if (!portletDisplay.isShowMoveIcon()) {
+		if (portlet.isStaticStart()) {
+			cssClasses += " portlet-static portlet-static-start";
+		}
+		else if (portlet.isStaticEnd()) {
+			cssClasses += " portlet-static portlet-static-end";
+		}
+	}
+
 	cssClasses = "portlet-boundary portlet-boundary" + HtmlUtil.escapeAttribute(PortalUtil.getPortletNamespace(rootPortletId)) + StringPool.SPACE + cssClasses + StringPool.SPACE + portlet.getCssClassWrapper() + StringPool.SPACE + customCSSClassName;
 	%>
 
