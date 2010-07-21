@@ -71,13 +71,21 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 	public Role getRole(long roleId)
 		throws PortalException, SystemException {
 
+		RolePermissionUtil.check(
+			getPermissionChecker(), roleId, ActionKeys.VIEW);
+
 		return roleLocalService.getRole(roleId);
 	}
 
 	public Role getRole(long companyId, String name)
 		throws PortalException, SystemException {
 
-		return roleLocalService.getRole(companyId, name);
+		Role role = roleLocalService.getRole(companyId, name);
+
+		RolePermissionUtil.check(
+			getPermissionChecker(), role.getRoleId(), ActionKeys.VIEW);
+
+		return role;
 	}
 
 	public List<Role> getUserGroupGroupRoles(long userId, long groupId)
