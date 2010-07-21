@@ -41,7 +41,7 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 <c:choose>
 	<c:when test="<%= PropsValues.FLAGS_GUEST_USERS_ENABLED || themeDisplay.isSignedIn() %>">
 		<aui:script use="aui-dialog">
-			var icon = A.one('.<%= randomNamespace %>-webdav-action');
+			var icon = A.one('.<%= randomNamespace %>');
 
 			if (icon) {
 				icon.on(
@@ -82,7 +82,7 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 		</div>
 
 		<aui:script use="aui-dialog">
-			var icon = A.one('.<%= randomNamespace %>-webdav-action');
+			var icon = A.one('.<%= randomNamespace %>');
 
 			if (icon) {
 				icon.on(
