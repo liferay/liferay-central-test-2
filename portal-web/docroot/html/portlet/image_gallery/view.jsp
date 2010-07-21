@@ -35,7 +35,7 @@ if ((folder == null) && (defaultFolderId != IGFolderConstants.DEFAULT_PARENT_FOL
 }
 
 int foldersCount = IGFolderServiceUtil.getFoldersCount(scopeGroupId, folderId);
-int imagesCount = IGImageLocalServiceUtil.getImagesCount(scopeGroupId, folderId);
+int imagesCount = IGImageServiceUtil.getImagesCount(scopeGroupId, folderId);
 
 long categoryId = ParamUtil.getLong(request, "categoryId");
 String tagName = ParamUtil.getString(request, "tag");
@@ -186,11 +186,11 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 						<%
 						SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, null, null);
 
-						int total = IGImageLocalServiceUtil.getImagesCount(scopeGroupId, folderId);
+						int total = IGImageServiceUtil.getImagesCount(scopeGroupId, folderId);
 
 						searchContainer.setTotal(total);
 
-						List results = IGImageLocalServiceUtil.getImages(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+						List results = IGImageServiceUtil.getImages(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
 						searchContainer.setResults(results);
 
@@ -247,11 +247,11 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, null);
 
-		int total = IGImageLocalServiceUtil.getGroupImagesCount(scopeGroupId, groupImagesUserId);
+		int total = IGImageServiceUtil.getGroupImagesCount(scopeGroupId, groupImagesUserId);
 
 		searchContainer.setTotal(total);
 
-		List results = IGImageLocalServiceUtil.getGroupImages(scopeGroupId, groupImagesUserId, searchContainer.getStart(), searchContainer.getEnd());
+		List results = IGImageServiceUtil.getGroupImages(scopeGroupId, groupImagesUserId, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 		%>
