@@ -85,9 +85,9 @@ import java.util.Set;
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  * 
- * @author    ${author}
- * @see       ${entity.name}Persistence
- * @see       ${entity.name}Util
+ * @author ${author}
+ * @see ${entity.name}Persistence
+ * @see ${entity.name}Util
  * @generated
  */
 public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.name}> implements ${entity.name}Persistence {

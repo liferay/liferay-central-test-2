@@ -17,9 +17,9 @@ import java.util.Date;
  * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
  * </p>
  *
- * @author    ${author}
- * @see       ${entity.name}PersistenceImpl
- * @see       ${entity.name}Util
+ * @author ${author}
+ * @see ${entity.name}PersistenceImpl
+ * @see ${entity.name}Util
  * @generated
  */
 public interface ${entity.name}Persistence extends BasePersistence<${entity.name}> {

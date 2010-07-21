@@ -19,9 +19,9 @@ import java.util.List;
  * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
  * </p>
  *
- * @author    ${author}
- * @see       ${entity.name}Persistence
- * @see       ${entity.name}PersistenceImpl
+ * @author ${author}
+ * @see ${entity.name}Persistence
+ * @see ${entity.name}PersistenceImpl
  * @generated
  */
 public class ${entity.name}Util {

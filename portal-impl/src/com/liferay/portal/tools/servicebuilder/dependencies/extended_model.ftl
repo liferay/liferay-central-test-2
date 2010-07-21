@@ -7,10 +7,10 @@ package ${packagePath}.model;
  * Never modify this interface directly. Add methods to {@link ${packagePath}.model.impl.${entity.name}Impl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
- * @author    ${author}
- * @see       ${entity.name}Model
- * @see       ${packagePath}.model.impl.${entity.name}Impl
- * @see       ${packagePath}.model.impl.${entity.name}ModelImpl
+ * @author ${author}
+ * @see ${entity.name}Model
+ * @see ${packagePath}.model.impl.${entity.name}Impl
+ * @see ${packagePath}.model.impl.${entity.name}ModelImpl
  * @generated
  */
 public interface ${entity.name} extends ${entity.name}Model {

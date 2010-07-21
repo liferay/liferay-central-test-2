@@ -57,10 +57,10 @@ import java.util.Map;
  * Never modify or reference this class directly. All methods that expect a ${entity.humanName} model instance should use the {@link ${packagePath}.model.${entity.name}} interface instead.
  * </p>
  *
- * @author    ${author}
- * @see       ${entity.name}Impl
- * @see       ${packagePath}.model.${entity.name}
- * @see       ${packagePath}.model.${entity.name}Model
+ * @author ${author}
+ * @see ${entity.name}Impl
+ * @see ${packagePath}.model.${entity.name}
+ * @see ${packagePath}.model.${entity.name}Model
  * @generated
  */
 public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> implements ${entity.name}Model {

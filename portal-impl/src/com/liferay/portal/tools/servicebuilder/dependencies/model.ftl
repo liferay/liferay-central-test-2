@@ -28,10 +28,10 @@ import java.util.Map;
  * Never modify or reference this interface directly. All methods that expect a ${entity.humanName} model instance should use the {@link ${entity.name}} interface instead.
  * </p>
  *
- * @author    ${author}
- * @see       ${entity.name}
- * @see       ${packagePath}.model.impl.${entity.name}Impl
- * @see       ${packagePath}.model.impl.${entity.name}ModelImpl
+ * @author ${author}
+ * @see ${entity.name}
+ * @see ${packagePath}.model.impl.${entity.name}Impl
+ * @see ${packagePath}.model.impl.${entity.name}ModelImpl
  * @generated
  */
 public interface ${entity.name}Model extends BaseModel<${entity.name}> {
