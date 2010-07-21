@@ -111,8 +111,8 @@ public class DB2DB extends BaseDB {
 		sb.append(databaseName);
 		sb.append(";\n");
 		sb.append(
-			FileUtil.read(sqlDir + "/portal" + suffix + "/portal" + suffix +
-				"-db2.sql"));
+			FileUtil.read(
+				sqlDir + "/portal" + suffix + "/portal" + suffix + "-db2.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read(sqlDir + "/indexes/indexes-db2.sql"));
 		sb.append("\n\n");
