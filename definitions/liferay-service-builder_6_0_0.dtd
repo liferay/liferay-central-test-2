@@ -98,6 +98,10 @@ to "none" to disable transaction management.
 The cache-enabled value specifies whether or not to cache this queries for this
 entity. Set this to false if data in the table will be updated by other
 programs. The default value is true.
+
+The human-name value specifies the readable name to use when generating
+documentation for this entity. If none is specified, one will be generated from
+the name.
 -->
 <!ATTLIST entity
 	name CDATA #REQUIRED
@@ -110,6 +114,7 @@ programs. The default value is true.
 	session-factory CDATA #IMPLIED
 	tx-manager CDATA #IMPLIED
 	cache-enabled CDATA #IMPLIED
+	human-name CDATA #IMPLIED
 >
 
 <!--

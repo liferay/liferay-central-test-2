@@ -633,6 +633,7 @@ public class ServiceBuilder {
 					"tx-manager");
 				boolean cacheEnabled = GetterUtil.getBoolean(
 					entityEl.attributeValue("cache-enabled"), true);
+				String humanName = entityEl.attributeValue("human-name");
 
 				List<EntityColumn> pkList = new ArrayList<EntityColumn>();
 				List<EntityColumn> regularColList =
@@ -976,7 +977,7 @@ public class ServiceBuilder {
 						_packagePath, _portletName, _portletShortName, ejbName,
 						table, alias, uuid, localService, remoteService,
 						persistenceClass, finderClass, dataSource,
-						sessionFactory, txManager, cacheEnabled, pkList,
+						sessionFactory, txManager, cacheEnabled, humanName, pkList,
 						regularColList, collectionList, columnList, order,
 						finderList, referenceList, txRequiredList));
 			}
