@@ -157,6 +157,38 @@ public class IGFolderServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGFolderSoap[] getFolders(
+		long groupId, long parentFolderId, int start, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> returnValue =
+				IGFolderServiceUtil.getFolders(groupId, parentFolderId, start,
+					end);
+
+			return com.liferay.portlet.imagegallery.model.IGFolderSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getFoldersCount(long groupId, long parentFolderId)
+		throws RemoteException {
+		try {
+			int returnValue = IGFolderServiceUtil.getFoldersCount(groupId,
+					parentFolderId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGFolderSoap updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean mergeWithParentFolder,

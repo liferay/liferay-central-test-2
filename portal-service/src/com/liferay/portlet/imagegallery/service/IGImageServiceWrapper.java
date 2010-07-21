@@ -53,6 +53,17 @@ public class IGImageServiceWrapper implements IGImageService {
 			folderId, nameWithExtension);
 	}
 
+	public int getGroupImagesCount(long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _igImageService.getGroupImagesCount(groupId, userId);
+	}
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getGroupImages(
+		long groupId, long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _igImageService.getGroupImages(groupId, userId, start, end);
+	}
+
 	public com.liferay.portlet.imagegallery.model.IGImage getImage(long imageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -86,6 +97,18 @@ public class IGImageServiceWrapper implements IGImageService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _igImageService.getImages(groupId, folderId);
+	}
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
+		long groupId, long folderId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _igImageService.getImages(groupId, folderId, start, end);
+	}
+
+	public int getImagesCount(long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _igImageService.getImagesCount(groupId, folderId);
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(

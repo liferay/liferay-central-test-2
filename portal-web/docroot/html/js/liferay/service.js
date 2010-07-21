@@ -672,6 +672,7 @@ Liferay.Service.registerClass(
 		deleteFolder: true,
 		getFolder: true,
 		getFolders: true,
+		getFoldersCount: true,
 		updateFolder: true
 	}
 );
@@ -681,11 +682,14 @@ Liferay.Service.registerClass(
 	{
 		deleteImage: true,
 		deleteImageByFolderIdAndNameWithExtension: true,
+		getGroupImagesCount: true,
+		getGroupImages: true,
 		getImage: true,
 		getImageByFolderIdAndNameWithExtension: true,
 		getImageByLargeImageId: true,
 		getImageBySmallImageId: true,
-		getImages: true
+		getImages: true,
+		getImagesCount: true
 	}
 );
 

@@ -90,6 +90,37 @@ public class IGImageServiceSoap {
 		}
 	}
 
+	public static int getGroupImagesCount(long groupId, long userId)
+		throws RemoteException {
+		try {
+			int returnValue = IGImageServiceUtil.getGroupImagesCount(groupId,
+					userId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.imagegallery.model.IGImageSoap[] getGroupImages(
+		long groupId, long userId, int start, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.imagegallery.model.IGImage> returnValue =
+				IGImageServiceUtil.getGroupImages(groupId, userId, start, end);
+
+			return com.liferay.portlet.imagegallery.model.IGImageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImageSoap getImage(
 		long imageId) throws RemoteException {
 		try {
@@ -155,6 +186,37 @@ public class IGImageServiceSoap {
 				IGImageServiceUtil.getImages(groupId, folderId);
 
 			return com.liferay.portlet.imagegallery.model.IGImageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.imagegallery.model.IGImageSoap[] getImages(
+		long groupId, long folderId, int start, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.imagegallery.model.IGImage> returnValue =
+				IGImageServiceUtil.getImages(groupId, folderId, start, end);
+
+			return com.liferay.portlet.imagegallery.model.IGImageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getImagesCount(long groupId, long folderId)
+		throws RemoteException {
+		try {
+			int returnValue = IGImageServiceUtil.getImagesCount(groupId,
+					folderId);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
