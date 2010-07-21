@@ -2336,11 +2336,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						List<${tempEntity.packagePath}.model.${tempEntity.name}> ${tempEntity.varNames} = get${tempEntity.names}(pk);
 
 						for (${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} : ${tempEntity.varNames}) {
-							if (!${tempEntity.varName}PKSet.contains(${tempEntity.varName}.getPrimaryKey())) {
+							if (!${tempEntity.varName}PKSet.remove(${tempEntity.varName}.getPrimaryKey())) {
 								remove${tempEntity.name}.remove(pk, ${tempEntity.varName}.getPrimaryKey());
-							}
-							else {
-								${tempEntity.varName}PKSet.remove(${tempEntity.varName}.getPrimaryKey());
 							}
 						}
 
