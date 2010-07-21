@@ -1301,13 +1301,10 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 				getSCFrameworkVersions(pk);
 
 			for (com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion : scFrameworkVersions) {
-				if (!scFrameworkVersionPKSet.contains(
+				if (!scFrameworkVersionPKSet.remove(
 							scFrameworkVersion.getPrimaryKey())) {
 					removeSCFrameworkVersion.remove(pk,
 						scFrameworkVersion.getPrimaryKey());
-				}
-				else {
-					scFrameworkVersionPKSet.remove(scFrameworkVersion.getPrimaryKey());
 				}
 			}
 

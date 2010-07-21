@@ -2006,11 +2006,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			List<com.liferay.portal.model.Group> groups = getGroups(pk);
 
 			for (com.liferay.portal.model.Group group : groups) {
-				if (!groupPKSet.contains(group.getPrimaryKey())) {
+				if (!groupPKSet.remove(group.getPrimaryKey())) {
 					removeGroup.remove(pk, group.getPrimaryKey());
-				}
-				else {
-					groupPKSet.remove(group.getPrimaryKey());
 				}
 			}
 
@@ -2337,11 +2334,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			List<com.liferay.portal.model.User> users = getUsers(pk);
 
 			for (com.liferay.portal.model.User user : users) {
-				if (!userPKSet.contains(user.getPrimaryKey())) {
+				if (!userPKSet.remove(user.getPrimaryKey())) {
 					removeUser.remove(pk, user.getPrimaryKey());
-				}
-				else {
-					userPKSet.remove(user.getPrimaryKey());
 				}
 			}
 

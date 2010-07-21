@@ -2269,11 +2269,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			List<com.liferay.portal.model.Group> groups = getGroups(pk);
 
 			for (com.liferay.portal.model.Group group : groups) {
-				if (!groupPKSet.contains(group.getPrimaryKey())) {
+				if (!groupPKSet.remove(group.getPrimaryKey())) {
 					removeGroup.remove(pk, group.getPrimaryKey());
-				}
-				else {
-					groupPKSet.remove(group.getPrimaryKey());
 				}
 			}
 
@@ -2613,11 +2610,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			List<com.liferay.portal.model.Permission> permissions = getPermissions(pk);
 
 			for (com.liferay.portal.model.Permission permission : permissions) {
-				if (!permissionPKSet.contains(permission.getPrimaryKey())) {
+				if (!permissionPKSet.remove(permission.getPrimaryKey())) {
 					removePermission.remove(pk, permission.getPrimaryKey());
-				}
-				else {
-					permissionPKSet.remove(permission.getPrimaryKey());
 				}
 			}
 
@@ -2944,11 +2938,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			List<com.liferay.portal.model.User> users = getUsers(pk);
 
 			for (com.liferay.portal.model.User user : users) {
-				if (!userPKSet.contains(user.getPrimaryKey())) {
+				if (!userPKSet.remove(user.getPrimaryKey())) {
 					removeUser.remove(pk, user.getPrimaryKey());
-				}
-				else {
-					userPKSet.remove(user.getPrimaryKey());
 				}
 			}
 

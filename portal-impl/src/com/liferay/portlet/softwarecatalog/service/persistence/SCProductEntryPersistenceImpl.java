@@ -2261,11 +2261,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 				getSCLicenses(pk);
 
 			for (com.liferay.portlet.softwarecatalog.model.SCLicense scLicense : scLicenses) {
-				if (!scLicensePKSet.contains(scLicense.getPrimaryKey())) {
+				if (!scLicensePKSet.remove(scLicense.getPrimaryKey())) {
 					removeSCLicense.remove(pk, scLicense.getPrimaryKey());
-				}
-				else {
-					scLicensePKSet.remove(scLicense.getPrimaryKey());
 				}
 			}
 

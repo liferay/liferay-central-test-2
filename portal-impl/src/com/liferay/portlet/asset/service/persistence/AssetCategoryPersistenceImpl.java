@@ -3874,11 +3874,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			List<com.liferay.portlet.asset.model.AssetEntry> assetEntries = getAssetEntries(pk);
 
 			for (com.liferay.portlet.asset.model.AssetEntry assetEntry : assetEntries) {
-				if (!assetEntryPKSet.contains(assetEntry.getPrimaryKey())) {
+				if (!assetEntryPKSet.remove(assetEntry.getPrimaryKey())) {
 					removeAssetEntry.remove(pk, assetEntry.getPrimaryKey());
-				}
-				else {
-					assetEntryPKSet.remove(assetEntry.getPrimaryKey());
 				}
 			}
 

@@ -1431,11 +1431,8 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 			List<com.liferay.portal.model.User> users = getUsers(pk);
 
 			for (com.liferay.portal.model.User user : users) {
-				if (!userPKSet.contains(user.getPrimaryKey())) {
+				if (!userPKSet.remove(user.getPrimaryKey())) {
 					removeUser.remove(pk, user.getPrimaryKey());
-				}
-				else {
-					userPKSet.remove(user.getPrimaryKey());
 				}
 			}
 

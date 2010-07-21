@@ -3905,11 +3905,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			List<com.liferay.portal.model.Group> groups = getGroups(pk);
 
 			for (com.liferay.portal.model.Group group : groups) {
-				if (!groupPKSet.contains(group.getPrimaryKey())) {
+				if (!groupPKSet.remove(group.getPrimaryKey())) {
 					removeGroup.remove(pk, group.getPrimaryKey());
-				}
-				else {
-					groupPKSet.remove(group.getPrimaryKey());
 				}
 			}
 
@@ -4248,11 +4245,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			List<com.liferay.portal.model.Organization> organizations = getOrganizations(pk);
 
 			for (com.liferay.portal.model.Organization organization : organizations) {
-				if (!organizationPKSet.contains(organization.getPrimaryKey())) {
+				if (!organizationPKSet.remove(organization.getPrimaryKey())) {
 					removeOrganization.remove(pk, organization.getPrimaryKey());
-				}
-				else {
-					organizationPKSet.remove(organization.getPrimaryKey());
 				}
 			}
 
@@ -4593,11 +4587,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			List<com.liferay.portal.model.Permission> permissions = getPermissions(pk);
 
 			for (com.liferay.portal.model.Permission permission : permissions) {
-				if (!permissionPKSet.contains(permission.getPrimaryKey())) {
+				if (!permissionPKSet.remove(permission.getPrimaryKey())) {
 					removePermission.remove(pk, permission.getPrimaryKey());
-				}
-				else {
-					permissionPKSet.remove(permission.getPrimaryKey());
 				}
 			}
 
@@ -4924,11 +4915,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			List<com.liferay.portal.model.Role> roles = getRoles(pk);
 
 			for (com.liferay.portal.model.Role role : roles) {
-				if (!rolePKSet.contains(role.getPrimaryKey())) {
+				if (!rolePKSet.remove(role.getPrimaryKey())) {
 					removeRole.remove(pk, role.getPrimaryKey());
-				}
-				else {
-					rolePKSet.remove(role.getPrimaryKey());
 				}
 			}
 
@@ -5253,11 +5241,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			List<com.liferay.portal.model.Team> teams = getTeams(pk);
 
 			for (com.liferay.portal.model.Team team : teams) {
-				if (!teamPKSet.contains(team.getPrimaryKey())) {
+				if (!teamPKSet.remove(team.getPrimaryKey())) {
 					removeTeam.remove(pk, team.getPrimaryKey());
-				}
-				else {
-					teamPKSet.remove(team.getPrimaryKey());
 				}
 			}
 
@@ -5594,11 +5579,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			List<com.liferay.portal.model.UserGroup> userGroups = getUserGroups(pk);
 
 			for (com.liferay.portal.model.UserGroup userGroup : userGroups) {
-				if (!userGroupPKSet.contains(userGroup.getPrimaryKey())) {
+				if (!userGroupPKSet.remove(userGroup.getPrimaryKey())) {
 					removeUserGroup.remove(pk, userGroup.getPrimaryKey());
-				}
-				else {
-					userGroupPKSet.remove(userGroup.getPrimaryKey());
 				}
 			}
 

@@ -1974,13 +1974,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 				getSCProductVersions(pk);
 
 			for (com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion : scProductVersions) {
-				if (!scProductVersionPKSet.contains(
+				if (!scProductVersionPKSet.remove(
 							scProductVersion.getPrimaryKey())) {
 					removeSCProductVersion.remove(pk,
 						scProductVersion.getPrimaryKey());
-				}
-				else {
-					scProductVersionPKSet.remove(scProductVersion.getPrimaryKey());
 				}
 			}
 
