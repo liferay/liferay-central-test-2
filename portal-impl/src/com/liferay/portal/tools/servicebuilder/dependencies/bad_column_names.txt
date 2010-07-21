@@ -11,6 +11,7 @@ catch
 char
 class
 code
+comment
 const
 continue
 data
