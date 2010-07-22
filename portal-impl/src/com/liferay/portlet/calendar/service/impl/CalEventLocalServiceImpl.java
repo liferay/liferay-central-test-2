@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StreamUtil;
@@ -809,6 +810,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 					fileName = fileName.substring(0, pos);
 				}
 			}
+
+			fileName = FileUtil.getShortFileName(fileName);
 
 			File file = File.createTempFile(fileName, extension);
 

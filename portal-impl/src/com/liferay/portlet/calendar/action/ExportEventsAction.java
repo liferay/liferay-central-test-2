@@ -60,8 +60,15 @@ public class ExportEventsAction extends PortletAction {
 
 			long eventId = ParamUtil.getLong(actionRequest, "eventId");
 
-			String exportFileName = ParamUtil.getString(
-				actionRequest, "exportFileName");
+			String exportFileName =	ParamUtil.getString(
+					actionRequest, "exportFileName");
+
+			if (exportFileName == null) {
+				exportFileName = "liferay.ics";
+			}
+			else {
+				exportFileName = FileUtil.getShortFileName(exportFileName);
+			}
 
 			if (eventId > 0) {
 				file = CalEventServiceUtil.exportEvent(eventId);
@@ -77,7 +84,7 @@ public class ExportEventsAction extends PortletAction {
 				actionResponse);
 
 			ServletResponseUtil.sendFile(
-				request, response, file.getName(), new FileInputStream(file),
+				request, response, exportFileName, new FileInputStream(file),
 				ContentTypes.TEXT_CALENDAR);
 
 			setForward(actionRequest, ActionConstants.COMMON_NULL);
