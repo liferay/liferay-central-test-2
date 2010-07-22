@@ -16,10 +16,6 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
-<%
-String scroll = ParamUtil.getString(request, "scroll");
-%>
-
 <c:choose>
 	<c:when test="<%= themeDisplay.isFacebook() || themeDisplay.isStateExclusive() %>">
 
