@@ -116,10 +116,13 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext context, Element articlesElement,
 			Element dlFoldersElement, Element dlFileEntriesElement,
 			Element dlFileRanksElement, Element igFoldersElement,
-			Element igImagesElement, JournalArticle article)
+			Element igImagesElement, JournalArticle article,
+			boolean checkDateRange)
 		throws Exception {
 
-		if (!context.isWithinDateRange(article.getModifiedDate())) {
+		if (checkDateRange &&
+			!context.isWithinDateRange(article.getModifiedDate())) {
+
 			return;
 		}
 
@@ -1858,7 +1861,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				exportArticle(
 					context, articlesElement, dlFoldersElement, dlFilesElement,
 					dlFileRanksElement, igFoldersElement, igImagesElement,
-					article);
+					article, true);
 			}
 		}
 

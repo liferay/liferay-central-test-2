@@ -166,7 +166,8 @@ public class JournalContentPortletDataHandlerImpl
 
 		JournalPortletDataHandlerImpl.exportArticle(
 			context, rootElement, dlFoldersElement, dlFilesElement,
-			dlFileRanksElement, igFoldersElement, igImagesElement, article);
+			dlFileRanksElement, igFoldersElement, igImagesElement, article,
+			false);
 
 		String structureId = article.getStructureId();
 
