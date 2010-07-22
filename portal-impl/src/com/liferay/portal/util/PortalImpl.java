@@ -524,13 +524,6 @@ public class PortalImpl implements Portal {
 	}
 
 	public String addPermanentParameters(
-		ThemeDisplay themeDisplay, String url) {
-
-		return addPermanentParameters(
-			themeDisplay, themeDisplay.getLayout(), url, true);
-	}
-
-	public String addPermanentParameters(
 		ThemeDisplay themeDisplay, Layout layout, String url,
 		boolean doAsUser) {
 
@@ -560,6 +553,13 @@ public class PortalImpl implements Portal {
 		}
 
 		return url;
+	}
+
+	public String addPermanentParameters(
+		ThemeDisplay themeDisplay, String url) {
+
+		return addPermanentParameters(
+			themeDisplay, themeDisplay.getLayout(), url, true);
 	}
 
 	public void addPortalPortEventListener(

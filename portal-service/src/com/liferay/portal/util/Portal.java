@@ -108,20 +108,20 @@ public interface Portal {
 
 	/**
 	 * Adds permanent parameters such as doAsGroupId, doAsUserId,
-	 * doAsUserLanguageId and referrerPlid that should always be preserved as
-	 * the user navigates through the portal.
-	 */
-	public String addPermanentParameters(
-		ThemeDisplay themeDisplay, String url);
-
-	/**
-	 * Adds permanent parameters such as doAsGroupId, doAsUserId,
-	 * doAsUserLanguageId and referrerPlid that should always be preserved as
+	 * doAsUserLanguageId, and referrerPlid that should always be preserved as
 	 * the user navigates through the portal. If doAsUser is false, then
 	 * doAsUserId and doAsUserLanguageId will never be added.
 	 */
 	public String addPermanentParameters(
 		ThemeDisplay themeDisplay, Layout layout, String url, boolean doAsUser);
+
+	/**
+	 * Adds permanent parameters such as doAsGroupId, doAsUserId,
+	 * doAsUserLanguageId, and referrerPlid that should always be preserved as
+	 * the user navigates through the portal.
+	 */
+	public String addPermanentParameters(
+		ThemeDisplay themeDisplay, String url);
 
 	public void addPortalPortEventListener(
 		PortalPortEventListener portalPortEventListener);
