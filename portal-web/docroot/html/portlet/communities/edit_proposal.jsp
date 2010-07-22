@@ -289,7 +289,10 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 		proposedLayout = LayoutLocalServiceUtil.getLayout(proposedLayoutPlid);
 	}
 
-	String tagligPreviewURL = "window.open('" + PortalUtil.getLayoutFriendlyURL(proposedLayout, themeDisplay) + "');";
+	String proposedLayoutURL = PortalUtil.getLayoutFriendlyURL(proposedLayout, themeDisplay);
+	proposedLayoutURL = PortalUtil.addPermanentParameters(themeDisplay, proposedLayoutURL);
+
+	String tagligPreviewURL = "window.open('" + proposedLayoutURL + "');";
 	%>
 
 	<aui:button onClick="<%= tagligPreviewURL %>" value="preview" />
