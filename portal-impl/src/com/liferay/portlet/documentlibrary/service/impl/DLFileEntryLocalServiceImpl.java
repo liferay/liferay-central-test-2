@@ -377,8 +377,9 @@ public class DLFileEntryLocalServiceImpl
 
 		// Lock
 
-		String lockId = DLUtil.getLockId(fileEntry.getGroupId(),
-			fileEntry.getFolderId(), fileEntry.getName());
+		String lockId = DLUtil.getLockId(
+			fileEntry.getGroupId(), fileEntry.getFolderId(),
+			fileEntry.getName());
 
 		lockLocalService.unlock(DLFileEntry.class.getName(), lockId);
 
