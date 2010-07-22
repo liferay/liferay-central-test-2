@@ -433,6 +433,9 @@ AUI().add(
 															if (exception.indexOf('auth.PrincipalException') > -1) {
 																instance._sendMessage('error', Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource'));
 															}
+															else if (exception.indexOf('VocabularyNameException') > -1) {
+																instance._sendMessage('error', Liferay.Language.get('one-of-your-fields-contains-invalid-characters'));
+															}
 														}
 														else {
 															instance._displayList(
@@ -1312,7 +1315,10 @@ AUI().add(
 								else {
 									var errorText = '';
 
-									if (exception.indexOf('DuplicateCategoryException') > -1) {
+									if (exception.indexOf('AssetCategoryNameException') > -1) {
+										errorText = Liferay.Language.get('please-enter-a-valid-category-name');
+									}
+									else if (exception.indexOf('DuplicateCategoryException') > -1) {
 										errorText = Liferay.Language.get('there-is-another-category-with-the-same-name-and-the-same-parent');
 									}
 									else if (exception.indexOf('NoSuchVocabularyException') > -1) {
@@ -1349,9 +1355,13 @@ AUI().add(
 										'en_US': vocabularyName  //this is temporary
 									}
 								),
-								description: null,
+								description: '',
 								settings: '',
-								serviceContext: null
+								serviceContext: A.JSON.stringify(
+									{
+										scopeGroupId: themeDisplay.getParentGroupId()
+									}
+								)
 							},
 							callback
 						);

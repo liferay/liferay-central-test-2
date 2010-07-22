@@ -19,12 +19,14 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.DuplicateVocabularyException;
+import com.liferay.portlet.asset.VocabularyNameException;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.base.AssetVocabularyLocalServiceBaseImpl;
 
@@ -57,11 +59,7 @@ public class AssetVocabularyLocalServiceImpl
 
 		Date now = new Date();
 
-		if (hasVocabulary(groupId, name)) {
-			throw new DuplicateVocabularyException(
-				"A category vocabulary with the name " + name +
-					" already exists");
-		}
+		validate(groupId, name);
 
 		long vocabularyId = counterLocalService.increment();
 
@@ -222,15 +220,14 @@ public class AssetVocabularyLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		long groupId = serviceContext.getScopeGroupId();
 		String name = titleMap.get(LocaleUtil.getDefault());
 
 		AssetVocabulary vocabulary =
 			assetVocabularyPersistence.findByPrimaryKey(vocabularyId);
 
-		if (!vocabulary.getName().equals(name) &&
-			hasVocabulary(vocabulary.getGroupId(), name)) {
-
-			throw new DuplicateVocabularyException(name);
+		if (!vocabulary.getName().equals(name)) {
+			validate(groupId, name);
 		}
 
 		vocabulary.setModifiedDate(new Date());
@@ -252,6 +249,20 @@ public class AssetVocabularyLocalServiceImpl
 		}
 		else {
 			return true;
+		}
+	}
+
+	protected void validate(long groupId, String name)
+		throws PortalException, SystemException {
+
+		if (Validator.isNull(name)) {
+			throw new VocabularyNameException();
+		}
+
+		if (hasVocabulary(groupId, name)) {
+			throw new DuplicateVocabularyException(
+				"A category vocabulary with the name " + name +
+					" already exists");
 		}
 	}
 

@@ -401,6 +401,7 @@
 	</entity>
 	<exceptions>
 		<exception>AssetCategory</exception>
+		<exception>AssetCategoryName</exception>
 		<exception>AssetLink</exception>
 		<exception>AssetTag</exception>
 		<exception>DuplicateCategory</exception>

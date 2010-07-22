@@ -29,6 +29,7 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.asset.AssetCategoryNameException;
 import com.liferay.portlet.asset.DuplicateCategoryException;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetCategoryConstants;
@@ -397,6 +398,10 @@ public class AssetCategoryLocalServiceImpl
 			long categoryId, long parentCategoryId, String name,
 			long vocabularyId)
 		throws PortalException, SystemException {
+
+		if (Validator.isNull(name)) {
+			throw new AssetCategoryNameException();	
+		}
 
 		List<AssetCategory> categories = null;
 
