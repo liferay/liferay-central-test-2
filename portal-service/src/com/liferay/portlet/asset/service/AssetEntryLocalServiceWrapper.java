@@ -229,18 +229,18 @@ public class AssetEntryLocalServiceWrapper implements AssetEntryLocalService {
 	}
 
 	public void incrementViewCounter(long userId, java.lang.String className,
+		long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_assetEntryLocalService.incrementViewCounter(userId, className, classPK);
+	}
+
+	public void incrementViewCounter(long userId, java.lang.String className,
 		long classPK, int increment)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_assetEntryLocalService.incrementViewCounter(userId, className,
 			classPK, increment);
-	}
-
-	public void incrementViewCounter(long userId, java.lang.String className,
-		long classPK)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_assetEntryLocalService.incrementViewCounter(userId, className, classPK);
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,

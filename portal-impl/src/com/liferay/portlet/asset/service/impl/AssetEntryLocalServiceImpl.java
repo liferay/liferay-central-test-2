@@ -306,7 +306,15 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return assetEntryFinder.findEntries(entryQuery);
 	}
 
-	@BufferedIncrement(incrementClass=NumberIncrement.class)
+	public void incrementViewCounter(
+			long userId, String className, long classPK)
+		throws PortalException, SystemException {
+
+		assetEntryLocalService.incrementViewCounter(
+			userId, className, classPK, 1);
+	}
+
+	@BufferedIncrement(incrementClass = NumberIncrement.class)
 	public void incrementViewCounter(
 			long userId, String className, long classPK, int increment)
 		throws PortalException, SystemException {
@@ -336,22 +344,6 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 					userId, entry.getEntryId(), ActionKeys.VIEW);
 			}
 		}
-	}
-
-	public void incrementViewCounter(
-			long userId, String className, long classPK)
-		throws PortalException, SystemException {
-
-		if (!PropsValues.ASSET_ENTRY_INCREMENT_VIEW_COUNTER_ENABLED) {
-			return;
-		}
-
-		if (classPK <= 0) {
-			return;
-		}
-
-		assetEntryLocalService.incrementViewCounter(
-			userId, className, classPK, 1);
 	}
 
 	public Hits search(

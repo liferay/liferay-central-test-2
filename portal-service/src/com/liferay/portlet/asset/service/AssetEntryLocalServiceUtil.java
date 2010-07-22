@@ -231,17 +231,17 @@ public class AssetEntryLocalServiceUtil {
 	}
 
 	public static void incrementViewCounter(long userId,
-		java.lang.String className, long classPK, int increment)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().incrementViewCounter(userId, className, classPK, increment);
-	}
-
-	public static void incrementViewCounter(long userId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().incrementViewCounter(userId, className, classPK);
+	}
+
+	public static void incrementViewCounter(long userId,
+		java.lang.String className, long classPK, int increment)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().incrementViewCounter(userId, className, classPK, increment);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
