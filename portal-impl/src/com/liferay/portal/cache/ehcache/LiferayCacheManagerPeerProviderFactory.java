@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.HtmlImpl;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -89,6 +90,16 @@ public class LiferayCacheManagerPeerProviderFactory
 			throw new RuntimeException(ioe.getMessage());
 		}
 
+		Object[] propertyKeys = portalProperties.keySet().toArray();
+
+		for(Object key : propertyKeys) {
+			String value = (String)portalProperties.remove(key);
+
+			value = _htmlUtil.unescape(value);
+
+			portalProperties.put(key, value);
+		}
+
 		if (_log.isDebugEnabled()) {
 			_log.debug(PropertiesUtil.list(portalProperties));
 		}
@@ -96,6 +107,8 @@ public class LiferayCacheManagerPeerProviderFactory
 		return _cacheManagerPeerProviderFactory.createCachePeerProvider(
 			cacheManager, portalProperties);
 	}
+
+	private static HtmlImpl _htmlUtil = new HtmlImpl();
 
 	private static Log _log = LogFactoryUtil.getLog(
 		LiferayCacheManagerPeerProviderFactory.class);

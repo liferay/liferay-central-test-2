@@ -14,21 +14,8 @@
 
 package com.liferay.portal.cache.ehcache;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
-import java.rmi.RemoteException;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.distribution.RemoteCacheException;
-import net.sf.ehcache.distribution.jgroups.JGroupEventMessage;
-import net.sf.ehcache.distribution.jgroups.JGroupManager;
-
-import org.jgroups.Address;
 
 /**
  * <p>
@@ -51,123 +38,8 @@ public class JGroupsBootstrapCacheLoader
 			asynchronous, maximumChunkSizeBytes);
 	}
 
-	public void doLoad(Ehcache cache) throws RemoteCacheException {
-		List<JGroupManager> cachePeers = acquireCachePeers(cache);
-
-		if ((cachePeers == null) || cachePeers.isEmpty()) {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Empty list of cache peers for cache " + cache.getName() +
-						". No cache peer to bootstrap from.");
-			}
-
-			return;
-		}
-
-		JGroupManager jGroupManager = cachePeers.get(0);
-
-		Address localAddress = jGroupManager.getBusLocalAddress();
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"(" + cache.getName() + ") local address: " + localAddress);
-		}
-
-		List<Address> addresses = _buildCachePeerAddressList(
-			cache, jGroupManager, localAddress);
-
-		if ((addresses == null) || addresses.isEmpty()) {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"This is the first node to start. No cache bootstrap for " +
-						cache.getName() + ".");
-			}
-
-			return;
-		}
-
-		Address address = null;
-		Random random = new Random();
-
-		while (!addresses.isEmpty() &&
-			   ((address == null) || (cache.getSize() == 0))) {
-
-			int randomPeerNumber = random.nextInt(addresses.size());
-
-			address = addresses.get(randomPeerNumber);
-
-			addresses.remove(randomPeerNumber);
-
-			JGroupEventMessage event = new JGroupEventMessage(
-				JGroupEventMessage.ASK_FOR_BOOTSTRAP,
-				localAddress, null, cache, cache.getName());
-
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Contact " + address + " to boot cache " + cache.getName());
-			}
-
-			List<JGroupEventMessage> events =
-				new ArrayList<JGroupEventMessage>();
-
-			events.add(event);
-
-			try {
-				jGroupManager.send(address, events);
-
-				try {
-					Thread.sleep(3000);
-				}
-				catch (InterruptedException ie) {
-					_log.error(ie, ie);
-				}
-			}
-			catch (RemoteException re) {
-				_log.error(re, re);
-			}
-		}
-
-		if (cache.getSize() == 0) {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Cache failed to bootstrap from its peers " +
-						cache.getName());
-			}
-		}
-		else {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Bootstrap for cache " + cache.getName() + " has loaded " +
-						cache.getSize() + " elements");
-			}
-		}
+	public void load(Ehcache cache) throws RemoteCacheException {
+		return;
 	}
-
-	private List<Address> _buildCachePeerAddressList(
-		Ehcache cache, JGroupManager jGroupManager, Address localAddress) {
-
-		List<Address> addresses = new ArrayList<Address>();
-
-		List<Address> members = jGroupManager.getBusMembership();
-
-		for (int i = 0; i < members.size(); i++) {
-			Address member = members.get(i);
-
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"(" + cache.getName() + ") member " + i + ": " + member +
-						(member.equals(localAddress) ? " ***" : ""));
-			}
-
-			if (!member.equals(localAddress)) {
-				addresses.add(member);
-			}
-		}
-
-		return addresses;
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		JGroupsBootstrapCacheLoader.class);
 
 }
