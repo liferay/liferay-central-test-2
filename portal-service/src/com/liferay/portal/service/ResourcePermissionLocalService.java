@@ -115,6 +115,12 @@ public interface ResourcePermissionLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.ResourcePermission> getResourcePermissions(
+		long companyId, java.lang.String name, int scope,
+		java.lang.String primKey)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getResourcePermissionsCount(long companyId,
 		java.lang.String name, int scope, java.lang.String primKey)
 		throws com.liferay.portal.kernel.exception.SystemException;

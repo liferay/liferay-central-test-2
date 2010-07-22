@@ -206,6 +206,13 @@ public class ResourceLocalServiceUtil {
 		return getService().getResources();
 	}
 
+	public static void updateResources(long companyId, java.lang.String name,
+		int scope, java.lang.String primKey, java.lang.String newPrimKey)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().updateResources(companyId, name, scope, primKey, newPrimKey);
+	}
+
 	public static void updateResources(long companyId, long groupId,
 		java.lang.String name, long primKey,
 		java.lang.String[] communityPermissions,
