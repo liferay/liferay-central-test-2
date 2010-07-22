@@ -400,7 +400,7 @@ public class AssetCategoryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(name)) {
-			throw new AssetCategoryNameException();	
+			throw new AssetCategoryNameException();
 		}
 
 		List<AssetCategory> categories = null;
