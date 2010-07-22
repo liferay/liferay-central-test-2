@@ -32,7 +32,7 @@ decimalFormat.setMaximumFractionDigits(2);
 decimalFormat.setMinimumFractionDigits(2);
 %>
 
-<form action="<portlet:renderURL><portlet:param name="struts_action" value="/currency_converter/view" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/currency_converter/view" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 
 <input type="submit" value="<liferay-ui:message key="convert" />" />
 
@@ -50,7 +50,7 @@ decimalFormat.setMinimumFractionDigits(2);
 		String currencyValue = (String)entry.getKey();
 	%>
 
-		<option <%= symbol.equals("USD") ? "selected" : "" %> value="<%= symbol %>"><%= currencyValue %></option value>
+		<option <%= symbol.equals(from) ? "selected" : "" %> value="<%= symbol %>"><%= currencyValue %></option value>
 
 	<%
 	}
@@ -72,7 +72,7 @@ decimalFormat.setMinimumFractionDigits(2);
 		String currencyValue = (String)entry.getKey();
 	%>
 
-		<option <%= symbol.equals("EUR") ? "selected" : "" %> value="<%= symbol %>"><%= currencyValue %></option value>
+		<option <%= symbol.equals(to) ? "selected" : "" %> value="<%= symbol %>"><%= currencyValue %></option value>
 
 	<%
 	}
