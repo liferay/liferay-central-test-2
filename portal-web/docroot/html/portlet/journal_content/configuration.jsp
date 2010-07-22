@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/journal_content/init.jsp" %>
 
 <%
-String cur = ParamUtil.getString(request, "cur");
+int cur = ParamUtil.getInteger(request, SearchContainer.DEFAULT_CUR_PARAM);
 
 String redirect = ParamUtil.getString(request, "redirect");
 

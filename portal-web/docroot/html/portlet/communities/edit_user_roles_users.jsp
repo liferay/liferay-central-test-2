@@ -19,7 +19,7 @@
 <%
 String tabs1 = (String)request.getAttribute("edit_user_roles.jsp-tabs1");
 
-String cur = (String)request.getAttribute("edit_user_roles.jsp-cur");
+int cur = (Integer)request.getAttribute("edit_user_roles.jsp-cur");
 
 Group group = (Group)request.getAttribute("edit_user_roles.jsp-group");
 String groupName = (String)request.getAttribute("edit_user_roles.jsp-groupName");

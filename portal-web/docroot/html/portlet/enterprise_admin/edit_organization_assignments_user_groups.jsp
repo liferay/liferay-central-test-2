@@ -19,7 +19,7 @@
 <%
 String tabs3 = (String)request.getAttribute("edit_organization_assignments.jsp-tabs3");
 
-String cur = (String)request.getAttribute("edit_organization_assignments.jsp-cur");
+int cur = (Integer)request.getAttribute("edit_organization_assignments.jsp-cur");
 
 Organization organization = (Organization)request.getAttribute("edit_organization_assignments.jsp-organization");
 

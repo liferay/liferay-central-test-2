@@ -20,7 +20,7 @@
 String tabs2 = ParamUtil.getString(request, "tabs2", "users");
 String tabs3 = ParamUtil.getString(request, "tabs3", "current");
 
-String cur = ParamUtil.getString(request, "cur");
+int cur = ParamUtil.getInteger(request, SearchContainer.DEFAULT_CUR_PARAM);
 
 String redirect = ParamUtil.getString(request, "redirect");
 

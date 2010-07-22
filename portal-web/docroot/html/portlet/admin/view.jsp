@@ -46,7 +46,7 @@
 			}
 		}
 
-		String cur = ParamUtil.getString(request, "cur");
+		int cur = ParamUtil.getInteger(request, SearchContainer.DEFAULT_CUR_PARAM);
 
 		PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -61,7 +61,7 @@
 			<portlet:param name="tabs1" value="<%= tabs1 %>" />
 			<portlet:param name="tabs2" value="<%= tabs2 %>" />
 			<portlet:param name="tabs3" value="<%= tabs3 %>" />
-			<portlet:param name="cur" value="<%= cur %>" />
+			<portlet:param name="cur" value="<%= String.valueOf(cur) %>" />
 		</portlet:renderURL>
 
 		<aui:form method="post" name="fm">
@@ -112,7 +112,7 @@
 		<aui:script>
 			function <portlet:namespace />saveServer(cmd) {
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
-				document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL><portlet:param name="struts_action" value="/admin/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /><portlet:param name="tabs2" value="<%= tabs2 %>" /><portlet:param name="tabs3" value="<%= tabs3 %>" /><portlet:param name="cur" value="<%= cur %>" /></portlet:renderURL>";
+				document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL><portlet:param name="struts_action" value="/admin/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /><portlet:param name="tabs2" value="<%= tabs2 %>" /><portlet:param name="tabs3" value="<%= tabs3 %>" /><portlet:param name="cur" value="<%= String.valueOf(cur) %>" /></portlet:renderURL>";
 				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/admin/edit_server" /></portlet:actionURL>");
 			}
 		</aui:script>

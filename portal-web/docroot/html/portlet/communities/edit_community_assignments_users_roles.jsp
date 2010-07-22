@@ -22,7 +22,7 @@ String tabs2 = (String)request.getAttribute("edit_community_assignments.jsp-tabs
 
 String redirect = (String)request.getAttribute("edit_community_assignments.jsp-redirect");
 
-String cur = (String)request.getAttribute("edit_community_assignments.jsp-cur");
+int cur = (Integer)request.getAttribute("edit_community_assignments.jsp-cur");
 
 Group group = (Group)request.getAttribute("edit_community_assignments.jsp-group");
 User selUser = (User)request.getAttribute("edit_community_assignments.jsp-selUser");

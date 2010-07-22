@@ -20,7 +20,7 @@
 String tabs2 = ParamUtil.getString(request, "tabs2", "users");
 String tabs3 = ParamUtil.getString(request, "tabs3", "current");
 
-String cur = ParamUtil.getString(request, "cur");
+int cur = ParamUtil.getInteger(request, SearchContainer.DEFAULT_CUR_PARAM);
 
 String redirect = ParamUtil.getString(request, "redirect");
 String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL");
@@ -356,7 +356,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 			}
 
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "organization_permissions";
-			document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveOrganizationPermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= HtmlUtil.escape(cur) %>&<portlet:namespace />organizationIds=" + organizationIds + "&<portlet:namespace />organizationIdsPos=" + organizationIdsPos;
+			document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveOrganizationPermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= cur %>&<portlet:namespace />organizationIds=" + organizationIds + "&<portlet:namespace />organizationIdsPos=" + organizationIdsPos;
 			document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value = organizationIds;
 			document.<portlet:namespace />fm.<portlet:namespace />organizationIdsPosValue.value = organizationIdsPosValue;
 			document.<portlet:namespace />fm.<portlet:namespace />organizationIdActionIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
@@ -384,7 +384,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 			}
 
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "role_permissions";
-			document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveRolePermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= HtmlUtil.escape(cur) %>&<portlet:namespace />roleIds=" + roleIds + "&<portlet:namespace />roleIdsPos=" + roleIdsPos;
+			document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveRolePermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= cur %>&<portlet:namespace />roleIds=" + roleIds + "&<portlet:namespace />roleIdsPos=" + roleIdsPos;
 			document.<portlet:namespace />fm.<portlet:namespace />roleIds.value = roleIds;
 			document.<portlet:namespace />fm.<portlet:namespace />roleIdsPosValue.value = roleIdsPosValue;
 			document.<portlet:namespace />fm.<portlet:namespace />roleIdActionIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
@@ -412,7 +412,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 			}
 
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "user_group_permissions";
-			document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveUserGroupPermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= HtmlUtil.escape(cur) %>&<portlet:namespace />userGroupIds=" + userGroupIds + "&<portlet:namespace />userGroupIdsPos=" + userGroupIdsPos;
+			document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveUserGroupPermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= cur %>&<portlet:namespace />userGroupIds=" + userGroupIds + "&<portlet:namespace />userGroupIdsPos=" + userGroupIdsPos;
 			document.<portlet:namespace />fm.<portlet:namespace />userGroupIds.value = userGroupIds;
 			document.<portlet:namespace />fm.<portlet:namespace />userGroupIdsPosValue.value = userGroupIdsPosValue;
 			document.<portlet:namespace />fm.<portlet:namespace />userGroupIdActionIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
@@ -440,7 +440,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 			}
 
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "user_permissions";
-			document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveUserPermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= HtmlUtil.escape(cur) %>&<portlet:namespace />userIds=" + userIds + "&<portlet:namespace />userIdsPos=" + userIdsPos;
+			document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveUserPermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= cur %>&<portlet:namespace />userIds=" + userIds + "&<portlet:namespace />userIdsPos=" + userIdsPos;
 			document.<portlet:namespace />fm.<portlet:namespace />userIds.value = userIds;
 			document.<portlet:namespace />fm.<portlet:namespace />userIdsPosValue.value = userIdsPosValue;
 			document.<portlet:namespace />fm.<portlet:namespace />userIdActionIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
