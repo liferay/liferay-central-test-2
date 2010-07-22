@@ -70,8 +70,8 @@ public class ATag extends IncludeTag {
 		return _CLEAN_UP_SET_ATTRIBUTES;
 	}
 
-	protected boolean isTryToTrimNewLine() {
-		return _TRY_TO_TRIM_NEW_LINE;
+	protected boolean isTrimNewLines() {
+		return _TRIM_NEW_LINES;
 	}
 
 	protected void setAttributes(HttpServletRequest request) {
@@ -86,7 +86,7 @@ public class ATag extends IncludeTag {
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
-	private static final boolean _TRY_TO_TRIM_NEW_LINE = true;
+	private static final boolean _TRIM_NEW_LINES = true;
 
 	private static final String _END_PAGE =
 		"/html/taglib/aui/a/end.jsp";

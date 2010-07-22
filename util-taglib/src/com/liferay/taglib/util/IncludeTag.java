@@ -173,16 +173,15 @@ public class IncludeTag
 			servletContext.getRequestDispatcher(page);
 
 		requestDispatcher.include(
-			request, new PipingServletResponse(pageContext,
-				isTryToTrimNewLine()));
+			request, new PipingServletResponse(pageContext, isTrimNewLines()));
 	}
 
 	protected boolean isCleanUpSetAttributes() {
 		return _CLEAN_UP_SET_ATTRIBUTES;
 	}
 
-	protected boolean isTryToTrimNewLine() {
-		return _TRY_TO_TRIM_NEW_LINE;
+	protected boolean isTrimNewLines() {
+		return _TRIM_NEW_LINES;
 	}
 
 	protected void setAttributes(HttpServletRequest request) {
@@ -243,7 +242,7 @@ public class IncludeTag
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = false;
 
-	private static final boolean _TRY_TO_TRIM_NEW_LINE = false;
+	private static final boolean _TRIM_NEW_LINES = false;
 
 	private static Log _log = LogFactoryUtil.getLog(IncludeTag.class);
 

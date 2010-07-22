@@ -87,15 +87,20 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public PipingServletResponse(
-		PageContext pageContext, boolean tryToTrimNewLine) {
+		PageContext pageContext, boolean trimNewLines) {
 
 		super((HttpServletResponse)pageContext.getResponse());
 
-		if (tryToTrimNewLine && pageContext instanceof PageContextWrapper) {
+		if (trimNewLines && (pageContext instanceof PageContextWrapper)) {
 			PageContextWrapper pageContextWrapper =
 				(PageContextWrapper)pageContext;
+
+			PageContext wrappedPageContext =
+				pageContextWrapper.getWrappedPageContext();
+
 			_printWriter = new UnsyncPrintWriter(
-				pageContextWrapper.getOutWithTrim(), true);
+				new TrimNewLinesJspWriter(wrappedPageContext.getOut()),
+				true);
 		}
 		else {
 			_printWriter = new UnsyncPrintWriter(pageContext.getOut(), true);

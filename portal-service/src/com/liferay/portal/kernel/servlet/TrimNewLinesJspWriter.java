@@ -27,15 +27,15 @@ import javax.servlet.jsp.JspWriter;
 /**
  * @author Shuyang Zhou
  */
-public class TrimNewLinePipingJspWriter extends JspWriter {
+public class TrimNewLinesJspWriter extends JspWriter {
 
-	public TrimNewLinePipingJspWriter(PrintWriter printWriter) {
+	public TrimNewLinesJspWriter(PrintWriter printWriter) {
 		super(NO_BUFFER, false);
 
 		_printWriter = printWriter;
 	}
 
-	public TrimNewLinePipingJspWriter(Writer writer) {
+	public TrimNewLinesJspWriter(Writer writer) {
 		super(NO_BUFFER, false);
 
 		_printWriter = new UnsyncPrintWriter(writer, true);
@@ -63,59 +63,75 @@ public class TrimNewLinePipingJspWriter extends JspWriter {
 	public void newLine() {
 		if (!_lastNewLine) {
 			_printWriter.println();
+
 			_lastNewLine = true;
 		}
 	}
 
 	public void print(boolean b) {
 		_printWriter.print(b);
+
 		_lastNewLine = false;
 	}
 
 	public void print(char c) {
-		boolean isNewLine = c == CharPool.NEW_LINE || c == CharPool.RETURN;
-		if (!_lastNewLine || !isNewLine) {
+		boolean newLine = false;
+
+		if ((c == CharPool.NEW_LINE) || (c == CharPool.RETURN)) {
+			newLine = true;
+		}
+
+		if (!_lastNewLine || !newLine) {
 			_printWriter.print(c);
 		}
-		if (isNewLine) {
+
+		if (newLine) {
 			_lastNewLine = true;
 		}
 	}
 
 	public void print(char[] charArray) {
 		_printWriter.print(charArray);
+
 		_lastNewLine = false;
 	}
 
 	public void print(double d) {
 		_printWriter.print(d);
+
 		_lastNewLine = false;
 	}
 
 	public void print(float f) {
 		_printWriter.print(f);
+
 		_lastNewLine = false;
 	}
 
 	public void print(int i) {
 		_printWriter.print(i);
+
 		_lastNewLine = false;
 	}
 
 	public void print(long l) {
 		_printWriter.print(l);
+
 		_lastNewLine = false;
 	}
 
 	public void print(Object object) {
 		_printWriter.print(object);
+
 		_lastNewLine = false;
 	}
 
 	public void print(String string) {
 		String trim = trim(string);
+
 		if (trim.length() > 0) {
 			_printWriter.print(trim);
+
 			_lastNewLine = false;
 		}
 	}
@@ -123,112 +139,144 @@ public class TrimNewLinePipingJspWriter extends JspWriter {
 	public void println() {
 		if (!_lastNewLine) {
 			_printWriter.println();
+
 			_lastNewLine = true;
 		}
 	}
 
 	public void println(boolean b) {
 		_printWriter.println(b);
+
 		_lastNewLine = true;
 	}
 
 	public void println(char c) {
 		_printWriter.println(c);
+
 		_lastNewLine = true;
 	}
 
 	public void println(char[] charArray) {
 		_printWriter.println(charArray);
+
 		_lastNewLine = true;
 	}
 
 	public void println(double d) {
 		_printWriter.println(d);
+
 		_lastNewLine = true;
 	}
 
 	public void println(float f) {
 		_printWriter.println(f);
+
 		_lastNewLine = true;
 	}
 
 	public void println(int i) {
 		_printWriter.println(i);
+
 		_lastNewLine = true;
 	}
 
 	public void println(long l) {
 		_printWriter.println(l);
+
 		_lastNewLine = true;
 	}
 
 	public void println(Object object) {
 		_printWriter.println(object);
+
 		_lastNewLine = true;
 	}
 
 	public void println(String string) {
 		String trim = trim(string);
+
 		if (trim.length() > 0) {
 			_printWriter.println(trim);
+
 			_lastNewLine = true;
 		}
 	}
 
 	public void write(char[] charArray) {
 		_printWriter.write(charArray);
+
 		_lastNewLine = false;
 	}
 
 	public void write(char[] charArray, int offset, int length) {
 		_printWriter.write(charArray, offset, length);
+
 		_lastNewLine = false;
 	}
 
 	public void write(int c) {
-		boolean isNewLine = c == CharPool.NEW_LINE || c == CharPool.RETURN;
-		if (!_lastNewLine || !isNewLine) {
+		boolean newLine = false;
+
+		if ((c == CharPool.NEW_LINE) || (c == CharPool.RETURN)) {
+			newLine = true;
+		}
+
+		if (!_lastNewLine || !newLine) {
 			_printWriter.write(c);
 		}
-		if (isNewLine) {
+
+		if (newLine) {
 			_lastNewLine = true;
 		}
 	}
 
 	public void write(String string) {
 		String trim = trim(string);
+
 		if (trim.length() > 0) {
 			_printWriter.write(trim);
+
 			_lastNewLine = false;
 		}
 	}
 
 	public void write(String string, int offset, int length) {
 		String trim = trim(string.substring(offset, offset + length));
+
 		if (trim.length() > 0) {
 			_printWriter.write(trim);
+
 			_lastNewLine = false;
 		}
 	}
 
-	private String trim(String string) {
+	protected String trim(String string) {
 		int length = string.length();
+
 		int start = length;
+
 		for(int i = 0; i < length; i++) {
 			char c = string.charAt(i);
-			if (c != CharPool.NEW_LINE && c != CharPool.RETURN) {
+
+			if ((c != CharPool.NEW_LINE) && (c != CharPool.RETURN)) {
 				start = i;
+
 				break;
 			}
 		}
+
 		int end = 0;
-		for(int i = length - 1; i >=0 ; i--) {
+
+		for(int i = length - 1; i >= 0 ; i--) {
 			char c = string.charAt(i);
-			if (c != CharPool.NEW_LINE && c != CharPool.RETURN) {
+
+			if ((c != CharPool.NEW_LINE) && (c != CharPool.RETURN)) {
 				end = i + 1;
+
 				break;
 			}
 		}
+
 		if (end > start) {
 			return string.substring(start, end);
 		}
