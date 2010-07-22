@@ -4,6 +4,8 @@ Liferay.provide(
 	Liferay.PortletSharing,
 	'showNetvibesInfo',
 	function(netvibesURL) {
+		var A = AUI();
+
 		var portletURL = Liferay.PortletURL.createResourceURL();
 
 		portletURL.setPortletId(133);
@@ -34,6 +36,8 @@ Liferay.provide(
 	Liferay.PortletSharing,
 	'showWidgetInfo',
 	function(widgetURL) {
+		var A = AUI();
+
 		var portletURL = Liferay.PortletURL.createResourceURL();
 
 		portletURL.setPortletId(133);
