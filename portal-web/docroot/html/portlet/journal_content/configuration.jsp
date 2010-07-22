@@ -55,7 +55,7 @@ type = ParamUtil.getString(request, "type", type);
 		</span>
 
 		<span class="displaying-article-id-holder <%= article == null ? "aui-helper-hidden" : StringPool.BLANK %>">
-			<liferay-ui:message key="displaying-content" />: <span class="displaying-article-id"><%= article != null ? articleId : StringPool.BLANK %></span>
+			<liferay-ui:message key="displaying-content" />: <span class="displaying-article-id"><%= article != null ? article.getTitle() : StringPool.BLANK %></span>
 		</span>
 	</div>
 
@@ -164,12 +164,14 @@ type = ParamUtil.getString(request, "type", type);
 
 		ResultRow row = new ResultRow(null, curArticle.getArticleId() + EditArticleAction.VERSION_SEPARATOR + curArticle.getVersion(), i);
 
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("javascript:");
 		sb.append(renderResponse.getNamespace());
 		sb.append("selectArticle('");
 		sb.append(curArticle.getArticleId());
+		sb.append("','");
+		sb.append(curArticle.getTitle());
 		sb.append("');");
 
 		String rowHREF = sb.toString();
@@ -261,7 +263,7 @@ type = ParamUtil.getString(request, "type", type);
 	Liferay.provide(
 		window,
 		'<portlet:namespace />selectArticle',
-		function(articleId) {
+		function(articleId, articletTitle) {
 			var A = AUI();
 
 			document.<portlet:namespace />fm.<portlet:namespace />articleId.value = articleId;
@@ -272,7 +274,7 @@ type = ParamUtil.getString(request, "type", type);
 
 			var displayArticleId = A.one('.displaying-article-id');
 
-			displayArticleId.set('innerHTML', articleId + ' (<%= LanguageUtil.get(pageContext, "modified") %>)');
+			displayArticleId.set('innerHTML', articletTitle + ' (<%= LanguageUtil.get(pageContext, "modified") %>)');
 			displayArticleId.addClass('modified');
 		},
 		['aui-base']
