@@ -180,8 +180,12 @@ public class EditPagesAction extends PortletAction {
 				updateVirtualHost(actionRequest);
 			}
 
-			String redirect = ParamUtil.getString(
-				actionRequest, "pagesRedirect");
+			String redirect = (String)actionRequest.getAttribute(
+				"pagesRedirect");
+
+			if (Validator.isNull(redirect)) {
+				redirect = ParamUtil.getString(actionRequest, "pagesRedirect");
+			}
 
 			if ((layout != null) && Validator.isNotNull(oldFriendlyURL)) {
 				ThemeDisplay themeDisplay =
