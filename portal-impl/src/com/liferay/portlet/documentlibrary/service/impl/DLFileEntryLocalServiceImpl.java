@@ -375,6 +375,13 @@ public class DLFileEntryLocalServiceImpl
 		expandoValueLocalService.deleteValues(
 			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
+		// Lock
+
+		String lockId = DLUtil.getLockId(fileEntry.getGroupId(),
+			fileEntry.getFolderId(), fileEntry.getName());
+
+		lockLocalService.unlock(DLFileEntry.class.getName(), lockId);
+
 		// Message boards
 
 		mbMessageLocalService.deleteDiscussionMessages(
