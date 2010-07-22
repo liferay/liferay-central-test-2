@@ -68,7 +68,7 @@
 						Layout liveLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layout.getUuid(), liveGroup.getGroupId());
 
 						friendlyURL = PortalUtil.getLayoutFriendlyURL(liveLayout, themeDisplay);
-						friendlyURL = PortalUtil.addPermanentParameters(themeDisplay, friendlyURL);
+						friendlyURL = PortalUtil.addPreservedParameters(themeDisplay, friendlyURL);
 					}
 					catch (Exception e) {
 					}
@@ -89,7 +89,7 @@
 						Layout stagedLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layout.getUuid(), stagingGroup.getGroupId());
 
 						friendlyURL = PortalUtil.getLayoutFriendlyURL(stagedLayout, themeDisplay);
-						friendlyURL = PortalUtil.addPermanentParameters(themeDisplay, friendlyURL);
+						friendlyURL = PortalUtil.addPreservedParameters(themeDisplay, friendlyURL);
 					}
 					catch (Exception e) {
 					}

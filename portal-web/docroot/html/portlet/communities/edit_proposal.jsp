@@ -294,7 +294,8 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 	}
 
 	String proposedLayoutURL = PortalUtil.getLayoutFriendlyURL(proposedLayout, themeDisplay);
-	proposedLayoutURL = PortalUtil.addPermanentParameters(themeDisplay, proposedLayoutURL);
+
+	proposedLayoutURL = PortalUtil.addPreservedParameters(themeDisplay, proposedLayoutURL);
 
 	String tagligPreviewURL = "window.open('" + proposedLayoutURL + "');";
 	%>
