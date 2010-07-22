@@ -181,7 +181,7 @@ public class EditPagesAction extends PortletAction {
 			}
 
 			String redirect = (String)actionRequest.getAttribute(
-				"pagesRedirect");
+				WebKeys.REDIRECT);
 
 			if (Validator.isNull(redirect)) {
 				redirect = ParamUtil.getString(actionRequest, "pagesRedirect");

@@ -787,7 +787,7 @@ public class StagingImpl implements Staging {
 					redirect, String.valueOf(themeDisplay.getScopeGroupId()),
 					String.valueOf(liveGroup.getGroupId()));
 
-				portletRequest.setAttribute("pagesRedirect", redirect);
+				portletRequest.setAttribute(WebKeys.REDIRECT, redirect);
 			}
 
 			GroupLocalServiceUtil.deleteGroup(
