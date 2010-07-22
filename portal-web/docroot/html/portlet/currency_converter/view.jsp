@@ -34,9 +34,11 @@ decimalFormat.setMinimumFractionDigits(2);
 
 <form action="<portlet:renderURL><portlet:param name="struts_action" value="/currency_converter/view" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 
-<input type="submit" value="<liferay-ui:message key="convert" />" />
+<c:if test="<%= windowState.equals(WindowState.NORMAL) %>">
+	<input type="submit" value="<liferay-ui:message key="convert" />" />
 
-<input name="<portlet:namespace />number" size="3" type="text" value="<%= number %>" />
+	<input name="<portlet:namespace />number" size="3" type="text" value="<%= number %>" />
+</c:if>
 
 <select name="<portlet:namespace />from">
 
@@ -50,7 +52,7 @@ decimalFormat.setMinimumFractionDigits(2);
 		String currencyValue = (String)entry.getKey();
 	%>
 
-		<option <%= symbol.equals("USD") ? "selected" : "" %> value="<%= symbol %>"><%= currencyValue %></option value>
+		<option <%= symbol.equals(from) ? "selected" : "" %> value="<%= symbol %>"><%= currencyValue %></option value>
 
 	<%
 	}
@@ -72,7 +74,7 @@ decimalFormat.setMinimumFractionDigits(2);
 		String currencyValue = (String)entry.getKey();
 	%>
 
-		<option <%= symbol.equals("EUR") ? "selected" : "" %> value="<%= symbol %>"><%= currencyValue %></option value>
+		<option <%= symbol.equals(to) ? "selected" : "" %> value="<%= symbol %>"><%= currencyValue %></option value>
 
 	<%
 	}
@@ -80,10 +82,46 @@ decimalFormat.setMinimumFractionDigits(2);
 
 </select>
 
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+	<input type="submit" value="<liferay-ui:message key="show" />" />
+
+	<input name="<portlet:namespace />number" type="hidden" value="<%= number %>" />
+</c:if>
+
 <br /><br />
 
 <c:choose>
 	<c:when test="<%= windowState.equals(WindowState.NORMAL) %>">
+		<table border="1" cellpadding="0" cellspacing="0" width="520">
+		<tr>
+			<td align="center" width="33%">
+				<%= currency.getFromSymbol() %><br />
+				<strong><%= number %></strong>
+			</td>
+			<td align="center" width="33%">
+				<%= currency.getToSymbol() %><br />
+				<strong><%= decimalFormat.format(number * currency.getRate()) %></strong>
+			</td>
+			<td align="center" width="34%">
+				<liferay-ui:message key="historical-charts" /><br />
+
+				<%
+				PortletURL portletURL = renderResponse.createRenderURL();
+
+				portletURL.setWindowState(WindowState.MAXIMIZED);
+				portletURL.setParameter("struts_action", "/currency_converter/view");
+				portletURL.setParameter("number", String.valueOf(number));
+				portletURL.setParameter("from", currency.getFromSymbol());
+				portletURL.setParameter("to", currency.getToSymbol());
+				%>
+
+				<a href="<% portletURL.setParameter("chartId", "3m"); %><%= portletURL.toString() %>">3<liferay-ui:message key="month-abbreviation" /></a>, <a href="<% portletURL.setParameter("chartId", "1y"); %><%= portletURL.toString() %>">1<liferay-ui:message key="year-abbreviation" /></a>, <a href="<% portletURL.setParameter("chartId", "2y"); %><%= portletURL.toString() %>">2<liferay-ui:message key="year-abbreviation" /></a>
+			</td>
+		</tr>
+		</table>
+
+		<br />
+
 		<table border="1" cellpadding="3" cellspacing="0" width="100%">
 		<tr class="portlet-section-header results-header">
 			<td>
@@ -147,18 +185,10 @@ decimalFormat.setMinimumFractionDigits(2);
 		</table>
 	</c:when>
 	<c:otherwise>
-		<table border="1" cellpadding="0" cellspacing="0" width="520">
+		<table border="0" cellpadding="0" cellspacing="0" width="520">
 		<tr>
-			<td align="center" width="33%">
-				<%= currency.getFromSymbol() %><br />
-				<strong><%= number %></strong>
-			</td>
-			<td align="center" width="33%">
-				<%= currency.getToSymbol() %><br />
-				<strong><%= decimalFormat.format(number * currency.getRate()) %></strong>
-			</td>
-			<td align="center" width="34%">
-				<liferay-ui:message key="historical-charts" /><br />
+			<td>
+				<liferay-ui:message key="historical-charts" />:&nbsp;
 
 				<%
 				PortletURL portletURL = renderResponse.createRenderURL();
