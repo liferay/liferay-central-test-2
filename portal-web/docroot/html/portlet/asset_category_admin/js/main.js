@@ -417,6 +417,8 @@ AUI().add(
 									on: {
 										contentTextChange: function(event) {
 											if (!event.initial) {
+												var editable = event.target;
+
 												var vocabularyName = event.newVal;
 												var vocabularyId = instance._selectedVocabularyId;
 
@@ -430,6 +432,18 @@ AUI().add(
 													function(message) {
 														var exception = message.exception;
 														if (exception) {
+															event.newVal = event.prevVal;
+
+															editable._syncContentText(event);
+
+															editable.set(
+																'contentText',
+																event.newVal,
+																{
+																	initial: true
+																}
+															);
+
 															if (exception.indexOf('auth.PrincipalException') > -1) {
 																instance._sendMessage('error', Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource'));
 															}
