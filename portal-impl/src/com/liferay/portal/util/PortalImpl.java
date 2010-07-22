@@ -523,45 +523,6 @@ public class PortalImpl implements Portal {
 		request.setAttribute(WebKeys.PAGE_TITLE, title);
 	}
 
-	public String addPermanentParameters(
-		ThemeDisplay themeDisplay, Layout layout, String url,
-		boolean doAsUser) {
-
-		if (doAsUser) {
-			if (Validator.isNotNull(themeDisplay.getDoAsUserId())) {
-				url = HttpUtil.addParameter(
-					url, "doAsUserId", themeDisplay.getDoAsUserId());
-			}
-
-			if (Validator.isNotNull(themeDisplay.getDoAsUserLanguageId())) {
-				url = HttpUtil.addParameter(
-					url, "doAsUserLanguageId",
-					themeDisplay.getDoAsUserLanguageId());
-			}
-		}
-
-		if (layout.isTypeControlPanel()) {
-			if (themeDisplay.getDoAsGroupId() > 0) {
-				url = HttpUtil.addParameter(
-					url, "doAsGroupId", themeDisplay.getDoAsGroupId());
-			}
-
-			if (themeDisplay.getRefererPlid() != LayoutConstants.DEFAULT_PLID) {
-				url = HttpUtil.addParameter(
-					url, "refererPlid", themeDisplay.getRefererPlid());
-			}
-		}
-
-		return url;
-	}
-
-	public String addPermanentParameters(
-		ThemeDisplay themeDisplay, String url) {
-
-		return addPermanentParameters(
-			themeDisplay, themeDisplay.getLayout(), url, true);
-	}
-
 	public void addPortalPortEventListener(
 		PortalPortEventListener portalPortEventListener) {
 
@@ -598,6 +559,45 @@ public class PortalImpl implements Portal {
 
 		addDefaultResource(themeDisplay, layout, portlet, true);
 		addDefaultResource(themeDisplay, layout, portlet, false);
+	}
+
+	public String addPreservedParameters(
+		ThemeDisplay themeDisplay, Layout layout, String url,
+		boolean doAsUser) {
+
+		if (doAsUser) {
+			if (Validator.isNotNull(themeDisplay.getDoAsUserId())) {
+				url = HttpUtil.addParameter(
+					url, "doAsUserId", themeDisplay.getDoAsUserId());
+			}
+
+			if (Validator.isNotNull(themeDisplay.getDoAsUserLanguageId())) {
+				url = HttpUtil.addParameter(
+					url, "doAsUserLanguageId",
+					themeDisplay.getDoAsUserLanguageId());
+			}
+		}
+
+		if (layout.isTypeControlPanel()) {
+			if (themeDisplay.getDoAsGroupId() > 0) {
+				url = HttpUtil.addParameter(
+					url, "doAsGroupId", themeDisplay.getDoAsGroupId());
+			}
+
+			if (themeDisplay.getRefererPlid() != LayoutConstants.DEFAULT_PLID) {
+				url = HttpUtil.addParameter(
+					url, "refererPlid", themeDisplay.getRefererPlid());
+			}
+		}
+
+		return url;
+	}
+
+	public String addPreservedParameters(
+		ThemeDisplay themeDisplay, String url) {
+
+		return addPreservedParameters(
+			themeDisplay, themeDisplay.getLayout(), url, true);
 	}
 
 	public void clearRequestParameters(RenderRequest renderRequest) {
@@ -1828,7 +1828,7 @@ public class PortalImpl implements Portal {
 				layout, themeDisplay);
 
 			if (Validator.isNotNull(layoutFriendlyURL)) {
-				layoutFriendlyURL = addPermanentParameters(
+				layoutFriendlyURL = addPreservedParameters(
 					themeDisplay, layout, layoutFriendlyURL, doAsUser);
 
 				return layoutFriendlyURL;
@@ -1837,7 +1837,7 @@ public class PortalImpl implements Portal {
 
 		String layoutURL = getLayoutActualURL(layout);
 
-		layoutURL = addPermanentParameters(
+		layoutURL = addPreservedParameters(
 			themeDisplay, layout, layoutURL, doAsUser);
 
 		return layoutURL;
