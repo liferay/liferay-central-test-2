@@ -16,7 +16,7 @@
 	<bean id="destination.blogs" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/blogs" />
 	</bean>
-	<bean id="destination.buffered_increment" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+	<bean id="destination.buffered_increment" class="com.liferay.portal.kernel.messaging.SerialDestination">
 		<property name="name" value="liferay/buffered_increment" />
 	</bean>
 	<bean id="destination.convert_process" class="com.liferay.portal.kernel.messaging.SerialDestination">
