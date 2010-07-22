@@ -79,7 +79,7 @@
 					</div>
 				</c:if>
 
-				<c:if test="<%= permissionChecker.isOmniadmin() %>">
+				<c:if test="<%= !layout.isTypePanel() && permissionChecker.isOmniadmin() %>">
 
 					<%
 					Group controlPanelGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupConstants.CONTROL_PANEL);
