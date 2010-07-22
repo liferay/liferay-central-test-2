@@ -66,7 +66,9 @@ public class LiferayCacheManagerPeerProviderFactory
 			throw new RuntimeException("portalPropertyKey is null");
 		}
 
-		String portalPropertiesString = PropsUtil.getProperties().getProperty(
+		Properties propsUtilProperties = PropsUtil.getProperties();
+
+		String portalPropertiesString = propsUtilProperties.getProperty(
 			portalPropertyKey);
 
 		if (_log.isInfoEnabled()) {
@@ -90,9 +92,9 @@ public class LiferayCacheManagerPeerProviderFactory
 			throw new RuntimeException(ioe.getMessage());
 		}
 
-		Object[] propertyKeys = portalProperties.keySet().toArray();
+		Object[] keys = portalProperties.keySet().toArray();
 
-		for(Object key : propertyKeys) {
+		for (Object key : keys) {
 			String value = (String)portalProperties.remove(key);
 
 			value = _htmlUtil.unescape(value);
@@ -108,10 +110,10 @@ public class LiferayCacheManagerPeerProviderFactory
 			cacheManager, portalProperties);
 	}
 
-	private static HtmlImpl _htmlUtil = new HtmlImpl();
-
 	private static Log _log = LogFactoryUtil.getLog(
 		LiferayCacheManagerPeerProviderFactory.class);
+
+	private static HtmlImpl _htmlUtil = new HtmlImpl();
 
 	private CacheManagerPeerProviderFactory _cacheManagerPeerProviderFactory;
 

@@ -97,23 +97,23 @@ public abstract class ClusterBase {
 		return PropsValues.CLUSTER_LINK_ENABLED;
 	}
 
-	protected JChannel createChannel(
+	protected JChannel createJChannel(
 			String properties, Receiver receiver, String clusterName)
 		throws ChannelException {
 
-		JChannel channel = new JChannel(properties);
+		JChannel jChannel = new JChannel(properties);
 
-		channel.setReceiver(receiver);
+		jChannel.setReceiver(receiver);
 
-		channel.connect(clusterName);
+		jChannel.connect(clusterName);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Create a new channel with properties " +
-					channel.getProperties());
+					jChannel.getProperties());
 		}
 
-		return channel;
+		return jChannel;
 	}
 
 	protected List<Address> getAddresses(JChannel channel) {

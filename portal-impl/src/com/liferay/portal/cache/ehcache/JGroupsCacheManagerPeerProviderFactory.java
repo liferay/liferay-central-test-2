@@ -17,6 +17,7 @@ package com.liferay.portal.cache.ehcache;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Properties;
 
@@ -38,10 +39,18 @@ public class JGroupsCacheManagerPeerProviderFactory
 		CacheManager cacheManager, Properties properties) {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("CREATING JGOUPS PEER PROVIDER");
+			_log.debug("Creating JGroups peer provider");
 		}
 
 		String clusterName = properties.getProperty("clusterName");
+
+		if (clusterName == null) {
+			clusterName = _DEFAULT_CLUSTER_NAME;
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Cluster name " + clusterName);
+		}
 
 		String channelProperties = properties.getProperty("channelProperties");
 
@@ -49,25 +58,19 @@ public class JGroupsCacheManagerPeerProviderFactory
 			channelProperties = channelProperties.replaceAll(
 				StringPool.SPACE, StringPool.BLANK);
 
-			if (channelProperties.trim().equals(StringPool.BLANK)) {
+			if (Validator.isNull(channelProperties)) {
 				channelProperties = null;
 			}
 		}
 
-		if (channelProperties != null) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Connect is:" + channelProperties);
-			}
+		if (_log.isDebugEnabled()) {
+			_log.debug("Channel properties " + channelProperties);
 		}
 
-		if (clusterName == null) {
-			clusterName = _DEFAULT_CLUSTER_NAME;
-		}
-
-		return new JGroupManager(cacheManager, channelProperties, clusterName);
+		return new JGroupsManager(cacheManager, clusterName, channelProperties);
 	}
 
-	private static final String _DEFAULT_CLUSTER_NAME = "EH-CACHE";
+	private static final String _DEFAULT_CLUSTER_NAME = "Ehcache";
 
 	private static Log _log = LogFactoryUtil.getLog(
 		JGroupsCacheManagerPeerProviderFactory.class);

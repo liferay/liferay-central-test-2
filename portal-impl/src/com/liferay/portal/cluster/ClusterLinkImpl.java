@@ -43,8 +43,8 @@ public class ClusterLinkImpl extends ClusterBase implements ClusterLink {
 			return;
 		}
 
-		for (JChannel channel : _transportChannels) {
-			channel.close();
+		for (JChannel jChannel : _transportChannels) {
+			jChannel.close();
 		}
 	}
 
@@ -68,9 +68,9 @@ public class ClusterLinkImpl extends ClusterBase implements ClusterLink {
 			return Collections.EMPTY_LIST;
 		}
 
-		JChannel channel = getChannel(priority);
+		JChannel jChannel = getChannel(priority);
 
-		return getAddresses(channel);
+		return getAddresses(jChannel);
 	}
 
 	public void sendMulticastMessage(Message message, Priority priority) {
@@ -78,10 +78,10 @@ public class ClusterLinkImpl extends ClusterBase implements ClusterLink {
 			return;
 		}
 
-		JChannel channel = getChannel(priority);
+		JChannel jChannel = getChannel(priority);
 
 		try {
-			channel.send(null, null, message);
+			jChannel.send(null, null, message);
 		}
 		catch (ChannelException ce) {
 			_log.error("Unable to send multicast message " + message, ce);
@@ -98,10 +98,10 @@ public class ClusterLinkImpl extends ClusterBase implements ClusterLink {
 		org.jgroups.Address jGroupsAddress =
 			(org.jgroups.Address)address.getRealAddress();
 
-		JChannel channel = getChannel(priority);
+		JChannel jChannel = getChannel(priority);
 
 		try {
-			channel.send(jGroupsAddress, null, message);
+			jChannel.send(jGroupsAddress, null, message);
 		}
 		catch (ChannelException ce) {
 			_log.error("Unable to send unicast message:" + message, ce);
@@ -155,14 +155,14 @@ public class ClusterLinkImpl extends ClusterBase implements ClusterLink {
 
 			String value = transportProperties.getProperty(customName);
 
-			JChannel channel = createChannel(
+			JChannel jChannel = createJChannel(
 				value,
 				new ClusterForwardReceiver(
 					_localTransportAddresses, _clusterForwardMessageListener),
 					_LIFERAY_TRANSPORT_CHANNEL + i);
 
-			_localTransportAddresses.add(channel.getLocalAddress());
-			_transportChannels.add(channel);
+			_localTransportAddresses.add(jChannel.getLocalAddress());
+			_transportChannels.add(jChannel);
 		}
 	}
 

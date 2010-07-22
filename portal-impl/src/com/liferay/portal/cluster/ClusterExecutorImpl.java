@@ -290,7 +290,7 @@ public class ClusterExecutorImpl
 			new ClusterRequestReceiver(this);
 
 		try {
-			_controlChannel = createChannel(
+			_controlChannel = createJChannel(
 				controlProperty, clusterInvokeReceiver, _DEFAULT_CLUSTER_NAME);
 		}
 		catch (ChannelException ce) {

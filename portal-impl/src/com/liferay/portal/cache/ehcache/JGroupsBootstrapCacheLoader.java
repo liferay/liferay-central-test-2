@@ -15,7 +15,6 @@
 package com.liferay.portal.cache.ehcache;
 
 import net.sf.ehcache.Ehcache;
-import net.sf.ehcache.distribution.RemoteCacheException;
 
 /**
  * <p>
@@ -38,7 +37,7 @@ public class JGroupsBootstrapCacheLoader
 			asynchronous, maximumChunkSizeBytes);
 	}
 
-	public void load(Ehcache cache) throws RemoteCacheException {
+	public void load(Ehcache cache) {
 		return;
 	}
 
