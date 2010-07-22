@@ -26,6 +26,7 @@ import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.impl.ResourceImpl;
@@ -317,6 +318,20 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 	public List<Resource> getResources() throws SystemException {
 		return resourcePersistence.findAll();
+	}
+
+	public void updateResources(
+			long companyId, String name, int scope, String primKey,
+			String newPrimKey)
+		throws PortalException, SystemException {
+
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			updateResources_6(companyId, name, scope, primKey, newPrimKey);
+		}
+		else {
+			updateResources_1to5(
+				companyId, name, scope, primKey, newPrimKey);
+		}
 	}
 
 	public void updateResources(
@@ -832,6 +847,18 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	protected void updateResources_1to5(
+			long companyId, String name, int scope, String primKey,
+			String newPrimKey)
+		throws PortalException, SystemException {
+
+		Resource resource = getResource(companyId, name, scope, primKey);
+
+		resource.setPrimKey(newPrimKey);
+
+		resourcePersistence.update(resource, false);
+	}
+
+	protected void updateResources_1to5(
 			long companyId, long groupId, Resource resource,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -845,6 +872,22 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		permissionLocalService.setRolePermissions(
 			role.getRoleId(), guestPermissions, resource.getResourceId());
+	}
+
+	protected void updateResources_6(
+			long companyId, String name, int scope, String primKey,
+			String newPrimKey)
+		throws PortalException, SystemException {
+
+		List<ResourcePermission> resourcePermissions =
+			resourcePermissionLocalService.getResourcePermissions(
+				companyId, name, scope, primKey);
+
+		for (ResourcePermission resourcePermission : resourcePermissions) {
+			resourcePermission.setPrimKey(newPrimKey);
+
+			resourcePermissionPersistence.update(resourcePermission, false);
+		}
 	}
 
 	protected void updateResources_6(

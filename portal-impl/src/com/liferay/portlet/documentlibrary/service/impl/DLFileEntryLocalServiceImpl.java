@@ -35,7 +35,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
@@ -767,14 +766,11 @@ public class DLFileEntryLocalServiceImpl
 
 		// Resources
 
-		Resource resource = resourceLocalService.getResource(
+		resourceLocalService.updateResources(
 			fileEntry.getCompanyId(), DLFileEntry.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL,
-			String.valueOf(fileEntry.getFileEntryId()));
-
-		resource.setPrimKey(String.valueOf(newFileEntryId));
-
-		resourcePersistence.update(resource, false);
+			String.valueOf(fileEntry.getFileEntryId()),
+			String.valueOf(newFileEntryId));
 
 		// Asset
 

@@ -106,6 +106,14 @@ public class ResourcePermissionLocalServiceImpl
 		return availableActionIds;
 	}
 
+	public List<ResourcePermission> getResourcePermissions(
+			long companyId, String name, int scope, String primKey)
+		throws SystemException {
+
+		return resourcePermissionPersistence.findByC_N_S_P(
+			companyId, name, scope, primKey);
+	}
+
 	public int getResourcePermissionsCount(
 			long companyId, String name, int scope, String primKey)
 		throws SystemException {
