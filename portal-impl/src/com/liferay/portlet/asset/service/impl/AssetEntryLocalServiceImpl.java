@@ -18,9 +18,10 @@ import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.increment.BufferedIncrement;
+import com.liferay.portal.kernel.increment.NumberIncrement;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.messaging.async.Async;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
@@ -305,12 +306,10 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return assetEntryFinder.findEntries(entryQuery);
 	}
 
-	@Async
+	@BufferedIncrement(incrementClass=NumberIncrement.class)
 	public void incrementViewCounter(
-			long userId, String className, long classPK)
+			long userId, String className, long classPK, int increment)
 		throws PortalException, SystemException {
-
-		// Entry
 
 		if (!PropsValues.ASSET_ENTRY_INCREMENT_VIEW_COUNTER_ENABLED) {
 			return;
@@ -326,17 +325,33 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			classNameId, classPK);
 
 		if (entry != null) {
-			entry.setViewCount(entry.getViewCount() + 1);
+			entry.setViewCount(entry.getViewCount() + increment);
 
 			assetEntryPersistence.update(entry, false);
+
+			// Social
+
+			if ((userId > 0) && (entry.getUserId() != userId)) {
+				socialEquityLogLocalService.addEquityLogs(
+					userId, entry.getEntryId(), ActionKeys.VIEW);
+			}
+		}
+	}
+
+	public void incrementViewCounter(
+			long userId, String className, long classPK)
+		throws PortalException, SystemException {
+
+		if (!PropsValues.ASSET_ENTRY_INCREMENT_VIEW_COUNTER_ENABLED) {
+			return;
 		}
 
-		// Social
-
-		if ((userId > 0) && (entry.getUserId() != userId)) {
-			socialEquityLogLocalService.addEquityLogs(
-				userId, entry.getEntryId(), ActionKeys.VIEW);
+		if (classPK <= 0) {
+			return;
 		}
+
+		assetEntryLocalService.incrementViewCounter(
+			userId, className, classPK, 1);
 	}
 
 	public Hits search(
