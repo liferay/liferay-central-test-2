@@ -164,6 +164,13 @@ public class JournalContentPortletDataHandlerImpl
 		Element igFoldersElement = rootElement.addElement("ig-folders");
 		Element igImagesElement = rootElement.addElement("ig-images");
 
+		String path = JournalPortletDataHandlerImpl.getArticlePath(
+			context, article);
+
+		Element articleElement = rootElement.addElement("article");
+
+		articleElement.addAttribute("path", path);
+
 		JournalPortletDataHandlerImpl.exportArticle(
 			context, rootElement, dlFoldersElement, dlFilesElement,
 			dlFileRanksElement, igFoldersElement, igImagesElement, article,
