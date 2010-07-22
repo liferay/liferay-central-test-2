@@ -60,8 +60,8 @@ public class ExportEventsAction extends PortletAction {
 
 			long eventId = ParamUtil.getLong(actionRequest, "eventId");
 
-			String exportFileName =	ParamUtil.getString(
-					actionRequest, "exportFileName");
+			String exportFileName = ParamUtil.getString(
+				actionRequest, "exportFileName");
 
 			if (exportFileName == null) {
 				exportFileName = "liferay.ics";
