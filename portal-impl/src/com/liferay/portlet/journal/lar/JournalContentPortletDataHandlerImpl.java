@@ -158,18 +158,18 @@ public class JournalContentPortletDataHandlerImpl
 
 		Element rootElement = document.addElement("journal-content-data");
 
-		Element dlFoldersElement = rootElement.addElement("dl-folders");
-		Element dlFilesElement = rootElement.addElement("dl-file-entries");
-		Element dlFileRanksElement = rootElement.addElement("dl-file-ranks");
-		Element igFoldersElement = rootElement.addElement("ig-folders");
-		Element igImagesElement = rootElement.addElement("ig-images");
-
 		String path = JournalPortletDataHandlerImpl.getArticlePath(
 			context, article);
 
 		Element articleElement = rootElement.addElement("article");
 
 		articleElement.addAttribute("path", path);
+
+		Element dlFoldersElement = rootElement.addElement("dl-folders");
+		Element dlFilesElement = rootElement.addElement("dl-file-entries");
+		Element dlFileRanksElement = rootElement.addElement("dl-file-ranks");
+		Element igFoldersElement = rootElement.addElement("ig-folders");
+		Element igImagesElement = rootElement.addElement("ig-images");
 
 		JournalPortletDataHandlerImpl.exportArticle(
 			context, rootElement, dlFoldersElement, dlFilesElement,
