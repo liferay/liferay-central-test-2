@@ -30,6 +30,9 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class SerialDestination extends BaseDestination {
 
 	public SerialDestination() {
+		super();
+		setWorkersCoreSize(_WORKERS_CORE_SIZE);
+		setWorkersMaxSize(_WORKERS_MAX_SIZE);
 	}
 
 	/**
@@ -62,8 +65,8 @@ public class SerialDestination extends BaseDestination {
 		threadPoolExecutor.execute(runnable);
 	}
 
-	private static final int _WORKERS_CORE_SIZE = 1;
+	protected static final int _WORKERS_CORE_SIZE = 1;
 
-	private static final int _WORKERS_MAX_SIZE = 1;
+	protected static final int _WORKERS_MAX_SIZE = 1;
 
 }
