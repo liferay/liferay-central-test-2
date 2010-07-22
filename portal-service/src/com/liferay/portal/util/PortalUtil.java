@@ -107,6 +107,30 @@ public class PortalUtil {
 		getPortal().addPageTitle(title, request);
 	}
 
+	/**
+	 * Adds permanent parameters such as doAsGroupId, doAsUserId,
+	 * doAsUserLanguageId and referrerPlid that should always be preserved as
+	 * the user navigates through the portal.
+	 */
+	public static String addPermanentParameters(
+		ThemeDisplay themeDisplay, String url) {
+
+		return getPortal().addPermanentParameters(themeDisplay, url);
+	}
+
+	/**
+	 * Adds permanent parameters such as doAsGroupId, doAsUserId,
+	 * doAsUserLanguageId and referrerPlid that should always be preserved as
+	 * the user navigates through the portal. If doAsUser is false, then
+	 * doAsUserId and doAsUserLanguageId will never be added.
+	 */
+	public static String addPermanentParameters(
+		ThemeDisplay themeDisplay, Layout layout, String url,
+		boolean doAsUser) {
+
+		return getPortal().addPermanentParameters(themeDisplay, layout, url, doAsUser);
+	}
+
 	public static void addPortalPortEventListener(
 		PortalPortEventListener portalPortEventListener) {
 
