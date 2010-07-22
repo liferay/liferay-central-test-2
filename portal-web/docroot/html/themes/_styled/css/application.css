@@ -27,6 +27,7 @@
 
 .results-header .sort-column .result-column-name {
 	background: url(../images/arrows/05_up.png) no-repeat 100% 50%;
+	display: inline-block;
 	font-style: italic;
 	padding-right: 15px;
 }
