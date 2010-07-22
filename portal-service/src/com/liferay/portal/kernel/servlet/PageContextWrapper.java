@@ -94,6 +94,10 @@ public class PageContextWrapper extends PageContext {
 		return new PipingJspWriter(_pageContext.getOut());
 	}
 
+	public JspWriter getOutWithTrim() {
+		return new TrimNewLinePipingJspWriter(_pageContext.getOut());
+	}
+
 	public Object getPage() {
 		return _pageContext.getPage();
 	}

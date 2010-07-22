@@ -86,6 +86,22 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 			pageContext.getOut());
 	}
 
+	public PipingServletResponse(
+		PageContext pageContext, boolean tryToTrimNewLine) {
+
+		super((HttpServletResponse)pageContext.getResponse());
+
+		if (tryToTrimNewLine && pageContext instanceof PageContextWrapper) {
+			PageContextWrapper pageContextWrapper =
+				(PageContextWrapper)pageContext;
+			_printWriter = new UnsyncPrintWriter(
+				pageContextWrapper.getOutWithTrim(), true);
+		}
+		else {
+			_printWriter = new UnsyncPrintWriter(pageContext.getOut(), true);
+		}
+	}
+
 	public ServletOutputStream getOutputStream() {
 		if (_servletOutputStream == null) {
 			if (_log.isWarnEnabled()) {
