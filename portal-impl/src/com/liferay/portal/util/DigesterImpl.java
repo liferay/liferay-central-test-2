@@ -25,6 +25,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import jodd.util.StringPool;
+
 import org.apache.commons.codec.binary.Hex;
 
 /**
@@ -37,7 +39,7 @@ public class DigesterImpl implements Digester {
 		return digest(Digester.DEFAULT_ALGORITHM, text);
 	}
 
-	public String digest(String algorithm, String ... text) {
+	public String digest(String algorithm, String... text) {
 
 		if (_BASE_64) {
 			byte[] bytes = digestRaw(algorithm, text);
@@ -53,7 +55,7 @@ public class DigesterImpl implements Digester {
 		return digestHex(Digester.DEFAULT_ALGORITHM, text);
 	}
 
-	public String digestHex(String algorithm, String ... text) {
+	public String digestHex(String algorithm, String... text) {
 		byte[] bytes = digestRaw(algorithm, text);
 
 		return Hex.encodeHexString(bytes);
@@ -63,7 +65,7 @@ public class DigesterImpl implements Digester {
 		return digestRaw(Digester.DEFAULT_ALGORITHM, text);
 	}
 
-	public byte[] digestRaw(String algorithm, String ... text) {
+	public byte[] digestRaw(String algorithm, String... text) {
 		MessageDigest messageDigest = null;
 
 		try{
@@ -73,13 +75,15 @@ public class DigesterImpl implements Digester {
 
 			for (String t : text) {
 				if (sb.length() > 0) {
-					sb.append(":");
+					sb.append(StringPool.COLON);
 				}
 
 				sb.append(t);
 			}
 
-			messageDigest.update(sb.toString().getBytes(Digester.ENCODING));
+			String s = sb.toString();
+
+			messageDigest.update(s.getBytes(Digester.ENCODING));
 		}
 		catch (NoSuchAlgorithmException nsae) {
 			_log.error(nsae, nsae);

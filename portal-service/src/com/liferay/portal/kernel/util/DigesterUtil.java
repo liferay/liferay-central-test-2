@@ -24,7 +24,7 @@ public class DigesterUtil {
 		return getDigester().digest(text);
 	}
 
-	public static String digest(String algorithm, String ... text) {
+	public static String digest(String algorithm, String... text) {
 		return getDigester().digest(algorithm, text);
 	}
 
@@ -32,7 +32,7 @@ public class DigesterUtil {
 		return getDigester().digestHex(text);
 	}
 
-	public static String digestHex(String algorithm, String ... text) {
+	public static String digestHex(String algorithm, String... text) {
 		return getDigester().digestHex(algorithm, text);
 	}
 
@@ -40,7 +40,7 @@ public class DigesterUtil {
 		return getDigester().digestRaw(text);
 	}
 
-	public static byte[] digestRaw(String algorithm, String ... text) {
+	public static byte[] digestRaw(String algorithm, String... text) {
 		return getDigester().digestRaw(algorithm, text);
 	}
 
