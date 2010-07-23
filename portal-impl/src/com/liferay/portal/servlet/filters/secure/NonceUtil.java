@@ -21,10 +21,10 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * @author Alexander Chow
@@ -48,7 +48,14 @@ public class NonceUtil {
 		String nonce = DigesterUtil.digestHex(
 			Digester.MD5, remoteAddress, String.valueOf(timestamp), companyKey);
 
-		_nonceMap.put(timestamp, nonce);
+		_lock.writeLock().lock();
+
+		try {
+			_nonceMap.put(timestamp, nonce);
+		}
+		finally {
+			_lock.writeLock().unlock();
+		}
 
 		return nonce;
 	}
@@ -56,7 +63,14 @@ public class NonceUtil {
 	public static boolean verify(String nonce) {
 		_cleanUp();
 
-		return _nonceMap.containsValue(nonce);
+		_lock.readLock().lock();
+
+		try {
+			return _nonceMap.containsValue(nonce);
+		}
+		finally {
+			_lock.readLock().unlock();
+		}
 	}
 
 	private static void _cleanUp() {
@@ -64,7 +78,11 @@ public class NonceUtil {
 
 		List<Long> times = new ArrayList<Long>();
 
-		synchronized (_nonceMap) {
+		// Find expired nonces
+
+		_lock.readLock().lock();
+
+		try {
 			for (long time : _nonceMap.keySet()) {
 				if (time <= expired) {
 					times.add(time);
@@ -74,15 +92,30 @@ public class NonceUtil {
 				}
 			}
 		}
+		finally {
+			_lock.readLock().unlock();
+		}
 
-		for (long time : times) {
-			_nonceMap.remove(time);
+		// Purge expired nonces
+
+		_lock.writeLock().lock();
+
+		try {
+			for (long time : times) {
+				_nonceMap.remove(time);
+			}
+		}
+		finally {
+			_lock.writeLock().unlock();
 		}
 	}
 
 	private static final long _NONCE_EXPIRATION = 10 * Time.MINUTE;
 
-	private static Map<Long, String> _nonceMap = Collections.synchronizedMap(
-		new LinkedHashMap<Long, String>());
+	private static final ReentrantReadWriteLock _lock =
+		new ReentrantReadWriteLock();
+
+	private static Map<Long, String> _nonceMap =
+		new LinkedHashMap<Long, String>();
 
 }
