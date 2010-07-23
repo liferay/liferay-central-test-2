@@ -95,7 +95,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 		<%@ include file="/html/portlet/document_library/view_file_entries.jspf" %>
 
 		<%
-		if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY)) {
+		if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY) || portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
 			PortalUtil.addPageKeywords(tagName, request);
 			PortalUtil.addPageKeywords(categoryName, request);
 		}
