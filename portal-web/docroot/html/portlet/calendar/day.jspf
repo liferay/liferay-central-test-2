@@ -157,7 +157,9 @@ if (!partDayResults.isEmpty()) {
 				curStartDate = Time.getDate(curEvent.getStartDate(), timeZone);
 			}
 
-			int curStartDateScore = (curStartDate.getHours() * 60) + curStartDate.getMinutes() + (curEvent.getDurationHour() * 60) + curEvent.getDurationMinute();
+			int curDisplayDuration = Math.max(50, (curEvent.getDurationHour() * 60) + curEvent.getDurationMinute());
+
+			int curStartDateScore = (curStartDate.getHours() * 60) + curStartDate.getMinutes() + curDisplayDuration;
 
 			if (curStartDateScore <= startDateScore) {
 				sortedResults.get(j).add(event);
@@ -250,8 +252,10 @@ if (!partDayResults.isEmpty()) {
 				startDate = Time.getDate(event.getStartDate(), timeZone);
 			}
 
+			int eventDisplayDuration = Math.max(50, (event.getDurationHour() * 60) + event.getDurationMinute());
+
 			int eventStartPos = (int)(((((startDate.getHours() * 60) + (float)startDate.getMinutes() ) / 60) * 50) - 2);
-			int eventBoxLength = (int)(((((event.getDurationHour() * 60) + (float)event.getDurationMinute()) / 60) * 50) - 12);
+			int eventBoxLength = (int)(((eventDisplayDuration / 60) * 50) - 12);
 
 			if ((eventBoxLength + eventStartPos) > 1186) {
 				eventBoxLength -= (eventBoxLength + eventStartPos) - 1186; // = (24 * 50) - 4
