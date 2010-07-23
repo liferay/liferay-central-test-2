@@ -1437,6 +1437,19 @@ public class StringUtil {
 		}
 	}
 
+	public static String unquote(String s) {
+		if (s == null) {
+			return s;
+		}
+
+		if (s.startsWith(StringPool.QUOTE) && s.endsWith(StringPool.QUOTE)) {
+			s = s.replaceAll("\"$", "");
+			s = s.replaceAll("^\"", "");
+		}
+
+		return s;
+	}
+
 	public static String upperCase(String s) {
 		if (s == null) {
 			return null;
