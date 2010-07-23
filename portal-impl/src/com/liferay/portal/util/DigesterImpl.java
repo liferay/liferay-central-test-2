@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.Digester;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.UnsupportedEncodingException;
 
@@ -28,35 +29,57 @@ import org.apache.commons.codec.binary.Hex;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
 public class DigesterImpl implements Digester {
 
 	public String digest(String text) {
-		return digest(Digester.DIGEST_ALGORITHM, text);
+		return digest(Digester.DEFAULT_ALGORITHM, text);
 	}
 
-	public String digest(String algorithm, String text) {
-		byte[] bytes = digestRaw(algorithm, text);
+	public String digest(String algorithm, String ... text) {
 
 		if (_BASE_64) {
+			byte[] bytes = digestRaw(algorithm, text);
+
 			return Base64.encode(bytes);
 		}
 		else {
-			return new String(Hex.encodeHex(bytes));
+			return digestHex(algorithm, text);
 		}
 	}
 
-	public byte[] digestRaw(String text) {
-		return digestRaw(Digester.DIGEST_ALGORITHM, text);
+	public String digestHex(String text) {
+		return digestHex(Digester.DEFAULT_ALGORITHM, text);
 	}
 
-	public byte[] digestRaw(String algorithm, String text) {
+	public String digestHex(String algorithm, String ... text) {
+		byte[] bytes = digestRaw(algorithm, text);
+
+		return Hex.encodeHexString(bytes);
+	}
+
+	public byte[] digestRaw(String text) {
+		return digestRaw(Digester.DEFAULT_ALGORITHM, text);
+	}
+
+	public byte[] digestRaw(String algorithm, String ... text) {
 		MessageDigest messageDigest = null;
 
 		try{
 			messageDigest = MessageDigest.getInstance(algorithm);
 
-			messageDigest.update(text.getBytes(Digester.ENCODING));
+			StringBundler sb = new StringBundler();
+
+			for (String t : text) {
+				if (sb.length() > 0) {
+					sb.append(":");
+				}
+
+				sb.append(t);
+			}
+
+			messageDigest.update(sb.toString().getBytes(Digester.ENCODING));
 		}
 		catch (NoSuchAlgorithmException nsae) {
 			_log.error(nsae, nsae);

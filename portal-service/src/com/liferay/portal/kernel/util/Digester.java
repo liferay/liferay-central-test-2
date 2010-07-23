@@ -16,19 +16,28 @@ package com.liferay.portal.kernel.util;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
 public interface Digester {
 
-	public static final String ENCODING = StringPool.UTF8;
+	public static final String MD5 = "MD5";
 
-	public static final String DIGEST_ALGORITHM = "SHA";
+	public static final String SHA = "SHA";
+
+	public static final String DEFAULT_ALGORITHM = SHA;
+
+	public static final String ENCODING = StringPool.UTF8;
 
 	public String digest(String text);
 
-	public String digest(String algorithm, String text);
+	public String digest(String algorithm, String ... text);
+
+	public String digestHex(String text);
+
+	public String digestHex(String algorithm, String ... text);
 
 	public byte[] digestRaw(String text);
 
-	public byte[] digestRaw(String algorithm, String text);
+	public byte[] digestRaw(String algorithm, String ... text);
 
 }
