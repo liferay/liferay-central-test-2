@@ -1,6 +1,6 @@
 <nav class="sort-pages modify-pages" id="navigation">
 	<h1>
-		<span>#language("navigation")</span>
+		<span><@liferay.language key="navigation"/></span>
 	</h1>
 
 	<ul>
