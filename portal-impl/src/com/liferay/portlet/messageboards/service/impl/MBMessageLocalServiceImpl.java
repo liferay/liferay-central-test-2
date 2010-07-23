@@ -1683,7 +1683,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		String messageURL =
 			layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR +
-				"message_boards/message/" + message.getMessageId();
+				"message_boards/view_message/" + message.getMessageId();
 
 		String portletName = PortalUtil.getPortletTitle(
 			PortletKeys.MESSAGE_BOARDS, LocaleUtil.getDefault());
@@ -1904,7 +1904,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		String sourceUri =
 			layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR +
-				"message_boards/message/" + message.getMessageId();
+				"message_boards/view_message/" + message.getMessageId();
 
 		Source source = new Source(message.getBody(true));
 
