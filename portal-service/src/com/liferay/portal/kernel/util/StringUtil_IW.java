@@ -439,6 +439,10 @@ public class StringUtil_IW {
 		return StringUtil.trimTrailing(s, exceptions);
 	}
 
+	public java.lang.String unquote(java.lang.String s) {
+		return StringUtil.unquote(s);
+	}
+
 	public java.lang.String upperCase(java.lang.String s) {
 		return StringUtil.upperCase(s);
 	}

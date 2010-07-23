@@ -1443,8 +1443,8 @@ public class StringUtil {
 		}
 
 		if (s.startsWith(StringPool.QUOTE) && s.endsWith(StringPool.QUOTE)) {
-			s = s.replaceAll("\"$", "");
-			s = s.replaceAll("^\"", "");
+			s = s.replaceAll("\"$", StringPool.BLANK);
+			s = s.replaceAll("^\"", StringPool.BLANK);
 		}
 
 		return s;
