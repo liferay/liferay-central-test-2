@@ -16,6 +16,9 @@ package com.liferay.portal.cache.ehcache;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.IPDetector;
+import com.liferay.portal.kernel.util.OSDetector;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -67,6 +70,24 @@ public class JGroupsCacheManagerPeerProviderFactory
 			_log.debug("Channel properties " + channelProperties);
 		}
 
+		if (!_initialized) {
+			if (OSDetector.isUnix() && IPDetector.isSupportsV6() &&
+				!IPDetector.isPrefersV4() && _log.isWarnEnabled()) {
+
+				StringBundler sb = new StringBundler(4);
+
+				sb.append(
+					"You are on an Unix server with IPv6 enabled. JGroups ");
+				sb.append("may not work with IPv6. If you see a multicast ");
+				sb.append("error, try adding java.net.preferIPv4Stack=true ");
+				sb.append("as a JVM startup parameter.");
+
+				_log.warn(sb.toString());
+			}
+
+			_initialized = true;
+		}
+
 		return new JGroupsManager(cacheManager, clusterName, channelProperties);
 	}
 
@@ -74,5 +95,7 @@ public class JGroupsCacheManagerPeerProviderFactory
 
 	private static Log _log = LogFactoryUtil.getLog(
 		JGroupsCacheManagerPeerProviderFactory.class);
+
+	private static boolean _initialized;
 
 }

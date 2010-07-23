@@ -77,7 +77,7 @@
 	</category>
 
 	<category name="com.liferay.portal.cache">
-		<priority value="ERROR" />
+		<priority value="WARN" />
 	</category>
 
 	<category name="com.liferay.portal.cache.ehcache.EhcachePortalCacheManager">
