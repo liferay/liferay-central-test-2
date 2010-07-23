@@ -636,6 +636,9 @@
 		<field name="passwordEncrypted" type="boolean" />
 		<field name="passwordReset" type="boolean" />
 		<field name="passwordModifiedDate" type="Date" />
+		<field name="digest" type="String">
+			<hint name="max-length">255</hint>
+		</field>
 		<field name="reminderQueryQuestion" type="String" />
 		<field name="reminderQueryAnswer" type="String" />
 		<field name="graceLoginCount" type="int" />

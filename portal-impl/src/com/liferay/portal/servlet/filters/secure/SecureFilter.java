@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
+import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -51,6 +52,9 @@ public class SecureFilter extends BasePortalFilter {
 
 		_basicAuthEnabled = GetterUtil.getBoolean(
 			filterConfig.getInitParameter("basic_auth"));
+
+		_digestAuthEnabled = GetterUtil.getBoolean(
+			filterConfig.getInitParameter("digest_auth"));
 
 		String propertyPrefix =
 			filterConfig.getInitParameter("portal_property_prefix");
@@ -161,60 +165,132 @@ public class SecureFilter extends BasePortalFilter {
 				_log.debug("Not securing " + completeURL);
 			}
 
-			// This basic authentication should only be run if specified by
+			// This authentication should only be run if specified by
 			// web.xml and JAAS is disabled. Make sure to run this once per
 			// session and wrap the request if necessary.
 
-			HttpSession session = request.getSession();
-
-			long userId = GetterUtil.getLong(
-				(String)session.getAttribute(_AUTHENTICATED_USER));
-
-			if (_basicAuthEnabled && !PropsValues.PORTAL_JAAS_ENABLE) {
-				if (userId > 0) {
-					request = new ProtectedServletRequest(
-						request, String.valueOf(userId));
+			if (!PropsValues.PORTAL_JAAS_ENABLE) {
+				if (_digestAuthEnabled) {
+					request = digestAuth(request, response);
 				}
-				else {
-					try {
-						userId = PortalUtil.getBasicAuthUserId(request);
-					}
-					catch (Exception e) {
-						_log.error(e);
-					}
-
-					if (userId > 0) {
-						String userIdString = String.valueOf(userId);
-
-						request = new ProtectedServletRequest(
-							request, userIdString);
-
-						session.setAttribute(_AUTHENTICATED_USER, userIdString);
-					}
-					else {
-						response.setHeader(
-							HttpHeaders.WWW_AUTHENTICATE, _PORTAL_REALM);
-						response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-
-						return;
-					}
+				else if (_basicAuthEnabled) {
+					request = basicAuth(request, response);
 				}
 			}
 
-			processFilter(SecureFilter.class, request, response, filterChain);
+			if (request != null) {
+				processFilter(
+					SecureFilter.class, request, response, filterChain);
+			}
 		}
 	}
 
+	protected HttpServletRequest basicAuth(
+		HttpServletRequest request, HttpServletResponse response) {
+
+		HttpSession session = request.getSession();
+
+		long userId = GetterUtil.getLong(
+			(String)session.getAttribute(_AUTHENTICATED_USER));
+
+		if (userId > 0) {
+			request = new ProtectedServletRequest(
+				request, String.valueOf(userId));
+		}
+		else {
+			try {
+				userId = PortalUtil.getBasicAuthUserId(request);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+
+			if (userId > 0) {
+				String userIdString = String.valueOf(userId);
+
+				request = new ProtectedServletRequest(
+					request, userIdString);
+
+				session.setAttribute(_AUTHENTICATED_USER, userIdString);
+			}
+			else {
+				response.setHeader(
+					HttpHeaders.WWW_AUTHENTICATE, _BASIC_REALM);
+				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
+				return null;
+			}
+		}
+
+		return request;
+	}
+
+	protected HttpServletRequest digestAuth(
+		HttpServletRequest request, HttpServletResponse response) {
+
+		HttpSession session = request.getSession();
+
+		long userId = GetterUtil.getLong(
+			(String)session.getAttribute(_AUTHENTICATED_USER));
+
+		if (userId > 0) {
+			request = new ProtectedServletRequest(
+				request, String.valueOf(userId));
+		}
+		else {
+			try {
+				userId = PortalUtil.getDigestAuthUserId(request);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+
+			if (userId > 0) {
+				String userIdString = String.valueOf(userId);
+
+				request = new ProtectedServletRequest(
+					request, userIdString);
+
+				session.setAttribute(_AUTHENTICATED_USER, userIdString);
+			}
+			else {
+
+				// Must generate a new nonce for each 401 (RFC2617, 3.2.1).
+
+				long companyId = PortalInstances.getCompanyId(request);
+				String remoteAddr = request.getRemoteAddr();
+
+				String nonce = NonceUtil.generate(companyId, remoteAddr);
+
+				StringBundler sb = new StringBundler(128);
+
+				sb.append(_DIGEST_REALM);
+				sb.append(",\nnonce=\"" + nonce + "\"");
+
+				response.setHeader(
+					HttpHeaders.WWW_AUTHENTICATE, sb.toString());
+				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
+				return null;
+			}
+		}
+
+		return request;
+	}
+
+	public static final String _AUTHENTICATED_USER =
+		SecureFilter.class + "_AUTHENTICATED_USER";
+
 	private static final String _SERVER_IP = "SERVER_IP";
 
-	private static final String _PORTAL_REALM = "Basic realm=\"PortalRealm\"";
+	private static final String _BASIC_REALM = "Basic realm=\"PortalRealm\"";
 
-	private static final String _AUTHENTICATED_USER =
-		SecureFilter.class + "_AUTHENTICATED_USER";
+	private static final String _DIGEST_REALM = "Digest\nrealm=\"PortalRealm\"";
 
 	private static Log _log = LogFactoryUtil.getLog(SecureFilter.class);
 
 	private boolean _basicAuthEnabled;
+	private boolean _digestAuthEnabled;
 	private Set<String> _hostsAllowed = new HashSet<String>();
 	private boolean _httpsRequired;
 

@@ -69,6 +69,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 			{ "passwordEncrypted", new Integer(Types.BOOLEAN) },
 			{ "passwordReset", new Integer(Types.BOOLEAN) },
 			{ "passwordModifiedDate", new Integer(Types.TIMESTAMP) },
+			{ "digest", new Integer(Types.VARCHAR) },
 			{ "reminderQueryQuestion", new Integer(Types.VARCHAR) },
 			{ "reminderQueryAnswer", new Integer(Types.VARCHAR) },
 			{ "graceLoginCount", new Integer(Types.INTEGER) },
@@ -96,7 +97,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 			{ "agreedToTermsOfUse", new Integer(Types.BOOLEAN) },
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,reminderQueryQuestion VARCHAR(75) null,reminderQueryAnswer VARCHAR(75) null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,facebookId LONG,openId VARCHAR(1024) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(255) null,comments STRING null,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,jobTitle VARCHAR(100) null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,active_ BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,digest VARCHAR(255) null,reminderQueryQuestion VARCHAR(75) null,reminderQueryAnswer VARCHAR(75) null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,facebookId LONG,openId VARCHAR(1024) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(255) null,comments STRING null,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,jobTitle VARCHAR(100) null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,active_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table User_";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -128,6 +129,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		model.setPasswordEncrypted(soapModel.getPasswordEncrypted());
 		model.setPasswordReset(soapModel.getPasswordReset());
 		model.setPasswordModifiedDate(soapModel.getPasswordModifiedDate());
+		model.setDigest(soapModel.getDigest());
 		model.setReminderQueryQuestion(soapModel.getReminderQueryQuestion());
 		model.setReminderQueryAnswer(soapModel.getReminderQueryAnswer());
 		model.setGraceLoginCount(soapModel.getGraceLoginCount());
@@ -396,6 +398,19 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 
 	public void setPasswordModifiedDate(Date passwordModifiedDate) {
 		_passwordModifiedDate = passwordModifiedDate;
+	}
+
+	public String getDigest() {
+		if (_digest == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _digest;
+		}
+	}
+
+	public void setDigest(String digest) {
+		_digest = digest;
 	}
 
 	public String getReminderQueryQuestion() {
@@ -774,6 +789,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		clone.setPasswordEncrypted(getPasswordEncrypted());
 		clone.setPasswordReset(getPasswordReset());
 		clone.setPasswordModifiedDate(getPasswordModifiedDate());
+		clone.setDigest(getDigest());
 		clone.setReminderQueryQuestion(getReminderQueryQuestion());
 		clone.setReminderQueryAnswer(getReminderQueryAnswer());
 		clone.setGraceLoginCount(getGraceLoginCount());
@@ -847,7 +863,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(75);
+		StringBundler sb = new StringBundler(77);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -871,6 +887,8 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		sb.append(getPasswordReset());
 		sb.append(", passwordModifiedDate=");
 		sb.append(getPasswordModifiedDate());
+		sb.append(", digest=");
+		sb.append(getDigest());
 		sb.append(", reminderQueryQuestion=");
 		sb.append(getReminderQueryQuestion());
 		sb.append(", reminderQueryAnswer=");
@@ -929,7 +947,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(115);
+		StringBundler sb = new StringBundler(118);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.User");
@@ -978,6 +996,10 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		sb.append(
 			"<column><column-name>passwordModifiedDate</column-name><column-value><![CDATA[");
 		sb.append(getPasswordModifiedDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>digest</column-name><column-value><![CDATA[");
+		sb.append(getDigest());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>reminderQueryQuestion</column-name><column-value><![CDATA[");
@@ -1109,6 +1131,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	private boolean _passwordEncrypted;
 	private boolean _passwordReset;
 	private Date _passwordModifiedDate;
+	private String _digest;
 	private String _reminderQueryQuestion;
 	private String _reminderQueryAnswer;
 	private int _graceLoginCount;

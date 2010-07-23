@@ -17,6 +17,8 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Digester;
+import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -87,6 +89,37 @@ public class UserImpl extends UserModelImpl implements User {
 
 	public Contact getContact() throws PortalException, SystemException {
 		return ContactLocalServiceUtil.getContact(getContactId());
+	}
+
+	public String getDigest(String password) {
+		String digest1 = DigesterUtil.digestHex(
+			Digester.MD5, getEmailAddress(), "PortalRealm", password);
+
+		String digest2 = DigesterUtil.digestHex(
+			Digester.MD5, getScreenName(), "PortalRealm", password);
+
+		String digest3 = DigesterUtil.digestHex(
+			Digester.MD5, Long.toString(getUserId()), "PortalRealm", password);
+
+		StringBundler sb = new StringBundler(256);
+
+		sb.append(digest1);
+		sb.append(StringPool.COMMA);
+		sb.append(digest2);
+		sb.append(StringPool.COMMA);
+		sb.append(digest3);
+
+		return sb.toString();
+	}
+
+	public String getDigest() {
+		String digest = super.getDigest();
+
+		if (Validator.isNull(digest) && !isPasswordEncrypted()) {
+			digest = getDigest(getPassword());
+		}
+
+		return digest;
 	}
 
 	public String getDisplayEmailAddress() {

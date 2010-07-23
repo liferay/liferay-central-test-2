@@ -1598,6 +1598,7 @@
 		<column name="passwordEncrypted" type="boolean" />
 		<column name="passwordReset" type="boolean" />
 		<column name="passwordModifiedDate" type="Date" />
+		<column name="digest" type="String" />
 		<column name="reminderQueryQuestion" type="String" />
 		<column name="reminderQueryAnswer" type="String" />
 		<column name="graceLoginCount" type="int" />

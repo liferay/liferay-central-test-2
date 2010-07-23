@@ -69,6 +69,7 @@ public class UserJSONSerializer {
 		}
 
 		jsonObj.put("passwordModifiedDate", passwordModifiedDateJSON);
+		jsonObj.put("digest", model.getDigest());
 		jsonObj.put("reminderQueryQuestion", model.getReminderQueryQuestion());
 		jsonObj.put("reminderQueryAnswer", model.getReminderQueryAnswer());
 		jsonObj.put("graceLoginCount", model.getGraceLoginCount());

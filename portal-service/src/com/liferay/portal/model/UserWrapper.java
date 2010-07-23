@@ -145,6 +145,14 @@ public class UserWrapper implements User {
 		_user.setPasswordModifiedDate(passwordModifiedDate);
 	}
 
+	public java.lang.String getDigest() {
+		return _user.getDigest();
+	}
+
+	public void setDigest(java.lang.String digest) {
+		_user.setDigest(digest);
+	}
+
 	public java.lang.String getReminderQueryQuestion() {
 		return _user.getReminderQueryQuestion();
 	}
@@ -442,6 +450,10 @@ public class UserWrapper implements User {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getContact();
+	}
+
+	public java.lang.String getDigest(java.lang.String password) {
+		return _user.getDigest(password);
 	}
 
 	public java.lang.String getDisplayEmailAddress() {

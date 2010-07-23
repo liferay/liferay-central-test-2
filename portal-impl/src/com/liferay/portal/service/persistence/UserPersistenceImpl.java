@@ -742,6 +742,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		userImpl.setPasswordEncrypted(user.isPasswordEncrypted());
 		userImpl.setPasswordReset(user.isPasswordReset());
 		userImpl.setPasswordModifiedDate(user.getPasswordModifiedDate());
+		userImpl.setDigest(user.getDigest());
 		userImpl.setReminderQueryQuestion(user.getReminderQueryQuestion());
 		userImpl.setReminderQueryAnswer(user.getReminderQueryAnswer());
 		userImpl.setGraceLoginCount(user.getGraceLoginCount());

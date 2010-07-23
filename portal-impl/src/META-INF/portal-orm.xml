@@ -781,6 +781,7 @@
 			<basic name="passwordModifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="digest" />
 			<basic name="reminderQueryQuestion" />
 			<basic name="reminderQueryAnswer" />
 			<basic name="graceLoginCount" />

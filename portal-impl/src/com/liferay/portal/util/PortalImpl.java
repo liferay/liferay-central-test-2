@@ -120,6 +120,7 @@ import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.servlet.ImageServlet;
 import com.liferay.portal.servlet.filters.i18n.I18nFilter;
+import com.liferay.portal.servlet.filters.secure.NonceUtil;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.upload.UploadPortletRequestImpl;
@@ -1247,6 +1248,65 @@ public class PortalImpl implements Portal {
 
 	public long getDefaultCompanyId() {
 		return PortalInstances.getDefaultCompanyId();
+	}
+
+	public long getDigestAuthUserId(HttpServletRequest request)
+		throws PortalException, SystemException {
+
+		long userId = 0;
+
+		long companyId = PortalInstances.getCompanyId(request);
+
+		HttpSession session = request.getSession();
+
+		String authorizationHeader = request.getHeader(
+			HttpHeaders.AUTHORIZATION);
+
+		if (Validator.isNull(authorizationHeader) ||
+			!authorizationHeader.startsWith("Digest ")) {
+
+			return userId;
+		}
+
+		authorizationHeader = authorizationHeader.substring("Digest ".length());
+		authorizationHeader = StringUtil.replace(
+			authorizationHeader, StringPool.COMMA, StringPool.NEW_LINE);
+
+		UnicodeProperties authorization = new UnicodeProperties();
+
+		authorization.fastLoad(authorizationHeader);
+
+		String username = StringUtil.unquote(
+			authorization.getProperty("username"));
+		String realm = StringUtil.unquote(authorization.getProperty("realm"));
+		String nonce = StringUtil.unquote(authorization.getProperty("nonce"));
+		String uri = StringUtil.unquote(authorization.getProperty("uri"));
+		String response = StringUtil.unquote(
+			authorization.getProperty("response"));
+
+		String method = request.getMethod();
+
+		if (Validator.isNull(username) || Validator.isNull(realm) ||
+			Validator.isNull(nonce) || Validator.isNull(uri) ||
+			Validator.isNull(response)) {
+
+			return userId;
+		}
+
+		if (!realm.equals("PortalRealm") ||
+			!uri.equals(request.getRequestURI())) {
+
+			return userId;
+		}
+
+		if (!NonceUtil.verify(nonce)) {
+			return userId;
+		}
+
+		userId = UserLocalServiceUtil.authenticateForDigest(
+			companyId, username, realm, nonce, method, uri, response);
+
+		return userId;
 	}
 
 	public Map<String, Serializable> getExpandoBridgeAttributes(

@@ -45,6 +45,7 @@ public class UserSoap implements Serializable {
 		soapModel.setPasswordEncrypted(model.getPasswordEncrypted());
 		soapModel.setPasswordReset(model.getPasswordReset());
 		soapModel.setPasswordModifiedDate(model.getPasswordModifiedDate());
+		soapModel.setDigest(model.getDigest());
 		soapModel.setReminderQueryQuestion(model.getReminderQueryQuestion());
 		soapModel.setReminderQueryAnswer(model.getReminderQueryAnswer());
 		soapModel.setGraceLoginCount(model.getGraceLoginCount());
@@ -221,6 +222,14 @@ public class UserSoap implements Serializable {
 
 	public void setPasswordModifiedDate(Date passwordModifiedDate) {
 		_passwordModifiedDate = passwordModifiedDate;
+	}
+
+	public String getDigest() {
+		return _digest;
+	}
+
+	public void setDigest(String digest) {
+		_digest = digest;
 	}
 
 	public String getReminderQueryQuestion() {
@@ -454,6 +463,7 @@ public class UserSoap implements Serializable {
 	private boolean _passwordEncrypted;
 	private boolean _passwordReset;
 	private Date _passwordModifiedDate;
+	private String _digest;
 	private String _reminderQueryQuestion;
 	private String _reminderQueryAnswer;
 	private int _graceLoginCount;

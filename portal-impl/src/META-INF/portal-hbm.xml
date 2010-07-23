@@ -747,6 +747,7 @@
 		<property name="passwordEncrypted" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="passwordReset" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="passwordModifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="digest" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="reminderQueryQuestion" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="reminderQueryAnswer" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="graceLoginCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />

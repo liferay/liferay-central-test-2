@@ -228,6 +228,17 @@ public class UserLocalServiceUtil {
 				   .authenticateForBasic(companyId, authType, login, password);
 	}
 
+	public static long authenticateForDigest(long companyId,
+		java.lang.String username, java.lang.String realm,
+		java.lang.String nonce, java.lang.String method, java.lang.String uri,
+		java.lang.String response)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .authenticateForDigest(companyId, username, realm, nonce,
+			method, uri, response);
+	}
+
 	public static boolean authenticateForJAAS(long userId,
 		java.lang.String encPassword) {
 		return getService().authenticateForJAAS(userId, encPassword);

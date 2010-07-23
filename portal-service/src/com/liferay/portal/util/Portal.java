@@ -241,6 +241,9 @@ public interface Portal {
 
 	public long getDefaultCompanyId();
 
+	public long getDigestAuthUserId(HttpServletRequest request)
+		throws PortalException, SystemException;
+
 	public Map<String, Serializable> getExpandoBridgeAttributes(
 			ExpandoBridge expandoBridge, PortletRequest portletRequest)
 		throws PortalException, SystemException;

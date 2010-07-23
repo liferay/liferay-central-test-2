@@ -74,6 +74,7 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		newUser.setPasswordEncrypted(randomBoolean());
 		newUser.setPasswordReset(randomBoolean());
 		newUser.setPasswordModifiedDate(nextDate());
+		newUser.setDigest(randomString());
 		newUser.setReminderQueryQuestion(randomString());
 		newUser.setReminderQueryAnswer(randomString());
 		newUser.setGraceLoginCount(nextInt());
@@ -121,6 +122,7 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(
 				existingUser.getPasswordModifiedDate()),
 			Time.getShortTimestamp(newUser.getPasswordModifiedDate()));
+		assertEquals(existingUser.getDigest(), newUser.getDigest());
 		assertEquals(existingUser.getReminderQueryQuestion(),
 			newUser.getReminderQueryQuestion());
 		assertEquals(existingUser.getReminderQueryAnswer(),
@@ -240,6 +242,7 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		user.setPasswordEncrypted(randomBoolean());
 		user.setPasswordReset(randomBoolean());
 		user.setPasswordModifiedDate(nextDate());
+		user.setDigest(randomString());
 		user.setReminderQueryQuestion(randomString());
 		user.setReminderQueryAnswer(randomString());
 		user.setGraceLoginCount(nextInt());

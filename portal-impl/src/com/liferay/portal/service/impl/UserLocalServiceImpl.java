@@ -58,6 +58,8 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.Digester;
+import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
@@ -624,6 +626,66 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		return 0;
+	}
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long authenticateForDigest(
+			long companyId, String username, String realm, String nonce,
+			String method, String uri, String response)
+		throws PortalException, SystemException {
+
+		long userId = 0;
+
+		// Get User
+
+		User user = null;
+
+		try {
+			user = getUserByEmailAddress(companyId, username);
+		}
+		catch (NoSuchUserException nsue) {
+			try {
+				user = getUserByScreenName(companyId, username);
+			}
+			catch (NoSuchUserException nsue2) {
+				try {
+					user = getUserById(Long.parseLong(username));
+				}
+				catch (NoSuchUserException nsue3) {
+					return userId;
+				}
+			}
+		}
+
+		// Verify digest
+
+		String digest = user.getDigest();
+
+		if (Validator.isNull(digest)) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"User must first log in through the portal " +
+						user.getUserId());
+			}
+
+			return userId;
+		}
+
+		String[] digestArray = StringUtil.split(user.getDigest());
+
+		for (String ha1 : digestArray) {
+			String ha2 = DigesterUtil.digestHex(Digester.MD5, method, uri);
+			String myresponse = DigesterUtil.digestHex(
+				Digester.MD5, ha1, nonce, ha2);
+
+			if (myresponse.equals(response)) {
+				userId = user.getUserId();
+
+				break;
+			}
+		}
+
+		return userId;
 	}
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -2516,6 +2578,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					authResult = Authenticator.FAILURE;
 				}
 			}
+		}
+
+		// Update digest
+
+		if (authResult == Authenticator.SUCCESS) {
+			String digest = user.getDigest(password);
+
+			user.setDigest(digest);
+
+			userPersistence.update(user, false);
 		}
 
 		// Post-authentication pipeline

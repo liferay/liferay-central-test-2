@@ -249,6 +249,21 @@ public interface UserModel extends BaseModel<User> {
 	public void setPasswordModifiedDate(Date passwordModifiedDate);
 
 	/**
+	 * Gets the digest of this user.
+	 *
+	 * @return the digest of this user
+	 */
+	@AutoEscape
+	public String getDigest();
+
+	/**
+	 * Sets the digest of this user.
+	 *
+	 * @param digest the digest of this user
+	 */
+	public void setDigest(String digest);
+
+	/**
 	 * Gets the reminder query question of this user.
 	 *
 	 * @return the reminder query question of this user

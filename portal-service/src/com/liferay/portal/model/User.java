@@ -40,6 +40,10 @@ public interface User extends UserModel {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public java.lang.String getDigest(java.lang.String password);
+
+	public java.lang.String getDigest();
+
 	public java.lang.String getDisplayEmailAddress();
 
 	public java.lang.String getDisplayURL(

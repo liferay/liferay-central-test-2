@@ -170,6 +170,13 @@ public interface UserLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public long authenticateForDigest(long companyId,
+		java.lang.String username, java.lang.String realm,
+		java.lang.String nonce, java.lang.String method, java.lang.String uri,
+		java.lang.String response)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public boolean authenticateForJAAS(long userId, java.lang.String encPassword);
 
 	public void checkLockout(com.liferay.portal.model.User user)

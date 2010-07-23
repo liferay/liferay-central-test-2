@@ -196,6 +196,13 @@ public class PortalUtil {
 		return getPortal().getBasicAuthUserId(request);
 	}
 
+	public static long getDigestAuthUserId(
+			HttpServletRequest request)
+		throws PortalException, SystemException {
+
+		return getPortal().getDigestAuthUserId(request);
+	}
+
 	public static long getBasicAuthUserId(
 			HttpServletRequest request, long companyId)
 		throws PortalException, SystemException {
