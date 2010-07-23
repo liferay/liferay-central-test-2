@@ -85,26 +85,11 @@ portletDisplay.setDescription(portletDescription);
 
 Group group = layout.getGroup();
 
-Boolean renderPortletResource = (Boolean)request.getAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
-
-boolean runtimePortlet = (renderPortletResource != null) && renderPortletResource.booleanValue();
-
-boolean freeformPortlet = themeDisplay.isFreeformLayout() && !runtimePortlet && !layoutTypePortlet.hasStateMax();
-
-String containerStyles = StringPool.BLANK;
-
-if (freeformPortlet) {
-	Properties freeformStyleProps = PropertiesUtil.load(portletSetup.getValue("portlet-freeform-styles", StringPool.BLANK));
-
-	containerStyles = "style=\"height: ".concat(GetterUtil.getString(freeformStyleProps.getProperty("height"), "300px")).concat("; overflow: auto;\"");
-}
-else {
-	containerStyles = "style=\"\"";
-}
+boolean wsrp = ParamUtil.getBoolean(request, "wsrp");
 %>
 
 <c:choose>
-	<c:when test="<%= ParamUtil.getBoolean(request, \"wsrp\") %>">
+	<c:when test="<%= wsrp %>">
 		<liferay-wsrp-portlet>
 			<%@ include file="/html/common/themes/portlet_content_wrapper.jspf" %>
 		</liferay-wsrp-portlet>
@@ -135,14 +120,29 @@ else {
 		</div>
 	</c:when>
 	<c:otherwise>
+
+		<%
+		Boolean renderPortletResource = (Boolean)request.getAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
+
+		boolean runtimePortlet = (renderPortletResource != null) && renderPortletResource.booleanValue();
+
+		boolean freeformPortlet = themeDisplay.isFreeformLayout() && !runtimePortlet && !layoutTypePortlet.hasStateMax();
+
+		String containerStyles = StringPool.BLANK;
+
+		if (freeformPortlet) {
+			Properties freeformStyleProps = PropertiesUtil.load(portletSetup.getValue("portlet-freeform-styles", StringPool.BLANK));
+
+			containerStyles = "style=\"height: ".concat(GetterUtil.getString(freeformStyleProps.getProperty("height"), "300px")).concat("; overflow: auto;\"");
+		}
+		else {
+			containerStyles = "style=\"\"";
+		}
+		%>
+
 		<c:choose>
 			<c:when test="<%= portletDecorate %>">
 				<liferay-theme:wrap-portlet page="portlet.jsp">
-
-					<%
-					boolean wsrp = ParamUtil.getBoolean(request, "wsrp");
-					%>
-
 					<c:if test="<%= wsrp %>">
 						<div id="wsrp-configuration-url"><%= portletDisplay.getURLConfiguration() %></div>
 
