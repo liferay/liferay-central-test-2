@@ -17,6 +17,7 @@ package com.liferay.taglib.util;
 import com.liferay.portal.freemarker.FreeMarkerVariables;
 import com.liferay.portal.kernel.freemarker.FreeMarkerContext;
 import com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil;
+import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -34,11 +35,13 @@ import com.liferay.portal.velocity.VelocityVariables;
 
 import freemarker.ext.jsp.TaglibFactory;
 import freemarker.ext.servlet.HttpRequestHashModel;
+import freemarker.ext.servlet.ServletContextHashModel;
 
 import freemarker.template.ObjectWrapper;
 
 import java.io.Writer;
 
+import javax.servlet.GenericServlet;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -143,7 +146,10 @@ public class ThemeUtil {
 		Writer writer = null;
 
 		if (write) {
-			writer = pageContext.getOut();
+
+			// Wrapping is needed because of a bug in FreeMarker.
+
+			writer = new UnsyncPrintWriter(pageContext.getOut());
 		}
 		else {
 			writer = new UnsyncStringWriter();
@@ -175,6 +181,12 @@ public class ThemeUtil {
 		HttpRequestHashModel httpRequestHashModel = new HttpRequestHashModel(
 			request, response, ObjectWrapper.DEFAULT_WRAPPER);
 
+		ServletContextHashModel servletContextHashModel = 
+			new ServletContextHashModel(
+				(GenericServlet)pageContext.getPage(),
+				ObjectWrapper.DEFAULT_WRAPPER);
+
+		freeMarkerContext.put("Application", servletContextHashModel);
 		freeMarkerContext.put("Request", httpRequestHashModel);
 
 		// Merge templates
