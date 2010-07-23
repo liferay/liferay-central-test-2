@@ -64,12 +64,14 @@ public class NonceUtil {
 
 		List<Long> times = new ArrayList<Long>();
 
-		for (long time : _nonceMap.keySet()) {
-			if (time <= expired) {
-				times.add(time);
-			}
-			else {
-				break;
+		synchronized (_nonceMap) {
+			for (long time : _nonceMap.keySet()) {
+				if (time <= expired) {
+					times.add(time);
+				}
+				else {
+					break;
+				}
 			}
 		}
 
