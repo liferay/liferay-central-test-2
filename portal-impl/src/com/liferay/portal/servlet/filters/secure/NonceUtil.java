@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
@@ -48,13 +49,13 @@ public class NonceUtil {
 		String nonce = DigesterUtil.digestHex(
 			Digester.MD5, remoteAddress, String.valueOf(timestamp), companyKey);
 
-		_lock.writeLock().lock();
+		_readWriteLock.writeLock().lock();
 
 		try {
 			_nonceMap.put(timestamp, nonce);
 		}
 		finally {
-			_lock.writeLock().unlock();
+			_readWriteLock.writeLock().unlock();
 		}
 
 		return nonce;
@@ -63,13 +64,13 @@ public class NonceUtil {
 	public static boolean verify(String nonce) {
 		_cleanUp();
 
-		_lock.readLock().lock();
+		_readWriteLock.readLock().lock();
 
 		try {
 			return _nonceMap.containsValue(nonce);
 		}
 		finally {
-			_lock.readLock().unlock();
+			_readWriteLock.readLock().unlock();
 		}
 	}
 
@@ -80,7 +81,7 @@ public class NonceUtil {
 
 		// Find expired nonces
 
-		_lock.readLock().lock();
+		_readWriteLock.readLock().lock();
 
 		try {
 			for (long time : _nonceMap.keySet()) {
@@ -93,12 +94,12 @@ public class NonceUtil {
 			}
 		}
 		finally {
-			_lock.readLock().unlock();
+			_readWriteLock.readLock().unlock();
 		}
 
 		// Purge expired nonces
 
-		_lock.writeLock().lock();
+		_readWriteLock.writeLock().lock();
 
 		try {
 			for (long time : times) {
@@ -106,15 +107,13 @@ public class NonceUtil {
 			}
 		}
 		finally {
-			_lock.writeLock().unlock();
+			_readWriteLock.writeLock().unlock();
 		}
 	}
 
 	private static final long _NONCE_EXPIRATION = 10 * Time.MINUTE;
 
-	private static final ReentrantReadWriteLock _lock =
-		new ReentrantReadWriteLock();
-
+	private static ReadWriteLock _readWriteLock = new ReentrantReadWriteLock();
 	private static Map<Long, String> _nonceMap =
 		new LinkedHashMap<Long, String>();
 
