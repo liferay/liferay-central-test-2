@@ -877,7 +877,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	protected void updateResources_6(
 			long companyId, String name, int scope, String primKey,
 			String newPrimKey)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<ResourcePermission> resourcePermissions =
 			resourcePermissionLocalService.getResourcePermissions(
