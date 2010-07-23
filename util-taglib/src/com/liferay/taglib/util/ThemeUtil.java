@@ -147,7 +147,7 @@ public class ThemeUtil {
 
 		if (write) {
 
-			// Wrapping is needed because of a bug in FreeMarker.
+			// Wrapping is needed because of a bug in FreeMarker
 
 			writer = new UnsyncPrintWriter(pageContext.getOut());
 		}
@@ -178,15 +178,16 @@ public class ThemeUtil {
 
 		// FreeMarker JSP tag library support
 
-		HttpRequestHashModel httpRequestHashModel = new HttpRequestHashModel(
-			request, response, ObjectWrapper.DEFAULT_WRAPPER);
-
-		ServletContextHashModel servletContextHashModel = 
+		ServletContextHashModel servletContextHashModel =
 			new ServletContextHashModel(
 				(GenericServlet)pageContext.getPage(),
 				ObjectWrapper.DEFAULT_WRAPPER);
 
 		freeMarkerContext.put("Application", servletContextHashModel);
+
+		HttpRequestHashModel httpRequestHashModel = new HttpRequestHashModel(
+			request, response, ObjectWrapper.DEFAULT_WRAPPER);
+
 		freeMarkerContext.put("Request", httpRequestHashModel);
 
 		// Merge templates
