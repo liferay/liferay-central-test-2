@@ -537,14 +537,14 @@ AUI().add(
 						var communityPermission = instance._getPermissionsEnabled('category', 'community');
 						var guestPermission = instance._getPermissionsEnabled('category', 'guest');
 
+						var titleMap = {};
+
+						titleMap[themeDisplay.getDefaultLanguageId()] = categoryName;
+
 						Liferay.Service.Asset.AssetCategory.addCategory(
 							{
 								parentCategoryId: 0,
-								titleMap: A.JSON.stringify(
-									{
-										'en_US': categoryName  //this is temporary
-									}
-								),
+								titleMap: A.JSON.stringify(titleMap),
 								vocabularyId: vocabularyId,
 								properties: [],
 								serviceContext: A.JSON.stringify(
@@ -638,13 +638,13 @@ AUI().add(
 						var communityPermission = instance._getPermissionsEnabled('vocabulary', 'community');
 						var guestPermission = instance._getPermissionsEnabled('vocabulary', 'guest');
 
+						var titleMap = {};
+
+						titleMap[themeDisplay.getDefaultLanguageId()] = vocabularyName;
+
 						Liferay.Service.Asset.AssetVocabulary.addVocabulary(
 							{
-								title: A.JSON.stringify(
-									{
-										'en_US': vocabularyName  //this is temporary
-									}
-								),
+								title: A.JSON.stringify(titleMap),
 								description: '',
 								settings: '',
 								serviceContext: A.JSON.stringify(
@@ -1305,15 +1305,15 @@ AUI().add(
 					_updateCategory: function(categoryId, vocabularyId, parentCategoryId, name, categoryProperties, callback) {
 						var instance = this;
 
+						var titleMap = {};
+
+						titleMap[themeDisplay.getDefaultLanguageId()] = name;
+
 						Liferay.Service.Asset.AssetCategory.updateCategory(
 							{
 								categoryId: categoryId,
 								parentCategoryId: parentCategoryId,
-								titleMap: A.JSON.stringify(
-									{
-										'en_US': name  //this is temporary
-									}
-								),
+								titleMap: A.JSON.stringify(titleMap),
 								vocabularyId: vocabularyId,
 								properties: categoryProperties,
 								serviceContext: null
@@ -1361,14 +1361,14 @@ AUI().add(
 					},
 
 					_updateVocabulary: function(vocabularyId, vocabularyName, callback) {
+						var titleMap = {};
+
+						titleMap[themeDisplay.getDefaultLanguageId()] = vocabularyName;
+
 						Liferay.Service.Asset.AssetVocabulary.updateVocabulary(
 							{
 								vocabularyId: vocabularyId,
-								title: A.JSON.stringify(
-									{
-										'en_US': vocabularyName  //this is temporary
-									}
-								),
+								title: A.JSON.stringify(titleMap),
 								description: '',
 								settings: '',
 								serviceContext: A.JSON.stringify(

@@ -140,6 +140,9 @@
 				isSignedIn: function() {
 					return <%= themeDisplay.isSignedIn() %>;
 				},
+				getDefaultLanguageId: function() {
+					return "<%= LocaleUtil.toLanguageId(LocaleUtil.getDefault()) %>";
+				},
 				getLanguageId: function() {
 					return "<%= LanguageUtil.getLanguageId(request) %>";
 				},
