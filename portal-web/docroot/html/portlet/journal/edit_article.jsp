@@ -102,19 +102,20 @@ String structureId = BeanParamUtil.getString(article, request, "structureId");
 JournalStructure structure = null;
 
 String parentStructureId = StringPool.BLANK;
+long structureGroupdId = groupId;
 String structureName = LanguageUtil.get(pageContext, "default");
 String structureDescription = StringPool.BLANK;
 String structureXSD = StringPool.BLANK;
-long structureGroupdId = groupId;
 
 if (Validator.isNotNull(structureId)) {
 	try {
 		structure = JournalStructureLocalServiceUtil.getStructure(groupId, structureId);
 	}
-	catch (NoSuchStructureException nsse) {
+	catch (NoSuchStructureException nsse1) {
 		if (groupId != themeDisplay.getCompanyGroupId()) {
 			try {
 				structure = JournalStructureLocalServiceUtil.getStructure(themeDisplay.getCompanyGroupId(), structureId);
+
 				structureGroupdId = themeDisplay.getCompanyGroupId();
 			}
 			catch (NoSuchStructureException nsse2) {
@@ -144,10 +145,11 @@ if ((structure == null) && Validator.isNotNull(templateId)) {
 	try {
 		template = JournalTemplateLocalServiceUtil.getTemplate(groupId, templateId);
 	}
-	catch (NoSuchTemplateException nste) {
+	catch (NoSuchTemplateException nste1) {
 		if (groupId != themeDisplay.getCompanyGroupId()) {
 			try {
 				template = JournalTemplateLocalServiceUtil.getTemplate(themeDisplay.getCompanyGroupId(), templateId);
+
 				structureGroupdId = themeDisplay.getCompanyGroupId();
 			}
 			catch (NoSuchTemplateException nste2) {
