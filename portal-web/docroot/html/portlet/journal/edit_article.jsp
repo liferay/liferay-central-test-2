@@ -109,13 +109,18 @@ String structureXSD = StringPool.BLANK;
 if (Validator.isNotNull(structureId)) {
 	try {
 		structure = JournalStructureLocalServiceUtil.getStructure(groupId, structureId);
+	}
+	catch (NoSuchStructureException nsse) {
+		if (groupId != themeDisplay.getCompanyGroupId()) {
+			structure = JournalStructureLocalServiceUtil.getStructure(themeDisplay.getCompanyGroupId(), structureId);
+		}
+	}
 
+	if (structure != null) {
 		parentStructureId = structure.getParentStructureId();
 		structureName = structure.getName();
 		structureDescription = structure.getDescription();
 		structureXSD = structure.getMergedXsd();
-	}
-	catch (NoSuchStructureException nsse) {
 	}
 }
 
