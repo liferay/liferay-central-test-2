@@ -1,0 +1,1 @@
+alter table User_ add digest VARCHAR(256) null;

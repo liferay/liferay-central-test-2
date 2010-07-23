@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.upgrade.v5_2_8_to_6_0_3;
+package com.liferay.portal.upgrade.v5_2_8_to_6_0_5;
 
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
@@ -21,8 +21,8 @@ import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.upgrade.v5_2_8_to_6_0_3.util.DLFileEntryTable;
-import com.liferay.portal.upgrade.v5_2_8_to_6_0_3.util.DLFileVersionTable;
+import com.liferay.portal.upgrade.v5_2_8_to_6_0_5.util.DLFileEntryTable;
+import com.liferay.portal.upgrade.v5_2_8_to_6_0_5.util.DLFileVersionTable;
 import com.liferay.portal.upgrade.v6_0_0.util.DLFileEntryNameUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v6_0_0.util.DLFileEntryTitleUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v6_0_0.util.DLFileEntryVersionUpgradeColumnImpl;

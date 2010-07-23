@@ -31,11 +31,7 @@ import java.util.Map;
  */
 public class NonceUtil {
 
-	public static String generate(long companyId, String remoteAddr) {
-		String nonce = null;
-
-		long timestamp = System.currentTimeMillis();
-
+	public static String generate(long companyId, String remoteAddress) {
 		String companyKey = null;
 
 		try {
@@ -47,42 +43,44 @@ public class NonceUtil {
 			throw new RuntimeException("Invalid companyId " + companyId, e);
 		}
 
-		nonce = DigesterUtil.digestHex(
-			Digester.MD5, remoteAddr, Long.toString(timestamp), companyKey);
+		long timestamp = System.currentTimeMillis();
 
-		_cache.put(timestamp, nonce);
+		String nonce = DigesterUtil.digestHex(
+			Digester.MD5, remoteAddress, String.valueOf(timestamp), companyKey);
+
+		_nonceMap.put(timestamp, nonce);
 
 		return nonce;
 	}
 
 	public static boolean verify(String nonce) {
-		_cleanup();
+		_cleanUp();
 
-		return _cache.containsValue(nonce);
+		return _nonceMap.containsValue(nonce);
 	}
 
-	private static void _cleanup() {
+	private static void _cleanUp() {
 		long expired = System.currentTimeMillis() - _NONCE_EXPIRATION;
 
-		List<Long> expiredTimes = new ArrayList<Long>();
+		List<Long> times = new ArrayList<Long>();
 
-		for (long time : _cache.keySet()) {
+		for (long time : _nonceMap.keySet()) {
 			if (time <= expired) {
-				expiredTimes.add(time);
+				times.add(time);
 			}
 			else {
 				break;
 			}
 		}
 
-		for (long time : expiredTimes) {
-			_cache.remove(time);
+		for (long time : times) {
+			_nonceMap.remove(time);
 		}
 	}
 
 	private static final long _NONCE_EXPIRATION = 10 * Time.MINUTE;
 
-	private static Map<Long, String> _cache = Collections.synchronizedMap(
+	private static Map<Long, String> _nonceMap = Collections.synchronizedMap(
 		new LinkedHashMap<Long, String>());
 
 }

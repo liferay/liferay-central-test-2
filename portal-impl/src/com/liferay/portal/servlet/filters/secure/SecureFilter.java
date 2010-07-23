@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -52,7 +53,6 @@ public class SecureFilter extends BasePortalFilter {
 
 		_basicAuthEnabled = GetterUtil.getBoolean(
 			filterConfig.getInitParameter("basic_auth"));
-
 		_digestAuthEnabled = GetterUtil.getBoolean(
 			filterConfig.getInitParameter("digest_auth"));
 
@@ -165,9 +165,9 @@ public class SecureFilter extends BasePortalFilter {
 				_log.debug("Not securing " + completeURL);
 			}
 
-			// This authentication should only be run if specified by
-			// web.xml and JAAS is disabled. Make sure to run this once per
-			// session and wrap the request if necessary.
+			// This authentication should only be run if specified by web.xml
+			// and JAAS is disabled. Make sure to run this once per session and
+			// wrap the request if necessary.
 
 			if (!PropsValues.PORTAL_JAAS_ENABLE) {
 				if (_digestAuthEnabled) {
@@ -202,20 +202,18 @@ public class SecureFilter extends BasePortalFilter {
 				userId = PortalUtil.getBasicAuthUserId(request);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 
 			if (userId > 0) {
 				String userIdString = String.valueOf(userId);
 
-				request = new ProtectedServletRequest(
-					request, userIdString);
+				request = new ProtectedServletRequest(request, userIdString);
 
 				session.setAttribute(_AUTHENTICATED_USER, userIdString);
 			}
 			else {
-				response.setHeader(
-					HttpHeaders.WWW_AUTHENTICATE, _BASIC_REALM);
+				response.setHeader(HttpHeaders.WWW_AUTHENTICATE, _BASIC_REALM);
 				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
 				return null;
@@ -242,7 +240,7 @@ public class SecureFilter extends BasePortalFilter {
 				userId = PortalUtil.getDigestAuthUserId(request);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 
 			if (userId > 0) {
@@ -255,17 +253,20 @@ public class SecureFilter extends BasePortalFilter {
 			}
 			else {
 
-				// Must generate a new nonce for each 401 (RFC2617, 3.2.1).
+				// Must generate a new nonce for each 401 (RFC2617, 3.2.1)
 
 				long companyId = PortalInstances.getCompanyId(request);
-				String remoteAddr = request.getRemoteAddr();
 
-				String nonce = NonceUtil.generate(companyId, remoteAddr);
+				String remoteAddress = request.getRemoteAddr();
 
-				StringBundler sb = new StringBundler(128);
+				String nonce = NonceUtil.generate(companyId, remoteAddress);
+
+				StringBundler sb = new StringBundler(4);
 
 				sb.append(_DIGEST_REALM);
-				sb.append(",\nnonce=\"" + nonce + "\"");
+				sb.append(",\nnonce=\"");
+				sb.append(nonce);
+				sb.append("\"");
 
 				response.setHeader(
 					HttpHeaders.WWW_AUTHENTICATE, sb.toString());
@@ -281,11 +282,13 @@ public class SecureFilter extends BasePortalFilter {
 	public static final String _AUTHENTICATED_USER =
 		SecureFilter.class + "_AUTHENTICATED_USER";
 
+	private static final String _BASIC_REALM =
+		"Basic realm=\"" + Portal.PORTAL_REALM + "\"";
+
+	private static final String _DIGEST_REALM =
+		"Digest\nrealm=\"" + Portal.PORTAL_REALM + "\"";
+
 	private static final String _SERVER_IP = "SERVER_IP";
-
-	private static final String _BASIC_REALM = "Basic realm=\"PortalRealm\"";
-
-	private static final String _DIGEST_REALM = "Digest\nrealm=\"PortalRealm\"";
 
 	private static Log _log = LogFactoryUtil.getLog(SecureFilter.class);
 

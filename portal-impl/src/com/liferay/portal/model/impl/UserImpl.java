@@ -51,6 +51,7 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.TeamLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.social.model.SocialEquityValue;
@@ -91,27 +92,6 @@ public class UserImpl extends UserModelImpl implements User {
 		return ContactLocalServiceUtil.getContact(getContactId());
 	}
 
-	public String getDigest(String password) {
-		String digest1 = DigesterUtil.digestHex(
-			Digester.MD5, getEmailAddress(), "PortalRealm", password);
-
-		String digest2 = DigesterUtil.digestHex(
-			Digester.MD5, getScreenName(), "PortalRealm", password);
-
-		String digest3 = DigesterUtil.digestHex(
-			Digester.MD5, Long.toString(getUserId()), "PortalRealm", password);
-
-		StringBundler sb = new StringBundler(256);
-
-		sb.append(digest1);
-		sb.append(StringPool.COMMA);
-		sb.append(digest2);
-		sb.append(StringPool.COMMA);
-		sb.append(digest3);
-
-		return sb.toString();
-	}
-
 	public String getDigest() {
 		String digest = super.getDigest();
 
@@ -120,6 +100,30 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 
 		return digest;
+	}
+
+	public String getDigest(String password) {
+		StringBundler sb = new StringBundler(5);
+
+		String digest1 = DigesterUtil.digestHex(
+			Digester.MD5, getEmailAddress(), Portal.PORTAL_REALM, password);
+
+		sb.append(digest1);
+		sb.append(StringPool.COMMA);
+
+		String digest2 = DigesterUtil.digestHex(
+			Digester.MD5, getScreenName(), Portal.PORTAL_REALM, password);
+
+		sb.append(digest2);
+		sb.append(StringPool.COMMA);
+
+		String digest3 = DigesterUtil.digestHex(
+			Digester.MD5, String.valueOf(getUserId()), Portal.PORTAL_REALM,
+			password);
+
+		sb.append(digest3);
+
+		return sb.toString();
 	}
 
 	public String getDisplayEmailAddress() {

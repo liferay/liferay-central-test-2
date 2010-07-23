@@ -471,3 +471,5 @@ create table SocialEquityUser (
 alter table User_ add facebookId LONG;
 
 alter table WikiPageResource add uuid_ VARCHAR(75) null;
+
+alter table User_ add digest VARCHAR(256) null;

@@ -12,17 +12,17 @@
  * details.
  */
 
-package com.liferay.portal.upgrade.v5_2_8_to_6_0_3;
+package com.liferay.portal.upgrade.v6_0_5;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 
 /**
- * @author Douglas Wong
+ * @author Brian Wing Shun Chan
  */
 public class UpgradeSchema extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		runSQLTemplate("update-5.2.8-6.0.3.sql", false);
+		runSQLTemplate("update-6.0.4-6.0.5.sql", false);
 	}
 
 }

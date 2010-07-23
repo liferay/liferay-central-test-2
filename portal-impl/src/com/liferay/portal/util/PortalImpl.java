@@ -1255,10 +1255,6 @@ public class PortalImpl implements Portal {
 
 		long userId = 0;
 
-		long companyId = PortalInstances.getCompanyId(request);
-
-		HttpSession session = request.getSession();
-
 		String authorizationHeader = request.getHeader(
 			HttpHeaders.AUTHORIZATION);
 
@@ -1272,19 +1268,20 @@ public class PortalImpl implements Portal {
 		authorizationHeader = StringUtil.replace(
 			authorizationHeader, StringPool.COMMA, StringPool.NEW_LINE);
 
-		UnicodeProperties authorization = new UnicodeProperties();
+		UnicodeProperties authorizationProperties = new UnicodeProperties();
 
-		authorization.fastLoad(authorizationHeader);
+		authorizationProperties.fastLoad(authorizationHeader);
 
 		String username = StringUtil.unquote(
-			authorization.getProperty("username"));
-		String realm = StringUtil.unquote(authorization.getProperty("realm"));
-		String nonce = StringUtil.unquote(authorization.getProperty("nonce"));
-		String uri = StringUtil.unquote(authorization.getProperty("uri"));
+			authorizationProperties.getProperty("username"));
+		String realm = StringUtil.unquote(
+			authorizationProperties.getProperty("realm"));
+		String nonce = StringUtil.unquote(
+			authorizationProperties.getProperty("nonce"));
+		String uri = StringUtil.unquote(
+			authorizationProperties.getProperty("uri"));
 		String response = StringUtil.unquote(
-			authorization.getProperty("response"));
-
-		String method = request.getMethod();
+			authorizationProperties.getProperty("response"));
 
 		if (Validator.isNull(username) || Validator.isNull(realm) ||
 			Validator.isNull(nonce) || Validator.isNull(uri) ||
@@ -1293,7 +1290,7 @@ public class PortalImpl implements Portal {
 			return userId;
 		}
 
-		if (!realm.equals("PortalRealm") ||
+		if (!realm.equals(PORTAL_REALM) ||
 			!uri.equals(request.getRequestURI())) {
 
 			return userId;
@@ -1303,8 +1300,11 @@ public class PortalImpl implements Portal {
 			return userId;
 		}
 
+		long companyId = PortalInstances.getCompanyId(request);
+
 		userId = UserLocalServiceUtil.authenticateForDigest(
-			companyId, username, realm, nonce, method, uri, response);
+			companyId, username, realm, nonce, request.getMethod(), uri,
+			response);
 
 		return userId;
 	}

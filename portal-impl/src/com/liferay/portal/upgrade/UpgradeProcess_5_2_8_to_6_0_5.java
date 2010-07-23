@@ -16,8 +16,8 @@ package com.liferay.portal.upgrade;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.upgrade.v5_2_8_to_6_0_3.UpgradeDocumentLibrary;
-import com.liferay.portal.upgrade.v5_2_8_to_6_0_3.UpgradeSchema;
+import com.liferay.portal.upgrade.v5_2_8_to_6_0_5.UpgradeDocumentLibrary;
+import com.liferay.portal.upgrade.v5_2_8_to_6_0_5.UpgradeSchema;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeAsset;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeAssetPublisher;
 import com.liferay.portal.upgrade.v6_0_0.UpgradeBlogs;
@@ -34,7 +34,7 @@ import com.liferay.portal.upgrade.v6_0_3.UpgradeSitemap;
 /**
  * @author Douglas Wong
  */
-public class UpgradeProcess_5_2_8_to_6_0_3 extends UpgradeProcess {
+public class UpgradeProcess_5_2_8_to_6_0_5 extends UpgradeProcess {
 
 	public int getThreshold() {
 		return ReleaseInfo.RELEASE_6_0_3_BUILD_NUMBER;
