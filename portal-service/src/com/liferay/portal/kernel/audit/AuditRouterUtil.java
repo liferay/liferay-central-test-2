@@ -19,6 +19,10 @@ package com.liferay.portal.kernel.audit;
  */
 public class AuditRouterUtil {
 
+	public static AuditRouter getAuditRouter() {
+		return _auditRouter;
+	}
+
 	public static void route(AuditMessage auditMessage) throws AuditException {
 		_auditRouter.route(auditMessage);
 	}

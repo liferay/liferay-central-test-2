@@ -14,6 +14,8 @@
 
 package com.liferay.portal.velocity;
 
+import com.liferay.portal.kernel.audit.AuditMessageFactoryUtil;
+import com.liferay.portal.kernel.audit.AuditRouterUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
@@ -100,6 +102,17 @@ public class VelocityVariables {
 		// Array util
 
 		velocityContext.put("arrayUtil", ArrayUtil_IW.getInstance());
+
+		// Audit message factory
+
+		velocityContext.put(
+			"auditMessageFactoryUtil",
+			AuditMessageFactoryUtil.getAuditMessageFactory());
+
+		// Audit router util
+
+		velocityContext.put(
+			"auditRouterUtil", AuditRouterUtil.getAuditRouter());
 
 		// Browser sniffer
 
