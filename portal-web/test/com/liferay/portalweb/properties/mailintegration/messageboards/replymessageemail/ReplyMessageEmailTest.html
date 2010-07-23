@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>ReplyMessageEmailTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ReplyMessageEmailTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>openWindow</td>
+	<td>http://www.gmail.com/</td>
+	<td>gmail</td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>gmail</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>gmail</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//div[4]/div/nobr/a[2]'))</td>
+	<td>signedIn</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${signedIn}</td>
+	<td>signedOut</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[4]/div/nobr/a[2]</td>
+	<td>Sign Out</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>signedOut</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>Email</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Email</td>
+	<td>liferay.qa.testing</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>Passwd</td>
+	<td>loveispatient</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isChecked('PersistentCookie'))</td>
+	<td>staySignedInChecked</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${staySignedInChecked}</td>
+	<td>StaySignedInChecked</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>PersistentCookie</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>StaySignedInChecked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>signIn</td>
+	<td>Sign In</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//td[3]/div/span</td>
+	<td>Administrator</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[3]/div/span</td>
+	<td>Administrator</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//td[3]/div/span</td>
+	<td>Administrator</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//h1/span[1]</td>
+	<td>[MB Category Name] MB Message Subject</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//h1/span[1]</td>
+	<td>[MB Category Name] MB Message Subject</td>
+</tr>
+<tr>
+	<td>assertPartialText</td>
+	<td>//div/div[2]/div/div/div[2]/div[5]</td>
+	<td>MB Message Body</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div/table/tbody/tr/td[1]/div/span</td>
+	<td>Reply</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div/table/tbody/tr/td[1]/div/span</td>
+	<td>Reply</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>//iframe[@id='canvas_frame']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>//iframe[@class='Am Al editable']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//body</td>
+	<td>MB Message Email Reply</td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>relative=top</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[3]/div/div/div/div[1]/b</td>
+	<td>Send</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[3]/div/div/div/div[1]/b</td>
+	<td>Send</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[4]/div/nobr/a[2]</td>
+	<td>Sign Out</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[4]/div/nobr/a[2]</td>
+	<td>Sign Out</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td>gmail</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

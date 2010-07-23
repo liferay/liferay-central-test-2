@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
+<title>ViewMessageEmailReplyTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">ViewMessageEmailReplyTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>60000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Message Boards Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Message Boards Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[1]/a</td>
+	<td>MB Category Name</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[2]/a</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[3]/a</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[4]/a</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//td[1]/a</td>
+	<td>MB Category Name</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[1]/a</td>
+	<td>MB Message Subject</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[3]/a</td>
+	<td>Joe Bloggs</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[4]/a</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//td[5]/a</td>
+	<td>Views</td>
+</tr>
+<tr>
+	<td>assertPartialText</td>
+	<td>//td[6]/a</td>
+	<td>By: userfn userln</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//td[1]/a</td>
+	<td>MB Message Subject</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[1]/h1/span</td>
+	<td>MB Message Subject</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[1]/a</td>
+	<td>MB Message Subject</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[2]/td[1]/a</td>
+	<td>Re: [MB Category Name] MB Message Subject</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div/a/strong</td>
+	<td>MB Message Subject</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[1]/div/div/div[2]/a</td>
+	<td>Joe Bloggs</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[2]/div[2]</td>
+	<td>MB Message Body</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[5]/table/tbody/tr[1]/td[2]/div[1]/div/a/strong</td>
+	<td>Re: [MB Category Name] MB Message Subject</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[5]/table/tbody/tr[1]/td[1]/div/div/div[2]/a</td>
+	<td>userfn userln</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[5]/table/tbody/tr[1]/td[2]/div[2]</td>
+	<td>MB Message Email Reply</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
