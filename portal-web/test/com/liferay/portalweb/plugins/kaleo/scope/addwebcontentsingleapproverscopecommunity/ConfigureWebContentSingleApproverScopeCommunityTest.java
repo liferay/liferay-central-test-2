@@ -44,10 +44,9 @@ public class ConfigureWebContentSingleApproverScopeCommunityTest
 
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Workflow Configuration",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div/span/a", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.clickAt("//div/span/a",
+			RuntimeVariables.replace("Scope Selector"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -68,8 +67,29 @@ public class ConfigureWebContentSingleApproverScopeCommunityTest
 		selenium.clickAt("//div[4]/div/div[1]/div[2]/ul/li[1]/a",
 			RuntimeVariables.replace("Community Name"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Community Name")
+										.equals(selenium.getText("//div/span/a"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Community Name"),
 			selenium.getText("//div/span/a"));
+		selenium.clickAt("link=Workflow Configuration",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.select("_152_workflowDefinitionName@com.liferay.portlet.journal.model.JournalArticle",
 			RuntimeVariables.replace("label=Single Approver (Version 1)"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

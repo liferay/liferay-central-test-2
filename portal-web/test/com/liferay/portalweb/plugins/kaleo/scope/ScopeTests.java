@@ -15,6 +15,10 @@
 package com.liferay.portalweb.plugins.kaleo.scope;
 
 import com.liferay.portalweb.plugins.kaleo.scope.addwebcontentsingleapproverscopecommunity.AddWebContentSingleApproverScopeCommunityTests;
+import com.liferay.portalweb.plugins.kaleo.scope.addwebcontentsingleapproverscopeglobal.AddWebContentSingleApproverScopeGlobalTests;
+import com.liferay.portalweb.plugins.kaleo.scope.addwebcontentsingleapproverscopeguest.AddWebContentSingleApproverScopeGuestTests;
+import com.liferay.portalweb.plugins.kaleo.scope.addwebcontentsingleapproverscopemycommunity.AddWebContentSingleApproverScopeMyCommunityTests;
+import com.liferay.portalweb.plugins.kaleo.scope.addwebcontentsingleapproverscopeorganization.AddWebContentSingleApproverScopeOrganizationTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
@@ -30,6 +34,12 @@ public class ScopeTests extends BaseTests {
 
 		testSuite.addTest(
 			AddWebContentSingleApproverScopeCommunityTests.suite());
+		testSuite.addTest(AddWebContentSingleApproverScopeGlobalTests.suite());
+		testSuite.addTest(AddWebContentSingleApproverScopeGuestTests.suite());
+		testSuite.addTest(
+			AddWebContentSingleApproverScopeMyCommunityTests.suite());
+		testSuite.addTest(
+			AddWebContentSingleApproverScopeOrganizationTests.suite());
 
 		return testSuite;
 	}

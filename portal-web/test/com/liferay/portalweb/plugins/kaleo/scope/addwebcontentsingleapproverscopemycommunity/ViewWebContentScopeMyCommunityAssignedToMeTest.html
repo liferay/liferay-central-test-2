@@ -1,19 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
-<title>ViewWebContentSingleApproverScopeCommunityTest</title>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ViewWebContentScopeMyCommunityAssignedToMeTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">ViewWebContentSingleApproverScopeCommunityTest</td></tr>
+<tr><td rowspan="1" colspan="3">ViewWebContentScopeMyCommunityAssignedToMeTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/web/guest/home/</td>
+	<td>/user/joebloggs/home/</td>
 	<td></td>
 </tr>
 <tr>
@@ -27,24 +24,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>//div/span/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>//div[4]/div/div[1]/div[2]/ul/li[1]/a</td>
-	<td>Community Name</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//div[4]/div/div[1]/div[2]/ul/li[1]/a</td>
-	<td>Community Name</td>
-</tr>
-<tr>
 	<td>assertText</td>
 	<td>//div/span/a</td>
-	<td>Community Name</td>
+	<td>My Community</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -55,11 +37,6 @@
 	<td>clickAtAndWait</td>
 	<td>link=Pending</td>
 	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[2]/div/div[1]/div[2]/div[1]</td>
-	<td>There are no pending tasks assigned to you.</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -77,9 +54,19 @@
 	<td>Web Content</td>
 </tr>
 <tr>
+	<td>assertElementPresent</td>
+	<td>//td[4]/a</td>
+	<td>Last Activity Date</td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>//td[5]/a</td>
 	<td>Never</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/div[2]/div[1]</td>
+	<td>There are no pending tasks assigned to your roles.</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -122,6 +109,11 @@
 	<td>Review</td>
 </tr>
 <tr>
+	<td>assertElementPresent</td>
+	<td>//td[5]/a</td>
+	<td>Last Activity Date</td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>//td[6]/a</td>
 	<td>Never</td>
@@ -152,6 +144,11 @@
 	<td>Web Content</td>
 </tr>
 <tr>
+	<td>assertElementPresent</td>
+	<td>//td[2]/a</td>
+	<td>Web Content ID</td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>//td[3]/a</td>
 	<td>Web Content Name</td>
@@ -165,6 +162,16 @@
 	<td>assertText</td>
 	<td>//td[5]/a</td>
 	<td>Pending</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//td[6]/a</td>
+	<td>Modified Date</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//td[7]/a</td>
+	<td>Display Date</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -205,6 +212,11 @@
 	<td>assertText</td>
 	<td>//td[4]/a</td>
 	<td>Review</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>//td[5]/a</td>
+	<td>Last Activity Date</td>
 </tr>
 <tr>
 	<td>assertText</td>

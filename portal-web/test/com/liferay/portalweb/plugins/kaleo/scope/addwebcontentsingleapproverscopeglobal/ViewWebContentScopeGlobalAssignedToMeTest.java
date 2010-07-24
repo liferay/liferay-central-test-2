@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.kaleo.scope.addwebcontentsingleapproverscopecommunity;
+package com.liferay.portalweb.plugins.kaleo.scope.addwebcontentsingleapproverscopeglobal;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class ViewWebContentSingleApproverScopeCommunityTest extends BaseTestCase {
-	public void testViewWebContentSingleApproverScopeCommunity()
+public class ViewWebContentScopeGlobalAssignedToMeTest extends BaseTestCase {
+	public void testViewWebContentScopeGlobalAssignedToMe()
 		throws Exception {
 		selenium.open("/web/guest/home/");
 
@@ -43,7 +43,9 @@ public class ViewWebContentSingleApproverScopeCommunityTest extends BaseTestCase
 
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div/span/a", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.clickAt("//div/span/a",
+			RuntimeVariables.replace("Scope Selector"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -51,7 +53,7 @@ public class ViewWebContentSingleApproverScopeCommunityTest extends BaseTestCase
 			}
 
 			try {
-				if (selenium.isVisible("//div[4]/div/div[1]/div[2]/ul/li[1]/a")) {
+				if (selenium.isVisible("//div[4]/div/div[3]/div[2]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -61,26 +63,45 @@ public class ViewWebContentSingleApproverScopeCommunityTest extends BaseTestCase
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[4]/div/div[1]/div[2]/ul/li[1]/a",
-			RuntimeVariables.replace("Community Name"));
+		selenium.clickAt("//div[4]/div/div[3]/div[2]/ul/li[1]/a",
+			RuntimeVariables.replace("Global"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Community Name"),
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Global")
+										.equals(selenium.getText("//div/span/a"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("Global"),
 			selenium.getText("//div/span/a"));
 		selenium.clickAt("link=My Workflow Tasks", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Pending", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace(
-				"There are no pending tasks assigned to you."),
-			selenium.getText("//div[2]/div/div[1]/div[2]/div[1]"));
 		assertEquals(RuntimeVariables.replace("Review"),
 			selenium.getText("//td[1]/a"));
 		assertEquals(RuntimeVariables.replace("Web Content Name"),
 			selenium.getText("//td[2]/a"));
 		assertEquals(RuntimeVariables.replace("Web Content"),
 			selenium.getText("//td[3]/a"));
+		assertTrue(selenium.isElementPresent("//td[4]/a"));
 		assertEquals(RuntimeVariables.replace("Never"),
 			selenium.getText("//td[5]/a"));
+		assertEquals(RuntimeVariables.replace(
+				"There are no pending tasks assigned to your roles."),
+			selenium.getText("//div[2]/div[2]/div[1]"));
 		selenium.clickAt("link=Completed", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("There are no completed tasks."),
@@ -97,6 +118,7 @@ public class ViewWebContentSingleApproverScopeCommunityTest extends BaseTestCase
 			selenium.getText("//td[3]/a"));
 		assertEquals(RuntimeVariables.replace("Review"),
 			selenium.getText("//td[4]/a"));
+		assertTrue(selenium.isElementPresent("//td[5]/a"));
 		assertEquals(RuntimeVariables.replace("Never"),
 			selenium.getText("//td[6]/a"));
 		assertEquals(RuntimeVariables.replace("Withdraw Submission"),
@@ -110,12 +132,15 @@ public class ViewWebContentSingleApproverScopeCommunityTest extends BaseTestCase
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//li[1]/span/span/a"));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("//td[2]/a"));
 		assertEquals(RuntimeVariables.replace("Web Content Name"),
 			selenium.getText("//td[3]/a"));
 		assertEquals(RuntimeVariables.replace("1.0"),
 			selenium.getText("//td[4]/a"));
 		assertEquals(RuntimeVariables.replace("Pending"),
 			selenium.getText("//td[5]/a"));
+		assertTrue(selenium.isElementPresent("//td[6]/a"));
+		assertTrue(selenium.isElementPresent("//td[7]/a"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
 			selenium.getText("//td[8]/a"));
 		selenium.clickAt("link=Workflow", RuntimeVariables.replace(""));
@@ -132,6 +157,7 @@ public class ViewWebContentSingleApproverScopeCommunityTest extends BaseTestCase
 			selenium.getText("//td[3]/a"));
 		assertEquals(RuntimeVariables.replace("Review"),
 			selenium.getText("//td[4]/a"));
+		assertTrue(selenium.isElementPresent("//td[5]/a"));
 		assertEquals(RuntimeVariables.replace("Never"),
 			selenium.getText("//td[6]/a"));
 		selenium.clickAt("link=Completed", RuntimeVariables.replace(""));

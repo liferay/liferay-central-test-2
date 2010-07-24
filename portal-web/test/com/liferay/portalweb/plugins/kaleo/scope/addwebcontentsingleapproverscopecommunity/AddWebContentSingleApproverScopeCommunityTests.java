@@ -33,7 +33,14 @@ public class AddWebContentSingleApproverScopeCommunityTests extends BaseTests {
 		testSuite.addTestSuite(
 			AddWebContentSingleApproverScopeCommunityTest.class);
 		testSuite.addTestSuite(
-			ViewWebContentSingleApproverScopeCommunityTest.class);
+			ViewWebContentScopeCommunityAssignedToMyRolesTest.class);
+		testSuite.addTestSuite(
+			AssignToMeWebContentScopeCommunityActionsTest.class);
+		testSuite.addTestSuite(
+			ViewWebContentScopeCommunityAssignedToMeTest.class);
+		testSuite.addTestSuite(
+			ApproveWebContentScopeCommunityActionsTest.class);
+		testSuite.addTestSuite(ViewWebContentScopeCommunityCompletedTest.class);
 		testSuite.addTestSuite(TearDownCommunityWebContentTest.class);
 		testSuite.addTestSuite(
 			TearDownCommunityWorkflowConfigurationTest.class);

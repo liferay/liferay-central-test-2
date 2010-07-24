@@ -43,7 +43,9 @@ public class AddWebContentSingleApproverScopeCommunityTest extends BaseTestCase 
 
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div/span/a", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.clickAt("//div/span/a",
+			RuntimeVariables.replace("Scope Selector"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -64,6 +66,24 @@ public class AddWebContentSingleApproverScopeCommunityTest extends BaseTestCase 
 		selenium.clickAt("//div[4]/div/div[1]/div[2]/ul/li[1]/a",
 			RuntimeVariables.replace("Community Name"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Community Name")
+										.equals(selenium.getText("//div/span/a"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Community Name"),
 			selenium.getText("//div/span/a"));
 		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
@@ -134,12 +154,15 @@ public class AddWebContentSingleApproverScopeCommunityTest extends BaseTestCase 
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));
+		assertTrue(selenium.isElementPresent("//td[2]/a"));
 		assertEquals(RuntimeVariables.replace("Web Content Name"),
 			selenium.getText("//td[3]/a"));
 		assertEquals(RuntimeVariables.replace("1.0"),
 			selenium.getText("//td[4]/a"));
 		assertEquals(RuntimeVariables.replace("Pending"),
 			selenium.getText("//td[5]/a"));
+		assertTrue(selenium.isElementPresent("//td[6]/a"));
+		assertTrue(selenium.isElementPresent("//td[7]/a"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
 			selenium.getText("//td[8]/a"));
 	}

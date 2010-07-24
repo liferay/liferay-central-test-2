@@ -48,7 +48,9 @@ public class TearDownCommunityWebContentTest extends BaseTestCase {
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//div/span/a", RuntimeVariables.replace(""));
+				Thread.sleep(5000);
+				selenium.clickAt("//div/span/a",
+					RuntimeVariables.replace("Scope Selector"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -70,6 +72,25 @@ public class TearDownCommunityWebContentTest extends BaseTestCase {
 				selenium.clickAt("//div[4]/div/div[1]/div[2]/ul/li[1]/a",
 					RuntimeVariables.replace("Community Name"));
 				selenium.waitForPageToLoad("30000");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (RuntimeVariables.replace("Community Name")
+												.equals(selenium.getText(
+										"//div/span/a"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				assertEquals(RuntimeVariables.replace("Community Name"),
 					selenium.getText("//div/span/a"));
 				selenium.clickAt("link=Web Content",
