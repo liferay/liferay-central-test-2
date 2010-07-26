@@ -83,10 +83,12 @@ else if (!groupByClass) {
 <%
 }
 else {
-	List<AssetRendererFactory> groupAssetRendererFactories = AssetRendererFactoryRegistryUtil.getAssetRendererFactories();
+	for (long classNameId : classNameIds) {
+		long[] groupClassNameIds = {classNameId};
 
-	for (AssetRendererFactory groupAssetRendererFactory : groupAssetRendererFactories) {
-		long[] groupClassNameIds = {groupAssetRendererFactory.getClassNameId()};
+		String groupClassName = ClassNameLocalServiceUtil.getClassName(classNameId).getClassName();
+
+		AssetRendererFactory groupAssetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(groupClassName);
 
 		assetEntryQuery.setClassNameIds(groupClassNameIds);
 
