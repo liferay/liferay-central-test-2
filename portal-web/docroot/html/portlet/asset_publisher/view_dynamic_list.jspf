@@ -86,7 +86,7 @@ else {
 	for (long classNameId : classNameIds) {
 		long[] groupClassNameIds = {classNameId};
 
-		String groupClassName = ClassNameLocalServiceUtil.getClassName(classNameId).getClassName();
+		String groupClassName = PortalUtil.getClassName(classNameId);
 
 		AssetRendererFactory groupAssetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(groupClassName);
 

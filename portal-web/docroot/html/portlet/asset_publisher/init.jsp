@@ -28,7 +28,6 @@
 <%@ page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %>
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
 <%@ page import="com.liferay.portal.security.permission.comparator.ModelResourceComparator" %>
-<%@ page import="com.liferay.portal.service.ClassNameLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.PortalPreferences" %>
 <%@ page import="com.liferay.portlet.PortletContextImpl" %>
 <%@ page import="com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil" %>
