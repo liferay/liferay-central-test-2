@@ -393,7 +393,7 @@ public class AssetEntryFinderImpl
 			else {
 				sb.append("AssetCategory.categoryId ");
 				sb.append(operator);
-				sb.append(" ? ");
+				sb.append(" ?");
 			}
 
 			if ((i + 1) != categoryIds.length) {
