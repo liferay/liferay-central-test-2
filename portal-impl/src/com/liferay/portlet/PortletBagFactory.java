@@ -308,6 +308,26 @@ public class PortletBagFactory {
 		_warFile = warFile;
 	}
 
+	protected String getPluginPropertyValue(String propertyKey)
+		throws Exception {
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			currentThread.setContextClassLoader(_classLoader);
+
+			MethodWrapper methodWrapper = new MethodWrapper(
+				PortletProps.class.getName(), "get", propertyKey);
+
+			return (String)MethodInvoker.invoke(methodWrapper, false);
+		}
+		finally {
+			currentThread.setContextClassLoader(contextClassLoader);
+		}
+	}
+
 	protected void initResourceBundle(
 		Map<String, ResourceBundle> resourceBundles, Portlet portlet,
 		Locale locale) {
@@ -333,23 +353,7 @@ public class PortletBagFactory {
 			String triggerValue = null;
 
 			if (_warFile) {
-				Thread currentThread = Thread.currentThread();
-
-				ClassLoader contextClassLoader =
-					currentThread.getContextClassLoader();
-
-				try {
-					currentThread.setContextClassLoader(_classLoader);
-
-					MethodWrapper methodWrapper = new MethodWrapper(
-						PortletProps.class.getName(), "get", propertyKey);
-
-					triggerValue = (String)MethodInvoker.invoke(
-						methodWrapper, false);
-				}
-				finally {
-					currentThread.setContextClassLoader(contextClassLoader);
-				}
+				triggerValue = getPluginPropertyValue(propertyKey);
 			}
 			else {
 				triggerValue = PrefsPropsUtil.getString(propertyKey);
@@ -439,16 +443,27 @@ public class PortletBagFactory {
 		for (String assetRendererFactoryClass :
 				portlet.getAssetRendererFactoryClasses()) {
 
-			String assetRendererEnabledKey =
+			String assetRendererEnabledPropertyKey =
 				PropsKeys.ASSET_RENDERER_ENABLED + assetRendererFactoryClass;
 
+			String assetRendererEnabledPropertyValue = null;
+
+			if (_warFile) {
+				assetRendererEnabledPropertyValue = getPluginPropertyValue(
+					assetRendererEnabledPropertyKey);
+			}
+			else {
+				assetRendererEnabledPropertyValue = PropsUtil.get(
+					assetRendererEnabledPropertyKey);
+			}
+
 			boolean assetRendererEnabledValue = GetterUtil.getBoolean(
-				PropsUtil.get(assetRendererEnabledKey), true);
+				assetRendererEnabledPropertyValue, true);
 
 			if (assetRendererEnabledValue) {
 				AssetRendererFactory assetRendererFactoryInstance =
-				newAssetRendererFactoryInstance(
-					portlet, assetRendererFactoryClass);
+					newAssetRendererFactoryInstance(
+						portlet, assetRendererFactoryClass);
 
 				assetRendererFactoryInstances.add(assetRendererFactoryInstance);
 			}
