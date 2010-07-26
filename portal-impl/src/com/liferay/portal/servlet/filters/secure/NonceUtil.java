@@ -46,7 +46,7 @@ public class NonceUtil {
 		String nonce = DigesterUtil.digestHex(
 			Digester.MD5, remoteAddress, String.valueOf(timestamp), companyKey);
 
-		_nonceQueue.put(new NonceDelayed(nonce));
+		_nonceDelayQueue.put(new NonceDelayed(nonce));
 
 		return nonce;
 	}
@@ -54,38 +54,41 @@ public class NonceUtil {
 	public static boolean verify(String nonce) {
 		_cleanUp();
 
-		return _nonceQueue.contains(new NonceDelayed(nonce));
+		return _nonceDelayQueue.contains(new NonceDelayed(nonce));
 	}
 
 	private static void _cleanUp() {
-		while (_nonceQueue.poll() != null);
+		while (_nonceDelayQueue.poll() != null);
 	}
+
+	private static final long _NONCE_EXPIRATION = 10 * Time.MINUTE;
+
+	private static DelayQueue<NonceDelayed> _nonceDelayQueue =
+		new DelayQueue<NonceDelayed>();
 
 	private static class NonceDelayed implements Delayed {
 
 		public NonceDelayed(String nonce) {
 			if (nonce == null) {
-				throw new NullPointerException("Null nonce");
+				throw new NullPointerException("Nonce is null");
 			}
+
 			_nonce = nonce;
-			_createdMilliseconds = System.currentTimeMillis();
+			_createTime = System.currentTimeMillis();
 		}
 
-		public long getDelay(TimeUnit unit) {
-			long leftDelayTime = _NONCE_EXPIRATION + _createdMilliseconds -
-				System.currentTimeMillis();
-			return unit.convert(leftDelayTime, TimeUnit.MILLISECONDS);
+		public long getDelay(TimeUnit timeUnit) {
+			long leftDelayTime =
+				_NONCE_EXPIRATION + _createTime - System.currentTimeMillis();
+
+			return timeUnit.convert(leftDelayTime, TimeUnit.MILLISECONDS);
 		}
 
-		public int compareTo(Delayed o) {
-			if (!(o instanceof NonceDelayed)) {
-				throw new IllegalArgumentException("Wrong Type : "
-					+ o.getClass());
-			}
-			// Do not cast result into int, it may cause int overflow or
-			// underflow
-			long result = _createdMilliseconds -
-				((NonceDelayed) o)._createdMilliseconds;
+		public int compareTo(Delayed delayed) {
+			NonceDelayed nonceDelayed = (NonceDelayed)delayed;
+
+			long result = _createTime - nonceDelayed._createTime;
+
 			if (result == 0) {
 				return 0;
 			}
@@ -106,23 +109,22 @@ public class NonceUtil {
 				return false;
 			}
 
-			NonceDelayed nonceDelayed = (NonceDelayed) obj;
+			NonceDelayed nonceDelayed = (NonceDelayed)obj;
 
-			return _nonce.equals(nonceDelayed._nonce);
+			if (_nonce.equals(nonceDelayed._nonce)) {
+				return true;
+			}
+
+			return false;
 		}
 
 		public int hashCode() {
 			return _nonce.hashCode();
 		}
 
-		private final long _createdMilliseconds;
+		private final long _createTime;
 		private final String _nonce;
 
 	}
-
-	private static final long _NONCE_EXPIRATION = 10 * Time.MINUTE;
-
-	private static final DelayQueue<NonceDelayed> _nonceQueue =
-		new DelayQueue<NonceDelayed>();
 
 }
