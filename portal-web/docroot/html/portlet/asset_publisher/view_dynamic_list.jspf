@@ -32,7 +32,8 @@ if (assetVocabularyId > 0) {
 	List<AssetCategory> assetCategories = AssetCategoryLocalServiceUtil.getVocabularyRootCategories(assetVocabulary.getVocabularyId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 	for (AssetCategory assetCategory : assetCategories) {
-		long[] newAllAssetCategoryIds = ArrayUtil.append(assetEntryQuery.getAllCategoryIds(), assetCategory.getCategoryId());
+		long[] previousAllCategoryIds = assetEntryQuery.getAllCategoryIds();
+		long[] newAllAssetCategoryIds = ArrayUtil.append(previousAllCategoryIds, assetCategory.getCategoryId());
 
 		assetEntryQuery.setAllCategoryIds(newAllAssetCategoryIds);
 
@@ -57,6 +58,8 @@ if (assetVocabularyId > 0) {
 
 <%
 		}
+
+		assetEntryQuery.setAllCategoryIds(previousAllCategoryIds);
 	}
 }
 else if (!groupByClass) {

@@ -89,7 +89,7 @@
 }
 
 .portlet-asset-publisher .asset-entries-group-label {
-	background-color: #EEE;
+	background-color: #DDD;
 	clear: both;
 	padding: 3px;
 }
