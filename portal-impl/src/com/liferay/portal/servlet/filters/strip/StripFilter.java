@@ -15,6 +15,8 @@
 package com.liferay.portal.servlet.filters.strip;
 
 import com.liferay.portal.kernel.concurrent.ConcurrentLRUCache;
+import com.liferay.portal.kernel.io.OutputStreamWriter;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
@@ -272,7 +274,22 @@ public class StripFilter extends BasePortalFilter {
 				CharBuffer oldCharBuffer = CharBuffer.wrap(
 					stringResponse.getString());
 
-				strip(oldCharBuffer, response.getWriter());
+				boolean ensureContentLength = ParamUtil.getBoolean(request,
+					_ENSURE_CONTENT_LENGTH, false);
+
+				if (ensureContentLength) {
+					UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
+						new UnsyncByteArrayOutputStream();
+					strip(oldCharBuffer,
+						new OutputStreamWriter(unsyncByteArrayOutputStream));
+					response.setContentLength(
+						unsyncByteArrayOutputStream.size());
+					unsyncByteArrayOutputStream.writeTo(
+						response.getOutputStream());
+				}
+				else {
+					strip(oldCharBuffer, response.getWriter());
+				}
 			}
 			else {
 				ServletResponseUtil.write(response, stringResponse);
@@ -480,6 +497,8 @@ public class StripFilter extends BasePortalFilter {
 	private static final String _CDATA_CLOSE = "/*]]>*/";
 
 	private static final String _CDATA_OPEN = "/*<![CDATA[*/";
+
+	private static final String _ENSURE_CONTENT_LENGTH = "ensureContentLength";
 
 	private static final char[] _MARKER_JS_OPEN =
 		"script type=\"text/javascript\">".toCharArray();
