@@ -23,48 +23,16 @@ String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:on
 
 </form>
 
-<aui:script use="aui-base">
-	var form = A.one('#<%= namespace + name %>');
+<aui:script use="liferay-form">
+	Liferay.Form.register(
+		{
+			id: '<%= namespace + name %>'
 
-	if (form) {
-		form.on(
-			'submit',
-			function(event) {
-				<c:choose>
-					<c:when test="<%= Validator.isNull(onSubmit) %>">
-						event.preventDefault();
-
-						submitForm(document.<%= namespace + name %>);
-					</c:when>
-					<c:otherwise>
-						<%= onSubmit %>
-					</c:otherwise>
-				</c:choose>
-			}
-		);
-
-		form.delegate(
-			'focus',
-			function(event) {
-				var row = event.currentTarget.ancestor('.aui-field');
-
-				if (row) {
-					row.addClass('aui-field-focused');
+			<c:if test="<%= Validator.isNotNull(onSubmit) %>">
+				, onSubmit: function(event) {
+					<%= onSubmit %>
 				}
-			},
-			'button,input,select,textarea'
-		);
-
-		form.delegate(
-			'blur',
-			function(event) {
-				var row = event.currentTarget.ancestor('.aui-field');
-
-				if (row) {
-					row.removeClass('aui-field-focused');
-				}
-			},
-			'button,input,select,textarea'
-		);
-	}
+			</c:if>
+		}
+	);
 </aui:script>

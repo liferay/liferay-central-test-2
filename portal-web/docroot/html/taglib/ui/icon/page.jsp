@@ -162,46 +162,17 @@ boolean forcePost = method.equals("post") && (url.startsWith(Http.HTTP_WITH_SLAS
 %>
 
 <c:if test="<%= Validator.isNotNull(srcHover) || forcePost %>">
-	<aui:script use="aui-base">
-		var icon = A.one('#<portlet:namespace /><%= id %>');
+	<aui:script use="liferay-icon">
+		Liferay.Icon.register(
+			{
+				forcePost: <%= forcePost %>,
+				id: '<portlet:namespace /><%= id %>'
 
-		<c:if test="<%= Validator.isNotNull(srcHover) %>">
-			if (icon) {
-				icon.on(
-					'mouseout',
-					function(event) {
-						var img = event.currentTarget.one('img');
-
-						if (img) {
-							img.attr('src', '<%= src %>');
-						}
-					}
-				);
-
-				icon.on(
-					'mouseover',
-					function(event) {
-						var img = event.currentTarget.one('img');
-
-						if (img) {
-							img.attr('src', '<%= srcHover %>');
-						}
-					}
-				);
+				<c:if test="<%= Validator.isNotNull(srcHover) %>">
+					, src: '<%= src %>',
+					srcHover: '<%= srcHover %>'
+				</c:if>
 			}
-		</c:if>
-
-		<c:if test="<%= forcePost %>">
-			if (icon) {
-				icon.on(
-					'click',
-					function(event) {
-						Liferay.Util.forcePost(this);
-
-						event.preventDefault();
-					}
-				);
-			}
-		</c:if>
+		);
 	</aui:script>
 </c:if>
