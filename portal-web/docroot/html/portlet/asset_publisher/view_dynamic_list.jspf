@@ -87,11 +87,11 @@ else {
 	for (long classNameId : classNameIds) {
 		long[] groupClassNameIds = {classNameId};
 
+		assetEntryQuery.setClassNameIds(groupClassNameIds);
+
 		String groupClassName = PortalUtil.getClassName(classNameId);
 
 		AssetRendererFactory groupAssetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(groupClassName);
-
-		assetEntryQuery.setClassNameIds(groupClassNameIds);
 
 		int groupTotal = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
 
