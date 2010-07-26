@@ -274,16 +274,20 @@ public class StripFilter extends BasePortalFilter {
 				CharBuffer oldCharBuffer = CharBuffer.wrap(
 					stringResponse.getString());
 
-				boolean ensureContentLength = ParamUtil.getBoolean(request,
-					_ENSURE_CONTENT_LENGTH, false);
+				boolean ensureContentLength = ParamUtil.getBoolean(
+					request, _ENSURE_CONTENT_LENGTH);
 
 				if (ensureContentLength) {
 					UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 						new UnsyncByteArrayOutputStream();
-					strip(oldCharBuffer,
+
+					strip(
+						oldCharBuffer,
 						new OutputStreamWriter(unsyncByteArrayOutputStream));
+
 					response.setContentLength(
 						unsyncByteArrayOutputStream.size());
+
 					unsyncByteArrayOutputStream.writeTo(
 						response.getOutputStream());
 				}
