@@ -397,7 +397,7 @@ public class AssetEntryFinderImpl
 			}
 
 			if ((i + 1) != categoryIds.length) {
-				sb.append("OR ");
+				sb.append(" OR ");
 			}
 		}
 
