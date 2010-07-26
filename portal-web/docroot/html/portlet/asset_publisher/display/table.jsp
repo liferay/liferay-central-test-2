@@ -87,10 +87,10 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 		<td>
 			<c:choose>
 				<c:when test="<%= Validator.isNotNull(viewURL) %>">
-					<a href="<%= viewURL %>"><%= title %></a>
+					<a href="<%= viewURL %>"><%= HtmlUtil.escape(title) %></a>
 				</c:when>
 				<c:otherwise>
-					<%= title %>
+					<%= HtmlUtil.escape(title) %>
 				</c:otherwise>
 			</c:choose>
 		</td>
