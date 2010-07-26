@@ -29,31 +29,41 @@ List<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistry
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
 	<aui:fieldset>
-		<aui:input inlineLabel="left" name="showAssetCount" type="checkbox" value="<%= showAssetCount %>" />
+		<ul class="lfr-tree lfr-component">
+			<li class="tree-item">
+				<aui:input inlineLabel="left" label="show-tags-with-zero-assets" name="showZeroAssetCount" type="checkbox" value="<%= showZeroAssetCount %>" />
+			</li>
 
-		<div class="aui-helper-hidden" id="<portlet:namespace />assetCountOptions">
-			<aui:select helpMessage="asset-type-asset-count-help" label="asset-type" name="classNameId">
-				<aui:option label="any" value="<%= classNameId == 0 %>" />
+			<li class="tree-item">
+				<aui:input inlineLabel="left" name="showAssetCount" type="checkbox" value="<%= showAssetCount %>" />
 
-				<%
-				for (AssetRendererFactory assetRendererFactory : assetRendererFactories) {
-				%>
+				<ul class="lfr-tree lfr-component aui-helper-hidden" id="<portlet:namespace />assetCountOptions">
+					<li class="tree-item">
+						<aui:select helpMessage="asset-type-asset-count-help" label="asset-type" name="classNameId">
+							<aui:option label="any" value="<%= classNameId == 0 %>" />
 
-					<aui:option label='<%= "model.resource." + assetRendererFactory.getClassName() %>' selected="<%= classNameId == assetRendererFactory.getClassNameId() %>" value="<%= assetRendererFactory.getClassNameId() %>" />
+							<%
+							for (AssetRendererFactory assetRendererFactory : assetRendererFactories) {
+							%>
 
-				<%
-				}
-				%>
+								<aui:option label='<%= "model.resource." + assetRendererFactory.getClassName() %>' selected="<%= classNameId == assetRendererFactory.getClassNameId() %>" value="<%= assetRendererFactory.getClassNameId() %>" />
 
-			</aui:select>
+							<%
+							}
+							%>
 
-			<aui:select name="displayStyle">
-				<aui:option label="number" selected='<%= displayStyle.equals("number") %>' />
-				<aui:option label="cloud" selected='<%= displayStyle.equals("cloud") %>' />
-			</aui:select>
+						</aui:select>
+					</li>
 
-			<aui:input inlineLabel="left" label="show-tags-with-zero-assets" name="showZeroAssetCount" type="checkbox" value="<%= showZeroAssetCount %>" />
-		</div>
+					<li class="tree-item">
+						<aui:select name="displayStyle">
+							<aui:option label="number" selected='<%= displayStyle.equals("number") %>' />
+							<aui:option label="cloud" selected='<%= displayStyle.equals("cloud") %>' />
+						</aui:select>
+					</li>
+				</ul>
+			</li>
+		</ul>
 	</aui:fieldset>
 
 	<aui:button-row>
