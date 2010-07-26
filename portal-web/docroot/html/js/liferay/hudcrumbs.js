@@ -40,14 +40,12 @@ AUI().add(
 
 						hudcrumbs.resetId();
 
-						var dockbar = A.one('#dockbar');
-
 						var win = A.getWin();
 						var body = A.getBody();
 
 						instance._win = win;
 						instance._body = body;
-						instance._dockbar = dockbar;
+						instance._dockbar = Liferay.Dockbar && Liferay.Dockbar.dockBar;
 
 						hudcrumbs.hide();
 

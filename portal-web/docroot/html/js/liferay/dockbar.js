@@ -58,7 +58,7 @@ AUI().add(
 					instance.addUnderlay(
 						{
 							align: {
-								node: '#dockbar',
+								node: instance.dockBar,
 								points: ['tc', 'bc']
 							},
 							bodyContent: '',
@@ -352,7 +352,7 @@ AUI().add(
 						}
 					);
 
-					menu.render('#dockbar');
+					menu.render(instance.dockBar);
 
 					instance[name] = menu;
 				}
@@ -412,13 +412,13 @@ AUI().add(
 						options.zIndex = instance.underlayZIndex++;
 
 						options.align = options.align || {
-							node: '#dockbar',
+							node: instance.dockBar,
 							points: ['tl', 'bl']
 						};
 
 						var underlay = new instance.Underlay(options);
 
-						underlay.render('#dockbar');
+						underlay.render(instance.dockBar);
 
 						if (options.io) {
 							options.io.loadingMask = {
