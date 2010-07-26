@@ -63,10 +63,10 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 		<h3 class="asset-title">
 			<c:choose>
 				<c:when test="<%= Validator.isNotNull(viewURL) %>">
-					<a href="<%= viewURL %>"><img alt="" src="<%= assetRendererFactory.getIconPath(renderRequest) %>" /> <%= title %></a>
+					<a href="<%= viewURL %>"><img alt="" src="<%= assetRendererFactory.getIconPath(renderRequest) %>" /> <%= HtmlUtil.escape(title) %></a>
 				</c:when>
 				<c:otherwise>
-					<img src="<%= assetRendererFactory.getIconPath(renderRequest) %>" alt="" /> <%= title %>
+					<img src="<%= assetRendererFactory.getIconPath(renderRequest) %>" alt="" /> <%= HtmlUtil.escape(title) %>
 				</c:otherwise>
 			</c:choose>
 		</h3>
@@ -93,7 +93,7 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 
 			<c:if test="<%= Validator.isNotNull(viewURL) %>">
 				<div class="asset-more">
-					<a href="<%= viewURL %>"><liferay-ui:message arguments='<%= new Object[] {"aui-helper-hidden-accessible", assetRenderer.getTitle()} %>' key="<%=viewURLMessage%>" /> &raquo; </a>
+					<a href="<%= viewURL %>"><liferay-ui:message arguments='<%= new Object[] {"aui-helper-hidden-accessible", HtmlUtil.escape(assetRenderer.getTitle())} %>' key="<%= viewURLMessage %>" /> &raquo; </a>
 				</div>
 			</c:if>
 		</div>
