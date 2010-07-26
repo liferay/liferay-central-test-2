@@ -49,8 +49,8 @@ public class AssetEntryQuery {
 			return ORDER_BY_COLUMNS[2];
 		}
 
-		for (int i = 0; i < ORDER_BY_COLUMNS.length; i++) {
-			if (orderByCol.equals(ORDER_BY_COLUMNS[i])) {
+		for (String curOrderByCol : ORDER_BY_COLUMNS) {
+			if (orderByCol.equals(curOrderByCol)) {
 				return orderByCol;
 			}
 		}
@@ -106,7 +106,7 @@ public class AssetEntryQuery {
 
 		if (Validator.isNotNull(tagName)) {
 			_allTagIds = AssetTagLocalServiceUtil.getTagIds(
-				_groupIds[0], new String[] {tagName});
+				themeDisplay.getParentGroupId(), new String[] {tagName});
 		}
 	}
 
