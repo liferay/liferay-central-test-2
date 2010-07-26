@@ -143,19 +143,9 @@ boolean wsrp = ParamUtil.getBoolean(request, "wsrp");
 		<c:choose>
 			<c:when test="<%= portletDecorate %>">
 				<liferay-theme:wrap-portlet page="portlet.jsp">
-					<c:if test="<%= wsrp %>">
-						<div id="wsrp-configuration-url"><%= portletDisplay.getURLConfiguration() %></div>
-
-						<liferay-wsrp-portlet>
-					</c:if>
-
 					<div class="<%= portletDisplay.isStateMin() ? "aui-helper-hidden" : "" %> portlet-content-container" <%= containerStyles %>>
 						<%@ include file="/html/common/themes/portlet_content_wrapper.jspf" %>
 					</div>
-
-					<c:if test="<%= wsrp %>">
-						</liferay-wsrp-portlet>
-					</c:if>
 				</liferay-theme:wrap-portlet>
 			</c:when>
 			<c:otherwise>
