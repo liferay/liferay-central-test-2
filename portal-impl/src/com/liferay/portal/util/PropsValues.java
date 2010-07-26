@@ -1034,6 +1034,8 @@ public class PropsValues {
 
 	public static final int SQL_DATA_MAX_PARAMETERS = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SQL_DATA_MAX_PARAMETERS));
 
+	public static final boolean STRIP_ENSURE_CONTENT_LENGTH_ENABLE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.STRIP_ENSURE_CONTENT_LENGTH_ENABLE));
+
 	public static final String[] STRIP_IGNORE_PATHS = PropsUtil.getArray(PropsKeys.STRIP_IGNORE_PATHS);
 
 	public static final String STRUTS_PORTLET_REQUEST_PROCESSOR = PropsUtil.get(PropsKeys.STRUTS_PORTLET_REQUEST_PROCESSOR);
