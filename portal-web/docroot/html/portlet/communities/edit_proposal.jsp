@@ -92,10 +92,9 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 	}
 	%>
 
-	<liferay-ui:tabs
-		names="proposal"
-		url="<%= portletURL.toString() %>"
+	<liferay-ui:header
 		backURL="<%= redirect %>"
+		title="<%= proposal.getName() %>"
 	/>
 
 	<liferay-ui:error exception="<%= DuplicateReviewUserIdException.class %>" message="users-cannot-be-assigned-to-more-than-one-stage" />
