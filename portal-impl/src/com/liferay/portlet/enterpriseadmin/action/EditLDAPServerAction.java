@@ -29,6 +29,7 @@ import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.service.CompanyServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.WebKeys;
 
@@ -99,6 +100,13 @@ public class EditLDAPServerAction extends PortletAction {
 		for (String key : keys) {
 			if (ArrayUtil.contains(_KEYS, key)) {
 				String value = properties.remove(key);
+
+				if (key.equals(PropsKeys.LDAP_SECURITY_CREDENTIALS) &&
+					value.equals(Portal.TEMP_OBFUSCATION_VALUE)) {
+
+					value = PrefsPropsUtil.getString(
+						PropsKeys.LDAP_SECURITY_CREDENTIALS);
+				}
 
 				properties.setProperty(key + postfix, value);
 			}
