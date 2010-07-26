@@ -35,11 +35,14 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.servlet.URLEncoder;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyFactory;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -436,11 +439,19 @@ public class PortletBagFactory {
 		for (String assetRendererFactoryClass :
 				portlet.getAssetRendererFactoryClasses()) {
 
-			AssetRendererFactory assetRendererFactoryInstance =
+			String assetRendererEnabledKey =
+				PropsKeys.ASSET_RENDERER_ENABLED + assetRendererFactoryClass;
+
+			boolean assetRendererEnabledValue = GetterUtil.getBoolean(
+				PropsUtil.get(assetRendererEnabledKey), true);
+
+			if (assetRendererEnabledValue) {
+				AssetRendererFactory assetRendererFactoryInstance =
 				newAssetRendererFactoryInstance(
 					portlet, assetRendererFactoryClass);
 
-			assetRendererFactoryInstances.add(assetRendererFactoryInstance);
+				assetRendererFactoryInstances.add(assetRendererFactoryInstance);
+			}
 		}
 
 		return assetRendererFactoryInstances;
