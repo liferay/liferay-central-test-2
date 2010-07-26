@@ -828,7 +828,6 @@
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>11.0</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
-		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
@@ -1063,7 +1062,6 @@
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
-		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
@@ -1313,7 +1311,6 @@
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
-		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
@@ -1389,7 +1386,6 @@
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>12.0</control-panel-entry-weight>
 		<use-default-template>false</use-default-template>
-		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
