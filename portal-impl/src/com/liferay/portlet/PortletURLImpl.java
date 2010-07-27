@@ -60,6 +60,7 @@ import java.io.Writer;
 
 import java.security.Key;
 
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -298,6 +299,8 @@ public class PortletURLImpl
 				"p_p_col_count",
 				String.valueOf(portletDisplay.getColumnCount()));
 		}
+
+		_reservedParameters = Collections.unmodifiableMap(_reservedParameters);
 
 		return _reservedParameters;
 	}
