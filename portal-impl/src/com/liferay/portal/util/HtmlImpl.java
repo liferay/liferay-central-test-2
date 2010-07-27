@@ -332,13 +332,14 @@ public class HtmlImpl implements Html {
 	}
 
 	public String wordBreak(String text, int columns) {
+		StringBundler sb = new StringBundler();
+
 		int length = 0;
 		int lastWrite = 0;
 		int pos = 0;
 
-		StringBundler sb = new StringBundler();
-
 		Pattern pattern = Pattern.compile("([\\s<&]|$)");
+
 		Matcher matcher = pattern.matcher(text);
 
 		while (matcher.find()) {
@@ -346,7 +347,7 @@ public class HtmlImpl implements Html {
 				continue;
 			}
 
-			while (length + matcher.start() - pos >= columns) {
+			while ((length + matcher.start() - pos) >= columns) {
 				pos += columns - length;
 
 				sb.append(text.substring(lastWrite, pos));
@@ -362,9 +363,10 @@ public class HtmlImpl implements Html {
 
 			if (group.equals(StringPool.AMPERSAND)) {
 				int x = text.indexOf(StringPool.SEMICOLON, matcher.start());
+
 				if (x != -1) {
-					pos = x + 1;
 					length++;
+					pos = x + 1;
 				}
 
 				continue;
@@ -372,6 +374,7 @@ public class HtmlImpl implements Html {
 
 			if (group.equals(StringPool.LESS_THAN)) {
 				int x = text.indexOf(StringPool.GREATER_THAN, matcher.start());
+
 				if (x != -1) {
 					pos = x + 1;
 				}
