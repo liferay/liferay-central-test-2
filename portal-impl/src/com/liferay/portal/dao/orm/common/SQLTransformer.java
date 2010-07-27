@@ -38,6 +38,9 @@ public class SQLTransformer {
 		if (db.getType().equals(DB.TYPE_MYSQL)) {
 			_vendorMySQL = true;
 		}
+		else if (db.getType().equals(DB.TYPE_ORACLE)) {
+			_vendorOracle = true;
+		}
 		else if (db.getType().equals(DB.TYPE_POSTGRESQL)) {
 			_vendorPostgreSQL = true;
 		}
@@ -120,6 +123,9 @@ public class SQLTransformer {
 				newSQL = _removeLower(newSQL);
 			}
 		}
+		else if (_vendorOracle) {
+			newSQL = _replaceMod(newSQL);
+		}
 		else if (_vendorSQLServer) {
 			newSQL = _replaceMod(newSQL);
 		}
@@ -148,6 +154,7 @@ public class SQLTransformer {
 		"MOD\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
 
 	private boolean _vendorMySQL;
+	private boolean _vendorOracle;
 	private boolean _vendorPostgreSQL;
 	private boolean _vendorSQLServer;
 
