@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.workflow.permission.WorkflowPermissionUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
@@ -137,6 +138,15 @@ public class WikiPagePermission {
 				page.getUserId(), actionId)) {
 
 			return true;
+		}
+
+		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
+			if ((page.getParentPage() != null) &&
+				!contains(
+					permissionChecker, page.getParentPage(), ActionKeys.VIEW)) {
+
+				return false;
+			}
 		}
 
 		return permissionChecker.hasPermission(
