@@ -168,6 +168,8 @@
 	</target>
 
 	<target name="build-test-ant-scripts">
+		<delete dir="portal-web/test-ant-scripts" />
+
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-admin" />
 			<param name="test.ant.script.suite" value="ControlPanelAdminTestSuite" />
