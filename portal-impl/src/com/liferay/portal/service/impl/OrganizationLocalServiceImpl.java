@@ -17,6 +17,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.DuplicateOrganizationException;
 import com.liferay.portal.OrganizationNameException;
 import com.liferay.portal.OrganizationParentException;
+import com.liferay.portal.OrganizationTypeException;
 import com.liferay.portal.RequiredOrganizationException;
 import com.liferay.portal.kernel.cache.ThreadLocalCachable;
 import com.liferay.portal.kernel.configuration.Filter;
@@ -805,6 +806,11 @@ public class OrganizationLocalServiceImpl
 			long companyId, long organizationId, long parentOrganizationId,
 			String name, String type, long countryId, int statusId)
 		throws PortalException, SystemException {
+
+		if (!ArrayUtil.contains(PropsValues.ORGANIZATIONS_TYPES, type)) {
+			throw new OrganizationTypeException(
+				"Organization type " + type + " is not on the allowed list.");
+		}
 
 		if ((parentOrganizationId ==
 				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID)) {
