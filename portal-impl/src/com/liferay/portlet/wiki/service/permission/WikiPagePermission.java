@@ -141,9 +141,10 @@ public class WikiPagePermission {
 		}
 
 		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
-			if ((page.getParentPage() != null) &&
-				!contains(
-					permissionChecker, page.getParentPage(), ActionKeys.VIEW)) {
+			WikiPage parentPage = page.getParentPage();
+
+			if ((parentPage != null) &&
+				!contains(permissionChecker, parentPage, ActionKeys.VIEW)) {
 
 				return false;
 			}
