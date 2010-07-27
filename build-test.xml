@@ -25,9 +25,7 @@
 		<if>
 			<isset property="test.ant.script.plugins" />
 			<then>
-				<property name="test.ant.script.file.plugins">
-					<![CDATA[<property name="${test.ant.script.plugins.type}.plugins.includes" value="${test.ant.script.plugins}" />]]>
-				</property>
+				<property name="test.ant.script.file.plugins" value="&lt;property name=&quot;${test.ant.script.plugins.type}.plugins.includes&quot; value=&quot;${test.ant.script.plugins}&quot; /&gt;" />
 			</then>
 			<else>
 				<property name="test.ant.script.file.plugins" value=" " />
@@ -37,18 +35,14 @@
 		<if>
 			<isset property="test.ant.script.properties" />
 			<then>
-				<property name="test.ant.script.file.properties">
-					<![CDATA[<param name="custom.properties" value="${test.ant.script.properties}" />]]>
-				</property>
+				<property name="test.ant.script.file.properties" value="&lt;param name=&quot;custom.properties&quot; value=&quot;${test.ant.script.properties}&quot; /&gt;" />
 			</then>
 			<else>
 				<property name="test.ant.script.file.properties" value=" " />
 			</else>
 		</if>
 
-		<property name="test.ant.script.file.suite">
-			<![CDATA[<property name="test.name" value="${test.ant.script.suite}" />]]>
-		</property>
+		<property name="test.ant.script.file.suite" value="&lt;property name=&quot;test.name&quot; value=&quot;${test.ant.script.suite}&quot; /&gt;" />
 
 		<antcall target="build-test-ant-script-file">
 			<param name="test.ant.script.file.plugins" value="${test.ant.script.file.plugins}" />

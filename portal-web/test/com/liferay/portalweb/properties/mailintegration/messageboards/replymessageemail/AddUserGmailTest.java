@@ -46,6 +46,7 @@ public class AddUserGmailTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		selenium.type("_125_screenName", RuntimeVariables.replace("usersn"));
 		selenium.type("_125_emailAddress",
 			RuntimeVariables.replace("liferay.qa.testing@gmail.com"));
@@ -61,6 +62,7 @@ public class AddUserGmailTest extends BaseTestCase {
 			selenium.getValue("_125_emailAddress"));
 		assertEquals("userfn", selenium.getValue("_125_firstName"));
 		assertEquals("userln", selenium.getValue("_125_lastName"));
+		Thread.sleep(5000);
 		selenium.clickAt("passwordLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
