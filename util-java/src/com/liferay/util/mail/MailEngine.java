@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.mail.SMTPAccount;
@@ -483,6 +484,11 @@ public class MailEngine {
 							"make sure one is properly configured. " +
 								me.getMessage());
 				}
+			}
+			else {
+				_log.error(me.getMessage());
+
+				LogUtil.log(_log, me);				
 			}
 		}
 	}
