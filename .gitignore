@@ -77,6 +77,7 @@
 /portal-web/portal-web.war
 /portal-web/portal-web.war.asc
 /portal-web/ROOT.war
+/portal-web/test-ant-scripts
 /portal-web/test-classes
 /portal-web/test-output
 /portal-web/test-results
