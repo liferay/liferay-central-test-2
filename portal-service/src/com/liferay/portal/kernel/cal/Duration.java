@@ -168,7 +168,6 @@ public class Duration implements Cloneable, Serializable {
 		minutes = 0;
 		seconds = 0;
 	}
-	;
 
 	/**
 	 * Method getWeeks

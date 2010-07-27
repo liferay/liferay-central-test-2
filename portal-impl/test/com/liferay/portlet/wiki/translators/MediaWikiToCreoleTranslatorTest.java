@@ -366,7 +366,7 @@ public class MediaWikiToCreoleTranslatorTest extends BaseTestCase {
 
 		String expected =
 			MediaWikiToCreoleTranslator.TABLE_OF_CONTENTS +
-				"== Header 1 ==\n=== Header 2 ===";;
+				"== Header 1 ==\n=== Header 2 ===";
 		String actual = _translator.postProcess(_translate(content));
 
 		assertEquals(expected, actual);

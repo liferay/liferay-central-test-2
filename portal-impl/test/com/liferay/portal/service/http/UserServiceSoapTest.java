@@ -51,14 +51,14 @@ public class UserServiceSoapTest extends BaseServiceSoapTestCase {
 		String password1 = null;
 		String password2 = null;
 		boolean autoScreenName = true;
-		String screenName = StringPool.BLANK;;
+		String screenName = StringPool.BLANK;
 		String emailAddress =
 			"UserServiceSoapTest." + nextLong() + "@liferay.com";
 		long facebookId = 0;
 		String openId = StringPool.BLANK;
 		String locale = LocaleUtil.getDefault().toString();
 		String firstName = "UserServiceSoapTest";
-		String middleName = StringPool.BLANK;;
+		String middleName = StringPool.BLANK;
 		String lastName = "UserServiceSoapTest";
 		int prefixId = 0;
 		int suffixId = 0;
