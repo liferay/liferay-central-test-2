@@ -52,4 +52,6 @@ public interface Html {
 
 	public String unescape(String text);
 
+	public String wordBreak(String text, int columns);
+
 }

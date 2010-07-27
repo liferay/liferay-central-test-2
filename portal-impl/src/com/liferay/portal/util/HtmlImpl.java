@@ -17,8 +17,12 @@ package com.liferay.portal.util;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Html;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import net.htmlparser.jericho.Source;
 
@@ -27,6 +31,7 @@ import net.htmlparser.jericho.Source;
  * @author Clarence Shen
  * @author Harry Mark
  * @author Samuel Kong
+ * @author Connor McKay
  */
 public class HtmlImpl implements Html {
 
@@ -324,6 +329,67 @@ public class HtmlImpl implements Html {
 		text = StringUtil.replace(text, "&#045;", "-");
 
 		return text;
+	}
+
+	public String wordBreak(String text, int columns) {
+		int length = 0;
+		int lastWrite = 0;
+		int pos = 0;
+
+		StringBundler sb = new StringBundler();
+
+		Pattern pattern = Pattern.compile("([\\s<&]|$)");
+		Matcher matcher = pattern.matcher(text);
+
+		while (matcher.find()) {
+			if (matcher.start() < pos) {
+				continue;
+			}
+
+			while (length + matcher.start() - pos >= columns) {
+				pos += columns - length;
+
+				sb.append(text.substring(lastWrite, pos));
+				sb.append("<wbr/>");
+
+				length = 0;
+				lastWrite = pos;
+			}
+
+			length += matcher.start() - pos;
+
+			String group = matcher.group();
+
+			if (group.equals(StringPool.AMPERSAND)) {
+				int x = text.indexOf(StringPool.SEMICOLON, matcher.start());
+				if (x != -1) {
+					pos = x + 1;
+					length++;
+				}
+
+				continue;
+			}
+
+			if (group.equals(StringPool.LESS_THAN)) {
+				int x = text.indexOf(StringPool.GREATER_THAN, matcher.start());
+				if (x != -1) {
+					pos = x + 1;
+				}
+
+				continue;
+			}
+
+			if (group.equals(StringPool.SPACE) ||
+				group.equals(StringPool.NEW_LINE)) {
+
+				length = 0;
+				pos++;
+			}
+		}
+
+		sb.append(text.substring(lastWrite));
+
+		return sb.toString();
 	}
 
 	protected boolean isScriptTag(String text, int pos) {

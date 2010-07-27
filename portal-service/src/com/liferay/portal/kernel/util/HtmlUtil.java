@@ -86,6 +86,10 @@ public class HtmlUtil {
 		return getHtml().unescape(html);
 	}
 
+	public static String wordBreak(String html, int columns) {
+		return getHtml().wordBreak(html, columns);
+	}
+
 	public void setHtml(Html html) {
 		_html = html;
 	}
