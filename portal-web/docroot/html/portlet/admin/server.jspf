@@ -460,7 +460,7 @@ numberFormat.setMinimumIntegerDigits(2);
 
 							<aui:input cssClass="lfr-input-text-container" label='<%= LanguageUtil.get(pageContext, "maximum-file-size") + "(" + LanguageUtil.get(pageContext,"small-image") + ")" %>' name="shoppingImageSmallMaxSize" type="text" value="<%= PrefsPropsUtil.getLong(PropsKeys.SHOPPING_IMAGE_SMALL_MAX_SIZE) %>" />
 
-							<aui:input cssClass="lfr-input-text-container" label="allowed-file-extensions" name="journalImageExtensions" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.JOURNAL_IMAGE_EXTENSIONS) %>" />
+							<aui:input cssClass="lfr-input-text-container" label="allowed-file-extensions" name="shoppingImageExtensions" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.SHOPPING_IMAGE_EXTENSIONS) %>" />
 						</liferay-ui:panel>
 					</liferay-ui:panel-container>
 
