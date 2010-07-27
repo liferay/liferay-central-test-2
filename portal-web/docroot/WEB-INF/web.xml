@@ -1029,6 +1029,10 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>I18n Servlet</servlet-name>
+		<url-pattern>/en_GB/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>I18n Servlet</servlet-name>
 		<url-pattern>/en_US/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
@@ -1426,6 +1430,7 @@
 			<url-pattern>/el/c/portal/protected</url-pattern>
 			<url-pattern>/el_GR/c/portal/protected</url-pattern>
 			<url-pattern>/en/c/portal/protected</url-pattern>
+			<url-pattern>/en_GB/c/portal/protected</url-pattern>
 			<url-pattern>/en_US/c/portal/protected</url-pattern>
 			<url-pattern>/es/c/portal/protected</url-pattern>
 			<url-pattern>/es_ES/c/portal/protected</url-pattern>
