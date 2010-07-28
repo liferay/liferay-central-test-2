@@ -252,10 +252,19 @@ public class EntityColumn implements Cloneable {
 	}
 
 	public boolean isPrimitiveType() {
+		return isPrimitiveType(true);
+	}
+
+	public boolean isPrimitiveType(boolean includeWrappers) {
 		if (Character.isLowerCase(_type.charAt(0))) {
 			return true;
 		}
-		else if (_type.equals("Boolean")) {
+
+		if (!includeWrappers) {
+			return false;
+		}
+
+		if (_type.equals("Boolean")) {
 			return true;
 		}
 		else if (_type.equals("Double")) {

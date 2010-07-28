@@ -388,13 +388,17 @@ public class Entity {
 	}
 
 	public boolean hasPrimitivePK() {
+		return 	hasPrimitivePK(true);
+	}
+
+	public boolean hasPrimitivePK(boolean includeWrappers) {
 		if (hasCompoundPK()) {
 			return false;
 		}
 		else {
 			EntityColumn col = _getPKColumn();
 
-			if (col.isPrimitiveType()) {
+			if (col.isPrimitiveType(includeWrappers)) {
 				return true;
 			}
 			else {
