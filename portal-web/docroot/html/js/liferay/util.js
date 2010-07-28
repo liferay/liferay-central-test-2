@@ -408,6 +408,66 @@ Liferay.Util = {
 				return str;
 			}
 		);
+	},
+
+	_getEditableInstance: function(title) {
+		var instance = this;
+
+		var A = AUI();
+
+		var editable = instance._EDITABLE;
+
+		if (!editable) {
+			editable = new A.Editable(
+				{
+					after: {
+						contentTextChange: function(event) {
+							var instance = this;
+
+							if (!event.initial) {
+								var title = instance.get('node');
+
+								var portletTitleEditOptions = title.getData('portletTitleEditOptions');
+
+								Liferay.Util.savePortletTitle(
+									{
+										doAsUserId: portletTitleEditOptions.doAsUserId,
+										plid: portletTitleEditOptions.plid,
+										portletId: portletTitleEditOptions.portletId,
+										title: event.newVal
+									}
+								);
+							}
+						},
+						startEditing: function(event) {
+							var instance = this;
+
+							if (Liferay.Layout) {
+								instance._dragListener = Liferay.Layout.layoutHandler.on(
+									'drag:start',
+									function(event) {
+										instance.fire('save');
+									}
+								);
+							}
+						},
+						stopEditing: function(event) {
+							var instance = this;
+
+							if (instance._dragListener) {
+								instance._dragListener.detach();
+							}
+						}
+					},
+					cssClass: 'lfr-portlet-title-editable',
+					node: title
+				}
+			);
+
+			instance._EDITABLE = editable;
+		}
+
+		return editable;
 	}
 };
 
@@ -826,58 +886,34 @@ Liferay.provide(
 	Liferay.Util,
 	'portletTitleEdit',
 	function(options) {
+		var instance = this;
+
 		var A = AUI();
 
 		var obj = options.obj;
-		var plid = options.plid;
-		var doAsUserId = options.doAsUserId;
-		var portletId = options.portletId;
-		var url = options.url;
-
 		var title = obj.one('.portlet-title-text');
 
-		var re = new RegExp('<\/?[^>]+>|\n|\r|\t', 'gim');
-
 		if (title && !title.hasClass('not-editable')) {
-			var editableTitle = new A.Editable(
-				{
-					after: {
-						contentTextChange: function(event) {
-							var instance = this;
+			title.setData('portletTitleEditOptions', options);
 
-							if (!event.initial) {
-								Liferay.Util.savePortletTitle(
-									{
-										doAsUserId: doAsUserId,
-										plid: plid,
-										portletId: portletId,
-										title: event.newVal
-									}
-								);
-							}
-						},
-						startEditing: function(event) {
-							var instance = this;
+			title.on(
+				'click',
+				function(event) {
+					var editable = instance._getEditableInstance(title);
 
-							if (Liferay.Layout) {
-								instance._dragListener = Liferay.Layout.layoutHandler.on(
-									'drag:start',
-									function(event) {
-										instance.fire('save');
-									}
-								);
-							}
-						},
-						stopEditing: function(event) {
-							var instance = this;
+					var rendered = editable.get('rendered');
 
-							if (instance._dragListener) {
-								instance._dragListener.detach();
-							}
-						}
-					},
-					cssClass: 'lfr-portlet-title-editable',
-					node: title
+					if (rendered) {
+						editable.fire('stopEditing');
+					}
+
+					editable.set('node', event.currentTarget);
+
+					if (rendered) {
+						editable.syncUI();
+					}
+
+					editable._startEditing(event);
 				}
 			);
 		}
