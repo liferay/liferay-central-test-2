@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.staging.StagingConstants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
@@ -118,7 +119,9 @@ public class GroupImpl extends GroupModelImpl implements Group {
 			Company company = CompanyLocalServiceUtil.getCompany(
 				getCompanyId());
 
-			name = company.getAccount().getName();
+			Account account = company.getAccount();
+
+			name = account.getName();
 		}
 
 		return name;
@@ -147,7 +150,9 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	public long getOrganizationId() {
 		if (isOrganization()) {
 			if (isStagingGroup()) {
-				return getLiveGroup().getClassPK();
+				Group liveGroup = getLiveGroup();
+
+				return liveGroup.getClassPK();
 			}
 			else {
 				return getClassPK();
