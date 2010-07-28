@@ -152,6 +152,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		else if (className.equals(Organization.class.getName()) && staging) {
 			classPK = liveGroupId;
 		}
+		else {
+			name = String.valueOf(classPK);
+		}
 
 		long parentGroupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
 
