@@ -29,7 +29,6 @@ import javax.servlet.jsp.JspException;
 public class IconListTag extends BaseBodyTagSupport {
 
 	public int doAfterBody() {
-
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
