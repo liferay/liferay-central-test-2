@@ -58,8 +58,9 @@ public interface AssetRendererFactory {
 		LiferayPortletResponse liferayPortletResponse);
 
 	public boolean hasPermission(
-		PermissionChecker permissionChecker, long entryClassPK,
-		String actionId) throws Exception;
+			PermissionChecker permissionChecker, long entryClassPK,
+			String actionId)
+		throws Exception;
 
 	public boolean isSelectable();
 

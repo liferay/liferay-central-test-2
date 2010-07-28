@@ -20,13 +20,12 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetEntryDisplay;
@@ -100,7 +99,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 	public List<AssetEntry> getEntries(AssetEntryQuery entryQuery)
 		throws PortalException, SystemException {
 
-		preFilterQuery(entryQuery);
+		setupQuery(entryQuery);
 
 		Object[] results = filterQuery(entryQuery);
 
@@ -110,7 +109,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 	public int getEntriesCount(AssetEntryQuery entryQuery)
 		throws PortalException, SystemException {
 
-		preFilterQuery(entryQuery);
+		setupQuery(entryQuery);
 
 		Object[] results = filterQuery(entryQuery);
 
@@ -122,7 +121,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			double version, String displayStyle, String feedURL, String tagURL)
 		throws PortalException, SystemException {
 
-		preFilterQuery(entryQuery);
+		setupQuery(entryQuery);
 
 		Object[] results = filterQuery(entryQuery);
 
@@ -281,7 +280,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		int end = entryQuery.getEnd();
 
 		entryQuery.setStart(0);
-		entryQuery.setEnd(end + ASSET_FILTER_SEARCH_LIMIT);
+		entryQuery.setEnd(end + PropsValues.ASSET_FILTER_SEARCH_LIMIT);
 
 		List<AssetEntry> entries = assetEntryLocalService.getEntries(
 			entryQuery);
@@ -321,19 +320,15 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		return new Object[] {filteredEntries, length};
 	}
 
-	protected void preFilterQuery(AssetEntryQuery entryQuery)
+	protected void setupQuery(AssetEntryQuery entryQuery)
 		throws PortalException, SystemException {
 
-		entryQuery.setAllCategoryIds(filterCategoryIds(
-			entryQuery.getAllCategoryIds()));
-		entryQuery.setAnyCategoryIds(filterCategoryIds(
-			entryQuery.getAnyCategoryIds()));
-
+		entryQuery.setAllCategoryIds(
+			filterCategoryIds(entryQuery.getAllCategoryIds()));
 		entryQuery.setAllTagIds(filterTagIds(entryQuery.getAllTagIds()));
+		entryQuery.setAnyCategoryIds(
+			filterCategoryIds(entryQuery.getAnyCategoryIds()));
 		entryQuery.setAnyTagIds(filterTagIds(entryQuery.getAnyTagIds()));
 	}
-
-	public static final int ASSET_FILTER_SEARCH_LIMIT = GetterUtil.getInteger(
-		PropsUtil.get(PropsKeys.ASSET_FILTER_SEARCH_LIMIT));
 
 }
