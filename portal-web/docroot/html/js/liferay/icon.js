@@ -11,15 +11,17 @@ AUI().add(
 				var src = config.src;
 				var forcePost = config.forcePost;
 
-				if (srcHover) {
-					instance._onMouseOver = A.rbind(instance._onMouseHover, instance, srcHover);
-					instance._onMouseOut = A.rbind(instance._onMouseHover, instance, src);
+				if (icon) {
+					if (srcHover) {
+						instance._onMouseOver = A.rbind(instance._onMouseHover, instance, srcHover);
+						instance._onMouseOut = A.rbind(instance._onMouseHover, instance, src);
 
-					icon.hover(instance._onMouseOver, instance._onMouseOut);
-				}
+						icon.hover(instance._onMouseOver, instance._onMouseOut);
+					}
 
-				if (forcePost) {
-					icon.on('click', instance._onClick, instance);
+					if (forcePost) {
+						icon.on('click', instance._onClick, instance);
+					}
 				}
 			},
 
