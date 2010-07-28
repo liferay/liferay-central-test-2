@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
-import com.liferay.portal.kernel.util.PortalInitable;
+import com.liferay.portal.kernel.util.BasePortalLifecycle;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -39,18 +39,21 @@ import org.apache.struts.Globals;
 /**
  * @author Michael Young
  */
-public class PortalSessionDestroyer implements PortalInitable {
+public class PortalSessionDestroyer extends BasePortalLifecycle {
 
-	public PortalSessionDestroyer(HttpSessionEvent event) {
-		_event = event;
+	public PortalSessionDestroyer(HttpSessionEvent httpSessionEvent) {
+		_httpSessionEvent = httpSessionEvent;
 	}
 
-	public void portalInit() {
+	protected void doPortalDestroy() {
+	}
+
+	protected void doPortalInit() {
 		if (PropsValues.SESSION_DISABLED) {
 			return;
 		}
 
-		HttpSession session = _event.getSession();
+		HttpSession session = _httpSessionEvent.getSession();
 
 		PortalSessionContext.remove(session.getId());
 
@@ -156,6 +159,6 @@ public class PortalSessionDestroyer implements PortalInitable {
 	private static Log _log = LogFactoryUtil.getLog(
 		PortalSessionDestroyer.class);
 
-	private HttpSessionEvent _event;
+	private HttpSessionEvent _httpSessionEvent;
 
 }

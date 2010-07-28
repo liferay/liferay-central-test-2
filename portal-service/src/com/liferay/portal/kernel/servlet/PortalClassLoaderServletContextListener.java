@@ -17,9 +17,8 @@ package com.liferay.portal.kernel.servlet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
+import com.liferay.portal.kernel.util.BasePortalLifecycle;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.PortalInitable;
-import com.liferay.portal.kernel.util.PortalInitableUtil;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -30,12 +29,30 @@ import javax.servlet.ServletContextListener;
  * @author Sandeep Soni
  */
 public abstract class PortalClassLoaderServletContextListener
-	implements PortalInitable, ServletContextListener {
+	extends BasePortalLifecycle implements ServletContextListener {
 
 	public PortalClassLoaderServletContextListener() {
 	}
 
-	public void contextDestroyed(ServletContextEvent event) {
+	public void contextDestroyed(ServletContextEvent servletContextEvent) {
+		portalDestroy();
+	}
+
+	public void contextInitialized(ServletContextEvent servletContextEvent) {
+		_servletContextEvent = servletContextEvent;
+
+		ServletContext servletContext = servletContextEvent.getServletContext();
+
+		_servletContextName = servletContext.getServletContextName();
+
+		Thread currentThread = Thread.currentThread();
+
+		_portletClassLoader = currentThread.getContextClassLoader();
+
+		registerPortalLifecycle();
+	}
+
+	protected void doPortalDestroy() {
 		PortletClassLoaderUtil.setClassLoader(_portletClassLoader);
 		PortletClassLoaderUtil.setServletContextName(_servletContextName);
 
@@ -47,28 +64,14 @@ public abstract class PortalClassLoaderServletContextListener
 			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
-			_servletContextListener.contextDestroyed(event);
+			_servletContextListener.contextDestroyed(_servletContextEvent);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 
-	public void contextInitialized(ServletContextEvent event) {
-		_event = event;
-
-		ServletContext servletContext = event.getServletContext();
-
-		_servletContextName = servletContext.getServletContextName();
-
-		Thread currentThread = Thread.currentThread();
-
-		_portletClassLoader = currentThread.getContextClassLoader();
-
-		PortalInitableUtil.init(this);
-	}
-
-	public void portalInit() {
+	protected void doPortalInit() {
 		PortletClassLoaderUtil.setClassLoader(_portletClassLoader);
 		PortletClassLoaderUtil.setServletContextName(_servletContextName);
 
@@ -82,7 +85,7 @@ public abstract class PortalClassLoaderServletContextListener
 
 			_servletContextListener = getInstance();
 
-			_servletContextListener.contextInitialized(_event);
+			_servletContextListener.contextInitialized(_servletContextEvent);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -97,7 +100,7 @@ public abstract class PortalClassLoaderServletContextListener
 	private static Log _log = LogFactoryUtil.getLog(
 		PortalClassLoaderServletContextListener.class);
 
-	private ServletContextEvent _event;
+	private ServletContextEvent _servletContextEvent;
 	private ServletContextListener _servletContextListener;
 	private ClassLoader _portletClassLoader;
 	private String _servletContextName;

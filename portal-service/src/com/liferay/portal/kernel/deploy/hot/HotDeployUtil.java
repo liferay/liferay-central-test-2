@@ -16,8 +16,9 @@ package com.liferay.portal.kernel.deploy.hot;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.PortalInitable;
-import com.liferay.portal.kernel.util.PortalInitableUtil;
+import com.liferay.portal.kernel.util.BasePortalLifecycle;
+import com.liferay.portal.kernel.util.PortalLifecycle;
+import com.liferay.portal.kernel.util.PortalLifecycleUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.ArrayList;
@@ -161,15 +162,18 @@ public class HotDeployUtil {
 
 			// Capture events that are fired before the portal initialized
 
-			PortalInitable portalInitable = new PortalInitable() {
+			PortalLifecycle portalLifecycle = new BasePortalLifecycle() {
 
-				public void portalInit() {
+				protected void doPortalDestroy() {
+				}
+
+				protected void doPortalInit() {
 					HotDeployUtil.fireDeployEvent(event);
 				}
 
 			};
 
-			PortalInitableUtil.init(portalInitable);
+			PortalLifecycleUtil.register(portalLifecycle);
 		}
 		else {
 

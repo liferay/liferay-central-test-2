@@ -18,9 +18,8 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.BasePortalLifecycle;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
-import com.liferay.portal.kernel.util.PortalInitable;
-import com.liferay.portal.kernel.util.PortalInitableUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 
 import java.lang.reflect.Method;
@@ -40,17 +39,25 @@ import javax.sql.DataSource;
  * @author Brian Wing Shun Chan
  */
 public class PortletContextListener
-	implements PortalInitable, ServletContextListener {
+	extends BasePortalLifecycle implements ServletContextListener {
 
-	public void contextDestroyed(ServletContextEvent event) {
-		ServletContext servletContext = event.getServletContext();
+	public void contextDestroyed(ServletContextEvent servletContextEvent) {
+		portalDestroy();
+	}
+
+	public void contextInitialized(ServletContextEvent servletContextEvent) {
+		_servletContext = servletContextEvent.getServletContext();
 
 		Thread currentThread = Thread.currentThread();
 
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+		_portletClassLoader = currentThread.getContextClassLoader();
 
+		registerPortalLifecycle();
+	}
+
+	protected void doPortalDestroy() {
 		HotDeployUtil.fireUndeployEvent(
-			new HotDeployEvent(servletContext, contextClassLoader));
+			new HotDeployEvent(_servletContext, _portletClassLoader));
 
 		try {
 			if (!_bindLiferayPool) {
@@ -88,17 +95,7 @@ public class PortletContextListener
 		}
 	}
 
-	public void contextInitialized(ServletContextEvent event) {
-		_servletContext = event.getServletContext();
-
-		Thread currentThread = Thread.currentThread();
-
-		_portletClassLoader = currentThread.getContextClassLoader();
-
-		PortalInitableUtil.init(this);
-	}
-
-	public void portalInit() {
+	protected void doPortalInit() {
 		HotDeployUtil.fireDeployEvent(
 			new HotDeployEvent(_servletContext, _portletClassLoader));
 

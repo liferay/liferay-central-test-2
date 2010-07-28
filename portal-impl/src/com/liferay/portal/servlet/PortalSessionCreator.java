@@ -18,7 +18,7 @@ import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.PortalInitable;
+import com.liferay.portal.kernel.util.BasePortalLifecycle;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
 
@@ -28,18 +28,23 @@ import javax.servlet.http.HttpSessionEvent;
 /**
  * @author Michael Young
  */
-public class PortalSessionCreator implements PortalInitable {
+public class PortalSessionCreator extends BasePortalLifecycle {
 
-	public PortalSessionCreator(HttpSessionEvent event) {
-		_event = event;
+	public PortalSessionCreator(HttpSessionEvent httpSessionEvent) {
+		_httpSessionEvent = httpSessionEvent;
+
+		registerPortalLifecycle();
 	}
 
-	public void portalInit() {
+	protected void doPortalDestroy() {
+	}
+
+	protected void doPortalInit() {
 		if (PropsValues.SESSION_DISABLED) {
 			return;
 		}
 
-		HttpSession session = _event.getSession();
+		HttpSession session = _httpSessionEvent.getSession();
 
 		try {
 			PortalSessionContext.put(session.getId(), session);
@@ -65,6 +70,6 @@ public class PortalSessionCreator implements PortalInitable {
 	private static Log _log = LogFactoryUtil.getLog(
 		PortalSessionCreator.class);
 
-	private HttpSessionEvent _event;
+	private HttpSessionEvent _httpSessionEvent;
 
 }

@@ -40,7 +40,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.PortalInitableUtil;
+import com.liferay.portal.kernel.util.PortalLifecycleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
@@ -125,6 +125,12 @@ import org.apache.struts.tiles.TilesUtilImpl;
 public class MainServlet extends ActionServlet {
 
 	public void destroy() {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Destroy plugins");
+		}
+
+		PortalLifecycleUtil.flushDestroys();
+
 		List<Portlet> portlets = PortletLocalServiceUtil.getPortlets();
 
 		if (_log.isDebugEnabled()) {
@@ -794,7 +800,7 @@ public class MainServlet extends ActionServlet {
 
 		HotDeployUtil.setCapturePrematureEvents(false);
 
-		PortalInitableUtil.flushInitables();
+		PortalLifecycleUtil.flushInits();
 	}
 
 	protected void initPortletApp(

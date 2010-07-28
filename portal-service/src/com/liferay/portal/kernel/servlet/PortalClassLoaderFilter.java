@@ -14,11 +14,8 @@
 
 package com.liferay.portal.kernel.servlet;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.BasePortalLifecycle;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.PortalInitable;
-import com.liferay.portal.kernel.util.PortalInitableUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.IOException;
@@ -33,22 +30,11 @@ import javax.servlet.ServletResponse;
 /**
  * @author Brian Wing Shun Chan
  */
-public class PortalClassLoaderFilter implements Filter, PortalInitable {
+public class PortalClassLoaderFilter
+	extends BasePortalLifecycle implements Filter{
 
 	public void destroy() {
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			currentThread.setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
-
-			_filter.destroy();
-		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
-		}
+		portalDestroy();
 	}
 
 	public void doFilter(
@@ -74,32 +60,40 @@ public class PortalClassLoaderFilter implements Filter, PortalInitable {
 	public void init(FilterConfig filterConfig) {
 		_filterConfig = filterConfig;
 
-		PortalInitableUtil.init(this);
+		registerPortalLifecycle();
 	}
 
-	public void portalInit() {
+	protected void doPortalDestroy() {
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
 		try {
-			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
+			currentThread.setContextClassLoader(
+				PortalClassLoaderUtil.getClassLoader());
 
-			String filterClass = _filterConfig.getInitParameter("filter-class");
-
-			if (filterClass.startsWith("com.liferay.filters.")) {
-				filterClass = StringUtil.replace(
-					filterClass, "com.liferay.filters.",
-					"com.liferay.portal.servlet.filters.");
-			}
-
-			_filter = (Filter)classLoader.loadClass(filterClass).newInstance();
-
-			_filter.init(_filterConfig);
+			_filter.destroy();
 		}
-		catch (Exception e) {
-			_log.error(e, e);
+		finally {
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		PortalClassLoaderFilter.class);
+	protected void doPortalInit() throws Exception {
+		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
+
+		String filterClass = _filterConfig.getInitParameter("filter-class");
+
+		if (filterClass.startsWith("com.liferay.filters.")) {
+			filterClass = StringUtil.replace(
+				filterClass, "com.liferay.filters.",
+				"com.liferay.portal.servlet.filters.");
+		}
+
+		_filter = (Filter)classLoader.loadClass(filterClass).newInstance();
+
+		_filter.init(_filterConfig);
+	}
 
 	private Filter _filter;
 	private FilterConfig _filterConfig;

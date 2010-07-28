@@ -17,8 +17,8 @@ package com.liferay.portal.kernel.servlet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.PortalInitable;
-import com.liferay.portal.kernel.util.PortalInitableUtil;
+import com.liferay.portal.kernel.util.PortalLifecycle;
+import com.liferay.portal.kernel.util.PortalLifecycleUtil;
 
 import java.io.IOException;
 
@@ -32,28 +32,26 @@ import javax.servlet.http.HttpServletResponse;
  * @author Brian Wing Shun Chan
  */
 public class PortalClassLoaderServlet
-	extends HttpServlet implements PortalInitable {
+	extends HttpServlet implements PortalLifecycle {
 
 	public void destroy() {
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			currentThread.setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
-
-			_servlet.destroy();
-		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
-		}
+		portalDestroy();
 	}
 
 	public void init(ServletConfig servletConfig) {
 		_servletConfig = servletConfig;
 
-		PortalInitableUtil.init(this);
+		PortalLifecycleUtil.register(this);
+	}
+
+	public void portalDestroy() {
+		if (!_calledPortalDestroy) {
+			PortalLifecycleUtil.removeDestroy(this);
+
+			doPortalDestroy();
+
+			_calledPortalDestroy = true;
+		}
 	}
 
 	public void portalInit() {
@@ -101,9 +99,26 @@ public class PortalClassLoaderServlet
 		}
 	}
 
+	protected void doPortalDestroy() {
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			currentThread.setContextClassLoader(
+				PortalClassLoaderUtil.getClassLoader());
+
+			_servlet.destroy();
+		}
+		finally {
+			currentThread.setContextClassLoader(contextClassLoader);
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(
 		PortalClassLoaderServlet.class);
 
+	private boolean _calledPortalDestroy;
 	private HttpServlet _servlet;
 	private ServletConfig _servletConfig;
 

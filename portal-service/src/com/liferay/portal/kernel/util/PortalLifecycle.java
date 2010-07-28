@@ -12,27 +12,15 @@
  * details.
  */
 
-package com.liferay.portal.servlet;
-
-import com.liferay.portal.kernel.cache.Lifecycle;
-import com.liferay.portal.kernel.cache.ThreadLocalCacheManager;
-
-import javax.servlet.http.HttpSessionEvent;
-import javax.servlet.http.HttpSessionListener;
+package com.liferay.portal.kernel.util;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class PortalSessionListener implements HttpSessionListener {
+public interface PortalLifecycle {
 
-	public void sessionCreated(HttpSessionEvent httpSessionEvent) {
-		new PortalSessionCreator(httpSessionEvent);
-	}
+	public void portalDestroy();
 
-	public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
-		new PortalSessionDestroyer(httpSessionEvent);
-
-		ThreadLocalCacheManager.clearAll(Lifecycle.SESSION);
-	}
+	public void portalInit();
 
 }
