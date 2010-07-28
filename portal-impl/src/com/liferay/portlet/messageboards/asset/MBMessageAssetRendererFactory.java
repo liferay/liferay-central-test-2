@@ -18,17 +18,20 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.BaseAssetRendererFactory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
 
 import javax.portlet.PortletURL;
 
 /**
  * @author Julio Camarero
  * @author Juan Fernández
+ * @author Raymond Augé
  */
 public class MBMessageAssetRendererFactory extends BaseAssetRendererFactory {
 
@@ -57,6 +60,14 @@ public class MBMessageAssetRendererFactory extends BaseAssetRendererFactory {
 		LiferayPortletResponse liferayPortletResponse) {
 
 		return null;
+	}
+
+	public boolean hasPermission(
+			PermissionChecker permissionChecker, long classPK, String actionId)
+		throws Exception {
+
+		return MBMessagePermission.contains(
+			permissionChecker, classPK, actionId);
 	}
 
 	protected String getIconPath(ThemeDisplay themeDisplay) {

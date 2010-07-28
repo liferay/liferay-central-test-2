@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
@@ -26,12 +27,14 @@ import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.BaseAssetRendererFactory;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
+import com.liferay.portlet.calendar.service.permission.CalEventPermission;
 import com.liferay.portlet.calendar.service.permission.CalendarPermission;
 
 import javax.portlet.PortletURL;
 
 /**
  * @author Juan Fernández
+ * @author Raymond Augé
  */
 public class CalEventAssetRendererFactory extends BaseAssetRendererFactory {
 
@@ -76,6 +79,14 @@ public class CalEventAssetRendererFactory extends BaseAssetRendererFactory {
 		}
 
 		return addAssetURL;
+	}
+
+	public boolean hasPermission(
+			PermissionChecker permissionChecker, long classPK, String actionId)
+		throws Exception {
+
+		return CalEventPermission.contains(
+			permissionChecker, classPK, actionId);
 	}
 
 	protected String getIconPath(ThemeDisplay themeDisplay) {

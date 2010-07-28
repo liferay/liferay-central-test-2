@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
@@ -27,6 +28,7 @@ import com.liferay.portlet.asset.model.BaseAssetRendererFactory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
+import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
 import com.liferay.portlet.blogs.service.permission.BlogsPermission;
 
 import javax.portlet.PortletURL;
@@ -34,6 +36,7 @@ import javax.portlet.PortletURL;
 /**
  * @author Jorge Ferrer
  * @author Juan Fernández
+ * @author Raymond Augé
  */
 public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 
@@ -86,6 +89,14 @@ public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 		}
 
 		return addAssetURL;
+	}
+
+	public boolean hasPermission(
+			PermissionChecker permissionChecker, long classPK, String actionId)
+		throws Exception {
+
+		return BlogsEntryPermission.contains(
+			permissionChecker, classPK, actionId);
 	}
 
 	protected String getIconPath(ThemeDisplay themeDisplay) {

@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
@@ -30,6 +31,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.service.permission.DLPermission;
 
 import javax.portlet.PortletURL;
@@ -37,6 +39,7 @@ import javax.portlet.PortletURL;
 /**
  * @author Julio Camarero
  * @author Juan Fernández
+ * @author Raymond Augé
  */
 public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 
@@ -106,6 +109,14 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 		}
 
 		return addAssetURL;
+	}
+
+	public boolean hasPermission(
+			PermissionChecker permissionChecker, long classPK, String actionId)
+		throws Exception {
+
+		return DLFileEntryPermission.contains(
+			permissionChecker, classPK, actionId);
 	}
 
 	protected String getIconPath(ThemeDisplay themeDisplay) {

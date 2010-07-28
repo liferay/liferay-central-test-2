@@ -14,14 +14,18 @@
 
 package com.liferay.portlet.asset.service.impl;
 
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
@@ -49,6 +53,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  * @author Bruno Farache
+ * @author Raymond Augé
  */
 public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 
@@ -95,17 +100,21 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 	public List<AssetEntry> getEntries(AssetEntryQuery entryQuery)
 		throws PortalException, SystemException {
 
-		filterQuery(entryQuery);
+		preFilterQuery(entryQuery);
 
-		return assetEntryLocalService.getEntries(entryQuery);
+		Object[] results = filterQuery(entryQuery);
+
+		return (List<AssetEntry>)results[0];
 	}
 
 	public int getEntriesCount(AssetEntryQuery entryQuery)
 		throws PortalException, SystemException {
 
-		filterQuery(entryQuery);
+		preFilterQuery(entryQuery);
 
-		return assetEntryLocalService.getEntriesCount(entryQuery);
+		Object[] results = filterQuery(entryQuery);
+
+		return (Integer)results[1];
 	}
 
 	public String getEntriesRSS(
@@ -113,13 +122,13 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			double version, String displayStyle, String feedURL, String tagURL)
 		throws PortalException, SystemException {
 
-		filterQuery(entryQuery);
+		preFilterQuery(entryQuery);
 
-		List<AssetEntry> entries = assetEntryLocalService.getEntries(
-			entryQuery);
+		Object[] results = filterQuery(entryQuery);
 
 		return exportToRSS(
-			name, null, type, version, displayStyle, feedURL, tagURL, entries);
+			name, null, type, version, displayStyle, feedURL, tagURL,
+			(List<AssetEntry>)results[0]);
 	}
 
 	public AssetEntry getEntry(long entryId)
@@ -248,18 +257,6 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			viewableCategoryIds.toArray(new Long[viewableCategoryIds.size()]));
 	}
 
-	protected void filterQuery(AssetEntryQuery entryQuery)
-		throws PortalException, SystemException {
-
-		entryQuery.setAllCategoryIds(filterCategoryIds(
-			entryQuery.getAllCategoryIds()));
-		entryQuery.setAnyCategoryIds(filterCategoryIds(
-			entryQuery.getAnyCategoryIds()));
-
-		entryQuery.setAllTagIds(filterTagIds(entryQuery.getAllTagIds()));
-		entryQuery.setAnyTagIds(filterTagIds(entryQuery.getAnyTagIds()));
-	}
-
 	protected long[] filterTagIds(long[] tagIds)
 		throws PortalException, SystemException {
 
@@ -276,5 +273,67 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		return ArrayUtil.toArray(
 			viewableTagIds.toArray(new Long[viewableTagIds.size()]));
 	}
+
+	protected Object[] filterQuery(AssetEntryQuery entryQuery)
+		throws PortalException, SystemException {
+
+		int start = entryQuery.getStart();
+		int end = entryQuery.getEnd();
+
+		entryQuery.setStart(0);
+		entryQuery.setEnd(end + ASSET_FILTER_SEARCH_LIMIT);
+
+		List<AssetEntry> entries = assetEntryLocalService.getEntries(
+			entryQuery);
+
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		List<AssetEntry> filteredEntries = new ArrayList<AssetEntry>();
+
+		for (AssetEntry entry : entries) {
+			String className = entry.getClassName();
+			long classPK = entry.getClassPK();
+
+			AssetRendererFactory factory = AssetRendererFactoryRegistryUtil.
+				getAssetRendererFactoryByClassName(className);
+
+			try {
+				if (factory.hasPermission(
+						permissionChecker, classPK, ActionKeys.VIEW)) {
+
+					filteredEntries.add(entry);
+				}
+			}
+			catch (Exception e) {
+			}
+		}
+
+		int length = filteredEntries.size();
+
+		if ((start != QueryUtil.ALL_POS) && (end != QueryUtil.ALL_POS)) {
+			if (end > length) {
+				end = length;
+			}
+
+			filteredEntries = filteredEntries.subList(start, end);
+		}
+
+		return new Object[] {filteredEntries, length};
+	}
+
+	protected void preFilterQuery(AssetEntryQuery entryQuery)
+		throws PortalException, SystemException {
+
+		entryQuery.setAllCategoryIds(filterCategoryIds(
+			entryQuery.getAllCategoryIds()));
+		entryQuery.setAnyCategoryIds(filterCategoryIds(
+			entryQuery.getAnyCategoryIds()));
+
+		entryQuery.setAllTagIds(filterTagIds(entryQuery.getAllTagIds()));
+		entryQuery.setAnyTagIds(filterTagIds(entryQuery.getAnyTagIds()));
+	}
+
+	public static final int ASSET_FILTER_SEARCH_LIMIT = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.ASSET_FILTER_SEARCH_LIMIT));
 
 }

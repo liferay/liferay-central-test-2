@@ -95,11 +95,11 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 
 		assetEntryQuery.setExcludeZeroViewCount(false);
 
-		int total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
+		int total = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
 
 		searchContainer.setTotal(total);
 
-		List results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
+		List results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
 
 		searchContainer.setResults(results);
 

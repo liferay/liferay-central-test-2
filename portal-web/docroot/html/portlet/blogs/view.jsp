@@ -66,8 +66,8 @@ portletURL.setParameter("struts_action", "/blogs/view");
 			assetEntryQuery.setVisible(Boolean.TRUE);
 		}
 
-		total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
-		results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
+		total = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
+		results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
 	}
 	else {
 		int status = WorkflowConstants.STATUS_APPROVED;

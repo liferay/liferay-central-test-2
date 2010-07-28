@@ -49,8 +49,8 @@ OrderByComparator orderByComparator = BookmarksUtil.getEntriesOrderByComparator(
 
 			assetEntryQuery.setExcludeZeroViewCount(false);
 
-			results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
-			total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
+			results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
+			total = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
 
 			pageContext.setAttribute("results", results);
 			pageContext.setAttribute("total", total);

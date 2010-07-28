@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
@@ -31,6 +32,7 @@ import com.liferay.portlet.journal.model.JournalArticleResource;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
+import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
 import com.liferay.portlet.journal.service.permission.JournalPermission;
 
 import javax.portlet.PortletURL;
@@ -38,6 +40,7 @@ import javax.portlet.PortletURL;
 /**
  * @author Julio Camarero
  * @author Juan Fernández
+ * @author Raymond Augé
  */
 public class JournalArticleAssetRendererFactory
 	extends BaseAssetRendererFactory {
@@ -114,6 +117,14 @@ public class JournalArticleAssetRendererFactory
 		}
 
 		return addAssetURL;
+	}
+
+	public boolean hasPermission(
+			PermissionChecker permissionChecker, long classPK, String actionId)
+		throws Exception {
+
+		return JournalArticlePermission.contains(
+			permissionChecker, classPK, actionId);
 	}
 
 	protected String getIconPath(ThemeDisplay themeDisplay) {

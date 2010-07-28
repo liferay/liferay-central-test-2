@@ -38,13 +38,13 @@ if (assetVocabularyId > 0) {
 
 		assetEntryQuery.setAllCategoryIds(newAllAssetCategoryIds);
 
-		int groupTotal = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
+		int groupTotal = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
 
 		total += groupTotal;
 
 		searchContainer.setTotal(groupTotal);
 
-		List results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
+		List results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
 
 		searchContainer.setResults(results);
 
@@ -68,11 +68,11 @@ else if (!groupByClass) {
 		assetEntryQuery.setClassNameIds(classNameIds);
 	}
 
-	total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
+	total = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
 
 	searchContainer.setTotal(total);
 
-	List results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
+	List results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
 
 	searchContainer.setResults(results);
 
@@ -93,13 +93,13 @@ else {
 
 		AssetRendererFactory groupAssetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(groupClassName);
 
-		int groupTotal = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
+		int groupTotal = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
 
 		total += groupTotal;
 
 		searchContainer.setTotal(groupTotal);
 
-		List results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
+		List results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
 
 		searchContainer.setResults(results);
 

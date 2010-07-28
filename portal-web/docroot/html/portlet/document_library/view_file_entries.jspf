@@ -32,8 +32,8 @@
 
 			assetEntryQuery.setExcludeZeroViewCount(false);
 
-			results = AssetEntryLocalServiceUtil.getEntries(assetEntryQuery);
-			total = AssetEntryLocalServiceUtil.getEntriesCount(assetEntryQuery);
+			results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
+			total = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
 		}
 		else {
 			if (mergedView) {

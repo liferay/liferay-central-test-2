@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.security.permission.PermissionChecker;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
@@ -25,6 +26,7 @@ import javax.portlet.PortletURL;
 /**
  * @author Jorge Ferrer
  * @author Juan Fernández
+ * @author Raymond Augé
  */
 public interface AssetRendererFactory {
 
@@ -54,6 +56,10 @@ public interface AssetRendererFactory {
 	public PortletURL getURLAdd(
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse);
+
+	public boolean hasPermission(
+		PermissionChecker permissionChecker, long entryClassPK,
+		String actionId) throws Exception;
 
 	public boolean isSelectable();
 

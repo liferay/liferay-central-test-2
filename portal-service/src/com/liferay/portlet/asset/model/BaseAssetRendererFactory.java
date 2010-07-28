@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 
 import javax.portlet.PortletRequest;
@@ -27,6 +28,7 @@ import javax.portlet.PortletURL;
 /**
  * @author Jorge Ferrer
  * @author Juan Fernández
+ * @author Raymond Augé
  */
 public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 
@@ -63,6 +65,13 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 		LiferayPortletResponse liferayPortletResponse) {
 
 		return null;
+	}
+
+	public boolean hasPermission(
+			PermissionChecker permissionChecker, long classPK, String actionId)
+		throws Exception {
+
+		return true;
 	}
 
 	public boolean isSelectable() {

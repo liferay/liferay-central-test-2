@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
@@ -27,6 +28,7 @@ import com.liferay.portlet.asset.model.BaseAssetRendererFactory;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
+import com.liferay.portlet.imagegallery.service.permission.IGImagePermission;
 import com.liferay.portlet.imagegallery.service.permission.IGPermission;
 
 import javax.portlet.PortletURL;
@@ -34,6 +36,7 @@ import javax.portlet.PortletURL;
 /**
  * @author Julio Camarero
  * @author Juan Fernández
+ * @author Raymond Augé
  */
 public class IGImageAssetRendererFactory extends BaseAssetRendererFactory {
 
@@ -87,6 +90,14 @@ public class IGImageAssetRendererFactory extends BaseAssetRendererFactory {
 		}
 
 		return addAssetURL;
+	}
+
+	public boolean hasPermission(
+			PermissionChecker permissionChecker, long classPK, String actionId)
+		throws Exception {
+
+		return IGImagePermission.contains(
+			permissionChecker, classPK, actionId);
 	}
 
 	protected String getIconPath(ThemeDisplay themeDisplay) {
