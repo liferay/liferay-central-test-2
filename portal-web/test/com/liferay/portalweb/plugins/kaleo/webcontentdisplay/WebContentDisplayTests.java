@@ -37,6 +37,7 @@ public class WebContentDisplayTests extends BaseTests {
 		testSuite.addTest(ViewWebContentCompletedTests.suite());
 		testSuite.addTest(ViewWebContentRejectedTests.suite());
 		testSuite.addTest(ViewWebContentResubmittedTests.suite());
+
 		return testSuite;
 	}
 
