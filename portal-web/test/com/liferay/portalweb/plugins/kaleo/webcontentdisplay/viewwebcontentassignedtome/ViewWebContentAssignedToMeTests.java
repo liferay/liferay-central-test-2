@@ -12,10 +12,8 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.kaleo;
+package com.liferay.portalweb.plugins.kaleo.webcontentdisplay.viewwebcontentassignedtome;
 
-import com.liferay.portalweb.plugins.kaleo.scope.ScopeTests;
-import com.liferay.portalweb.plugins.kaleo.webcontentdisplay.WebContentDisplayTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
@@ -24,13 +22,23 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class KaleoTests extends BaseTests {
+public class ViewWebContentAssignedToMeTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(ScopeTests.suite());
-		testSuite.addTest(WebContentDisplayTests.suite());
+		testSuite.addTestSuite(ConfigureWebContentSingleApproverTest.class);
+		testSuite.addTestSuite(AddPageWCDTest.class);
+		testSuite.addTestSuite(AddPortletWCDTest.class);
+		testSuite.addTestSuite(AddWCDWebContentTest.class);
+		testSuite.addTestSuite(AssignToMeWebContentActionsTest.class);
+		testSuite.addTestSuite(ViewWebContentAssignedToMeTest.class);
+		testSuite.addTestSuite(SignOutTest.class);
+		testSuite.addTestSuite(ViewWebContentAssignedToMeGuestTest.class);
+		testSuite.addTestSuite(SignInTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
+		testSuite.addTestSuite(TearDownWebContentTest.class);
+		testSuite.addTestSuite(TearDownWorkflowConfigurationTest.class);
 
 		return testSuite;
 	}
