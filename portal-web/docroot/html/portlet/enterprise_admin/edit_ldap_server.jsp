@@ -343,6 +343,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			}
 
 			if (url != null) {
+				data.<portlet:namespace />ldapServerId = document.<portlet:namespace />fm['<portlet:namespace />ldapServerId'].value;
 				data.<portlet:namespace />baseProviderURL = document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.LDAP_BASE_PROVIDER_URL + postfix %>--'].value;
 				data.<portlet:namespace />baseDN = document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.LDAP_BASE_DN + postfix %>--'].value;
 				data.<portlet:namespace />principal = document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.LDAP_SECURITY_PRINCIPAL + postfix %>--'].value;
