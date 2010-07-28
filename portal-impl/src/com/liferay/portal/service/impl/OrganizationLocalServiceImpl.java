@@ -809,7 +809,7 @@ public class OrganizationLocalServiceImpl
 
 		if (!ArrayUtil.contains(PropsValues.ORGANIZATIONS_TYPES, type)) {
 			throw new OrganizationTypeException(
-				"Organization type " + type + " is not on the allowed list.");
+				"Invalid organization type " + type);
 		}
 
 		if ((parentOrganizationId ==
