@@ -20,11 +20,9 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.util.PortalUtil;
 
 import java.util.List;
 
@@ -101,19 +99,6 @@ public class VerifyGroup extends VerifyProcess {
 
 			GroupLocalServiceUtil.updateGroup(
 				group.getGroupId(), typeSettingsProperties.toString());
-
-			if (group.isOrganization()) {
-				Group stagingGroup = group.getStagingGroup();
-
-				long classNameId = PortalUtil.getClassNameId(
-					Organization.class.getName().concat(".staging"));
-
-				stagingGroup.setClassNameId(classNameId);
-				stagingGroup.setName(
-					group.getDescriptiveName().concat(" (Staging)"));
-
-				GroupLocalServiceUtil.updateGroup(stagingGroup, false);
-			}
 		}
 	}
 

@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -138,8 +137,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			}
 		}
 
-		boolean staged = ParamUtil.getBoolean(serviceContext, "staged");
-
 		long groupClassNameId = PortalUtil.getClassNameId(Group.class);
 
 		if ((classNameId <= 0) || className.equals(Group.class.getName())) {
@@ -148,7 +145,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			classNameId = groupClassNameId;
 			classPK = groupId;
 		}
-		else if (!staged) {
+		else {
 			name = String.valueOf(classPK);
 		}
 

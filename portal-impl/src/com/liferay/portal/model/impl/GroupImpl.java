@@ -421,10 +421,9 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	}
 
 	protected boolean hasClassName(Class<?> classObj) {
-		String className = PortalUtil.getClassName(
-			PortalUtil.getClassNameId(classObj));
+		long classNameId = getClassNameId();
 
-		if (getClassName().startsWith(className)) {
+		if (classNameId == PortalUtil.getClassNameId(classObj)) {
 			return true;
 		}
 		else {

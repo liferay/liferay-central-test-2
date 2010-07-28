@@ -61,7 +61,6 @@ import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
-import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.http.GroupServiceHttp;
 import com.liferay.portal.service.http.LayoutServiceHttp;
@@ -84,10 +83,10 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map.Entry;
 import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
-import java.util.Map.Entry;
 
 import javax.portlet.PortletRequest;
 
@@ -824,18 +823,13 @@ public class StagingImpl implements Staging {
 			portletRequest, liveGroup, typeSettingsProperties);
 
 		if (!liveGroup.hasStagingGroup()) {
-			ServiceContext serviceContext = new ServiceContext();
-
-			serviceContext.setAttribute("staged", Boolean.TRUE.toString());
-
 			Group stagingGroup = GroupLocalServiceUtil.addGroup(
-				liveGroup.getCreatorUserId(),
-				liveGroup.getClassName().concat(".staging"),
+				liveGroup.getCreatorUserId(), liveGroup.getClassName(),
 				liveGroup.getClassPK(), liveGroup.getGroupId(),
-				liveGroup.getDescriptiveName().concat(" (Staging)"),
+				liveGroup.getDescriptiveName() + " (Staging)",
 				liveGroup.getDescription(), liveGroup.getType(),
 				liveGroup.getFriendlyURL().concat("-staging"),
-				liveGroup.isActive(), serviceContext);
+				liveGroup.isActive(), null);
 
 			GroupServiceUtil.updateGroup(
 				liveGroup.getGroupId(), typeSettingsProperties.toString());
