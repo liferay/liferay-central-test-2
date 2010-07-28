@@ -38,6 +38,8 @@ public interface Group extends GroupModel {
 
 	public com.liferay.portal.model.Group getLiveGroup();
 
+	public long getOrganizationId();
+
 	public java.lang.String getPathFriendlyURL(boolean privateLayout,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay);
 

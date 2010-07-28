@@ -191,7 +191,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 						LinkedHashMap userParams = new LinkedHashMap();
 
 						if (liveGroup.isOrganization()) {
-							userParams.put("usersOrgs", new Long(liveGroup.getClassPK()));
+							userParams.put("usersOrgs", new Long(liveGroup.getOrganizationId()));
 						}
 						else {
 							userParams.put("usersGroups", new Long(liveGroupId));

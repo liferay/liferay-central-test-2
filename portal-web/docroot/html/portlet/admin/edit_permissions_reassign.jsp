@@ -176,7 +176,7 @@ while (rolesItr.hasNext()) {
 		else if (group.isOrganization()) {
 			editGroupURL.setParameter("struts_action", "/admin_server/edit_organization");
 			editGroupURL.setParameter("tabs1Names", "organizations");
-			editGroupURL.setParameter("organizationId", String.valueOf(group.getClassPK()));
+			editGroupURL.setParameter("organizationId", String.valueOf(group.getOrganizationId()));
 		}
 		else if (group.isUser()) {
 			editGroupURL.setParameter("struts_action", "/admin_server/edit_user");

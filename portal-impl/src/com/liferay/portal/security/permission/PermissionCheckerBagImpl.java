@@ -173,7 +173,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 			}
 		}
 		else if (group.isOrganization()) {
-			long organizationId = group.getClassPK();
+			long organizationId = group.getOrganizationId();
 
 			while (organizationId !=
 						OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
@@ -243,7 +243,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 			}
 		}
 		else if (group.isOrganization()) {
-			long organizationId = group.getClassPK();
+			long organizationId = group.getOrganizationId();
 
 			while (organizationId !=
 						OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {

@@ -735,7 +735,7 @@ public class ServicePreAction extends Action {
 			}
 		}
 		else if (group.isOrganization()) {
-			long organizationId = group.getClassPK();
+			long organizationId = group.getOrganizationId();
 
 			if (OrganizationLocalServiceUtil.hasUserOrganization(
 					user.getUserId(), organizationId, false, true, false)) {
@@ -757,7 +757,7 @@ public class ServicePreAction extends Action {
 					for (Organization ancestorOrganization :
 							organization.getAncestors()) {
 
-						if (group.getClassPK() ==
+						if (organizationId ==
 								ancestorOrganization.getOrganizationId()) {
 
 							return true;

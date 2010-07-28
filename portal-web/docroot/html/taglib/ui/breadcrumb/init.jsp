@@ -59,7 +59,7 @@ private void _buildParentGroupsBreadcrumb(LayoutSet layoutSet, PortletURL portle
 	Group group = layoutSet.getGroup();
 
 	if (group.isOrganization()) {
-		Organization organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
+		Organization organization = OrganizationLocalServiceUtil.getOrganization(group.getOrganizationId());
 
 		Organization parentOrganization = organization.getParentOrganization();
 

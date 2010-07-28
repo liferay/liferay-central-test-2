@@ -52,7 +52,7 @@ public class GroupPermissionImpl implements GroupPermission {
 		}
 
 		if (group.isOrganization()) {
-			long organizationId = group.getClassPK();
+			long organizationId = group.getOrganizationId();
 
 			return OrganizationPermissionUtil.contains(
 				permissionChecker, organizationId, actionId);

@@ -75,16 +75,15 @@ public class CompanySharepointStorageImpl extends BaseSharepointStorageImpl {
 
 		String name = group.getName();
 
-		long classPK = group.getClassPK();
-
 		if (group.isUser()) {
-			User user = UserServiceUtil.getUserById(classPK);
+			User user = UserServiceUtil.getUserById(group.getClassPK());
 
 			name = user.getFullName();
 		}
 		else if (group.isOrganization()) {
 			Organization organization =
-				OrganizationLocalServiceUtil.getOrganization(classPK);
+				OrganizationLocalServiceUtil.getOrganization(
+					group.getOrganizationId());
 
 			name = organization.getName();
 		}

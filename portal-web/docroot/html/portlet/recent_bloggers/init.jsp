@@ -40,7 +40,7 @@ if (organizationId == 0) {
 	Group group = GroupLocalServiceUtil.getGroup(scopeGroupId);
 
 	if (group.isOrganization()) {
-		organizationId = group.getClassPK();
+		organizationId = group.getOrganizationId();
 	}
 }
 

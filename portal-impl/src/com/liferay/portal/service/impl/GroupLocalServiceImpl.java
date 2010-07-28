@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -122,6 +123,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				organizationPersistence.findByPrimaryKey(classPK);
 
 			friendlyName = organization.getName();
+			name = String.valueOf(classPK);
 		}
 
 		long groupId = 0;
@@ -137,6 +139,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			}
 		}
 
+		boolean staging = isStaging(serviceContext);
+
 		long groupClassNameId = PortalUtil.getClassNameId(Group.class);
 
 		if ((classNameId <= 0) || className.equals(Group.class.getName())) {
@@ -145,8 +149,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			classNameId = groupClassNameId;
 			classPK = groupId;
 		}
-		else {
-			name = String.valueOf(classPK);
+		else if (className.equals(Organization.class.getName()) && staging) {
+			classPK = liveGroupId;
 		}
 
 		long parentGroupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
@@ -160,6 +164,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		friendlyURL = getFriendlyURL(
 			user.getCompanyId(), groupId, classNameId, classPK, friendlyName,
 			friendlyURL);
+
+		if (staging) {
+			name = name.concat(" (Staging)");
+			friendlyURL = friendlyURL.concat("-staging");
+		}
 
 		validateFriendlyURL(
 			user.getCompanyId(), groupId, classNameId, classPK, friendlyURL);
@@ -1205,6 +1214,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		return realName;
+	}
+
+	protected boolean isStaging(ServiceContext serviceContext) {
+		if (serviceContext != null) {
+			return ParamUtil.getBoolean(serviceContext, "staging");
+		}
+
+		return false;
 	}
 
 	protected void initImportLARFile() {

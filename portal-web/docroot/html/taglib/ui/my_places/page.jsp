@@ -54,7 +54,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 			String privateAddPageHREF = null;
 
 			if (organizationCommunity) {
-				organization = OrganizationLocalServiceUtil.getOrganization(myPlace.getClassPK());
+				organization = OrganizationLocalServiceUtil.getOrganization(myPlace.getOrganizationId());
 
 				if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.MANAGE_LAYOUTS)) {
 					PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);

@@ -3375,7 +3375,7 @@ public class PortalImpl implements Portal {
 				}
 			}
 			else if (group.isOrganization()) {
-				long organizationId = group.getClassPK();
+				long organizationId = group.getOrganizationId();
 
 				if (OrganizationPermissionUtil.contains(
 						permissionChecker, organizationId,

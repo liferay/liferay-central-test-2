@@ -28,7 +28,7 @@ if (group.isCommunity()) {
 	activities = SocialActivityLocalServiceUtil.getGroupActivities(group.getGroupId(), start, end);
 }
 else if (group.isOrganization()) {
-	activities = SocialActivityLocalServiceUtil.getOrganizationActivities(group.getClassPK(), start, end);
+	activities = SocialActivityLocalServiceUtil.getOrganizationActivities(group.getOrganizationId(), start, end);
 }
 else if (group.isUser()) {
 	activities = SocialActivityLocalServiceUtil.getUserActivities(group.getClassPK(), start, end);

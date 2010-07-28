@@ -92,7 +92,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 			name = layoutSetPrototype.getName(LocaleUtil.getDefault());
 		}
 		else if (isOrganization()) {
-			long organizationId = getClassPK();
+			long organizationId = getOrganizationId();
 
 			Organization organization =
 				OrganizationLocalServiceUtil.getOrganization(organizationId);
@@ -142,6 +142,19 @@ public class GroupImpl extends GroupModelImpl implements Group {
 
 			return null;
 		}
+	}
+
+	public long getOrganizationId() {
+		if (isOrganization()) {
+			if (isStagingGroup()) {
+				return getLiveGroup().getClassPK();
+			}
+			else {
+				return getClassPK();
+			}
+		}
+
+		return 0;
 	}
 
 	public String getPathFriendlyURL(

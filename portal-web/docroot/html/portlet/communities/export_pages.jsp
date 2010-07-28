@@ -137,7 +137,7 @@ Organization organization = null;
 User user2 = null;
 
 if (liveGroup.isOrganization()) {
-	organization = OrganizationLocalServiceUtil.getOrganization(liveGroup.getClassPK());
+	organization = OrganizationLocalServiceUtil.getOrganization(liveGroup.getOrganizationId());
 }
 else if (liveGroup.isUser()) {
 	user2 = UserLocalServiceUtil.getUserById(liveGroup.getClassPK());

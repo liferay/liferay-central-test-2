@@ -363,7 +363,7 @@ public class EditPagesAction extends PortletAction {
 				permissionChecker, group.getClassPK(), ActionKeys.UPDATE);
 		}
 		else if (group.isOrganization()) {
-			long organizationId = group.getClassPK();
+			long organizationId = group.getOrganizationId();
 
 			String cmd = ParamUtil.getString(portletRequest, Constants.CMD);
 

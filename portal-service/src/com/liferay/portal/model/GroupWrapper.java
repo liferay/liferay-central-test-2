@@ -236,6 +236,10 @@ public class GroupWrapper implements Group {
 		return _group.getLiveGroup();
 	}
 
+	public long getOrganizationId() {
+		return _group.getOrganizationId();
+	}
+
 	public java.lang.String getPathFriendlyURL(boolean privateLayout,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
 		return _group.getPathFriendlyURL(privateLayout, themeDisplay);

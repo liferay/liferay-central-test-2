@@ -188,7 +188,7 @@ if (layout.isTypeControlPanel()) {
 											LinkedHashMap userParams = new LinkedHashMap();
 
 											if (liveGroup.isOrganization()) {
-												userParams.put("usersOrgs", new Long(liveGroup.getClassPK()));
+												userParams.put("usersOrgs", new Long(liveGroup.getOrganizationId()));
 											}
 											else {
 												userParams.put("usersGroups", new Long(liveGroup.getGroupId()));
