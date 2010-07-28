@@ -866,13 +866,6 @@ public class StagingImpl implements Staging {
 
 		Group liveGroup = GroupServiceUtil.getGroup(liveGroupId);
 
-		if (liveGroup.hasStagingGroup()) {
-			disableStaging(portletRequest, liveGroupId);
-		}
-
-		UnicodeProperties typeSettingsProperties =
-			liveGroup.getTypeSettingsProperties();
-
 		String remoteAddress = ParamUtil.getString(
 			portletRequest, "remoteAddress");
 		long remoteGroupId = ParamUtil.getLong(portletRequest, "remoteGroupId");
@@ -881,6 +874,13 @@ public class StagingImpl implements Staging {
 			portletRequest, "secureConnection");
 
 		validate(remoteAddress, remoteGroupId, remotePort, secureConnection);
+
+		if (liveGroup.hasStagingGroup()) {
+			disableStaging(portletRequest, liveGroupId);
+		}
+
+		UnicodeProperties typeSettingsProperties =
+			liveGroup.getTypeSettingsProperties();
 
 		typeSettingsProperties.setProperty("remoteAddress", remoteAddress);
 		typeSettingsProperties.setProperty(
