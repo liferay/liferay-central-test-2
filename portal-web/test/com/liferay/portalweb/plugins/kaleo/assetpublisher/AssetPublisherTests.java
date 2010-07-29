@@ -14,11 +14,21 @@
 
 package com.liferay.portalweb.plugins.kaleo.assetpublisher;
 
+import com.liferay.portalweb.plugins.kaleo.assetpublisher.viewblogsentryassignedtome.ViewBlogsEntryAssignedToMeTests;
+import com.liferay.portalweb.plugins.kaleo.assetpublisher.viewblogsentryassignedtomyroles.ViewBlogsEntryAssignedToMyRolesTests;
+import com.liferay.portalweb.plugins.kaleo.assetpublisher.viewblogsentrycompleted.ViewBlogsEntryCompletedTests;
+import com.liferay.portalweb.plugins.kaleo.assetpublisher.viewblogsentryrejected.ViewBlogsEntryRejectedTests;
+import com.liferay.portalweb.plugins.kaleo.assetpublisher.viewblogsentryresubmitted.ViewBlogsEntryResubmittedTests;
 import com.liferay.portalweb.plugins.kaleo.assetpublisher.viewdocumentassignedtome.ViewDocumentAssignedToMeTests;
 import com.liferay.portalweb.plugins.kaleo.assetpublisher.viewdocumentassignedtomyroles.ViewDocumentAssignedToMyRolesTests;
 import com.liferay.portalweb.plugins.kaleo.assetpublisher.viewdocumentcompleted.ViewDocumentCompletedTests;
 import com.liferay.portalweb.plugins.kaleo.assetpublisher.viewdocumentrejected.ViewDocumentRejectedTests;
 import com.liferay.portalweb.plugins.kaleo.assetpublisher.viewdocumentresubmitted.ViewDocumentResubmittedTests;
+import com.liferay.portalweb.plugins.kaleo.assetpublisher.viewmessageassignedtome.ViewMessageAssignedToMeTests;
+import com.liferay.portalweb.plugins.kaleo.assetpublisher.viewmessageassignedtomyroles.ViewMessageAssignedToMyRolesTests;
+import com.liferay.portalweb.plugins.kaleo.assetpublisher.viewmessagecompleted.ViewMessageCompletedTests;
+import com.liferay.portalweb.plugins.kaleo.assetpublisher.viewmessagerejected.ViewMessageRejectedTests;
+import com.liferay.portalweb.plugins.kaleo.assetpublisher.viewmessageresubmitted.ViewMessageResubmittedTests;
 import com.liferay.portalweb.plugins.kaleo.assetpublisher.viewwebcontentassignedtome.ViewWebContentAssignedToMeTests;
 import com.liferay.portalweb.plugins.kaleo.assetpublisher.viewwebcontentassignedtomyroles.ViewWebContentAssignedToMyRolesTests;
 import com.liferay.portalweb.plugins.kaleo.assetpublisher.viewwebcontentcompleted.ViewWebContentCompletedTests;
@@ -37,11 +47,21 @@ public class AssetPublisherTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
+		testSuite.addTest(ViewBlogsEntryAssignedToMeTests.suite());
+		testSuite.addTest(ViewBlogsEntryAssignedToMyRolesTests.suite());
+		testSuite.addTest(ViewBlogsEntryCompletedTests.suite());
+		testSuite.addTest(ViewBlogsEntryRejectedTests.suite());
+		testSuite.addTest(ViewBlogsEntryResubmittedTests.suite());
 		testSuite.addTest(ViewDocumentAssignedToMeTests.suite());
 		testSuite.addTest(ViewDocumentAssignedToMyRolesTests.suite());
 		testSuite.addTest(ViewDocumentCompletedTests.suite());
 		testSuite.addTest(ViewDocumentRejectedTests.suite());
 		testSuite.addTest(ViewDocumentResubmittedTests.suite());
+		testSuite.addTest(ViewMessageAssignedToMeTests.suite());
+		testSuite.addTest(ViewMessageAssignedToMyRolesTests.suite());
+		testSuite.addTest(ViewMessageCompletedTests.suite());
+		testSuite.addTest(ViewMessageRejectedTests.suite());
+		testSuite.addTest(ViewMessageResubmittedTests.suite());
 		testSuite.addTest(ViewWebContentAssignedToMeTests.suite());
 		testSuite.addTest(ViewWebContentAssignedToMyRolesTests.suite());
 		testSuite.addTest(ViewWebContentCompletedTests.suite());
