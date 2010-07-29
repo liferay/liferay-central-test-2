@@ -162,6 +162,17 @@ public class PortalLDAPUtil {
 	}
 
 	public static byte[] getGroups(
+			long companyId, LdapContext ldapContext, byte[] cookie,
+			int maxResults, String baseDN, String groupFilter,
+			String[] attributeIds, List<SearchResult> searchResults)
+		throws Exception {
+
+		return searchLDAP(
+			companyId, ldapContext, cookie, maxResults, baseDN, groupFilter,
+			attributeIds, searchResults);
+	}
+
+	public static byte[] getGroups(
 			long ldapServerId, long companyId, LdapContext ldapContext,
 			byte[] cookie, int maxResults, List<SearchResult> searchResults)
 		throws Exception {
@@ -176,6 +187,24 @@ public class PortalLDAPUtil {
 		return getGroups(
 			companyId, ldapContext, cookie, maxResults, baseDN, groupFilter,
 			searchResults);
+	}
+
+	public static byte[] getGroups(
+			long ldapServerId, long companyId, LdapContext ldapContext,
+			byte[] cookie, int maxResults, String[] attributeIds,
+			List<SearchResult> searchResults)
+		throws Exception {
+
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
+
+		String baseDN = PrefsPropsUtil.getString(
+			companyId, PropsKeys.LDAP_BASE_DN + postfix);
+		String groupFilter = PrefsPropsUtil.getString(
+			companyId, PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER + postfix);
+
+		return getGroups(
+			companyId, ldapContext, cookie, maxResults, baseDN, groupFilter,
+			attributeIds, searchResults);
 	}
 
 	public static long getLdapServerId(long companyId, String screenName)
@@ -372,6 +401,17 @@ public class PortalLDAPUtil {
 	}
 
 	public static byte[] getUsers(
+			long companyId, LdapContext ldapContext, byte[] cookie,
+			int maxResults, String baseDN, String userFilter,
+			String[] attributeIds, List<SearchResult> searchResults)
+		throws Exception {
+
+		return searchLDAP(
+			companyId, ldapContext, cookie, maxResults, baseDN, userFilter,
+			attributeIds, searchResults);
+	}
+
+	public static byte[] getUsers(
 			long ldapServerId, long companyId, LdapContext ldapContext,
 			byte[] cookie, int maxResults, List<SearchResult> searchResults)
 		throws Exception {
@@ -386,6 +426,24 @@ public class PortalLDAPUtil {
 		return getUsers(
 			companyId, ldapContext, cookie, maxResults, baseDN, userFilter,
 			searchResults);
+	}
+	
+	public static byte[] getUsers(
+			long ldapServerId, long companyId, LdapContext ldapContext,
+			byte[] cookie, int maxResults, String[] attributeIds,
+			List<SearchResult> searchResults)
+		throws Exception {
+
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
+
+		String baseDN = PrefsPropsUtil.getString(
+			companyId, PropsKeys.LDAP_BASE_DN + postfix);
+		String userFilter = PrefsPropsUtil.getString(
+			companyId, PropsKeys.LDAP_IMPORT_USER_SEARCH_FILTER + postfix);
+
+		return getUsers(
+			companyId, ldapContext, cookie, maxResults, baseDN, userFilter,
+			attributeIds, searchResults);
 	}
 
 	public static String getUsersDN(long ldapServerId, long companyId)

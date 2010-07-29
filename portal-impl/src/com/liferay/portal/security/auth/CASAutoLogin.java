@@ -33,6 +33,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 
+import java.util.Properties;
+
 import javax.naming.Binding;
 import javax.naming.NamingEnumeration;
 import javax.naming.directory.Attributes;
@@ -177,8 +179,15 @@ public class CASAutoLogin implements AutoLogin {
 				_log.debug("Search filter after transformation " + filter);
 			}
 
+			Properties groupMappings = LDAPSettingsUtil.getUserMappings(
+					ldapServerId, companyId);
+
+			String attributeId =
+				groupMappings.getProperty("screenName").toLowerCase();
+
 			SearchControls searchControls = new SearchControls(
-				SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
+				SearchControls.SUBTREE_SCOPE, 1, 0, new String[] {attributeId},
+				false, false);
 
 			NamingEnumeration<SearchResult> enu = ldapContext.search(
 				baseDN, filter, searchControls);

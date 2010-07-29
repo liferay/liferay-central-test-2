@@ -481,9 +481,12 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		while (cookie != null) {
 			List<SearchResult> searchResults = new ArrayList<SearchResult>();
 
+			String attributeId = 
+				userMappings.getProperty("groupName").toLowerCase();
+
 			cookie = PortalLDAPUtil.searchLDAP(
-				companyId, ldapContext, cookie, 0, baseDN, sb.toString(), null,
-				searchResults);
+				companyId, ldapContext, cookie, 0, baseDN, sb.toString(),
+				new String[]{attributeId}, searchResults);
 
 			for (SearchResult searchResult : searchResults) {
 				String fullGroupDN = PortalLDAPUtil.getNameInNamespace(
