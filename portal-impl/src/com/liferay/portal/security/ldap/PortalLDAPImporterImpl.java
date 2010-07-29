@@ -481,7 +481,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		while (cookie != null) {
 			List<SearchResult> searchResults = new ArrayList<SearchResult>();
 
-			PortalLDAPUtil.searchLDAP(
+			cookie = PortalLDAPUtil.searchLDAP(
 				companyId, ldapContext, cookie, 0, baseDN, sb.toString(), null,
 				searchResults);
 
