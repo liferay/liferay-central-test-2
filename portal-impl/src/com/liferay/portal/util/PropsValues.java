@@ -482,7 +482,7 @@ public class PropsValues {
 
 	public static final String IMAGE_HOOK_FILE_SYSTEM_ROOT_DIR = PropsUtil.get(PropsKeys.IMAGE_HOOK_FILE_SYSTEM_ROOT_DIR);
 
-	public static final String IMAGE_HOOK_IMPL = PropsUtil.get(PropsKeys.IMAGE_HOOK_IMPL);
+	public static String IMAGE_HOOK_IMPL = PropsUtil.get(PropsKeys.IMAGE_HOOK_IMPL);
 
 	public static final int INDEX_ON_STARTUP_DELAY = GetterUtil.getInteger(PropsUtil.get(PropsKeys.INDEX_ON_STARTUP_DELAY));
 
