@@ -9,6 +9,9 @@
 	<bean id="com.liferay.portal.service.persistence.AddressPersistence" class="com.liferay.portal.service.persistence.AddressPersistenceImpl2" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.BrowserTrackerLocalService" class="com.liferay.portal.service.impl.BrowserTrackerLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.persistence.BrowserTrackerPersistence" class="com.liferay.portal.service.persistence.BrowserTrackerPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portal.service.ClusterGroupLocalService" class="com.liferay.portal.service.impl.ClusterGroupLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.ClusterGroupService" class="com.liferay.portal.service.impl.ClusterGroupServiceImpl" />
+	<bean id="com.liferay.portal.service.persistence.ClusterGroupPersistence" class="com.liferay.portal.service.persistence.ClusterGroupPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.ClassNameLocalService" class="com.liferay.portal.service.impl.ClassNameLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.ClassNameService" class="com.liferay.portal.service.impl.ClassNameServiceImpl" />
 	<bean id="com.liferay.portal.service.persistence.ClassNamePersistence" class="com.liferay.portal.service.persistence.ClassNamePersistenceImpl" parent="basePersistence" />

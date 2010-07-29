@@ -31,6 +31,8 @@ import com.liferay.portal.service.AddressService;
 import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.ClassNameLocalService;
 import com.liferay.portal.service.ClassNameService;
+import com.liferay.portal.service.ClusterGroupLocalService;
+import com.liferay.portal.service.ClusterGroupService;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
 import com.liferay.portal.service.ContactLocalService;
@@ -115,6 +117,7 @@ import com.liferay.portal.service.persistence.AccountPersistence;
 import com.liferay.portal.service.persistence.AddressPersistence;
 import com.liferay.portal.service.persistence.BrowserTrackerPersistence;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
+import com.liferay.portal.service.persistence.ClusterGroupPersistence;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.ContactPersistence;
 import com.liferay.portal.service.persistence.CountryPersistence;
@@ -322,6 +325,32 @@ public abstract class ResourceLocalServiceBaseImpl
 	public void setBrowserTrackerPersistence(
 		BrowserTrackerPersistence browserTrackerPersistence) {
 		this.browserTrackerPersistence = browserTrackerPersistence;
+	}
+
+	public ClusterGroupLocalService getClusterGroupLocalService() {
+		return clusterGroupLocalService;
+	}
+
+	public void setClusterGroupLocalService(
+		ClusterGroupLocalService clusterGroupLocalService) {
+		this.clusterGroupLocalService = clusterGroupLocalService;
+	}
+
+	public ClusterGroupService getClusterGroupService() {
+		return clusterGroupService;
+	}
+
+	public void setClusterGroupService(ClusterGroupService clusterGroupService) {
+		this.clusterGroupService = clusterGroupService;
+	}
+
+	public ClusterGroupPersistence getClusterGroupPersistence() {
+		return clusterGroupPersistence;
+	}
+
+	public void setClusterGroupPersistence(
+		ClusterGroupPersistence clusterGroupPersistence) {
+		this.clusterGroupPersistence = clusterGroupPersistence;
 	}
 
 	public ClassNameLocalService getClassNameLocalService() {
@@ -1604,6 +1633,12 @@ public abstract class ResourceLocalServiceBaseImpl
 	protected BrowserTrackerLocalService browserTrackerLocalService;
 	@BeanReference(type = BrowserTrackerPersistence.class)
 	protected BrowserTrackerPersistence browserTrackerPersistence;
+	@BeanReference(type = ClusterGroupLocalService.class)
+	protected ClusterGroupLocalService clusterGroupLocalService;
+	@BeanReference(type = ClusterGroupService.class)
+	protected ClusterGroupService clusterGroupService;
+	@BeanReference(type = ClusterGroupPersistence.class)
+	protected ClusterGroupPersistence clusterGroupPersistence;
 	@BeanReference(type = ClassNameLocalService.class)
 	protected ClassNameLocalService classNameLocalService;
 	@BeanReference(type = ClassNameService.class)

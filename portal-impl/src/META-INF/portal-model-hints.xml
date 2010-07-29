@@ -74,6 +74,11 @@
 		<field name="userId" type="long" />
 		<field name="browserKey" type="long" />
 	</model>
+	<model name="com.liferay.portal.model.ClusterGroup">
+		<field name="clusterGroupId" type="long" />
+		<field name="clusterNodeIds" type="String" />
+		<field name="wholeCluster" type="boolean" />
+	</model>
 	<model name="com.liferay.portal.model.ClassName">
 		<field name="classNameId" type="long" />
 		<field name="value" type="String">

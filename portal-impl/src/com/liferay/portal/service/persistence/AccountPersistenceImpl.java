@@ -556,6 +556,8 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 	protected AddressPersistence addressPersistence;
 	@BeanReference(type = BrowserTrackerPersistence.class)
 	protected BrowserTrackerPersistence browserTrackerPersistence;
+	@BeanReference(type = ClusterGroupPersistence.class)
+	protected ClusterGroupPersistence clusterGroupPersistence;
 	@BeanReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
 	@BeanReference(type = CompanyPersistence.class)
