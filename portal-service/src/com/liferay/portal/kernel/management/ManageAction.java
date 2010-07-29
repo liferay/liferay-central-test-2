@@ -14,12 +14,10 @@
 
 package com.liferay.portal.kernel.management;
 
-import java.io.Serializable;
-
 /**
  * @author Shuyang Zhou
  */
-public interface ManageAction extends Serializable {
+public interface ManageAction {
 
 	public void action() throws ManageActionException;
 
