@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -481,12 +482,12 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		while (cookie != null) {
 			List<SearchResult> searchResults = new ArrayList<SearchResult>();
 
-			String attributeId = 
-				userMappings.getProperty("groupName").toLowerCase();
+			String userMappingsGroupName = GetterUtil.getString(
+				userMappings.getProperty("groupName")).toLowerCase();
 
 			cookie = PortalLDAPUtil.searchLDAP(
 				companyId, ldapContext, cookie, 0, baseDN, sb.toString(),
-				new String[]{attributeId}, searchResults);
+				new String[] {userMappingsGroupName}, searchResults);
 
 			for (SearchResult searchResult : searchResults) {
 				String fullGroupDN = PortalLDAPUtil.getNameInNamespace(

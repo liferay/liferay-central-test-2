@@ -17,6 +17,7 @@ package com.liferay.portal.security.auth;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
@@ -179,15 +180,15 @@ public class CASAutoLogin implements AutoLogin {
 				_log.debug("Search filter after transformation " + filter);
 			}
 
-			Properties groupMappings = LDAPSettingsUtil.getUserMappings(
-					ldapServerId, companyId);
+			Properties userMappings = LDAPSettingsUtil.getUserMappings(
+				ldapServerId, companyId);
 
-			String attributeId =
-				groupMappings.getProperty("screenName").toLowerCase();
+			String userMappingsScreenName = GetterUtil.getString(
+				userMappings.getProperty("screenName")).toLowerCase();
 
 			SearchControls searchControls = new SearchControls(
-				SearchControls.SUBTREE_SCOPE, 1, 0, new String[] {attributeId},
-				false, false);
+				SearchControls.SUBTREE_SCOPE, 1, 0,
+				new String[] {userMappingsScreenName}, false, false);
 
 			NamingEnumeration<SearchResult> enu = ldapContext.search(
 				baseDN, filter, searchControls);
