@@ -386,7 +386,7 @@ public class HtmlImpl implements Html {
 				group.equals(StringPool.NEW_LINE)) {
 
 				length = 0;
-				pos++;
+				pos = matcher.start() + 1;
 			}
 		}
 
