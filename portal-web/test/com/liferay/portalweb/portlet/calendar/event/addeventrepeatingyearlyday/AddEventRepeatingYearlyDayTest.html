@@ -41,7 +41,7 @@
 <tr>
 	<td>select</td>
 	<td>_8_startDateYear</td>
-	<td>label=2010</td>
+	<td>label=2014</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -101,7 +101,7 @@
 <tr>
 	<td>select</td>
 	<td>_8_endDateYear</td>
-	<td>label=2013</td>
+	<td>label=2016</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -140,23 +140,18 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='aui-layout event']/div[1]/h3</td>
+	<td>//div[1]/h1/span</td>
 	<td>Yearly Day Repeating Event</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//dl[@class='property-list']/dd[1]</td>
-	<td>1/1/10</td>
+	<td>1/1/14</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//dl[@class='property-list']/dd[2]</td>
-	<td>1/1/13</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//dl[@class='property-list']/dd[5]</td>
-	<td>The Second Monday of February of every 1 year(s)</td>
+	<td>1/1/16</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -179,8 +174,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAt</td>
-	<td>//td[5]/ul/li/strong/a</td>
+	<td>//td[6]/ul/li/strong/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -206,7 +206,7 @@
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>_8_startDateYear</td>
-	<td>2010</td>
+	<td>2014</td>
 </tr>
 <tr>
 	<td>assertValue</td>
@@ -266,7 +266,7 @@
 <tr>
 	<td>assertSelectedLabel</td>
 	<td>_8_endDateYear</td>
-	<td>2013</td>
+	<td>2016</td>
 </tr>
 <tr>
 	<td>open</td>
@@ -291,16 +291,16 @@
 <tr>
 	<td>select</td>
 	<td>//select</td>
-	<td>label=2010</td>
+	<td>label=2014</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[contains(@href, 'javascript:_8_updateCalendar(1, 8, 2010);')]</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(1, 10, 2014);')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//a[contains(@href, 'javascript:_8_updateCalendar(1, 8, 2010);')]</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(1, 10, 2014);')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -316,16 +316,16 @@
 <tr>
 	<td>selectAndWait</td>
 	<td>//select</td>
-	<td>label=2011</td>
+	<td>label=2015</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[contains(@href, 'javascript:_8_updateCalendar(1, 8, 2011);')]</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(1, 9, 2015);')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//a[contains(@href, 'javascript:_8_updateCalendar(1, 8, 2011);')]</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(1, 9, 2015);')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -341,16 +341,16 @@
 <tr>
 	<td>select</td>
 	<td>//select</td>
-	<td>label=2011</td>
+	<td>label=2016</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[contains(@href, 'javascript:_8_updateCalendar(2, 8, 2011);')]</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(1, 9, 2016);')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//a[contains(@href, 'javascript:_8_updateCalendar(2, 8, 2011);')]</td>
+	<td>//a[contains(@href, 'javascript:_8_updateCalendar(1, 9, 2016);')]</td>
 	<td></td>
 </tr>
 <tr>

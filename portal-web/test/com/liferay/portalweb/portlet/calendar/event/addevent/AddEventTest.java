@@ -45,6 +45,7 @@ public class AddEventTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Event']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		selenium.type("_8_title", RuntimeVariables.replace("Test Event"));
 		selenium.type("_8_description",
 			RuntimeVariables.replace("This is a Test Event."));
@@ -52,6 +53,25 @@ public class AddEventTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Test Event")
+										.equals(selenium.getText(
+								"//tr[3]/td[2]/a"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Test Event"),
 			selenium.getText("//tr[3]/td[2]/a"));
 	}

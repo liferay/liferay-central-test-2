@@ -91,13 +91,11 @@ public class AddEventRepeatingDailyTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Daily Repeating Event"),
-			selenium.getText("//div[@class='aui-layout event']/div[1]/h3"));
+			selenium.getText("//div[1]/h1/span"));
 		assertEquals(RuntimeVariables.replace("1/1/10"),
 			selenium.getText("//dl[@class='property-list']/dd[1]"));
 		assertEquals(RuntimeVariables.replace("1/1/11"),
 			selenium.getText("//dl[@class='property-list']/dd[2]"));
-		assertEquals(RuntimeVariables.replace("1 day(s)"),
-			selenium.getText("//dl[@class='property-list']/dd[5]"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -120,7 +118,8 @@ public class AddEventRepeatingDailyTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Events", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[5]/ul/li/strong/a", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.clickAt("//td[6]/ul/li/strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

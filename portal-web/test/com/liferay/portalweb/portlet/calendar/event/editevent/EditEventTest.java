@@ -45,7 +45,9 @@ public class EditEventTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Test Event"),
 			selenium.getText(
 				"//table[@class='taglib-search-iterator']/tbody/tr[3]/td[2]/a"));
-		selenium.clickAt("//td[4]/ul/li/strong/a", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.clickAt("//td[4]/ul/li/strong/a",
+			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

@@ -67,6 +67,8 @@ public class AddEventDateEndInvalidTest extends BaseTestCase {
 		selenium.type("_8_dailyInterval", RuntimeVariables.replace("1"));
 		selenium.select("_8_endDateMonth",
 			RuntimeVariables.replace("label=February"));
+		selenium.select("_8_endDateMonth",
+			RuntimeVariables.replace("label=February"));
 		Thread.sleep(5000);
 		assertFalse(selenium.isPartialText("_8_endDateDay", "30"));
 	}

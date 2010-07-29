@@ -193,11 +193,5 @@ public class AssertEventSelectFieldEnabledTest extends BaseTestCase {
 				"//select[@name='_8_endDateDay' and @disabled='']"));
 		assertFalse(selenium.isElementPresent(
 				"//select[@name='_8_endDateYear' and @disabled='']"));
-		assertFalse(selenium.isElementPresent(
-				"//select[@name='_8_endDateHour' and @disabled='']"));
-		assertFalse(selenium.isElementPresent(
-				"//select[@name='_8_endDateMinute' and @disabled='']"));
-		assertFalse(selenium.isElementPresent(
-				"//select[@name='_8_endDateAmPm' and @disabled='']"));
 	}
 }

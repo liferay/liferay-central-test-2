@@ -49,6 +49,8 @@ public class AddEventDateStartInvalidTest extends BaseTestCase {
 			RuntimeVariables.replace("Invalid Start Date Test Event"));
 		selenium.select("_8_startDateMonth",
 			RuntimeVariables.replace("label=February"));
+		selenium.select("_8_startDateMonth",
+			RuntimeVariables.replace("label=February"));
 		Thread.sleep(5000);
 		assertFalse(selenium.isPartialText("_8_startDateDay", "30"));
 	}

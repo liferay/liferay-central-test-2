@@ -42,7 +42,8 @@ public class ImportLARTest extends BaseTestCase {
 
 		selenium.clickAt("link=Calendar Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -68,7 +69,7 @@ public class ImportLARTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_86_importFileName",
 			RuntimeVariables.replace(
-				"L:\\trunk\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\calendar\\lar\\importlar\\dependencies\\Calendar-Selenium.portlet.lar"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\calendar\\lar\\importlar\\dependencies\\Calendar-Selenium.portlet.lar"));
 		selenium.clickAt("_86_DELETE_PORTLET_DATACheckbox",
 			RuntimeVariables.replace(""));
 		selenium.clickAt("_86_PORTLET_DATACheckbox",

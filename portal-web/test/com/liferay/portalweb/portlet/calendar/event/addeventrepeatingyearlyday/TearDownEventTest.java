@@ -51,8 +51,24 @@ public class TearDownEventTest extends BaseTestCase {
 				selenium.clickAt("link=Events", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("//span/input")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				boolean event1Present = selenium.isElementPresent(
-						"//td[5]/ul/li/strong/a");
+						"//td[6]/ul/li/strong/a");
 
 				if (!event1Present) {
 					label = 2;
@@ -60,8 +76,8 @@ public class TearDownEventTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[5]/ul/li/strong/a",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("//td[6]/ul/li/strong/a",
+					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -88,8 +104,24 @@ public class TearDownEventTest extends BaseTestCase {
 
 			case 2:
 
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("//span/input")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				boolean event2Present = selenium.isElementPresent(
-						"//td[5]/ul/li/strong/a");
+						"//td[6]/ul/li/strong/a");
 
 				if (!event2Present) {
 					label = 3;
@@ -97,8 +129,8 @@ public class TearDownEventTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[5]/ul/li/strong/a",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("//td[6]/ul/li/strong/a",
+					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -125,8 +157,24 @@ public class TearDownEventTest extends BaseTestCase {
 
 			case 3:
 
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("//span/input")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				boolean event3Present = selenium.isElementPresent(
-						"//td[5]/ul/li/strong/a");
+						"//td[6]/ul/li/strong/a");
 
 				if (!event3Present) {
 					label = 4;
@@ -134,8 +182,8 @@ public class TearDownEventTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[5]/ul/li/strong/a",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("//td[6]/ul/li/strong/a",
+					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -162,8 +210,24 @@ public class TearDownEventTest extends BaseTestCase {
 
 			case 4:
 
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("//span/input")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				boolean event4Present = selenium.isElementPresent(
-						"//td[5]/ul/li/strong/a");
+						"//td[6]/ul/li/strong/a");
 
 				if (!event4Present) {
 					label = 5;
@@ -171,8 +235,8 @@ public class TearDownEventTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[5]/ul/li/strong/a",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("//td[6]/ul/li/strong/a",
+					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -199,8 +263,24 @@ public class TearDownEventTest extends BaseTestCase {
 
 			case 5:
 
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("//span/input")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				boolean event5Present = selenium.isElementPresent(
-						"//td[5]/ul/li/strong/a");
+						"//td[6]/ul/li/strong/a");
 
 				if (!event5Present) {
 					label = 6;
@@ -208,8 +288,8 @@ public class TearDownEventTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[5]/ul/li/strong/a",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("//td[6]/ul/li/strong/a",
+					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
