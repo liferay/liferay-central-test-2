@@ -70,7 +70,6 @@ import com.liferay.util.FiniteUniqueStack;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -1237,6 +1236,17 @@ public class JournalUtil {
 
 	private static void _mergeArticleContentUpdate(
 		Element curElement, Element newElement, String defaultLocale) {
+
+		// LPS-11120
+		// This modification is because of the field property changing in the
+		// structure of the web content. It it is not happen, the modification,
+		// of existing contents does not work correctly.
+
+		curElement.attribute("index-type").setValue(
+			newElement.attribute("index-type").getValue());
+
+		curElement.attribute("type").setValue(
+			newElement.attribute("type").getValue());
 
 		Element newContentElement = newElement.elements(
 			"dynamic-content").get(0);
