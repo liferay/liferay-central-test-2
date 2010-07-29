@@ -17,6 +17,8 @@ package com.liferay.portal.convert;
 import com.liferay.portal.image.DatabaseHook;
 import com.liferay.portal.image.HookFactory;
 import com.liferay.portal.kernel.cache.CacheRegistryUtil;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.image.Hook;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -69,6 +71,8 @@ public class ConvertImageGallery extends ConvertProcess {
 	}
 
 	protected void doConvert() throws Exception {
+		boolean cacheRegistryActive = CacheRegistryUtil.isActive();
+
 		try {
 			CacheRegistryUtil.setActive(false);
 
@@ -90,23 +94,22 @@ public class ConvertImageGallery extends ConvertProcess {
 			MaintenanceUtil.appendStatus(
 				"Please set " + PropsKeys.IMAGE_HOOK_IMPL +
 					" in your portal-ext.properties to use " +
-					targetHookClassName);
+						targetHookClassName);
 
 			if (_sourceHook instanceof DatabaseHook) {
-				MaintenanceUtil.appendStatus(
-					"If you are satisfied with the conversion, please " +
-						"shutdown the server and execute the following SQL: " +
-						"update Image set text_ = \"\"");
+				DB db = DBFactoryUtil.getDB();
+
+				db.runSQL("update Image set text_ = \"\"");
 			}
 
 			PropsValues.IMAGE_HOOK_IMPL = targetHookClassName;
 		}
 		finally {
-			CacheRegistryUtil.setActive(true);
+			CacheRegistryUtil.setActive(cacheRegistryActive);
 		}
 	}
 
-	protected void migrateImage(Image image) {
+	protected void migrateImage(Image image) throws Exception {
 		try {
 			InputStream is = _sourceHook.getImageAsStream(image);
 
