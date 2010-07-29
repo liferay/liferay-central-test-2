@@ -125,13 +125,11 @@ AUI().add(
 						instance.entries.after('add', instance._updateHiddenInput, instance);
 						instance.entries.after('remove', instance._updateHiddenInput, instance);
 					},
-
-					_bindTagsSelector: function() {
+					
+					addEntries: function() {
 						var instance = this;
-
-						instance.entries.on('add', instance._onAddMultipleEntries, instance);
-
-						instance._submitFormListener = A.Do.before(instance._onAddEntryClick, window, 'submitForm', instance);
+						
+						instance._onAddEntryClick();
 					},
 
 					syncUI: function() {
@@ -142,6 +140,12 @@ AUI().add(
 						var curEntries = instance.get('curEntries');
 
 						A.each(curEntries, instance.add, instance);
+					},
+												   
+					_bindTagsSelector: function() {
+						var instance = this;
+						
+						instance._submitFormListener = A.Do.before(instance._onAddEntryClick, window, 'submitForm', instance);
 					},
 
 					_formatEntry: function(item) {
@@ -333,38 +337,24 @@ AUI().add(
 					_onAddEntryClick: function(event) {
 						var instance = this;
 
-						instance.entries.add(instance.inputNode.val(), {});
+						var text = instance.inputNode.val();
+
+						if (text) {
+							if(text.indexOf(',') > -1) {
+								var items = text.split(',');
+
+								A.each(
+									items,
+									function(item, index, collection) {
+										instance.entries.add(item, {});
+									}
+								);
+							} else {
+								instance.entries.add(text, {});
+							}
+						}
 
 						Liferay.Util.focusFormField(instance.inputNode);
-					},
-
-					_onAddMultipleEntries: function(event) {
-						var instance = this;
-
-						var obj = event.item;
-						var matchKey = instance.get('matchKey');
-
-						var text = obj[matchKey] || event.attrName;
-
-						if (text && text.indexOf(',') > -1) {
-							var items = text.split(',');
-
-							setTimeout(
-								function() {
-									A.each(
-										items,
-										function(item, index, collection) {
-											instance.entries.add(item, {});
-										}
-									);
-								},
-								0
-							);
-
-							instance.inputNode.val('');
-
-							event.preventDefault();
-						}
 					},
 
 					_onCheckboxClick: function(event) {
