@@ -14,12 +14,8 @@
 
 package com.liferay.mail.util;
 
-import com.liferay.mail.NoSuchCyrusUserException;
-import com.liferay.mail.model.CyrusUser;
-import com.liferay.mail.model.CyrusVirtual;
 import com.liferay.mail.model.Filter;
-import com.liferay.mail.service.persistence.CyrusUserUtil;
-import com.liferay.mail.service.persistence.CyrusVirtualUtil;
+import com.liferay.mail.service.CyrusServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -104,18 +100,7 @@ public class CyrusHook implements Hook {
 		String middleName, String lastName, String emailAddress) {
 
 		try {
-
-			// User
-
-			CyrusUser user = new CyrusUser(userId, password);
-
-			CyrusUserUtil.update(user);
-
-			// Virtual
-
-			CyrusVirtual virtual = new CyrusVirtual(emailAddress, userId);
-
-			CyrusVirtualUtil.update(virtual);
+			CyrusServiceUtil.addUser(userId, emailAddress, password);
 
 			// Expect
 
@@ -165,7 +150,7 @@ public class CyrusHook implements Hook {
 
 	public void deleteEmailAddress(long companyId, long userId) {
 		try {
-			CyrusVirtualUtil.removeByUserId(userId);
+			CyrusServiceUtil.deleteEmailAddress(companyId, userId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -174,18 +159,7 @@ public class CyrusHook implements Hook {
 
 	public void deleteUser(long companyId, long userId) {
 		try {
-
-			// User
-
-			try {
-				CyrusUserUtil.remove(userId);
-			}
-			catch (NoSuchCyrusUserException nscue) {
-			}
-
-			// Virtual
-
-			CyrusVirtualUtil.removeByUserId(userId);
+			CyrusServiceUtil.deleteUser(userId);
 
 			// Expect
 
@@ -275,11 +249,8 @@ public class CyrusHook implements Hook {
 		long companyId, long userId, String emailAddress) {
 
 		try {
-			CyrusVirtualUtil.removeByUserId(userId);
-
-			CyrusVirtual virtual = new CyrusVirtual(emailAddress, userId);
-
-			CyrusVirtualUtil.update(virtual);
+			CyrusServiceUtil.updateEmailAddress(
+				companyId, userId, emailAddress);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -287,22 +258,8 @@ public class CyrusHook implements Hook {
 	}
 
 	public void updatePassword(long companyId, long userId, String password) {
-		CyrusUser user = null;
-
 		try {
-			user = CyrusUserUtil.findByPrimaryKey(userId);
-		}
-		catch (NoSuchCyrusUserException nscue) {
-			user = new CyrusUser(userId, password);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		try {
-			user.setPassword(password);
-
-			CyrusUserUtil.update(user);
+			CyrusServiceUtil.updatePassword(companyId, userId, password);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
