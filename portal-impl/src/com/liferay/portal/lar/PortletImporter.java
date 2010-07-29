@@ -644,6 +644,8 @@ public class PortletImporter {
 					context, portletId, preferencesImpl, portletData);
 		}
 		catch (Exception e) {
+			_log.error(e, e);
+
 			throw new SystemException(e);
 		}
 		finally {

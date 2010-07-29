@@ -141,7 +141,12 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		article = (JournalArticle)article.clone();
 
-		Element articleElement = articlesElement.addElement("article");
+		Element articleElement = (Element)articlesElement.selectSingleNode(
+			"//article[@path='".concat(path).concat("']"));
+
+		if (articleElement == null) {
+			articleElement = articlesElement.addElement("article");
+		}
 
 		articleElement.addAttribute("path", path);
 
@@ -225,6 +230,22 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			content = exportLayoutFriendlyURLs(context, content);
 
 			article.setContent(content);
+		}
+
+		if (Validator.isNotNull(article.getStructureId())) {
+			JournalStructure structure =
+				JournalStructureLocalServiceUtil.getStructure(
+					context.getScopeGroupId(), article.getStructureId());
+
+			articleElement.addAttribute("structure-uuid", structure.getUuid());
+		}
+
+		if (Validator.isNotNull(article.getTemplateId())) {
+			JournalTemplate template =
+				JournalTemplateLocalServiceUtil.getTemplate(
+					context.getScopeGroupId(), article.getTemplateId());
+
+			articleElement.addAttribute("template-uuid", template.getUuid());
 		}
 
 		article.setUserUuid(article.getUserUuid());
@@ -1040,20 +1061,24 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		if (Validator.isNotNull(article.getStructureId())) {
-			JournalStructure structure = JournalStructureUtil.fetchByG_S(
-				context.getScopeGroupId(), article.getStructureId());
+			String structureUuid = articleElement.attributeValue(
+				"structure-uuid");
 
-			if (structure == null) {
+			JournalStructure existingStructure =
+				JournalStructureUtil.fetchByUUID_G(
+					structureUuid, context.getScopeGroupId());
+
+			if (existingStructure == null) {
 				String newStructureId = structureIds.get(
 					article.getStructureId());
 
 				if (Validator.isNotNull(newStructureId)) {
-					structure = JournalStructureUtil.fetchByG_S(
+					existingStructure = JournalStructureUtil.fetchByG_S(
 						context.getScopeGroupId(),
 						String.valueOf(newStructureId));
 				}
 
-				if (structure == null) {
+				if (existingStructure == null) {
 					if (_log.isWarnEnabled()) {
 						StringBundler sb = new StringBundler();
 
@@ -1069,21 +1094,27 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					return;
 				}
 			}
+
+			parentStructureId = existingStructure.getStructureId();
 		}
 
 		if (Validator.isNotNull(article.getTemplateId())) {
-			JournalTemplate template = JournalTemplateUtil.fetchByG_T(
-				context.getScopeGroupId(), article.getTemplateId());
+			String templateUuid = articleElement.attributeValue(
+				"template-uuid");
 
-			if (template == null) {
+			JournalTemplate existingTemplate =
+				JournalTemplateUtil.fetchByUUID_G(
+					templateUuid, context.getScopeGroupId());
+
+			if (existingTemplate == null) {
 				String newTemplateId = templateIds.get(article.getTemplateId());
 
 				if (Validator.isNotNull(newTemplateId)) {
-					template = JournalTemplateUtil.fetchByG_T(
+					existingTemplate = JournalTemplateUtil.fetchByG_T(
 						context.getScopeGroupId(), newTemplateId);
 				}
 
-				if (template == null) {
+				if (existingTemplate == null) {
 					if (_log.isWarnEnabled()) {
 						StringBundler sb = new StringBundler();
 
@@ -1099,6 +1130,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					return;
 				}
 			}
+
+			parentTemplateId = existingTemplate.getTemplateId();
 		}
 
 		File smallFile = null;
