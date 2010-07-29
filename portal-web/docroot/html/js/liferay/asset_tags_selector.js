@@ -146,6 +146,14 @@ AUI().add(
 						var instance = this;
 						
 						instance._submitFormListener = A.Do.before(instance._onAddEntryClick, window, 'submitForm', instance);
+						
+						A.on(
+							'key',
+							instance._onTagsSelectorCommaPress,
+							instance.get('boundingBox'),
+							'down:188',
+							instance
+						);
 					},
 
 					_formatEntry: function(item) {
@@ -355,6 +363,14 @@ AUI().add(
 						}
 
 						Liferay.Util.focusFormField(instance.inputNode);
+					},
+					
+					_onTagsSelectorCommaPress: function(event) {
+						var instance = this;
+						
+						instance._onAddEntryClick();
+						
+						event.preventDefault();
 					},
 
 					_onCheckboxClick: function(event) {
