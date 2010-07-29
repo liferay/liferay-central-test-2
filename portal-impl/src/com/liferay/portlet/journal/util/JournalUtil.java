@@ -1241,9 +1241,13 @@ public class JournalUtil {
 		// This modification is because of the field property changing in the
 		// structure of the web content. It it is not happen, the modification,
 		// of existing contents does not work correctly.
+		// It is possible that the index-type attribute is not exists at older
+		// versions of Liferay.
 
-		curElement.attribute("index-type").setValue(
-			newElement.attribute("index-type").getValue());
+		if (newElement.attribute("index-type") != null) {
+			curElement.attribute("index-type").setValue(
+				newElement.attribute("index-type").getValue());
+		}
 
 		curElement.attribute("type").setValue(
 			newElement.attribute("type").getValue());
