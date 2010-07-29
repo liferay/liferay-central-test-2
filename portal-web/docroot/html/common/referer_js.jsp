@@ -17,5 +17,5 @@
 <%@ include file="/html/common/referer_common.jsp" %>
 
 <script type="text/javascript">
-	location.href = '<%= UnicodeFormatter.toString(referer) %>';
+	location.href = '<%= HtmlUtil.escapeJS(referer) %>';
 </script>

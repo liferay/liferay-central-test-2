@@ -19,7 +19,7 @@
 <%
 String referer = null;
 
-String refererParam = HtmlUtil.escape(PortalUtil.escapeRedirect(request.getParameter(WebKeys.REFERER)));
+String refererParam = PortalUtil.escapeRedirect(request.getParameter(WebKeys.REFERER));
 String refererRequest = (String)request.getAttribute(WebKeys.REFERER);
 String refererSession = (String)session.getAttribute(WebKeys.REFERER);
 
@@ -32,9 +32,10 @@ else if ((refererRequest != null) && (!refererRequest.equals(StringPool.NULL)) &
 else if ((refererSession != null) && (!refererSession.equals(StringPool.NULL)) && (!refererSession.equals(StringPool.BLANK))) {
 	referer = refererSession;
 }
+else if (themeDisplay != null) {
+	referer = themeDisplay.getPathMain();
+}
 else {
-	if (referer == null) {
-		referer = themeDisplay.getPathMain();
-	}
+	referer = PortalUtil.getPathMain();
 }
 %>

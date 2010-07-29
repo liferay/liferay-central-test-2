@@ -19,7 +19,7 @@
 <%
 String forwardURL = null;
 
-String forwardParam = request.getParameter(WebKeys.FORWARD_URL);
+String forwardParam = PortalUtil.escapeRedirect(request.getParameter(WebKeys.FORWARD_URL));
 String forwardRequest = (String)request.getAttribute(WebKeys.FORWARD_URL);
 String forwardSession = (String)session.getAttribute(WebKeys.FORWARD_URL);
 
@@ -32,7 +32,10 @@ else if ((forwardRequest != null) && (!forwardRequest.equals(StringPool.NULL)) &
 else if ((forwardSession != null) && (!forwardSession.equals(StringPool.NULL)) && (!forwardSession.equals(StringPool.BLANK))) {
 	forwardURL = forwardSession;
 }
-else {
+else if (themeDisplay != null) {
 	forwardURL = themeDisplay.getPathMain();
+}
+else {
+	forwardURL = PortalUtil.getPathMain();
 }
 %>
