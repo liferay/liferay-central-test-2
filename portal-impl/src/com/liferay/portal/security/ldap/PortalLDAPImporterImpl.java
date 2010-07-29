@@ -356,8 +356,12 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		while (cookie != null) {
 			List<SearchResult> searchResults = new ArrayList<SearchResult>();
 
+			String groupMappingsGroupName = GetterUtil.getString(
+				groupMappings.getProperty("groupName")).toLowerCase();
+
 			cookie = PortalLDAPUtil.getGroups(
-				ldapServerId, companyId, ldapContext, cookie, 0, searchResults);
+				ldapServerId, companyId, ldapContext, cookie, 0,
+				new String[] {groupMappingsGroupName}, searchResults);
 
 			for (SearchResult searchResult : searchResults) {
 				try {
@@ -408,8 +412,12 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		while (cookie != null) {
 			List<SearchResult> searchResults = new ArrayList<SearchResult>();
 
+			String userMappingsScreenName = GetterUtil.getString(
+				userMappings.getProperty("screenName")).toLowerCase();
+
 			cookie = PortalLDAPUtil.getUsers(
-				ldapServerId, companyId, ldapContext, cookie, 0, searchResults);
+				ldapServerId, companyId, ldapContext, cookie, 0,
+				new String[] {userMappingsScreenName}, searchResults);
 
 			for (SearchResult searchResult : searchResults) {
 				try {
@@ -482,12 +490,12 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		while (cookie != null) {
 			List<SearchResult> searchResults = new ArrayList<SearchResult>();
 
-			String userMappingsGroupName = GetterUtil.getString(
-				userMappings.getProperty("groupName")).toLowerCase();
+			String groupMappingsGroupName = GetterUtil.getString(
+				groupMappings.getProperty("groupName")).toLowerCase();
 
 			cookie = PortalLDAPUtil.searchLDAP(
 				companyId, ldapContext, cookie, 0, baseDN, sb.toString(),
-				new String[] {userMappingsGroupName}, searchResults);
+				new String[] {groupMappingsGroupName}, searchResults);
 
 			for (SearchResult searchResult : searchResults) {
 				String fullGroupDN = PortalLDAPUtil.getNameInNamespace(
