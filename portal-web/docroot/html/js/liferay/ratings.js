@@ -300,7 +300,7 @@ AUI().add(
 						var description = instance._fixScore(score);
 						var label = instance._getLabel(description, json.totalEntries);
 
-						instance.set('label', label);
+						instance.ratings.set('label', label);
 					}
 				}
 			}
