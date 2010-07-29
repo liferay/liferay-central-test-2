@@ -37,6 +37,7 @@
 			'panel': ['aui-base', 'aui-io-request'],
 			'panel-floating': ['aui-paginator', 'liferay-panel', 'selector-css3'],
 			'poller': ['aui-base', 'io', 'json'],
+			'portlet-journal': ['aui-base', 'aui-data-set', 'aui-datatype', 'aui-dialog', 'aui-nested-list', 'aui-overlay-context-panel', 'json', 'substitute'],
 			'portlet-url': ['aui-base', 'aui-io-request', 'querystring-stringify-simple'],
 			'ratings': ['aui-io-request', 'aui-rating', 'substitute'],
 			'search-container': ['aui-base', 'selector-css3'],
