@@ -23,13 +23,15 @@ import com.liferay.portlet.journal.model.JournalArticleDisplay;
 public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 
 	public JournalArticleDisplayImpl(
-		long id, long resourcePrimKey, long groupId, long userId,
-		String articleId, double version, String title, String urlTitle,
-		String description, String[] availableLocales, String content,
-		String type, String structureId, String templateId, boolean smallImage,
-		long smallImageId, String smallImageURL, int numberOfPages,
-		int currentPage, boolean paginate, boolean cacheable) {
+		long companyId, long id, long resourcePrimKey, long groupId,
+		long userId, String articleId, double version, String title,
+		String urlTitle, String description, String[] availableLocales,
+		String content, String type, String structureId, String templateId,
+		boolean smallImage, long smallImageId, String smallImageURL,
+		int numberOfPages, int currentPage, boolean paginate,
+		boolean cacheable) {
 
+		_companyId = companyId;
 		_id = id;
 		_resourcePrimKey = resourcePrimKey;
 		_groupId = groupId;
@@ -51,6 +53,10 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 		_currentPage = currentPage;
 		_paginate = paginate;
 		_cacheable = cacheable;
+	}
+
+	public long getCompanyId() {
+		return _companyId;
 	}
 
 	public long getId() {
@@ -177,6 +183,7 @@ public class JournalArticleDisplayImpl implements JournalArticleDisplay {
 		_cacheable = cacheable;
 	}
 
+	private long _companyId;
 	private long _id;
 	private long _resourcePrimKey;
 	private long _groupId;

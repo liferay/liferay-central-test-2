@@ -22,6 +22,8 @@ import java.io.Serializable;
  */
 public interface JournalArticleDisplay extends Serializable {
 
+	public long getCompanyId();
+
 	public long getId();
 
 	public long getResourcePrimKey();
