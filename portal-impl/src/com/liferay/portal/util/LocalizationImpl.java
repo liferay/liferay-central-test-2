@@ -106,6 +106,19 @@ public class LocalizationImpl implements Localization {
 		String systemDefaultLanguageId = LocaleUtil.toLanguageId(
 			LocaleUtil.getDefault());
 
+		String priorityLanguageId = null;
+
+		Locale requestedLocale = LocaleUtil.fromLanguageId(requestedLanguageId);
+
+		if (LanguageUtil.isDuplicateLanguageCode(requestedLocale.getLanguage())) {
+			Locale priorityLocale = LanguageUtil.getLocale(
+				requestedLocale.getLanguage());
+
+			if (!requestedLanguageId.equals(priorityLanguageId)) {
+				priorityLanguageId = LocaleUtil.toLanguageId(priorityLocale);
+			}
+		}
+
 		if (!Validator.isXml(xml)) {
 			if (useDefault ||
 				requestedLanguageId.equals(systemDefaultLanguageId)) {
@@ -154,6 +167,7 @@ public class LocalizationImpl implements Localization {
 			// Find specified language and/or default language
 
 			String defaultValue = StringPool.BLANK;
+			String priorityValue = StringPool.BLANK;
 
 			while (xmlStreamReader.hasNext()) {
 				int event = xmlStreamReader.next();
@@ -167,6 +181,7 @@ public class LocalizationImpl implements Localization {
 					}
 
 					if (languageId.equals(defaultLanguageId) ||
+						languageId.equals(priorityLanguageId) ||
 						languageId.equals(requestedLanguageId)) {
 
 						while (xmlStreamReader.hasNext()) {
@@ -179,6 +194,10 @@ public class LocalizationImpl implements Localization {
 
 								if (languageId.equals(defaultLanguageId)) {
 									defaultValue = text;
+								}
+
+								if (languageId.equals(priorityLanguageId)) {
+									priorityValue = text;
 								}
 
 								if (languageId.equals(requestedLanguageId)) {
@@ -200,6 +219,12 @@ public class LocalizationImpl implements Localization {
 				else if (event == XMLStreamConstants.END_DOCUMENT) {
 					break;
 				}
+			}
+
+			if (priorityLanguageId!= null && Validator.isNull(value) &&
+				Validator.isNotNull(priorityValue)) {
+
+				value = priorityValue;
 			}
 
 			if (useDefault && Validator.isNull(value)) {

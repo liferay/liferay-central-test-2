@@ -14,6 +14,7 @@
 
 package com.liferay.portal.language;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -91,6 +92,16 @@ public class LanguageResources {
 		}
 
 		if (Validator.isNotNull(locale.getCountry())) {
+			if (LanguageUtil.isDuplicateLanguageCode(locale.getLanguage())) {
+				Locale priorityLocale = LanguageUtil.getLocale(
+					locale.getLanguage());
+
+				if (!locale.equals(priorityLocale)) {
+					return new Locale(priorityLocale.getLanguage(),
+						priorityLocale.getCountry()) ;
+				}
+			}
+
 			return new Locale(locale.getLanguage());
 		}
 
