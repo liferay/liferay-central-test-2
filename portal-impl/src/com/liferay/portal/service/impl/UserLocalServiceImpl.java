@@ -763,6 +763,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 					user.setLastFailedLoginDate(null);
 					user.setFailedLoginAttempts(0);
+
+					userPersistence.update(user, false);
 				}
 			}
 
@@ -779,6 +781,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 					user.setLockout(false);
 					user.setLockoutDate(null);
+
+					userPersistence.update(user, false);
 				}
 			}
 
