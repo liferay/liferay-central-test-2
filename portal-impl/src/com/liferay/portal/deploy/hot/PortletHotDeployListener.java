@@ -58,6 +58,7 @@ import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.xmlrpc.XmlRpcServlet;
 import com.liferay.portlet.CustomUserAttributes;
+import com.liferay.portlet.InvokerPortlet;
 import com.liferay.portlet.PortletBagFactory;
 import com.liferay.portlet.PortletConfigFactoryUtil;
 import com.liferay.portlet.PortletContextBag;
@@ -524,9 +525,12 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 			portletContextBag.getPortletFilters().put(
 				portletFilter.getFilterName(), portletFilterInstance);
-
-			PortletFilterFactory.create(portletFilter, portletContext);
 		}
+
+		InvokerPortlet invokerPortlet =
+			PortletInstanceFactoryUtil.create(portlet, servletContext);
+
+		invokerPortlet.setPortletFilters();
 
 		Set<PortletURLListener> portletURLListeners =
 			portletApp.getPortletURLListeners();

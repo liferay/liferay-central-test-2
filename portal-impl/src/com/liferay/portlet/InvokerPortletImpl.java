@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.tools.deploy.PortletDeployer;
 import com.liferay.portal.util.WebKeys;
 
@@ -515,6 +516,15 @@ public class InvokerPortletImpl implements InvokerPortlet {
 	}
 
 	public void setPortletFilters() throws PortletException {
+		PortletApp portletApp = _portletModel.getPortletApp();
+
+		PortletContextBag portletContextBag = PortletContextBagPool.get(
+			portletApp.getServletContextName());
+
+		if (portletApp.isWARFile() && (portletContextBag == null)) {
+			return;
+		}
+
 		removePortletFilters();
 
 		Map<String, com.liferay.portal.model.PortletFilter> portletFilters =
