@@ -1151,8 +1151,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Map<String, byte[]> images = new HashMap<String, byte[]>();
 
-		if (context.getBooleanParameter(_NAMESPACE, "images")) {
-			String imagePath = articleElement.attributeValue("image-path");
+		String imagePath = articleElement.attributeValue("image-path");
+
+		if (context.getBooleanParameter(_NAMESPACE, "images") &&
+			Validator.isNotNull(imagePath)) {
 
 			List<String> imageFiles = context.getZipFolderEntries(imagePath);
 
