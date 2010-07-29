@@ -18,9 +18,9 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.service.persistence.UserUtil;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -37,18 +37,17 @@ public class CurrentUserIdStrategy implements UserIdStrategy {
 			return _user.getUserId();
 		}
 
+		long companyId = CompanyThreadLocal.getCompanyId();
+
 		List<User> users = UserUtil.findByUuid(userUuid);
 
-		Iterator<User> itr = users.iterator();
-
-		if (itr.hasNext()) {
-			User user = itr.next();
-
-			return user.getUserId();
+		for (User user : users) {
+			if (user.getCompanyId() == companyId) {
+				return user.getUserId();
+			}
 		}
-		else {
-			return _user.getUserId();
-		}
+
+		return _user.getUserId();
 	}
 
 	private User _user;
