@@ -51,7 +51,7 @@ public class ViewEntryTest extends BaseTestCase {
 		selenium.clickAt("//div/div[3]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
-			selenium.getText("//form/div/div[1]/div[1]"));
+			selenium.getText("//div[1]/h1/span"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Content"),
 			selenium.getText("//p"));
 	}

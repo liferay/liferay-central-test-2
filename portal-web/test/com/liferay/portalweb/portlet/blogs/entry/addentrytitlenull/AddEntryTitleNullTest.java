@@ -99,7 +99,7 @@ public class AddEntryTitleNullTest extends BaseTestCase {
 		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body", RuntimeVariables.replace("Content."));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("_33_publishButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));

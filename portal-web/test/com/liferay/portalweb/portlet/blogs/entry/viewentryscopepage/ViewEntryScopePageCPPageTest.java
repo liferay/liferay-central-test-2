@@ -69,10 +69,66 @@ public class ViewEntryScopePageCPPageTest extends BaseTestCase {
 			selenium.getText("//div[2]/span"));
 		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Blogs")
+										.equals(selenium.getText(
+								"//header/h1/span"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Blogs"),
 			selenium.getText("//header/h1/span"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Blogs Entry Title Scope Page")
+										.equals(selenium.getText(
+								"//div[2]/div[1]/div[1]/a"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title Scope Page"),
 			selenium.getText("//div[2]/div[1]/div[1]/a"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Blogs Entry Content Scope Page")
+										.equals(selenium.getText("//p"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Blogs Entry Content Scope Page"),
 			selenium.getText("//p"));
 	}

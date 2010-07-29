@@ -42,7 +42,8 @@ public class ImportLARTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -50,7 +51,8 @@ public class ImportLARTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Export / Import")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a")) {
 					break;
 				}
 			}
@@ -60,7 +62,8 @@ public class ImportLARTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Export / Import", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Import", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -84,6 +87,9 @@ public class ImportLARTest extends BaseTestCase {
 		selenium.type("_86_importFileName",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\blogs\\lar\\importlar\\dependencies\\Blogs-Selenium.portlet.lar"));
+		selenium.type("_86_importFileName",
+			RuntimeVariables.replace(
+				"L:\\trunk\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\blogs\\lar\\importlar\\dependencies\\Blogs-Selenium.portlet.lar"));
 		selenium.clickAt("_86_DELETE_PORTLET_DATACheckbox",
 			RuntimeVariables.replace(""));
 		selenium.clickAt("_86_PORTLET_DATACheckbox",
@@ -108,6 +114,24 @@ public class ImportLARTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Import']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 	}

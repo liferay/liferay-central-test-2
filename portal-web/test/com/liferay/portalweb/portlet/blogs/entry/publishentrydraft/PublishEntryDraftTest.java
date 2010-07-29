@@ -45,8 +45,26 @@ public class PublishEntryDraftTest extends BaseTestCase {
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("_33_publishButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertFalse(selenium.isElementPresent("//div[1]/h3"));

@@ -99,7 +99,7 @@ public class AddEntryDraftTest extends BaseTestCase {
 		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body", RuntimeVariables.replace("DraftContent."));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("_33_saveDraftButton", RuntimeVariables.replace(""));
+		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

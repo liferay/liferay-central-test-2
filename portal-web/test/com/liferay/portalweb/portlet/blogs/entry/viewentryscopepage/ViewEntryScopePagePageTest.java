@@ -48,6 +48,7 @@ public class ViewEntryScopePagePageTest extends BaseTestCase {
 			selenium.getText("//div[2]/div[1]/div[1]/a"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Content Scope Page"),
 			selenium.getText("//p"));
+		Thread.sleep(5000);
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options Icon"));
 
 		for (int second = 0;; second++) {
@@ -94,7 +95,7 @@ public class ViewEntryScopePagePageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_86_scopeLayoutId")) {
+				if (selenium.isVisible("_86_scopeLayoutUuid")) {
 					break;
 				}
 			}
@@ -105,6 +106,6 @@ public class ViewEntryScopePagePageTest extends BaseTestCase {
 		}
 
 		assertEquals("Blogs Page Scope Page",
-			selenium.getSelectedLabel("_86_scopeLayoutId"));
+			selenium.getSelectedLabel("_86_scopeLayoutUuid"));
 	}
 }

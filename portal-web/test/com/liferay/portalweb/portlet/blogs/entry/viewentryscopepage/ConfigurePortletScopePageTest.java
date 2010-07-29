@@ -42,6 +42,7 @@ public class ConfigurePortletScopePageTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options Icon"));
 
 		for (int second = 0;; second++) {
@@ -88,7 +89,7 @@ public class ConfigurePortletScopePageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_86_scopeLayoutId")) {
+				if (selenium.isVisible("_86_scopeLayoutUuid")) {
 					break;
 				}
 			}
@@ -98,7 +99,7 @@ public class ConfigurePortletScopePageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_scopeLayoutId",
+		selenium.select("_86_scopeLayoutUuid",
 			RuntimeVariables.replace("label=Blogs Page Scope Page"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -110,9 +111,9 @@ public class ConfigurePortletScopePageTest extends BaseTestCase {
 
 			try {
 				if (RuntimeVariables.replace(
-							"Your request processed successfully.")
+							"You have successfully updated the setup.")
 										.equals(selenium.getText(
-								"//div[3]/div/div/div/div/div"))) {
+								"//div[@id='p_p_id_86_']/div/div"))) {
 					break;
 				}
 			}
@@ -123,10 +124,10 @@ public class ConfigurePortletScopePageTest extends BaseTestCase {
 		}
 
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
-			selenium.getText("//div[3]/div/div/div/div/div"));
+				"You have successfully updated the setup."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
 		assertEquals("Blogs Page Scope Page",
-			selenium.getSelectedLabel("_86_scopeLayoutId"));
+			selenium.getSelectedLabel("_86_scopeLayoutUuid"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

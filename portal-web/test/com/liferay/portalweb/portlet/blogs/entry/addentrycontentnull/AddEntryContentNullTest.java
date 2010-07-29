@@ -46,7 +46,7 @@ public class AddEntryContentNullTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_33_title", RuntimeVariables.replace("Title"));
 		Thread.sleep(5000);
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("_33_publishButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));

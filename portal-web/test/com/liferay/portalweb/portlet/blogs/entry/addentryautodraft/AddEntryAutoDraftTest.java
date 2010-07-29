@@ -138,10 +138,65 @@ public class AddEntryAutoDraftTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Draft")
+										.equals(selenium.getText("//div[1]/h3"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Draft"),
 			selenium.getText("//div[1]/h3"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("DraftTitle")
+										.equals(selenium.getText(
+								"//div[2]/div[1]/div[1]/a"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("DraftTitle"),
 			selenium.getText("//div[2]/div[1]/div[1]/a"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("DraftContent.")
+										.equals(selenium.getText("//p"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("DraftContent."),
 			selenium.getText("//p"));
 	}

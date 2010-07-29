@@ -67,6 +67,24 @@ public class AddEntryCommentTest extends BaseTestCase {
 		selenium.keyPress("_33_postReplyBody0", RuntimeVariables.replace("\\8"));
 		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertEquals(RuntimeVariables.replace("Comment."),

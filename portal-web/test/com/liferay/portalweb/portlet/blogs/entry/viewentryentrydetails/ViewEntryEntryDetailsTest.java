@@ -45,7 +45,7 @@ public class ViewEntryEntryDetailsTest extends BaseTestCase {
 		selenium.clickAt("link=Title", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Title"),
-			selenium.getText("//span/span/span"));
+			selenium.getText("//div[1]/h1/span"));
 		assertEquals(RuntimeVariables.replace("By Joe Bloggs"),
 			selenium.getText("//form/div/div[4]/div[1]"));
 		assertEquals(RuntimeVariables.replace("Content."),
@@ -54,10 +54,10 @@ public class ViewEntryEntryDetailsTest extends BaseTestCase {
 			selenium.getText("//div[4]/div[5]/div[1]/div/div"));
 		assertTrue(selenium.isPartialText("//div[5]/div[2]/div/div", "0 Votes"));
 		assertEquals(RuntimeVariables.replace("Previous"),
-			selenium.getText("//section/div/div/div/div[1]/span[1]"));
+			selenium.getText("//div/div/div/div[2]/span[1]"));
 		assertEquals(RuntimeVariables.replace("Next"),
-			selenium.getText("//section/div/div/div/div[1]/span[2]"));
+			selenium.getText("//div/div/div/div[2]/span[2]"));
 		assertEquals(RuntimeVariables.replace("Comments"),
-			selenium.getText("//div[2]/div/div[1]/div/span"));
+			selenium.getText("//div[3]/div/div[1]/div/span"));
 	}
 }

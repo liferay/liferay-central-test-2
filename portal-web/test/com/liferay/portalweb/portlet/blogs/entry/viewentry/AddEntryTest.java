@@ -99,10 +99,29 @@ public class AddEntryTest extends BaseTestCase {
 		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body", RuntimeVariables.replace("Content."));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("_33_publishButton", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("Title"),
 			selenium.getText("//div[2]/div[1]/div[1]/a"));
 		assertEquals(RuntimeVariables.replace("Content."),

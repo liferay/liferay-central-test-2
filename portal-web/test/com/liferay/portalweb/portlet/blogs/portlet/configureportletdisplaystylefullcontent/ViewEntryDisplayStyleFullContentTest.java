@@ -43,6 +43,25 @@ public class ViewEntryDisplayStyleFullContentTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Title")
+										.equals(selenium.getText(
+								"//div[2]/div[1]/div[1]/a"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Title"),
 			selenium.getText("//div[2]/div[1]/div[1]/a"));
 		assertEquals(RuntimeVariables.replace("Content."),
@@ -52,8 +71,27 @@ public class ViewEntryDisplayStyleFullContentTest extends BaseTestCase {
 		selenium.clickAt("//div[2]/div[1]/div[1]/a",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Title")
+										.equals(selenium.getText(
+								"//div[1]/h1/span"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Title"),
-			selenium.getText("//span/span/span"));
+			selenium.getText("//div[1]/h1/span"));
 		assertEquals(RuntimeVariables.replace("Content."),
 			selenium.getText("//p"));
 	}

@@ -42,6 +42,7 @@ public class DeleteEntryContentMultipleWordTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("Title"),
 			selenium.getText("//div[2]/div[1]/div[1]/a"));
 		assertEquals(RuntimeVariables.replace(
@@ -50,6 +51,24 @@ public class DeleteEntryContentMultipleWordTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 

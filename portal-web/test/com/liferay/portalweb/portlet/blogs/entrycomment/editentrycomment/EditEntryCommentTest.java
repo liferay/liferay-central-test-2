@@ -68,9 +68,27 @@ public class EditEntryCommentTest extends BaseTestCase {
 			RuntimeVariables.replace("CommentEdit."));
 		selenium.keyPress("_33_editReplyBody1", RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_33_editReplyBody1", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("//input[@value='Update']",
+		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertEquals(RuntimeVariables.replace("CommentEdit."),
