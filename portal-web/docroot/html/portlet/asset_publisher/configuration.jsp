@@ -24,6 +24,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 String typeSelection = ParamUtil.getString(request, "typeSelection", StringPool.BLANK);
 
 AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(typeSelection);
+
+Group scopeGroup = themeDisplay.getScopeGroup();
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationActionURL" />
@@ -279,7 +281,7 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="assetSourcePanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "source") %>'>
 						<aui:fieldset label="scope">
 							<aui:select label="" name="defaultScope">
-								<aui:option label="<%= HtmlUtil.escape(themeDisplay.getScopeGroup().getDescriptiveName()) %>" selected="<%= defaultScope %>" value="<%= true %>" />
+								<aui:option label="<%= _getName(scopeGroup, pageContext) %>" selected="<%= defaultScope %>" value="<%= true %>" />
 								<aui:option label='<%= LanguageUtil.get(pageContext,"select") + "..." %>' selected="<%= !defaultScope %>" value="<%= false %>" />
 							</aui:select>
 
@@ -289,7 +291,7 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 							Set<Group> groups = new HashSet<Group>();
 
 							groups.add(company.getGroup());
-							groups.add(themeDisplay.getScopeGroup());
+							groups.add(scopeGroup);
 
 							for (Layout curLayout : LayoutLocalServiceUtil.getLayouts(layout.getGroupId(), layout.isPrivateLayout())) {
 								if (curLayout.hasScopeGroup()) {
@@ -304,7 +306,7 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 							for (long groupId : groupIds) {
 								Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-								scopesLeftList.add(new KeyValuePair(_getKey(group), HtmlUtil.escape(group.getDescriptiveName())));
+								scopesLeftList.add(new KeyValuePair(_getKey(group), _getName(group, pageContext)));
 							}
 
 							// Right list
@@ -315,7 +317,7 @@ AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAsset
 
 							for (Group group : groups) {
 								if (Arrays.binarySearch(groupIds, group.getGroupId()) < 0) {
-									scopesRightList.add(new KeyValuePair(_getKey(group), HtmlUtil.escape(group.getDescriptiveName())));
+									scopesRightList.add(new KeyValuePair(_getKey(group), _getName(group, pageContext)));
 								}
 							}
 
@@ -610,10 +612,26 @@ private String _getKey(Group group) throws Exception {
 
 		key = "Layout" + StringPool.UNDERLINE + layout.getLayoutId();
 	}
+	else if (group.isLayoutPrototype()) {
+		key = "Group" + StringPool.UNDERLINE + GroupConstants.DEFAULT_GROUP;
+	}
 	else {
-		key = "Group" + StringPool.UNDERLINE + group.getGroupId();;
+		key = "Group" + StringPool.UNDERLINE + group.getGroupId();
 	}
 
 	return key;
+}
+
+private String _getName(Group group, PageContext pageContext) throws Exception {
+	String name = null;
+
+	if (group.isLayoutPrototype()) {
+		name = LanguageUtil.get(pageContext, "default");
+	}
+	else {
+		name = HtmlUtil.escape(group.getDescriptiveName());
+	}
+
+	return name;
 }
 %>

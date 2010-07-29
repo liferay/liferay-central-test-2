@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -313,10 +314,17 @@ public class AssetPublisherUtil {
 						groupIds[i] = scopeIdGroup.getGroupId();
 					}
 					else {
-						long scopeIdGroupId = GetterUtil.getLong(
-							scopeIdFragments[1]);
+						if (scopeIdFragments[1].equals(
+							GroupConstants.DEFAULT_GROUP)) {
 
-						groupIds[i] = scopeIdGroupId;
+							groupIds[i] = scopeGroupId;
+						}
+						else {
+							long scopeIdGroupId = GetterUtil.getLong(
+								scopeIdFragments[1]);
+
+							groupIds[i] = scopeIdGroupId;
+						}
 					}
 				}
 				catch (Exception e) {

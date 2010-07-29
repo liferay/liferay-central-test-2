@@ -27,6 +27,8 @@ public class GroupConstants {
 
 	public static final String CONTROL_PANEL_FRIENDLY_URL = "/control_panel";
 
+	public static final String DEFAULT_GROUP = "default";
+
 	public static final String GUEST = "Guest";
 
 	public static final String[] SYSTEM_GROUPS = {
