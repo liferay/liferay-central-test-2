@@ -3,6 +3,8 @@ AUI().add(
 	function(A) {
 		var DDM = A.DD.DDM;
 
+		var CSS_DRAGGABLE = A.ClassNameManager.getClassName('dd', 'draggable');
+
 		var getTitle = A.cached(
 			function(id) {
 				var portletBoundary = A.one('#' + id);
@@ -383,7 +385,7 @@ AUI().add(
 						dragNodes = dragNodes.filter(':not(' + options.invalid + ')');
 					}
 
-					dragNodes.addClass('yui3-dd-draggable');
+					dragNodes.addClass(CSS_DRAGGABLE);
 				}
 			},
 

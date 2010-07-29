@@ -83,10 +83,10 @@ body.portlet {
 .ie6 .portlet-title-default, .ie7 .portlet-title-default {
 }
 
-.yui3-dd-draggable .portlet-topper {
+.aui-dd-draggable .portlet-topper {
 }
 
-.yui3-dd-draggable .portlet-title-default {
+.aui-dd-draggable .portlet-title-default {
 }
 
 .portlet-borderless-bar .portlet-back a {
