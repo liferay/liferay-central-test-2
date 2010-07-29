@@ -46,7 +46,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		for (long vocabularyId : assetVocabularyIds) {
 			AssetVocabulary vocabulary = AssetVocabularyLocalServiceUtil.getVocabulary(vocabularyId);
 
-			typesLeftList.add(new KeyValuePair(String.valueOf(vocabularyId), vocabulary.getName()));
+			typesLeftList.add(new KeyValuePair(String.valueOf(vocabularyId), _getName(vocabulary, themeDisplay)));
 		}
 
 		// Right list
@@ -59,7 +59,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			if (Arrays.binarySearch(assetVocabularyIds, vocabularyId) < 0) {
 				AssetVocabulary vocabulary = AssetVocabularyLocalServiceUtil.getVocabulary(vocabularyId);
 
-				typesRightList.add(new KeyValuePair(String.valueOf(vocabularyId), vocabulary.getName()));
+				typesRightList.add(new KeyValuePair(String.valueOf(vocabularyId), _getName(vocabulary, themeDisplay)));
 			}
 		}
 
@@ -100,3 +100,15 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 	Liferay.Util.toggleSelectBox('<portlet:namespace />allAssetVocabularies', 'false', '<portlet:namespace />assetVocabulariesBoxes');
 </aui:script>
+
+<%!
+private String _getName(AssetVocabulary vocabulary, ThemeDisplay themeDisplay) throws Exception {
+	String name = vocabulary.getName();
+
+	if (vocabulary.getGroupId() == themeDisplay.getCompanyGroupId()) {
+		name += " (" + LanguageUtil.get(themeDisplay.getLocale(), "global") + ")";
+	}
+
+	return name;
+}
+%>
