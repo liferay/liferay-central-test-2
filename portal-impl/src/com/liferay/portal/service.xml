@@ -131,17 +131,6 @@
 			<finder-column name="value" />
 		</finder>
 	</entity>
-	<entity name="ClusterGroup" local-service="true">
-
-		<!-- PK fields -->
-
-		<column name="clusterGroupId" type="long" primary="true" />
-
-		<!-- Other fields -->
-
-		<column name="clusterNodeIds" type="String" />
-		<column name="wholeCluster" type="boolean" />
-	</entity>
 	<entity name="Company" local-service="true" remote-service="true">
 
 		<!-- PK fields -->

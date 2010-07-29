@@ -301,12 +301,6 @@ create table ClassName_ (
 	value VARCHAR(200) null
 );
 
-create table ClusterGroup (
-	clusterGroupId LONG not null primary key,
-	clusterNodeIds VARCHAR(75) null,
-	wholeCluster BOOLEAN
-);
-
 create table Company (
 	companyId LONG not null primary key,
 	accountId LONG,

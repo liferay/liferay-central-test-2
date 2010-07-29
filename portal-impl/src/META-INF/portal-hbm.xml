@@ -6,7 +6,6 @@
 	<import class="com.liferay.portal.model.Account" />
 	<import class="com.liferay.portal.model.Address" />
 	<import class="com.liferay.portal.model.BrowserTracker" />
-	<import class="com.liferay.portal.model.ClusterGroup" />
 	<import class="com.liferay.portal.model.ClassName" />
 	<import class="com.liferay.portal.model.Company" />
 	<import class="com.liferay.portal.model.Contact" />
@@ -190,14 +189,6 @@
 		</id>
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="browserKey" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-	</class>
-	<class name="com.liferay.portal.model.impl.ClusterGroupImpl" table="ClusterGroup">
-		<cache usage="read-write" />
-		<id name="clusterGroupId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="clusterNodeIds" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="wholeCluster" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.ClassNameImpl" table="ClassName_">
 		<cache usage="read-write" />
