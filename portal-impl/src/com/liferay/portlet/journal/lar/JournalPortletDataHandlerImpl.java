@@ -150,6 +150,24 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		articleElement.addAttribute("path", path);
 
+		article.setUserUuid(article.getUserUuid());
+
+		if (Validator.isNotNull(article.getStructureId())) {
+			JournalStructure structure =
+				JournalStructureLocalServiceUtil.getStructure(
+					context.getScopeGroupId(), article.getStructureId());
+
+			articleElement.addAttribute("structure-uuid", structure.getUuid());
+		}
+
+		if (Validator.isNotNull(article.getTemplateId())) {
+			JournalTemplate template =
+				JournalTemplateLocalServiceUtil.getTemplate(
+					context.getScopeGroupId(), article.getTemplateId());
+
+			articleElement.addAttribute("template-uuid", template.getUuid());
+		}
+
 		Image smallImage = ImageUtil.fetchByPrimaryKey(
 			article.getSmallImageId());
 
@@ -195,6 +213,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
+		article.setStatusByUserUuid(article.getStatusByUserUuid());
+
 		context.addPermissions(
 			JournalArticle.class, article.getResourcePrimKey());
 
@@ -231,25 +251,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			article.setContent(content);
 		}
-
-		if (Validator.isNotNull(article.getStructureId())) {
-			JournalStructure structure =
-				JournalStructureLocalServiceUtil.getStructure(
-					context.getScopeGroupId(), article.getStructureId());
-
-			articleElement.addAttribute("structure-uuid", structure.getUuid());
-		}
-
-		if (Validator.isNotNull(article.getTemplateId())) {
-			JournalTemplate template =
-				JournalTemplateLocalServiceUtil.getTemplate(
-					context.getScopeGroupId(), article.getTemplateId());
-
-			articleElement.addAttribute("template-uuid", template.getUuid());
-		}
-
-		article.setUserUuid(article.getUserUuid());
-		article.setStatusByUserUuid(article.getStatusByUserUuid());
 
 		context.addZipEntry(path, article);
 	}
