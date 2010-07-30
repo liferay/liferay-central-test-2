@@ -129,6 +129,23 @@ public interface Localization {
 		PortletRequest portletRequest, String parameter);
 
 	/**
+	 * Gets an xml of locales and localized strings for the parameter in the
+	 * portlet request.
+	 *
+	 * @param  preferences the preferences container to get the localized value
+	 *		   from
+	 * @param  portletRequest the portlet request to get the locales and
+	 *		   localized strings from
+	 * @param  parameter the prefix of the parameters containing the localized
+	 *		   strings. Each localization will be loaded from a parameter with
+	 *		   this prefix, followed by an underscore, and the language id.
+	 * @return the locales and localized strings in xml format
+	 */
+	public String getLocalizationXmlFromPreferences(
+		PortletPreferences preferences, PortletRequest portletRequest,
+		String parameter);
+
+	/**
 	 * Gets the localized preferences value for the key. Uses the default
 	 * language if no localization exists for the requested language.
 	 *

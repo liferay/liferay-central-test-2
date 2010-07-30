@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.Localization;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.PrefsParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
@@ -293,6 +294,42 @@ public class LocalizationImpl implements Localization {
 		PortletRequest portletRequest, String parameter) {
 
 		return getLocalizationMap(portletRequest, parameter);
+	}
+
+	public String getLocalizationXmlFromPreferences(
+		PortletPreferences preferences, PortletRequest portletRequest,
+		String parameter) {
+
+		String xml = StringPool.BLANK;
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+		Locale defaultLocale = LocaleUtil.getDefault();
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+		for (Locale locale : locales) {
+			String languageId = LocaleUtil.toLanguageId(locale);
+
+			String localParameter =
+				parameter + StringPool.UNDERLINE + languageId;
+
+			String value = PrefsParamUtil.getString(
+				preferences, portletRequest, localParameter);
+
+			if (Validator.isNotNull(value)) {
+				xml = updateLocalization(xml, parameter, value ,languageId);
+			}
+		}
+
+		if (Validator.isNull(getLocalization(xml, defaultLanguageId))) {
+			String oldValue = PrefsParamUtil.getString(
+				preferences, portletRequest, parameter);
+
+			if (Validator.isNotNull(oldValue)) {
+				xml = updateLocalization(xml, parameter, oldValue);
+			}
+		}
+
+		return xml;
 	}
 
 	public String getPreferencesValue(

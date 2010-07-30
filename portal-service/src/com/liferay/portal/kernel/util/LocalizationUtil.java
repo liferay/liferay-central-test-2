@@ -95,6 +95,14 @@ public class LocalizationUtil {
 			portletRequest, parameter);
 	}
 
+	public static String getLocalizationXmlFromPreferences(
+		PortletPreferences preferences, PortletRequest portletRequest,
+		String parameter) {
+
+		return getLocalization().getLocalizationXmlFromPreferences(
+			preferences, portletRequest, parameter);
+	}
+
 	public static String getPreferencesValue(
 		PortletPreferences preferences, String key, String languageId) {
 
