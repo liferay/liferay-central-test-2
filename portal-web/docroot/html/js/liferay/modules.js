@@ -37,7 +37,6 @@
 			'panel': ['aui-base', 'aui-io-request'],
 			'panel-floating': ['aui-paginator', 'liferay-panel', 'selector-css3'],
 			'poller': ['aui-base', 'io', 'json'],
-			'portlet-journal': ['aui-base', 'aui-data-set', 'aui-datatype', 'aui-dialog', 'aui-nested-list', 'aui-overlay-context-panel', 'json', 'substitute'],
 			'portlet-url': ['aui-base', 'aui-io-request', 'querystring-stringify-simple'],
 			'ratings': ['aui-io-request', 'aui-rating', 'substitute'],
 			'search-container': ['aui-base', 'selector-css3'],
@@ -45,7 +44,15 @@
 			'service-datasource': ['aui-base', 'datasource-local'],
 			'undo-manager': ['aui-data-set', 'base', 'substitute'],
 			'upload': ['aui-base', 'aui-swf', 'collection', 'substitute', 'swfupload'],
-			'util-list-fields': ['aui-base']
+			'util-list-fields': ['aui-base'],
+
+			// Portlets
+
+			'bbcode-editor': ['aui-color-picker', 'aui-io-request', 'aui-overlay-context'],
+			'category-admin': ['aui-editable', 'aui-live-search', 'aui-overlay-context-panel', 'aui-tree-view', 'dd', 'json', 'liferay-portlet-url'],
+			'enterprise-admin': [],
+			'portlet-journal': ['aui-base', 'aui-data-set', 'aui-datatype', 'aui-dialog', 'aui-nested-list', 'aui-overlay-context-panel', 'json', 'substitute'],
+			'tags-admin': ['aui-live-search', 'aui-overlay-context-panel', 'base', 'dd', 'json', 'liferay-portlet-url', 'substitute']
 		};
 
 		for (var i in moduleList) {
