@@ -78,7 +78,9 @@ public class I18nServlet extends HttpServlet {
 		try {
 			String[] i18nData = getI18nData(request);
 
-			if (i18nData == null) {
+			if ((i18nData == null) ||
+				!PortalUtil.isValidResourceId(i18nData[2])) {
+
 				PortalUtil.sendError(
 					HttpServletResponse.SC_NOT_FOUND,
 					new NoSuchLayoutException(), request, response);

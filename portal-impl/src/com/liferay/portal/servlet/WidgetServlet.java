@@ -45,7 +45,7 @@ public class WidgetServlet extends HttpServlet {
 		try {
 			String redirect = getRedirect(request);
 
-			if (redirect == null) {
+			if ((redirect == null) || !PortalUtil.isValidResourceId(redirect)) {
 				PortalUtil.sendError(
 					HttpServletResponse.SC_NOT_FOUND,
 					new NoSuchLayoutException(), request, response);

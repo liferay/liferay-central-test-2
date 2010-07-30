@@ -47,7 +47,9 @@ public class FacebookServlet extends HttpServlet {
 		try {
 			String[] facebookData = FacebookUtil.getFacebookData(request);
 
-			if (facebookData == null) {
+			if ((facebookData == null) ||
+				!PortalUtil.isValidResourceId(facebookData[1])) {
+
 				PortalUtil.sendError(
 					HttpServletResponse.SC_NOT_FOUND,
 					new NoSuchLayoutException(), request, response);
