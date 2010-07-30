@@ -89,8 +89,8 @@ public class ETagUtil {
 		HttpServletRequest request, HttpServletResponse response,
 		int hashCode) {
 
-		String eTag =
-			StringPool.QUOTE + Integer.toHexString(hashCode) + StringPool.QUOTE;
+		String eTag = StringPool.QUOTE.concat(
+			Integer.toHexString(hashCode)).concat(StringPool.QUOTE);
 
 		response.setHeader(HttpHeaders.ETAG, eTag);
 
