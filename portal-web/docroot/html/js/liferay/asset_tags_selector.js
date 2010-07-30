@@ -141,7 +141,7 @@ AUI().add(
 
 						A.each(curEntries, instance.add, instance);
 					},
-												   
+
 					_bindTagsSelector: function() {
 						var instance = this;
 
