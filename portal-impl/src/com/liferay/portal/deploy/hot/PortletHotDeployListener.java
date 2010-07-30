@@ -60,7 +60,6 @@ import com.liferay.portal.xmlrpc.XmlRpcServlet;
 import com.liferay.portlet.CustomUserAttributes;
 import com.liferay.portlet.InvokerPortlet;
 import com.liferay.portlet.PortletBagFactory;
-import com.liferay.portlet.PortletConfigFactoryUtil;
 import com.liferay.portlet.PortletContextBag;
 import com.liferay.portlet.PortletContextBagPool;
 import com.liferay.portlet.PortletFilterFactory;
@@ -83,8 +82,6 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletContext;
 import javax.portlet.PortletURLGenerationListener;
 
 import javax.servlet.ServletContext;
@@ -477,11 +474,6 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			Portlet portlet, String servletContextName,
 			ServletContext servletContext, ClassLoader portletClassLoader)
 		throws Exception {
-
-		PortletConfig portletConfig = PortletConfigFactoryUtil.create(
-			portlet, servletContext);
-
-		PortletContext portletContext = portletConfig.getPortletContext();
 
 		PortletContextBag portletContextBag = new PortletContextBag(
 			servletContextName);
