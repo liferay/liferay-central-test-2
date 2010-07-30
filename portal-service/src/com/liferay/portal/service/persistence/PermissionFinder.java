@@ -40,9 +40,6 @@ public interface PermissionFinder {
 		java.util.List<com.liferay.portal.model.Group> groups)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByR_A_C(long roleId, java.lang.String actionId, long codeId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public int countByRolesPermissions(
 		java.util.List<com.liferay.portal.model.Permission> permissions,
 		java.util.List<com.liferay.portal.model.Role> roles)
@@ -60,6 +57,9 @@ public interface PermissionFinder {
 	public int countByUsersRoles(
 		java.util.List<com.liferay.portal.model.Permission> permissions,
 		long userId) throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByR_A_C(long roleId, java.lang.String actionId, long codeId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Permission> findByA_C(
 		java.lang.String actionId, long codeId)

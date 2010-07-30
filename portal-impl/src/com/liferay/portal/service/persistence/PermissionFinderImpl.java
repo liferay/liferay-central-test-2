@@ -50,9 +50,6 @@ public class PermissionFinderImpl
 	public static String COUNT_BY_GROUPS_ROLES =
 		PermissionFinder.class.getName() + ".countByGroupsRoles";
 
-	public static String COUNT_BY_R_A_C =
-		PermissionFinder.class.getName() + ".countByR_A_C";
-
 	public static String COUNT_BY_ROLES_PERMISSIONS =
 		PermissionFinder.class.getName() + ".countByRolesPermissions";
 
@@ -64,6 +61,9 @@ public class PermissionFinderImpl
 
 	public static String COUNT_BY_USERS_ROLES =
 		PermissionFinder.class.getName() + ".countByUsersRoles";
+
+	public static String COUNT_BY_R_A_C =
+		PermissionFinder.class.getName() + ".countByR_A_C";
 
 	public static String FIND_BY_A_C =
 		PermissionFinder.class.getName() + ".findByA_C";
@@ -437,46 +437,6 @@ public class PermissionFinderImpl
 		}
 	}
 
-	public int countByR_A_C(long roleId, String actionId, long codeId)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_R_A_C);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(roleId);
-			qPos.add(actionId);
-			qPos.add(codeId);
-
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public int countByRolesPermissions(
 			List<Permission> permissions, List<Role> roles)
 		throws SystemException {
@@ -664,25 +624,65 @@ public class PermissionFinderImpl
 		}
 	}
 
-	public List<Permission> findByA_C(String actionId, long codeId)
+	public int countByR_A_C(long roleId, String actionId, long codeId)
 		throws SystemException {
-	
+
 		Session session = null;
-	
+
 		try {
 			session = openSession();
-	
-			String sql = CustomSQLUtil.get(FIND_BY_A_C);
-	
+
+			String sql = CustomSQLUtil.get(COUNT_BY_R_A_C);
+
 			SQLQuery q = session.createSQLQuery(sql);
-	
-			q.addEntity("Permission_", PermissionImpl.class);
-	
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
 			QueryPos qPos = QueryPos.getInstance(q);
-	
+
+			qPos.add(roleId);
 			qPos.add(actionId);
 			qPos.add(codeId);
-	
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<Permission> findByA_C(String actionId, long codeId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_A_C);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("Permission_", PermissionImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(actionId);
+			qPos.add(codeId);
+
 			return q.list();
 		}
 		catch (Exception e) {
