@@ -558,7 +558,7 @@ release was successful.</echo>
 			<mapper
 				type="glob"
 				from="glassfishv3/glassfish/*"
-				to="glassfish-3.0.0/*"
+				to="glassfish-3.0.1/*"
 			/>
 		</unzip>
 	</target>
