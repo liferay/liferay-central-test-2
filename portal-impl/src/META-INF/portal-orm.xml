@@ -90,6 +90,14 @@
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.ClusterGroupModelImpl">
+		<attributes>
+			<id name="clusterGroupId" />
+			<basic name="clusterNodeIds" />
+			<basic name="wholeCluster" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.CompanyModelImpl">
 		<attributes>
 			<id name="companyId" />
@@ -2667,6 +2675,10 @@
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ClassNameImpl" name="ClassName">
 		<table name="ClassName_" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portal.model.impl.ClusterGroupImpl" name="ClusterGroup">
+		<table name="ClusterGroup" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.CompanyImpl" name="Company">

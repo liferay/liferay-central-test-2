@@ -31,6 +31,7 @@ import com.liferay.portal.service.AddressService;
 import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.ClassNameLocalService;
 import com.liferay.portal.service.ClassNameService;
+import com.liferay.portal.service.ClusterGroupLocalService;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
 import com.liferay.portal.service.ContactLocalService;
@@ -115,6 +116,7 @@ import com.liferay.portal.service.persistence.AccountPersistence;
 import com.liferay.portal.service.persistence.AddressPersistence;
 import com.liferay.portal.service.persistence.BrowserTrackerPersistence;
 import com.liferay.portal.service.persistence.ClassNamePersistence;
+import com.liferay.portal.service.persistence.ClusterGroupPersistence;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.ContactPersistence;
 import com.liferay.portal.service.persistence.CountryPersistence;
@@ -352,6 +354,24 @@ public abstract class UserTrackerLocalServiceBaseImpl
 	public void setClassNamePersistence(
 		ClassNamePersistence classNamePersistence) {
 		this.classNamePersistence = classNamePersistence;
+	}
+
+	public ClusterGroupLocalService getClusterGroupLocalService() {
+		return clusterGroupLocalService;
+	}
+
+	public void setClusterGroupLocalService(
+		ClusterGroupLocalService clusterGroupLocalService) {
+		this.clusterGroupLocalService = clusterGroupLocalService;
+	}
+
+	public ClusterGroupPersistence getClusterGroupPersistence() {
+		return clusterGroupPersistence;
+	}
+
+	public void setClusterGroupPersistence(
+		ClusterGroupPersistence clusterGroupPersistence) {
+		this.clusterGroupPersistence = clusterGroupPersistence;
 	}
 
 	public CompanyLocalService getCompanyLocalService() {
@@ -1614,6 +1634,10 @@ public abstract class UserTrackerLocalServiceBaseImpl
 	protected ClassNameService classNameService;
 	@BeanReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
+	@BeanReference(type = ClusterGroupLocalService.class)
+	protected ClusterGroupLocalService clusterGroupLocalService;
+	@BeanReference(type = ClusterGroupPersistence.class)
+	protected ClusterGroupPersistence clusterGroupPersistence;
 	@BeanReference(type = CompanyLocalService.class)
 	protected CompanyLocalService companyLocalService;
 	@BeanReference(type = CompanyService.class)

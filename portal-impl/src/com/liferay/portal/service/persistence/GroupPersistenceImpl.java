@@ -5603,6 +5603,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	protected BrowserTrackerPersistence browserTrackerPersistence;
 	@BeanReference(type = ClassNamePersistence.class)
 	protected ClassNamePersistence classNamePersistence;
+	@BeanReference(type = ClusterGroupPersistence.class)
+	protected ClusterGroupPersistence clusterGroupPersistence;
 	@BeanReference(type = CompanyPersistence.class)
 	protected CompanyPersistence companyPersistence;
 	@BeanReference(type = ContactPersistence.class)
