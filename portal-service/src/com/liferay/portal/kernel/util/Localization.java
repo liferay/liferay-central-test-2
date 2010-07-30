@@ -122,13 +122,6 @@ public interface Localization {
 	public Map<Locale, String> getLocalizationMap(String xml);
 
 	/**
-	 * @deprecated use {@link #getLocalizationMap(PortletRequest, String)}
-	 *			   instead.
-	 */
-	public Map<Locale, String> getLocalizedParameter(
-		PortletRequest portletRequest, String parameter);
-
-	/**
 	 * Gets an xml of locales and localized strings for the parameter in the
 	 * portlet request.
 	 *
@@ -139,11 +132,18 @@ public interface Localization {
 	 * @param  parameter the prefix of the parameters containing the localized
 	 *		   strings. Each localization will be loaded from a parameter with
 	 *		   this prefix, followed by an underscore, and the language id.
-	 * @return the locales and localized strings in xml format
+	 * @return the locales and localized strings
 	 */
 	public String getLocalizationXmlFromPreferences(
 		PortletPreferences preferences, PortletRequest portletRequest,
 		String parameter);
+
+	/**
+	 * @deprecated use {@link #getLocalizationMap(PortletRequest, String)}
+	 *			   instead.
+	 */
+	public Map<Locale, String> getLocalizedParameter(
+		PortletRequest portletRequest, String parameter);
 
 	/**
 	 * Gets the localized preferences value for the key. Uses the default

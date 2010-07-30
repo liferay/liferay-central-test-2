@@ -85,6 +85,14 @@ public class LocalizationUtil {
 		return getLocalization().getLocalizationMap(xml);
 	}
 
+	public static String getLocalizationXmlFromPreferences(
+		PortletPreferences preferences, PortletRequest portletRequest,
+		String parameter) {
+
+		return getLocalization().getLocalizationXmlFromPreferences(
+			preferences, portletRequest, parameter);
+	}
+
 	/**
 	 * @deprecated Use <code>getLocalizationMap</code>.
 	 */
@@ -93,14 +101,6 @@ public class LocalizationUtil {
 
 		return getLocalization().getLocalizedParameter(
 			portletRequest, parameter);
-	}
-
-	public static String getLocalizationXmlFromPreferences(
-		PortletPreferences preferences, PortletRequest portletRequest,
-		String parameter) {
-
-		return getLocalization().getLocalizationXmlFromPreferences(
-			preferences, portletRequest, parameter);
 	}
 
 	public static String getPreferencesValue(

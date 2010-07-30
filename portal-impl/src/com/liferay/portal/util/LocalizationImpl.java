@@ -293,12 +293,6 @@ public class LocalizationImpl implements Localization {
 		return map;
 	}
 
-	public Map<Locale, String> getLocalizedParameter(
-		PortletRequest portletRequest, String parameter) {
-
-		return getLocalizationMap(portletRequest, parameter);
-	}
-
 	public String getLocalizationXmlFromPreferences(
 		PortletPreferences preferences, PortletRequest portletRequest,
 		String parameter) {
@@ -333,6 +327,12 @@ public class LocalizationImpl implements Localization {
 		}
 
 		return xml;
+	}
+
+	public Map<Locale, String> getLocalizedParameter(
+		PortletRequest portletRequest, String parameter) {
+
+		return getLocalizationMap(portletRequest, parameter);
 	}
 
 	public String getPreferencesValue(
