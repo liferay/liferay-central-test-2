@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
@@ -70,6 +71,7 @@ import com.liferay.util.FiniteUniqueStack;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -1237,20 +1239,17 @@ public class JournalUtil {
 	private static void _mergeArticleContentUpdate(
 		Element curElement, Element newElement, String defaultLocale) {
 
-		// LPS-11120
-		// This modification is because of the field property changing in the
-		// structure of the web content. It it is not happen, the modification,
-		// of existing contents does not work correctly.
-		// It is possible that the index-type attribute is not exists at older
-		// versions of Liferay.
+		Attribute curTypeAttribute = curElement.attribute("type");
+		Attribute newTypeAttribute = newElement.attribute("type");
 
-		if (newElement.attribute("index-type") != null) {
-			curElement.attribute("index-type").setValue(
-				newElement.attribute("index-type").getValue());
+		curTypeAttribute.setValue(newTypeAttribute.getValue());
+
+		Attribute curIndexTypeAttribute = curElement.attribute("index-type");
+		Attribute newIndexTypeAttribute = newElement.attribute("index-type");
+
+		if (newIndexTypeAttribute != null) {
+			curIndexTypeAttribute.setValue(newIndexTypeAttribute.getValue());
 		}
-
-		curElement.attribute("type").setValue(
-			newElement.attribute("type").getValue());
 
 		Element newContentElement = newElement.elements(
 			"dynamic-content").get(0);
