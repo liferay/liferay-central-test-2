@@ -74,7 +74,7 @@ public class ClusterManageActionWrapper implements ManageAction {
 
 		for (String requiredClusterNodeId : requiredClusterNodesIds) {
 			for (ClusterNode clusterNode : clusterNodes) {
-				String clusterNodeId = clusterNode.getClusterNodeId(); 
+				String clusterNodeId = clusterNode.getClusterNodeId();
 
 				if (clusterNodeId.equals(requiredClusterNodeId)) {
 					clusterNodes.remove(clusterNode);
