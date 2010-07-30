@@ -58,7 +58,7 @@ public class ViewCategoryItemTest extends BaseTestCase {
 		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("Item Test"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
-				"Item Test\n \n This is an item test. \n Limited: Time Only. \n\n Price for 1 Items and Above: $9.99\n \n Availability: In Stock"),
+				"Item Test\n \n This is an item test. \n Limited: Time Only \n\n Price for 1 Items and Above: $9.99\n \n Availability: In Stock"),
 			selenium.getText("//td[3]"));
 		assertEquals(RuntimeVariables.replace("In Stock"),
 			selenium.getText("//td[3]/div[1]"));
