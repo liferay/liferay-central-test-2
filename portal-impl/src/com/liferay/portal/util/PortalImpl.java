@@ -3202,31 +3202,17 @@ public class PortalImpl implements Portal {
 			}
 
 			if (request != null) {
-				String portletId =
-					(String)request.getAttribute(WebKeys.PORTLET_ID);
 				Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
-				String currentURL =
-					(String)request.getAttribute(WebKeys.CURRENT_URL);
 
 				PortletURL portletURL = new PortletURLImpl(
-					request, portletId, layout.getPlid(),
+					request, PortletKeys.DIRECTORY, layout.getPlid(),
 					PortletRequest.RENDER_PHASE);
 
 				portletURL.setWindowState(WindowState.MAXIMIZED);
 				portletURL.setPortletMode(PortletMode.VIEW);
 
-				Portlet portlet =
-					PortletLocalServiceUtil.getPortletById(portletId);
-
-				StringBundler strutsAction = new StringBundler(3);
-
-				strutsAction.append("/");
-				strutsAction.append(portlet.getStrutsPath());
-				strutsAction.append("/view_user");
-
 				portletURL.setParameter(
-					"struts_action", strutsAction.toString());
-				portletURL.setParameter("redirect", currentURL);
+					"struts_action", "/directory/view_user");
 				portletURL.setParameter(
 					"p_u_i_d", String.valueOf(user.getUserId()));
 

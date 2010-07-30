@@ -34,22 +34,9 @@ request.setAttribute("phones.className", Contact.class.getName());
 request.setAttribute("phones.classPK", selContact.getContactId());
 request.setAttribute("websites.className", Contact.class.getName());
 request.setAttribute("websites.classPK", selContact.getContactId());
-
-String redirect = ParamUtil.getString(request, "redirect");
-String backURL = ParamUtil.getString(request, "backURL", redirect);
 %>
 
-<c:choose>
-	<c:when test="<%= portletName.equals(PortletKeys.DIRECTORY) %>">
-		<liferay-util:include page="/html/portlet/directory/tabs1.jsp" />
-	</c:when>
-	<c:otherwise>
-		<liferay-ui:header
-			backURL="<%= backURL %>"
-			title='user'
-		/>
-	</c:otherwise>
-</c:choose>
+<liferay-util:include page="/html/portlet/directory/tabs1.jsp" />
 
 <div class="user-information">
 	<div class="section entity-details">
