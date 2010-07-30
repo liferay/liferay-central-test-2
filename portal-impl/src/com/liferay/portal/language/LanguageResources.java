@@ -97,8 +97,9 @@ public class LanguageResources {
 					locale.getLanguage());
 
 				if (!locale.equals(priorityLocale)) {
-					return new Locale(priorityLocale.getLanguage(),
-						priorityLocale.getCountry()) ;
+					return new Locale(
+						priorityLocale.getLanguage(),
+						priorityLocale.getCountry());
 				}
 			}
 
