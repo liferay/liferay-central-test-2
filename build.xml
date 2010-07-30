@@ -206,6 +206,20 @@
 						</replace>
 					</then>
 				</if>
+
+				<delete>
+					<fileset
+						dir="${app.server.dir}/modules"
+						includes="commons-codec-repackaged.jar"
+					/>
+				</delete>
+
+				<copy todir="${app.server.dir}/modules">
+					<fileset
+						dir="lib/portal"
+						includes="commons-codec.jar"
+					/>
+				</copy>
 			</then>
 		</if>
 
