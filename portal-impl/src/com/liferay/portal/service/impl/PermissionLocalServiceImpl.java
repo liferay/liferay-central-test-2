@@ -689,16 +689,11 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		ResourceCode resourceCode = resourceCodeLocalService.getResourceCode(
 			companyId, name, scope);
 
-		List<Resource> resources = resourcePersistence.findByCodeId(
-			resourceCode.getCodeId());
+		List<Permission> permissions = permissionFinder.findByA_C(
+			actionId, resourceCode.getCodeId());
 
-		for (Resource resource : resources) {
-			Permission permission = permissionPersistence.fetchByA_R(
-				actionId, resource.getResourceId());
-
-			if (permission != null) {
-				rolePersistence.removePermission(roleId, permission);
-			}
+		for (Permission permission : permissions) {
+			rolePersistence.removePermission(roleId, permission);
 		}
 
 		PermissionCacheUtil.clearCache();

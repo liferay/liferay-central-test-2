@@ -65,6 +65,9 @@ public class PermissionFinderImpl
 	public static String COUNT_BY_USERS_ROLES =
 		PermissionFinder.class.getName() + ".countByUsersRoles";
 
+	public static String FIND_BY_A_C =
+		PermissionFinder.class.getName() + ".findByA_C";
+
 	public static String FIND_BY_A_R =
 		PermissionFinder.class.getName() + ".findByA_R";
 
@@ -652,6 +655,35 @@ public class PermissionFinderImpl
 			}
 
 			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<Permission> findByA_C(String actionId, long codeId)
+		throws SystemException {
+	
+		Session session = null;
+	
+		try {
+			session = openSession();
+	
+			String sql = CustomSQLUtil.get(FIND_BY_A_C);
+	
+			SQLQuery q = session.createSQLQuery(sql);
+	
+			q.addEntity("Permission_", PermissionImpl.class);
+	
+			QueryPos qPos = QueryPos.getInstance(q);
+	
+			qPos.add(actionId);
+			qPos.add(codeId);
+	
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

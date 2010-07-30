@@ -693,6 +693,20 @@
 				(Resource_.codeId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.PermissionFinder.findByA_C">
+		<![CDATA[
+			SELECT
+				{Permission_.*}
+			FROM
+				Permission_
+			INNER JOIN
+				Resource_ ON
+					(Resource_.resourceId = Permission_.resourceId)
+			WHERE
+				(Permission_.actionId = ?) AND
+				(Resource_.codeId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionFinder.findByA_R">
 		<![CDATA[
 			SELECT
