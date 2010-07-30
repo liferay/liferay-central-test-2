@@ -26,35 +26,39 @@ public class PortalManagerUtil {
 
 	public static MethodWrapper createManageActionMethodWrapper(
 		ManageAction manageAction) {
-		return new MethodWrapper(_manageMethod, new Object[]{manageAction});
+
+		return new MethodWrapper(_manageMethod, new Object[] {manageAction});
 	}
 
 	public static void manage(
 			ClusterGroup clusterGroup, ManageAction manageAction)
 		throws ManageActionException {
-		ManageAction action = new ClusterManageActionWrapper(clusterGroup,
-			manageAction);
+
+		ManageAction action = new ClusterManageActionWrapper(
+			clusterGroup, manageAction);
+
 		_portalManager.manage(action);
 	}
 
 	public static void manage(ManageAction manageAction)
 		throws ManageActionException {
+
 		_portalManager.manage(manageAction);
 	}
 
 	public void setPortalManager(PortalManager portalManager) {
 		_portalManager = portalManager;
-
 	}
 
-	private static PortalManager _portalManager;
 	private static Method _manageMethod;
+	private static PortalManager _portalManager;
 
 	static {
 		try {
-			_manageMethod = PortalManagerUtil.class.getDeclaredMethod("manage",
-				ManageAction.class);
-		} catch (Exception e) {
+			_manageMethod = PortalManagerUtil.class.getDeclaredMethod(
+				"manage", ManageAction.class);
+		}
+		catch (Exception e) {
 			throw new ExceptionInInitializerError(e);
 		}
 	}

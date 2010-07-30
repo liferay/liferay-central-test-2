@@ -28,7 +28,7 @@ import java.util.List;
  */
 public class ClusterManageActionWrapper implements ManageAction {
 
-	public ClusterManageActionWrapper(
+ 	public ClusterManageActionWrapper(
 		ClusterGroup clusterGroup, ManageAction manageAction) {
 
 		_clusterGroup = clusterGroup;
@@ -38,48 +38,57 @@ public class ClusterManageActionWrapper implements ManageAction {
 	public void action() throws ManageActionException {
 		try {
 			doAction();
-		} catch (SystemException se) {
+		}
+		catch (SystemException se) {
 			throw new ManageActionException(
-				"Fail to execute cluster manage action", se);
+				"Failed to execute cluster manage action", se);
 		}
 	}
 
- 	private void doAction() throws SystemException, ManageActionException {
+	private void doAction() throws ManageActionException, SystemException {
 		MethodWrapper manageActionMethodWrapper =
 			PortalManagerUtil.createManageActionMethodWrapper(_manageAction);
+
 		ClusterRequest clusterRequest = null;
+
 		if (_clusterGroup.isWholeCluster()) {
 			clusterRequest = ClusterRequest.createMulticastRequest(
 				manageActionMethodWrapper);
 		}
 		else {
 			verifyClusterGroup();
+
 			clusterRequest = ClusterRequest.createUnicastRequest(
 				manageActionMethodWrapper,
 				_clusterGroup.getClusterNodeIdsArray());
 		}
+
 		ClusterExecutorUtil.execute(clusterRequest);
 	}
 
 	private void verifyClusterGroup() throws ManageActionException {
 		List<ClusterNode> clusterNodes = ClusterExecutorUtil.getClusterNodes();
+
 		String[] requiredClusterNodesIds =
 			_clusterGroup.getClusterNodeIdsArray();
 
-		for(String requiredClusterNodeId : requiredClusterNodesIds) {
-			for(ClusterNode clusterNode : clusterNodes) {
-				if (clusterNode.getClusterNodeId().equals(
-					requiredClusterNodeId)) {
+		for (String requiredClusterNodeId : requiredClusterNodesIds) {
+			for (ClusterNode clusterNode : clusterNodes) {
+				String clusterNodeId = clusterNode.getClusterNodeId(); 
+
+				if (clusterNodeId.equals(requiredClusterNodeId)) {
 					clusterNodes.remove(clusterNode);
+
 					continue;
 				}
 			}
-			throw new ManageActionException("ClusterNode:" +
-				requiredClusterNodeId + " is not available currently");
+
+			throw new ManageActionException(
+				"Cluster node " + requiredClusterNodeId + " is not available");
 		}
 	}
 
-	private final ClusterGroup _clusterGroup;
-	private final ManageAction _manageAction;
+	private ClusterGroup _clusterGroup;
+	private ManageAction _manageAction;
 
 }
