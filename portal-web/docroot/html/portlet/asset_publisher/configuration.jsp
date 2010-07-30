@@ -613,7 +613,7 @@ private String _getKey(Group group) throws Exception {
 		key = "Layout" + StringPool.UNDERLINE + layout.getLayoutId();
 	}
 	else if (group.isLayoutPrototype()) {
-		key = "Group" + StringPool.UNDERLINE + GroupConstants.DEFAULT_GROUP;
+		key = "Group" + StringPool.UNDERLINE + GroupConstants.DEFAULT;
 	}
 	else {
 		key = "Group" + StringPool.UNDERLINE + group.getGroupId();

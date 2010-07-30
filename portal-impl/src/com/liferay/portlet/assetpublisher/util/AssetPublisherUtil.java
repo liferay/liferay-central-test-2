@@ -315,7 +315,7 @@ public class AssetPublisherUtil {
 					}
 					else {
 						if (scopeIdFragments[1].equals(
-							GroupConstants.DEFAULT_GROUP)) {
+								GroupConstants.DEFAULT)) {
 
 							groupIds[i] = scopeGroupId;
 						}
