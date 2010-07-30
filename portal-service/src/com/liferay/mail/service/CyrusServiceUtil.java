@@ -15,7 +15,6 @@
 package com.liferay.mail.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
@@ -25,7 +24,7 @@ public class CyrusServiceUtil {
 
 	public static void addUser(
 			long userId, String emailAddress, String password)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		getService().addUser(userId, emailAddress, password);
 	}
@@ -40,27 +39,25 @@ public class CyrusServiceUtil {
 	}
 
 	public static void deleteEmailAddress(long companyId, long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		getService().deleteEmailAddress(companyId, userId);
 	}
 
-	public static void deleteUser(long userId)
-		throws PortalException, SystemException {
-
+	public static void deleteUser(long userId) throws SystemException {
 		getService().deleteUser(userId);
 	}
 
 	public static void updateEmailAddress(
 			long companyId, long userId, String emailAddress)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		getService().updateEmailAddress(companyId, userId, emailAddress);
 	}
 
 	public static void updatePassword(
 			long companyId, long userId, String password)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		getService().updatePassword(companyId, userId, password);
 	}

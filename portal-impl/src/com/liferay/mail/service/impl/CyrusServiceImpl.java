@@ -20,7 +20,6 @@ import com.liferay.mail.model.CyrusVirtual;
 import com.liferay.mail.service.CyrusService;
 import com.liferay.mail.service.persistence.CyrusUserUtil;
 import com.liferay.mail.service.persistence.CyrusVirtualUtil;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
@@ -29,7 +28,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 public class CyrusServiceImpl implements CyrusService {
 
 	public void addUser(long userId, String emailAddress, String password)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		// User
 
@@ -45,13 +44,12 @@ public class CyrusServiceImpl implements CyrusService {
 	}
 
 	public void deleteEmailAddress(long companyId, long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		CyrusVirtualUtil.removeByUserId(userId);
 	}
 
-	public void deleteUser(long userId)
-		throws PortalException, SystemException {
+	public void deleteUser(long userId) throws SystemException {
 
 		// User
 
@@ -68,7 +66,7 @@ public class CyrusServiceImpl implements CyrusService {
 
 	public void updateEmailAddress(
 			long companyId, long userId, String emailAddress)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		CyrusVirtualUtil.removeByUserId(userId);
 
@@ -78,7 +76,7 @@ public class CyrusServiceImpl implements CyrusService {
 	}
 
 	public void updatePassword(long companyId, long userId, String password)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		CyrusUser user = null;
 

@@ -25,18 +25,18 @@ import com.liferay.portal.kernel.exception.SystemException;
 public interface CyrusService {
 
 	public void addUser(long userId, String emailAddress, String password)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public void deleteEmailAddress(long companyId, long userId)
-		throws PortalException, SystemException;
+		throws SystemException;
 
-	public void deleteUser(long userId) throws PortalException, SystemException;
+	public void deleteUser(long userId) throws SystemException;
 
 	public void updateEmailAddress(
 			long companyId, long userId, String emailAddress)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public void updatePassword(long companyId, long userId, String password)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 }
