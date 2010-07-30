@@ -34,7 +34,7 @@ if (group.isLayout()) {
 	groupId = group.getParentGroupId();
 }
 
-List<AssetVocabulary> vocabularies = AssetVocabularyServiceUtil.getGroupsVocabularies(new long[] {groupId, themeDisplay.getCompanyGroupId() });
+List<AssetVocabulary> vocabularies = AssetVocabularyServiceUtil.getGroupsVocabularies(new long[] {groupId, themeDisplay.getCompanyGroupId()});
 List<AssetCategory> categories = AssetCategoryServiceUtil.getCategories(className, classPK);
 %>
 
