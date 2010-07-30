@@ -527,8 +527,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				portletFilter.getFilterName(), portletFilterInstance);
 		}
 
-		InvokerPortlet invokerPortlet =
-			PortletInstanceFactoryUtil.create(portlet, servletContext);
+		InvokerPortlet invokerPortlet = PortletInstanceFactoryUtil.create(
+			portlet, servletContext);
 
 		invokerPortlet.setPortletFilters();
 
