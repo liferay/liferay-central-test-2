@@ -20,8 +20,9 @@ import com.liferay.portal.model.ClusterGroup;
 /**
  * @author Brian Wing Shun Chan
  */
-public class ClusterGroupImpl extends ClusterGroupModelImpl
-	implements ClusterGroup {
+public class ClusterGroupImpl
+	extends ClusterGroupModelImpl implements ClusterGroup {
+
 	public ClusterGroupImpl() {
 	}
 
