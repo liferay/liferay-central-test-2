@@ -498,6 +498,17 @@ public class BaseDeployer {
 
 		updateDeployDirectory(srcFile);
 
+		File extLibGlobalDir = new File(
+			srcFile.getAbsolutePath() + "/WEB-INF/ext-lib/global");
+
+		if (extLibGlobalDir.exists()) {
+			File globalLibDir = new File(PortalUtil.getGlobalLibDir());
+
+			CopyTask.copyDirectory(
+				extLibGlobalDir, globalLibDir, "*.jar", StringPool.BLANK,
+				overwrite, true);
+		}
+
 		String excludes = StringPool.BLANK;
 
 		if (appServerType.equals(ServerDetector.JBOSS_ID)) {
@@ -570,7 +581,9 @@ public class BaseDeployer {
 				SystemProperties.get(SystemProperties.TMP_DIR) +
 					File.separator + Time.getTimestamp());
 
-			WarTask.war(srcFile, tempDir, "WEB-INF/web.xml", webXml);
+			excludes += "**/WEB-INF/web.xml";
+
+			WarTask.war(srcFile, tempDir, excludes, webXml);
 
 			if (isJEEDeploymentEnabled()) {
 				File tempWarDir = new File(
@@ -594,23 +607,13 @@ public class BaseDeployer {
 			}
 			else {
 				if (!tempDir.renameTo(deployDir)) {
-					WarTask.war(srcFile, deployDir, "WEB-INF/web.xml", webXml);
+					WarTask.war(srcFile, deployDir, excludes, webXml);
 				}
 
 				DeleteTask.deleteDirectory(tempDir);
 			}
 		}
 		else {
-			File extLibGlobalDir = new File(
-				srcFile.getAbsolutePath() + "/WEB-INF/ext-lib/global");
-
-			if (extLibGlobalDir.exists()) {
-				File globalLibDir = new File(PortalUtil.getGlobalLibDir());
-
-				CopyTask.copyDirectory(
-					extLibGlobalDir, globalLibDir, "*.jar", StringPool.BLANK,
-					overwrite, true);
-			}
 
 			// The deployer might only copy files that have been modified.
 			// However, the deployer always copies and overwrites web.xml after
