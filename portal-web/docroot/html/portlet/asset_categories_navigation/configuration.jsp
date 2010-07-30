@@ -102,7 +102,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </aui:script>
 
 <%!
-private String _getName(AssetVocabulary vocabulary, ThemeDisplay themeDisplay) throws Exception {
+private String _getName(AssetVocabulary vocabulary, ThemeDisplay themeDisplay) {
 	String name = vocabulary.getName();
 
 	if (vocabulary.getGroupId() == themeDisplay.getCompanyGroupId()) {
