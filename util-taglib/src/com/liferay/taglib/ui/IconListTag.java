@@ -43,8 +43,6 @@ public class IconListTag extends BaseBodyTagSupport {
 
 			bodyContent.clearBody();
 
-			removeScriptDataLastEntry();
-
 			request.setAttribute(
 				"liferay-ui:icon-list:single-icon", Boolean.TRUE);
 

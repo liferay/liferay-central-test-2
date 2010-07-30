@@ -47,8 +47,6 @@ public class IconMenuTag extends BaseBodyTagSupport {
 
 			bodyContent.clearBody();
 
-			removeScriptDataLastEntry();
-
 			request.setAttribute(
 				"liferay-ui:icon-menu:single-icon", Boolean.TRUE);
 

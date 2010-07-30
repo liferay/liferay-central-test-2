@@ -17,15 +17,12 @@ package com.liferay.portal.kernel.servlet.taglib;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BodyContentWrapper;
-import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 import java.io.Writer;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.tagext.BodyContent;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
@@ -64,18 +61,6 @@ public class BaseBodyTagSupport extends BodyTagSupport {
 		StringBundler sb = getBodyContentAsStringBundler();
 
 		sb.writeTo(writer);
-	}
-
-	protected void removeScriptDataLastEntry() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		ScriptData scriptData = (ScriptData)request.getAttribute(
-			WebKeys.AUI_SCRIPT_DATA);
-
-		if (scriptData != null) {
-			scriptData.removeLastEntry();
-		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(BaseBodyTagSupport.class);
