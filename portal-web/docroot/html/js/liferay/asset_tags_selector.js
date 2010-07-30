@@ -125,10 +125,10 @@ AUI().add(
 						instance.entries.after('add', instance._updateHiddenInput, instance);
 						instance.entries.after('remove', instance._updateHiddenInput, instance);
 					},
-					
+
 					addEntries: function() {
 						var instance = this;
-						
+
 						instance._onAddEntryClick();
 					},
 
@@ -144,9 +144,9 @@ AUI().add(
 												   
 					_bindTagsSelector: function() {
 						var instance = this;
-						
+
 						instance._submitFormListener = A.Do.before(instance._onAddEntryClick, window, 'submitForm', instance);
-						
+
 						A.on(
 							'key',
 							instance._onTagsSelectorCommaPress,
@@ -364,14 +364,6 @@ AUI().add(
 
 						Liferay.Util.focusFormField(instance.inputNode);
 					},
-					
-					_onTagsSelectorCommaPress: function(event) {
-						var instance = this;
-						
-						instance._onAddEntryClick();
-						
-						event.preventDefault();
-					},
 
 					_onCheckboxClick: function(event) {
 						var instance = this;
@@ -387,6 +379,14 @@ AUI().add(
 						}
 
 						instance[action](value);
+					},
+
+					_onTagsSelectorCommaPress: function(event) {
+						var instance = this;
+
+						instance._onAddEntryClick();
+
+						event.preventDefault();
 					},
 
 					_renderIcons: function() {
