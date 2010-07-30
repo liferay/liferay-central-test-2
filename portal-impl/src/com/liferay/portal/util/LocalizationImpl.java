@@ -224,9 +224,8 @@ public class LocalizationImpl implements Localization {
 				}
 			}
 
-			if (useDefault && priorityLanguageId!= null &&
-				Validator.isNull(value) &&
-				Validator.isNotNull(priorityValue)) {
+			if (useDefault && Validator.isNotNull(priorityLanguageId) &&
+				Validator.isNull(value) && Validator.isNotNull(priorityValue)) {
 
 				value = priorityValue;
 			}
