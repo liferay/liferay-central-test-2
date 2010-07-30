@@ -12,15 +12,19 @@
  * details.
  */
 
-package com.liferay.portal.kernel.management;
+package com.liferay.portal.management;
 
-import java.io.Serializable;
+import com.liferay.portal.kernel.management.ManageAction;
+import com.liferay.portal.kernel.management.ManageActionException;
+import com.liferay.portal.kernel.management.PortalManager;
 
 /**
  * @author Shuyang Zhou
  */
-public interface ManageAction extends Serializable {
+public class BasePortalManager implements PortalManager{
 
-	public void action() throws ManageActionException;
+	public void manage(ManageAction manageAction) throws ManageActionException {
+		manageAction.action();
+	}
 
 }
