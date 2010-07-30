@@ -171,16 +171,8 @@ body.portlet {
 	background-image: url(../images/portlet/close_borderless.png);
 }
 
-.portlet-borderless-bar .portlet-css a {
-	background-image: url(../images/portlet/portlet_css_borderless.png);
-}
-
-.portlet-borderless-bar .portlet-edit a {
-	background-image: url(../images/portlet/edit_borderless.png);
-}
-
-.portlet-borderless-bar .portlet-configuration a {
-	background-image: url(../images/portlet/configuration_borderless.png);
+.portlet-borderless-bar .portlet-options li.lfr-trigger strong a {
+	background-image: url(../images/portlet/options_borderless.png);
 }
 
 .portlet-borderless-bar .portlet-title-default, .portlet-borderless-bar .portlet-actions {

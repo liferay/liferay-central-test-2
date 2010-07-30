@@ -156,25 +156,11 @@ boolean wsrp = ParamUtil.getBoolean(request, "wsrp");
 								<span class="portlet-title-default"><%= portletDisplay.getTitle() %></span>
 
 								<span class="portlet-actions">
-									<span class="portlet-action portlet-css lfr-js-required">
+									<span class="portlet-action portlet-options">
 										<span class="portlet-action-separator">-</span>
 
-										<a href="<%= portletDisplay.getURLPortletCss() %>" title="<liferay-ui:message key="look-and-feel" />"><liferay-ui:message key="look-and-feel" /></a>
+										<liferay-portlet:icon-options />
 									</span>
-
-									<span class="portlet-action portlet-configuration">
-										<span class="portlet-action-separator">-</span>
-
-										<a href="<%= portletDisplay.getURLConfiguration() %>" title="<liferay-ui:message key="configuration" />"><liferay-ui:message key="configuration" /></a>
-									</span>
-
-									<c:if test="<%= portletDisplay.isShowEditIcon() %>">
-										<span class="portlet-action portlet-edit">
-											<span class="portlet-action-separator">-</span>
-
-											<a href="<%= portletDisplay.getURLEdit() %>" title="<liferay-ui:message key="preferences" />"><liferay-ui:message key="preferences" /></a>
-										</span>
-									</c:if>
 
 									<c:if test="<%= portletDisplay.isShowCloseIcon() %>">
 										<span class="portlet-action portlet-close">
