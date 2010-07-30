@@ -50,6 +50,9 @@ public class PermissionFinderImpl
 	public static String COUNT_BY_GROUPS_ROLES =
 		PermissionFinder.class.getName() + ".countByGroupsRoles";
 
+	public static String COUNT_BY_R_A_C =
+		PermissionFinder.class.getName() + ".countByR_A_C";
+
 	public static String COUNT_BY_ROLES_PERMISSIONS =
 		PermissionFinder.class.getName() + ".countByRolesPermissions";
 
@@ -410,6 +413,46 @@ public class PermissionFinderImpl
 
 			setPermissionIds(qPos, permissions);
 			setGroupIds(qPos, groups);
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByR_A_C(long roleId, String actionId, long codeId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_R_A_C);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(roleId);
+			qPos.add(actionId);
+			qPos.add(codeId);
 
 			Iterator<Long> itr = q.list().iterator();
 

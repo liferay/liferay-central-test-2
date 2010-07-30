@@ -285,23 +285,14 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		ResourceCode resourceCode = resourceCodeLocalService.getResourceCode(
 			companyId, name, scope);
 
-		List<Resource> resources = resourcePersistence.findByCodeId(
-			resourceCode.getCodeId());
+		if (permissionFinder.countByR_A_C(
+				roleId, actionId, resourceCode.getCodeId()) > 0) {
 
-		for (Resource resource : resources) {
-			Permission permission = permissionPersistence.fetchByA_R(
-				actionId, resource.getResourceId());
-
-			if (permission != null) {
-				if (rolePersistence.containsPermission(
-						roleId, permission.getPermissionId())) {
-
-					return true;
-				}
-			}
+			return true;
 		}
-
-		return false;
+		else {
+			return false;
+		}
 	}
 
 	public boolean hasRolePermission(

@@ -52,6 +52,11 @@ public class PermissionFinderUtil {
 		return getFinder().countByGroupsRoles(permissions, groups);
 	}
 
+	public static int countByR_A_C(long roleId, java.lang.String actionId,
+		long codeId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().countByR_A_C(roleId, actionId, codeId);
+	}
+
 	public static int countByRolesPermissions(
 		java.util.List<com.liferay.portal.model.Permission> permissions,
 		java.util.List<com.liferay.portal.model.Role> roles)

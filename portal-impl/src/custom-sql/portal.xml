@@ -675,6 +675,24 @@
 				(Users_Roles.userId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.PermissionFinder.countByR_A_C">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				Roles_Permissions
+			INNER JOIN
+				Permission_ ON
+					(Permission_.permissionId = Roles_Permissions.permissionId)
+			INNER JOIN
+				Resource_ ON
+					(Resource_.resourceId = Permission_.resourceId)
+			WHERE
+				(Roles_Permissions.roleId = ?) AND
+				(Permission_.actionId = ?) AND
+				(Resource_.codeId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionFinder.findByA_R">
 		<![CDATA[
 			SELECT
