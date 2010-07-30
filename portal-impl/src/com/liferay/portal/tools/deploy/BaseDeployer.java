@@ -492,12 +492,6 @@ public class BaseDeployer {
 
 		updateWebXml(webXml, srcFile, displayName, pluginPackage);
 
-		if ((deployDir == null) || baseDir.equals(destDir)) {
-			return;
-		}
-
-		updateDeployDirectory(srcFile);
-
 		File extLibGlobalDir = new File(
 			srcFile.getAbsolutePath() + "/WEB-INF/ext-lib/global");
 
@@ -508,6 +502,12 @@ public class BaseDeployer {
 				extLibGlobalDir, globalLibDir, "*.jar", StringPool.BLANK,
 				overwrite, true);
 		}
+
+		if ((deployDir == null) || baseDir.equals(destDir)) {
+			return;
+		}
+
+		updateDeployDirectory(srcFile);
 
 		String excludes = StringPool.BLANK;
 
