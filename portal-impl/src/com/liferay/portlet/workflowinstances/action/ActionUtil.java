@@ -15,7 +15,6 @@
 package com.liferay.portlet.workflowinstances.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowInstance;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -42,7 +41,7 @@ public class ActionUtil {
 
 		WorkflowInstance workflowInstance = null;
 
-		if (Validator.isNotNull(workflowInstanceId)) {
+		if (workflowInstanceId > 0) {
 			workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(
 				themeDisplay.getCompanyId(), workflowInstanceId);
 		}

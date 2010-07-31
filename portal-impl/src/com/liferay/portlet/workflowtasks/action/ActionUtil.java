@@ -15,7 +15,6 @@
 package com.liferay.portlet.workflowtasks.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -41,7 +40,7 @@ public class ActionUtil {
 
 		WorkflowTask workflowTask = null;
 
-		if (Validator.isNotNull(workflowTaskId)) {
+		if (workflowTaskId > 0) {
 			workflowTask = WorkflowTaskManagerUtil.getWorkflowTask(
 				themeDisplay.getCompanyId(), workflowTaskId);
 		}
