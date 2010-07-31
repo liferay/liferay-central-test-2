@@ -244,7 +244,7 @@ public class TeamFinderImpl
 				if (value instanceof Long) {
 					Long valueLong = (Long)value;
 
-					if (valueLong != null) {
+					if (Validator.isNotNull(valueLong)) {
 						qPos.add(valueLong);
 					}
 				}
