@@ -895,7 +895,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		boolean timeZoneXPropertyValue = true;
 
-		if (Validator.isNotNull(timeZoneXProperty) &&
+		if ((timeZoneXProperty != null) &&
 			timeZoneXProperty.getValue().equals("FALSE")) {
 
 			timeZoneXPropertyValue = false;
@@ -936,7 +936,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		RRule rrule = (RRule)event.getProperty(Property.RRULE);
 
-		if (Validator.isNotNull(dtEnd)) {
+		if (dtEnd != null) {
 			endDate = toCalendar(dtEnd, timeZone, timeZoneXPropertyValue);
 
 			endDate.setTime(dtEnd.getDate());
@@ -953,7 +953,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		long durationMins = 0;
 		boolean multiDayEvent = false;
 
-		if (Validator.isNotNull(dtEnd)) {
+		if (dtEnd != null) {
 			diffMillis =
 				dtEnd.getDate().getTime() - startDate.getTimeInMillis();
 			durationHours = diffMillis / Time.HOUR;
@@ -990,7 +990,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		Property comment = event.getProperty(Property.COMMENT);
 
-		if (Validator.isNotNull(comment) &&
+		if ((comment != null) &&
 			ArrayUtil.contains(CalEventConstants.TYPES, comment.getValue())) {
 
 			type = comment.getValue();
@@ -1057,9 +1057,11 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 	}
 
-	protected boolean isICal4jDateOnly(DateProperty date) {
-		if (Validator.isNotNull(date.getParameter(Parameter.VALUE)) &&
-			date.getParameter(Parameter.VALUE).getValue().equals("DATE")) {
+	protected boolean isICal4jDateOnly(DateProperty dateProperty) {
+		Parameter valueParameter = dateProperty.getParameter(Parameter.VALUE);
+
+		if ((valueParameter != null) &&
+			valueParameter.getValue().equals("DATE")) {
 
 			return true;
 		}
@@ -1501,7 +1503,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		String frequency = recur.getFrequency();
 
-		if (Validator.isNotNull(recur.getUntil())) {
+		if (recur.getUntil() != null) {
 			until.setTime(recur.getUntil());
 
 			recurrence.setUntil(until);

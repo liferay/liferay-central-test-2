@@ -386,7 +386,7 @@ public class ExpandoColumnLocalServiceImpl
 
 		ExpandoValue value = new ExpandoValueImpl();
 
-		if (Validator.isNotNull(defaultData)) {
+		if (defaultData != null) {
 			value.setColumnId(columnId);
 
 			if (type == ExpandoColumnConstants.BOOLEAN) {

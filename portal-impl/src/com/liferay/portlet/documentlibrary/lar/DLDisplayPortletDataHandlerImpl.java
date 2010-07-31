@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -174,7 +173,7 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		long rootFolderId = GetterUtil.getLong(
 			rootElement.attributeValue("root-folder-id"));
 
-		if (Validator.isNotNull(rootFolderId)) {
+		if (rootFolderId > 0) {
 			Map<Long, Long> folderPKs =
 				(Map<Long, Long>)context.getNewPrimaryKeysMap(DLFolder.class);
 

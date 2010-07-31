@@ -14,8 +14,6 @@
 
 package com.liferay.portal.spring.aop;
 
-import com.liferay.portal.kernel.util.Validator;
-
 /**
  * @author Shuyang Zhou
  */
@@ -23,12 +21,12 @@ public class ChainableMethodAdviceInjector {
 
 	public void afterPropertiesSet() {
 		if (_injectCondition) {
-			if (Validator.isNull(_newChainableMethodAdvice)) {
+			if (_newChainableMethodAdvice == null) {
 				throw new IllegalArgumentException(
 					"New ChainableMethodAdvice is null");
 			}
 
-			if (Validator.isNull(_parentChainableMethodAdvice)) {
+			if (_parentChainableMethodAdvice == null) {
 				throw new IllegalArgumentException(
 					"Parent ChainableMethodAdvice is null");
 			}

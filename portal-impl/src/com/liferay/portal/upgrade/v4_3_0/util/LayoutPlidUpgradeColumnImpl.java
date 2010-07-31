@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.upgrade.StagnantRowException;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.ValueMapper;
 import com.liferay.portal.kernel.upgrade.util.ValueMapperFactoryUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 
 /**
@@ -49,7 +48,7 @@ public class LayoutPlidUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		Long layoutId = (Long)_layoutIdColumn.getOldValue();
 
 		if ((groupId == null) || (privateLayout == null) ||
-			(Validator.isNull(layoutId))) {
+			(layoutId == null)) {
 
 			throw new StagnantRowException(
 				"{groupId=" + groupId + ",privateLayout=" + privateLayout +

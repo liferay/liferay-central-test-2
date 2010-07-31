@@ -163,7 +163,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 	}
 
 	public void addProperty(Cookie cookie) {
-		if (Validator.isNull(cookie)) {
+		if (cookie == null) {
 			throw new IllegalArgumentException();
 		}
 
