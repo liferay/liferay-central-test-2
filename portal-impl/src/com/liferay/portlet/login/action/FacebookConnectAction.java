@@ -258,9 +258,7 @@ public class FacebookConnectAction extends PortletAction {
 		JSONObject jsonObject = FacebookConnectUtil.getGraphResources(
 			companyId, "/me", token, "id,email,verified");
 
-		if (Validator.isNotNull(jsonObject) &&
-			jsonObject.getBoolean("verified")) {
-
+		if ((jsonObject != null) && jsonObject.getBoolean("verified")) {
 			String facebookId = jsonObject.getString("id");
 
 			if (Validator.isNotNull(facebookId)) {
