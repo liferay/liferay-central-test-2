@@ -19,7 +19,8 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 /**
- * The base implementation for all model classes.
+ * The base implementation for all model classes. This class should never need
+ * to be used directly.
  *
  * @author Brian Wing Shun Chan
  */

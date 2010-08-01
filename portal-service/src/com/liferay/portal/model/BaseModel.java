@@ -20,7 +20,8 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import java.io.Serializable;
 
 /**
- * The base interface for all model classes.
+ * The base interface for all model classes. This interface should never need to
+ * be used directly.
  *
  * @author Brian Wing Shun Chan
  * @see	   com.liferay.portal.model.impl.BaseModelImpl

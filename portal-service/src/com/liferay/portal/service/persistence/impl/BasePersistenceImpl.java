@@ -43,7 +43,8 @@ import java.util.List;
 import javax.sql.DataSource;
 
 /**
- * The base implementation for all persistence classes.
+ * The base implementation for all persistence classes. This class should never
+ * need to be used directly.
  *
  * <p>
  * Caching information and settings can be found in

@@ -29,7 +29,8 @@ import java.util.List;
 import javax.sql.DataSource;
 
 /**
- * The base interface for all persistence classes.
+ * The base interface for all ServiceBuilder persistence classes. This interface
+ * should never need to be used directly.
  *
  * <p>
  * Caching information and settings can be found in

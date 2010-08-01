@@ -75,16 +75,20 @@ import java.util.Set;
 </#list>
 
 /**
- * The persistence for the ${entity.humanName} service.
+ * The persistence implementation for the ${entity.humanName} service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ${entity.name}Util} instead.
  * </p>
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
- * 
+ *
  * @author ${author}
  * @see ${entity.name}Persistence
  * @see ${entity.name}Util
@@ -212,7 +216,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 	/**
 	 * Clears the cache for all ${entity.humanNames}.
-	 * 
+	 *
 	 * <p>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
@@ -226,7 +230,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 	/**
 	 * Clears the cache for the ${entity.humanName}.
-	 * 
+	 *
 	 * <p>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
@@ -264,7 +268,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	}
 
 	/**
-	 * Creates a new ${entity.humanName} with the primary key.
+	 * Creates a new ${entity.humanName} with the primary key. Does not add the ${entity.humanName} to the database.
 	 *
 	 * @param ${entity.PKVarName} the primary key for the new ${entity.humanName}
 	 * @return the new ${entity.humanName}
