@@ -17,7 +17,8 @@ package com.liferay.portal.kernel.portlet;
 import java.util.Map;
 
 /**
- * Provides custom URL mapping for a portlet.
+ * Provides friendly URL mapping for a portlet by converting portlet URL
+ * parameters to friendly URL paths and back.
  *
  * <p>
  * Never implement this interface directly, subclass {@link
