@@ -45,9 +45,9 @@ public class StringParser {
 	 * </pre>
 	 *
 	 * <p>
-	 * This pattern would match the string "Hi Tom! How are you?". The format of
-	 * a fragment may optionally be specified by inserting a colon followed by a
-	 * regular expression after the fragment name. For instance,
+	 * This pattern would match the string &quot;Hi Tom! How are you?&quot;. The
+	 * format of a fragment may optionally be specified by inserting a colon
+	 * followed by a regular expression after the fragment name. For instance,
 	 * <code>name</code> could be set to match only lower case letters with the
 	 * following:
 	 * </p>
@@ -77,7 +77,8 @@ public class StringParser {
 	 *
 	 * <p>
 	 * The format of the path fragment has also been specified to match anything
-	 * using the pattern ".*". This pattern could be used to parse the string:
+	 * using the pattern &quot;.*&quot;. This pattern could be used to parse the
+	 * string:
 	 * </p>
 	 *
 	 * <pre>
@@ -87,8 +88,9 @@ public class StringParser {
 	 * </pre>
 	 *
 	 * <p>
-	 * <code>path</code> would be set to "root/home/mysite/pages/index.htm",
-	 * even if {@link URLStringEncoder} had been set as the string encoder.
+	 * <code>path</code> would be set to
+	 * &quot;root/home/mysite/pages/index.htm&quot;, even if {@link
+	 * URLStringEncoder} had been set as the string encoder.
 	 * </p>
 	 *
 	 * <p>

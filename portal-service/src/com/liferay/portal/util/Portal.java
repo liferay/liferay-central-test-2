@@ -121,8 +121,8 @@ public interface Portal {
 	/**
 	 * Adds preserved parameters such as doAsGroupId, doAsUserId,
 	 * doAsUserLanguageId, and referrerPlid that should always be preserved as
-	 * the user navigates through the portal. If doAsUser is false, then
-	 * doAsUserId and doAsUserLanguageId will never be added.
+	 * the user navigates through the portal. If doAsUser is <code>false</code>,
+	 * then doAsUserId and doAsUserLanguageId will never be added.
 	 */
 	public String addPreservedParameters(
 		ThemeDisplay themeDisplay, Layout layout, String url, boolean doAsUser);
