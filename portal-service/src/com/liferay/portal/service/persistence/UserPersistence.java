@@ -20,11 +20,7 @@ import com.liferay.portal.model.User;
  * The persistence interface for the user service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link UserUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link UserUtil} to access the user persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

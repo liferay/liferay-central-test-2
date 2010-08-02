@@ -20,11 +20,7 @@ import com.liferay.portal.model.Image;
  * The persistence interface for the image service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link ImageUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link ImageUtil} to access the image persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

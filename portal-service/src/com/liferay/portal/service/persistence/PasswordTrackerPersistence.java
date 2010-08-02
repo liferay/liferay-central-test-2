@@ -20,11 +20,7 @@ import com.liferay.portal.model.PasswordTracker;
  * The persistence interface for the password tracker service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link PasswordTrackerUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link PasswordTrackerUtil} to access the password tracker persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

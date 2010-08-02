@@ -58,11 +58,7 @@ import java.util.List;
  * The persistence implementation for the polls question service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link PollsQuestionUtil} instead.
+ * Never modify or reference this class directly. Always use {@link PollsQuestionUtil} to access the polls question persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
  * <p>

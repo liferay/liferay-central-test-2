@@ -21,20 +21,20 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
+ * The interface for the email address remote service.
+ *
  * <p>
- * This interface defines the service. The default implementation is
- * {@link
- * com.liferay.portal.service.impl.EmailAddressServiceImpl}.
- * Modify methods in that class and rerun ServiceBuilder to populate this class
- * and all other generated classes.
+ * Never modify or reference this interface directly. Always use {@link EmailAddressServiceUtil} to access the email address remote service. Add custom service methods to {@link com.liferay.portal.service.impl.EmailAddressServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
  * <p>
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       EmailAddressServiceUtil
+ * @author Brian Wing Shun Chan
+ * @see EmailAddressServiceUtil
+ * @see com.liferay.portal.service.base.EmailAddressServiceBaseImpl
+ * @see com.liferay.portal.service.impl.EmailAddressServiceImpl
  * @generated
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {

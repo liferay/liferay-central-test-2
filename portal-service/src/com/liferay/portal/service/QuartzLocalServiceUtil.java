@@ -17,16 +17,20 @@ package com.liferay.portal.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
+ * The utility for the quartz local service. This utility wraps {@link com.liferay.portal.service.impl.QuartzLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ *
  * <p>
- * This class provides static methods for the
- * {@link QuartzLocalService} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.QuartzLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       QuartzLocalService
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see QuartzLocalService
+ * @see com.liferay.portal.service.base.QuartzLocalServiceBaseImpl
+ * @see com.liferay.portal.service.impl.QuartzLocalServiceImpl
  * @generated
  */
 public class QuartzLocalServiceUtil {

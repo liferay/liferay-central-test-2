@@ -29,29 +29,62 @@ public class RatingsEntryLocalServiceWrapper implements RatingsEntryLocalService
 		_ratingsEntryLocalService = ratingsEntryLocalService;
 	}
 
+	/**
+	* Adds the ratings entry to the database. Also notifies the appropriate model listeners.
+	*
+	* @param ratingsEntry the ratings entry to add
+	* @return the ratings entry that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.ratings.model.RatingsEntry addRatingsEntry(
 		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ratingsEntryLocalService.addRatingsEntry(ratingsEntry);
 	}
 
+	/**
+	* Creates a new ratings entry with the primary key. Does not add the ratings entry to the database.
+	*
+	* @param entryId the primary key for the new ratings entry
+	* @return the new ratings entry
+	*/
 	public com.liferay.portlet.ratings.model.RatingsEntry createRatingsEntry(
 		long entryId) {
 		return _ratingsEntryLocalService.createRatingsEntry(entryId);
 	}
 
+	/**
+	* Deletes the ratings entry with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param entryId the primary key of the ratings entry to delete
+	* @throws PortalException if a ratings entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteRatingsEntry(long entryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_ratingsEntryLocalService.deleteRatingsEntry(entryId);
 	}
 
+	/**
+	* Deletes the ratings entry from the database. Also notifies the appropriate model listeners.
+	*
+	* @param ratingsEntry the ratings entry to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteRatingsEntry(
 		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_ratingsEntryLocalService.deleteRatingsEntry(ratingsEntry);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -59,6 +92,19 @@ public class RatingsEntryLocalServiceWrapper implements RatingsEntryLocalService
 		return _ratingsEntryLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -66,6 +112,20 @@ public class RatingsEntryLocalServiceWrapper implements RatingsEntryLocalService
 		return _ratingsEntryLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -76,12 +136,27 @@ public class RatingsEntryLocalServiceWrapper implements RatingsEntryLocalService
 			orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ratingsEntryLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the ratings entry with the primary key.
+	*
+	* @param entryId the primary key of the ratings entry to get
+	* @return the ratings entry
+	* @throws PortalException if a ratings entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.ratings.model.RatingsEntry getRatingsEntry(
 		long entryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -89,23 +164,56 @@ public class RatingsEntryLocalServiceWrapper implements RatingsEntryLocalService
 		return _ratingsEntryLocalService.getRatingsEntry(entryId);
 	}
 
+	/**
+	* Gets a range of all the ratings entries.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of ratings entries to return
+	* @param end the upper bound of the range of ratings entries to return (not inclusive)
+	* @return the range of ratings entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> getRatingsEntries(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ratingsEntryLocalService.getRatingsEntries(start, end);
 	}
 
+	/**
+	* Gets the number of ratings entries.
+	*
+	* @return the number of ratings entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getRatingsEntriesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ratingsEntryLocalService.getRatingsEntriesCount();
 	}
 
+	/**
+	* Updates the ratings entry in the database. Also notifies the appropriate model listeners.
+	*
+	* @param ratingsEntry the ratings entry to update
+	* @return the ratings entry that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.ratings.model.RatingsEntry updateRatingsEntry(
 		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ratingsEntryLocalService.updateRatingsEntry(ratingsEntry);
 	}
 
+	/**
+	* Updates the ratings entry in the database. Also notifies the appropriate model listeners.
+	*
+	* @param ratingsEntry the ratings entry to update
+	* @param merge whether to merge the ratings entry with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the ratings entry that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.ratings.model.RatingsEntry updateRatingsEntry(
 		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry,
 		boolean merge)

@@ -61,11 +61,7 @@ import java.util.List;
  * The persistence implementation for the message boards thread service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link MBThreadUtil} instead.
+ * Never modify or reference this class directly. Always use {@link MBThreadUtil} to access the message boards thread persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
  * <p>

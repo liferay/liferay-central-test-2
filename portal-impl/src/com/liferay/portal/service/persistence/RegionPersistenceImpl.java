@@ -50,11 +50,7 @@ import java.util.List;
  * The persistence implementation for the region service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link RegionUtil} instead.
+ * Never modify or reference this class directly. Always use {@link RegionUtil} to access the region persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
  * <p>

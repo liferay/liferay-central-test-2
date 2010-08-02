@@ -30,29 +30,62 @@ public class JournalStructureLocalServiceWrapper
 		_journalStructureLocalService = journalStructureLocalService;
 	}
 
+	/**
+	* Adds the journal structure to the database. Also notifies the appropriate model listeners.
+	*
+	* @param journalStructure the journal structure to add
+	* @return the journal structure that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.journal.model.JournalStructure addJournalStructure(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalStructureLocalService.addJournalStructure(journalStructure);
 	}
 
+	/**
+	* Creates a new journal structure with the primary key. Does not add the journal structure to the database.
+	*
+	* @param id the primary key for the new journal structure
+	* @return the new journal structure
+	*/
 	public com.liferay.portlet.journal.model.JournalStructure createJournalStructure(
 		long id) {
 		return _journalStructureLocalService.createJournalStructure(id);
 	}
 
+	/**
+	* Deletes the journal structure with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param id the primary key of the journal structure to delete
+	* @throws PortalException if a journal structure with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteJournalStructure(long id)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_journalStructureLocalService.deleteJournalStructure(id);
 	}
 
+	/**
+	* Deletes the journal structure from the database. Also notifies the appropriate model listeners.
+	*
+	* @param journalStructure the journal structure to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteJournalStructure(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_journalStructureLocalService.deleteJournalStructure(journalStructure);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +93,19 @@ public class JournalStructureLocalServiceWrapper
 		return _journalStructureLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -68,6 +114,20 @@ public class JournalStructureLocalServiceWrapper
 			end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -78,12 +138,27 @@ public class JournalStructureLocalServiceWrapper
 			end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalStructureLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the journal structure with the primary key.
+	*
+	* @param id the primary key of the journal structure to get
+	* @return the journal structure
+	* @throws PortalException if a journal structure with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.journal.model.JournalStructure getJournalStructure(
 		long id)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -91,6 +166,15 @@ public class JournalStructureLocalServiceWrapper
 		return _journalStructureLocalService.getJournalStructure(id);
 	}
 
+	/**
+	* Gets the journal structure with the UUID and group id.
+	*
+	* @param uuid the UUID of journal structure to get
+	* @param groupId the group id of the journal structure to get
+	* @return the journal structure
+	* @throws PortalException if a journal structure with the UUID and group id could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.journal.model.JournalStructure getJournalStructureByUuidAndGroupId(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -99,23 +183,56 @@ public class JournalStructureLocalServiceWrapper
 			groupId);
 	}
 
+	/**
+	* Gets a range of all the journal structures.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of journal structures to return
+	* @param end the upper bound of the range of journal structures to return (not inclusive)
+	* @return the range of journal structures
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> getJournalStructures(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalStructureLocalService.getJournalStructures(start, end);
 	}
 
+	/**
+	* Gets the number of journal structures.
+	*
+	* @return the number of journal structures
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getJournalStructuresCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalStructureLocalService.getJournalStructuresCount();
 	}
 
+	/**
+	* Updates the journal structure in the database. Also notifies the appropriate model listeners.
+	*
+	* @param journalStructure the journal structure to update
+	* @return the journal structure that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.journal.model.JournalStructure updateJournalStructure(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalStructureLocalService.updateJournalStructure(journalStructure);
 	}
 
+	/**
+	* Updates the journal structure in the database. Also notifies the appropriate model listeners.
+	*
+	* @param journalStructure the journal structure to update
+	* @param merge whether to merge the journal structure with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the journal structure that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.journal.model.JournalStructure updateJournalStructure(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure,
 		boolean merge)

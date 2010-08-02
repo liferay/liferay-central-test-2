@@ -22,11 +22,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
  * The persistence interface for the bookmarks entry service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link BookmarksEntryUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link BookmarksEntryUtil} to access the bookmarks entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

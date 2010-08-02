@@ -51,11 +51,7 @@ import java.util.List;
  * The persistence implementation for the password policy service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link PasswordPolicyUtil} instead.
+ * Never modify or reference this class directly. Always use {@link PasswordPolicyUtil} to access the password policy persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
  * <p>

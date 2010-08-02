@@ -29,29 +29,62 @@ public class MBStatsUserLocalServiceWrapper implements MBStatsUserLocalService {
 		_mbStatsUserLocalService = mbStatsUserLocalService;
 	}
 
+	/**
+	* Adds the message boards stats user to the database. Also notifies the appropriate model listeners.
+	*
+	* @param mbStatsUser the message boards stats user to add
+	* @return the message boards stats user that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBStatsUser addMBStatsUser(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbStatsUserLocalService.addMBStatsUser(mbStatsUser);
 	}
 
+	/**
+	* Creates a new message boards stats user with the primary key. Does not add the message boards stats user to the database.
+	*
+	* @param statsUserId the primary key for the new message boards stats user
+	* @return the new message boards stats user
+	*/
 	public com.liferay.portlet.messageboards.model.MBStatsUser createMBStatsUser(
 		long statsUserId) {
 		return _mbStatsUserLocalService.createMBStatsUser(statsUserId);
 	}
 
+	/**
+	* Deletes the message boards stats user with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param statsUserId the primary key of the message boards stats user to delete
+	* @throws PortalException if a message boards stats user with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteMBStatsUser(long statsUserId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_mbStatsUserLocalService.deleteMBStatsUser(statsUserId);
 	}
 
+	/**
+	* Deletes the message boards stats user from the database. Also notifies the appropriate model listeners.
+	*
+	* @param mbStatsUser the message boards stats user to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteMBStatsUser(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_mbStatsUserLocalService.deleteMBStatsUser(mbStatsUser);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -59,6 +92,19 @@ public class MBStatsUserLocalServiceWrapper implements MBStatsUserLocalService {
 		return _mbStatsUserLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -66,6 +112,20 @@ public class MBStatsUserLocalServiceWrapper implements MBStatsUserLocalService {
 		return _mbStatsUserLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -76,12 +136,27 @@ public class MBStatsUserLocalServiceWrapper implements MBStatsUserLocalService {
 			orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbStatsUserLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the message boards stats user with the primary key.
+	*
+	* @param statsUserId the primary key of the message boards stats user to get
+	* @return the message boards stats user
+	* @throws PortalException if a message boards stats user with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBStatsUser getMBStatsUser(
 		long statsUserId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -89,23 +164,56 @@ public class MBStatsUserLocalServiceWrapper implements MBStatsUserLocalService {
 		return _mbStatsUserLocalService.getMBStatsUser(statsUserId);
 	}
 
+	/**
+	* Gets a range of all the message boards stats users.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of message boards stats users to return
+	* @param end the upper bound of the range of message boards stats users to return (not inclusive)
+	* @return the range of message boards stats users
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getMBStatsUsers(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbStatsUserLocalService.getMBStatsUsers(start, end);
 	}
 
+	/**
+	* Gets the number of message boards stats users.
+	*
+	* @return the number of message boards stats users
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getMBStatsUsersCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbStatsUserLocalService.getMBStatsUsersCount();
 	}
 
+	/**
+	* Updates the message boards stats user in the database. Also notifies the appropriate model listeners.
+	*
+	* @param mbStatsUser the message boards stats user to update
+	* @return the message boards stats user that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBStatsUser updateMBStatsUser(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbStatsUserLocalService.updateMBStatsUser(mbStatsUser);
 	}
 
+	/**
+	* Updates the message boards stats user in the database. Also notifies the appropriate model listeners.
+	*
+	* @param mbStatsUser the message boards stats user to update
+	* @param merge whether to merge the message boards stats user with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the message boards stats user that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBStatsUser updateMBStatsUser(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser,
 		boolean merge)

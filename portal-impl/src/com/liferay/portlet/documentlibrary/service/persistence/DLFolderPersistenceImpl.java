@@ -63,11 +63,7 @@ import java.util.List;
  * The persistence implementation for the d l folder service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link DLFolderUtil} instead.
+ * Never modify or reference this class directly. Always use {@link DLFolderUtil} to access the d l folder persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
  * <p>

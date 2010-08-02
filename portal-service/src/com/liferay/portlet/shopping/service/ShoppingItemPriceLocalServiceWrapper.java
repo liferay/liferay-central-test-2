@@ -30,29 +30,62 @@ public class ShoppingItemPriceLocalServiceWrapper
 		_shoppingItemPriceLocalService = shoppingItemPriceLocalService;
 	}
 
+	/**
+	* Adds the shopping item price to the database. Also notifies the appropriate model listeners.
+	*
+	* @param shoppingItemPrice the shopping item price to add
+	* @return the shopping item price that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.shopping.model.ShoppingItemPrice addShoppingItemPrice(
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingItemPriceLocalService.addShoppingItemPrice(shoppingItemPrice);
 	}
 
+	/**
+	* Creates a new shopping item price with the primary key. Does not add the shopping item price to the database.
+	*
+	* @param itemPriceId the primary key for the new shopping item price
+	* @return the new shopping item price
+	*/
 	public com.liferay.portlet.shopping.model.ShoppingItemPrice createShoppingItemPrice(
 		long itemPriceId) {
 		return _shoppingItemPriceLocalService.createShoppingItemPrice(itemPriceId);
 	}
 
+	/**
+	* Deletes the shopping item price with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param itemPriceId the primary key of the shopping item price to delete
+	* @throws PortalException if a shopping item price with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteShoppingItemPrice(long itemPriceId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_shoppingItemPriceLocalService.deleteShoppingItemPrice(itemPriceId);
 	}
 
+	/**
+	* Deletes the shopping item price from the database. Also notifies the appropriate model listeners.
+	*
+	* @param shoppingItemPrice the shopping item price to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteShoppingItemPrice(
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_shoppingItemPriceLocalService.deleteShoppingItemPrice(shoppingItemPrice);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +93,19 @@ public class ShoppingItemPriceLocalServiceWrapper
 		return _shoppingItemPriceLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -68,6 +114,20 @@ public class ShoppingItemPriceLocalServiceWrapper
 			end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -78,12 +138,27 @@ public class ShoppingItemPriceLocalServiceWrapper
 			end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingItemPriceLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the shopping item price with the primary key.
+	*
+	* @param itemPriceId the primary key of the shopping item price to get
+	* @return the shopping item price
+	* @throws PortalException if a shopping item price with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.shopping.model.ShoppingItemPrice getShoppingItemPrice(
 		long itemPriceId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -91,23 +166,56 @@ public class ShoppingItemPriceLocalServiceWrapper
 		return _shoppingItemPriceLocalService.getShoppingItemPrice(itemPriceId);
 	}
 
+	/**
+	* Gets a range of all the shopping item prices.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of shopping item prices to return
+	* @param end the upper bound of the range of shopping item prices to return (not inclusive)
+	* @return the range of shopping item prices
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingItemPriceLocalService.getShoppingItemPrices(start, end);
 	}
 
+	/**
+	* Gets the number of shopping item prices.
+	*
+	* @return the number of shopping item prices
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getShoppingItemPricesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingItemPriceLocalService.getShoppingItemPricesCount();
 	}
 
+	/**
+	* Updates the shopping item price in the database. Also notifies the appropriate model listeners.
+	*
+	* @param shoppingItemPrice the shopping item price to update
+	* @return the shopping item price that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.shopping.model.ShoppingItemPrice updateShoppingItemPrice(
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingItemPriceLocalService.updateShoppingItemPrice(shoppingItemPrice);
 	}
 
+	/**
+	* Updates the shopping item price in the database. Also notifies the appropriate model listeners.
+	*
+	* @param shoppingItemPrice the shopping item price to update
+	* @param merge whether to merge the shopping item price with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the shopping item price that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.shopping.model.ShoppingItemPrice updateShoppingItemPrice(
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice,
 		boolean merge)

@@ -30,29 +30,62 @@ public class TasksProposalLocalServiceWrapper
 		_tasksProposalLocalService = tasksProposalLocalService;
 	}
 
+	/**
+	* Adds the tasks proposal to the database. Also notifies the appropriate model listeners.
+	*
+	* @param tasksProposal the tasks proposal to add
+	* @return the tasks proposal that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.tasks.model.TasksProposal addTasksProposal(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.addTasksProposal(tasksProposal);
 	}
 
+	/**
+	* Creates a new tasks proposal with the primary key. Does not add the tasks proposal to the database.
+	*
+	* @param proposalId the primary key for the new tasks proposal
+	* @return the new tasks proposal
+	*/
 	public com.liferay.portlet.tasks.model.TasksProposal createTasksProposal(
 		long proposalId) {
 		return _tasksProposalLocalService.createTasksProposal(proposalId);
 	}
 
+	/**
+	* Deletes the tasks proposal with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param proposalId the primary key of the tasks proposal to delete
+	* @throws PortalException if a tasks proposal with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteTasksProposal(long proposalId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_tasksProposalLocalService.deleteTasksProposal(proposalId);
 	}
 
+	/**
+	* Deletes the tasks proposal from the database. Also notifies the appropriate model listeners.
+	*
+	* @param tasksProposal the tasks proposal to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteTasksProposal(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_tasksProposalLocalService.deleteTasksProposal(tasksProposal);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +93,19 @@ public class TasksProposalLocalServiceWrapper
 		return _tasksProposalLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -67,6 +113,20 @@ public class TasksProposalLocalServiceWrapper
 		return _tasksProposalLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -77,12 +137,27 @@ public class TasksProposalLocalServiceWrapper
 			end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the tasks proposal with the primary key.
+	*
+	* @param proposalId the primary key of the tasks proposal to get
+	* @return the tasks proposal
+	* @throws PortalException if a tasks proposal with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.tasks.model.TasksProposal getTasksProposal(
 		long proposalId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -90,23 +165,56 @@ public class TasksProposalLocalServiceWrapper
 		return _tasksProposalLocalService.getTasksProposal(proposalId);
 	}
 
+	/**
+	* Gets a range of all the tasks proposals.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of tasks proposals to return
+	* @param end the upper bound of the range of tasks proposals to return (not inclusive)
+	* @return the range of tasks proposals
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getTasksProposals(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.getTasksProposals(start, end);
 	}
 
+	/**
+	* Gets the number of tasks proposals.
+	*
+	* @return the number of tasks proposals
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getTasksProposalsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.getTasksProposalsCount();
 	}
 
+	/**
+	* Updates the tasks proposal in the database. Also notifies the appropriate model listeners.
+	*
+	* @param tasksProposal the tasks proposal to update
+	* @return the tasks proposal that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.tasks.model.TasksProposal updateTasksProposal(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposalLocalService.updateTasksProposal(tasksProposal);
 	}
 
+	/**
+	* Updates the tasks proposal in the database. Also notifies the appropriate model listeners.
+	*
+	* @param tasksProposal the tasks proposal to update
+	* @param merge whether to merge the tasks proposal with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the tasks proposal that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.tasks.model.TasksProposal updateTasksProposal(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal,
 		boolean merge)

@@ -22,11 +22,7 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
  * The persistence interface for the d l folder service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link DLFolderUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link DLFolderUtil} to access the d l folder persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

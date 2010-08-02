@@ -60,11 +60,7 @@ import java.util.List;
  * The persistence implementation for the d l file shortcut service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link DLFileShortcutUtil} instead.
+ * Never modify or reference this class directly. Always use {@link DLFileShortcutUtil} to access the d l file shortcut persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
  * <p>

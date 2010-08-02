@@ -17,42 +17,79 @@ package com.liferay.portlet.journal.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
+ * The utility for the journal content search local service. This utility wraps {@link com.liferay.portlet.journal.service.impl.JournalContentSearchLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ *
  * <p>
- * This class provides static methods for the
- * {@link JournalContentSearchLocalService} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.journal.service.impl.JournalContentSearchLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       JournalContentSearchLocalService
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see JournalContentSearchLocalService
+ * @see com.liferay.portlet.journal.service.base.JournalContentSearchLocalServiceBaseImpl
+ * @see com.liferay.portlet.journal.service.impl.JournalContentSearchLocalServiceImpl
  * @generated
  */
 public class JournalContentSearchLocalServiceUtil {
+	/**
+	* Adds the journal content search to the database. Also notifies the appropriate model listeners.
+	*
+	* @param journalContentSearch the journal content search to add
+	* @return the journal content search that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.journal.model.JournalContentSearch addJournalContentSearch(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addJournalContentSearch(journalContentSearch);
 	}
 
+	/**
+	* Creates a new journal content search with the primary key. Does not add the journal content search to the database.
+	*
+	* @param contentSearchId the primary key for the new journal content search
+	* @return the new journal content search
+	*/
 	public static com.liferay.portlet.journal.model.JournalContentSearch createJournalContentSearch(
 		long contentSearchId) {
 		return getService().createJournalContentSearch(contentSearchId);
 	}
 
+	/**
+	* Deletes the journal content search with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param contentSearchId the primary key of the journal content search to delete
+	* @throws PortalException if a journal content search with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteJournalContentSearch(long contentSearchId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteJournalContentSearch(contentSearchId);
 	}
 
+	/**
+	* Deletes the journal content search from the database. Also notifies the appropriate model listeners.
+	*
+	* @param journalContentSearch the journal content search to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteJournalContentSearch(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteJournalContentSearch(journalContentSearch);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +97,19 @@ public class JournalContentSearchLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -67,6 +117,20 @@ public class JournalContentSearchLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -77,12 +141,27 @@ public class JournalContentSearchLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public static long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the journal content search with the primary key.
+	*
+	* @param contentSearchId the primary key of the journal content search to get
+	* @return the journal content search
+	* @throws PortalException if a journal content search with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.journal.model.JournalContentSearch getJournalContentSearch(
 		long contentSearchId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -90,23 +169,56 @@ public class JournalContentSearchLocalServiceUtil {
 		return getService().getJournalContentSearch(contentSearchId);
 	}
 
+	/**
+	* Gets a range of all the journal content searchs.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of journal content searchs to return
+	* @param end the upper bound of the range of journal content searchs to return (not inclusive)
+	* @return the range of journal content searchs
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> getJournalContentSearchs(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getJournalContentSearchs(start, end);
 	}
 
+	/**
+	* Gets the number of journal content searchs.
+	*
+	* @return the number of journal content searchs
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int getJournalContentSearchsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getJournalContentSearchsCount();
 	}
 
+	/**
+	* Updates the journal content search in the database. Also notifies the appropriate model listeners.
+	*
+	* @param journalContentSearch the journal content search to update
+	* @return the journal content search that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.journal.model.JournalContentSearch updateJournalContentSearch(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateJournalContentSearch(journalContentSearch);
 	}
 
+	/**
+	* Updates the journal content search in the database. Also notifies the appropriate model listeners.
+	*
+	* @param journalContentSearch the journal content search to update
+	* @param merge whether to merge the journal content search with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the journal content search that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.journal.model.JournalContentSearch updateJournalContentSearch(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch,
 		boolean merge)

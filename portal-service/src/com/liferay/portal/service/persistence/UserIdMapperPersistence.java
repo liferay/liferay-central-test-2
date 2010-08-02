@@ -20,11 +20,7 @@ import com.liferay.portal.model.UserIdMapper;
  * The persistence interface for the user id mapper service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link UserIdMapperUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link UserIdMapperUtil} to access the user id mapper persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

@@ -30,29 +30,62 @@ public class JournalTemplateLocalServiceWrapper
 		_journalTemplateLocalService = journalTemplateLocalService;
 	}
 
+	/**
+	* Adds the journal template to the database. Also notifies the appropriate model listeners.
+	*
+	* @param journalTemplate the journal template to add
+	* @return the journal template that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.journal.model.JournalTemplate addJournalTemplate(
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalTemplateLocalService.addJournalTemplate(journalTemplate);
 	}
 
+	/**
+	* Creates a new journal template with the primary key. Does not add the journal template to the database.
+	*
+	* @param id the primary key for the new journal template
+	* @return the new journal template
+	*/
 	public com.liferay.portlet.journal.model.JournalTemplate createJournalTemplate(
 		long id) {
 		return _journalTemplateLocalService.createJournalTemplate(id);
 	}
 
+	/**
+	* Deletes the journal template with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param id the primary key of the journal template to delete
+	* @throws PortalException if a journal template with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteJournalTemplate(long id)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_journalTemplateLocalService.deleteJournalTemplate(id);
 	}
 
+	/**
+	* Deletes the journal template from the database. Also notifies the appropriate model listeners.
+	*
+	* @param journalTemplate the journal template to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteJournalTemplate(
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_journalTemplateLocalService.deleteJournalTemplate(journalTemplate);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +93,19 @@ public class JournalTemplateLocalServiceWrapper
 		return _journalTemplateLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -68,6 +114,20 @@ public class JournalTemplateLocalServiceWrapper
 			end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -78,12 +138,27 @@ public class JournalTemplateLocalServiceWrapper
 			end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalTemplateLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the journal template with the primary key.
+	*
+	* @param id the primary key of the journal template to get
+	* @return the journal template
+	* @throws PortalException if a journal template with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.journal.model.JournalTemplate getJournalTemplate(
 		long id)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -91,6 +166,15 @@ public class JournalTemplateLocalServiceWrapper
 		return _journalTemplateLocalService.getJournalTemplate(id);
 	}
 
+	/**
+	* Gets the journal template with the UUID and group id.
+	*
+	* @param uuid the UUID of journal template to get
+	* @param groupId the group id of the journal template to get
+	* @return the journal template
+	* @throws PortalException if a journal template with the UUID and group id could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.journal.model.JournalTemplate getJournalTemplateByUuidAndGroupId(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -99,23 +183,56 @@ public class JournalTemplateLocalServiceWrapper
 			groupId);
 	}
 
+	/**
+	* Gets a range of all the journal templates.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of journal templates to return
+	* @param end the upper bound of the range of journal templates to return (not inclusive)
+	* @return the range of journal templates
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> getJournalTemplates(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalTemplateLocalService.getJournalTemplates(start, end);
 	}
 
+	/**
+	* Gets the number of journal templates.
+	*
+	* @return the number of journal templates
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getJournalTemplatesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalTemplateLocalService.getJournalTemplatesCount();
 	}
 
+	/**
+	* Updates the journal template in the database. Also notifies the appropriate model listeners.
+	*
+	* @param journalTemplate the journal template to update
+	* @return the journal template that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.journal.model.JournalTemplate updateJournalTemplate(
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalTemplateLocalService.updateJournalTemplate(journalTemplate);
 	}
 
+	/**
+	* Updates the journal template in the database. Also notifies the appropriate model listeners.
+	*
+	* @param journalTemplate the journal template to update
+	* @param merge whether to merge the journal template with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the journal template that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.journal.model.JournalTemplate updateJournalTemplate(
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate,
 		boolean merge)

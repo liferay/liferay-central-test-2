@@ -20,11 +20,7 @@ import com.liferay.portal.model.WorkflowDefinitionLink;
  * The persistence interface for the workflow definition link service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link WorkflowDefinitionLinkUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link WorkflowDefinitionLinkUtil} to access the workflow definition link persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

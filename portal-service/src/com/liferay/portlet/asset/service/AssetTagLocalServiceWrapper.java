@@ -29,28 +29,61 @@ public class AssetTagLocalServiceWrapper implements AssetTagLocalService {
 		_assetTagLocalService = assetTagLocalService;
 	}
 
+	/**
+	* Adds the asset tag to the database. Also notifies the appropriate model listeners.
+	*
+	* @param assetTag the asset tag to add
+	* @return the asset tag that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.asset.model.AssetTag addAssetTag(
 		com.liferay.portlet.asset.model.AssetTag assetTag)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetTagLocalService.addAssetTag(assetTag);
 	}
 
+	/**
+	* Creates a new asset tag with the primary key. Does not add the asset tag to the database.
+	*
+	* @param tagId the primary key for the new asset tag
+	* @return the new asset tag
+	*/
 	public com.liferay.portlet.asset.model.AssetTag createAssetTag(long tagId) {
 		return _assetTagLocalService.createAssetTag(tagId);
 	}
 
+	/**
+	* Deletes the asset tag with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param tagId the primary key of the asset tag to delete
+	* @throws PortalException if a asset tag with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteAssetTag(long tagId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_assetTagLocalService.deleteAssetTag(tagId);
 	}
 
+	/**
+	* Deletes the asset tag from the database. Also notifies the appropriate model listeners.
+	*
+	* @param assetTag the asset tag to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteAssetTag(
 		com.liferay.portlet.asset.model.AssetTag assetTag)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_assetTagLocalService.deleteAssetTag(assetTag);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -58,6 +91,19 @@ public class AssetTagLocalServiceWrapper implements AssetTagLocalService {
 		return _assetTagLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -65,6 +111,20 @@ public class AssetTagLocalServiceWrapper implements AssetTagLocalService {
 		return _assetTagLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -75,35 +135,83 @@ public class AssetTagLocalServiceWrapper implements AssetTagLocalService {
 			orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetTagLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the asset tag with the primary key.
+	*
+	* @param tagId the primary key of the asset tag to get
+	* @return the asset tag
+	* @throws PortalException if a asset tag with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.asset.model.AssetTag getAssetTag(long tagId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _assetTagLocalService.getAssetTag(tagId);
 	}
 
+	/**
+	* Gets a range of all the asset tags.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of asset tags to return
+	* @param end the upper bound of the range of asset tags to return (not inclusive)
+	* @return the range of asset tags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.asset.model.AssetTag> getAssetTags(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetTagLocalService.getAssetTags(start, end);
 	}
 
+	/**
+	* Gets the number of asset tags.
+	*
+	* @return the number of asset tags
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getAssetTagsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetTagLocalService.getAssetTagsCount();
 	}
 
+	/**
+	* Updates the asset tag in the database. Also notifies the appropriate model listeners.
+	*
+	* @param assetTag the asset tag to update
+	* @return the asset tag that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.asset.model.AssetTag updateAssetTag(
 		com.liferay.portlet.asset.model.AssetTag assetTag)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetTagLocalService.updateAssetTag(assetTag);
 	}
 
+	/**
+	* Updates the asset tag in the database. Also notifies the appropriate model listeners.
+	*
+	* @param assetTag the asset tag to update
+	* @param merge whether to merge the asset tag with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the asset tag that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.asset.model.AssetTag updateAssetTag(
 		com.liferay.portlet.asset.model.AssetTag assetTag, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {

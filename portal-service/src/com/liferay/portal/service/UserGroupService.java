@@ -21,20 +21,20 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
+ * The interface for the user group remote service.
+ *
  * <p>
- * This interface defines the service. The default implementation is
- * {@link
- * com.liferay.portal.service.impl.UserGroupServiceImpl}.
- * Modify methods in that class and rerun ServiceBuilder to populate this class
- * and all other generated classes.
+ * Never modify or reference this interface directly. Always use {@link UserGroupServiceUtil} to access the user group remote service. Add custom service methods to {@link com.liferay.portal.service.impl.UserGroupServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
  * <p>
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       UserGroupServiceUtil
+ * @author Brian Wing Shun Chan
+ * @see UserGroupServiceUtil
+ * @see com.liferay.portal.service.base.UserGroupServiceBaseImpl
+ * @see com.liferay.portal.service.impl.UserGroupServiceImpl
  * @generated
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {

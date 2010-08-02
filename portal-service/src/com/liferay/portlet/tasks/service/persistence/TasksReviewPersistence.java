@@ -22,11 +22,7 @@ import com.liferay.portlet.tasks.model.TasksReview;
  * The persistence interface for the tasks review service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link TasksReviewUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link TasksReviewUtil} to access the tasks review persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

@@ -17,16 +17,20 @@ package com.liferay.portal.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
+ * The utility for the plugin setting remote service. This utility wraps {@link com.liferay.portal.service.impl.PluginSettingServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
+ *
  * <p>
- * This class provides static methods for the
- * {@link PluginSettingService} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.PluginSettingServiceImpl} and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       PluginSettingService
+ * <p>
+ * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see PluginSettingService
+ * @see com.liferay.portal.service.base.PluginSettingServiceBaseImpl
+ * @see com.liferay.portal.service.impl.PluginSettingServiceImpl
  * @generated
  */
 public class PluginSettingServiceUtil {

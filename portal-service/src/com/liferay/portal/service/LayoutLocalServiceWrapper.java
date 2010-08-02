@@ -28,27 +28,60 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService {
 		_layoutLocalService = layoutLocalService;
 	}
 
+	/**
+	* Adds the layout to the database. Also notifies the appropriate model listeners.
+	*
+	* @param layout the layout to add
+	* @return the layout that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Layout addLayout(
 		com.liferay.portal.model.Layout layout)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutLocalService.addLayout(layout);
 	}
 
+	/**
+	* Creates a new layout with the primary key. Does not add the layout to the database.
+	*
+	* @param plid the primary key for the new layout
+	* @return the new layout
+	*/
 	public com.liferay.portal.model.Layout createLayout(long plid) {
 		return _layoutLocalService.createLayout(plid);
 	}
 
+	/**
+	* Deletes the layout with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param plid the primary key of the layout to delete
+	* @throws PortalException if a layout with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteLayout(long plid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_layoutLocalService.deleteLayout(plid);
 	}
 
+	/**
+	* Deletes the layout from the database. Also notifies the appropriate model listeners.
+	*
+	* @param layout the layout to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteLayout(com.liferay.portal.model.Layout layout)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_layoutLocalService.deleteLayout(layout);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -56,6 +89,19 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService {
 		return _layoutLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -63,6 +109,20 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService {
 		return _layoutLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -73,18 +133,42 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService {
 			orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the layout with the primary key.
+	*
+	* @param plid the primary key of the layout to get
+	* @return the layout
+	* @throws PortalException if a layout with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Layout getLayout(long plid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutLocalService.getLayout(plid);
 	}
 
+	/**
+	* Gets the layout with the UUID and group id.
+	*
+	* @param uuid the UUID of layout to get
+	* @param groupId the group id of the layout to get
+	* @return the layout
+	* @throws PortalException if a layout with the UUID and group id could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Layout getLayoutByUuidAndGroupId(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -92,23 +176,56 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService {
 		return _layoutLocalService.getLayoutByUuidAndGroupId(uuid, groupId);
 	}
 
+	/**
+	* Gets a range of all the layouts.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of layouts to return
+	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @return the range of layouts
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.Layout> getLayouts(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutLocalService.getLayouts(start, end);
 	}
 
+	/**
+	* Gets the number of layouts.
+	*
+	* @return the number of layouts
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getLayoutsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutLocalService.getLayoutsCount();
 	}
 
+	/**
+	* Updates the layout in the database. Also notifies the appropriate model listeners.
+	*
+	* @param layout the layout to update
+	* @return the layout that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Layout updateLayout(
 		com.liferay.portal.model.Layout layout)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutLocalService.updateLayout(layout);
 	}
 
+	/**
+	* Updates the layout in the database. Also notifies the appropriate model listeners.
+	*
+	* @param layout the layout to update
+	* @param merge whether to merge the layout with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the layout that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Layout updateLayout(
 		com.liferay.portal.model.Layout layout, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {

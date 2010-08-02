@@ -17,42 +17,79 @@ package com.liferay.portlet.messageboards.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
+ * The utility for the message boards discussion local service. This utility wraps {@link com.liferay.portlet.messageboards.service.impl.MBDiscussionLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ *
  * <p>
- * This class provides static methods for the
- * {@link MBDiscussionLocalService} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.messageboards.service.impl.MBDiscussionLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       MBDiscussionLocalService
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see MBDiscussionLocalService
+ * @see com.liferay.portlet.messageboards.service.base.MBDiscussionLocalServiceBaseImpl
+ * @see com.liferay.portlet.messageboards.service.impl.MBDiscussionLocalServiceImpl
  * @generated
  */
 public class MBDiscussionLocalServiceUtil {
+	/**
+	* Adds the message boards discussion to the database. Also notifies the appropriate model listeners.
+	*
+	* @param mbDiscussion the message boards discussion to add
+	* @return the message boards discussion that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBDiscussion addMBDiscussion(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addMBDiscussion(mbDiscussion);
 	}
 
+	/**
+	* Creates a new message boards discussion with the primary key. Does not add the message boards discussion to the database.
+	*
+	* @param discussionId the primary key for the new message boards discussion
+	* @return the new message boards discussion
+	*/
 	public static com.liferay.portlet.messageboards.model.MBDiscussion createMBDiscussion(
 		long discussionId) {
 		return getService().createMBDiscussion(discussionId);
 	}
 
+	/**
+	* Deletes the message boards discussion with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param discussionId the primary key of the message boards discussion to delete
+	* @throws PortalException if a message boards discussion with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteMBDiscussion(long discussionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteMBDiscussion(discussionId);
 	}
 
+	/**
+	* Deletes the message boards discussion from the database. Also notifies the appropriate model listeners.
+	*
+	* @param mbDiscussion the message boards discussion to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteMBDiscussion(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteMBDiscussion(mbDiscussion);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +97,19 @@ public class MBDiscussionLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -67,6 +117,20 @@ public class MBDiscussionLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -77,12 +141,27 @@ public class MBDiscussionLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public static long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the message boards discussion with the primary key.
+	*
+	* @param discussionId the primary key of the message boards discussion to get
+	* @return the message boards discussion
+	* @throws PortalException if a message boards discussion with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBDiscussion getMBDiscussion(
 		long discussionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -90,23 +169,56 @@ public class MBDiscussionLocalServiceUtil {
 		return getService().getMBDiscussion(discussionId);
 	}
 
+	/**
+	* Gets a range of all the message boards discussions.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of message boards discussions to return
+	* @param end the upper bound of the range of message boards discussions to return (not inclusive)
+	* @return the range of message boards discussions
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> getMBDiscussions(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getMBDiscussions(start, end);
 	}
 
+	/**
+	* Gets the number of message boards discussions.
+	*
+	* @return the number of message boards discussions
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int getMBDiscussionsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getMBDiscussionsCount();
 	}
 
+	/**
+	* Updates the message boards discussion in the database. Also notifies the appropriate model listeners.
+	*
+	* @param mbDiscussion the message boards discussion to update
+	* @return the message boards discussion that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBDiscussion updateMBDiscussion(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateMBDiscussion(mbDiscussion);
 	}
 
+	/**
+	* Updates the message boards discussion in the database. Also notifies the appropriate model listeners.
+	*
+	* @param mbDiscussion the message boards discussion to update
+	* @param merge whether to merge the message boards discussion with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the message boards discussion that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBDiscussion updateMBDiscussion(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion,
 		boolean merge)

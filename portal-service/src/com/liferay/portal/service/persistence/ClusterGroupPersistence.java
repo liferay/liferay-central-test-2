@@ -20,11 +20,7 @@ import com.liferay.portal.model.ClusterGroup;
  * The persistence interface for the cluster group service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link ClusterGroupUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link ClusterGroupUtil} to access the cluster group persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

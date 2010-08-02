@@ -29,29 +29,62 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 		_mbCategoryLocalService = mbCategoryLocalService;
 	}
 
+	/**
+	* Adds the message boards category to the database. Also notifies the appropriate model listeners.
+	*
+	* @param mbCategory the message boards category to add
+	* @return the message boards category that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBCategory addMBCategory(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbCategoryLocalService.addMBCategory(mbCategory);
 	}
 
+	/**
+	* Creates a new message boards category with the primary key. Does not add the message boards category to the database.
+	*
+	* @param categoryId the primary key for the new message boards category
+	* @return the new message boards category
+	*/
 	public com.liferay.portlet.messageboards.model.MBCategory createMBCategory(
 		long categoryId) {
 		return _mbCategoryLocalService.createMBCategory(categoryId);
 	}
 
+	/**
+	* Deletes the message boards category with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param categoryId the primary key of the message boards category to delete
+	* @throws PortalException if a message boards category with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteMBCategory(long categoryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_mbCategoryLocalService.deleteMBCategory(categoryId);
 	}
 
+	/**
+	* Deletes the message boards category from the database. Also notifies the appropriate model listeners.
+	*
+	* @param mbCategory the message boards category to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteMBCategory(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_mbCategoryLocalService.deleteMBCategory(mbCategory);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -59,6 +92,19 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 		return _mbCategoryLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -66,6 +112,20 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 		return _mbCategoryLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -76,12 +136,27 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 			orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbCategoryLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the message boards category with the primary key.
+	*
+	* @param categoryId the primary key of the message boards category to get
+	* @return the message boards category
+	* @throws PortalException if a message boards category with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBCategory getMBCategory(
 		long categoryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -89,6 +164,15 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 		return _mbCategoryLocalService.getMBCategory(categoryId);
 	}
 
+	/**
+	* Gets the message boards category with the UUID and group id.
+	*
+	* @param uuid the UUID of message boards category to get
+	* @param groupId the group id of the message boards category to get
+	* @return the message boards category
+	* @throws PortalException if a message boards category with the UUID and group id could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBCategory getMBCategoryByUuidAndGroupId(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -97,23 +181,56 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 			groupId);
 	}
 
+	/**
+	* Gets a range of all the message boards categories.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of message boards categories to return
+	* @param end the upper bound of the range of message boards categories to return (not inclusive)
+	* @return the range of message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getMBCategories(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbCategoryLocalService.getMBCategories(start, end);
 	}
 
+	/**
+	* Gets the number of message boards categories.
+	*
+	* @return the number of message boards categories
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getMBCategoriesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbCategoryLocalService.getMBCategoriesCount();
 	}
 
+	/**
+	* Updates the message boards category in the database. Also notifies the appropriate model listeners.
+	*
+	* @param mbCategory the message boards category to update
+	* @return the message boards category that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBCategory updateMBCategory(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbCategoryLocalService.updateMBCategory(mbCategory);
 	}
 
+	/**
+	* Updates the message boards category in the database. Also notifies the appropriate model listeners.
+	*
+	* @param mbCategory the message boards category to update
+	* @param merge whether to merge the message boards category with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the message boards category that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBCategory updateMBCategory(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory,
 		boolean merge)

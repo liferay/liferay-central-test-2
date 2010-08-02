@@ -56,11 +56,7 @@ import java.util.List;
  * The persistence implementation for the social equity setting service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link SocialEquitySettingUtil} instead.
+ * Never modify or reference this class directly. Always use {@link SocialEquitySettingUtil} to access the social equity setting persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
  * <p>

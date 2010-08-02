@@ -29,29 +29,62 @@ public class SCLicenseLocalServiceWrapper implements SCLicenseLocalService {
 		_scLicenseLocalService = scLicenseLocalService;
 	}
 
+	/**
+	* Adds the s c license to the database. Also notifies the appropriate model listeners.
+	*
+	* @param scLicense the s c license to add
+	* @return the s c license that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.softwarecatalog.model.SCLicense addSCLicense(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scLicenseLocalService.addSCLicense(scLicense);
 	}
 
+	/**
+	* Creates a new s c license with the primary key. Does not add the s c license to the database.
+	*
+	* @param licenseId the primary key for the new s c license
+	* @return the new s c license
+	*/
 	public com.liferay.portlet.softwarecatalog.model.SCLicense createSCLicense(
 		long licenseId) {
 		return _scLicenseLocalService.createSCLicense(licenseId);
 	}
 
+	/**
+	* Deletes the s c license with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param licenseId the primary key of the s c license to delete
+	* @throws PortalException if a s c license with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteSCLicense(long licenseId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_scLicenseLocalService.deleteSCLicense(licenseId);
 	}
 
+	/**
+	* Deletes the s c license from the database. Also notifies the appropriate model listeners.
+	*
+	* @param scLicense the s c license to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteSCLicense(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_scLicenseLocalService.deleteSCLicense(scLicense);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -59,6 +92,19 @@ public class SCLicenseLocalServiceWrapper implements SCLicenseLocalService {
 		return _scLicenseLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -66,6 +112,20 @@ public class SCLicenseLocalServiceWrapper implements SCLicenseLocalService {
 		return _scLicenseLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -76,12 +136,27 @@ public class SCLicenseLocalServiceWrapper implements SCLicenseLocalService {
 			orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scLicenseLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the s c license with the primary key.
+	*
+	* @param licenseId the primary key of the s c license to get
+	* @return the s c license
+	* @throws PortalException if a s c license with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.softwarecatalog.model.SCLicense getSCLicense(
 		long licenseId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -89,23 +164,56 @@ public class SCLicenseLocalServiceWrapper implements SCLicenseLocalService {
 		return _scLicenseLocalService.getSCLicense(licenseId);
 	}
 
+	/**
+	* Gets a range of all the s c licenses.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of s c licenses to return
+	* @param end the upper bound of the range of s c licenses to return (not inclusive)
+	* @return the range of s c licenses
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getSCLicenses(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scLicenseLocalService.getSCLicenses(start, end);
 	}
 
+	/**
+	* Gets the number of s c licenses.
+	*
+	* @return the number of s c licenses
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getSCLicensesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scLicenseLocalService.getSCLicensesCount();
 	}
 
+	/**
+	* Updates the s c license in the database. Also notifies the appropriate model listeners.
+	*
+	* @param scLicense the s c license to update
+	* @return the s c license that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.softwarecatalog.model.SCLicense updateSCLicense(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scLicenseLocalService.updateSCLicense(scLicense);
 	}
 
+	/**
+	* Updates the s c license in the database. Also notifies the appropriate model listeners.
+	*
+	* @param scLicense the s c license to update
+	* @param merge whether to merge the s c license with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the s c license that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.softwarecatalog.model.SCLicense updateSCLicense(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense,
 		boolean merge)

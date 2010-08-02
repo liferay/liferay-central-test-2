@@ -30,29 +30,62 @@ public class ServiceComponentLocalServiceWrapper
 		_serviceComponentLocalService = serviceComponentLocalService;
 	}
 
+	/**
+	* Adds the service component to the database. Also notifies the appropriate model listeners.
+	*
+	* @param serviceComponent the service component to add
+	* @return the service component that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.ServiceComponent addServiceComponent(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _serviceComponentLocalService.addServiceComponent(serviceComponent);
 	}
 
+	/**
+	* Creates a new service component with the primary key. Does not add the service component to the database.
+	*
+	* @param serviceComponentId the primary key for the new service component
+	* @return the new service component
+	*/
 	public com.liferay.portal.model.ServiceComponent createServiceComponent(
 		long serviceComponentId) {
 		return _serviceComponentLocalService.createServiceComponent(serviceComponentId);
 	}
 
+	/**
+	* Deletes the service component with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param serviceComponentId the primary key of the service component to delete
+	* @throws PortalException if a service component with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteServiceComponent(long serviceComponentId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_serviceComponentLocalService.deleteServiceComponent(serviceComponentId);
 	}
 
+	/**
+	* Deletes the service component from the database. Also notifies the appropriate model listeners.
+	*
+	* @param serviceComponent the service component to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteServiceComponent(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_serviceComponentLocalService.deleteServiceComponent(serviceComponent);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +93,19 @@ public class ServiceComponentLocalServiceWrapper
 		return _serviceComponentLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -68,6 +114,20 @@ public class ServiceComponentLocalServiceWrapper
 			end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -78,12 +138,27 @@ public class ServiceComponentLocalServiceWrapper
 			end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _serviceComponentLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the service component with the primary key.
+	*
+	* @param serviceComponentId the primary key of the service component to get
+	* @return the service component
+	* @throws PortalException if a service component with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.ServiceComponent getServiceComponent(
 		long serviceComponentId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -91,23 +166,56 @@ public class ServiceComponentLocalServiceWrapper
 		return _serviceComponentLocalService.getServiceComponent(serviceComponentId);
 	}
 
+	/**
+	* Gets a range of all the service components.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of service components to return
+	* @param end the upper bound of the range of service components to return (not inclusive)
+	* @return the range of service components
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.ServiceComponent> getServiceComponents(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _serviceComponentLocalService.getServiceComponents(start, end);
 	}
 
+	/**
+	* Gets the number of service components.
+	*
+	* @return the number of service components
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getServiceComponentsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _serviceComponentLocalService.getServiceComponentsCount();
 	}
 
+	/**
+	* Updates the service component in the database. Also notifies the appropriate model listeners.
+	*
+	* @param serviceComponent the service component to update
+	* @return the service component that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.ServiceComponent updateServiceComponent(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _serviceComponentLocalService.updateServiceComponent(serviceComponent);
 	}
 
+	/**
+	* Updates the service component in the database. Also notifies the appropriate model listeners.
+	*
+	* @param serviceComponent the service component to update
+	* @param merge whether to merge the service component with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the service component that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.ServiceComponent updateServiceComponent(
 		com.liferay.portal.model.ServiceComponent serviceComponent,
 		boolean merge)

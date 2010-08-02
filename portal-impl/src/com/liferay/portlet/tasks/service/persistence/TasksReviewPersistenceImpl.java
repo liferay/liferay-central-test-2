@@ -55,11 +55,7 @@ import java.util.List;
  * The persistence implementation for the tasks review service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link TasksReviewUtil} instead.
+ * Never modify or reference this class directly. Always use {@link TasksReviewUtil} to access the tasks review persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
  * <p>

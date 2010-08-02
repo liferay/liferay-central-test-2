@@ -64,11 +64,7 @@ import java.util.List;
  * The persistence implementation for the i g image service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link IGImageUtil} instead.
+ * Never modify or reference this class directly. Always use {@link IGImageUtil} to access the i g image persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
  * <p>

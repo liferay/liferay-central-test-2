@@ -17,42 +17,79 @@ package com.liferay.portlet.asset.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
+ * The utility for the asset entry local service. This utility wraps {@link com.liferay.portlet.asset.service.impl.AssetEntryLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ *
  * <p>
- * This class provides static methods for the
- * {@link AssetEntryLocalService} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.asset.service.impl.AssetEntryLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       AssetEntryLocalService
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see AssetEntryLocalService
+ * @see com.liferay.portlet.asset.service.base.AssetEntryLocalServiceBaseImpl
+ * @see com.liferay.portlet.asset.service.impl.AssetEntryLocalServiceImpl
  * @generated
  */
 public class AssetEntryLocalServiceUtil {
+	/**
+	* Adds the asset entry to the database. Also notifies the appropriate model listeners.
+	*
+	* @param assetEntry the asset entry to add
+	* @return the asset entry that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetEntry addAssetEntry(
 		com.liferay.portlet.asset.model.AssetEntry assetEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addAssetEntry(assetEntry);
 	}
 
+	/**
+	* Creates a new asset entry with the primary key. Does not add the asset entry to the database.
+	*
+	* @param entryId the primary key for the new asset entry
+	* @return the new asset entry
+	*/
 	public static com.liferay.portlet.asset.model.AssetEntry createAssetEntry(
 		long entryId) {
 		return getService().createAssetEntry(entryId);
 	}
 
+	/**
+	* Deletes the asset entry with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param entryId the primary key of the asset entry to delete
+	* @throws PortalException if a asset entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteAssetEntry(long entryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteAssetEntry(entryId);
 	}
 
+	/**
+	* Deletes the asset entry from the database. Also notifies the appropriate model listeners.
+	*
+	* @param assetEntry the asset entry to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteAssetEntry(
 		com.liferay.portlet.asset.model.AssetEntry assetEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteAssetEntry(assetEntry);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +97,19 @@ public class AssetEntryLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -67,6 +117,20 @@ public class AssetEntryLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -77,12 +141,27 @@ public class AssetEntryLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public static long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the asset entry with the primary key.
+	*
+	* @param entryId the primary key of the asset entry to get
+	* @return the asset entry
+	* @throws PortalException if a asset entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetEntry getAssetEntry(
 		long entryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -90,23 +169,56 @@ public class AssetEntryLocalServiceUtil {
 		return getService().getAssetEntry(entryId);
 	}
 
+	/**
+	* Gets a range of all the asset entries.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of asset entries to return
+	* @param end the upper bound of the range of asset entries to return (not inclusive)
+	* @return the range of asset entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> getAssetEntries(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getAssetEntries(start, end);
 	}
 
+	/**
+	* Gets the number of asset entries.
+	*
+	* @return the number of asset entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int getAssetEntriesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getAssetEntriesCount();
 	}
 
+	/**
+	* Updates the asset entry in the database. Also notifies the appropriate model listeners.
+	*
+	* @param assetEntry the asset entry to update
+	* @return the asset entry that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetEntry updateAssetEntry(
 		com.liferay.portlet.asset.model.AssetEntry assetEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateAssetEntry(assetEntry);
 	}
 
+	/**
+	* Updates the asset entry in the database. Also notifies the appropriate model listeners.
+	*
+	* @param assetEntry the asset entry to update
+	* @param merge whether to merge the asset entry with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the asset entry that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.asset.model.AssetEntry updateAssetEntry(
 		com.liferay.portlet.asset.model.AssetEntry assetEntry, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {

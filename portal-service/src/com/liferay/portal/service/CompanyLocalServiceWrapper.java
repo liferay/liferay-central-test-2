@@ -28,27 +28,60 @@ public class CompanyLocalServiceWrapper implements CompanyLocalService {
 		_companyLocalService = companyLocalService;
 	}
 
+	/**
+	* Adds the company to the database. Also notifies the appropriate model listeners.
+	*
+	* @param company the company to add
+	* @return the company that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Company addCompany(
 		com.liferay.portal.model.Company company)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _companyLocalService.addCompany(company);
 	}
 
+	/**
+	* Creates a new company with the primary key. Does not add the company to the database.
+	*
+	* @param companyId the primary key for the new company
+	* @return the new company
+	*/
 	public com.liferay.portal.model.Company createCompany(long companyId) {
 		return _companyLocalService.createCompany(companyId);
 	}
 
+	/**
+	* Deletes the company with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param companyId the primary key of the company to delete
+	* @throws PortalException if a company with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteCompany(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_companyLocalService.deleteCompany(companyId);
 	}
 
+	/**
+	* Deletes the company from the database. Also notifies the appropriate model listeners.
+	*
+	* @param company the company to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteCompany(com.liferay.portal.model.Company company)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_companyLocalService.deleteCompany(company);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -56,6 +89,19 @@ public class CompanyLocalServiceWrapper implements CompanyLocalService {
 		return _companyLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -63,6 +109,20 @@ public class CompanyLocalServiceWrapper implements CompanyLocalService {
 		return _companyLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -73,35 +133,83 @@ public class CompanyLocalServiceWrapper implements CompanyLocalService {
 			orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _companyLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the company with the primary key.
+	*
+	* @param companyId the primary key of the company to get
+	* @return the company
+	* @throws PortalException if a company with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Company getCompany(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _companyLocalService.getCompany(companyId);
 	}
 
+	/**
+	* Gets a range of all the companies.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of companies to return
+	* @param end the upper bound of the range of companies to return (not inclusive)
+	* @return the range of companies
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.Company> getCompanies(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _companyLocalService.getCompanies(start, end);
 	}
 
+	/**
+	* Gets the number of companies.
+	*
+	* @return the number of companies
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getCompaniesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _companyLocalService.getCompaniesCount();
 	}
 
+	/**
+	* Updates the company in the database. Also notifies the appropriate model listeners.
+	*
+	* @param company the company to update
+	* @return the company that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Company updateCompany(
 		com.liferay.portal.model.Company company)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _companyLocalService.updateCompany(company);
 	}
 
+	/**
+	* Updates the company in the database. Also notifies the appropriate model listeners.
+	*
+	* @param company the company to update
+	* @param merge whether to merge the company with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the company that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Company updateCompany(
 		com.liferay.portal.model.Company company, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {

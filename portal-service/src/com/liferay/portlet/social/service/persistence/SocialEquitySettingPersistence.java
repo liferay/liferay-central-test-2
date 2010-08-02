@@ -22,11 +22,7 @@ import com.liferay.portlet.social.model.SocialEquitySetting;
  * The persistence interface for the social equity setting service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link SocialEquitySettingUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link SocialEquitySettingUtil} to access the social equity setting persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

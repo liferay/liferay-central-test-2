@@ -22,11 +22,7 @@ import com.liferay.portlet.asset.model.AssetCategoryProperty;
  * The persistence interface for the asset category property service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link AssetCategoryPropertyUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link AssetCategoryPropertyUtil} to access the asset category property persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

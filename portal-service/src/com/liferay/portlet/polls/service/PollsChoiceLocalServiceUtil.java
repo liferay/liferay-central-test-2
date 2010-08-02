@@ -17,42 +17,79 @@ package com.liferay.portlet.polls.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
+ * The utility for the polls choice local service. This utility wraps {@link com.liferay.portlet.polls.service.impl.PollsChoiceLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ *
  * <p>
- * This class provides static methods for the
- * {@link PollsChoiceLocalService} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.polls.service.impl.PollsChoiceLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       PollsChoiceLocalService
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see PollsChoiceLocalService
+ * @see com.liferay.portlet.polls.service.base.PollsChoiceLocalServiceBaseImpl
+ * @see com.liferay.portlet.polls.service.impl.PollsChoiceLocalServiceImpl
  * @generated
  */
 public class PollsChoiceLocalServiceUtil {
+	/**
+	* Adds the polls choice to the database. Also notifies the appropriate model listeners.
+	*
+	* @param pollsChoice the polls choice to add
+	* @return the polls choice that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.polls.model.PollsChoice addPollsChoice(
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addPollsChoice(pollsChoice);
 	}
 
+	/**
+	* Creates a new polls choice with the primary key. Does not add the polls choice to the database.
+	*
+	* @param choiceId the primary key for the new polls choice
+	* @return the new polls choice
+	*/
 	public static com.liferay.portlet.polls.model.PollsChoice createPollsChoice(
 		long choiceId) {
 		return getService().createPollsChoice(choiceId);
 	}
 
+	/**
+	* Deletes the polls choice with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param choiceId the primary key of the polls choice to delete
+	* @throws PortalException if a polls choice with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deletePollsChoice(long choiceId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deletePollsChoice(choiceId);
 	}
 
+	/**
+	* Deletes the polls choice from the database. Also notifies the appropriate model listeners.
+	*
+	* @param pollsChoice the polls choice to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deletePollsChoice(
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deletePollsChoice(pollsChoice);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +97,19 @@ public class PollsChoiceLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -67,6 +117,20 @@ public class PollsChoiceLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -77,12 +141,27 @@ public class PollsChoiceLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public static long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the polls choice with the primary key.
+	*
+	* @param choiceId the primary key of the polls choice to get
+	* @return the polls choice
+	* @throws PortalException if a polls choice with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.polls.model.PollsChoice getPollsChoice(
 		long choiceId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -90,23 +169,56 @@ public class PollsChoiceLocalServiceUtil {
 		return getService().getPollsChoice(choiceId);
 	}
 
+	/**
+	* Gets a range of all the polls choices.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of polls choices to return
+	* @param end the upper bound of the range of polls choices to return (not inclusive)
+	* @return the range of polls choices
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.polls.model.PollsChoice> getPollsChoices(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getPollsChoices(start, end);
 	}
 
+	/**
+	* Gets the number of polls choices.
+	*
+	* @return the number of polls choices
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int getPollsChoicesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getPollsChoicesCount();
 	}
 
+	/**
+	* Updates the polls choice in the database. Also notifies the appropriate model listeners.
+	*
+	* @param pollsChoice the polls choice to update
+	* @return the polls choice that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.polls.model.PollsChoice updatePollsChoice(
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updatePollsChoice(pollsChoice);
 	}
 
+	/**
+	* Updates the polls choice in the database. Also notifies the appropriate model listeners.
+	*
+	* @param pollsChoice the polls choice to update
+	* @param merge whether to merge the polls choice with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the polls choice that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.polls.model.PollsChoice updatePollsChoice(
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {

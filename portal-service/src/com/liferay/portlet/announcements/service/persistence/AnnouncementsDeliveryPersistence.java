@@ -22,11 +22,7 @@ import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
  * The persistence interface for the announcements delivery service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link AnnouncementsDeliveryUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link AnnouncementsDeliveryUtil} to access the announcements delivery persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

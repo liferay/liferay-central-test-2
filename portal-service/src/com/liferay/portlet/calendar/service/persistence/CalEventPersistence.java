@@ -22,11 +22,7 @@ import com.liferay.portlet.calendar.model.CalEvent;
  * The persistence interface for the cal event service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link CalEventUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link CalEventUtil} to access the cal event persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

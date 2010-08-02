@@ -29,29 +29,62 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 		_calEventLocalService = calEventLocalService;
 	}
 
+	/**
+	* Adds the cal event to the database. Also notifies the appropriate model listeners.
+	*
+	* @param calEvent the cal event to add
+	* @return the cal event that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent addCalEvent(
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _calEventLocalService.addCalEvent(calEvent);
 	}
 
+	/**
+	* Creates a new cal event with the primary key. Does not add the cal event to the database.
+	*
+	* @param eventId the primary key for the new cal event
+	* @return the new cal event
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent createCalEvent(
 		long eventId) {
 		return _calEventLocalService.createCalEvent(eventId);
 	}
 
+	/**
+	* Deletes the cal event with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param eventId the primary key of the cal event to delete
+	* @throws PortalException if a cal event with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteCalEvent(long eventId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_calEventLocalService.deleteCalEvent(eventId);
 	}
 
+	/**
+	* Deletes the cal event from the database. Also notifies the appropriate model listeners.
+	*
+	* @param calEvent the cal event to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteCalEvent(
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_calEventLocalService.deleteCalEvent(calEvent);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -59,6 +92,19 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 		return _calEventLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -66,6 +112,20 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 		return _calEventLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -76,18 +136,42 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 			orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _calEventLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the cal event with the primary key.
+	*
+	* @param eventId the primary key of the cal event to get
+	* @return the cal event
+	* @throws PortalException if a cal event with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent getCalEvent(long eventId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _calEventLocalService.getCalEvent(eventId);
 	}
 
+	/**
+	* Gets the cal event with the UUID and group id.
+	*
+	* @param uuid the UUID of cal event to get
+	* @param groupId the group id of the cal event to get
+	* @return the cal event
+	* @throws PortalException if a cal event with the UUID and group id could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent getCalEventByUuidAndGroupId(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -95,23 +179,56 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 		return _calEventLocalService.getCalEventByUuidAndGroupId(uuid, groupId);
 	}
 
+	/**
+	* Gets a range of all the cal events.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of cal events to return
+	* @param end the upper bound of the range of cal events to return (not inclusive)
+	* @return the range of cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getCalEvents(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _calEventLocalService.getCalEvents(start, end);
 	}
 
+	/**
+	* Gets the number of cal events.
+	*
+	* @return the number of cal events
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getCalEventsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _calEventLocalService.getCalEventsCount();
 	}
 
+	/**
+	* Updates the cal event in the database. Also notifies the appropriate model listeners.
+	*
+	* @param calEvent the cal event to update
+	* @return the cal event that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent updateCalEvent(
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _calEventLocalService.updateCalEvent(calEvent);
 	}
 
+	/**
+	* Updates the cal event in the database. Also notifies the appropriate model listeners.
+	*
+	* @param calEvent the cal event to update
+	* @param merge whether to merge the cal event with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the cal event that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.calendar.model.CalEvent updateCalEvent(
 		com.liferay.portlet.calendar.model.CalEvent calEvent, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {

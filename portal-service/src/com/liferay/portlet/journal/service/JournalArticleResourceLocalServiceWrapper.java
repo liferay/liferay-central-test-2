@@ -30,29 +30,62 @@ public class JournalArticleResourceLocalServiceWrapper
 		_journalArticleResourceLocalService = journalArticleResourceLocalService;
 	}
 
+	/**
+	* Adds the journal article resource to the database. Also notifies the appropriate model listeners.
+	*
+	* @param journalArticleResource the journal article resource to add
+	* @return the journal article resource that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.journal.model.JournalArticleResource addJournalArticleResource(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleResourceLocalService.addJournalArticleResource(journalArticleResource);
 	}
 
+	/**
+	* Creates a new journal article resource with the primary key. Does not add the journal article resource to the database.
+	*
+	* @param resourcePrimKey the primary key for the new journal article resource
+	* @return the new journal article resource
+	*/
 	public com.liferay.portlet.journal.model.JournalArticleResource createJournalArticleResource(
 		long resourcePrimKey) {
 		return _journalArticleResourceLocalService.createJournalArticleResource(resourcePrimKey);
 	}
 
+	/**
+	* Deletes the journal article resource with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param resourcePrimKey the primary key of the journal article resource to delete
+	* @throws PortalException if a journal article resource with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteJournalArticleResource(long resourcePrimKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleResourceLocalService.deleteJournalArticleResource(resourcePrimKey);
 	}
 
+	/**
+	* Deletes the journal article resource from the database. Also notifies the appropriate model listeners.
+	*
+	* @param journalArticleResource the journal article resource to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteJournalArticleResource(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleResourceLocalService.deleteJournalArticleResource(journalArticleResource);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +93,19 @@ public class JournalArticleResourceLocalServiceWrapper
 		return _journalArticleResourceLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -68,6 +114,20 @@ public class JournalArticleResourceLocalServiceWrapper
 			start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -78,12 +138,27 @@ public class JournalArticleResourceLocalServiceWrapper
 			start, end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleResourceLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the journal article resource with the primary key.
+	*
+	* @param resourcePrimKey the primary key of the journal article resource to get
+	* @return the journal article resource
+	* @throws PortalException if a journal article resource with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.journal.model.JournalArticleResource getJournalArticleResource(
 		long resourcePrimKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -91,6 +166,18 @@ public class JournalArticleResourceLocalServiceWrapper
 		return _journalArticleResourceLocalService.getJournalArticleResource(resourcePrimKey);
 	}
 
+	/**
+	* Gets a range of all the journal article resources.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of journal article resources to return
+	* @param end the upper bound of the range of journal article resources to return (not inclusive)
+	* @return the range of journal article resources
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> getJournalArticleResources(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -98,17 +185,38 @@ public class JournalArticleResourceLocalServiceWrapper
 			end);
 	}
 
+	/**
+	* Gets the number of journal article resources.
+	*
+	* @return the number of journal article resources
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getJournalArticleResourcesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleResourceLocalService.getJournalArticleResourcesCount();
 	}
 
+	/**
+	* Updates the journal article resource in the database. Also notifies the appropriate model listeners.
+	*
+	* @param journalArticleResource the journal article resource to update
+	* @return the journal article resource that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.journal.model.JournalArticleResource updateJournalArticleResource(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleResourceLocalService.updateJournalArticleResource(journalArticleResource);
 	}
 
+	/**
+	* Updates the journal article resource in the database. Also notifies the appropriate model listeners.
+	*
+	* @param journalArticleResource the journal article resource to update
+	* @param merge whether to merge the journal article resource with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the journal article resource that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.journal.model.JournalArticleResource updateJournalArticleResource(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource,
 		boolean merge)

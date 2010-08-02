@@ -17,42 +17,79 @@ package com.liferay.portlet.expando.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
+ * The utility for the expando value local service. This utility wraps {@link com.liferay.portlet.expando.service.impl.ExpandoValueLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ *
  * <p>
- * This class provides static methods for the
- * {@link ExpandoValueLocalService} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.expando.service.impl.ExpandoValueLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       ExpandoValueLocalService
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see ExpandoValueLocalService
+ * @see com.liferay.portlet.expando.service.base.ExpandoValueLocalServiceBaseImpl
+ * @see com.liferay.portlet.expando.service.impl.ExpandoValueLocalServiceImpl
  * @generated
  */
 public class ExpandoValueLocalServiceUtil {
+	/**
+	* Adds the expando value to the database. Also notifies the appropriate model listeners.
+	*
+	* @param expandoValue the expando value to add
+	* @return the expando value that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoValue addExpandoValue(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addExpandoValue(expandoValue);
 	}
 
+	/**
+	* Creates a new expando value with the primary key. Does not add the expando value to the database.
+	*
+	* @param valueId the primary key for the new expando value
+	* @return the new expando value
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoValue createExpandoValue(
 		long valueId) {
 		return getService().createExpandoValue(valueId);
 	}
 
+	/**
+	* Deletes the expando value with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param valueId the primary key of the expando value to delete
+	* @throws PortalException if a expando value with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteExpandoValue(long valueId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteExpandoValue(valueId);
 	}
 
+	/**
+	* Deletes the expando value from the database. Also notifies the appropriate model listeners.
+	*
+	* @param expandoValue the expando value to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteExpandoValue(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteExpandoValue(expandoValue);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +97,19 @@ public class ExpandoValueLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -67,6 +117,20 @@ public class ExpandoValueLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -77,12 +141,27 @@ public class ExpandoValueLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public static long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the expando value with the primary key.
+	*
+	* @param valueId the primary key of the expando value to get
+	* @return the expando value
+	* @throws PortalException if a expando value with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoValue getExpandoValue(
 		long valueId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -90,23 +169,56 @@ public class ExpandoValueLocalServiceUtil {
 		return getService().getExpandoValue(valueId);
 	}
 
+	/**
+	* Gets a range of all the expando values.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of expando values to return
+	* @param end the upper bound of the range of expando values to return (not inclusive)
+	* @return the range of expando values
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getExpandoValues(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getExpandoValues(start, end);
 	}
 
+	/**
+	* Gets the number of expando values.
+	*
+	* @return the number of expando values
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int getExpandoValuesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getExpandoValuesCount();
 	}
 
+	/**
+	* Updates the expando value in the database. Also notifies the appropriate model listeners.
+	*
+	* @param expandoValue the expando value to update
+	* @return the expando value that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoValue updateExpandoValue(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateExpandoValue(expandoValue);
 	}
 
+	/**
+	* Updates the expando value in the database. Also notifies the appropriate model listeners.
+	*
+	* @param expandoValue the expando value to update
+	* @param merge whether to merge the expando value with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the expando value that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoValue updateExpandoValue(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue,
 		boolean merge)

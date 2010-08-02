@@ -54,11 +54,7 @@ import java.util.List;
  * The persistence implementation for the message boards message flag service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link MBMessageFlagUtil} instead.
+ * Never modify or reference this class directly. Always use {@link MBMessageFlagUtil} to access the message boards message flag persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
  * <p>

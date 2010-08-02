@@ -22,11 +22,7 @@ import com.liferay.portlet.tasks.model.TasksProposal;
  * The persistence interface for the tasks proposal service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link TasksProposalUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link TasksProposalUtil} to access the tasks proposal persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

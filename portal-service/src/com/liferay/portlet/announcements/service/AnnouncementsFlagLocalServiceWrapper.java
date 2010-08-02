@@ -30,29 +30,62 @@ public class AnnouncementsFlagLocalServiceWrapper
 		_announcementsFlagLocalService = announcementsFlagLocalService;
 	}
 
+	/**
+	* Adds the announcements flag to the database. Also notifies the appropriate model listeners.
+	*
+	* @param announcementsFlag the announcements flag to add
+	* @return the announcements flag that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag addAnnouncementsFlag(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _announcementsFlagLocalService.addAnnouncementsFlag(announcementsFlag);
 	}
 
+	/**
+	* Creates a new announcements flag with the primary key. Does not add the announcements flag to the database.
+	*
+	* @param flagId the primary key for the new announcements flag
+	* @return the new announcements flag
+	*/
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag createAnnouncementsFlag(
 		long flagId) {
 		return _announcementsFlagLocalService.createAnnouncementsFlag(flagId);
 	}
 
+	/**
+	* Deletes the announcements flag with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param flagId the primary key of the announcements flag to delete
+	* @throws PortalException if a announcements flag with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteAnnouncementsFlag(long flagId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_announcementsFlagLocalService.deleteAnnouncementsFlag(flagId);
 	}
 
+	/**
+	* Deletes the announcements flag from the database. Also notifies the appropriate model listeners.
+	*
+	* @param announcementsFlag the announcements flag to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteAnnouncementsFlag(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_announcementsFlagLocalService.deleteAnnouncementsFlag(announcementsFlag);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +93,19 @@ public class AnnouncementsFlagLocalServiceWrapper
 		return _announcementsFlagLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -68,6 +114,20 @@ public class AnnouncementsFlagLocalServiceWrapper
 			end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -78,12 +138,27 @@ public class AnnouncementsFlagLocalServiceWrapper
 			end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _announcementsFlagLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the announcements flag with the primary key.
+	*
+	* @param flagId the primary key of the announcements flag to get
+	* @return the announcements flag
+	* @throws PortalException if a announcements flag with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag getAnnouncementsFlag(
 		long flagId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -91,23 +166,56 @@ public class AnnouncementsFlagLocalServiceWrapper
 		return _announcementsFlagLocalService.getAnnouncementsFlag(flagId);
 	}
 
+	/**
+	* Gets a range of all the announcements flags.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of announcements flags to return
+	* @param end the upper bound of the range of announcements flags to return (not inclusive)
+	* @return the range of announcements flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> getAnnouncementsFlags(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _announcementsFlagLocalService.getAnnouncementsFlags(start, end);
 	}
 
+	/**
+	* Gets the number of announcements flags.
+	*
+	* @return the number of announcements flags
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getAnnouncementsFlagsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _announcementsFlagLocalService.getAnnouncementsFlagsCount();
 	}
 
+	/**
+	* Updates the announcements flag in the database. Also notifies the appropriate model listeners.
+	*
+	* @param announcementsFlag the announcements flag to update
+	* @return the announcements flag that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag updateAnnouncementsFlag(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _announcementsFlagLocalService.updateAnnouncementsFlag(announcementsFlag);
 	}
 
+	/**
+	* Updates the announcements flag in the database. Also notifies the appropriate model listeners.
+	*
+	* @param announcementsFlag the announcements flag to update
+	* @param merge whether to merge the announcements flag with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the announcements flag that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag updateAnnouncementsFlag(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag,
 		boolean merge)

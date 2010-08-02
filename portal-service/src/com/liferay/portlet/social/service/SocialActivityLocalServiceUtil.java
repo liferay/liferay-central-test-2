@@ -17,42 +17,79 @@ package com.liferay.portlet.social.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
+ * The utility for the social activity local service. This utility wraps {@link com.liferay.portlet.social.service.impl.SocialActivityLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ *
  * <p>
- * This class provides static methods for the
- * {@link SocialActivityLocalService} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.social.service.impl.SocialActivityLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       SocialActivityLocalService
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see SocialActivityLocalService
+ * @see com.liferay.portlet.social.service.base.SocialActivityLocalServiceBaseImpl
+ * @see com.liferay.portlet.social.service.impl.SocialActivityLocalServiceImpl
  * @generated
  */
 public class SocialActivityLocalServiceUtil {
+	/**
+	* Adds the social activity to the database. Also notifies the appropriate model listeners.
+	*
+	* @param socialActivity the social activity to add
+	* @return the social activity that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialActivity addSocialActivity(
 		com.liferay.portlet.social.model.SocialActivity socialActivity)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addSocialActivity(socialActivity);
 	}
 
+	/**
+	* Creates a new social activity with the primary key. Does not add the social activity to the database.
+	*
+	* @param activityId the primary key for the new social activity
+	* @return the new social activity
+	*/
 	public static com.liferay.portlet.social.model.SocialActivity createSocialActivity(
 		long activityId) {
 		return getService().createSocialActivity(activityId);
 	}
 
+	/**
+	* Deletes the social activity with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param activityId the primary key of the social activity to delete
+	* @throws PortalException if a social activity with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteSocialActivity(long activityId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteSocialActivity(activityId);
 	}
 
+	/**
+	* Deletes the social activity from the database. Also notifies the appropriate model listeners.
+	*
+	* @param socialActivity the social activity to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteSocialActivity(
 		com.liferay.portlet.social.model.SocialActivity socialActivity)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteSocialActivity(socialActivity);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +97,19 @@ public class SocialActivityLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -67,6 +117,20 @@ public class SocialActivityLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -77,12 +141,27 @@ public class SocialActivityLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public static long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the social activity with the primary key.
+	*
+	* @param activityId the primary key of the social activity to get
+	* @return the social activity
+	* @throws PortalException if a social activity with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialActivity getSocialActivity(
 		long activityId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -90,23 +169,56 @@ public class SocialActivityLocalServiceUtil {
 		return getService().getSocialActivity(activityId);
 	}
 
+	/**
+	* Gets a range of all the social activities.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of social activities to return
+	* @param end the upper bound of the range of social activities to return (not inclusive)
+	* @return the range of social activities
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> getSocialActivities(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getSocialActivities(start, end);
 	}
 
+	/**
+	* Gets the number of social activities.
+	*
+	* @return the number of social activities
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int getSocialActivitiesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getSocialActivitiesCount();
 	}
 
+	/**
+	* Updates the social activity in the database. Also notifies the appropriate model listeners.
+	*
+	* @param socialActivity the social activity to update
+	* @return the social activity that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialActivity updateSocialActivity(
 		com.liferay.portlet.social.model.SocialActivity socialActivity)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateSocialActivity(socialActivity);
 	}
 
+	/**
+	* Updates the social activity in the database. Also notifies the appropriate model listeners.
+	*
+	* @param socialActivity the social activity to update
+	* @param merge whether to merge the social activity with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the social activity that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.social.model.SocialActivity updateSocialActivity(
 		com.liferay.portlet.social.model.SocialActivity socialActivity,
 		boolean merge)

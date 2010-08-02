@@ -29,29 +29,62 @@ public class ExpandoTableLocalServiceWrapper implements ExpandoTableLocalService
 		_expandoTableLocalService = expandoTableLocalService;
 	}
 
+	/**
+	* Adds the expando table to the database. Also notifies the appropriate model listeners.
+	*
+	* @param expandoTable the expando table to add
+	* @return the expando table that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.expando.model.ExpandoTable addExpandoTable(
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _expandoTableLocalService.addExpandoTable(expandoTable);
 	}
 
+	/**
+	* Creates a new expando table with the primary key. Does not add the expando table to the database.
+	*
+	* @param tableId the primary key for the new expando table
+	* @return the new expando table
+	*/
 	public com.liferay.portlet.expando.model.ExpandoTable createExpandoTable(
 		long tableId) {
 		return _expandoTableLocalService.createExpandoTable(tableId);
 	}
 
+	/**
+	* Deletes the expando table with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param tableId the primary key of the expando table to delete
+	* @throws PortalException if a expando table with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteExpandoTable(long tableId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_expandoTableLocalService.deleteExpandoTable(tableId);
 	}
 
+	/**
+	* Deletes the expando table from the database. Also notifies the appropriate model listeners.
+	*
+	* @param expandoTable the expando table to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteExpandoTable(
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_expandoTableLocalService.deleteExpandoTable(expandoTable);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -59,6 +92,19 @@ public class ExpandoTableLocalServiceWrapper implements ExpandoTableLocalService
 		return _expandoTableLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -66,6 +112,20 @@ public class ExpandoTableLocalServiceWrapper implements ExpandoTableLocalService
 		return _expandoTableLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -76,12 +136,27 @@ public class ExpandoTableLocalServiceWrapper implements ExpandoTableLocalService
 			orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _expandoTableLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the expando table with the primary key.
+	*
+	* @param tableId the primary key of the expando table to get
+	* @return the expando table
+	* @throws PortalException if a expando table with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.expando.model.ExpandoTable getExpandoTable(
 		long tableId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -89,23 +164,56 @@ public class ExpandoTableLocalServiceWrapper implements ExpandoTableLocalService
 		return _expandoTableLocalService.getExpandoTable(tableId);
 	}
 
+	/**
+	* Gets a range of all the expando tables.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of expando tables to return
+	* @param end the upper bound of the range of expando tables to return (not inclusive)
+	* @return the range of expando tables
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoTable> getExpandoTables(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _expandoTableLocalService.getExpandoTables(start, end);
 	}
 
+	/**
+	* Gets the number of expando tables.
+	*
+	* @return the number of expando tables
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getExpandoTablesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _expandoTableLocalService.getExpandoTablesCount();
 	}
 
+	/**
+	* Updates the expando table in the database. Also notifies the appropriate model listeners.
+	*
+	* @param expandoTable the expando table to update
+	* @return the expando table that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.expando.model.ExpandoTable updateExpandoTable(
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _expandoTableLocalService.updateExpandoTable(expandoTable);
 	}
 
+	/**
+	* Updates the expando table in the database. Also notifies the appropriate model listeners.
+	*
+	* @param expandoTable the expando table to update
+	* @param merge whether to merge the expando table with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the expando table that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.expando.model.ExpandoTable updateExpandoTable(
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable,
 		boolean merge)

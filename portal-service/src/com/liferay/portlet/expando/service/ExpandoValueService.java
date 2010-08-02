@@ -21,20 +21,20 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
+ * The interface for the expando value remote service.
+ *
  * <p>
- * This interface defines the service. The default implementation is
- * {@link
- * com.liferay.portlet.expando.service.impl.ExpandoValueServiceImpl}.
- * Modify methods in that class and rerun ServiceBuilder to populate this class
- * and all other generated classes.
+ * Never modify or reference this interface directly. Always use {@link ExpandoValueServiceUtil} to access the expando value remote service. Add custom service methods to {@link com.liferay.portlet.expando.service.impl.ExpandoValueServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
  * <p>
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       ExpandoValueServiceUtil
+ * @author Brian Wing Shun Chan
+ * @see ExpandoValueServiceUtil
+ * @see com.liferay.portlet.expando.service.base.ExpandoValueServiceBaseImpl
+ * @see com.liferay.portlet.expando.service.impl.ExpandoValueServiceImpl
  * @generated
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {

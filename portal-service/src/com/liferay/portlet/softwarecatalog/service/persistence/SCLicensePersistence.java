@@ -22,11 +22,7 @@ import com.liferay.portlet.softwarecatalog.model.SCLicense;
  * The persistence interface for the s c license service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link SCLicenseUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link SCLicenseUtil} to access the s c license persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

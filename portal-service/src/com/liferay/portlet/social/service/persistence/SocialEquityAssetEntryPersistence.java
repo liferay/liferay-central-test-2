@@ -22,11 +22,7 @@ import com.liferay.portlet.social.model.SocialEquityAssetEntry;
  * The persistence interface for the social equity asset entry service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link SocialEquityAssetEntryUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link SocialEquityAssetEntryUtil} to access the social equity asset entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

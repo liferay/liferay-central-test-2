@@ -17,42 +17,79 @@ package com.liferay.portlet.expando.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
+ * The utility for the expando row local service. This utility wraps {@link com.liferay.portlet.expando.service.impl.ExpandoRowLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ *
  * <p>
- * This class provides static methods for the
- * {@link ExpandoRowLocalService} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.expando.service.impl.ExpandoRowLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       ExpandoRowLocalService
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see ExpandoRowLocalService
+ * @see com.liferay.portlet.expando.service.base.ExpandoRowLocalServiceBaseImpl
+ * @see com.liferay.portlet.expando.service.impl.ExpandoRowLocalServiceImpl
  * @generated
  */
 public class ExpandoRowLocalServiceUtil {
+	/**
+	* Adds the expando row to the database. Also notifies the appropriate model listeners.
+	*
+	* @param expandoRow the expando row to add
+	* @return the expando row that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoRow addExpandoRow(
 		com.liferay.portlet.expando.model.ExpandoRow expandoRow)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addExpandoRow(expandoRow);
 	}
 
+	/**
+	* Creates a new expando row with the primary key. Does not add the expando row to the database.
+	*
+	* @param rowId the primary key for the new expando row
+	* @return the new expando row
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoRow createExpandoRow(
 		long rowId) {
 		return getService().createExpandoRow(rowId);
 	}
 
+	/**
+	* Deletes the expando row with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param rowId the primary key of the expando row to delete
+	* @throws PortalException if a expando row with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteExpandoRow(long rowId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteExpandoRow(rowId);
 	}
 
+	/**
+	* Deletes the expando row from the database. Also notifies the appropriate model listeners.
+	*
+	* @param expandoRow the expando row to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteExpandoRow(
 		com.liferay.portlet.expando.model.ExpandoRow expandoRow)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteExpandoRow(expandoRow);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +97,19 @@ public class ExpandoRowLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -67,6 +117,20 @@ public class ExpandoRowLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -77,12 +141,27 @@ public class ExpandoRowLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public static long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the expando row with the primary key.
+	*
+	* @param rowId the primary key of the expando row to get
+	* @return the expando row
+	* @throws PortalException if a expando row with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoRow getExpandoRow(
 		long rowId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -90,23 +169,56 @@ public class ExpandoRowLocalServiceUtil {
 		return getService().getExpandoRow(rowId);
 	}
 
+	/**
+	* Gets a range of all the expando rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of expando rows to return
+	* @param end the upper bound of the range of expando rows to return (not inclusive)
+	* @return the range of expando rows
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getExpandoRows(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getExpandoRows(start, end);
 	}
 
+	/**
+	* Gets the number of expando rows.
+	*
+	* @return the number of expando rows
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int getExpandoRowsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getExpandoRowsCount();
 	}
 
+	/**
+	* Updates the expando row in the database. Also notifies the appropriate model listeners.
+	*
+	* @param expandoRow the expando row to update
+	* @return the expando row that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoRow updateExpandoRow(
 		com.liferay.portlet.expando.model.ExpandoRow expandoRow)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateExpandoRow(expandoRow);
 	}
 
+	/**
+	* Updates the expando row in the database. Also notifies the appropriate model listeners.
+	*
+	* @param expandoRow the expando row to update
+	* @param merge whether to merge the expando row with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the expando row that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.expando.model.ExpandoRow updateExpandoRow(
 		com.liferay.portlet.expando.model.ExpandoRow expandoRow, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {

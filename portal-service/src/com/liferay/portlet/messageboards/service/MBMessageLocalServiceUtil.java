@@ -17,42 +17,79 @@ package com.liferay.portlet.messageboards.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
+ * The utility for the message-boards message local service. This utility wraps {@link com.liferay.portlet.messageboards.service.impl.MBMessageLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ *
  * <p>
- * This class provides static methods for the
- * {@link MBMessageLocalService} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.messageboards.service.impl.MBMessageLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       MBMessageLocalService
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see MBMessageLocalService
+ * @see com.liferay.portlet.messageboards.service.base.MBMessageLocalServiceBaseImpl
+ * @see com.liferay.portlet.messageboards.service.impl.MBMessageLocalServiceImpl
  * @generated
  */
 public class MBMessageLocalServiceUtil {
+	/**
+	* Adds the message-boards message to the database. Also notifies the appropriate model listeners.
+	*
+	* @param mbMessage the message-boards message to add
+	* @return the message-boards message that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBMessage addMBMessage(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addMBMessage(mbMessage);
 	}
 
+	/**
+	* Creates a new message-boards message with the primary key. Does not add the message-boards message to the database.
+	*
+	* @param messageId the primary key for the new message-boards message
+	* @return the new message-boards message
+	*/
 	public static com.liferay.portlet.messageboards.model.MBMessage createMBMessage(
 		long messageId) {
 		return getService().createMBMessage(messageId);
 	}
 
+	/**
+	* Deletes the message-boards message with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param messageId the primary key of the message-boards message to delete
+	* @throws PortalException if a message-boards message with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteMBMessage(long messageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteMBMessage(messageId);
 	}
 
+	/**
+	* Deletes the message-boards message from the database. Also notifies the appropriate model listeners.
+	*
+	* @param mbMessage the message-boards message to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteMBMessage(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteMBMessage(mbMessage);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +97,19 @@ public class MBMessageLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -67,6 +117,20 @@ public class MBMessageLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -77,12 +141,27 @@ public class MBMessageLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public static long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the message-boards message with the primary key.
+	*
+	* @param messageId the primary key of the message-boards message to get
+	* @return the message-boards message
+	* @throws PortalException if a message-boards message with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBMessage getMBMessage(
 		long messageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -90,6 +169,15 @@ public class MBMessageLocalServiceUtil {
 		return getService().getMBMessage(messageId);
 	}
 
+	/**
+	* Gets the message-boards message with the UUID and group id.
+	*
+	* @param uuid the UUID of message-boards message to get
+	* @param groupId the group id of the message-boards message to get
+	* @return the message-boards message
+	* @throws PortalException if a message-boards message with the UUID and group id could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBMessage getMBMessageByUuidAndGroupId(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -97,23 +185,56 @@ public class MBMessageLocalServiceUtil {
 		return getService().getMBMessageByUuidAndGroupId(uuid, groupId);
 	}
 
+	/**
+	* Gets a range of all the message-boards messages.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of message-boards messages to return
+	* @param end the upper bound of the range of message-boards messages to return (not inclusive)
+	* @return the range of message-boards messages
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getMBMessages(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getMBMessages(start, end);
 	}
 
+	/**
+	* Gets the number of message-boards messages.
+	*
+	* @return the number of message-boards messages
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int getMBMessagesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getMBMessagesCount();
 	}
 
+	/**
+	* Updates the message-boards message in the database. Also notifies the appropriate model listeners.
+	*
+	* @param mbMessage the message-boards message to update
+	* @return the message-boards message that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMBMessage(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateMBMessage(mbMessage);
 	}
 
+	/**
+	* Updates the message-boards message in the database. Also notifies the appropriate model listeners.
+	*
+	* @param mbMessage the message-boards message to update
+	* @param merge whether to merge the message-boards message with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the message-boards message that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMBMessage(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage,
 		boolean merge)

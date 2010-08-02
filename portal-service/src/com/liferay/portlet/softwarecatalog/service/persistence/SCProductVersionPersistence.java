@@ -22,11 +22,7 @@ import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
  * The persistence interface for the s c product version service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link SCProductVersionUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link SCProductVersionUtil} to access the s c product version persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

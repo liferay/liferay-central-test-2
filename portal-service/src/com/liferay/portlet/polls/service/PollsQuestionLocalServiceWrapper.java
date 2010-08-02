@@ -30,29 +30,62 @@ public class PollsQuestionLocalServiceWrapper
 		_pollsQuestionLocalService = pollsQuestionLocalService;
 	}
 
+	/**
+	* Adds the polls question to the database. Also notifies the appropriate model listeners.
+	*
+	* @param pollsQuestion the polls question to add
+	* @return the polls question that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.polls.model.PollsQuestion addPollsQuestion(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _pollsQuestionLocalService.addPollsQuestion(pollsQuestion);
 	}
 
+	/**
+	* Creates a new polls question with the primary key. Does not add the polls question to the database.
+	*
+	* @param questionId the primary key for the new polls question
+	* @return the new polls question
+	*/
 	public com.liferay.portlet.polls.model.PollsQuestion createPollsQuestion(
 		long questionId) {
 		return _pollsQuestionLocalService.createPollsQuestion(questionId);
 	}
 
+	/**
+	* Deletes the polls question with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param questionId the primary key of the polls question to delete
+	* @throws PortalException if a polls question with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deletePollsQuestion(long questionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_pollsQuestionLocalService.deletePollsQuestion(questionId);
 	}
 
+	/**
+	* Deletes the polls question from the database. Also notifies the appropriate model listeners.
+	*
+	* @param pollsQuestion the polls question to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deletePollsQuestion(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_pollsQuestionLocalService.deletePollsQuestion(pollsQuestion);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +93,19 @@ public class PollsQuestionLocalServiceWrapper
 		return _pollsQuestionLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -67,6 +113,20 @@ public class PollsQuestionLocalServiceWrapper
 		return _pollsQuestionLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -77,12 +137,27 @@ public class PollsQuestionLocalServiceWrapper
 			end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _pollsQuestionLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the polls question with the primary key.
+	*
+	* @param questionId the primary key of the polls question to get
+	* @return the polls question
+	* @throws PortalException if a polls question with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.polls.model.PollsQuestion getPollsQuestion(
 		long questionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -90,6 +165,15 @@ public class PollsQuestionLocalServiceWrapper
 		return _pollsQuestionLocalService.getPollsQuestion(questionId);
 	}
 
+	/**
+	* Gets the polls question with the UUID and group id.
+	*
+	* @param uuid the UUID of polls question to get
+	* @param groupId the group id of the polls question to get
+	* @return the polls question
+	* @throws PortalException if a polls question with the UUID and group id could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.polls.model.PollsQuestion getPollsQuestionByUuidAndGroupId(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -98,23 +182,56 @@ public class PollsQuestionLocalServiceWrapper
 			groupId);
 	}
 
+	/**
+	* Gets a range of all the polls questions.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of polls questions to return
+	* @param end the upper bound of the range of polls questions to return (not inclusive)
+	* @return the range of polls questions
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.polls.model.PollsQuestion> getPollsQuestions(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _pollsQuestionLocalService.getPollsQuestions(start, end);
 	}
 
+	/**
+	* Gets the number of polls questions.
+	*
+	* @return the number of polls questions
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getPollsQuestionsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _pollsQuestionLocalService.getPollsQuestionsCount();
 	}
 
+	/**
+	* Updates the polls question in the database. Also notifies the appropriate model listeners.
+	*
+	* @param pollsQuestion the polls question to update
+	* @return the polls question that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.polls.model.PollsQuestion updatePollsQuestion(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _pollsQuestionLocalService.updatePollsQuestion(pollsQuestion);
 	}
 
+	/**
+	* Updates the polls question in the database. Also notifies the appropriate model listeners.
+	*
+	* @param pollsQuestion the polls question to update
+	* @param merge whether to merge the polls question with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the polls question that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.polls.model.PollsQuestion updatePollsQuestion(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion,
 		boolean merge)

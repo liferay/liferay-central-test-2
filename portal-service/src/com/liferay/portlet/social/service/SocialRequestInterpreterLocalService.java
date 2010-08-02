@@ -20,20 +20,20 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
+ * The interface for the social request interpreter local service.
+ *
  * <p>
- * This interface defines the service. The default implementation is
- * {@link
- * com.liferay.portlet.social.service.impl.SocialRequestInterpreterLocalServiceImpl}.
- * Modify methods in that class and rerun ServiceBuilder to populate this class
- * and all other generated classes.
+ * Never modify or reference this interface directly. Always use {@link SocialRequestInterpreterLocalServiceUtil} to access the social request interpreter local service. Add custom service methods to {@link com.liferay.portlet.social.service.impl.SocialRequestInterpreterLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
  * <p>
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       SocialRequestInterpreterLocalServiceUtil
+ * @author Brian Wing Shun Chan
+ * @see SocialRequestInterpreterLocalServiceUtil
+ * @see com.liferay.portlet.social.service.base.SocialRequestInterpreterLocalServiceBaseImpl
+ * @see com.liferay.portlet.social.service.impl.SocialRequestInterpreterLocalServiceImpl
  * @generated
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {

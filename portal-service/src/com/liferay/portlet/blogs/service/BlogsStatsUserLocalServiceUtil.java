@@ -17,42 +17,79 @@ package com.liferay.portlet.blogs.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
+ * The utility for the blogs stats user local service. This utility wraps {@link com.liferay.portlet.blogs.service.impl.BlogsStatsUserLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ *
  * <p>
- * This class provides static methods for the
- * {@link BlogsStatsUserLocalService} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.blogs.service.impl.BlogsStatsUserLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       BlogsStatsUserLocalService
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see BlogsStatsUserLocalService
+ * @see com.liferay.portlet.blogs.service.base.BlogsStatsUserLocalServiceBaseImpl
+ * @see com.liferay.portlet.blogs.service.impl.BlogsStatsUserLocalServiceImpl
  * @generated
  */
 public class BlogsStatsUserLocalServiceUtil {
+	/**
+	* Adds the blogs stats user to the database. Also notifies the appropriate model listeners.
+	*
+	* @param blogsStatsUser the blogs stats user to add
+	* @return the blogs stats user that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser addBlogsStatsUser(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addBlogsStatsUser(blogsStatsUser);
 	}
 
+	/**
+	* Creates a new blogs stats user with the primary key. Does not add the blogs stats user to the database.
+	*
+	* @param statsUserId the primary key for the new blogs stats user
+	* @return the new blogs stats user
+	*/
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser createBlogsStatsUser(
 		long statsUserId) {
 		return getService().createBlogsStatsUser(statsUserId);
 	}
 
+	/**
+	* Deletes the blogs stats user with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param statsUserId the primary key of the blogs stats user to delete
+	* @throws PortalException if a blogs stats user with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteBlogsStatsUser(long statsUserId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteBlogsStatsUser(statsUserId);
 	}
 
+	/**
+	* Deletes the blogs stats user from the database. Also notifies the appropriate model listeners.
+	*
+	* @param blogsStatsUser the blogs stats user to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteBlogsStatsUser(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteBlogsStatsUser(blogsStatsUser);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +97,19 @@ public class BlogsStatsUserLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -67,6 +117,20 @@ public class BlogsStatsUserLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -77,12 +141,27 @@ public class BlogsStatsUserLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public static long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the blogs stats user with the primary key.
+	*
+	* @param statsUserId the primary key of the blogs stats user to get
+	* @return the blogs stats user
+	* @throws PortalException if a blogs stats user with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser getBlogsStatsUser(
 		long statsUserId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -90,23 +169,56 @@ public class BlogsStatsUserLocalServiceUtil {
 		return getService().getBlogsStatsUser(statsUserId);
 	}
 
+	/**
+	* Gets a range of all the blogs stats users.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of blogs stats users to return
+	* @param end the upper bound of the range of blogs stats users to return (not inclusive)
+	* @return the range of blogs stats users
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> getBlogsStatsUsers(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getBlogsStatsUsers(start, end);
 	}
 
+	/**
+	* Gets the number of blogs stats users.
+	*
+	* @return the number of blogs stats users
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int getBlogsStatsUsersCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getBlogsStatsUsersCount();
 	}
 
+	/**
+	* Updates the blogs stats user in the database. Also notifies the appropriate model listeners.
+	*
+	* @param blogsStatsUser the blogs stats user to update
+	* @return the blogs stats user that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser updateBlogsStatsUser(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateBlogsStatsUser(blogsStatsUser);
 	}
 
+	/**
+	* Updates the blogs stats user in the database. Also notifies the appropriate model listeners.
+	*
+	* @param blogsStatsUser the blogs stats user to update
+	* @param merge whether to merge the blogs stats user with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the blogs stats user that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser updateBlogsStatsUser(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser,
 		boolean merge)

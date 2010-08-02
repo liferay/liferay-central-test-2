@@ -20,11 +20,7 @@ import com.liferay.portal.model.OrgGroupPermission;
  * The persistence interface for the org group permission service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link OrgGroupPermissionUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link OrgGroupPermissionUtil} to access the org group permission persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

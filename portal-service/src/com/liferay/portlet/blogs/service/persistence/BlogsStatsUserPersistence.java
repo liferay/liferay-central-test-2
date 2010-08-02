@@ -22,11 +22,7 @@ import com.liferay.portlet.blogs.model.BlogsStatsUser;
  * The persistence interface for the blogs stats user service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link BlogsStatsUserUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link BlogsStatsUserUtil} to access the blogs stats user persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

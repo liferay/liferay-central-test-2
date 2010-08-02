@@ -30,29 +30,62 @@ public class LayoutSetPrototypeLocalServiceWrapper
 		_layoutSetPrototypeLocalService = layoutSetPrototypeLocalService;
 	}
 
+	/**
+	* Adds the layout set prototype to the database. Also notifies the appropriate model listeners.
+	*
+	* @param layoutSetPrototype the layout set prototype to add
+	* @return the layout set prototype that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.LayoutSetPrototype addLayoutSetPrototype(
 		com.liferay.portal.model.LayoutSetPrototype layoutSetPrototype)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetPrototypeLocalService.addLayoutSetPrototype(layoutSetPrototype);
 	}
 
+	/**
+	* Creates a new layout set prototype with the primary key. Does not add the layout set prototype to the database.
+	*
+	* @param layoutSetPrototypeId the primary key for the new layout set prototype
+	* @return the new layout set prototype
+	*/
 	public com.liferay.portal.model.LayoutSetPrototype createLayoutSetPrototype(
 		long layoutSetPrototypeId) {
 		return _layoutSetPrototypeLocalService.createLayoutSetPrototype(layoutSetPrototypeId);
 	}
 
+	/**
+	* Deletes the layout set prototype with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param layoutSetPrototypeId the primary key of the layout set prototype to delete
+	* @throws PortalException if a layout set prototype with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteLayoutSetPrototype(long layoutSetPrototypeId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_layoutSetPrototypeLocalService.deleteLayoutSetPrototype(layoutSetPrototypeId);
 	}
 
+	/**
+	* Deletes the layout set prototype from the database. Also notifies the appropriate model listeners.
+	*
+	* @param layoutSetPrototype the layout set prototype to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteLayoutSetPrototype(
 		com.liferay.portal.model.LayoutSetPrototype layoutSetPrototype)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_layoutSetPrototypeLocalService.deleteLayoutSetPrototype(layoutSetPrototype);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +93,19 @@ public class LayoutSetPrototypeLocalServiceWrapper
 		return _layoutSetPrototypeLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -68,6 +114,20 @@ public class LayoutSetPrototypeLocalServiceWrapper
 			start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -78,12 +138,27 @@ public class LayoutSetPrototypeLocalServiceWrapper
 			start, end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetPrototypeLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the layout set prototype with the primary key.
+	*
+	* @param layoutSetPrototypeId the primary key of the layout set prototype to get
+	* @return the layout set prototype
+	* @throws PortalException if a layout set prototype with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.LayoutSetPrototype getLayoutSetPrototype(
 		long layoutSetPrototypeId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -91,23 +166,56 @@ public class LayoutSetPrototypeLocalServiceWrapper
 		return _layoutSetPrototypeLocalService.getLayoutSetPrototype(layoutSetPrototypeId);
 	}
 
+	/**
+	* Gets a range of all the layout set prototypes.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of layout set prototypes to return
+	* @param end the upper bound of the range of layout set prototypes to return (not inclusive)
+	* @return the range of layout set prototypes
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.LayoutSetPrototype> getLayoutSetPrototypes(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetPrototypeLocalService.getLayoutSetPrototypes(start, end);
 	}
 
+	/**
+	* Gets the number of layout set prototypes.
+	*
+	* @return the number of layout set prototypes
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getLayoutSetPrototypesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetPrototypeLocalService.getLayoutSetPrototypesCount();
 	}
 
+	/**
+	* Updates the layout set prototype in the database. Also notifies the appropriate model listeners.
+	*
+	* @param layoutSetPrototype the layout set prototype to update
+	* @return the layout set prototype that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.LayoutSetPrototype updateLayoutSetPrototype(
 		com.liferay.portal.model.LayoutSetPrototype layoutSetPrototype)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetPrototypeLocalService.updateLayoutSetPrototype(layoutSetPrototype);
 	}
 
+	/**
+	* Updates the layout set prototype in the database. Also notifies the appropriate model listeners.
+	*
+	* @param layoutSetPrototype the layout set prototype to update
+	* @param merge whether to merge the layout set prototype with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the layout set prototype that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.LayoutSetPrototype updateLayoutSetPrototype(
 		com.liferay.portal.model.LayoutSetPrototype layoutSetPrototype,
 		boolean merge)

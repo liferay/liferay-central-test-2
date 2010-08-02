@@ -22,11 +22,7 @@ import com.liferay.portlet.asset.model.AssetTagStats;
  * The persistence interface for the asset tag stats service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link AssetTagStatsUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link AssetTagStatsUtil} to access the asset tag stats persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

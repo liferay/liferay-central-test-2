@@ -17,16 +17,20 @@ package com.liferay.portlet.wiki.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
+ * The utility for the wiki page remote service. This utility wraps {@link com.liferay.portlet.wiki.service.impl.WikiPageServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
+ *
  * <p>
- * This class provides static methods for the
- * {@link WikiPageService} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.wiki.service.impl.WikiPageServiceImpl} and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       WikiPageService
+ * <p>
+ * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see WikiPageService
+ * @see com.liferay.portlet.wiki.service.base.WikiPageServiceBaseImpl
+ * @see com.liferay.portlet.wiki.service.impl.WikiPageServiceImpl
  * @generated
  */
 public class WikiPageServiceUtil {

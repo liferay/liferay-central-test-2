@@ -29,29 +29,62 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 		_igFolderLocalService = igFolderLocalService;
 	}
 
+	/**
+	* Adds the i g folder to the database. Also notifies the appropriate model listeners.
+	*
+	* @param igFolder the i g folder to add
+	* @return the i g folder that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder addIGFolder(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _igFolderLocalService.addIGFolder(igFolder);
 	}
 
+	/**
+	* Creates a new i g folder with the primary key. Does not add the i g folder to the database.
+	*
+	* @param folderId the primary key for the new i g folder
+	* @return the new i g folder
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder createIGFolder(
 		long folderId) {
 		return _igFolderLocalService.createIGFolder(folderId);
 	}
 
+	/**
+	* Deletes the i g folder with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param folderId the primary key of the i g folder to delete
+	* @throws PortalException if a i g folder with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteIGFolder(long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_igFolderLocalService.deleteIGFolder(folderId);
 	}
 
+	/**
+	* Deletes the i g folder from the database. Also notifies the appropriate model listeners.
+	*
+	* @param igFolder the i g folder to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteIGFolder(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_igFolderLocalService.deleteIGFolder(igFolder);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -59,6 +92,19 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 		return _igFolderLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -66,6 +112,20 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 		return _igFolderLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -76,12 +136,27 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 			orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _igFolderLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the i g folder with the primary key.
+	*
+	* @param folderId the primary key of the i g folder to get
+	* @return the i g folder
+	* @throws PortalException if a i g folder with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder getIGFolder(
 		long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -89,6 +164,15 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 		return _igFolderLocalService.getIGFolder(folderId);
 	}
 
+	/**
+	* Gets the i g folder with the UUID and group id.
+	*
+	* @param uuid the UUID of i g folder to get
+	* @param groupId the group id of the i g folder to get
+	* @return the i g folder
+	* @throws PortalException if a i g folder with the UUID and group id could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder getIGFolderByUuidAndGroupId(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -96,23 +180,56 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 		return _igFolderLocalService.getIGFolderByUuidAndGroupId(uuid, groupId);
 	}
 
+	/**
+	* Gets a range of all the i g folders.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of i g folders to return
+	* @param end the upper bound of the range of i g folders to return (not inclusive)
+	* @return the range of i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getIGFolders(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _igFolderLocalService.getIGFolders(start, end);
 	}
 
+	/**
+	* Gets the number of i g folders.
+	*
+	* @return the number of i g folders
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getIGFoldersCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _igFolderLocalService.getIGFoldersCount();
 	}
 
+	/**
+	* Updates the i g folder in the database. Also notifies the appropriate model listeners.
+	*
+	* @param igFolder the i g folder to update
+	* @return the i g folder that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder updateIGFolder(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _igFolderLocalService.updateIGFolder(igFolder);
 	}
 
+	/**
+	* Updates the i g folder in the database. Also notifies the appropriate model listeners.
+	*
+	* @param igFolder the i g folder to update
+	* @param merge whether to merge the i g folder with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the i g folder that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGFolder updateIGFolder(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {

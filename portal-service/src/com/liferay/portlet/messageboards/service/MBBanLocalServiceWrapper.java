@@ -28,27 +28,60 @@ public class MBBanLocalServiceWrapper implements MBBanLocalService {
 		_mbBanLocalService = mbBanLocalService;
 	}
 
+	/**
+	* Adds the message boards ban to the database. Also notifies the appropriate model listeners.
+	*
+	* @param mbBan the message boards ban to add
+	* @return the message boards ban that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBBan addMBBan(
 		com.liferay.portlet.messageboards.model.MBBan mbBan)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbBanLocalService.addMBBan(mbBan);
 	}
 
+	/**
+	* Creates a new message boards ban with the primary key. Does not add the message boards ban to the database.
+	*
+	* @param banId the primary key for the new message boards ban
+	* @return the new message boards ban
+	*/
 	public com.liferay.portlet.messageboards.model.MBBan createMBBan(long banId) {
 		return _mbBanLocalService.createMBBan(banId);
 	}
 
+	/**
+	* Deletes the message boards ban with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param banId the primary key of the message boards ban to delete
+	* @throws PortalException if a message boards ban with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteMBBan(long banId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_mbBanLocalService.deleteMBBan(banId);
 	}
 
+	/**
+	* Deletes the message boards ban from the database. Also notifies the appropriate model listeners.
+	*
+	* @param mbBan the message boards ban to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteMBBan(com.liferay.portlet.messageboards.model.MBBan mbBan)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_mbBanLocalService.deleteMBBan(mbBan);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -56,6 +89,19 @@ public class MBBanLocalServiceWrapper implements MBBanLocalService {
 		return _mbBanLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -63,6 +109,20 @@ public class MBBanLocalServiceWrapper implements MBBanLocalService {
 		return _mbBanLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -73,35 +133,83 @@ public class MBBanLocalServiceWrapper implements MBBanLocalService {
 			orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbBanLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the message boards ban with the primary key.
+	*
+	* @param banId the primary key of the message boards ban to get
+	* @return the message boards ban
+	* @throws PortalException if a message boards ban with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBBan getMBBan(long banId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _mbBanLocalService.getMBBan(banId);
 	}
 
+	/**
+	* Gets a range of all the message boards bans.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of message boards bans to return
+	* @param end the upper bound of the range of message boards bans to return (not inclusive)
+	* @return the range of message boards bans
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> getMBBans(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbBanLocalService.getMBBans(start, end);
 	}
 
+	/**
+	* Gets the number of message boards bans.
+	*
+	* @return the number of message boards bans
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getMBBansCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbBanLocalService.getMBBansCount();
 	}
 
+	/**
+	* Updates the message boards ban in the database. Also notifies the appropriate model listeners.
+	*
+	* @param mbBan the message boards ban to update
+	* @return the message boards ban that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBBan updateMBBan(
 		com.liferay.portlet.messageboards.model.MBBan mbBan)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbBanLocalService.updateMBBan(mbBan);
 	}
 
+	/**
+	* Updates the message boards ban in the database. Also notifies the appropriate model listeners.
+	*
+	* @param mbBan the message boards ban to update
+	* @param merge whether to merge the message boards ban with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the message boards ban that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.messageboards.model.MBBan updateMBBan(
 		com.liferay.portlet.messageboards.model.MBBan mbBan, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {

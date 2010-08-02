@@ -21,20 +21,20 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
+ * The interface for the announcements flag remote service.
+ *
  * <p>
- * This interface defines the service. The default implementation is
- * {@link
- * com.liferay.portlet.announcements.service.impl.AnnouncementsFlagServiceImpl}.
- * Modify methods in that class and rerun ServiceBuilder to populate this class
- * and all other generated classes.
+ * Never modify or reference this interface directly. Always use {@link AnnouncementsFlagServiceUtil} to access the announcements flag remote service. Add custom service methods to {@link com.liferay.portlet.announcements.service.impl.AnnouncementsFlagServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
  * <p>
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       AnnouncementsFlagServiceUtil
+ * @author Brian Wing Shun Chan
+ * @see AnnouncementsFlagServiceUtil
+ * @see com.liferay.portlet.announcements.service.base.AnnouncementsFlagServiceBaseImpl
+ * @see com.liferay.portlet.announcements.service.impl.AnnouncementsFlagServiceImpl
  * @generated
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {

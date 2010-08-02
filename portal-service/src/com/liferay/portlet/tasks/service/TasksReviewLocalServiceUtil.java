@@ -17,42 +17,79 @@ package com.liferay.portlet.tasks.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
+ * The utility for the tasks review local service. This utility wraps {@link com.liferay.portlet.tasks.service.impl.TasksReviewLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ *
  * <p>
- * This class provides static methods for the
- * {@link TasksReviewLocalService} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.tasks.service.impl.TasksReviewLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       TasksReviewLocalService
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see TasksReviewLocalService
+ * @see com.liferay.portlet.tasks.service.base.TasksReviewLocalServiceBaseImpl
+ * @see com.liferay.portlet.tasks.service.impl.TasksReviewLocalServiceImpl
  * @generated
  */
 public class TasksReviewLocalServiceUtil {
+	/**
+	* Adds the tasks review to the database. Also notifies the appropriate model listeners.
+	*
+	* @param tasksReview the tasks review to add
+	* @return the tasks review that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.tasks.model.TasksReview addTasksReview(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addTasksReview(tasksReview);
 	}
 
+	/**
+	* Creates a new tasks review with the primary key. Does not add the tasks review to the database.
+	*
+	* @param reviewId the primary key for the new tasks review
+	* @return the new tasks review
+	*/
 	public static com.liferay.portlet.tasks.model.TasksReview createTasksReview(
 		long reviewId) {
 		return getService().createTasksReview(reviewId);
 	}
 
+	/**
+	* Deletes the tasks review with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param reviewId the primary key of the tasks review to delete
+	* @throws PortalException if a tasks review with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteTasksReview(long reviewId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteTasksReview(reviewId);
 	}
 
+	/**
+	* Deletes the tasks review from the database. Also notifies the appropriate model listeners.
+	*
+	* @param tasksReview the tasks review to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteTasksReview(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteTasksReview(tasksReview);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +97,19 @@ public class TasksReviewLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -67,6 +117,20 @@ public class TasksReviewLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -77,12 +141,27 @@ public class TasksReviewLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public static long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the tasks review with the primary key.
+	*
+	* @param reviewId the primary key of the tasks review to get
+	* @return the tasks review
+	* @throws PortalException if a tasks review with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.tasks.model.TasksReview getTasksReview(
 		long reviewId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -90,23 +169,56 @@ public class TasksReviewLocalServiceUtil {
 		return getService().getTasksReview(reviewId);
 	}
 
+	/**
+	* Gets a range of all the tasks reviews.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of tasks reviews to return
+	* @param end the upper bound of the range of tasks reviews to return (not inclusive)
+	* @return the range of tasks reviews
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> getTasksReviews(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getTasksReviews(start, end);
 	}
 
+	/**
+	* Gets the number of tasks reviews.
+	*
+	* @return the number of tasks reviews
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int getTasksReviewsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getTasksReviewsCount();
 	}
 
+	/**
+	* Updates the tasks review in the database. Also notifies the appropriate model listeners.
+	*
+	* @param tasksReview the tasks review to update
+	* @return the tasks review that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.tasks.model.TasksReview updateTasksReview(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateTasksReview(tasksReview);
 	}
 
+	/**
+	* Updates the tasks review in the database. Also notifies the appropriate model listeners.
+	*
+	* @param tasksReview the tasks review to update
+	* @param merge whether to merge the tasks review with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the tasks review that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.tasks.model.TasksReview updateTasksReview(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {

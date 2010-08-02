@@ -28,29 +28,62 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 		_igImageLocalService = igImageLocalService;
 	}
 
+	/**
+	* Adds the i g image to the database. Also notifies the appropriate model listeners.
+	*
+	* @param igImage the i g image to add
+	* @return the i g image that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGImage addIGImage(
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _igImageLocalService.addIGImage(igImage);
 	}
 
+	/**
+	* Creates a new i g image with the primary key. Does not add the i g image to the database.
+	*
+	* @param imageId the primary key for the new i g image
+	* @return the new i g image
+	*/
 	public com.liferay.portlet.imagegallery.model.IGImage createIGImage(
 		long imageId) {
 		return _igImageLocalService.createIGImage(imageId);
 	}
 
+	/**
+	* Deletes the i g image with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param imageId the primary key of the i g image to delete
+	* @throws PortalException if a i g image with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteIGImage(long imageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_igImageLocalService.deleteIGImage(imageId);
 	}
 
+	/**
+	* Deletes the i g image from the database. Also notifies the appropriate model listeners.
+	*
+	* @param igImage the i g image to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteIGImage(
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_igImageLocalService.deleteIGImage(igImage);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -58,6 +91,19 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 		return _igImageLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -65,6 +111,20 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 		return _igImageLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -75,12 +135,27 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 			orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _igImageLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the i g image with the primary key.
+	*
+	* @param imageId the primary key of the i g image to get
+	* @return the i g image
+	* @throws PortalException if a i g image with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGImage getIGImage(
 		long imageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -88,6 +163,15 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 		return _igImageLocalService.getIGImage(imageId);
 	}
 
+	/**
+	* Gets the i g image with the UUID and group id.
+	*
+	* @param uuid the UUID of i g image to get
+	* @param groupId the group id of the i g image to get
+	* @return the i g image
+	* @throws PortalException if a i g image with the UUID and group id could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGImage getIGImageByUuidAndGroupId(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -95,23 +179,56 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 		return _igImageLocalService.getIGImageByUuidAndGroupId(uuid, groupId);
 	}
 
+	/**
+	* Gets a range of all the i g images.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of i g images to return
+	* @param end the upper bound of the range of i g images to return (not inclusive)
+	* @return the range of i g images
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getIGImages(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _igImageLocalService.getIGImages(start, end);
 	}
 
+	/**
+	* Gets the number of i g images.
+	*
+	* @return the number of i g images
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getIGImagesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _igImageLocalService.getIGImagesCount();
 	}
 
+	/**
+	* Updates the i g image in the database. Also notifies the appropriate model listeners.
+	*
+	* @param igImage the i g image to update
+	* @return the i g image that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGImage updateIGImage(
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _igImageLocalService.updateIGImage(igImage);
 	}
 
+	/**
+	* Updates the i g image in the database. Also notifies the appropriate model listeners.
+	*
+	* @param igImage the i g image to update
+	* @param merge whether to merge the i g image with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the i g image that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.imagegallery.model.IGImage updateIGImage(
 		com.liferay.portlet.imagegallery.model.IGImage igImage, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {

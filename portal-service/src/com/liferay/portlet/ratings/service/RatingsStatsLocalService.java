@@ -21,50 +21,110 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
+ * The interface for the ratings stats local service.
+ *
  * <p>
- * This interface defines the service. The default implementation is
- * {@link
- * com.liferay.portlet.ratings.service.impl.RatingsStatsLocalServiceImpl}.
- * Modify methods in that class and rerun ServiceBuilder to populate this class
- * and all other generated classes.
+ * Never modify or reference this interface directly. Always use {@link RatingsStatsLocalServiceUtil} to access the ratings stats local service. Add custom service methods to {@link com.liferay.portlet.ratings.service.impl.RatingsStatsLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
  * <p>
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       RatingsStatsLocalServiceUtil
+ * @author Brian Wing Shun Chan
+ * @see RatingsStatsLocalServiceUtil
+ * @see com.liferay.portlet.ratings.service.base.RatingsStatsLocalServiceBaseImpl
+ * @see com.liferay.portlet.ratings.service.impl.RatingsStatsLocalServiceImpl
  * @generated
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface RatingsStatsLocalService {
+	/**
+	* Adds the ratings stats to the database. Also notifies the appropriate model listeners.
+	*
+	* @param ratingsStats the ratings stats to add
+	* @return the ratings stats that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.ratings.model.RatingsStats addRatingsStats(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Creates a new ratings stats with the primary key. Does not add the ratings stats to the database.
+	*
+	* @param statsId the primary key for the new ratings stats
+	* @return the new ratings stats
+	*/
 	public com.liferay.portlet.ratings.model.RatingsStats createRatingsStats(
 		long statsId);
 
+	/**
+	* Deletes the ratings stats with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param statsId the primary key of the ratings stats to delete
+	* @throws PortalException if a ratings stats with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteRatingsStats(long statsId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Deletes the ratings stats from the database. Also notifies the appropriate model listeners.
+	*
+	* @param ratingsStats the ratings stats to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteRatingsStats(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -72,29 +132,77 @@ public interface RatingsStatsLocalService {
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets the ratings stats with the primary key.
+	*
+	* @param statsId the primary key of the ratings stats to get
+	* @return the ratings stats
+	* @throws PortalException if a ratings stats with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.ratings.model.RatingsStats getRatingsStats(
 		long statsId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets a range of all the ratings statses.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of ratings statses to return
+	* @param end the upper bound of the range of ratings statses to return (not inclusive)
+	* @return the range of ratings statses
+	* @throws SystemException if a system exception occurred
+	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsStats> getRatingsStatses(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets the number of ratings statses.
+	*
+	* @return the number of ratings statses
+	* @throws SystemException if a system exception occurred
+	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getRatingsStatsesCount()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Updates the ratings stats in the database. Also notifies the appropriate model listeners.
+	*
+	* @param ratingsStats the ratings stats to update
+	* @return the ratings stats that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.ratings.model.RatingsStats updateRatingsStats(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Updates the ratings stats in the database. Also notifies the appropriate model listeners.
+	*
+	* @param ratingsStats the ratings stats to update
+	* @param merge whether to merge the ratings stats with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the ratings stats that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.ratings.model.RatingsStats updateRatingsStats(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats,
 		boolean merge)

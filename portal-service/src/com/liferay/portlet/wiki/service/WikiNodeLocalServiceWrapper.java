@@ -29,27 +29,60 @@ public class WikiNodeLocalServiceWrapper implements WikiNodeLocalService {
 		_wikiNodeLocalService = wikiNodeLocalService;
 	}
 
+	/**
+	* Adds the wiki node to the database. Also notifies the appropriate model listeners.
+	*
+	* @param wikiNode the wiki node to add
+	* @return the wiki node that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.wiki.model.WikiNode addWikiNode(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _wikiNodeLocalService.addWikiNode(wikiNode);
 	}
 
+	/**
+	* Creates a new wiki node with the primary key. Does not add the wiki node to the database.
+	*
+	* @param nodeId the primary key for the new wiki node
+	* @return the new wiki node
+	*/
 	public com.liferay.portlet.wiki.model.WikiNode createWikiNode(long nodeId) {
 		return _wikiNodeLocalService.createWikiNode(nodeId);
 	}
 
+	/**
+	* Deletes the wiki node with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param nodeId the primary key of the wiki node to delete
+	* @throws PortalException if a wiki node with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteWikiNode(long nodeId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_wikiNodeLocalService.deleteWikiNode(nodeId);
 	}
 
+	/**
+	* Deletes the wiki node from the database. Also notifies the appropriate model listeners.
+	*
+	* @param wikiNode the wiki node to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteWikiNode(com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_wikiNodeLocalService.deleteWikiNode(wikiNode);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -57,6 +90,19 @@ public class WikiNodeLocalServiceWrapper implements WikiNodeLocalService {
 		return _wikiNodeLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -64,6 +110,20 @@ public class WikiNodeLocalServiceWrapper implements WikiNodeLocalService {
 		return _wikiNodeLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -74,18 +134,42 @@ public class WikiNodeLocalServiceWrapper implements WikiNodeLocalService {
 			orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _wikiNodeLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the wiki node with the primary key.
+	*
+	* @param nodeId the primary key of the wiki node to get
+	* @return the wiki node
+	* @throws PortalException if a wiki node with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.wiki.model.WikiNode getWikiNode(long nodeId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _wikiNodeLocalService.getWikiNode(nodeId);
 	}
 
+	/**
+	* Gets the wiki node with the UUID and group id.
+	*
+	* @param uuid the UUID of wiki node to get
+	* @param groupId the group id of the wiki node to get
+	* @return the wiki node
+	* @throws PortalException if a wiki node with the UUID and group id could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.wiki.model.WikiNode getWikiNodeByUuidAndGroupId(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -93,23 +177,56 @@ public class WikiNodeLocalServiceWrapper implements WikiNodeLocalService {
 		return _wikiNodeLocalService.getWikiNodeByUuidAndGroupId(uuid, groupId);
 	}
 
+	/**
+	* Gets a range of all the wiki nodes.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of wiki nodes to return
+	* @param end the upper bound of the range of wiki nodes to return (not inclusive)
+	* @return the range of wiki nodes
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> getWikiNodes(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _wikiNodeLocalService.getWikiNodes(start, end);
 	}
 
+	/**
+	* Gets the number of wiki nodes.
+	*
+	* @return the number of wiki nodes
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getWikiNodesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _wikiNodeLocalService.getWikiNodesCount();
 	}
 
+	/**
+	* Updates the wiki node in the database. Also notifies the appropriate model listeners.
+	*
+	* @param wikiNode the wiki node to update
+	* @return the wiki node that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.wiki.model.WikiNode updateWikiNode(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _wikiNodeLocalService.updateWikiNode(wikiNode);
 	}
 
+	/**
+	* Updates the wiki node in the database. Also notifies the appropriate model listeners.
+	*
+	* @param wikiNode the wiki node to update
+	* @param merge whether to merge the wiki node with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the wiki node that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.wiki.model.WikiNode updateWikiNode(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {

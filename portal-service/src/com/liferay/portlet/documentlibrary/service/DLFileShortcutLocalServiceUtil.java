@@ -17,42 +17,79 @@ package com.liferay.portlet.documentlibrary.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
+ * The utility for the d l file shortcut local service. This utility wraps {@link com.liferay.portlet.documentlibrary.service.impl.DLFileShortcutLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ *
  * <p>
- * This class provides static methods for the
- * {@link DLFileShortcutLocalService} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.documentlibrary.service.impl.DLFileShortcutLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       DLFileShortcutLocalService
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see DLFileShortcutLocalService
+ * @see com.liferay.portlet.documentlibrary.service.base.DLFileShortcutLocalServiceBaseImpl
+ * @see com.liferay.portlet.documentlibrary.service.impl.DLFileShortcutLocalServiceImpl
  * @generated
  */
 public class DLFileShortcutLocalServiceUtil {
+	/**
+	* Adds the d l file shortcut to the database. Also notifies the appropriate model listeners.
+	*
+	* @param dlFileShortcut the d l file shortcut to add
+	* @return the d l file shortcut that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addDLFileShortcut(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addDLFileShortcut(dlFileShortcut);
 	}
 
+	/**
+	* Creates a new d l file shortcut with the primary key. Does not add the d l file shortcut to the database.
+	*
+	* @param fileShortcutId the primary key for the new d l file shortcut
+	* @return the new d l file shortcut
+	*/
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut createDLFileShortcut(
 		long fileShortcutId) {
 		return getService().createDLFileShortcut(fileShortcutId);
 	}
 
+	/**
+	* Deletes the d l file shortcut with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param fileShortcutId the primary key of the d l file shortcut to delete
+	* @throws PortalException if a d l file shortcut with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteDLFileShortcut(long fileShortcutId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteDLFileShortcut(fileShortcutId);
 	}
 
+	/**
+	* Deletes the d l file shortcut from the database. Also notifies the appropriate model listeners.
+	*
+	* @param dlFileShortcut the d l file shortcut to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteDLFileShortcut(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteDLFileShortcut(dlFileShortcut);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +97,19 @@ public class DLFileShortcutLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -67,6 +117,20 @@ public class DLFileShortcutLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -77,12 +141,27 @@ public class DLFileShortcutLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public static long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the d l file shortcut with the primary key.
+	*
+	* @param fileShortcutId the primary key of the d l file shortcut to get
+	* @return the d l file shortcut
+	* @throws PortalException if a d l file shortcut with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut getDLFileShortcut(
 		long fileShortcutId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -90,6 +169,15 @@ public class DLFileShortcutLocalServiceUtil {
 		return getService().getDLFileShortcut(fileShortcutId);
 	}
 
+	/**
+	* Gets the d l file shortcut with the UUID and group id.
+	*
+	* @param uuid the UUID of d l file shortcut to get
+	* @param groupId the group id of the d l file shortcut to get
+	* @return the d l file shortcut
+	* @throws PortalException if a d l file shortcut with the UUID and group id could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut getDLFileShortcutByUuidAndGroupId(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -97,23 +185,56 @@ public class DLFileShortcutLocalServiceUtil {
 		return getService().getDLFileShortcutByUuidAndGroupId(uuid, groupId);
 	}
 
+	/**
+	* Gets a range of all the d l file shortcuts.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of d l file shortcuts to return
+	* @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
+	* @return the range of d l file shortcuts
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> getDLFileShortcuts(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getDLFileShortcuts(start, end);
 	}
 
+	/**
+	* Gets the number of d l file shortcuts.
+	*
+	* @return the number of d l file shortcuts
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int getDLFileShortcutsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getDLFileShortcutsCount();
 	}
 
+	/**
+	* Updates the d l file shortcut in the database. Also notifies the appropriate model listeners.
+	*
+	* @param dlFileShortcut the d l file shortcut to update
+	* @return the d l file shortcut that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateDLFileShortcut(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateDLFileShortcut(dlFileShortcut);
 	}
 
+	/**
+	* Updates the d l file shortcut in the database. Also notifies the appropriate model listeners.
+	*
+	* @param dlFileShortcut the d l file shortcut to update
+	* @param merge whether to merge the d l file shortcut with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the d l file shortcut that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateDLFileShortcut(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut,
 		boolean merge)

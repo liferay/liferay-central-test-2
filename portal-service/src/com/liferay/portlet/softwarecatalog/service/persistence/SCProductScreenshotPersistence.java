@@ -22,11 +22,7 @@ import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
  * The persistence interface for the s c product screenshot service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link SCProductScreenshotUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link SCProductScreenshotUtil} to access the s c product screenshot persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

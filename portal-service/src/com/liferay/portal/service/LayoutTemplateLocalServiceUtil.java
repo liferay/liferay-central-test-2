@@ -17,16 +17,20 @@ package com.liferay.portal.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
+ * The utility for the layout template local service. This utility wraps {@link com.liferay.portal.service.impl.LayoutTemplateLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ *
  * <p>
- * This class provides static methods for the
- * {@link LayoutTemplateLocalService} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.LayoutTemplateLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       LayoutTemplateLocalService
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see LayoutTemplateLocalService
+ * @see com.liferay.portal.service.base.LayoutTemplateLocalServiceBaseImpl
+ * @see com.liferay.portal.service.impl.LayoutTemplateLocalServiceImpl
  * @generated
  */
 public class LayoutTemplateLocalServiceUtil {

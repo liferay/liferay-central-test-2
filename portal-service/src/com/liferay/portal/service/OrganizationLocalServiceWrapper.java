@@ -29,29 +29,62 @@ public class OrganizationLocalServiceWrapper implements OrganizationLocalService
 		_organizationLocalService = organizationLocalService;
 	}
 
+	/**
+	* Adds the organization to the database. Also notifies the appropriate model listeners.
+	*
+	* @param organization the organization to add
+	* @return the organization that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Organization addOrganization(
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _organizationLocalService.addOrganization(organization);
 	}
 
+	/**
+	* Creates a new organization with the primary key. Does not add the organization to the database.
+	*
+	* @param organizationId the primary key for the new organization
+	* @return the new organization
+	*/
 	public com.liferay.portal.model.Organization createOrganization(
 		long organizationId) {
 		return _organizationLocalService.createOrganization(organizationId);
 	}
 
+	/**
+	* Deletes the organization with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param organizationId the primary key of the organization to delete
+	* @throws PortalException if a organization with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteOrganization(long organizationId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_organizationLocalService.deleteOrganization(organizationId);
 	}
 
+	/**
+	* Deletes the organization from the database. Also notifies the appropriate model listeners.
+	*
+	* @param organization the organization to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteOrganization(
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_organizationLocalService.deleteOrganization(organization);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -59,6 +92,19 @@ public class OrganizationLocalServiceWrapper implements OrganizationLocalService
 		return _organizationLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -66,6 +112,20 @@ public class OrganizationLocalServiceWrapper implements OrganizationLocalService
 		return _organizationLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -76,12 +136,27 @@ public class OrganizationLocalServiceWrapper implements OrganizationLocalService
 			orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _organizationLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the organization with the primary key.
+	*
+	* @param organizationId the primary key of the organization to get
+	* @return the organization
+	* @throws PortalException if a organization with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Organization getOrganization(
 		long organizationId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -89,23 +164,56 @@ public class OrganizationLocalServiceWrapper implements OrganizationLocalService
 		return _organizationLocalService.getOrganization(organizationId);
 	}
 
+	/**
+	* Gets a range of all the organizations.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of organizations to return
+	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @return the range of organizations
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.Organization> getOrganizations(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _organizationLocalService.getOrganizations(start, end);
 	}
 
+	/**
+	* Gets the number of organizations.
+	*
+	* @return the number of organizations
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getOrganizationsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _organizationLocalService.getOrganizationsCount();
 	}
 
+	/**
+	* Updates the organization in the database. Also notifies the appropriate model listeners.
+	*
+	* @param organization the organization to update
+	* @return the organization that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Organization updateOrganization(
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _organizationLocalService.updateOrganization(organization);
 	}
 
+	/**
+	* Updates the organization in the database. Also notifies the appropriate model listeners.
+	*
+	* @param organization the organization to update
+	* @param merge whether to merge the organization with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the organization that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.Organization updateOrganization(
 		com.liferay.portal.model.Organization organization, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {

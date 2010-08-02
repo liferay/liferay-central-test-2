@@ -17,40 +17,77 @@ package com.liferay.portal.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
+ * The utility for the image local service. This utility wraps {@link com.liferay.portal.service.impl.ImageLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ *
  * <p>
- * This class provides static methods for the
- * {@link ImageLocalService} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.ImageLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       ImageLocalService
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see ImageLocalService
+ * @see com.liferay.portal.service.base.ImageLocalServiceBaseImpl
+ * @see com.liferay.portal.service.impl.ImageLocalServiceImpl
  * @generated
  */
 public class ImageLocalServiceUtil {
+	/**
+	* Adds the image to the database. Also notifies the appropriate model listeners.
+	*
+	* @param image the image to add
+	* @return the image that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Image addImage(
 		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addImage(image);
 	}
 
+	/**
+	* Creates a new image with the primary key. Does not add the image to the database.
+	*
+	* @param imageId the primary key for the new image
+	* @return the new image
+	*/
 	public static com.liferay.portal.model.Image createImage(long imageId) {
 		return getService().createImage(imageId);
 	}
 
+	/**
+	* Deletes the image with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param imageId the primary key of the image to delete
+	* @throws PortalException if a image with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteImage(long imageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteImage(imageId);
 	}
 
+	/**
+	* Deletes the image from the database. Also notifies the appropriate model listeners.
+	*
+	* @param image the image to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteImage(com.liferay.portal.model.Image image)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteImage(image);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -58,6 +95,19 @@ public class ImageLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -65,6 +115,20 @@ public class ImageLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -75,35 +139,83 @@ public class ImageLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public static long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the image with the primary key.
+	*
+	* @param imageId the primary key of the image to get
+	* @return the image
+	* @throws PortalException if a image with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Image getImage(long imageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getImage(imageId);
 	}
 
+	/**
+	* Gets a range of all the images.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of images to return
+	* @param end the upper bound of the range of images to return (not inclusive)
+	* @return the range of images
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.Image> getImages(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getImages(start, end);
 	}
 
+	/**
+	* Gets the number of images.
+	*
+	* @return the number of images
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int getImagesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getImagesCount();
 	}
 
+	/**
+	* Updates the image in the database. Also notifies the appropriate model listeners.
+	*
+	* @param image the image to update
+	* @return the image that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Image updateImage(
 		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateImage(image);
 	}
 
+	/**
+	* Updates the image in the database. Also notifies the appropriate model listeners.
+	*
+	* @param image the image to update
+	* @param merge whether to merge the image with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the image that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Image updateImage(
 		com.liferay.portal.model.Image image, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {

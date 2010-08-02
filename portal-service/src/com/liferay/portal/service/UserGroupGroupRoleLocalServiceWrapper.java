@@ -30,17 +30,37 @@ public class UserGroupGroupRoleLocalServiceWrapper
 		_userGroupGroupRoleLocalService = userGroupGroupRoleLocalService;
 	}
 
+	/**
+	* Adds the user group group role to the database. Also notifies the appropriate model listeners.
+	*
+	* @param userGroupGroupRole the user group group role to add
+	* @return the user group group role that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.UserGroupGroupRole addUserGroupGroupRole(
 		com.liferay.portal.model.UserGroupGroupRole userGroupGroupRole)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userGroupGroupRoleLocalService.addUserGroupGroupRole(userGroupGroupRole);
 	}
 
+	/**
+	* Creates a new user group group role with the primary key. Does not add the user group group role to the database.
+	*
+	* @param userGroupGroupRolePK the primary key for the new user group group role
+	* @return the new user group group role
+	*/
 	public com.liferay.portal.model.UserGroupGroupRole createUserGroupGroupRole(
 		com.liferay.portal.service.persistence.UserGroupGroupRolePK userGroupGroupRolePK) {
 		return _userGroupGroupRoleLocalService.createUserGroupGroupRole(userGroupGroupRolePK);
 	}
 
+	/**
+	* Deletes the user group group role with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param userGroupGroupRolePK the primary key of the user group group role to delete
+	* @throws PortalException if a user group group role with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteUserGroupGroupRole(
 		com.liferay.portal.service.persistence.UserGroupGroupRolePK userGroupGroupRolePK)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -48,12 +68,25 @@ public class UserGroupGroupRoleLocalServiceWrapper
 		_userGroupGroupRoleLocalService.deleteUserGroupGroupRole(userGroupGroupRolePK);
 	}
 
+	/**
+	* Deletes the user group group role from the database. Also notifies the appropriate model listeners.
+	*
+	* @param userGroupGroupRole the user group group role to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteUserGroupGroupRole(
 		com.liferay.portal.model.UserGroupGroupRole userGroupGroupRole)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_userGroupGroupRoleLocalService.deleteUserGroupGroupRole(userGroupGroupRole);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -61,6 +94,19 @@ public class UserGroupGroupRoleLocalServiceWrapper
 		return _userGroupGroupRoleLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -69,6 +115,20 @@ public class UserGroupGroupRoleLocalServiceWrapper
 			start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -79,12 +139,27 @@ public class UserGroupGroupRoleLocalServiceWrapper
 			start, end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userGroupGroupRoleLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the user group group role with the primary key.
+	*
+	* @param userGroupGroupRolePK the primary key of the user group group role to get
+	* @return the user group group role
+	* @throws PortalException if a user group group role with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.UserGroupGroupRole getUserGroupGroupRole(
 		com.liferay.portal.service.persistence.UserGroupGroupRolePK userGroupGroupRolePK)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -92,23 +167,56 @@ public class UserGroupGroupRoleLocalServiceWrapper
 		return _userGroupGroupRoleLocalService.getUserGroupGroupRole(userGroupGroupRolePK);
 	}
 
+	/**
+	* Gets a range of all the user group group roles.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of user group group roles to return
+	* @param end the upper bound of the range of user group group roles to return (not inclusive)
+	* @return the range of user group group roles
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.UserGroupGroupRole> getUserGroupGroupRoles(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userGroupGroupRoleLocalService.getUserGroupGroupRoles(start, end);
 	}
 
+	/**
+	* Gets the number of user group group roles.
+	*
+	* @return the number of user group group roles
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getUserGroupGroupRolesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userGroupGroupRoleLocalService.getUserGroupGroupRolesCount();
 	}
 
+	/**
+	* Updates the user group group role in the database. Also notifies the appropriate model listeners.
+	*
+	* @param userGroupGroupRole the user group group role to update
+	* @return the user group group role that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.UserGroupGroupRole updateUserGroupGroupRole(
 		com.liferay.portal.model.UserGroupGroupRole userGroupGroupRole)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userGroupGroupRoleLocalService.updateUserGroupGroupRole(userGroupGroupRole);
 	}
 
+	/**
+	* Updates the user group group role in the database. Also notifies the appropriate model listeners.
+	*
+	* @param userGroupGroupRole the user group group role to update
+	* @param merge whether to merge the user group group role with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the user group group role that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.UserGroupGroupRole updateUserGroupGroupRole(
 		com.liferay.portal.model.UserGroupGroupRole userGroupGroupRole,
 		boolean merge)

@@ -30,29 +30,62 @@ public class AnnouncementsEntryLocalServiceWrapper
 		_announcementsEntryLocalService = announcementsEntryLocalService;
 	}
 
+	/**
+	* Adds the announcements entry to the database. Also notifies the appropriate model listeners.
+	*
+	* @param announcementsEntry the announcements entry to add
+	* @return the announcements entry that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry addAnnouncementsEntry(
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _announcementsEntryLocalService.addAnnouncementsEntry(announcementsEntry);
 	}
 
+	/**
+	* Creates a new announcements entry with the primary key. Does not add the announcements entry to the database.
+	*
+	* @param entryId the primary key for the new announcements entry
+	* @return the new announcements entry
+	*/
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry createAnnouncementsEntry(
 		long entryId) {
 		return _announcementsEntryLocalService.createAnnouncementsEntry(entryId);
 	}
 
+	/**
+	* Deletes the announcements entry with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param entryId the primary key of the announcements entry to delete
+	* @throws PortalException if a announcements entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteAnnouncementsEntry(long entryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_announcementsEntryLocalService.deleteAnnouncementsEntry(entryId);
 	}
 
+	/**
+	* Deletes the announcements entry from the database. Also notifies the appropriate model listeners.
+	*
+	* @param announcementsEntry the announcements entry to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteAnnouncementsEntry(
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_announcementsEntryLocalService.deleteAnnouncementsEntry(announcementsEntry);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +93,19 @@ public class AnnouncementsEntryLocalServiceWrapper
 		return _announcementsEntryLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -68,6 +114,20 @@ public class AnnouncementsEntryLocalServiceWrapper
 			start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -78,12 +138,27 @@ public class AnnouncementsEntryLocalServiceWrapper
 			start, end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _announcementsEntryLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the announcements entry with the primary key.
+	*
+	* @param entryId the primary key of the announcements entry to get
+	* @return the announcements entry
+	* @throws PortalException if a announcements entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry getAnnouncementsEntry(
 		long entryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -91,6 +166,18 @@ public class AnnouncementsEntryLocalServiceWrapper
 		return _announcementsEntryLocalService.getAnnouncementsEntry(entryId);
 	}
 
+	/**
+	* Gets a range of all the announcements entries.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of announcements entries to return
+	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @return the range of announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> getAnnouncementsEntries(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -98,17 +185,38 @@ public class AnnouncementsEntryLocalServiceWrapper
 			end);
 	}
 
+	/**
+	* Gets the number of announcements entries.
+	*
+	* @return the number of announcements entries
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getAnnouncementsEntriesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _announcementsEntryLocalService.getAnnouncementsEntriesCount();
 	}
 
+	/**
+	* Updates the announcements entry in the database. Also notifies the appropriate model listeners.
+	*
+	* @param announcementsEntry the announcements entry to update
+	* @return the announcements entry that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry updateAnnouncementsEntry(
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _announcementsEntryLocalService.updateAnnouncementsEntry(announcementsEntry);
 	}
 
+	/**
+	* Updates the announcements entry in the database. Also notifies the appropriate model listeners.
+	*
+	* @param announcementsEntry the announcements entry to update
+	* @param merge whether to merge the announcements entry with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the announcements entry that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry updateAnnouncementsEntry(
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry,
 		boolean merge)

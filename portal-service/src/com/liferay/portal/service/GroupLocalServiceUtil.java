@@ -17,40 +17,77 @@ package com.liferay.portal.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
+ * The utility for the group local service. This utility wraps {@link com.liferay.portal.service.impl.GroupLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ *
  * <p>
- * This class provides static methods for the
- * {@link GroupLocalService} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.GroupLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       GroupLocalService
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see GroupLocalService
+ * @see com.liferay.portal.service.base.GroupLocalServiceBaseImpl
+ * @see com.liferay.portal.service.impl.GroupLocalServiceImpl
  * @generated
  */
 public class GroupLocalServiceUtil {
+	/**
+	* Adds the group to the database. Also notifies the appropriate model listeners.
+	*
+	* @param group the group to add
+	* @return the group that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Group addGroup(
 		com.liferay.portal.model.Group group)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addGroup(group);
 	}
 
+	/**
+	* Creates a new group with the primary key. Does not add the group to the database.
+	*
+	* @param groupId the primary key for the new group
+	* @return the new group
+	*/
 	public static com.liferay.portal.model.Group createGroup(long groupId) {
 		return getService().createGroup(groupId);
 	}
 
+	/**
+	* Deletes the group with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param groupId the primary key of the group to delete
+	* @throws PortalException if a group with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteGroup(long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteGroup(groupId);
 	}
 
+	/**
+	* Deletes the group from the database. Also notifies the appropriate model listeners.
+	*
+	* @param group the group to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteGroup(com.liferay.portal.model.Group group)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteGroup(group);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -58,6 +95,19 @@ public class GroupLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -65,6 +115,20 @@ public class GroupLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -75,35 +139,83 @@ public class GroupLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public static long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the group with the primary key.
+	*
+	* @param groupId the primary key of the group to get
+	* @return the group
+	* @throws PortalException if a group with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Group getGroup(long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getGroup(groupId);
 	}
 
+	/**
+	* Gets a range of all the groups.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of groups to return
+	* @param end the upper bound of the range of groups to return (not inclusive)
+	* @return the range of groups
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.Group> getGroups(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getGroups(start, end);
 	}
 
+	/**
+	* Gets the number of groups.
+	*
+	* @return the number of groups
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int getGroupsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getGroupsCount();
 	}
 
+	/**
+	* Updates the group in the database. Also notifies the appropriate model listeners.
+	*
+	* @param group the group to update
+	* @return the group that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Group updateGroup(
 		com.liferay.portal.model.Group group)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateGroup(group);
 	}
 
+	/**
+	* Updates the group in the database. Also notifies the appropriate model listeners.
+	*
+	* @param group the group to update
+	* @param merge whether to merge the group with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the group that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.Group updateGroup(
 		com.liferay.portal.model.Group group, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {

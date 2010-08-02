@@ -28,27 +28,60 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		_userLocalService = userLocalService;
 	}
 
+	/**
+	* Adds the user to the database. Also notifies the appropriate model listeners.
+	*
+	* @param user the user to add
+	* @return the user that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.User addUser(
 		com.liferay.portal.model.User user)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userLocalService.addUser(user);
 	}
 
+	/**
+	* Creates a new user with the primary key. Does not add the user to the database.
+	*
+	* @param userId the primary key for the new user
+	* @return the new user
+	*/
 	public com.liferay.portal.model.User createUser(long userId) {
 		return _userLocalService.createUser(userId);
 	}
 
+	/**
+	* Deletes the user with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param userId the primary key of the user to delete
+	* @throws PortalException if a user with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteUser(long userId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_userLocalService.deleteUser(userId);
 	}
 
+	/**
+	* Deletes the user from the database. Also notifies the appropriate model listeners.
+	*
+	* @param user the user to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public void deleteUser(com.liferay.portal.model.User user)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_userLocalService.deleteUser(user);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -56,6 +89,19 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		return _userLocalService.dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -63,6 +109,20 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		return _userLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -73,34 +133,82 @@ public class UserLocalServiceWrapper implements UserLocalService {
 			orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the user with the primary key.
+	*
+	* @param userId the primary key of the user to get
+	* @return the user
+	* @throws PortalException if a user with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.User getUser(long userId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _userLocalService.getUser(userId);
 	}
 
+	/**
+	* Gets a range of all the users.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of users to return
+	* @param end the upper bound of the range of users to return (not inclusive)
+	* @return the range of users
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.util.List<com.liferay.portal.model.User> getUsers(int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _userLocalService.getUsers(start, end);
 	}
 
+	/**
+	* Gets the number of users.
+	*
+	* @return the number of users
+	* @throws SystemException if a system exception occurred
+	*/
 	public int getUsersCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userLocalService.getUsersCount();
 	}
 
+	/**
+	* Updates the user in the database. Also notifies the appropriate model listeners.
+	*
+	* @param user the user to update
+	* @return the user that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.User updateUser(
 		com.liferay.portal.model.User user)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userLocalService.updateUser(user);
 	}
 
+	/**
+	* Updates the user in the database. Also notifies the appropriate model listeners.
+	*
+	* @param user the user to update
+	* @param merge whether to merge the user with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the user that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public com.liferay.portal.model.User updateUser(
 		com.liferay.portal.model.User user, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {

@@ -20,11 +20,7 @@ import com.liferay.portal.model.Resource;
  * The persistence interface for the resource service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link ResourceUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link ResourceUtil} to access the resource persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

@@ -30,16 +30,6 @@ import java.rmi.RemoteException;
  * </p>
  *
  * <p>
- * ServiceBuilder follows certain rules in translating the methods. For example,
- * if the method in the service utility returns a {@link java.util.List}, that
- * is translated to an array of {@link com.liferay.portal.model.PortalSoap}.
- * If the method in the service utility returns a
- * {@link com.liferay.portal.model.Portal}, that is translated to a
- * {@link com.liferay.portal.model.PortalSoap}. Methods that SOAP cannot
- * safely wire are skipped.
- * </p>
- *
- * <p>
  * The benefits of using the SOAP utility is that it is cross platform
  * compatible. SOAP allows different languages like Java, .NET, C++, PHP, and
  * even Perl, to call the generated services. One drawback of SOAP is that it is
@@ -59,7 +49,6 @@ import java.rmi.RemoteException;
  *
  * @author    Brian Wing Shun Chan
  * @see       PortalServiceHttp
- * @see       com.liferay.portal.model.PortalSoap
  * @see       com.liferay.portal.service.PortalServiceUtil
  * @generated
  */

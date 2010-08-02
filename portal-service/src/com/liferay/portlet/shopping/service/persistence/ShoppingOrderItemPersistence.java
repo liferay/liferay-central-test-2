@@ -22,11 +22,7 @@ import com.liferay.portlet.shopping.model.ShoppingOrderItem;
  * The persistence interface for the shopping order item service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link ShoppingOrderItemUtil} instead.
+ * Never modify or reference this interface directly. Always use {@link ShoppingOrderItemUtil} to access the shopping order item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>

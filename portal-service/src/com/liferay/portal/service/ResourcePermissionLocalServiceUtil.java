@@ -17,42 +17,79 @@ package com.liferay.portal.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
+ * The utility for the resource permission local service. This utility wraps {@link com.liferay.portal.service.impl.ResourcePermissionLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ *
  * <p>
- * This class provides static methods for the
- * {@link ResourcePermissionLocalService} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.ResourcePermissionLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
- * @author    Brian Wing Shun Chan
- * @see       ResourcePermissionLocalService
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see ResourcePermissionLocalService
+ * @see com.liferay.portal.service.base.ResourcePermissionLocalServiceBaseImpl
+ * @see com.liferay.portal.service.impl.ResourcePermissionLocalServiceImpl
  * @generated
  */
 public class ResourcePermissionLocalServiceUtil {
+	/**
+	* Adds the resource permission to the database. Also notifies the appropriate model listeners.
+	*
+	* @param resourcePermission the resource permission to add
+	* @return the resource permission that was added
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.ResourcePermission addResourcePermission(
 		com.liferay.portal.model.ResourcePermission resourcePermission)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addResourcePermission(resourcePermission);
 	}
 
+	/**
+	* Creates a new resource permission with the primary key. Does not add the resource permission to the database.
+	*
+	* @param resourcePermissionId the primary key for the new resource permission
+	* @return the new resource permission
+	*/
 	public static com.liferay.portal.model.ResourcePermission createResourcePermission(
 		long resourcePermissionId) {
 		return getService().createResourcePermission(resourcePermissionId);
 	}
 
+	/**
+	* Deletes the resource permission with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param resourcePermissionId the primary key of the resource permission to delete
+	* @throws PortalException if a resource permission with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteResourcePermission(long resourcePermissionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteResourcePermission(resourcePermissionId);
 	}
 
+	/**
+	* Deletes the resource permission from the database. Also notifies the appropriate model listeners.
+	*
+	* @param resourcePermission the resource permission to delete
+	* @throws SystemException if a system exception occurred
+	*/
 	public static void deleteResourcePermission(
 		com.liferay.portal.model.ResourcePermission resourcePermission)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteResourcePermission(resourcePermission);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns the matching rows.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -60,6 +97,19 @@ public class ResourcePermissionLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns a range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @return the range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -67,6 +117,20 @@ public class ResourcePermissionLocalServiceUtil {
 		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
+	/**
+	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @param start the lower bound of the range of model instances to return
+	* @param end the upper bound of the range of model instances to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching rows
+	* @throws SystemException if a system exception occurred
+	*/
 	@SuppressWarnings("unchecked")
 	public static java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
@@ -77,12 +141,27 @@ public class ResourcePermissionLocalServiceUtil {
 				   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}
 
+	/**
+	* Counts the number of rows that match the dynamic query.
+	*
+	* @param dynamicQuery the dynamic query to search with
+	* @return the number of rows that match the dynamic query
+	* @throws SystemException if a system exception occurred
+	*/
 	public static long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	/**
+	* Gets the resource permission with the primary key.
+	*
+	* @param resourcePermissionId the primary key of the resource permission to get
+	* @return the resource permission
+	* @throws PortalException if a resource permission with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.ResourcePermission getResourcePermission(
 		long resourcePermissionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -90,23 +169,56 @@ public class ResourcePermissionLocalServiceUtil {
 		return getService().getResourcePermission(resourcePermissionId);
 	}
 
+	/**
+	* Gets a range of all the resource permissions.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param start the lower bound of the range of resource permissions to return
+	* @param end the upper bound of the range of resource permissions to return (not inclusive)
+	* @return the range of resource permissions
+	* @throws SystemException if a system exception occurred
+	*/
 	public static java.util.List<com.liferay.portal.model.ResourcePermission> getResourcePermissions(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getResourcePermissions(start, end);
 	}
 
+	/**
+	* Gets the number of resource permissions.
+	*
+	* @return the number of resource permissions
+	* @throws SystemException if a system exception occurred
+	*/
 	public static int getResourcePermissionsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getResourcePermissionsCount();
 	}
 
+	/**
+	* Updates the resource permission in the database. Also notifies the appropriate model listeners.
+	*
+	* @param resourcePermission the resource permission to update
+	* @return the resource permission that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.ResourcePermission updateResourcePermission(
 		com.liferay.portal.model.ResourcePermission resourcePermission)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateResourcePermission(resourcePermission);
 	}
 
+	/**
+	* Updates the resource permission in the database. Also notifies the appropriate model listeners.
+	*
+	* @param resourcePermission the resource permission to update
+	* @param merge whether to merge the resource permission with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the resource permission that was updated
+	* @throws SystemException if a system exception occurred
+	*/
 	public static com.liferay.portal.model.ResourcePermission updateResourcePermission(
 		com.liferay.portal.model.ResourcePermission resourcePermission,
 		boolean merge)
