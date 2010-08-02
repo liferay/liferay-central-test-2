@@ -57,7 +57,7 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 		</c:if>
 	</liferay-ui:search-container-row>
 
-	<liferay-ui:search-iterator />
+	<liferay-ui:search-iterator paginate="<%= false %>" />
 </liferay-ui:search-container>
 
 <c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">

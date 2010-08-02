@@ -74,7 +74,7 @@ userGroupRoles.addAll(organizationRoles);
 		</c:if>
 	</liferay-ui:search-container-row>
 
-	<liferay-ui:search-iterator />
+	<liferay-ui:search-iterator paginate="<%= false %>" />
 </liferay-ui:search-container>
 
 <c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
@@ -131,7 +131,7 @@ userGroupRoles.addAll(organizationRoles);
 
 	</liferay-ui:search-container-row>
 
-	<liferay-ui:search-iterator />
+	<liferay-ui:search-iterator paginate="<%= false %>" />
 </liferay-ui:search-container>
 
 <br /><br />
@@ -177,7 +177,7 @@ userGroupRoles.addAll(organizationRoles);
 				</c:if>
 			</liferay-ui:search-container-row>
 
-			<liferay-ui:search-iterator />
+			<liferay-ui:search-iterator paginate="<%= false %>" />
 		</liferay-ui:search-container>
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
@@ -257,7 +257,7 @@ userGroupRoles.addAll(organizationRoles);
 				</c:if>
 			</liferay-ui:search-container-row>
 
-			<liferay-ui:search-iterator />
+			<liferay-ui:search-iterator paginate="<%= false %>" />
 		</liferay-ui:search-container>
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
