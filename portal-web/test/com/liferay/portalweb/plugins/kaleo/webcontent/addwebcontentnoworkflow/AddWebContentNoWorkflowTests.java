@@ -12,12 +12,8 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.kaleo;
+package com.liferay.portalweb.plugins.kaleo.webcontent.addwebcontentnoworkflow;
 
-import com.liferay.portalweb.plugins.kaleo.assetpublisher.AssetPublisherTests;
-import com.liferay.portalweb.plugins.kaleo.scope.ScopeTests;
-import com.liferay.portalweb.plugins.kaleo.webcontent.WebContentTests;
-import com.liferay.portalweb.plugins.kaleo.webcontentdisplay.WebContentDisplayTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
@@ -26,15 +22,14 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class KaleoTests extends BaseTests {
+public class AddWebContentNoWorkflowTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AssetPublisherTests.suite());
-		testSuite.addTest(ScopeTests.suite());
-		testSuite.addTest(WebContentTests.suite());
-		testSuite.addTest(WebContentDisplayTests.suite());
+		testSuite.addTestSuite(AddWebContentNoWorkflowTest.class);
+		testSuite.addTestSuite(ViewWebContentNoWorkflowTest.class);
+		testSuite.addTestSuite(TearDownWebContentTest.class);
 
 		return testSuite;
 	}
