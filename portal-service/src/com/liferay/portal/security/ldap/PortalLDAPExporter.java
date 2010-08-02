@@ -23,6 +23,7 @@ import java.util.Map;
 
 /**
  * @author Michael C. Han
+ * @author Marcellus Tavares
  */
 public interface PortalLDAPExporter {
 
@@ -33,5 +34,7 @@ public interface PortalLDAPExporter {
 	public void exportToLDAP(
 			User user, Map<String, Serializable> userExpandoAttributes)
 		throws Exception;
+
+	public void exportToLDAP(long userId, long userGroupId) throws Exception;
 
 }

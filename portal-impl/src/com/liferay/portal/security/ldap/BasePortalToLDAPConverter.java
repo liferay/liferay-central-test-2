@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoConverterUtil;
@@ -39,12 +40,14 @@ import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.BasicAttribute;
 import javax.naming.directory.BasicAttributes;
+import javax.naming.directory.DirContext;
 
 import org.apache.commons.beanutils.PropertyUtils;
 
 /**
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
+ * @author Marcellus Tavares
  */
 public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 
@@ -55,6 +58,25 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 			UserConverterKeys.PASSWORD, UserConverterKeys.PASSWORD);
 		_reservedUserFieldNames.put(
 			UserConverterKeys.SCREEN_NAME, UserConverterKeys.SCREEN_NAME);
+	}
+
+	public String getGroupDNName(
+			long ldapServerId, UserGroup userGroup, Properties groupMappings)
+		throws Exception {
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(
+			GetterUtil.getString(
+				groupMappings.getProperty(_groupDNFieldName), _DEFAULT_DN));
+		sb.append(StringPool.EQUAL);
+		sb.append(userGroup.getName());
+		sb.append(StringPool.COMMA);
+		sb.append(
+			PortalLDAPUtil.getGroupsDN(
+				ldapServerId, userGroup.getCompanyId()));
+
+		return sb.toString();
 	}
 
 	public Modifications getLDAPContactModifications(
@@ -76,13 +98,70 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 		return modifications;
 	}
 
+	public Attributes getLDAPGroupAttributes(
+			long ldapServerId, UserGroup userGroup, User user,
+			Properties groupMappings, Properties userMappings)
+		throws Exception {
+
+		Attributes attributes = new BasicAttributes(true);
+
+		Attribute objectClass = new BasicAttribute(_OBJECT_CLASS);
+
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
+
+		String[] defaultObjectClasses = PrefsPropsUtil.getStringArray(
+			userGroup.getCompanyId(),
+			PropsKeys.LDAP_GROUP_DEFAULT_OBJECT_CLASSES + postfix,
+			StringPool.COMMA);
+
+		for (int i = 0; i < defaultObjectClasses.length; i++) {
+			objectClass.add(defaultObjectClasses[i]);
+		}
+
+		attributes.put(objectClass);
+
+		addAttributeMapping(
+			groupMappings.getProperty(GroupConverterKeys.GROUP_NAME),
+			userGroup.getName(), attributes);
+		addAttributeMapping(
+			groupMappings.getProperty(GroupConverterKeys.DESCRIPTION),
+			userGroup.getDescription(), attributes);
+		addAttributeMapping(
+			groupMappings.getProperty(GroupConverterKeys.USER),
+			getUserDNName(ldapServerId, user, userMappings), attributes);
+
+		return attributes;
+	}
+
+	public Modifications getLDAPGroupModifications(
+			long ldapServerId, UserGroup userGroup, User user,
+			Properties groupMappings, Properties userMappings)
+		throws Exception {
+
+		Modifications modifications = Modifications.getInstance();
+
+		String groupDN = getGroupDNName(ldapServerId, userGroup, groupMappings);
+		String userDN = getUserDNName(ldapServerId, user, userMappings);
+
+		if (!PortalLDAPUtil.isGroupMember(
+				ldapServerId, user.getCompanyId(), groupDN, userDN)) {
+
+			modifications.addItem(
+				DirContext.ADD_ATTRIBUTE,
+				groupMappings.getProperty(GroupConverterKeys.USER),
+				getUserDNName(ldapServerId, user, userMappings));
+		}
+
+		return modifications;
+	}
+
 	public Attributes getLDAPUserAttributes(
 			long ldapServerId, User user, Properties userMappings)
 		throws SystemException {
 
 		Attributes attributes = new BasicAttributes(true);
 
-		Attribute objectClass = new BasicAttribute(_USER_OBJECT_CLASS);
+		Attribute objectClass = new BasicAttribute(_OBJECT_CLASS);
 
 		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
@@ -271,7 +350,7 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 
 	private static final String _DEFAULT_DN = "cn";
 
-	private static final String _USER_OBJECT_CLASS = "objectclass";
+	private static final String _OBJECT_CLASS = "objectclass";
 
 	private static Log _log = LogFactoryUtil.getLog(
 		BasePortalToLDAPConverter.class);
@@ -281,6 +360,7 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 	private Map<String, String> _reservedUserFieldNames =
 		new HashMap<String, String>();
 
+	private String _groupDNFieldName = GroupConverterKeys.GROUP_NAME;
 	private String _userDNFieldName = UserConverterKeys.SCREEN_NAME;
 
 }

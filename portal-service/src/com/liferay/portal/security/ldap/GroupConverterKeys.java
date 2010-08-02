@@ -23,4 +23,6 @@ public interface GroupConverterKeys {
 
 	public static final String GROUP_NAME = "groupName";
 
+	public static final String USER = "user";
+
 }

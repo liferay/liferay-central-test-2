@@ -25,6 +25,7 @@ import java.util.Map;
  * @author Edward Han
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
+ * @author Marcellus Tavares
  */
 public class PortalLDAPExporterUtil {
 
@@ -40,6 +41,12 @@ public class PortalLDAPExporterUtil {
 		throws Exception {
 
 		_portalLDAPExporter.exportToLDAP(user, userExpandoAttributes);
+	}
+
+	public static void exportToLDAP(long userId, long userGroupId)
+		throws Exception {
+
+		_portalLDAPExporter.exportToLDAP(userId, userGroupId);
 	}
 
 	public void setPortalLDAPExporter(PortalLDAPExporter portalLDAPExporter) {

@@ -40,6 +40,7 @@ String ldapImportGroupSearchFilter = ParamUtil.getString(request, "settings--" +
 String ldapUsersDN = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_USERS_DN + postfix + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USERS_DN + postfix));
 String ldapUserDefaultObjectClasses = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES + postfix + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES + postfix));
 String ldapGroupsDN = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_GROUPS_DN + postfix + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_GROUPS_DN + postfix));
+String ldapGroupDefaultObjectClasses = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_GROUP_DEFAULT_OBJECT_CLASSES + postfix + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_GROUP_DEFAULT_OBJECT_CLASSES + postfix));
 
 String ldapUserMappings = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_USER_MAPPINGS + postfix + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USER_MAPPINGS + postfix));
 
@@ -257,6 +258,9 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<aui:input cssClass="lfr-input-text-container" label="user-default-object-classes" name='<%= "settings--" + PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES + postfix + "--" %>' type="text" value="<%= ldapUserDefaultObjectClasses %>" />
 
 		<aui:input cssClass="lfr-input-text-container" label="groups-dn" name='<%= "settings--" + PropsKeys.LDAP_GROUPS_DN + postfix + "--" %>' type="text" value="<%= ldapGroupsDN %>" />
+
+		<aui:input cssClass="lfr-input-text-container" label="group-default-object-classes" name='<%= "settings--" + PropsKeys.LDAP_GROUP_DEFAULT_OBJECT_CLASSES + postfix + "--" %>' type="text" value="<%= ldapGroupDefaultObjectClasses %>" />
+
 	</aui:fieldset>
 
 	<aui:button-row>

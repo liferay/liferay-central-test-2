@@ -917,6 +917,8 @@ public interface PropsKeys {
 
 	public static final String LDAP_GROUP_MAPPINGS = "ldap.group.mappings";
 
+	public static final String LDAP_GROUP_DEFAULT_OBJECT_CLASSES = "ldap.group.default.object.classes";
+
 	public static final String LDAP_GROUPS_DN = "ldap.groups.dn";
 
 	public static final String LDAP_IMPORT_CREATE_ROLE_PER_GROUP = "ldap.import.create.role.per.group";

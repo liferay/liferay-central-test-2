@@ -57,6 +57,7 @@ import javax.naming.ldap.PagedResultsResponseControl;
  * @author Samuel Kong
  * @author Ryan Park
  * @author Wesley Gong
+ * @author Marcellus Tavares
  */
 public class PortalLDAPUtil {
 
@@ -117,6 +118,70 @@ public class PortalLDAPUtil {
 		}
 
 		return ldapContext;
+	}
+
+	public static Binding getGroup(
+			long ldapServerId, long companyId, String groupName)
+		throws Exception {
+
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
+
+		LdapContext ldapContext = getContext(ldapServerId, companyId);
+
+		NamingEnumeration<SearchResult> enu = null;
+
+		try {
+			if (ldapContext == null) {
+				return null;
+			}
+
+			String baseDN = PrefsPropsUtil.getString(
+				companyId, PropsKeys.LDAP_BASE_DN + postfix);
+
+			Properties groupMappings = LDAPSettingsUtil.getGroupMappings(
+				ldapServerId, companyId);
+
+			StringBundler filter = new StringBundler(5);
+
+			filter.append(StringPool.OPEN_PARENTHESIS);
+			filter.append(groupMappings.getProperty("groupName"));
+			filter.append(StringPool.EQUAL);
+			filter.append(groupName);
+			filter.append(StringPool.CLOSE_PARENTHESIS);
+
+			SearchControls searchControls = new SearchControls(
+				SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
+
+			enu = ldapContext.search(baseDN, filter.toString(), searchControls);
+		}
+		catch (Exception e) {
+			throw e;
+		}
+		finally {
+			if (ldapContext != null) {
+				ldapContext.close();
+			}
+		}
+
+		if (enu.hasMoreElements()) {
+			Binding binding = enu.nextElement();
+
+			enu.close();
+
+			return binding;
+		}
+		else {
+			return null;
+		}
+	}
+
+	public static String getGroupsDN(long ldapServerId, long companyId)
+		throws Exception {
+
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
+
+		return PrefsPropsUtil.getString(
+			companyId, PropsKeys.LDAP_GROUPS_DN + postfix);
 	}
 
 	public static Attributes getGroupAttributes(
@@ -465,6 +530,50 @@ public class PortalLDAPUtil {
 		else {
 			return false;
 		}
+	}
+
+	public static boolean isGroupMember(
+			long ldapServerId, long companyId, String groupDN, String userDN)
+		throws Exception {
+
+		LdapContext ldapContext = getContext(ldapServerId, companyId);
+
+		try {
+			if (ldapContext == null) {
+				return false;
+			}
+
+			Properties groupMappings = LDAPSettingsUtil.getGroupMappings(
+				ldapServerId, companyId);
+
+			StringBundler filter = new StringBundler(5);
+
+			filter.append(StringPool.OPEN_PARENTHESIS);
+			filter.append(groupMappings.getProperty(GroupConverterKeys.USER));
+			filter.append(StringPool.EQUAL);
+			filter.append(userDN);
+			filter.append(StringPool.CLOSE_PARENTHESIS);
+
+			SearchControls searchControls = new SearchControls(
+				SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
+
+			NamingEnumeration<SearchResult> enu = ldapContext.search(
+				groupDN, filter.toString(), searchControls);
+
+			if (enu.hasMoreElements()) {
+				return true;
+			}
+		}
+		catch (Exception e) {
+			throw e;
+		}
+		finally {
+			if (ldapContext != null) {
+				ldapContext.close();
+			}
+		}
+
+		return false;
 	}
 
 	public static byte[] searchLDAP(

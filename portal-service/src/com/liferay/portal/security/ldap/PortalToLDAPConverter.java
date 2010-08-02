@@ -14,9 +14,9 @@
 
 package com.liferay.portal.security.ldap;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroup;
 
 import java.io.Serializable;
 
@@ -28,17 +28,32 @@ import javax.naming.directory.Attributes;
 /**
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
+ * @author Marcellus Tavares
  */
 public interface PortalToLDAPConverter {
+
+	public String getGroupDNName(
+			long ldapServerId, UserGroup userGroup, Properties groupMappings)
+		throws Exception;
 
 	public Modifications getLDAPContactModifications(
 			Contact contact, Map<String, Serializable> contactExpandoAttributes,
 			Properties contactMappings, Properties contactExpandoMappings)
 		throws Exception;
 
+	public Attributes getLDAPGroupAttributes(
+			long ldapServerId, UserGroup userGroup, User user,
+			Properties groupMappings, Properties userMappings)
+		throws Exception;
+
+	public Modifications getLDAPGroupModifications(
+			long ldapServerId, UserGroup userGroup, User user,
+			Properties groupMappings, Properties userMappings)
+		throws Exception;
+
 	public Attributes getLDAPUserAttributes(
 			long ldapServerId, User user, Properties userMappings)
-		throws SystemException;
+		throws Exception;
 
 	public Modifications getLDAPUserModifications(
 			User user, Map<String, Serializable> userExpandoAttributes,

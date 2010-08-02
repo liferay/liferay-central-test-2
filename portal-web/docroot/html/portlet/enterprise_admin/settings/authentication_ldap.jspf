@@ -37,6 +37,7 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 	String ldapUsersDN = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_USERS_DN + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USERS_DN));
 	String ldapUserDefaultObjectClasses = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES));
 	String ldapGroupsDN = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_GROUPS_DN + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_GROUPS_DN));
+	String ldapGroupDefaultObjectClasses = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_GROUP_DEFAULT_OBJECT_CLASSES + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_GROUP_DEFAULT_OBJECT_CLASSES));
 	String ldapUserMappings = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_USER_MAPPINGS + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USER_MAPPINGS));
 	String ldapGroupMappings = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_GROUP_MAPPINGS + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_GROUP_MAPPINGS));
 
@@ -60,6 +61,7 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 		properties.put(PropsKeys.LDAP_USERS_DN + postfix, ldapUsersDN);
 		properties.put(PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES + postfix, ldapUserDefaultObjectClasses);
 		properties.put(PropsKeys.LDAP_GROUPS_DN + postfix, ldapGroupsDN);
+		properties.put(PropsKeys.LDAP_GROUP_DEFAULT_OBJECT_CLASSES + postfix, ldapGroupDefaultObjectClasses);
 		properties.put(PropsKeys.LDAP_USER_MAPPINGS + postfix, ldapUserMappings);
 		properties.put(PropsKeys.LDAP_GROUP_MAPPINGS + postfix, ldapGroupMappings);
 		properties.put("ldap.server.ids", StringUtil.merge(ldapServerIds));
@@ -77,6 +79,7 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
 		keys.add(PropsKeys.LDAP_USERS_DN);
 		keys.add(PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES);
 		keys.add(PropsKeys.LDAP_GROUPS_DN);
+		keys.add(PropsKeys.LDAP_GROUP_DEFAULT_OBJECT_CLASSES);
 		keys.add(PropsKeys.LDAP_USER_MAPPINGS);
 		keys.add(PropsKeys.LDAP_GROUP_MAPPINGS);
 
