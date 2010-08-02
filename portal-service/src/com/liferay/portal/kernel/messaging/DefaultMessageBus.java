@@ -16,12 +16,13 @@ package com.liferay.portal.kernel.messaging;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ConcurrentHashSet;
+import com.liferay.portal.kernel.util.MapBackedSet;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Michael C. Han
@@ -227,7 +228,8 @@ public class DefaultMessageBus implements MessageBus {
 	private static Log _log = LogFactoryUtil.getLog(DefaultMessageBus.class);
 
 	private Set<DestinationEventListener> _destinationEventListeners =
-		new ConcurrentHashSet<DestinationEventListener>();
+		new MapBackedSet<DestinationEventListener>(
+			new ConcurrentHashMap<DestinationEventListener, Boolean>());
 	private Map<String, Destination> _destinations =
 		new HashMap<String, Destination>();
 

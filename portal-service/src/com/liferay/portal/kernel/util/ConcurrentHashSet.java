@@ -14,74 +14,26 @@
 
 package com.liferay.portal.kernel.util;
 
-import java.util.AbstractSet;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class ConcurrentHashSet<E> extends AbstractSet<E> {
+@Deprecated
+public class ConcurrentHashSet<E> extends MapBackedSet<E> {
 
 	public ConcurrentHashSet() {
-		_map = new ConcurrentHashMap<E, String>();
+		super(new ConcurrentHashMap<E, Boolean>());
 	}
 
 	public ConcurrentHashSet(int capacity) {
-		_map = new ConcurrentHashMap<E, String>(capacity);
+		super(new ConcurrentHashMap<E, Boolean>(capacity));
 	}
 
 	public ConcurrentHashSet(Set<E> set) {
-		Iterator<E> itr = set.iterator();
-
-		while (itr.hasNext()) {
-			E e = itr.next();
-
-			_map.put(e, StringPool.BLANK);
-		}
+		super(new ConcurrentHashMap<E, Boolean>());
+		addAll(set);
 	}
-
-	public boolean add(E e) {
-		if (_map.put(e, StringPool.BLANK) == null) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public void clear() {
-		_map.clear();
-	}
-
-	public boolean contains(Object obj) {
-		if (_map.containsKey(obj)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public Iterator<E> iterator() {
-		return _map.keySet().iterator();
-	}
-
-	public boolean remove(Object obj) {
-		if (_map.remove(obj) == null) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
-	public int size() {
-		return _map.size();
-	}
-
-	private Map<E, String> _map;
 
 }

@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ConcurrentHashSet;
+import com.liferay.portal.kernel.util.MapBackedSet;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -136,7 +136,8 @@ public class LiveUsers {
 		Set<Long> groupUsers = liveUsers.get(groupId);
 
 		if (groupUsers == null) {
-			groupUsers = new ConcurrentHashSet<Long>();
+			groupUsers = new MapBackedSet<Long>(
+				new ConcurrentHashMap<Long, Boolean>());
 
 			liveUsers.put(groupId, groupUsers);
 		}

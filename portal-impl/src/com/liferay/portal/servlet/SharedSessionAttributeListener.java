@@ -16,10 +16,11 @@ package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.servlet.ServletVersionDetector;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.ConcurrentHashSet;
+import com.liferay.portal.kernel.util.MapBackedSet;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionAttributeListener;
@@ -44,7 +45,8 @@ public class SharedSessionAttributeListener
 			return;
 		}
 
-		_sessionIds = new ConcurrentHashSet<String>();
+		_sessionIds = new MapBackedSet<String>(
+			new ConcurrentHashMap<String, Boolean>());
 	}
 
 	public void attributeAdded(HttpSessionBindingEvent event) {
