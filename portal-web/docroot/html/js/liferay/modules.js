@@ -44,15 +44,7 @@
 			'service-datasource': ['aui-base', 'datasource-local'],
 			'undo-manager': ['aui-data-set', 'base', 'substitute'],
 			'upload': ['aui-base', 'aui-swf', 'collection', 'substitute', 'swfupload'],
-			'util-list-fields': ['aui-base'],
-
-			// Portlets
-
-			'bbcode-editor': ['aui-color-picker', 'aui-io-request', 'aui-overlay-context'],
-			'category-admin': ['aui-editable', 'aui-live-search', 'aui-overlay-context-panel', 'aui-tree-view', 'dd', 'json', 'liferay-portlet-url'],
-			'enterprise-admin': [],
-			'portlet-journal': ['aui-base', 'aui-data-set', 'aui-datatype', 'aui-dialog', 'aui-nested-list', 'aui-overlay-context-panel', 'json', 'substitute'],
-			'tags-admin': ['aui-live-search', 'aui-overlay-context-panel', 'base', 'dd', 'json', 'liferay-portlet-url', 'substitute']
+			'util-list-fields': ['aui-base']
 		};
 
 		for (var i in moduleList) {
