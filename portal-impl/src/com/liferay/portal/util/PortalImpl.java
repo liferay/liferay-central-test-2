@@ -3613,7 +3613,7 @@ public class PortalImpl implements Portal {
 			return true;
 		}
 
-		Matcher matcher = _bannedRresourceIdPattern.matcher(resourceId);
+		Matcher matcher = _bannedResourceIdPattern.matcher(resourceId);
 
 		if (matcher.matches()) {
 			return false;
@@ -4583,7 +4583,7 @@ public class PortalImpl implements Portal {
 	private String[] _allSystemGroups;
 	private String[] _allSystemOrganizationRoles;
 	private String[] _allSystemRoles;
-	private Pattern _bannedRresourceIdPattern = Pattern.compile(
+	private Pattern _bannedResourceIdPattern = Pattern.compile(
 		PropsValues.PORTLET_RESOURCE_ID_BANNED_PATHS_REGEXP);
 	private String _cdnHostHttp;
 	private String _cdnHostHttps;
