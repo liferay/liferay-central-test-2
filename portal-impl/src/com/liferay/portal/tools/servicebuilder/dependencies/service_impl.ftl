@@ -32,7 +32,7 @@ import ${packagePath}.service.base.${entity.name}${sessionTypeName}ServiceBaseIm
  * </p>
  *
  * <p>
- * Never reference this interface directly. Always use {@link ${packagePath}.service.${entity.name}ServiceUtil} to access the ${entity.humanName} local service.
+ * Never reference this interface directly. Always use {@link ${packagePath}.service.${entity.name}ServiceUtil} to access the ${entity.humanName} remote service.
  * </p>
  *
  * <p>

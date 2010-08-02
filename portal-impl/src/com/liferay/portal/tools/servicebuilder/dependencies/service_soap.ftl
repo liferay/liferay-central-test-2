@@ -17,6 +17,7 @@ import java.rmi.RemoteException;
  * However, the signatures are different because it is difficult for SOAP to
  * support certain types.
  * </p>
+<#if entity.hasColumns()>
  *
  * <p>
  * ServiceBuilder follows certain rules in translating the methods. For example,
@@ -27,6 +28,7 @@ import java.rmi.RemoteException;
  * {@link ${packagePath}.model.${entity.name}Soap}. Methods that SOAP cannot
  * safely wire are skipped.
  * </p>
+</#if>
  *
  * <p>
  * The benefits of using the SOAP utility is that it is cross platform
@@ -48,7 +50,9 @@ import java.rmi.RemoteException;
  *
  * @author    ${author}
  * @see       ${entity.name}ServiceHttp
+<#if entity.hasColumns()>
  * @see       ${packagePath}.model.${entity.name}Soap
+</#if>
  * @see       ${packagePath}.service.${entity.name}ServiceUtil
  * @generated
  */
