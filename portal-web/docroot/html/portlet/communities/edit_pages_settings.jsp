@@ -38,11 +38,12 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 List<String> tabs2NamesList = new ArrayList<String>();
 
 if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE)) {
+	tabs2NamesList.add("virtual-host");
+
 	if (company.isCommunityLogo()) {
 		tabs2NamesList.add("logo");
 	}
 
-	tabs2NamesList.add("virtual-host");
 	tabs2NamesList.add("sitemap");
 	tabs2NamesList.add("monitoring");
 

@@ -121,6 +121,9 @@ if (Validator.isNull(tabs2) && !tabs1.equals("settings")) {
 if (tabs1.endsWith("-pages") && !tabs2.equals("pages") && !tabs2.equals("look-and-feel") && !tabs2.equals("export-import") && !tabs2.equals("proposals")) {
 	tabs2 = "pages";
 }
+else if (tabs1.equals("settings") && !tabs2.equals("virtual-host") && !tabs2.equals("logo") && !tabs2.equals("sitemap") && !tabs2.equals("monitoring") && !tabs2.equals("merge-pages") && !tabs2.equals("staging")) {
+	tabs2 = "virtual-host";
+}
 
 if ((selLayout == null) && tabs2.equals("pages")) {
 	tabs3 = "children";
