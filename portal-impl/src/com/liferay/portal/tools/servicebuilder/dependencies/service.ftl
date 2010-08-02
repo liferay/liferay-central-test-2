@@ -8,23 +8,43 @@ import com.liferay.portal.kernel.exception.SystemException;
 
 @Transactional(isolation = Isolation.PORTAL, rollbackFor = {PortalException.class, SystemException.class})
 
+<#if sessionTypeName == "Local">
 /**
+ * The interface for the ${entity.humanName} local service.
+ *
  * <p>
- * This interface defines the service. The default implementation is
- * {@link
- * ${packagePath}.service.impl.${entity.name}${sessionTypeName}ServiceImpl}.
- * Modify methods in that class and rerun ServiceBuilder to populate this class
- * and all other generated classes.
+ * Never modify or reference this interface directly. Always use {@link ${entity.name}LocalServiceUtil} to access the ${entity.humanName} local service. Add custom service methods to {@link ${packagePath}.service.impl.${entity.name}LocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
  * <p>
- * ${serviceComments}
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
- * @author    ${author}
- * @see       ${entity.name}${sessionTypeName}ServiceUtil
+ * @author ${author}
+ * @see ${entity.name}LocalServiceUtil
+ * @see ${packagePath}.service.base.${entity.name}LocalServiceBaseImpl
+ * @see ${packagePath}.service.impl.${entity.name}LocalServiceImpl
  * @generated
  */
+<#else>
+/**
+ * The interface for the ${entity.humanName} local service.
+ *
+ * <p>
+ * Never modify or reference this interface directly. Always use {@link ${entity.name}LocalServiceUtil} to access the ${entity.humanName} local service. Add custom service methods to {@link ${packagePath}.service.impl.${entity.name}LocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+ * </p>
+ *
+ * <p>
+ * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
+ * </p>
+ *
+ * @author ${author}
+ * @see ${entity.name}ServiceUtil
+ * @see ${packagePath}.service.base.${entity.name}ServiceBaseImpl
+ * @see ${packagePath}.service.impl.${entity.name}ServiceImpl
+ * @generated
+ */
+</#if>
 public interface ${entity.name}${sessionTypeName}Service {
 
 	<#list methods as method>

@@ -4,19 +4,43 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ClassLoaderProxy;
 
+<#if sessionTypeName == "Local">
 /**
+ * The utility for the ${entity.humanName} local service. This utility wraps {@link ${packagePath}.service.impl.${entity.name}LocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ *
  * <p>
- * This class provides static methods for the
- * {@link ${entity.name}${sessionTypeName}Service} bean. The static methods of
- * this class calls the same methods of the bean instance. It's convenient to be
- * able to just write one line to call a method on a bean instead of writing a
- * lookup call and a method call.
+ * Never modify this class directly. Add custom service methods to {@link ${packagePath}.service.impl.${entity.name}LocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
  * </p>
  *
- * @author    ${author}
- * @see       ${entity.name}${sessionTypeName}Service
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author ${author}
+ * @see ${entity.name}LocalService
+ * @see ${packagePath}.service.base.${entity.name}LocalServiceBaseImpl
+ * @see ${packagePath}.service.impl.${entity.name}LocalServiceImpl
  * @generated
  */
+<#else>
+/**
+ * The utility for the ${entity.humanName} remote service. This utility wraps {@link ${packagePath}.service.impl.${entity.name}ServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
+ *
+ * <p>
+ * Never modify this class directly. Add custom service methods to {@link ${packagePath}.service.impl.${entity.name}ServiceImpl} and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
+ * </p>
+ *
+ * @author ${author}
+ * @see ${entity.name}Service
+ * @see ${packagePath}.service.base.${entity.name}ServiceBaseImpl
+ * @see ${packagePath}.service.impl.${entity.name}ServiceImpl
+ * @generated
+ */
+</#if>
 public class ${entity.name}${sessionTypeName}ServiceUtil {
 
 	<#list methods as method>

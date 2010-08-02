@@ -10,7 +10,7 @@ import ${packagePath}.model.${entity.name};
  * </p>
  *
  * <p>
- * Never reference this interface directly. All methods that expect a ${entity.humanName} model instance should use the {@link ${entity.name}} interface instead.
+ * Never reference this class directly. All methods that expect a ${entity.humanName} model instance should use the {@link ${entity.name}} interface instead.
  * </p>
  */
 public class ${entity.name}Impl extends ${entity.name}ModelImpl implements ${entity.name} {

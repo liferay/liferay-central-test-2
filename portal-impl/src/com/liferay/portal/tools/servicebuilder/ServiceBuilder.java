@@ -2833,8 +2833,6 @@ public class ServiceBuilder {
 	private void _createService(Entity entity, int sessionType)
 		throws Exception {
 
-		String serviceComments = "This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.";
-
 		JavaClass javaClass = _getJavaClass(_outputPath + "/service/impl/" + entity.getName() + (sessionType != _SESSION_TYPE_REMOTE ? "Local" : "") + "ServiceImpl.java");
 
 		JavaMethod[] methods = _getMethods(javaClass);
@@ -2855,8 +2853,6 @@ public class ServiceBuilder {
 
 				methods = allMethods;
 			}
-
-			serviceComments = "This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.";
 		}
 
 		Map<String, Object> context = _getContext();
@@ -2864,7 +2860,6 @@ public class ServiceBuilder {
 		context.put("entity", entity);
 		context.put("methods", methods);
 		context.put("sessionTypeName",_getSessionTypeName(sessionType));
-		context.put("serviceComments", serviceComments);
 
 		// Content
 

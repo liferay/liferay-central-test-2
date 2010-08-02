@@ -14,11 +14,7 @@ import java.util.Date;
  * The persistence interface for the ${entity.humanName} service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
- * </p>
- *
- * <p>
- * Never reference this class directly, use {@link ${entity.name}Util} instead.
+ * Never modify or reference this interface directly. Always use {@link ${entity.name}Util} to access the ${entity.humanName} persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
  * </p>
  *
  * <p>
