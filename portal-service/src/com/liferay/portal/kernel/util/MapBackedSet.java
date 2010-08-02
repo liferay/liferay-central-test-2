@@ -31,14 +31,20 @@ public class MapBackedSet<E> extends AbstractSet<E> implements Serializable {
 
 	public MapBackedSet(Map<E, Boolean> backedMap) {
 		if (!backedMap.isEmpty()) {
-			throw new IllegalArgumentException("Map is non-empty");
+			throw new IllegalArgumentException("Map is not empty");
 		}
+
 		_backedMap = backedMap;
 		_backedMapKeySet = backedMap.keySet();
 	}
 
 	public boolean add(E element) {
-		return _backedMap.put(element, Boolean.TRUE) == null;
+		if (_backedMap.put(element, Boolean.TRUE) == null) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public void clear() {
@@ -54,7 +60,12 @@ public class MapBackedSet<E> extends AbstractSet<E> implements Serializable {
 	}
 
 	public boolean equals(Object obj) {
-		return obj == this || _backedMapKeySet.equals(obj);
+		if ((obj == this) || _backedMapKeySet.equals(obj)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public int hashCode() {
@@ -70,7 +81,12 @@ public class MapBackedSet<E> extends AbstractSet<E> implements Serializable {
 	}
 
 	public boolean remove(Object obj) {
-		return _backedMap.remove(obj) != null;
+		if (_backedMap.remove(obj) != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public boolean removeAll(Collection<?> collection) {
@@ -98,8 +114,10 @@ public class MapBackedSet<E> extends AbstractSet<E> implements Serializable {
 	}
 
 	private void readObject(ObjectInputStream objectInputStream)
-		throws IOException, ClassNotFoundException {
+		throws ClassNotFoundException, IOException {
+
 		objectInputStream.defaultReadObject();
+
 		_backedMapKeySet = _backedMap.keySet();
 	}
 

@@ -20,7 +20,6 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author Brian Wing Shun Chan
  */
-@Deprecated
 public class ConcurrentHashSet<E> extends MapBackedSet<E> {
 
 	public ConcurrentHashSet() {
@@ -33,6 +32,7 @@ public class ConcurrentHashSet<E> extends MapBackedSet<E> {
 
 	public ConcurrentHashSet(Set<E> set) {
 		super(new ConcurrentHashMap<E, Boolean>());
+
 		addAll(set);
 	}
 
