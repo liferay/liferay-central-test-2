@@ -22,7 +22,15 @@ import com.liferay.portlet.tasks.model.TasksReview;
  * The persistence interface for the tasks review service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link TasksReviewUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 		java.util.List<com.liferay.portlet.tasks.model.TasksReview> tasksReviews);
 
 	/**
-	* Creates a new tasks review with the primary key.
+	* Creates a new tasks review with the primary key. Does not add the tasks review to the database.
 	*
 	* @param reviewId the primary key for the new tasks review
 	* @return the new tasks review

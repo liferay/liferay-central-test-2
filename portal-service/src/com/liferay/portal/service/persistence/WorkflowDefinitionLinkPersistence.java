@@ -20,7 +20,15 @@ import com.liferay.portal.model.WorkflowDefinitionLink;
  * The persistence interface for the workflow definition link service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link WorkflowDefinitionLinkUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -46,7 +54,7 @@ public interface WorkflowDefinitionLinkPersistence extends BasePersistence<Workf
 		java.util.List<com.liferay.portal.model.WorkflowDefinitionLink> workflowDefinitionLinks);
 
 	/**
-	* Creates a new workflow definition link with the primary key.
+	* Creates a new workflow definition link with the primary key. Does not add the workflow definition link to the database.
 	*
 	* @param workflowDefinitionLinkId the primary key for the new workflow definition link
 	* @return the new workflow definition link

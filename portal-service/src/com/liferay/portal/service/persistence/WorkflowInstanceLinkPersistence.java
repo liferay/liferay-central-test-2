@@ -20,7 +20,15 @@ import com.liferay.portal.model.WorkflowInstanceLink;
  * The persistence interface for the workflow instance link service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link WorkflowInstanceLinkUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -46,7 +54,7 @@ public interface WorkflowInstanceLinkPersistence extends BasePersistence<Workflo
 		java.util.List<com.liferay.portal.model.WorkflowInstanceLink> workflowInstanceLinks);
 
 	/**
-	* Creates a new workflow instance link with the primary key.
+	* Creates a new workflow instance link with the primary key. Does not add the workflow instance link to the database.
 	*
 	* @param workflowInstanceLinkId the primary key for the new workflow instance link
 	* @return the new workflow instance link

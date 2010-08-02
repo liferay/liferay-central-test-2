@@ -48,10 +48,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the portlet service.
+ * The persistence implementation for the portlet service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link PortletUtil} instead.
  * </p>
  *
  * <p>
@@ -161,7 +165,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	}
 
 	/**
-	 * Creates a new portlet with the primary key.
+	 * Creates a new portlet with the primary key. Does not add the portlet to the database.
 	 *
 	 * @param id the primary key for the new portlet
 	 * @return the new portlet

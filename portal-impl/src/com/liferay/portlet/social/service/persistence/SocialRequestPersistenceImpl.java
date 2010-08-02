@@ -53,10 +53,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the social request service.
+ * The persistence implementation for the social request service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link SocialRequestUtil} instead.
  * </p>
  *
  * <p>
@@ -298,7 +302,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	}
 
 	/**
-	 * Creates a new social request with the primary key.
+	 * Creates a new social request with the primary key. Does not add the social request to the database.
 	 *
 	 * @param requestId the primary key for the new social request
 	 * @return the new social request

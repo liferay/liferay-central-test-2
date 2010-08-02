@@ -22,7 +22,15 @@ import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
  * The persistence interface for the d l file shortcut service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link DLFileShortcutUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> dlFileShortcuts);
 
 	/**
-	* Creates a new d l file shortcut with the primary key.
+	* Creates a new d l file shortcut with the primary key. Does not add the d l file shortcut to the database.
 	*
 	* @param fileShortcutId the primary key for the new d l file shortcut
 	* @return the new d l file shortcut

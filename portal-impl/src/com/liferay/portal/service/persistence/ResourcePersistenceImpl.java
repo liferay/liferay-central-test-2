@@ -48,10 +48,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the resource service.
+ * The persistence implementation for the resource service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ResourceUtil} instead.
  * </p>
  *
  * <p>
@@ -154,7 +158,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	}
 
 	/**
-	 * Creates a new resource with the primary key.
+	 * Creates a new resource with the primary key. Does not add the resource to the database.
 	 *
 	 * @param resourceId the primary key for the new resource
 	 * @return the new resource

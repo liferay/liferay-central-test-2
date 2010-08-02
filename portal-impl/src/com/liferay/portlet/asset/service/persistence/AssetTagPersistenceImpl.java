@@ -60,10 +60,14 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * The persistence for the asset tag service.
+ * The persistence implementation for the asset tag service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link AssetTagUtil} instead.
  * </p>
  *
  * <p>
@@ -151,7 +155,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	}
 
 	/**
-	 * Creates a new asset tag with the primary key.
+	 * Creates a new asset tag with the primary key. Does not add the asset tag to the database.
 	 *
 	 * @param tagId the primary key for the new asset tag
 	 * @return the new asset tag

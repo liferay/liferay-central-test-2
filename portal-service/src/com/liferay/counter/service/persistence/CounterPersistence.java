@@ -22,7 +22,15 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * The persistence interface for the counter service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link CounterUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -47,7 +55,7 @@ public interface CounterPersistence extends BasePersistence<Counter> {
 		java.util.List<com.liferay.counter.model.Counter> counters);
 
 	/**
-	* Creates a new counter with the primary key.
+	* Creates a new counter with the primary key. Does not add the counter to the database.
 	*
 	* @param name the primary key for the new counter
 	* @return the new counter

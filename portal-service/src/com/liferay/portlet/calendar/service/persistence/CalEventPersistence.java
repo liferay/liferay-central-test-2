@@ -22,7 +22,15 @@ import com.liferay.portlet.calendar.model.CalEvent;
  * The persistence interface for the cal event service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link CalEventUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface CalEventPersistence extends BasePersistence<CalEvent> {
 		java.util.List<com.liferay.portlet.calendar.model.CalEvent> calEvents);
 
 	/**
-	* Creates a new cal event with the primary key.
+	* Creates a new cal event with the primary key. Does not add the cal event to the database.
 	*
 	* @param eventId the primary key for the new cal event
 	* @return the new cal event

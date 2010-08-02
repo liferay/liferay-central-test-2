@@ -20,7 +20,15 @@ import com.liferay.portal.model.ServiceComponent;
  * The persistence interface for the service component service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ServiceComponentUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -46,7 +54,7 @@ public interface ServiceComponentPersistence extends BasePersistence<ServiceComp
 		java.util.List<com.liferay.portal.model.ServiceComponent> serviceComponents);
 
 	/**
-	* Creates a new service component with the primary key.
+	* Creates a new service component with the primary key. Does not add the service component to the database.
 	*
 	* @param serviceComponentId the primary key for the new service component
 	* @return the new service component

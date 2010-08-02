@@ -22,7 +22,15 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
  * The persistence interface for the d l file entry service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link DLFileEntryUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> dlFileEntries);
 
 	/**
-	* Creates a new d l file entry with the primary key.
+	* Creates a new d l file entry with the primary key. Does not add the d l file entry to the database.
 	*
 	* @param fileEntryId the primary key for the new d l file entry
 	* @return the new d l file entry

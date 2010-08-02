@@ -49,10 +49,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the image service.
+ * The persistence implementation for the image service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ImageUtil} instead.
  * </p>
  *
  * <p>
@@ -139,7 +143,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	}
 
 	/**
-	 * Creates a new image with the primary key.
+	 * Creates a new image with the primary key. Does not add the image to the database.
 	 *
 	 * @param imageId the primary key for the new image
 	 * @return the new image

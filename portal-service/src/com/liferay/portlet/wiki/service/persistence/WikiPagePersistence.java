@@ -22,7 +22,15 @@ import com.liferay.portlet.wiki.model.WikiPage;
  * The persistence interface for the wiki page service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link WikiPageUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -47,7 +55,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 		java.util.List<com.liferay.portlet.wiki.model.WikiPage> wikiPages);
 
 	/**
-	* Creates a new wiki page with the primary key.
+	* Creates a new wiki page with the primary key. Does not add the wiki page to the database.
 	*
 	* @param pageId the primary key for the new wiki page
 	* @return the new wiki page

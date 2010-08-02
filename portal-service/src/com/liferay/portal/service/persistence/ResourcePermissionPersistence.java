@@ -20,7 +20,15 @@ import com.liferay.portal.model.ResourcePermission;
  * The persistence interface for the resource permission service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ResourcePermissionUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -46,7 +54,7 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 		java.util.List<com.liferay.portal.model.ResourcePermission> resourcePermissions);
 
 	/**
-	* Creates a new resource permission with the primary key.
+	* Creates a new resource permission with the primary key. Does not add the resource permission to the database.
 	*
 	* @param resourcePermissionId the primary key for the new resource permission
 	* @return the new resource permission

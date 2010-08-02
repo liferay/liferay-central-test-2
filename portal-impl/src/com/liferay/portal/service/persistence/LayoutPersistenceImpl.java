@@ -56,10 +56,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the layout service.
+ * The persistence implementation for the layout service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link LayoutUtil} instead.
  * </p>
  *
  * <p>
@@ -315,7 +319,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	}
 
 	/**
-	 * Creates a new layout with the primary key.
+	 * Creates a new layout with the primary key. Does not add the layout to the database.
 	 *
 	 * @param plid the primary key for the new layout
 	 * @return the new layout

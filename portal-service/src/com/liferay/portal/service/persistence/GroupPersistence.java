@@ -20,7 +20,15 @@ import com.liferay.portal.model.Group;
  * The persistence interface for the group service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link GroupUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -45,7 +53,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 		java.util.List<com.liferay.portal.model.Group> groups);
 
 	/**
-	* Creates a new group with the primary key.
+	* Creates a new group with the primary key. Does not add the group to the database.
 	*
 	* @param groupId the primary key for the new group
 	* @return the new group

@@ -22,7 +22,15 @@ import com.liferay.portlet.journal.model.JournalContentSearch;
  * The persistence interface for the journal content search service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link JournalContentSearchUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 		java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> journalContentSearchs);
 
 	/**
-	* Creates a new journal content search with the primary key.
+	* Creates a new journal content search with the primary key. Does not add the journal content search to the database.
 	*
 	* @param contentSearchId the primary key for the new journal content search
 	* @return the new journal content search

@@ -20,7 +20,15 @@ import com.liferay.portal.model.User;
  * The persistence interface for the user service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link UserUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -44,7 +52,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	public void cacheResult(java.util.List<com.liferay.portal.model.User> users);
 
 	/**
-	* Creates a new user with the primary key.
+	* Creates a new user with the primary key. Does not add the user to the database.
 	*
 	* @param userId the primary key for the new user
 	* @return the new user

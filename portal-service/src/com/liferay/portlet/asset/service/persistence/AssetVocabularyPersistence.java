@@ -22,7 +22,15 @@ import com.liferay.portlet.asset.model.AssetVocabulary;
  * The persistence interface for the asset vocabulary service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link AssetVocabularyUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 		java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> assetVocabularies);
 
 	/**
-	* Creates a new asset vocabulary with the primary key.
+	* Creates a new asset vocabulary with the primary key. Does not add the asset vocabulary to the database.
 	*
 	* @param vocabularyId the primary key for the new asset vocabulary
 	* @return the new asset vocabulary

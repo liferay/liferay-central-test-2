@@ -59,10 +59,14 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * The persistence for the organization service.
+ * The persistence implementation for the organization service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link OrganizationUtil} instead.
  * </p>
  *
  * <p>
@@ -198,7 +202,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	}
 
 	/**
-	 * Creates a new organization with the primary key.
+	 * Creates a new organization with the primary key. Does not add the organization to the database.
 	 *
 	 * @param organizationId the primary key for the new organization
 	 * @return the new organization

@@ -22,7 +22,15 @@ import com.liferay.portlet.asset.model.AssetCategoryProperty;
  * The persistence interface for the asset category property service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link AssetCategoryPropertyUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface AssetCategoryPropertyPersistence extends BasePersistence<AssetC
 		java.util.List<com.liferay.portlet.asset.model.AssetCategoryProperty> assetCategoryProperties);
 
 	/**
-	* Creates a new asset category property with the primary key.
+	* Creates a new asset category property with the primary key. Does not add the asset category property to the database.
 	*
 	* @param categoryPropertyId the primary key for the new asset category property
 	* @return the new asset category property

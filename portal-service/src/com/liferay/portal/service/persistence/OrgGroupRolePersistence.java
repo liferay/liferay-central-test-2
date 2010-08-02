@@ -20,7 +20,15 @@ import com.liferay.portal.model.OrgGroupRole;
  * The persistence interface for the org group role service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link OrgGroupRoleUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -45,7 +53,7 @@ public interface OrgGroupRolePersistence extends BasePersistence<OrgGroupRole> {
 		java.util.List<com.liferay.portal.model.OrgGroupRole> orgGroupRoles);
 
 	/**
-	* Creates a new org group role with the primary key.
+	* Creates a new org group role with the primary key. Does not add the org group role to the database.
 	*
 	* @param orgGroupRolePK the primary key for the new org group role
 	* @return the new org group role

@@ -53,10 +53,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the d l file rank service.
+ * The persistence implementation for the d l file rank service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link DLFileRankUtil} instead.
  * </p>
  *
  * <p>
@@ -202,7 +206,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	}
 
 	/**
-	 * Creates a new d l file rank with the primary key.
+	 * Creates a new d l file rank with the primary key. Does not add the d l file rank to the database.
 	 *
 	 * @param fileRankId the primary key for the new d l file rank
 	 * @return the new d l file rank

@@ -48,10 +48,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the layout set service.
+ * The persistence implementation for the layout set service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link LayoutSetUtil} instead.
  * </p>
  *
  * <p>
@@ -171,7 +175,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 	}
 
 	/**
-	 * Creates a new layout set with the primary key.
+	 * Creates a new layout set with the primary key. Does not add the layout set to the database.
 	 *
 	 * @param layoutSetId the primary key for the new layout set
 	 * @return the new layout set

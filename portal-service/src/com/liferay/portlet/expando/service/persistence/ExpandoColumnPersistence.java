@@ -22,7 +22,15 @@ import com.liferay.portlet.expando.model.ExpandoColumn;
  * The persistence interface for the expando column service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ExpandoColumnUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface ExpandoColumnPersistence extends BasePersistence<ExpandoColumn>
 		java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> expandoColumns);
 
 	/**
-	* Creates a new expando column with the primary key.
+	* Creates a new expando column with the primary key. Does not add the expando column to the database.
 	*
 	* @param columnId the primary key for the new expando column
 	* @return the new expando column

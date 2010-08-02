@@ -56,10 +56,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the journal feed service.
+ * The persistence implementation for the journal feed service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link JournalFeedUtil} instead.
  * </p>
  *
  * <p>
@@ -199,7 +203,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 	}
 
 	/**
-	 * Creates a new journal feed with the primary key.
+	 * Creates a new journal feed with the primary key. Does not add the journal feed to the database.
 	 *
 	 * @param id the primary key for the new journal feed
 	 * @return the new journal feed

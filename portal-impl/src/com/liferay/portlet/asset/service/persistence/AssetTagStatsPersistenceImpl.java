@@ -51,10 +51,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the asset tag stats service.
+ * The persistence implementation for the asset tag stats service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link AssetTagStatsUtil} instead.
  * </p>
  *
  * <p>
@@ -178,7 +182,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	}
 
 	/**
-	 * Creates a new asset tag stats with the primary key.
+	 * Creates a new asset tag stats with the primary key. Does not add the asset tag stats to the database.
 	 *
 	 * @param tagStatsId the primary key for the new asset tag stats
 	 * @return the new asset tag stats

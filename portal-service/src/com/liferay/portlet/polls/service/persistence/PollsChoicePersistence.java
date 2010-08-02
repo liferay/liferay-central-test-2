@@ -22,7 +22,15 @@ import com.liferay.portlet.polls.model.PollsChoice;
  * The persistence interface for the polls choice service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link PollsChoiceUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface PollsChoicePersistence extends BasePersistence<PollsChoice> {
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> pollsChoices);
 
 	/**
-	* Creates a new polls choice with the primary key.
+	* Creates a new polls choice with the primary key. Does not add the polls choice to the database.
 	*
 	* @param choiceId the primary key for the new polls choice
 	* @return the new polls choice

@@ -21,6 +21,10 @@ package com.liferay.portlet.messageboards.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
+ * <p>
+ * Never reference this interface directly. All methods that expect a message boards message flag model instance should use the {@link MBMessageFlag} interface instead.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
  * @see MBMessageFlagModel
  * @see com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl

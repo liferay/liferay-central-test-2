@@ -22,7 +22,15 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
  * The persistence interface for the d l folder service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link DLFolderUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 		java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> dlFolders);
 
 	/**
-	* Creates a new d l folder with the primary key.
+	* Creates a new d l folder with the primary key. Does not add the d l folder to the database.
 	*
 	* @param folderId the primary key for the new d l folder
 	* @return the new d l folder

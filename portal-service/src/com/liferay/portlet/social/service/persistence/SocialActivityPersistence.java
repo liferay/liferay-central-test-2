@@ -22,7 +22,15 @@ import com.liferay.portlet.social.model.SocialActivity;
  * The persistence interface for the social activity service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link SocialActivityUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface SocialActivityPersistence extends BasePersistence<SocialActivit
 		java.util.List<com.liferay.portlet.social.model.SocialActivity> socialActivities);
 
 	/**
-	* Creates a new social activity with the primary key.
+	* Creates a new social activity with the primary key. Does not add the social activity to the database.
 	*
 	* @param activityId the primary key for the new social activity
 	* @return the new social activity

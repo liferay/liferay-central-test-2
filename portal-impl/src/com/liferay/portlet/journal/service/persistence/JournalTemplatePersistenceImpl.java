@@ -58,10 +58,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the journal template service.
+ * The persistence implementation for the journal template service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link JournalTemplateUtil} instead.
  * </p>
  *
  * <p>
@@ -248,7 +252,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	}
 
 	/**
-	 * Creates a new journal template with the primary key.
+	 * Creates a new journal template with the primary key. Does not add the journal template to the database.
 	 *
 	 * @param id the primary key for the new journal template
 	 * @return the new journal template

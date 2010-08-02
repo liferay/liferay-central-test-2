@@ -20,7 +20,15 @@ import com.liferay.portal.model.UserGroupRole;
  * The persistence interface for the user group role service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link UserGroupRoleUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -46,7 +54,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 		java.util.List<com.liferay.portal.model.UserGroupRole> userGroupRoles);
 
 	/**
-	* Creates a new user group role with the primary key.
+	* Creates a new user group role with the primary key. Does not add the user group role to the database.
 	*
 	* @param userGroupRolePK the primary key for the new user group role
 	* @return the new user group role

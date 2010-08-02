@@ -20,7 +20,15 @@ import com.liferay.portal.model.PluginSetting;
  * The persistence interface for the plugin setting service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link PluginSettingUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -46,7 +54,7 @@ public interface PluginSettingPersistence extends BasePersistence<PluginSetting>
 		java.util.List<com.liferay.portal.model.PluginSetting> pluginSettings);
 
 	/**
-	* Creates a new plugin setting with the primary key.
+	* Creates a new plugin setting with the primary key. Does not add the plugin setting to the database.
 	*
 	* @param pluginSettingId the primary key for the new plugin setting
 	* @return the new plugin setting

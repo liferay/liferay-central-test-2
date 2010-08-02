@@ -20,7 +20,15 @@ import com.liferay.portal.model.Contact;
  * The persistence interface for the contact service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ContactUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -45,7 +53,7 @@ public interface ContactPersistence extends BasePersistence<Contact> {
 		java.util.List<com.liferay.portal.model.Contact> contacts);
 
 	/**
-	* Creates a new contact with the primary key.
+	* Creates a new contact with the primary key. Does not add the contact to the database.
 	*
 	* @param contactId the primary key for the new contact
 	* @return the new contact

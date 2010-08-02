@@ -20,7 +20,15 @@ import com.liferay.portal.model.Role;
  * The persistence interface for the role service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link RoleUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -44,7 +52,7 @@ public interface RolePersistence extends BasePersistence<Role> {
 	public void cacheResult(java.util.List<com.liferay.portal.model.Role> roles);
 
 	/**
-	* Creates a new role with the primary key.
+	* Creates a new role with the primary key. Does not add the role to the database.
 	*
 	* @param roleId the primary key for the new role
 	* @return the new role

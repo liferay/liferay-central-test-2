@@ -56,10 +56,14 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * The persistence for the user group service.
+ * The persistence implementation for the user group service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link UserGroupUtil} instead.
  * </p>
  *
  * <p>
@@ -175,7 +179,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	}
 
 	/**
-	 * Creates a new user group with the primary key.
+	 * Creates a new user group with the primary key. Does not add the user group to the database.
 	 *
 	 * @param userGroupId the primary key for the new user group
 	 * @return the new user group

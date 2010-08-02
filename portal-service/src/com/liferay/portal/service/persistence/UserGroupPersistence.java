@@ -20,7 +20,15 @@ import com.liferay.portal.model.UserGroup;
  * The persistence interface for the user group service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link UserGroupUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -45,7 +53,7 @@ public interface UserGroupPersistence extends BasePersistence<UserGroup> {
 		java.util.List<com.liferay.portal.model.UserGroup> userGroups);
 
 	/**
-	* Creates a new user group with the primary key.
+	* Creates a new user group with the primary key. Does not add the user group to the database.
 	*
 	* @param userGroupId the primary key for the new user group
 	* @return the new user group

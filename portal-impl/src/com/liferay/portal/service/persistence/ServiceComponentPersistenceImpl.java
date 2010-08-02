@@ -48,10 +48,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the service component service.
+ * The persistence implementation for the service component service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ServiceComponentUtil} instead.
  * </p>
  *
  * <p>
@@ -162,7 +166,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	}
 
 	/**
-	 * Creates a new service component with the primary key.
+	 * Creates a new service component with the primary key. Does not add the service component to the database.
 	 *
 	 * @param serviceComponentId the primary key for the new service component
 	 * @return the new service component

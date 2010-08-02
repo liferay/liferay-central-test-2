@@ -58,10 +58,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the bookmarks entry service.
+ * The persistence implementation for the bookmarks entry service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link BookmarksEntryUtil} instead.
  * </p>
  *
  * <p>
@@ -209,7 +213,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 	}
 
 	/**
-	 * Creates a new bookmarks entry with the primary key.
+	 * Creates a new bookmarks entry with the primary key. Does not add the bookmarks entry to the database.
 	 *
 	 * @param entryId the primary key for the new bookmarks entry
 	 * @return the new bookmarks entry

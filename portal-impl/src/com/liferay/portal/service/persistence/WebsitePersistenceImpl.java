@@ -47,10 +47,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the website service.
+ * The persistence implementation for the website service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link WebsiteUtil} instead.
  * </p>
  *
  * <p>
@@ -195,7 +199,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	}
 
 	/**
-	 * Creates a new website with the primary key.
+	 * Creates a new website with the primary key. Does not add the website to the database.
 	 *
 	 * @param websiteId the primary key for the new website
 	 * @return the new website

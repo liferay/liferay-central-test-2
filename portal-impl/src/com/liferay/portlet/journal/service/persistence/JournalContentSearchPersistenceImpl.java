@@ -55,10 +55,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the journal content search service.
+ * The persistence implementation for the journal content search service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link JournalContentSearchUtil} instead.
  * </p>
  *
  * <p>
@@ -264,7 +268,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	}
 
 	/**
-	 * Creates a new journal content search with the primary key.
+	 * Creates a new journal content search with the primary key. Does not add the journal content search to the database.
 	 *
 	 * @param contentSearchId the primary key for the new journal content search
 	 * @return the new journal content search

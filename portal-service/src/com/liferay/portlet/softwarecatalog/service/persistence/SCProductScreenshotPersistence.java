@@ -22,7 +22,15 @@ import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
  * The persistence interface for the s c product screenshot service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link SCProductScreenshotUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface SCProductScreenshotPersistence extends BasePersistence<SCProduc
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> scProductScreenshots);
 
 	/**
-	* Creates a new s c product screenshot with the primary key.
+	* Creates a new s c product screenshot with the primary key. Does not add the s c product screenshot to the database.
 	*
 	* @param productScreenshotId the primary key for the new s c product screenshot
 	* @return the new s c product screenshot

@@ -65,10 +65,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the wiki page service.
+ * The persistence implementation for the wiki page service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link WikiPageUtil} instead.
  * </p>
  *
  * <p>
@@ -448,7 +452,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	}
 
 	/**
-	 * Creates a new wiki page with the primary key.
+	 * Creates a new wiki page with the primary key. Does not add the wiki page to the database.
 	 *
 	 * @param pageId the primary key for the new wiki page
 	 * @return the new wiki page

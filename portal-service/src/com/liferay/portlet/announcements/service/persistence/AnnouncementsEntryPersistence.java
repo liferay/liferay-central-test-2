@@ -22,7 +22,15 @@ import com.liferay.portlet.announcements.model.AnnouncementsEntry;
  * The persistence interface for the announcements entry service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link AnnouncementsEntryUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface AnnouncementsEntryPersistence extends BasePersistence<Announcem
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> announcementsEntries);
 
 	/**
-	* Creates a new announcements entry with the primary key.
+	* Creates a new announcements entry with the primary key. Does not add the announcements entry to the database.
 	*
 	* @param entryId the primary key for the new announcements entry
 	* @return the new announcements entry

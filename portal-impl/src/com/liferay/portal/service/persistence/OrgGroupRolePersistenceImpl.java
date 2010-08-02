@@ -47,10 +47,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the org group role service.
+ * The persistence implementation for the org group role service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link OrgGroupRoleUtil} instead.
  * </p>
  *
  * <p>
@@ -151,7 +155,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 	}
 
 	/**
-	 * Creates a new org group role with the primary key.
+	 * Creates a new org group role with the primary key. Does not add the org group role to the database.
 	 *
 	 * @param orgGroupRolePK the primary key for the new org group role
 	 * @return the new org group role

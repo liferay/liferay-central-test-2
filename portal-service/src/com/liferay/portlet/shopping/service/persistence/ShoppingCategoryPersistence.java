@@ -22,7 +22,15 @@ import com.liferay.portlet.shopping.model.ShoppingCategory;
  * The persistence interface for the shopping category service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ShoppingCategoryUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> shoppingCategories);
 
 	/**
-	* Creates a new shopping category with the primary key.
+	* Creates a new shopping category with the primary key. Does not add the shopping category to the database.
 	*
 	* @param categoryId the primary key for the new shopping category
 	* @return the new shopping category

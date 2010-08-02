@@ -22,7 +22,15 @@ import com.liferay.portlet.messageboards.model.MBStatsUser;
  * The persistence interface for the message boards stats user service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link MBStatsUserUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface MBStatsUserPersistence extends BasePersistence<MBStatsUser> {
 		java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> mbStatsUsers);
 
 	/**
-	* Creates a new message boards stats user with the primary key.
+	* Creates a new message boards stats user with the primary key. Does not add the message boards stats user to the database.
 	*
 	* @param statsUserId the primary key for the new message boards stats user
 	* @return the new message boards stats user

@@ -47,10 +47,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the org group permission service.
+ * The persistence implementation for the org group permission service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link OrgGroupPermissionUtil} instead.
  * </p>
  *
  * <p>
@@ -154,7 +158,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	}
 
 	/**
-	 * Creates a new org group permission with the primary key.
+	 * Creates a new org group permission with the primary key. Does not add the org group permission to the database.
 	 *
 	 * @param orgGroupPermissionPK the primary key for the new org group permission
 	 * @return the new org group permission

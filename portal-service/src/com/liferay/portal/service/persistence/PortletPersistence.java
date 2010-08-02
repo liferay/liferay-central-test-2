@@ -20,7 +20,15 @@ import com.liferay.portal.model.Portlet;
  * The persistence interface for the portlet service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link PortletUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -45,7 +53,7 @@ public interface PortletPersistence extends BasePersistence<Portlet> {
 		java.util.List<com.liferay.portal.model.Portlet> portlets);
 
 	/**
-	* Creates a new portlet with the primary key.
+	* Creates a new portlet with the primary key. Does not add the portlet to the database.
 	*
 	* @param id the primary key for the new portlet
 	* @return the new portlet

@@ -20,7 +20,15 @@ import com.liferay.portal.model.Image;
  * The persistence interface for the image service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ImageUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -45,7 +53,7 @@ public interface ImagePersistence extends BasePersistence<Image> {
 		java.util.List<com.liferay.portal.model.Image> images);
 
 	/**
-	* Creates a new image with the primary key.
+	* Creates a new image with the primary key. Does not add the image to the database.
 	*
 	* @param imageId the primary key for the new image
 	* @return the new image

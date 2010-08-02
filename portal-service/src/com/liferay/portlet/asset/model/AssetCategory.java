@@ -21,6 +21,10 @@ package com.liferay.portlet.asset.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.asset.model.impl.AssetCategoryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
+ * <p>
+ * Never reference this interface directly. All methods that expect a asset category model instance should use the {@link AssetCategory} interface instead.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
  * @see AssetCategoryModel
  * @see com.liferay.portlet.asset.model.impl.AssetCategoryImpl

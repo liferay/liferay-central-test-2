@@ -20,7 +20,15 @@ import com.liferay.portal.model.Phone;
  * The persistence interface for the phone service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link PhoneUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -45,7 +53,7 @@ public interface PhonePersistence extends BasePersistence<Phone> {
 		java.util.List<com.liferay.portal.model.Phone> phones);
 
 	/**
-	* Creates a new phone with the primary key.
+	* Creates a new phone with the primary key. Does not add the phone to the database.
 	*
 	* @param phoneId the primary key for the new phone
 	* @return the new phone

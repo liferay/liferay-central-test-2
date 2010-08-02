@@ -22,7 +22,15 @@ import com.liferay.portlet.blogs.model.BlogsStatsUser;
  * The persistence interface for the blogs stats user service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link BlogsStatsUserUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface BlogsStatsUserPersistence extends BasePersistence<BlogsStatsUse
 		java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> blogsStatsUsers);
 
 	/**
-	* Creates a new blogs stats user with the primary key.
+	* Creates a new blogs stats user with the primary key. Does not add the blogs stats user to the database.
 	*
 	* @param statsUserId the primary key for the new blogs stats user
 	* @return the new blogs stats user

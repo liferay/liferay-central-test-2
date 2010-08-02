@@ -51,10 +51,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the expando row service.
+ * The persistence implementation for the expando row service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ExpandoRowUtil} instead.
  * </p>
  *
  * <p>
@@ -162,7 +166,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 	}
 
 	/**
-	 * Creates a new expando row with the primary key.
+	 * Creates a new expando row with the primary key. Does not add the expando row to the database.
 	 *
 	 * @param rowId the primary key for the new expando row
 	 * @return the new expando row

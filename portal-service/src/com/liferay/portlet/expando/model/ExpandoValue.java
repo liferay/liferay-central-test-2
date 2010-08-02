@@ -21,6 +21,10 @@ package com.liferay.portlet.expando.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.expando.model.impl.ExpandoValueImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
+ * <p>
+ * Never reference this interface directly. All methods that expect a expando value model instance should use the {@link ExpandoValue} interface instead.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
  * @see ExpandoValueModel
  * @see com.liferay.portlet.expando.model.impl.ExpandoValueImpl

@@ -47,10 +47,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the subscription service.
+ * The persistence implementation for the subscription service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link SubscriptionUtil} instead.
  * </p>
  *
  * <p>
@@ -197,7 +201,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	/**
-	 * Creates a new subscription with the primary key.
+	 * Creates a new subscription with the primary key. Does not add the subscription to the database.
 	 *
 	 * @param subscriptionId the primary key for the new subscription
 	 * @return the new subscription

@@ -47,10 +47,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the email address service.
+ * The persistence implementation for the email address service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link EmailAddressUtil} instead.
  * </p>
  *
  * <p>
@@ -196,7 +200,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	}
 
 	/**
-	 * Creates a new email address with the primary key.
+	 * Creates a new email address with the primary key. Does not add the email address to the database.
 	 *
 	 * @param emailAddressId the primary key for the new email address
 	 * @return the new email address

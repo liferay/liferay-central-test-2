@@ -51,10 +51,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the announcements flag service.
+ * The persistence implementation for the announcements flag service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link AnnouncementsFlagUtil} instead.
  * </p>
  *
  * <p>
@@ -173,7 +177,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	}
 
 	/**
-	 * Creates a new announcements flag with the primary key.
+	 * Creates a new announcements flag with the primary key. Does not add the announcements flag to the database.
 	 *
 	 * @param flagId the primary key for the new announcements flag
 	 * @return the new announcements flag

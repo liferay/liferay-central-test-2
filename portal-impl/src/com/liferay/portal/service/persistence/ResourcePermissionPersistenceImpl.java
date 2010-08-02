@@ -48,10 +48,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the resource permission service.
+ * The persistence implementation for the resource permission service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ResourcePermissionUtil} instead.
  * </p>
  *
  * <p>
@@ -227,7 +231,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	/**
-	 * Creates a new resource permission with the primary key.
+	 * Creates a new resource permission with the primary key. Does not add the resource permission to the database.
 	 *
 	 * @param resourcePermissionId the primary key for the new resource permission
 	 * @return the new resource permission

@@ -21,6 +21,10 @@ package com.liferay.portlet.social.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.social.model.impl.SocialEquityAssetEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
+ * <p>
+ * Never reference this interface directly. All methods that expect a social equity asset entry model instance should use the {@link SocialEquityAssetEntry} interface instead.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
  * @see SocialEquityAssetEntryModel
  * @see com.liferay.portlet.social.model.impl.SocialEquityAssetEntryImpl

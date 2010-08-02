@@ -22,7 +22,15 @@ import com.liferay.portlet.shopping.model.ShoppingCoupon;
  * The persistence interface for the shopping coupon service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ShoppingCouponUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface ShoppingCouponPersistence extends BasePersistence<ShoppingCoupo
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> shoppingCoupons);
 
 	/**
-	* Creates a new shopping coupon with the primary key.
+	* Creates a new shopping coupon with the primary key. Does not add the shopping coupon to the database.
 	*
 	* @param couponId the primary key for the new shopping coupon
 	* @return the new shopping coupon

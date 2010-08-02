@@ -20,7 +20,15 @@ import com.liferay.portal.model.PasswordPolicy;
  * The persistence interface for the password policy service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link PasswordPolicyUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -46,7 +54,7 @@ public interface PasswordPolicyPersistence extends BasePersistence<PasswordPolic
 		java.util.List<com.liferay.portal.model.PasswordPolicy> passwordPolicies);
 
 	/**
-	* Creates a new password policy with the primary key.
+	* Creates a new password policy with the primary key. Does not add the password policy to the database.
 	*
 	* @param passwordPolicyId the primary key for the new password policy
 	* @return the new password policy

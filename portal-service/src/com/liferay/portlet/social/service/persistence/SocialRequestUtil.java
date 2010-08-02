@@ -25,10 +25,14 @@ import com.liferay.portlet.social.model.SocialRequest;
 import java.util.List;
 
 /**
- * The persistence utility for the social request service.
+ * The persistence utility for the social request service. This utility wraps {@link SocialRequestPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -132,7 +136,7 @@ public class SocialRequestUtil {
 	}
 
 	/**
-	* Creates a new social request with the primary key.
+	* Creates a new social request with the primary key. Does not add the social request to the database.
 	*
 	* @param requestId the primary key for the new social request
 	* @return the new social request

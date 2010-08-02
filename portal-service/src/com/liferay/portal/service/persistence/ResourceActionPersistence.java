@@ -20,7 +20,15 @@ import com.liferay.portal.model.ResourceAction;
  * The persistence interface for the resource action service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ResourceActionUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -46,7 +54,7 @@ public interface ResourceActionPersistence extends BasePersistence<ResourceActio
 		java.util.List<com.liferay.portal.model.ResourceAction> resourceActions);
 
 	/**
-	* Creates a new resource action with the primary key.
+	* Creates a new resource action with the primary key. Does not add the resource action to the database.
 	*
 	* @param resourceActionId the primary key for the new resource action
 	* @return the new resource action

@@ -20,7 +20,15 @@ import com.liferay.portal.model.Release;
  * The persistence interface for the release service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ReleaseUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -45,7 +53,7 @@ public interface ReleasePersistence extends BasePersistence<Release> {
 		java.util.List<com.liferay.portal.model.Release> releases);
 
 	/**
-	* Creates a new release with the primary key.
+	* Creates a new release with the primary key. Does not add the release to the database.
 	*
 	* @param releaseId the primary key for the new release
 	* @return the new release

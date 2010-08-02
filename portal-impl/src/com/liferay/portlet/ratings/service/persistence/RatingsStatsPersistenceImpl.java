@@ -51,10 +51,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the ratings stats service.
+ * The persistence implementation for the ratings stats service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link RatingsStatsUtil} instead.
  * </p>
  *
  * <p>
@@ -151,7 +155,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	}
 
 	/**
-	 * Creates a new ratings stats with the primary key.
+	 * Creates a new ratings stats with the primary key. Does not add the ratings stats to the database.
 	 *
 	 * @param statsId the primary key for the new ratings stats
 	 * @return the new ratings stats

@@ -49,10 +49,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the social equity history service.
+ * The persistence implementation for the social equity history service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link SocialEquityHistoryUtil} instead.
  * </p>
  *
  * <p>
@@ -130,7 +134,7 @@ public class SocialEquityHistoryPersistenceImpl extends BasePersistenceImpl<Soci
 	}
 
 	/**
-	 * Creates a new social equity history with the primary key.
+	 * Creates a new social equity history with the primary key. Does not add the social equity history to the database.
 	 *
 	 * @param equityHistoryId the primary key for the new social equity history
 	 * @return the new social equity history

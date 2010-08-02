@@ -20,7 +20,15 @@ import com.liferay.portal.model.Region;
  * The persistence interface for the region service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link RegionUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -45,7 +53,7 @@ public interface RegionPersistence extends BasePersistence<Region> {
 		java.util.List<com.liferay.portal.model.Region> regions);
 
 	/**
-	* Creates a new region with the primary key.
+	* Creates a new region with the primary key. Does not add the region to the database.
 	*
 	* @param regionId the primary key for the new region
 	* @return the new region

@@ -25,10 +25,14 @@ import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import java.util.List;
 
 /**
- * The persistence utility for the announcements delivery service.
+ * The persistence utility for the announcements delivery service. This utility wraps {@link AnnouncementsDeliveryPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -135,7 +139,7 @@ public class AnnouncementsDeliveryUtil {
 	}
 
 	/**
-	* Creates a new announcements delivery with the primary key.
+	* Creates a new announcements delivery with the primary key. Does not add the announcements delivery to the database.
 	*
 	* @param deliveryId the primary key for the new announcements delivery
 	* @return the new announcements delivery

@@ -22,7 +22,15 @@ import com.liferay.portlet.asset.model.AssetTag;
  * The persistence interface for the asset tag service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link AssetTagUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -47,7 +55,7 @@ public interface AssetTagPersistence extends BasePersistence<AssetTag> {
 		java.util.List<com.liferay.portlet.asset.model.AssetTag> assetTags);
 
 	/**
-	* Creates a new asset tag with the primary key.
+	* Creates a new asset tag with the primary key. Does not add the asset tag to the database.
 	*
 	* @param tagId the primary key for the new asset tag
 	* @return the new asset tag

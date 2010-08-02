@@ -22,7 +22,15 @@ import com.liferay.portlet.shopping.model.ShoppingItemPrice;
  * The persistence interface for the shopping item price service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ShoppingItemPriceUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface ShoppingItemPricePersistence extends BasePersistence<ShoppingIt
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> shoppingItemPrices);
 
 	/**
-	* Creates a new shopping item price with the primary key.
+	* Creates a new shopping item price with the primary key. Does not add the shopping item price to the database.
 	*
 	* @param itemPriceId the primary key for the new shopping item price
 	* @return the new shopping item price

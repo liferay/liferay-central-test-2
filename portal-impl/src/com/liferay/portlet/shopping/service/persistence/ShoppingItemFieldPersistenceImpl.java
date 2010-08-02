@@ -51,10 +51,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the shopping item field service.
+ * The persistence implementation for the shopping item field service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ShoppingItemFieldUtil} instead.
  * </p>
  *
  * <p>
@@ -145,7 +149,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 	}
 
 	/**
-	 * Creates a new shopping item field with the primary key.
+	 * Creates a new shopping item field with the primary key. Does not add the shopping item field to the database.
 	 *
 	 * @param itemFieldId the primary key for the new shopping item field
 	 * @return the new shopping item field

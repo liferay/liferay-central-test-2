@@ -53,10 +53,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the social equity setting service.
+ * The persistence implementation for the social equity setting service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link SocialEquitySettingUtil} instead.
  * </p>
  *
  * <p>
@@ -183,7 +187,7 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 	}
 
 	/**
-	 * Creates a new social equity setting with the primary key.
+	 * Creates a new social equity setting with the primary key. Does not add the social equity setting to the database.
 	 *
 	 * @param equitySettingId the primary key for the new social equity setting
 	 * @return the new social equity setting

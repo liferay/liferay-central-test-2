@@ -22,7 +22,15 @@ import com.liferay.portlet.messageboards.model.MBBan;
  * The persistence interface for the message boards ban service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link MBBanUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -47,7 +55,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 		java.util.List<com.liferay.portlet.messageboards.model.MBBan> mbBans);
 
 	/**
-	* Creates a new message boards ban with the primary key.
+	* Creates a new message boards ban with the primary key. Does not add the message boards ban to the database.
 	*
 	* @param banId the primary key for the new message boards ban
 	* @return the new message boards ban

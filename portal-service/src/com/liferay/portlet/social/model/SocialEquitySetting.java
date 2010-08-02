@@ -21,6 +21,10 @@ package com.liferay.portlet.social.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.social.model.impl.SocialEquitySettingImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
+ * <p>
+ * Never reference this interface directly. All methods that expect a social equity setting model instance should use the {@link SocialEquitySetting} interface instead.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
  * @see SocialEquitySettingModel
  * @see com.liferay.portlet.social.model.impl.SocialEquitySettingImpl

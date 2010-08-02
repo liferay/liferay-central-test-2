@@ -21,6 +21,10 @@ package com.liferay.portlet.messageboards.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.messageboards.model.impl.MBCategoryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
+ * <p>
+ * Never reference this interface directly. All methods that expect a message boards category model instance should use the {@link MBCategory} interface instead.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
  * @see MBCategoryModel
  * @see com.liferay.portlet.messageboards.model.impl.MBCategoryImpl

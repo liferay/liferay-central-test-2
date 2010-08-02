@@ -48,10 +48,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the password policy service.
+ * The persistence implementation for the password policy service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link PasswordPolicyUtil} instead.
  * </p>
  *
  * <p>
@@ -171,7 +175,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 	}
 
 	/**
-	 * Creates a new password policy with the primary key.
+	 * Creates a new password policy with the primary key. Does not add the password policy to the database.
 	 *
 	 * @param passwordPolicyId the primary key for the new password policy
 	 * @return the new password policy

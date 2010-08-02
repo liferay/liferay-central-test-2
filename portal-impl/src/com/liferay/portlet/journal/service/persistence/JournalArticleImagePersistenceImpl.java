@@ -53,10 +53,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the journal article image service.
+ * The persistence implementation for the journal article image service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link JournalArticleImageUtil} instead.
  * </p>
  *
  * <p>
@@ -221,7 +225,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	}
 
 	/**
-	 * Creates a new journal article image with the primary key.
+	 * Creates a new journal article image with the primary key. Does not add the journal article image to the database.
 	 *
 	 * @param articleImageId the primary key for the new journal article image
 	 * @return the new journal article image

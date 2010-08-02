@@ -22,7 +22,15 @@ import com.liferay.portlet.messageboards.model.MBDiscussion;
  * The persistence interface for the message boards discussion service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link MBDiscussionUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface MBDiscussionPersistence extends BasePersistence<MBDiscussion> {
 		java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> mbDiscussions);
 
 	/**
-	* Creates a new message boards discussion with the primary key.
+	* Creates a new message boards discussion with the primary key. Does not add the message boards discussion to the database.
 	*
 	* @param discussionId the primary key for the new message boards discussion
 	* @return the new message boards discussion

@@ -22,7 +22,15 @@ import com.liferay.portlet.tasks.model.TasksProposal;
  * The persistence interface for the tasks proposal service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link TasksProposalUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface TasksProposalPersistence extends BasePersistence<TasksProposal>
 		java.util.List<com.liferay.portlet.tasks.model.TasksProposal> tasksProposals);
 
 	/**
-	* Creates a new tasks proposal with the primary key.
+	* Creates a new tasks proposal with the primary key. Does not add the tasks proposal to the database.
 	*
 	* @param proposalId the primary key for the new tasks proposal
 	* @return the new tasks proposal

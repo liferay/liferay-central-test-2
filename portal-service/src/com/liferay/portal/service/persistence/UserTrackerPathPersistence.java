@@ -20,7 +20,15 @@ import com.liferay.portal.model.UserTrackerPath;
  * The persistence interface for the user tracker path service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link UserTrackerPathUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -46,7 +54,7 @@ public interface UserTrackerPathPersistence extends BasePersistence<UserTrackerP
 		java.util.List<com.liferay.portal.model.UserTrackerPath> userTrackerPaths);
 
 	/**
-	* Creates a new user tracker path with the primary key.
+	* Creates a new user tracker path with the primary key. Does not add the user tracker path to the database.
 	*
 	* @param userTrackerPathId the primary key for the new user tracker path
 	* @return the new user tracker path

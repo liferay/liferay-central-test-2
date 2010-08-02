@@ -22,7 +22,15 @@ import com.liferay.portlet.documentlibrary.model.DLFileVersion;
  * The persistence interface for the d l file version service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link DLFileVersionUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> dlFileVersions);
 
 	/**
-	* Creates a new d l file version with the primary key.
+	* Creates a new d l file version with the primary key. Does not add the d l file version to the database.
 	*
 	* @param fileVersionId the primary key for the new d l file version
 	* @return the new d l file version

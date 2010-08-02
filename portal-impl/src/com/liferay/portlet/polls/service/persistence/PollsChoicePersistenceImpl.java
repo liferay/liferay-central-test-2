@@ -53,10 +53,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the polls choice service.
+ * The persistence implementation for the polls choice service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link PollsChoiceUtil} instead.
  * </p>
  *
  * <p>
@@ -178,7 +182,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 	}
 
 	/**
-	 * Creates a new polls choice with the primary key.
+	 * Creates a new polls choice with the primary key. Does not add the polls choice to the database.
 	 *
 	 * @param choiceId the primary key for the new polls choice
 	 * @return the new polls choice

@@ -22,7 +22,15 @@ import com.liferay.portlet.social.model.SocialEquityUser;
  * The persistence interface for the social equity user service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link SocialEquityUserUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface SocialEquityUserPersistence extends BasePersistence<SocialEquit
 		java.util.List<com.liferay.portlet.social.model.SocialEquityUser> socialEquityUsers);
 
 	/**
-	* Creates a new social equity user with the primary key.
+	* Creates a new social equity user with the primary key. Does not add the social equity user to the database.
 	*
 	* @param equityUserId the primary key for the new social equity user
 	* @return the new social equity user

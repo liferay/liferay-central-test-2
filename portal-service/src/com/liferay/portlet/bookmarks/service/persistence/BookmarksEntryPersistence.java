@@ -22,7 +22,15 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
  * The persistence interface for the bookmarks entry service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link BookmarksEntryUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 		java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> bookmarksEntries);
 
 	/**
-	* Creates a new bookmarks entry with the primary key.
+	* Creates a new bookmarks entry with the primary key. Does not add the bookmarks entry to the database.
 	*
 	* @param entryId the primary key for the new bookmarks entry
 	* @return the new bookmarks entry

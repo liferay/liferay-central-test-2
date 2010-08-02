@@ -22,7 +22,15 @@ import com.liferay.portlet.announcements.model.AnnouncementsFlag;
  * The persistence interface for the announcements flag service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link AnnouncementsFlagUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface AnnouncementsFlagPersistence extends BasePersistence<Announceme
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> announcementsFlags);
 
 	/**
-	* Creates a new announcements flag with the primary key.
+	* Creates a new announcements flag with the primary key. Does not add the announcements flag to the database.
 	*
 	* @param flagId the primary key for the new announcements flag
 	* @return the new announcements flag

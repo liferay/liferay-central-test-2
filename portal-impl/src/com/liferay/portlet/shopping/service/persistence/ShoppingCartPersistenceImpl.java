@@ -51,10 +51,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the shopping cart service.
+ * The persistence implementation for the shopping cart service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ShoppingCartUtil} instead.
  * </p>
  *
  * <p>
@@ -175,7 +179,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	}
 
 	/**
-	 * Creates a new shopping cart with the primary key.
+	 * Creates a new shopping cart with the primary key. Does not add the shopping cart to the database.
 	 *
 	 * @param cartId the primary key for the new shopping cart
 	 * @return the new shopping cart

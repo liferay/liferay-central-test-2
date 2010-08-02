@@ -58,10 +58,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the announcements entry service.
+ * The persistence implementation for the announcements entry service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link AnnouncementsEntryUtil} instead.
  * </p>
  *
  * <p>
@@ -195,7 +199,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 	}
 
 	/**
-	 * Creates a new announcements entry with the primary key.
+	 * Creates a new announcements entry with the primary key. Does not add the announcements entry to the database.
 	 *
 	 * @param entryId the primary key for the new announcements entry
 	 * @return the new announcements entry

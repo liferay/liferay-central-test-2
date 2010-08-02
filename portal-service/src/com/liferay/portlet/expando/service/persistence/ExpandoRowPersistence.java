@@ -22,7 +22,15 @@ import com.liferay.portlet.expando.model.ExpandoRow;
  * The persistence interface for the expando row service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ExpandoRowUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 		java.util.List<com.liferay.portlet.expando.model.ExpandoRow> expandoRows);
 
 	/**
-	* Creates a new expando row with the primary key.
+	* Creates a new expando row with the primary key. Does not add the expando row to the database.
 	*
 	* @param rowId the primary key for the new expando row
 	* @return the new expando row

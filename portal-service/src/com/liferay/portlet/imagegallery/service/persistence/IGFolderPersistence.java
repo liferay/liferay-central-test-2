@@ -22,7 +22,15 @@ import com.liferay.portlet.imagegallery.model.IGFolder;
  * The persistence interface for the i g folder service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link IGFolderUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface IGFolderPersistence extends BasePersistence<IGFolder> {
 		java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> igFolders);
 
 	/**
-	* Creates a new i g folder with the primary key.
+	* Creates a new i g folder with the primary key. Does not add the i g folder to the database.
 	*
 	* @param folderId the primary key for the new i g folder
 	* @return the new i g folder

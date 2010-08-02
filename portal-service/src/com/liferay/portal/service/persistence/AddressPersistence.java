@@ -20,7 +20,15 @@ import com.liferay.portal.model.Address;
  * The persistence interface for the address service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link AddressUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -45,7 +53,7 @@ public interface AddressPersistence extends BasePersistence<Address> {
 		java.util.List<com.liferay.portal.model.Address> addresses);
 
 	/**
-	* Creates a new address with the primary key.
+	* Creates a new address with the primary key. Does not add the address to the database.
 	*
 	* @param addressId the primary key for the new address
 	* @return the new address

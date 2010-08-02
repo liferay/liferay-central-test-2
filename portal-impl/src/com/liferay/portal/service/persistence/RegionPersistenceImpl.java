@@ -47,10 +47,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the region service.
+ * The persistence implementation for the region service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link RegionUtil} instead.
  * </p>
  *
  * <p>
@@ -163,7 +167,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	}
 
 	/**
-	 * Creates a new region with the primary key.
+	 * Creates a new region with the primary key. Does not add the region to the database.
 	 *
 	 * @param regionId the primary key for the new region
 	 * @return the new region

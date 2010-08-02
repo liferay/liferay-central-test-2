@@ -79,10 +79,14 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * The persistence for the group service.
+ * The persistence implementation for the group service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link GroupUtil} instead.
  * </p>
  *
  * <p>
@@ -306,7 +310,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	}
 
 	/**
-	 * Creates a new group with the primary key.
+	 * Creates a new group with the primary key. Does not add the group to the database.
 	 *
 	 * @param groupId the primary key for the new group
 	 * @return the new group

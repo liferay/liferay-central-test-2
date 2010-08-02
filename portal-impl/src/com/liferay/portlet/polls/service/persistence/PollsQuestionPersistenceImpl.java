@@ -55,10 +55,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the polls question service.
+ * The persistence implementation for the polls question service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link PollsQuestionUtil} instead.
  * </p>
  *
  * <p>
@@ -180,7 +184,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	}
 
 	/**
-	 * Creates a new polls question with the primary key.
+	 * Creates a new polls question with the primary key. Does not add the polls question to the database.
 	 *
 	 * @param questionId the primary key for the new polls question
 	 * @return the new polls question

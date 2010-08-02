@@ -22,7 +22,15 @@ import com.liferay.portlet.journal.model.JournalArticleResource;
  * The persistence interface for the journal article resource service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link JournalArticleResourceUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface JournalArticleResourcePersistence extends BasePersistence<Journ
 		java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> journalArticleResources);
 
 	/**
-	* Creates a new journal article resource with the primary key.
+	* Creates a new journal article resource with the primary key. Does not add the journal article resource to the database.
 	*
 	* @param resourcePrimKey the primary key for the new journal article resource
 	* @return the new journal article resource

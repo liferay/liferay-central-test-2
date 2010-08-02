@@ -21,6 +21,10 @@ package com.liferay.portlet.tasks.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.tasks.model.impl.TasksProposalImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
+ * <p>
+ * Never reference this interface directly. All methods that expect a tasks proposal model instance should use the {@link TasksProposal} interface instead.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
  * @see TasksProposalModel
  * @see com.liferay.portlet.tasks.model.impl.TasksProposalImpl

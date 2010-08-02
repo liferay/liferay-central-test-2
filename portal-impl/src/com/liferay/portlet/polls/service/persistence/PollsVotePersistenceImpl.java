@@ -51,10 +51,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the polls vote service.
+ * The persistence implementation for the polls vote service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link PollsVoteUtil} instead.
  * </p>
  *
  * <p>
@@ -174,7 +178,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 	}
 
 	/**
-	 * Creates a new polls vote with the primary key.
+	 * Creates a new polls vote with the primary key. Does not add the polls vote to the database.
 	 *
 	 * @param voteId the primary key for the new polls vote
 	 * @return the new polls vote

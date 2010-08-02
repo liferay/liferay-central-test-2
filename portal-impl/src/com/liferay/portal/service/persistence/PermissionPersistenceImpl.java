@@ -56,10 +56,14 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * The persistence for the permission service.
+ * The persistence implementation for the permission service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link PermissionUtil} instead.
  * </p>
  *
  * <p>
@@ -165,7 +169,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	}
 
 	/**
-	 * Creates a new permission with the primary key.
+	 * Creates a new permission with the primary key. Does not add the permission to the database.
 	 *
 	 * @param permissionId the primary key for the new permission
 	 * @return the new permission

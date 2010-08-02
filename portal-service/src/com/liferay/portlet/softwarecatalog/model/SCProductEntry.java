@@ -21,6 +21,10 @@ package com.liferay.portlet.softwarecatalog.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
+ * <p>
+ * Never reference this interface directly. All methods that expect a s c product entry model instance should use the {@link SCProductEntry} interface instead.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
  * @see SCProductEntryModel
  * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl

@@ -20,7 +20,15 @@ import com.liferay.portal.model.LayoutSetPrototype;
  * The persistence interface for the layout set prototype service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link LayoutSetPrototypeUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -46,7 +54,7 @@ public interface LayoutSetPrototypePersistence extends BasePersistence<LayoutSet
 		java.util.List<com.liferay.portal.model.LayoutSetPrototype> layoutSetPrototypes);
 
 	/**
-	* Creates a new layout set prototype with the primary key.
+	* Creates a new layout set prototype with the primary key. Does not add the layout set prototype to the database.
 	*
 	* @param layoutSetPrototypeId the primary key for the new layout set prototype
 	* @return the new layout set prototype

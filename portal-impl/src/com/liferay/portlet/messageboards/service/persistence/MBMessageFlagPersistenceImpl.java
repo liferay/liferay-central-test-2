@@ -51,10 +51,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the message boards message flag service.
+ * The persistence implementation for the message boards message flag service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link MBMessageFlagUtil} instead.
  * </p>
  *
  * <p>
@@ -242,7 +246,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	}
 
 	/**
-	 * Creates a new message boards message flag with the primary key.
+	 * Creates a new message boards message flag with the primary key. Does not add the message boards message flag to the database.
 	 *
 	 * @param messageFlagId the primary key for the new message boards message flag
 	 * @return the new message boards message flag

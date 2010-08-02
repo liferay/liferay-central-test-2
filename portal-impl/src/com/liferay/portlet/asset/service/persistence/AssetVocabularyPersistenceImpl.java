@@ -56,10 +56,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the asset vocabulary service.
+ * The persistence implementation for the asset vocabulary service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link AssetVocabularyUtil} instead.
  * </p>
  *
  * <p>
@@ -218,7 +222,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	}
 
 	/**
-	 * Creates a new asset vocabulary with the primary key.
+	 * Creates a new asset vocabulary with the primary key. Does not add the asset vocabulary to the database.
 	 *
 	 * @param vocabularyId the primary key for the new asset vocabulary
 	 * @return the new asset vocabulary

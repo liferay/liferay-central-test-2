@@ -22,7 +22,15 @@ import com.liferay.portlet.expando.model.ExpandoValue;
  * The persistence interface for the expando value service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ExpandoValueUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 		java.util.List<com.liferay.portlet.expando.model.ExpandoValue> expandoValues);
 
 	/**
-	* Creates a new expando value with the primary key.
+	* Creates a new expando value with the primary key. Does not add the expando value to the database.
 	*
 	* @param valueId the primary key for the new expando value
 	* @return the new expando value

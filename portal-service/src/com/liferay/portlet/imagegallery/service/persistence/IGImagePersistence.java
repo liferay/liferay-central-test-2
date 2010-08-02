@@ -22,7 +22,15 @@ import com.liferay.portlet.imagegallery.model.IGImage;
  * The persistence interface for the i g image service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link IGImageUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface IGImagePersistence extends BasePersistence<IGImage> {
 		java.util.List<com.liferay.portlet.imagegallery.model.IGImage> igImages);
 
 	/**
-	* Creates a new i g image with the primary key.
+	* Creates a new i g image with the primary key. Does not add the i g image to the database.
 	*
 	* @param imageId the primary key for the new i g image
 	* @return the new i g image

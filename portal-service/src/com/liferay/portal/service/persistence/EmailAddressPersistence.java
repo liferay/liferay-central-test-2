@@ -20,7 +20,15 @@ import com.liferay.portal.model.EmailAddress;
  * The persistence interface for the email address service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link EmailAddressUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -45,7 +53,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses);
 
 	/**
-	* Creates a new email address with the primary key.
+	* Creates a new email address with the primary key. Does not add the email address to the database.
 	*
 	* @param emailAddressId the primary key for the new email address
 	* @return the new email address

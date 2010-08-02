@@ -62,10 +62,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the cal event service.
+ * The persistence implementation for the cal event service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link CalEventUtil} instead.
  * </p>
  *
  * <p>
@@ -230,7 +234,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	/**
-	 * Creates a new cal event with the primary key.
+	 * Creates a new cal event with the primary key. Does not add the cal event to the database.
 	 *
 	 * @param eventId the primary key for the new cal event
 	 * @return the new cal event

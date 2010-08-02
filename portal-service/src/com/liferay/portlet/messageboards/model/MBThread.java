@@ -21,6 +21,10 @@ package com.liferay.portlet.messageboards.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.messageboards.model.impl.MBThreadImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
+ * <p>
+ * Never reference this interface directly. All methods that expect a message boards thread model instance should use the {@link MBThread} interface instead.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
  * @see MBThreadModel
  * @see com.liferay.portlet.messageboards.model.impl.MBThreadImpl

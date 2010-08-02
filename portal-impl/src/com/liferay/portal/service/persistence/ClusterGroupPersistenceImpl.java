@@ -45,10 +45,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the cluster group service.
+ * The persistence implementation for the cluster group service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ClusterGroupUtil} instead.
  * </p>
  *
  * <p>
@@ -125,7 +129,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 	}
 
 	/**
-	 * Creates a new cluster group with the primary key.
+	 * Creates a new cluster group with the primary key. Does not add the cluster group to the database.
 	 *
 	 * @param clusterGroupId the primary key for the new cluster group
 	 * @return the new cluster group

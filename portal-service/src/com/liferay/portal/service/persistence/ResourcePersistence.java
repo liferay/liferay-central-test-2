@@ -20,7 +20,15 @@ import com.liferay.portal.model.Resource;
  * The persistence interface for the resource service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ResourceUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -45,7 +53,7 @@ public interface ResourcePersistence extends BasePersistence<Resource> {
 		java.util.List<com.liferay.portal.model.Resource> resources);
 
 	/**
-	* Creates a new resource with the primary key.
+	* Creates a new resource with the primary key. Does not add the resource to the database.
 	*
 	* @param resourceId the primary key for the new resource
 	* @return the new resource

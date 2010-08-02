@@ -20,7 +20,15 @@ import com.liferay.portal.model.ListType;
  * The persistence interface for the list type service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ListTypeUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -45,7 +53,7 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 		java.util.List<com.liferay.portal.model.ListType> listTypes);
 
 	/**
-	* Creates a new list type with the primary key.
+	* Creates a new list type with the primary key. Does not add the list type to the database.
 	*
 	* @param listTypeId the primary key for the new list type
 	* @return the new list type

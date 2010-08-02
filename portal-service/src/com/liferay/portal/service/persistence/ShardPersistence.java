@@ -20,7 +20,15 @@ import com.liferay.portal.model.Shard;
  * The persistence interface for the shard service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ShardUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -45,7 +53,7 @@ public interface ShardPersistence extends BasePersistence<Shard> {
 		java.util.List<com.liferay.portal.model.Shard> shards);
 
 	/**
-	* Creates a new shard with the primary key.
+	* Creates a new shard with the primary key. Does not add the shard to the database.
 	*
 	* @param shardId the primary key for the new shard
 	* @return the new shard

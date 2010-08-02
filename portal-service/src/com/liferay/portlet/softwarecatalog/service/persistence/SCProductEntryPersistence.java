@@ -22,7 +22,15 @@ import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
  * The persistence interface for the s c product entry service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link SCProductEntryUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface SCProductEntryPersistence extends BasePersistence<SCProductEntr
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries);
 
 	/**
-	* Creates a new s c product entry with the primary key.
+	* Creates a new s c product entry with the primary key. Does not add the s c product entry to the database.
 	*
 	* @param productEntryId the primary key for the new s c product entry
 	* @return the new s c product entry

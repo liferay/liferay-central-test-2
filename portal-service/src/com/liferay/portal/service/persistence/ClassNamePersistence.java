@@ -20,7 +20,15 @@ import com.liferay.portal.model.ClassName;
  * The persistence interface for the class name service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ClassNameUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -45,7 +53,7 @@ public interface ClassNamePersistence extends BasePersistence<ClassName> {
 		java.util.List<com.liferay.portal.model.ClassName> classNames);
 
 	/**
-	* Creates a new class name with the primary key.
+	* Creates a new class name with the primary key. Does not add the class name to the database.
 	*
 	* @param classNameId the primary key for the new class name
 	* @return the new class name

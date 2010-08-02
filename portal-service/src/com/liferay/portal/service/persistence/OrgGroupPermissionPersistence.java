@@ -20,7 +20,15 @@ import com.liferay.portal.model.OrgGroupPermission;
  * The persistence interface for the org group permission service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link OrgGroupPermissionUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -46,7 +54,7 @@ public interface OrgGroupPermissionPersistence extends BasePersistence<OrgGroupP
 		java.util.List<com.liferay.portal.model.OrgGroupPermission> orgGroupPermissions);
 
 	/**
-	* Creates a new org group permission with the primary key.
+	* Creates a new org group permission with the primary key. Does not add the org group permission to the database.
 	*
 	* @param orgGroupPermissionPK the primary key for the new org group permission
 	* @return the new org group permission

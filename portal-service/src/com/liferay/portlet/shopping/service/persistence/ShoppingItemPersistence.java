@@ -22,7 +22,15 @@ import com.liferay.portlet.shopping.model.ShoppingItem;
  * The persistence interface for the shopping item service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ShoppingItemUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface ShoppingItemPersistence extends BasePersistence<ShoppingItem> {
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> shoppingItems);
 
 	/**
-	* Creates a new shopping item with the primary key.
+	* Creates a new shopping item with the primary key. Does not add the shopping item to the database.
 	*
 	* @param itemId the primary key for the new shopping item
 	* @return the new shopping item

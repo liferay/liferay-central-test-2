@@ -74,10 +74,14 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * The persistence for the blogs entry service.
+ * The persistence implementation for the blogs entry service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link BlogsEntryUtil} instead.
  * </p>
  *
  * <p>
@@ -392,7 +396,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	}
 
 	/**
-	 * Creates a new blogs entry with the primary key.
+	 * Creates a new blogs entry with the primary key. Does not add the blogs entry to the database.
 	 *
 	 * @param entryId the primary key for the new blogs entry
 	 * @return the new blogs entry

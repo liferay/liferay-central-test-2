@@ -56,10 +56,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the tasks proposal service.
+ * The persistence implementation for the tasks proposal service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link TasksProposalUtil} instead.
  * </p>
  *
  * <p>
@@ -185,7 +189,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	}
 
 	/**
-	 * Creates a new tasks proposal with the primary key.
+	 * Creates a new tasks proposal with the primary key. Does not add the tasks proposal to the database.
 	 *
 	 * @param proposalId the primary key for the new tasks proposal
 	 * @return the new tasks proposal

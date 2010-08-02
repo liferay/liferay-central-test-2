@@ -51,10 +51,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the social equity asset entry service.
+ * The persistence implementation for the social equity asset entry service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link SocialEquityAssetEntryUtil} instead.
  * </p>
  *
  * <p>
@@ -149,7 +153,7 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 	}
 
 	/**
-	 * Creates a new social equity asset entry with the primary key.
+	 * Creates a new social equity asset entry with the primary key. Does not add the social equity asset entry to the database.
 	 *
 	 * @param equityAssetEntryId the primary key for the new social equity asset entry
 	 * @return the new social equity asset entry

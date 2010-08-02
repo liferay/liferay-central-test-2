@@ -52,10 +52,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the asset category property service.
+ * The persistence implementation for the asset category property service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link AssetCategoryPropertyUtil} instead.
  * </p>
  *
  * <p>
@@ -195,7 +199,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	}
 
 	/**
-	 * Creates a new asset category property with the primary key.
+	 * Creates a new asset category property with the primary key. Does not add the asset category property to the database.
 	 *
 	 * @param categoryPropertyId the primary key for the new asset category property
 	 * @return the new asset category property

@@ -20,7 +20,15 @@ import com.liferay.portal.model.Team;
  * The persistence interface for the team service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link TeamUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -44,7 +52,7 @@ public interface TeamPersistence extends BasePersistence<Team> {
 	public void cacheResult(java.util.List<com.liferay.portal.model.Team> teams);
 
 	/**
-	* Creates a new team with the primary key.
+	* Creates a new team with the primary key. Does not add the team to the database.
 	*
 	* @param teamId the primary key for the new team
 	* @return the new team

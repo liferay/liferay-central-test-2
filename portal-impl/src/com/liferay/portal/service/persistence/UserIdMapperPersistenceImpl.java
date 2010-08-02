@@ -48,10 +48,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the user id mapper service.
+ * The persistence implementation for the user id mapper service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link UserIdMapperUtil} instead.
  * </p>
  *
  * <p>
@@ -184,7 +188,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	}
 
 	/**
-	 * Creates a new user id mapper with the primary key.
+	 * Creates a new user id mapper with the primary key. Does not add the user id mapper to the database.
 	 *
 	 * @param userIdMapperId the primary key for the new user id mapper
 	 * @return the new user id mapper

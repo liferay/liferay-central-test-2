@@ -51,10 +51,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the expando value service.
+ * The persistence implementation for the expando value service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ExpandoValueUtil} instead.
  * </p>
  *
  * <p>
@@ -282,7 +286,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	}
 
 	/**
-	 * Creates a new expando value with the primary key.
+	 * Creates a new expando value with the primary key. Does not add the expando value to the database.
 	 *
 	 * @param valueId the primary key for the new expando value
 	 * @return the new expando value

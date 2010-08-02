@@ -22,7 +22,15 @@ import com.liferay.portlet.shopping.model.ShoppingOrder;
  * The persistence interface for the shopping order service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ShoppingOrderUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface ShoppingOrderPersistence extends BasePersistence<ShoppingOrder>
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> shoppingOrders);
 
 	/**
-	* Creates a new shopping order with the primary key.
+	* Creates a new shopping order with the primary key. Does not add the shopping order to the database.
 	*
 	* @param orderId the primary key for the new shopping order
 	* @return the new shopping order

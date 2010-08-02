@@ -20,7 +20,15 @@ import com.liferay.portal.model.PasswordPolicyRel;
  * The persistence interface for the password policy rel service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link PasswordPolicyRelUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -46,7 +54,7 @@ public interface PasswordPolicyRelPersistence extends BasePersistence<PasswordPo
 		java.util.List<com.liferay.portal.model.PasswordPolicyRel> passwordPolicyRels);
 
 	/**
-	* Creates a new password policy rel with the primary key.
+	* Creates a new password policy rel with the primary key. Does not add the password policy rel to the database.
 	*
 	* @param passwordPolicyRelId the primary key for the new password policy rel
 	* @return the new password policy rel

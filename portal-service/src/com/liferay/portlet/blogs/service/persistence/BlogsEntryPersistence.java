@@ -22,7 +22,15 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
  * The persistence interface for the blogs entry service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link BlogsEntryUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 		java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> blogsEntries);
 
 	/**
-	* Creates a new blogs entry with the primary key.
+	* Creates a new blogs entry with the primary key. Does not add the blogs entry to the database.
 	*
 	* @param entryId the primary key for the new blogs entry
 	* @return the new blogs entry

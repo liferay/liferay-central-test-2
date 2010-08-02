@@ -49,10 +49,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the counter service.
+ * The persistence implementation for the counter service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link CounterUtil} instead.
  * </p>
  *
  * <p>
@@ -128,7 +132,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	}
 
 	/**
-	 * Creates a new counter with the primary key.
+	 * Creates a new counter with the primary key. Does not add the counter to the database.
 	 *
 	 * @param name the primary key for the new counter
 	 * @return the new counter

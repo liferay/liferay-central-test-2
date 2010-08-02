@@ -20,7 +20,15 @@ import com.liferay.portal.model.Subscription;
  * The persistence interface for the subscription service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link SubscriptionUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -45,7 +53,7 @@ public interface SubscriptionPersistence extends BasePersistence<Subscription> {
 		java.util.List<com.liferay.portal.model.Subscription> subscriptions);
 
 	/**
-	* Creates a new subscription with the primary key.
+	* Creates a new subscription with the primary key. Does not add the subscription to the database.
 	*
 	* @param subscriptionId the primary key for the new subscription
 	* @return the new subscription

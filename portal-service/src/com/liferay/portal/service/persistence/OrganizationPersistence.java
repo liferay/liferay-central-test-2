@@ -20,7 +20,15 @@ import com.liferay.portal.model.Organization;
  * The persistence interface for the organization service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link OrganizationUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -45,7 +53,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 		java.util.List<com.liferay.portal.model.Organization> organizations);
 
 	/**
-	* Creates a new organization with the primary key.
+	* Creates a new organization with the primary key. Does not add the organization to the database.
 	*
 	* @param organizationId the primary key for the new organization
 	* @return the new organization

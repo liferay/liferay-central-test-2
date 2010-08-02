@@ -25,10 +25,14 @@ import com.liferay.portlet.expando.model.ExpandoTable;
 import java.util.List;
 
 /**
- * The persistence utility for the expando table service.
+ * The persistence utility for the expando table service. This utility wraps {@link ExpandoTablePersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -132,7 +136,7 @@ public class ExpandoTableUtil {
 	}
 
 	/**
-	* Creates a new expando table with the primary key.
+	* Creates a new expando table with the primary key. Does not add the expando table to the database.
 	*
 	* @param tableId the primary key for the new expando table
 	* @return the new expando table

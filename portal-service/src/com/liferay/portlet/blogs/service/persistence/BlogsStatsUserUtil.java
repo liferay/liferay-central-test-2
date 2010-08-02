@@ -25,10 +25,14 @@ import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import java.util.List;
 
 /**
- * The persistence utility for the blogs stats user service.
+ * The persistence utility for the blogs stats user service. This utility wraps {@link BlogsStatsUserPersistenceImpl} and provides direct access to the database for CRUD operations. This utility should only be used by the service layer, as it must operate within a transaction. Never access this utility in a JSP, controller, model, or other front-end class.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -132,7 +136,7 @@ public class BlogsStatsUserUtil {
 	}
 
 	/**
-	* Creates a new blogs stats user with the primary key.
+	* Creates a new blogs stats user with the primary key. Does not add the blogs stats user to the database.
 	*
 	* @param statsUserId the primary key for the new blogs stats user
 	* @return the new blogs stats user

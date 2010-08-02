@@ -67,10 +67,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the d l file entry service.
+ * The persistence implementation for the d l file entry service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link DLFileEntryUtil} instead.
  * </p>
  *
  * <p>
@@ -301,7 +305,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	}
 
 	/**
-	 * Creates a new d l file entry with the primary key.
+	 * Creates a new d l file entry with the primary key. Does not add the d l file entry to the database.
 	 *
 	 * @param fileEntryId the primary key for the new d l file entry
 	 * @return the new d l file entry

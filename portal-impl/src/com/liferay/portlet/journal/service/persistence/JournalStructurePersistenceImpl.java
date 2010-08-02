@@ -57,10 +57,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the journal structure service.
+ * The persistence implementation for the journal structure service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link JournalStructureUtil} instead.
  * </p>
  *
  * <p>
@@ -232,7 +236,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	}
 
 	/**
-	 * Creates a new journal structure with the primary key.
+	 * Creates a new journal structure with the primary key. Does not add the journal structure to the database.
 	 *
 	 * @param id the primary key for the new journal structure
 	 * @return the new journal structure

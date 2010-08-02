@@ -20,7 +20,15 @@ import com.liferay.portal.model.BrowserTracker;
  * The persistence interface for the browser tracker service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link BrowserTrackerUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -46,7 +54,7 @@ public interface BrowserTrackerPersistence extends BasePersistence<BrowserTracke
 		java.util.List<com.liferay.portal.model.BrowserTracker> browserTrackers);
 
 	/**
-	* Creates a new browser tracker with the primary key.
+	* Creates a new browser tracker with the primary key. Does not add the browser tracker to the database.
 	*
 	* @param browserTrackerId the primary key for the new browser tracker
 	* @return the new browser tracker

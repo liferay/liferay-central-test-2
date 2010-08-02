@@ -51,10 +51,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the shopping order item service.
+ * The persistence implementation for the shopping order item service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ShoppingOrderItemUtil} instead.
  * </p>
  *
  * <p>
@@ -145,7 +149,7 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 	}
 
 	/**
-	 * Creates a new shopping order item with the primary key.
+	 * Creates a new shopping order item with the primary key. Does not add the shopping order item to the database.
 	 *
 	 * @param orderItemId the primary key for the new shopping order item
 	 * @return the new shopping order item

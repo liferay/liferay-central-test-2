@@ -53,10 +53,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the message boards mailing list service.
+ * The persistence implementation for the message boards mailing list service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link MBMailingListUtil} instead.
  * </p>
  *
  * <p>
@@ -198,7 +202,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	}
 
 	/**
-	 * Creates a new message boards mailing list with the primary key.
+	 * Creates a new message boards mailing list with the primary key. Does not add the message boards mailing list to the database.
 	 *
 	 * @param mailingListId the primary key for the new message boards mailing list
 	 * @return the new message boards mailing list

@@ -20,7 +20,15 @@ import com.liferay.portal.model.Layout;
  * The persistence interface for the layout service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link LayoutUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -45,7 +53,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 		java.util.List<com.liferay.portal.model.Layout> layouts);
 
 	/**
-	* Creates a new layout with the primary key.
+	* Creates a new layout with the primary key. Does not add the layout to the database.
 	*
 	* @param plid the primary key for the new layout
 	* @return the new layout

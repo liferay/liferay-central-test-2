@@ -47,10 +47,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the web d a v props service.
+ * The persistence implementation for the web d a v props service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link WebDAVPropsUtil} instead.
  * </p>
  *
  * <p>
@@ -146,7 +150,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	}
 
 	/**
-	 * Creates a new web d a v props with the primary key.
+	 * Creates a new web d a v props with the primary key. Does not add the web d a v props to the database.
 	 *
 	 * @param webDavPropsId the primary key for the new web d a v props
 	 * @return the new web d a v props

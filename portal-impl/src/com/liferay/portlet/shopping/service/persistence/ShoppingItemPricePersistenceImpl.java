@@ -51,10 +51,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the shopping item price service.
+ * The persistence implementation for the shopping item price service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ShoppingItemPriceUtil} instead.
  * </p>
  *
  * <p>
@@ -145,7 +149,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 	}
 
 	/**
-	 * Creates a new shopping item price with the primary key.
+	 * Creates a new shopping item price with the primary key. Does not add the shopping item price to the database.
 	 *
 	 * @param itemPriceId the primary key for the new shopping item price
 	 * @return the new shopping item price

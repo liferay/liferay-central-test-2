@@ -22,7 +22,15 @@ import com.liferay.portlet.messageboards.model.MBMailingList;
  * The persistence interface for the message boards mailing list service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link MBMailingListUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface MBMailingListPersistence extends BasePersistence<MBMailingList>
 		java.util.List<com.liferay.portlet.messageboards.model.MBMailingList> mbMailingLists);
 
 	/**
-	* Creates a new message boards mailing list with the primary key.
+	* Creates a new message boards mailing list with the primary key. Does not add the message boards mailing list to the database.
 	*
 	* @param mailingListId the primary key for the new message boards mailing list
 	* @return the new message boards mailing list

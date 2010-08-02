@@ -52,10 +52,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the tasks review service.
+ * The persistence implementation for the tasks review service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link TasksReviewUtil} instead.
  * </p>
  *
  * <p>
@@ -222,7 +226,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	}
 
 	/**
-	 * Creates a new tasks review with the primary key.
+	 * Creates a new tasks review with the primary key. Does not add the tasks review to the database.
 	 *
 	 * @param reviewId the primary key for the new tasks review
 	 * @return the new tasks review

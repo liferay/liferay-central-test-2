@@ -72,10 +72,14 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * The persistence for the asset entry service.
+ * The persistence implementation for the asset entry service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link AssetEntryUtil} instead.
  * </p>
  *
  * <p>
@@ -205,7 +209,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 	}
 
 	/**
-	 * Creates a new asset entry with the primary key.
+	 * Creates a new asset entry with the primary key. Does not add the asset entry to the database.
 	 *
 	 * @param entryId the primary key for the new asset entry
 	 * @return the new asset entry

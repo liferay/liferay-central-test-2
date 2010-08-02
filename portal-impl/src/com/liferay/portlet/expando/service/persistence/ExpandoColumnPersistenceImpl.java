@@ -52,10 +52,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the expando column service.
+ * The persistence implementation for the expando column service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ExpandoColumnUtil} instead.
  * </p>
  *
  * <p>
@@ -168,7 +172,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 	}
 
 	/**
-	 * Creates a new expando column with the primary key.
+	 * Creates a new expando column with the primary key. Does not add the expando column to the database.
 	 *
 	 * @param columnId the primary key for the new expando column
 	 * @return the new expando column

@@ -22,7 +22,15 @@ import com.liferay.portlet.polls.model.PollsQuestion;
  * The persistence interface for the polls question service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link PollsQuestionUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion>
 		java.util.List<com.liferay.portlet.polls.model.PollsQuestion> pollsQuestions);
 
 	/**
-	* Creates a new polls question with the primary key.
+	* Creates a new polls question with the primary key. Does not add the polls question to the database.
 	*
 	* @param questionId the primary key for the new polls question
 	* @return the new polls question

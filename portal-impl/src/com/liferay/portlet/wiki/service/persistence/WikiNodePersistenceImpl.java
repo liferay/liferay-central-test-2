@@ -57,10 +57,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the wiki node service.
+ * The persistence implementation for the wiki node service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link WikiNodeUtil} instead.
  * </p>
  *
  * <p>
@@ -202,7 +206,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	}
 
 	/**
-	 * Creates a new wiki node with the primary key.
+	 * Creates a new wiki node with the primary key. Does not add the wiki node to the database.
 	 *
 	 * @param nodeId the primary key for the new wiki node
 	 * @return the new wiki node

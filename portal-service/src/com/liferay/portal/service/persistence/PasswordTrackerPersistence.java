@@ -20,7 +20,15 @@ import com.liferay.portal.model.PasswordTracker;
  * The persistence interface for the password tracker service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link PasswordTrackerUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -46,7 +54,7 @@ public interface PasswordTrackerPersistence extends BasePersistence<PasswordTrac
 		java.util.List<com.liferay.portal.model.PasswordTracker> passwordTrackers);
 
 	/**
-	* Creates a new password tracker with the primary key.
+	* Creates a new password tracker with the primary key. Does not add the password tracker to the database.
 	*
 	* @param passwordTrackerId the primary key for the new password tracker
 	* @return the new password tracker

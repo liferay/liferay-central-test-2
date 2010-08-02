@@ -20,7 +20,15 @@ import com.liferay.portal.model.PortletPreferences;
  * The persistence interface for the portlet preferences service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link PortletPreferencesUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -46,7 +54,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 		java.util.List<com.liferay.portal.model.PortletPreferences> portletPreferenceses);
 
 	/**
-	* Creates a new portlet preferences with the primary key.
+	* Creates a new portlet preferences with the primary key. Does not add the portlet preferences to the database.
 	*
 	* @param portletPreferencesId the primary key for the new portlet preferences
 	* @return the new portlet preferences

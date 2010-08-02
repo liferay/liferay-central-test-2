@@ -20,7 +20,15 @@ import com.liferay.portal.model.Country;
  * The persistence interface for the country service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link CountryUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -45,7 +53,7 @@ public interface CountryPersistence extends BasePersistence<Country> {
 		java.util.List<com.liferay.portal.model.Country> countries);
 
 	/**
-	* Creates a new country with the primary key.
+	* Creates a new country with the primary key. Does not add the country to the database.
 	*
 	* @param countryId the primary key for the new country
 	* @return the new country

@@ -22,7 +22,15 @@ import com.liferay.portlet.journal.model.JournalArticleImage;
  * The persistence interface for the journal article image service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link JournalArticleImageUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 		java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> journalArticleImages);
 
 	/**
-	* Creates a new journal article image with the primary key.
+	* Creates a new journal article image with the primary key. Does not add the journal article image to the database.
 	*
 	* @param articleImageId the primary key for the new journal article image
 	* @return the new journal article image

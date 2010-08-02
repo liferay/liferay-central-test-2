@@ -22,7 +22,15 @@ import com.liferay.portlet.ratings.model.RatingsEntry;
  * The persistence interface for the ratings entry service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link RatingsEntryUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface RatingsEntryPersistence extends BasePersistence<RatingsEntry> {
 		java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> ratingsEntries);
 
 	/**
-	* Creates a new ratings entry with the primary key.
+	* Creates a new ratings entry with the primary key. Does not add the ratings entry to the database.
 	*
 	* @param entryId the primary key for the new ratings entry
 	* @return the new ratings entry

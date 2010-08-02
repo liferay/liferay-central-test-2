@@ -22,7 +22,15 @@ import com.liferay.portlet.softwarecatalog.model.SCLicense;
  * The persistence interface for the s c license service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link SCLicenseUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface SCLicensePersistence extends BasePersistence<SCLicense> {
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses);
 
 	/**
-	* Creates a new s c license with the primary key.
+	* Creates a new s c license with the primary key. Does not add the s c license to the database.
 	*
 	* @param licenseId the primary key for the new s c license
 	* @return the new s c license

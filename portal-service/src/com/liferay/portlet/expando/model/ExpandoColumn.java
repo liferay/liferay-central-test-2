@@ -21,6 +21,10 @@ package com.liferay.portlet.expando.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portlet.expando.model.impl.ExpandoColumnImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
+ * <p>
+ * Never reference this interface directly. All methods that expect a expando column model instance should use the {@link ExpandoColumn} interface instead.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
  * @see ExpandoColumnModel
  * @see com.liferay.portlet.expando.model.impl.ExpandoColumnImpl

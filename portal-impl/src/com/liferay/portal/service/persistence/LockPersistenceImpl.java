@@ -51,10 +51,14 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * The persistence for the lock service.
+ * The persistence implementation for the lock service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link LockUtil} instead.
  * </p>
  *
  * <p>
@@ -167,7 +171,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	}
 
 	/**
-	 * Creates a new lock with the primary key.
+	 * Creates a new lock with the primary key. Does not add the lock to the database.
 	 *
 	 * @param lockId the primary key for the new lock
 	 * @return the new lock

@@ -20,7 +20,15 @@ import com.liferay.portal.model.UserIdMapper;
  * The persistence interface for the user id mapper service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link UserIdMapperUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -45,7 +53,7 @@ public interface UserIdMapperPersistence extends BasePersistence<UserIdMapper> {
 		java.util.List<com.liferay.portal.model.UserIdMapper> userIdMappers);
 
 	/**
-	* Creates a new user id mapper with the primary key.
+	* Creates a new user id mapper with the primary key. Does not add the user id mapper to the database.
 	*
 	* @param userIdMapperId the primary key for the new user id mapper
 	* @return the new user id mapper

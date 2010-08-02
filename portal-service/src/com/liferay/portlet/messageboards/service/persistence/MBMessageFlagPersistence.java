@@ -22,7 +22,15 @@ import com.liferay.portlet.messageboards.model.MBMessageFlag;
  * The persistence interface for the message boards message flag service.
  *
  * <p>
- * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this interface.
+ * Never modify this interface directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link MBMessageFlagUtil} instead.
+ * </p>
+ *
+ * <p>
+ * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
@@ -48,7 +56,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 		java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> mbMessageFlags);
 
 	/**
-	* Creates a new message boards message flag with the primary key.
+	* Creates a new message boards message flag with the primary key. Does not add the message boards message flag to the database.
 	*
 	* @param messageFlagId the primary key for the new message boards message flag
 	* @return the new message boards message flag

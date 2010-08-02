@@ -21,6 +21,10 @@ package com.liferay.portal.model;
  * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.PasswordPolicyRelImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
  * </p>
  *
+ * <p>
+ * Never reference this interface directly. All methods that expect a password policy rel model instance should use the {@link PasswordPolicyRel} interface instead.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
  * @see PasswordPolicyRelModel
  * @see com.liferay.portal.model.impl.PasswordPolicyRelImpl

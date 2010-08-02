@@ -54,10 +54,14 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * The persistence for the blogs stats user service.
+ * The persistence implementation for the blogs stats user service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link BlogsStatsUserUtil} instead.
  * </p>
  *
  * <p>
@@ -220,7 +224,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	}
 
 	/**
-	 * Creates a new blogs stats user with the primary key.
+	 * Creates a new blogs stats user with the primary key. Does not add the blogs stats user to the database.
 	 *
 	 * @param statsUserId the primary key for the new blogs stats user
 	 * @return the new blogs stats user

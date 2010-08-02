@@ -52,10 +52,14 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence for the shopping coupon service.
+ * The persistence implementation for the shopping coupon service.
  *
  * <p>
- * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regnerate this class.
+ * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+ * </p>
+ *
+ * <p>
+ * Never reference this class directly, use {@link ShoppingCouponUtil} instead.
  * </p>
  *
  * <p>
@@ -160,7 +164,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 	}
 
 	/**
-	 * Creates a new shopping coupon with the primary key.
+	 * Creates a new shopping coupon with the primary key. Does not add the shopping coupon to the database.
 	 *
 	 * @param couponId the primary key for the new shopping coupon
 	 * @return the new shopping coupon
