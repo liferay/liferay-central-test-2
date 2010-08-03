@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.InputStream;
 
@@ -658,7 +659,8 @@ public class JCRHook extends BaseHook {
 					Version newVersion = newContentNode.checkin();
 
 					newContentNode.getVersionHistory().addVersionLabel(
-						newVersion.getName(), versionLabels[i], false);
+						newVersion.getName(), versionLabels[i],
+						PropsValues.DL_HOOK_JCR_MOVE_VERSION_LABELS);
 				}
 
 				fileNode.remove();
@@ -749,7 +751,8 @@ public class JCRHook extends BaseHook {
 				Version newVersion = newContentNode.checkin();
 
 				newContentNode.getVersionHistory().addVersionLabel(
-					newVersion.getName(), versionLabels[i], false);
+					newVersion.getName(), versionLabels[i],
+					PropsValues.DL_HOOK_JCR_MOVE_VERSION_LABELS);
 			}
 
 			fileNode.remove();
@@ -819,7 +822,8 @@ public class JCRHook extends BaseHook {
 			Version version = contentNode.checkin();
 
 			contentNode.getVersionHistory().addVersionLabel(
-				version.getName(), versionLabel, false);
+				version.getName(), versionLabel,
+				PropsValues.DL_HOOK_JCR_MOVE_VERSION_LABELS);
 
 			Indexer indexer = IndexerRegistryUtil.getIndexer(
 				FileModel.class);

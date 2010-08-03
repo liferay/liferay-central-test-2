@@ -491,6 +491,8 @@ public interface PropsKeys {
 
 	public static final String DL_HOOK_JCR_FETCH_MAX_FAILURES = "dl.hook.jcr.fetch.max.failures";
 
+	public static final String DL_HOOK_JCR_MOVE_VERSION_LABELS = "dl.hook.jcr.move.version.labels";
+
 	public static final String DL_HOOK_S3_ACCESS_KEY = "dl.hook.s3.access.key";
 
 	public static final String DL_HOOK_S3_BUCKET_NAME = "dl.hook.s3.bucket.name";
