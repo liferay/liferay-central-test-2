@@ -31,7 +31,13 @@ if (Validator.isNotNull(backURL) && !backURL.equals("javascript:history.go(-1);"
 
 	<h1 class="header-title">
 		<span>
-			<%= HtmlUtil.escape(LanguageUtil.get(pageContext, title)) %>
+			<%
+				if (escapeXml) {
+					out.print(HtmlUtil.escape(LanguageUtil.get(pageContext, title)));
+				} else {
+					out.print(LanguageUtil.get(pageContext, title));
+				}
+			%>
 		</span>
 	</h1>
 </div>
