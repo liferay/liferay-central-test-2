@@ -1044,8 +1044,7 @@ public class PortletURLImpl
 				}
 			}
 		}
-
-		if (!CookieKeys.hasSessionId(_request)) {
+		else if (!CookieKeys.hasSessionId(_request)) {
 			result = PortalUtil.getURLWithSessionId(
 				result, _request.getSession().getId());
 		}
