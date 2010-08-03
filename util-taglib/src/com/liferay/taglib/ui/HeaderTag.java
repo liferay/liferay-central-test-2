@@ -27,16 +27,16 @@ public class HeaderTag extends IncludeTag {
 		request.setAttribute("liferay-ui:header:backLabel", _backLabel);
 		request.setAttribute("liferay-ui:header:backURL", _backURL);
 		request.setAttribute("liferay-ui:header:cssClass", _cssClass);
-		request.setAttribute("liferay-ui:header:title", _title);
 		request.setAttribute("liferay-ui:header:escapeXml", _escapeXml);
+		request.setAttribute("liferay-ui:header:title", _title);
 	}
 
 	protected void cleanUp() {
 		_backLabel = null;
 		_backURL = null;
 		_cssClass = null;
+		_escapeXml = true;
 		_title = null;
-		_escapeXml = null;
 	}
 
 	protected String getPage() {
@@ -59,12 +59,12 @@ public class HeaderTag extends IncludeTag {
 		_cssClass = cssClass;
 	}
 
+	public void setEscapeXml(boolean escapeXml) {
+		_escapeXml = escapeXml;
+	}
+
 	public void setTitle(String title) {
 		_title = title;
-	}
-	
-	public void setEscapeXml(String escapeXml) {
-		_escapeXml = escapeXml;
 	}
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
@@ -74,7 +74,7 @@ public class HeaderTag extends IncludeTag {
 	private String _backLabel;
 	private String _backURL;
 	private String _cssClass;
+	private boolean _escapeXml = true;
 	private String _title;
-	private String _escapeXml;
 
 }

@@ -31,13 +31,14 @@ if (Validator.isNotNull(backURL) && !backURL.equals("javascript:history.go(-1);"
 
 	<h1 class="header-title">
 		<span>
-			<%
-				if (escapeXml) {
-					out.print(HtmlUtil.escape(LanguageUtil.get(pageContext, title)));
-				} else {
-					out.print(LanguageUtil.get(pageContext, title));
-				}
-			%>
+			<c:choose>
+				<c:when test="<%= escapeXml %>">
+					<%= HtmlUtil.escape(LanguageUtil.get(pageContext, title)) %>
+				</c:when>
+				<c:otherwise>
+					<%= LanguageUtil.get(pageContext, title) %>
+				</c:otherwise>
+			</c:choose>
 		</span>
 	</h1>
 </div>
