@@ -20,8 +20,6 @@
 	<property name="pscp.executable" location="${project.dir}/tools/putty/pscp.exe" />
 
 	<target name="build-test-ant-script">
-		<mkdir dir="portal-web/test-ant-scripts" />
-
 		<if>
 			<isset property="test.ant.script.plugins" />
 			<then>
@@ -44,14 +42,6 @@
 
 		<property name="test.ant.script.file.suite" value="&lt;property name=&quot;test.name&quot; value=&quot;${test.ant.script.suite}&quot; /&gt;" />
 
-		<antcall target="build-test-ant-script-file">
-			<param name="test.ant.script.file.plugins" value="${test.ant.script.file.plugins}" />
-			<param name="test.ant.script.file.properties" value="${test.ant.script.file.properties}" />
-			<param name="test.ant.script.file.suite" value="${test.ant.script.file.suite}" />
-		</antcall>
-	</target>
-
-	<target name="build-test-ant-script-file">
 		<echo file="portal-web/test-ant-scripts/build-test-${test.ant.script.command}.xml"><![CDATA[<?xml version="1.0"?>
 
 			<project name="portal-test-${test.ant.script.command}" basedir="../../." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
@@ -167,8 +157,521 @@
 		]]></echo>
 	</target>
 
+	<target name="build-test-ant-script-db-upgrade">
+		<if>
+			<equals arg1="${test.ant.script.db}" arg2="db2" />
+			<then>
+				<property name="test.ant.script.db.minimal" value="drop database lportal;${line.separator}create database lportal;" />
+			</then>
+			<elseif>
+				<equals arg1="${test.ant.script.db}" arg2="mysql" />
+				<then>
+					<property name="test.ant.script.db.minimal" value="drop database if exists lportal;${line.separator}create database lportal character set utf8;" />
+				</then>
+			</elseif>
+			<elseif>
+				<equals arg1="${test.ant.script.db}" arg2="oracle" />
+				<then>
+					<property name="test.ant.script.db.minimal" value="&lt;![CDATA[drop user &amp;1 cascade;${line.separator}create user &amp;1 identified by &amp;2;${line.separator}grant connect,resource to &amp;1;${line.separator}exit;]]&gt;" />
+				</then>
+			</elseif>
+			<elseif>
+				<equals arg1="${test.ant.script.db}" arg2="postgresql" />
+				<then>
+					<property name="test.ant.script.db.minimal" value="drop database lportal;${line.separator}create database lportal encoding = 'UNICODE';" />
+				</then>
+			</elseif>
+			<elseif>
+				<equals arg1="${test.ant.script.db}" arg2="sql-server" />
+				<then>
+					<property name="test.ant.script.db.minimal" value="drop database lportal;${line.separator}create database lportal;" />
+				</then>
+			</elseif>
+		</if>
+
+		<if>
+			<equals arg1="${test.ant.script.db}" arg2="oracle" />
+			<then>
+				<property name="test.ant.script.db.schema" value="username" />
+			</then>
+			<else>
+				<property name="test.ant.script.db.schema" value="schema" />
+			</else>
+		</if>
+
+		<echo file="portal-web/test-ant-scripts/build-test-db-upgrade-${test.ant.script.db}.xml"><![CDATA[<?xml version="1.0"?>
+
+			<project name="portal-test-db-upgrade-${test.ant.script.db}" basedir="../../." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
+				<import file="../../build-test.xml" />
+
+				<target name="prepare-db-${test.ant.script.db}-common">
+					<echo file="test.$${user.name}.properties">db.type=${test.ant.script.db}</echo>
+
+					<antcall target="prepare-portal-ext-properties" inheritAll="false" />
+
+					<ant dir="portal-impl" target="deploy-properties" inheritAll="false" />
+
+					<if>
+						<isset property="sql.version" />
+						<then>
+							<property name="sql.dir" value="sql\legacy\$${sql.version}\create\" />
+							<property name="sql.file" value="create-${test.ant.script.db}.sql" />
+						</then>
+					</if>
+
+					<antcall target="rebuild-database" inheritAll="false">
+						<param name="sql.dir" value="$${sql.dir}" />
+						<param name="sql.file" value="$${sql.file}" />
+					</antcall>
+				</target>
+
+				<target name="run-latest-upgrade-test">
+					<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat" inheritAll="false">
+						<property name="skip.rebuild-database" value="true" />
+					</ant>
+
+					<antcall target="clean-up-bundles" />
+				</target>
+
+				<target name="run-smoke-test">
+					<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat" inheritAll="false">
+						<property name="skip.rebuild-database" value="true" />
+						<property name="test.name" value="SmokeTestSuite" />
+					</ant>
+				</target>
+
+				<target name="run-versioned-upgrade-test">
+					<ant antfile="build-test-tomcat.xml" target="run-selenium-versioned-tomcat" inheritAll="false">
+						<property name="skip.rebuild-database" value="true" />
+					</ant>
+
+					<antcall target="clean-up-bundles" />
+				</target>
+
+				<target name="test-db-upgrade-5.1.0-tomcat-${test.ant.script.db}">
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="sql.version" value="5.1.0" />
+					</antcall>
+
+					<antcall target="run-versioned-upgrade-test">
+						<param name="file.name" value="liferay-portal-tomcat-6.0-5.1.0.zip" />
+						<param name="legacy.config" value="true" />
+						<param name="legacy.theme.ids" value="classic" />
+						<param name="license.type" value="ce" />
+						<param name="lp.version" value="5.1.0" />
+						<param name="test.name" value="SampleData510TestSuite" />
+						<param name="tomcat.folder.dir" value="liferay-portal-tomcat-6.0-5.1.0" />
+					</antcall>
+
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5$${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="skip.rebuild-database" value="true" />
+						<param name="sql.version" value="5.1.0" />
+					</antcall>
+
+					<antcall target="run-latest-upgrade-test">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5$${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
+						<param name="portlet.plugins.includes" value="web-form-portlet" />
+						<param name="test.name" value="ViewSampleData510LatestTestSuite" />
+					</antcall>
+				</target>
+
+				<target name="test-db-upgrade-5.1.0-smoke-tomcat-${test.ant.script.db}">
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="sql.version" value="5.1.0" />
+					</antcall>
+
+					<antcall target="run-smoke-test">
+						<param name="build.app.server" value="false" />
+					</antcall>
+				</target>
+
+				<target name="test-db-upgrade-5.1.1-tomcat-${test.ant.script.db}">
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="sql.version" value="5.1.1" />
+					</antcall>
+
+					<antcall target="run-versioned-upgrade-test">
+						<param name="file.name" value="liferay-portal-tomcat-6.0-5.1.1.zip" />
+						<param name="legacy.config" value="true" />
+						<param name="legacy.theme.ids" value="classic" />
+						<param name="license.type" value="ce" />
+						<param name="lp.version" value="5.1.1" />
+						<param name="test.name" value="SampleData511TestSuite" />
+						<param name="tomcat.folder.dir" value="liferay-portal-tomcat-6.0-5.1.1" />
+					</antcall>
+
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5$${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="skip.rebuild-database" value="true" />
+						<param name="sql.version" value="5.1.1" />
+					</antcall>
+
+					<antcall target="run-latest-upgrade-test">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5$${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
+						<param name="portlet.plugins.includes" value="web-form-portlet" />
+						<param name="test.name" value="ViewSampleData511LatestTestSuite" />
+					</antcall>
+				</target>
+
+				<target name="test-db-upgrade-5.1.1-smoke-tomcat-${test.ant.script.db}">
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="sql.version" value="5.1.1" />
+					</antcall>
+
+					<antcall target="run-smoke-test">
+						<param name="build.app.server" value="false" />
+					</antcall>
+				</target>
+
+				<target name="test-db-upgrade-5.1.2-tomcat-${test.ant.script.db}">
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="sql.version" value="5.1.2" />
+					</antcall>
+
+					<antcall target="run-versioned-upgrade-test">
+						<param name="file.name" value="liferay-portal-tomcat-6.0-5.1.2.zip" />
+						<param name="legacy.config" value="true" />
+						<param name="legacy.theme.ids" value="classic" />
+						<param name="license.type" value="ce" />
+						<param name="lp.version" value="5.1.2" />
+						<param name="test.name" value="SampleData512TestSuite" />
+						<param name="tomcat.folder.dir" value="liferay-portal-tomcat-6.0-5.1.2" />
+					</antcall>
+
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5$${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="skip.rebuild-database" value="true" />
+						<param name="sql.version" value="5.1.2" />
+					</antcall>
+
+					<antcall target="run-latest-upgrade-test">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5$${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
+						<param name="portlet.plugins.includes" value="web-form-portlet" />
+						<param name="test.name" value="ViewSampleData512LatestTestSuite" />
+					</antcall>
+				</target>
+
+				<target name="test-db-upgrade-5.1.2-smoke-tomcat-${test.ant.script.db}">
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="sql.version" value="5.1.2" />
+					</antcall>
+
+					<antcall target="run-smoke-test">
+						<param name="build.app.server" value="false" />
+					</antcall>
+				</target>
+
+				<target name="test-db-upgrade-5.2.0-tomcat-${test.ant.script.db}">
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="sql.version" value="5.2.0" />
+					</antcall>
+
+					<antcall target="run-versioned-upgrade-test">
+						<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.0.zip" />
+						<param name="legacy.theme.ids" value="classic,controlpanel" />
+						<param name="license.type" value="ce" />
+						<param name="lp.version" value="5.2.0" />
+						<param name="test.name" value="SampleData520TestSuite" />
+						<param name="tomcat.folder.dir" value="liferay-portal-5.2.0/tomcat-6.0.18" />
+					</antcall>
+
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5$${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="skip.rebuild-database" value="true" />
+						<param name="sql.version" value="5.2.0" />
+					</antcall>
+
+					<antcall target="run-latest-upgrade-test">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5$${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
+						<param name="test.name" value="ViewSampleData520LatestTestSuite" />
+					</antcall>
+				</target>
+
+				<target name="test-db-upgrade-5.2.0-smoke-tomcat-${test.ant.script.db}">
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="sql.version" value="5.2.0" />
+					</antcall>
+
+					<antcall target="run-smoke-test">
+						<param name="build.app.server" value="false" />
+					</antcall>
+				</target>
+
+				<target name="test-db-upgrade-5.2.1-tomcat-${test.ant.script.db}">
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="sql.version" value="5.2.1" />
+					</antcall>
+
+					<antcall target="run-versioned-upgrade-test">
+						<param name="deploy.versioned.plugins" value="true" />
+						<param name="ee.deploy.dir" value="liferay-portal-5.2.1/deploy" />
+						<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.1.zip" />
+						<param name="legacy.theme.ids" value="classic,controlpanel" />
+						<param name="license.type" value="ce" />
+						<param name="lp.version" value="5.2.1" />
+						<param name="portlet.plugins.includes" value="web-form-portlet" />
+						<param name="test.name" value="SampleData521TestSuite" />
+						<param name="tomcat.folder.dir" value="liferay-portal-5.2.1/tomcat-6.0.18" />
+					</antcall>
+
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5$${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="skip.rebuild-database" value="true" />
+						<param name="sql.version" value="5.2.1" />
+					</antcall>
+
+					<antcall target="run-latest-upgrade-test">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5$${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
+						<param name="portlet.plugins.includes" value="web-form-portlet" />
+						<param name="test.name" value="ViewSampleData521LatestTestSuite" />
+					</antcall>
+				</target>
+
+				<target name="test-db-upgrade-5.2.1-smoke-tomcat-${test.ant.script.db}">
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="sql.version" value="5.2.1" />
+					</antcall>
+
+					<antcall target="run-smoke-test">
+						<param name="build.app.server" value="false" />
+					</antcall>
+				</target>
+
+				<target name="test-db-upgrade-5.2.2-tomcat-${test.ant.script.db}">
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="sql.version" value="5.2.2" />
+					</antcall>
+
+					<antcall target="run-versioned-upgrade-test">
+						<param name="deploy.versioned.plugins" value="true" />
+						<param name="ee.deploy.dir" value="liferay-portal-5.2.2/deploy" />
+						<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.2.zip" />
+						<param name="legacy.theme.ids" value="classic,controlpanel" />
+						<param name="license.type" value="ce" />
+						<param name="lp.version" value="5.2.2" />
+						<param name="portlet.plugins.includes" value="web-form-portlet" />
+						<param name="test.name" value="SampleData522TestSuite" />
+						<param name="tomcat.folder.dir" value="liferay-portal-5.2.2/tomcat-6.0.18" />
+					</antcall>
+
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5$${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="skip.rebuild-database" value="true" />
+						<param name="sql.version" value="5.2.2" />
+					</antcall>
+
+					<antcall target="run-latest-upgrade-test">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5$${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
+						<param name="portlet.plugins.includes" value="web-form-portlet" />
+						<param name="test.name" value="ViewSampleData522LatestTestSuite" />
+					</antcall>
+				</target>
+
+				<target name="test-db-upgrade-5.2.2-smoke-tomcat-${test.ant.script.db}">
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="sql.version" value="5.2.2" />
+					</antcall>
+
+					<antcall target="run-smoke-test">
+						<param name="build.app.server" value="false" />
+					</antcall>
+				</target>
+
+				<target name="test-db-upgrade-5.2.3-tomcat-${test.ant.script.db}">
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="sql.version" value="5.2.3" />
+					</antcall>
+
+					<antcall target="run-versioned-upgrade-test">
+						<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.3.zip" />
+						<param name="legacy.theme.ids" value="classic,controlpanel" />
+						<param name="license.type" value="ce" />
+						<param name="lp.version" value="5.2.3" />
+						<param name="test.name" value="SampleData523TestSuite" />
+						<param name="tomcat.folder.dir" value="liferay-portal-5.2.3/tomcat-6.0.18" />
+					</antcall>
+
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5$${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="skip.rebuild-database" value="true" />
+						<param name="sql.version" value="5.2.3" />
+					</antcall>
+
+					<antcall target="run-latest-upgrade-test">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5$${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
+						<param name="test.name" value="ViewSampleData523LatestTestSuite" />
+					</antcall>
+				</target>
+
+				<target name="test-db-upgrade-5.2.3-smoke-tomcat-${test.ant.script.db}">
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="sql.version" value="5.2.3" />
+					</antcall>
+
+					<antcall target="run-smoke-test">
+						<param name="build.app.server" value="false" />
+					</antcall>
+				</target>
+
+				<target name="test-db-upgrade-5.2.7-tomcat-${test.ant.script.db}">
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="sql.version" value="5.2.7" />
+					</antcall>
+
+					<antcall target="run-versioned-upgrade-test">
+						<param name="deploy.versioned.plugins" value="true" />
+						<param name="ee.deploy.dir" value="liferay-portal-5.2-ee-sp3/deploy" />
+						<param name="ee.license.dir" value="liferay-portal-5.2-ee-sp3/ee" />
+						<param name="file.name" value="liferay-portal-tomcat-6.0-5.2-ee-sp3.zip" />
+						<param name="legacy.theme.ids" value="classic,controlpanel" />
+						<param name="license.type" value="ee" />
+						<param name="lp.version" value="5.2.7" />
+						<param name="test.name" value="SampleData527TestSuite" />
+						<param name="tomcat.folder.dir" value="liferay-portal-5.2-ee-sp3/tomcat-6.0.18" />
+					</antcall>
+
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="custom.properties" value="upgrade.processes=com.liferay.portal.upgrade.UpgradeProcess_5_2_7_to_6_0_0$${line.separator}com.liferay.portal.upgrade.UpgradeProcess_6_0_1$${line.separator}com.liferay.portal.upgrade.UpgradeProcess_6_0_2$${line.separator}permissions.user.check.algorithm=5$${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="skip.rebuild-database" value="true" />
+						<param name="sql.version" value="5.2.7" />
+					</antcall>
+
+					<antcall target="run-latest-upgrade-test">
+						<param name="custom.properties" value="upgrade.processes=com.liferay.portal.upgrade.UpgradeProcess_5_2_7_to_6_0_0$${line.separator}com.liferay.portal.upgrade.UpgradeProcess_6_0_1$${line.separator}permissions.user.check.algorithm=5" />
+						<param name="portlet.plugins.includes" value="web-form-portlet" />
+						<param name="test.name" value="ViewSampleData527LatestTestSuite" />
+					</antcall>
+				</target>
+
+				<target name="test-db-upgrade-5.2.7-smoke-tomcat-${test.ant.script.db}">
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="custom.properties" value="permissions.user.check.algorithm=5" />
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="sql.version" value="5.2.7" />
+					</antcall>
+
+					<antcall target="run-smoke-test">
+						<param name="custom.properties" value="upgrade.processes=com.liferay.portal.upgrade.UpgradeProcess_5_2_7_to_6_0_0$${line.separator}com.liferay.portal.upgrade.UpgradeProcess_6_0_1$${line.separator}com.liferay.portal.upgrade.UpgradeProcess_6_0_2" />
+						<param name="build.app.server" value="false" />
+					</antcall>
+				</target>
+
+				<target name="test-db-upgrade-6.0.0-tomcat-${test.ant.script.db}">
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="sql.version" value="6.0.0" />
+					</antcall>
+
+					<antcall target="run-versioned-upgrade-test">
+						<param name="deploy.versioned.plugins" value="true" />
+						<param name="ee.deploy.dir" value="liferay-portal-6.0.0/deploy" />
+						<param name="file.name" value="liferay-portal-tomcat-6.0.0.zip" />
+						<param name="legacy.theme.ids" value="classic,controlpanel" />
+						<param name="license.type" value="ce" />
+						<param name="lp.version" value="6.0.0" />
+						<param name="test.name" value="SampleData600TestSuite" />
+						<param name="tomcat.folder.dir" value="liferay-portal-6.0.0/tomcat-6.0.24" />
+					</antcall>
+
+					<antcall target="run-latest-upgrade-test">
+						<param name="portlet.plugins.includes" value="web-form-portlet" />
+						<param name="test.name" value="ViewSampleData600LatestTestSuite" />
+					</antcall>
+				</target>
+
+				<target name="test-db-upgrade-6.0.0-smoke-tomcat-${test.ant.script.db}">
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="sql.version" value="6.0.0" />
+					</antcall>
+
+					<antcall target="run-smoke-test">
+						<param name="build.app.server" value="false" />
+					</antcall>
+				</target>
+
+				<target name="test-db-upgrade-latest-smoke-tomcat-${test.ant.script.db}">
+					<echo file="create-$${db.${test.ant.script.db}.${test.ant.script.db.schema}}.sql">${test.ant.script.db.minimal}</echo>
+
+					<antcall target="prepare-db-${test.ant.script.db}-common">
+						<param name="skip.prepare-bundle" value="true" />
+						<param name="sql.dir" value="" />
+						<param name="sql.file" value="create-$${db.${test.ant.script.db}.${test.ant.script.db.schema}}.sql" />
+					</antcall>
+
+					<antcall target="run-smoke-test">
+						<param name="build.app.server" value="false" />
+					</antcall>
+
+					<delete file="create-$${db.${test.ant.script.db}.${test.ant.script.db.schema}}.sql" />
+				</target>
+
+				<target name="test-db-upgrade-smoke-tomcat-${test.ant.script.db}">
+					<antcall target="prepare-${test.ant.script.db}" />
+
+					<ant antfile="build-dist.xml" target="build-dist-tomcat" />
+
+					<antcall target="test-db-upgrade-latest-smoke-tomcat-${test.ant.script.db}" />
+					<antcall target="test-db-upgrade-5.1.0-smoke-tomcat-${test.ant.script.db}" />
+					<antcall target="test-db-upgrade-5.1.1-smoke-tomcat-${test.ant.script.db}" />
+					<antcall target="test-db-upgrade-5.1.2-smoke-tomcat-${test.ant.script.db}" />
+					<antcall target="test-db-upgrade-5.2.0-smoke-tomcat-${test.ant.script.db}" />
+					<antcall target="test-db-upgrade-5.2.1-smoke-tomcat-${test.ant.script.db}" />
+					<antcall target="test-db-upgrade-5.2.2-smoke-tomcat-${test.ant.script.db}" />
+					<antcall target="test-db-upgrade-5.2.3-smoke-tomcat-${test.ant.script.db}" />
+					<antcall target="test-db-upgrade-5.2.7-smoke-tomcat-${test.ant.script.db}" />
+					<antcall target="test-db-upgrade-6.0.0-smoke-tomcat-${test.ant.script.db}" />
+				</target>
+			</project>
+		]]></echo>
+
+		<if>
+			<equals arg1="${test.ant.script.db}" arg2="postgresql" />
+			<then>
+				<replace
+					file="portal-web/test-ant-scripts/build-test-db-upgrade-${test.ant.script.db}.xml"
+					token="&lt;antcall target=&quot;test-db-upgrade-5.1.0-smoke-tomcat-${test.ant.script.db}&quot; /&gt;"
+					value="&lt;!--&lt;antcall target=&quot;test-db-upgrade-5.1.0-smoke-tomcat-${test.ant.script.db}&quot; /&gt;--&gt;"
+				/>
+			</then>
+		</if>
+	</target>
+
 	<target name="build-test-ant-scripts">
 		<delete dir="portal-web/test-ant-scripts" />
+
+		<mkdir dir="portal-web/test-ant-scripts" />
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-admin" />
@@ -243,6 +746,26 @@
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-web-content" />
 			<param name="test.ant.script.suite" value="ControlPanelWebContentTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-upgrade">
+			<param name="test.ant.script.db" value="db2" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-upgrade">
+			<param name="test.ant.script.db" value="mysql" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-upgrade">
+			<param name="test.ant.script.db" value="oracle" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-upgrade">
+			<param name="test.ant.script.db" value="postgresql" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-upgrade">
+			<param name="test.ant.script.db" value="sql-server" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
