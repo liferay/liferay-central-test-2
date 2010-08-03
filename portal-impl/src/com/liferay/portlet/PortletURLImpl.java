@@ -773,10 +773,20 @@ public class PortletURLImpl
 				!_layoutFriendlyURL.startsWith(Http.HTTPS_WITH_SLASH)) {
 
 				sb.append(portalURL);
-			}
-
-			if (!themeDisplay.isFacebook()) {
 				sb.append(_layoutFriendlyURL);
+			}
+			else {
+				if (!themeDisplay.isFacebook()) {
+					sb.append(_layoutFriendlyURL);
+				}
+				else {
+					sb.append(portalURL);
+
+					int pos = _layoutFriendlyURL.indexOf(
+						StringPool.SLASH, Http.HTTPS_WITH_SLASH.length());
+
+					sb.append(_layoutFriendlyURL.substring(pos));
+				}
 			}
 
 			String friendlyURLPath = getPortletFriendlyURLPath();
