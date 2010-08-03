@@ -29,12 +29,17 @@ if (Validator.isNotNull(structureId)) {
 	try {
 		structure = JournalStructureLocalServiceUtil.getStructure(groupId, structureId);
 	}
-	catch (NoSuchStructureException nsse) {
-		structureId = StringPool.BLANK;
+	catch (NoSuchStructureException nsse1) {
+		try {
+			structure = JournalStructureLocalServiceUtil.getStructure(themeDisplay.getCompanyGroupId(), structureId);
+		}
+		catch (NoSuchStructureException nsse2) {	
+			structureId = StringPool.BLANK;
 
-		preferences.setValue("structure-id", structureId);
+			preferences.setValue("structure-id", structureId);
 
-		preferences.store();
+			preferences.store();
+		}
 	}
 }
 %>
