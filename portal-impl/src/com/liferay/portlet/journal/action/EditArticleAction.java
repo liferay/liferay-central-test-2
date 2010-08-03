@@ -404,6 +404,9 @@ public class EditArticleAction extends PortletAction {
 	protected JournalArticle updateArticle(ActionRequest actionRequest)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
 			actionRequest);
 
@@ -540,9 +543,18 @@ public class EditArticleAction extends PortletAction {
 			}
 			else {
 				if (curArticle.isTemplateDriven()) {
-					JournalStructure structure =
-						JournalStructureLocalServiceUtil.getStructure(
-							groupId, structureId);
+					JournalStructure structure = null;
+
+					try {
+						structure =
+							JournalStructureLocalServiceUtil.getStructure(
+								groupId, structureId);
+					}
+					catch (NoSuchStructureException nsse) {
+						structure =
+							JournalStructureLocalServiceUtil.getStructure(
+								themeDisplay.getCompanyGroupId(), structureId);
+					}
 
 					content = JournalUtil.mergeArticleContent(
 						curArticle.getContent(), content);

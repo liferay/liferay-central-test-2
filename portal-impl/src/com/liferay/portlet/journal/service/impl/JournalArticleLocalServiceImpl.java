@@ -52,6 +52,7 @@ import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.ResourceConstants;
@@ -81,6 +82,7 @@ import com.liferay.portlet.journal.ArticleVersionException;
 import com.liferay.portlet.journal.DuplicateArticleIdException;
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.NoSuchArticleResourceException;
+import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.StructureXsdException;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -171,9 +173,9 @@ public class JournalArticleLocalServiceImpl
 		Date now = new Date();
 
 		validate(
-			groupId, articleId, autoArticleId, version, title, content, type,
-			structureId, templateId, smallImage, smallImageURL, smallFile,
-			smallBytes);
+			user.getCompanyId(), groupId, articleId, autoArticleId, version,
+			title, content, type, structureId, templateId, smallImage,
+			smallImageURL, smallFile, smallBytes);
 
 		if (autoArticleId) {
 			articleId = String.valueOf(counterLocalService.increment());
@@ -929,10 +931,11 @@ public class JournalArticleLocalServiceImpl
 
 			if (article.isTemplateDriven()) {
 
-				// Try with specified template first. If a template is not
-				// specified, use the default one. If the specified template
-				// does not exit, use the default one. If the default one does
-				// not exist, throw an exception.
+				// Try with specified template first (in the current group and
+				// the global group). If a template is not specified, use the 
+				// default one. If the specified template does not exit, use the
+				// default one. If the default one does not exist, throw an
+				// exception.
 
 				JournalTemplate template = null;
 
@@ -940,13 +943,22 @@ public class JournalArticleLocalServiceImpl
 					template = journalTemplatePersistence.findByG_T(
 						article.getGroupId(), templateId);
 				}
-				catch (NoSuchTemplateException nste) {
-					if (!defaultTemplateId.equals(templateId)) {
+				catch (NoSuchTemplateException nste1) {
+					try {
+						Group globalGroup = groupLocalService.getCompanyGroup(
+							article.getCompanyId());
+
 						template = journalTemplatePersistence.findByG_T(
-							article.getGroupId(), defaultTemplateId);
+							globalGroup.getGroupId(), templateId);
 					}
-					else {
-						throw nste;
+					catch (NoSuchTemplateException nste2) {
+						if (!defaultTemplateId.equals(templateId)) {
+							template = journalTemplatePersistence.findByG_T(
+								article.getGroupId(), defaultTemplateId);
+						}
+						else {
+							throw nste1;
+						}
 					}
 				}
 
@@ -1637,8 +1649,8 @@ public class JournalArticleLocalServiceImpl
 		Date now = new Date();
 
 		validate(
-			groupId, title, content, type, structureId, templateId, smallImage,
-			smallImageURL, smallFile, smallBytes);
+			user.getCompanyId(), groupId, title, content, type, structureId,
+			templateId, smallImage, smallImageURL, smallFile, smallBytes);
 
 		JournalArticle oldArticle = null;
 		double oldVersion = 0;
@@ -2844,10 +2856,11 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected void validate(
-			long groupId, String articleId, boolean autoArticleId,
-			double version, String title, String content, String type,
-			String structureId, String templateId, boolean smallImage,
-			String smallImageURL, File smallFile, byte[] smallBytes)
+			long companyId, long groupId, String articleId,
+			boolean autoArticleId, double version, String title, String content,
+			String type, String structureId, String templateId,
+			boolean smallImage, String smallImageURL, File smallFile,
+			byte[] smallBytes)
 		throws PortalException, SystemException {
 
 		if (!autoArticleId) {
@@ -2862,14 +2875,15 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		validate(
-			groupId, title, content, type, structureId, templateId,
+			companyId, groupId, title, content, type, structureId, templateId,
 			smallImage, smallImageURL, smallFile, smallBytes);
 	}
 
 	protected void validate(
-			long groupId, String title, String content, String type,
-			String structureId, String templateId, boolean smallImage,
-			String smallImageURL, File smallFile, byte[] smallBytes)
+			long companyId, long groupId, String title, String content,
+			String type, String structureId, String templateId,
+			boolean smallImage, String smallImageURL, File smallFile,
+			byte[] smallBytes)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(title)) {
@@ -2883,10 +2897,27 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		if (Validator.isNotNull(structureId)) {
-			journalStructurePersistence.findByG_S(groupId, structureId);
+			Group globalGroup = groupLocalService.getCompanyGroup(companyId);
 
-			JournalTemplate template = journalTemplatePersistence.findByG_T(
-				groupId, templateId);
+			try {
+				journalStructurePersistence.findByG_S(
+					groupId, structureId);
+			}
+			catch (NoSuchStructureException nsse) {
+				journalStructurePersistence.findByG_S(
+					globalGroup.getGroupId(), structureId);
+			}
+
+			JournalTemplate template = null;
+
+			try {
+				template = journalTemplatePersistence.findByG_T(
+					groupId, templateId);
+			}
+			catch (NoSuchTemplateException nste) {
+				template = journalTemplatePersistence.findByG_T(
+					globalGroup.getGroupId(), templateId);
+			}
 
 			if (!template.getStructureId().equals(structureId)) {
 				throw new NoSuchTemplateException();
