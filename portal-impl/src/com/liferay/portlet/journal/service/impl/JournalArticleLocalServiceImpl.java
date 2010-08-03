@@ -945,11 +945,11 @@ public class JournalArticleLocalServiceImpl
 				}
 				catch (NoSuchTemplateException nste1) {
 					try {
-						Group globalGroup = groupLocalService.getCompanyGroup(
+						Group companyGroup = groupLocalService.getCompanyGroup(
 							article.getCompanyId());
 
 						template = journalTemplatePersistence.findByG_T(
-							globalGroup.getGroupId(), templateId);
+							companyGroup.getGroupId(), templateId);
 					}
 					catch (NoSuchTemplateException nste2) {
 						if (!defaultTemplateId.equals(templateId)) {
@@ -2897,7 +2897,7 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		if (Validator.isNotNull(structureId)) {
-			Group globalGroup = groupLocalService.getCompanyGroup(companyId);
+			Group companyGroup = groupLocalService.getCompanyGroup(companyId);
 
 			try {
 				journalStructurePersistence.findByG_S(
@@ -2905,7 +2905,7 @@ public class JournalArticleLocalServiceImpl
 			}
 			catch (NoSuchStructureException nsse) {
 				journalStructurePersistence.findByG_S(
-					globalGroup.getGroupId(), structureId);
+					companyGroup.getGroupId(), structureId);
 			}
 
 			JournalTemplate template = null;
@@ -2916,7 +2916,7 @@ public class JournalArticleLocalServiceImpl
 			}
 			catch (NoSuchTemplateException nste) {
 				template = journalTemplatePersistence.findByG_T(
-					globalGroup.getGroupId(), templateId);
+					companyGroup.getGroupId(), templateId);
 			}
 
 			if (!template.getStructureId().equals(structureId)) {
