@@ -1,4 +1,3 @@
-<%@ page import="com.liferay.portlet.journal.NoSuchTemplateException" %>
 <%
 /**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
@@ -268,21 +267,10 @@ if (articleDisplay != null) {
 			stageableGroup = layout.getGroup();
 		}
 
-		JournalTemplate template = null;
-
-		if (articleDisplay != null && Validator.isNotNull(articleDisplay.getTemplateId())) {
-			try {
-				template = JournalTemplateLocalServiceUtil.getTemplate(articleDisplay.getGroupId(), articleDisplay.getTemplateId());
-			}
-			catch (NoSuchTemplateException nste) {
-				template = JournalTemplateLocalServiceUtil.getTemplate(themeDisplay.getCompanyGroupId(), articleDisplay.getTemplateId());
-			}
-		}
-
 		boolean staged = stageableGroup.hasStagingGroup();
 
 		boolean showEditArticleIcon = (articleDisplay != null) && JournalArticlePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getArticleId(), ActionKeys.UPDATE);
-		boolean showEditTemplateIcon = template != null && JournalTemplatePermission.contains(permissionChecker, template.getGroupId(), template.getTemplateId(), ActionKeys.UPDATE);
+		boolean showEditTemplateIcon = (articleDisplay != null) && Validator.isNotNull(articleDisplay.getTemplateId()) && JournalTemplatePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getTemplateId(), ActionKeys.UPDATE);
 		boolean showSelectArticleIcon = PortletPermissionUtil.contains(permissionChecker, plid, portletDisplay.getId(), ActionKeys.CONFIGURATION);
 		boolean showAddArticleIcon = PortletPermissionUtil.contains(permissionChecker, plid, portletDisplay.getId(), ActionKeys.CONFIGURATION) && JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE);
 		boolean showIconsActions = themeDisplay.isSignedIn() && ((showEditArticleIcon || showEditTemplateIcon || showSelectArticleIcon || showAddArticleIcon) && !staged);
@@ -313,8 +301,8 @@ if (articleDisplay != null) {
 							<portlet:param name="struts_action" value="/journal/edit_template" />
 							<portlet:param name="redirect" value="<%= currentURL %>" />
 							<portlet:param name="referringPortletResource" value="<%= PortletKeys.JOURNAL_CONTENT %>" />
-							<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
-							<portlet:param name="templateId" value="<%= template.getTemplateId() %>" />
+							<portlet:param name="groupId" value="<%= String.valueOf(articleDisplay.getGroupId()) %>" />
+							<portlet:param name="templateId" value="<%= articleDisplay.getTemplateId() %>" />
 						</liferay-portlet:renderURL>
 
 						<liferay-ui:icon
