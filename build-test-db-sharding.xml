@@ -63,7 +63,7 @@ spring.configs=\
 		META-INF/ext-spring.xml]]></echo>
 	</target>
 
-	<target name="run-db-sharding-plugins-ee-tomcat-mysql">
+	<target name="test-db-sharding-plugins-tomcat-mysql">
 		<antcall target="prepare-mysql" />
 
 		<antcall target="prepare-db-sharding" />
@@ -77,7 +77,7 @@ spring.configs=\
 		</ant>
 	</target>
 
-	<target name="run-db-sharding-tomcat-mysql">
+	<target name="test-db-sharding-smoke-tomcat-mysql">
 		<antcall target="prepare-mysql" />
 
 		<antcall target="prepare-db-sharding" />

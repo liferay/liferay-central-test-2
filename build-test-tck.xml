@@ -44,7 +44,7 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 		<antcall target="rebuild-database" inheritAll="false" />
 	</target>
 
-	<target name="test-tck">
+	<target name="test-tck-286-tomcat-mysql">
 		<antcall target="prepare-tck" />
 
 		<parallel>

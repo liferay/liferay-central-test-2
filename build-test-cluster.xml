@@ -167,7 +167,7 @@ JkShmFile logs/jk-runtime-status</echo>
 		<antcall target="prepare-cluster-vm-node-2" />
 	</target>
 
-	<target name="run-cluster-tomcat-mysql">
+	<target name="test-cluster-smoke-tomcat-mysql">
 		<antcall target="prepare-mysql" />
 
 		<antcall target="prepare-cluster-vms" />

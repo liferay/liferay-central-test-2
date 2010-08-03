@@ -90,7 +90,7 @@ userpassword:: e1NIQX1xVXFQNWN5eG02WWNUQWh6MDVIcGg1Z3Z1OU09</echo>
 		</exec>
 	</target>
 
-	<target name="run-ldap-tomcat-mysql">
+	<target name="test-ldap-smoke-tomcat-mysql">
 		<antcall target="prepare-mysql" />
 
 		<antcall target="prepare-vm-server">
