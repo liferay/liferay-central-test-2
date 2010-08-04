@@ -140,6 +140,11 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 		friendlyURLPath = friendlyURLPath.substring(getMapping().length() + 1);
 
+		if (friendlyURLPath.endsWith(StringPool.SLASH))	{
+			friendlyURLPath = friendlyURLPath.substring(
+				0, friendlyURLPath.length() - 1);
+		}
+
 		Map<String, String> routeParameters = new HashMap<String, String>();
 
 		if (!router.urlToParameters(friendlyURLPath, routeParameters)) {

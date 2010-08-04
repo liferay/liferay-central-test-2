@@ -3,7 +3,7 @@
 
 <routes>
 	<route>
-		<pattern>/</pattern>
+		<pattern></pattern>
 		<implicit-parameter name="folderId">0</implicit-parameter>
 		<implicit-parameter name="struts_action">/document_library/view</implicit-parameter>
 	</route>

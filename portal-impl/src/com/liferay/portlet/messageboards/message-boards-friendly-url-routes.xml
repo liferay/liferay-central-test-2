@@ -50,7 +50,7 @@
 		<implicit-parameter name="struts_action">/message_boards/view</implicit-parameter>
 	</route>
 	<route>
-		<pattern>/</pattern>
+		<pattern></pattern>
 		<implicit-parameter name="struts_action">/message_boards/view</implicit-parameter>
 	</route>
 </routes>
