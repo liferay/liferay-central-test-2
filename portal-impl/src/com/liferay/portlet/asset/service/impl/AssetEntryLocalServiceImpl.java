@@ -80,12 +80,11 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 	public void deleteEntry(AssetEntry entry)
 		throws PortalException, SystemException {
-		
-		// Get a list of tags associated with this entry
+
+		// Entry
+
 		List<AssetTag> tags = assetEntryPersistence.getAssetTags(
 			entry.getEntryId());
-		
-		// Entry
 
 		assetEntryPersistence.remove(entry);
 
@@ -93,15 +92,16 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 		assetLinkLocalService.deleteLinks(entry.getEntryId());
 
+		// Tags
+
+		for (AssetTag tag : tags) {
+			assetTagLocalService.decrementAssetCount(
+				tag.getTagId(), entry.getClassNameId());
+		}
+
 		// Social
 
 		socialEquityLogLocalService.deactivateEquityLogs(entry.getEntryId());
-		
-		// Update tag statistics (decrement tag count)
-		for(AssetTag tag : tags) {
-			assetTagLocalService.decrementAssetCount(tag.getTagId(), 
-				entry.getClassNameId());
-		}
 	}
 
 	public void deleteEntry(long entryId)
