@@ -438,6 +438,26 @@ AUI().add(
 				}
 			},
 
+			_getSelection: function() {
+				var instance = this;
+
+				var textarea = instance._textarea;
+				var field = textarea.getDOM();
+				var value = textarea.val();
+				var selection;
+
+				if (Liferay.Browser.isIe()) {
+					instance._setSelectionRange();
+
+					selection = instance._selectionRange.text;
+				}
+				else if (field.selectionStart || field.selectionStart == 0) {
+					selection = value.substring(field.selectionStart, field.selectionEnd);
+				}
+
+				return selection;
+			},
+
 			_insertEmoticon: function(emoticon) {
 				var instance = this;
 
@@ -504,7 +524,15 @@ AUI().add(
 				var url = prompt(Liferay.Language.get('enter-an-address'), 'http://');
 
 				if (url != null) {
-					var title = prompt(Liferay.Language.get('enter-a-title-for-the-address'), '');
+					var title;
+					var sel = instance._getSelection();
+
+					if (sel) {
+						title = sel;
+					}
+					else {
+						title = prompt(Liferay.Language.get('enter-a-title-for-the-address'), '');
+					}
 
 					if (title) {
 						instance.insertTag('url', url, title);
