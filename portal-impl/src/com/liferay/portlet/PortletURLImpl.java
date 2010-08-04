@@ -764,29 +764,22 @@ public class PortletURLImpl
 			sb.append(StringPool.AMPERSAND);
 		}
 		else {
-
-			// A virtual host URL will contain the complete path. Do not append
-			// the portal URL if the virtual host URL starts with "http://" or
-			// "https://".
-
-			if (!_layoutFriendlyURL.startsWith(Http.HTTP_WITH_SLASH) &&
-				!_layoutFriendlyURL.startsWith(Http.HTTPS_WITH_SLASH)) {
-
+			if (themeDisplay.isFacebook()) {
 				sb.append(portalURL);
-				sb.append(_layoutFriendlyURL);
 			}
 			else {
-				if (!themeDisplay.isFacebook()) {
-					sb.append(_layoutFriendlyURL);
-				}
-				else {
+
+				// A virtual host URL will contain the complete path. Do not
+				// append the portal URL if the virtual host URL starts with
+				// "http://" or "https://".
+
+				if (!_layoutFriendlyURL.startsWith(Http.HTTP_WITH_SLASH) &&
+					!_layoutFriendlyURL.startsWith(Http.HTTPS_WITH_SLASH)) {
+
 					sb.append(portalURL);
-
-					int pos = _layoutFriendlyURL.indexOf(
-						StringPool.SLASH, Http.HTTPS_WITH_SLASH.length());
-
-					sb.append(_layoutFriendlyURL.substring(pos));
 				}
+
+				sb.append(_layoutFriendlyURL);
 			}
 
 			String friendlyURLPath = getPortletFriendlyURLPath();
