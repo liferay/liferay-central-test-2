@@ -27,7 +27,8 @@ public class HeaderTag extends IncludeTag {
 		request.setAttribute("liferay-ui:header:backLabel", _backLabel);
 		request.setAttribute("liferay-ui:header:backURL", _backURL);
 		request.setAttribute("liferay-ui:header:cssClass", _cssClass);
-		request.setAttribute("liferay-ui:header:escapeXml", _escapeXml);
+		request.setAttribute(
+			"liferay-ui:header:escapeXml", String.valueOf(_escapeXml));
 		request.setAttribute("liferay-ui:header:title", _title);
 	}
 
