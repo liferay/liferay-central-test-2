@@ -14,11 +14,52 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.ClusterGroup;
 import com.liferay.portal.service.base.ClusterGroupLocalServiceBaseImpl;
+
+import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
  */
 public class ClusterGroupLocalServiceImpl
 	extends ClusterGroupLocalServiceBaseImpl {
+
+	public ClusterGroup addClusterGroup(
+			String name, List<String> clusterNodeIds)
+		throws SystemException {
+
+		long ClusterGroupId = counterLocalService.increment();
+		ClusterGroup clusterGroup = clusterGroupPersistence.create(
+			ClusterGroupId);
+		clusterGroup.setName(name);
+
+		int size = clusterNodeIds.size();
+		StringBundler sb = new StringBundler(size * 2 -1);
+		for(int i = 0; i < size; i++) {
+			sb.append(clusterNodeIds.get(i));
+			if (i < size - 1) {
+				sb.append(StringPool.COMMA);
+			}
+		}
+
+		clusterGroup.setClusterNodeIds(sb.toString());
+
+		return clusterGroupPersistence.update(clusterGroup, false);
+	}
+
+	public ClusterGroup addWholeClusterGroup(String name)
+		throws SystemException {
+		long ClusterGroupId = counterLocalService.increment();
+		ClusterGroup clusterGroup = clusterGroupPersistence.create(
+			ClusterGroupId);
+		clusterGroup.setName(name);
+		clusterGroup.setWholeCluster(true);
+
+		return clusterGroupPersistence.update(clusterGroup, false);
+	}
+
 }

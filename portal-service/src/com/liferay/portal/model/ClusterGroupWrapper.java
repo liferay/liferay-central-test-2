@@ -52,6 +52,14 @@ public class ClusterGroupWrapper implements ClusterGroup {
 		_clusterGroup.setClusterNodeIds(clusterNodeIds);
 	}
 
+	public java.lang.String getName() {
+		return _clusterGroup.getName();
+	}
+
+	public void setName(java.lang.String name) {
+		_clusterGroup.setName(name);
+	}
+
 	public boolean getWholeCluster() {
 		return _clusterGroup.getWholeCluster();
 	}

@@ -64,6 +64,7 @@ public class ClusterGroupPersistenceTest extends BasePersistenceTestCase {
 		ClusterGroup newClusterGroup = _persistence.create(pk);
 
 		newClusterGroup.setClusterNodeIds(randomString());
+		newClusterGroup.setName(randomString());
 		newClusterGroup.setWholeCluster(randomBoolean());
 
 		_persistence.update(newClusterGroup, false);
@@ -74,6 +75,7 @@ public class ClusterGroupPersistenceTest extends BasePersistenceTestCase {
 			newClusterGroup.getClusterGroupId());
 		assertEquals(existingClusterGroup.getClusterNodeIds(),
 			newClusterGroup.getClusterNodeIds());
+		assertEquals(existingClusterGroup.getName(), newClusterGroup.getName());
 		assertEquals(existingClusterGroup.getWholeCluster(),
 			newClusterGroup.getWholeCluster());
 	}
@@ -150,6 +152,7 @@ public class ClusterGroupPersistenceTest extends BasePersistenceTestCase {
 		ClusterGroup clusterGroup = _persistence.create(pk);
 
 		clusterGroup.setClusterNodeIds(randomString());
+		clusterGroup.setName(randomString());
 		clusterGroup.setWholeCluster(randomBoolean());
 
 		_persistence.update(clusterGroup, false);

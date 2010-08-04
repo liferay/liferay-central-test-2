@@ -54,9 +54,10 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "clusterGroupId", new Integer(Types.BIGINT) },
 			{ "clusterNodeIds", new Integer(Types.VARCHAR) },
+			{ "name", new Integer(Types.VARCHAR) },
 			{ "wholeCluster", new Integer(Types.BOOLEAN) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table ClusterGroup (clusterGroupId LONG not null primary key,clusterNodeIds VARCHAR(75) null,wholeCluster BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table ClusterGroup (clusterGroupId LONG not null primary key,clusterNodeIds VARCHAR(75) null,name VARCHAR(75) null,wholeCluster BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table ClusterGroup";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -106,6 +107,19 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 		_clusterNodeIds = clusterNodeIds;
 	}
 
+	public String getName() {
+		if (_name == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _name;
+		}
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
 	public boolean getWholeCluster() {
 		return _wholeCluster;
 	}
@@ -147,6 +161,7 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 
 		clone.setClusterGroupId(getClusterGroupId());
 		clone.setClusterNodeIds(getClusterNodeIds());
+		clone.setName(getName());
 		clone.setWholeCluster(getWholeCluster());
 
 		return clone;
@@ -195,12 +210,14 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{clusterGroupId=");
 		sb.append(getClusterGroupId());
 		sb.append(", clusterNodeIds=");
 		sb.append(getClusterNodeIds());
+		sb.append(", name=");
+		sb.append(getName());
 		sb.append(", wholeCluster=");
 		sb.append(getWholeCluster());
 		sb.append("}");
@@ -209,7 +226,7 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.ClusterGroup");
@@ -224,6 +241,10 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 		sb.append(getClusterNodeIds());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>name</column-name><column-value><![CDATA[");
+		sb.append(getName());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>wholeCluster</column-name><column-value><![CDATA[");
 		sb.append(getWholeCluster());
 		sb.append("]]></column-value></column>");
@@ -235,6 +256,7 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 
 	private long _clusterGroupId;
 	private String _clusterNodeIds;
+	private String _name;
 	private boolean _wholeCluster;
 	private transient ExpandoBridge _expandoBridge;
 }

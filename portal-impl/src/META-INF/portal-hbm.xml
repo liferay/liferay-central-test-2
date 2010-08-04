@@ -204,6 +204,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="clusterNodeIds" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="wholeCluster" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.CompanyImpl" table="Company">

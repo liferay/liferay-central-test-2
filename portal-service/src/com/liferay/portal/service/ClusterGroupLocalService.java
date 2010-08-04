@@ -206,4 +206,12 @@ public interface ClusterGroupLocalService {
 	public com.liferay.portal.model.ClusterGroup updateClusterGroup(
 		com.liferay.portal.model.ClusterGroup clusterGroup, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.ClusterGroup addClusterGroup(
+		java.lang.String name, java.util.List<java.lang.String> clusterNodeIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.ClusterGroup addWholeClusterGroup(
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

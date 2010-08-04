@@ -304,6 +304,7 @@ create table ClassName_ (
 create table ClusterGroup (
 	clusterGroupId LONG not null primary key,
 	clusterNodeIds VARCHAR(75) null,
+	name VARCHAR(75) null,
 	wholeCluster BOOLEAN
 );
 

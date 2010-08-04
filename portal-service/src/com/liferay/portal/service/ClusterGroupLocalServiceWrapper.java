@@ -220,6 +220,18 @@ public class ClusterGroupLocalServiceWrapper implements ClusterGroupLocalService
 		return _clusterGroupLocalService.updateClusterGroup(clusterGroup, merge);
 	}
 
+	public com.liferay.portal.model.ClusterGroup addClusterGroup(
+		java.lang.String name, java.util.List<java.lang.String> clusterNodeIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _clusterGroupLocalService.addClusterGroup(name, clusterNodeIds);
+	}
+
+	public com.liferay.portal.model.ClusterGroup addWholeClusterGroup(
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _clusterGroupLocalService.addWholeClusterGroup(name);
+	}
+
 	public ClusterGroupLocalService getWrappedClusterGroupLocalService() {
 		return _clusterGroupLocalService;
 	}

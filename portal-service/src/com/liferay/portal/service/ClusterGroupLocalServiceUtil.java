@@ -225,6 +225,18 @@ public class ClusterGroupLocalServiceUtil {
 		return getService().updateClusterGroup(clusterGroup, merge);
 	}
 
+	public static com.liferay.portal.model.ClusterGroup addClusterGroup(
+		java.lang.String name, java.util.List<java.lang.String> clusterNodeIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().addClusterGroup(name, clusterNodeIds);
+	}
+
+	public static com.liferay.portal.model.ClusterGroup addWholeClusterGroup(
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().addWholeClusterGroup(name);
+	}
+
 	public static ClusterGroupLocalService getService() {
 		if (_service == null) {
 			_service = (ClusterGroupLocalService)PortalBeanLocatorUtil.locate(ClusterGroupLocalService.class.getName());
