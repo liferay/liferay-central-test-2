@@ -507,7 +507,6 @@ AUI().add(
 					var title = prompt(Liferay.Language.get('enter-a-title-for-the-address'), '');
 
 					if (title) {
-						instance._resetSelection();
 						instance.insertTag('url', url, title);
 					}
 					else {
