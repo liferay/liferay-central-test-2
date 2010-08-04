@@ -88,32 +88,36 @@ public class MinifierFilter extends BasePortalFilter {
 			else {
 				sb.append(content.substring(pos, x));
 
-				String importFile = content.substring(
+				String importFileName = content.substring(
 					x + _CSS_IMPORT_BEGIN.length(), y);
 
-				String importFileName = dir + StringPool.SLASH + importFile;
+				String importFullFileName = dir.concat(StringPool.SLASH).concat(
+					importFileName);
 
-				String importContent = FileUtil.read(importFileName);
+				String importContent = FileUtil.read(importFullFileName);
 
 				if (importContent == null) {
 					if (_log.isWarnEnabled()) {
-						_log.warn("Import file not found: " + importFileName);
+						_log.warn(
+							"File " + importFullFileName + " does not exist");
 					}
+
 					importContent = StringPool.BLANK;
 				}
 
-				String importFilePath = StringPool.BLANK;
+				String importDir = StringPool.BLANK;
 
-				if (importFile.lastIndexOf(StringPool.SLASH) != -1) {
-					importFilePath = StringPool.SLASH + importFile.substring(
-						0, importFile.lastIndexOf(StringPool.SLASH) + 1);
+				int slashPos = importFileName.lastIndexOf(StringPool.SLASH);
+
+				if (slashPos != -1) {
+					importDir = StringPool.SLASH.concat(
+						importFileName.substring(0, slashPos + 1));
 				}
 
-				importContent = aggregateCss(
-					dir + importFilePath, importContent);
+				importContent = aggregateCss(dir + importDir, importContent);
 
 				int importDepth = StringUtil.count(
-					importFile, StringPool.SLASH);
+					importFileName, StringPool.SLASH);
 
 				// LEP-7540
 

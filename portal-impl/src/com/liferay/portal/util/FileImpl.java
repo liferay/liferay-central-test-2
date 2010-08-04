@@ -483,7 +483,6 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		int len = 0;
 
 		while ((len = inputStream.read(buffer, 0, buffer.length)) != -1) {
-
 			if (ascii) {
 				ascii = detector.isAscii(buffer, len);
 
