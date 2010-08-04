@@ -175,15 +175,6 @@ public class PortalLDAPUtil {
 		}
 	}
 
-	public static String getGroupsDN(long ldapServerId, long companyId)
-		throws Exception {
-
-		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
-
-		return PrefsPropsUtil.getString(
-			companyId, PropsKeys.LDAP_GROUPS_DN + postfix);
-	}
-
 	public static Attributes getGroupAttributes(
 			long ldapServerId, long companyId, LdapContext ldapContext,
 			String fullDistinguishedName)
@@ -270,6 +261,15 @@ public class PortalLDAPUtil {
 		return getGroups(
 			companyId, ldapContext, cookie, maxResults, baseDN, groupFilter,
 			attributeIds, searchResults);
+	}
+
+	public static String getGroupsDN(long ldapServerId, long companyId)
+		throws Exception {
+
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
+
+		return PrefsPropsUtil.getString(
+			companyId, PropsKeys.LDAP_GROUPS_DN + postfix);
 	}
 
 	public static long getLdapServerId(long companyId, String screenName)

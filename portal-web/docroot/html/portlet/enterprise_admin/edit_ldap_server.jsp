@@ -260,7 +260,6 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<aui:input cssClass="lfr-input-text-container" label="groups-dn" name='<%= "settings--" + PropsKeys.LDAP_GROUPS_DN + postfix + "--" %>' type="text" value="<%= ldapGroupsDN %>" />
 
 		<aui:input cssClass="lfr-input-text-container" label="group-default-object-classes" name='<%= "settings--" + PropsKeys.LDAP_GROUP_DEFAULT_OBJECT_CLASSES + postfix + "--" %>' type="text" value="<%= ldapGroupDefaultObjectClasses %>" />
-
 	</aui:fieldset>
 
 	<aui:button-row>
