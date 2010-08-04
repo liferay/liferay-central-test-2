@@ -32,6 +32,7 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 
 			<liferay-ui:search-container-column-jsp
 				align="<%= align %>"
+				index="<%= j %>"
 				path="/html/portlet/document_library/file_entry_action.jsp"
 			/>
 
@@ -39,6 +40,7 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 		<c:when test='<%= fileEntryColumn.equals("downloads") %>'>
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
+				index="<%= j %>"
 				name="<%= fileEntryColumn %>"
 				value="<%= String.valueOf(fileEntry.getReadCount()) %>"
 			/>
@@ -51,6 +53,7 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
+				index="<%= j %>"
 				name="<%= fileEntryColumn %>"
 				value='<%= LanguageUtil.get(pageContext, isLocked ? "yes" : "no") %>'
 			/>
@@ -58,6 +61,7 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 		<c:when test='<%= fileEntryColumn.equals("name") %>'>
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
+				index="<%= j %>"
 				name="<%= fileEntryColumn %>"
 			>
 				<liferay-ui:icon
@@ -82,6 +86,7 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 		<c:when test='<%= fileEntryColumn.equals("size") %>'>
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
+				index="<%= j %>"
 				name="<%= fileEntryColumn %>"
 				value='<%= TextFormatter.formatKB(fileEntry.getSize(), locale) + "k" %>'
 			/>
@@ -96,6 +101,7 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
+				index="<%= j %>"
 				name="<%= fileEntryColumn %>"
 				value='<%= ListUtil.toString(assetTags, "name", StringPool.COMMA_AND_SPACE) %>'
 			/>
