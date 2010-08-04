@@ -932,7 +932,7 @@ public class JournalArticleLocalServiceImpl
 			if (article.isTemplateDriven()) {
 
 				// Try with specified template first (in the current group and
-				// the global group). If a template is not specified, use the 
+				// the global group). If a template is not specified, use the
 				// default one. If the specified template does not exit, use the
 				// default one. If the default one does not exist, throw an
 				// exception.

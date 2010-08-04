@@ -33,7 +33,7 @@ if (Validator.isNotNull(structureId)) {
 		try {
 			structure = JournalStructureLocalServiceUtil.getStructure(themeDisplay.getCompanyGroupId(), structureId);
 		}
-		catch (NoSuchStructureException nsse2) {	
+		catch (NoSuchStructureException nsse2) {
 			structureId = StringPool.BLANK;
 
 			preferences.setValue("structure-id", structureId);
