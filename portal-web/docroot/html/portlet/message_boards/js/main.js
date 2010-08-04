@@ -525,10 +525,10 @@ AUI().add(
 
 				if (url != null) {
 					var title;
-					var sel = instance._getSelection();
+					var selection = instance._getSelection();
 
-					if (sel) {
-						title = sel;
+					if (selection) {
+						title = selection;
 					}
 					else {
 						title = prompt(Liferay.Language.get('enter-a-title-for-the-address'), '');
@@ -552,10 +552,10 @@ AUI().add(
 				if (Liferay.Browser.isIe()) {
 					field.focus();
 
-					var sel = document.selection.createRange();
+					var selection = document.selection.createRange();
 
-					sel.collapse(false);
-					sel.select();
+					selection.collapse(false);
+					selection.select();
 				}
 				else if (field.setSelectionRange) {
 					var selectionStart = field.selectionStart;
