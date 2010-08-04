@@ -91,8 +91,16 @@ public class MinifierFilter extends BasePortalFilter {
 				String importFile = content.substring(
 					x + _CSS_IMPORT_BEGIN.length(), y);
 
-				String importContent = FileUtil.read(
-					dir + StringPool.SLASH + importFile);
+				String importFileName = dir + StringPool.SLASH + importFile;
+
+				String importContent = FileUtil.read(importFileName);
+
+				if (importContent == null) {
+					if (_log.isWarnEnabled()) {
+						_log.warn("Import file not found: " + importFileName);
+					}
+					importContent = StringPool.BLANK;
+				}
 
 				String importFilePath = StringPool.BLANK;
 

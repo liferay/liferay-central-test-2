@@ -571,6 +571,10 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	public String read(File file, boolean raw) throws IOException {
 		byte[] bytes = getBytes(file);
 
+		if (bytes == null) {
+			return null;
+		}
+
 		String s = new String(bytes, StringPool.UTF8);
 
 		if (raw) {
