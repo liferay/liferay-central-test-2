@@ -4442,62 +4442,38 @@ public class PortalImpl implements Portal {
 			Portlet portlet, String servletPath, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		String layoutURL = getLayoutURL(themeDisplay);
-
 		Layout layout = themeDisplay.getLayout();
 
 		StringBundler sb = new StringBundler();
 
-		if (HttpUtil.hasDomain(layoutURL)) {
-			String protocol = HttpUtil.getProtocol(layoutURL);
-			String domain = HttpUtil.getDomain(layoutURL);
-			HttpUtil.removeDomain(layoutURL);
+		sb.append(themeDisplay.getPortalURL());
 
-			sb.append(protocol);
-			sb.append(Http.PROTOCOL_DELIMITER);
-			sb.append(domain);
-
-			if (Validator.isNotNull(_pathContext)) {
-				sb.append(_pathContext);
-			}
-
-			if (themeDisplay.isI18n()) {
-				sb.append(themeDisplay.getI18nPath());
-			}
-
-			sb.append(servletPath);
-			sb.append(layout.getFriendlyURL());
+		if (Validator.isNotNull(_pathContext)) {
+			sb.append(_pathContext);
 		}
-		else {
-			sb.append(themeDisplay.getPortalURL());
 
-			if (Validator.isNotNull(_pathContext)) {
-				sb.append(_pathContext);
-			}
+		if (themeDisplay.isI18n()) {
+			sb.append(themeDisplay.getI18nPath());
+		}
 
-			if (themeDisplay.isI18n()) {
-				sb.append(themeDisplay.getI18nPath());
-			}
+		sb.append(servletPath);
 
-			sb.append(servletPath);
+		Group group = layout.getGroup();
 
-			Group group = layout.getGroup();
-
-			if (layout.isPrivateLayout()) {
-				if (group.isUser()) {
-					sb.append(_PRIVATE_USER_SERVLET_MAPPING);
-				}
-				else {
-					sb.append(_PRIVATE_GROUP_SERVLET_MAPPING);
-				}
+		if (layout.isPrivateLayout()) {
+			if (group.isUser()) {
+				sb.append(_PRIVATE_USER_SERVLET_MAPPING);
 			}
 			else {
-				sb.append(_PUBLIC_GROUP_SERVLET_MAPPING);
+				sb.append(_PRIVATE_GROUP_SERVLET_MAPPING);
 			}
-
-			sb.append(group.getFriendlyURL());
-			sb.append(layout.getFriendlyURL());
 		}
+		else {
+			sb.append(_PUBLIC_GROUP_SERVLET_MAPPING);
+		}
+
+		sb.append(group.getFriendlyURL());
+		sb.append(layout.getFriendlyURL());
 
 		sb.append(FRIENDLY_URL_SEPARATOR);
 
