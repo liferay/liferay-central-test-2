@@ -481,8 +481,7 @@ public class EditPagesAction extends PortletAction {
 				layout = LayoutServiceUtil.addLayout(
 					groupId, privateLayout, parentLayoutId, localeNamesMap,
 					localeTitlesMap, description, parentLayout.getType(),
-					parentLayout.isHidden(), friendlyURL,
-					serviceContext);
+					hidden, friendlyURL, serviceContext);
 
 				LayoutServiceUtil.updateLayout(
 					layout.getGroupId(), layout.isPrivateLayout(),
