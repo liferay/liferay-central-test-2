@@ -80,6 +80,8 @@ public class SearchContainerColumnTextTag extends SearchContainerColumnTag {
 			return EVAL_PAGE;
 		}
 		finally {
+			_value = null;
+
 			if (!ServerDetector.isResin()) {
 				align = SearchEntry.DEFAULT_ALIGN;
 				_buffer = null;
@@ -90,11 +92,11 @@ public class SearchContainerColumnTextTag extends SearchContainerColumnTag {
 				_orderable = false;
 				_orderableProperty = null;
 				_property = null;
+				_sb = null;
 				_target = null;
 				_title = null;
 				_translate = false;
 				valign = SearchEntry.DEFAULT_VALIGN;
-				_value = null;
 			}
 		}
 	}
