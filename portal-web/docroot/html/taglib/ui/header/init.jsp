@@ -20,6 +20,6 @@
 String backLabel = (String)request.getAttribute("liferay-ui:header:backLabel");
 String backURL = (String)request.getAttribute("liferay-ui:header:backURL");
 String cssClass = (String)request.getAttribute("liferay-ui:header:cssClass");
-boolean escapeXml = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:header:escapeXml"));
+boolean escapeXml = (Boolean)request.getAttribute("liferay-ui:header:escapeXml");
 String title = (String)request.getAttribute("liferay-ui:header:title");
 %>
