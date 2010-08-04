@@ -37,9 +37,9 @@ int roleType = RoleConstants.TYPE_COMMUNITY;
 Organization organization = null;
 
 if (group.isOrganization()) {
-	organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
-	
 	roleType = RoleConstants.TYPE_ORGANIZATION;
+
+	organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();
