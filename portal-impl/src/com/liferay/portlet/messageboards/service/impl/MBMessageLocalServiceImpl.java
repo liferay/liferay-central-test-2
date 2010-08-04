@@ -1490,7 +1490,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			if (message.isDiscussion()) {
 				updateDiscussionMessageStatus(
-					userId, messageId, status, serviceContext);
+					userId, messageId, status, oldStatus, serviceContext);
 			}
 		}
 		else if ((oldStatus == WorkflowConstants.STATUS_APPROVED) &&
@@ -2072,7 +2072,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	protected void updateDiscussionMessageStatus(
-			long userId, long messageId, int status,
+			long userId, long messageId, int status, int oldStatus,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -2081,8 +2081,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			(String)serviceContext.getAttribute("classPK"));
 
 		MBMessage message = getMessage(messageId);
-
-		int oldStatus = message.getStatus();
 
 		if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
 			(status == WorkflowConstants.STATUS_APPROVED)) {
