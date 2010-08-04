@@ -235,7 +235,7 @@
 					<then>
 						<delete file="${tstamp.value}/META-INF/services/javax.servlet.ServletContainerInitializer" />
 
-						<jar
+						<zip
 							basedir="${tstamp.value}"
 							destfile="${app.server.dir}/modules/jsf-impl.jar"
 						/>
