@@ -139,8 +139,8 @@
 
 		<!-- Other fields -->
 
-		<column name="clusterNodeIds" type="String" />
 		<column name="name" type="String" />
+		<column name="clusterNodeIds" type="String" />
 		<column name="wholeCluster" type="boolean" />
 	</entity>
 	<entity name="Company" local-service="true" remote-service="true">

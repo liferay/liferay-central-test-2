@@ -93,8 +93,8 @@
 	<mapped-superclass class="com.liferay.portal.model.impl.ClusterGroupModelImpl">
 		<attributes>
 			<id name="clusterGroupId" />
-			<basic name="clusterNodeIds" />
 			<basic name="name" />
+			<basic name="clusterNodeIds" />
 			<basic name="wholeCluster" />
 			<transient name="primaryKey" />
 		</attributes>

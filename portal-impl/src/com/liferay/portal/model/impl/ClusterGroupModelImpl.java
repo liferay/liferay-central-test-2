@@ -53,11 +53,11 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 	public static final String TABLE_NAME = "ClusterGroup";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "clusterGroupId", new Integer(Types.BIGINT) },
-			{ "clusterNodeIds", new Integer(Types.VARCHAR) },
 			{ "name", new Integer(Types.VARCHAR) },
+			{ "clusterNodeIds", new Integer(Types.VARCHAR) },
 			{ "wholeCluster", new Integer(Types.BOOLEAN) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table ClusterGroup (clusterGroupId LONG not null primary key,clusterNodeIds VARCHAR(75) null,name VARCHAR(75) null,wholeCluster BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table ClusterGroup (clusterGroupId LONG not null primary key,name VARCHAR(75) null,clusterNodeIds VARCHAR(75) null,wholeCluster BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table ClusterGroup";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -94,19 +94,6 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 		_clusterGroupId = clusterGroupId;
 	}
 
-	public String getClusterNodeIds() {
-		if (_clusterNodeIds == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _clusterNodeIds;
-		}
-	}
-
-	public void setClusterNodeIds(String clusterNodeIds) {
-		_clusterNodeIds = clusterNodeIds;
-	}
-
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -118,6 +105,19 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 
 	public void setName(String name) {
 		_name = name;
+	}
+
+	public String getClusterNodeIds() {
+		if (_clusterNodeIds == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _clusterNodeIds;
+		}
+	}
+
+	public void setClusterNodeIds(String clusterNodeIds) {
+		_clusterNodeIds = clusterNodeIds;
 	}
 
 	public boolean getWholeCluster() {
@@ -160,8 +160,8 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 		ClusterGroupImpl clone = new ClusterGroupImpl();
 
 		clone.setClusterGroupId(getClusterGroupId());
-		clone.setClusterNodeIds(getClusterNodeIds());
 		clone.setName(getName());
+		clone.setClusterNodeIds(getClusterNodeIds());
 		clone.setWholeCluster(getWholeCluster());
 
 		return clone;
@@ -214,10 +214,10 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 
 		sb.append("{clusterGroupId=");
 		sb.append(getClusterGroupId());
-		sb.append(", clusterNodeIds=");
-		sb.append(getClusterNodeIds());
 		sb.append(", name=");
 		sb.append(getName());
+		sb.append(", clusterNodeIds=");
+		sb.append(getClusterNodeIds());
 		sb.append(", wholeCluster=");
 		sb.append(getWholeCluster());
 		sb.append("}");
@@ -237,12 +237,12 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 		sb.append(getClusterGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>clusterNodeIds</column-name><column-value><![CDATA[");
-		sb.append(getClusterNodeIds());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
 		sb.append(getName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>clusterNodeIds</column-name><column-value><![CDATA[");
+		sb.append(getClusterNodeIds());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>wholeCluster</column-name><column-value><![CDATA[");
@@ -255,8 +255,8 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 	}
 
 	private long _clusterGroupId;
-	private String _clusterNodeIds;
 	private String _name;
+	private String _clusterNodeIds;
 	private boolean _wholeCluster;
 	private transient ExpandoBridge _expandoBridge;
 }

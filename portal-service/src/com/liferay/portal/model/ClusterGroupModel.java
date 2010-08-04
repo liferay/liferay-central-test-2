@@ -68,21 +68,6 @@ public interface ClusterGroupModel extends BaseModel<ClusterGroup> {
 	public void setClusterGroupId(long clusterGroupId);
 
 	/**
-	 * Gets the cluster node ids of this cluster group.
-	 *
-	 * @return the cluster node ids of this cluster group
-	 */
-	@AutoEscape
-	public String getClusterNodeIds();
-
-	/**
-	 * Sets the cluster node ids of this cluster group.
-	 *
-	 * @param clusterNodeIds the cluster node ids of this cluster group
-	 */
-	public void setClusterNodeIds(String clusterNodeIds);
-
-	/**
 	 * Gets the name of this cluster group.
 	 *
 	 * @return the name of this cluster group
@@ -96,6 +81,21 @@ public interface ClusterGroupModel extends BaseModel<ClusterGroup> {
 	 * @param name the name of this cluster group
 	 */
 	public void setName(String name);
+
+	/**
+	 * Gets the cluster node ids of this cluster group.
+	 *
+	 * @return the cluster node ids of this cluster group
+	 */
+	@AutoEscape
+	public String getClusterNodeIds();
+
+	/**
+	 * Sets the cluster node ids of this cluster group.
+	 *
+	 * @param clusterNodeIds the cluster node ids of this cluster group
+	 */
+	public void setClusterNodeIds(String clusterNodeIds);
 
 	/**
 	 * Gets the whole cluster of this cluster group.

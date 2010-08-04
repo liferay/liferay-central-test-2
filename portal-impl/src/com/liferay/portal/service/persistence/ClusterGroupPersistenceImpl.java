@@ -270,8 +270,8 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 		clusterGroupImpl.setPrimaryKey(clusterGroup.getPrimaryKey());
 
 		clusterGroupImpl.setClusterGroupId(clusterGroup.getClusterGroupId());
-		clusterGroupImpl.setClusterNodeIds(clusterGroup.getClusterNodeIds());
 		clusterGroupImpl.setName(clusterGroup.getName());
+		clusterGroupImpl.setClusterNodeIds(clusterGroup.getClusterNodeIds());
 		clusterGroupImpl.setWholeCluster(clusterGroup.isWholeCluster());
 
 		return clusterGroupImpl;
