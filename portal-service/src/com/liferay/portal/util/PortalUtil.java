@@ -386,6 +386,15 @@ public class PortalUtil {
 			expandoBridge, portletRequest);
 	}
 
+	public static String getFacebookURL(
+			Portlet portlet, String facebookCanvasPageURL,
+			ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return getPortal().getFacebookURL(
+			portlet, facebookCanvasPageURL, themeDisplay);
+	}
+
 	public static String getFirstPageLayoutTypes(PageContext pageContext) {
 		return getPortal().getFirstPageLayoutTypes(pageContext);
 	}

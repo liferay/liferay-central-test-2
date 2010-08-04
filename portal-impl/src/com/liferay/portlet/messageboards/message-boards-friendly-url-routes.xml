@@ -49,4 +49,8 @@
 		<pattern>/{topLink}/{p_p_state}</pattern>
 		<implicit-parameter name="struts_action">/message_boards/view</implicit-parameter>
 	</route>
+	<route>
+		<pattern>/</pattern>
+		<implicit-parameter name="struts_action">/message_boards/view</implicit-parameter>
+	</route>
 </routes>

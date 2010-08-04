@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.Portal;
@@ -33,28 +32,6 @@ public class FacebookUtil {
 	public static final String FACEBOOK_APPS_URL = "http://apps.facebook.com/";
 
 	public static final String FACEBOOK_SERVLET_PATH = "/facebook/";
-
-	public static String getCallbackURL(
-		String fbmlPortletURL, String facebookCanvasPageURL) {
-
-		int pos = fbmlPortletURL.indexOf(
-			StringPool.SLASH, Http.HTTPS_WITH_SLASH.length());
-
-		StringBundler sb = new StringBundler(4);
-
-		sb.append(fbmlPortletURL.substring(0, pos));
-		sb.append(FACEBOOK_SERVLET_PATH);
-		sb.append(facebookCanvasPageURL);
-		sb.append(fbmlPortletURL.substring(pos));
-
-		String callbackURL = sb.toString();
-
-		if (!callbackURL.endsWith(StringPool.SLASH)) {
-			callbackURL += StringPool.SLASH;
-		}
-
-		return callbackURL;
-	}
 
 	public static String[] getFacebookData(HttpServletRequest request) {
 		String path = GetterUtil.getString(request.getPathInfo());

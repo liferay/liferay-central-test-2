@@ -1342,6 +1342,22 @@ public class PortalImpl implements Portal {
 		return attributes;
 	}
 
+	public String getFacebookURL(
+			Portlet portlet, String facebookCanvasPageURL,
+			ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		String facebookURL = _getServletURL(
+			portlet, FacebookUtil.FACEBOOK_SERVLET_PATH + facebookCanvasPageURL,
+			themeDisplay);
+
+		if (!facebookURL.endsWith(StringPool.SLASH)) {
+			facebookURL += StringPool.SLASH;
+		}
+
+		return facebookURL;
+	}
+
 	public String getFirstPageLayoutTypes(PageContext pageContext) {
 		StringBundler sb = new StringBundler();
 

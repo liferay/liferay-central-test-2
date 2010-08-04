@@ -250,6 +250,11 @@ public interface Portal {
 			ExpandoBridge expandoBridge, PortletRequest portletRequest)
 		throws PortalException, SystemException;
 
+	public String getFacebookURL(
+			Portlet portlet, String facebookCanvasPageURL,
+			ThemeDisplay themeDisplay)
+		throws PortalException, SystemException;
+
 	public String getFirstPageLayoutTypes(PageContext pageContext);
 
 	public String getGlobalLibDir();
