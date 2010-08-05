@@ -15,7 +15,6 @@ package com.liferay.portal.kernel.util;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 
 import java.util.PropertyResourceBundle;
@@ -25,12 +24,10 @@ import java.util.PropertyResourceBundle;
  */
 public class Utf8PropertyResourceBundle extends PropertyResourceBundle {
 
-	public Utf8PropertyResourceBundle(InputStream stream) throws IOException {
-		super(stream);
-	}
+	public Utf8PropertyResourceBundle(InputStream inputStream)
+		throws IOException {
 
-	public Utf8PropertyResourceBundle(Reader reader) throws IOException {
-		super(reader);
+		super(inputStream);
 	}
 
 	public Object handleGetObject(String key) {
@@ -41,11 +38,13 @@ public class Utf8PropertyResourceBundle extends PropertyResourceBundle {
 		}
 
 		try {
-			return new String(value.getBytes("ISO-8859-1"), "UTF-8");
+			return new String(value.getBytes(_ISO_8859_1), StringPool.UTF8);
 		}
 		catch (UnsupportedEncodingException e) {
 			return null;
 		}
 	}
+
+	private static final String _ISO_8859_1 = "ISO-8859-1";
 
 }
