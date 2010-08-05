@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -457,7 +458,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		sb.append("/bin/");
 		sb.append(message.getMessageId());
 		sb.append(StringPool.SLASH);
-		sb.append(attachment);
+		sb.append(PortalUUIDUtil.generate());
 
 		return sb.toString();
 	}
