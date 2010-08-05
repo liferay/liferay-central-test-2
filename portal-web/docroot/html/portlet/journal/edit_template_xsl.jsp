@@ -42,10 +42,10 @@ String defaultContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE
 
 		<c:choose>
 			<c:when test="<%= useEditorCodepress %>">
-				 <aui:input cssClass="codepress html" label="" name="xslContent" type="textarea" wrap="off" />
+				 <aui:input inputCssClass="codepress html" label="" name="xslContent" type="textarea" wrap="off" />
 			</c:when>
 			<c:otherwise>
-				<aui:input cssClass="lfr-textarea" label="" name="xslContent" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();" type="textarea" wrap="off" />
+				<aui:input inputCssClass="lfr-textarea" label="" name="xslContent" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();" type="textarea" wrap="off" />
 			</c:otherwise>
 		</c:choose>
 	</aui:fieldset>
@@ -132,8 +132,13 @@ String defaultContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE
 		},
 		['aui-dialog']
 	);
-
-	document.<portlet:namespace />editorForm.<portlet:namespace />xslContent.value = <portlet:namespace />getEditorContent();
+	
+	if (<%= useEditorCodepress %>) {
+		document.<portlet:namespace />editorForm.<portlet:namespace />xslContent_cp.value = <portlet:namespace />getEditorContent();
+	}
+	else {
+		document.<portlet:namespace />editorForm.<portlet:namespace />xslContent.value = <portlet:namespace />getEditorContent();
+	}
 
 	Liferay.Util.resizeTextarea('<portlet:namespace />xslContent', <%= useEditorCodepress %>, true);
 </aui:script>

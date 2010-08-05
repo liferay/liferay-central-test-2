@@ -38,10 +38,10 @@ boolean useEditorCodepress = editorType.equals("codepress");
 
 		<c:choose>
 			<c:when test="<%= useEditorCodepress %>">
-				<aui:input cssClass="codepress html" label="" name="xsdContent" type="textarea" wrap="off" />
+				<aui:input inputCssClass="codepress html" label="" name="xsdContent" type="textarea" wrap="off" />
 			</c:when>
 			<c:otherwise>
-				<aui:input cssClass="lfr-textarea-container" label="" name="xsdContent" type="textarea" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();" wrap="off" />
+				<aui:input inputCssClass="lfr-textarea-container" label="" name="xsdContent" type="textarea" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();" wrap="off" />
 			</c:otherwise>
 		</c:choose>
 	</aui:fieldset>
@@ -123,7 +123,12 @@ boolean useEditorCodepress = editorType.equals("codepress");
 		['aui-dialog']
 	);
 
-	document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent.value = getEditorContent();
+	if (<%= useEditorCodepress %>) {
+		document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent_cp.value = getEditorContent();
+	}
+	else {
+		document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent.value = getEditorContent();
+	}
 
 	Liferay.Util.resizeTextarea('<portlet:namespace />xsdContent', <%= useEditorCodepress %>, true);
 </aui:script>
