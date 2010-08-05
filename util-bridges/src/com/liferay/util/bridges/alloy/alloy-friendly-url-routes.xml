@@ -3,7 +3,7 @@
 
 <routes>
 	<route>
-		<pattern>GET/</pattern>
+		<pattern>GET</pattern>
 		<implicit-parameter name="action">index</implicit-parameter>
 		<implicit-parameter name="controller">assets</implicit-parameter>
 		<implicit-parameter name="format">html</implicit-parameter>
