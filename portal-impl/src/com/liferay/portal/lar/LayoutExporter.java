@@ -14,6 +14,7 @@
 
 package com.liferay.portal.lar;
 
+import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
@@ -558,14 +559,20 @@ public class LayoutExporter {
 				typeSettingsProperties.getProperty(
 					"linkToLayoutId", StringPool.BLANK));
 
-			Layout linkedToLayout = LayoutUtil.findByG_P_L(
-				context.getScopeGroupId(), layout.isPrivateLayout(),
-				linkToLayoutId);
+			if (linkToLayoutId > 0) {
+				try {
+					Layout linkedToLayout = LayoutUtil.findByG_P_L(
+						context.getScopeGroupId(), layout.isPrivateLayout(),
+						linkToLayoutId);
 
-			exportLayout(
-				context, layoutConfigurationPortlet, layoutCache, portletIds,
-				exportPermissions, exportUserPermissions, linkedToLayout,
-				layoutsElement);
+					exportLayout(
+						context, layoutConfigurationPortlet, layoutCache,
+						portletIds,	exportPermissions, exportUserPermissions,
+						linkedToLayout, layoutsElement);
+				}
+				catch (NoSuchLayoutException nsle) {
+				}
+			}
 		}
 
 		fixTypeSettings(layout);
