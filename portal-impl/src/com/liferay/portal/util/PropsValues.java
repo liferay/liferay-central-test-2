@@ -792,6 +792,8 @@ public class PropsValues {
 
 	public static final String OPEN_SSO_LAST_NAME_ATTR = PropsUtil.get(PropsKeys.OPEN_SSO_LAST_NAME_ATTR);
 
+	public static final boolean OPEN_SSO_LDAP_IMPORT_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.OPEN_SSO_LDAP_IMPORT_ENABLED));
+
 	public static final String OPEN_SSO_LOGIN_URL = PropsUtil.get(PropsKeys.OPEN_SSO_LOGIN_URL);
 
 	public static final String OPEN_SSO_LOGOUT_URL = PropsUtil.get(PropsKeys.OPEN_SSO_LOGOUT_URL);

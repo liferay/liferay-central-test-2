@@ -17,17 +17,12 @@ package com.liferay.portal.security.auth;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.security.ldap.PortalLDAPImporterUtil;
-import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-
-import javax.naming.directory.SearchResult;
-import javax.naming.ldap.LdapContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,7 +53,8 @@ public class NtlmAutoLogin implements AutoLogin {
 
 			request.removeAttribute(WebKeys.NTLM_REMOTE_USER);
 
-			User user = getUser(companyId, screenName);
+			User user = PortalLDAPImporterUtil.importLDAPUserByScreenName(
+				companyId, screenName);
 
 			if (user != null) {
 				String redirect = ParamUtil.getString(request, "redirect");
@@ -80,33 +76,6 @@ public class NtlmAutoLogin implements AutoLogin {
 		}
 
 		return credentials;
-	}
-
-	protected User getUser(long companyId, String screenName) throws Exception {
-		long ldapServerId = PortalLDAPUtil.getLdapServerId(
-			companyId, screenName);
-
-		SearchResult result = (SearchResult)PortalLDAPUtil.getUser(
-			ldapServerId, companyId, screenName);
-
-		if (result == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"No user was found in LDAP with screenName " + screenName);
-			}
-
-			return null;
-		}
-
-		LdapContext ctx = PortalLDAPUtil.getContext(ldapServerId, companyId);
-
-		User user = PortalLDAPImporterUtil.importLDAPUser(
-			ldapServerId, companyId, ctx, result.getAttributes(),
-			StringPool.BLANK);
-
-		ctx.close();
-
-		return user;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(NtlmAutoLogin.class);

@@ -51,6 +51,7 @@ String ntlmServicePassword = ParamUtil.getString(request, "settings--" + PropsKe
 boolean openIdAuthEnabled = ParamUtil.getBoolean(request, "settings--" + PropsKeys.OPEN_ID_AUTH_ENABLED + "--", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.OPEN_ID_AUTH_ENABLED, PropsValues.OPEN_ID_AUTH_ENABLED));
 
 boolean openSsoAuthEnabled = ParamUtil.getBoolean(request, "settings--" + PropsKeys.OPEN_SSO_AUTH_ENABLED + "--", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.OPEN_SSO_AUTH_ENABLED, PropsValues.OPEN_SSO_AUTH_ENABLED));
+boolean openSsoLdapImportEnabled = ParamUtil.getBoolean(request, "settings--" + PropsKeys.OPEN_SSO_LDAP_IMPORT_ENABLED + "--", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.OPEN_SSO_LDAP_IMPORT_ENABLED, PropsValues.OPEN_SSO_LDAP_IMPORT_ENABLED));
 String openSsoLoginUrl = ParamUtil.getString(request, "settings--" + PropsKeys.OPEN_SSO_LOGIN_URL + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_LOGIN_URL, PropsValues.OPEN_SSO_LOGIN_URL));
 String openSsoLogoutUrl = ParamUtil.getString(request, "settings--" + PropsKeys.OPEN_SSO_LOGOUT_URL + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_LOGOUT_URL, PropsValues.OPEN_SSO_LOGOUT_URL));
 String openSsoServiceUrl = ParamUtil.getString(request, "settings--" + PropsKeys.OPEN_SSO_SERVICE_URL + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_SERVICE_URL, PropsValues.OPEN_SSO_SERVICE_URL));
@@ -151,6 +152,8 @@ String siteminderUserHeader = ParamUtil.getString(request, "settings--" + PropsK
 	<liferay-ui:section>
 		<aui:fieldset>
 			<aui:input inlineLabel="left" label="enabled" name='<%= "settings--" + PropsKeys.OPEN_SSO_AUTH_ENABLED + "--" %>' type="checkbox" value="<%= openSsoAuthEnabled %>" />
+
+			<aui:input inlineLabel="left" label="ldap-import-enabled" name='<%= "settings--" + PropsKeys.OPEN_SSO_LDAP_IMPORT_ENABLED + "--" %>' type="checkbox" value="<%= openSsoLdapImportEnabled %>" />
 
 			<aui:input cssClass="lfr-input-text-container" helpMessage="login-url-for-opensso-help" label="login-url" name='<%= "settings--" + PropsKeys.OPEN_SSO_LOGIN_URL + "--" %>' type="text" value="<%= openSsoLoginUrl %>" />
 

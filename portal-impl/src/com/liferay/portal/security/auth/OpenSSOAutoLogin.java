@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.ldap.PortalLDAPImporterUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.servlet.filters.sso.opensso.OpenSSOUtil;
@@ -68,6 +69,9 @@ public class OpenSSOAutoLogin implements AutoLogin {
 				return credentials;
 			}
 
+			boolean ldapImportEnabled = PrefsPropsUtil.getBoolean(
+				companyId, PropsKeys.OPEN_SSO_LDAP_IMPORT_ENABLED,
+				PropsValues.OPEN_SSO_LDAP_IMPORT_ENABLED);
 			String screenNameAttr = PrefsPropsUtil.getString(
 				companyId, PropsKeys.OPEN_SSO_SCREEN_NAME_ATTR,
 				PropsValues.OPEN_SSO_SCREEN_NAME_ATTR);
@@ -96,17 +100,26 @@ public class OpenSSOAutoLogin implements AutoLogin {
 						" and email address " + emailAddress);
 			}
 
-			if (Validator.isNull(emailAddress)) {
-				throw new AutoLoginException("Email address is null");
-			}
-
 			User user = null;
 
-			try {
-				user = UserLocalServiceUtil.getUserByScreenName(
+			if (ldapImportEnabled) {
+				user = PortalLDAPImporterUtil.importLDAPUserByScreenName(
 					companyId, screenName);
 			}
-			catch (NoSuchUserException nsue) {
+			else {
+				if (Validator.isNull(emailAddress)) {
+					throw new AutoLoginException("Email address is null");
+				}
+
+				try {
+					user = UserLocalServiceUtil.getUserByScreenName(
+						companyId, screenName);
+				}
+				catch (NoSuchUserException nsue) {
+				}
+			}
+
+			if (user == null) {
 				ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 					WebKeys.THEME_DISPLAY);
 

@@ -1187,6 +1187,8 @@ public interface PropsKeys {
 
 	public static final String OPEN_SSO_LAST_NAME_ATTR = "open.sso.last.name.attr";
 
+	public static final String OPEN_SSO_LDAP_IMPORT_ENABLED = "open.sso.ldap.import.enabled";
+
 	public static final String OPEN_SSO_LOGIN_URL = "open.sso.login.url";
 
 	public static final String OPEN_SSO_LOGOUT_URL = "open.sso.logout.url";

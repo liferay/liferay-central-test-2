@@ -211,6 +211,35 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		return user;
 	}
 
+	public User importLDAPUserByScreenName(long companyId, String screenName)
+		throws Exception {
+
+		long ldapServerId = PortalLDAPUtil.getLdapServerId(
+			companyId, screenName);
+
+		SearchResult result = (SearchResult)PortalLDAPUtil.getUser(
+			ldapServerId, companyId, screenName);
+
+		if (result == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"No user was found in LDAP with screenName " + screenName);
+			}
+
+			return null;
+		}
+
+		LdapContext ctx = PortalLDAPUtil.getContext(ldapServerId, companyId);
+
+		User user = PortalLDAPImporterUtil.importLDAPUser(
+			ldapServerId, companyId, ctx, result.getAttributes(),
+			StringPool.BLANK);
+
+		ctx.close();
+
+		return user;
+	}
+
 	public void setLDAPToPortalConverter(
 		LDAPToPortalConverter ldapToPortalConverter) {
 
