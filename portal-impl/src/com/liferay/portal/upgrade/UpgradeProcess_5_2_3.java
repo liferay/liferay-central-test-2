@@ -44,12 +44,14 @@ public class UpgradeProcess_5_2_3 extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 		upgrade(UpgradeSchema.class);
+		upgrade(UpgradeDuplicates.class);
 		upgrade(UpgradeBookmarks.class);
 		upgrade(UpgradeCalendar.class);
 		upgrade(UpgradeDocumentLibrary.class);
 		upgrade(UpgradeGroup.class);
 		upgrade(UpgradeImageGallery.class);
 		upgrade(UpgradeLayout.class);
+		upgrade(UpgradeMessageBoards.class);
 		upgrade(UpgradeResource.class);
 		upgrade(UpgradeResourceCode.class);
 		upgrade(UpgradeRole.class);
@@ -57,8 +59,6 @@ public class UpgradeProcess_5_2_3 extends UpgradeProcess {
 		upgrade(UpgradeTags.class);
 		upgrade(UpgradeUser.class);
 		upgrade(UpgradeWiki.class);
-		upgrade(UpgradeDuplicates.class);
-		upgrade(UpgradeMessageBoards.class);
 		upgrade(DropIndexes.class);
 	}
 
