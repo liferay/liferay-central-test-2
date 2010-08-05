@@ -985,35 +985,35 @@ public class SourceFormatter {
 	}
 
 	private static String _getCopyright() throws IOException {
-		try {
-			return _fileUtil.read("copyright.txt");
+		String copyright = _fileUtil.read("copyright.txt");
+
+		if (copyright == null) {
+			copyright = _fileUtil.read("../copyright.txt");
 		}
-		catch (Exception e1) {
-			try {
-				return _fileUtil.read("../copyright.txt");
-			}
-			catch (Exception e2) {
-				return _fileUtil.read("../../copyright.txt");
-			}
+
+		if (copyright == null) {
+			copyright = _fileUtil.read("../../copyright.txt");
 		}
+
+		return copyright;
 	}
 
 	private static String _getOldCopyright() {
 		try {
-			return _fileUtil.read("old-copyright.txt");
+			String copyright = _fileUtil.read("old-copyright.txt");
+
+			if (copyright == null) {
+				copyright = _fileUtil.read("../old-copyright.txt");
+			}
+
+			if (copyright == null) {
+				copyright = _fileUtil.read("../../old-copyright.txt");
+			}
+
+			return copyright;
 		}
-		catch (Exception e1) {
-			try {
-				return _fileUtil.read("../old-copyright.txt");
-			}
-			catch (Exception e2) {
-				try {
-					return _fileUtil.read("../../old-copyright.txt");
-				}
-				catch (Exception e3) {
-					return null;
-				}
-			}
+		catch (Exception e) {
+			return null;
 		}
 	}
 
