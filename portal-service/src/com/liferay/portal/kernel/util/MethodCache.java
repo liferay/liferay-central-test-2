@@ -51,15 +51,15 @@ public class MethodCache {
 		throws ClassNotFoundException, NoSuchMethodException {
 
 		MethodKey methodKey = new MethodKey(
-			classesMap, methodsMap, className, methodName, parameterTypes);
+			className, methodName, parameterTypes);
 
-		return get(methodKey);
+		return _instance._get(classesMap, methodsMap, methodKey);
 	}
 
 	public static Method get(MethodKey methodKey)
 		throws ClassNotFoundException, NoSuchMethodException {
 
-		return _instance._get(methodKey);
+		return _instance._get(null, null, methodKey);
 	}
 
 	public static Method put(MethodKey methodKey, Method method) {
@@ -71,16 +71,14 @@ public class MethodCache {
 		_methodsMap = new HashMap<MethodKey, Method>();
 	}
 
-	private Method _get(MethodKey methodKey)
+	private Method _get(
+			Map<String, Class<?>> classesMap, Map<MethodKey, Method> methodsMap,
+			MethodKey methodKey)
 		throws ClassNotFoundException, NoSuchMethodException {
-
-		Map<String, Class<?>> classesMap = methodKey.getClassesMap();
 
 		if (classesMap == null) {
 			classesMap = _classesMap;
 		}
-
-		Map<MethodKey, Method> methodsMap = methodKey.getMethodsMap();
 
 		if (methodsMap == null) {
 			methodsMap = _methodsMap;

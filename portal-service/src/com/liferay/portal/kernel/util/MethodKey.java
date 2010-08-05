@@ -16,10 +16,6 @@ package com.liferay.portal.kernel.util;
 
 import java.io.Serializable;
 
-import java.lang.reflect.Method;
-
-import java.util.Map;
-
 /**
  * @author Brian Wing Shun Chan
  */
@@ -43,26 +39,9 @@ public class MethodKey implements Serializable {
 	public MethodKey(
 		String className, String methodName, Class<?>[] parameterTypes) {
 
-		this(null, null, className, methodName, parameterTypes);
-	}
-
-	public MethodKey(
-		Map<String, Class<?>> classesMap, Map<MethodKey, Method> methodsMap,
-		String className, String methodName, Class<?>[] parameterTypes) {
-
-		_classesMap = classesMap;
-		_methodsMap = methodsMap;
 		_className = className;
 		_methodName = methodName;
 		_parameterTypes = parameterTypes;
-	}
-
-	public Map<String, Class<?>> getClassesMap() {
-		return _classesMap;
-	}
-
-	public Map<MethodKey, Method> getMethodsMap() {
-		return _methodsMap;
 	}
 
 	public String getClassName() {
@@ -121,8 +100,6 @@ public class MethodKey implements Serializable {
 		return _toString;
 	}
 
-	private Map<String, Class<?>> _classesMap;
-	private Map<MethodKey, Method> _methodsMap;
 	private String _className;
 	private String _methodName;
 	private Class<?>[] _parameterTypes;
