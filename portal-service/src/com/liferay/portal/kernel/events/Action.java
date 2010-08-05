@@ -14,11 +14,8 @@
 
 package com.liferay.portal.kernel.events;
 
-import com.liferay.portal.kernel.util.MethodKey;
-import com.liferay.portal.kernel.util.PortalClassInvoker;
+import com.liferay.portal.util.PortalUtil;
 
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -38,8 +35,9 @@ public abstract class Action {
 		throws ActionException {
 
 		try {
-			HttpServletRequest request = _getHttpServletRequest(renderRequest);
-			HttpServletResponse response = _getHttpServletResponse(
+			HttpServletRequest request = PortalUtil.getHttpServletRequest(
+				renderRequest);
+			HttpServletResponse response = PortalUtil.getHttpServletResponse(
 				renderResponse);
 
 			run(request, response);
@@ -51,43 +49,5 @@ public abstract class Action {
 			throw new ActionException(e);
 		}
 	}
-
-	private HttpServletRequest _getHttpServletRequest(
-			PortletRequest portletRequest)
-		throws Exception {
-
-		Object returnObj = PortalClassInvoker.invoke(
-			false, _GET_HTTP_SERVLET_REQUEST_METHOD_KEY, portletRequest);
-
-		if (returnObj != null) {
-			return (HttpServletRequest)returnObj;
-		}
-		else {
-			return null;
-		}
-	}
-
-	private HttpServletResponse _getHttpServletResponse(
-			PortletResponse portletResponse)
-		throws Exception {
-
-		Object returnObj = PortalClassInvoker.invoke(
-			false, _GET_HTTP_SERVLET_RESPONSE_METHOD_KEY, portletResponse);
-
-		if (returnObj != null) {
-			return (HttpServletResponse)returnObj;
-		}
-		else {
-			return null;
-		}
-	}
-
-	private static final String _CLASS = "com.liferay.portal.util.PortalUtil";
-
-	private static final MethodKey _GET_HTTP_SERVLET_REQUEST_METHOD_KEY =
-		new MethodKey(_CLASS, "getHttpServletRequest", PortletRequest.class);
-
-	private static final MethodKey _GET_HTTP_SERVLET_RESPONSE_METHOD_KEY =
-		new MethodKey(_CLASS, "getHttpServletResponse", PortletResponse.class);
 
 }

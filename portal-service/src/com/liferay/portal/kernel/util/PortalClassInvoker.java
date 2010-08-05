@@ -23,8 +23,7 @@ import java.lang.reflect.InvocationTargetException;
 public class PortalClassInvoker {
 
 	public static Object invoke(
-			boolean newInstance, String className, String methodName,
-			String[] parameterTypeNames, Object... args)
+			boolean newInstance, MethodKey methodKey, Object... arguments)
 		throws Exception {
 
 		Thread currentThread = Thread.currentThread();
@@ -35,9 +34,9 @@ public class PortalClassInvoker {
 			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
-			MethodKey methodKey = new MethodKey(className, methodName,
-				parameterTypeNames);
-			MethodHandler methodHandler = new MethodHandler(methodKey, args);
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, arguments);
+
 			return methodHandler.invoke(newInstance);
 		}
 		catch (InvocationTargetException ite) {
@@ -49,7 +48,8 @@ public class PortalClassInvoker {
 	}
 
 	public static Object invoke(
-			boolean newInstance, MethodKey methodKey, Object... args)
+			boolean newInstance, String className, String methodName,
+			String[] parameterTypeNames, Object... arguments)
 		throws Exception {
 
 		Thread currentThread = Thread.currentThread();
@@ -60,7 +60,12 @@ public class PortalClassInvoker {
 			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, args);
+			MethodKey methodKey = new MethodKey(
+				className, methodName, parameterTypeNames);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, arguments);
+
 			return methodHandler.invoke(newInstance);
 		}
 		catch (InvocationTargetException ite) {

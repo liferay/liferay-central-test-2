@@ -24,6 +24,20 @@ import java.lang.reflect.Method;
  */
 public class MethodKey implements Serializable {
 
+	public MethodKey(Method method) {
+		this(
+			method.getDeclaringClass().getName(), method.getName(),
+			method.getParameterTypes());
+	}
+
+	public MethodKey(
+		String className, String methodName, Class<?>... parameterTypes) {
+
+		_className = className;
+		_methodName = methodName;
+		_parameterTypes = parameterTypes;
+	}
+
 	public MethodKey(
 			String className, String methodName, String[] parameterTypeNames)
 		throws ClassNotFoundException {
@@ -40,31 +54,6 @@ public class MethodKey implements Serializable {
 		}
 	}
 
-	public MethodKey(Method method) {
-		this(method.getDeclaringClass().getName(), method.getName(),
-			method.getParameterTypes());
-	}
-
-	public MethodKey(
-		String className, String methodName, Class<?>... parameterTypes) {
-
-		_className = className;
-		_methodName = methodName;
-		_parameterTypes = parameterTypes;
-	}
-
-	public String getClassName() {
-		return _className;
-	}
-
-	public String getMethodName() {
-		return _methodName;
-	}
-
-	public Class<?>[] getParameterTypes() {
-		return _parameterTypes;
-	}
-
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -78,6 +67,18 @@ public class MethodKey implements Serializable {
 		else {
 			return false;
 		}
+	}
+
+	public String getClassName() {
+		return _className;
+	}
+
+	public String getMethodName() {
+		return _methodName;
+	}
+
+	public Class<?>[] getParameterTypes() {
+		return _parameterTypes;
 	}
 
 	public int hashCode() {

@@ -267,8 +267,8 @@ public class Validator {
 		Boolean valid = null;
 
 		try {
-			valid = (Boolean)PortalClassInvoker.invoke(true,
-				_IS_VALID_METHOD_KEY, emailAddress);
+			valid = (Boolean)PortalClassInvoker.invoke(
+				true, isValidMethodKey, emailAddress);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -631,10 +631,6 @@ public class Validator {
 		'_', '`', '{', '|', '}', '~'
 	};
 
-	private static final MethodKey _IS_VALID_METHOD_KEY =
-		new MethodKey("com.liferay.util.mail.InternetAddressUtil", "isValid",
-			String.class);
-
 	private static final String _VARIABLE_TERM_BEGIN = "[$";
 
 	private static final String _VARIABLE_TERM_END = "$]";
@@ -652,7 +648,8 @@ public class Validator {
 		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\." +
 		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])" +
 		"\\b");
-
+	private static MethodKey isValidMethodKey = new MethodKey(
+		"com.liferay.util.mail.InternetAddressUtil", "isValid", String.class);
 	private static Pattern _variableNamePattern = Pattern.compile(
 		"[_a-zA-Z]+[_a-zA-Z0-9]*");
 

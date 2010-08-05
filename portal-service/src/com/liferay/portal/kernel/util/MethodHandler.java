@@ -16,7 +16,6 @@ package com.liferay.portal.kernel.util;
 
 import java.io.Serializable;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import java.util.Arrays;
@@ -35,22 +34,6 @@ public class MethodHandler implements Serializable {
 		_arguments = arguments;
 	}
 
-	public String getClassName() {
-		return _methodKey.getClassName();
-	}
-
-	public String getMethodName() {
-		return _methodKey.getMethodName();
-	}
-
-	public MethodKey getMethodKey() {
-		return _methodKey;
-	}
-
-	public Class<?>[] getArgumentClass() {
-		return _methodKey.getParameterTypes();
-	}
-
 	public Object[] getArguments() {
 		Object[] arguments = new Object[_arguments.length];
 
@@ -59,44 +42,58 @@ public class MethodHandler implements Serializable {
 		return arguments;
 	}
 
-	public Object invoke(boolean newInstance)
-		throws ClassNotFoundException, IllegalAccessException,
-			   IllegalArgumentException, InstantiationException,
-			   InvocationTargetException, NoSuchMethodException {
+	public Class<?>[] getArgumentsClasses() {
+		return _methodKey.getParameterTypes();
+	}
+
+	public String getClassName() {
+		return _methodKey.getClassName();
+	}
+
+	public MethodKey getMethodKey() {
+		return _methodKey;
+	}
+
+	public String getMethodName() {
+		return _methodKey.getMethodName();
+	}
+
+	public Object invoke(boolean newInstance) throws Exception {
 		Thread currentThread = Thread.currentThread();
 
-		ClassLoader contextClassLoader =
-			currentThread.getContextClassLoader();
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		Object targetObject = null;
+
 		if (newInstance) {
-			targetObject = contextClassLoader.loadClass(
-				getClassName()).newInstance();
+			Class<?> targetClass = contextClassLoader.loadClass(
+				getClassName());
+
+			targetObject = targetClass.newInstance();
 		}
+
 		return invoke(targetObject);
 	}
 
-	public Object invoke(Object target)
-		throws ClassNotFoundException, IllegalAccessException,
-			   IllegalArgumentException, InvocationTargetException,
-			   NoSuchMethodException {
+	public Object invoke(Object target) throws Exception {
 		Method method = MethodCache.get(_methodKey);
+
 		return method.invoke(target, _arguments);
 	}
 
 	public String toString() {
 		StringBundler sb = new StringBundler(5);
 
-		sb.append("{MethodKey=");
-		sb.append(_methodKey);
-		sb.append(", arguments=");
+		sb.append("{arguments=");
 		sb.append(Arrays.toString(_arguments));
+		sb.append(", methodKey=");
+		sb.append(_methodKey);
 		sb.append("}");
 
 		return sb.toString();
 	}
 
-	private MethodKey _methodKey;
 	private Object[] _arguments;
+	private MethodKey _methodKey;
 
 }

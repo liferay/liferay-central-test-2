@@ -29,8 +29,8 @@ public class PropsUtil {
 		String value = null;
 
 		try {
-			Object returnObj =
-				PortalClassInvoker.invoke(false, _GET_METHOD_KEY, key);
+			Object returnObj = PortalClassInvoker.invoke(
+				false, _getMethodKey1, key);
 
 			if (returnObj != null) {
 				value = (String)returnObj;
@@ -47,8 +47,8 @@ public class PropsUtil {
 		String value = null;
 
 		try {
-			Object returnObj =
-				PortalClassInvoker.invoke(false, _GET_METHOD_KEY2, key, filter);
+			Object returnObj = PortalClassInvoker.invoke(
+				false, _getMethodKey2, key, filter);
 
 			if (returnObj != null) {
 				value = (String)returnObj;
@@ -65,8 +65,8 @@ public class PropsUtil {
 		String[] value = null;
 
 		try {
-			Object returnObj =
-				PortalClassInvoker.invoke(false, _GET_ARRAY_METHOD_KEY, key);
+			Object returnObj = PortalClassInvoker.invoke(
+				false, _getArrayMethodKey, key);
 
 			if (returnObj != null) {
 				value = (String[])returnObj;
@@ -83,8 +83,8 @@ public class PropsUtil {
 		Properties properties = null;
 
 		try {
-			Object returnObj =
-				PortalClassInvoker.invoke(false, _GET_PROPERTIES_METHOD_KEY);
+			Object returnObj = PortalClassInvoker.invoke(
+				false, _getPropertiesMethodKey1);
 
 			if (returnObj != null) {
 				properties = (Properties)returnObj;
@@ -103,9 +103,8 @@ public class PropsUtil {
 		Properties properties = null;
 
 		try {
-			Object returnObj =
-				PortalClassInvoker.invoke(false, _GET_PROPERTIES_METHOD_KEY2,
-					prefix, removePrefix);
+			Object returnObj = PortalClassInvoker.invoke(
+				false, _getPropertiesMethodKey2, prefix, removePrefix);
 
 			if (returnObj != null) {
 				properties = (Properties)returnObj;
@@ -118,23 +117,20 @@ public class PropsUtil {
 		return properties;
 	}
 
-	private static final String _CLASS = "com.liferay.portal.util.PropsUtil";
-
-	private static final MethodKey _GET_ARRAY_METHOD_KEY =
-		new MethodKey(_CLASS, "getArray", String.class);
-
-	private static final MethodKey _GET_METHOD_KEY =
-		new MethodKey(_CLASS, "get", String.class);
-
-	private static final MethodKey _GET_METHOD_KEY2 =
-		new MethodKey(_CLASS, "get", String.class, Filter.class);
-
-	private static final MethodKey _GET_PROPERTIES_METHOD_KEY =
-		new MethodKey(_CLASS, "getProperties");
-
-	private static final MethodKey _GET_PROPERTIES_METHOD_KEY2 =
-		new MethodKey(_CLASS, "getProperties", String.class, boolean.class);
+	private static final String _CLASS_NAME =
+		"com.liferay.portal.util.PropsUtil";
 
 	private static Log _log = LogFactoryUtil.getLog(PropsUtil.class);
+
+	private static MethodKey _getArrayMethodKey = new MethodKey(
+		_CLASS_NAME, "getArray", String.class);
+	private static MethodKey _getMethodKey1 = new MethodKey(
+		_CLASS_NAME, "get", String.class);
+	private static MethodKey _getMethodKey2 = new MethodKey(
+		_CLASS_NAME, "get", String.class, Filter.class);
+	private static MethodKey _getPropertiesMethodKey1 = new MethodKey(
+		_CLASS_NAME, "getProperties");
+	private static MethodKey _getPropertiesMethodKey2 = new MethodKey(
+		_CLASS_NAME, "getProperties", String.class, boolean.class);
 
 }

@@ -32,7 +32,7 @@ public class PortletActionInvoker {
 
 		PortalClassInvoker.invoke(
 			true, className, "processAction",
-			new String[]{
+			new String[] {
 				"org.apache.struts.action.ActionMapping",
 				"org.apache.struts.action.ActionForm",
 				PortletConfig.class.getName(), ActionRequest.class.getName(),

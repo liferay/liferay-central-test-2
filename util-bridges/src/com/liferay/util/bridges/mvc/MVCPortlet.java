@@ -176,16 +176,17 @@ public class MVCPortlet extends LiferayPortlet {
 	public void invokeTaglibDiscussion(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
+
 		PortletConfig portletConfig = getPortletConfig();
+
 		PortalClassInvoker.invoke(
 			true,
 			"com.liferay.portlet.messageboards.action.EditDiscussionAction",
 			"processAction",
-			new String[]{
+			new String[] {
 				"org.apache.struts.action.ActionMapping",
 				"org.apache.struts.action.ActionForm",
-				PortletConfig.class.getName(),
-				ActionRequest.class.getName(),
+				PortletConfig.class.getName(), ActionRequest.class.getName(),
 				ActionResponse.class.getName()
 			},
 			null, null, portletConfig, actionRequest, actionResponse);

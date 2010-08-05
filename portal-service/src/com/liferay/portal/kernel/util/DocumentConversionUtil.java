@@ -27,8 +27,7 @@ public class DocumentConversionUtil {
 		throws Exception {
 
 		Object returnObj = PortalClassInvoker.invoke(
-			false, _CONVERT_METHOD_KEY, id, is, sourceExtension,
-			targetExtension);
+			false, _convertMethodKey, id, is, sourceExtension, targetExtension);
 
 		if (returnObj != null) {
 			return (InputStream)returnObj;
@@ -40,7 +39,7 @@ public class DocumentConversionUtil {
 
 	public static String[] getConversions(String extension) throws Exception {
 		Object returnObj = PortalClassInvoker.invoke(
-			false, _GET_CONVERSIONS_METHOD_KEY, extension);
+			false, _getConversionsMethodKey, extension);
 
 		if (returnObj != null) {
 			return (String[])returnObj;
@@ -50,14 +49,13 @@ public class DocumentConversionUtil {
 		}
 	}
 
-	private static final String _CLASS =
+	private static final String _CLASS_NAME =
 		"com.liferay.portlet.documentlibrary.util.DocumentConversionUtil";
 
-	private static final MethodKey _CONVERT_METHOD_KEY =
-		new MethodKey(_CLASS, "convert", String.class, InputStream.class,
-			String.class, String.class);
-
-	private static final MethodKey _GET_CONVERSIONS_METHOD_KEY =
-		new MethodKey(_CLASS, "getConversions", String.class);
+	private static MethodKey _convertMethodKey = new MethodKey(
+		_CLASS_NAME, "convert", String.class, InputStream.class, String.class,
+		String.class);
+	private static MethodKey _getConversionsMethodKey = new MethodKey(
+		_CLASS_NAME, "getConversions", String.class);
 
 }
