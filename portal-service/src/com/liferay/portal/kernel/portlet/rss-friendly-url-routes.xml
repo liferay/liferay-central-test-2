@@ -7,4 +7,24 @@
 		<implicit-parameter name="rss">true</implicit-parameter>
 		<overridden-parameter name="p_p_state">exclusive</overridden-parameter>
 	</route>
+	<route>
+		<pattern>/rss</pattern>
+		<implicit-parameter name="rss">t</implicit-parameter>
+		<overridden-parameter name="p_p_state">exclusive</overridden-parameter>
+	</route>
+	<route>
+		<pattern>/rss</pattern>
+		<implicit-parameter name="rss">y</implicit-parameter>
+		<overridden-parameter name="p_p_state">exclusive</overridden-parameter>
+	</route>
+	<route>
+		<pattern>/rss</pattern>
+		<implicit-parameter name="rss">on</implicit-parameter>
+		<overridden-parameter name="p_p_state">exclusive</overridden-parameter>
+	</route>
+	<route>
+		<pattern>/rss</pattern>
+		<implicit-parameter name="rss">1</implicit-parameter>
+		<overridden-parameter name="p_p_state">exclusive</overridden-parameter>
+	</route>
 </routes>

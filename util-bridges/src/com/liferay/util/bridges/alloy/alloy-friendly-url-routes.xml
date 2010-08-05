@@ -16,9 +16,19 @@
 		<implicit-parameter name="method">GET</implicit-parameter>
 	</route>
 	<route>
+		<pattern>GET/{controller}.{format}</pattern>
+		<implicit-parameter name="action">index</implicit-parameter>
+		<implicit-parameter name="method">GET</implicit-parameter>
+	</route>
+	<route>
 		<pattern>POST/{controller}</pattern>
 		<implicit-parameter name="action">create</implicit-parameter>
 		<implicit-parameter name="format">html</implicit-parameter>
+		<implicit-parameter name="method">POST</implicit-parameter>
+	</route>
+	<route>
+		<pattern>POST/{controller}.{format}</pattern>
+		<implicit-parameter name="action">create</implicit-parameter>
 		<implicit-parameter name="method">POST</implicit-parameter>
 	</route>
 	<route>
@@ -28,29 +38,19 @@
 		<implicit-parameter name="method">GET</implicit-parameter>
 	</route>
 	<route>
+		<pattern>GET/{controller}/{id:\d+}.{format}</pattern>
+		<implicit-parameter name="action">view</implicit-parameter>
+		<implicit-parameter name="method">GET</implicit-parameter>
+	</route>
+	<route>
 		<pattern>POST/{controller}/{id:\d+}</pattern>
 		<implicit-parameter name="action">update</implicit-parameter>
 		<implicit-parameter name="format">html</implicit-parameter>
 		<implicit-parameter name="method">POST</implicit-parameter>
 	</route>
 	<route>
-		<pattern>GET/{controller}/{id:\d+}.{format}</pattern>
-		<implicit-parameter name="action">view</implicit-parameter>
-		<implicit-parameter name="method">GET</implicit-parameter>
-	</route>
-	<route>
 		<pattern>POST/{controller}/{id:\d+}.{format}</pattern>
 		<implicit-parameter name="action">update</implicit-parameter>
-		<implicit-parameter name="method">POST</implicit-parameter>
-	</route>
-	<route>
-		<pattern>GET/{controller}.{format}</pattern>
-		<implicit-parameter name="action">index</implicit-parameter>
-		<implicit-parameter name="method">GET</implicit-parameter>
-	</route>
-	<route>
-		<pattern>POST/{controller}.{format}</pattern>
-		<implicit-parameter name="action">create</implicit-parameter>
 		<implicit-parameter name="method">POST</implicit-parameter>
 	</route>
 	<route>

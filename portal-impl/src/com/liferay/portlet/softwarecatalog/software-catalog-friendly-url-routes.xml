@@ -3,43 +3,16 @@
 
 <routes>
 	<route>
-		<pattern>/framework_versions/new</pattern>
-		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
-		<implicit-parameter name="p_p_state">normal</implicit-parameter>
-		<implicit-parameter name="struts_action">/software_catalog/edit_framework_version</implicit-parameter>
-	</route>
-	<route>
-		<pattern>/licenses/new</pattern>
-		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
-		<implicit-parameter name="p_p_state">normal</implicit-parameter>
-		<implicit-parameter name="struts_action">/software_catalog/edit_license</implicit-parameter>
-	</route>
-	<route>
-		<pattern>/products/new</pattern>
-		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
-		<implicit-parameter name="p_p_state">normal</implicit-parameter>
-		<implicit-parameter name="struts_action">/software_catalog/edit_product_entry</implicit-parameter>
-	</route>
-	<route>
-		<pattern>/framework_versions/new/{p_p_state}</pattern>
-		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
-		<implicit-parameter name="struts_action">/software_catalog/edit_framework_version</implicit-parameter>
-	</route>
-	<route>
-		<pattern>/licenses/new/{p_p_state}</pattern>
-		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
-		<implicit-parameter name="struts_action">/software_catalog/edit_license</implicit-parameter>
-	</route>
-	<route>
-		<pattern>/products/new/{p_p_state}</pattern>
-		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
-		<implicit-parameter name="struts_action">/software_catalog/edit_product_entry</implicit-parameter>
-	</route>
-	<route>
 		<pattern>/products/{productEntryId:\d+}</pattern>
 		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
 		<implicit-parameter name="p_p_state">normal</implicit-parameter>
 		<implicit-parameter name="struts_action">/software_catalog/view_product_entry</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/products/{productEntryId:\d+}/edit</pattern>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="p_p_state">normal</implicit-parameter>
+		<implicit-parameter name="struts_action">/software_catalog/edit_product_entry</implicit-parameter>
 	</route>
 	<route>
 		<pattern>/framework_versions/{frameworkVersionId:\d+}/edit</pattern>
@@ -54,21 +27,22 @@
 		<implicit-parameter name="struts_action">/software_catalog/edit_license</implicit-parameter>
 	</route>
 	<route>
-		<pattern>/products/{productEntryId:\d+}/edit</pattern>
+		<pattern>/products/new</pattern>
 		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
 		<implicit-parameter name="p_p_state">normal</implicit-parameter>
 		<implicit-parameter name="struts_action">/software_catalog/edit_product_entry</implicit-parameter>
 	</route>
 	<route>
-		<pattern>/products/{productEntryId:\d+}/versions/new</pattern>
+		<pattern>/framework_versions/new</pattern>
 		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
 		<implicit-parameter name="p_p_state">normal</implicit-parameter>
-		<implicit-parameter name="struts_action">/software_catalog/edit_product_version</implicit-parameter>
+		<implicit-parameter name="struts_action">/software_catalog/edit_framework_version</implicit-parameter>
 	</route>
 	<route>
-		<pattern>/products/{productEntryId:\d+}/versions/new/{p_p_state}</pattern>
+		<pattern>/licenses/new</pattern>
 		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
-		<implicit-parameter name="struts_action">/software_catalog/edit_product_version</implicit-parameter>
+		<implicit-parameter name="p_p_state">normal</implicit-parameter>
+		<implicit-parameter name="struts_action">/software_catalog/edit_license</implicit-parameter>
 	</route>
 	<route>
 		<pattern>/products/{productEntryId:\d+}/versions/{productVersionId:\d+}/edit</pattern>
@@ -77,9 +51,26 @@
 		<implicit-parameter name="struts_action">/software_catalog/edit_product_version</implicit-parameter>
 	</route>
 	<route>
-		<pattern>/products/{productEntryId:\d+}/versions/{productVersionId:\d+}/edit/{p_p_state}</pattern>
+		<pattern>/products/{productEntryId:\d+}/versions/new</pattern>
 		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="p_p_state">normal</implicit-parameter>
 		<implicit-parameter name="struts_action">/software_catalog/edit_product_version</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/{tabs1}</pattern>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="p_p_state">normal</implicit-parameter>
+		<implicit-parameter name="struts_action">/software_catalog/view</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/products/{productEntryId:\d+}/{p_p_state}</pattern>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="struts_action">/software_catalog/view_product_entry</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/products/{productEntryId:\d+}/edit/{p_p_state}</pattern>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="struts_action">/software_catalog/edit_product_entry</implicit-parameter>
 	</route>
 	<route>
 		<pattern>/framework_versions/{frameworkVersionId:\d+}/edit/{p_p_state}</pattern>
@@ -92,20 +83,29 @@
 		<implicit-parameter name="struts_action">/software_catalog/edit_license</implicit-parameter>
 	</route>
 	<route>
-		<pattern>/products/{productEntryId:\d+}/edit/{p_p_state}</pattern>
+		<pattern>/products/new/{p_p_state}</pattern>
 		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
 		<implicit-parameter name="struts_action">/software_catalog/edit_product_entry</implicit-parameter>
 	</route>
 	<route>
-		<pattern>/products/{productEntryId:\d+}/{p_p_state}</pattern>
+		<pattern>/framework_versions/new/{p_p_state}</pattern>
 		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
-		<implicit-parameter name="struts_action">/software_catalog/view_product_entry</implicit-parameter>
+		<implicit-parameter name="struts_action">/software_catalog/edit_framework_version</implicit-parameter>
 	</route>
 	<route>
-		<pattern>/{tabs1}</pattern>
+		<pattern>/licenses/new/{p_p_state}</pattern>
 		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
-		<implicit-parameter name="p_p_state">normal</implicit-parameter>
-		<implicit-parameter name="struts_action">/software_catalog/view</implicit-parameter>
+		<implicit-parameter name="struts_action">/software_catalog/edit_license</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/products/{productEntryId:\d+}/versions/{productVersionId:\d+}/edit/{p_p_state}</pattern>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="struts_action">/software_catalog/edit_product_version</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/products/{productEntryId:\d+}/versions/new/{p_p_state}</pattern>
+		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+		<implicit-parameter name="struts_action">/software_catalog/edit_product_version</implicit-parameter>
 	</route>
 	<route>
 		<pattern>/{tabs1}/{p_p_state}</pattern>
