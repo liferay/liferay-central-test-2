@@ -64,6 +64,7 @@ public class ButtonTag extends IncludeTag {
 		_cssClass = null;
 		_data = null;
 		_disabled = false;
+		_inputCssClass = null;
 		_name = null;
 		_onClick = null;
 		_type = "button";

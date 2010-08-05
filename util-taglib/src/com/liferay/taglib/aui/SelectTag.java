@@ -68,7 +68,7 @@ public class SelectTag extends IncludeTag {
 	public void setInlineLabel(String inlineLabel) {
 		_inlineLabel = inlineLabel;
 	}
-	
+
 	public void setInputCssClass(String inputCssClass) {
 		_inputCssClass = inputCssClass;
 	}
@@ -122,6 +122,7 @@ public class SelectTag extends IncludeTag {
 		_helpMessage = null;
 		_inlineField = false;
 		_inlineLabel = null;
+		_inputCssClass = null;
 		_id = null;
 		_label = null;
 		_last = false;
