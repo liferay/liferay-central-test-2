@@ -135,7 +135,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 					<c:if test="<%= folder != null %>">
 						<c:if test="<%= Validator.isNotNull(folder.getDescription()) %>">
 							<div class="lfr-asset-description">
-								<%= folder.getDescription() %>
+								<%= HtmlUtil.escape(folder.getDescription()) %>
 							</div>
 						</c:if>
 
