@@ -40,6 +40,10 @@ public class ButtonTag extends IncludeTag {
 		_disabled = disabled;
 	}
 
+	public void setInputCssClass(String inputCssClass) {
+		_inputCssClass = inputCssClass;
+	}
+
 	public void setName(String name) {
 		_name = name;
 	}
@@ -94,6 +98,7 @@ public class ButtonTag extends IncludeTag {
 		request.setAttribute("aui:button:disabled", String.valueOf(_disabled));
 		request.setAttribute(
 			"aui:button:dynamicAttributes", getDynamicAttributes());
+		request.setAttribute("aui:button:inputCssClass", _inputCssClass);
 		request.setAttribute("aui:button:name", _name);
 		request.setAttribute("aui:button:onClick", _onClick);
 		request.setAttribute("aui:button:type", _type);
@@ -107,6 +112,7 @@ public class ButtonTag extends IncludeTag {
 	private String _cssClass;
 	private Map<String, Object> _data;
 	private boolean _disabled;
+	private String _inputCssClass;
 	private String _name;
 	private String _onClick;
 	private String _type = "button";

@@ -34,6 +34,7 @@ String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:inpu
 String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:input:id"));
 boolean inlineField = GetterUtil.getBoolean((String)request.getAttribute("aui:input:inlineField"));
 String inlineLabel = GetterUtil.getString((String)request.getAttribute("aui:input:inlineLabel"));
+String inputCssClass = GetterUtil.getString((String)request.getAttribute("aui:input:inputCssClass"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:input:label"));
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:input:last"));
 Class<?> model = (Class<?>)request.getAttribute("aui:input:model");
@@ -102,7 +103,7 @@ if (choiceField) {
 String baseTypeCss = TextFormatter.format(baseType.toLowerCase(), TextFormatter.K);
 
 String fieldCss = _buildCss(FIELD_PREFIX, baseTypeCss, inlineField, disabled, choiceField, first, last, cssClass);
-String inputCss = _buildCss(INPUT_PREFIX, baseTypeCss, false, false, choiceField, false, false, null);
+String inputCss = _buildCss(INPUT_PREFIX, baseTypeCss, false, false, choiceField, false, false, inputCssClass);
 String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 %>
 

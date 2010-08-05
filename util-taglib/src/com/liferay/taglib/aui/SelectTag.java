@@ -68,6 +68,10 @@ public class SelectTag extends IncludeTag {
 	public void setInlineLabel(String inlineLabel) {
 		_inlineLabel = inlineLabel;
 	}
+	
+	public void setInputCssClass(String inputCssClass) {
+		_inputCssClass = inputCssClass;
+	}
 
 	public void setLabel(String label) {
 		_label = label;
@@ -180,10 +184,11 @@ public class SelectTag extends IncludeTag {
 			"aui:select:dynamicAttributes", getDynamicAttributes());
 		request.setAttribute("aui:select:first", String.valueOf(_first));
 		request.setAttribute("aui:select:helpMessage", _helpMessage);
+		request.setAttribute("aui:select:id", id);
 		request.setAttribute(
 			"aui:select:inlineField", String.valueOf(_inlineField));
 		request.setAttribute("aui:select:inlineLabel", _inlineLabel);
-		request.setAttribute("aui:select:id", id);
+		request.setAttribute("aui:select:inputCssClass", _inputCssClass);
 		request.setAttribute("aui:select:label", label);
 		request.setAttribute("aui:select:last", String.valueOf(_last));
 		request.setAttribute("aui:select:listType", _listType);
@@ -214,6 +219,7 @@ public class SelectTag extends IncludeTag {
 	private String _id;
 	private boolean _inlineField;
 	private String _inlineLabel;
+	private String _inputCssClass;
 	private String _label;
 	private boolean _last;
 	private String _listType;

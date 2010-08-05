@@ -25,9 +25,10 @@ Map<String, Object> data = (Map<String, Object>)request.getAttribute("aui:select
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:select:dynamicAttributes");
 boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:select:first"));
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:select:helpMessage"));
+String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:select:id"));
 boolean inlineField = GetterUtil.getBoolean((String)request.getAttribute("aui:select:inlineField"));
 String inlineLabel = GetterUtil.getString((String)request.getAttribute("aui:select:inlineLabel"));
-String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:select:id"));
+String inputCssClass = GetterUtil.getString((String)request.getAttribute("aui:select:inputCssClass"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:select:label"));
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:select:last"));
 String listType = GetterUtil.getString((String)request.getAttribute("aui:select:listType"));
@@ -54,7 +55,7 @@ else if (Validator.isNotNull(title)) {
 }
 
 String fieldCss = _buildCss(FIELD_PREFIX, "select", inlineField, disabled, false, first, last, cssClass);
-String inputCss = _buildCss(INPUT_PREFIX, "select", false, false, false, false, false, null);
+String inputCss = _buildCss(INPUT_PREFIX, "select", false, false, false, false, false, inputCssClass);
 %>
 
 <span class="<%= fieldCss %>">

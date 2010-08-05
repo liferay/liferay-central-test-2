@@ -86,6 +86,10 @@ public class InputTag extends IncludeTag {
 		_inlineLabel = inlineLabel;
 	}
 
+	public void setInputCssClass(String inputCssClass) {
+		_inputCssClass = inputCssClass;
+	}
+
 	public void setLabel(String label) {
 		_label = label;
 	}
@@ -141,6 +145,7 @@ public class InputTag extends IncludeTag {
 		_id = null;
 		_inlineField = false;
 		_inlineLabel = null;
+		_inputCssClass = null;
 		_label = null;
 		_last = false;
 		_model = null;
@@ -216,6 +221,7 @@ public class InputTag extends IncludeTag {
 		request.setAttribute(
 			"aui:input:inlineField", String.valueOf(_inlineField));
 		request.setAttribute("aui:input:inlineLabel", _inlineLabel);
+		request.setAttribute("aui:input:inputCssClass", _inputCssClass);
 		request.setAttribute("aui:input:label", label);
 		request.setAttribute("aui:input:last", String.valueOf(_last));
 		request.setAttribute("aui:input:model", model);
@@ -246,6 +252,7 @@ public class InputTag extends IncludeTag {
 	private String _id;
 	private boolean _inlineField;
 	private String _inlineLabel;
+	private String _inputCssClass;
 	private String _label;
 	private boolean _last;
 	private Class<?> _model;
