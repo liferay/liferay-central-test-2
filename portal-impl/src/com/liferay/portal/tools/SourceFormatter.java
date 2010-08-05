@@ -1145,23 +1145,18 @@ public class SourceFormatter {
 		return copyright;
 	}
 
-	private static String _getOldCopyright() {
-		try {
-			String copyright = _fileUtil.read("old-copyright.txt");
+	private static String _getOldCopyright() throws IOException {
+		String copyright = _fileUtil.read("old-copyright.txt");
 
-			if (copyright == null) {
-				copyright = _fileUtil.read("../old-copyright.txt");
-			}
-
-			if (copyright == null) {
-				copyright = _fileUtil.read("../../old-copyright.txt");
-			}
-
-			return copyright;
+		if (copyright == null) {
+			copyright = _fileUtil.read("../old-copyright.txt");
 		}
-		catch (Exception e) {
-			return null;
+
+		if (copyright == null) {
+			copyright = _fileUtil.read("../../old-copyright.txt");
 		}
+
+		return copyright;
 	}
 
 	private static Collection<String> _getPluginJavaFiles() {
