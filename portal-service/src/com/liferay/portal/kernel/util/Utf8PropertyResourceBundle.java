@@ -36,6 +36,10 @@ public class Utf8PropertyResourceBundle extends PropertyResourceBundle {
 	public Object handleGetObject(String key) {
 		String value = (String)super.handleGetObject(key);
 
+		if (value == null) {
+			return null;
+		}
+
 		try {
 			return new String(value.getBytes("ISO-8859-1"), "UTF-8");
 		}
