@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Utf8PropertyResourceBundle;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
@@ -38,7 +39,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -162,7 +162,7 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 					sb.append(portletInfo.getDescription());
 					sb.append(StringPool.NEW_LINE);
 
-					resourceBundle = new PropertyResourceBundle(
+					resourceBundle = new Utf8PropertyResourceBundle(
 						new UnsyncByteArrayInputStream(
 							sb.toString().getBytes()));
 				}
