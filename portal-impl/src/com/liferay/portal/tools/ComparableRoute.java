@@ -26,12 +26,23 @@ import java.util.TreeSet;
  * @author Connor McKay
  */
 public class ComparableRoute implements Comparable<ComparableRoute> {
+
 	public static boolean hasRegex(String fragment) {
-		return (fragment.indexOf(":") != -1);
+		if (fragment.indexOf(":") != -1) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public static boolean isCaptureFragment(String fragment) {
-		return (fragment.indexOf("{") != -1);
+		if (fragment.indexOf("{") != -1) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public static boolean isMatchAny(String fragment) {
@@ -58,82 +69,77 @@ public class ComparableRoute implements Comparable<ComparableRoute> {
 		_overriddenParameters.put(name, value);
 	}
 
-	public int compareTo(ComparableRoute r) {
+	public int compareTo(ComparableRoute comparableRoute) {
+
 		// Don't split on .*
 
-		String[] myFragments = _pattern.split("[/\\.](?!\\*)");
-		String[] theirFragments = r.getPattern().split("[/\\.](?!\\*)");
+		String[] _fragments = _pattern.split("[/\\.](?!\\*)");
+
+		String pattern = comparableRoute.getPattern();
+
+		String[] fragments = pattern.split("[/\\.](?!\\*)");
 
 		int i;
 
-		for (i = 0; i < myFragments.length && i < theirFragments.length; i++) {
-			String myFragment = myFragments[i];
-			String theirFragment = theirFragments[i];
+		for (i = 0; (i < _fragments.length) && (i < fragments.length); i++) {
+			String _fragment = _fragments[i];
+			String fragment = fragments[i];
 
 			// Capture fragments are more general than static ones
 
-			boolean iCapture = isCaptureFragment(myFragment);
-			boolean theyCapture = isCaptureFragment(theirFragment);
-
-			if (theyCapture && !iCapture) {
+			if (!isCaptureFragment(_fragment) && isCaptureFragment(fragment)) {
 				return -1;
 			}
 
-			if (iCapture && !theyCapture) {
+			if (isCaptureFragment(_fragment) && !isCaptureFragment(fragment)) {
 				return 1;
 			}
 
 			// A fragment matching .* is more general than anything
 
-			boolean iMatchAny = isMatchAny(myFragment);
-			boolean theyMatchAny = isMatchAny(theirFragment);
-
-			if (theyMatchAny && !iMatchAny) {
+			if (!isMatchAny(_fragment) && isMatchAny(fragment)) {
 				return -1;
 			}
 
-			if (iMatchAny && !theyMatchAny) {
+			if (isMatchAny(_fragment) && !isMatchAny(fragment)) {
 				return 1;
 			}
 
 			// Not having a regex is more general than having a custom one
 
-			boolean iRegex = hasRegex(myFragment);
-			boolean theyRegex = hasRegex(theirFragment);
-
-			if (iRegex && !theyRegex) {
+			if (hasRegex(_fragment) && !hasRegex(fragment)) {
 				return -1;
 			}
 
-			if (theyRegex && !iRegex) {
+			if (!hasRegex(_fragment) && hasRegex(fragment)) {
 				return 1;
 			}
 		}
 
 		// Having more fragments is more general
 
-		if (i < theirFragments.length && i >= myFragments.length) {
+		if ((i < fragments.length) && (i >= _fragments.length)) {
 			return -1;
 		}
 
-		if (i < myFragments.length && i >= theirFragments.length) {
+		if ((i < _fragments.length) && (i >= fragments.length)) {
 			return 1;
 		}
 
 		// Having fewer implicit parameters is more general
 
-		int myImplicitCount = _implicitParameters.size();
-		int theirImplicitCount = r.getImplicitParameters().size();
+		Map<String, String> implicitParameters =
+			comparableRoute.getImplicitParameters(); 
 
-		if (myImplicitCount > theirImplicitCount) {
+		if (_implicitParameters.size() > implicitParameters.size()) {
 			return -1;
 		}
 
-		if (theirImplicitCount > myImplicitCount) {
+		if (_implicitParameters.size() < implicitParameters.size()) {
 			return 1;
 		}
 
-		return _pattern.compareTo(r.getPattern());
+		return _pattern.compareTo(comparableRoute.getPattern());
 	}
 
 	public boolean equals(Object obj) {
@@ -145,9 +151,14 @@ public class ComparableRoute implements Comparable<ComparableRoute> {
 			return false;
 		}
 
-		ComparableRoute r = (ComparableRoute)obj;
+		ComparableRoute comparableRoute = (ComparableRoute)obj;
 
-		return (compareTo(r) == 0);
+		if (compareTo(comparableRoute) == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public Map<String, String> getGeneratedParameters() {
@@ -175,8 +186,8 @@ public class ComparableRoute implements Comparable<ComparableRoute> {
 	private Set<String> _ignoredParameters = new TreeSet<String>();
 	private Map<String, String> _implicitParameters =
 		new TreeMap<String, String>();
-	private String _pattern;
 	private Map<String, String> _overriddenParameters =
 		new TreeMap<String, String>();
+	private String _pattern;
 
 }

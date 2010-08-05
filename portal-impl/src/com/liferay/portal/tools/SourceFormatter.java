@@ -370,12 +370,13 @@ public class SourceFormatter {
 
 		Element rootElement = document.getRootElement();
 
-		List<ComparableRoute> routes = new ArrayList<ComparableRoute>();
+		List<ComparableRoute> comparableRoutes =
+			new ArrayList<ComparableRoute>();
 
 		for (Element routeElement : rootElement.elements("route")) {
 			String pattern = routeElement.elementText("pattern");
 
-			ComparableRoute route = new ComparableRoute(pattern);
+			ComparableRoute comparableRoute = new ComparableRoute(pattern);
 
 			for (Element generatedParameterElement :
 					routeElement.elements("generated-parameter")) {
@@ -383,7 +384,7 @@ public class SourceFormatter {
 				String name = generatedParameterElement.attributeValue("name");
 				String value = generatedParameterElement.getText();
 
-				route.addGeneratedParameter(name, value);
+				comparableRoute.addGeneratedParameter(name, value);
 			}
 
 			for (Element ignoredParameterElement :
@@ -391,16 +392,16 @@ public class SourceFormatter {
 
 				String name = ignoredParameterElement.attributeValue("name");
 
-				route.addIgnoredParameter(name);
+				comparableRoute.addIgnoredParameter(name);
 			}
 
 			for (Element implicitParameterElement :
-				routeElement.elements("implicit-parameter")) {
+					routeElement.elements("implicit-parameter")) {
 
 				String name = implicitParameterElement.attributeValue("name");
 				String value = implicitParameterElement.getText();
 
-				route.addImplicitParameter(name, value);
+				comparableRoute.addImplicitParameter(name, value);
 			}
 
 			for (Element overriddenParameterElement :
@@ -409,30 +410,32 @@ public class SourceFormatter {
 				String name = overriddenParameterElement.attributeValue("name");
 				String value = overriddenParameterElement.getText();
 
-				route.addOverriddenParameter(name, value);
+				comparableRoute.addOverriddenParameter(name, value);
 			}
 
-			routes.add(route);
+			comparableRoutes.add(comparableRoute);
 		}
-		
-		Collections.sort(routes);
+
+		Collections.sort(comparableRoutes);
 
 		StringBundler sb = new StringBundler();
 
 		sb.append("<?xml version=\"1.0\"?>\n");
-		sb.append(
-			"<!DOCTYPE routes PUBLIC \"-//Liferay//DTD Friendly URL Routes " +
-			"6.0.0//EN\" \"http://www.liferay.com/dtd/liferay-friendly-url-" +
-			"routes_6_0_0.dtd\">\n\n<routes>\n");
+		sb.append("<!DOCTYPE routes PUBLIC \"-//Liferay//DTD Friendly URL ");
+		sb.append("Routes 6.0.0//EN\" \"http://www.liferay.com/dtd/");
+		sb.append("liferay-friendly-url-routes_6_0_0.dtd\">\n\n<routes>\n");
 
-		for (ComparableRoute route : routes) {
+		for (ComparableRoute comparableRoute : comparableRoutes) {
 			sb.append("\t<route>\n");
 			sb.append("\t\t<pattern>");
-			sb.append(route.getPattern());
+			sb.append(comparableRoute.getPattern());
 			sb.append("</pattern>\n");
 
+			Map<String, String> generatedParameters =
+				comparableRoute.getGeneratedParameters();
+
 			for (Map.Entry<String, String> entry :
-				route.getGeneratedParameters().entrySet()) {
+					generatedParameters.entrySet()) {
 
 				sb.append("\t\t<generated-parameter name=\"");
 				sb.append(entry.getKey());
@@ -441,14 +444,20 @@ public class SourceFormatter {
 				sb.append("</generated-parameter>\n");
 			}
 
-			for (String entry : route.getIgnoredParameters()) {
+			Set<String> ignoredParameters =
+				comparableRoute.getIgnoredParameters();
+
+			for (String entry : ignoredParameters) {
 				sb.append("\t\t<ignored-parameter name=\"");
 				sb.append(entry);
 				sb.append("\" />\n");
 			}
 
+			Map<String, String> implicitParameters =
+				comparableRoute.getImplicitParameters();
+
 			for (Map.Entry<String, String> entry :
-				route.getImplicitParameters().entrySet()) {
+					implicitParameters.entrySet()) {
 
 				sb.append("\t\t<implicit-parameter name=\"");
 				sb.append(entry.getKey());
@@ -457,8 +466,11 @@ public class SourceFormatter {
 				sb.append("</implicit-parameter>\n");
 			}
 
+			Map<String, String> overriddenParameters =
+				comparableRoute.getOverriddenParameters();
+
 			for (Map.Entry<String, String> entry :
-				route.getOverriddenParameters().entrySet()) {
+					overriddenParameters.entrySet()) {
 
 				sb.append("\t\t<overridden-parameter name=\"");
 				sb.append(entry.getKey());
@@ -469,6 +481,7 @@ public class SourceFormatter {
 
 			sb.append("\t</route>\n");
 		}
+
 		sb.append("</routes>");
 
 		return sb.toString();
