@@ -128,7 +128,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 				<liferay-ui:panel-container extended="<%= false %>" persistState="<%= true %>">
 					<c:if test="<%= folder != null %>">
 						<div class="lfr-asset-description">
-							<%= folder.getDescription() %>
+							<%= HtmlUtil.escape(folder.getDescription()) %>
 						</div>
 
 						<div class="lfr-asset-metadata">

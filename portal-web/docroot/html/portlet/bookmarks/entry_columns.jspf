@@ -48,7 +48,7 @@ for (int j = 0; j < entryColumns.length; j++) {
 				href="<%= rowHREF %>"
 				name="<%= bookmarksEntryColumn %>"
 				target="<%= target %>"
-				value="<%= entry.getName() %>"
+				value="<%= HtmlUtil.escape(entry.getName()) %>"
 			/>
 		</c:when>
 		<c:when test='<%= bookmarksEntryColumn.equals("url") %>'>
