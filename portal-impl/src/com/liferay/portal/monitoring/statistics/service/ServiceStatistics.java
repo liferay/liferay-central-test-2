@@ -37,7 +37,7 @@ public class ServiceStatistics
 		throws SystemException {
 
 		try {
-			MethodKey methodKey = MethodKey.create(
+			MethodKey methodKey = new MethodKey(
 				_className, methodName, parameterTypes);
 
 			RequestStatistics requestStatistics = _methodRequestStatistics.get(
@@ -58,7 +58,7 @@ public class ServiceStatistics
 		throws SystemException {
 
 		try {
-			MethodKey methodKey = MethodKey.create(
+			MethodKey methodKey = new MethodKey(
 				_className, methodName, parameterTypes);
 
 			RequestStatistics requestStatistics = _methodRequestStatistics.get(
@@ -79,7 +79,7 @@ public class ServiceStatistics
 		throws SystemException {
 
 		try {
-			MethodKey methodKey = MethodKey.create(
+			MethodKey methodKey = new MethodKey(
 				_className, methodName, parameterTypes);
 
 			RequestStatistics requestStatistics = _methodRequestStatistics.get(
@@ -100,7 +100,7 @@ public class ServiceStatistics
 		throws SystemException {
 
 		try {
-			MethodKey methodKey = MethodKey.create(
+			MethodKey methodKey = new MethodKey(
 				_className, methodName, parameterTypes);
 
 			RequestStatistics requestStatistics = _methodRequestStatistics.get(
@@ -121,7 +121,7 @@ public class ServiceStatistics
 		throws SystemException {
 
 		try {
-			MethodKey methodKey = MethodKey.create(
+			MethodKey methodKey = new MethodKey(
 				_className, methodName, parameterTypes);
 
 			RequestStatistics requestStatistics = _methodRequestStatistics.get(

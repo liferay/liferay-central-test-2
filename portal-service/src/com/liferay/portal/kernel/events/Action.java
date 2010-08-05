@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.events;
 
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.PortalClassInvoker;
 
 import javax.portlet.PortletRequest;
@@ -56,7 +57,7 @@ public abstract class Action {
 		throws Exception {
 
 		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GETHTTPSERVLETREQUEST, portletRequest, false);
+			false, _GET_HTTP_SERVLET_REQUEST_METHOD_KEY, portletRequest);
 
 		if (returnObj != null) {
 			return (HttpServletRequest)returnObj;
@@ -71,7 +72,7 @@ public abstract class Action {
 		throws Exception {
 
 		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GETHTTPSERVLETRESPONSE, portletResponse, false);
+			false, _GET_HTTP_SERVLET_RESPONSE_METHOD_KEY, portletResponse);
 
 		if (returnObj != null) {
 			return (HttpServletResponse)returnObj;
@@ -83,10 +84,10 @@ public abstract class Action {
 
 	private static final String _CLASS = "com.liferay.portal.util.PortalUtil";
 
-	private static final String _METHOD_GETHTTPSERVLETREQUEST =
-		"getHttpServletRequest";
+	private static final MethodKey _GET_HTTP_SERVLET_REQUEST_METHOD_KEY =
+		new MethodKey(_CLASS, "getHttpServletRequest", PortletRequest.class);
 
-	private static final String _METHOD_GETHTTPSERVLETRESPONSE =
-		"getHttpServletResponse";
+	private static final MethodKey _GET_HTTP_SERVLET_RESPONSE_METHOD_KEY =
+		new MethodKey(_CLASS, "getHttpServletResponse", PortletResponse.class);
 
 }

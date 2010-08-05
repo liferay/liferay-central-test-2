@@ -18,100 +18,13 @@ import java.lang.reflect.InvocationTargetException;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class PortalClassInvoker {
 
-	public static Object invoke(String className, String methodName)
-		throws Exception {
-
-		return invoke(className, methodName, new Object[] {});
-	}
-
-	public static Object invoke(String className, String methodName, Object arg)
-		throws Exception {
-
-		return invoke(className, methodName, new Object[] {arg});
-	}
-
 	public static Object invoke(
-			String className, String methodName, Object arg1, Object arg2)
-		throws Exception {
-
-		return invoke(className, methodName, new Object[] {arg1, arg2});
-	}
-
-	public static Object invoke(
-			String className, String methodName, Object arg1, Object arg2,
-			Object arg3)
-		throws Exception {
-
-		return invoke(className, methodName, new Object[] {arg1, arg2, arg3});
-	}
-
-	public static Object invoke(
-			String className, String methodName, Object[] args)
-		throws Exception {
-
-		return invoke(className, methodName, args, true);
-	}
-
-	public static Object invoke(
-		String className, String methodName, boolean newInstance)
-		throws Exception {
-
-		return invoke(className, methodName, new Object[] {}, newInstance);
-	}
-
-	public static Object invoke(
-			String className, String methodName, Object arg,
-			boolean newInstance)
-		throws Exception {
-
-		return invoke(className, methodName, new Object[] {arg}, newInstance);
-	}
-
-	public static Object invoke(
-			String className, String methodName, Object arg1, Object arg2,
-			boolean newInstance)
-		throws Exception {
-
-		return invoke(
-			className, methodName, new Object[] {arg1, arg2}, newInstance);
-	}
-
-	public static Object invoke(
-			String className, String methodName, Object arg1, Object arg2,
-			Object arg3, boolean newInstance)
-		throws Exception {
-
-		return invoke(
-			className, methodName, new Object[] {arg1, arg2, arg3},
-			newInstance);
-	}
-
-	public static Object invoke(
-			String className, String methodName, Object arg1, Object arg2,
-			Object arg3, Object arg4, boolean newInstance)
-		throws Exception {
-
-		return invoke(
-			className, methodName, new Object[] {arg1, arg2, arg3, arg4},
-			newInstance);
-	}
-
-	public static Object invoke(
-			String className, String methodName, Object arg1, Object arg2,
-			Object arg3, Object arg4, Object arg5, boolean newInstance)
-		throws Exception {
-
-		return invoke(
-			className, methodName, new Object[] {arg1, arg2, arg3, arg4, arg5},
-			newInstance);
-	}
-
-	public static Object invoke(
-			String className, String methodName, Object[] args,
-			boolean newInstance)
+			boolean newInstance, String className, String methodName,
+			String[] parameterTypeNames, Object... args)
 		throws Exception {
 
 		Thread currentThread = Thread.currentThread();
@@ -122,10 +35,33 @@ public class PortalClassInvoker {
 			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
-			MethodWrapper methodWrapper = new MethodWrapper(
-				className, methodName, args);
+			MethodKey methodKey = new MethodKey(className, methodName,
+				parameterTypeNames);
+			MethodHandler methodHandler = new MethodHandler(methodKey, args);
+			return methodHandler.invoke(newInstance);
+		}
+		catch (InvocationTargetException ite) {
+			throw (Exception)ite.getCause();
+		}
+		finally {
+			currentThread.setContextClassLoader(contextClassLoader);
+		}
+	}
 
-			return MethodInvoker.invoke(methodWrapper, newInstance);
+	public static Object invoke(
+			boolean newInstance, MethodKey methodKey, Object... args)
+		throws Exception {
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			currentThread.setContextClassLoader(
+				PortalClassLoaderUtil.getClassLoader());
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, args);
+			return methodHandler.invoke(newInstance);
 		}
 		catch (InvocationTargetException ite) {
 			throw (Exception)ite.getCause();

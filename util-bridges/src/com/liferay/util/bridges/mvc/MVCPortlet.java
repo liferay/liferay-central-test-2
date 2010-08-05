@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortlet;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalClassInvoker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -34,6 +33,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletRequestDispatcher;
@@ -176,16 +176,19 @@ public class MVCPortlet extends LiferayPortlet {
 	public void invokeTaglibDiscussion(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
-
-		Object[] arguments = new Object[] {
-			new NullWrapper("org.apache.struts.action.ActionMapping"),
-			new NullWrapper("org.apache.struts.action.ActionForm"),
-			getPortletConfig(), actionRequest, actionResponse
-		};
-
+		PortletConfig portletConfig = getPortletConfig();
 		PortalClassInvoker.invoke(
+			true,
 			"com.liferay.portlet.messageboards.action.EditDiscussionAction",
-			"processAction", arguments);
+			"processAction",
+			new String[]{
+				"org.apache.struts.action.ActionMapping",
+				"org.apache.struts.action.ActionForm",
+				PortletConfig.class.getName(),
+				ActionRequest.class.getName(),
+				ActionResponse.class.getName()
+			},
+			null, null, portletConfig, actionRequest, actionResponse);
 	}
 
 	public void processAction(

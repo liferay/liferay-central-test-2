@@ -16,28 +16,37 @@ package com.liferay.portal.kernel.util;
 
 import java.io.Serializable;
 
+import java.lang.reflect.Method;
+
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class MethodKey implements Serializable {
 
-	public static MethodKey create(
+	public MethodKey(
 			String className, String methodName, String[] parameterTypeNames)
 		throws ClassNotFoundException {
 
-		Class<?>[] parameterTypes = new Class[parameterTypeNames.length];
+		_className = className;
+		_methodName = methodName;
+
+		_parameterTypes = new Class[parameterTypeNames.length];
 
 		for (int i = 0; i < parameterTypeNames.length; i++) {
 			String parameterTypeName = parameterTypeNames[i];
 
-			parameterTypes[i] = Class.forName(parameterTypeName);
+			_parameterTypes[i] = Class.forName(parameterTypeName);
 		}
+	}
 
-		return new MethodKey(className, methodName, parameterTypes);
+	public MethodKey(Method method) {
+		this(method.getDeclaringClass().getName(), method.getName(),
+			method.getParameterTypes());
 	}
 
 	public MethodKey(
-		String className, String methodName, Class<?>[] parameterTypes) {
+		String className, String methodName, Class<?>... parameterTypes) {
 
 		_className = className;
 		_methodName = methodName;

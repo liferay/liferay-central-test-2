@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import java.lang.Object;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -73,7 +72,7 @@ public class ClassLoaderProxy {
 
 				if (ClassUtil.isSubclass(argClass, PrimitiveWrapper.class)) {
 					MethodKey methodKey = new MethodKey(
-						argClass.getName(), "getValue", null);
+						argClass.getName(), "getValue");
 
 					Method method = MethodCache.get(methodKey);
 

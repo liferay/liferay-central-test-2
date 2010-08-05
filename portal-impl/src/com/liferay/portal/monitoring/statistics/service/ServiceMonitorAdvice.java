@@ -48,7 +48,7 @@ public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 		throws SystemException {
 
 		try {
-			MethodKey methodKey = MethodKey.create(
+			MethodKey methodKey = new MethodKey(
 				className, methodName, parameterTypes);
 
 			_monitoredMethods.add(methodKey);

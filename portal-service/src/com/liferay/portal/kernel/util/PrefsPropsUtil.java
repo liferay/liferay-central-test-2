@@ -24,8 +24,9 @@ public class PrefsPropsUtil {
 	public static String getString(long companyId, String key)
 		throws Exception {
 
-		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GET_STRING, new LongWrapper(companyId), key, false);
+		Object returnObj =
+			PortalClassInvoker.invoke(false, _GET_STRING_METHOD_KEY, companyId,
+				key);
 
 		if (returnObj != null) {
 			return (String)returnObj;
@@ -38,8 +39,8 @@ public class PrefsPropsUtil {
 	public static String getString(String key)
 		throws Exception {
 
-		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GET_STRING, key, false);
+		Object returnObj =
+			PortalClassInvoker.invoke(false, _GET_STRING_METHOD_KEY2, key);
 
 		if (returnObj != null) {
 			return (String)returnObj;
@@ -53,9 +54,9 @@ public class PrefsPropsUtil {
 			long companyId, String name, String delimiter)
 		throws Exception {
 
-		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GET_STRING_ARRAY, new LongWrapper(companyId), name,
-			delimiter, false);
+		Object returnObj =
+			PortalClassInvoker.invoke(false, _GET_STRING_ARRAY_METHOD_KEY,
+				companyId, name, delimiter);
 
 		if (returnObj != null) {
 			return (String[])returnObj;
@@ -70,9 +71,9 @@ public class PrefsPropsUtil {
 			String[] defaultValue)
 		throws Exception {
 
-		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GET_STRING_ARRAY, new LongWrapper(companyId), name,
-			delimiter, defaultValue, false);
+		Object returnObj =
+			PortalClassInvoker.invoke(false, _GET_STRING_ARRAY_METHOD_KEY2,
+				companyId, name, delimiter, defaultValue);
 
 		if (returnObj != null) {
 			return (String[])returnObj;
@@ -87,9 +88,9 @@ public class PrefsPropsUtil {
 			String delimiter)
 		throws Exception {
 
-		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GET_STRING_ARRAY, preferences,
-			new LongWrapper(companyId), name, delimiter, false);
+		Object returnObj =
+			PortalClassInvoker.invoke(false, _GET_STRING_ARRAY_METHOD_KEY3,
+				preferences, companyId, name, delimiter);
 
 		if (returnObj != null) {
 			return (String[])returnObj;
@@ -104,9 +105,9 @@ public class PrefsPropsUtil {
 			String delimiter, String[] defaultValue)
 		throws Exception {
 
-		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GET_STRING_ARRAY, preferences,
-			new LongWrapper(companyId), name, delimiter, defaultValue, false);
+		Object returnObj =
+			PortalClassInvoker.invoke(false, _GET_STRING_ARRAY_METHOD_KEY4,
+				preferences, companyId, name, delimiter, defaultValue);
 
 		if (returnObj != null) {
 			return (String[])returnObj;
@@ -119,8 +120,9 @@ public class PrefsPropsUtil {
 	public static String[] getStringArray(String name, String delimiter)
 		throws Exception {
 
-		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GET_STRING_ARRAY, name, delimiter, false);
+		Object returnObj =
+			PortalClassInvoker.invoke(false, _GET_STRING_ARRAY_METHOD_KEY5,
+				name, delimiter);
 
 		if (returnObj != null) {
 			return (String[])returnObj;
@@ -134,9 +136,9 @@ public class PrefsPropsUtil {
 			String name, String delimiter, String[] defaultValue)
 		throws Exception {
 
-		Object returnObj = PortalClassInvoker.invoke(
-			_CLASS, _METHOD_GET_STRING_ARRAY, name, delimiter, defaultValue,
-			false);
+		Object returnObj =
+			PortalClassInvoker.invoke(false, _GET_STRING_ARRAY_METHOD_KEY6,
+				name, delimiter, defaultValue);
 
 		if (returnObj != null) {
 			return (String[])returnObj;
@@ -149,8 +151,33 @@ public class PrefsPropsUtil {
 	private static final String _CLASS =
 		"com.liferay.portal.util.PrefsPropsUtil";
 
-	private static final String _METHOD_GET_STRING = "getString";
+	private static final MethodKey _GET_STRING_METHOD_KEY =
+		new MethodKey(_CLASS, "getString", long.class, String.class);
 
-	private static final String _METHOD_GET_STRING_ARRAY = "getStringArray";
+	private static final MethodKey _GET_STRING_METHOD_KEY2 =
+		new MethodKey(_CLASS, "getString", String.class);
+
+	private static final MethodKey _GET_STRING_ARRAY_METHOD_KEY =
+		new MethodKey(_CLASS, "getStringArray", long.class, String.class,
+			String.class);
+
+	private static final MethodKey _GET_STRING_ARRAY_METHOD_KEY2 =
+		new MethodKey(_CLASS, "getStringArray", long.class, String.class,
+			String.class, String[].class);
+
+	private static final MethodKey _GET_STRING_ARRAY_METHOD_KEY3 =
+		new MethodKey(_CLASS, "getStringArray", PortletPreferences.class,
+			long.class, String.class, String.class);
+
+	private static final MethodKey _GET_STRING_ARRAY_METHOD_KEY4 =
+		new MethodKey(_CLASS, "getStringArray", PortletPreferences.class,
+			long.class, String.class, String.class, String[].class);
+
+	private static final MethodKey _GET_STRING_ARRAY_METHOD_KEY5 =
+		new MethodKey(_CLASS, "getStringArray", String.class, String.class);
+
+	private static final MethodKey _GET_STRING_ARRAY_METHOD_KEY6 =
+		new MethodKey(_CLASS, "getStringArray", String.class, String.class,
+			String[].class);
 
 }

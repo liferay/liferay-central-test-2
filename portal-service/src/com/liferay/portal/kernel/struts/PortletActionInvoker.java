@@ -14,7 +14,6 @@
 
 package com.liferay.portal.kernel.struts;
 
-import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.PortalClassInvoker;
 
 import javax.portlet.ActionRequest;
@@ -31,16 +30,15 @@ public class PortletActionInvoker {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		Object mapping = new NullWrapper(
-			"org.apache.struts.action.ActionMapping");
-		Object form = new NullWrapper(
-			"org.apache.struts.action.ActionForm");
-
 		PortalClassInvoker.invoke(
-			className, "processAction",
-			new Object[] {
-				mapping, form, portletConfig, actionRequest, actionResponse
-			});
+			true, className, "processAction",
+			new String[]{
+				"org.apache.struts.action.ActionMapping",
+				"org.apache.struts.action.ActionForm",
+				PortletConfig.class.getName(), ActionRequest.class.getName(),
+				ActionResponse.class.getName()
+			},
+			null, null, portletConfig, actionRequest, actionResponse);
 	}
 
 }

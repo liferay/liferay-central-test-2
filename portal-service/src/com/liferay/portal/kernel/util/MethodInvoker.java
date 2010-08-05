@@ -140,7 +140,7 @@ public class MethodInvoker {
 					(Class<?>)argClass.getField("TYPE").get(arguments[i]));
 
 				MethodKey methodKey = new MethodKey(
-					argClass.getName(), "getValue", null);
+					argClass.getName(), "getValue");
 
 				Method method = MethodCache.get(methodKey);
 
