@@ -229,13 +229,14 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			return null;
 		}
 
-		LdapContext ctx = PortalLDAPUtil.getContext(ldapServerId, companyId);
+		LdapContext ldapContext = PortalLDAPUtil.getContext(
+			ldapServerId, companyId);
 
 		User user = PortalLDAPImporterUtil.importLDAPUser(
-			ldapServerId, companyId, ctx, result.getAttributes(),
+			ldapServerId, companyId, ldapContext, result.getAttributes(),
 			StringPool.BLANK);
 
-		ctx.close();
+		ldapContext.close();
 
 		return user;
 	}
