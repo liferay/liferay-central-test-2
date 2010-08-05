@@ -61,11 +61,11 @@ public class CompeteLatch {
 	 *
 	 * @return true if the latch was open, false if the waiting time elapsed
 	 *		   before the latch be opened.
-	 *
 	 * @throws InterruptedException if the current thread is interrupted
 	 */
 	public boolean await(long timeout, TimeUnit timeUnit)
 		throws InterruptedException {
+
 		return _sync.tryAcquireSharedNanos(1, timeUnit.toNanos(timeout));
 	}
 
