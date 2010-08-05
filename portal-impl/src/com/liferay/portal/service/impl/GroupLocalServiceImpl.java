@@ -144,8 +144,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		long groupClassNameId = PortalUtil.getClassNameId(Group.class);
 
 		if ((classNameId <= 0) || className.equals(Group.class.getName())) {
-			validateName(groupId, user.getCompanyId(), name);
-
 			classNameId = groupClassNameId;
 			classPK = groupId;
 		}
@@ -171,6 +169,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		if (staging) {
 			name = name.concat(" (Staging)");
 			friendlyURL = friendlyURL.concat("-staging");
+		}
+
+		if ((classNameId <= 0) || className.equals(Group.class.getName())) {
+			validateName(groupId, user.getCompanyId(), name);
 		}
 
 		validateFriendlyURL(
