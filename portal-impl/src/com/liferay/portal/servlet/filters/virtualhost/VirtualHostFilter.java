@@ -71,13 +71,11 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 		if (PortalInstances.isVirtualHostsIgnorePath(friendlyURL) ||
 			friendlyURL.startsWith(
-				PortalUtil.getPathFriendlyURLPrivateGroup() +
-					StringPool.SLASH) ||
+				_PRIVATE_GROUP_SERVLET_MAPPING + StringPool.SLASH) ||
 			friendlyURL.startsWith(
-				PortalUtil.getPathFriendlyURLPublic() + StringPool.SLASH) ||
+				_PUBLIC_GROUP_SERVLET_MAPPING + StringPool.SLASH) ||
 			friendlyURL.startsWith(
-				PortalUtil.getPathFriendlyURLPrivateUser() +
-					StringPool.SLASH) ||
+				_PRIVATE_USER_SERVLET_MAPPING + StringPool.SLASH) ||
 			friendlyURL.startsWith(_PATH_C) ||
 			friendlyURL.startsWith(_PATH_COMBO) ||
 			friendlyURL.startsWith(_PATH_DELEGATE) ||
