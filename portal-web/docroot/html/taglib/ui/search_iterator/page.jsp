@@ -105,7 +105,7 @@ List<String> primaryKeys = new ArrayList<String>();
 				if (orderCurrentHeader) {
 					cssClass = "sort-column";
 
-					cssClass += " sort-" + orderByType;
+					cssClass += " sort-" + HtmlUtil.escapeAttribute(orderByType);
 
 					if (orderByType.equals("asc")) {
 						orderByType = "desc";
