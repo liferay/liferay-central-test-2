@@ -102,7 +102,7 @@ if (!paginationType.equals("none")) {
 
 <c:if test='<%= Validator.isNotNull(assetTagName) && selectionStyle.equals("dynamic") %>'>
 	<h1 class="asset-categorization-title">
-		<%= LanguageUtil.format(pageContext, "content-with-tag-x", assetTagName) %>
+		<%= HtmlUtil.escape(LanguageUtil.format(pageContext, "content-with-tag-x", assetTagName)) %>
 	</h1>
 
 	<%
