@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+
+<project name="portal-test-db-upgrade" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
+	<import file="build-test.xml" />
+
+	<target name="prepare-db-db2-common">
+		<echo file="test.${user.name}.properties">db.type=db2</echo>
+
+		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
+
+		<ant dir="portal-impl" target="deploy-properties" inheritAll="false" />
+
+		<if>
+			<isset property="sql.version" />
+			<then>
+				<property name="sql.dir" value="sql\legacy\${sql.version}\create\" />
+				<property name="sql.file" value="create-db2.sql" />
+			</then>
+		</if>
+
+		<antcall target="rebuild-database" inheritAll="false">
+			<param name="sql.dir" value="${sql.dir}" />
+			<param name="sql.file" value="${sql.file}" />
+		</antcall>
+	</target>
+
+	<target name="prepare-db-mysql-common">
+		<echo file="test.${user.name}.properties">db.type=mysql</echo>
+
+		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
+
+		<ant dir="portal-impl" target="deploy-properties" inheritAll="false" />
+
+		<if>
+			<isset property="sql.version" />
+			<then>
+				<property name="sql.dir" value="sql\legacy\${sql.version}\create\" />
+				<property name="sql.file" value="create-mysql.sql" />
+			</then>
+		</if>
+
+		<antcall target="rebuild-database" inheritAll="false">
+			<param name="sql.dir" value="${sql.dir}" />
+			<param name="sql.file" value="${sql.file}" />
+		</antcall>
+	</target>
+
+	<target name="prepare-db-oracle-common">
+		<echo file="test.${user.name}.properties">db.type=oracle</echo>
+
+		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
+
+		<ant dir="portal-impl" target="deploy-properties" inheritAll="false" />
+
+		<if>
+			<isset property="sql.version" />
+			<then>
+				<property name="sql.dir" value="sql\legacy\${sql.version}\create\" />
+				<property name="sql.file" value="create-oracle.sql" />
+			</then>
+		</if>
+
+		<antcall target="rebuild-database" inheritAll="false">
+			<param name="sql.dir" value="${sql.dir}" />
+			<param name="sql.file" value="${sql.file}" />
+		</antcall>
+	</target>
+
+	<target name="prepare-db-postgresql-common">
+		<echo file="test.${user.name}.properties">db.type=postgresql</echo>
+
+		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
+
+		<ant dir="portal-impl" target="deploy-properties" inheritAll="false" />
+
+		<if>
+			<isset property="sql.version" />
+			<then>
+				<property name="sql.dir" value="sql\legacy\${sql.version}\create\" />
+				<property name="sql.file" value="create-postgresql.sql" />
+			</then>
+		</if>
+
+		<antcall target="rebuild-database" inheritAll="false">
+			<param name="sql.dir" value="${sql.dir}" />
+			<param name="sql.file" value="${sql.file}" />
+		</antcall>
+	</target>
+
+	<target name="prepare-db-sql-server-common">
+		<echo file="test.${user.name}.properties">db.type=sql-server</echo>
+
+		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
+
+		<ant dir="portal-impl" target="deploy-properties" inheritAll="false" />
+
+		<if>
+			<isset property="sql.version" />
+			<then>
+				<property name="sql.dir" value="sql\legacy\${sql.version}\create\" />
+				<property name="sql.file" value="create-sql-server.sql" />
+			</then>
+		</if>
+
+		<antcall target="rebuild-database" inheritAll="false">
+			<param name="sql.dir" value="${sql.dir}" />
+			<param name="sql.file" value="${sql.file}" />
+		</antcall>
+	</target>
+
+	<target name="run-latest-upgrade-test">
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat" inheritAll="false">
+			<property name="skip.rebuild-database" value="true" />
+		</ant>
+
+		<antcall target="clean-up-bundles" />
+	</target>
+
+	<target name="run-smoke-test">
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat" inheritAll="false">
+			<property name="skip.rebuild-database" value="true" />
+			<property name="test.name" value="SmokeTestSuite" />
+		</ant>
+	</target>
+
+	<target name="run-versioned-upgrade-test">
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-versioned-tomcat" inheritAll="false">
+			<property name="skip.rebuild-database" value="true" />
+		</ant>
+
+		<antcall target="clean-up-bundles" />
+	</target>
+</project>
