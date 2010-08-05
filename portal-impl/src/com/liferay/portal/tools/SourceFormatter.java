@@ -34,12 +34,11 @@ import com.liferay.portal.xml.SAXReaderImpl;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -371,7 +370,7 @@ public class SourceFormatter {
 
 		Element rootElement = document.getRootElement();
 
-		Set<ComparableRoute> routes = new TreeSet<ComparableRoute>();
+		List<ComparableRoute> routes = new ArrayList<ComparableRoute>();
 
 		for (Element routeElement : rootElement.elements("route")) {
 			String pattern = routeElement.elementText("pattern");
@@ -415,6 +414,8 @@ public class SourceFormatter {
 
 			routes.add(route);
 		}
+		
+		Collections.sort(routes);
 
 		StringBundler sb = new StringBundler();
 
