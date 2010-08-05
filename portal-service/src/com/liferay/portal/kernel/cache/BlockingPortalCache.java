@@ -69,7 +69,11 @@ public class BlockingPortalCache implements PortalCache {
 		_competeLatch.set(currentCompeteLatch);
 
 		if (!currentCompeteLatch.compete()) {
-			currentCompeteLatch.await();
+			try {
+				currentCompeteLatch.await();
+			} catch (InterruptedException ie) {
+				// ignore
+			}
 
 			_competeLatch.set(null);
 

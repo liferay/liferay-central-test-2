@@ -307,10 +307,12 @@ public class CounterFinderImpl
 		CompeteLatch completeLatch = counterRegister.getCompeteLatch();
 
 		if (!completeLatch.compete()) {
-
 			// Loser thread has to wait for the winner thread to finish its job
-
-			completeLatch.await();
+			try {
+				completeLatch.await();
+			} catch (InterruptedException ie) {
+				throw processException(ie);
+			}
 
 			// Compete again
 

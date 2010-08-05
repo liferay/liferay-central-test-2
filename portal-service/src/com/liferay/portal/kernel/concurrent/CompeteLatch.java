@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.concurrent;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
 /**
@@ -42,9 +43,30 @@ public class CompeteLatch {
 	 * means the winner has finished its job and all the loser threads calling
 	 * this method will return immediately. If the winner thread calls this
 	 * method before his job completed, then all threads will deadlock.
+	 *
+	 * @throws InterruptedException if the current thread is interrupted
 	 */
-	public void await() {
-		_sync.acquireShared(1);
+	public void await() throws InterruptedException {
+		_sync.acquireSharedInterruptibly(1);
+	}
+
+	/**
+	 * This method should only be called by a loser thread. If the latch is
+	 * locked, that means the winner is executing its job and all loser threads
+	 * that call this method will be blocked for the given waiting time. If the
+	 * latch is not locked, that means the winner has finished its job and all
+	 * the loser threads calling this method will return immediately. If the
+	 * winner thread calls this method before his job completed, then all
+	 * threads will deadlock.
+	 *
+	 * @return true if the latch was open, false if the waiting time elapsed
+	 *		   before the latch be opened.
+	 *
+	 * @throws InterruptedException if the current thread is interrupted
+	 */
+	public boolean await(long timeout, TimeUnit timeUnit)
+		throws InterruptedException {
+		return _sync.tryAcquireSharedNanos(1, timeUnit.toNanos(timeout));
 	}
 
 	/**
@@ -109,7 +131,7 @@ public class CompeteLatch {
 			}
 		}
 
-		private final boolean _isLocked() {
+		private boolean _isLocked() {
 			if (getState() == 1) {
 				return true;
 			}
@@ -118,7 +140,7 @@ public class CompeteLatch {
 			}
 		}
 
-		private final boolean _tryInitAcquireShared() {
+		private boolean _tryInitAcquireShared() {
 			if (compareAndSetState(0, 1)) {
 				return true;
 			}
