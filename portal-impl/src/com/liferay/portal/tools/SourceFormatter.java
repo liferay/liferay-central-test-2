@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
@@ -40,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
@@ -69,6 +71,7 @@ public class SourceFormatter {
 						_checkPersistenceTestSuite();
 						_formatJSP();
 						_formatAntXML();
+						_formatFriendlyURLRoutesXML();
 						_formatWebXML();
 					}
 					catch (Exception e) {
@@ -325,6 +328,149 @@ public class SourceFormatter {
 				previousName = name;
 			}
 		}
+	}
+
+	private static void _formatFriendlyURLRoutesXML()
+		throws DocumentException, IOException {
+
+		String basedir = "./";
+
+		DirectoryScanner directoryScanner = new DirectoryScanner();
+
+		directoryScanner.setBasedir(basedir);
+		directoryScanner.setIncludes(new String[] {"**\\*routes.xml"});
+		directoryScanner.setExcludes(
+			new String[] {"**\\classes\\**", "**\\bin\\**"});
+
+		List<String> fileNames = _sourceFormatterHelper.scanForFiles(
+			directoryScanner);
+
+		for (String fileName : fileNames) {
+			File file = new File(basedir + fileName);
+
+			String content = _fileUtil.read(file);
+
+			if (content.indexOf("<!-- SourceFormatter.Ignore -->") != -1) {
+				continue;
+			}
+
+			String newContent = _formatFriendlyURLRoutesXML(content);
+
+			if ((newContent != null) && !content.equals(newContent)) {
+				_fileUtil.write(file, newContent);
+
+				_sourceFormatterHelper.printError(fileName, file);
+			}
+		}
+	}
+
+	private static String _formatFriendlyURLRoutesXML(String content)
+	 	throws DocumentException {
+
+		Document document = _saxReaderUtil.read(content);
+
+		Element rootElement = document.getRootElement();
+
+		Set<ComparableRoute> routes = new TreeSet<ComparableRoute>();
+
+		for (Element routeElement : rootElement.elements("route")) {
+			String pattern = routeElement.elementText("pattern");
+
+			ComparableRoute route = new ComparableRoute(pattern);
+
+			for (Element generatedParameterElement :
+					routeElement.elements("generated-parameter")) {
+
+				String name = generatedParameterElement.attributeValue("name");
+				String value = generatedParameterElement.getText();
+
+				route.addGeneratedParameter(name, value);
+			}
+
+			for (Element ignoredParameterElement :
+					routeElement.elements("ignored-parameter")) {
+
+				String name = ignoredParameterElement.attributeValue("name");
+
+				route.addIgnoredParameter(name);
+			}
+
+			for (Element implicitParameterElement :
+				routeElement.elements("implicit-parameter")) {
+
+				String name = implicitParameterElement.attributeValue("name");
+				String value = implicitParameterElement.getText();
+
+				route.addImplicitParameter(name, value);
+			}
+
+			for (Element overriddenParameterElement :
+					routeElement.elements("overridden-parameter")) {
+
+				String name = overriddenParameterElement.attributeValue("name");
+				String value = overriddenParameterElement.getText();
+
+				route.addOverriddenParameter(name, value);
+			}
+
+			routes.add(route);
+		}
+
+		StringBundler sb = new StringBundler();
+
+		sb.append("<?xml version=\"1.0\"?>\n");
+		sb.append(
+			"<!DOCTYPE routes PUBLIC \"-//Liferay//DTD Friendly URL Routes " +
+			"6.0.0//EN\" \"http://www.liferay.com/dtd/liferay-friendly-url-" +
+			"routes_6_0_0.dtd\">\n\n<routes>\n");
+
+		for (ComparableRoute route : routes) {
+			sb.append("\t<route>\n");
+			sb.append("\t\t<pattern>");
+			sb.append(route.getPattern());
+			sb.append("</pattern>\n");
+
+			for (Map.Entry<String, String> entry :
+				route.getGeneratedParameters().entrySet()) {
+
+				sb.append("\t\t<generated-parameter name=\"");
+				sb.append(entry.getKey());
+				sb.append("\">");
+				sb.append(entry.getValue());
+				sb.append("</generated-parameter>\n");
+			}
+
+			for (String entry : route.getIgnoredParameters()) {
+				sb.append("\t\t<ignored-parameter name=\"");
+				sb.append(entry);
+				sb.append("\" />\n");
+			}
+
+			for (Map.Entry<String, String> entry :
+				route.getImplicitParameters().entrySet()) {
+
+				sb.append("\t\t<implicit-parameter name=\"");
+				sb.append(entry.getKey());
+				sb.append("\">");
+				sb.append(entry.getValue());
+				sb.append("</implicit-parameter>\n");
+			}
+
+			for (Map.Entry<String, String> entry :
+				route.getOverriddenParameters().entrySet()) {
+
+				sb.append("\t\t<overridden-parameter name=\"");
+				sb.append(entry.getKey());
+				sb.append("\">");
+				sb.append(entry.getValue());
+				sb.append("</overridden-parameter>\n");
+			}
+
+			sb.append("\t</route>\n");
+		}
+		sb.append("</routes>");
+
+		return sb.toString();
 	}
 
 	private static String _formatImports(String imports) throws IOException {
