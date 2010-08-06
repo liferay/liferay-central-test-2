@@ -43,15 +43,18 @@ public class ViewPageAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		long categoryId = ParamUtil.getLong(renderRequest, "categoryId");
-		String tag = ParamUtil.getString(renderRequest, "tag");
 		String title = ParamUtil.getString(renderRequest, "title");
 
 		if (Validator.isNull(title)) {
+			long categoryId = ParamUtil.getLong(renderRequest, "categoryId");
+
 			if (categoryId > 0) {
 				return ViewNodeAction.viewNode(
-					mapping, renderRequest, "portlet.wiki.view_categorized_pages");
+					mapping, renderRequest,
+					"portlet.wiki.view_categorized_pages");
 			}
+
+			String tag = ParamUtil.getString(renderRequest, "tag");
 
 			if (Validator.isNotNull(tag)) {
 				return ViewNodeAction.viewNode(
