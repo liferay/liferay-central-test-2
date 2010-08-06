@@ -48,7 +48,7 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 			${serviceBuilder.getJavadocComment(method)}
 
 			<#if method.name = "dynamicQuery">
-				@SuppressWarnings("unchecked")
+				@SuppressWarnings("rawtypes")
 			</#if>
 
 			public static ${serviceBuilder.getTypeGenericsName(method.returns)} ${method.name}(

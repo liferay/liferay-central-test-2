@@ -20,7 +20,7 @@ public class ${entity.name}${sessionTypeName}ServiceWrapper implements ${entity.
 			${serviceBuilder.getJavadocComment(method)}
 
 			<#if method.name = "dynamicQuery">
-				@SuppressWarnings("unchecked")
+				@SuppressWarnings("rawtypes")
 			</#if>
 
 			public ${serviceBuilder.getTypeGenericsName(method.returns)} ${method.name}(

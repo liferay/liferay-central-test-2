@@ -22,7 +22,7 @@ public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name
 			<#assign parameters = method.parameters>
 
 			<#if method.name = "dynamicQuery">
-				@SuppressWarnings("unchecked")
+				@SuppressWarnings("rawtypes")
 			</#if>
 
 			public ${returnTypeName} ${method.name}(

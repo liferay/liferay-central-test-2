@@ -139,7 +139,7 @@ import javax.sql.DataSource;
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery) throws SystemException {
 		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery);
 	}
@@ -157,7 +157,7 @@ import javax.sql.DataSource;
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end) throws SystemException {
 		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
@@ -176,7 +176,7 @@ import javax.sql.DataSource;
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end, OrderByComparator orderByComparator) throws SystemException {
 		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery, start, end, orderByComparator);
 	}

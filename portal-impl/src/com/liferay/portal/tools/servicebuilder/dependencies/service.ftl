@@ -52,7 +52,7 @@ public interface ${entity.name}${sessionTypeName}Service {
 			${serviceBuilder.getJavadocComment(method)}
 
 			<#if method.name = "dynamicQuery">
-				@SuppressWarnings("unchecked")
+				@SuppressWarnings("rawtypes")
 			</#if>
 
 			<#if serviceBuilder.isServiceReadOnlyMethod(method, entity.txRequiredList)>
