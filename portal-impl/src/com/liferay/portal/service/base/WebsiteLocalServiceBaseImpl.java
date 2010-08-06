@@ -254,7 +254,7 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return websitePersistence.findWithDynamicQuery(dynamicQuery);
@@ -273,7 +273,7 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException {
 		return websitePersistence.findWithDynamicQuery(dynamicQuery, start, end);
@@ -293,7 +293,7 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		return websitePersistence.findWithDynamicQuery(dynamicQuery, start,

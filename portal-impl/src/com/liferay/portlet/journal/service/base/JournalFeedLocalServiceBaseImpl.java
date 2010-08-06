@@ -135,7 +135,7 @@ public abstract class JournalFeedLocalServiceBaseImpl
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return journalFeedPersistence.findWithDynamicQuery(dynamicQuery);
@@ -154,7 +154,7 @@ public abstract class JournalFeedLocalServiceBaseImpl
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException {
 		return journalFeedPersistence.findWithDynamicQuery(dynamicQuery, start,
@@ -175,7 +175,7 @@ public abstract class JournalFeedLocalServiceBaseImpl
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		return journalFeedPersistence.findWithDynamicQuery(dynamicQuery, start,

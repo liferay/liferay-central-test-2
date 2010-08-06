@@ -130,7 +130,7 @@ public abstract class DLFileRankLocalServiceBaseImpl
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return dlFileRankPersistence.findWithDynamicQuery(dynamicQuery);
@@ -149,7 +149,7 @@ public abstract class DLFileRankLocalServiceBaseImpl
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException {
 		return dlFileRankPersistence.findWithDynamicQuery(dynamicQuery, start,
@@ -170,7 +170,7 @@ public abstract class DLFileRankLocalServiceBaseImpl
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		return dlFileRankPersistence.findWithDynamicQuery(dynamicQuery, start,

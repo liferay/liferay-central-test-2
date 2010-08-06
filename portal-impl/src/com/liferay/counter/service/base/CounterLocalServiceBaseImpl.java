@@ -108,7 +108,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return counterPersistence.findWithDynamicQuery(dynamicQuery);
@@ -127,7 +127,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	 * @return the range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException {
 		return counterPersistence.findWithDynamicQuery(dynamicQuery, start, end);
@@ -147,7 +147,7 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		return counterPersistence.findWithDynamicQuery(dynamicQuery, start,
