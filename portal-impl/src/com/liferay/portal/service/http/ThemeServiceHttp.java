@@ -16,8 +16,8 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.ThemeServiceUtil;
 
@@ -56,15 +56,14 @@ public class ThemeServiceHttp {
 		HttpPrincipal httpPrincipal, long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(ThemeServiceUtil.class.getName(),
-					"getThemes", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(ThemeServiceUtil.class.getName(),
+					"getThemes", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
@@ -83,13 +82,14 @@ public class ThemeServiceHttp {
 		HttpPrincipal httpPrincipal)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodWrapper methodWrapper = new MethodWrapper(ThemeServiceUtil.class.getName(),
-					"getWARThemes", new Object[0]);
+			MethodKey methodKey = new MethodKey(ThemeServiceUtil.class.getName(),
+					"getWARThemes");
+			MethodHandler methodHandler = new MethodHandler(methodKey);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				throw new com.liferay.portal.kernel.exception.SystemException(e);

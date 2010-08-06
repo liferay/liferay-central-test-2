@@ -16,9 +16,8 @@ package com.liferay.portlet.asset.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -64,39 +63,17 @@ public class AssetVocabularyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = titleMap;
-
-			if (titleMap == null) {
-				paramObj0 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj1 = descriptionMap;
-
-			if (descriptionMap == null) {
-				paramObj1 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj2 = settings;
-
-			if (settings == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj3 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetVocabularyServiceUtil.class.getName(),
-					"addVocabulary",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
+					"addVocabulary", java.util.Map.class, java.util.Map.class,
+					java.lang.String.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					titleMap, descriptionMap, settings, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -124,13 +101,13 @@ public class AssetVocabularyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(vocabularyId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetVocabularyServiceUtil.class.getName(),
-					"deleteVocabulary", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
+					"deleteVocabulary", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					vocabularyId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -156,15 +133,14 @@ public class AssetVocabularyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetVocabularyServiceUtil.class.getName(),
-					"getCompanyVocabularies", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
+					"getCompanyVocabularies", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -192,19 +168,14 @@ public class AssetVocabularyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = groupIds;
-
-			if (groupIds == null) {
-				paramObj0 = new NullWrapper("[J");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetVocabularyServiceUtil.class.getName(),
-					"getGroupsVocabularies", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
+					"getGroupsVocabularies", long[].class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupIds);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -232,15 +203,14 @@ public class AssetVocabularyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetVocabularyServiceUtil.class.getName(),
-					"getGroupVocabularies", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
+					"getGroupVocabularies", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -268,15 +238,15 @@ public class AssetVocabularyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(vocabularyId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetVocabularyServiceUtil.class.getName(),
-					"getVocabulary", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
+					"getVocabulary", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					vocabularyId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -308,43 +278,18 @@ public class AssetVocabularyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(vocabularyId);
-
-			Object paramObj1 = titleMap;
-
-			if (titleMap == null) {
-				paramObj1 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj2 = descriptionMap;
-
-			if (descriptionMap == null) {
-				paramObj2 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj3 = settings;
-
-			if (settings == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj4 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetVocabularyServiceUtil.class.getName(),
-					"updateVocabulary",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
+					"updateVocabulary", long.class, java.util.Map.class,
+					java.util.Map.class, java.lang.String.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					vocabularyId, titleMap, descriptionMap, settings,
+					serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

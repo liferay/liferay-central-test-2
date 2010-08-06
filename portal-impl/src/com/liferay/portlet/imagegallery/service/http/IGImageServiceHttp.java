@@ -16,10 +16,8 @@ package com.liferay.portlet.imagegallery.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -64,52 +62,19 @@ public class IGImageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(folderId);
-
-			Object paramObj2 = name;
-
-			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = description;
-
-			if (description == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = file;
-
-			if (file == null) {
-				paramObj4 = new NullWrapper("java.io.File");
-			}
-
-			Object paramObj5 = contentType;
-
-			if (contentType == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj6 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
-					"addImage",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
-					});
+			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
+					"addImage", long.class, long.class, java.lang.String.class,
+					java.lang.String.class, java.io.File.class,
+					java.lang.String.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					folderId, name, description, file, contentType,
+					serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -136,13 +101,12 @@ public class IGImageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(imageId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
-					"deleteImage", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
+					"deleteImage", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, imageId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -169,22 +133,14 @@ public class IGImageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(folderId);
-
-			Object paramObj2 = nameWithExtension;
-
-			if (nameWithExtension == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
-					"deleteImageByFolderIdAndNameWithExtension",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
+					"deleteImageByFolderIdAndNameWithExtension", long.class,
+					long.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					folderId, nameWithExtension);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -209,22 +165,16 @@ public class IGImageServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, long userId, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(userId);
-
-			Object paramObj2 = new IntegerWrapper(start);
-
-			Object paramObj3 = new IntegerWrapper(end);
-
-			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
-					"getGroupImages",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
+					"getGroupImages", long.class, long.class, int.class,
+					int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					userId, start, end);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -247,17 +197,15 @@ public class IGImageServiceHttp {
 		long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(userId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
-					"getGroupImagesCount", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
+					"getGroupImagesCount", long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					userId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -281,15 +229,14 @@ public class IGImageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(imageId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
-					"getImage", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
+					"getImage", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, imageId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -318,24 +265,16 @@ public class IGImageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(folderId);
-
-			Object paramObj2 = nameWithExtension;
-
-			if (nameWithExtension == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
-					"getImageByFolderIdAndNameWithExtension",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
+					"getImageByFolderIdAndNameWithExtension", long.class,
+					long.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					folderId, nameWithExtension);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -363,15 +302,15 @@ public class IGImageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(largeImageId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
-					"getImageByLargeImageId", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
+					"getImageByLargeImageId", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					largeImageId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -399,15 +338,15 @@ public class IGImageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(smallImageId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
-					"getImageBySmallImageId", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
+					"getImageBySmallImageId", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					smallImageId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -434,17 +373,15 @@ public class IGImageServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(folderId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
-					"getImages", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
+					"getImages", long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					folderId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -467,22 +404,15 @@ public class IGImageServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, long folderId, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(folderId);
-
-			Object paramObj2 = new IntegerWrapper(start);
-
-			Object paramObj3 = new IntegerWrapper(end);
-
-			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
-					"getImages",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
+					"getImages", long.class, long.class, int.class, int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					folderId, start, end);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -505,17 +435,15 @@ public class IGImageServiceHttp {
 		long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(folderId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
-					"getImagesCount", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
+					"getImagesCount", long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					folderId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -542,54 +470,19 @@ public class IGImageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(imageId);
-
-			Object paramObj1 = new LongWrapper(groupId);
-
-			Object paramObj2 = new LongWrapper(folderId);
-
-			Object paramObj3 = name;
-
-			if (name == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = description;
-
-			if (description == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = file;
-
-			if (file == null) {
-				paramObj5 = new NullWrapper("java.io.File");
-			}
-
-			Object paramObj6 = contentType;
-
-			if (contentType == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj7 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
-					"updateImage",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
-					});
+			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
+					"updateImage", long.class, long.class, long.class,
+					java.lang.String.class, java.lang.String.class,
+					java.io.File.class, java.lang.String.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, imageId,
+					groupId, folderId, name, description, file, contentType,
+					serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

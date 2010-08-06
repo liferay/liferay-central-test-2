@@ -16,11 +16,8 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.EmailAddressServiceUtil;
 
@@ -61,34 +58,16 @@ public class EmailAddressServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = className;
-
-			if (className == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = new LongWrapper(classPK);
-
-			Object paramObj2 = address;
-
-			if (address == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new IntegerWrapper(typeId);
-
-			Object paramObj4 = new BooleanWrapper(primary);
-
-			MethodWrapper methodWrapper = new MethodWrapper(EmailAddressServiceUtil.class.getName(),
-					"addEmailAddress",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+			MethodKey methodKey = new MethodKey(EmailAddressServiceUtil.class.getName(),
+					"addEmailAddress", java.lang.String.class, long.class,
+					java.lang.String.class, int.class, boolean.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					className, classPK, address, typeId, primary);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -116,13 +95,13 @@ public class EmailAddressServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(emailAddressId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(EmailAddressServiceUtil.class.getName(),
-					"deleteEmailAddress", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(EmailAddressServiceUtil.class.getName(),
+					"deleteEmailAddress", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					emailAddressId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -148,15 +127,15 @@ public class EmailAddressServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(emailAddressId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(EmailAddressServiceUtil.class.getName(),
-					"getEmailAddress", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(EmailAddressServiceUtil.class.getName(),
+					"getEmailAddress", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					emailAddressId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -184,21 +163,15 @@ public class EmailAddressServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = className;
-
-			if (className == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = new LongWrapper(classPK);
-
-			MethodWrapper methodWrapper = new MethodWrapper(EmailAddressServiceUtil.class.getName(),
-					"getEmailAddresses", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(EmailAddressServiceUtil.class.getName(),
+					"getEmailAddresses", java.lang.String.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					className, classPK);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -227,26 +200,16 @@ public class EmailAddressServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(emailAddressId);
-
-			Object paramObj1 = address;
-
-			if (address == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new IntegerWrapper(typeId);
-
-			Object paramObj3 = new BooleanWrapper(primary);
-
-			MethodWrapper methodWrapper = new MethodWrapper(EmailAddressServiceUtil.class.getName(),
-					"updateEmailAddress",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(EmailAddressServiceUtil.class.getName(),
+					"updateEmailAddress", long.class, java.lang.String.class,
+					int.class, boolean.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					emailAddressId, address, typeId, primary);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

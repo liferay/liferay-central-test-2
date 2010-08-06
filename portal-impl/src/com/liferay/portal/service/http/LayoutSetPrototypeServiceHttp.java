@@ -16,10 +16,8 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.LayoutSetPrototypeServiceUtil;
 
@@ -61,28 +59,16 @@ public class LayoutSetPrototypeServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = nameMap;
-
-			if (nameMap == null) {
-				paramObj0 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj1 = description;
-
-			if (description == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new BooleanWrapper(active);
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutSetPrototypeServiceUtil.class.getName(),
-					"addLayoutSetPrototype",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(LayoutSetPrototypeServiceUtil.class.getName(),
+					"addLayoutSetPrototype", java.util.Map.class,
+					java.lang.String.class, boolean.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, nameMap,
+					description, active);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -110,13 +96,13 @@ public class LayoutSetPrototypeServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(layoutSetPrototypeId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutSetPrototypeServiceUtil.class.getName(),
-					"deleteLayoutSetPrototype", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(LayoutSetPrototypeServiceUtil.class.getName(),
+					"deleteLayoutSetPrototype", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					layoutSetPrototypeId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -142,15 +128,15 @@ public class LayoutSetPrototypeServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(layoutSetPrototypeId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutSetPrototypeServiceUtil.class.getName(),
-					"getLayoutSetPrototype", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(LayoutSetPrototypeServiceUtil.class.getName(),
+					"getLayoutSetPrototype", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					layoutSetPrototypeId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -179,28 +165,16 @@ public class LayoutSetPrototypeServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-
-			Object paramObj1 = active;
-
-			if (active == null) {
-				paramObj1 = new NullWrapper("java.lang.Boolean");
-			}
-
-			Object paramObj2 = obc;
-
-			if (obc == null) {
-				paramObj2 = new NullWrapper(
-						"com.liferay.portal.kernel.util.OrderByComparator");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutSetPrototypeServiceUtil.class.getName(),
-					"search", new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(LayoutSetPrototypeServiceUtil.class.getName(),
+					"search", long.class, java.lang.Boolean.class,
+					com.liferay.portal.kernel.util.OrderByComparator.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, active, obc);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -230,30 +204,16 @@ public class LayoutSetPrototypeServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(layoutSetPrototypeId);
-
-			Object paramObj1 = nameMap;
-
-			if (nameMap == null) {
-				paramObj1 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj2 = description;
-
-			if (description == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new BooleanWrapper(active);
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutSetPrototypeServiceUtil.class.getName(),
-					"updateLayoutSetPrototype",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(LayoutSetPrototypeServiceUtil.class.getName(),
+					"updateLayoutSetPrototype", long.class,
+					java.util.Map.class, java.lang.String.class, boolean.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					layoutSetPrototypeId, nameMap, description, active);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

@@ -16,11 +16,8 @@ package com.liferay.portlet.announcements.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -68,74 +65,24 @@ public class AnnouncementsEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = new LongWrapper(classNameId);
-
-			Object paramObj2 = new LongWrapper(classPK);
-
-			Object paramObj3 = title;
-
-			if (title == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = content;
-
-			if (content == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = url;
-
-			if (url == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = type;
-
-			if (type == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = new IntegerWrapper(displayDateMonth);
-
-			Object paramObj8 = new IntegerWrapper(displayDateDay);
-
-			Object paramObj9 = new IntegerWrapper(displayDateYear);
-
-			Object paramObj10 = new IntegerWrapper(displayDateHour);
-
-			Object paramObj11 = new IntegerWrapper(displayDateMinute);
-
-			Object paramObj12 = new IntegerWrapper(expirationDateMonth);
-
-			Object paramObj13 = new IntegerWrapper(expirationDateDay);
-
-			Object paramObj14 = new IntegerWrapper(expirationDateYear);
-
-			Object paramObj15 = new IntegerWrapper(expirationDateHour);
-
-			Object paramObj16 = new IntegerWrapper(expirationDateMinute);
-
-			Object paramObj17 = new IntegerWrapper(priority);
-
-			Object paramObj18 = new BooleanWrapper(alert);
-
-			MethodWrapper methodWrapper = new MethodWrapper(AnnouncementsEntryServiceUtil.class.getName(),
-					"addEntry",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18
-					});
+			MethodKey methodKey = new MethodKey(AnnouncementsEntryServiceUtil.class.getName(),
+					"addEntry", long.class, long.class, long.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class, int.class,
+					int.class, int.class, int.class, int.class, int.class,
+					int.class, int.class, int.class, int.class, int.class,
+					boolean.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, plid,
+					classNameId, classPK, title, content, url, type,
+					displayDateMonth, displayDateDay, displayDateYear,
+					displayDateHour, displayDateMinute, expirationDateMonth,
+					expirationDateDay, expirationDateYear, expirationDateHour,
+					expirationDateMinute, priority, alert);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -162,13 +109,12 @@ public class AnnouncementsEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(entryId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(AnnouncementsEntryServiceUtil.class.getName(),
-					"deleteEntry", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(AnnouncementsEntryServiceUtil.class.getName(),
+					"deleteEntry", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -199,67 +145,23 @@ public class AnnouncementsEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(entryId);
-
-			Object paramObj1 = title;
-
-			if (title == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = content;
-
-			if (content == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = url;
-
-			if (url == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = type;
-
-			if (type == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = new IntegerWrapper(displayDateMonth);
-
-			Object paramObj6 = new IntegerWrapper(displayDateDay);
-
-			Object paramObj7 = new IntegerWrapper(displayDateYear);
-
-			Object paramObj8 = new IntegerWrapper(displayDateHour);
-
-			Object paramObj9 = new IntegerWrapper(displayDateMinute);
-
-			Object paramObj10 = new IntegerWrapper(expirationDateMonth);
-
-			Object paramObj11 = new IntegerWrapper(expirationDateDay);
-
-			Object paramObj12 = new IntegerWrapper(expirationDateYear);
-
-			Object paramObj13 = new IntegerWrapper(expirationDateHour);
-
-			Object paramObj14 = new IntegerWrapper(expirationDateMinute);
-
-			Object paramObj15 = new IntegerWrapper(priority);
-
-			MethodWrapper methodWrapper = new MethodWrapper(AnnouncementsEntryServiceUtil.class.getName(),
-					"updateEntry",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15
-					});
+			MethodKey methodKey = new MethodKey(AnnouncementsEntryServiceUtil.class.getName(),
+					"updateEntry", long.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, int.class, int.class, int.class,
+					int.class, int.class, int.class, int.class, int.class,
+					int.class, int.class, int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, entryId,
+					title, content, url, type, displayDateMonth,
+					displayDateDay, displayDateYear, displayDateHour,
+					displayDateMinute, expirationDateMonth, expirationDateDay,
+					expirationDateYear, expirationDateHour,
+					expirationDateMinute, priority);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

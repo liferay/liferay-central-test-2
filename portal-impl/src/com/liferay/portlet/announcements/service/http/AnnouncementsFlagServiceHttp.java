@@ -16,9 +16,8 @@ package com.liferay.portlet.announcements.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -60,15 +59,13 @@ public class AnnouncementsFlagServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(entryId);
-
-			Object paramObj1 = new IntegerWrapper(value);
-
-			MethodWrapper methodWrapper = new MethodWrapper(AnnouncementsFlagServiceUtil.class.getName(),
-					"addFlag", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(AnnouncementsFlagServiceUtil.class.getName(),
+					"addFlag", long.class, int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, entryId,
+					value);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -93,13 +90,12 @@ public class AnnouncementsFlagServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(flagId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(AnnouncementsFlagServiceUtil.class.getName(),
-					"deleteFlag", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(AnnouncementsFlagServiceUtil.class.getName(),
+					"deleteFlag", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, flagId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -125,17 +121,15 @@ public class AnnouncementsFlagServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(entryId);
-
-			Object paramObj1 = new IntegerWrapper(value);
-
-			MethodWrapper methodWrapper = new MethodWrapper(AnnouncementsFlagServiceUtil.class.getName(),
-					"getFlag", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(AnnouncementsFlagServiceUtil.class.getName(),
+					"getFlag", long.class, int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, entryId,
+					value);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

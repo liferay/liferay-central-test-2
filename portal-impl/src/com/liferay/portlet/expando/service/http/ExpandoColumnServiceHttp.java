@@ -16,10 +16,8 @@ package com.liferay.portlet.expando.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -62,24 +60,15 @@ public class ExpandoColumnServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(tableId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new IntegerWrapper(type);
-
-			MethodWrapper methodWrapper = new MethodWrapper(ExpandoColumnServiceUtil.class.getName(),
-					"addColumn",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(ExpandoColumnServiceUtil.class.getName(),
+					"addColumn", long.class, java.lang.String.class, int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, tableId,
+					name, type);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -108,30 +97,16 @@ public class ExpandoColumnServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(tableId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new IntegerWrapper(type);
-
-			Object paramObj3 = defaultData;
-
-			if (defaultData == null) {
-				paramObj3 = new NullWrapper("java.lang.Object");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ExpandoColumnServiceUtil.class.getName(),
-					"addColumn",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(ExpandoColumnServiceUtil.class.getName(),
+					"addColumn", long.class, java.lang.String.class, int.class,
+					java.lang.Object.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, tableId,
+					name, type, defaultData);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -158,13 +133,12 @@ public class ExpandoColumnServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(columnId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(ExpandoColumnServiceUtil.class.getName(),
-					"deleteColumn", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(ExpandoColumnServiceUtil.class.getName(),
+					"deleteColumn", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, columnId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -191,24 +165,16 @@ public class ExpandoColumnServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(columnId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new IntegerWrapper(type);
-
-			MethodWrapper methodWrapper = new MethodWrapper(ExpandoColumnServiceUtil.class.getName(),
-					"updateColumn",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(ExpandoColumnServiceUtil.class.getName(),
+					"updateColumn", long.class, java.lang.String.class,
+					int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					columnId, name, type);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -237,30 +203,16 @@ public class ExpandoColumnServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(columnId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new IntegerWrapper(type);
-
-			Object paramObj3 = defaultData;
-
-			if (defaultData == null) {
-				paramObj3 = new NullWrapper("java.lang.Object");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ExpandoColumnServiceUtil.class.getName(),
-					"updateColumn",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(ExpandoColumnServiceUtil.class.getName(),
+					"updateColumn", long.class, java.lang.String.class,
+					int.class, java.lang.Object.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					columnId, name, type, defaultData);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -289,21 +241,15 @@ public class ExpandoColumnServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(columnId);
-
-			Object paramObj1 = typeSettings;
-
-			if (typeSettings == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ExpandoColumnServiceUtil.class.getName(),
-					"updateTypeSettings", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(ExpandoColumnServiceUtil.class.getName(),
+					"updateTypeSettings", long.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					columnId, typeSettings);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

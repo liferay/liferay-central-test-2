@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.cluster.FutureClusterResponses;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodWrapper;
 
 import java.io.Serializable;
 
@@ -253,7 +252,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 				clusterNodeResponse.setException(
 					new ClusterException(
 						"Payload is not of type " +
-							MethodWrapper.class.getName()));
+							MethodHandler.class.getName()));
 			}
 		}
 

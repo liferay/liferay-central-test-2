@@ -16,11 +16,8 @@ package com.liferay.portlet.calendar.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -70,84 +67,26 @@ public class CalEventServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = title;
-
-			if (title == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = description;
-
-			if (description == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new IntegerWrapper(startDateMonth);
-
-			Object paramObj3 = new IntegerWrapper(startDateDay);
-
-			Object paramObj4 = new IntegerWrapper(startDateYear);
-
-			Object paramObj5 = new IntegerWrapper(startDateHour);
-
-			Object paramObj6 = new IntegerWrapper(startDateMinute);
-
-			Object paramObj7 = new IntegerWrapper(endDateMonth);
-
-			Object paramObj8 = new IntegerWrapper(endDateDay);
-
-			Object paramObj9 = new IntegerWrapper(endDateYear);
-
-			Object paramObj10 = new IntegerWrapper(durationHour);
-
-			Object paramObj11 = new IntegerWrapper(durationMinute);
-
-			Object paramObj12 = new BooleanWrapper(allDay);
-
-			Object paramObj13 = new BooleanWrapper(timeZoneSensitive);
-
-			Object paramObj14 = type;
-
-			if (type == null) {
-				paramObj14 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj15 = new BooleanWrapper(repeating);
-
-			Object paramObj16 = recurrence;
-
-			if (recurrence == null) {
-				paramObj16 = new NullWrapper(
-						"com.liferay.portal.kernel.cal.TZSRecurrence");
-			}
-
-			Object paramObj17 = new IntegerWrapper(remindBy);
-
-			Object paramObj18 = new IntegerWrapper(firstReminder);
-
-			Object paramObj19 = new IntegerWrapper(secondReminder);
-
-			Object paramObj20 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj20 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
-					"addEvent",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18, paramObj19, paramObj20
-					});
+			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
+					"addEvent", java.lang.String.class, java.lang.String.class,
+					int.class, int.class, int.class, int.class, int.class,
+					int.class, int.class, int.class, int.class, int.class,
+					boolean.class, boolean.class, java.lang.String.class,
+					boolean.class,
+					com.liferay.portal.kernel.cal.TZSRecurrence.class,
+					int.class, int.class, int.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, title,
+					description, startDateMonth, startDateDay, startDateYear,
+					startDateHour, startDateMinute, endDateMonth, endDateDay,
+					endDateYear, durationHour, durationMinute, allDay,
+					timeZoneSensitive, type, repeating, recurrence, remindBy,
+					firstReminder, secondReminder, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -174,13 +113,12 @@ public class CalEventServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(eventId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
-					"deleteEvent", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
+					"deleteEvent", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, eventId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -206,15 +144,14 @@ public class CalEventServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(eventId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
-					"exportEvent", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
+					"exportEvent", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, eventId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -242,21 +179,15 @@ public class CalEventServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = fileName;
-
-			if (fileName == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
-					"exportGroupEvents", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
+					"exportGroupEvents", long.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					fileName);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -284,15 +215,14 @@ public class CalEventServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(eventId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
-					"getEvent", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
+					"getEvent", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, eventId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -320,19 +250,13 @@ public class CalEventServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = file;
-
-			if (file == null) {
-				paramObj1 = new NullWrapper("java.io.File");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
-					"importICal4j", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
+					"importICal4j", long.class, java.io.File.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					file);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -366,86 +290,27 @@ public class CalEventServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(eventId);
-
-			Object paramObj1 = title;
-
-			if (title == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = description;
-
-			if (description == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new IntegerWrapper(startDateMonth);
-
-			Object paramObj4 = new IntegerWrapper(startDateDay);
-
-			Object paramObj5 = new IntegerWrapper(startDateYear);
-
-			Object paramObj6 = new IntegerWrapper(startDateHour);
-
-			Object paramObj7 = new IntegerWrapper(startDateMinute);
-
-			Object paramObj8 = new IntegerWrapper(endDateMonth);
-
-			Object paramObj9 = new IntegerWrapper(endDateDay);
-
-			Object paramObj10 = new IntegerWrapper(endDateYear);
-
-			Object paramObj11 = new IntegerWrapper(durationHour);
-
-			Object paramObj12 = new IntegerWrapper(durationMinute);
-
-			Object paramObj13 = new BooleanWrapper(allDay);
-
-			Object paramObj14 = new BooleanWrapper(timeZoneSensitive);
-
-			Object paramObj15 = type;
-
-			if (type == null) {
-				paramObj15 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj16 = new BooleanWrapper(repeating);
-
-			Object paramObj17 = recurrence;
-
-			if (recurrence == null) {
-				paramObj17 = new NullWrapper(
-						"com.liferay.portal.kernel.cal.TZSRecurrence");
-			}
-
-			Object paramObj18 = new IntegerWrapper(remindBy);
-
-			Object paramObj19 = new IntegerWrapper(firstReminder);
-
-			Object paramObj20 = new IntegerWrapper(secondReminder);
-
-			Object paramObj21 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj21 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
-					"updateEvent",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18, paramObj19, paramObj20, paramObj21
-					});
+			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
+					"updateEvent", long.class, java.lang.String.class,
+					java.lang.String.class, int.class, int.class, int.class,
+					int.class, int.class, int.class, int.class, int.class,
+					int.class, int.class, boolean.class, boolean.class,
+					java.lang.String.class, boolean.class,
+					com.liferay.portal.kernel.cal.TZSRecurrence.class,
+					int.class, int.class, int.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, eventId,
+					title, description, startDateMonth, startDateDay,
+					startDateYear, startDateHour, startDateMinute,
+					endDateMonth, endDateDay, endDateYear, durationHour,
+					durationMinute, allDay, timeZoneSensitive, type, repeating,
+					recurrence, remindBy, firstReminder, secondReminder,
+					serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

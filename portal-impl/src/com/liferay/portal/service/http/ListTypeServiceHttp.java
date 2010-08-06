@@ -16,10 +16,8 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.ListTypeServiceUtil;
 
@@ -59,15 +57,15 @@ public class ListTypeServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new IntegerWrapper(listTypeId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(ListTypeServiceUtil.class.getName(),
-					"getListType", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(ListTypeServiceUtil.class.getName(),
+					"getListType", int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					listTypeId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -94,19 +92,14 @@ public class ListTypeServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = type;
-
-			if (type == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ListTypeServiceUtil.class.getName(),
-					"getListTypes", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(ListTypeServiceUtil.class.getName(),
+					"getListTypes", java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, type);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -130,19 +123,13 @@ public class ListTypeServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new IntegerWrapper(listTypeId);
-
-			Object paramObj1 = type;
-
-			if (type == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ListTypeServiceUtil.class.getName(),
-					"validate", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(ListTypeServiceUtil.class.getName(),
+					"validate", int.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					listTypeId, type);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -168,21 +155,13 @@ public class ListTypeServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new IntegerWrapper(listTypeId);
-
-			Object paramObj1 = new LongWrapper(classNameId);
-
-			Object paramObj2 = type;
-
-			if (type == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ListTypeServiceUtil.class.getName(),
-					"validate", new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(ListTypeServiceUtil.class.getName(),
+					"validate", int.class, long.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					listTypeId, classNameId, type);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

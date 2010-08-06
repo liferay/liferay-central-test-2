@@ -16,9 +16,8 @@ package com.liferay.portlet.asset.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -61,28 +60,16 @@ public class AssetTagPropertyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(tagId);
-
-			Object paramObj1 = key;
-
-			if (key == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = value;
-
-			if (value == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetTagPropertyServiceUtil.class.getName(),
-					"addTagProperty",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(AssetTagPropertyServiceUtil.class.getName(),
+					"addTagProperty", long.class, java.lang.String.class,
+					java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, tagId,
+					key, value);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -110,13 +97,13 @@ public class AssetTagPropertyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(tagPropertyId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetTagPropertyServiceUtil.class.getName(),
-					"deleteTagProperty", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(AssetTagPropertyServiceUtil.class.getName(),
+					"deleteTagProperty", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					tagPropertyId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -141,15 +128,14 @@ public class AssetTagPropertyServiceHttp {
 		HttpPrincipal httpPrincipal, long tagId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(tagId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetTagPropertyServiceUtil.class.getName(),
-					"getTagProperties", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(AssetTagPropertyServiceUtil.class.getName(),
+					"getTagProperties", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, tagId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -172,22 +158,15 @@ public class AssetTagPropertyServiceHttp {
 		HttpPrincipal httpPrincipal, long companyId, java.lang.String key)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-
-			Object paramObj1 = key;
-
-			if (key == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetTagPropertyServiceUtil.class.getName(),
-					"getTagPropertyValues",
-					new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(AssetTagPropertyServiceUtil.class.getName(),
+					"getTagPropertyValues", long.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, key);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -212,28 +191,16 @@ public class AssetTagPropertyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(tagPropertyId);
-
-			Object paramObj1 = key;
-
-			if (key == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = value;
-
-			if (value == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetTagPropertyServiceUtil.class.getName(),
-					"updateTagProperty",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(AssetTagPropertyServiceUtil.class.getName(),
+					"updateTagProperty", long.class, java.lang.String.class,
+					java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					tagPropertyId, key, value);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
