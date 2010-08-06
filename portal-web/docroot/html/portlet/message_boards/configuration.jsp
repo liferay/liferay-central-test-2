@@ -478,53 +478,33 @@ else if (tabs2.equals("message-updated-email")) {
 					function() {
 						var A = AUI();
 
-						if (lastLanguageId != "<%= defaultLanguageId %>") {
+						if (lastLanguageId != '<%= defaultLanguageId %>') {
 							if (changed) {
 								for (var i = 0; i < 10; i++) {
-									var priorityName = A.one("#<portlet:namespace />priorityName" + i + "_temp").attr("value");
-									var priorityImage = A.one("#<portlet:namespace />priorityImage" + i + "_temp").attr("value");
-									var priorityValue = A.one("#<portlet:namespace />priorityValue" + i + "_temp").attr("value");
+									var priorityName = A.one('#<portlet:namespace />priorityName' + i + '_temp').val();
+									var priorityImage = A.one('#<portlet:namespace />priorityImage' + i + '_temp').val();
+									var priorityValue = A.one('#<portlet:namespace />priorityValue' + i + '_temp').val();
 
-									if (priorityName == null) {
-										priorityName = "";
-									}
-
-									A.one("#<portlet:namespace />priorityName" + i + "_" + lastLanguageId).attr("value", priorityName);
-
-									if (priorityImage == null) {
-										priorityImage = "";
-									}
-
-									A.one("#<portlet:namespace />priorityImage" + i + "_" + lastLanguageId).attr("value", priorityImage);
-
-									if (priorityValue == null) {
-										priorityValue = "";
-									}
-
-									A.one("#<portlet:namespace />priorityValue" + i + "_" + lastLanguageId).attr("value", priorityValue);
+									A.one('#<portlet:namespace />priorityName' + i + '_' + lastLanguageId).val(priorityName);
+									A.one('#<portlet:namespace />priorityImage' + i + '_' + lastLanguageId).val(priorityImage);
+									A.one('#<portlet:namespace />priorityValue' + i + '_' + lastLanguageId).val(priorityValue);
 								}
 
 								changed = false;
 							}
 						}
 
-						var selLanguageId = "";
+						var selLanguageId = A.one(document.<portlet:namespace />fm.<portlet:namespace />languageId).val();
 
-						for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />languageId.length; i++) {
-							if (document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].selected) {
-								selLanguageId = document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].value;
+						var localizedPriorityTable = A.one('#<portlet:namespace />localized-priorities-table');
 
-								break;
-							}
-						}
-
-						if (selLanguageId != "") {
+						if (selLanguageId) {
 							<portlet:namespace />updateLanguageTemps(selLanguageId);
 
-							A.one("#<portlet:namespace />localized-priorities-table").show();
+							localizedPriorityTable.show();
 						}
 						else {
-							A.one("#<portlet:namespace />localized-priorities-table").hide();
+							localizedPriorityTable.hide();
 						}
 
 						lastLanguageId = selLanguageId;
@@ -538,48 +518,23 @@ else if (tabs2.equals("message-updated-email")) {
 					function(lang) {
 						var A = AUI();
 
-						if (lang != "<%= defaultLanguageId %>") {
+						if (lang != '<%= defaultLanguageId %>') {
 							for (var i = 0; i < 10; i++) {
-								var priorityName = A.one("#<portlet:namespace />priorityName" + i + "_" + lang).attr("value");
-								var priorityImage = A.one("#<portlet:namespace />priorityImage" + i + "_" + lang).attr("value");
-								var priorityValue = A.one("#<portlet:namespace />priorityValue" + i + "_" + lang).attr("value");
+								var defaultName = A.one('#<portlet:namespace />priorityName' + i + '_' + '<%= defaultLanguageId %>').val();
+								var defaultImage = A.one('#<portlet:namespace />priorityImage' + i + '_' + '<%= defaultLanguageId %>').val();
+								var defaultValue = A.one('#<portlet:namespace />priorityValue' + i + '_' + '<%= defaultLanguageId %>').val();
 
-								var defaultName = A.one("#<portlet:namespace />priorityName" + i + "_" + "<%= defaultLanguageId %>").attr("value");
-								var defaultImage = A.one("#<portlet:namespace />priorityImage" + i + "_" + "<%= defaultLanguageId %>").attr("value");
-								var defaultValue = A.one("#<portlet:namespace />priorityValue" + i + "_" + "<%= defaultLanguageId %>").attr("value");
+								var priorityName = A.one('#<portlet:namespace />priorityName' + i + '_' + lang).val();
+								var priorityImage = A.one('#<portlet:namespace />priorityImage' + i + '_' + lang).val();
+								var priorityValue = A.one('#<portlet:namespace />priorityValue' + i + '_' + lang).val();
 
-								if (defaultName == null) {
-									defaultName = "";
-								}
+								var name = priorityName || defaultName;
+								var image = priorityImage || defaultImage;
+								var value = priorityValue || defaultValue;
 
-								if (defaultImage == null) {
-									defaultImage = "";
-								}
-
-								if (defaultValue == null) {
-									defaultValue = "";
-								}
-
-								if ((priorityName == null) || (priorityName == "")) {
-									A.one("#<portlet:namespace />priorityName" + i + "_temp").attr("value", defaultName);
-								}
-								else {
-									A.one("#<portlet:namespace />priorityName" + i + "_temp").attr("value", priorityName);
-								}
-
-								if ((priorityImage == null) || (priorityImage == "")) {
-									A.one("#<portlet:namespace />priorityImage" + i + "_temp").attr("value", defaultImage);
-								}
-								else {
-									A.one("#<portlet:namespace />priorityImage" + i + "_temp").attr("value", priorityImage);
-								}
-
-								if ((priorityValue == null) || (priorityValue == "")) {
-									A.one("#<portlet:namespace />priorityValue" + i + "_temp").attr("value", defaultValue);
-								}
-								else {
-									A.one("#<portlet:namespace />priorityValue" + i + "_temp").attr("value", priorityValue);
-								}
+								A.one('#<portlet:namespace />priorityName' + i + '_temp').val(name);
+								A.one('#<portlet:namespace />priorityImage' + i + '_temp').val(image);
+								A.one('#<portlet:namespace />priorityValue' + i + '_temp').val(value);
 							}
 						}
 					},
@@ -648,7 +603,7 @@ else if (tabs2.equals("message-updated-email")) {
 
 			<aui:script>
 				var ranksChanged = false;
-				var lastLanguageId = "<%= currentLanguageId %>";
+				var lastLanguageId = '<%= currentLanguageId %>';
 
 				function <portlet:namespace />onRanksChanged() {
 					ranksChanged = true;
@@ -660,37 +615,31 @@ else if (tabs2.equals("message-updated-email")) {
 					function() {
 						var A = AUI();
 
-						if (lastLanguageId != "<%= defaultLanguageId %>") {
+						if (lastLanguageId != '<%= defaultLanguageId %>') {
 							if (ranksChanged) {
-								var ranksValue = A.one("#<portlet:namespace />ranks_temp").attr("value");
+								var ranksValue = A.one('#<portlet:namespace />ranks_temp').val();
 
 								if (ranksValue == null) {
-									ranksValue = "";
+									ranksValue = '';
 								}
 
-								A.one("#<portlet:namespace />ranks_" + lastLanguageId).attr("value", ranksValue);
+								A.one('#<portlet:namespace />ranks_' + lastLanguageId).val(ranksValue);
 
 								ranksChanged = false;
 							}
 						}
 
-						var selLanguageId = "";
+						var selLanguageId = A.one(document.<portlet:namespace />fm.<portlet:namespace />languageId).val();
 
-						for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />languageId.length; i++) {
-							if (document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].selected) {
-								selLanguageId = document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].value;
+						var ranksTemp = A.one('#<portlet:namespace />ranks_temp');
 
-								break;
-							}
-						}
-
-						if (selLanguageId != "") {
+						if (selLanguageId) {
 							<portlet:namespace />updateLanguageTemps(selLanguageId);
 
-							A.one("#<portlet:namespace />ranks_temp").show();
+							ranksTemp.show();
 						}
 						else {
-							A.one("#<portlet:namespace />ranks_temp").hide();
+							ranksTemp.hide();
 						}
 
 						lastLanguageId = selLanguageId;
@@ -704,20 +653,13 @@ else if (tabs2.equals("message-updated-email")) {
 					function(lang) {
 						var A = AUI();
 
-						if (lang != "<%= defaultLanguageId %>") {
-							var ranksValue = A.one("#<portlet:namespace />ranks_" + lang).attr("value");
-							var defaultRanksValue = A.one("#<portlet:namespace />ranks_<%= defaultLanguageId %>").attr("value");
+						if (lang != '<%= defaultLanguageId %>') {
+							var ranksValue = A.one('#<portlet:namespace />ranks_' + lang).val();
+							var defaultRanksValue = A.one('#<portlet:namespace />ranks_<%= defaultLanguageId %>').val();
 
-							if (defaultRanksValue == null) {
-								defaultRanksValue = "";
-							}
+							var value = ranksValue || defaultRanksValue;
 
-							if ((ranksValue == null) || (ranksValue == "")) {
-								A.one("#<portlet:namespace />ranks_temp").attr("value", defaultRanksValue);
-							}
-							else {
-								A.one("#<portlet:namespace />ranks_temp").attr("value", ranksValue);
-							}
+							A.one('#<portlet:namespace />ranks_temp').val(value);
 						}
 					},
 					['aui-base']
