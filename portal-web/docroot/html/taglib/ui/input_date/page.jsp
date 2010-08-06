@@ -77,51 +77,55 @@ if (yearValue > 0) {
 %>
 
 <div class="aui-datepicker aui-datepicker-display aui-helper-clearfix <%= Validator.isNotNull(cssClass) ? cssClass : StringPool.BLANK %>" id="<%= randomNamespace %>displayDate">
-	<div class="aui-datepicker-select-wrapper">
-		<c:choose>
-			<c:when test="<%= monthAndYearParam.equals(namespace) %>">
+	<div class="aui-datepicker-content" id="<%= randomNamespace %>displayDateContent">
+		<div class="aui-datepicker-select-wrapper">
+			<c:choose>
+				<c:when test="<%= monthAndYearParam.equals(namespace) %>">
 
-				<%
-				int[] monthIds = CalendarUtil.getMonthIds();
-				String[] months = CalendarUtil.getMonths(locale);
-				%>
+					<%
+					int[] monthIds = CalendarUtil.getMonthIds();
+					String[] months = CalendarUtil.getMonths(locale);
+					%>
 
-				<%@ include file="select_month.jspf" %>
-			</c:when>
-		</c:choose>
+					<%@ include file="select_month.jspf" %>
+				</c:when>
+			</c:choose>
 
-		<%@ include file="select_day.jspf" %>
+			<%@ include file="select_day.jspf" %>
 
-		<%@ include file="select_year.jspf" %>
-	</div>
-	<div class="aui-datepicker-button-wrapper">
-		<button class="aui-buttonitem aui-buttonitem-content aui-buttonitem-icon-only aui-component aui-state-default aui-widget" id="buttonTest" type="button">
-			<span class="aui-buttonitem-icon aui-icon aui-icon-calendar"></span>
-		</button>
+			<%@ include file="select_year.jspf" %>
+		</div>
+		<div class="aui-datepicker-button-wrapper">
+			<button class="aui-buttonitem aui-buttonitem-content aui-buttonitem-icon-only aui-component aui-state-default aui-widget" id="buttonTest" type="button">
+				<span class="aui-buttonitem-icon aui-icon aui-icon-calendar"></span>
+			</button>
+		</div>
 	</div>
 </div>
 
 <input class="<%= disabled ? "disabled" : "" %>" id="<%= imageInputId %>Input" type="hidden" />
 
-<aui:script use="aui-calendar-datepicker-select">
+<aui:script use="aui-datepicker-select">
 	var datePicker = new A.DatePickerSelect(
 		{
 			appendOrder: <%= dateFormatMDY ? "['m', 'd', 'y']" : "['y', 'm', 'd']" %>,
-			dates: [
-				new Date(
-					<%= cal.get(Calendar.YEAR) %>,
-					<%= cal.get(Calendar.MONTH) %>,
-					<%= cal.get(Calendar.DATE) %>
-				)
-			],
-			dateFormat: '%m/%e/%Y',
+			boundingBox: '#<%= randomNamespace %>displayDate',
+			calendar: {
+				dates: [
+					new Date(
+						<%= cal.get(Calendar.YEAR) %>,
+						<%= cal.get(Calendar.MONTH) %>,
+						<%= cal.get(Calendar.DATE) %>
+					)
+				],
+				dateFormat: '%m/%e/%Y',
+				firstDayOfWeek: <%= firstDayOfWeek %>
+			},
 			dayNode: '#<%= dayParam %>',
 			disabled: <%= disabled %>,
-			firstDayOfWeek: <%= firstDayOfWeek %>,
 			monthNode: '#<%= monthParam %>',
-			srcNode: '#<%= randomNamespace %>displayDate',
 			on: {
-				select: function(event) {
+				'calendar:select': function(event) {
 					var formatted = event.date.formatted[0];
 
 					A.one('#<%= imageInputId %>Input').val(formatted);
@@ -129,6 +133,7 @@ if (yearValue > 0) {
 			},
 			populateMonth: false,
 			populateYear: false,
+			srcNode: '#<%= randomNamespace %>displayDateContent',
 			yearNode: '#<%= yearParam %>',
 			yearRange: [<%= yearRangeStart %>, <%= yearRangeEnd %>]
 		}
