@@ -134,6 +134,9 @@ public class EditServerAction extends PortletAction {
 		else if (cmd.equals("threadDump")) {
 			threadDump();
 		}
+		else if (cmd.equals("updateCaptcha")) {
+			updateCaptcha(actionRequest, preferences);
+		}
 		else if (cmd.equals("updateFileUploads")) {
 			updateFileUploads(actionRequest, preferences);
 		}
@@ -390,6 +393,23 @@ public class EditServerAction extends PortletAction {
 				"Thread dumps require the log level to be at least INFO for " +
 					getClass().getName());
 		}
+	}
+
+	protected void updateCaptcha(
+			ActionRequest actionRequest, PortletPreferences preferences)
+		throws Exception {
+
+		String recaptchaPrivateKey = ParamUtil.getString(
+				actionRequest, "recaptchaPrivateKey");
+		String recaptchaPublicKey = ParamUtil.getString(
+				actionRequest, "recaptchaPublicKey");
+
+		preferences.setValue(
+				PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE, recaptchaPrivateKey);
+		preferences.setValue(
+				PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC, recaptchaPublicKey);
+
+		preferences.store();
 	}
 
 	protected void updateFileUploads(
