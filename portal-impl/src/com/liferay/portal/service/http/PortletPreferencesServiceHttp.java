@@ -16,8 +16,9 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.PortletPreferencesServiceUtil;
 
@@ -57,13 +58,13 @@ public class PortletPreferencesServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PortletPreferencesServiceUtil.class.getName(),
-					"deleteArchivedPreferences", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					portletItemId);
+			Object paramObj0 = new LongWrapper(portletItemId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(PortletPreferencesServiceUtil.class.getName(),
+					"deleteArchivedPreferences", new Object[] { paramObj0 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -90,15 +91,32 @@ public class PortletPreferencesServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PortletPreferencesServiceUtil.class.getName(),
-					"restoreArchivedPreferences", long.class,
-					java.lang.String.class, java.lang.String.class,
-					javax.portlet.PortletPreferences.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					name, portletId, preferences);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = name;
+
+			if (name == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = portletId;
+
+			if (portletId == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = preferences;
+
+			if (preferences == null) {
+				paramObj3 = new NullWrapper("javax.portlet.PortletPreferences");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(PortletPreferencesServiceUtil.class.getName(),
+					"restoreArchivedPreferences",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -125,15 +143,36 @@ public class PortletPreferencesServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PortletPreferencesServiceUtil.class.getName(),
-					"updateArchivePreferences", long.class, long.class,
-					java.lang.String.class, java.lang.String.class,
-					javax.portlet.PortletPreferences.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
-					groupId, name, portletId, preferences);
+			Object paramObj0 = new LongWrapper(userId);
+
+			Object paramObj1 = new LongWrapper(groupId);
+
+			Object paramObj2 = name;
+
+			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = portletId;
+
+			if (portletId == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = preferences;
+
+			if (preferences == null) {
+				paramObj4 = new NullWrapper("javax.portlet.PortletPreferences");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(PortletPreferencesServiceUtil.class.getName(),
+					"updateArchivePreferences",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

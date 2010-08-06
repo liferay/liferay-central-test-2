@@ -16,8 +16,11 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.PhoneServiceUtil;
 
@@ -59,17 +62,41 @@ public class PhoneServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PhoneServiceUtil.class.getName(),
-					"addPhone", java.lang.String.class, long.class,
-					java.lang.String.class, java.lang.String.class, int.class,
-					boolean.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					className, classPK, number, extension, typeId, primary);
+			Object paramObj0 = className;
+
+			if (className == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = new LongWrapper(classPK);
+
+			Object paramObj2 = number;
+
+			if (number == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = extension;
+
+			if (extension == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new IntegerWrapper(typeId);
+
+			Object paramObj5 = new BooleanWrapper(primary);
+
+			MethodWrapper methodWrapper = new MethodWrapper(PhoneServiceUtil.class.getName(),
+					"addPhone",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -96,12 +123,13 @@ public class PhoneServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PhoneServiceUtil.class.getName(),
-					"deletePhone", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, phoneId);
+			Object paramObj0 = new LongWrapper(phoneId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(PhoneServiceUtil.class.getName(),
+					"deletePhone", new Object[] { paramObj0 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -127,14 +155,15 @@ public class PhoneServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PhoneServiceUtil.class.getName(),
-					"getPhone", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, phoneId);
+			Object paramObj0 = new LongWrapper(phoneId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(PhoneServiceUtil.class.getName(),
+					"getPhone", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -162,15 +191,21 @@ public class PhoneServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PhoneServiceUtil.class.getName(),
-					"getPhones", java.lang.String.class, long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					className, classPK);
+			Object paramObj0 = className;
+
+			if (className == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = new LongWrapper(classPK);
+
+			MethodWrapper methodWrapper = new MethodWrapper(PhoneServiceUtil.class.getName(),
+					"getPhones", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -199,16 +234,34 @@ public class PhoneServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PhoneServiceUtil.class.getName(),
-					"updatePhone", long.class, java.lang.String.class,
-					java.lang.String.class, int.class, boolean.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, phoneId,
-					number, extension, typeId, primary);
+			Object paramObj0 = new LongWrapper(phoneId);
+
+			Object paramObj1 = number;
+
+			if (number == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = extension;
+
+			if (extension == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new IntegerWrapper(typeId);
+
+			Object paramObj4 = new BooleanWrapper(primary);
+
+			MethodWrapper methodWrapper = new MethodWrapper(PhoneServiceUtil.class.getName(),
+					"updatePhone",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

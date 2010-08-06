@@ -16,8 +16,10 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.PermissionServiceUtil;
 
@@ -57,13 +59,15 @@ public class PermissionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"checkPermission", long.class, long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					resourceId);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(resourceId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"checkPermission", new Object[] { paramObj0, paramObj1 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -89,14 +93,22 @@ public class PermissionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"checkPermission", long.class, java.lang.String.class,
-					long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					name, primKey);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = name;
+
+			if (name == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new LongWrapper(primKey);
+
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"checkPermission",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -122,14 +134,26 @@ public class PermissionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"checkPermission", long.class, java.lang.String.class,
-					java.lang.String.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					name, primKey);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = name;
+
+			if (name == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = primKey;
+
+			if (primKey == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"checkPermission",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -154,16 +178,24 @@ public class PermissionServiceHttp {
 		long groupId, java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"hasGroupPermission", long.class, java.lang.String.class,
-					long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					actionId, resourceId);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = actionId;
+
+			if (actionId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new LongWrapper(resourceId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"hasGroupPermission",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -186,16 +218,24 @@ public class PermissionServiceHttp {
 		long userId, java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"hasUserPermission", long.class, java.lang.String.class,
-					long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
-					actionId, resourceId);
+			Object paramObj0 = new LongWrapper(userId);
+
+			Object paramObj1 = actionId;
+
+			if (actionId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new LongWrapper(resourceId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"hasUserPermission",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -222,17 +262,39 @@ public class PermissionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"hasUserPermissions", long.class, long.class,
-					java.util.List.class, java.lang.String.class,
-					com.liferay.portal.security.permission.PermissionCheckerBag.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
-					groupId, resources, actionId, permissionCheckerBag);
+			Object paramObj0 = new LongWrapper(userId);
+
+			Object paramObj1 = new LongWrapper(groupId);
+
+			Object paramObj2 = resources;
+
+			if (resources == null) {
+				paramObj2 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj3 = actionId;
+
+			if (actionId == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = permissionCheckerBag;
+
+			if (permissionCheckerBag == null) {
+				paramObj4 = new NullWrapper(
+						"com.liferay.portal.security.permission.PermissionCheckerBag");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"hasUserPermissions",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -260,14 +322,22 @@ public class PermissionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"setGroupPermissions", long.class,
-					java.lang.String[].class, long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					actionIds, resourceId);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = actionIds;
+
+			if (actionIds == null) {
+				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj2 = new LongWrapper(resourceId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"setGroupPermissions",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -294,15 +364,36 @@ public class PermissionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"setGroupPermissions", java.lang.String.class,
-					java.lang.String.class, long.class,
-					java.lang.String[].class, long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					className, classPK, groupId, actionIds, resourceId);
+			Object paramObj0 = className;
+
+			if (className == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = classPK;
+
+			if (classPK == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new LongWrapper(groupId);
+
+			Object paramObj3 = actionIds;
+
+			if (actionIds == null) {
+				paramObj3 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj4 = new LongWrapper(resourceId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"setGroupPermissions",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -329,14 +420,24 @@ public class PermissionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"setOrgGroupPermissions", long.class, long.class,
-					java.lang.String[].class, long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					organizationId, groupId, actionIds, resourceId);
+			Object paramObj0 = new LongWrapper(organizationId);
+
+			Object paramObj1 = new LongWrapper(groupId);
+
+			Object paramObj2 = actionIds;
+
+			if (actionIds == null) {
+				paramObj2 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj3 = new LongWrapper(resourceId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"setOrgGroupPermissions",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -363,15 +464,39 @@ public class PermissionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"setRolePermission", long.class, long.class,
-					java.lang.String.class, int.class, java.lang.String.class,
-					java.lang.String.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
-					groupId, name, scope, primKey, actionId);
+			Object paramObj0 = new LongWrapper(roleId);
+
+			Object paramObj1 = new LongWrapper(groupId);
+
+			Object paramObj2 = name;
+
+			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new IntegerWrapper(scope);
+
+			Object paramObj4 = primKey;
+
+			if (primKey == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = actionId;
+
+			if (actionId == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"setRolePermission",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
+					});
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -397,14 +522,24 @@ public class PermissionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"setRolePermissions", long.class, long.class,
-					java.lang.String[].class, long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
-					groupId, actionIds, resourceId);
+			Object paramObj0 = new LongWrapper(roleId);
+
+			Object paramObj1 = new LongWrapper(groupId);
+
+			Object paramObj2 = actionIds;
+
+			if (actionIds == null) {
+				paramObj2 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj3 = new LongWrapper(resourceId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"setRolePermissions",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -430,14 +565,24 @@ public class PermissionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"setUserPermissions", long.class, long.class,
-					java.lang.String[].class, long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
-					groupId, actionIds, resourceId);
+			Object paramObj0 = new LongWrapper(userId);
+
+			Object paramObj1 = new LongWrapper(groupId);
+
+			Object paramObj2 = actionIds;
+
+			if (actionIds == null) {
+				paramObj2 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj3 = new LongWrapper(resourceId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"setUserPermissions",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -463,13 +608,18 @@ public class PermissionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"unsetRolePermission", long.class, long.class, long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
-					groupId, permissionId);
+			Object paramObj0 = new LongWrapper(roleId);
+
+			Object paramObj1 = new LongWrapper(groupId);
+
+			Object paramObj2 = new LongWrapper(permissionId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"unsetRolePermission",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -496,15 +646,39 @@ public class PermissionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"unsetRolePermission", long.class, long.class,
-					java.lang.String.class, int.class, java.lang.String.class,
-					java.lang.String.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
-					groupId, name, scope, primKey, actionId);
+			Object paramObj0 = new LongWrapper(roleId);
+
+			Object paramObj1 = new LongWrapper(groupId);
+
+			Object paramObj2 = name;
+
+			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new IntegerWrapper(scope);
+
+			Object paramObj4 = primKey;
+
+			if (primKey == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = actionId;
+
+			if (actionId == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"unsetRolePermission",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
+					});
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -531,14 +705,32 @@ public class PermissionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"unsetRolePermissions", long.class, long.class,
-					java.lang.String.class, int.class, java.lang.String.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
-					groupId, name, scope, actionId);
+			Object paramObj0 = new LongWrapper(roleId);
+
+			Object paramObj1 = new LongWrapper(groupId);
+
+			Object paramObj2 = name;
+
+			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new IntegerWrapper(scope);
+
+			Object paramObj4 = actionId;
+
+			if (actionId == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"unsetRolePermissions",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -564,14 +756,24 @@ public class PermissionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"unsetUserPermissions", long.class, long.class,
-					java.lang.String[].class, long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
-					groupId, actionIds, resourceId);
+			Object paramObj0 = new LongWrapper(userId);
+
+			Object paramObj1 = new LongWrapper(groupId);
+
+			Object paramObj2 = actionIds;
+
+			if (actionIds == null) {
+				paramObj2 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj3 = new LongWrapper(resourceId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
+					"unsetUserPermissions",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

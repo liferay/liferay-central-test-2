@@ -17,8 +17,8 @@ package com.liferay.portal.cluster;
 import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
 import com.liferay.portal.kernel.cluster.ClusterRequest;
 import com.liferay.portal.kernel.cluster.Clusterable;
-import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodTargetClassKey;
+import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.spring.aop.AnnotationChainableMethodAdvice;
 
 import java.lang.annotation.Annotation;
@@ -52,11 +52,11 @@ public class ClusterableAdvice
 
 		Method utilClassMethod = _getUtilClassMethod(method);
 
-		MethodHandler methodHandler = new MethodHandler(
+		MethodWrapper methodWrapper = new MethodWrapper(
 			utilClassMethod, methodInvocation.getArguments());
 
 		ClusterRequest clusterRequest = ClusterRequest.createMulticastRequest(
-			methodHandler, true);
+			methodWrapper, true);
 
 		clusterRequest.setServletContextName(_servletContextName);
 

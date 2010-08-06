@@ -16,8 +16,11 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.OrganizationServiceUtil;
 
@@ -57,13 +60,20 @@ public class OrganizationServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
-					"addGroupOrganizations", long.class, long[].class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					organizationIds);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = organizationIds;
+
+			if (organizationIds == null) {
+				paramObj1 = new NullWrapper("[J");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"addGroupOrganizations",
+					new Object[] { paramObj0, paramObj1 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -90,13 +100,20 @@ public class OrganizationServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
-					"addPasswordPolicyOrganizations", long.class, long[].class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					passwordPolicyId, organizationIds);
+			Object paramObj0 = new LongWrapper(passwordPolicyId);
+
+			Object paramObj1 = organizationIds;
+
+			if (organizationIds == null) {
+				paramObj1 = new NullWrapper("[J");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"addPasswordPolicyOrganizations",
+					new Object[] { paramObj0, paramObj1 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -125,19 +142,52 @@ public class OrganizationServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
-					"addOrganization", long.class, java.lang.String.class,
-					java.lang.String.class, boolean.class, long.class,
-					long.class, int.class, java.lang.String.class,
-					com.liferay.portal.service.ServiceContext.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					parentOrganizationId, name, type, recursable, regionId,
-					countryId, statusId, comments, serviceContext);
+			Object paramObj0 = new LongWrapper(parentOrganizationId);
+
+			Object paramObj1 = name;
+
+			if (name == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = type;
+
+			if (type == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new BooleanWrapper(recursable);
+
+			Object paramObj4 = new LongWrapper(regionId);
+
+			Object paramObj5 = new LongWrapper(countryId);
+
+			Object paramObj6 = new IntegerWrapper(statusId);
+
+			Object paramObj7 = comments;
+
+			if (comments == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj8 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"addOrganization",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -173,23 +223,83 @@ public class OrganizationServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
-					"addOrganization", long.class, java.lang.String.class,
-					java.lang.String.class, boolean.class, long.class,
-					long.class, int.class, java.lang.String.class,
-					java.util.List.class, java.util.List.class,
-					java.util.List.class, java.util.List.class,
-					java.util.List.class,
-					com.liferay.portal.service.ServiceContext.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					parentOrganizationId, name, type, recursable, regionId,
-					countryId, statusId, comments, addresses, emailAddresses,
-					orgLabors, phones, websites, serviceContext);
+			Object paramObj0 = new LongWrapper(parentOrganizationId);
+
+			Object paramObj1 = name;
+
+			if (name == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = type;
+
+			if (type == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new BooleanWrapper(recursable);
+
+			Object paramObj4 = new LongWrapper(regionId);
+
+			Object paramObj5 = new LongWrapper(countryId);
+
+			Object paramObj6 = new IntegerWrapper(statusId);
+
+			Object paramObj7 = comments;
+
+			if (comments == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = addresses;
+
+			if (addresses == null) {
+				paramObj8 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj9 = emailAddresses;
+
+			if (emailAddresses == null) {
+				paramObj9 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj10 = orgLabors;
+
+			if (orgLabors == null) {
+				paramObj10 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj11 = phones;
+
+			if (phones == null) {
+				paramObj11 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj12 = websites;
+
+			if (websites == null) {
+				paramObj12 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj13 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj13 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"addOrganization",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12, paramObj13
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -217,13 +327,13 @@ public class OrganizationServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
-					"deleteLogo", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					organizationId);
+			Object paramObj0 = new LongWrapper(organizationId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"deleteLogo", new Object[] { paramObj0 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -249,13 +359,13 @@ public class OrganizationServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
-					"deleteOrganization", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					organizationId);
+			Object paramObj0 = new LongWrapper(organizationId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"deleteOrganization", new Object[] { paramObj0 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -281,16 +391,22 @@ public class OrganizationServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
-					"getManageableOrganizations", java.lang.String.class,
-					int.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					actionId, max);
+			Object paramObj0 = actionId;
+
+			if (actionId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = new IntegerWrapper(max);
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"getManageableOrganizations",
+					new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -318,15 +434,15 @@ public class OrganizationServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
-					"getOrganization", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					organizationId);
+			Object paramObj0 = new LongWrapper(organizationId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"getOrganization", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -353,15 +469,21 @@ public class OrganizationServiceHttp {
 		long companyId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
-					"getOrganizationId", long.class, java.lang.String.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, name);
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = name;
+
+			if (name == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"getOrganizationId", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -385,14 +507,15 @@ public class OrganizationServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
-					"getUserOrganizations", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, userId);
+			Object paramObj0 = new LongWrapper(userId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"getUserOrganizations", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -420,15 +543,18 @@ public class OrganizationServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
-					"getUserOrganizations", long.class, boolean.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
-					inheritUserGroups);
+			Object paramObj0 = new LongWrapper(userId);
+
+			Object paramObj1 = new BooleanWrapper(inheritUserGroups);
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"getUserOrganizations",
+					new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -456,13 +582,20 @@ public class OrganizationServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
-					"setGroupOrganizations", long.class, long[].class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					organizationIds);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = organizationIds;
+
+			if (organizationIds == null) {
+				paramObj1 = new NullWrapper("[J");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"setGroupOrganizations",
+					new Object[] { paramObj0, paramObj1 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -488,13 +621,20 @@ public class OrganizationServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
-					"unsetGroupOrganizations", long.class, long[].class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					organizationIds);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = organizationIds;
+
+			if (organizationIds == null) {
+				paramObj1 = new NullWrapper("[J");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"unsetGroupOrganizations",
+					new Object[] { paramObj0, paramObj1 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -521,13 +661,20 @@ public class OrganizationServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
-					"unsetPasswordPolicyOrganizations", long.class, long[].class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					passwordPolicyId, organizationIds);
+			Object paramObj0 = new LongWrapper(passwordPolicyId);
+
+			Object paramObj1 = organizationIds;
+
+			if (organizationIds == null) {
+				paramObj1 = new NullWrapper("[J");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"unsetPasswordPolicyOrganizations",
+					new Object[] { paramObj0, paramObj1 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -557,21 +704,54 @@ public class OrganizationServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
-					"updateOrganization", long.class, long.class,
-					java.lang.String.class, java.lang.String.class,
-					boolean.class, long.class, long.class, int.class,
-					java.lang.String.class,
-					com.liferay.portal.service.ServiceContext.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					organizationId, parentOrganizationId, name, type,
-					recursable, regionId, countryId, statusId, comments,
-					serviceContext);
+			Object paramObj0 = new LongWrapper(organizationId);
+
+			Object paramObj1 = new LongWrapper(parentOrganizationId);
+
+			Object paramObj2 = name;
+
+			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = type;
+
+			if (type == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new BooleanWrapper(recursable);
+
+			Object paramObj5 = new LongWrapper(regionId);
+
+			Object paramObj6 = new LongWrapper(countryId);
+
+			Object paramObj7 = new IntegerWrapper(statusId);
+
+			Object paramObj8 = comments;
+
+			if (comments == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj9 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"updateOrganization",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -608,24 +788,86 @@ public class OrganizationServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
-					"updateOrganization", long.class, long.class,
-					java.lang.String.class, java.lang.String.class,
-					boolean.class, long.class, long.class, int.class,
-					java.lang.String.class, java.util.List.class,
-					java.util.List.class, java.util.List.class,
-					java.util.List.class, java.util.List.class,
-					com.liferay.portal.service.ServiceContext.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					organizationId, parentOrganizationId, name, type,
-					recursable, regionId, countryId, statusId, comments,
-					addresses, emailAddresses, orgLabors, phones, websites,
-					serviceContext);
+			Object paramObj0 = new LongWrapper(organizationId);
+
+			Object paramObj1 = new LongWrapper(parentOrganizationId);
+
+			Object paramObj2 = name;
+
+			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = type;
+
+			if (type == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new BooleanWrapper(recursable);
+
+			Object paramObj5 = new LongWrapper(regionId);
+
+			Object paramObj6 = new LongWrapper(countryId);
+
+			Object paramObj7 = new IntegerWrapper(statusId);
+
+			Object paramObj8 = comments;
+
+			if (comments == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = addresses;
+
+			if (addresses == null) {
+				paramObj9 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj10 = emailAddresses;
+
+			if (emailAddresses == null) {
+				paramObj10 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj11 = orgLabors;
+
+			if (orgLabors == null) {
+				paramObj11 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj12 = phones;
+
+			if (phones == null) {
+				paramObj12 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj13 = websites;
+
+			if (websites == null) {
+				paramObj13 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj14 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj14 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
+					"updateOrganization",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12, paramObj13,
+						paramObj14
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

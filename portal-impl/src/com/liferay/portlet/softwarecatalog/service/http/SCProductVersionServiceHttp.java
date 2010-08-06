@@ -16,8 +16,11 @@ package com.liferay.portlet.softwarecatalog.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -64,21 +67,60 @@ public class SCProductVersionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(SCProductVersionServiceUtil.class.getName(),
-					"addProductVersion", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, boolean.class, boolean.class,
-					long[].class,
-					com.liferay.portal.service.ServiceContext.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					productEntryId, version, changeLog, downloadPageURL,
-					directDownloadURL, testDirectDownloadURL,
-					repoStoreArtifact, frameworkVersionIds, serviceContext);
+			Object paramObj0 = new LongWrapper(productEntryId);
+
+			Object paramObj1 = version;
+
+			if (version == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = changeLog;
+
+			if (changeLog == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = downloadPageURL;
+
+			if (downloadPageURL == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = directDownloadURL;
+
+			if (directDownloadURL == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = new BooleanWrapper(testDirectDownloadURL);
+
+			Object paramObj6 = new BooleanWrapper(repoStoreArtifact);
+
+			Object paramObj7 = frameworkVersionIds;
+
+			if (frameworkVersionIds == null) {
+				paramObj7 = new NullWrapper("[J");
+			}
+
+			Object paramObj8 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj8 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(SCProductVersionServiceUtil.class.getName(),
+					"addProductVersion",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -106,13 +148,13 @@ public class SCProductVersionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(SCProductVersionServiceUtil.class.getName(),
-					"deleteProductVersion", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					productVersionId);
+			Object paramObj0 = new LongWrapper(productVersionId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(SCProductVersionServiceUtil.class.getName(),
+					"deleteProductVersion", new Object[] { paramObj0 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -138,15 +180,15 @@ public class SCProductVersionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(SCProductVersionServiceUtil.class.getName(),
-					"getProductVersion", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					productVersionId);
+			Object paramObj0 = new LongWrapper(productVersionId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(SCProductVersionServiceUtil.class.getName(),
+					"getProductVersion", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -174,15 +216,20 @@ public class SCProductVersionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(SCProductVersionServiceUtil.class.getName(),
-					"getProductVersions", long.class, int.class, int.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					productEntryId, start, end);
+			Object paramObj0 = new LongWrapper(productEntryId);
+
+			Object paramObj1 = new IntegerWrapper(start);
+
+			Object paramObj2 = new IntegerWrapper(end);
+
+			MethodWrapper methodWrapper = new MethodWrapper(SCProductVersionServiceUtil.class.getName(),
+					"getProductVersions",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -210,15 +257,15 @@ public class SCProductVersionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(SCProductVersionServiceUtil.class.getName(),
-					"getProductVersionsCount", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					productEntryId);
+			Object paramObj0 = new LongWrapper(productEntryId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(SCProductVersionServiceUtil.class.getName(),
+					"getProductVersionsCount", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -250,20 +297,53 @@ public class SCProductVersionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(SCProductVersionServiceUtil.class.getName(),
-					"updateProductVersion", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, boolean.class, boolean.class,
-					long[].class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					productVersionId, version, changeLog, downloadPageURL,
-					directDownloadURL, testDirectDownloadURL,
-					repoStoreArtifact, frameworkVersionIds);
+			Object paramObj0 = new LongWrapper(productVersionId);
+
+			Object paramObj1 = version;
+
+			if (version == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = changeLog;
+
+			if (changeLog == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = downloadPageURL;
+
+			if (downloadPageURL == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = directDownloadURL;
+
+			if (directDownloadURL == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = new BooleanWrapper(testDirectDownloadURL);
+
+			Object paramObj6 = new BooleanWrapper(repoStoreArtifact);
+
+			Object paramObj7 = frameworkVersionIds;
+
+			if (frameworkVersionIds == null) {
+				paramObj7 = new NullWrapper("[J");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(SCProductVersionServiceUtil.class.getName(),
+					"updateProductVersion",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

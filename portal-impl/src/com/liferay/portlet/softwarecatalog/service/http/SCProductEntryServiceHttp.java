@@ -16,8 +16,9 @@ package com.liferay.portlet.softwarecatalog.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -66,23 +67,97 @@ public class SCProductEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(SCProductEntryServiceUtil.class.getName(),
-					"addProductEntry", java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					long[].class, java.util.List.class, java.util.List.class,
-					com.liferay.portal.service.ServiceContext.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, name,
-					type, tags, shortDescription, longDescription, pageURL,
-					author, repoGroupId, repoArtifactId, licenseIds,
-					thumbnails, fullImages, serviceContext);
+			Object paramObj0 = name;
+
+			if (name == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = type;
+
+			if (type == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = tags;
+
+			if (tags == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = shortDescription;
+
+			if (shortDescription == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = longDescription;
+
+			if (longDescription == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = pageURL;
+
+			if (pageURL == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = author;
+
+			if (author == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = repoGroupId;
+
+			if (repoGroupId == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = repoArtifactId;
+
+			if (repoArtifactId == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = licenseIds;
+
+			if (licenseIds == null) {
+				paramObj9 = new NullWrapper("[J");
+			}
+
+			Object paramObj10 = thumbnails;
+
+			if (thumbnails == null) {
+				paramObj10 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj11 = fullImages;
+
+			if (fullImages == null) {
+				paramObj11 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj12 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj12 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(SCProductEntryServiceUtil.class.getName(),
+					"addProductEntry",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -110,13 +185,13 @@ public class SCProductEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(SCProductEntryServiceUtil.class.getName(),
-					"deleteProductEntry", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					productEntryId);
+			Object paramObj0 = new LongWrapper(productEntryId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(SCProductEntryServiceUtil.class.getName(),
+					"deleteProductEntry", new Object[] { paramObj0 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -142,15 +217,15 @@ public class SCProductEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(SCProductEntryServiceUtil.class.getName(),
-					"getProductEntry", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					productEntryId);
+			Object paramObj0 = new LongWrapper(productEntryId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(SCProductEntryServiceUtil.class.getName(),
+					"getProductEntry", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -184,22 +259,92 @@ public class SCProductEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(SCProductEntryServiceUtil.class.getName(),
-					"updateProductEntry", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					long[].class, java.util.List.class, java.util.List.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					productEntryId, name, type, tags, shortDescription,
-					longDescription, pageURL, author, repoGroupId,
-					repoArtifactId, licenseIds, thumbnails, fullImages);
+			Object paramObj0 = new LongWrapper(productEntryId);
+
+			Object paramObj1 = name;
+
+			if (name == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = type;
+
+			if (type == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = tags;
+
+			if (tags == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = shortDescription;
+
+			if (shortDescription == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = longDescription;
+
+			if (longDescription == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = pageURL;
+
+			if (pageURL == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = author;
+
+			if (author == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = repoGroupId;
+
+			if (repoGroupId == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = repoArtifactId;
+
+			if (repoArtifactId == null) {
+				paramObj9 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj10 = licenseIds;
+
+			if (licenseIds == null) {
+				paramObj10 = new NullWrapper("[J");
+			}
+
+			Object paramObj11 = thumbnails;
+
+			if (thumbnails == null) {
+				paramObj11 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj12 = fullImages;
+
+			if (fullImages == null) {
+				paramObj12 = new NullWrapper("java.util.List");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(SCProductEntryServiceUtil.class.getName(),
+					"updateProductEntry",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

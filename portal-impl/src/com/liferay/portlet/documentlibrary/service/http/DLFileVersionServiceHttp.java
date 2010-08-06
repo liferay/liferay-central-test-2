@@ -16,8 +16,9 @@ package com.liferay.portlet.documentlibrary.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -60,15 +61,21 @@ public class DLFileVersionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(DLFileVersionServiceUtil.class.getName(),
-					"updateDescription", long.class, java.lang.String.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					fileVersionId, description);
+			Object paramObj0 = new LongWrapper(fileVersionId);
+
+			Object paramObj1 = description;
+
+			if (description == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(DLFileVersionServiceUtil.class.getName(),
+					"updateDescription", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

@@ -16,8 +16,11 @@ package com.liferay.portlet.tasks.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -62,19 +65,49 @@ public class TasksProposalServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(TasksProposalServiceUtil.class.getName(),
-					"addProposal", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, long.class, boolean.class,
-					boolean.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					className, classPK, name, description, reviewUserId,
-					addCommunityPermissions, addGuestPermissions);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = className;
+
+			if (className == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = classPK;
+
+			if (classPK == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = name;
+
+			if (name == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = description;
+
+			if (description == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = new LongWrapper(reviewUserId);
+
+			Object paramObj6 = new BooleanWrapper(addCommunityPermissions);
+
+			Object paramObj7 = new BooleanWrapper(addGuestPermissions);
+
+			MethodWrapper methodWrapper = new MethodWrapper(TasksProposalServiceUtil.class.getName(),
+					"addProposal",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -106,19 +139,57 @@ public class TasksProposalServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(TasksProposalServiceUtil.class.getName(),
-					"addProposal", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, long.class,
-					java.lang.String[].class, java.lang.String[].class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					className, classPK, name, description, reviewUserId,
-					communityPermissions, guestPermissions);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = className;
+
+			if (className == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = classPK;
+
+			if (classPK == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = name;
+
+			if (name == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = description;
+
+			if (description == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = new LongWrapper(reviewUserId);
+
+			Object paramObj6 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj6 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj7 = guestPermissions;
+
+			if (guestPermissions == null) {
+				paramObj7 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(TasksProposalServiceUtil.class.getName(),
+					"addProposal",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -146,13 +217,13 @@ public class TasksProposalServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(TasksProposalServiceUtil.class.getName(),
-					"deleteProposal", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					proposalId);
+			Object paramObj0 = new LongWrapper(proposalId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(TasksProposalServiceUtil.class.getName(),
+					"deleteProposal", new Object[] { paramObj0 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -180,17 +251,35 @@ public class TasksProposalServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(TasksProposalServiceUtil.class.getName(),
-					"updateProposal", long.class, java.lang.String.class,
-					int.class, int.class, int.class, int.class, int.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					proposalId, description, dueDateMonth, dueDateDay,
-					dueDateYear, dueDateHour, dueDateMinute);
+			Object paramObj0 = new LongWrapper(proposalId);
+
+			Object paramObj1 = description;
+
+			if (description == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new IntegerWrapper(dueDateMonth);
+
+			Object paramObj3 = new IntegerWrapper(dueDateDay);
+
+			Object paramObj4 = new IntegerWrapper(dueDateYear);
+
+			Object paramObj5 = new IntegerWrapper(dueDateHour);
+
+			Object paramObj6 = new IntegerWrapper(dueDateMinute);
+
+			MethodWrapper methodWrapper = new MethodWrapper(TasksProposalServiceUtil.class.getName(),
+					"updateProposal",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

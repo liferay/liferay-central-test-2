@@ -24,13 +24,15 @@ import com.liferay.portal.kernel.cluster.ClusterRequest;
 import com.liferay.portal.kernel.cluster.FutureClusterResponses;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodInvoker;
+import com.liferay.portal.kernel.util.MethodWrapper;
 
 import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 
 import org.jgroups.Channel;
 import org.jgroups.ChannelException;
@@ -115,11 +117,11 @@ public class ClusterRequestReceiver extends BaseReceiver {
 	}
 
 	protected Object invoke(
-			String servletContextName, MethodHandler methodHandler)
+			String servletContextName, MethodWrapper methodWrapper)
 		throws Exception {
 
 		if (servletContextName == null) {
-			return methodHandler.invoke(true);
+			return MethodInvoker.invoke(methodWrapper);
 		}
 
 		Thread currentThread = Thread.currentThread();
@@ -133,7 +135,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 
 			currentThread.setContextClassLoader(classLoader);
 
-			return methodHandler.invoke(true);
+			return MethodInvoker.invoke(methodWrapper);
 		}
 		catch(Exception e) {
 			throw e;
@@ -146,8 +148,8 @@ public class ClusterRequestReceiver extends BaseReceiver {
 	protected List<Address> getDepartAddresses(View view) {
 		List<Address> departAddresses = new ArrayList<Address>();
 
-		List<org.jgroups.Address> jGroupsAddresses = view.getMembers();
-		List<org.jgroups.Address> lastJGroupsAddresses =
+		Vector<org.jgroups.Address> jGroupsAddresses = view.getMembers();
+		Vector<org.jgroups.Address> lastJGroupsAddresses =
 			_lastView.getMembers();
 
 		List<org.jgroups.Address> tempAddresses =
@@ -221,14 +223,14 @@ public class ClusterRequestReceiver extends BaseReceiver {
 			clusterNodeResponse.setMulticast(clusterRequest.isMulticast());
 			clusterNodeResponse.setUuid(clusterRequest.getUuid());
 
-			MethodHandler methodHandler = clusterRequest.getMethodHandler();
+			MethodWrapper methodWrapper = clusterRequest.getMethodWrapper();
 
-			if (methodHandler != null) {
+			if (methodWrapper != null) {
 				try {
 					ClusterInvokeThreadLocal.setEnabled(false);
 
 					Object returnValue = invoke(
-						clusterRequest.getServletContextName(), methodHandler);
+						clusterRequest.getServletContextName(), methodWrapper);
 
 					if (returnValue instanceof Serializable) {
 						clusterNodeResponse.setResult(returnValue);
@@ -242,7 +244,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 				catch (Exception e) {
 					clusterNodeResponse.setException(e);
 
-					_log.error("Failed to invoke method " + methodHandler, e);
+					_log.error("Failed to invoke method " + methodWrapper, e);
 				}
 				finally {
 					ClusterInvokeThreadLocal.setEnabled(true);
@@ -252,7 +254,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 				clusterNodeResponse.setException(
 					new ClusterException(
 						"Payload is not of type " +
-							MethodHandler.class.getName()));
+							MethodWrapper.class.getName()));
 			}
 		}
 

@@ -16,8 +16,10 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.RegionServiceUtil;
 
@@ -58,16 +60,30 @@ public class RegionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(RegionServiceUtil.class.getName(),
-					"addRegion", long.class, java.lang.String.class,
-					java.lang.String.class, boolean.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					countryId, regionCode, name, active);
+			Object paramObj0 = new LongWrapper(countryId);
+
+			Object paramObj1 = regionCode;
+
+			if (regionCode == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = name;
+
+			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new BooleanWrapper(active);
+
+			MethodWrapper methodWrapper = new MethodWrapper(RegionServiceUtil.class.getName(),
+					"addRegion",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -94,14 +110,13 @@ public class RegionServiceHttp {
 		HttpPrincipal httpPrincipal)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(RegionServiceUtil.class.getName(),
-					"getRegions");
-			MethodHandler methodHandler = new MethodHandler(methodKey);
+			MethodWrapper methodWrapper = new MethodWrapper(RegionServiceUtil.class.getName(),
+					"getRegions", new Object[0]);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -124,14 +139,15 @@ public class RegionServiceHttp {
 		HttpPrincipal httpPrincipal, long countryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(RegionServiceUtil.class.getName(),
-					"getRegions", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, countryId);
+			Object paramObj0 = new LongWrapper(countryId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(RegionServiceUtil.class.getName(),
+					"getRegions", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -154,14 +170,15 @@ public class RegionServiceHttp {
 		HttpPrincipal httpPrincipal, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(RegionServiceUtil.class.getName(),
-					"getRegions", boolean.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, active);
+			Object paramObj0 = new BooleanWrapper(active);
+
+			MethodWrapper methodWrapper = new MethodWrapper(RegionServiceUtil.class.getName(),
+					"getRegions", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -184,15 +201,17 @@ public class RegionServiceHttp {
 		HttpPrincipal httpPrincipal, long countryId, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(RegionServiceUtil.class.getName(),
-					"getRegions", long.class, boolean.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					countryId, active);
+			Object paramObj0 = new LongWrapper(countryId);
+
+			Object paramObj1 = new BooleanWrapper(active);
+
+			MethodWrapper methodWrapper = new MethodWrapper(RegionServiceUtil.class.getName(),
+					"getRegions", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -216,14 +235,15 @@ public class RegionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(RegionServiceUtil.class.getName(),
-					"getRegion", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, regionId);
+			Object paramObj0 = new LongWrapper(regionId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(RegionServiceUtil.class.getName(),
+					"getRegion", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

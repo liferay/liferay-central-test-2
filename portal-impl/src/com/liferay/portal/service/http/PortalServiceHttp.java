@@ -16,8 +16,7 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.PortalServiceUtil;
 
@@ -56,14 +55,13 @@ public class PortalServiceHttp {
 		HttpPrincipal httpPrincipal)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PortalServiceUtil.class.getName(),
-					"getAutoDeployDirectory");
-			MethodHandler methodHandler = new MethodHandler(methodKey);
+			MethodWrapper methodWrapper = new MethodWrapper(PortalServiceUtil.class.getName(),
+					"getAutoDeployDirectory", new Object[0]);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -85,14 +83,13 @@ public class PortalServiceHttp {
 	public static int getBuildNumber(HttpPrincipal httpPrincipal)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PortalServiceUtil.class.getName(),
-					"getBuildNumber");
-			MethodHandler methodHandler = new MethodHandler(methodKey);
+			MethodWrapper methodWrapper = new MethodWrapper(PortalServiceUtil.class.getName(),
+					"getBuildNumber", new Object[0]);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
@@ -110,12 +107,11 @@ public class PortalServiceHttp {
 	public static void test(HttpPrincipal httpPrincipal)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PortalServiceUtil.class.getName(),
-					"test");
-			MethodHandler methodHandler = new MethodHandler(methodKey);
+			MethodWrapper methodWrapper = new MethodWrapper(PortalServiceUtil.class.getName(),
+					"test", new Object[0]);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
@@ -131,12 +127,11 @@ public class PortalServiceHttp {
 	public static void testCounterRollback(HttpPrincipal httpPrincipal)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PortalServiceUtil.class.getName(),
-					"testCounterRollback");
-			MethodHandler methodHandler = new MethodHandler(methodKey);
+			MethodWrapper methodWrapper = new MethodWrapper(PortalServiceUtil.class.getName(),
+					"testCounterRollback", new Object[0]);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {

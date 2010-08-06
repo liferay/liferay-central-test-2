@@ -16,7 +16,7 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.Base64;
-import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -39,7 +39,7 @@ import javax.servlet.http.HttpServletRequest;
 public class TunnelUtil {
 
 	public static Object invoke(
-			HttpPrincipal httpPrincipal, MethodHandler methodHandler)
+			HttpPrincipal httpPrincipal, MethodWrapper methodWrapper)
 		throws Exception {
 
 		HttpURLConnection urlc = _getConnection(httpPrincipal);
@@ -47,8 +47,8 @@ public class TunnelUtil {
 		ObjectOutputStream oos = new ObjectOutputStream(urlc.getOutputStream());
 
 		oos.writeObject(
-			new ObjectValuePair<HttpPrincipal, MethodHandler>(
-				httpPrincipal, methodHandler));
+			new ObjectValuePair<HttpPrincipal, MethodWrapper>(
+				httpPrincipal, methodWrapper));
 
 		oos.flush();
 		oos.close();

@@ -16,8 +16,11 @@ package com.liferay.portlet.shopping.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -59,14 +62,22 @@ public class ShoppingItemServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(ShoppingItemServiceUtil.class.getName(),
-					"addBookItems", long.class, long.class,
-					java.lang.String[].class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					categoryId, isbns);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(categoryId);
+
+			Object paramObj2 = isbns;
+
+			if (isbns == null) {
+				paramObj2 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(ShoppingItemServiceUtil.class.getName(),
+					"addBookItems",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -104,29 +115,128 @@ public class ShoppingItemServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(ShoppingItemServiceUtil.class.getName(),
-					"addItem", long.class, long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					boolean.class, int.class, boolean.class,
-					java.lang.Boolean.class, boolean.class,
-					java.lang.String.class, java.io.File.class, boolean.class,
-					java.lang.String.class, java.io.File.class, boolean.class,
-					java.lang.String.class, java.io.File.class,
-					java.util.List.class, java.util.List.class,
-					com.liferay.portal.service.ServiceContext.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					categoryId, sku, name, description, properties,
-					fieldsQuantities, requiresShipping, stockQuantity,
-					featured, sale, smallImage, smallImageURL, smallFile,
-					mediumImage, mediumImageURL, mediumFile, largeImage,
-					largeImageURL, largeFile, itemFields, itemPrices,
-					serviceContext);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(categoryId);
+
+			Object paramObj2 = sku;
+
+			if (sku == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = name;
+
+			if (name == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = description;
+
+			if (description == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = properties;
+
+			if (properties == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = fieldsQuantities;
+
+			if (fieldsQuantities == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = new BooleanWrapper(requiresShipping);
+
+			Object paramObj8 = new IntegerWrapper(stockQuantity);
+
+			Object paramObj9 = new BooleanWrapper(featured);
+
+			Object paramObj10 = sale;
+
+			if (sale == null) {
+				paramObj10 = new NullWrapper("java.lang.Boolean");
+			}
+
+			Object paramObj11 = new BooleanWrapper(smallImage);
+
+			Object paramObj12 = smallImageURL;
+
+			if (smallImageURL == null) {
+				paramObj12 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj13 = smallFile;
+
+			if (smallFile == null) {
+				paramObj13 = new NullWrapper("java.io.File");
+			}
+
+			Object paramObj14 = new BooleanWrapper(mediumImage);
+
+			Object paramObj15 = mediumImageURL;
+
+			if (mediumImageURL == null) {
+				paramObj15 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj16 = mediumFile;
+
+			if (mediumFile == null) {
+				paramObj16 = new NullWrapper("java.io.File");
+			}
+
+			Object paramObj17 = new BooleanWrapper(largeImage);
+
+			Object paramObj18 = largeImageURL;
+
+			if (largeImageURL == null) {
+				paramObj18 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj19 = largeFile;
+
+			if (largeFile == null) {
+				paramObj19 = new NullWrapper("java.io.File");
+			}
+
+			Object paramObj20 = itemFields;
+
+			if (itemFields == null) {
+				paramObj20 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj21 = itemPrices;
+
+			if (itemPrices == null) {
+				paramObj21 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj22 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj22 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(ShoppingItemServiceUtil.class.getName(),
+					"addItem",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12, paramObj13,
+						paramObj14, paramObj15, paramObj16, paramObj17,
+						paramObj18, paramObj19, paramObj20, paramObj21,
+						paramObj22
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -153,12 +263,13 @@ public class ShoppingItemServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(ShoppingItemServiceUtil.class.getName(),
-					"deleteItem", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, itemId);
+			Object paramObj0 = new LongWrapper(itemId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(ShoppingItemServiceUtil.class.getName(),
+					"deleteItem", new Object[] { paramObj0 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -184,14 +295,15 @@ public class ShoppingItemServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(ShoppingItemServiceUtil.class.getName(),
-					"getItem", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, itemId);
+			Object paramObj0 = new LongWrapper(itemId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(ShoppingItemServiceUtil.class.getName(),
+					"getItem", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -231,29 +343,130 @@ public class ShoppingItemServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(ShoppingItemServiceUtil.class.getName(),
-					"updateItem", long.class, long.class, long.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, boolean.class, int.class,
-					boolean.class, java.lang.Boolean.class, boolean.class,
-					java.lang.String.class, java.io.File.class, boolean.class,
-					java.lang.String.class, java.io.File.class, boolean.class,
-					java.lang.String.class, java.io.File.class,
-					java.util.List.class, java.util.List.class,
-					com.liferay.portal.service.ServiceContext.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, itemId,
-					groupId, categoryId, sku, name, description, properties,
-					fieldsQuantities, requiresShipping, stockQuantity,
-					featured, sale, smallImage, smallImageURL, smallFile,
-					mediumImage, mediumImageURL, mediumFile, largeImage,
-					largeImageURL, largeFile, itemFields, itemPrices,
-					serviceContext);
+			Object paramObj0 = new LongWrapper(itemId);
+
+			Object paramObj1 = new LongWrapper(groupId);
+
+			Object paramObj2 = new LongWrapper(categoryId);
+
+			Object paramObj3 = sku;
+
+			if (sku == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = name;
+
+			if (name == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = description;
+
+			if (description == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = properties;
+
+			if (properties == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = fieldsQuantities;
+
+			if (fieldsQuantities == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = new BooleanWrapper(requiresShipping);
+
+			Object paramObj9 = new IntegerWrapper(stockQuantity);
+
+			Object paramObj10 = new BooleanWrapper(featured);
+
+			Object paramObj11 = sale;
+
+			if (sale == null) {
+				paramObj11 = new NullWrapper("java.lang.Boolean");
+			}
+
+			Object paramObj12 = new BooleanWrapper(smallImage);
+
+			Object paramObj13 = smallImageURL;
+
+			if (smallImageURL == null) {
+				paramObj13 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj14 = smallFile;
+
+			if (smallFile == null) {
+				paramObj14 = new NullWrapper("java.io.File");
+			}
+
+			Object paramObj15 = new BooleanWrapper(mediumImage);
+
+			Object paramObj16 = mediumImageURL;
+
+			if (mediumImageURL == null) {
+				paramObj16 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj17 = mediumFile;
+
+			if (mediumFile == null) {
+				paramObj17 = new NullWrapper("java.io.File");
+			}
+
+			Object paramObj18 = new BooleanWrapper(largeImage);
+
+			Object paramObj19 = largeImageURL;
+
+			if (largeImageURL == null) {
+				paramObj19 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj20 = largeFile;
+
+			if (largeFile == null) {
+				paramObj20 = new NullWrapper("java.io.File");
+			}
+
+			Object paramObj21 = itemFields;
+
+			if (itemFields == null) {
+				paramObj21 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj22 = itemPrices;
+
+			if (itemPrices == null) {
+				paramObj22 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj23 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj23 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(ShoppingItemServiceUtil.class.getName(),
+					"updateItem",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12, paramObj13,
+						paramObj14, paramObj15, paramObj16, paramObj17,
+						paramObj18, paramObj19, paramObj20, paramObj21,
+						paramObj22, paramObj23
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

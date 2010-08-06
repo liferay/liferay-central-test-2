@@ -16,8 +16,9 @@ package com.liferay.portlet.expando.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -61,17 +62,45 @@ public class ExpandoValueServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(ExpandoValueServiceUtil.class.getName(),
-					"addValue", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class, long.class,
-					java.lang.Object.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, className, tableName, columnName, classPK, data);
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = className;
+
+			if (className == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = tableName;
+
+			if (tableName == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = columnName;
+
+			if (columnName == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new LongWrapper(classPK);
+
+			Object paramObj5 = data;
+
+			if (data == null) {
+				paramObj5 = new NullWrapper("java.lang.Object");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoValueServiceUtil.class.getName(),
+					"addValue",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -101,17 +130,45 @@ public class ExpandoValueServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(ExpandoValueServiceUtil.class.getName(),
-					"addValue", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class, long.class,
-					java.lang.String.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, className, tableName, columnName, classPK, data);
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = className;
+
+			if (className == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = tableName;
+
+			if (tableName == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = columnName;
+
+			if (columnName == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new LongWrapper(classPK);
+
+			Object paramObj5 = data;
+
+			if (data == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoValueServiceUtil.class.getName(),
+					"addValue",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -140,16 +197,38 @@ public class ExpandoValueServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(ExpandoValueServiceUtil.class.getName(),
-					"getData", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class, long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, className, tableName, columnName, classPK);
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = className;
+
+			if (className == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = tableName;
+
+			if (tableName == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = columnName;
+
+			if (columnName == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new LongWrapper(classPK);
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoValueServiceUtil.class.getName(),
+					"getData",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -179,16 +258,38 @@ public class ExpandoValueServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(ExpandoValueServiceUtil.class.getName(),
-					"getJSONData", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class, long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, className, tableName, columnName, classPK);
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = className;
+
+			if (className == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = tableName;
+
+			if (tableName == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = columnName;
+
+			if (columnName == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new LongWrapper(classPK);
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoValueServiceUtil.class.getName(),
+					"getJSONData",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

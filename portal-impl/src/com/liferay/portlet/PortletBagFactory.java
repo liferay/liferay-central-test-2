@@ -37,8 +37,8 @@ import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.MethodInvoker;
+import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -318,8 +318,10 @@ public class PortletBagFactory {
 		try {
 			currentThread.setContextClassLoader(_classLoader);
 
-			return (String)new MethodHandler(
-				_getMethodKey, propertyKey).invoke(false);
+			MethodWrapper methodWrapper = new MethodWrapper(
+				PortletProps.class.getName(), "get", propertyKey);
+
+			return (String)MethodInvoker.invoke(methodWrapper, false);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
@@ -667,9 +669,6 @@ public class PortletBagFactory {
 		return (URLEncoder)newInstance(
 			URLEncoder.class, portlet.getURLEncoderClass());
 	}
-
-	private static final MethodKey _getMethodKey = new MethodKey(
-		PortletProps.class.getName(), "get", String.class);
 
 	private static Log _log = LogFactoryUtil.getLog(PortletBagFactory.class);
 

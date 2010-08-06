@@ -16,8 +16,9 @@ package com.liferay.portlet.bookmarks.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -61,17 +62,46 @@ public class BookmarksEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(BookmarksEntryServiceUtil.class.getName(),
-					"addEntry", long.class, long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					com.liferay.portal.service.ServiceContext.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					folderId, name, url, comments, serviceContext);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(folderId);
+
+			Object paramObj2 = name;
+
+			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = url;
+
+			if (url == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = comments;
+
+			if (comments == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj5 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(BookmarksEntryServiceUtil.class.getName(),
+					"addEntry",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -98,12 +128,13 @@ public class BookmarksEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(BookmarksEntryServiceUtil.class.getName(),
-					"deleteEntry", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
+			Object paramObj0 = new LongWrapper(entryId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(BookmarksEntryServiceUtil.class.getName(),
+					"deleteEntry", new Object[] { paramObj0 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -129,14 +160,15 @@ public class BookmarksEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(BookmarksEntryServiceUtil.class.getName(),
-					"getEntry", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
+			Object paramObj0 = new LongWrapper(entryId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(BookmarksEntryServiceUtil.class.getName(),
+					"getEntry", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -164,14 +196,15 @@ public class BookmarksEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(BookmarksEntryServiceUtil.class.getName(),
-					"openEntry", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
+			Object paramObj0 = new LongWrapper(entryId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(BookmarksEntryServiceUtil.class.getName(),
+					"openEntry", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -201,18 +234,48 @@ public class BookmarksEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(BookmarksEntryServiceUtil.class.getName(),
-					"updateEntry", long.class, long.class, long.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class,
-					com.liferay.portal.service.ServiceContext.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, entryId,
-					groupId, folderId, name, url, comments, serviceContext);
+			Object paramObj0 = new LongWrapper(entryId);
+
+			Object paramObj1 = new LongWrapper(groupId);
+
+			Object paramObj2 = new LongWrapper(folderId);
+
+			Object paramObj3 = name;
+
+			if (name == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = url;
+
+			if (url == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = comments;
+
+			if (comments == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj6 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(BookmarksEntryServiceUtil.class.getName(),
+					"updateEntry",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

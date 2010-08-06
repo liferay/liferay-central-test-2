@@ -16,8 +16,10 @@ package com.liferay.portlet.shopping.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -61,17 +63,35 @@ public class ShoppingCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(ShoppingCategoryServiceUtil.class.getName(),
-					"addCategory", long.class, java.lang.String.class,
-					java.lang.String.class,
-					com.liferay.portal.service.ServiceContext.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					parentCategoryId, name, description, serviceContext);
+			Object paramObj0 = new LongWrapper(parentCategoryId);
+
+			Object paramObj1 = name;
+
+			if (name == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = description;
+
+			if (description == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj3 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
+					"addCategory",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -99,13 +119,13 @@ public class ShoppingCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(ShoppingCategoryServiceUtil.class.getName(),
-					"deleteCategory", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					categoryId);
+			Object paramObj0 = new LongWrapper(categoryId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
+					"deleteCategory", new Object[] { paramObj0 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -131,15 +151,15 @@ public class ShoppingCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(ShoppingCategoryServiceUtil.class.getName(),
-					"getCategory", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					categoryId);
+			Object paramObj0 = new LongWrapper(categoryId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
+					"getCategory", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -170,19 +190,42 @@ public class ShoppingCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(ShoppingCategoryServiceUtil.class.getName(),
-					"updateCategory", long.class, long.class,
-					java.lang.String.class, java.lang.String.class,
-					boolean.class,
-					com.liferay.portal.service.ServiceContext.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					categoryId, parentCategoryId, name, description,
-					mergeWithParentCategory, serviceContext);
+			Object paramObj0 = new LongWrapper(categoryId);
+
+			Object paramObj1 = new LongWrapper(parentCategoryId);
+
+			Object paramObj2 = name;
+
+			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = description;
+
+			if (description == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new BooleanWrapper(mergeWithParentCategory);
+
+			Object paramObj5 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj5 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCategoryServiceUtil.class.getName(),
+					"updateCategory",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

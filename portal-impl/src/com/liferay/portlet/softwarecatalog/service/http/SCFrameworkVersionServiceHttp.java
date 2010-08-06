@@ -16,8 +16,11 @@ package com.liferay.portlet.softwarecatalog.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -61,17 +64,39 @@ public class SCFrameworkVersionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(SCFrameworkVersionServiceUtil.class.getName(),
-					"addFrameworkVersion", java.lang.String.class,
-					java.lang.String.class, boolean.class, int.class,
-					com.liferay.portal.service.ServiceContext.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, name,
-					url, active, priority, serviceContext);
+			Object paramObj0 = name;
+
+			if (name == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = url;
+
+			if (url == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new BooleanWrapper(active);
+
+			Object paramObj3 = new IntegerWrapper(priority);
+
+			Object paramObj4 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj4 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(SCFrameworkVersionServiceUtil.class.getName(),
+					"addFrameworkVersion",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -99,13 +124,13 @@ public class SCFrameworkVersionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(SCFrameworkVersionServiceUtil.class.getName(),
-					"deleteFrameworkVersion", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					frameworkVersionId);
+			Object paramObj0 = new LongWrapper(frameworkVersionId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(SCFrameworkVersionServiceUtil.class.getName(),
+					"deleteFrameworkVersion", new Object[] { paramObj0 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -131,15 +156,15 @@ public class SCFrameworkVersionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(SCFrameworkVersionServiceUtil.class.getName(),
-					"getFrameworkVersion", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					frameworkVersionId);
+			Object paramObj0 = new LongWrapper(frameworkVersionId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(SCFrameworkVersionServiceUtil.class.getName(),
+					"getFrameworkVersion", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -166,15 +191,18 @@ public class SCFrameworkVersionServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(SCFrameworkVersionServiceUtil.class.getName(),
-					"getFrameworkVersions", long.class, boolean.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					active);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new BooleanWrapper(active);
+
+			MethodWrapper methodWrapper = new MethodWrapper(SCFrameworkVersionServiceUtil.class.getName(),
+					"getFrameworkVersions",
+					new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -197,16 +225,22 @@ public class SCFrameworkVersionServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, boolean active, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(SCFrameworkVersionServiceUtil.class.getName(),
-					"getFrameworkVersions", long.class, boolean.class,
-					int.class, int.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					active, start, end);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new BooleanWrapper(active);
+
+			Object paramObj2 = new IntegerWrapper(start);
+
+			Object paramObj3 = new IntegerWrapper(end);
+
+			MethodWrapper methodWrapper = new MethodWrapper(SCFrameworkVersionServiceUtil.class.getName(),
+					"getFrameworkVersions",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -232,17 +266,34 @@ public class SCFrameworkVersionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(SCFrameworkVersionServiceUtil.class.getName(),
-					"updateFrameworkVersion", long.class,
-					java.lang.String.class, java.lang.String.class,
-					boolean.class, int.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					frameworkVersionId, name, url, active, priority);
+			Object paramObj0 = new LongWrapper(frameworkVersionId);
+
+			Object paramObj1 = name;
+
+			if (name == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = url;
+
+			if (url == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new BooleanWrapper(active);
+
+			Object paramObj4 = new IntegerWrapper(priority);
+
+			MethodWrapper methodWrapper = new MethodWrapper(SCFrameworkVersionServiceUtil.class.getName(),
+					"updateFrameworkVersion",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

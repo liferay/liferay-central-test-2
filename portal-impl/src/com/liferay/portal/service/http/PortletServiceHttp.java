@@ -16,8 +16,10 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.PortletServiceUtil;
 
@@ -56,14 +58,13 @@ public class PortletServiceHttp {
 		HttpPrincipal httpPrincipal)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PortletServiceUtil.class.getName(),
-					"getWARPortlets");
-			MethodHandler methodHandler = new MethodHandler(methodKey);
+			MethodWrapper methodWrapper = new MethodWrapper(PortletServiceUtil.class.getName(),
+					"getWARPortlets", new Object[0]);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
@@ -84,16 +85,30 @@ public class PortletServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PortletServiceUtil.class.getName(),
-					"updatePortlet", long.class, java.lang.String.class,
-					java.lang.String.class, boolean.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, portletId, roles, active);
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = portletId;
+
+			if (portletId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = roles;
+
+			if (roles == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new BooleanWrapper(active);
+
+			MethodWrapper methodWrapper = new MethodWrapper(PortletServiceUtil.class.getName(),
+					"updatePortlet",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
