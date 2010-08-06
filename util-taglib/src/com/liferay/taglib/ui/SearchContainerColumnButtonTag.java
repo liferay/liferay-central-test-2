@@ -51,11 +51,12 @@ public class SearchContainerColumnButtonTag extends SearchContainerColumnTag {
 			return EVAL_PAGE;
 		}
 		finally {
+			index = -1;
+
 			if (!ServerDetector.isResin()) {
 				align = SearchEntry.DEFAULT_ALIGN;
 				colspan = SearchEntry.DEFAULT_COLSPAN;
 				_href = null;
-				index = -1;
 				name = StringPool.BLANK;
 				valign = SearchEntry.DEFAULT_VALIGN;
 			}

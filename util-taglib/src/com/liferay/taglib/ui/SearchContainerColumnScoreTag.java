@@ -46,8 +46,9 @@ public class SearchContainerColumnScoreTag extends SearchContainerColumnTag {
 			return EVAL_PAGE;
 		}
 		finally {
+			index = -1;
+
 			if (!ServerDetector.isResin()) {
-				index = -1;
 				_name = DEFAULT_NAME;
 				_score = 0;
 			}

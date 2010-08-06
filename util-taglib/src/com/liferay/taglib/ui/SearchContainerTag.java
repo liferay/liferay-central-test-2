@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
@@ -42,26 +43,28 @@ public class SearchContainerTag extends ParamAndPropertyAncestorTagImpl {
 	public static final String DEFAULT_VAR = "searchContainer";
 
 	public int doEndTag() {
-		_curParam = SearchContainer.DEFAULT_CUR_PARAM;
-		_delta = SearchContainer.DEFAULT_DELTA;
-		_deltaConfigurable = SearchContainer.DEFAULT_DELTA_CONFIGURABLE;
-		_deltaParam = SearchContainer.DEFAULT_DELTA_PARAM;
-		_displayTerms = null;
-		_emptyResultsMessage = null;
-		_hasResults = false;
-		_headerNames = null;
-		_hover = false;
-		_id = null;
-		_iteratorURL = null;
-		_orderByCol = null;
-		_orderByColParam = SearchContainer.DEFAULT_ORDER_BY_COL_PARAM;
-		_orderByComparator = null;
-		_orderByType = null;
-		_orderByTypeParam = SearchContainer.DEFAULT_ORDER_BY_TYPE_PARAM;
-		_rowChecker = null;
-		_searchContainer = null;
-		_searchTerms = null;
-		_var = DEFAULT_VAR;
+		if (!ServerDetector.isResin()) {
+			_curParam = SearchContainer.DEFAULT_CUR_PARAM;
+			_delta = SearchContainer.DEFAULT_DELTA;
+			_deltaConfigurable = SearchContainer.DEFAULT_DELTA_CONFIGURABLE;
+			_deltaParam = SearchContainer.DEFAULT_DELTA_PARAM;
+			_displayTerms = null;
+			_emptyResultsMessage = null;
+			_hasResults = false;
+			_headerNames = null;
+			_hover = false;
+			_id = null;
+			_iteratorURL = null;
+			_orderByCol = null;
+			_orderByColParam = SearchContainer.DEFAULT_ORDER_BY_COL_PARAM;
+			_orderByComparator = null;
+			_orderByType = null;
+			_orderByTypeParam = SearchContainer.DEFAULT_ORDER_BY_TYPE_PARAM;
+			_rowChecker = null;
+			_searchContainer = null;
+			_searchTerms = null;
+			_var = DEFAULT_VAR;
+		}
 
 		return EVAL_PAGE;
 	}

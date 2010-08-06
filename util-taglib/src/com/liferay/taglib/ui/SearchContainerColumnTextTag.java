@@ -81,13 +81,13 @@ public class SearchContainerColumnTextTag extends SearchContainerColumnTag {
 		}
 		finally {
 			_value = null;
+			index = -1;
 
 			if (!ServerDetector.isResin()) {
 				align = SearchEntry.DEFAULT_ALIGN;
 				_buffer = null;
 				colspan = SearchEntry.DEFAULT_COLSPAN;
 				_href = null;
-				index = -1;
 				name = null;
 				_orderable = false;
 				_orderableProperty = null;

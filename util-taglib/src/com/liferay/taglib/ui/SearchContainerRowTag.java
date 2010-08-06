@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
@@ -95,20 +96,23 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 	}
 
 	public int doEndTag() {
-		_bold = false;
-		_className = null;
-		_escapedModel = false;
 		_headerNames = null;
 		_headerNamesAssigned = false;
-		_indexVar = DEFAULT_INDEX_VAR;
-		_keyProperty = null;
-		_modelVar = DEFAULT_MODEL_VAR;
-		_orderableHeaders = null;
 		_resultRows = null;
 		_rowIndex = 0;
-		_rowVar = DEFAULT_ROW_VAR;
 		_row = null;
-		_stringKey = false;
+
+		if (!ServerDetector.isResin()) {
+			_bold = false;
+			_className = null;
+			_escapedModel = false;
+			_indexVar = DEFAULT_INDEX_VAR;
+			_keyProperty = null;
+			_modelVar = DEFAULT_MODEL_VAR;
+			_orderableHeaders = null;
+			_rowVar = DEFAULT_ROW_VAR;
+			_stringKey = false;
+		}
 
 		return EVAL_PAGE;
 	}

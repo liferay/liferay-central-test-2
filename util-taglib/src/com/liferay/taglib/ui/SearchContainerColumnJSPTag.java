@@ -50,10 +50,11 @@ public class SearchContainerColumnJSPTag extends SearchContainerColumnTag {
 			return EVAL_PAGE;
 		}
 		finally {
+			index = -1;
+
 			if (!ServerDetector.isResin()) {
 				align = SearchEntry.DEFAULT_ALIGN;
 				colspan = SearchEntry.DEFAULT_COLSPAN;
-				index = -1;
 				name = StringPool.BLANK;
 				_path = null;
 				valign = SearchEntry.DEFAULT_VALIGN;
