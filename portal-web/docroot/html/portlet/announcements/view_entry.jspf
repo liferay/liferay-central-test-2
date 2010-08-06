@@ -22,7 +22,7 @@ try {
 
 	readEntry = true;
 }
-catch (NoSuchFlagException nsfe) {
+catch (NoSuchFlagException nsfe1) {
 	try {
 		AnnouncementsFlagLocalServiceUtil.getFlag(user.getUserId(), entry.getEntryId(), AnnouncementsFlagConstants.HIDDEN);
 
