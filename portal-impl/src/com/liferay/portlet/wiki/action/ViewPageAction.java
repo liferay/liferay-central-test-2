@@ -45,15 +45,18 @@ public class ViewPageAction extends PortletAction {
 
 		long categoryId = ParamUtil.getLong(renderRequest, "categoryId");
 		String tag = ParamUtil.getString(renderRequest, "tag");
+		String title = ParamUtil.getString(renderRequest, "title");
 
-		if (categoryId > 0) {
-			return ViewNodeAction.viewNode(
-				mapping, renderRequest, "portlet.wiki.view_categorized_pages");
-		}
+		if (Validator.isNull(title)) {
+			if (categoryId > 0) {
+				return ViewNodeAction.viewNode(
+					mapping, renderRequest, "portlet.wiki.view_categorized_pages");
+			}
 
-		if (Validator.isNotNull(tag)) {
-			return ViewNodeAction.viewNode(
-				mapping, renderRequest, "portlet.wiki.view_tagged_pages");
+			if (Validator.isNotNull(tag)) {
+				return ViewNodeAction.viewNode(
+					mapping, renderRequest, "portlet.wiki.view_tagged_pages");
+			}
 		}
 
 		try {
