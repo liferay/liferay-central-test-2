@@ -78,6 +78,10 @@ public class BookmarksIndexer extends BaseIndexer {
 			long folderId, SearchContext searchContext)
 		throws Exception {
 
+		if (folderId == BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			return;
+		}
+
 		BookmarksFolderServiceUtil.getFolder(folderId);
 	}
 

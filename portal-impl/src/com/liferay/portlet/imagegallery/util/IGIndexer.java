@@ -84,6 +84,10 @@ public class IGIndexer extends BaseIndexer {
 			long folderId, SearchContext searchContext)
 		throws Exception {
 
+		if (folderId == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			return;
+		}
+
 		IGFolderServiceUtil.getFolder(folderId);
 	}
 
