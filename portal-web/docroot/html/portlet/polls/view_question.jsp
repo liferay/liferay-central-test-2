@@ -58,7 +58,7 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 		/>
 
 		<span style="font-size: x-small;">
-		<%= HtmlUtil.escape(question.getDescription(locale)) %>
+			<%= HtmlUtil.escape(question.getDescription(locale)) %>
 		</span>
 
 		<br /><br />
