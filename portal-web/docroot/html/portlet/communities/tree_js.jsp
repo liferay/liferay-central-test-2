@@ -59,7 +59,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 		},
 
 		createLink: function(label, plid) {
-			return '<a href="<%= portletURL + StringPool.AMPERSAND + portletDisplay.getNamespace() + "selPlid=" %>'+ plid +'">'+ label +'</a>';
+			return '<a href="<%= portletURL + StringPool.AMPERSAND + portletDisplay.getNamespace() + "selPlid=" %>'+ plid +'">'+ Liferay.Util.escapeHTML(label) +'</a>';
 		},
 
 		extractLayoutId: function(node) {
