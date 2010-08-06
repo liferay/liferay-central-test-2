@@ -991,6 +991,8 @@ public class DLFileEntryLocalServiceImpl
 			extension = fileEntry.getExtension();
 		}
 
+		boolean updatedFileVersion = false;
+
 		try {
 			DLFileVersion latestFileVersion =
 				dlFileVersionLocalService.getLatestFileVersion(
@@ -1007,6 +1009,8 @@ public class DLFileEntryLocalServiceImpl
 					WorkflowConstants.ACTION_SAVE_DRAFT);
 
 				version = latestFileVersion.getVersion();
+
+				updatedFileVersion = true;
 
 				updateFileVersion(
 					user, latestFileVersion, sourceFileName, extension, title,
@@ -1033,7 +1037,7 @@ public class DLFileEntryLocalServiceImpl
 				version, size, WorkflowConstants.STATUS_DRAFT, serviceContext);
 		}
 
-		if ((is == null) && !version.equals(fileEntry.getVersion())) {
+		if ((is == null) && !updatedFileVersion) {
 			int fetchFailures = 0;
 
 			while (is == null) {
@@ -1097,7 +1101,7 @@ public class DLFileEntryLocalServiceImpl
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 				fileEntry.getGroupId(), fileEntry.getRepositoryId(), name,
 				fileEntry.getExtension(), false, version, sourceFileName,
-				fileEntry.getFileEntryId(),	fileEntry.getLuceneProperties(),
+				fileEntry.getFileEntryId(), fileEntry.getLuceneProperties(),
 				fileEntry.getModifiedDate(), serviceContext, is);
 		}
 
