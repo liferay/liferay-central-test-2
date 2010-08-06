@@ -14,9 +14,7 @@
 
 package com.liferay.portal.kernel.messaging.proxy;
 
-import com.liferay.portal.kernel.util.MethodInvoker;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
 
 import java.io.Serializable;
 
@@ -31,15 +29,8 @@ import java.lang.reflect.Method;
 public class ProxyRequest implements Serializable {
 
 	public ProxyRequest(Method method, Object[] arguments) throws Exception {
-		Class<?>[] argumentTypes = method.getParameterTypes();
 
-		for (int i = 0; i < arguments.length; i++) {
-			if (arguments[i] == null) {
-				arguments[i] = new NullWrapper(argumentTypes[i].getName());
-			}
-		}
-
-		_methodWrapper = new MethodWrapper(method, arguments);
+		_methodHandler = new MethodHandler(method, arguments);
 
 		_hasReturnValue = false;
 
@@ -64,7 +55,7 @@ public class ProxyRequest implements Serializable {
 
 	public Object execute(Object object) throws Exception {
 		try {
-			return MethodInvoker.invoke(_methodWrapper, object);
+			return _methodHandler.invoke(object);
 		}
 		catch (InvocationTargetException ite) {
 			Throwable t = ite.getCause();
@@ -78,8 +69,8 @@ public class ProxyRequest implements Serializable {
 		}
 	}
 
-	public MethodWrapper getMethodWrapper() {
-		return _methodWrapper;
+	public Object[] getArguments() {
+		return _methodHandler.getArguments();
 	}
 
 	public boolean hasReturnValue() {
@@ -91,7 +82,7 @@ public class ProxyRequest implements Serializable {
 	}
 
 	private boolean _hasReturnValue;
-	private MethodWrapper _methodWrapper;
+	private MethodHandler _methodHandler;
 	private boolean _synchronous;
 
 }
