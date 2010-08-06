@@ -1,0 +1,12 @@
+
+	<target name="test-db-upgrade-${test.ant.script.version}-smoke-tomcat-${test.ant.script.db}">
+		<antcall target="prepare-db-${test.ant.script.db}-common">
+			${custom.properties}
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="${test.ant.script.version}" />
+		</antcall>
+
+		<antcall target="run-smoke-test">
+			<param name="build.app.server" value="false" />
+		</antcall>
+	</target>

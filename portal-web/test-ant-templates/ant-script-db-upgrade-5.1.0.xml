@@ -1,0 +1,29 @@
+
+	<target name="test-db-upgrade-5.1.0-tomcat-${test.ant.script.db}">
+		<antcall target="prepare-db-${test.ant.script.db}-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.version" value="5.1.0" />
+		</antcall>
+
+		<antcall target="run-versioned-upgrade-test">
+			<param name="file.name" value="liferay-portal-tomcat-6.0-5.1.0.zip" />
+			<param name="legacy.config" value="true" />
+			<param name="legacy.theme.ids" value="classic" />
+			<param name="license.type" value="ce" />
+			<param name="lp.version" value="5.1.0" />
+			<param name="test.name" value="SampleData510TestSuite" />
+			<param name="tomcat.folder.dir" value="liferay-portal-tomcat-6.0-5.1.0" />
+		</antcall>
+
+		<antcall target="prepare-db-${test.ant.script.db}-common">
+			<param name="custom.properties" value="permissions.user.check.algorithm=5$${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="skip.rebuild-database" value="true" />
+			<param name="sql.version" value="5.1.0" />
+		</antcall>
+
+		<antcall target="run-latest-upgrade-test">
+			<param name="portlet.plugins.includes" value="web-form-portlet" />
+			<param name="test.name" value="ViewSampleData510LatestTestSuite" />
+		</antcall>
+	</target>

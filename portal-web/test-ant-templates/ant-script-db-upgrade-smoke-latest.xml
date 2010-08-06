@@ -1,0 +1,16 @@
+
+	<target name="test-db-upgrade-latest-smoke-tomcat-${test.ant.script.db}">
+		<echo file="create-$${db.${test.ant.script.db}.${test.ant.script.db.schema}}.sql">${test.ant.script.db.minimal}</echo>
+
+		<antcall target="prepare-db-${test.ant.script.db}-common">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="sql.dir" value="" />
+			<param name="sql.file" value="create-$${db.${test.ant.script.db}.${test.ant.script.db.schema}}.sql" />
+		</antcall>
+
+		<antcall target="run-smoke-test">
+			<param name="build.app.server" value="false" />
+		</antcall>
+
+		<delete file="create-$${db.${test.ant.script.db}.${test.ant.script.db.schema}}.sql" />
+	</target>
