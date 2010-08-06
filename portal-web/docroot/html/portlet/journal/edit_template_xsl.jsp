@@ -132,7 +132,7 @@ String defaultContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE
 		},
 		['aui-dialog']
 	);
-	
+
 	if (<%= useEditorCodepress %>) {
 		document.<portlet:namespace />editorForm.<portlet:namespace />xslContent_cp.value = <portlet:namespace />getEditorContent();
 	}

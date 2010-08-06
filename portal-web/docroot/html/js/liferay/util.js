@@ -1048,6 +1048,7 @@ Liferay.provide(
 				if (el.ancestor('.aui-dialog-bd') == null) {
 					el = A.one('#' + elString + '_cp');
 				}
+
 				pageBody = el.ancestor('.aui-dialog-bd');
 			}
 			else {
