@@ -1216,7 +1216,6 @@ AUI().add(
 					var repeatable = instance.getById('repeatable');
 					var fieldType = instance.getById('fieldType');
 					var indexType = instance.getById('indexType');
-					var localizedCheckbox = instance.getById('localized');
 					var instructions = instance.getById('instructions');
 					var predefinedValue = instance.getById('predefinedValue');
 					var required = instance.getById('required');
@@ -1226,7 +1225,6 @@ AUI().add(
 					indexType.val(fieldInstance.get('indexType'));
 
 					check(displayAsTooltip, fieldInstance.get('displayAsTooltip'));
-					check(localizedCheckbox, fieldInstance.get('localized'));
 					check(repeatable, fieldInstance.get('repeatable'));
 					check(required, fieldInstance.get('required'));
 
@@ -1238,10 +1236,6 @@ AUI().add(
 
 					if (fieldInstance.get('repeated') || fieldInstance.get('parentStructureId')) {
 						elements.attr('disabled', 'disabled');
-
-						if (localizedCheckbox) {
-							localizedCheckbox.attr('disabled', '');
-						}
 					}
 					else {
 						elements.attr('disabled', '');
@@ -1502,7 +1496,6 @@ AUI().add(
 					var required = instance.getById('required');
 					var requiredCheckbox = instance.getById('requiredCheckbox');
 					var fieldLabel = instance.getById('fieldLabel');
-					var localizedCheckbox = instance.getById('localizedCheckbox');
 					var localized = source.one('.journal-article-localized');
 
 					if (localized) {
@@ -1517,7 +1510,6 @@ AUI().add(
 							fieldType: fieldType.val(),
 							indexType: indexType.val(),
 							instructions: instructions.val(),
-							localized: localizedCheckbox ? localizedCheckbox.attr('checked') : false,
 							localizedValue: localizedValue,
 							predefinedValue: predefinedValue.val(),
 							repeatable: repeatableCheckbox.attr('checked'),
@@ -1995,6 +1987,17 @@ AUI().add(
 				container.delegate(
 					'click',
 					function(event) {
+						var checkbox = event.currentTarget;
+						var source = instance.getSourceByNode(checkbox);
+
+						instance._updateLocaleState(source, checkbox);
+					},
+					'.journal-article-localized-checkbox .aui-field-input-choice'
+				);
+
+				container.delegate(
+					'click',
+					function(event) {
 						var source = instance.getSourceByNode(event.currentTarget);
 
 						instance.repeatField(source);
@@ -2145,7 +2148,6 @@ AUI().add(
 				var editFieldCloseButton = editContainerWrapper.one('.close-button .aui-button-input');
 				var editFieldSaveButton = editContainerWrapper.one('.save-button .aui-button-input');
 				var languageIdSelect = instance.getById('languageIdSelect');
-				var localizedCheckbox = instance.getById('localizedCheckbox');
 
 				editContainerCheckboxes.detach('click');
 				editContainerInputs.detach('change');
@@ -2177,34 +2179,6 @@ AUI().add(
 
 				editFieldCancelButton.on('click', closeEditField, instance);
 				editFieldCloseButton.on('click', closeEditField, instance);
-
-				localizedCheckbox.on(
-					'click',
-					function(event) {
-						var source = instance.getSelectedField();
-						var defaultLocale = instance.getDefaultLocale();
-						var checkbox = event.target;
-						var isLocalized = checkbox.get('checked');
-						var localizedValue = source.one('.journal-article-localized');
-
-						if (languageIdSelect) {
-							var selectedLocale = languageIdSelect.val();
-						}
-
-						if (localizedValue) {
-							if (isLocalized) {
-								localizedValue.val(selectedLocale || defaultLocale);
-							}
-							else if (!confirm(Liferay.Language.get('unchecking-this-field-will-remove-localized-data-for-languages-not-shown-in-this-view'))) {
-								checkbox.attr('checked', 'checked');
-								localizedValue.val(selectedLocale || defaultLocale);
-							}
-							else {
-								localizedValue.val('false');
-							}
-						}
-					}
-				);
 			},
 
 			_attachEvents: function() {
@@ -2212,6 +2186,7 @@ AUI().add(
 
 				var closeButtons = instance.getCloseButtons();
 				var editButtons = instance.getEditButtons();
+				var enableLocale = instance.getById('enableLocalizationCheckbox');
 				var repeatableButtons = instance.getRepeatableButtons();
 				var defaultLanguageIdSelect = instance.getById('defaultLanguageIdSelect');
 				var downloadArticleContentBtn = instance.getById('downloadArticleContentBtn');
@@ -2220,6 +2195,7 @@ AUI().add(
 				var previewArticleBtn = instance.getById('previewArticleBtn');
 				var publishButton = instance.getById('publishButton');
 				var saveButton = instance.getById('saveButton');
+				var wrapper = instance.getById('journalArticleWrapper');
 
 				var containerInputs = fieldsContainer.all('.journal-article-component-container .aui-field-input');
 
@@ -2244,6 +2220,24 @@ AUI().add(
 						var source = instance.getSourceByNode(event.currentTarget);
 
 						instance.renderEditFieldOptions(source);
+					}
+				);
+				
+				enableLocale.on(
+					'click',
+					function(event) {
+						var checked = enableLocale.get('checked');
+						
+						wrapper.toggleClass('localization-disabled', !checked);
+						
+						A.io.request(
+							themeDisplay.getPathMain() + '/portal/session_click',
+							{
+								data: {
+									'liferay_journal_localization': checked
+								}
+							}
+						);
 					}
 				);
 
@@ -2668,6 +2662,36 @@ AUI().add(
 				}
 
 				return errorText;
+			},
+			
+			_updateLocaleState: function(source, checkbox) {
+				var instance = this;
+				
+				var isLocalized = checkbox.get('checked');
+				var fieldInstance = instance.getFieldInstance(source);
+				var languageIdSelect = instance.getById('languageIdSelect');
+				var defaultLocale = instance.getDefaultLocale();
+				var localizedValue = source.one('.journal-article-localized');
+
+				if (languageIdSelect) {
+					var selectedLocale = languageIdSelect.val();
+				}
+
+				if (localizedValue) {
+					if (isLocalized) {
+						localizedValue.val(selectedLocale || defaultLocale);
+					}
+					else if (!confirm(Liferay.Language.get('unchecking-this-field-will-remove-localized-data-for-languages-not-shown-in-this-view'))) {
+						checkbox.attr('checked', 'checked');
+						localizedValue.val(selectedLocale || defaultLocale);
+					}
+					else {
+						localizedValue.val('false');
+					}
+				}
+
+				var fieldInstance = instance.getFieldInstance(source);
+				fieldInstance.set('localized', checkbox.get('checked'));
 			},
 
 			_updateOriginalStructureXSD: function() {

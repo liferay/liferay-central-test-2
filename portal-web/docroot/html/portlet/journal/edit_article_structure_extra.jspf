@@ -81,8 +81,6 @@
 
 			<aui:input name="required" type="checkbox" value="<%= true %>" />
 
-			<aui:input name="localized" type="checkbox" value="<%= true %>" />
-
 			<aui:button-row>
 				<aui:button cssClass="save-button" name="save" type="button" value="save" />
 

@@ -150,8 +150,10 @@
 }
 
 .portlet-journal .structure-tree li {
-	border-width: 0;
+	border-top: 1px solid #CCCCCC;
+	border-width: 1px;
 	margin: 10px;
+	padding-top: 5px;
 	position: relative;
 }
 
@@ -180,6 +182,27 @@
 .portlet-journal .structure-tree .folder .field-container.required-field .journal-article-required-message {
 	display: block;
 	margin: 0;
+}
+
+.portlet-journal .journal-article-localized-checkbox {
+	display: block;
+	margin-top: 5px;
+}
+
+.portlet-journal .localization-disabled .journal-article-language-options {
+	display: none;
+}
+
+.portlet-journal .localization-disabled .structure-field .journal-article-localized-checkbox {
+	display: none;
+}
+
+.portlet-journal-edit-mode .portlet-journal .structure-field .journal-article-localized-checkbox {
+	display: none;
+}
+
+.portlet-journal .journal-article-header-edit .journal-article-localized-checkbox {
+	margin-bottom: 5px;
 }
 
 .portlet-journal-edit-mode .structure-tree li.structure-field.selected {
