@@ -1,0 +1,18 @@
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+			<property name="skip.rebuild-database" value="true" />
+			<property name="test.name" value="DBShardingLocalhostTestSuite" />
+		</ant>
+
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+			<property name="build.app.server" value="false" />
+			<property name="skip.rebuild-database" value="true" />
+			<property name="test.name" value="DBShardingAbleTestSuite" />
+			<property name="virtual.host.name" value="able" />
+		</ant>
+
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+			<property name="build.app.server" value="false" />
+			<property name="skip.rebuild-database" value="true" />
+			<property name="test.name" value="DBShardingBakerTestSuite" />
+			<property name="virtual.host.name" value="baker" />
+		</ant>

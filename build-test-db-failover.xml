@@ -3,48 +3,12 @@
 <project name="portal-test-db-failover" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
-	<target name="test-db-failover-smoke-tomcat-mysql">
-		<antcall target="prepare-mysql" />
+	<target name="run-db-failover">
+		<antcall target="run-db-failover-mysql" />
+	</target>
 
-		<antcall target="prepare-vm-server">
-			<param name="vm.vmdk.suffix" value="generic" />
-		 </antcall>
-
-		<ant antfile="build-test-tomcat.xml" target="prepare-vm-tomcat"> </ant>
-
-		<echo file="portal-impl/src/portal-ext.properties" append="true">
-
-counter.increment=5</echo>
-
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} portal-impl/src/portal-ext.properties ${vm.username}@${vm.host}:/liferay-portal-${lp.version}/tomcat-6.0.26/webapps/ROOT/WEB-INF/classes" />
-		</exec>
-
-		<delete file="portal-impl/src/portal-ext.properties" />
-
-		<antcall target="rebuild-database" inheritAll="false" />
-
-		<antcall target="revert-test-properties" />
-
-		<replace
-			file="portal-impl/test/test-portal-impl.properties"
-			token="localhost:8080"
-			value="${vm.host}:8080"
-		/>
-
-		<replace
-			file="portal-web/test/test-portal-web.properties"
-			token="localhost:8080"
-			value="${vm.host}:8080"
-		/>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.26\bin\startup.bat" />
-		</exec>
-
+	<target name="run-db-failover-mysql">
 		<sleep seconds="60" />
-
-		<antcall target="start-selenium" />
 
 		<exec executable="cmd.exe">
 			<arg line="/c net stop mysql" />
@@ -57,15 +21,5 @@ counter.increment=5</echo>
 		</exec>
 
 		<sleep seconds="60" />
-
-		<antcall target="run-selenium-test">
-			<param name="test.class" value="DBFailoverTestSuite" />
-		</antcall>
-
-		<antcall target="stop-selenium" />
-
-		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
-			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx stop hard" />
-		</exec>
 	</target>
 </project>

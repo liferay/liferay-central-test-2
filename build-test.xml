@@ -58,6 +58,26 @@
 		</antcall>
 	</target>
 
+	<target name="build-test-ant-script-db-failover">
+		<antcall target="create-ant-script">
+			<param name="ant.script.template" value="ant-script-db-failover.xml" />
+			<param name="ant.script.file.name" value="build-test-${test.ant.script.command}.xml" />
+		</antcall>
+	</target>
+
+	<target name="build-test-ant-script-db-sharding">
+		<loadfile property="db.sharding.tests" srcFile="portal-web/test-ant-templates/${test.ant.script.template}">
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</loadfile>
+
+		<antcall target="create-ant-script">
+			<param name="ant.script.template" value="ant-script-db-sharding.xml" />
+			<param name="ant.script.file.name" value="build-test-${test.ant.script.command}.xml" />
+		</antcall>
+	</target>
+
 	<target name="build-test-ant-script-db-upgrade">
 		<antcall target="create-ant-script">
 			<param name="ant.script.template" value="ant-script-db-upgrade-header.xml" />
@@ -319,6 +339,136 @@
 			<param name="test.ant.script.suite" value="ControlPanelWebContentTestSuite" />
 		</antcall>
 
+		<antcall target="build-test-ant-script-db-failover">
+			<param name="test.ant.script.command" value="db-failover-smoke" />
+			<param name="test.ant.script.suite" value="DBFailoverSmokeTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-plugins-chat" />
+			<param name="test.ant.script.plugins" value="chat-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsChatTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-plugins-flash" />
+			<param name="test.ant.script.plugins" value="flash-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsFlashTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-plugins-google-adsense" />
+			<param name="test.ant.script.plugins" value="google-adsense-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsGoogleAdsenseTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-plugins-google-gadget" />
+			<param name="test.ant.script.plugins" value="google-gadget-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsGoogleGadgetTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-plugins-google-maps" />
+			<param name="test.ant.script.plugins" value="google-maps-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsGoogleMapsTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-plugins-ip-geocoder" />
+			<param name="test.ant.script.plugins" value="ip-geocoder-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsIPGeocoderTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-plugins-knowledge-base" />
+			<param name="test.ant.script.plugins" value="knowledge-base-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsKnowledgeBaseTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-plugins-mail" />
+			<param name="test.ant.script.plugins" value="mail-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsMailTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-plugins-opensocial" />
+			<param name="test.ant.script.plugins" value="opensocial-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsOpensocialTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-plugins-social-coding" />
+			<param name="test.ant.script.plugins" value="social-coding-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSocialCodingTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-plugins-social-networking" />
+			<param name="test.ant.script.plugins" value="social-networking-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSocialNetworkingTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-plugins-twitter" />
+			<param name="test.ant.script.plugins" value="twitter-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsTwitterTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-plugins-weather" />
+			<param name="test.ant.script.plugins" value="weather-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsWeatherTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-plugins-web-form" />
+			<param name="test.ant.script.plugins" value="web-form-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsWebFormTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-plugins-wsrp" />
+			<param name="test.ant.script.plugins" value="wsrp-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsWSRPTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-smoke" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-smoke.xml" />
+		</antcall>
+
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-5.1.0" />
 			<param name="test.ant.script.dbs" value="db2,mysql,oracle,postgresql,sql-server" />
@@ -411,492 +561,492 @@
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-analog-clock" />
-			<param name="test.ant.script.suite" value="PluginsAnalogClockTestSuite" />
 			<param name="test.ant.script.plugins" value="analog-clock-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsAnalogClockTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-bible-gateway" />
-			<param name="test.ant.script.suite" value="PluginsBibleGatewayTestSuite" />
 			<param name="test.ant.script.plugins" value="bible-gateway-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsBibleGatewayTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-chat" />
-			<param name="test.ant.script.suite" value="PluginsChatTestSuite" />
 			<param name="test.ant.script.plugins" value="chat-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsChatTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-flash" />
-			<param name="test.ant.script.suite" value="PluginsFlashTestSuite" />
 			<param name="test.ant.script.plugins" value="flash-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsFlashTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-google-adsense" />
-			<param name="test.ant.script.suite" value="PluginsGoogleAdSenseTestSuite" />
 			<param name="test.ant.script.plugins" value="google-adsense-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsGoogleAdSenseTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-google-gadget" />
-			<param name="test.ant.script.suite" value="PluginsGoogleGadgetTestSuite" />
 			<param name="test.ant.script.plugins" value="google-gadget-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsGoogleGadgetTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-google-maps" />
-			<param name="test.ant.script.suite" value="PluginsGoogleMapsTestSuite" />
 			<param name="test.ant.script.plugins" value="google-maps-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsGoogleMapsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-gospel-for-asia" />
-			<param name="test.ant.script.suite" value="PluginsGospelForAsiaTestSuite" />
 			<param name="test.ant.script.plugins" value="gospel-for-asia-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsGospelForAsiaTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-ip-geocoder" />
-			<param name="test.ant.script.suite" value="PluginsIPGeocoderTestSuite" />
 			<param name="test.ant.script.plugins" value="ip-geocoder-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsIPGeocoderTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-journal-police" />
-			<param name="test.ant.script.suite" value="PluginsJournalPoliceTestSuite" />
 			<param name="test.ant.script.plugins" value="journal-police-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsJournalPoliceTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-kaleo" />
-			<param name="test.ant.script.suite" value="PluginsKaleoTestSuite" />
 			<param name="test.ant.script.plugins" value="kaleo-web" />
 			<param name="test.ant.script.plugins.type" value="webs" />
+			<param name="test.ant.script.suite" value="PluginsKaleoTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-mail" />
-			<param name="test.ant.script.suite" value="PluginsMailTestSuite" />
 			<param name="test.ant.script.plugins" value="mail-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsMailTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-novell-collaboration" />
-			<param name="test.ant.script.suite" value="PluginsNovellCollaborationTestSuite" />
 			<param name="test.ant.script.plugins" value="novell-collaboration-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsNovellCollaborationTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-random-bible-verse" />
-			<param name="test.ant.script.suite" value="PluginsRandomBibleVerseTestSuite" />
 			<param name="test.ant.script.plugins" value="random-bible-verse-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsRandomBibleVerseTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-release-tools" />
-			<param name="test.ant.script.suite" value="PluginsReleaseToolsTestSuite" />
 			<param name="test.ant.script.plugins" value="release-tools-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsReleaseToolsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-ruby-console" />
-			<param name="test.ant.script.suite" value="PluginsRubyConsoleTestSuite" />
 			<param name="test.ant.script.plugins" value="ruby-console-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsRubyConsoleTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-dao" />
-			<param name="test.ant.script.suite" value="PluginsSampleDAOTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-dao-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleDAOTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-groovy" />
-			<param name="test.ant.script.suite" value="PluginsSampleGroovyTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-groovy-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleGroovyTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-hibernate" />
-			<param name="test.ant.script.suite" value="PluginsSampleHibernateTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-hibernate-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleHibernateTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-icefaces-ipc-ajax-push" />
-			<param name="test.ant.script.suite" value="PluginsSampleIcefacesIPCAjaxPushTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-icefaces-ipc-ajax-push-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleIcefacesIPCAjaxPushTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-icefaces-jsf-1.1-myfaces-jsp" />
-			<param name="test.ant.script.suite" value="PluginsSampleIcefacesJSF11SunFaceletsTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-icefaces-jsf-1.1-myfaces-jsp-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleIcefacesJSF11SunFaceletsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-icefaces-jsf-1.1-sun-facelets" />
-			<param name="test.ant.script.suite" value="PluginsSampleIcefacesJSF11SunJSPTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-icefaces-jsf-1.1-sun-facelets-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleIcefacesJSF11SunJSPTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-icefaces-jsf-1.1-sun-jsp" />
-			<param name="test.ant.script.suite" value="PluginsSampleIcefacesJSF11SunMyfacesJSPTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-icefaces-jsf-1.1-sun-jsp-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleIcefacesJSF11SunMyfacesJSPTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-icefaces-jsf-1.2-sun-facelets" />
-			<param name="test.ant.script.suite" value="PluginsSampleIcefacesJSF12SunFaceletsTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-icefaces-jsf-1.2-sun-facelets-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleIcefacesJSF12SunFaceletsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-jsf-1.1-myfaces-facelets" />
-			<param name="test.ant.script.suite" value="PluginsSampleJSF11MyfacesFaceletsTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-jsf-1.1-myfaces-facelets-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleJSF11MyfacesFaceletsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-jsf-1.1-myfaces-jsp" />
-			<param name="test.ant.script.suite" value="PluginsSampleJSF11MyfacesJSPTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-jsf-1.1-myfaces-jsp-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleJSF11MyfacesJSPTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-jsf-1.1-sun-facelets" />
-			<param name="test.ant.script.suite" value="PluginsSampleJSF11SunFaceletsTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-jsf-1.1-sun-facelets-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleJSF11SunFaceletsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-jsf-1.1-sun-jsp" />
-			<param name="test.ant.script.suite" value="PluginsSampleJSF11SunJSPTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-jsf-1.1-sun-jsp-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleJSF11SunJSPTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-jsf-1.2-sun-facelets" />
-			<param name="test.ant.script.suite" value="PluginsSampleJSF12SunFaceletsTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-jsf-1.2-sun-facelets-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleJSF12SunFaceletsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-jsf-1.2-sun-jsp" />
-			<param name="test.ant.script.suite" value="PluginsSampleJSF12SunJSPTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-jsf-1.2-sun-jsp-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleJSF12SunJSPTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-json" />
-			<param name="test.ant.script.suite" value="PluginsSampleJSONTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-json-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleJSONTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-jsp" />
-			<param name="test.ant.script.suite" value="PluginsSampleJSPTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-jsp-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleJSPTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-lar" />
-			<param name="test.ant.script.suite" value="PluginsSampleLARTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-lar-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleLARTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-laszlo" />
-			<param name="test.ant.script.suite" value="PluginsSampleLaszloTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-laszlo-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleLaszloTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-orbeon-forms" />
-			<param name="test.ant.script.suite" value="PluginsSampleOrbeonFormsTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-orbeon-forms-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleOrbeonFormsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-permissions" />
-			<param name="test.ant.script.suite" value="PluginsSamplePermissionsTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-permissions-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSamplePermissionsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-php" />
-			<param name="test.ant.script.suite" value="PluginsSamplePHPTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-php-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSamplePHPTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-portal-client" />
-			<param name="test.ant.script.suite" value="PluginsSamplePortalClientTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-portal-client-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSamplePortalClientTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-portal-service" />
-			<param name="test.ant.script.suite" value="PluginsSamplePortalServiceTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-portal-service-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSamplePortalServiceTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-python" />
-			<param name="test.ant.script.suite" value="PluginsSamplePythonTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-python-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSamplePythonTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-ruby" />
-			<param name="test.ant.script.suite" value="PluginsSampleRubyTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-ruby-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleRubyTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-service-builder" />
-			<param name="test.ant.script.suite" value="PluginsSampleServiceBuilderTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-service-builder-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleServiceBuilderTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-sign-in" />
-			<param name="test.ant.script.suite" value="PluginsSampleSignInTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-sign-in-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleSignInTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-spring" />
-			<param name="test.ant.script.suite" value="PluginsSampleSpringTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-spring-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleSpringTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-struts" />
-			<param name="test.ant.script.suite" value="PluginsSampleStrutsTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-struts-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleStrutsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-struts-liferay" />
-			<param name="test.ant.script.suite" value="PluginsSampleStrutsLiferayTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-struts-liferay-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleStrutsLiferayTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-tapestry" />
-			<param name="test.ant.script.suite" value="PluginsSampleTapestryTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-tapestry-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleTapestryTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-ui-search-container-taglib" />
-			<param name="test.ant.script.suite" value="PluginsSampleUISearchContainerTaglibTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-ui-search-container-taglib-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleUISearchContainerTaglibTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-ui-taglibs" />
-			<param name="test.ant.script.suite" value="PluginsSampleUITagLibsTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-ui-taglibs-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleUITagLibsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sample-wap" />
-			<param name="test.ant.script.suite" value="PluginsSampleWAPTestSuite" />
 			<param name="test.ant.script.plugins" value="sample-wap-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSampleWAPTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-social-coding" />
-			<param name="test.ant.script.suite" value="PluginsSocialCodingTestSuite" />
 			<param name="test.ant.script.plugins" value="social-coding-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSocialCodingTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-social-networking" />
-			<param name="test.ant.script.suite" value="PluginsSocialNetworkingTestSuite" />
 			<param name="test.ant.script.plugins" value="social-networking-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSocialNetworkingTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-ssh-term" />
-			<param name="test.ant.script.suite" value="PluginsSSHTermTestSuite" />
 			<param name="test.ant.script.plugins" value="ssh-term-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSSHTermTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-ssh-vnc" />
-			<param name="test.ant.script.suite" value="PluginsSSHVncTestSuite" />
 			<param name="test.ant.script.plugins" value="ssh-vnc-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSSHVncTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-stocks" />
-			<param name="test.ant.script.suite" value="PluginsStocksTestSuite" />
 			<param name="test.ant.script.plugins" value="stocks-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsStocksTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-sun-tour-ipc" />
-			<param name="test.ant.script.suite" value="PluginsSunTourIPCTestSuite" />
 			<param name="test.ant.script.plugins" value="sun-tour-ipc-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsSunTourIPCTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-clp" />
-			<param name="test.ant.script.suite" value="PluginsTestCLPTestSuite" />
 			<param name="test.ant.script.plugins" value="chat-portlet,test-clp-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsTestCLPTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-test-dependecy" />
-			<param name="test.ant.script.suite" value="PluginsTestDependencyTestSuite" />
 			<param name="test.ant.script.plugins" value="test-dependency-able-portlet,test-dependency-baker-portlet,test-dependency-charlie-portlet,test-dependency-dog-portlet,test-dependency-easy-portlet,test-dependency-fox-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsTestDependencyTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-test-hook" />
-			<param name="test.ant.script.suite" value="PluginsTestHookTestSuite" />
 			<param name="test.ant.script.plugins" value="test-hook-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsTestHookTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-test-localized" />
-			<param name="test.ant.script.suite" value="PluginsTestLocalizedTestSuite" />
 			<param name="test.ant.script.plugins" value="test-localized-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsTestLocalizedTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-test-misc" />
-			<param name="test.ant.script.suite" value="PluginsTestMiscTestSuite" />
 			<param name="test.ant.script.plugins" value="test-misc-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsTestMiscTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-test-workflow" />
-			<param name="test.ant.script.suite" value="PluginsTestWorkflowTestSuite" />
 			<param name="test.ant.script.plugins" value="test-workflow-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsTestWorkflowTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-twitter" />
-			<param name="test.ant.script.suite" value="PluginsTwitterTestSuite" />
 			<param name="test.ant.script.plugins" value="twitter-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsTwitterTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-weather" />
-			<param name="test.ant.script.suite" value="PluginsWeatherTestSuite" />
 			<param name="test.ant.script.plugins" value="weather-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsWeatherTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-webcam" />
-			<param name="test.ant.script.suite" value="PluginsWebcamTestSuite" />
 			<param name="test.ant.script.plugins" value="webcam-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsWebcamTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-web-form" />
-			<param name="test.ant.script.suite" value="PluginsWebFormTestSuite" />
 			<param name="test.ant.script.plugins" value="web-form-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsWebFormTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-westminster-catechism" />
-			<param name="test.ant.script.suite" value="PluginsWestminsterCatechismTestSuite" />
 			<param name="test.ant.script.plugins" value="westminster-catechism-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsWestminsterCatechismTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-wiki-navigation" />
-			<param name="test.ant.script.suite" value="PluginsWikiNavigationTestSuite" />
 			<param name="test.ant.script.plugins" value="wiki-navigation-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsWikiNavigationTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-wsrp" />
-			<param name="test.ant.script.suite" value="PluginsWSRPTestSuite" />
 			<param name="test.ant.script.plugins" value="wsrp-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsWSRPTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-wysiwyg" />
-			<param name="test.ant.script.suite" value="PluginsWysiwygTestSuite" />
 			<param name="test.ant.script.plugins" value="wysiwyg-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsWysiwygTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
@@ -1156,8 +1306,8 @@
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="properties-mail-integration" />
-			<param name="test.ant.script.suite" value="PropertiesMailIntegrationTestSuite" />
 			<param name="test.ant.script.properties" value="pop.server.notifications.enabled=true$${line.separator}pop.server.notifications.interval=1$${line.separator}pop.server.subdomain=" />
+			<param name="test.ant.script.suite" value="PropertiesMailIntegrationTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
@@ -1850,6 +2000,13 @@ file.
 					</or>
 					<then>
 						<sleep seconds="60" />
+					</then>
+				</if>
+
+				<if>
+					<equals arg1="${test.ant.script.actions}" arg2="db-failover" />
+					<then>
+						<ant antfile="build-test-db-failover.xml" target="run-db-failover" />
 					</then>
 				</if>
 
