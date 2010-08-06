@@ -60,7 +60,7 @@ public class SetUtil {
 		return set;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static <E> Set<E> fromCollection(Collection<E> c) {
 		if ((c != null) && (Set.class.isAssignableFrom(c.getClass()))) {
 			return (Set)c;

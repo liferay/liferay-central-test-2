@@ -24,7 +24,7 @@ import java.lang.reflect.Constructor;
  */
 public class IncrementFactory {
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static Increment createIncrement(
 			Class<? extends Increment<?>> counterClass, Object value)
 		throws SystemException {

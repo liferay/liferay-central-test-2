@@ -1102,7 +1102,7 @@ public class HookHotDeployListener
 			portletClassLoader.getResource("META-INF/portal-log4j.xml"));
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	protected ModelListener<BaseModel<?>> initModelListener(
 			String modelName, String modelListenerClassName,
 			ClassLoader portletClassLoader)
@@ -1937,7 +1937,7 @@ public class HookHotDeployListener
 			modelListeners.add(modelListener);
 		}
 
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings("rawtypes")
 		public void unregisterModelListeners() {
 			for (Map.Entry<String, List<ModelListener<BaseModel<?>>>> entry :
 					_modelListenersMap.entrySet()) {

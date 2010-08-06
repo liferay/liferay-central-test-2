@@ -36,7 +36,7 @@ import org.aopalliance.intercept.MethodInvocation;
 public class BufferedIncrementAdvice
 	extends AnnotationChainableMethodAdvice<BufferedIncrement> {
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public Object before(MethodInvocation methodInvocation) throws Throwable {
 		MethodTargetClassKey methodTargetClassKey = buildMethodTargetClassKey(
 			methodInvocation);
@@ -83,7 +83,7 @@ public class BufferedIncrementAdvice
 		return _nullBufferedIncrement;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	private static BatchablePipe<String, BufferedIncreasableEntry>
 		_batchablePipe = new BatchablePipe<String, BufferedIncreasableEntry>();
 

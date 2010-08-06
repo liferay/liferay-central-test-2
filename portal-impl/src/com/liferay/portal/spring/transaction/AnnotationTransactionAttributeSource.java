@@ -41,7 +41,7 @@ import org.springframework.transaction.interceptor.TransactionAttributeSource;
 public class AnnotationTransactionAttributeSource
 	implements TransactionAttributeSource {
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public TransactionAttribute getTransactionAttribute(
 		Method method, Class targetClass) {
 

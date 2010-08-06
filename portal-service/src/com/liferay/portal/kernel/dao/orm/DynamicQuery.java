@@ -27,10 +27,10 @@ public interface DynamicQuery {
 
 	public void compile(Session session);
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List list();
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List list(boolean unmodifiable);
 
 	public void setLimit(int start, int end);

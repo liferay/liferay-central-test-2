@@ -88,7 +88,7 @@ public class JGroupsManager implements CacheManagerPeerProvider, CachePeer {
 		return _jChannel.getView().getMembers();
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List getElements(List list) {
 		return null;
 	}
@@ -97,7 +97,7 @@ public class JGroupsManager implements CacheManagerPeerProvider, CachePeer {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List getKeys() {
 		return null;
 	}
@@ -165,7 +165,7 @@ public class JGroupsManager implements CacheManagerPeerProvider, CachePeer {
 	public void removeAll() {
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public void send(Address address, List eventMessages)
 		throws RemoteException {
 
@@ -198,7 +198,7 @@ public class JGroupsManager implements CacheManagerPeerProvider, CachePeer {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public void send(List eventMessages) throws RemoteException {
 		send(null, eventMessages);
 	}

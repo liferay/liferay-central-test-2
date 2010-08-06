@@ -92,7 +92,7 @@ public class ListUtil {
 		return new ArrayList<E>(Arrays.asList(array));
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static <E> List<E> fromCollection(Collection<E> c) {
 		if ((c != null) && (List.class.isAssignableFrom(c.getClass()))) {
 			return (List)c;

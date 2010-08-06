@@ -60,12 +60,12 @@ public class SQLQueryImpl implements SQLQuery {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public Iterator iterate() throws ORMException {
 		return iterate(true);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public Iterator iterate(boolean unmodifiable) throws ORMException {
 		try {
 			return list(unmodifiable).iterator();
@@ -75,12 +75,12 @@ public class SQLQueryImpl implements SQLQuery {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List list() throws ORMException {
 		return list(true);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List list(boolean unmodifiable) throws ORMException {
 		try {
 			List list = _sqlQuery.list();

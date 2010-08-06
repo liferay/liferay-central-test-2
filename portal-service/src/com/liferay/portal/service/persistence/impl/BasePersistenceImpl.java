@@ -96,7 +96,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		throw new UnsupportedOperationException();
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 
@@ -117,7 +117,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List findWithDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException {
@@ -141,7 +141,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List findWithDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end,
 			OrderByComparator orderByComparator)

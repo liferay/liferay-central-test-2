@@ -35,7 +35,7 @@ public class BufferedIncrementMessageListener implements MessageListener {
 
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	protected void doReceive(Message message) throws Exception {
 		BatchablePipe<String, BufferedIncreasableEntry> batchablePipe =
 			(BatchablePipe<String, BufferedIncreasableEntry>)

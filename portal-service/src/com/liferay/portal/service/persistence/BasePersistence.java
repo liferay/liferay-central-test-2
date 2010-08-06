@@ -109,7 +109,7 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 * @return the matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException;
 
@@ -137,7 +137,7 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 *		   com.liferay.portal.kernel.dao.orm.Query,
 	 *		   com.liferay.portal.kernel.dao.orm.Dialect, int, int)
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List findWithDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end)
 		throws SystemException;
@@ -164,7 +164,7 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List findWithDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end,
 			OrderByComparator orderByComparator)
