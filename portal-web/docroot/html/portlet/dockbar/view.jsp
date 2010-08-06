@@ -337,7 +337,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 					<li>
 						<label>
 							<a href="javascript:;">
-								<input name="template" type="radio" value="<%= layoutPrototype.getLayoutPrototypeId() %>" /> <%= layoutPrototype.getName(user.getLanguageId()) %>
+								<input name="template" type="radio" value="<%= layoutPrototype.getLayoutPrototypeId() %>" /> <%= HtmlUtil.escape(layoutPrototype.getName(user.getLanguageId())) %>
 							</a>
 						</label>
 					</li>
