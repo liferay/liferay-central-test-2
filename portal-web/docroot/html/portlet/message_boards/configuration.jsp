@@ -402,13 +402,13 @@ else if (tabs2.equals("message-updated-email")) {
 
 						<tr>
 							<td>
-								<aui:input label="" name='<%= "priorityName" + i + "_temp" %>' size="15" />
+								<aui:input label="" name='<%= "priorityName" + i + "_temp" %>' onChange='<%= renderResponse.getNamespace() + "onChanged();" %>' size="15" />
 							</td>
 							<td>
-								<aui:input label="" name='<%= "priorityImage" + i + "_temp" %>' size="40" />
+								<aui:input label="" name='<%= "priorityImage" + i + "_temp" %>' onChange='<%= renderResponse.getNamespace() + "onChanged();" %>' size="40" />
 							</td>
 							<td>
-								<aui:input label="" name='<%= "priorityValue" + i + "_temp" %>' size="4" />
+								<aui:input label="" name='<%= "priorityValue" + i + "_temp" %>' onChange='<%= renderResponse.getNamespace() + "onChanged();" %>' size="4" />
 							</td>
 						</tr>
 
@@ -464,19 +464,13 @@ else if (tabs2.equals("message-updated-email")) {
 
 			<br />
 
-			<aui:script use="aui-base">
+			<aui:script>
 				var changed = false;
 				var lastLanguageId = "<%= currentLanguageId %>";
 
-				var tempTable = A.one('#<portlet:namespace />localized-priorities-table');
-
-				tempTable.delegate(
-					'change',
-					function(event) {
-						changed = true;
-					},
-					'input'
-				);
+				function <portlet:namespace />onChanged() {
+					changed = true;
+				}
 
 				Liferay.provide(
 					window,
