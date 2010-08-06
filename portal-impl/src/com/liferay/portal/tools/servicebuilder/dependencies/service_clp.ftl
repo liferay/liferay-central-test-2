@@ -1,18 +1,13 @@
 package ${packagePath}.service;
 
-import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.ClassLoaderProxy;
-import com.liferay.portal.kernel.util.DoubleWrapper;
-import com.liferay.portal.kernel.util.FloatWrapper;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
-import com.liferay.portal.kernel.util.ShortWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 
 public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name}${sessionTypeName}Service {
 
-	public ${entity.name}${sessionTypeName}ServiceClp(ClassLoaderProxy classLoaderProxy) {
+	public ${entity.name}${sessionTypeName}ServiceClp(String className, ClassLoaderProxy classLoaderProxy) {
+		_className = className;
 		_classLoaderProxy = classLoaderProxy;
 	}
 
@@ -50,58 +45,24 @@ public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name
 			</#list>
 
 			{
-				<#list parameters as parameter>
-					<#assign parameterTypeName = serviceBuilder.getTypeGenericsName(parameter.type)>
-
-					Object paramObj${parameter_index} =
-
-					<#if parameterTypeName == "boolean">
-						new BooleanWrapper(${parameter.name});
-					<#elseif parameterTypeName == "double">
-						new DoubleWrapper(${parameter.name});
-					<#elseif parameterTypeName == "float">
-						new FloatWrapper(${parameter.name});
-					<#elseif parameterTypeName == "int">
-						new IntegerWrapper(${parameter.name});
-					<#elseif parameterTypeName == "long">
-						new LongWrapper(${parameter.name});
-					<#elseif parameterTypeName == "short">
-						new ShortWrapper(${parameter.name});
-					<#else>
-						ClpSerializer.translateInput(${parameter.name});
-
-						if (${parameter.name} == null) {
-							paramObj${parameter_index} = new NullWrapper("${serviceBuilder.getClassName(parameter.type)}");
-						}
-					</#if>
-				</#list>
-
 				<#if returnTypeName != "void">
 					Object returnObj = null;
 				</#if>
+
+				MethodHandler methodHandler = new MethodHandler(_${method.name}MethodKey${method_index}
+
+				<#list parameters as parameter>
+				, ${parameter.name}
+				</#list>
+
+				);
 
 				try {
 					<#if returnTypeName != "void">
 						returnObj =
 					</#if>
 
-					_classLoaderProxy.invoke("${method.name}",
-
-					<#if parameters?size == 0>
-						new Object[0]
-					<#else>
-						new Object[] {
-							<#list parameters as parameter>
-								paramObj${parameter_index}
-
-								<#if parameter_has_next>
-									,
-								</#if>
-							</#list>
-						}
-					</#if>
-
-					);
+					_classLoaderProxy.invoke(methodHandler);
 				}
 				catch (Throwable t) {
 					<#list method.exceptions as exception>
@@ -143,6 +104,20 @@ public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name
 		return _classLoaderProxy;
 	}
 
+	private String _className;
 	private ClassLoaderProxy _classLoaderProxy;
+
+	<#list methods as method>
+		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method)>
+			<#assign parameters = method.parameters>
+			private final MethodKey _${method.name}MethodKey${method_index} = new MethodKey(_className, "${method.name}"
+
+			<#list parameters as parameter>
+				, ${serviceBuilder.getLiteralClass(parameter.type)}
+			</#list>
+
+			);
+		</#if>
+	</#list>
 
 }
