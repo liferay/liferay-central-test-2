@@ -59,6 +59,16 @@ while (itr.hasNext()) {
 		continue;
 	}
 
+	if (groupId != 0) {
+		long curPlid = PortalUtil.getPlidFromPortletId(groupId, portlet.getPortletId());
+
+		if (!PortletPermissionUtil.contains(permissionChecker, curPlid, portlet, ActionKeys.VIEW)) {
+			itr.remove();
+
+			continue;
+		}
+	}
+
 	portletTitles.add(PortalUtil.getPortletTitle(portlet, application, locale));
 }
 
