@@ -286,7 +286,7 @@ public class SecureFilter extends BasePortalFilter {
 		"Basic realm=\"" + Portal.PORTAL_REALM + "\"";
 
 	private static final String _DIGEST_REALM =
-		"Digest\nrealm=\"" + Portal.PORTAL_REALM + "\"";
+		"Digest realm=\"" + Portal.PORTAL_REALM + "\"";
 
 	private static final String _SERVER_IP = "SERVER_IP";
 
