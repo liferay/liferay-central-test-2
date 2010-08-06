@@ -143,6 +143,10 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 			while (Validator.isNotNull(line = resourceNameReader.readLine())) {
 				String[] values = StringUtil.split(line);
 
+				if (values.length == 0) {
+					continue;
+				}
+
 				String name = values[0];
 
 				List<String> defaultActionIds =
