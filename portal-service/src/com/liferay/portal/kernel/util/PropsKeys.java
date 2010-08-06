@@ -1231,6 +1231,8 @@ public interface PropsKeys {
 
 	public static final String ORGANIZATIONS_ROOTABLE = "organizations.rootable";
 
+	public static final String ORGANIZATIONS_SEARCH_WITH_INDEX = "organizations.search.with.index";
+
 	public static final String ORGANIZATIONS_TYPES = "organizations.types";
 
 	public static final String ORGANIZATIONS_USER_GROUP_MEMBERSHIP_ENABLED = "organizations.user.group.membership.enabled";

@@ -24,6 +24,11 @@ import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -50,23 +55,32 @@ import com.liferay.portal.util.comparator.OrganizationNameComparator;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  * @author Julio Camarero
+ * @author Hugo Huijser
  */
 public class OrganizationLocalServiceImpl
 	extends OrganizationLocalServiceBaseImpl {
 
 	public void addGroupOrganizations(long groupId, long[] organizationIds)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		groupPersistence.addOrganizations(groupId, organizationIds);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(Organization.class);
+
+		indexer.reindex(organizationIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -144,6 +158,12 @@ public class OrganizationLocalServiceImpl
 
 		expandoBridge.setAttributes(serviceContext);
 
+		// Indexer
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(Organization.class);
+
+		indexer.reindex(organization);
+
 		return organization;
 	}
 
@@ -217,6 +237,12 @@ public class OrganizationLocalServiceImpl
 
 			throw new RequiredOrganizationException();
 		}
+
+		// Indexer
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(Organization.class);
+
+		indexer.delete(organization);
 
 		// Asset
 
@@ -530,6 +556,38 @@ public class OrganizationLocalServiceImpl
 			obc);
 	}
 
+	public Hits search(
+			long companyId, long parentOrganizationId, String keywords,
+			LinkedHashMap<String, Object> params, int start, int end, Sort sort)
+		throws SystemException {
+
+		String name = null;
+		String type = null;
+		String street = null;
+		String city = null;
+		String zip = null;
+		String region = null;
+		String country = null;
+		boolean andOperator = false;
+
+		if (Validator.isNotNull(keywords)) {
+			name = keywords;
+			type = keywords;
+			street = keywords;
+			city = keywords;
+			zip = keywords;
+			region = keywords;
+			country = keywords;
+		}
+		else {
+			andOperator = true;
+		}
+
+		return search(
+			companyId, parentOrganizationId, name, type, street, city, zip,
+			region, country, params, andOperator, start, end, sort);
+	}
+
 	public List<Organization> search(
 			long companyId, long parentOrganizationId, String name, String type,
 			String street, String city, String zip,
@@ -563,6 +621,52 @@ public class OrganizationLocalServiceImpl
 			companyId, parentOrganizationId, parentOrganizationIdComparator,
 			name, type, street, city, zip, regionId, countryId, params,
 			andOperator, start, end, obc);
+	}
+
+	public Hits search(
+			long companyId, long parentOrganizationId, String name, String type,
+			String street, String city, String zip, String region,
+			String country, LinkedHashMap<String, Object> params,
+			boolean andSearch, int start, int end, Sort sort)
+		throws SystemException {
+
+		try {
+
+			Map<String, Serializable> attributes =
+				new HashMap<String, Serializable>();
+
+			if (parentOrganizationId > 0) {
+				attributes.put(
+					"parentOrganizationId", 
+					String.valueOf(parentOrganizationId));
+			}
+
+			attributes.put("name", name);
+			attributes.put("type", type);
+			attributes.put("street", street);
+			attributes.put("city", city);
+			attributes.put("zip", zip);
+			attributes.put("region", region);
+			attributes.put("country", country);
+			attributes.put("params", params);
+
+			SearchContext searchContext = new SearchContext();
+
+			searchContext.setAndSearch(andSearch);
+			searchContext.setAttributes(attributes);
+			searchContext.setCompanyId(companyId);
+			searchContext.setEnd(end);
+			searchContext.setSorts(new Sort[] {sort});
+			searchContext.setStart(start);
+
+			Indexer indexer =
+				IndexerRegistryUtil.getIndexer(Organization.class);
+
+			return indexer.search(searchContext);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	public int searchCount(
@@ -606,17 +710,25 @@ public class OrganizationLocalServiceImpl
 	}
 
 	public void setGroupOrganizations(long groupId, long[] organizationIds)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		groupPersistence.setOrganizations(groupId, organizationIds);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(Organization.class);
+
+		indexer.reindex(organizationIds);
 
 		PermissionCacheUtil.clearCache();
 	}
 
 	public void unsetGroupOrganizations(long groupId, long[] organizationIds)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		groupPersistence.removeOrganizations(groupId, organizationIds);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(Organization.class);
+
+		indexer.reindex(organizationIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -694,6 +806,12 @@ public class OrganizationLocalServiceImpl
 		ExpandoBridge expandoBridge = organization.getExpandoBridge();
 
 		expandoBridge.setAttributes(serviceContext);
+
+		// Indexer
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(Organization.class);
+
+		indexer.reindex(organization);
 
 		return organization;
 	}

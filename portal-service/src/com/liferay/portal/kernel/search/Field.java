@@ -54,6 +54,8 @@ public class Field implements Serializable {
 
 	public static final String NODE_ID = "nodeId";
 
+	public static final String ORGANIZATION_ID = "organzationId";
+
 	public static final String PORTLET_ID = "portletId";
 
 	public static final String PROPERTIES = "properties";

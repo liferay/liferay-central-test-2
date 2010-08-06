@@ -227,7 +227,8 @@ public class OrganizationLocalServiceUtil {
 
 	public static void addGroupOrganizations(long groupId,
 		long[] organizationIds)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().addGroupOrganizations(groupId, organizationIds);
 	}
 
@@ -401,6 +402,16 @@ public class OrganizationLocalServiceUtil {
 			regionId, countryId, params, start, end, obc);
 	}
 
+	public static com.liferay.portal.kernel.search.Hits search(long companyId,
+		long parentOrganizationId, java.lang.String keywords,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		int start, int end, com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .search(companyId, parentOrganizationId, keywords, params,
+			start, end, sort);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Organization> search(
 		long companyId, long parentOrganizationId, java.lang.String name,
 		java.lang.String type, java.lang.String street, java.lang.String city,
@@ -428,6 +439,20 @@ public class OrganizationLocalServiceUtil {
 			city, zip, regionId, countryId, params, andOperator, start, end, obc);
 	}
 
+	public static com.liferay.portal.kernel.search.Hits search(long companyId,
+		long parentOrganizationId, java.lang.String name,
+		java.lang.String type, java.lang.String street, java.lang.String city,
+		java.lang.String zip, java.lang.String region,
+		java.lang.String country,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		boolean andSearch, int start, int end,
+		com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .search(companyId, parentOrganizationId, name, type, street,
+			city, zip, region, country, params, andSearch, start, end, sort);
+	}
+
 	public static int searchCount(long companyId, long parentOrganizationId,
 		java.lang.String keywords, java.lang.String type,
 		java.lang.Long regionId, java.lang.Long countryId,
@@ -452,13 +477,15 @@ public class OrganizationLocalServiceUtil {
 
 	public static void setGroupOrganizations(long groupId,
 		long[] organizationIds)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().setGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static void unsetGroupOrganizations(long groupId,
 		long[] organizationIds)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().unsetGroupOrganizations(groupId, organizationIds);
 	}
 

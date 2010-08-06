@@ -15,12 +15,17 @@
 package com.liferay.portlet.enterpriseadmin.search;
 
 import com.liferay.portal.kernel.dao.search.DAOParamUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.service.CountryServiceUtil;
+import com.liferay.portal.service.RegionServiceUtil;
 
 import javax.portlet.PortletRequest;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Hugo Huijser
  */
 public class OrganizationSearchTerms extends OrganizationDisplayTerms {
 
@@ -47,12 +52,32 @@ public class OrganizationSearchTerms extends OrganizationDisplayTerms {
 		}
 	}
 
+	public String getCountryName() throws PortalException, SystemException {
+		if (countryId == 0) {
+			return null;
+		}
+		else {
+			return CountryServiceUtil.getCountry(
+				countryId).getName().toLowerCase();
+		}
+	}
+
 	public Long getRegionIdObj() {
 		if (regionId == 0) {
 			return null;
 		}
 		else {
 			return new Long(regionId);
+		}
+	}
+
+	public String getRegionName() throws PortalException, SystemException {
+		if (regionId == 0) {
+			return null;
+		}
+		else {
+			return RegionServiceUtil.getRegion(
+				regionId).getName().toLowerCase();
 		}
 	}
 

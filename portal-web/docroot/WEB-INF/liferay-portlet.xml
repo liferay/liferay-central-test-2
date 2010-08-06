@@ -1100,6 +1100,7 @@
 		<portlet-name>126</portlet-name>
 		<icon>/html/icons/enterprise_admin_organizations.png</icon>
 		<struts-path>enterprise_admin_organizations</struts-path>
+		<indexer-class>com.liferay.portlet.enterpriseadmin.util.OrganizationIndexer</indexer-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>2.0</control-panel-entry-weight>

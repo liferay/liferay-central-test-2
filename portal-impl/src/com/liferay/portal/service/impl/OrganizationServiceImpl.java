@@ -275,10 +275,6 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		Organization organization = updateOrganization(
-			organizationId, parentOrganizationId, name, type, recursable,
-			regionId, countryId, statusId, comments, serviceContext);
-
 		EnterpriseAdminUtil.updateAddresses(
 			Organization.class.getName(), organizationId, addresses);
 
@@ -292,6 +288,10 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 		EnterpriseAdminUtil.updateWebsites(
 			Organization.class.getName(), organizationId, websites);
+
+		Organization organization = updateOrganization(
+			organizationId, parentOrganizationId, name, type, recursable,
+			regionId, countryId, statusId, comments, serviceContext);
 
 		return organization;
 	}

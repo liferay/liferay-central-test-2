@@ -14,19 +14,18 @@
 
 package com.liferay.portlet.enterpriseadmin.util;
 
-import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
+import com.liferay.portal.kernel.search.ExpandoIndexer;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.SetUtil;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
@@ -39,7 +38,6 @@ import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.ArrayList;
@@ -56,7 +54,7 @@ import javax.portlet.PortletURL;
  * @author Raymond Augé
  * @author Zsigmond Rab
  */
-public class UserIndexer extends BaseIndexer {
+public class UserIndexer extends ExpandoIndexer {
 
 	public static final String[] CLASS_NAMES = {User.class.getName()};
 
@@ -122,43 +120,6 @@ public class UserIndexer extends BaseIndexer {
 		}
 		else if (key.equals("usersUserGroups")) {
 			contextQuery.addRequiredTerm("userGroupIds", String.valueOf(value));
-		}
-	}
-
-	protected void addSearchQueryParams(
-			BooleanQuery searchQuery, SearchContext searchContext,
-			ExpandoBridge expandoBridge, Set<String> attributeNames, String key,
-			Object value)
-		throws Exception {
-
-		if (attributeNames.contains(key)) {
-			UnicodeProperties properties = expandoBridge.getAttributeProperties(
-				key);
-
-			if (GetterUtil.getBoolean(
-					properties.getProperty(ExpandoBridgeIndexer.INDEXABLE))) {
-
-				String fieldName = ExpandoBridgeIndexerUtil.encodeFieldName(
-					key);
-
-				if (Validator.isNotNull((String)value)) {
-					if (searchContext.isAndSearch()) {
-						searchQuery.addRequiredTerm(
-							fieldName, (String)value, true);
-					}
-					else {
-						searchQuery.addTerm(fieldName, (String)value, true);
-					}
-				}
-			}
-		}
-		else if (Validator.isNotNull(key) && Validator.isNotNull(value)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm(key, String.valueOf(value));
-			}
-			else {
-				searchQuery.addTerm(key, String.valueOf(value));
-			}
 		}
 	}
 
