@@ -36,6 +36,7 @@ if (categoryId != 0) {
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
 <liferay-ui:header
+	escapeXml="<%= false %>"
 	title='<%= LanguageUtil.format(pageContext, "pages-with-x-x", new String[] {vocabularyName, categoryName}) %>'
 />
 
