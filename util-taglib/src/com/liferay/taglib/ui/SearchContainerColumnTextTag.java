@@ -80,8 +80,8 @@ public class SearchContainerColumnTextTag extends SearchContainerColumnTag {
 			return EVAL_PAGE;
 		}
 		finally {
-			_value = null;
 			index = -1;
+			_value = null;
 
 			if (!ServerDetector.isResin()) {
 				align = SearchEntry.DEFAULT_ALIGN;
