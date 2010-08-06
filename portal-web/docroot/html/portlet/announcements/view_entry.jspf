@@ -23,7 +23,13 @@ try {
 	readEntry = true;
 }
 catch (NoSuchFlagException nsfe) {
-	AnnouncementsFlagLocalServiceUtil.addFlag(user.getUserId(), entry.getEntryId(), AnnouncementsFlagConstants.READ);
+	try {
+		AnnouncementsFlagLocalServiceUtil.getFlag(user.getUserId(), entry.getEntryId(), AnnouncementsFlagConstants.HIDDEN);
+
+		readEntry = true;
+	}
+	catch (NoSuchFlagException nsfe2) {
+	}
 }
 
 if (readEntry) {
