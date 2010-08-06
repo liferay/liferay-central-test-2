@@ -6,14 +6,8 @@ package ${packagePath}.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.DoubleWrapper;
-import com.liferay.portal.kernel.util.FloatWrapper;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
-import com.liferay.portal.kernel.util.ShortWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -85,47 +79,18 @@ public class ${entity.name}ServiceHttp {
 
 			{
 				try {
+					MethodKey methodKey = new MethodKey(${entity.name}ServiceUtil.class.getName(), "${method.name}"
+
 					<#list parameters as parameter>
-						<#assign parameterTypeName = serviceBuilder.getTypeGenericsName(parameter.type)>
-
-						Object paramObj${parameter_index} =
-
-						<#if parameterTypeName == "boolean">
-							new BooleanWrapper(${parameter.name});
-						<#elseif parameterTypeName == "double">
-							new DoubleWrapper(${parameter.name});
-						<#elseif parameterTypeName == "float">
-							new FloatWrapper(${parameter.name});
-						<#elseif parameterTypeName == "int">
-							new IntegerWrapper(${parameter.name});
-						<#elseif parameterTypeName == "long">
-							new LongWrapper(${parameter.name});
-						<#elseif parameterTypeName == "short">
-							new ShortWrapper(${parameter.name});
-						<#else>
-							${parameter.name};
-
-							if (${parameter.name} == null) {
-								paramObj${parameter_index} = new NullWrapper("${serviceBuilder.getClassName(parameter.type)}");
-							}
-						</#if>
+						, ${serviceBuilder.getLiteralClass(parameter.type)}
 					</#list>
 
-					MethodWrapper methodWrapper = new MethodWrapper(${entity.name}ServiceUtil.class.getName(), "${method.name}",
+					);
+					MethodHandler methodHandler = new MethodHandler(methodKey
 
-					<#if parameters?size == 0>
-						new Object[0]
-					<#else>
-						new Object[] {
-							<#list parameters as parameter>
-								paramObj${parameter_index}
-
-								<#if parameter_has_next>
-									,
-								</#if>
-							</#list>
-						}
-					</#if>
+					<#list parameters as parameter>
+					, ${parameter.name}
+					</#list>
 
 					);
 
@@ -138,7 +103,7 @@ public class ${entity.name}ServiceHttp {
 							returnObj =
 						</#if>
 
-						TunnelUtil.invoke(httpPrincipal, methodWrapper);
+						TunnelUtil.invoke(httpPrincipal, methodHandler);
 					}
 					catch (Exception e) {
 						<#list method.exceptions as exception>
