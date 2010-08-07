@@ -35,6 +35,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Raymond Augé
+ * @author Eduardo Lundgren
  */
 public abstract class BaseFilter implements Filter {
 
@@ -101,16 +102,25 @@ public abstract class BaseFilter implements Filter {
 				url = url.concat(StringPool.QUESTION).concat(queryString);
 			}
 
-			if (_urlRegexPattern != null) {
-				Matcher matcher = _urlRegexPattern.matcher(url);
+			Matcher matcher = null;
+			Matcher ignoreMatcher = null;
 
-				filterEnabled = matcher.find();
+			if (_urlRegexPattern != null) {
+				matcher = _urlRegexPattern.matcher(url);
 			}
 
 			if (_urlRegexIgnorePattern != null) {
-				Matcher matcher = _urlRegexIgnorePattern.matcher(url);
+				ignoreMatcher = _urlRegexIgnorePattern.matcher(url);
+			}
 
-				filterEnabled = !matcher.find();
+			if ((matcher != null) && (ignoreMatcher != null)) {
+				filterEnabled = matcher.find() && !ignoreMatcher.find();
+			}
+			else if (matcher != null) {
+				filterEnabled = matcher.find();
+			}
+			else if (ignoreMatcher != null) {
+				filterEnabled = !ignoreMatcher.find();
 			}
 		}
 
