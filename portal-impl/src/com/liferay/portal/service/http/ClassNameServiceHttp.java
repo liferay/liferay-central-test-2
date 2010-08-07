@@ -16,9 +16,8 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.ClassNameServiceUtil;
 
@@ -58,15 +57,15 @@ public class ClassNameServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(classNameId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(ClassNameServiceUtil.class.getName(),
-					"getClassName", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(ClassNameServiceUtil.class.getName(),
+					"getClassName", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					classNameId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -93,19 +92,14 @@ public class ClassNameServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String value)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = value;
-
-			if (value == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ClassNameServiceUtil.class.getName(),
-					"getClassName", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(ClassNameServiceUtil.class.getName(),
+					"getClassName", java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, value);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -128,19 +122,14 @@ public class ClassNameServiceHttp {
 		java.lang.Class<?> classObj)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = classObj;
-
-			if (classObj == null) {
-				paramObj0 = new NullWrapper("java.lang.Class");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ClassNameServiceUtil.class.getName(),
-					"getClassNameId", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(ClassNameServiceUtil.class.getName(),
+					"getClassNameId", java.lang.Class.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, classObj);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				throw new com.liferay.portal.kernel.exception.SystemException(e);
@@ -159,19 +148,14 @@ public class ClassNameServiceHttp {
 		java.lang.String value)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = value;
-
-			if (value == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ClassNameServiceUtil.class.getName(),
-					"getClassNameId", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(ClassNameServiceUtil.class.getName(),
+					"getClassNameId", java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, value);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				throw new com.liferay.portal.kernel.exception.SystemException(e);

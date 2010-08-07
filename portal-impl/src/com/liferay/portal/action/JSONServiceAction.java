@@ -26,8 +26,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
-import com.liferay.portal.kernel.util.MethodInvoker;
-import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -546,11 +546,10 @@ public class JSONServiceAction extends JSONAction {
 		else if (returnObj instanceof BaseModel<?>) {
 			String serlializerClassName = getSerializerClassName(returnObj);
 
-			MethodWrapper methodWrapper = new MethodWrapper(
-				serlializerClassName, "toJSONObject", returnObj);
-
-			JSONObject jsonObject = (JSONObject)MethodInvoker.invoke(
-				methodWrapper, false);
+			MethodKey methodKey = new MethodKey(
+				serlializerClassName, "toJSONObject", returnObj.getClass());
+			JSONObject jsonObject = (JSONObject)new MethodHandler(
+				methodKey, returnObj).invoke(false);
 
 			return jsonObject.toString();
 		}
@@ -565,11 +564,10 @@ public class JSONServiceAction extends JSONAction {
 				String serializerClassName = getSerializerClassName(
 					returnItem0);
 
-				MethodWrapper methodWrapper = new MethodWrapper(
-					serializerClassName, "toJSONArray", returnObj);
-
-				jsonArray = (JSONArray)MethodInvoker.invoke(
-					methodWrapper, false);
+				MethodKey methodKey = new MethodKey(
+					serializerClassName, "toJSONArray", returnObj.getClass());
+				jsonArray = (JSONArray)new MethodHandler(
+					methodKey, returnObj).invoke(false);
 			}
 
 			return jsonArray.toString();
@@ -587,11 +585,10 @@ public class JSONServiceAction extends JSONAction {
 				String serializerClassName = getSerializerClassName(
 					returnItem0);
 
-				MethodWrapper methodWrapper = new MethodWrapper(
-					serializerClassName, "toJSONArray", returnObj);
-
-				jsonArray = (JSONArray)MethodInvoker.invoke(
-					methodWrapper, false);
+				MethodKey methodKey = new MethodKey(
+					serializerClassName, "toJSONArray", returnObj.getClass());
+				jsonArray = (JSONArray)new MethodHandler(
+					methodKey, returnObj).invoke(false);
 			}
 
 			return jsonArray.toString();
@@ -607,11 +604,10 @@ public class JSONServiceAction extends JSONAction {
 				String serlializerClassName = getSerializerClassName(
 					returnItem0);
 
-				MethodWrapper methodWrapper = new MethodWrapper(
-					serlializerClassName, "toJSONArray", returnObj);
-
-				jsonArray = (JSONArray)MethodInvoker.invoke(
-					methodWrapper, false);
+				MethodKey methodKey = new MethodKey(
+					serlializerClassName, "toJSONArray", returnObj.getClass());
+				jsonArray = (JSONArray)new MethodHandler(
+					methodKey, returnObj).invoke(false);
 			}
 
 			return jsonArray.toString();

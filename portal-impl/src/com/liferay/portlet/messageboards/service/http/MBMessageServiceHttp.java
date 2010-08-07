@@ -16,12 +16,8 @@ package com.liferay.portlet.messageboards.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.DoubleWrapper;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -67,58 +63,19 @@ public class MBMessageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = className;
-
-			if (className == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new LongWrapper(classPK);
-
-			Object paramObj3 = permissionClassName;
-
-			if (permissionClassName == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = new LongWrapper(permissionClassPK);
-
-			Object paramObj5 = new LongWrapper(threadId);
-
-			Object paramObj6 = new LongWrapper(parentMessageId);
-
-			Object paramObj7 = subject;
-
-			if (subject == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = body;
-
-			if (body == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj9 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"addDiscussionMessage",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
-					});
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"addDiscussionMessage", long.class, java.lang.String.class,
+					long.class, java.lang.String.class, long.class, long.class,
+					long.class, java.lang.String.class, java.lang.String.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					className, classPK, permissionClassName, permissionClassPK,
+					threadId, parentMessageId, subject, body, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -151,57 +108,20 @@ public class MBMessageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(categoryId);
-
-			Object paramObj2 = new LongWrapper(threadId);
-
-			Object paramObj3 = new LongWrapper(parentMessageId);
-
-			Object paramObj4 = subject;
-
-			if (subject == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = body;
-
-			if (body == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = files;
-
-			if (files == null) {
-				paramObj6 = new NullWrapper("java.util.List");
-			}
-
-			Object paramObj7 = new BooleanWrapper(anonymous);
-
-			Object paramObj8 = new DoubleWrapper(priority);
-
-			Object paramObj9 = new BooleanWrapper(allowPingbacks);
-
-			Object paramObj10 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj10 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"addMessage",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10
-					});
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"addMessage", long.class, long.class, long.class,
+					long.class, java.lang.String.class, java.lang.String.class,
+					java.util.List.class, boolean.class, double.class,
+					boolean.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					categoryId, threadId, parentMessageId, subject, body,
+					files, anonymous, priority, allowPingbacks, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -233,52 +153,20 @@ public class MBMessageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(categoryId);
-
-			Object paramObj2 = subject;
-
-			if (subject == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = body;
-
-			if (body == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = files;
-
-			if (files == null) {
-				paramObj4 = new NullWrapper("java.util.List");
-			}
-
-			Object paramObj5 = new BooleanWrapper(anonymous);
-
-			Object paramObj6 = new DoubleWrapper(priority);
-
-			Object paramObj7 = new BooleanWrapper(allowPingbacks);
-
-			Object paramObj8 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj8 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"addMessage",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8
-					});
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"addMessage", long.class, long.class,
+					java.lang.String.class, java.lang.String.class,
+					java.util.List.class, boolean.class, double.class,
+					boolean.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					categoryId, subject, body, files, anonymous, priority,
+					allowPingbacks, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -308,35 +196,16 @@ public class MBMessageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = className;
-
-			if (className == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new LongWrapper(classPK);
-
-			Object paramObj3 = permissionClassName;
-
-			if (permissionClassName == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = new LongWrapper(permissionClassPK);
-
-			Object paramObj5 = new LongWrapper(messageId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"deleteDiscussionMessage",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
-					});
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"deleteDiscussionMessage", long.class,
+					java.lang.String.class, long.class, java.lang.String.class,
+					long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					className, classPK, permissionClassName, permissionClassPK,
+					messageId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -361,13 +230,12 @@ public class MBMessageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(messageId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"deleteMessage", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"deleteMessage", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, messageId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -394,26 +262,16 @@ public class MBMessageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(categoryId);
-
-			Object paramObj2 = new IntegerWrapper(status);
-
-			Object paramObj3 = new IntegerWrapper(start);
-
-			Object paramObj4 = new IntegerWrapper(end);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"getCategoryMessages",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"getCategoryMessages", long.class, long.class, int.class,
+					int.class, int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					categoryId, status, start, end);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -440,20 +298,16 @@ public class MBMessageServiceHttp {
 		long groupId, long categoryId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(categoryId);
-
-			Object paramObj2 = new IntegerWrapper(status);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"getCategoryMessagesCount",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"getCategoryMessagesCount", long.class, long.class,
+					int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					categoryId, status);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -481,58 +335,20 @@ public class MBMessageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(categoryId);
-
-			Object paramObj2 = new IntegerWrapper(status);
-
-			Object paramObj3 = new IntegerWrapper(max);
-
-			Object paramObj4 = type;
-
-			if (type == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = new DoubleWrapper(version);
-
-			Object paramObj6 = displayStyle;
-
-			if (displayStyle == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = feedURL;
-
-			if (feedURL == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = entryURL;
-
-			if (entryURL == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = themeDisplay;
-
-			if (themeDisplay == null) {
-				paramObj9 = new NullWrapper(
-						"com.liferay.portal.theme.ThemeDisplay");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"getCategoryMessagesRSS",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
-					});
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"getCategoryMessagesRSS", long.class, long.class,
+					int.class, int.class, java.lang.String.class, double.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class,
+					com.liferay.portal.theme.ThemeDisplay.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					categoryId, status, max, type, version, displayStyle,
+					feedURL, entryURL, themeDisplay);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -563,56 +379,20 @@ public class MBMessageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-
-			Object paramObj1 = new IntegerWrapper(status);
-
-			Object paramObj2 = new IntegerWrapper(max);
-
-			Object paramObj3 = type;
-
-			if (type == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = new DoubleWrapper(version);
-
-			Object paramObj5 = displayStyle;
-
-			if (displayStyle == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = feedURL;
-
-			if (feedURL == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = entryURL;
-
-			if (entryURL == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = themeDisplay;
-
-			if (themeDisplay == null) {
-				paramObj8 = new NullWrapper(
-						"com.liferay.portal.theme.ThemeDisplay");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"getCompanyMessagesRSS",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8
-					});
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"getCompanyMessagesRSS", long.class, int.class, int.class,
+					java.lang.String.class, double.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class,
+					com.liferay.portal.theme.ThemeDisplay.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, status, max, type, version, displayStyle,
+					feedURL, entryURL, themeDisplay);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -643,56 +423,20 @@ public class MBMessageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new IntegerWrapper(status);
-
-			Object paramObj2 = new IntegerWrapper(max);
-
-			Object paramObj3 = type;
-
-			if (type == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = new DoubleWrapper(version);
-
-			Object paramObj5 = displayStyle;
-
-			if (displayStyle == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = feedURL;
-
-			if (feedURL == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = entryURL;
-
-			if (entryURL == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = themeDisplay;
-
-			if (themeDisplay == null) {
-				paramObj8 = new NullWrapper(
-						"com.liferay.portal.theme.ThemeDisplay");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"getGroupMessagesRSS",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8
-					});
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"getGroupMessagesRSS", long.class, int.class, int.class,
+					java.lang.String.class, double.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class,
+					com.liferay.portal.theme.ThemeDisplay.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					status, max, type, version, displayStyle, feedURL,
+					entryURL, themeDisplay);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -724,58 +468,20 @@ public class MBMessageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(userId);
-
-			Object paramObj2 = new IntegerWrapper(status);
-
-			Object paramObj3 = new IntegerWrapper(max);
-
-			Object paramObj4 = type;
-
-			if (type == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = new DoubleWrapper(version);
-
-			Object paramObj6 = displayStyle;
-
-			if (displayStyle == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = feedURL;
-
-			if (feedURL == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = entryURL;
-
-			if (entryURL == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = themeDisplay;
-
-			if (themeDisplay == null) {
-				paramObj9 = new NullWrapper(
-						"com.liferay.portal.theme.ThemeDisplay");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"getGroupMessagesRSS",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
-					});
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"getGroupMessagesRSS", long.class, long.class, int.class,
+					int.class, java.lang.String.class, double.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class,
+					com.liferay.portal.theme.ThemeDisplay.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					userId, status, max, type, version, displayStyle, feedURL,
+					entryURL, themeDisplay);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -803,15 +509,14 @@ public class MBMessageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(messageId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"getMessage", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"getMessage", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, messageId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -840,26 +545,16 @@ public class MBMessageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(messageId);
-
-			Object paramObj1 = new IntegerWrapper(status);
-
-			Object paramObj2 = threadView;
-
-			if (threadView == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new BooleanWrapper(includePrevAndNext);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"getMessageDisplay",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"getMessageDisplay", long.class, int.class,
+					java.lang.String.class, boolean.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					messageId, status, threadView, includePrevAndNext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -887,29 +582,16 @@ public class MBMessageServiceHttp {
 		long threadId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(categoryId);
-
-			Object paramObj2 = new LongWrapper(threadId);
-
-			Object paramObj3 = new IntegerWrapper(status);
-
-			Object paramObj4 = new IntegerWrapper(start);
-
-			Object paramObj5 = new IntegerWrapper(end);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"getThreadMessages",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
-					});
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"getThreadMessages", long.class, long.class, long.class,
+					int.class, int.class, int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					categoryId, threadId, status, start, end);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -932,22 +614,16 @@ public class MBMessageServiceHttp {
 		long groupId, long categoryId, long threadId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(categoryId);
-
-			Object paramObj2 = new LongWrapper(threadId);
-
-			Object paramObj3 = new IntegerWrapper(status);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"getThreadMessagesCount",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"getThreadMessagesCount", long.class, long.class,
+					long.class, int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					categoryId, threadId, status);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -974,56 +650,20 @@ public class MBMessageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(threadId);
-
-			Object paramObj1 = new IntegerWrapper(status);
-
-			Object paramObj2 = new IntegerWrapper(max);
-
-			Object paramObj3 = type;
-
-			if (type == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = new DoubleWrapper(version);
-
-			Object paramObj5 = displayStyle;
-
-			if (displayStyle == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = feedURL;
-
-			if (feedURL == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = entryURL;
-
-			if (entryURL == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = themeDisplay;
-
-			if (themeDisplay == null) {
-				paramObj8 = new NullWrapper(
-						"com.liferay.portal.theme.ThemeDisplay");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"getThreadMessagesRSS",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8
-					});
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"getThreadMessagesRSS", long.class, int.class, int.class,
+					java.lang.String.class, double.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class,
+					com.liferay.portal.theme.ThemeDisplay.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					threadId, status, max, type, version, displayStyle,
+					feedURL, entryURL, themeDisplay);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1051,13 +691,12 @@ public class MBMessageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(messageId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"subscribeMessage", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"subscribeMessage", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, messageId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1083,13 +722,12 @@ public class MBMessageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(messageId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"unsubscribeMessage", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"unsubscribeMessage", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, messageId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1118,54 +756,19 @@ public class MBMessageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = className;
-
-			if (className == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = new LongWrapper(classPK);
-
-			Object paramObj2 = permissionClassName;
-
-			if (permissionClassName == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new LongWrapper(permissionClassPK);
-
-			Object paramObj4 = new LongWrapper(messageId);
-
-			Object paramObj5 = subject;
-
-			if (subject == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = body;
-
-			if (body == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj7 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"updateDiscussionMessage",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
-					});
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"updateDiscussionMessage", java.lang.String.class,
+					long.class, java.lang.String.class, long.class, long.class,
+					java.lang.String.class, java.lang.String.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					className, classPK, permissionClassName, permissionClassPK,
+					messageId, subject, body, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1198,54 +801,19 @@ public class MBMessageServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(messageId);
-
-			Object paramObj1 = subject;
-
-			if (subject == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = body;
-
-			if (body == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = files;
-
-			if (files == null) {
-				paramObj3 = new NullWrapper("java.util.List");
-			}
-
-			Object paramObj4 = existingFiles;
-
-			if (existingFiles == null) {
-				paramObj4 = new NullWrapper("java.util.List");
-			}
-
-			Object paramObj5 = new DoubleWrapper(priority);
-
-			Object paramObj6 = new BooleanWrapper(allowPingbacks);
-
-			Object paramObj7 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj7 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
-					"updateMessage",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
-					});
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"updateMessage", long.class, java.lang.String.class,
+					java.lang.String.class, java.util.List.class,
+					java.util.List.class, double.class, boolean.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					messageId, subject, body, files, existingFiles, priority,
+					allowPingbacks, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

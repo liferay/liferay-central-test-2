@@ -20,8 +20,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.MethodInvoker;
-import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
@@ -58,14 +57,14 @@ public class TunnelServlet extends HttpServlet {
 		Object returnObj = null;
 
 		try {
-			ObjectValuePair<HttpPrincipal, MethodWrapper> ovp =
-				(ObjectValuePair<HttpPrincipal, MethodWrapper>)
+			ObjectValuePair<HttpPrincipal, MethodHandler> ovp =
+				(ObjectValuePair<HttpPrincipal, MethodHandler>)
 					ois.readObject();
 
 			HttpPrincipal httpPrincipal = ovp.getKey();
-			MethodWrapper methodWrapper = ovp.getValue();
+			MethodHandler methodHandler = ovp.getValue();
 
-			if (!isValidRequest(methodWrapper)) {
+			if (!isValidRequest(methodHandler)) {
 				return;
 			}
 
@@ -111,7 +110,7 @@ public class TunnelServlet extends HttpServlet {
 			}
 
 			if (returnObj == null) {
-				returnObj = MethodInvoker.invoke(methodWrapper);
+				returnObj = methodHandler.invoke(true);
 			}
 		}
 		catch (InvocationTargetException ite) {
@@ -138,8 +137,8 @@ public class TunnelServlet extends HttpServlet {
 		}
 	}
 
-	protected boolean isValidRequest(MethodWrapper methodWrapper) {
-		String className = methodWrapper.getClassName();
+	protected boolean isValidRequest(MethodHandler methodHandler) {
+		String className = methodHandler.getClassName();
 
 		if (className.contains(".service.") &&
 			className.endsWith("ServiceUtil") &&

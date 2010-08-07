@@ -16,8 +16,8 @@ package com.liferay.portlet.messageboards.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -58,13 +58,12 @@ public class MBMessageFlagServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(messageId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageFlagServiceUtil.class.getName(),
-					"addAnswerFlag", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(MBMessageFlagServiceUtil.class.getName(),
+					"addAnswerFlag", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, messageId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -90,13 +89,12 @@ public class MBMessageFlagServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(messageId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBMessageFlagServiceUtil.class.getName(),
-					"deleteAnswerFlag", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(MBMessageFlagServiceUtil.class.getName(),
+					"deleteAnswerFlag", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, messageId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

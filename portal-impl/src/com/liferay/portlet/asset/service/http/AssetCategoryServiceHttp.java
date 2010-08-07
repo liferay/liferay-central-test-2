@@ -16,10 +16,8 @@ package com.liferay.portlet.asset.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -64,39 +62,18 @@ public class AssetCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(parentCategoryId);
-
-			Object paramObj1 = titleMap;
-
-			if (titleMap == null) {
-				paramObj1 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj2 = new LongWrapper(vocabularyId);
-
-			Object paramObj3 = categoryProperties;
-
-			if (categoryProperties == null) {
-				paramObj3 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj4 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj4 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
-					"addCategory",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+			MethodKey methodKey = new MethodKey(AssetCategoryServiceUtil.class.getName(),
+					"addCategory", long.class, java.util.Map.class, long.class,
+					java.lang.String[].class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					parentCategoryId, titleMap, vocabularyId,
+					categoryProperties, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -124,13 +101,13 @@ public class AssetCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(categoryId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
-					"deleteCategory", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(AssetCategoryServiceUtil.class.getName(),
+					"deleteCategory", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					categoryId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -156,21 +133,15 @@ public class AssetCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = className;
-
-			if (className == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = new LongWrapper(classPK);
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
-					"getCategories", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(AssetCategoryServiceUtil.class.getName(),
+					"getCategories", java.lang.String.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					className, classPK);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -198,15 +169,15 @@ public class AssetCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(categoryId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
-					"getCategory", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(AssetCategoryServiceUtil.class.getName(),
+					"getCategory", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					categoryId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -235,27 +206,16 @@ public class AssetCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(parentCategoryId);
-
-			Object paramObj1 = new IntegerWrapper(start);
-
-			Object paramObj2 = new IntegerWrapper(end);
-
-			Object paramObj3 = obc;
-
-			if (obc == null) {
-				paramObj3 = new NullWrapper(
-						"com.liferay.portal.kernel.util.OrderByComparator");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
-					"getChildCategories",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(AssetCategoryServiceUtil.class.getName(),
+					"getChildCategories", long.class, int.class, int.class,
+					com.liferay.portal.kernel.util.OrderByComparator.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					parentCategoryId, start, end, obc);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -284,27 +244,17 @@ public class AssetCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(vocabularyId);
-
-			Object paramObj1 = new IntegerWrapper(start);
-
-			Object paramObj2 = new IntegerWrapper(end);
-
-			Object paramObj3 = obc;
-
-			if (obc == null) {
-				paramObj3 = new NullWrapper(
-						"com.liferay.portal.kernel.util.OrderByComparator");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
-					"getVocabularyCategories",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(AssetCategoryServiceUtil.class.getName(),
+					"getVocabularyCategories", long.class, int.class,
+					int.class,
+					com.liferay.portal.kernel.util.OrderByComparator.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					vocabularyId, start, end, obc);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -333,27 +283,17 @@ public class AssetCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(vocabularyId);
-
-			Object paramObj1 = new IntegerWrapper(start);
-
-			Object paramObj2 = new IntegerWrapper(end);
-
-			Object paramObj3 = obc;
-
-			if (obc == null) {
-				paramObj3 = new NullWrapper(
-						"com.liferay.portal.kernel.util.OrderByComparator");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
-					"getVocabularyRootCategories",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(AssetCategoryServiceUtil.class.getName(),
+					"getVocabularyRootCategories", long.class, int.class,
+					int.class,
+					com.liferay.portal.kernel.util.OrderByComparator.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					vocabularyId, start, end, obc);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -381,34 +321,16 @@ public class AssetCategoryServiceHttp {
 		java.lang.String[] categoryProperties, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = categoryProperties;
-
-			if (categoryProperties == null) {
-				paramObj2 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj3 = new IntegerWrapper(start);
-
-			Object paramObj4 = new IntegerWrapper(end);
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
-					"search",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+			MethodKey methodKey = new MethodKey(AssetCategoryServiceUtil.class.getName(),
+					"search", long.class, java.lang.String.class,
+					java.lang.String[].class, int.class, int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					name, categoryProperties, start, end);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -435,42 +357,18 @@ public class AssetCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(categoryId);
-
-			Object paramObj1 = new LongWrapper(parentCategoryId);
-
-			Object paramObj2 = titleMap;
-
-			if (titleMap == null) {
-				paramObj2 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj3 = new LongWrapper(vocabularyId);
-
-			Object paramObj4 = categoryProperties;
-
-			if (categoryProperties == null) {
-				paramObj4 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj5 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj5 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(AssetCategoryServiceUtil.class.getName(),
-					"updateCategory",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
-					});
+			MethodKey methodKey = new MethodKey(AssetCategoryServiceUtil.class.getName(),
+					"updateCategory", long.class, long.class,
+					java.util.Map.class, long.class, java.lang.String[].class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					categoryId, parentCategoryId, titleMap, vocabularyId,
+					categoryProperties, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

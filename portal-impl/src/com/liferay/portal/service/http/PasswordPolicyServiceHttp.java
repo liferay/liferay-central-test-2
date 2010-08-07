@@ -16,11 +16,8 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.PasswordPolicyServiceUtil;
 
@@ -67,77 +64,26 @@ public class PasswordPolicyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = name;
-
-			if (name == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = description;
-
-			if (description == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new BooleanWrapper(changeable);
-
-			Object paramObj3 = new BooleanWrapper(changeRequired);
-
-			Object paramObj4 = new LongWrapper(minAge);
-
-			Object paramObj5 = new BooleanWrapper(checkSyntax);
-
-			Object paramObj6 = new BooleanWrapper(allowDictionaryWords);
-
-			Object paramObj7 = new IntegerWrapper(minAlphanumeric);
-
-			Object paramObj8 = new IntegerWrapper(minLength);
-
-			Object paramObj9 = new IntegerWrapper(minLowerCase);
-
-			Object paramObj10 = new IntegerWrapper(minNumbers);
-
-			Object paramObj11 = new IntegerWrapper(minSymbols);
-
-			Object paramObj12 = new IntegerWrapper(minUpperCase);
-
-			Object paramObj13 = new BooleanWrapper(history);
-
-			Object paramObj14 = new IntegerWrapper(historyCount);
-
-			Object paramObj15 = new BooleanWrapper(expireable);
-
-			Object paramObj16 = new LongWrapper(maxAge);
-
-			Object paramObj17 = new LongWrapper(warningTime);
-
-			Object paramObj18 = new IntegerWrapper(graceLimit);
-
-			Object paramObj19 = new BooleanWrapper(lockout);
-
-			Object paramObj20 = new IntegerWrapper(maxFailure);
-
-			Object paramObj21 = new LongWrapper(lockoutDuration);
-
-			Object paramObj22 = new LongWrapper(resetFailureCount);
-
-			Object paramObj23 = new LongWrapper(resetTicketMaxAge);
-
-			MethodWrapper methodWrapper = new MethodWrapper(PasswordPolicyServiceUtil.class.getName(),
-					"addPasswordPolicy",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18, paramObj19, paramObj20, paramObj21,
-						paramObj22, paramObj23
-					});
+			MethodKey methodKey = new MethodKey(PasswordPolicyServiceUtil.class.getName(),
+					"addPasswordPolicy", java.lang.String.class,
+					java.lang.String.class, boolean.class, boolean.class,
+					long.class, boolean.class, boolean.class, int.class,
+					int.class, int.class, int.class, int.class, int.class,
+					boolean.class, int.class, boolean.class, long.class,
+					long.class, int.class, boolean.class, int.class,
+					long.class, long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, name,
+					description, changeable, changeRequired, minAge,
+					checkSyntax, allowDictionaryWords, minAlphanumeric,
+					minLength, minLowerCase, minNumbers, minSymbols,
+					minUpperCase, history, historyCount, expireable, maxAge,
+					warningTime, graceLimit, lockout, maxFailure,
+					lockoutDuration, resetFailureCount, resetTicketMaxAge);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -165,13 +111,13 @@ public class PasswordPolicyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(passwordPolicyId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(PasswordPolicyServiceUtil.class.getName(),
-					"deletePasswordPolicy", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(PasswordPolicyServiceUtil.class.getName(),
+					"deletePasswordPolicy", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					passwordPolicyId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -205,79 +151,27 @@ public class PasswordPolicyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(passwordPolicyId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = description;
-
-			if (description == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new BooleanWrapper(changeable);
-
-			Object paramObj4 = new BooleanWrapper(changeRequired);
-
-			Object paramObj5 = new LongWrapper(minAge);
-
-			Object paramObj6 = new BooleanWrapper(checkSyntax);
-
-			Object paramObj7 = new BooleanWrapper(allowDictionaryWords);
-
-			Object paramObj8 = new IntegerWrapper(minAlphanumeric);
-
-			Object paramObj9 = new IntegerWrapper(minLength);
-
-			Object paramObj10 = new IntegerWrapper(minLowerCase);
-
-			Object paramObj11 = new IntegerWrapper(minNumbers);
-
-			Object paramObj12 = new IntegerWrapper(minSymbols);
-
-			Object paramObj13 = new IntegerWrapper(minUpperCase);
-
-			Object paramObj14 = new BooleanWrapper(history);
-
-			Object paramObj15 = new IntegerWrapper(historyCount);
-
-			Object paramObj16 = new BooleanWrapper(expireable);
-
-			Object paramObj17 = new LongWrapper(maxAge);
-
-			Object paramObj18 = new LongWrapper(warningTime);
-
-			Object paramObj19 = new IntegerWrapper(graceLimit);
-
-			Object paramObj20 = new BooleanWrapper(lockout);
-
-			Object paramObj21 = new IntegerWrapper(maxFailure);
-
-			Object paramObj22 = new LongWrapper(lockoutDuration);
-
-			Object paramObj23 = new LongWrapper(resetFailureCount);
-
-			Object paramObj24 = new LongWrapper(resetTicketMaxAge);
-
-			MethodWrapper methodWrapper = new MethodWrapper(PasswordPolicyServiceUtil.class.getName(),
-					"updatePasswordPolicy",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18, paramObj19, paramObj20, paramObj21,
-						paramObj22, paramObj23, paramObj24
-					});
+			MethodKey methodKey = new MethodKey(PasswordPolicyServiceUtil.class.getName(),
+					"updatePasswordPolicy", long.class, java.lang.String.class,
+					java.lang.String.class, boolean.class, boolean.class,
+					long.class, boolean.class, boolean.class, int.class,
+					int.class, int.class, int.class, int.class, int.class,
+					boolean.class, int.class, boolean.class, long.class,
+					long.class, int.class, boolean.class, int.class,
+					long.class, long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					passwordPolicyId, name, description, changeable,
+					changeRequired, minAge, checkSyntax, allowDictionaryWords,
+					minAlphanumeric, minLength, minLowerCase, minNumbers,
+					minSymbols, minUpperCase, history, historyCount,
+					expireable, maxAge, warningTime, graceLimit, lockout,
+					maxFailure, lockoutDuration, resetFailureCount,
+					resetTicketMaxAge);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

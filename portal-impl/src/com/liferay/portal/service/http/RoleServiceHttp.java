@@ -16,11 +16,8 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.RoleServiceUtil;
 
@@ -62,34 +59,16 @@ public class RoleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = name;
-
-			if (name == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = titleMap;
-
-			if (titleMap == null) {
-				paramObj1 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj2 = description;
-
-			if (description == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new IntegerWrapper(type);
-
-			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
-					"addRole",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
+					"addRole", java.lang.String.class, java.util.Map.class,
+					java.lang.String.class, int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, name,
+					titleMap, description, type);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -117,19 +96,13 @@ public class RoleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(userId);
-
-			Object paramObj1 = roleIds;
-
-			if (roleIds == null) {
-				paramObj1 = new NullWrapper("[J");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
-					"addUserRoles", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
+					"addUserRoles", long.class, long[].class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
+					roleIds);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -154,13 +127,12 @@ public class RoleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(roleId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
-					"deleteRole", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
+					"deleteRole", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, roleId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -185,15 +157,14 @@ public class RoleServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
-					"getGroupRoles", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
+					"getGroupRoles", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -217,15 +188,14 @@ public class RoleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(roleId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
-					"getRole", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
+					"getRole", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, roleId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -253,21 +223,15 @@ public class RoleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
-					"getRole", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
+					"getRole", long.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, name);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -294,18 +258,15 @@ public class RoleServiceHttp {
 		HttpPrincipal httpPrincipal, long userId, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(userId);
-
-			Object paramObj1 = new LongWrapper(groupId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
-					"getUserGroupGroupRoles",
-					new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
+					"getUserGroupGroupRoles", long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
+					groupId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -328,17 +289,15 @@ public class RoleServiceHttp {
 		HttpPrincipal httpPrincipal, long userId, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(userId);
-
-			Object paramObj1 = new LongWrapper(groupId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
-					"getUserGroupRoles", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
+					"getUserGroupRoles", long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
+					groupId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -362,21 +321,15 @@ public class RoleServiceHttp {
 		java.util.List<com.liferay.portal.model.Group> groups)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(userId);
-
-			Object paramObj1 = groups;
-
-			if (groups == null) {
-				paramObj1 = new NullWrapper("java.util.List");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
-					"getUserRelatedRoles", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
+					"getUserRelatedRoles", long.class, java.util.List.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
+					groups);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -399,15 +352,14 @@ public class RoleServiceHttp {
 		HttpPrincipal httpPrincipal, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(userId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
-					"getUserRoles", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
+					"getUserRoles", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, userId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -431,26 +383,16 @@ public class RoleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(userId);
-
-			Object paramObj1 = new LongWrapper(companyId);
-
-			Object paramObj2 = name;
-
-			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new BooleanWrapper(inherited);
-
-			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
-					"hasUserRole",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
+					"hasUserRole", long.class, long.class,
+					java.lang.String.class, boolean.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
+					companyId, name, inherited);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -478,26 +420,16 @@ public class RoleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(userId);
-
-			Object paramObj1 = new LongWrapper(companyId);
-
-			Object paramObj2 = names;
-
-			if (names == null) {
-				paramObj2 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj3 = new BooleanWrapper(inherited);
-
-			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
-					"hasUserRoles",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
+					"hasUserRoles", long.class, long.class,
+					java.lang.String[].class, boolean.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
+					companyId, names, inherited);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -525,19 +457,13 @@ public class RoleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(userId);
-
-			Object paramObj1 = roleIds;
-
-			if (roleIds == null) {
-				paramObj1 = new NullWrapper("[J");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
-					"unsetUserRoles", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
+					"unsetUserRoles", long.class, long[].class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
+					roleIds);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -565,42 +491,17 @@ public class RoleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(roleId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = titleMap;
-
-			if (titleMap == null) {
-				paramObj2 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj3 = description;
-
-			if (description == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = subtype;
-
-			if (subtype == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
-					"updateRole",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
+					"updateRole", long.class, java.lang.String.class,
+					java.util.Map.class, java.lang.String.class,
+					java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
+					name, titleMap, description, subtype);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

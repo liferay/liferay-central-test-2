@@ -16,9 +16,8 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.UserGroupRoleServiceUtil;
 
@@ -58,22 +57,13 @@ public class UserGroupRoleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(userId);
-
-			Object paramObj1 = new LongWrapper(groupId);
-
-			Object paramObj2 = roleIds;
-
-			if (roleIds == null) {
-				paramObj2 = new NullWrapper("[J");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(UserGroupRoleServiceUtil.class.getName(),
-					"addUserGroupRoles",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(UserGroupRoleServiceUtil.class.getName(),
+					"addUserGroupRoles", long.class, long.class, long[].class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
+					groupId, roleIds);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -99,22 +89,13 @@ public class UserGroupRoleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = userIds;
-
-			if (userIds == null) {
-				paramObj0 = new NullWrapper("[J");
-			}
-
-			Object paramObj1 = new LongWrapper(groupId);
-
-			Object paramObj2 = new LongWrapper(roleId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(UserGroupRoleServiceUtil.class.getName(),
-					"addUserGroupRoles",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(UserGroupRoleServiceUtil.class.getName(),
+					"addUserGroupRoles", long[].class, long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, userIds,
+					groupId, roleId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -140,22 +121,13 @@ public class UserGroupRoleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(userId);
-
-			Object paramObj1 = new LongWrapper(groupId);
-
-			Object paramObj2 = roleIds;
-
-			if (roleIds == null) {
-				paramObj2 = new NullWrapper("[J");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(UserGroupRoleServiceUtil.class.getName(),
-					"deleteUserGroupRoles",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(UserGroupRoleServiceUtil.class.getName(),
+					"deleteUserGroupRoles", long.class, long.class, long[].class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
+					groupId, roleIds);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -181,22 +153,13 @@ public class UserGroupRoleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = userIds;
-
-			if (userIds == null) {
-				paramObj0 = new NullWrapper("[J");
-			}
-
-			Object paramObj1 = new LongWrapper(groupId);
-
-			Object paramObj2 = new LongWrapper(roleId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(UserGroupRoleServiceUtil.class.getName(),
-					"deleteUserGroupRoles",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(UserGroupRoleServiceUtil.class.getName(),
+					"deleteUserGroupRoles", long[].class, long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, userIds,
+					groupId, roleId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

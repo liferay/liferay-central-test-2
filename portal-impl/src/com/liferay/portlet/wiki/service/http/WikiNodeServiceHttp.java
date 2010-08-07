@@ -16,9 +16,8 @@ package com.liferay.portlet.wiki.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -62,32 +61,16 @@ public class WikiNodeServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = name;
-
-			if (name == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = description;
-
-			if (description == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj2 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(WikiNodeServiceUtil.class.getName(),
-					"addNode", new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(WikiNodeServiceUtil.class.getName(),
+					"addNode", java.lang.String.class, java.lang.String.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, name,
+					description, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -114,13 +97,12 @@ public class WikiNodeServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(nodeId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(WikiNodeServiceUtil.class.getName(),
-					"deleteNode", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(WikiNodeServiceUtil.class.getName(),
+					"deleteNode", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -146,15 +128,14 @@ public class WikiNodeServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(nodeId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(WikiNodeServiceUtil.class.getName(),
-					"getNode", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(WikiNodeServiceUtil.class.getName(),
+					"getNode", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -182,21 +163,15 @@ public class WikiNodeServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(WikiNodeServiceUtil.class.getName(),
-					"getNode", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(WikiNodeServiceUtil.class.getName(),
+					"getNode", long.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					name);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -225,32 +200,14 @@ public class WikiNodeServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(nodeId);
-
-			Object paramObj1 = importer;
-
-			if (importer == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = files;
-
-			if (files == null) {
-				paramObj2 = new NullWrapper("[Ljava.io.File;");
-			}
-
-			Object paramObj3 = options;
-
-			if (options == null) {
-				paramObj3 = new NullWrapper("java.util.Map");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(WikiNodeServiceUtil.class.getName(),
-					"importPages",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(WikiNodeServiceUtil.class.getName(),
+					"importPages", long.class, java.lang.String.class,
+					java.io.File[].class, java.util.Map.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
+					importer, files, options);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -275,13 +232,12 @@ public class WikiNodeServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(nodeId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(WikiNodeServiceUtil.class.getName(),
-					"subscribeNode", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(WikiNodeServiceUtil.class.getName(),
+					"subscribeNode", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -306,13 +262,12 @@ public class WikiNodeServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(nodeId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(WikiNodeServiceUtil.class.getName(),
-					"unsubscribeNode", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(WikiNodeServiceUtil.class.getName(),
+					"unsubscribeNode", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -340,35 +295,17 @@ public class WikiNodeServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(nodeId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = description;
-
-			if (description == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj3 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(WikiNodeServiceUtil.class.getName(),
-					"updateNode",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(WikiNodeServiceUtil.class.getName(),
+					"updateNode", long.class, java.lang.String.class,
+					java.lang.String.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
+					name, description, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

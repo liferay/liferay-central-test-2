@@ -16,10 +16,8 @@ package com.liferay.portlet.journal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -66,69 +64,21 @@ public class JournalTemplateServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = templateId;
-
-			if (templateId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new BooleanWrapper(autoTemplateId);
-
-			Object paramObj3 = structureId;
-
-			if (structureId == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = name;
-
-			if (name == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = description;
-
-			if (description == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = xsl;
-
-			if (xsl == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = new BooleanWrapper(formatXsl);
-
-			Object paramObj8 = langType;
-
-			if (langType == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = new BooleanWrapper(cacheable);
-
-			Object paramObj10 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj10 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
-					"addTemplate",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10
-					});
+			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class.getName(),
+					"addTemplate", long.class, java.lang.String.class,
+					boolean.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, boolean.class,
+					java.lang.String.class, boolean.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					templateId, autoTemplateId, structureId, name, description,
+					xsl, formatXsl, langType, cacheable, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -162,83 +112,23 @@ public class JournalTemplateServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = templateId;
-
-			if (templateId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new BooleanWrapper(autoTemplateId);
-
-			Object paramObj3 = structureId;
-
-			if (structureId == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = name;
-
-			if (name == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = description;
-
-			if (description == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = xsl;
-
-			if (xsl == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = new BooleanWrapper(formatXsl);
-
-			Object paramObj8 = langType;
-
-			if (langType == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = new BooleanWrapper(cacheable);
-
-			Object paramObj10 = new BooleanWrapper(smallImage);
-
-			Object paramObj11 = smallImageURL;
-
-			if (smallImageURL == null) {
-				paramObj11 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj12 = smallFile;
-
-			if (smallFile == null) {
-				paramObj12 = new NullWrapper("java.io.File");
-			}
-
-			Object paramObj13 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj13 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
-					"addTemplate",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13
-					});
+			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class.getName(),
+					"addTemplate", long.class, java.lang.String.class,
+					boolean.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, boolean.class,
+					java.lang.String.class, boolean.class, boolean.class,
+					java.lang.String.class, java.io.File.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					templateId, autoTemplateId, structureId, name, description,
+					xsl, formatXsl, langType, cacheable, smallImage,
+					smallImageURL, smallFile, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -268,30 +158,16 @@ public class JournalTemplateServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = oldTemplateId;
-
-			if (oldTemplateId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = newTemplateId;
-
-			if (newTemplateId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new BooleanWrapper(autoTemplateId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
-					"copyTemplate",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class.getName(),
+					"copyTemplate", long.class, java.lang.String.class,
+					java.lang.String.class, boolean.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					oldTemplateId, newTemplateId, autoTemplateId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -319,19 +195,13 @@ public class JournalTemplateServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = templateId;
-
-			if (templateId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
-					"deleteTemplate", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class.getName(),
+					"deleteTemplate", long.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					templateId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -357,22 +227,15 @@ public class JournalTemplateServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = structureId;
-
-			if (structureId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
-					"getStructureTemplates",
-					new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class.getName(),
+					"getStructureTemplates", long.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					structureId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -400,21 +263,15 @@ public class JournalTemplateServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = templateId;
-
-			if (templateId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
-					"getTemplate", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class.getName(),
+					"getTemplate", long.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					templateId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -446,66 +303,20 @@ public class JournalTemplateServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = templateId;
-
-			if (templateId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = structureId;
-
-			if (structureId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = name;
-
-			if (name == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = description;
-
-			if (description == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = xsl;
-
-			if (xsl == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = new BooleanWrapper(formatXsl);
-
-			Object paramObj7 = langType;
-
-			if (langType == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = new BooleanWrapper(cacheable);
-
-			Object paramObj9 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj9 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
-					"updateTemplate",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
-					});
+			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class.getName(),
+					"updateTemplate", long.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					boolean.class, java.lang.String.class, boolean.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					templateId, structureId, name, description, xsl, formatXsl,
+					langType, cacheable, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -538,81 +349,22 @@ public class JournalTemplateServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = templateId;
-
-			if (templateId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = structureId;
-
-			if (structureId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = name;
-
-			if (name == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = description;
-
-			if (description == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = xsl;
-
-			if (xsl == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = new BooleanWrapper(formatXsl);
-
-			Object paramObj7 = langType;
-
-			if (langType == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = new BooleanWrapper(cacheable);
-
-			Object paramObj9 = new BooleanWrapper(smallImage);
-
-			Object paramObj10 = smallImageURL;
-
-			if (smallImageURL == null) {
-				paramObj10 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj11 = smallFile;
-
-			if (smallFile == null) {
-				paramObj11 = new NullWrapper("java.io.File");
-			}
-
-			Object paramObj12 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj12 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
-					"updateTemplate",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12
-					});
+			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class.getName(),
+					"updateTemplate", long.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					boolean.class, java.lang.String.class, boolean.class,
+					boolean.class, java.lang.String.class, java.io.File.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					templateId, structureId, name, description, xsl, formatXsl,
+					langType, cacheable, smallImage, smallImageURL, smallFile,
+					serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

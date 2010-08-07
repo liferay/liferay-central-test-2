@@ -16,9 +16,8 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.OrgLaborServiceUtil;
 
@@ -61,51 +60,20 @@ public class OrgLaborServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(organizationId);
-
-			Object paramObj1 = new IntegerWrapper(typeId);
-
-			Object paramObj2 = new IntegerWrapper(sunOpen);
-
-			Object paramObj3 = new IntegerWrapper(sunClose);
-
-			Object paramObj4 = new IntegerWrapper(monOpen);
-
-			Object paramObj5 = new IntegerWrapper(monClose);
-
-			Object paramObj6 = new IntegerWrapper(tueOpen);
-
-			Object paramObj7 = new IntegerWrapper(tueClose);
-
-			Object paramObj8 = new IntegerWrapper(wedOpen);
-
-			Object paramObj9 = new IntegerWrapper(wedClose);
-
-			Object paramObj10 = new IntegerWrapper(thuOpen);
-
-			Object paramObj11 = new IntegerWrapper(thuClose);
-
-			Object paramObj12 = new IntegerWrapper(friOpen);
-
-			Object paramObj13 = new IntegerWrapper(friClose);
-
-			Object paramObj14 = new IntegerWrapper(satOpen);
-
-			Object paramObj15 = new IntegerWrapper(satClose);
-
-			MethodWrapper methodWrapper = new MethodWrapper(OrgLaborServiceUtil.class.getName(),
-					"addOrgLabor",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15
-					});
+			MethodKey methodKey = new MethodKey(OrgLaborServiceUtil.class.getName(),
+					"addOrgLabor", long.class, int.class, int.class, int.class,
+					int.class, int.class, int.class, int.class, int.class,
+					int.class, int.class, int.class, int.class, int.class,
+					int.class, int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					organizationId, typeId, sunOpen, sunClose, monOpen,
+					monClose, tueOpen, tueClose, wedOpen, wedClose, thuOpen,
+					thuClose, friOpen, friClose, satOpen, satClose);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -133,13 +101,13 @@ public class OrgLaborServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(orgLaborId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(OrgLaborServiceUtil.class.getName(),
-					"deleteOrgLabor", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(OrgLaborServiceUtil.class.getName(),
+					"deleteOrgLabor", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					orgLaborId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -165,15 +133,15 @@ public class OrgLaborServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(orgLaborId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(OrgLaborServiceUtil.class.getName(),
-					"getOrgLabor", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(OrgLaborServiceUtil.class.getName(),
+					"getOrgLabor", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					orgLaborId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -201,15 +169,15 @@ public class OrgLaborServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(organizationId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(OrgLaborServiceUtil.class.getName(),
-					"getOrgLabors", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(OrgLaborServiceUtil.class.getName(),
+					"getOrgLabors", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					organizationId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -240,51 +208,20 @@ public class OrgLaborServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(orgLaborId);
-
-			Object paramObj1 = new IntegerWrapper(typeId);
-
-			Object paramObj2 = new IntegerWrapper(sunOpen);
-
-			Object paramObj3 = new IntegerWrapper(sunClose);
-
-			Object paramObj4 = new IntegerWrapper(monOpen);
-
-			Object paramObj5 = new IntegerWrapper(monClose);
-
-			Object paramObj6 = new IntegerWrapper(tueOpen);
-
-			Object paramObj7 = new IntegerWrapper(tueClose);
-
-			Object paramObj8 = new IntegerWrapper(wedOpen);
-
-			Object paramObj9 = new IntegerWrapper(wedClose);
-
-			Object paramObj10 = new IntegerWrapper(thuOpen);
-
-			Object paramObj11 = new IntegerWrapper(thuClose);
-
-			Object paramObj12 = new IntegerWrapper(friOpen);
-
-			Object paramObj13 = new IntegerWrapper(friClose);
-
-			Object paramObj14 = new IntegerWrapper(satOpen);
-
-			Object paramObj15 = new IntegerWrapper(satClose);
-
-			MethodWrapper methodWrapper = new MethodWrapper(OrgLaborServiceUtil.class.getName(),
-					"updateOrgLabor",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15
-					});
+			MethodKey methodKey = new MethodKey(OrgLaborServiceUtil.class.getName(),
+					"updateOrgLabor", long.class, int.class, int.class,
+					int.class, int.class, int.class, int.class, int.class,
+					int.class, int.class, int.class, int.class, int.class,
+					int.class, int.class, int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					orgLaborId, typeId, sunOpen, sunClose, monOpen, monClose,
+					tueOpen, tueClose, wedOpen, wedClose, thuOpen, thuClose,
+					friOpen, friClose, satOpen, satClose);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

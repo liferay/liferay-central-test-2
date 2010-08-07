@@ -19,20 +19,20 @@ import com.liferay.portal.LARFileException;
 import com.liferay.portal.LARTypeException;
 import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.NoSuchLayoutException;
-import com.liferay.portal.kernel.cluster.ClusterLinkUtil;
-import com.liferay.portal.kernel.cluster.Priority;
+import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
+import com.liferay.portal.kernel.cluster.ClusterRequest;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MapUtil;
-import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -961,13 +961,11 @@ public class LayoutImporter {
 
 		themeLoader.loadThemes();
 
-		MethodWrapper methodWrapper = new MethodWrapper(
-			ThemeLoaderFactory.class.getName(), "loadThemes");
+		ClusterRequest clusterRequest = ClusterRequest.createMulticastRequest(
+			_loadThemesMethodHandler, true);
+		clusterRequest.setFireAndForget(true);
 
-		Message message = new Message();
-		message.setPayload(methodWrapper);
-
-		ClusterLinkUtil.sendMulticastMessage(message, Priority.LEVEL5);
+		ClusterExecutorUtil.execute(clusterRequest);
 
 		themeId +=
 			PortletConstants.WAR_SEPARATOR +
@@ -1039,6 +1037,10 @@ public class LayoutImporter {
 			layout.setTypeSettings(newTypeSettings);
 		}
 	}
+
+	private static final MethodHandler _loadThemesMethodHandler =
+		new MethodHandler(new MethodKey(ThemeLoaderFactory.class.getName(),
+			"loadThemes"));
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutImporter.class);
 

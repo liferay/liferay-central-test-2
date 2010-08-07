@@ -16,11 +16,8 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.CompanyServiceUtil;
 
@@ -62,45 +59,17 @@ public class CompanyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = webId;
-
-			if (webId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = virtualHost;
-
-			if (virtualHost == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = mx;
-
-			if (mx == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = shardName;
-
-			if (shardName == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = new BooleanWrapper(system);
-
-			Object paramObj5 = new IntegerWrapper(maxUsers);
-
-			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
-					"addCompany",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
-					});
+			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
+					"addCompany", java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, boolean.class, int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, webId,
+					virtualHost, mx, shardName, system, maxUsers);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -127,13 +96,12 @@ public class CompanyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
-					"deleteLogo", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
+					"deleteLogo", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -159,15 +127,14 @@ public class CompanyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
-					"getCompanyById", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
+					"getCompanyById", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -195,15 +162,14 @@ public class CompanyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(logoId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
-					"getCompanyByLogoId", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
+					"getCompanyByLogoId", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, logoId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -231,19 +197,14 @@ public class CompanyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = mx;
-
-			if (mx == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
-					"getCompanyByMx", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
+					"getCompanyByMx", java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, mx);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -271,19 +232,15 @@ public class CompanyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = virtualHost;
-
-			if (virtualHost == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
-					"getCompanyByVirtualHost", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
+					"getCompanyByVirtualHost", java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					virtualHost);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -311,19 +268,14 @@ public class CompanyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = webId;
-
-			if (webId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
-					"getCompanyByWebId", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
+					"getCompanyByWebId", java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, webId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -351,19 +303,13 @@ public class CompanyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-
-			Object paramObj1 = keys;
-
-			if (keys == null) {
-				paramObj1 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
-					"removePreferences", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
+					"removePreferences", long.class, java.lang.String[].class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, keys);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -390,30 +336,16 @@ public class CompanyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-
-			Object paramObj1 = virtualHost;
-
-			if (virtualHost == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = mx;
-
-			if (mx == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new IntegerWrapper(maxUsers);
-
-			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
-					"updateCompany",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
+					"updateCompany", long.class, java.lang.String.class,
+					java.lang.String.class, int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, virtualHost, mx, maxUsers);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -447,92 +379,23 @@ public class CompanyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-
-			Object paramObj1 = virtualHost;
-
-			if (virtualHost == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = mx;
-
-			if (mx == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = homeURL;
-
-			if (homeURL == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = name;
-
-			if (name == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = legalName;
-
-			if (legalName == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = legalId;
-
-			if (legalId == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = legalType;
-
-			if (legalType == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = sicCode;
-
-			if (sicCode == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = tickerSymbol;
-
-			if (tickerSymbol == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj10 = industry;
-
-			if (industry == null) {
-				paramObj10 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj11 = type;
-
-			if (type == null) {
-				paramObj11 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj12 = size;
-
-			if (size == null) {
-				paramObj12 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
-					"updateCompany",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12
-					});
+			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
+					"updateCompany", long.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, virtualHost, mx, homeURL, name, legalName,
+					legalId, legalType, sicCode, tickerSymbol, industry, type,
+					size);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -572,137 +435,28 @@ public class CompanyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-
-			Object paramObj1 = virtualHost;
-
-			if (virtualHost == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = mx;
-
-			if (mx == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = homeURL;
-
-			if (homeURL == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = name;
-
-			if (name == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = legalName;
-
-			if (legalName == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = legalId;
-
-			if (legalId == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = legalType;
-
-			if (legalType == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = sicCode;
-
-			if (sicCode == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = tickerSymbol;
-
-			if (tickerSymbol == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj10 = industry;
-
-			if (industry == null) {
-				paramObj10 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj11 = type;
-
-			if (type == null) {
-				paramObj11 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj12 = size;
-
-			if (size == null) {
-				paramObj12 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj13 = languageId;
-
-			if (languageId == null) {
-				paramObj13 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj14 = timeZoneId;
-
-			if (timeZoneId == null) {
-				paramObj14 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj15 = addresses;
-
-			if (addresses == null) {
-				paramObj15 = new NullWrapper("java.util.List");
-			}
-
-			Object paramObj16 = emailAddresses;
-
-			if (emailAddresses == null) {
-				paramObj16 = new NullWrapper("java.util.List");
-			}
-
-			Object paramObj17 = phones;
-
-			if (phones == null) {
-				paramObj17 = new NullWrapper("java.util.List");
-			}
-
-			Object paramObj18 = websites;
-
-			if (websites == null) {
-				paramObj18 = new NullWrapper("java.util.List");
-			}
-
-			Object paramObj19 = properties;
-
-			if (properties == null) {
-				paramObj19 = new NullWrapper(
-						"com.liferay.portal.kernel.util.UnicodeProperties");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
-					"updateCompany",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18, paramObj19
-					});
+			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
+					"updateCompany", long.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.util.List.class,
+					java.util.List.class, java.util.List.class,
+					java.util.List.class,
+					com.liferay.portal.kernel.util.UnicodeProperties.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, virtualHost, mx, homeURL, name, legalName,
+					legalId, legalType, sicCode, tickerSymbol, industry, type,
+					size, languageId, timeZoneId, addresses, emailAddresses,
+					phones, websites, properties);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -730,26 +484,14 @@ public class CompanyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-
-			Object paramObj1 = languageId;
-
-			if (languageId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = timeZoneId;
-
-			if (timeZoneId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
-					"updateDisplay",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
+					"updateDisplay", long.class, java.lang.String.class,
+					java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, languageId, timeZoneId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -775,19 +517,13 @@ public class CompanyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-
-			Object paramObj1 = file;
-
-			if (file == null) {
-				paramObj1 = new NullWrapper("java.io.File");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
-					"updateLogo", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
+					"updateLogo", long.class, java.io.File.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, file);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -814,20 +550,14 @@ public class CompanyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-
-			Object paramObj1 = properties;
-
-			if (properties == null) {
-				paramObj1 = new NullWrapper(
-						"com.liferay.portal.kernel.util.UnicodeProperties");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
-					"updatePreferences", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
+					"updatePreferences", long.class,
+					com.liferay.portal.kernel.util.UnicodeProperties.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, properties);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -855,35 +585,16 @@ public class CompanyServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-
-			Object paramObj1 = authType;
-
-			if (authType == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new BooleanWrapper(autoLogin);
-
-			Object paramObj3 = new BooleanWrapper(sendPassword);
-
-			Object paramObj4 = new BooleanWrapper(strangers);
-
-			Object paramObj5 = new BooleanWrapper(strangersWithMx);
-
-			Object paramObj6 = new BooleanWrapper(strangersVerify);
-
-			Object paramObj7 = new BooleanWrapper(communityLogo);
-
-			MethodWrapper methodWrapper = new MethodWrapper(CompanyServiceUtil.class.getName(),
-					"updateSecurity",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
-					});
+			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
+					"updateSecurity", long.class, java.lang.String.class,
+					boolean.class, boolean.class, boolean.class, boolean.class,
+					boolean.class, boolean.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, authType, autoLogin, sendPassword, strangers,
+					strangersWithMx, strangersVerify, communityLogo);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

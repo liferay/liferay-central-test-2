@@ -16,9 +16,8 @@ package com.liferay.portlet.messageboards.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -61,22 +60,16 @@ public class MBBanServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(banUserId);
-
-			Object paramObj1 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj1 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBBanServiceUtil.class.getName(),
-					"addBan", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(MBBanServiceUtil.class.getName(),
+					"addBan", long.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					banUserId, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -104,20 +97,14 @@ public class MBBanServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(banUserId);
-
-			Object paramObj1 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj1 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBBanServiceUtil.class.getName(),
-					"deleteBan", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(MBBanServiceUtil.class.getName(),
+					"deleteBan", long.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					banUserId, serviceContext);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

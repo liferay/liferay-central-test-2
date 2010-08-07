@@ -89,7 +89,7 @@ public class MultiClassLoaderProxyRequest extends ProxyRequest {
 				if (ExecutingClassLoaders.class.isAssignableFrom(
 						annotation.annotationType())) {
 
-					return (ClassLoader[])getMethodWrapper().getArguments()[i];
+					return (ClassLoader[])getArguments()[i];
 				}
 			}
 		}

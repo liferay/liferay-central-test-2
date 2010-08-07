@@ -16,11 +16,8 @@ package com.liferay.portlet.polls.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -68,54 +65,20 @@ public class PollsQuestionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = titleMap;
-
-			if (titleMap == null) {
-				paramObj0 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj1 = descriptionMap;
-
-			if (descriptionMap == null) {
-				paramObj1 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj2 = new IntegerWrapper(expirationDateMonth);
-
-			Object paramObj3 = new IntegerWrapper(expirationDateDay);
-
-			Object paramObj4 = new IntegerWrapper(expirationDateYear);
-
-			Object paramObj5 = new IntegerWrapper(expirationDateHour);
-
-			Object paramObj6 = new IntegerWrapper(expirationDateMinute);
-
-			Object paramObj7 = new BooleanWrapper(neverExpire);
-
-			Object paramObj8 = choices;
-
-			if (choices == null) {
-				paramObj8 = new NullWrapper("java.util.List");
-			}
-
-			Object paramObj9 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj9 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(PollsQuestionServiceUtil.class.getName(),
-					"addQuestion",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
-					});
+			MethodKey methodKey = new MethodKey(PollsQuestionServiceUtil.class.getName(),
+					"addQuestion", java.util.Map.class, java.util.Map.class,
+					int.class, int.class, int.class, int.class, int.class,
+					boolean.class, java.util.List.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					titleMap, descriptionMap, expirationDateMonth,
+					expirationDateDay, expirationDateYear, expirationDateHour,
+					expirationDateMinute, neverExpire, choices, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -143,13 +106,13 @@ public class PollsQuestionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(questionId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(PollsQuestionServiceUtil.class.getName(),
-					"deleteQuestion", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(PollsQuestionServiceUtil.class.getName(),
+					"deleteQuestion", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					questionId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -175,15 +138,15 @@ public class PollsQuestionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(questionId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(PollsQuestionServiceUtil.class.getName(),
-					"getQuestion", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(PollsQuestionServiceUtil.class.getName(),
+					"getQuestion", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					questionId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -217,57 +180,20 @@ public class PollsQuestionServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(questionId);
-
-			Object paramObj1 = titleMap;
-
-			if (titleMap == null) {
-				paramObj1 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj2 = descriptionMap;
-
-			if (descriptionMap == null) {
-				paramObj2 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj3 = new IntegerWrapper(expirationDateMonth);
-
-			Object paramObj4 = new IntegerWrapper(expirationDateDay);
-
-			Object paramObj5 = new IntegerWrapper(expirationDateYear);
-
-			Object paramObj6 = new IntegerWrapper(expirationDateHour);
-
-			Object paramObj7 = new IntegerWrapper(expirationDateMinute);
-
-			Object paramObj8 = new BooleanWrapper(neverExpire);
-
-			Object paramObj9 = choices;
-
-			if (choices == null) {
-				paramObj9 = new NullWrapper("java.util.List");
-			}
-
-			Object paramObj10 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj10 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(PollsQuestionServiceUtil.class.getName(),
-					"updateQuestion",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10
-					});
+			MethodKey methodKey = new MethodKey(PollsQuestionServiceUtil.class.getName(),
+					"updateQuestion", long.class, java.util.Map.class,
+					java.util.Map.class, int.class, int.class, int.class,
+					int.class, int.class, boolean.class, java.util.List.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					questionId, titleMap, descriptionMap, expirationDateMonth,
+					expirationDateDay, expirationDateYear, expirationDateHour,
+					expirationDateMinute, neverExpire, choices, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

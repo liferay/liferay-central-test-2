@@ -16,11 +16,8 @@ package com.liferay.portlet.messageboards.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -71,109 +68,27 @@ public class MBCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(parentCategoryId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = description;
-
-			if (description == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = emailAddress;
-
-			if (emailAddress == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = inProtocol;
-
-			if (inProtocol == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = inServerName;
-
-			if (inServerName == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = new IntegerWrapper(inServerPort);
-
-			Object paramObj7 = new BooleanWrapper(inUseSSL);
-
-			Object paramObj8 = inUserName;
-
-			if (inUserName == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = inPassword;
-
-			if (inPassword == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj10 = new IntegerWrapper(inReadInterval);
-
-			Object paramObj11 = outEmailAddress;
-
-			if (outEmailAddress == null) {
-				paramObj11 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj12 = new BooleanWrapper(outCustom);
-
-			Object paramObj13 = outServerName;
-
-			if (outServerName == null) {
-				paramObj13 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj14 = new IntegerWrapper(outServerPort);
-
-			Object paramObj15 = new BooleanWrapper(outUseSSL);
-
-			Object paramObj16 = outUserName;
-
-			if (outUserName == null) {
-				paramObj16 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj17 = outPassword;
-
-			if (outPassword == null) {
-				paramObj17 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj18 = new BooleanWrapper(mailingListActive);
-
-			Object paramObj19 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj19 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
-					"addCategory",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18, paramObj19
-					});
+			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
+					"addCategory", long.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class, int.class,
+					boolean.class, java.lang.String.class,
+					java.lang.String.class, int.class, java.lang.String.class,
+					boolean.class, java.lang.String.class, int.class,
+					boolean.class, java.lang.String.class,
+					java.lang.String.class, boolean.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					parentCategoryId, name, description, emailAddress,
+					inProtocol, inServerName, inServerPort, inUseSSL,
+					inUserName, inPassword, inReadInterval, outEmailAddress,
+					outCustom, outServerName, outServerPort, outUseSSL,
+					outUserName, outPassword, mailingListActive, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -201,15 +116,13 @@ public class MBCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(categoryId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
-					"deleteCategory", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
+					"deleteCategory", long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					categoryId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -235,22 +148,16 @@ public class MBCategoryServiceHttp {
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(parentCategoryId);
-
-			Object paramObj2 = new IntegerWrapper(start);
-
-			Object paramObj3 = new IntegerWrapper(end);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
-					"getCategories",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
+					"getCategories", long.class, long.class, int.class,
+					int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					parentCategoryId, start, end);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -274,26 +181,16 @@ public class MBCategoryServiceHttp {
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = parentCategoryIds;
-
-			if (parentCategoryIds == null) {
-				paramObj1 = new NullWrapper("[J");
-			}
-
-			Object paramObj2 = new IntegerWrapper(start);
-
-			Object paramObj3 = new IntegerWrapper(end);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
-					"getCategories",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
+					"getCategories", long.class, long[].class, int.class,
+					int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					parentCategoryIds, start, end);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -316,17 +213,15 @@ public class MBCategoryServiceHttp {
 		long groupId, long parentCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(parentCategoryId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
-					"getCategoriesCount", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
+					"getCategoriesCount", long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					parentCategoryId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -349,21 +244,15 @@ public class MBCategoryServiceHttp {
 		long groupId, long[] parentCategoryIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = parentCategoryIds;
-
-			if (parentCategoryIds == null) {
-				paramObj1 = new NullWrapper("[J");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
-					"getCategoriesCount", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
+					"getCategoriesCount", long.class, long[].class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					parentCategoryIds);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -387,15 +276,15 @@ public class MBCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(categoryId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
-					"getCategory", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
+					"getCategory", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					categoryId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -422,17 +311,15 @@ public class MBCategoryServiceHttp {
 		long groupId, long categoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(categoryId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
-					"getCategoryIds", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
+					"getCategoryIds", long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					categoryId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -457,24 +344,16 @@ public class MBCategoryServiceHttp {
 		long categoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = categoryIds;
-
-			if (categoryIds == null) {
-				paramObj0 = new NullWrapper("java.util.List");
-			}
-
-			Object paramObj1 = new LongWrapper(groupId);
-
-			Object paramObj2 = new LongWrapper(categoryId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
-					"getSubcategoryIds",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
+					"getSubcategoryIds", java.util.List.class, long.class,
+					long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					categoryIds, groupId, categoryId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -497,22 +376,16 @@ public class MBCategoryServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, long userId, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(userId);
-
-			Object paramObj2 = new IntegerWrapper(start);
-
-			Object paramObj3 = new IntegerWrapper(end);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
-					"getSubscribedCategories",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
+					"getSubscribedCategories", long.class, long.class,
+					int.class, int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					userId, start, end);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -535,18 +408,15 @@ public class MBCategoryServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(userId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
-					"getSubscribedCategoriesCount",
-					new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
+					"getSubscribedCategoriesCount", long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					userId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -570,15 +440,13 @@ public class MBCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(categoryId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
-					"subscribeCategory", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
+					"subscribeCategory", long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					categoryId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -604,15 +472,13 @@ public class MBCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(categoryId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
-					"unsubscribeCategory", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
+					"unsubscribeCategory", long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					categoryId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -648,113 +514,29 @@ public class MBCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(categoryId);
-
-			Object paramObj1 = new LongWrapper(parentCategoryId);
-
-			Object paramObj2 = name;
-
-			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = description;
-
-			if (description == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = emailAddress;
-
-			if (emailAddress == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = inProtocol;
-
-			if (inProtocol == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = inServerName;
-
-			if (inServerName == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = new IntegerWrapper(inServerPort);
-
-			Object paramObj8 = new BooleanWrapper(inUseSSL);
-
-			Object paramObj9 = inUserName;
-
-			if (inUserName == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj10 = inPassword;
-
-			if (inPassword == null) {
-				paramObj10 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj11 = new IntegerWrapper(inReadInterval);
-
-			Object paramObj12 = outEmailAddress;
-
-			if (outEmailAddress == null) {
-				paramObj12 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj13 = new BooleanWrapper(outCustom);
-
-			Object paramObj14 = outServerName;
-
-			if (outServerName == null) {
-				paramObj14 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj15 = new IntegerWrapper(outServerPort);
-
-			Object paramObj16 = new BooleanWrapper(outUseSSL);
-
-			Object paramObj17 = outUserName;
-
-			if (outUserName == null) {
-				paramObj17 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj18 = outPassword;
-
-			if (outPassword == null) {
-				paramObj18 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj19 = new BooleanWrapper(mailingListActive);
-
-			Object paramObj20 = new BooleanWrapper(mergeWithParentCategory);
-
-			Object paramObj21 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj21 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
-					"updateCategory",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18, paramObj19, paramObj20, paramObj21
-					});
+			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
+					"updateCategory", long.class, long.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, int.class, boolean.class,
+					java.lang.String.class, java.lang.String.class, int.class,
+					java.lang.String.class, boolean.class,
+					java.lang.String.class, int.class, boolean.class,
+					java.lang.String.class, java.lang.String.class,
+					boolean.class, boolean.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					categoryId, parentCategoryId, name, description,
+					emailAddress, inProtocol, inServerName, inServerPort,
+					inUseSSL, inUserName, inPassword, inReadInterval,
+					outEmailAddress, outCustom, outServerName, outServerPort,
+					outUseSSL, outUserName, outPassword, mailingListActive,
+					mergeWithParentCategory, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
