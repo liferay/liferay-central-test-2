@@ -30,6 +30,14 @@ AUI().add(
 						'<div class="journal-article-move-handler"></div>' +
 						'<label for="" class="journal-article-field-label"><span>{fieldLabel}</span></label>' +
 						'<div class="journal-article-component-container"></div>' +
+						'<span class="aui-field aui-field-choice journal-article-localized-checkbox">' +
+							'<span class="aui-field-content">' +
+								'<span class="aui-field-element aui-field-label-right">' +
+									'<input type="hidden" value="false" name="{portletNamespace}{instanceId}localized-checkbox">' +
+									'<input type="checkbox" onclick="Liferay.Util.updateCheckboxValue(this); " name="{portletNamespace}{instanceId}localized-checkboxCheckbox" id="{portletNamespace}{instanceId}localized-checkboxCheckbox" class="aui-field-input aui-field-input-choice"> </span>' +
+									'<label for="{portletNamespace}{instanceId}localized-checkboxCheckbox" class="aui-field-label">{localizedLabelLanguage}</label>' +
+								'</span>'+
+							'</span>' +
 						'<div class="journal-article-required-message portlet-msg-error">{requiredFieldLanguage}</div>' +
 						'<div class="journal-article-buttons {articleButtonsRowCSSClass}">' +
 							'<span class="aui-field aui-field-inline aui-field-text journal-article-variable-name">' +
@@ -1498,8 +1506,10 @@ AUI().add(
 					var fieldLabel = instance.getById('fieldLabel');
 					var localized = source.one('.journal-article-localized');
 
+					var localizedValue = '';
+
 					if (localized) {
-						var localizedValue = localized.val();
+						localizedValue = localized.val();
 					}
 
 					var journalMessage = instance.getById('journalMessage');
@@ -2147,7 +2157,9 @@ AUI().add(
 				var editFieldCancelButton = editContainerWrapper.one('.cancel-button .aui-button-input');
 				var editFieldCloseButton = editContainerWrapper.one('.close-button .aui-button-input');
 				var editFieldSaveButton = editContainerWrapper.one('.save-button .aui-button-input');
+				var enableLocale = instance.getById('enableLocalizationCheckbox');
 				var languageIdSelect = instance.getById('languageIdSelect');
+				var wrapper = instance.getById('journalArticleWrapper');
 
 				editContainerCheckboxes.detach('click');
 				editContainerInputs.detach('change');
@@ -2179,6 +2191,24 @@ AUI().add(
 
 				editFieldCancelButton.on('click', closeEditField, instance);
 				editFieldCloseButton.on('click', closeEditField, instance);
+
+				enableLocale.on(
+					'click',
+					function(event) {
+						var checked = enableLocale.get('checked');
+
+						wrapper.toggleClass('localization-disabled', !checked);
+
+						A.io.request(
+							themeDisplay.getPathMain() + '/portal/session_click',
+							{
+								data: {
+									'liferay_journal_localization': checked
+								}
+							}
+						);
+					}
+				);
 			},
 
 			_attachEvents: function() {
@@ -2186,7 +2216,6 @@ AUI().add(
 
 				var closeButtons = instance.getCloseButtons();
 				var editButtons = instance.getEditButtons();
-				var enableLocale = instance.getById('enableLocalizationCheckbox');
 				var repeatableButtons = instance.getRepeatableButtons();
 				var defaultLanguageIdSelect = instance.getById('defaultLanguageIdSelect');
 				var downloadArticleContentBtn = instance.getById('downloadArticleContentBtn');
@@ -2195,7 +2224,6 @@ AUI().add(
 				var previewArticleBtn = instance.getById('previewArticleBtn');
 				var publishButton = instance.getById('publishButton');
 				var saveButton = instance.getById('saveButton');
-				var wrapper = instance.getById('journalArticleWrapper');
 
 				var containerInputs = fieldsContainer.all('.journal-article-component-container .aui-field-input');
 
@@ -2220,24 +2248,6 @@ AUI().add(
 						var source = instance.getSourceByNode(event.currentTarget);
 
 						instance.renderEditFieldOptions(source);
-					}
-				);
-				
-				enableLocale.on(
-					'click',
-					function(event) {
-						var checked = enableLocale.get('checked');
-						
-						wrapper.toggleClass('localization-disabled', !checked);
-						
-						A.io.request(
-							themeDisplay.getPathMain() + '/portal/session_click',
-							{
-								data: {
-									'liferay_journal_localization': checked
-								}
-							}
-						);
 					}
 				);
 
@@ -2663,34 +2673,38 @@ AUI().add(
 
 				return errorText;
 			},
-			
+
 			_updateLocaleState: function(source, checkbox) {
 				var instance = this;
-				
+
 				var isLocalized = checkbox.get('checked');
 				var fieldInstance = instance.getFieldInstance(source);
 				var languageIdSelect = instance.getById('languageIdSelect');
 				var defaultLocale = instance.getDefaultLocale();
 				var localizedValue = source.one('.journal-article-localized');
 
+				var selectedLocale = defaultLocale;
+
 				if (languageIdSelect) {
-					var selectedLocale = languageIdSelect.val();
+					selectedLocale = languageIdSelect.val();
 				}
 
 				if (localizedValue) {
 					if (isLocalized) {
-						localizedValue.val(selectedLocale || defaultLocale);
+						localizedValue.val(selectedLocale);
 					}
 					else if (!confirm(Liferay.Language.get('unchecking-this-field-will-remove-localized-data-for-languages-not-shown-in-this-view'))) {
-						checkbox.attr('checked', 'checked');
-						localizedValue.val(selectedLocale || defaultLocale);
+						checkbox.attr('checked', true);
+
+						localizedValue.val(selectedLocale);
 					}
 					else {
-						localizedValue.val('false');
+						localizedValue.val(false);
 					}
 				}
 
 				var fieldInstance = instance.getFieldInstance(source);
+
 				fieldInstance.set('localized', checkbox.get('checked'));
 			},
 
@@ -3070,6 +3084,7 @@ AUI().add(
 						if (!instance.fieldContainer) {
 							var htmlTemplate = [];
 							var fieldLabel = Liferay.Language.get('field');
+							var localizedLabelLanguage = Liferay.Language.get('localized');
 							var requiredFieldLanguage = Liferay.Language.get('this-field-is-required');
 							var variableNameLanguage = Liferay.Language.get('variable-name');
 
@@ -3106,6 +3121,7 @@ AUI().add(
 									articleButtonsRowCSSClass: articleButtonsRowCSSClass,
 									editBtnTemplateHTML: editBtnTemplateHTML,
 									fieldLabel: fieldLabel,
+									localizedLabelLanguage: localizedLabelLanguage,
 									instanceId: randomInstanceId,
 									portletNamespace: instance.portletNamespace,
 									repeatableBtnTemplateHTML: repeatableBtnTemplateHTML,
