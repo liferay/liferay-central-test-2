@@ -15,6 +15,7 @@
 package com.liferay.portal.verify;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -25,6 +26,7 @@ import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
+import java.lang.reflect.Method;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -68,10 +70,12 @@ public class VerifyUUID extends VerifyProcess {
 		throws Exception {
 		MethodKey methodKey = new MethodKey(
 			serviceClassName, "get" + modelName, long.class);
+		Method method = MethodCache.get(methodKey);
+
 		Object obj = new MethodHandler(methodKey, pk).invoke(true);
 
 		methodKey = new MethodKey(
-			serviceClassName, "update" + modelName, obj.getClass());
+			serviceClassName, "update" + modelName, method.getReturnType());
 		new MethodHandler(methodKey, obj).invoke(true);
 	}
 
