@@ -31,6 +31,7 @@ import java.util.Map;
  * @author Harry Mark
  * @author Shuyang Zhou
  */
+@Deprecated
 public class MethodInvoker {
 
 	public static Object invoke(MethodWrapper methodWrapper)
