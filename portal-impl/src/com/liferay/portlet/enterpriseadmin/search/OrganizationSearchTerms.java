@@ -53,13 +53,14 @@ public class OrganizationSearchTerms extends OrganizationDisplayTerms {
 	}
 
 	public String getCountryName() throws PortalException, SystemException {
-		if (countryId == 0) {
-			return null;
-		}
-		else {
-			return CountryServiceUtil.getCountry(
+		String countryName = null;
+
+		if (countryId != 0) {
+			countryName = CountryServiceUtil.getCountry(
 				countryId).getName().toLowerCase();
 		}
+
+		return countryName;
 	}
 
 	public Long getRegionIdObj() {
@@ -72,13 +73,14 @@ public class OrganizationSearchTerms extends OrganizationDisplayTerms {
 	}
 
 	public String getRegionName() throws PortalException, SystemException {
-		if (regionId == 0) {
-			return null;
+		String regionName = null;
+
+	if (regionId != 0) {
+		regionName = RegionServiceUtil.getRegion(
+			regionId).getName().toLowerCase();
 		}
-		else {
-			return RegionServiceUtil.getRegion(
-				regionId).getName().toLowerCase();
-		}
+
+		return regionName;
 	}
 
 }
