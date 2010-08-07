@@ -44,8 +44,15 @@ public abstract class BaseFilter implements Filter {
 		String urlRegexPattern = GetterUtil.getString(
 			filterConfig.getInitParameter("url-regex-pattern"));
 
+		String urlRegexIgnorePattern = GetterUtil.getString(
+			filterConfig.getInitParameter("url-regex-ignore-pattern"));
+
 		if (Validator.isNotNull(urlRegexPattern)) {
 			_urlRegexPattern = Pattern.compile(urlRegexPattern);
+		}
+
+		if (Validator.isNotNull(urlRegexIgnorePattern)) {
+			_urlRegexIgnorePattern = Pattern.compile(urlRegexIgnorePattern);
 		}
 
 		String servlet24Dispatcher = GetterUtil.getString(
@@ -85,7 +92,7 @@ public abstract class BaseFilter implements Filter {
 			filterEnabled = false;
 		}
 
-		if (filterEnabled && (_urlRegexPattern != null)) {
+		if (filterEnabled) {
 			String url = requestURL.toString();
 
 			String queryString = request.getQueryString();
@@ -94,9 +101,17 @@ public abstract class BaseFilter implements Filter {
 				url = url.concat(StringPool.QUESTION).concat(queryString);
 			}
 
-			Matcher matcher = _urlRegexPattern.matcher(url);
+			if (_urlRegexPattern != null) {
+				Matcher matcher = _urlRegexPattern.matcher(url);
 
-			filterEnabled = matcher.find();
+				filterEnabled = matcher.find();
+			}
+
+			if (_urlRegexIgnorePattern != null) {
+				Matcher matcher = _urlRegexIgnorePattern.matcher(url);
+
+				filterEnabled = !matcher.find();
+			}
 		}
 
 		try {
@@ -206,6 +221,7 @@ public abstract class BaseFilter implements Filter {
 	private Class<?> _filterClass = getClass();
 	private boolean _filterEnabled = true;
 	private boolean _servlet24Dispatcher;
+	private Pattern _urlRegexIgnorePattern;
 	private Pattern _urlRegexPattern;
 
 }

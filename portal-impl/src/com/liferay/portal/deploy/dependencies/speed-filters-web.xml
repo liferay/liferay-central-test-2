@@ -6,6 +6,10 @@
 		<param-value>com.liferay.portal.servlet.filters.cache.CacheFilter</param-value>
 	</init-param>
 	<init-param>
+		<param-name>url-regex-ignore-pattern</param-name>
+		<param-value>.+/-/.+</param-value>
+	</init-param>
+	<init-param>
 		<param-name>pattern</param-name>
 		<param-value>2</param-value>
 	</init-param>
@@ -40,6 +44,10 @@
 	<init-param>
 		<param-name>filter-class</param-name>
 		<param-value>com.liferay.portal.servlet.filters.etag.ETagFilter</param-value>
+	</init-param>
+	<init-param>
+		<param-name>url-regex-ignore-pattern</param-name>
+		<param-value>.+/-/.+</param-value>
 	</init-param>
 	<init-param>
 		<param-name>servlet-2.4-dispatcher</param-name>
@@ -80,6 +88,10 @@
 	<init-param>
 		<param-name>filter-class</param-name>
 		<param-value>com.liferay.portal.servlet.filters.header.HeaderFilter</param-value>
+	</init-param>
+	<init-param>
+		<param-name>url-regex-ignore-pattern</param-name>
+		<param-value>.+/-/.+</param-value>
 	</init-param>
 	<init-param>
 		<param-name>Cache-Control</param-name>

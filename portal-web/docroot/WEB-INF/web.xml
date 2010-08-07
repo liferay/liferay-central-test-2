@@ -41,6 +41,10 @@
 		<filter-name>Cache Filter - Resource</filter-name>
 		<filter-class>com.liferay.portal.servlet.filters.cache.CacheFilter</filter-class>
 		<init-param>
+			<param-name>url-regex-ignore-pattern</param-name>
+			<param-value>.+/-/.+</param-value>
+		</init-param>
+		<init-param>
 			<param-name>pattern</param-name>
 			<param-value>2</param-value>
 		</init-param>
@@ -64,12 +68,16 @@
 	<filter>
 		<filter-name>ETag Filter</filter-name>
 		<filter-class>com.liferay.portal.servlet.filters.etag.ETagFilter</filter-class>
+		<init-param>
+			<param-name>url-regex-ignore-pattern</param-name>
+			<param-value>.+/-/.+</param-value>
+		</init-param>
 	</filter>
 	<filter>
 		<filter-name>ETag Filter - JSP</filter-name>
 		<filter-class>com.liferay.portal.servlet.filters.etag.ETagFilter</filter-class>
 		<init-param>
-		<param-name>url-regex-pattern</param-name>
+			<param-name>url-regex-pattern</param-name>
 			<param-value>.+/(barebone|css|everything|main)\.jsp</param-value>
 		</init-param>
 	</filter>
@@ -80,6 +88,10 @@
 	<filter>
 		<filter-name>Header Filter</filter-name>
 		<filter-class>com.liferay.portal.servlet.filters.header.HeaderFilter</filter-class>
+		<init-param>
+			<param-name>url-regex-ignore-pattern</param-name>
+			<param-value>.+/-/.+</param-value>
+		</init-param>
 		<init-param>
 			<param-name>Cache-Control</param-name>
 			<param-value>max-age=315360000, public</param-value>
