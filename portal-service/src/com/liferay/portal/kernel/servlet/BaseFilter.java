@@ -102,25 +102,16 @@ public abstract class BaseFilter implements Filter {
 				url = url.concat(StringPool.QUESTION).concat(queryString);
 			}
 
-			Matcher matcher = null;
-			Matcher ignoreMatcher = null;
-
 			if (_urlRegexPattern != null) {
-				matcher = _urlRegexPattern.matcher(url);
-			}
+				Matcher matcher = _urlRegexPattern.matcher(url);
 
-			if (_urlRegexIgnorePattern != null) {
-				ignoreMatcher = _urlRegexIgnorePattern.matcher(url);
-			}
-
-			if ((matcher != null) && (ignoreMatcher != null)) {
-				filterEnabled = matcher.find() && !ignoreMatcher.find();
-			}
-			else if (matcher != null) {
 				filterEnabled = matcher.find();
 			}
-			else if (ignoreMatcher != null) {
-				filterEnabled = !ignoreMatcher.find();
+
+			if (filterEnabled && (_urlRegexIgnorePattern != null)) {
+				Matcher matcher = _urlRegexIgnorePattern.matcher(url);
+
+				filterEnabled = !matcher.find();
 			}
 		}
 
