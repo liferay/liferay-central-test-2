@@ -51,7 +51,9 @@ AUI().add(
 
 					instance._positionHelper = A.Node.create('<div class="lfr-position-helper"></div>');
 					instance._positionHelper.append(instance._container);
-					instance._positionHelper.appendTo(document.body);
+
+					A.getBody().prepend(instance._positionHelper);
+
 					instance._positionHelper.hide();
 
 					instance.paginate(instance._container.all('.lfr-panel-content'));
