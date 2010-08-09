@@ -18,7 +18,6 @@
 	href="<%= rowURL %>"
 	name="name"
 	orderable="<%= true %>"
-	value="<%= organization.getName() %>"
 />
 
 <liferay-ui:search-container-column-text
