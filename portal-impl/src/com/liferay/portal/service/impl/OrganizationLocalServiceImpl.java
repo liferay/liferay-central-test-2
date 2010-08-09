@@ -423,13 +423,6 @@ public class OrganizationLocalServiceImpl
 	}
 
 	public List<Organization> getUserOrganizations(
-			long userId, int start, int end)
-		throws PortalException, SystemException {
-
-		return getUserOrganizations(userId, false, start, end);
-	}
-
-	public List<Organization> getUserOrganizations(
 			long userId, boolean inheritUserGroups, int start, int end)
 		throws PortalException, SystemException {
 
@@ -453,6 +446,13 @@ public class OrganizationLocalServiceImpl
 		}
 	}
 
+	public List<Organization> getUserOrganizations(
+			long userId, int start, int end)
+		throws PortalException, SystemException {
+
+		return getUserOrganizations(userId, false, start, end);
+	}
+
 	@ThreadLocalCachable
 	public int getUserOrganizationsCount(long userId) throws SystemException {
 		return userPersistence.getOrganizationsSize(userId);
@@ -462,6 +462,14 @@ public class OrganizationLocalServiceImpl
 		throws SystemException {
 
 		return groupPersistence.containsOrganization(groupId, organizationId);
+	}
+
+	public boolean hasPasswordPolicyOrganization(
+			long passwordPolicyId, long organizationId)
+		throws SystemException {
+
+		return passwordPolicyRelLocalService.hasPasswordPolicyRel(
+			passwordPolicyId, Organization.class.getName(), organizationId);
 	}
 
 	public boolean hasUserOrganization(long userId, long organizationId)
@@ -508,18 +516,42 @@ public class OrganizationLocalServiceImpl
 		return false;
 	}
 
-	public boolean hasPasswordPolicyOrganization(
-			long passwordPolicyId, long organizationId)
-		throws SystemException {
-
-		return passwordPolicyRelLocalService.hasPasswordPolicyRel(
-			passwordPolicyId, Organization.class.getName(), organizationId);
-	}
-
 	public void rebuildTree(long companyId, boolean force)
 		throws SystemException {
 
 		organizationPersistence.rebuildTree(companyId, force);
+	}
+
+	public Hits search(
+			long companyId, long parentOrganizationId, String keywords,
+			LinkedHashMap<String, Object> params, int start, int end, Sort sort)
+		throws SystemException {
+
+		String name = null;
+		String type = null;
+		String street = null;
+		String city = null;
+		String zip = null;
+		String region = null;
+		String country = null;
+		boolean andOperator = false;
+
+		if (Validator.isNotNull(keywords)) {
+			name = keywords;
+			type = keywords;
+			street = keywords;
+			city = keywords;
+			zip = keywords;
+			region = keywords;
+			country = keywords;
+		}
+		else {
+			andOperator = true;
+		}
+
+		return search(
+			companyId, parentOrganizationId, name, type, street, city, zip,
+			region, country, params, andOperator, start, end, sort);
 	}
 
 	public List<Organization> search(
@@ -554,38 +586,6 @@ public class OrganizationLocalServiceImpl
 			companyId, parentOrganizationId, parentOrganizationIdComparator,
 			keywords, type, regionId, countryId, params, start, end,
 			obc);
-	}
-
-	public Hits search(
-			long companyId, long parentOrganizationId, String keywords,
-			LinkedHashMap<String, Object> params, int start, int end, Sort sort)
-		throws SystemException {
-
-		String name = null;
-		String type = null;
-		String street = null;
-		String city = null;
-		String zip = null;
-		String region = null;
-		String country = null;
-		boolean andOperator = false;
-
-		if (Validator.isNotNull(keywords)) {
-			name = keywords;
-			type = keywords;
-			street = keywords;
-			city = keywords;
-			zip = keywords;
-			region = keywords;
-			country = keywords;
-		}
-		else {
-			andOperator = true;
-		}
-
-		return search(
-			companyId, parentOrganizationId, name, type, street, city, zip,
-			region, country, params, andOperator, start, end, sort);
 	}
 
 	public List<Organization> search(
@@ -911,16 +911,6 @@ public class OrganizationLocalServiceImpl
 	}
 
 	protected void validate(
-			long companyId, long parentOrganizationId, String name, String type,
-			long countryId, int statusId)
-		throws PortalException, SystemException {
-
-		validate(
-			companyId, 0, parentOrganizationId, name, type, countryId,
-			statusId);
-	}
-
-	protected void validate(
 			long companyId, long organizationId, long parentOrganizationId,
 			String name, String type, long countryId, int statusId)
 		throws PortalException, SystemException {
@@ -1008,6 +998,16 @@ public class OrganizationLocalServiceImpl
 
 		listTypeService.validate(
 			statusId, ListTypeConstants.ORGANIZATION_STATUS);
+	}
+
+	protected void validate(
+			long companyId, long parentOrganizationId, String name, String type,
+			long countryId, int statusId)
+		throws PortalException, SystemException {
+
+		validate(
+			companyId, 0, parentOrganizationId, name, type, countryId,
+			statusId);
 	}
 
 }
