@@ -148,8 +148,8 @@ public class LanguageResources {
 							value.getBytes(StringPool.ISO_8859_1),
 							StringPool.UTF8);
 					}
-					catch (UnsupportedEncodingException e) {
-						e.printStackTrace();
+					catch (UnsupportedEncodingException uee) {
+						_log.error(uee, uee);
 					}
 
 					languageMap.put(key, value);

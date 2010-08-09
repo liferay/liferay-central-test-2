@@ -31,7 +31,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
@@ -154,12 +153,12 @@ public class LangBuilder {
 			translationId = "en_hi";
 		}
 
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new UnsyncStringReader(content));
 		UnsyncBufferedWriter nativePropsUnsyncBufferedWriter = 
 			new UnsyncBufferedWriter(new FileWriter(nativePropsFile));
 		UnsyncBufferedWriter propsUnsyncBufferedWriter = 
 			new UnsyncBufferedWriter(new FileWriter(propsFile));
-		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
-			new UnsyncStringReader(content));
 
 		String line = null;
 
@@ -291,9 +290,9 @@ public class LangBuilder {
 			}
 		}
 
+		unsyncBufferedReader.close();
 		nativePropsUnsyncBufferedWriter.close();
 		propsUnsyncBufferedWriter.close();
-		unsyncBufferedReader.close();
 	}
 
 	private String _getProperty(Properties properties, String key)
@@ -451,7 +450,8 @@ public class LangBuilder {
 	private void _writeLine(
 			UnsyncBufferedWriter nativePropsUnsyncBufferedWriter,
 			UnsyncBufferedWriter propsUnsyncedBufferedWriter,
-			String line) throws IOException {
+			String line)
+		throws IOException {
 
 		nativePropsUnsyncBufferedWriter.write(line);
 		nativePropsUnsyncBufferedWriter.newLine();
@@ -461,15 +461,14 @@ public class LangBuilder {
 			return;
 		}
 		else if (line.endsWith(_AUTOMATIC_TRANSLATION)) {
-			int index = line.indexOf(_AUTOMATIC_TRANSLATION);
-			
-			line = line.substring(0, index);
+			int pos = line.indexOf(_AUTOMATIC_TRANSLATION);
+
+			line = line.substring(0, pos);
 		}
 
 		propsUnsyncedBufferedWriter.write(line);
 		propsUnsyncedBufferedWriter.newLine();
 		propsUnsyncedBufferedWriter.flush();
-
 	}
 
 	private static final String _AUTOMATIC_COPY = " (Automatic Copy)";
