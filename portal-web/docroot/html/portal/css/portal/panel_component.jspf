@@ -83,7 +83,7 @@
 }
 
 .ie6 .lfr-extended.lfr-collapsible .lfr-panel-titlebar {
-	height: 1%;
+	zoom: 1;
 }
 
 .lfr-extended.lfr-collapsed .lfr-panel-titlebar {

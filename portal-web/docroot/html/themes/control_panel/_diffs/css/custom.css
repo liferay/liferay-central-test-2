@@ -202,16 +202,18 @@ html > .lfr-dockbar-pinned {
 	margin: 0;
 }
 
-.ie6 .lfr-ctrl-panel .panel-page-category .category-portlets li {
-	zoom: 1;
-}
-
 .lfr-ctrl-panel .panel-page-category .category-portlets a {
 	color: #888;
 	display: block;
 	font-size: 12px;
 	line-height: 22px;
 	padding: 0 6px;
+}
+
+.ie6 .lfr-ctrl-panel .panel-page-category .category-portlets a {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	zoom: 1;
 }
 
 .lfr-ctrl-panel .panel-page-category .category-portlets a:hover {
