@@ -45,12 +45,12 @@ public abstract class BaseFilter implements Filter {
 		String urlRegexPattern = GetterUtil.getString(
 			filterConfig.getInitParameter("url-regex-pattern"));
 
-		String urlRegexIgnorePattern = GetterUtil.getString(
-			filterConfig.getInitParameter("url-regex-ignore-pattern"));
-
 		if (Validator.isNotNull(urlRegexPattern)) {
 			_urlRegexPattern = Pattern.compile(urlRegexPattern);
 		}
+
+		String urlRegexIgnorePattern = GetterUtil.getString(
+			filterConfig.getInitParameter("url-regex-ignore-pattern"));
 
 		if (Validator.isNotNull(urlRegexIgnorePattern)) {
 			_urlRegexIgnorePattern = Pattern.compile(urlRegexIgnorePattern);
@@ -93,7 +93,10 @@ public abstract class BaseFilter implements Filter {
 			filterEnabled = false;
 		}
 
-		if (filterEnabled) {
+		if (filterEnabled &&
+			((_urlRegexPattern != null) ||
+			 (_urlRegexIgnorePattern != null))) {
+
 			String url = requestURL.toString();
 
 			String queryString = request.getQueryString();
