@@ -110,57 +110,59 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		boolean showSearch = !results.isEmpty();
 		%>
 
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "categories") %>'>
-			<c:if test="<%= showAddCategoryButton || showPermissionsButton || showSearch %>">
-				<aui:fieldset>
-					<c:if test="<%= showSearch %>">
-						<aui:input id="keywords1" label="search" name="keywords" size="30" type="text" />
-					</c:if>
-				</aui:fieldset>
+		<liferay-ui:panel-container extended="<%= true %>" id='convert1PanelContainer' persistState="<%= true %>">
+			<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='convert1Panel' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "categories") %>'>
+				<c:if test="<%= showAddCategoryButton || showPermissionsButton || showSearch %>">
+					<aui:fieldset>
+						<c:if test="<%= showSearch %>">
+							<aui:input id="keywords1" label="search" name="keywords" size="30" type="text" />
+						</c:if>
+					</aui:fieldset>
 
-				<aui:button-row>
-					<c:if test="<%= showSearch %>">
-						<aui:button type="submit" value="search-categories" />
-					</c:if>
+					<aui:button-row>
+						<c:if test="<%= showSearch %>">
+							<aui:button type="submit" value="search-categories" />
+						</c:if>
 
-					<c:if test="<%= showAddCategoryButton %>">
-						<portlet:renderURL var="addCategoriesURL">
-							<portlet:param name="struts_action" value="/shopping/edit_category" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" />
-						</portlet:renderURL>
+						<c:if test="<%= showAddCategoryButton %>">
+							<portlet:renderURL var="addCategoriesURL">
+								<portlet:param name="struts_action" value="/shopping/edit_category" />
+								<portlet:param name="redirect" value="<%= currentURL %>" />
+								<portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" />
+							</portlet:renderURL>
 
-						<aui:button onClick="<%= addCategoriesURL %>" type="button" value='<%= (category == null) ? "add-category" : "add-subcategory" %>' />
-					</c:if>
+							<aui:button onClick="<%= addCategoriesURL %>" type="button" value='<%= (category == null) ? "add-category" : "add-subcategory" %>' />
+						</c:if>
 
-					<c:if test="<%= showPermissionsButton %>">
+						<c:if test="<%= showPermissionsButton %>">
 
-						<%
-						String modelResource = "com.liferay.portlet.shopping";
-						String modelResourceDescription = themeDisplay.getScopeGroupName();
-						String resourcePrimKey = String.valueOf(scopeGroupId);
+							<%
+							String modelResource = "com.liferay.portlet.shopping";
+							String modelResourceDescription = themeDisplay.getScopeGroupName();
+							String resourcePrimKey = String.valueOf(scopeGroupId);
 
-						if (category != null) {
-							modelResource = ShoppingCategory.class.getName();
-							modelResourceDescription = category.getName();
-							resourcePrimKey = String.valueOf(category.getCategoryId());
-						}
-						%>
+							if (category != null) {
+								modelResource = ShoppingCategory.class.getName();
+								modelResourceDescription = category.getName();
+								resourcePrimKey = String.valueOf(category.getCategoryId());
+							}
+							%>
 
-						<liferay-security:permissionsURL
-							modelResource="<%= modelResource %>"
-							modelResourceDescription="<%= HtmlUtil.escape(modelResourceDescription) %>"
-							resourcePrimKey="<%= resourcePrimKey %>"
-							var="permissionsURL"
-						/>
+							<liferay-security:permissionsURL
+								modelResource="<%= modelResource %>"
+								modelResourceDescription="<%= HtmlUtil.escape(modelResourceDescription) %>"
+								resourcePrimKey="<%= resourcePrimKey %>"
+								var="permissionsURL"
+							/>
 
-						<aui:button onClick="<%= permissionsURL %>" type="button" value="permissions" />
-					</c:if>
-				</aui:button-row>
-			</c:if>
+							<aui:button onClick="<%= permissionsURL %>" type="button" value="permissions" />
+						</c:if>
+					</aui:button-row>
+				</c:if>
 
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-		</liferay-ui:panel>
+				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+			</liferay-ui:panel>
+		</liferay-ui:panel-container>
 	</aui:form>
 
 	<aui:form action="<%= searchURL %>" method="get" name="fm2">
@@ -316,41 +318,43 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		boolean showSearch = !results.isEmpty();
 		%>
 
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "items") %>'>
-			<c:if test="<%= showAddItemButton || showSearch %>">
-				<aui:fieldset>
-					<c:if test="<%= showSearch %>">
-						<aui:input id="keyworkds2" label="search" name="keywords" size="30" type="text" />
-					</c:if>
-				</aui:fieldset>
+		<liferay-ui:panel-container extended="<%= true %>" id='convert2PanelContainer' persistState="<%= true %>">
+			<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='convert2Panel' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "items") %>'>
+				<c:if test="<%= showAddItemButton || showSearch %>">
+					<aui:fieldset>
+						<c:if test="<%= showSearch %>">
+							<aui:input id="keyworkds2" label="search" name="keywords" size="30" type="text" />
+						</c:if>
+					</aui:fieldset>
 
-				<aui:button-row>
-					<c:if test="<%= showSearch %>">
-						<aui:button type="submit" value="search-this-category" />
-					</c:if>
+					<aui:button-row>
+						<c:if test="<%= showSearch %>">
+							<aui:button type="submit" value="search-this-category" />
+						</c:if>
 
-					<c:if test="<%= showAddItemButton %>">
-						<portlet:renderURL var="addItemURL">
-							<portlet:param name="struts_action" value="/shopping/edit_item" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" />
-						</portlet:renderURL>
+						<c:if test="<%= showAddItemButton %>">
+							<portlet:renderURL var="addItemURL">
+								<portlet:param name="struts_action" value="/shopping/edit_item" />
+								<portlet:param name="redirect" value="<%= currentURL %>" />
+								<portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" />
+							</portlet:renderURL>
 
-						<aui:button onClick="<%= addItemURL %>" type="button" value="add-item" />
+							<aui:button onClick="<%= addItemURL %>" type="button" value="add-item" />
 
-						<portlet:renderURL var="addBooksURL">
-							<portlet:param name="struts_action" value="/shopping/add_book_items" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" />
-						</portlet:renderURL>
+							<portlet:renderURL var="addBooksURL">
+								<portlet:param name="struts_action" value="/shopping/add_book_items" />
+								<portlet:param name="redirect" value="<%= currentURL %>" />
+								<portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" />
+							</portlet:renderURL>
 
-						<aui:button onClick="<%= addBooksURL %>" type="button" value="add-books" />
-					</c:if>
-				</aui:button-row>
-			</c:if>
+							<aui:button onClick="<%= addBooksURL %>" type="button" value="add-books" />
+						</c:if>
+					</aui:button-row>
+				</c:if>
 
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-		</liferay-ui:panel>
+				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+			</liferay-ui:panel>
+		</liferay-ui:panel-container>
 	</aui:form>
 </liferay-ui:panel-container>
 
