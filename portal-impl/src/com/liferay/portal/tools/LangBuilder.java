@@ -125,14 +125,14 @@ public class LangBuilder {
 			props.load(new FileInputStream(propsFile));
 		}
 
-		File nativePropsFile = new File(
+		File missingPropsFile = new File(
 			_langDir + "/" + _langFile + "_" + languageId +
-				".properties.native");
+				".properties.missing");
 
-		Properties nativeProps = new Properties();
+		Properties missingProps = new Properties();
 
-		if (nativePropsFile.exists()) {
-			nativeProps.load(new FileInputStream(nativePropsFile));
+		if (missingPropsFile.exists()) {
+			missingProps.load(new FileInputStream(missingPropsFile));
 		}
 
 		String translationId = "en_" + languageId;
@@ -155,8 +155,8 @@ public class LangBuilder {
 
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(content));
-		UnsyncBufferedWriter nativePropsUnsyncBufferedWriter = 
-			new UnsyncBufferedWriter(new FileWriter(nativePropsFile));
+		UnsyncBufferedWriter missingPropsUnsyncBufferedWriter = 
+			new UnsyncBufferedWriter(new FileWriter(missingPropsFile));
 		UnsyncBufferedWriter propsUnsyncBufferedWriter = 
 			new UnsyncBufferedWriter(new FileWriter(propsFile));
 
@@ -171,16 +171,16 @@ public class LangBuilder {
 				String key = line.substring(0, pos);
 				String value = line.substring(pos + 1, line.length());
 
-				String nativeValue = _getProperty(nativeProps, key);
+				String missingValue = _getProperty(missingProps, key);
 				String translatedText = _getProperty(props, key);
 
-				if ((nativeValue == null) && (translatedText == null) &&
+				if ((missingValue == null) && (translatedText == null) &&
 					(_renameKeys != null)) {
 
 					String renameKey = _renameKeys.getProperty(key);
 
 					if (renameKey != null) {
-						nativeValue = _getProperty(nativeProps, key);
+						missingValue = _getProperty(missingProps, key);
 						translatedText = _getProperty(props, key);
 					}
 				}
@@ -191,8 +191,8 @@ public class LangBuilder {
 
 					translatedText = "";
 				}
-				else if ((nativeValue != null) &&
-						 (nativeValue.endsWith(_AUTOMATIC_TRANSLATION))) {
+				else if ((missingValue != null) &&
+						 (missingValue.endsWith(_AUTOMATIC_TRANSLATION))) {
 
 					translatedText += _AUTOMATIC_TRANSLATION;
 				}
@@ -274,24 +274,24 @@ public class LangBuilder {
 						translatedText.trim(), "  ", " ");
 
 					_writeLine(
-						nativePropsUnsyncBufferedWriter, 
+						missingPropsUnsyncBufferedWriter, 
 						propsUnsyncBufferedWriter, key + "=" + translatedText);
 				}
-				else if (nativeProps.containsKey(key)) {
+				else if (missingProps.containsKey(key)) {
 					_writeLine(
-						nativePropsUnsyncBufferedWriter, 
+						missingPropsUnsyncBufferedWriter, 
 						propsUnsyncBufferedWriter, key + "=");
 				}
 			}
 			else {
 				_writeLine(
-					nativePropsUnsyncBufferedWriter, propsUnsyncBufferedWriter,
+					missingPropsUnsyncBufferedWriter, propsUnsyncBufferedWriter,
 					line);
 			}
 		}
 
 		unsyncBufferedReader.close();
-		nativePropsUnsyncBufferedWriter.close();
+		missingPropsUnsyncBufferedWriter.close();
 		propsUnsyncBufferedWriter.close();
 	}
 
@@ -448,14 +448,14 @@ public class LangBuilder {
 	}
 
 	private void _writeLine(
-			UnsyncBufferedWriter nativePropsUnsyncBufferedWriter,
+			UnsyncBufferedWriter missingPropsUnsyncBufferedWriter,
 			UnsyncBufferedWriter propsUnsyncedBufferedWriter,
 			String line)
 		throws IOException {
 
-		nativePropsUnsyncBufferedWriter.write(line);
-		nativePropsUnsyncBufferedWriter.newLine();
-		nativePropsUnsyncBufferedWriter.flush();
+		missingPropsUnsyncBufferedWriter.write(line);
+		missingPropsUnsyncBufferedWriter.newLine();
+		missingPropsUnsyncBufferedWriter.flush();
 
 		if (line.endsWith(_AUTOMATIC_COPY)) {
 			return;
