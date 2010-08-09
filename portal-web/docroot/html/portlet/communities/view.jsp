@@ -186,7 +186,7 @@ pageContext.setAttribute("portletURL", portletURL);
 
 		StringBundler sb = new StringBundler();
 
-		sb.append(group.getDescriptiveName());
+		sb.append(HtmlUtil.escape(group.getDescriptiveName()));
 
 		int publicLayoutsPageCount = group.getPublicLayoutsPageCount();
 		int privateLayoutsPageCount = group.getPrivateLayoutsPageCount();
