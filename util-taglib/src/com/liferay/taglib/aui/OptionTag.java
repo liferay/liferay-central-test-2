@@ -37,6 +37,10 @@ public class OptionTag extends IncludeTag {
 		_selected = selected;
 	}
 
+	public void setStyle(String style) {
+		_style = style;
+	}
+
 	public void setValue(Object value) {
 		_value = String.valueOf(value);
 	}
@@ -45,6 +49,7 @@ public class OptionTag extends IncludeTag {
 		_cssClass = null;
 		_label = null;
 		_selected = false;
+		_style = null;
 		_value = null;
 	}
 
@@ -73,6 +78,7 @@ public class OptionTag extends IncludeTag {
 		request.setAttribute("aui:option:label", _label);
 		request.setAttribute(
 			"aui:option:selected", String.valueOf(_selected));
+		request.setAttribute("aui:option:style", _style);
 		request.setAttribute("aui:option:value", value);
 	}
 
@@ -86,6 +92,7 @@ public class OptionTag extends IncludeTag {
 	private String _cssClass;
 	private String _label;
 	private boolean _selected;
+	private String _style;
 	private String _value;
 
 }
