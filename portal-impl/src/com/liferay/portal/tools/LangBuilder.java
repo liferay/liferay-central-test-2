@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncBufferedWriter;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
@@ -30,7 +31,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.io.Writer;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
@@ -153,10 +154,12 @@ public class LangBuilder {
 			translationId = "en_hi";
 		}
 
+		UnsyncBufferedWriter nativePropsUnsyncBufferedWriter = 
+			new UnsyncBufferedWriter(new FileWriter(nativePropsFile));
+		UnsyncBufferedWriter propsUnsyncBufferedWriter = 
+			new UnsyncBufferedWriter(new FileWriter(propsFile));
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(content));
-		UnsyncBufferedWriter unsyncBufferedWriter = new UnsyncBufferedWriter(
-			new FileWriter(nativePropsFile));
 
 		String line = null;
 
@@ -171,6 +174,12 @@ public class LangBuilder {
 
 				String nativeValue = nativeProps.getProperty(key);
 				String translatedText = props.getProperty(key);
+
+				if (Validator.isNotNull(translatedText)) {
+					translatedText = new String(
+						translatedText.getBytes(StringPool.ISO_8859_1), 
+						StringPool.UTF8);
+				}
 
 				if ((nativeValue == null) && (translatedText == null) &&
 					(_renameKeys != null)) {
@@ -271,28 +280,26 @@ public class LangBuilder {
 					translatedText = StringUtil.replace(
 						translatedText.trim(), "  ", " ");
 
-					unsyncBufferedWriter.write(key + "=" + translatedText);
-
-					unsyncBufferedWriter.newLine();
-					unsyncBufferedWriter.flush();
+					_writeLine(
+						nativePropsUnsyncBufferedWriter, 
+						propsUnsyncBufferedWriter, key + "=" + translatedText);
 				}
 				else if (nativeProps.containsKey(key)) {
-					unsyncBufferedWriter.write(key + "=");
-
-					unsyncBufferedWriter.newLine();
-					unsyncBufferedWriter.flush();
+					_writeLine(
+						nativePropsUnsyncBufferedWriter, 
+						propsUnsyncBufferedWriter, key + "=");
 				}
 			}
 			else {
-				unsyncBufferedWriter.write(line);
-
-				unsyncBufferedWriter.newLine();
-				unsyncBufferedWriter.flush();
+				_writeLine(
+					nativePropsUnsyncBufferedWriter, propsUnsyncBufferedWriter,
+					line);
 			}
 		}
 
+		nativePropsUnsyncBufferedWriter.close();
+		propsUnsyncBufferedWriter.close();
 		unsyncBufferedReader.close();
-		unsyncBufferedWriter.close();
 	}
 
 	private String _orderProps(File propsFile) throws IOException {
@@ -431,6 +438,30 @@ public class LangBuilder {
 		}
 
 		return toText;
+	}
+
+	private void _writeLine(
+			UnsyncBufferedWriter nativePropsUnsyncBufferedWriter, 
+			UnsyncBufferedWriter propsUnsyncedBufferedWriter, 
+			String line) throws IOException {
+
+		nativePropsUnsyncBufferedWriter.write(line);
+		nativePropsUnsyncBufferedWriter.newLine();
+		nativePropsUnsyncBufferedWriter.flush();
+		
+		if (line.endsWith(_AUTOMATIC_COPY)) {
+			return;
+		}
+		else if (line.endsWith(_AUTOMATIC_TRANSLATION)) {
+			int index = line.indexOf(_AUTOMATIC_TRANSLATION);
+			
+			line = line.substring(0, index);
+		}
+		
+		propsUnsyncedBufferedWriter.write(line);
+		propsUnsyncedBufferedWriter.newLine();
+		propsUnsyncedBufferedWriter.flush();
+		
 	}
 
 	private static final String _AUTOMATIC_COPY = " (Automatic Copy)";

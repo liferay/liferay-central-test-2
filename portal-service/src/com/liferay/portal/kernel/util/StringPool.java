@@ -99,6 +99,8 @@ public class StringPool {
 
 	public static final String IS_NULL = "IS NULL";
 
+	public static final String ISO_8859_1 = "ISO-8859-1";
+
 	public static final String LESS_THAN = "<";
 
 	public static final String LESS_THAN_OR_EQUAL = "<=";
