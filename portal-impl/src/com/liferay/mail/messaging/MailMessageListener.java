@@ -21,7 +21,8 @@ import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodInvoker;
+import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.security.auth.EmailAddressGenerator;
 import com.liferay.portal.security.auth.EmailAddressGeneratorFactory;
 import com.liferay.portal.util.PropsValues;
@@ -102,14 +103,20 @@ public class MailMessageListener implements MessageListener {
 		}
 	}
 
+	protected void doMethodWrapper(MethodWrapper methodWrapper)
+		throws Exception {
+
+		MethodInvoker.invoke(methodWrapper, HookFactory.getInstance());
+	}
+
 	protected void doReceive(Message message) throws Exception {
 		Object payload = message.getPayload();
 
 		if (payload instanceof MailMessage) {
 			doMailMessage((MailMessage)payload);
 		}
-		else if (payload instanceof MethodHandler) {
-			((MethodHandler)payload).invoke(HookFactory.getInstance());
+		else if (payload instanceof MethodWrapper) {
+			doMethodWrapper((MethodWrapper)payload);
 		}
 	}
 

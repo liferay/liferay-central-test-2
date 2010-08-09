@@ -14,7 +14,7 @@
 
 package com.liferay.portal.kernel.cluster;
 
-import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
@@ -46,18 +46,18 @@ public class ClusterRequest implements Serializable {
 	}
 
 	public static ClusterRequest createMulticastRequest(
-		MethodHandler methodHandler) {
+		MethodWrapper methodWrapper) {
 
-		return createMulticastRequest(methodHandler, false);
+		return createMulticastRequest(methodWrapper, false);
 	}
 
 	public static ClusterRequest createMulticastRequest(
-		MethodHandler methodHandler, boolean skipLocal) {
+		MethodWrapper methodWrapper, boolean skipLocal) {
 
 		ClusterRequest clusterRequest = new ClusterRequest();
 
 		clusterRequest.setClusterMessageType(ClusterMessageType.EXECUTE);
-		clusterRequest.setMethodHandler(methodHandler);
+		clusterRequest.setMethodWrapper(methodWrapper);
 		clusterRequest.setMulticast(true);
 		clusterRequest.setSkipLocal(skipLocal);
 		clusterRequest.setUuid(PortalUUIDUtil.generate());
@@ -66,13 +66,13 @@ public class ClusterRequest implements Serializable {
 	}
 
 	public static ClusterRequest createUnicastRequest(
-		MethodHandler methodHandler, String... targetClusterNodeIds) {
+		MethodWrapper methodWrapper, String... targetClusterNodeIds) {
 
 		ClusterRequest clusterRequest = new ClusterRequest();
 
 		clusterRequest.addTargetClusterNodeIds(targetClusterNodeIds);
 		clusterRequest.setClusterMessageType(ClusterMessageType.EXECUTE);
-		clusterRequest.setMethodHandler(methodHandler);
+		clusterRequest.setMethodWrapper(methodWrapper);
 		clusterRequest.setMulticast(false);
 		clusterRequest.setSkipLocal(false);
 		clusterRequest.setUuid(PortalUUIDUtil.generate());
@@ -92,8 +92,8 @@ public class ClusterRequest implements Serializable {
 		return _clusterMessageType;
 	}
 
-	public MethodHandler getMethodHandler() {
-		return _methodHandler;
+	public MethodWrapper getMethodWrapper() {
+		return _methodWrapper;
 	}
 
 	public ClusterNode getOriginatingClusterNode() {
@@ -132,8 +132,8 @@ public class ClusterRequest implements Serializable {
 		_fireAndForget = fireAndForget;
 	}
 
-	public void setMethodHandler(MethodHandler methodHandler) {
-		_methodHandler = methodHandler;
+	public void setMethodWrapper(MethodWrapper methodWrapper) {
+		_methodWrapper = methodWrapper;
 	}
 
 	public void setMulticast(boolean multicast) {
@@ -177,8 +177,8 @@ public class ClusterRequest implements Serializable {
 			sb.append(_originatingClusterNode);
 		}
 		else {
-			sb.append(", methodHandler=");
-			sb.append(_methodHandler);
+			sb.append(", methodWrapper=");
+			sb.append(_methodWrapper);
 		}
 
 		sb.append("}");
@@ -191,7 +191,7 @@ public class ClusterRequest implements Serializable {
 
 	private ClusterMessageType _clusterMessageType;
 	private boolean _fireAndForget;
-	private MethodHandler _methodHandler;
+	private MethodWrapper _methodWrapper;
 	private boolean _multicast;
 	private ClusterNode _originatingClusterNode;
 	private String _servletContextName;

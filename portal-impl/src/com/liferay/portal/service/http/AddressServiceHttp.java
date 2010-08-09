@@ -16,8 +16,11 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.AddressServiceUtil;
 
@@ -61,20 +64,66 @@ public class AddressServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(AddressServiceUtil.class.getName(),
-					"addAddress", java.lang.String.class, long.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, long.class, long.class, int.class,
-					boolean.class, boolean.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					className, classPK, street1, street2, street3, city, zip,
-					regionId, countryId, typeId, mailing, primary);
+			Object paramObj0 = className;
+
+			if (className == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = new LongWrapper(classPK);
+
+			Object paramObj2 = street1;
+
+			if (street1 == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = street2;
+
+			if (street2 == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = street3;
+
+			if (street3 == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = city;
+
+			if (city == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = zip;
+
+			if (zip == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = new LongWrapper(regionId);
+
+			Object paramObj8 = new LongWrapper(countryId);
+
+			Object paramObj9 = new IntegerWrapper(typeId);
+
+			Object paramObj10 = new BooleanWrapper(mailing);
+
+			Object paramObj11 = new BooleanWrapper(primary);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AddressServiceUtil.class.getName(),
+					"addAddress",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -101,12 +150,13 @@ public class AddressServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(AddressServiceUtil.class.getName(),
-					"deleteAddress", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, addressId);
+			Object paramObj0 = new LongWrapper(addressId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AddressServiceUtil.class.getName(),
+					"deleteAddress", new Object[] { paramObj0 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -132,14 +182,15 @@ public class AddressServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(AddressServiceUtil.class.getName(),
-					"getAddress", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, addressId);
+			Object paramObj0 = new LongWrapper(addressId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AddressServiceUtil.class.getName(),
+					"getAddress", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -167,15 +218,21 @@ public class AddressServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(AddressServiceUtil.class.getName(),
-					"getAddresses", java.lang.String.class, long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					className, classPK);
+			Object paramObj0 = className;
+
+			if (className == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = new LongWrapper(classPK);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AddressServiceUtil.class.getName(),
+					"getAddresses", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -206,19 +263,60 @@ public class AddressServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(AddressServiceUtil.class.getName(),
-					"updateAddress", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class, long.class,
-					long.class, int.class, boolean.class, boolean.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					addressId, street1, street2, street3, city, zip, regionId,
-					countryId, typeId, mailing, primary);
+			Object paramObj0 = new LongWrapper(addressId);
+
+			Object paramObj1 = street1;
+
+			if (street1 == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = street2;
+
+			if (street2 == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = street3;
+
+			if (street3 == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = city;
+
+			if (city == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = zip;
+
+			if (zip == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = new LongWrapper(regionId);
+
+			Object paramObj7 = new LongWrapper(countryId);
+
+			Object paramObj8 = new IntegerWrapper(typeId);
+
+			Object paramObj9 = new BooleanWrapper(mailing);
+
+			Object paramObj10 = new BooleanWrapper(primary);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AddressServiceUtil.class.getName(),
+					"updateAddress",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

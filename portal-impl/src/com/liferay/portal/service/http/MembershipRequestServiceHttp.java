@@ -16,8 +16,10 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.MembershipRequestServiceUtil;
 
@@ -57,15 +59,22 @@ public class MembershipRequestServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(MembershipRequestServiceUtil.class.getName(),
-					"addMembershipRequest", long.class, java.lang.String.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					comments);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = comments;
+
+			if (comments == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(MembershipRequestServiceUtil.class.getName(),
+					"addMembershipRequest",
+					new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -93,13 +102,16 @@ public class MembershipRequestServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(MembershipRequestServiceUtil.class.getName(),
-					"deleteMembershipRequests", long.class, int.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					statusId);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new IntegerWrapper(statusId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(MembershipRequestServiceUtil.class.getName(),
+					"deleteMembershipRequests",
+					new Object[] { paramObj0, paramObj1 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -125,15 +137,15 @@ public class MembershipRequestServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(MembershipRequestServiceUtil.class.getName(),
-					"getMembershipRequest", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					membershipRequestId);
+			Object paramObj0 = new LongWrapper(membershipRequestId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(MembershipRequestServiceUtil.class.getName(),
+					"getMembershipRequest", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -161,14 +173,22 @@ public class MembershipRequestServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(MembershipRequestServiceUtil.class.getName(),
-					"updateStatus", long.class, java.lang.String.class,
-					int.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					membershipRequestId, reviewComments, statusId);
+			Object paramObj0 = new LongWrapper(membershipRequestId);
+
+			Object paramObj1 = reviewComments;
+
+			if (reviewComments == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new IntegerWrapper(statusId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(MembershipRequestServiceUtil.class.getName(),
+					"updateStatus",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

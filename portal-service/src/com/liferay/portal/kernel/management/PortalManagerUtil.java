@@ -14,7 +14,7 @@
 
 package com.liferay.portal.kernel.management;
 
-import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.model.ClusterGroup;
 
 import java.lang.reflect.Method;
@@ -24,10 +24,10 @@ import java.lang.reflect.Method;
  */
 public class PortalManagerUtil {
 
-	public static MethodHandler createManageActionMethodHandler(
+	public static MethodWrapper createManageActionMethodWrapper(
 		ManageAction manageAction) {
 
-		return new MethodHandler(_manageMethod, manageAction);
+		return new MethodWrapper(_manageMethod, new Object[] {manageAction});
 	}
 
 	public static void manage(

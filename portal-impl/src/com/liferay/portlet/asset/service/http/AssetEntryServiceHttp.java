@@ -16,8 +16,12 @@ package com.liferay.portlet.asset.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.DoubleWrapper;
+import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -58,12 +62,13 @@ public class AssetEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"deleteEntry", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
+			Object paramObj0 = new LongWrapper(entryId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetEntryServiceUtil.class.getName(),
+					"deleteEntry", new Object[] { paramObj0 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -88,15 +93,20 @@ public class AssetEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long companyId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"getCompanyEntries", long.class, int.class, int.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, start, end);
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = new IntegerWrapper(start);
+
+			Object paramObj2 = new IntegerWrapper(end);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetEntryServiceUtil.class.getName(),
+					"getCompanyEntries",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -119,14 +129,15 @@ public class AssetEntryServiceHttp {
 		long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"getCompanyEntriesCount", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
+			Object paramObj0 = new LongWrapper(companyId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetEntryServiceUtil.class.getName(),
+					"getCompanyEntriesCount", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -152,18 +163,47 @@ public class AssetEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"getCompanyEntriesRSS", long.class, int.class,
-					java.lang.String.class, double.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, max, type, version, displayStyle, feedURL, tagURL);
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = new IntegerWrapper(max);
+
+			Object paramObj2 = type;
+
+			if (type == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new DoubleWrapper(version);
+
+			Object paramObj4 = displayStyle;
+
+			if (displayStyle == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = feedURL;
+
+			if (feedURL == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = tagURL;
+
+			if (tagURL == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetEntryServiceUtil.class.getName(),
+					"getCompanyEntriesRSS",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -191,16 +231,26 @@ public class AssetEntryServiceHttp {
 		java.lang.String languageId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"getCompanyEntryDisplays", long.class, int.class,
-					int.class, java.lang.String.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, start, end, languageId);
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = new IntegerWrapper(start);
+
+			Object paramObj2 = new IntegerWrapper(end);
+
+			Object paramObj3 = languageId;
+
+			if (languageId == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetEntryServiceUtil.class.getName(),
+					"getCompanyEntryDisplays",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -225,16 +275,20 @@ public class AssetEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"getEntries",
-					com.liferay.portlet.asset.service.persistence.AssetEntryQuery.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					entryQuery);
+			Object paramObj0 = entryQuery;
+
+			if (entryQuery == null) {
+				paramObj0 = new NullWrapper(
+						"com.liferay.portlet.asset.service.persistence.AssetEntryQuery");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetEntryServiceUtil.class.getName(),
+					"getEntries", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -262,16 +316,20 @@ public class AssetEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"getEntriesCount",
-					com.liferay.portlet.asset.service.persistence.AssetEntryQuery.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					entryQuery);
+			Object paramObj0 = entryQuery;
+
+			if (entryQuery == null) {
+				paramObj0 = new NullWrapper(
+						"com.liferay.portlet.asset.service.persistence.AssetEntryQuery");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetEntryServiceUtil.class.getName(),
+					"getEntriesCount", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -302,20 +360,56 @@ public class AssetEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
+			Object paramObj0 = entryQuery;
+
+			if (entryQuery == null) {
+				paramObj0 = new NullWrapper(
+						"com.liferay.portlet.asset.service.persistence.AssetEntryQuery");
+			}
+
+			Object paramObj1 = name;
+
+			if (name == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = type;
+
+			if (type == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new DoubleWrapper(version);
+
+			Object paramObj4 = displayStyle;
+
+			if (displayStyle == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = feedURL;
+
+			if (feedURL == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = tagURL;
+
+			if (tagURL == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetEntryServiceUtil.class.getName(),
 					"getEntriesRSS",
-					com.liferay.portlet.asset.service.persistence.AssetEntryQuery.class,
-					java.lang.String.class, java.lang.String.class,
-					double.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					entryQuery, name, type, version, displayStyle, feedURL,
-					tagURL);
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -343,14 +437,15 @@ public class AssetEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"getEntry", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
+			Object paramObj0 = new LongWrapper(entryId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetEntryServiceUtil.class.getName(),
+					"getEntry", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -378,13 +473,20 @@ public class AssetEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"incrementViewCounter", java.lang.String.class, long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					className, classPK);
+			Object paramObj0 = className;
+
+			if (className == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = new LongWrapper(classPK);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetEntryServiceUtil.class.getName(),
+					"incrementViewCounter",
+					new Object[] { paramObj0, paramObj1 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -411,17 +513,41 @@ public class AssetEntryServiceHttp {
 		java.lang.String languageId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"searchEntryDisplays", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class, int.class,
-					int.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, portletId, keywords, languageId, start, end);
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = portletId;
+
+			if (portletId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = keywords;
+
+			if (keywords == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = languageId;
+
+			if (languageId == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new IntegerWrapper(start);
+
+			Object paramObj5 = new IntegerWrapper(end);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetEntryServiceUtil.class.getName(),
+					"searchEntryDisplays",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -445,17 +571,34 @@ public class AssetEntryServiceHttp {
 		java.lang.String languageId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"searchEntryDisplaysCount", long.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, portletId, keywords, languageId);
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = portletId;
+
+			if (portletId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = keywords;
+
+			if (keywords == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = languageId;
+
+			if (languageId == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetEntryServiceUtil.class.getName(),
+					"searchEntryDisplaysCount",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -486,26 +629,116 @@ public class AssetEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"updateEntry", long.class, java.lang.String.class,
-					long.class, java.lang.String.class, long[].class,
-					java.lang.String[].class, boolean.class,
-					java.util.Date.class, java.util.Date.class,
-					java.util.Date.class, java.util.Date.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, int.class, int.class,
-					java.lang.Integer.class, boolean.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					className, classPK, classUuid, categoryIds, tagNames,
-					visible, startDate, endDate, publishDate, expirationDate,
-					mimeType, title, description, summary, url, height, width,
-					priority, sync);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = className;
+
+			if (className == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new LongWrapper(classPK);
+
+			Object paramObj3 = classUuid;
+
+			if (classUuid == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = categoryIds;
+
+			if (categoryIds == null) {
+				paramObj4 = new NullWrapper("[J");
+			}
+
+			Object paramObj5 = tagNames;
+
+			if (tagNames == null) {
+				paramObj5 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj6 = new BooleanWrapper(visible);
+
+			Object paramObj7 = startDate;
+
+			if (startDate == null) {
+				paramObj7 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj8 = endDate;
+
+			if (endDate == null) {
+				paramObj8 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj9 = publishDate;
+
+			if (publishDate == null) {
+				paramObj9 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj10 = expirationDate;
+
+			if (expirationDate == null) {
+				paramObj10 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj11 = mimeType;
+
+			if (mimeType == null) {
+				paramObj11 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj12 = title;
+
+			if (title == null) {
+				paramObj12 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj13 = description;
+
+			if (description == null) {
+				paramObj13 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj14 = summary;
+
+			if (summary == null) {
+				paramObj14 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj15 = url;
+
+			if (url == null) {
+				paramObj15 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj16 = new IntegerWrapper(height);
+
+			Object paramObj17 = new IntegerWrapper(width);
+
+			Object paramObj18 = priority;
+
+			if (priority == null) {
+				paramObj18 = new NullWrapper("java.lang.Integer");
+			}
+
+			Object paramObj19 = new BooleanWrapper(sync);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AssetEntryServiceUtil.class.getName(),
+					"updateEntry",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12, paramObj13,
+						paramObj14, paramObj15, paramObj16, paramObj17,
+						paramObj18, paramObj19
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

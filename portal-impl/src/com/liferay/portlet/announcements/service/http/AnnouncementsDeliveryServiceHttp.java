@@ -16,8 +16,10 @@ package com.liferay.portlet.announcements.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -60,16 +62,30 @@ public class AnnouncementsDeliveryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(AnnouncementsDeliveryServiceUtil.class.getName(),
-					"updateDelivery", long.class, java.lang.String.class,
-					boolean.class, boolean.class, boolean.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
-					type, email, sms, website);
+			Object paramObj0 = new LongWrapper(userId);
+
+			Object paramObj1 = type;
+
+			if (type == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new BooleanWrapper(email);
+
+			Object paramObj3 = new BooleanWrapper(sms);
+
+			Object paramObj4 = new BooleanWrapper(website);
+
+			MethodWrapper methodWrapper = new MethodWrapper(AnnouncementsDeliveryServiceUtil.class.getName(),
+					"updateDelivery",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

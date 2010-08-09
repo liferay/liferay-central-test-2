@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
 import com.liferay.portal.kernel.cluster.ClusterNode;
 import com.liferay.portal.kernel.cluster.ClusterRequest;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.model.ClusterGroup;
 
 import java.util.List;
@@ -46,20 +46,20 @@ public class ClusterManageActionWrapper implements ManageAction {
 	}
 
 	private void doAction() throws ManageActionException, SystemException {
-		MethodHandler manageActionMethodHandler =
-			PortalManagerUtil.createManageActionMethodHandler(_manageAction);
+		MethodWrapper manageActionMethodWrapper =
+			PortalManagerUtil.createManageActionMethodWrapper(_manageAction);
 
 		ClusterRequest clusterRequest = null;
 
 		if (_clusterGroup.isWholeCluster()) {
 			clusterRequest = ClusterRequest.createMulticastRequest(
-				manageActionMethodHandler);
+				manageActionMethodWrapper);
 		}
 		else {
 			verifyClusterGroup();
 
 			clusterRequest = ClusterRequest.createUnicastRequest(
-				manageActionMethodHandler,
+				manageActionMethodWrapper,
 				_clusterGroup.getClusterNodeIdsArray());
 		}
 

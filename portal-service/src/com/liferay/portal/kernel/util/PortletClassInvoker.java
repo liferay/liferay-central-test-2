@@ -22,13 +22,110 @@ import javax.servlet.ServletContext;
 
 /**
  * @author Bruno Farache
- * @author Shuyang Zhou
  */
 public class PortletClassInvoker {
 
 	public static Object invoke(
-			boolean newInstance, String portletId, MethodKey methodKey,
-			Object... arguments)
+			String portletId, String className, String methodName)
+		throws Exception {
+
+		return invoke(portletId, className, methodName, new Object[] {});
+	}
+
+	public static Object invoke(
+			String portletId, String className, String methodName, Object arg)
+		throws Exception {
+
+		return invoke(portletId, className, methodName, new Object[] {arg});
+	}
+
+	public static Object invoke(
+			String portletId, String className, String methodName, Object arg1,
+			Object arg2)
+		throws Exception {
+
+		return invoke(
+			portletId, className, methodName, new Object[] {arg1, arg2});
+	}
+
+	public static Object invoke(
+			String portletId, String className, String methodName, Object arg1,
+			Object arg2, Object arg3)
+		throws Exception {
+
+		return invoke(
+			portletId, className, methodName, new Object[] {arg1, arg2, arg3});
+	}
+
+	public static Object invoke(
+			String portletId, String className, String methodName, Object arg1,
+			Object arg2, Object arg3, Object arg4)
+		throws Exception {
+
+		return invoke(
+			portletId, className, methodName,
+			new Object[] {arg1, arg2, arg3, arg4});
+	}
+
+	public static Object invoke(
+			String portletId, String className, String methodName,
+			Object[] args)
+		throws Exception {
+
+		return invoke(portletId, className, methodName, args, true);
+	}
+
+	public static Object invoke(
+		String portletId,String className, String methodName,
+		boolean newInstance)
+		throws Exception {
+
+		return invoke(
+			portletId, className, methodName, new Object[] {}, newInstance);
+	}
+
+	public static Object invoke(
+			String portletId, String className, String methodName, Object arg,
+			boolean newInstance)
+		throws Exception {
+
+		return invoke(
+			portletId, className, methodName, new Object[] {arg}, newInstance);
+	}
+
+	public static Object invoke(
+			String portletId, String className, String methodName, Object arg1,
+			Object arg2, boolean newInstance)
+		throws Exception {
+
+		return invoke(
+			portletId, className, methodName, new Object[] {arg1, arg2},
+			newInstance);
+	}
+
+	public static Object invoke(
+			String portletId, String className, String methodName, Object arg1,
+			Object arg2, Object arg3, boolean newInstance)
+		throws Exception {
+
+		return invoke(
+			portletId, className, methodName, new Object[] {arg1, arg2, arg3},
+			newInstance);
+	}
+
+	public static Object invoke(
+			String portletId, String className, String methodName, Object arg1,
+			Object arg2, Object arg3, Object arg4, boolean newInstance)
+		throws Exception {
+
+		return invoke(
+			portletId, className, methodName,
+			new Object[] {arg1, arg2, arg3, arg4}, newInstance);
+	}
+
+	public static Object invoke(
+			String portletId, String className, String methodName,
+			Object[] args, boolean newInstance)
 		throws Exception {
 
 		portletId = _getRootPortletId(portletId);
@@ -51,10 +148,10 @@ public class PortletClassInvoker {
 		try {
 			currentThread.setContextClassLoader(portletClassLoader);
 
-			MethodHandler methodHandler = new MethodHandler(
-				methodKey, arguments);
+			MethodWrapper methodWrapper = new MethodWrapper(
+				className, methodName, args);
 
-			return methodHandler.invoke(newInstance);
+			return MethodInvoker.invoke(methodWrapper, newInstance);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);

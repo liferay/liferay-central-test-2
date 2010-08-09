@@ -16,8 +16,12 @@ package com.liferay.portlet.blogs.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.DoubleWrapper;
+import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -64,20 +68,57 @@ public class BlogsEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
-					"addEntry", java.lang.String.class, java.lang.String.class,
-					int.class, int.class, int.class, int.class, int.class,
-					boolean.class, boolean.class, java.lang.String[].class,
-					com.liferay.portal.service.ServiceContext.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, title,
-					content, displayDateMonth, displayDateDay, displayDateYear,
-					displayDateHour, displayDateMinute, allowPingbacks,
-					allowTrackbacks, trackbacks, serviceContext);
+			Object paramObj0 = title;
+
+			if (title == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = content;
+
+			if (content == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new IntegerWrapper(displayDateMonth);
+
+			Object paramObj3 = new IntegerWrapper(displayDateDay);
+
+			Object paramObj4 = new IntegerWrapper(displayDateYear);
+
+			Object paramObj5 = new IntegerWrapper(displayDateHour);
+
+			Object paramObj6 = new IntegerWrapper(displayDateMinute);
+
+			Object paramObj7 = new BooleanWrapper(allowPingbacks);
+
+			Object paramObj8 = new BooleanWrapper(allowTrackbacks);
+
+			Object paramObj9 = trackbacks;
+
+			if (trackbacks == null) {
+				paramObj9 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj10 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj10 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
+					"addEntry",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -104,12 +145,13 @@ public class BlogsEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
-					"deleteEntry", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
+			Object paramObj0 = new LongWrapper(entryId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
+					"deleteEntry", new Object[] { paramObj0 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -135,15 +177,20 @@ public class BlogsEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
-					"getCompanyEntries", long.class, int.class, int.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, status, max);
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = new IntegerWrapper(status);
+
+			Object paramObj2 = new IntegerWrapper(max);
+
+			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
+					"getCompanyEntries",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -174,20 +221,56 @@ public class BlogsEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
-					"getCompanyEntriesRSS", long.class, int.class, int.class,
-					java.lang.String.class, double.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class,
-					com.liferay.portal.theme.ThemeDisplay.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, status, max, type, version, displayStyle,
-					feedURL, entryURL, themeDisplay);
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = new IntegerWrapper(status);
+
+			Object paramObj2 = new IntegerWrapper(max);
+
+			Object paramObj3 = type;
+
+			if (type == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new DoubleWrapper(version);
+
+			Object paramObj5 = displayStyle;
+
+			if (displayStyle == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = feedURL;
+
+			if (feedURL == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = entryURL;
+
+			if (entryURL == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = themeDisplay;
+
+			if (themeDisplay == null) {
+				paramObj8 = new NullWrapper(
+						"com.liferay.portal.theme.ThemeDisplay");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
+					"getCompanyEntriesRSS",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -215,14 +298,15 @@ public class BlogsEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
-					"getEntry", long.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
+			Object paramObj0 = new LongWrapper(entryId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
+					"getEntry", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -250,15 +334,21 @@ public class BlogsEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
-					"getEntry", long.class, java.lang.String.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					urlTitle);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = urlTitle;
+
+			if (urlTitle == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
+					"getEntry", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -286,15 +376,20 @@ public class BlogsEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
-					"getGroupEntries", long.class, int.class, int.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					status, max);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new IntegerWrapper(status);
+
+			Object paramObj2 = new IntegerWrapper(max);
+
+			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
+					"getGroupEntries",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -325,20 +420,56 @@ public class BlogsEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
-					"getGroupEntriesRSS", long.class, int.class, int.class,
-					java.lang.String.class, double.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class,
-					com.liferay.portal.theme.ThemeDisplay.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					status, max, type, version, displayStyle, feedURL,
-					entryURL, themeDisplay);
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new IntegerWrapper(status);
+
+			Object paramObj2 = new IntegerWrapper(max);
+
+			Object paramObj3 = type;
+
+			if (type == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new DoubleWrapper(version);
+
+			Object paramObj5 = displayStyle;
+
+			if (displayStyle == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = feedURL;
+
+			if (feedURL == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = entryURL;
+
+			if (entryURL == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = themeDisplay;
+
+			if (themeDisplay == null) {
+				paramObj8 = new NullWrapper(
+						"com.liferay.portal.theme.ThemeDisplay");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
+					"getGroupEntriesRSS",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -367,16 +498,22 @@ public class BlogsEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
-					"getGroupsEntries", long.class, long.class, int.class,
-					int.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, groupId, status, max);
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = new LongWrapper(groupId);
+
+			Object paramObj2 = new IntegerWrapper(status);
+
+			Object paramObj3 = new IntegerWrapper(max);
+
+			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
+					"getGroupsEntries",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -404,15 +541,20 @@ public class BlogsEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
-					"getOrganizationEntries", long.class, int.class, int.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					organizationId, status, max);
+			Object paramObj0 = new LongWrapper(organizationId);
+
+			Object paramObj1 = new IntegerWrapper(status);
+
+			Object paramObj2 = new IntegerWrapper(max);
+
+			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
+					"getOrganizationEntries",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -443,20 +585,56 @@ public class BlogsEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
-					"getOrganizationEntriesRSS", long.class, int.class,
-					int.class, java.lang.String.class, double.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class,
-					com.liferay.portal.theme.ThemeDisplay.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					organizationId, status, max, type, version, displayStyle,
-					feedURL, entryURL, themeDisplay);
+			Object paramObj0 = new LongWrapper(organizationId);
+
+			Object paramObj1 = new IntegerWrapper(status);
+
+			Object paramObj2 = new IntegerWrapper(max);
+
+			Object paramObj3 = type;
+
+			if (type == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new DoubleWrapper(version);
+
+			Object paramObj5 = displayStyle;
+
+			if (displayStyle == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = feedURL;
+
+			if (feedURL == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = entryURL;
+
+			if (entryURL == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = themeDisplay;
+
+			if (themeDisplay == null) {
+				paramObj8 = new NullWrapper(
+						"com.liferay.portal.theme.ThemeDisplay");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
+					"getOrganizationEntriesRSS",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -489,21 +667,59 @@ public class BlogsEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
-					"updateEntry", long.class, java.lang.String.class,
-					java.lang.String.class, int.class, int.class, int.class,
-					int.class, int.class, boolean.class, boolean.class,
-					java.lang.String[].class,
-					com.liferay.portal.service.ServiceContext.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey, entryId,
-					title, content, displayDateMonth, displayDateDay,
-					displayDateYear, displayDateHour, displayDateMinute,
-					allowPingbacks, allowTrackbacks, trackbacks, serviceContext);
+			Object paramObj0 = new LongWrapper(entryId);
+
+			Object paramObj1 = title;
+
+			if (title == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = content;
+
+			if (content == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new IntegerWrapper(displayDateMonth);
+
+			Object paramObj4 = new IntegerWrapper(displayDateDay);
+
+			Object paramObj5 = new IntegerWrapper(displayDateYear);
+
+			Object paramObj6 = new IntegerWrapper(displayDateHour);
+
+			Object paramObj7 = new IntegerWrapper(displayDateMinute);
+
+			Object paramObj8 = new BooleanWrapper(allowPingbacks);
+
+			Object paramObj9 = new BooleanWrapper(allowTrackbacks);
+
+			Object paramObj10 = trackbacks;
+
+			if (trackbacks == null) {
+				paramObj10 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj11 = serviceContext;
+
+			if (serviceContext == null) {
+				paramObj11 = new NullWrapper(
+						"com.liferay.portal.service.ServiceContext");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
+					"updateEntry",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

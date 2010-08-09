@@ -16,8 +16,10 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.PluginSettingServiceUtil;
 
@@ -58,17 +60,38 @@ public class PluginSettingServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(PluginSettingServiceUtil.class.getName(),
-					"updatePluginSetting", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					boolean.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, pluginId, pluginType, roles, active);
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = pluginId;
+
+			if (pluginId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = pluginType;
+
+			if (pluginType == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = roles;
+
+			if (roles == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new BooleanWrapper(active);
+
+			MethodWrapper methodWrapper = new MethodWrapper(PluginSettingServiceUtil.class.getName(),
+					"updatePluginSetting",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

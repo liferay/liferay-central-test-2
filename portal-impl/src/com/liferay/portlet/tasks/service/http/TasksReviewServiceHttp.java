@@ -16,8 +16,10 @@ package com.liferay.portlet.tasks.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -59,15 +61,17 @@ public class TasksReviewServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(TasksReviewServiceUtil.class.getName(),
-					"approveReview", long.class, int.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					proposalId, stage);
+			Object paramObj0 = new LongWrapper(proposalId);
+
+			Object paramObj1 = new IntegerWrapper(stage);
+
+			MethodWrapper methodWrapper = new MethodWrapper(TasksReviewServiceUtil.class.getName(),
+					"approveReview", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -95,15 +99,17 @@ public class TasksReviewServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(TasksReviewServiceUtil.class.getName(),
-					"rejectReview", long.class, int.class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					proposalId, stage);
+			Object paramObj0 = new LongWrapper(proposalId);
+
+			Object paramObj1 = new IntegerWrapper(stage);
+
+			MethodWrapper methodWrapper = new MethodWrapper(TasksReviewServiceUtil.class.getName(),
+					"rejectReview", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -131,13 +137,19 @@ public class TasksReviewServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			MethodKey methodKey = new MethodKey(TasksReviewServiceUtil.class.getName(),
-					"updateReviews", long.class, long[][].class);
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					proposalId, userIdsPerStage);
+			Object paramObj0 = new LongWrapper(proposalId);
+
+			Object paramObj1 = userIdsPerStage;
+
+			if (userIdsPerStage == null) {
+				paramObj1 = new NullWrapper("[[J");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(TasksReviewServiceUtil.class.getName(),
+					"updateReviews", new Object[] { paramObj0, paramObj1 });
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
