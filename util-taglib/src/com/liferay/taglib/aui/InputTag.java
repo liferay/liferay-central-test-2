@@ -263,8 +263,8 @@ public class InputTag extends IncludeTag {
 	private boolean _last;
 	private Class<?> _model;
 	private String _name;
-	private String _onClick;
 	private String _onChange;
+	private String _onClick;
 	private String _prefix;
 	private String _suffix;
 	private String _title;
