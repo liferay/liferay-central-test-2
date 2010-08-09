@@ -7,7 +7,7 @@
 		<antcall target="prepare-mysql" />
 
 		<exec dir="${lp.plugins.dir}" executable="cmd.exe">
-			<arg line="/c svn update" />
+			<arg line="/c svn --username ${svn.username} --password ${svn.password} update" />
 		</exec>
 
 		<ant antfile="build-test-jboss.xml" target="run-selenium-jboss">
@@ -20,7 +20,7 @@
 		<antcall target="prepare-mysql" />
 
 		<exec dir="${lp.plugins.dir}" executable="cmd.exe">
-			<arg line="/c svn update" />
+			<arg line="/c svn --username ${svn.username} --password ${svn.password} update" />
 		</exec>
 
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
