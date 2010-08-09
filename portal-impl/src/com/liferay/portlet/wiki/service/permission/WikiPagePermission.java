@@ -93,7 +93,7 @@ public class WikiPagePermission {
 		}
 		catch (NoSuchPageException nspe) {
 			return WikiNodePermission.contains(
-				permissionChecker, nodeId, ActionKeys.ADD_PAGE);
+				permissionChecker, nodeId, ActionKeys.VIEW);
 		}
 	}
 
@@ -110,7 +110,7 @@ public class WikiPagePermission {
 		}
 		catch (NoSuchPageException nspe) {
 			return WikiNodePermission.contains(
-				permissionChecker, nodeId, ActionKeys.ADD_PAGE);
+				permissionChecker, nodeId, ActionKeys.VIEW);
 		}
 	}
 
