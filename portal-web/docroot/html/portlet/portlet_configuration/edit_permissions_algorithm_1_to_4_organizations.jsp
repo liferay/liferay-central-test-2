@@ -108,7 +108,7 @@ int organizationIdsPos = ParamUtil.getInteger(request, "organizationIdsPos");
 
 				<liferay-ui:search-container-column-text
 					name="city"
-					value="<%= organization.getAddress().getCity() %>"
+					value="<%= HtmlUtil.escape(organization.getAddress().getCity()) %>"
 				/>
 
 				<liferay-ui:search-container-column-text

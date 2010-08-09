@@ -202,7 +202,7 @@ portletURL.setParameter("tabs3", tabs3);
 
 					<liferay-ui:search-container-column-text
 						name="city"
-						value="<%= organization.getAddress().getCity() %>"
+						value="<%= HtmlUtil.escape(organization.getAddress().getCity()) %>"
 					/>
 
 					<liferay-ui:search-container-column-text
