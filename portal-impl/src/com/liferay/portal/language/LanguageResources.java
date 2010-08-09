@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 
 import java.net.URL;
 
@@ -142,15 +141,6 @@ public class LanguageResources {
 				for (Map.Entry<Object, Object> entry : properties.entrySet()) {
 					String key = (String)entry.getKey();
 					String value = (String)entry.getValue();
-
-					try {
-						value = new String(
-							value.getBytes(StringPool.ISO_8859_1),
-							StringPool.UTF8);
-					}
-					catch (UnsupportedEncodingException e) {
-						e.printStackTrace();
-					}
 
 					languageMap.put(key, value);
 				}
