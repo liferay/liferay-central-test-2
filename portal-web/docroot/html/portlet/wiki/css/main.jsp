@@ -91,6 +91,20 @@
 	margin: 1em 0;
 }
 
+.portlet-wiki .portlet-body h2 a.hashlink,
+.portlet-wiki .portlet-body h3 a.hashlink,
+.portlet-wiki .portlet-body h4 a.hashlink {
+	color: #DDE0E1;
+	font-size: 12px;
+	text-decoration: none;
+}
+
+.portlet-wiki .portlet-body h2:hover a.hashlink,
+.portlet-wiki .portlet-body h3:hover a.hashlink,
+.portlet-wiki .portlet-body h4:hover a.hashlink {
+	color: #777;
+}
+
 .portlet-wiki .portlet-body h1.page-title .return-to-page {
 	background: url(<%= themeImagesPath %>/wiki/return_to_page.png) no-repeat 0 50%;
 	padding-left: 20px;
