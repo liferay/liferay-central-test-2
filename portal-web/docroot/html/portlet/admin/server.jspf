@@ -45,7 +45,7 @@ numberFormat.setMinimumIntegerDigits(2);
 	</c:when>
 	<c:otherwise>
 		<liferay-ui:tabs
-			names="resources,log-levels,properties,data-migration,file-uploads,mail,OpenOffice,script,shutdown"
+			names="resources,log-levels,properties,captcha,data-migration,file-uploads,mail,OpenOffice,script,shutdown"
 			param="tabs2"
 			url="<%= portletURL.toString() %>"
 		/>
@@ -313,6 +313,24 @@ numberFormat.setMinimumIntegerDigits(2);
 						<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 					</c:otherwise>
 				</c:choose>
+			</c:when>
+			<c:when test='<%= tabs2.equals("captcha") %>'>
+				<aui:fieldset>
+					<aui:input inlineLabel="right" label="enable-recaptcha" name="recaptchaEnabled" type="checkbox" value='<%= PrefsPropsUtil.getString(PropsKeys.CAPTCHA_ENGINE_IMPL).equals("com.liferay.portal.captcha.recaptcha.ReCaptchaImpl") %>' />
+
+					<aui:input cssClass="lfr-input-text-container" label="recaptcha-private-key" name="recaptchaPrivateKey" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE) %>" />
+
+					<aui:input cssClass="lfr-input-text-container" label="recaptcha-public-key" name="recaptchaPublicKey" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC) %>" />
+				</aui:fieldset>
+
+				<aui:button-row>
+
+					<%
+					String taglibUpdateCaptcha = renderResponse.getNamespace() + "saveServer('updateCaptcha');";
+					%>
+
+					<aui:button type="button" onClick="<%= taglibUpdateCaptcha %>" value="save" />
+				</aui:button-row>
 			</c:when>
 			<c:when test='<%= tabs2.equals("data-migration") %>'>
 

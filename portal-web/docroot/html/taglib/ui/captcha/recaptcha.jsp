@@ -24,7 +24,7 @@
 	<input name="recaptcha_response_field" type="hidden" value="manual_challenge" />
 </noscript>
 
-<script src="<%= PropsValues.CAPTCHA_ENGINE_RECAPTCHA_URL_SCRIPT %><%= PropsValues.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC %>" type="text/javascript"></script>
+<script src="<%= PropsValues.CAPTCHA_ENGINE_RECAPTCHA_URL_SCRIPT %><%= PrefsPropsUtil.getString(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC) %>" type="text/javascript"></script>
 
 <aui:script position="inline">
 	var RecaptchaOptions = {

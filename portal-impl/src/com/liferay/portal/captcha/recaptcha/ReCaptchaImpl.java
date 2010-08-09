@@ -22,6 +22,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PrefsPropsUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -53,8 +55,16 @@ public class ReCaptchaImpl extends SimpleCaptchaImpl {
 		Http.Options options = new Http.Options();
 
 		options.addPart("challenge", reCaptchaChallenge);
-		options.addPart(
-			"privatekey", PropsValues.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE);
+
+		try {
+			options.addPart(
+				"privatekey", PrefsPropsUtil.getString(
+						PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE));
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
 		options.addPart("remoteip", request.getRemoteAddr());
 		options.addPart("response", reCaptchaResponse);
 		options.setLocation(PropsValues.CAPTCHA_ENGINE_RECAPTCHA_URL_VERIFY);
