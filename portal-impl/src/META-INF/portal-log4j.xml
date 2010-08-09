@@ -96,6 +96,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.captcha.CaptchaImpl">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.portal.cluster">
 		<priority value="INFO" />
 	</category>

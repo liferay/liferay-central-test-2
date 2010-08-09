@@ -14,12 +14,12 @@
 
 package com.liferay.portal.deploy.hot;
 
+import com.liferay.portal.captcha.CaptchaImpl;
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.bean.ClassLoaderBeanHandler;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.captcha.Captcha;
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
-import com.liferay.portal.kernel.captcha.CaptchaWrapper;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
@@ -292,10 +292,9 @@ public class HookHotDeployListener
 		}
 
 		if (portalProperties.containsKey(PropsKeys.CAPTCHA_ENGINE_IMPL)) {
-			CaptchaWrapper captchaWrapper =
-				(CaptchaWrapper)CaptchaUtil.getCaptcha();
+			CaptchaImpl captchaImpl = (CaptchaImpl)CaptchaUtil.getCaptcha();
 
-			captchaWrapper.setCaptcha(null);
+			captchaImpl.setCaptcha(null);
 		}
 
 		if (portalProperties.containsKey(
@@ -1193,10 +1192,9 @@ public class HookHotDeployListener
 			Captcha captcha = (Captcha)newInstance(
 				portletClassLoader, Captcha.class, captchaClassName);
 
-			CaptchaWrapper captchaWrapper =
-				(CaptchaWrapper)CaptchaUtil.getCaptcha();
+			CaptchaImpl captchaImpl = (CaptchaImpl)CaptchaUtil.getCaptcha();
 
-			captchaWrapper.setCaptcha(captcha);
+			captchaImpl.setCaptcha(captcha);
 		}
 
 		if (portalProperties.containsKey(
