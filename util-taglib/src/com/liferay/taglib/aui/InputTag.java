@@ -106,6 +106,10 @@ public class InputTag extends IncludeTag {
 		_name = name;
 	}
 
+	public void setOnChange(String onChange) {
+		_onChange = onChange;
+	}
+
 	public void setOnClick(String onClick) {
 		_onClick = onClick;
 	}
@@ -150,6 +154,7 @@ public class InputTag extends IncludeTag {
 		_last = false;
 		_model = null;
 		_name = null;
+		_onChange = null;
 		_onClick = null;
 		_prefix = null;
 		_suffix = null;
@@ -226,6 +231,7 @@ public class InputTag extends IncludeTag {
 		request.setAttribute("aui:input:last", String.valueOf(_last));
 		request.setAttribute("aui:input:model", model);
 		request.setAttribute("aui:input:name", _name);
+		request.setAttribute("aui:input:onChange", _onChange);
 		request.setAttribute("aui:input:onClick", _onClick);
 		request.setAttribute("aui:input:prefix", _prefix);
 		request.setAttribute("aui:input:suffix", _suffix);
@@ -258,6 +264,7 @@ public class InputTag extends IncludeTag {
 	private Class<?> _model;
 	private String _name;
 	private String _onClick;
+	private String _onChange;
 	private String _prefix;
 	private String _suffix;
 	private String _title;

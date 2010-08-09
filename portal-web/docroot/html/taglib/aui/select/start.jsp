@@ -35,6 +35,7 @@ String listType = GetterUtil.getString((String)request.getAttribute("aui:select:
 String listTypeFieldName = GetterUtil.getString((String)request.getAttribute("aui:select:listTypeFieldName"));
 boolean multiple = GetterUtil.getBoolean((String)request.getAttribute("aui:select:multiple"));
 String name = GetterUtil.getString((String)request.getAttribute("aui:select:name"));
+String onChange = GetterUtil.getString((String)request.getAttribute("aui:select:onChange"));
 String prefix = GetterUtil.getString((String)request.getAttribute("aui:select:prefix"));
 boolean showEmptyOption = GetterUtil.getBoolean((String)request.getAttribute("aui:select:showEmptyOption"));
 String title = GetterUtil.getString((String)request.getAttribute("aui:select:title"));
@@ -81,7 +82,7 @@ String inputCss = _buildCss(INPUT_PREFIX, "select", false, false, false, false, 
 		</c:if>
 
 		<span class='aui-field-element <%= Validator.isNotNull(label) && inlineLabel.equals("right") ? "aui-field-label-right" : StringPool.BLANK %>'>
-			<select class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" <%= multiple ? "multiple" : StringPool.BLANK %> name="<%= namespace + name %>" <%= Validator.isNotNull(title) ? "title=\"" + title + "\"" : StringPool.BLANK %> <%= _buildData(data) %> <%= _buildDynamicAttributes(dynamicAttributes) %>>
+			<select class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" <%= multiple ? "multiple" : StringPool.BLANK %> name="<%= namespace + name %>" <%= Validator.isNotNull(onChange) ? "onChange=\"" + onChange + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(title) ? "title=\"" + title + "\"" : StringPool.BLANK %> <%= _buildData(data) %> <%= _buildDynamicAttributes(dynamicAttributes) %>>
 				<c:if test="<%= showEmptyOption %>">
 					<aui:option />
 				</c:if>
