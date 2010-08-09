@@ -1084,7 +1084,7 @@ ${exception.message}
 			fork="true"
 			newenvironment="true"
 		>
-			<jvmarg value="-Xmx128m" />
+			<jvmarg value="-Xmx256m" />
 		</java>
 
 		<delete file="ServiceBuilder.temp" />
