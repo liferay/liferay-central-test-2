@@ -21,6 +21,7 @@ import com.liferay.portal.captcha.simplecaptcha.SimpleCaptchaImpl;
 import com.liferay.portal.convert.ConvertProcess;
 import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
+import com.liferay.portal.kernel.captcha.Captcha;
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
@@ -403,37 +404,35 @@ public class EditServerAction extends PortletAction {
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		boolean recaptchaEnabled = ParamUtil.getBoolean(
-			actionRequest, "recaptchaEnabled");
-		String recaptchaPrivateKey = ParamUtil.getString(
-			actionRequest, "recaptchaPrivateKey");
-		String recaptchaPublicKey = ParamUtil.getString(
-			actionRequest, "recaptchaPublicKey");
+		boolean reCaptchaEnabled = ParamUtil.getBoolean(
+			actionRequest, "reCaptchaEnabled");
+		String reCaptchaPrivateKey = ParamUtil.getString(
+			actionRequest, "reCaptchaPrivateKey");
+		String reCaptchaPublicKey = ParamUtil.getString(
+			actionRequest, "reCaptchaPublicKey");
 
-		String captchaEngineImpl = "com.liferay.portal.captcha.simplecaptcha.SimpleCaptchaImpl";
+		Captcha captcha = null;
 
-		if (recaptchaEnabled) {
-			captchaEngineImpl = "com.liferay.portal.captcha.recaptcha.ReCaptchaImpl";
-		}
-
-		preferences.setValue(
-			PropsKeys.CAPTCHA_ENGINE_IMPL, captchaEngineImpl);
-		preferences.setValue(
-			PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE, recaptchaPrivateKey);
-		preferences.setValue(
-			PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC, recaptchaPublicKey);
-
-		CaptchaImpl captchaImpl =
-			(CaptchaImpl)CaptchaUtil.getCaptcha();
-
-		if (recaptchaEnabled) {
-			captchaImpl.setCaptcha(new ReCaptchaImpl());
+		if (reCaptchaEnabled) {
+			captcha = new ReCaptchaImpl();
 		}
 		else {
-			captchaImpl.setCaptcha(new SimpleCaptchaImpl());
+			captcha = new SimpleCaptchaImpl();
 		}
 
+		preferences.setValue(
+			PropsKeys.CAPTCHA_ENGINE_IMPL, captcha.getClass().getName());
+		preferences.setValue(
+			PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE,
+			reCaptchaPrivateKey);
+		preferences.setValue(
+			PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC, reCaptchaPublicKey);
+
 		preferences.store();
+
+		CaptchaImpl captchaImpl = (CaptchaImpl)CaptchaUtil.getCaptcha();
+
+		captchaImpl.setCaptcha(captcha);
 	}
 
 	protected void updateFileUploads(

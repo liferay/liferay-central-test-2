@@ -16,15 +16,16 @@ package com.liferay.portal.captcha.recaptcha;
 
 import com.liferay.portal.captcha.simplecaptcha.SimpleCaptchaImpl;
 import com.liferay.portal.kernel.captcha.CaptchaTextException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
@@ -58,11 +59,13 @@ public class ReCaptchaImpl extends SimpleCaptchaImpl {
 
 		try {
 			options.addPart(
-				"privatekey", PrefsPropsUtil.getString(
-						PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE));
+				"privatekey",
+				PrefsPropsUtil.getString(
+					PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE,
+					PropsValues.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE));
 		}
-		catch (Exception e) {
-			_log.error(e, e);
+		catch (SystemException se) {
+			_log.error(se, se);
 		}
 
 		options.addPart("remoteip", request.getRemoteAddr());
