@@ -18,6 +18,8 @@ import com.liferay.portal.kernel.dao.search.DAOParamUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.model.Country;
+import com.liferay.portal.model.Region;
 import com.liferay.portal.service.CountryServiceUtil;
 import com.liferay.portal.service.RegionServiceUtil;
 
@@ -56,8 +58,9 @@ public class OrganizationSearchTerms extends OrganizationDisplayTerms {
 		String countryName = null;
 
 		if (countryId != 0) {
-			countryName = CountryServiceUtil.getCountry(
-				countryId).getName().toLowerCase();
+			Country country = CountryServiceUtil.getCountry(countryId);
+
+			countryName = country.getName().toLowerCase();
 		}
 
 		return countryName;
@@ -75,9 +78,10 @@ public class OrganizationSearchTerms extends OrganizationDisplayTerms {
 	public String getRegionName() throws PortalException, SystemException {
 		String regionName = null;
 
-	if (regionId != 0) {
-		regionName = RegionServiceUtil.getRegion(
-			regionId).getName().toLowerCase();
+		if (regionId != 0) {
+			Region region = RegionServiceUtil.getRegion(regionId);
+
+			regionName = region.getName().toLowerCase();
 		}
 
 		return regionName;

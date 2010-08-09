@@ -22,12 +22,13 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Address;
+import com.liferay.portal.model.Country;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Region;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.CountryServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
@@ -99,34 +100,30 @@ public class OrganizationIndexer extends ExpandoIndexer {
 
 		long companyId = organization.getCompanyId();
 		long organizationId = organization.getOrganizationId();
-		String name = organization.getName();
-		long countryId = organization.getCountryId();
-		long regionId = organization.getRegionId();
 		long parentOrganizationId = organization.getParentOrganizationId();
+		String name = organization.getName();
 		String type = organization.getType();
+		long regionId = organization.getRegionId();
+		long countryId = organization.getCountryId();
 
 		List<Address> addresses = organization.getAddresses();
-
-		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
-			User.class.getName(), organizationId);
-		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
-			User.class.getName(), organizationId);
 
 		List<String> streets = new ArrayList<String>();
 		List<String> cities = new ArrayList<String>();
 		List<String> zips = new ArrayList<String>();
-		List<String> countries = new ArrayList<String>();
 		List<String> regions = new ArrayList<String>();
-
-		if (countryId > 0) {
-			countries.add(
-				CountryServiceUtil.getCountry(
-					countryId).getName().toLowerCase());
-		}
+		List<String> countries = new ArrayList<String>();
 
 		if (regionId > 0) {
-			regions.add(
-				RegionServiceUtil.getRegion(regionId).getName().toLowerCase());
+			Region region = RegionServiceUtil.getRegion(regionId);
+
+			regions.add(region.getName().toLowerCase());
+		}
+
+		if (countryId > 0) {
+			Country country = CountryServiceUtil.getCountry(countryId);
+
+			countries.add(country.getName().toLowerCase());
 		}
 
 		for (Address address : addresses) {
@@ -135,9 +132,14 @@ public class OrganizationIndexer extends ExpandoIndexer {
 			streets.add(address.getStreet3().toLowerCase());
 			cities.add(address.getCity().toLowerCase());
 			zips.add(address.getZip().toLowerCase());
-			countries.add(address.getCountry().getName().toLowerCase());
 			regions.add(address.getRegion().getName().toLowerCase());
+			countries.add(address.getCountry().getName().toLowerCase());
 		}
+
+		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
+			User.class.getName(), organizationId);
+		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+			User.class.getName(), organizationId);
 
 		ExpandoBridge expandoBridge = organization.getExpandoBridge();
 
@@ -148,9 +150,19 @@ public class OrganizationIndexer extends ExpandoIndexer {
 		document.addKeyword(Field.COMPANY_ID, companyId);
 		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		document.addKeyword(Field.ORGANIZATION_ID, organizationId);
-		document.addKeyword("name", name, true);
 		document.addKeyword("parentOrganizationId", parentOrganizationId);
+		document.addKeyword("name", name, true);
 		document.addKeyword("type", type);
+		document.addKeyword(
+			"street", streets.toArray(new String[streets.size()]));
+		document.addKeyword(
+			"city", cities.toArray(new String[cities.size()]));
+		document.addKeyword(
+			"zip", zips.toArray(new String[zips.size()]));
+		document.addKeyword(
+			"region", regions.toArray(new String[regions.size()]));
+		document.addKeyword(
+			"country", countries.toArray(new String[countries.size()]));
 
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
@@ -158,15 +170,6 @@ public class OrganizationIndexer extends ExpandoIndexer {
 		document.addKeyword(
 			Field.ENTRY_CLASS_NAME, Organization.class.getName());
 		document.addKeyword(Field.ENTRY_CLASS_PK, organizationId);
-
-		document.addKeyword(
-			"street", ArrayUtil.toStringArray(streets.toArray()));
-		document.addKeyword("city", ArrayUtil.toStringArray(cities.toArray()));
-		document.addKeyword("zip", ArrayUtil.toStringArray(zips.toArray()));
-		document.addKeyword(
-			"country", ArrayUtil.toStringArray(countries.toArray()));
-		document.addKeyword(
-			"region", ArrayUtil.toStringArray(regions.toArray()));
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
@@ -197,8 +200,8 @@ public class OrganizationIndexer extends ExpandoIndexer {
 
 			for (long organizationId : organizationIds) {
 				Organization organization =
-					OrganizationLocalServiceUtil.
-						getOrganization(organizationId);
+					OrganizationLocalServiceUtil.getOrganization(
+						organizationId);
 
 				Document document = getDocument(organization);
 
@@ -255,53 +258,6 @@ public class OrganizationIndexer extends ExpandoIndexer {
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 
-		String name = (String)searchContext.getAttribute("name");
-
-		if (Validator.isNotNull(name)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("name", name, true);
-			}
-			else {
-				searchQuery.addTerm("name", name, true);
-			}
-		}
-
-		String parentOrganizationId =
-			(String)searchContext.getAttribute("parentOrganizationId");
-		
-		if (Validator.isNotNull(parentOrganizationId)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm(
-					"parentOrganizationId", parentOrganizationId, true);
-			}
-			else {
-				searchQuery.addTerm(
-					"parentOrganizationId", parentOrganizationId, true);
-			}
-		}
-
-		String type = (String)searchContext.getAttribute("type");
-
-		if (Validator.isNotNull(type)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("type", type, true);
-			}
-			else {
-				searchQuery.addTerm("type", type, true);
-			}
-		}
-
-		String street = (String)searchContext.getAttribute("street");
-
-		if (Validator.isNotNull(street)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("street", street, true);
-			}
-			else {
-				searchQuery.addTerm("street", street, true);
-			}
-		}
-
 		String city = (String)searchContext.getAttribute("city");
 
 		if (Validator.isNotNull(city)) {
@@ -313,28 +269,6 @@ public class OrganizationIndexer extends ExpandoIndexer {
 			}
 		}
 
-		String zip = (String)searchContext.getAttribute("zip");
-
-		if (Validator.isNotNull(zip)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("zip", zip, true);
-			}
-			else {
-				searchQuery.addTerm("zip", zip, true);
-			}
-		}
-
-		String region = (String)searchContext.getAttribute("region");
-
-		if (Validator.isNotNull(region)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("region", region, true);
-			}
-			else {
-				searchQuery.addTerm("region", region, true);
-			}
-		}
-
 		String country = (String)searchContext.getAttribute("country");
 
 		if (Validator.isNotNull(country)) {
@@ -343,6 +277,17 @@ public class OrganizationIndexer extends ExpandoIndexer {
 			}
 			else {
 				searchQuery.addTerm("country", country, true);
+			}
+		}
+
+		String name = (String)searchContext.getAttribute("name");
+
+		if (Validator.isNotNull(name)) {
+			if (searchContext.isAndSearch()) {
+				searchQuery.addRequiredTerm("name", name, true);
+			}
+			else {
+				searchQuery.addTerm("name", name, true);
 			}
 		}
 
@@ -364,6 +309,64 @@ public class OrganizationIndexer extends ExpandoIndexer {
 				addSearchQueryParams(
 					searchQuery, searchContext, expandoBridge, attributeNames,
 					key, value);
+			}
+		}
+
+		String parentOrganizationId = (String)searchContext.getAttribute(
+			"parentOrganizationId");
+
+		if (Validator.isNotNull(parentOrganizationId)) {
+			if (searchContext.isAndSearch()) {
+				searchQuery.addRequiredTerm(
+					"parentOrganizationId", parentOrganizationId, true);
+			}
+			else {
+				searchQuery.addTerm(
+					"parentOrganizationId", parentOrganizationId, true);
+			}
+		}
+
+		String region = (String)searchContext.getAttribute("region");
+
+		if (Validator.isNotNull(region)) {
+			if (searchContext.isAndSearch()) {
+				searchQuery.addRequiredTerm("region", region, true);
+			}
+			else {
+				searchQuery.addTerm("region", region, true);
+			}
+		}
+
+		String street = (String)searchContext.getAttribute("street");
+
+		if (Validator.isNotNull(street)) {
+			if (searchContext.isAndSearch()) {
+				searchQuery.addRequiredTerm("street", street, true);
+			}
+			else {
+				searchQuery.addTerm("street", street, true);
+			}
+		}
+
+		String type = (String)searchContext.getAttribute("type");
+
+		if (Validator.isNotNull(type)) {
+			if (searchContext.isAndSearch()) {
+				searchQuery.addRequiredTerm("type", type, true);
+			}
+			else {
+				searchQuery.addTerm("type", type, true);
+			}
+		}
+
+		String zip = (String)searchContext.getAttribute("zip");
+
+		if (Validator.isNotNull(zip)) {
+			if (searchContext.isAndSearch()) {
+				searchQuery.addRequiredTerm("zip", zip, true);
+			}
+			else {
+				searchQuery.addTerm("zip", zip, true);
 			}
 		}
 	}

@@ -14,9 +14,6 @@
 
 package com.liferay.portal.kernel.search;
 
-import com.liferay.portal.kernel.search.BooleanQuery;
-import com.liferay.portal.kernel.search.ExpandoIndexer;
-import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
@@ -31,7 +28,7 @@ import java.util.Set;
  */
 public abstract class ExpandoIndexer extends BaseIndexer {
 
-	public void addSearchQueryParams(
+	protected void addSearchQueryParams(
 			BooleanQuery searchQuery, SearchContext searchContext,
 			ExpandoBridge expandoBridge, Set<String> attributeNames, String key,
 			Object value)

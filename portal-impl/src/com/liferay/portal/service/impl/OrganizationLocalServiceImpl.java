@@ -631,24 +631,24 @@ public class OrganizationLocalServiceImpl
 		throws SystemException {
 
 		try {
-
 			Map<String, Serializable> attributes =
 				new HashMap<String, Serializable>();
 
+			attributes.put("city", city);
+			attributes.put("country", country);
+			attributes.put("name", name);
+			attributes.put("params", params);
+
 			if (parentOrganizationId > 0) {
 				attributes.put(
-					"parentOrganizationId", 
+					"parentOrganizationId",
 					String.valueOf(parentOrganizationId));
 			}
 
-			attributes.put("name", name);
-			attributes.put("type", type);
-			attributes.put("street", street);
-			attributes.put("city", city);
-			attributes.put("zip", zip);
 			attributes.put("region", region);
-			attributes.put("country", country);
-			attributes.put("params", params);
+			attributes.put("street", street);
+			attributes.put("type", type);
+			attributes.put("zip", zip);
 
 			SearchContext searchContext = new SearchContext();
 
@@ -659,8 +659,8 @@ public class OrganizationLocalServiceImpl
 			searchContext.setSorts(new Sort[] {sort});
 			searchContext.setStart(start);
 
-			Indexer indexer =
-				IndexerRegistryUtil.getIndexer(Organization.class);
+			Indexer indexer = IndexerRegistryUtil.getIndexer(
+				Organization.class);
 
 			return indexer.search(searchContext);
 		}

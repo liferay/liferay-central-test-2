@@ -319,18 +319,18 @@ public class OrganizationLocalServiceWrapper implements OrganizationLocalService
 	}
 
 	public java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
-		long userId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _organizationLocalService.getUserOrganizations(userId, start, end);
-	}
-
-	public java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
 		long userId, boolean inheritUserGroups, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _organizationLocalService.getUserOrganizations(userId,
 			inheritUserGroups, start, end);
+	}
+
+	public java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
+		long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _organizationLocalService.getUserOrganizations(userId, start, end);
 	}
 
 	public int getUserOrganizationsCount(long userId)
@@ -341,6 +341,13 @@ public class OrganizationLocalServiceWrapper implements OrganizationLocalService
 	public boolean hasGroupOrganization(long groupId, long organizationId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _organizationLocalService.hasGroupOrganization(groupId,
+			organizationId);
+	}
+
+	public boolean hasPasswordPolicyOrganization(long passwordPolicyId,
+		long organizationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _organizationLocalService.hasPasswordPolicyOrganization(passwordPolicyId,
 			organizationId);
 	}
 
@@ -360,16 +367,18 @@ public class OrganizationLocalServiceWrapper implements OrganizationLocalService
 			includeSpecifiedOrganization);
 	}
 
-	public boolean hasPasswordPolicyOrganization(long passwordPolicyId,
-		long organizationId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _organizationLocalService.hasPasswordPolicyOrganization(passwordPolicyId,
-			organizationId);
-	}
-
 	public void rebuildTree(long companyId, boolean force)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_organizationLocalService.rebuildTree(companyId, force);
+	}
+
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		long parentOrganizationId, java.lang.String keywords,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		int start, int end, com.liferay.portal.kernel.search.Sort sort)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _organizationLocalService.search(companyId,
+			parentOrganizationId, keywords, params, start, end, sort);
 	}
 
 	public java.util.List<com.liferay.portal.model.Organization> search(
@@ -394,15 +403,6 @@ public class OrganizationLocalServiceWrapper implements OrganizationLocalService
 		return _organizationLocalService.search(companyId,
 			parentOrganizationId, keywords, type, regionId, countryId, params,
 			start, end, obc);
-	}
-
-	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long parentOrganizationId, java.lang.String keywords,
-		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.search.Sort sort)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _organizationLocalService.search(companyId,
-			parentOrganizationId, keywords, params, start, end, sort);
 	}
 
 	public java.util.List<com.liferay.portal.model.Organization> search(
