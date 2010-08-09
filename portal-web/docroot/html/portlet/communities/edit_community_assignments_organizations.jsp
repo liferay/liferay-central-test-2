@@ -19,7 +19,7 @@
 <%
 String tabs2 = (String)request.getAttribute("edit_community_assignments.jsp-tabs2");
 
-String cur = (String)request.getAttribute("edit_community_assignments.jsp-cur");
+int cur = (Integer)request.getAttribute("edit_community_assignments.jsp-cur");
 
 Group group = (Group)request.getAttribute("edit_community_assignments.jsp-group");
 
