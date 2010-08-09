@@ -23,7 +23,7 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class DBFailoverTestSuite extends BaseTests {
+public class DBFailoverSmokeTestSuite extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
