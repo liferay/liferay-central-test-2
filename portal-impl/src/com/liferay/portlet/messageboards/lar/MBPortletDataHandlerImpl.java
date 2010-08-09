@@ -794,7 +794,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		MBPortletDataHandlerImpl.class);
 
 	private static PortletDataHandlerBoolean _attachments =
-		new PortletDataHandlerBoolean(_NAMESPACE, "attachments");	
+		new PortletDataHandlerBoolean(_NAMESPACE, "attachments");
 
 	private static PortletDataHandlerBoolean _categoriesAndMessages =
 		new PortletDataHandlerBoolean(
