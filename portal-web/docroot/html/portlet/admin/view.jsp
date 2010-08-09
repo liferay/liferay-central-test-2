@@ -54,8 +54,6 @@
 		portletURL.setParameter("tabs1", tabs1);
 		portletURL.setParameter("tabs2", tabs2);
 		portletURL.setParameter("tabs3", tabs3);
-
-		String portletURLString = portletURL.toString();
 		%>
 
 		<portlet:renderURL var="redirectURL">
@@ -66,7 +64,7 @@
 			<portlet:param name="cur" value="<%= String.valueOf(cur) %>" />
 		</portlet:renderURL>
 
-		<aui:form method="post" name="fm" action="<%= portletURLString %>">
+		<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 			<aui:input name="<%= Constants.CMD %>" type="hidden" />
 			<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
 			<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
