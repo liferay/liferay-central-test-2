@@ -503,6 +503,17 @@ public class BaseDeployer {
 				overwrite, true);
 		}
 
+		File extLibPortalDir = new File(
+			srcFile.getAbsolutePath() + "/WEB-INF/ext-lib/portal");
+
+		if (extLibPortalDir.exists()) {
+			File portalLibDir = new File(PortalUtil.getPortalLibDir());
+
+			CopyTask.copyDirectory(
+				extLibPortalDir, portalLibDir, "*.jar", StringPool.BLANK,
+				overwrite, true);
+		}
+
 		if ((deployDir == null) || baseDir.equals(destDir)) {
 			return;
 		}
