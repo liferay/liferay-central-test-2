@@ -223,8 +223,6 @@ if (Validator.isNotNull(content)) {
 	}
 }
 
-boolean isLocalizationEnabled = GetterUtil.getBoolean(SessionClicks.get(request, "liferay_journal_localization", "true"));
-
 boolean smallImage = BeanParamUtil.getBoolean(article, request, "smallImage");
 String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL");
 %>
@@ -269,7 +267,11 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 	<aui:model-context bean="<%= article %>" model="<%= JournalArticle.class %>" />
 
-	<table class="lfr-table <%= isLocalizationEnabled ? StringPool.BLANK : "localization-disabled" %>" id="<portlet:namespace />journalArticleWrapper" width="100%">
+	<%
+	boolean localizationEnabled = GetterUtil.getBoolean(SessionClicks.get(request, "liferay_journal_localization_enabled", Boolean.TRUE.toString()));
+	%>
+
+	<table class="lfr-table <%= localizationEnabled ? StringPool.BLANK : "localization-disabled" %>" id="<portlet:namespace />journalArticleWrapper" width="100%">
 	<tr>
 		<td class="lfr-top">
 			<liferay-ui:error exception="<%= ArticleContentException.class %>" message="please-enter-valid-content" />
@@ -309,7 +311,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			</tr>
 			<tr>
 				<td>
-					<aui:input cssClass="journal-article-localized-checkbox" disabled="<%= article == null %>" label="Localize" name="enableLocalization" type="checkbox" value="<%= isLocalizationEnabled %>" />
+					<aui:input cssClass="journal-article-localized-checkbox" disabled="<%= article == null %>" label="localize" name="enableLocalization" type="checkbox" value="<%= localizationEnabled %>" />
 				</td>
 			</tr>
 			<tr class="journal-article-language-options">

@@ -45,7 +45,6 @@ String elLabel = elMetaData.get("label");
 String elPredefinedValue = elMetaData.get("predefinedValue");
 
 boolean displayAsTooltip = false;
-boolean isLocalizationEnabled = GetterUtil.getBoolean(SessionClicks.get(request, "liferay_journal_localization", "true"));
 
 if (Validator.isNotNull(elDisplayAsTooltip)) {
 	displayAsTooltip = GetterUtil.getBoolean(elDisplayAsTooltip);
@@ -330,8 +329,8 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 					</aui:select>
 				</c:if>
 			</div>
-			
-			<aui:input cssClass="journal-article-localized-checkbox" label="Localized" name='<%= elInstanceId + "localized-checkbox" %>' type="checkbox" value="<%= !elLanguageId.equals(StringPool.BLANK) %>" />
+
+			<aui:input cssClass="journal-article-localized-checkbox" label="localized" name='<%= elInstanceId + "localized-checkbox" %>' type="checkbox" value="<%= !elLanguageId.equals(StringPool.BLANK) %>" />
 
 			<div class="journal-article-required-message portlet-msg-error">
 				<liferay-ui:message key="this-field-is-required" />
