@@ -101,6 +101,10 @@ public class SelectTag extends IncludeTag {
 		_onChange = onChange;
 	}
 
+	public void setOnClick(String onClick) {
+		_onClick = onClick;
+	}
+
 	public void setPrefix(String prefix) {
 		_prefix = prefix;
 	}
@@ -135,6 +139,7 @@ public class SelectTag extends IncludeTag {
 		_multiple = false;
 		_name = null;
 		_onChange = null;
+		_onClick = null;
 		_prefix = null;
 		_showEmptyOption = false;
 		_suffix = null;
@@ -202,6 +207,7 @@ public class SelectTag extends IncludeTag {
 		request.setAttribute("aui:select:multiple", String.valueOf(_multiple));
 		request.setAttribute("aui:select:name", _name);
 		request.setAttribute("aui:select:onChange", _onChange);
+		request.setAttribute("aui:select:onClick", _onClick);
 		request.setAttribute("aui:select:prefix", _prefix);
 		request.setAttribute(
 			"aui:select:showEmptyOption", String.valueOf(_showEmptyOption));
@@ -234,6 +240,7 @@ public class SelectTag extends IncludeTag {
 	private boolean _multiple;
 	private String _name;
 	private String _onChange;
+	private String _onClick;
 	private String _prefix;
 	private boolean _showEmptyOption;
 	private String _suffix;
