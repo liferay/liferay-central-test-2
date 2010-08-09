@@ -66,13 +66,15 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
-			_categoriesAndMessages, _messageFlags, _attachments, _userBans, _ratings, _tags
+			_categoriesAndMessages, _attachments, _messageFlags, _userBans,
+			_ratings, _tags
 		};
 	}
 
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
-			_categoriesAndMessages, _messageFlags, _attachments, _userBans, _ratings, _tags
+			_categoriesAndMessages, _attachments, _messageFlags, _userBans,
+			_ratings, _tags
 		};
 	}
 
