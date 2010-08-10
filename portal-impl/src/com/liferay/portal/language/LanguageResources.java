@@ -47,13 +47,13 @@ public class LanguageResources {
 		Map<String, String> languageMap = _languageMaps.get(locale);
 
 		if (languageMap == null) {
-			languageMap = loadLocale(locale);
+			languageMap = _loadLocale(locale);
 		}
 
 		String value = languageMap.get(key);
 
 		if (value == null) {
-			return getMessage(getSuperLocale(locale), key);
+			return getMessage(_getSuperLocale(locale), key);
 		}
 		else {
 			return value;
@@ -66,7 +66,7 @@ public class LanguageResources {
 		Map<String, String> oldLanguageMap = _languageMaps.get(locale);
 
 		if (oldLanguageMap == null) {
-			loadLocale(locale);
+			_loadLocale(locale);
 			oldLanguageMap = _languageMaps.get(locale);
 		}
 
@@ -87,7 +87,7 @@ public class LanguageResources {
 		_config = config;
 	}
 
-	private static Locale getSuperLocale(Locale locale) {
+	private static Locale _getSuperLocale(Locale locale) {
 		if (Validator.isNotNull(locale.getVariant())) {
 			return new Locale(locale.getLanguage(), locale.getCountry());
 		}
@@ -114,7 +114,7 @@ public class LanguageResources {
 		return null;
 	}
 
-	private static Map<String, String> loadLocale(Locale locale) {
+	private static Map<String, String> _loadLocale(Locale locale) {
 		String[] names = StringUtil.split(
 			_config.replace(StringPool.PERIOD, StringPool.SLASH));
 
@@ -137,7 +137,7 @@ public class LanguageResources {
 
 				sb.append(".properties");
 
-				Properties properties = loadProperties(sb.toString());
+				Properties properties = _loadProperties(sb.toString());
 
 				for (Map.Entry<Object, Object> entry : properties.entrySet()) {
 					String key = (String)entry.getKey();
@@ -165,7 +165,7 @@ public class LanguageResources {
 		return languageMap;
 	}
 
-	private static Properties loadProperties(String name) {
+	private static Properties _loadProperties(String name) {
 		Properties properties = new Properties();
 
 		try {
