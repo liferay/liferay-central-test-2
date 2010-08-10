@@ -113,7 +113,7 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 		</c:choose>
 	</c:if>
 
-	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage.getNodeId(), wikiPage.getTitle(), ActionKeys.DELETE) && !wikiPage.isDraft() %>">
+	<c:if test="<%= !wikiPage.isDraft() && WikiPagePermission.contains(permissionChecker, wikiPage.getNodeId(), wikiPage.getTitle(), ActionKeys.DELETE) %>">
 		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/wiki/edit_page" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
@@ -125,7 +125,7 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 		<liferay-ui:icon-delete url="<%= deleteURL %>" />
 	</c:if>
 
-	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.DELETE) && wikiPage.isDraft() %>">
+	<c:if test="<%= wikiPage.isDraft() && WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.DELETE) %>">
 		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/wiki/edit_page" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
