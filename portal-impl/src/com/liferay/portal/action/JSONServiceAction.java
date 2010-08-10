@@ -120,7 +120,7 @@ public class JSONServiceAction extends JSONAction {
 				Object returnObj = method.invoke(classObj, args);
 
 				if (returnObj != null) {
-					return getReturnValue(returnObj);
+					return getReturnValue(returnObj, method.getReturnType());
 				}
 				else {
 					JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
@@ -532,7 +532,8 @@ public class JSONServiceAction extends JSONAction {
 		return jsonArray.toString();
 	}
 
-	protected String getReturnValue(Object returnObj) throws Exception {
+	protected String getReturnValue(Object returnObj, Class<?> returnType)
+		throws Exception {
 		if ((returnObj instanceof Boolean) || (returnObj instanceof Double) ||
 			(returnObj instanceof Integer) || (returnObj instanceof Long) ||
 			(returnObj instanceof Short) || (returnObj instanceof String)) {
@@ -547,7 +548,7 @@ public class JSONServiceAction extends JSONAction {
 			String serlializerClassName = getSerializerClassName(returnObj);
 
 			MethodKey methodKey = new MethodKey(
-				serlializerClassName, "toJSONObject", returnObj.getClass());
+				serlializerClassName, "toJSONObject", returnType);
 			JSONObject jsonObject = (JSONObject)new MethodHandler(
 				methodKey, returnObj).invoke(false);
 
@@ -565,7 +566,7 @@ public class JSONServiceAction extends JSONAction {
 					returnItem0);
 
 				MethodKey methodKey = new MethodKey(
-					serializerClassName, "toJSONArray", returnObj.getClass());
+					serializerClassName, "toJSONArray", returnType);
 				jsonArray = (JSONArray)new MethodHandler(
 					methodKey, returnObj).invoke(false);
 			}
@@ -586,7 +587,7 @@ public class JSONServiceAction extends JSONAction {
 					returnItem0);
 
 				MethodKey methodKey = new MethodKey(
-					serializerClassName, "toJSONArray", returnObj.getClass());
+					serializerClassName, "toJSONArray", returnType);
 				jsonArray = (JSONArray)new MethodHandler(
 					methodKey, returnObj).invoke(false);
 			}
@@ -605,7 +606,7 @@ public class JSONServiceAction extends JSONAction {
 					returnItem0);
 
 				MethodKey methodKey = new MethodKey(
-					serlializerClassName, "toJSONArray", returnObj.getClass());
+					serlializerClassName, "toJSONArray", returnType);
 				jsonArray = (JSONArray)new MethodHandler(
 					methodKey, returnObj).invoke(false);
 			}
