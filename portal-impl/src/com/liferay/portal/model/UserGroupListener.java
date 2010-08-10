@@ -24,11 +24,13 @@ import com.liferay.portal.security.ldap.PortalLDAPExporterUtil;
 public class UserGroupListener extends BaseModelListener<UserGroup> {
 
 	public void onAfterAddAssociation(
-			Object userGroupId, String associationClassName, Object userId)
+			Object userGroupId, String associationClassName, Object associationClassPK)
 		throws ModelListenerException {
 
 		try {
-			exportToLDAP((Long)userId, (Long)userGroupId);
+			if (associationClassName.equals(User.class.getName())) {
+				exportToLDAP((Long)associationClassPK, (Long)userGroupId);
+			}
 		}
 		catch (Exception e) {
 			throw new ModelListenerException(e);
