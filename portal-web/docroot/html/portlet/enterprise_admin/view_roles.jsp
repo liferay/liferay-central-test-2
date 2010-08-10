@@ -79,7 +79,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Name
 
-	row.addText(role.getTitle(locale), rowURL);
+	row.addText(HtmlUtil.escape(role.getTitle(locale)), rowURL);
 
 	// Type
 
