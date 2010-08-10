@@ -63,6 +63,7 @@ public class AssetCategoryPropertyServiceHttp {
 			MethodKey methodKey = new MethodKey(AssetCategoryPropertyServiceUtil.class.getName(),
 					"addCategoryProperty", long.class, java.lang.String.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId,
 					key, value);
 
@@ -99,6 +100,7 @@ public class AssetCategoryPropertyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetCategoryPropertyServiceUtil.class.getName(),
 					"deleteCategoryProperty", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					categoryPropertyId);
 
@@ -130,6 +132,7 @@ public class AssetCategoryPropertyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetCategoryPropertyServiceUtil.class.getName(),
 					"getCategoryProperties", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
 
 			Object returnObj = null;
@@ -161,6 +164,7 @@ public class AssetCategoryPropertyServiceHttp {
 			MethodKey methodKey = new MethodKey(AssetCategoryPropertyServiceUtil.class.getName(),
 					"getCategoryPropertyValues", long.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, key);
 
@@ -195,6 +199,7 @@ public class AssetCategoryPropertyServiceHttp {
 			MethodKey methodKey = new MethodKey(AssetCategoryPropertyServiceUtil.class.getName(),
 					"updateCategoryProperty", long.class,
 					java.lang.String.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					categoryPropertyId, key, value);
 

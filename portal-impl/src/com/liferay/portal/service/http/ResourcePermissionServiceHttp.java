@@ -62,6 +62,7 @@ public class ResourcePermissionServiceHttp {
 					"addResourcePermission", long.class, long.class,
 					java.lang.String.class, int.class, java.lang.String.class,
 					long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					companyId, name, scope, primKey, roleId, actionId);
 
@@ -98,6 +99,7 @@ public class ResourcePermissionServiceHttp {
 					"setIndividualResourcePermissions", long.class, long.class,
 					java.lang.String.class, java.lang.String.class, long.class,
 					java.lang.String[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					companyId, name, primKey, roleId, actionIds);
 
@@ -133,6 +135,7 @@ public class ResourcePermissionServiceHttp {
 					"removeResourcePermission", long.class, long.class,
 					java.lang.String.class, int.class, java.lang.String.class,
 					long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					companyId, name, scope, primKey, roleId, actionId);
 
@@ -168,6 +171,7 @@ public class ResourcePermissionServiceHttp {
 					"removeResourcePermissions", long.class, long.class,
 					java.lang.String.class, int.class, long.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					companyId, name, scope, roleId, actionId);
 

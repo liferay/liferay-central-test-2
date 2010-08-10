@@ -58,6 +58,7 @@ public class PortletServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(PortletServiceUtil.class.getName(),
 					"getWARPortlets");
+
 			MethodHandler methodHandler = new MethodHandler(methodKey);
 
 			Object returnObj = null;
@@ -87,6 +88,7 @@ public class PortletServiceHttp {
 			MethodKey methodKey = new MethodKey(PortletServiceUtil.class.getName(),
 					"updatePortlet", long.class, java.lang.String.class,
 					java.lang.String.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, portletId, roles, active);
 

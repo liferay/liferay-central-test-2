@@ -67,6 +67,7 @@ public class FlagsEntryServiceHttp {
 					java.lang.String.class, long.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK, reporterEmailAddress, reportedUserId,
 					contentTitle, contentURL, reason, serviceContext);

@@ -58,6 +58,7 @@ public class PortalServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(PortalServiceUtil.class.getName(),
 					"getAutoDeployDirectory");
+
 			MethodHandler methodHandler = new MethodHandler(methodKey);
 
 			Object returnObj = null;
@@ -87,6 +88,7 @@ public class PortalServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(PortalServiceUtil.class.getName(),
 					"getBuildNumber");
+
 			MethodHandler methodHandler = new MethodHandler(methodKey);
 
 			Object returnObj = null;
@@ -112,6 +114,7 @@ public class PortalServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(PortalServiceUtil.class.getName(),
 					"test");
+
 			MethodHandler methodHandler = new MethodHandler(methodKey);
 
 			try {
@@ -133,6 +136,7 @@ public class PortalServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(PortalServiceUtil.class.getName(),
 					"testCounterRollback");
+
 			MethodHandler methodHandler = new MethodHandler(methodKey);
 
 			try {

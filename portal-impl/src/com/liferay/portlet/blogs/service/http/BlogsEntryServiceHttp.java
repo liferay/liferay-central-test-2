@@ -69,6 +69,7 @@ public class BlogsEntryServiceHttp {
 					int.class, int.class, int.class, int.class, int.class,
 					boolean.class, boolean.class, java.lang.String[].class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, title,
 					content, displayDateMonth, displayDateDay, displayDateYear,
 					displayDateHour, displayDateMinute, allowPingbacks,
@@ -106,6 +107,7 @@ public class BlogsEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
 					"deleteEntry", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
 
 			try {
@@ -137,6 +139,7 @@ public class BlogsEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
 					"getCompanyEntries", long.class, int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, status, max);
 
@@ -180,6 +183,7 @@ public class BlogsEntryServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class,
 					com.liferay.portal.theme.ThemeDisplay.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, status, max, type, version, displayStyle,
 					feedURL, entryURL, themeDisplay);
@@ -217,6 +221,7 @@ public class BlogsEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
 					"getEntry", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
 
 			Object returnObj = null;
@@ -252,6 +257,7 @@ public class BlogsEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
 					"getEntry", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					urlTitle);
 
@@ -288,6 +294,7 @@ public class BlogsEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
 					"getGroupEntries", long.class, int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					status, max);
 
@@ -331,6 +338,7 @@ public class BlogsEntryServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class,
 					com.liferay.portal.theme.ThemeDisplay.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					status, max, type, version, displayStyle, feedURL,
 					entryURL, themeDisplay);
@@ -370,6 +378,7 @@ public class BlogsEntryServiceHttp {
 			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
 					"getGroupsEntries", long.class, long.class, int.class,
 					int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, groupId, status, max);
 
@@ -406,6 +415,7 @@ public class BlogsEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
 					"getOrganizationEntries", long.class, int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					organizationId, status, max);
 
@@ -449,6 +459,7 @@ public class BlogsEntryServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class,
 					com.liferay.portal.theme.ThemeDisplay.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					organizationId, status, max, type, version, displayStyle,
 					feedURL, entryURL, themeDisplay);
@@ -495,6 +506,7 @@ public class BlogsEntryServiceHttp {
 					int.class, int.class, boolean.class, boolean.class,
 					java.lang.String[].class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId,
 					title, content, displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,

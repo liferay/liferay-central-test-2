@@ -59,6 +59,7 @@ public class ClassNameServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ClassNameServiceUtil.class.getName(),
 					"getClassName", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					classNameId);
 
@@ -94,6 +95,7 @@ public class ClassNameServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ClassNameServiceUtil.class.getName(),
 					"getClassName", java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, value);
 
 			Object returnObj = null;
@@ -124,6 +126,7 @@ public class ClassNameServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ClassNameServiceUtil.class.getName(),
 					"getClassNameId", java.lang.Class.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, classObj);
 
 			Object returnObj = null;
@@ -150,6 +153,7 @@ public class ClassNameServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ClassNameServiceUtil.class.getName(),
 					"getClassNameId", java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, value);
 
 			Object returnObj = null;

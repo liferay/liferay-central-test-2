@@ -65,6 +65,7 @@ public class OrgLaborServiceHttp {
 					int.class, int.class, int.class, int.class, int.class,
 					int.class, int.class, int.class, int.class, int.class,
 					int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					organizationId, typeId, sunOpen, sunClose, monOpen,
 					monClose, tueOpen, tueClose, wedOpen, wedClose, thuOpen,
@@ -103,6 +104,7 @@ public class OrgLaborServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(OrgLaborServiceUtil.class.getName(),
 					"deleteOrgLabor", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					orgLaborId);
 
@@ -135,6 +137,7 @@ public class OrgLaborServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(OrgLaborServiceUtil.class.getName(),
 					"getOrgLabor", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					orgLaborId);
 
@@ -171,6 +174,7 @@ public class OrgLaborServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(OrgLaborServiceUtil.class.getName(),
 					"getOrgLabors", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					organizationId);
 
@@ -213,6 +217,7 @@ public class OrgLaborServiceHttp {
 					int.class, int.class, int.class, int.class, int.class,
 					int.class, int.class, int.class, int.class, int.class,
 					int.class, int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					orgLaborId, typeId, sunOpen, sunClose, monOpen, monClose,
 					tueOpen, tueClose, wedOpen, wedClose, thuOpen, thuClose,

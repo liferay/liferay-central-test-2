@@ -61,6 +61,7 @@ public class TeamServiceHttp {
 			MethodKey methodKey = new MethodKey(TeamServiceUtil.class.getName(),
 					"addTeam", long.class, java.lang.String.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					name, description);
 
@@ -96,6 +97,7 @@ public class TeamServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(TeamServiceUtil.class.getName(),
 					"deleteTeam", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, teamId);
 
 			try {
@@ -129,6 +131,7 @@ public class TeamServiceHttp {
 			MethodKey methodKey = new MethodKey(TeamServiceUtil.class.getName(),
 					"updateTeam", long.class, java.lang.String.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, teamId,
 					name, description);
 

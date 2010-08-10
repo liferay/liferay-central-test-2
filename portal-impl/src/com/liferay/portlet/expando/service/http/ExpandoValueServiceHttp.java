@@ -65,6 +65,7 @@ public class ExpandoValueServiceHttp {
 					"addValue", long.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class, long.class,
 					java.lang.Object.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, className, tableName, columnName, classPK, data);
 
@@ -105,6 +106,7 @@ public class ExpandoValueServiceHttp {
 					"addValue", long.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class, long.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, className, tableName, columnName, classPK, data);
 
@@ -143,6 +145,7 @@ public class ExpandoValueServiceHttp {
 			MethodKey methodKey = new MethodKey(ExpandoValueServiceUtil.class.getName(),
 					"getData", long.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, className, tableName, columnName, classPK);
 
@@ -182,6 +185,7 @@ public class ExpandoValueServiceHttp {
 			MethodKey methodKey = new MethodKey(ExpandoValueServiceUtil.class.getName(),
 					"getJSONData", long.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, className, tableName, columnName, classPK);
 

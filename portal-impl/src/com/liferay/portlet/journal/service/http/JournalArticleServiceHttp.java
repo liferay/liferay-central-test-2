@@ -85,6 +85,7 @@ public class JournalArticleServiceHttp {
 					java.io.File.class, java.util.Map.class,
 					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					articleId, autoArticleId, title, description, content,
 					type, structureId, templateId, displayDateMonth,
@@ -149,6 +150,7 @@ public class JournalArticleServiceHttp {
 					int.class, int.class, int.class, boolean.class,
 					boolean.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					articleId, autoArticleId, title, description, content,
 					type, structureId, templateId, displayDateMonth,
@@ -196,6 +198,7 @@ public class JournalArticleServiceHttp {
 			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
 					"copyArticle", long.class, java.lang.String.class,
 					java.lang.String.class, boolean.class, double.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					oldArticleId, newArticleId, autoArticleId, version);
 
@@ -236,6 +239,7 @@ public class JournalArticleServiceHttp {
 					"deleteArticle", long.class, java.lang.String.class,
 					double.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					articleId, version, articleURL, serviceContext);
 
@@ -271,6 +275,7 @@ public class JournalArticleServiceHttp {
 					"deleteArticle", long.class, java.lang.String.class,
 					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					articleId, articleURL, serviceContext);
 
@@ -307,6 +312,7 @@ public class JournalArticleServiceHttp {
 					"expireArticle", long.class, java.lang.String.class,
 					double.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					articleId, version, articleURL, serviceContext);
 
@@ -343,6 +349,7 @@ public class JournalArticleServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
 					"getArticle", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					articleId);
 
@@ -381,6 +388,7 @@ public class JournalArticleServiceHttp {
 			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
 					"getArticle", long.class, java.lang.String.class,
 					double.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					articleId, version);
 
@@ -417,6 +425,7 @@ public class JournalArticleServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
 					"getArticleByUrlTitle", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					urlTitle);
 
@@ -457,6 +466,7 @@ public class JournalArticleServiceHttp {
 					"getArticleContent", long.class, java.lang.String.class,
 					double.class, java.lang.String.class,
 					com.liferay.portal.theme.ThemeDisplay.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					articleId, version, languageId, themeDisplay);
 
@@ -497,6 +507,7 @@ public class JournalArticleServiceHttp {
 					"getArticleContent", long.class, java.lang.String.class,
 					java.lang.String.class,
 					com.liferay.portal.theme.ThemeDisplay.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					articleId, languageId, themeDisplay);
 
@@ -535,6 +546,7 @@ public class JournalArticleServiceHttp {
 			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
 					"getLatestArticle", long.class, java.lang.String.class,
 					int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					articleId, status);
 
@@ -571,6 +583,7 @@ public class JournalArticleServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
 					"removeArticleLocale", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, languageId);
 
@@ -605,6 +618,7 @@ public class JournalArticleServiceHttp {
 			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
 					"removeArticleLocale", long.class, java.lang.String.class,
 					double.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					articleId, version, languageId);
 
@@ -643,6 +657,7 @@ public class JournalArticleServiceHttp {
 			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
 					"updateArticle", long.class, java.lang.String.class,
 					double.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					articleId, version, content);
 
@@ -703,6 +718,7 @@ public class JournalArticleServiceHttp {
 					java.io.File.class, java.util.Map.class,
 					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					articleId, version, title, description, content, type,
 					structureId, templateId, displayDateMonth, displayDateDay,
@@ -749,6 +765,7 @@ public class JournalArticleServiceHttp {
 			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
 					"updateContent", long.class, java.lang.String.class,
 					double.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					articleId, version, content);
 

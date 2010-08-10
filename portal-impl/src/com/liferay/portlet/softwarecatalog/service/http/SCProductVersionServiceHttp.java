@@ -70,6 +70,7 @@ public class SCProductVersionServiceHttp {
 					java.lang.String.class, boolean.class, boolean.class,
 					long[].class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					productEntryId, version, changeLog, downloadPageURL,
 					directDownloadURL, testDirectDownloadURL,
@@ -108,6 +109,7 @@ public class SCProductVersionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(SCProductVersionServiceUtil.class.getName(),
 					"deleteProductVersion", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					productVersionId);
 
@@ -140,6 +142,7 @@ public class SCProductVersionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(SCProductVersionServiceUtil.class.getName(),
 					"getProductVersion", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					productVersionId);
 
@@ -176,6 +179,7 @@ public class SCProductVersionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(SCProductVersionServiceUtil.class.getName(),
 					"getProductVersions", long.class, int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					productEntryId, start, end);
 
@@ -212,6 +216,7 @@ public class SCProductVersionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(SCProductVersionServiceUtil.class.getName(),
 					"getProductVersionsCount", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					productEntryId);
 
@@ -255,6 +260,7 @@ public class SCProductVersionServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class, boolean.class, boolean.class,
 					long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					productVersionId, version, changeLog, downloadPageURL,
 					directDownloadURL, testDirectDownloadURL,

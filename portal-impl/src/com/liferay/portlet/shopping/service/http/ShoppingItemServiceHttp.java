@@ -62,6 +62,7 @@ public class ShoppingItemServiceHttp {
 			MethodKey methodKey = new MethodKey(ShoppingItemServiceUtil.class.getName(),
 					"addBookItems", long.class, long.class,
 					java.lang.String[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					categoryId, isbns);
 
@@ -115,6 +116,7 @@ public class ShoppingItemServiceHttp {
 					java.lang.String.class, java.io.File.class,
 					java.util.List.class, java.util.List.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					categoryId, sku, name, description, properties,
 					fieldsQuantities, requiresShipping, stockQuantity,
@@ -155,6 +157,7 @@ public class ShoppingItemServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingItemServiceUtil.class.getName(),
 					"deleteItem", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, itemId);
 
 			try {
@@ -186,6 +189,7 @@ public class ShoppingItemServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingItemServiceUtil.class.getName(),
 					"getItem", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, itemId);
 
 			Object returnObj = null;
@@ -242,6 +246,7 @@ public class ShoppingItemServiceHttp {
 					java.lang.String.class, java.io.File.class,
 					java.util.List.class, java.util.List.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, itemId,
 					groupId, categoryId, sku, name, description, properties,
 					fieldsQuantities, requiresShipping, stockQuantity,

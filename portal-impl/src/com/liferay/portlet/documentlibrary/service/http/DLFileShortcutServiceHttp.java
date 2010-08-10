@@ -65,6 +65,7 @@ public class DLFileShortcutServiceHttp {
 					"addFileShortcut", long.class, long.class, long.class,
 					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, toFolderId, toName, serviceContext);
 
@@ -101,6 +102,7 @@ public class DLFileShortcutServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFileShortcutServiceUtil.class.getName(),
 					"deleteFileShortcut", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					fileShortcutId);
 
@@ -133,6 +135,7 @@ public class DLFileShortcutServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFileShortcutServiceUtil.class.getName(),
 					"getFileShortcut", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					fileShortcutId);
 
@@ -173,6 +176,7 @@ public class DLFileShortcutServiceHttp {
 					"updateFileShortcut", long.class, long.class, long.class,
 					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					fileShortcutId, folderId, toFolderId, toName, serviceContext);
 

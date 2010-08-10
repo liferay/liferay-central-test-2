@@ -59,6 +59,7 @@ public class PortletPreferencesServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(PortletPreferencesServiceUtil.class.getName(),
 					"deleteArchivedPreferences", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					portletItemId);
 
@@ -94,6 +95,7 @@ public class PortletPreferencesServiceHttp {
 					"restoreArchivedPreferences", long.class,
 					java.lang.String.class, java.lang.String.class,
 					javax.portlet.PortletPreferences.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					name, portletId, preferences);
 
@@ -129,6 +131,7 @@ public class PortletPreferencesServiceHttp {
 					"updateArchivePreferences", long.class, long.class,
 					java.lang.String.class, java.lang.String.class,
 					javax.portlet.PortletPreferences.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					groupId, name, portletId, preferences);
 

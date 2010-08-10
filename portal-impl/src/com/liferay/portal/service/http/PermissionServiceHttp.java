@@ -59,6 +59,7 @@ public class PermissionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
 					"checkPermission", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					resourceId);
 
@@ -92,6 +93,7 @@ public class PermissionServiceHttp {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
 					"checkPermission", long.class, java.lang.String.class,
 					long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					name, primKey);
 
@@ -125,6 +127,7 @@ public class PermissionServiceHttp {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
 					"checkPermission", long.class, java.lang.String.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					name, primKey);
 
@@ -157,6 +160,7 @@ public class PermissionServiceHttp {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
 					"hasGroupPermission", long.class, java.lang.String.class,
 					long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					actionId, resourceId);
 
@@ -189,6 +193,7 @@ public class PermissionServiceHttp {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
 					"hasUserPermission", long.class, java.lang.String.class,
 					long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					actionId, resourceId);
 
@@ -226,6 +231,7 @@ public class PermissionServiceHttp {
 					"hasUserPermissions", long.class, long.class,
 					java.util.List.class, java.lang.String.class,
 					com.liferay.portal.security.permission.PermissionCheckerBag.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					groupId, resources, actionId, permissionCheckerBag);
 
@@ -263,6 +269,7 @@ public class PermissionServiceHttp {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
 					"setGroupPermissions", long.class,
 					java.lang.String[].class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					actionIds, resourceId);
 
@@ -298,6 +305,7 @@ public class PermissionServiceHttp {
 					"setGroupPermissions", java.lang.String.class,
 					java.lang.String.class, long.class,
 					java.lang.String[].class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK, groupId, actionIds, resourceId);
 
@@ -332,6 +340,7 @@ public class PermissionServiceHttp {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
 					"setOrgGroupPermissions", long.class, long.class,
 					java.lang.String[].class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					organizationId, groupId, actionIds, resourceId);
 
@@ -367,6 +376,7 @@ public class PermissionServiceHttp {
 					"setRolePermission", long.class, long.class,
 					java.lang.String.class, int.class, java.lang.String.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
 					groupId, name, scope, primKey, actionId);
 
@@ -400,6 +410,7 @@ public class PermissionServiceHttp {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
 					"setRolePermissions", long.class, long.class,
 					java.lang.String[].class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
 					groupId, actionIds, resourceId);
 
@@ -433,6 +444,7 @@ public class PermissionServiceHttp {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
 					"setUserPermissions", long.class, long.class,
 					java.lang.String[].class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					groupId, actionIds, resourceId);
 
@@ -465,6 +477,7 @@ public class PermissionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
 					"unsetRolePermission", long.class, long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
 					groupId, permissionId);
 
@@ -500,6 +513,7 @@ public class PermissionServiceHttp {
 					"unsetRolePermission", long.class, long.class,
 					java.lang.String.class, int.class, java.lang.String.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
 					groupId, name, scope, primKey, actionId);
 
@@ -534,6 +548,7 @@ public class PermissionServiceHttp {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
 					"unsetRolePermissions", long.class, long.class,
 					java.lang.String.class, int.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
 					groupId, name, scope, actionId);
 
@@ -567,6 +582,7 @@ public class PermissionServiceHttp {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
 					"unsetUserPermissions", long.class, long.class,
 					java.lang.String[].class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					groupId, actionIds, resourceId);
 

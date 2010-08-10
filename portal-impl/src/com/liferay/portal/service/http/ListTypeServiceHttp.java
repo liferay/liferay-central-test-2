@@ -59,6 +59,7 @@ public class ListTypeServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ListTypeServiceUtil.class.getName(),
 					"getListType", int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					listTypeId);
 
@@ -94,6 +95,7 @@ public class ListTypeServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ListTypeServiceUtil.class.getName(),
 					"getListTypes", java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, type);
 
 			Object returnObj = null;
@@ -125,6 +127,7 @@ public class ListTypeServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ListTypeServiceUtil.class.getName(),
 					"validate", int.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					listTypeId, type);
 
@@ -157,6 +160,7 @@ public class ListTypeServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ListTypeServiceUtil.class.getName(),
 					"validate", int.class, long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					listTypeId, classNameId, type);
 

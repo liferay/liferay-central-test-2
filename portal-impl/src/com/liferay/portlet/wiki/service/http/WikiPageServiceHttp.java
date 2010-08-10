@@ -66,6 +66,7 @@ public class WikiPageServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					boolean.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
 					title, content, summary, minorEdit, serviceContext);
 
@@ -110,6 +111,7 @@ public class WikiPageServiceHttp {
 					boolean.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
 					title, content, summary, minorEdit, format, parentTitle,
 					redirectTitle, serviceContext);
@@ -149,6 +151,7 @@ public class WikiPageServiceHttp {
 			MethodKey methodKey = new MethodKey(WikiPageServiceUtil.class.getName(),
 					"addPageAttachments", long.class, java.lang.String.class,
 					java.util.List.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
 					title, files);
 
@@ -184,6 +187,7 @@ public class WikiPageServiceHttp {
 					"changeParent", long.class, java.lang.String.class,
 					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
 					title, newParentTitle, serviceContext);
 
@@ -216,6 +220,7 @@ public class WikiPageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(WikiPageServiceUtil.class.getName(),
 					"deletePage", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
 					title);
 
@@ -249,6 +254,7 @@ public class WikiPageServiceHttp {
 			MethodKey methodKey = new MethodKey(WikiPageServiceUtil.class.getName(),
 					"deletePage", long.class, java.lang.String.class,
 					double.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
 					title, version);
 
@@ -282,6 +288,7 @@ public class WikiPageServiceHttp {
 			MethodKey methodKey = new MethodKey(WikiPageServiceUtil.class.getName(),
 					"deletePageAttachment", long.class, java.lang.String.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
 					title, fileName);
 
@@ -314,6 +321,7 @@ public class WikiPageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(WikiPageServiceUtil.class.getName(),
 					"getDraftPage", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
 					title);
 
@@ -350,6 +358,7 @@ public class WikiPageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(WikiPageServiceUtil.class.getName(),
 					"getNodePages", long.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
 					max);
 
@@ -391,6 +400,7 @@ public class WikiPageServiceHttp {
 					java.lang.String.class, double.class,
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
 					max, type, version, displayStyle, feedURL, entryURL);
 
@@ -427,6 +437,7 @@ public class WikiPageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(WikiPageServiceUtil.class.getName(),
 					"getPage", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
 					title);
 
@@ -465,6 +476,7 @@ public class WikiPageServiceHttp {
 			MethodKey methodKey = new MethodKey(WikiPageServiceUtil.class.getName(),
 					"getPage", long.class, java.lang.String.class,
 					java.lang.Boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
 					title, head);
 
@@ -502,6 +514,7 @@ public class WikiPageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(WikiPageServiceUtil.class.getName(),
 					"getPage", long.class, java.lang.String.class, double.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
 					title, version);
 
@@ -545,6 +558,7 @@ public class WikiPageServiceHttp {
 					double.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class,
 					java.util.Locale.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, nodeId, title, max, type, version, displayStyle,
 					feedURL, entryURL, locale);
@@ -585,6 +599,7 @@ public class WikiPageServiceHttp {
 					"movePage", long.class, java.lang.String.class,
 					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
 					title, newTitle, serviceContext);
 
@@ -620,6 +635,7 @@ public class WikiPageServiceHttp {
 					"revertPage", long.class, java.lang.String.class,
 					double.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
 					title, version, serviceContext);
 
@@ -656,6 +672,7 @@ public class WikiPageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(WikiPageServiceUtil.class.getName(),
 					"subscribePage", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
 					title);
 
@@ -688,6 +705,7 @@ public class WikiPageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(WikiPageServiceUtil.class.getName(),
 					"unsubscribePage", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
 					title);
 
@@ -729,6 +747,7 @@ public class WikiPageServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
 					title, version, content, summary, minorEdit, format,
 					parentTitle, redirectTitle, serviceContext);

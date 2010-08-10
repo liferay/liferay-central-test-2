@@ -63,6 +63,7 @@ public class AssetTagPropertyServiceHttp {
 			MethodKey methodKey = new MethodKey(AssetTagPropertyServiceUtil.class.getName(),
 					"addTagProperty", long.class, java.lang.String.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, tagId,
 					key, value);
 
@@ -99,6 +100,7 @@ public class AssetTagPropertyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagPropertyServiceUtil.class.getName(),
 					"deleteTagProperty", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					tagPropertyId);
 
@@ -130,6 +132,7 @@ public class AssetTagPropertyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagPropertyServiceUtil.class.getName(),
 					"getTagProperties", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, tagId);
 
 			Object returnObj = null;
@@ -160,6 +163,7 @@ public class AssetTagPropertyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagPropertyServiceUtil.class.getName(),
 					"getTagPropertyValues", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, key);
 
@@ -194,6 +198,7 @@ public class AssetTagPropertyServiceHttp {
 			MethodKey methodKey = new MethodKey(AssetTagPropertyServiceUtil.class.getName(),
 					"updateTagProperty", long.class, java.lang.String.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					tagPropertyId, key, value);
 

@@ -78,6 +78,7 @@ public class MBCategoryServiceHttp {
 					boolean.class, java.lang.String.class,
 					java.lang.String.class, boolean.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					parentCategoryId, name, description, emailAddress,
 					inProtocol, inServerName, inServerPort, inUseSSL,
@@ -118,6 +119,7 @@ public class MBCategoryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
 					"deleteCategory", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					categoryId);
 
@@ -151,6 +153,7 @@ public class MBCategoryServiceHttp {
 			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
 					"getCategories", long.class, long.class, int.class,
 					int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentCategoryId, start, end);
 
@@ -184,6 +187,7 @@ public class MBCategoryServiceHttp {
 			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
 					"getCategories", long.class, long[].class, int.class,
 					int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentCategoryIds, start, end);
 
@@ -215,6 +219,7 @@ public class MBCategoryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
 					"getCategoriesCount", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentCategoryId);
 
@@ -246,6 +251,7 @@ public class MBCategoryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
 					"getCategoriesCount", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentCategoryIds);
 
@@ -278,6 +284,7 @@ public class MBCategoryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
 					"getCategory", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					categoryId);
 
@@ -313,6 +320,7 @@ public class MBCategoryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
 					"getCategoryIds", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					categoryId);
 
@@ -347,6 +355,7 @@ public class MBCategoryServiceHttp {
 			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
 					"getSubcategoryIds", java.util.List.class, long.class,
 					long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					categoryIds, groupId, categoryId);
 
@@ -379,6 +388,7 @@ public class MBCategoryServiceHttp {
 			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
 					"getSubscribedCategories", long.class, long.class,
 					int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userId, start, end);
 
@@ -410,6 +420,7 @@ public class MBCategoryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
 					"getSubscribedCategoriesCount", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userId);
 
@@ -442,6 +453,7 @@ public class MBCategoryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
 					"subscribeCategory", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					categoryId);
 
@@ -474,6 +486,7 @@ public class MBCategoryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(MBCategoryServiceUtil.class.getName(),
 					"unsubscribeCategory", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					categoryId);
 
@@ -525,6 +538,7 @@ public class MBCategoryServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					boolean.class, boolean.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					categoryId, parentCategoryId, name, description,
 					emailAddress, inProtocol, inServerName, inServerPort,

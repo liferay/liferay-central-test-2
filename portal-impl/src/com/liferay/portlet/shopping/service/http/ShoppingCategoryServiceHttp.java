@@ -65,6 +65,7 @@ public class ShoppingCategoryServiceHttp {
 					"addCategory", long.class, java.lang.String.class,
 					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					parentCategoryId, name, description, serviceContext);
 
@@ -101,6 +102,7 @@ public class ShoppingCategoryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingCategoryServiceUtil.class.getName(),
 					"deleteCategory", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					categoryId);
 
@@ -133,6 +135,7 @@ public class ShoppingCategoryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingCategoryServiceUtil.class.getName(),
 					"getCategory", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					categoryId);
 
@@ -175,6 +178,7 @@ public class ShoppingCategoryServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					boolean.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					categoryId, parentCategoryId, name, description,
 					mergeWithParentCategory, serviceContext);

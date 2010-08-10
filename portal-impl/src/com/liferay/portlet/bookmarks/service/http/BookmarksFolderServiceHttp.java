@@ -65,6 +65,7 @@ public class BookmarksFolderServiceHttp {
 					"addFolder", long.class, java.lang.String.class,
 					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					parentFolderId, name, description, serviceContext);
 
@@ -100,6 +101,7 @@ public class BookmarksFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(BookmarksFolderServiceUtil.class.getName(),
 					"deleteFolder", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, folderId);
 
 			try {
@@ -131,6 +133,7 @@ public class BookmarksFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(BookmarksFolderServiceUtil.class.getName(),
 					"getFolder", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, folderId);
 
 			Object returnObj = null;
@@ -172,6 +175,7 @@ public class BookmarksFolderServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					boolean.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					folderId, parentFolderId, name, description,
 					mergeWithParentFolder, serviceContext);

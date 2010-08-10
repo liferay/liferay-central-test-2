@@ -60,6 +60,7 @@ public class LayoutSetServiceHttp {
 			MethodKey methodKey = new MethodKey(LayoutSetServiceUtil.class.getName(),
 					"updateLogo", long.class, boolean.class, boolean.class,
 					java.io.File.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, logo, file);
 
@@ -96,6 +97,7 @@ public class LayoutSetServiceHttp {
 					"updateLookAndFeel", long.class, boolean.class,
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, themeId, colorSchemeId, css, wapTheme);
 
@@ -134,6 +136,7 @@ public class LayoutSetServiceHttp {
 			MethodKey methodKey = new MethodKey(LayoutSetServiceUtil.class.getName(),
 					"updateSettings", long.class, boolean.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, settings);
 
@@ -172,6 +175,7 @@ public class LayoutSetServiceHttp {
 			MethodKey methodKey = new MethodKey(LayoutSetServiceUtil.class.getName(),
 					"updateVirtualHost", long.class, boolean.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, virtualHost);
 

@@ -70,6 +70,7 @@ public class PollsQuestionServiceHttp {
 					int.class, int.class, int.class, int.class, int.class,
 					boolean.class, java.util.List.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					titleMap, descriptionMap, expirationDateMonth,
 					expirationDateDay, expirationDateYear, expirationDateHour,
@@ -108,6 +109,7 @@ public class PollsQuestionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(PollsQuestionServiceUtil.class.getName(),
 					"deleteQuestion", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					questionId);
 
@@ -140,6 +142,7 @@ public class PollsQuestionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(PollsQuestionServiceUtil.class.getName(),
 					"getQuestion", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					questionId);
 
@@ -185,6 +188,7 @@ public class PollsQuestionServiceHttp {
 					java.util.Map.class, int.class, int.class, int.class,
 					int.class, int.class, boolean.class, java.util.List.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					questionId, titleMap, descriptionMap, expirationDateMonth,
 					expirationDateDay, expirationDateYear, expirationDateHour,

@@ -63,6 +63,7 @@ public class MBBanServiceHttp {
 			MethodKey methodKey = new MethodKey(MBBanServiceUtil.class.getName(),
 					"addBan", long.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					banUserId, serviceContext);
 
@@ -100,6 +101,7 @@ public class MBBanServiceHttp {
 			MethodKey methodKey = new MethodKey(MBBanServiceUtil.class.getName(),
 					"deleteBan", long.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					banUserId, serviceContext);
 

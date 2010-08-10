@@ -76,6 +76,7 @@ public class ShoppingCouponServiceHttp {
 					java.lang.String.class, double.class, double.class,
 					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, code,
 					autoCode, name, description, startDateMonth, startDateDay,
 					startDateYear, startDateHour, startDateMinute,
@@ -116,6 +117,7 @@ public class ShoppingCouponServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingCouponServiceUtil.class.getName(),
 					"deleteCoupon", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					couponId);
 
@@ -148,6 +150,7 @@ public class ShoppingCouponServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingCouponServiceUtil.class.getName(),
 					"getCoupon", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					couponId);
 
@@ -188,6 +191,7 @@ public class ShoppingCouponServiceHttp {
 					"search", long.class, long.class, java.lang.String.class,
 					boolean.class, java.lang.String.class, boolean.class,
 					int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					companyId, code, active, discountType, andOperator, start,
 					end);
@@ -238,6 +242,7 @@ public class ShoppingCouponServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					double.class, double.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					couponId, name, description, startDateMonth, startDateDay,
 					startDateYear, startDateHour, startDateMinute,

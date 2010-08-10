@@ -60,6 +60,7 @@ public class UserGroupGroupRoleServiceHttp {
 			MethodKey methodKey = new MethodKey(UserGroupGroupRoleServiceUtil.class.getName(),
 					"addUserGroupGroupRoles", long.class, long.class,
 					long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					userGroupId, groupId, roleIds);
 
@@ -93,6 +94,7 @@ public class UserGroupGroupRoleServiceHttp {
 			MethodKey methodKey = new MethodKey(UserGroupGroupRoleServiceUtil.class.getName(),
 					"addUserGroupGroupRoles", long[].class, long.class,
 					long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					userGroupIds, groupId, roleId);
 
@@ -126,6 +128,7 @@ public class UserGroupGroupRoleServiceHttp {
 			MethodKey methodKey = new MethodKey(UserGroupGroupRoleServiceUtil.class.getName(),
 					"deleteUserGroupGroupRoles", long.class, long.class,
 					long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					userGroupId, groupId, roleIds);
 
@@ -159,6 +162,7 @@ public class UserGroupGroupRoleServiceHttp {
 			MethodKey methodKey = new MethodKey(UserGroupGroupRoleServiceUtil.class.getName(),
 					"deleteUserGroupGroupRoles", long[].class, long.class,
 					long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					userGroupIds, groupId, roleId);
 

@@ -69,6 +69,7 @@ public class LayoutServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					boolean.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, parentLayoutId, localeNamesMap,
 					localeTitlesMap, description, type, hidden, friendlyURL,
@@ -115,6 +116,7 @@ public class LayoutServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					boolean.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, parentLayoutId, name, title, description,
 					type, hidden, friendlyURL, serviceContext);
@@ -151,6 +153,7 @@ public class LayoutServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
 					"deleteLayout", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, plid);
 
 			try {
@@ -182,6 +185,7 @@ public class LayoutServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
 					"deleteLayout", long.class, boolean.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, layoutId);
 
@@ -218,6 +222,7 @@ public class LayoutServiceHttp {
 					"exportLayouts", long.class, boolean.class, long[].class,
 					java.util.Map.class, java.util.Date.class,
 					java.util.Date.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, layoutIds, parameterMap, startDate, endDate);
 
@@ -258,6 +263,7 @@ public class LayoutServiceHttp {
 					"exportLayouts", long.class, boolean.class,
 					java.util.Map.class, java.util.Date.class,
 					java.util.Date.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, parameterMap, startDate, endDate);
 
@@ -299,6 +305,7 @@ public class LayoutServiceHttp {
 					"exportLayoutsAsFile", long.class, boolean.class,
 					long[].class, java.util.Map.class, java.util.Date.class,
 					java.util.Date.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, layoutIds, parameterMap, startDate, endDate);
 
@@ -339,6 +346,7 @@ public class LayoutServiceHttp {
 					"exportPortletInfo", long.class, long.class,
 					java.lang.String.class, java.util.Map.class,
 					java.util.Date.class, java.util.Date.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, plid,
 					groupId, portletId, parameterMap, startDate, endDate);
 
@@ -380,6 +388,7 @@ public class LayoutServiceHttp {
 					"exportPortletInfoAsFile", long.class, long.class,
 					java.lang.String.class, java.util.Map.class,
 					java.util.Date.class, java.util.Date.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, plid,
 					groupId, portletId, parameterMap, startDate, endDate);
 
@@ -418,6 +427,7 @@ public class LayoutServiceHttp {
 			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
 					"getLayoutName", long.class, boolean.class, long.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, layoutId, languageId);
 
@@ -456,6 +466,7 @@ public class LayoutServiceHttp {
 			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
 					"getLayoutReferences", long.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, portletId, preferencesKey, preferencesValue);
 
@@ -491,6 +502,7 @@ public class LayoutServiceHttp {
 			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
 					"importLayouts", long.class, boolean.class,
 					java.util.Map.class, byte[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, parameterMap, bytes);
 
@@ -526,6 +538,7 @@ public class LayoutServiceHttp {
 			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
 					"importLayouts", long.class, boolean.class,
 					java.util.Map.class, java.io.File.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, parameterMap, file);
 
@@ -561,6 +574,7 @@ public class LayoutServiceHttp {
 			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
 					"importLayouts", long.class, boolean.class,
 					java.util.Map.class, java.io.InputStream.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, parameterMap, is);
 
@@ -597,6 +611,7 @@ public class LayoutServiceHttp {
 					"importPortletInfo", long.class, long.class,
 					java.lang.String.class, java.util.Map.class,
 					java.io.File.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, plid,
 					groupId, portletId, parameterMap, file);
 
@@ -633,6 +648,7 @@ public class LayoutServiceHttp {
 					"importPortletInfo", long.class, long.class,
 					java.lang.String.class, java.util.Map.class,
 					java.io.InputStream.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, plid,
 					groupId, portletId, parameterMap, is);
 
@@ -676,6 +692,7 @@ public class LayoutServiceHttp {
 					java.util.Date.class, java.lang.String.class,
 					java.lang.String.class, java.util.Date.class,
 					java.util.Date.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					sourceGroupId, targetGroupId, privateLayout, layoutIdMap,
 					parameterMap, scope, startDate, endDate, groupName,
@@ -724,6 +741,7 @@ public class LayoutServiceHttp {
 					java.util.Date.class, java.lang.String.class,
 					java.lang.String.class, java.util.Date.class,
 					java.util.Date.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					sourceGroupId, privateLayout, layoutIdMap, parameterMap,
 					remoteAddress, remotePort, secureConnection, remoteGroupId,
@@ -760,6 +778,7 @@ public class LayoutServiceHttp {
 			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
 					"setLayouts", long.class, boolean.class, long.class,
 					long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, parentLayoutId, layoutIds);
 
@@ -793,6 +812,7 @@ public class LayoutServiceHttp {
 			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
 					"unschedulePublishToLive", long.class,
 					java.lang.String.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					jobName, groupName);
 
@@ -826,6 +846,7 @@ public class LayoutServiceHttp {
 			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
 					"unschedulePublishToRemote", long.class,
 					java.lang.String.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					jobName, groupName);
 
@@ -870,6 +891,7 @@ public class LayoutServiceHttp {
 					boolean.class, java.lang.String.class,
 					java.lang.Boolean.class, byte[].class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, layoutId, parentLayoutId, localeNamesMap,
 					localeTitlesMap, description, type, hidden, friendlyURL,
@@ -918,6 +940,7 @@ public class LayoutServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					boolean.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, layoutId, parentLayoutId, localeNamesMap,
 					localeTitlesMap, description, type, hidden, friendlyURL,
@@ -958,6 +981,7 @@ public class LayoutServiceHttp {
 			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
 					"updateLayout", long.class, boolean.class, long.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, layoutId, typeSettings);
 
@@ -998,6 +1022,7 @@ public class LayoutServiceHttp {
 					"updateLookAndFeel", long.class, boolean.class, long.class,
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, layoutId, themeId, colorSchemeId, css,
 					wapTheme);
@@ -1037,6 +1062,7 @@ public class LayoutServiceHttp {
 			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
 					"updateName", long.class, boolean.class, long.class,
 					java.lang.String.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, layoutId, name, languageId);
 
@@ -1075,6 +1101,7 @@ public class LayoutServiceHttp {
 			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
 					"updateName", long.class, java.lang.String.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, plid,
 					name, languageId);
 
@@ -1113,6 +1140,7 @@ public class LayoutServiceHttp {
 			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
 					"updateParentLayoutId", long.class, boolean.class,
 					long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, layoutId, parentLayoutId);
 
@@ -1149,6 +1177,7 @@ public class LayoutServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
 					"updateParentLayoutId", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, plid,
 					parentPlid);
 
@@ -1187,6 +1216,7 @@ public class LayoutServiceHttp {
 			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
 					"updatePriority", long.class, boolean.class, long.class,
 					int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, layoutId, priority);
 
@@ -1223,6 +1253,7 @@ public class LayoutServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
 					"updatePriority", long.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, plid,
 					priority);
 

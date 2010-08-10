@@ -61,6 +61,7 @@ public class ResourceServiceHttp {
 			MethodKey methodKey = new MethodKey(ResourceServiceUtil.class.getName(),
 					"getResource", long.class, java.lang.String.class,
 					int.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, name, scope, primKey);
 

@@ -74,6 +74,7 @@ public class SCProductEntryServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					long[].class, java.util.List.class, java.util.List.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					type, tags, shortDescription, longDescription, pageURL,
 					author, repoGroupId, repoArtifactId, licenseIds,
@@ -112,6 +113,7 @@ public class SCProductEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(SCProductEntryServiceUtil.class.getName(),
 					"deleteProductEntry", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					productEntryId);
 
@@ -144,6 +146,7 @@ public class SCProductEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(SCProductEntryServiceUtil.class.getName(),
 					"getProductEntry", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					productEntryId);
 
@@ -191,6 +194,7 @@ public class SCProductEntryServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class,
 					long[].class, java.util.List.class, java.util.List.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					productEntryId, name, type, tags, shortDescription,
 					longDescription, pageURL, author, repoGroupId,

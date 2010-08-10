@@ -62,6 +62,7 @@ public class RoleServiceHttp {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
 					"addRole", java.lang.String.class, java.util.Map.class,
 					java.lang.String.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					titleMap, description, type);
 
@@ -98,6 +99,7 @@ public class RoleServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
 					"addUserRoles", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					roleIds);
 
@@ -129,6 +131,7 @@ public class RoleServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
 					"deleteRole", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId);
 
 			try {
@@ -159,6 +162,7 @@ public class RoleServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
 					"getGroupRoles", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
 			Object returnObj = null;
@@ -190,6 +194,7 @@ public class RoleServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
 					"getRole", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId);
 
 			Object returnObj = null;
@@ -225,6 +230,7 @@ public class RoleServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
 					"getRole", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, name);
 
@@ -260,6 +266,7 @@ public class RoleServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
 					"getUserGroupGroupRoles", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					groupId);
 
@@ -291,6 +298,7 @@ public class RoleServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
 					"getUserGroupRoles", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					groupId);
 
@@ -323,6 +331,7 @@ public class RoleServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
 					"getUserRelatedRoles", long.class, java.util.List.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					groups);
 
@@ -354,6 +363,7 @@ public class RoleServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
 					"getUserRoles", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId);
 
 			Object returnObj = null;
@@ -386,6 +396,7 @@ public class RoleServiceHttp {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
 					"hasUserRole", long.class, long.class,
 					java.lang.String.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					companyId, name, inherited);
 
@@ -423,6 +434,7 @@ public class RoleServiceHttp {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
 					"hasUserRoles", long.class, long.class,
 					java.lang.String[].class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					companyId, names, inherited);
 
@@ -459,6 +471,7 @@ public class RoleServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
 					"unsetUserRoles", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					roleIds);
 
@@ -495,6 +508,7 @@ public class RoleServiceHttp {
 					"updateRole", long.class, java.lang.String.class,
 					java.util.Map.class, java.lang.String.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
 					name, titleMap, description, subtype);
 

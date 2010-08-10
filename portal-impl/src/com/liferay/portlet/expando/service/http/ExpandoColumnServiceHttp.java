@@ -62,6 +62,7 @@ public class ExpandoColumnServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ExpandoColumnServiceUtil.class.getName(),
 					"addColumn", long.class, java.lang.String.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, tableId,
 					name, type);
 
@@ -100,6 +101,7 @@ public class ExpandoColumnServiceHttp {
 			MethodKey methodKey = new MethodKey(ExpandoColumnServiceUtil.class.getName(),
 					"addColumn", long.class, java.lang.String.class, int.class,
 					java.lang.Object.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, tableId,
 					name, type, defaultData);
 
@@ -135,6 +137,7 @@ public class ExpandoColumnServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ExpandoColumnServiceUtil.class.getName(),
 					"deleteColumn", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, columnId);
 
 			try {
@@ -168,6 +171,7 @@ public class ExpandoColumnServiceHttp {
 			MethodKey methodKey = new MethodKey(ExpandoColumnServiceUtil.class.getName(),
 					"updateColumn", long.class, java.lang.String.class,
 					int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					columnId, name, type);
 
@@ -206,6 +210,7 @@ public class ExpandoColumnServiceHttp {
 			MethodKey methodKey = new MethodKey(ExpandoColumnServiceUtil.class.getName(),
 					"updateColumn", long.class, java.lang.String.class,
 					int.class, java.lang.Object.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					columnId, name, type, defaultData);
 
@@ -243,6 +248,7 @@ public class ExpandoColumnServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ExpandoColumnServiceUtil.class.getName(),
 					"updateTypeSettings", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					columnId, typeSettings);
 

@@ -69,6 +69,7 @@ public class JournalStructureServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					structureId, autoStructureId, parentStructureId, name,
 					description, xsd, serviceContext);
@@ -109,6 +110,7 @@ public class JournalStructureServiceHttp {
 			MethodKey methodKey = new MethodKey(JournalStructureServiceUtil.class.getName(),
 					"copyStructure", long.class, java.lang.String.class,
 					java.lang.String.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					oldStructureId, newStructureId, autoStructureId);
 
@@ -145,6 +147,7 @@ public class JournalStructureServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(JournalStructureServiceUtil.class.getName(),
 					"deleteStructure", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					structureId);
 
@@ -177,6 +180,7 @@ public class JournalStructureServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(JournalStructureServiceUtil.class.getName(),
 					"getStructure", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					structureId);
 
@@ -220,6 +224,7 @@ public class JournalStructureServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					structureId, parentStructureId, name, description, xsd,
 					serviceContext);

@@ -65,6 +65,7 @@ public class DLFolderServiceHttp {
 					"addFolder", long.class, long.class,
 					java.lang.String.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentFolderId, name, description, serviceContext);
 
@@ -107,6 +108,7 @@ public class DLFolderServiceHttp {
 					"copyFolder", long.class, long.class, long.class,
 					java.lang.String.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					sourceFolderId, parentFolderId, name, description,
 					serviceContext);
@@ -148,6 +150,7 @@ public class DLFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"deleteFolder", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, folderId);
 
 			try {
@@ -185,6 +188,7 @@ public class DLFolderServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"deleteFolder", long.class, long.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentFolderId, name);
 
@@ -222,6 +226,7 @@ public class DLFolderServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"getFileEntriesAndFileShortcuts", long.class,
 					java.util.List.class, int.class, int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderIds, status, start, end);
 
@@ -255,6 +260,7 @@ public class DLFolderServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"getFileEntriesAndFileShortcuts", long.class, long.class,
 					int.class, int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, status, start, end);
 
@@ -288,6 +294,7 @@ public class DLFolderServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"getFileEntriesAndFileShortcutsCount", long.class,
 					java.util.List.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderIds, status);
 
@@ -320,6 +327,7 @@ public class DLFolderServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"getFileEntriesAndFileShortcutsCount", long.class,
 					long.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, status);
 
@@ -352,6 +360,7 @@ public class DLFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"getFolder", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, folderId);
 
 			Object returnObj = null;
@@ -388,6 +397,7 @@ public class DLFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"getFolder", long.class, long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentFolderId, name);
 
@@ -425,6 +435,7 @@ public class DLFolderServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"getFolderId", long.class, long.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentFolderId, name);
 
@@ -460,6 +471,7 @@ public class DLFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"getFolderIds", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId);
 
@@ -491,6 +503,7 @@ public class DLFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"getFolders", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentFolderId);
 
@@ -523,6 +536,7 @@ public class DLFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"getFolders", long.class, long.class, int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentFolderId, start, end);
 
@@ -556,6 +570,7 @@ public class DLFolderServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"getFoldersAndFileEntriesAndFileShortcuts", long.class,
 					java.util.List.class, int.class, int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderIds, status, start, end);
 
@@ -590,6 +605,7 @@ public class DLFolderServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"getFoldersAndFileEntriesAndFileShortcuts", long.class,
 					long.class, int.class, int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, status, start, end);
 
@@ -627,6 +643,7 @@ public class DLFolderServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"getFoldersAndFileEntriesAndFileShortcutsCount",
 					long.class, java.util.List.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderIds, status);
 
@@ -660,6 +677,7 @@ public class DLFolderServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"getFoldersAndFileEntriesAndFileShortcutsCount",
 					long.class, long.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, status);
 
@@ -695,6 +713,7 @@ public class DLFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"getFoldersCount", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentFolderId);
 
@@ -727,6 +746,7 @@ public class DLFolderServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"getSubfolderIds", java.util.List.class, long.class,
 					long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					folderIds, groupId, folderId);
 
@@ -755,6 +775,7 @@ public class DLFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"hasInheritableLock", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, folderId);
 
 			Object returnObj = null;
@@ -791,6 +812,7 @@ public class DLFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"lockFolder", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, folderId);
 
 			Object returnObj = null;
@@ -833,6 +855,7 @@ public class DLFolderServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"lockFolder", long.class, java.lang.String.class,
 					boolean.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					folderId, owner, inheritable, expirationTime);
 
@@ -874,6 +897,7 @@ public class DLFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"refreshFolderLock", java.lang.String.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					lockUuid, expirationTime);
 
@@ -911,6 +935,7 @@ public class DLFolderServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"unlockFolder", long.class, long.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, lockUuid);
 
@@ -944,6 +969,7 @@ public class DLFolderServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"unlockFolder", long.class, long.class,
 					java.lang.String.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentFolderId, name, lockUuid);
 
@@ -981,6 +1007,7 @@ public class DLFolderServiceHttp {
 					"updateFolder", long.class, long.class,
 					java.lang.String.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					folderId, parentFolderId, name, description, serviceContext);
 
@@ -1021,6 +1048,7 @@ public class DLFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"verifyInheritableLock", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					folderId, lockUuid);
 

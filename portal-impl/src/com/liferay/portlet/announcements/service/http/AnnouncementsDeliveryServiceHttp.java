@@ -63,6 +63,7 @@ public class AnnouncementsDeliveryServiceHttp {
 			MethodKey methodKey = new MethodKey(AnnouncementsDeliveryServiceUtil.class.getName(),
 					"updateDelivery", long.class, java.lang.String.class,
 					boolean.class, boolean.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					type, email, sms, website);
 

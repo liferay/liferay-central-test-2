@@ -58,6 +58,7 @@ public class ThemeServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ThemeServiceUtil.class.getName(),
 					"getThemes", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
 
 			Object returnObj = null;
@@ -84,6 +85,7 @@ public class ThemeServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ThemeServiceUtil.class.getName(),
 					"getWARThemes");
+
 			MethodHandler methodHandler = new MethodHandler(methodKey);
 
 			Object returnObj = null;

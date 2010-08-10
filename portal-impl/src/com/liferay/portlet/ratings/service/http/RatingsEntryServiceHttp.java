@@ -61,6 +61,7 @@ public class RatingsEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(RatingsEntryServiceUtil.class.getName(),
 					"deleteEntry", java.lang.String.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK);
 
@@ -95,6 +96,7 @@ public class RatingsEntryServiceHttp {
 			MethodKey methodKey = new MethodKey(RatingsEntryServiceUtil.class.getName(),
 					"updateEntry", java.lang.String.class, long.class,
 					double.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK, score);
 

@@ -68,6 +68,7 @@ public class MBMessageServiceHttp {
 					long.class, java.lang.String.class, long.class, long.class,
 					long.class, java.lang.String.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					className, classPK, permissionClassName, permissionClassPK,
 					threadId, parentMessageId, subject, body, serviceContext);
@@ -114,6 +115,7 @@ public class MBMessageServiceHttp {
 					java.util.List.class, boolean.class, double.class,
 					boolean.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					categoryId, threadId, parentMessageId, subject, body,
 					files, anonymous, priority, allowPingbacks, serviceContext);
@@ -159,6 +161,7 @@ public class MBMessageServiceHttp {
 					java.util.List.class, boolean.class, double.class,
 					boolean.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					categoryId, subject, body, files, anonymous, priority,
 					allowPingbacks, serviceContext);
@@ -200,6 +203,7 @@ public class MBMessageServiceHttp {
 					"deleteDiscussionMessage", long.class,
 					java.lang.String.class, long.class, java.lang.String.class,
 					long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					className, classPK, permissionClassName, permissionClassPK,
 					messageId);
@@ -232,6 +236,7 @@ public class MBMessageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
 					"deleteMessage", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, messageId);
 
 			try {
@@ -265,6 +270,7 @@ public class MBMessageServiceHttp {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
 					"getCategoryMessages", long.class, long.class, int.class,
 					int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					categoryId, status, start, end);
 
@@ -301,6 +307,7 @@ public class MBMessageServiceHttp {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
 					"getCategoryMessagesCount", long.class, long.class,
 					int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					categoryId, status);
 
@@ -341,6 +348,7 @@ public class MBMessageServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class,
 					com.liferay.portal.theme.ThemeDisplay.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					categoryId, status, max, type, version, displayStyle,
 					feedURL, entryURL, themeDisplay);
@@ -385,6 +393,7 @@ public class MBMessageServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class,
 					com.liferay.portal.theme.ThemeDisplay.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, status, max, type, version, displayStyle,
 					feedURL, entryURL, themeDisplay);
@@ -429,6 +438,7 @@ public class MBMessageServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class,
 					com.liferay.portal.theme.ThemeDisplay.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					status, max, type, version, displayStyle, feedURL,
 					entryURL, themeDisplay);
@@ -474,6 +484,7 @@ public class MBMessageServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class,
 					com.liferay.portal.theme.ThemeDisplay.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userId, status, max, type, version, displayStyle, feedURL,
 					entryURL, themeDisplay);
@@ -511,6 +522,7 @@ public class MBMessageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
 					"getMessage", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, messageId);
 
 			Object returnObj = null;
@@ -548,6 +560,7 @@ public class MBMessageServiceHttp {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
 					"getMessageDisplay", long.class, int.class,
 					java.lang.String.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					messageId, status, threadView, includePrevAndNext);
 
@@ -585,6 +598,7 @@ public class MBMessageServiceHttp {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
 					"getThreadMessages", long.class, long.class, long.class,
 					int.class, int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					categoryId, threadId, status, start, end);
 
@@ -617,6 +631,7 @@ public class MBMessageServiceHttp {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
 					"getThreadMessagesCount", long.class, long.class,
 					long.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					categoryId, threadId, status);
 
@@ -656,6 +671,7 @@ public class MBMessageServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class,
 					com.liferay.portal.theme.ThemeDisplay.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					threadId, status, max, type, version, displayStyle,
 					feedURL, entryURL, themeDisplay);
@@ -693,6 +709,7 @@ public class MBMessageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
 					"subscribeMessage", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, messageId);
 
 			try {
@@ -724,6 +741,7 @@ public class MBMessageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
 					"unsubscribeMessage", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, messageId);
 
 			try {
@@ -761,6 +779,7 @@ public class MBMessageServiceHttp {
 					long.class, java.lang.String.class, long.class, long.class,
 					java.lang.String.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK, permissionClassName, permissionClassPK,
 					messageId, subject, body, serviceContext);
@@ -806,6 +825,7 @@ public class MBMessageServiceHttp {
 					java.lang.String.class, java.util.List.class,
 					java.util.List.class, double.class, boolean.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					messageId, subject, body, files, existingFiles, priority,
 					allowPingbacks, serviceContext);

@@ -67,6 +67,7 @@ public class AddressServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class, long.class, long.class, int.class,
 					boolean.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK, street1, street2, street3, city, zip,
 					regionId, countryId, typeId, mailing, primary);
@@ -103,6 +104,7 @@ public class AddressServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AddressServiceUtil.class.getName(),
 					"deleteAddress", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, addressId);
 
 			try {
@@ -134,6 +136,7 @@ public class AddressServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AddressServiceUtil.class.getName(),
 					"getAddress", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, addressId);
 
 			Object returnObj = null;
@@ -169,6 +172,7 @@ public class AddressServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AddressServiceUtil.class.getName(),
 					"getAddresses", java.lang.String.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK);
 
@@ -211,6 +215,7 @@ public class AddressServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class, long.class,
 					long.class, int.class, boolean.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					addressId, street1, street2, street3, city, zip, regionId,
 					countryId, typeId, mailing, primary);

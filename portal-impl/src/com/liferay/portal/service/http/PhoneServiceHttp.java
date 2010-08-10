@@ -63,6 +63,7 @@ public class PhoneServiceHttp {
 					"addPhone", java.lang.String.class, long.class,
 					java.lang.String.class, java.lang.String.class, int.class,
 					boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK, number, extension, typeId, primary);
 
@@ -98,6 +99,7 @@ public class PhoneServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(PhoneServiceUtil.class.getName(),
 					"deletePhone", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, phoneId);
 
 			try {
@@ -129,6 +131,7 @@ public class PhoneServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(PhoneServiceUtil.class.getName(),
 					"getPhone", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, phoneId);
 
 			Object returnObj = null;
@@ -164,6 +167,7 @@ public class PhoneServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(PhoneServiceUtil.class.getName(),
 					"getPhones", java.lang.String.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK);
 
@@ -202,6 +206,7 @@ public class PhoneServiceHttp {
 			MethodKey methodKey = new MethodKey(PhoneServiceUtil.class.getName(),
 					"updatePhone", long.class, java.lang.String.class,
 					java.lang.String.class, int.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, phoneId,
 					number, extension, typeId, primary);
 

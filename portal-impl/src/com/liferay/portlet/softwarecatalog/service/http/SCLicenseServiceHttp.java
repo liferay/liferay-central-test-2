@@ -65,6 +65,7 @@ public class SCLicenseServiceHttp {
 					"addLicense", java.lang.String.class,
 					java.lang.String.class, boolean.class, boolean.class,
 					boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					url, openSource, active, recommended);
 
@@ -100,6 +101,7 @@ public class SCLicenseServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(SCLicenseServiceUtil.class.getName(),
 					"deleteLicense", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, licenseId);
 
 			try {
@@ -131,6 +133,7 @@ public class SCLicenseServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(SCLicenseServiceUtil.class.getName(),
 					"getLicense", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, licenseId);
 
 			Object returnObj = null;
@@ -170,6 +173,7 @@ public class SCLicenseServiceHttp {
 					"updateLicense", long.class, java.lang.String.class,
 					java.lang.String.class, boolean.class, boolean.class,
 					boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					licenseId, name, url, openSource, active, recommended);
 

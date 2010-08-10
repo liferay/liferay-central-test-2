@@ -65,6 +65,7 @@ public class IGFolderServiceHttp {
 					"addFolder", long.class, java.lang.String.class,
 					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					parentFolderId, name, description, serviceContext);
 
@@ -105,6 +106,7 @@ public class IGFolderServiceHttp {
 					"copyFolder", long.class, long.class,
 					java.lang.String.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					sourceFolderId, parentFolderId, name, description,
 					serviceContext);
@@ -141,6 +143,7 @@ public class IGFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(IGFolderServiceUtil.class.getName(),
 					"deleteFolder", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, folderId);
 
 			try {
@@ -172,6 +175,7 @@ public class IGFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(IGFolderServiceUtil.class.getName(),
 					"getFolder", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, folderId);
 
 			Object returnObj = null;
@@ -208,6 +212,7 @@ public class IGFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(IGFolderServiceUtil.class.getName(),
 					"getFolder", long.class, long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentFolderId, name);
 
@@ -243,6 +248,7 @@ public class IGFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(IGFolderServiceUtil.class.getName(),
 					"getFolders", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentFolderId);
 
@@ -275,6 +281,7 @@ public class IGFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(IGFolderServiceUtil.class.getName(),
 					"getFolders", long.class, long.class, int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentFolderId, start, end);
 
@@ -306,6 +313,7 @@ public class IGFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(IGFolderServiceUtil.class.getName(),
 					"getFoldersCount", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentFolderId);
 
@@ -344,6 +352,7 @@ public class IGFolderServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					boolean.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					folderId, parentFolderId, name, description,
 					mergeWithParentFolder, serviceContext);

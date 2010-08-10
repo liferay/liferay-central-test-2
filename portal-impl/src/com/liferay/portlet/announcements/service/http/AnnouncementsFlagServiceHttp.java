@@ -61,6 +61,7 @@ public class AnnouncementsFlagServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AnnouncementsFlagServiceUtil.class.getName(),
 					"addFlag", long.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId,
 					value);
 
@@ -92,6 +93,7 @@ public class AnnouncementsFlagServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AnnouncementsFlagServiceUtil.class.getName(),
 					"deleteFlag", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, flagId);
 
 			try {
@@ -123,6 +125,7 @@ public class AnnouncementsFlagServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AnnouncementsFlagServiceUtil.class.getName(),
 					"getFlag", long.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId,
 					value);
 

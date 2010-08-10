@@ -67,6 +67,7 @@ public class IGImageServiceHttp {
 					java.lang.String.class, java.io.File.class,
 					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, name, description, file, contentType,
 					serviceContext);
@@ -103,6 +104,7 @@ public class IGImageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
 					"deleteImage", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, imageId);
 
 			try {
@@ -136,6 +138,7 @@ public class IGImageServiceHttp {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
 					"deleteImageByFolderIdAndNameWithExtension", long.class,
 					long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, nameWithExtension);
 
@@ -168,6 +171,7 @@ public class IGImageServiceHttp {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
 					"getGroupImages", long.class, long.class, int.class,
 					int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userId, start, end);
 
@@ -199,6 +203,7 @@ public class IGImageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
 					"getGroupImagesCount", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userId);
 
@@ -231,6 +236,7 @@ public class IGImageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
 					"getImage", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, imageId);
 
 			Object returnObj = null;
@@ -268,6 +274,7 @@ public class IGImageServiceHttp {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
 					"getImageByFolderIdAndNameWithExtension", long.class,
 					long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, nameWithExtension);
 
@@ -304,6 +311,7 @@ public class IGImageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
 					"getImageByLargeImageId", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					largeImageId);
 
@@ -340,6 +348,7 @@ public class IGImageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
 					"getImageBySmallImageId", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					smallImageId);
 
@@ -375,6 +384,7 @@ public class IGImageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
 					"getImages", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId);
 
@@ -406,6 +416,7 @@ public class IGImageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
 					"getImages", long.class, long.class, int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, start, end);
 
@@ -437,6 +448,7 @@ public class IGImageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
 					"getImagesCount", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId);
 
@@ -475,6 +487,7 @@ public class IGImageServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.io.File.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, imageId,
 					groupId, folderId, name, description, file, contentType,
 					serviceContext);

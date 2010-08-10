@@ -60,6 +60,7 @@ public class AssetEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
 					"deleteEntry", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
 
 			try {
@@ -90,6 +91,7 @@ public class AssetEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
 					"getCompanyEntries", long.class, int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, start, end);
 
@@ -121,6 +123,7 @@ public class AssetEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
 					"getCompanyEntriesCount", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
 
 			Object returnObj = null;
@@ -157,6 +160,7 @@ public class AssetEntryServiceHttp {
 					java.lang.String.class, double.class,
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, max, type, version, displayStyle, feedURL, tagURL);
 
@@ -194,6 +198,7 @@ public class AssetEntryServiceHttp {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
 					"getCompanyEntryDisplays", long.class, int.class,
 					int.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, start, end, languageId);
 
@@ -228,6 +233,7 @@ public class AssetEntryServiceHttp {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
 					"getEntries",
 					com.liferay.portlet.asset.service.persistence.AssetEntryQuery.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					entryQuery);
 
@@ -265,6 +271,7 @@ public class AssetEntryServiceHttp {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
 					"getEntriesCount",
 					com.liferay.portlet.asset.service.persistence.AssetEntryQuery.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					entryQuery);
 
@@ -308,6 +315,7 @@ public class AssetEntryServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					double.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					entryQuery, name, type, version, displayStyle, feedURL,
 					tagURL);
@@ -345,6 +353,7 @@ public class AssetEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
 					"getEntry", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
 
 			Object returnObj = null;
@@ -380,6 +389,7 @@ public class AssetEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
 					"incrementViewCounter", java.lang.String.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK);
 
@@ -415,6 +425,7 @@ public class AssetEntryServiceHttp {
 					"searchEntryDisplays", long.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class, int.class,
 					int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, portletId, keywords, languageId, start, end);
 
@@ -449,6 +460,7 @@ public class AssetEntryServiceHttp {
 					"searchEntryDisplaysCount", long.class,
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, portletId, keywords, languageId);
 
@@ -496,6 +508,7 @@ public class AssetEntryServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class, int.class, int.class,
 					java.lang.Integer.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					className, classPK, classUuid, categoryIds, tagNames,
 					visible, startDate, endDate, publishDate, expirationDate,

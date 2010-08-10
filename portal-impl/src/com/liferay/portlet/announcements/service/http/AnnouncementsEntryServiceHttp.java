@@ -72,6 +72,7 @@ public class AnnouncementsEntryServiceHttp {
 					int.class, int.class, int.class, int.class, int.class,
 					int.class, int.class, int.class, int.class, int.class,
 					boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, plid,
 					classNameId, classPK, title, content, url, type,
 					displayDateMonth, displayDateDay, displayDateYear,
@@ -111,6 +112,7 @@ public class AnnouncementsEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AnnouncementsEntryServiceUtil.class.getName(),
 					"deleteEntry", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
 
 			try {
@@ -151,6 +153,7 @@ public class AnnouncementsEntryServiceHttp {
 					java.lang.String.class, int.class, int.class, int.class,
 					int.class, int.class, int.class, int.class, int.class,
 					int.class, int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId,
 					title, content, url, type, displayDateMonth,
 					displayDateDay, displayDateYear, displayDateHour,

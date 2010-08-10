@@ -63,6 +63,7 @@ public class CompanyServiceHttp {
 					"addCompany", java.lang.String.class,
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class, boolean.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, webId,
 					virtualHost, mx, shardName, system, maxUsers);
 
@@ -98,6 +99,7 @@ public class CompanyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
 					"deleteLogo", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
 
 			try {
@@ -129,6 +131,7 @@ public class CompanyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
 					"getCompanyById", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
 
 			Object returnObj = null;
@@ -164,6 +167,7 @@ public class CompanyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
 					"getCompanyByLogoId", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, logoId);
 
 			Object returnObj = null;
@@ -199,6 +203,7 @@ public class CompanyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
 					"getCompanyByMx", java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, mx);
 
 			Object returnObj = null;
@@ -234,6 +239,7 @@ public class CompanyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
 					"getCompanyByVirtualHost", java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					virtualHost);
 
@@ -270,6 +276,7 @@ public class CompanyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
 					"getCompanyByWebId", java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, webId);
 
 			Object returnObj = null;
@@ -305,6 +312,7 @@ public class CompanyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
 					"removePreferences", long.class, java.lang.String[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, keys);
 
@@ -339,6 +347,7 @@ public class CompanyServiceHttp {
 			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
 					"updateCompany", long.class, java.lang.String.class,
 					java.lang.String.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, virtualHost, mx, maxUsers);
 
@@ -387,6 +396,7 @@ public class CompanyServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, virtualHost, mx, homeURL, name, legalName,
 					legalId, legalType, sicCode, tickerSymbol, industry, type,
@@ -447,6 +457,7 @@ public class CompanyServiceHttp {
 					java.util.List.class, java.util.List.class,
 					java.util.List.class,
 					com.liferay.portal.kernel.util.UnicodeProperties.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, virtualHost, mx, homeURL, name, legalName,
 					legalId, legalType, sicCode, tickerSymbol, industry, type,
@@ -487,6 +498,7 @@ public class CompanyServiceHttp {
 			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
 					"updateDisplay", long.class, java.lang.String.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, languageId, timeZoneId);
 
@@ -519,6 +531,7 @@ public class CompanyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
 					"updateLogo", long.class, java.io.File.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, file);
 
@@ -553,6 +566,7 @@ public class CompanyServiceHttp {
 			MethodKey methodKey = new MethodKey(CompanyServiceUtil.class.getName(),
 					"updatePreferences", long.class,
 					com.liferay.portal.kernel.util.UnicodeProperties.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, properties);
 
@@ -589,6 +603,7 @@ public class CompanyServiceHttp {
 					"updateSecurity", long.class, java.lang.String.class,
 					boolean.class, boolean.class, boolean.class, boolean.class,
 					boolean.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, authType, autoLogin, sendPassword, strangers,
 					strangersWithMx, strangersVerify, communityLogo);

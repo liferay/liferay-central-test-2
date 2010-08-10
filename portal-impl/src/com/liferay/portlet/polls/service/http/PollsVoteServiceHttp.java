@@ -63,6 +63,7 @@ public class PollsVoteServiceHttp {
 			MethodKey methodKey = new MethodKey(PollsVoteServiceUtil.class.getName(),
 					"addVote", long.class, long.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					questionId, choiceId, serviceContext);
 

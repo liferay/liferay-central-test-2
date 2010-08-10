@@ -67,6 +67,7 @@ public class AssetVocabularyServiceHttp {
 					"addVocabulary", java.util.Map.class, java.util.Map.class,
 					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					titleMap, descriptionMap, settings, serviceContext);
 
@@ -103,6 +104,7 @@ public class AssetVocabularyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
 					"deleteVocabulary", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					vocabularyId);
 
@@ -135,6 +137,7 @@ public class AssetVocabularyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
 					"getCompanyVocabularies", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
 
 			Object returnObj = null;
@@ -170,6 +173,7 @@ public class AssetVocabularyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
 					"getGroupsVocabularies", long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupIds);
 
 			Object returnObj = null;
@@ -205,6 +209,7 @@ public class AssetVocabularyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
 					"getGroupVocabularies", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
 			Object returnObj = null;
@@ -240,6 +245,7 @@ public class AssetVocabularyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
 					"getVocabulary", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					vocabularyId);
 
@@ -282,6 +288,7 @@ public class AssetVocabularyServiceHttp {
 					"updateVocabulary", long.class, java.util.Map.class,
 					java.util.Map.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					vocabularyId, titleMap, descriptionMap, settings,
 					serviceContext);

@@ -78,6 +78,7 @@ public class JournalFeedServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class, double.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					feedId, autoFeedId, name, description, type, structureId,
 					templateId, rendererTemplateId, delta, orderByCol,
@@ -117,6 +118,7 @@ public class JournalFeedServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(JournalFeedServiceUtil.class.getName(),
 					"deleteFeed", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					feedId);
 
@@ -149,6 +151,7 @@ public class JournalFeedServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(JournalFeedServiceUtil.class.getName(),
 					"deleteFeed", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					feedId);
 
@@ -181,6 +184,7 @@ public class JournalFeedServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(JournalFeedServiceUtil.class.getName(),
 					"getFeed", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					feedId);
 
@@ -217,6 +221,7 @@ public class JournalFeedServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(JournalFeedServiceUtil.class.getName(),
 					"getFeed", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					feedId);
 
@@ -269,6 +274,7 @@ public class JournalFeedServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					double.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					feedId, name, description, type, structureId, templateId,
 					rendererTemplateId, delta, orderByCol, orderByType,

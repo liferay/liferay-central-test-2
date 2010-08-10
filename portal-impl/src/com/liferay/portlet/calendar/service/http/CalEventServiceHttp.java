@@ -76,6 +76,7 @@ public class CalEventServiceHttp {
 					com.liferay.portal.kernel.cal.TZSRecurrence.class,
 					int.class, int.class, int.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, title,
 					description, startDateMonth, startDateDay, startDateYear,
 					startDateHour, startDateMinute, endDateMonth, endDateDay,
@@ -115,6 +116,7 @@ public class CalEventServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
 					"deleteEvent", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, eventId);
 
 			try {
@@ -146,6 +148,7 @@ public class CalEventServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
 					"exportEvent", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, eventId);
 
 			Object returnObj = null;
@@ -181,6 +184,7 @@ public class CalEventServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
 					"exportGroupEvents", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					fileName);
 
@@ -217,6 +221,7 @@ public class CalEventServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
 					"getEvent", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, eventId);
 
 			Object returnObj = null;
@@ -252,6 +257,7 @@ public class CalEventServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CalEventServiceUtil.class.getName(),
 					"importICal4j", long.class, java.io.File.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					file);
 
@@ -299,6 +305,7 @@ public class CalEventServiceHttp {
 					com.liferay.portal.kernel.cal.TZSRecurrence.class,
 					int.class, int.class, int.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, eventId,
 					title, description, startDateMonth, startDateDay,
 					startDateYear, startDateHour, startDateMinute,

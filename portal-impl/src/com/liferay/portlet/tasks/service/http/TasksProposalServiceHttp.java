@@ -67,6 +67,7 @@ public class TasksProposalServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class, long.class, boolean.class,
 					boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					className, classPK, name, description, reviewUserId,
 					addCommunityPermissions, addGuestPermissions);
@@ -111,6 +112,7 @@ public class TasksProposalServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class, long.class,
 					java.lang.String[].class, java.lang.String[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					className, classPK, name, description, reviewUserId,
 					communityPermissions, guestPermissions);
@@ -148,6 +150,7 @@ public class TasksProposalServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(TasksProposalServiceUtil.class.getName(),
 					"deleteProposal", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					proposalId);
 
@@ -183,6 +186,7 @@ public class TasksProposalServiceHttp {
 			MethodKey methodKey = new MethodKey(TasksProposalServiceUtil.class.getName(),
 					"updateProposal", long.class, java.lang.String.class,
 					int.class, int.class, int.class, int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					proposalId, description, dueDateMonth, dueDateDay,
 					dueDateYear, dueDateHour, dueDateMinute);

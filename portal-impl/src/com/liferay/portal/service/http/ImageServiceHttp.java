@@ -59,6 +59,7 @@ public class ImageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ImageServiceUtil.class.getName(),
 					"getImage", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, imageId);
 
 			Object returnObj = null;

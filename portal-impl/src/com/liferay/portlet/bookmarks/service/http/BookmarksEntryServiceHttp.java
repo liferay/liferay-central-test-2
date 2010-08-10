@@ -65,6 +65,7 @@ public class BookmarksEntryServiceHttp {
 					"addEntry", long.class, long.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, name, url, comments, serviceContext);
 
@@ -100,6 +101,7 @@ public class BookmarksEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(BookmarksEntryServiceUtil.class.getName(),
 					"deleteEntry", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
 
 			try {
@@ -131,6 +133,7 @@ public class BookmarksEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(BookmarksEntryServiceUtil.class.getName(),
 					"getEntry", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
 
 			Object returnObj = null;
@@ -166,6 +169,7 @@ public class BookmarksEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(BookmarksEntryServiceUtil.class.getName(),
 					"openEntry", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
 
 			Object returnObj = null;
@@ -206,6 +210,7 @@ public class BookmarksEntryServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId,
 					groupId, folderId, name, url, comments, serviceContext);
 

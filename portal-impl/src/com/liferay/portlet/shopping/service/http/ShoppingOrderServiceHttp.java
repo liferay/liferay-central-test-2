@@ -65,6 +65,7 @@ public class ShoppingOrderServiceHttp {
 					"completeOrder", long.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class,
 					double.class, java.lang.String.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					number, ppTxnId, ppPaymentStatus, ppPaymentGross,
 					ppReceiverEmail, ppPayerEmail);
@@ -98,6 +99,7 @@ public class ShoppingOrderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingOrderServiceUtil.class.getName(),
 					"deleteOrder", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					orderId);
 
@@ -130,6 +132,7 @@ public class ShoppingOrderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingOrderServiceUtil.class.getName(),
 					"getOrder", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					orderId);
 
@@ -166,6 +169,7 @@ public class ShoppingOrderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingOrderServiceUtil.class.getName(),
 					"sendEmail", long.class, long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					orderId, emailType);
 
@@ -203,6 +207,7 @@ public class ShoppingOrderServiceHttp {
 					"updateOrder", long.class, long.class,
 					java.lang.String.class, java.lang.String.class,
 					double.class, java.lang.String.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					orderId, ppTxnId, ppPaymentStatus, ppPaymentGross,
 					ppReceiverEmail, ppPayerEmail);
@@ -267,6 +272,7 @@ public class ShoppingOrderServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class, int.class,
 					int.class, java.lang.String.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					orderId, billingFirstName, billingLastName,
 					billingEmailAddress, billingCompany, billingStreet,

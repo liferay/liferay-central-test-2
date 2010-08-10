@@ -62,6 +62,7 @@ public class LayoutPrototypeServiceHttp {
 			MethodKey methodKey = new MethodKey(LayoutPrototypeServiceUtil.class.getName(),
 					"addLayoutPrototype", java.util.Map.class,
 					java.lang.String.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nameMap,
 					description, active);
 
@@ -98,6 +99,7 @@ public class LayoutPrototypeServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(LayoutPrototypeServiceUtil.class.getName(),
 					"deleteLayoutPrototype", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					layoutPrototypeId);
 
@@ -130,6 +132,7 @@ public class LayoutPrototypeServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(LayoutPrototypeServiceUtil.class.getName(),
 					"getLayoutPrototype", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					layoutPrototypeId);
 
@@ -168,6 +171,7 @@ public class LayoutPrototypeServiceHttp {
 			MethodKey methodKey = new MethodKey(LayoutPrototypeServiceUtil.class.getName(),
 					"search", long.class, java.lang.Boolean.class,
 					com.liferay.portal.kernel.util.OrderByComparator.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, active, obc);
 
@@ -207,6 +211,7 @@ public class LayoutPrototypeServiceHttp {
 			MethodKey methodKey = new MethodKey(LayoutPrototypeServiceUtil.class.getName(),
 					"updateLayoutPrototype", long.class, java.util.Map.class,
 					java.lang.String.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					layoutPrototypeId, nameMap, description, active);
 

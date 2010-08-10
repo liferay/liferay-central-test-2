@@ -61,6 +61,7 @@ public class RegionServiceHttp {
 			MethodKey methodKey = new MethodKey(RegionServiceUtil.class.getName(),
 					"addRegion", long.class, java.lang.String.class,
 					java.lang.String.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					countryId, regionCode, name, active);
 
@@ -96,6 +97,7 @@ public class RegionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(RegionServiceUtil.class.getName(),
 					"getRegions");
+
 			MethodHandler methodHandler = new MethodHandler(methodKey);
 
 			Object returnObj = null;
@@ -126,6 +128,7 @@ public class RegionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(RegionServiceUtil.class.getName(),
 					"getRegions", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, countryId);
 
 			Object returnObj = null;
@@ -156,6 +159,7 @@ public class RegionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(RegionServiceUtil.class.getName(),
 					"getRegions", boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, active);
 
 			Object returnObj = null;
@@ -186,6 +190,7 @@ public class RegionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(RegionServiceUtil.class.getName(),
 					"getRegions", long.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					countryId, active);
 
@@ -218,6 +223,7 @@ public class RegionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(RegionServiceUtil.class.getName(),
 					"getRegion", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, regionId);
 
 			Object returnObj = null;

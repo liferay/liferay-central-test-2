@@ -59,6 +59,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"addGroupUsers", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userIds);
 
@@ -91,6 +92,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"addOrganizationUsers", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					organizationId, userIds);
 
@@ -123,6 +125,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"addPasswordPolicyUsers", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					passwordPolicyId, userIds);
 
@@ -155,6 +158,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"addRoleUsers", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
 					userIds);
 
@@ -187,6 +191,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"addTeamUsers", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, teamId,
 					userIds);
 
@@ -219,6 +224,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"addUserGroupUsers", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					userGroupId, userIds);
 
@@ -270,6 +276,7 @@ public class UserServiceHttp {
 					java.lang.String.class, long[].class, long[].class,
 					long[].class, long[].class, boolean.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, autoPassword, password1, password2,
 					autoScreenName, screenName, emailAddress, facebookId,
@@ -338,6 +345,7 @@ public class UserServiceHttp {
 					java.util.List.class, java.util.List.class,
 					java.util.List.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, autoPassword, password1, password2,
 					autoScreenName, screenName, emailAddress, facebookId,
@@ -379,6 +387,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"deletePortrait", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId);
 
 			try {
@@ -410,6 +419,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"deleteRoleUser", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
 					userId);
 
@@ -441,6 +451,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"deleteUser", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId);
 
 			try {
@@ -472,6 +483,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"getDefaultUserId", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
 
 			Object returnObj = null;
@@ -506,6 +518,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"getGroupUserIds", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
 			Object returnObj = null;
@@ -536,6 +549,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"getOrganizationUserIds", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					organizationId);
 
@@ -566,6 +580,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"getRoleUserIds", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId);
 
 			Object returnObj = null;
@@ -598,6 +613,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"getUserByEmailAddress", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, emailAddress);
 
@@ -634,6 +650,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"getUserById", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId);
 
 			Object returnObj = null;
@@ -669,6 +686,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"getUserByScreenName", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, screenName);
 
@@ -706,6 +724,7 @@ public class UserServiceHttp {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"getUserIdByEmailAddress", long.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, emailAddress);
 
@@ -742,6 +761,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"getUserIdByScreenName", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, screenName);
 
@@ -777,6 +797,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"hasGroupUser", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userId);
 
@@ -807,6 +828,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"hasRoleUser", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
 					userId);
 
@@ -840,6 +862,7 @@ public class UserServiceHttp {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"hasRoleUser", long.class, java.lang.String.class,
 					long.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, name, userId, inherited);
 
@@ -876,6 +899,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"setRoleUsers", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
 					userIds);
 
@@ -908,6 +932,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"setUserGroupUsers", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					userGroupId, userIds);
 
@@ -940,6 +965,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"unsetGroupUsers", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userIds);
 
@@ -972,6 +998,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"unsetOrganizationUsers", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					organizationId, userIds);
 
@@ -1004,6 +1031,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"unsetPasswordPolicyUsers", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					passwordPolicyId, userIds);
 
@@ -1036,6 +1064,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"unsetRoleUsers", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
 					userIds);
 
@@ -1068,6 +1097,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"unsetTeamUsers", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, teamId,
 					userIds);
 
@@ -1100,6 +1130,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"unsetUserGroupUsers", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					userGroupId, userIds);
 
@@ -1132,6 +1163,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"updateActive", long.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					active);
 
@@ -1168,6 +1200,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"updateAgreedToTermsOfUse", long.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					agreedToTermsOfUse);
 
@@ -1206,6 +1239,7 @@ public class UserServiceHttp {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"updateEmailAddress", long.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					password, emailAddress1, emailAddress2);
 
@@ -1238,6 +1272,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"updateLockout", long.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					lockout);
 
@@ -1274,6 +1309,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"updateOpenId", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					openId);
 
@@ -1306,6 +1342,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"updateOrganizations", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					organizationIds);
 
@@ -1340,6 +1377,7 @@ public class UserServiceHttp {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"updatePassword", long.class, java.lang.String.class,
 					java.lang.String.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					password1, password2, passwordReset);
 
@@ -1376,6 +1414,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"updatePortrait", long.class, byte[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					bytes);
 
@@ -1409,6 +1448,7 @@ public class UserServiceHttp {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"updateReminderQuery", long.class, java.lang.String.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					question, answer);
 
@@ -1441,6 +1481,7 @@ public class UserServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
 					"updateScreenName", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					screenName);
 
@@ -1509,6 +1550,7 @@ public class UserServiceHttp {
 					java.lang.String.class, long[].class, long[].class,
 					long[].class, java.util.List.class, long[].class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					oldPassword, newPassword1, newPassword2, passwordReset,
 					reminderQueryQuestion, reminderQueryAnswer, screenName,
@@ -1597,6 +1639,7 @@ public class UserServiceHttp {
 					java.util.List.class, java.util.List.class,
 					java.util.List.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					oldPassword, newPassword1, newPassword2, passwordReset,
 					reminderQueryQuestion, reminderQueryAnswer, screenName,

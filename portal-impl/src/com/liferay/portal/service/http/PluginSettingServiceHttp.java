@@ -62,6 +62,7 @@ public class PluginSettingServiceHttp {
 					"updatePluginSetting", long.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class,
 					boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, pluginId, pluginType, roles, active);
 

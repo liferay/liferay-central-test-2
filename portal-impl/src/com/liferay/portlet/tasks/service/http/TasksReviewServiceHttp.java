@@ -61,6 +61,7 @@ public class TasksReviewServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(TasksReviewServiceUtil.class.getName(),
 					"approveReview", long.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					proposalId, stage);
 
@@ -97,6 +98,7 @@ public class TasksReviewServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(TasksReviewServiceUtil.class.getName(),
 					"rejectReview", long.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					proposalId, stage);
 
@@ -133,6 +135,7 @@ public class TasksReviewServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(TasksReviewServiceUtil.class.getName(),
 					"updateReviews", long.class, long[][].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					proposalId, userIdsPerStage);
 

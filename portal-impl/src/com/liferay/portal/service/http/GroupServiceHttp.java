@@ -63,6 +63,7 @@ public class GroupServiceHttp {
 					"addGroup", java.lang.String.class, java.lang.String.class,
 					int.class, java.lang.String.class, boolean.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					description, type, friendlyURL, active, serviceContext);
 
@@ -104,6 +105,7 @@ public class GroupServiceHttp {
 					java.lang.String.class, int.class, java.lang.String.class,
 					boolean.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					liveGroupId, name, description, type, friendlyURL, active,
 					serviceContext);
@@ -141,6 +143,7 @@ public class GroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(GroupServiceUtil.class.getName(),
 					"addRoleGroups", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
 					groupIds);
 
@@ -172,6 +175,7 @@ public class GroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(GroupServiceUtil.class.getName(),
 					"deleteGroup", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
 			try {
@@ -203,6 +207,7 @@ public class GroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(GroupServiceUtil.class.getName(),
 					"getGroup", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
 			Object returnObj = null;
@@ -238,6 +243,7 @@ public class GroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(GroupServiceUtil.class.getName(),
 					"getGroup", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, name);
 
@@ -274,6 +280,7 @@ public class GroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(GroupServiceUtil.class.getName(),
 					"getManageableGroups", java.lang.String.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					actionId, max);
 
@@ -310,6 +317,7 @@ public class GroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(GroupServiceUtil.class.getName(),
 					"getOrganizationsGroups", java.util.List.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					organizations);
 
@@ -338,6 +346,7 @@ public class GroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(GroupServiceUtil.class.getName(),
 					"getUserGroup", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, userId);
 
@@ -375,6 +384,7 @@ public class GroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(GroupServiceUtil.class.getName(),
 					"getUserGroupsGroups", java.util.List.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					userGroups);
 
@@ -412,6 +422,7 @@ public class GroupServiceHttp {
 			MethodKey methodKey = new MethodKey(GroupServiceUtil.class.getName(),
 					"getUserOrganizationsGroups", long.class, int.class,
 					int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					start, end);
 
@@ -447,6 +458,7 @@ public class GroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(GroupServiceUtil.class.getName(),
 					"hasUserGroup", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					groupId);
 
@@ -481,6 +493,7 @@ public class GroupServiceHttp {
 					"search", long.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String[].class,
 					int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, name, description, params, start, end);
 
@@ -514,6 +527,7 @@ public class GroupServiceHttp {
 			MethodKey methodKey = new MethodKey(GroupServiceUtil.class.getName(),
 					"searchCount", long.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, name, description, params);
 
@@ -546,6 +560,7 @@ public class GroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(GroupServiceUtil.class.getName(),
 					"setRoleGroups", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
 					groupIds);
 
@@ -578,6 +593,7 @@ public class GroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(GroupServiceUtil.class.getName(),
 					"unsetRoleGroups", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
 					groupIds);
 
@@ -610,6 +626,7 @@ public class GroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(GroupServiceUtil.class.getName(),
 					"updateFriendlyURL", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					friendlyURL);
 
@@ -651,6 +668,7 @@ public class GroupServiceHttp {
 					java.lang.String.class, int.class, java.lang.String.class,
 					boolean.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					name, description, type, friendlyURL, active, serviceContext);
 
@@ -687,6 +705,7 @@ public class GroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(GroupServiceUtil.class.getName(),
 					"updateGroup", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					typeSettings);
 
@@ -725,6 +744,7 @@ public class GroupServiceHttp {
 			MethodKey methodKey = new MethodKey(GroupServiceUtil.class.getName(),
 					"updateWorkflow", long.class, boolean.class, int.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					workflowEnabled, workflowStages, workflowRoleNames);
 

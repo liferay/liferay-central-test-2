@@ -64,6 +64,7 @@ public class WikiNodeServiceHttp {
 			MethodKey methodKey = new MethodKey(WikiNodeServiceUtil.class.getName(),
 					"addNode", java.lang.String.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					description, serviceContext);
 
@@ -99,6 +100,7 @@ public class WikiNodeServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(WikiNodeServiceUtil.class.getName(),
 					"deleteNode", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId);
 
 			try {
@@ -130,6 +132,7 @@ public class WikiNodeServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(WikiNodeServiceUtil.class.getName(),
 					"getNode", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId);
 
 			Object returnObj = null;
@@ -165,6 +168,7 @@ public class WikiNodeServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(WikiNodeServiceUtil.class.getName(),
 					"getNode", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					name);
 
@@ -203,6 +207,7 @@ public class WikiNodeServiceHttp {
 			MethodKey methodKey = new MethodKey(WikiNodeServiceUtil.class.getName(),
 					"importPages", long.class, java.lang.String.class,
 					java.io.File[].class, java.util.Map.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
 					importer, files, options);
 
@@ -234,6 +239,7 @@ public class WikiNodeServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(WikiNodeServiceUtil.class.getName(),
 					"subscribeNode", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId);
 
 			try {
@@ -264,6 +270,7 @@ public class WikiNodeServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(WikiNodeServiceUtil.class.getName(),
 					"unsubscribeNode", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId);
 
 			try {
@@ -299,6 +306,7 @@ public class WikiNodeServiceHttp {
 					"updateNode", long.class, java.lang.String.class,
 					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, nodeId,
 					name, description, serviceContext);
 

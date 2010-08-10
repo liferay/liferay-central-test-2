@@ -59,6 +59,7 @@ public class OrganizationServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
 					"addGroupOrganizations", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					organizationIds);
 
@@ -92,6 +93,7 @@ public class OrganizationServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
 					"addPasswordPolicyOrganizations", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					passwordPolicyId, organizationIds);
 
@@ -130,6 +132,7 @@ public class OrganizationServiceHttp {
 					java.lang.String.class, boolean.class, long.class,
 					long.class, int.class, java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					parentOrganizationId, name, type, recursable, regionId,
 					countryId, statusId, comments, serviceContext);
@@ -181,6 +184,7 @@ public class OrganizationServiceHttp {
 					java.util.List.class, java.util.List.class,
 					java.util.List.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					parentOrganizationId, name, type, recursable, regionId,
 					countryId, statusId, comments, addresses, emailAddresses,
@@ -219,6 +223,7 @@ public class OrganizationServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
 					"deleteLogo", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					organizationId);
 
@@ -251,6 +256,7 @@ public class OrganizationServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
 					"deleteOrganization", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					organizationId);
 
@@ -284,6 +290,7 @@ public class OrganizationServiceHttp {
 			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
 					"getManageableOrganizations", java.lang.String.class,
 					int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					actionId, max);
 
@@ -320,6 +327,7 @@ public class OrganizationServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
 					"getOrganization", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					organizationId);
 
@@ -355,6 +363,7 @@ public class OrganizationServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
 					"getOrganizationId", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, name);
 
@@ -387,6 +396,7 @@ public class OrganizationServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
 					"getUserOrganizations", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId);
 
 			Object returnObj = null;
@@ -422,6 +432,7 @@ public class OrganizationServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
 					"getUserOrganizations", long.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					inheritUserGroups);
 
@@ -458,6 +469,7 @@ public class OrganizationServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
 					"setGroupOrganizations", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					organizationIds);
 
@@ -490,6 +502,7 @@ public class OrganizationServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
 					"unsetGroupOrganizations", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					organizationIds);
 
@@ -523,6 +536,7 @@ public class OrganizationServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(OrganizationServiceUtil.class.getName(),
 					"unsetPasswordPolicyOrganizations", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					passwordPolicyId, organizationIds);
 
@@ -563,6 +577,7 @@ public class OrganizationServiceHttp {
 					boolean.class, long.class, long.class, int.class,
 					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					organizationId, parentOrganizationId, name, type,
 					recursable, regionId, countryId, statusId, comments,
@@ -616,6 +631,7 @@ public class OrganizationServiceHttp {
 					java.util.List.class, java.util.List.class,
 					java.util.List.class, java.util.List.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					organizationId, parentOrganizationId, name, type,
 					recursable, regionId, countryId, statusId, comments,

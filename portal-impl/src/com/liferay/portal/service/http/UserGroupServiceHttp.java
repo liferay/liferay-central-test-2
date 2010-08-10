@@ -59,6 +59,7 @@ public class UserGroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserGroupServiceUtil.class.getName(),
 					"addGroupUserGroups", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userGroupIds);
 
@@ -93,6 +94,7 @@ public class UserGroupServiceHttp {
 			MethodKey methodKey = new MethodKey(UserGroupServiceUtil.class.getName(),
 					"addUserGroup", java.lang.String.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					description);
 
@@ -129,6 +131,7 @@ public class UserGroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserGroupServiceUtil.class.getName(),
 					"deleteUserGroup", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					userGroupId);
 
@@ -161,6 +164,7 @@ public class UserGroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserGroupServiceUtil.class.getName(),
 					"getUserGroup", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					userGroupId);
 
@@ -197,6 +201,7 @@ public class UserGroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserGroupServiceUtil.class.getName(),
 					"getUserGroup", java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, name);
 
 			Object returnObj = null;
@@ -231,6 +236,7 @@ public class UserGroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserGroupServiceUtil.class.getName(),
 					"getUserUserGroups", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId);
 
 			Object returnObj = null;
@@ -262,6 +268,7 @@ public class UserGroupServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(UserGroupServiceUtil.class.getName(),
 					"unsetGroupUserGroups", long.class, long[].class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userGroupIds);
 
@@ -296,6 +303,7 @@ public class UserGroupServiceHttp {
 			MethodKey methodKey = new MethodKey(UserGroupServiceUtil.class.getName(),
 					"updateUserGroup", long.class, java.lang.String.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					userGroupId, name, description);
 

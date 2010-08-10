@@ -72,6 +72,7 @@ public class PasswordPolicyServiceHttp {
 					boolean.class, int.class, boolean.class, long.class,
 					long.class, int.class, boolean.class, int.class,
 					long.class, long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					description, changeable, changeRequired, minAge,
 					checkSyntax, allowDictionaryWords, minAlphanumeric,
@@ -113,6 +114,7 @@ public class PasswordPolicyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(PasswordPolicyServiceUtil.class.getName(),
 					"deletePasswordPolicy", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					passwordPolicyId);
 
@@ -159,6 +161,7 @@ public class PasswordPolicyServiceHttp {
 					boolean.class, int.class, boolean.class, long.class,
 					long.class, int.class, boolean.class, int.class,
 					long.class, long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					passwordPolicyId, name, description, changeable,
 					changeRequired, minAge, checkSyntax, allowDictionaryWords,

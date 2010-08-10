@@ -64,6 +64,7 @@ public class CountryServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class, java.lang.String.class,
 					boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					a2, a3, number, idd, active);
 
@@ -99,6 +100,7 @@ public class CountryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CountryServiceUtil.class.getName(),
 					"getCountries");
+
 			MethodHandler methodHandler = new MethodHandler(methodKey);
 
 			Object returnObj = null;
@@ -129,6 +131,7 @@ public class CountryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CountryServiceUtil.class.getName(),
 					"getCountries", boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, active);
 
 			Object returnObj = null;
@@ -160,6 +163,7 @@ public class CountryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CountryServiceUtil.class.getName(),
 					"getCountry", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, countryId);
 
 			Object returnObj = null;
@@ -195,6 +199,7 @@ public class CountryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CountryServiceUtil.class.getName(),
 					"getCountryByA2", java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, a2);
 
 			Object returnObj = null;
@@ -230,6 +235,7 @@ public class CountryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CountryServiceUtil.class.getName(),
 					"getCountryByA3", java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, a3);
 
 			Object returnObj = null;
@@ -265,6 +271,7 @@ public class CountryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(CountryServiceUtil.class.getName(),
 					"getCountryByName", java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, name);
 
 			Object returnObj = null;

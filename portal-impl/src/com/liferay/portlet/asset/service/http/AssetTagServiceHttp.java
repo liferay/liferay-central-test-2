@@ -64,6 +64,7 @@ public class AssetTagServiceHttp {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
 					"addTag", java.lang.String.class, java.lang.String[].class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					tagProperties, serviceContext);
 
@@ -99,6 +100,7 @@ public class AssetTagServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
 					"deleteTag", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, tagId);
 
 			try {
@@ -130,6 +132,7 @@ public class AssetTagServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
 					"getGroupTags", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
 			Object returnObj = null;
@@ -165,6 +168,7 @@ public class AssetTagServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
 					"getTag", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, tagId);
 
 			Object returnObj = null;
@@ -201,6 +205,7 @@ public class AssetTagServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
 					"getTags", long.class, long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					classNameId, name);
 
@@ -237,6 +242,7 @@ public class AssetTagServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
 					"getTags", java.lang.String.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK);
 
@@ -273,6 +279,7 @@ public class AssetTagServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
 					"mergeTags", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					fromTagId, toTagId);
 
@@ -306,6 +313,7 @@ public class AssetTagServiceHttp {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
 					"search", long.class, java.lang.String.class,
 					java.lang.String[].class, int.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					name, tagProperties, start, end);
 
@@ -342,6 +350,7 @@ public class AssetTagServiceHttp {
 					"updateTag", long.class, java.lang.String.class,
 					java.lang.String[].class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, tagId,
 					name, tagProperties, serviceContext);
 

@@ -61,6 +61,7 @@ public class EmailAddressServiceHttp {
 			MethodKey methodKey = new MethodKey(EmailAddressServiceUtil.class.getName(),
 					"addEmailAddress", java.lang.String.class, long.class,
 					java.lang.String.class, int.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK, address, typeId, primary);
 
@@ -97,6 +98,7 @@ public class EmailAddressServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(EmailAddressServiceUtil.class.getName(),
 					"deleteEmailAddress", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					emailAddressId);
 
@@ -129,6 +131,7 @@ public class EmailAddressServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(EmailAddressServiceUtil.class.getName(),
 					"getEmailAddress", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					emailAddressId);
 
@@ -165,6 +168,7 @@ public class EmailAddressServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(EmailAddressServiceUtil.class.getName(),
 					"getEmailAddresses", java.lang.String.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK);
 
@@ -203,6 +207,7 @@ public class EmailAddressServiceHttp {
 			MethodKey methodKey = new MethodKey(EmailAddressServiceUtil.class.getName(),
 					"updateEmailAddress", long.class, java.lang.String.class,
 					int.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					emailAddressId, address, typeId, primary);
 

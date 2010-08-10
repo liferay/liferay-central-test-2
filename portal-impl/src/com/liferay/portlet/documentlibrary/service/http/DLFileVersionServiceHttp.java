@@ -62,6 +62,7 @@ public class DLFileVersionServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFileVersionServiceUtil.class.getName(),
 					"updateDescription", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					fileVersionId, description);
 

@@ -61,6 +61,7 @@ public class WebsiteServiceHttp {
 			MethodKey methodKey = new MethodKey(WebsiteServiceUtil.class.getName(),
 					"addWebsite", java.lang.String.class, long.class,
 					java.lang.String.class, int.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK, url, typeId, primary);
 
@@ -96,6 +97,7 @@ public class WebsiteServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(WebsiteServiceUtil.class.getName(),
 					"deleteWebsite", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, websiteId);
 
 			try {
@@ -127,6 +129,7 @@ public class WebsiteServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(WebsiteServiceUtil.class.getName(),
 					"getWebsite", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, websiteId);
 
 			Object returnObj = null;
@@ -162,6 +165,7 @@ public class WebsiteServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(WebsiteServiceUtil.class.getName(),
 					"getWebsites", java.lang.String.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK);
 
@@ -200,6 +204,7 @@ public class WebsiteServiceHttp {
 			MethodKey methodKey = new MethodKey(WebsiteServiceUtil.class.getName(),
 					"updateWebsite", long.class, java.lang.String.class,
 					int.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					websiteId, url, typeId, primary);
 

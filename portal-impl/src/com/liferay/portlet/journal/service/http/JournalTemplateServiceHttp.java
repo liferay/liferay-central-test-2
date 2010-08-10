@@ -71,6 +71,7 @@ public class JournalTemplateServiceHttp {
 					java.lang.String.class, boolean.class,
 					java.lang.String.class, boolean.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					templateId, autoTemplateId, structureId, name, description,
 					xsl, formatXsl, langType, cacheable, serviceContext);
@@ -120,6 +121,7 @@ public class JournalTemplateServiceHttp {
 					java.lang.String.class, boolean.class, boolean.class,
 					java.lang.String.class, java.io.File.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					templateId, autoTemplateId, structureId, name, description,
 					xsl, formatXsl, langType, cacheable, smallImage,
@@ -161,6 +163,7 @@ public class JournalTemplateServiceHttp {
 			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class.getName(),
 					"copyTemplate", long.class, java.lang.String.class,
 					java.lang.String.class, boolean.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					oldTemplateId, newTemplateId, autoTemplateId);
 
@@ -197,6 +200,7 @@ public class JournalTemplateServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class.getName(),
 					"deleteTemplate", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					templateId);
 
@@ -229,6 +233,7 @@ public class JournalTemplateServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class.getName(),
 					"getStructureTemplates", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					structureId);
 
@@ -265,6 +270,7 @@ public class JournalTemplateServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class.getName(),
 					"getTemplate", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					templateId);
 
@@ -309,6 +315,7 @@ public class JournalTemplateServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					boolean.class, java.lang.String.class, boolean.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					templateId, structureId, name, description, xsl, formatXsl,
 					langType, cacheable, serviceContext);
@@ -356,6 +363,7 @@ public class JournalTemplateServiceHttp {
 					boolean.class, java.lang.String.class, boolean.class,
 					boolean.class, java.lang.String.class, java.io.File.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					templateId, structureId, name, description, xsl, formatXsl,
 					langType, cacheable, smallImage, smallImageURL, smallFile,

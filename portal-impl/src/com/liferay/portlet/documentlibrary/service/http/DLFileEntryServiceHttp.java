@@ -69,6 +69,7 @@ public class DLFileEntryServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class, byte[].class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, name, title, description, changeLog,
 					extraSettings, bytes, serviceContext);
@@ -114,6 +115,7 @@ public class DLFileEntryServiceHttp {
 					java.lang.String.class, java.lang.String.class,
 					java.lang.String.class, java.io.File.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, name, title, description, changeLog,
 					extraSettings, file, serviceContext);
@@ -152,6 +154,7 @@ public class DLFileEntryServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"deleteFileEntry", long.class, long.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, name);
 
@@ -186,6 +189,7 @@ public class DLFileEntryServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"deleteFileEntry", long.class, long.class,
 					java.lang.String.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, name, version);
 
@@ -219,6 +223,7 @@ public class DLFileEntryServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"deleteFileEntryByTitle", long.class, long.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, titleWithExtension);
 
@@ -251,6 +256,7 @@ public class DLFileEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"getFileEntries", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId);
 
@@ -289,6 +295,7 @@ public class DLFileEntryServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"getFileEntries", long.class, long.class, int.class,
 					int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, start, end);
 
@@ -328,6 +335,7 @@ public class DLFileEntryServiceHttp {
 					"getFileEntries", long.class, long.class, int.class,
 					int.class,
 					com.liferay.portal.kernel.util.OrderByComparator.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, start, end, obc);
 
@@ -364,6 +372,7 @@ public class DLFileEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"getFileEntriesCount", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId);
 
@@ -402,6 +411,7 @@ public class DLFileEntryServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"getFileEntry", long.class, long.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, name);
 
@@ -440,6 +450,7 @@ public class DLFileEntryServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"getFileEntryByTitle", long.class, long.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, titleWithExtension);
 
@@ -477,6 +488,7 @@ public class DLFileEntryServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"getFileEntryByUuidAndGroupId", java.lang.String.class,
 					long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, uuid,
 					groupId);
 
@@ -513,6 +525,7 @@ public class DLFileEntryServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"getFoldersFileEntriesCount", long.class,
 					java.util.List.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderIds, status);
 
@@ -545,6 +558,7 @@ public class DLFileEntryServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"getGroupFileEntries", long.class, long.class, int.class,
 					int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userId, start, end);
 
@@ -579,6 +593,7 @@ public class DLFileEntryServiceHttp {
 					"getGroupFileEntries", long.class, long.class, int.class,
 					int.class,
 					com.liferay.portal.kernel.util.OrderByComparator.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userId, start, end, obc);
 
@@ -610,6 +625,7 @@ public class DLFileEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"getGroupFileEntriesCount", long.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userId);
 
@@ -643,6 +659,7 @@ public class DLFileEntryServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"hasFileEntryLock", long.class, long.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, name);
 
@@ -681,6 +698,7 @@ public class DLFileEntryServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"lockFileEntry", long.class, long.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, name);
 
@@ -719,6 +737,7 @@ public class DLFileEntryServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"lockFileEntry", long.class, long.class,
 					java.lang.String.class, java.lang.String.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, name, owner, expirationTime);
 
@@ -759,6 +778,7 @@ public class DLFileEntryServiceHttp {
 					"moveFileEntry", long.class, long.class, long.class,
 					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, newFolderId, name, serviceContext);
 
@@ -796,6 +816,7 @@ public class DLFileEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"refreshFileEntryLock", java.lang.String.class, long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					lockUuid, expirationTime);
 
@@ -832,6 +853,7 @@ public class DLFileEntryServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"unlockFileEntry", long.class, long.class,
 					java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, name);
 
@@ -862,6 +884,7 @@ public class DLFileEntryServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"unlockFileEntry", long.class, long.class,
 					java.lang.String.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, name, lockUuid);
 
@@ -904,6 +927,7 @@ public class DLFileEntryServiceHttp {
 					java.lang.String.class, boolean.class,
 					java.lang.String.class, byte[].class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, name, sourceFileName, title, description,
 					changeLog, majorVersion, extraSettings, bytes,
@@ -952,6 +976,7 @@ public class DLFileEntryServiceHttp {
 					java.lang.String.class, boolean.class,
 					java.lang.String.class, java.io.File.class,
 					com.liferay.portal.service.ServiceContext.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, name, sourceFileName, title, description,
 					changeLog, majorVersion, extraSettings, file, serviceContext);
@@ -991,6 +1016,7 @@ public class DLFileEntryServiceHttp {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"verifyFileEntryLock", long.class, long.class,
 					java.lang.String.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, name, lockUuid);
 

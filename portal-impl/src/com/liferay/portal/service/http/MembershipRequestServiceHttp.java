@@ -59,6 +59,7 @@ public class MembershipRequestServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(MembershipRequestServiceUtil.class.getName(),
 					"addMembershipRequest", long.class, java.lang.String.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					comments);
 
@@ -95,6 +96,7 @@ public class MembershipRequestServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(MembershipRequestServiceUtil.class.getName(),
 					"deleteMembershipRequests", long.class, int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					statusId);
 
@@ -127,6 +129,7 @@ public class MembershipRequestServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(MembershipRequestServiceUtil.class.getName(),
 					"getMembershipRequest", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					membershipRequestId);
 
@@ -164,6 +167,7 @@ public class MembershipRequestServiceHttp {
 			MethodKey methodKey = new MethodKey(MembershipRequestServiceUtil.class.getName(),
 					"updateStatus", long.class, java.lang.String.class,
 					int.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					membershipRequestId, reviewComments, statusId);
 

@@ -60,6 +60,7 @@ public class MBMessageFlagServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageFlagServiceUtil.class.getName(),
 					"addAnswerFlag", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, messageId);
 
 			try {
@@ -91,6 +92,7 @@ public class MBMessageFlagServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageFlagServiceUtil.class.getName(),
 					"deleteAnswerFlag", long.class);
+
 			MethodHandler methodHandler = new MethodHandler(methodKey, messageId);
 
 			try {
