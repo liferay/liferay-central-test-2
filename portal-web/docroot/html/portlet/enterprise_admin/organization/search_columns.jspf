@@ -18,7 +18,7 @@
 	href="<%= rowURL %>"
 	name="name"
 	orderable="<%= true %>"
-	value="<%= HtmlUtil.escape(organization.getName()) %>"
+	property="name"
 />
 
 <liferay-ui:search-container-column-text
@@ -51,7 +51,7 @@
 <liferay-ui:search-container-column-text
 	href="<%= rowURL %>"
 	name="city"
-	value="<%= HtmlUtil.escape(organization.getAddress().getCity()) %>"
+	value="<%= organization.getAddress().getCity() %>"
 />
 
 <liferay-ui:search-container-column-text
