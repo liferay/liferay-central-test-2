@@ -109,7 +109,6 @@
 			<jvmarg value="-Duser.language=en" />
 			<arg value="${lang.dir}" />
 			<arg value="${lang.file}" />
-			<arg value="${lang.code}" />
 		</java>
 
 		<copy file="${lang.dir}/${lang.file}.properties" tofile="${lang.dir}/${lang.file}_en.properties" />
