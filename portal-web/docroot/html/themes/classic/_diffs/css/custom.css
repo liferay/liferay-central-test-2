@@ -109,12 +109,18 @@ body #banner .logo a {
 	margin: 0 auto 5px;
 	min-height: 2.2em;
 	padding: 0 5px;
+	position: relative;
+	z-index: 1;
 }
 
 #navigation ul {
 	list-style: none;
 	margin: 0;
 	padding: 3px;
+}
+
+.ie7 #navigation ul {
+	padding: 2px;
 }
 
 #navigation li, #navigation a {
@@ -124,6 +130,7 @@ body #banner .logo a {
 .ie6 #navigation li, .ie7 #navigation li, .ie6 #navigation a, .ie7 #navigation a {
 	display: inline;
 	zoom: 1;
+	z-index: 200;
 }
 
 #navigation li {
@@ -138,6 +145,10 @@ body #banner .logo a {
 	margin: 0 1px;
 	padding: 3px 15px;
 	text-decoration: none;
+}
+
+.ie7 #navigation a {
+	padding: 4px 15px;
 }
 
 #navigation .selected a, #navigation a:hover, #navigation a:focus, #navigation .child-menu li a {
@@ -161,6 +172,11 @@ body #banner .logo a {
 	position: absolute;
 	width: 200px;
 	z-index: 200;
+}
+
+.ie6 #navigation li.hover .child-menu, .ie7 #navigation li:hover ul.child-menu {
+	left: 0;
+	top: 25px;
 }
 
 #navigation .child-menu {
