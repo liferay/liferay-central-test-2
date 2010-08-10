@@ -97,7 +97,7 @@
 				if (UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.MANAGE_ANNOUNCEMENTS)) {
 			%>
 
-					<aui:option label="<%= userGroup.getName() %>" selected="<%= classPK == userGroup.getUserGroupId() %>" value="<%= PortalUtil.getClassNameId(UserGroup.class) + StringPool.COMMA + userGroup.getUserGroupId() %>" />
+					<aui:option label="<%= HtmlUtil.escape(userGroup.getName()) %>" selected="<%= classPK == userGroup.getUserGroupId() %>" value="<%= PortalUtil.getClassNameId(UserGroup.class) + StringPool.COMMA + userGroup.getUserGroupId() %>" />
 
 			<%
 				}

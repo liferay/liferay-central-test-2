@@ -71,7 +71,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	<c:if test="<%= userGroup != null %>">
 		<aui:input name="<%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
 
-		<h3><%= LanguageUtil.format(pageContext, "users-of-x", userGroup.getName()) %></h3>
+		<h3><%= LanguageUtil.format(pageContext, "users-of-x", HtmlUtil.escape(userGroup.getName())) %></h3>
 	</c:if>
 
 	<liferay-ui:search-form
@@ -130,7 +130,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	<c:if test="<%= userGroup != null %>">
 		<aui:input name="<%= UserDisplayTerms.USER_GROUP_ID %>" type="hidden" value="<%= userGroup.getUserGroupId() %>" />
 
-		<liferay-ui:message key="filter-by-user-group" />: <%= userGroup.getName() %><br />
+		<liferay-ui:message key="filter-by-user-group" />: <%= HtmlUtil.escape(userGroup.getName()) %><br />
 	</c:if>
 
 	<div class="separator"><!-- --></div>
