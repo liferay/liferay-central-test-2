@@ -40,6 +40,29 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class LanguageResources {
 
+	public static String fixValue(String value) {
+		try {
+			value = new String(
+				value.getBytes(StringPool.ISO_8859_1), StringPool.UTF8);
+		}
+		catch (UnsupportedEncodingException uee) {
+			_log.error(uee, uee);
+		}
+
+		if (value.endsWith(LangBuilder.AUTOMATIC_COPY)) {
+			value = value.substring(
+				0, value.length() - LangBuilder.AUTOMATIC_COPY.length());
+		}
+
+		if (value.endsWith(LangBuilder.AUTOMATIC_TRANSLATION)) {
+			value = value.substring(
+				0,
+				value.length() - LangBuilder.AUTOMATIC_TRANSLATION.length());
+		}
+
+		return value;
+	}
+
 	public static String getMessage(Locale locale, String key) {
 		if (locale == null) {
 			return null;
@@ -144,28 +167,7 @@ public class LanguageResources {
 					String key = (String)entry.getKey();
 					String value = (String)entry.getValue();
 
-					try {
-						value = new String(
-							value.getBytes(StringPool.ISO_8859_1),
-							StringPool.UTF8);
-					}
-					catch (UnsupportedEncodingException uee) {
-						_log.error(uee, uee);
-					}
-
-					if (value.endsWith(LangBuilder.AUTOMATIC_COPY)) {
-						value = value.substring(
-							0,
-							value.length() -
-								LangBuilder.AUTOMATIC_COPY.length());
-					}
-
-					if (value.endsWith(LangBuilder.AUTOMATIC_TRANSLATION)) {
-						value = value.substring(
-							0,
-							value.length() -
-								LangBuilder.AUTOMATIC_TRANSLATION.length());
-					}
+					value = fixValue(value);
 
 					languageMap.put(key, value);
 				}
