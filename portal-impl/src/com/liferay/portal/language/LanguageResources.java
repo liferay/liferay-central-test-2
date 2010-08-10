@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.tools.LangBuilder;
 
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -150,6 +151,20 @@ public class LanguageResources {
 					}
 					catch (UnsupportedEncodingException uee) {
 						_log.error(uee, uee);
+					}
+
+					if (value.endsWith(LangBuilder.AUTOMATIC_COPY)) {
+						value = value.substring(
+							0,
+							value.length() -
+								LangBuilder.AUTOMATIC_COPY.length());
+					}
+
+					if (value.endsWith(LangBuilder.AUTOMATIC_TRANSLATION)) {
+						value = value.substring(
+							0,
+							value.length() -
+								LangBuilder.AUTOMATIC_TRANSLATION.length());
 					}
 
 					languageMap.put(key, value);

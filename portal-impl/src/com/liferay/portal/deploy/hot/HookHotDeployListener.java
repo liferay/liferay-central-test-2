@@ -86,6 +86,7 @@ import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.autologin.AutoLoginFilter;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
+import com.liferay.portal.tools.LangBuilder;
 import com.liferay.portal.upgrade.UpgradeProcessUtil;
 import com.liferay.portal.util.JavaScriptBundleUtil;
 import com.liferay.portal.util.PortalInstances;
@@ -99,6 +100,7 @@ import com.liferay.util.log4j.Log4JUtil;
 
 import java.io.File;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -498,6 +500,29 @@ public class HookHotDeployListener
 				for (Map.Entry<Object, Object> entry : properties.entrySet()) {
 					String key = (String)entry.getKey();
 					String value = (String)entry.getValue();
+
+					try {
+						value = new String(
+							value.getBytes(StringPool.ISO_8859_1),
+							StringPool.UTF8);
+					}
+					catch (UnsupportedEncodingException uee) {
+						_log.error(uee, uee);
+					}
+
+					if (value.endsWith(LangBuilder.AUTOMATIC_COPY)) {
+						value = value.substring(
+							0,
+							value.length() -
+								LangBuilder.AUTOMATIC_COPY.length());
+					}
+
+					if (value.endsWith(LangBuilder.AUTOMATIC_TRANSLATION)) {
+						value = value.substring(
+							0,
+							value.length() -
+								LangBuilder.AUTOMATIC_TRANSLATION.length());
+					}
 
 					languageMap.put(key, value);
 				}

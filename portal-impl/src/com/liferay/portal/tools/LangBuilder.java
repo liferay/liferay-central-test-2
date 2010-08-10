@@ -40,6 +40,11 @@ import java.util.TreeSet;
  */
 public class LangBuilder {
 
+	public static final String AUTOMATIC_COPY = " (Automatic Copy)";
+
+	public static final String AUTOMATIC_TRANSLATION =
+		" (Automatic Translation)";
+
 	public static void main(String[] args) {
 		InitUtil.initWithSpring();
 
@@ -66,46 +71,46 @@ public class LangBuilder {
 					FileUtil.read(renameKeysFile));
 			}
 
-			String content = _orderProps(
+			String content = _orderProperties(
 				new File(_langDir + "/" + _langFile + ".properties"));
 
 			if (Validator.isNotNull(langCode) && !langCode.startsWith("$")) {
-				_createProps(content, langCode);
+				_createProperties(content, langCode);
 			}
 			else {
-				_createProps(content, "ar"); // Arabic
-				_createProps(content, "eu"); // Basque
-				_createProps(content, "bg"); // Bulgarian
-				_createProps(content, "ca"); // Catalan
-				_createProps(content, "zh_CN"); // Chinese (China)
-				_createProps(content, "zh_TW"); // Chinese (Taiwan)
-				_createProps(content, "cs"); // Czech
-				_createProps(content, "nl"); // Dutch
-				_createProps(content, "et"); // Estonian
-				_createProps(content, "fi"); // Finnish
-				_createProps(content, "fr"); // French
-				_createProps(content, "gl"); // Galician
-				_createProps(content, "de"); // German
-				_createProps(content, "el"); // Greek
-				_createProps(content, "iw"); // Hebrew
-				_createProps(content, "hi_IN"); // Hindi (India)
-				_createProps(content, "hu"); // Hungarian
-				_createProps(content, "in"); // Indonesian
-				_createProps(content, "it"); // Italian
-				_createProps(content, "ja"); // Japanese
-				_createProps(content, "ko"); // Korean
-				_createProps(content, "nb"); // Norwegian Bokmål
-				_createProps(content, "fa"); // Persian
-				_createProps(content, "pl"); // Polish
-				_createProps(content, "pt_BR"); // Portuguese (Brazil)
-				_createProps(content, "pt_PT"); // Portuguese (Portugal)
-				_createProps(content, "ru"); // Russian
-				_createProps(content, "sk"); // Slovak
-				_createProps(content, "es"); // Spanish
-				_createProps(content, "sv"); // Swedish
-				_createProps(content, "tr"); // Turkish
-				_createProps(content, "uk"); // Ukrainian
-				_createProps(content, "vi"); // Vietnamese
+				_createProperties(content, "ar"); // Arabic
+				_createProperties(content, "eu"); // Basque
+				_createProperties(content, "bg"); // Bulgarian
+				_createProperties(content, "ca"); // Catalan
+				_createProperties(content, "zh_CN"); // Chinese (China)
+				_createProperties(content, "zh_TW"); // Chinese (Taiwan)
+				_createProperties(content, "cs"); // Czech
+				_createProperties(content, "nl"); // Dutch
+				_createProperties(content, "et"); // Estonian
+				_createProperties(content, "fi"); // Finnish
+				_createProperties(content, "fr"); // French
+				_createProperties(content, "gl"); // Galician
+				_createProperties(content, "de"); // German
+				_createProperties(content, "el"); // Greek
+				_createProperties(content, "iw"); // Hebrew
+				_createProperties(content, "hi_IN"); // Hindi (India)
+				_createProperties(content, "hu"); // Hungarian
+				_createProperties(content, "in"); // Indonesian
+				_createProperties(content, "it"); // Italian
+				_createProperties(content, "ja"); // Japanese
+				_createProperties(content, "ko"); // Korean
+				_createProperties(content, "nb"); // Norwegian Bokmål
+				_createProperties(content, "fa"); // Persian
+				_createProperties(content, "pl"); // Polish
+				_createProperties(content, "pt_BR"); // Portuguese (Brazil)
+				_createProperties(content, "pt_PT"); // Portuguese (Portugal)
+				_createProperties(content, "ru"); // Russian
+				_createProperties(content, "sk"); // Slovak
+				_createProperties(content, "es"); // Spanish
+				_createProperties(content, "sv"); // Swedish
+				_createProperties(content, "tr"); // Turkish
+				_createProperties(content, "uk"); // Ukrainian
+				_createProperties(content, "vi"); // Vietnamese
 			}
 		}
 		catch (Exception e) {
@@ -113,26 +118,16 @@ public class LangBuilder {
 		}
 	}
 
-	private void _createProps(String content, String languageId)
+	private void _createProperties(String content, String languageId)
 		throws IOException {
 
-		File propsFile = new File(
+		File propertiesFile = new File(
 			_langDir + "/" + _langFile + "_" + languageId + ".properties");
 
-		Properties props = new Properties();
+		Properties properties = new Properties();
 
-		if (propsFile.exists()) {
-			props.load(new FileInputStream(propsFile));
-		}
-
-		File missingPropsFile = new File(
-			_langDir + "/" + _langFile + "_" + languageId +
-				".properties.missing");
-
-		Properties missingProps = new Properties();
-
-		if (missingPropsFile.exists()) {
-			missingProps.load(new FileInputStream(missingPropsFile));
+		if (propertiesFile.exists()) {
+			properties.load(new FileInputStream(propertiesFile));
 		}
 
 		String translationId = "en_" + languageId;
@@ -155,10 +150,8 @@ public class LangBuilder {
 
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(content));
-		UnsyncBufferedWriter missingPropsUnsyncBufferedWriter = 
-			new UnsyncBufferedWriter(new FileWriter(missingPropsFile));
-		UnsyncBufferedWriter propsUnsyncBufferedWriter = 
-			new UnsyncBufferedWriter(new FileWriter(propsFile));
+		UnsyncBufferedWriter unsyncBufferedWriter = new UnsyncBufferedWriter(
+			new FileWriter(propertiesFile));
 
 		String line = null;
 
@@ -171,17 +164,13 @@ public class LangBuilder {
 				String key = line.substring(0, pos);
 				String value = line.substring(pos + 1, line.length());
 
-				String missingValue = _getProperty(missingProps, key);
-				String translatedText = _getProperty(props, key);
+				String translatedText = _getProperty(properties, key);
 
-				if ((missingValue == null) && (translatedText == null) &&
-					(_renameKeys != null)) {
-
+				if ((translatedText == null) && (_renameKeys != null)) {
 					String renameKey = _renameKeys.getProperty(key);
 
 					if (renameKey != null) {
-						missingValue = _getProperty(missingProps, key);
-						translatedText = _getProperty(props, key);
+						translatedText = _getProperty(properties, key);
 					}
 				}
 
@@ -191,15 +180,10 @@ public class LangBuilder {
 
 					translatedText = "";
 				}
-				else if ((missingValue != null) &&
-						 (missingValue.endsWith(_AUTOMATIC_TRANSLATION))) {
-
-					translatedText += _AUTOMATIC_TRANSLATION;
-				}
 
 				if ((translatedText == null) || translatedText.equals("")) {
 					if (line.indexOf("{") != -1 || line.indexOf("<") != -1) {
-						translatedText = value + _AUTOMATIC_COPY;
+						translatedText = value + AUTOMATIC_COPY;
 					}
 					else if (line.indexOf("[") != -1) {
 						pos = line.indexOf("[");
@@ -207,7 +191,7 @@ public class LangBuilder {
 						String baseKey = line.substring(0, pos);
 
 						translatedText =
-							_getProperty(props, baseKey) + _AUTOMATIC_COPY;
+							_getProperty(properties, baseKey) + AUTOMATIC_COPY;
 					}
 					else if (key.equals("lang.dir")) {
 						translatedText = "ltr";
@@ -251,7 +235,10 @@ public class LangBuilder {
 							translationId, key, value, 0);
 
 						if (Validator.isNull(translatedText)) {
-							translatedText = value + _AUTOMATIC_COPY;
+							translatedText = value + AUTOMATIC_COPY;
+						}
+						else {
+							translatedText = value + AUTOMATIC_TRANSLATION;
 						}
 					}
 				}
@@ -273,26 +260,22 @@ public class LangBuilder {
 					translatedText = StringUtil.replace(
 						translatedText.trim(), "  ", " ");
 
-					_writeLine(
-						missingPropsUnsyncBufferedWriter, 
-						propsUnsyncBufferedWriter, key + "=" + translatedText);
-				}
-				else if (missingProps.containsKey(key)) {
-					_writeLine(
-						missingPropsUnsyncBufferedWriter, 
-						propsUnsyncBufferedWriter, key + "=");
+					unsyncBufferedWriter.write(key + "=" + translatedText);
+
+					unsyncBufferedWriter.newLine();
+					unsyncBufferedWriter.flush();
 				}
 			}
 			else {
-				_writeLine(
-					missingPropsUnsyncBufferedWriter, propsUnsyncBufferedWriter,
-					line);
+				unsyncBufferedWriter.write(line);
+
+				unsyncBufferedWriter.newLine();
+				unsyncBufferedWriter.flush();
 			}
 		}
 
 		unsyncBufferedReader.close();
-		missingPropsUnsyncBufferedWriter.close();
-		propsUnsyncBufferedWriter.close();
+		unsyncBufferedWriter.close();
 	}
 
 	private String _getProperty(Properties properties, String key)
@@ -309,13 +292,13 @@ public class LangBuilder {
 		return value;
 	}
 
-	private String _orderProps(File propsFile) throws IOException {
-		String content = FileUtil.read(propsFile);
+	private String _orderProperties(File propertiesFile) throws IOException {
+		String content = FileUtil.read(propertiesFile);
 
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(content));
 		UnsyncBufferedWriter unsyncBufferedWriter = new UnsyncBufferedWriter(
-			new FileWriter(propsFile));
+			new FileWriter(propertiesFile));
 
 		Set<String> messages = new TreeSet<String>();
 
@@ -355,7 +338,7 @@ public class LangBuilder {
 		unsyncBufferedReader.close();
 		unsyncBufferedWriter.close();
 
-		return FileUtil.read(propsFile);
+		return FileUtil.read(propertiesFile);
 	}
 
 	private void _sortAndWrite(
@@ -441,40 +424,11 @@ public class LangBuilder {
 		}
 
 		if (Validator.isNotNull(toText)) {
-			toText += _AUTOMATIC_TRANSLATION;
+			toText += AUTOMATIC_TRANSLATION;
 		}
 
 		return toText;
 	}
-
-	private void _writeLine(
-			UnsyncBufferedWriter missingPropsUnsyncBufferedWriter,
-			UnsyncBufferedWriter propsUnsyncedBufferedWriter,
-			String line)
-		throws IOException {
-
-		missingPropsUnsyncBufferedWriter.write(line);
-		missingPropsUnsyncBufferedWriter.newLine();
-		missingPropsUnsyncBufferedWriter.flush();
-
-		if (line.endsWith(_AUTOMATIC_COPY)) {
-			return;
-		}
-		else if (line.endsWith(_AUTOMATIC_TRANSLATION)) {
-			int pos = line.indexOf(_AUTOMATIC_TRANSLATION);
-
-			line = line.substring(0, pos);
-		}
-
-		propsUnsyncedBufferedWriter.write(line);
-		propsUnsyncedBufferedWriter.newLine();
-		propsUnsyncedBufferedWriter.flush();
-	}
-
-	private static final String _AUTOMATIC_COPY = " (Automatic Copy)";
-
-	private static final String _AUTOMATIC_TRANSLATION =
-		" (Automatic Translation)";
 
 	private String _langDir;
 	private String _langFile;
