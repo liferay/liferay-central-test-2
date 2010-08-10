@@ -318,9 +318,9 @@ numberFormat.setMinimumIntegerDigits(2);
 				<aui:fieldset>
 					<aui:input inlineLabel="right" label="enable-recaptcha" name="reCaptchaEnabled" type="checkbox" value="<%= PrefsPropsUtil.getString(PropsKeys.CAPTCHA_ENGINE_IMPL, PropsValues.CAPTCHA_ENGINE_IMPL).equals(ReCaptchaImpl.class.getName()) %>" />
 
-					<aui:input cssClass="lfr-input-text-container" label="recaptcha-private-key" name="reCaptchaPrivateKey" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE, PropsValues.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE) %>" />
-
 					<aui:input cssClass="lfr-input-text-container" label="recaptcha-public-key" name="reCaptchaPublicKey" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC, PropsValues.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC) %>" />
+
+					<aui:input cssClass="lfr-input-text-container" label="recaptcha-private-key" name="reCaptchaPrivateKey" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE, PropsValues.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE) %>" />
 				</aui:fieldset>
 
 				<aui:button-row>
