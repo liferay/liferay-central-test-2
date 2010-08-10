@@ -487,6 +487,7 @@ public class EditArticleAction extends PortletAction {
 			reviewDateHour += 12;
 		}
 
+		boolean localized = ParamUtil.getBoolean(uploadRequest, "localized");
 		boolean indexable = ParamUtil.getBoolean(uploadRequest, "indexable");
 
 		boolean smallImage = ParamUtil.getBoolean(uploadRequest, "smallImage");
@@ -536,8 +537,14 @@ public class EditArticleAction extends PortletAction {
 
 			if (Validator.isNull(structureId)) {
 				if (!curArticle.isTemplateDriven()) {
+					String curContent = StringPool.BLANK;
+
+					if (localized) {
+						curContent = curArticle.getContent();
+					}
+
 					content = LocalizationUtil.updateLocalization(
-						curArticle.getContent(), "static-content", content,
+						curContent, "static-content", content,
 						lastLanguageId, defaultLanguageId, true);
 				}
 			}

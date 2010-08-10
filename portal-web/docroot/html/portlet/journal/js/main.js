@@ -2688,19 +2688,23 @@ AUI().add(
 				if (languageIdSelect) {
 					selectedLocale = languageIdSelect.val();
 				}
-
-				if (localizedValue) {
-					if (isLocalized) {
-						localizedValue.val(selectedLocale);
+				
+				var setLocalizedValue = function(value) {
+					if (localizedValue) {
+						localizedValue.val(value);
 					}
-					else if (!confirm(Liferay.Language.get('unchecking-this-field-will-remove-localized-data-for-languages-not-shown-in-this-view'))) {
-						checkbox.attr('checked', true);
-
-						localizedValue.val(selectedLocale);
-					}
-					else {
-						localizedValue.val(false);
-					}
+				};
+				
+				if (isLocalized) {
+					setLocalizedValue(selectedLocale);
+				}
+				else if (!confirm(Liferay.Language.get('unchecking-this-field-will-remove-localized-data-for-languages-not-shown-in-this-view'))) {
+					checkbox.attr('checked', true);
+					
+					setLocalizedValue(selectedLocale);
+				}
+				else {
+					setLocalizedValue(false);
 				}
 
 				var fieldInstance = instance.getFieldInstance(source);

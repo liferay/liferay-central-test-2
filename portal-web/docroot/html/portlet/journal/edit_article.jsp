@@ -418,6 +418,8 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 												<liferay-ui:input-editor name='<%= renderResponse.getNamespace() + "structure_el_TextAreaField_content" %>' editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="liferay-article" onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>' width="100%" />
 											</div>
 
+											<aui:input cssClass="journal-article-localized-checkbox" disabled="<%= article == null %>" label="localized" name="localized" type="checkbox" value="<%= ((article != null) && (article.getAvailableLocales().length > 1)) %>" />
+
 											<div class="journal-article-required-message portlet-msg-error">
 												<liferay-ui:message key="this-field-is-required" />
 											</div>
