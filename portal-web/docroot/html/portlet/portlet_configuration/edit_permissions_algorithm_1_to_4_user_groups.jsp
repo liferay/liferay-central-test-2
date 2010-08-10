@@ -117,7 +117,7 @@ int userGroupIdsPos = ParamUtil.getInteger(request, "userGroupIdsPos");
 		%>
 
 		<liferay-ui:header
-			title="<%= HtmlUtil.escape(userGroup.getName()) %>"
+			title="<%= userGroup.getName() %>"
 		/>
 
 		<%

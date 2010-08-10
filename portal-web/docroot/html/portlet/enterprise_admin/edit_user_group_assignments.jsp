@@ -36,7 +36,7 @@ portletURL.setParameter("userGroupId", String.valueOf(userGroup.getUserGroupId()
 
 <liferay-ui:header
 	backURL="<%= redirect %>"
-	title="<%= HtmlUtil.escape(userGroup.getName()) %>"
+	title="<%= userGroup.getName() %>"
 />
 
 <liferay-ui:tabs

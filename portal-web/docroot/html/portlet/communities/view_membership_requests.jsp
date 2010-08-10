@@ -40,7 +40,7 @@ Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
 <liferay-ui:header
 	backURL="<%= redirect %>"
-	title="<%= HtmlUtil.escape(group.getDescriptiveName()) %>"
+	title="<%= group.getDescriptiveName() %>"
 />
 
 <liferay-ui:tabs

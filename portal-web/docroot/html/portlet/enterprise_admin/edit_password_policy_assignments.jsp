@@ -45,7 +45,7 @@ portletURL.setParameter("tabs3", tabs3);
 
 <liferay-ui:header
 	backURL="<%= redirect %>"
-	title="<%= HtmlUtil.escape(passwordPolicy.getName()) %>"
+	title="<%= passwordPolicy.getName() %>"
 />
 
 <liferay-ui:tabs

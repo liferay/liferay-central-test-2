@@ -162,7 +162,7 @@ int organizationIdsPos = ParamUtil.getInteger(request, "organizationIdsPos");
 		%>
 
 		<liferay-ui:header
-			title="<%= HtmlUtil.escape(organization.getName()) %>"
+			title="<%= organization.getName() %>"
 		/>
 
 		<%

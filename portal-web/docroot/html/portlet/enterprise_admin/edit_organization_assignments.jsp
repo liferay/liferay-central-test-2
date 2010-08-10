@@ -49,7 +49,7 @@ request.setAttribute("edit_organization_assignments.jsp-portletURL", portletURL)
 
 <liferay-ui:header
 	backURL="<%= redirect %>"
-	title="<%= HtmlUtil.escape(organization.getName()) %>"
+	title="<%= organization.getName() %>"
 />
 
 <%

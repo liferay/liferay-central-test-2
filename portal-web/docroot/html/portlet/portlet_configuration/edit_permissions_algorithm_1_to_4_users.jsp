@@ -125,7 +125,7 @@ int userIdsPos = ParamUtil.getInteger(request, "userIdsPos");
 		%>
 
 		<liferay-ui:header
-			title="<%= HtmlUtil.escape(user2.getFullName()) %>"
+			title="<%= user2.getFullName() %>"
 		/>
 
 		<%

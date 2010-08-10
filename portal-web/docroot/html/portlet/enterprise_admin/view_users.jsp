@@ -93,7 +93,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 
 		<liferay-ui:header
 			backURL="<%= backURL %>"
-			title="<%= HtmlUtil.escape(organization.getName()) %>"
+			title="<%= organization.getName() %>"
 		/>
 
 		<%
@@ -109,7 +109,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 
 		<liferay-ui:header
 			backURL="<%= backURL %>"
-			title="<%= HtmlUtil.escape(role.getTitle(locale)) %>"
+			title="<%= role.getTitle(locale) %>"
 		/>
 
 		<%
@@ -124,7 +124,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 
 		<liferay-ui:header
 			backURL="<%= backURL %>"
-			title="<%= HtmlUtil.escape(userGroup.getName()) %>"
+			title="<%= userGroup.getName() %>"
 		/>
 
 		<%
