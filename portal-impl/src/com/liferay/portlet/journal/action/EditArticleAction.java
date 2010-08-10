@@ -487,7 +487,6 @@ public class EditArticleAction extends PortletAction {
 			reviewDateHour += 12;
 		}
 
-		boolean localized = ParamUtil.getBoolean(uploadRequest, "localized");
 		boolean indexable = ParamUtil.getBoolean(uploadRequest, "indexable");
 
 		boolean smallImage = ParamUtil.getBoolean(uploadRequest, "smallImage");
@@ -538,6 +537,9 @@ public class EditArticleAction extends PortletAction {
 			if (Validator.isNull(structureId)) {
 				if (!curArticle.isTemplateDriven()) {
 					String curContent = StringPool.BLANK;
+
+					boolean localized = ParamUtil.getBoolean(
+						uploadRequest, "localized");
 
 					if (localized) {
 						curContent = curArticle.getContent();

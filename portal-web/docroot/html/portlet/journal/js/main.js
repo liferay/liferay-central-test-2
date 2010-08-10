@@ -2688,19 +2688,19 @@ AUI().add(
 				if (languageIdSelect) {
 					selectedLocale = languageIdSelect.val();
 				}
-				
+
 				var setLocalizedValue = function(value) {
 					if (localizedValue) {
 						localizedValue.val(value);
 					}
 				};
-				
+
 				if (isLocalized) {
 					setLocalizedValue(selectedLocale);
 				}
 				else if (!confirm(Liferay.Language.get('unchecking-this-field-will-remove-localized-data-for-languages-not-shown-in-this-view'))) {
 					checkbox.attr('checked', true);
-					
+
 					setLocalizedValue(selectedLocale);
 				}
 				else {
