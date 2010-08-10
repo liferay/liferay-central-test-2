@@ -963,6 +963,7 @@ public class LayoutImporter {
 
 		ClusterRequest clusterRequest = ClusterRequest.createMulticastRequest(
 			_loadThemesMethodHandler, true);
+
 		clusterRequest.setFireAndForget(true);
 
 		ClusterExecutorUtil.execute(clusterRequest);
@@ -1038,11 +1039,10 @@ public class LayoutImporter {
 		}
 	}
 
-	private static final MethodHandler _loadThemesMethodHandler =
-		new MethodHandler(new MethodKey(ThemeLoaderFactory.class.getName(),
-			"loadThemes"));
-
 	private static Log _log = LogFactoryUtil.getLog(LayoutImporter.class);
+
+	private static MethodHandler _loadThemesMethodHandler = new MethodHandler(
+		new MethodKey(ThemeLoaderFactory.class.getName(), "loadThemes"));
 
 	private PermissionImporter _permissionImporter = new PermissionImporter();
 	private PortletImporter _portletImporter = new PortletImporter();

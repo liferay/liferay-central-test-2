@@ -1341,15 +1341,16 @@ public class ServiceBuilder {
 	}
 
 	public String getLiteralClass(Type type) {
-		int dimensions = type.getDimensions();
-		StringBundler sb = new StringBundler(dimensions + 2);
+		StringBundler sb = new StringBundler(type.getDimensions() + 2);
+
 		sb.append(type.getValue());
 
-		for(int i = 0; i < dimensions; i++) {
+		for (int i = 0; i < type.getDimensions(); i++) {
 			sb.append("[]");
 		}
 
 		sb.append(".class");
+
 		return sb.toString();
 	}
 

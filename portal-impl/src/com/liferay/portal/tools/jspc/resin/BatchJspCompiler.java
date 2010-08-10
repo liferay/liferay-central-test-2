@@ -93,7 +93,7 @@ public class BatchJspCompiler {
 			"com.caucho.jsp.JspCompiler", "main", String[].class);
 
 		MethodHandler methodHandler = new MethodHandler(
-			methodKey, args.toArray(new String[args.size()]));
+			methodKey, args.toArray(new Object[args.size()]));
 
 		try {
 			methodHandler.invoke(false);

@@ -86,10 +86,11 @@ public class ${entity.name}ServiceHttp {
 					</#list>
 
 					);
+
 					MethodHandler methodHandler = new MethodHandler(methodKey
 
 					<#list parameters as parameter>
-					, ${parameter.name}
+						, ${parameter.name}
 					</#list>
 
 					);

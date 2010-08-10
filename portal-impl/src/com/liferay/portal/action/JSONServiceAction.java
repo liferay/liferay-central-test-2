@@ -534,6 +534,7 @@ public class JSONServiceAction extends JSONAction {
 
 	protected String getReturnValue(Object returnObj, Class<?> returnType)
 		throws Exception {
+
 		if ((returnObj instanceof Boolean) || (returnObj instanceof Double) ||
 			(returnObj instanceof Integer) || (returnObj instanceof Long) ||
 			(returnObj instanceof Short) || (returnObj instanceof String)) {
@@ -549,8 +550,11 @@ public class JSONServiceAction extends JSONAction {
 
 			MethodKey methodKey = new MethodKey(
 				serlializerClassName, "toJSONObject", returnType);
-			JSONObject jsonObject = (JSONObject)new MethodHandler(
-				methodKey, returnObj).invoke(false);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, returnObj);
+
+			JSONObject jsonObject = (JSONObject)methodHandler.invoke(false);
 
 			return jsonObject.toString();
 		}
@@ -567,8 +571,11 @@ public class JSONServiceAction extends JSONAction {
 
 				MethodKey methodKey = new MethodKey(
 					serializerClassName, "toJSONArray", returnType);
-				jsonArray = (JSONArray)new MethodHandler(
-					methodKey, returnObj).invoke(false);
+
+				MethodHandler methodHandler = new MethodHandler(
+					methodKey, returnObj);
+
+				jsonArray = (JSONArray)methodHandler.invoke(false);
 			}
 
 			return jsonArray.toString();
@@ -588,8 +595,11 @@ public class JSONServiceAction extends JSONAction {
 
 				MethodKey methodKey = new MethodKey(
 					serializerClassName, "toJSONArray", returnType);
-				jsonArray = (JSONArray)new MethodHandler(
-					methodKey, returnObj).invoke(false);
+
+				MethodHandler methodHandler = new MethodHandler(
+					methodKey, returnObj);
+
+				jsonArray = (JSONArray)methodHandler.invoke(false);
 			}
 
 			return jsonArray.toString();
@@ -607,8 +617,11 @@ public class JSONServiceAction extends JSONAction {
 
 				MethodKey methodKey = new MethodKey(
 					serlializerClassName, "toJSONArray", returnType);
-				jsonArray = (JSONArray)new MethodHandler(
-					methodKey, returnObj).invoke(false);
+
+				MethodHandler methodHandler = new MethodHandler(
+					methodKey, returnObj);
+
+				jsonArray = (JSONArray)methodHandler.invoke(false);
 			}
 
 			return jsonArray.toString();

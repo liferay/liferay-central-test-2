@@ -77,12 +77,12 @@ public class InputPermissionsTag extends IncludeTag {
 	private static final String _TAG_CLASS =
 		"com.liferay.portal.servlet.taglib.ui.InputPermissionsTagUtil";
 
-	private static final MethodKey _doEndTagMethodKey = new MethodKey(
-		_TAG_CLASS, "doEndTag", String.class, String.class, String.class,
-		PageContext.class);
-
 	private static final String _PAGE =
 		"/html/taglib/ui/input_permissions/page.jsp";
+
+	private static MethodKey _doEndTagMethodKey = new MethodKey(
+		_TAG_CLASS, "doEndTag", String.class, String.class, String.class,
+		PageContext.class);
 
 	private String _formName = "fm";
 	private String _modelName = null;

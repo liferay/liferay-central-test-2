@@ -69,15 +69,25 @@ public class VerifyUUID extends VerifyProcess {
 	public static void verifyModel(
 			String serviceClassName, String modelName, long pk)
 		throws Exception {
-		MethodKey methodKey = new MethodKey(
+
+		MethodKey getPKMethodKey = new MethodKey(
 			serviceClassName, "get" + modelName, long.class);
-		Method method = MethodCache.get(methodKey);
 
-		Object obj = new MethodHandler(methodKey, pk).invoke(true);
+		MethodHandler getPKMethodHandler = new MethodHandler(
+			getPKMethodKey, pk);
 
-		methodKey = new MethodKey(
-			serviceClassName, "update" + modelName, method.getReturnType());
-		new MethodHandler(methodKey, obj).invoke(true);
+		Object pkValue = getPKMethodHandler.invoke(true);
+
+		Method getPKMethod = MethodCache.get(getPKMethodKey);
+
+		MethodKey updateUuidMethodKey = new MethodKey(
+			serviceClassName, "update" + modelName,
+			getPKMethod.getReturnType());
+
+		MethodHandler updateUuidMethodHandler = new MethodHandler(
+			updateUuidMethodKey, pkValue);
+
+		updateUuidMethodHandler.invoke(true);
 	}
 
 	protected void doVerify() throws Exception {

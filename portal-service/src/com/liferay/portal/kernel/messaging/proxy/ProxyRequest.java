@@ -29,7 +29,6 @@ import java.lang.reflect.Method;
 public class ProxyRequest implements Serializable {
 
 	public ProxyRequest(Method method, Object[] arguments) throws Exception {
-
 		_methodHandler = new MethodHandler(method, arguments);
 
 		_hasReturnValue = false;

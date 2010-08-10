@@ -102,6 +102,12 @@ public class MailMessageListener implements MessageListener {
 		}
 	}
 
+	protected void doMethodHandler(MethodHandler methodHandler)
+		throws Exception {
+
+		methodHandler.invoke(HookFactory.getInstance());
+	}
+
 	protected void doReceive(Message message) throws Exception {
 		Object payload = message.getPayload();
 
@@ -109,7 +115,7 @@ public class MailMessageListener implements MessageListener {
 			doMailMessage((MailMessage)payload);
 		}
 		else if (payload instanceof MethodHandler) {
-			((MethodHandler)payload).invoke(HookFactory.getInstance());
+			doMethodHandler((MethodHandler)payload);
 		}
 	}
 

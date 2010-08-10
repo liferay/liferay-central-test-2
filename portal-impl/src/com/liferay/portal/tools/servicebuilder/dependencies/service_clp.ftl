@@ -6,8 +6,7 @@ import com.liferay.portal.kernel.util.MethodKey;
 
 public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name}${sessionTypeName}Service {
 
-	public ${entity.name}${sessionTypeName}ServiceClp(String className, ClassLoaderProxy classLoaderProxy) {
-		_className = className;
+	public ${entity.name}${sessionTypeName}ServiceClp(ClassLoaderProxy classLoaderProxy) {
 		_classLoaderProxy = classLoaderProxy;
 	}
 
@@ -52,7 +51,7 @@ public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name
 				MethodHandler methodHandler = new MethodHandler(_${method.name}MethodKey${method_index}
 
 				<#list parameters as parameter>
-				, ${parameter.name}
+					, ${parameter.name}
 				</#list>
 
 				);
@@ -104,13 +103,13 @@ public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name
 		return _classLoaderProxy;
 	}
 
-	private String _className;
 	private ClassLoaderProxy _classLoaderProxy;
 
 	<#list methods as method>
 		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method)>
 			<#assign parameters = method.parameters>
-			private final MethodKey _${method.name}MethodKey${method_index} = new MethodKey(_className, "${method.name}"
+
+			private MethodKey _${method.name}MethodKey${method_index} = new MethodKey(_classLoaderProxy.getClassName(), "${method.name}"
 
 			<#list parameters as parameter>
 				, ${serviceBuilder.getLiteralClass(parameter.type)}

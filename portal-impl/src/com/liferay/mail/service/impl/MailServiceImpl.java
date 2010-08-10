@@ -73,6 +73,7 @@ public class MailServiceImpl implements MailService {
 		MethodHandler methodHandler = new MethodHandler(
 			_addUserMethodKey, companyId, userId, password, firstName,
 			middleName, lastName, emailAddress);
+
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodHandler);
 	}
 
@@ -87,6 +88,7 @@ public class MailServiceImpl implements MailService {
 		MethodHandler methodHandler = new MethodHandler(
 			_addVacationMessageMethodKey, companyId, userId, emailAddress,
 			vacationMessage);
+
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodHandler);
 	}
 
@@ -101,6 +103,7 @@ public class MailServiceImpl implements MailService {
 
 		MethodHandler methodHandler = new MethodHandler(
 			_deleteEmailAddressMethodKey, companyId, userId);
+
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodHandler);
 	}
 
@@ -111,6 +114,7 @@ public class MailServiceImpl implements MailService {
 
 		MethodHandler methodHandler = new MethodHandler(
 			_deleteUserMethodKey, companyId, userId);
+
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodHandler);
 	}
 
@@ -252,6 +256,7 @@ public class MailServiceImpl implements MailService {
 
 		MethodHandler methodHandler = new MethodHandler(
 			_updateBlockedMethodKey, companyId, userId, blocked);
+
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodHandler);
 	}
 
@@ -264,6 +269,7 @@ public class MailServiceImpl implements MailService {
 
 		MethodHandler methodHandler = new MethodHandler(
 			_updateEmailAddressMethodKey, companyId, userId, emailAddress);
+
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodHandler);
 	}
 
@@ -274,40 +280,34 @@ public class MailServiceImpl implements MailService {
 
 		MethodHandler methodHandler = new MethodHandler(
 			_updatePasswordMethodKey, companyId, userId, password);
+
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodHandler);
 	}
 
-	private static final MethodKey _addForwardMethodKey = new MethodKey(
+	private static Log _log = LogFactoryUtil.getLog(MailServiceImpl.class);
+
+	private static MethodKey _addForwardMethodKey = new MethodKey(
 		Hook.class.getName(), "addForward", long.class, long.class, List.class,
 		List.class, boolean.class);
-
-	private static final MethodKey _addUserMethodKey = new MethodKey(
+	private static MethodKey _addUserMethodKey = new MethodKey(
 		Hook.class.getName(), "addUser", long.class, long.class, String.class,
 		String.class, String.class, String.class, String.class);
-
-	private static final MethodKey _addVacationMessageMethodKey = new MethodKey(
+	private static MethodKey _addVacationMessageMethodKey = new MethodKey(
 		Hook.class.getName(), "addVacationMessage", long.class, long.class,
 		String.class, String.class);
-
-	private static final MethodKey _deleteEmailAddressMethodKey = new MethodKey(
+	private static MethodKey _deleteEmailAddressMethodKey = new MethodKey(
 		Hook.class.getName(), "deleteEmailAddress", long.class, long.class);
-
-	private static final MethodKey _deleteUserMethodKey = new MethodKey(
+	private static MethodKey _deleteUserMethodKey = new MethodKey(
 		Hook.class.getName(), "deleteUser", long.class, long.class);
-
-	private static final MethodKey _updateBlockedMethodKey = new MethodKey(
+	private static MethodKey _updateBlockedMethodKey = new MethodKey(
 		Hook.class.getName(), "updateBlocked", long.class, long.class,
 		List.class);
-
-	private static final MethodKey _updateEmailAddressMethodKey = new MethodKey(
+	private static MethodKey _updateEmailAddressMethodKey = new MethodKey(
 		Hook.class.getName(), "updateEmailAddress", long.class, long.class,
 		String.class);
-
-	private static final MethodKey _updatePasswordMethodKey = new MethodKey(
+	private static MethodKey _updatePasswordMethodKey = new MethodKey(
 		Hook.class.getName(), "updatePassword", long.class, long.class,
 		String.class);
-
-	private static Log _log = LogFactoryUtil.getLog(MailServiceImpl.class);
 
 	private Session _session;
 

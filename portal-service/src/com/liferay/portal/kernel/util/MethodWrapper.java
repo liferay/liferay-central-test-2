@@ -21,9 +21,9 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author	   Brian Wing Shun Chan
+ * @deprecated
  */
-@Deprecated
 public class MethodWrapper implements Serializable {
 
 	public MethodWrapper(String className, String methodName) {

@@ -334,10 +334,10 @@ public class RuntimePortletUtil {
 		}
 	}
 
-	private static final MethodKey _initMethodKey = new MethodKey(
+	private static Log _log = LogFactoryUtil.getLog(RuntimePortletUtil.class);
+
+	private static MethodKey _initMethodKey = new MethodKey(
 		"com.liferay.taglib.util.VelocityTaglib", "init", ServletContext.class,
 		HttpServletRequest.class, HttpServletResponse.class, PageContext.class);
-
-	private static Log _log = LogFactoryUtil.getLog(RuntimePortletUtil.class);
 
 }

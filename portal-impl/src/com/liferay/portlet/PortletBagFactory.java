@@ -318,8 +318,10 @@ public class PortletBagFactory {
 		try {
 			currentThread.setContextClassLoader(_classLoader);
 
-			return (String)new MethodHandler(
-				_getMethodKey, propertyKey).invoke(false);
+			MethodHandler methodHandler = new MethodHandler(
+				_getMethodKey, propertyKey);
+
+			return (String)methodHandler.invoke(false);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);

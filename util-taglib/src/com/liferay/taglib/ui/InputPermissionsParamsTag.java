@@ -61,7 +61,7 @@ public class InputPermissionsParamsTag extends TagSupport {
 	private static final String _TAG_CLASS =
 		"com.liferay.portal.servlet.taglib.ui.InputPermissionsParamsTagUtil";
 
-	private static final MethodKey _doEndTagMethodKey = new MethodKey(
+	private static MethodKey _doEndTagMethodKey = new MethodKey(
 		_TAG_CLASS, "doEndTag", String.class, PageContext.class);
 
 	private String _modelName;

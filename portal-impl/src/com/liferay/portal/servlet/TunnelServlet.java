@@ -21,6 +21,8 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodInvoker;
+import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
@@ -46,6 +48,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Michael Weisser
  * @author Brian Wing Shun Chan
  */
+@SuppressWarnings("deprecation")
 public class TunnelServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -57,15 +60,31 @@ public class TunnelServlet extends HttpServlet {
 		Object returnObj = null;
 
 		try {
-			ObjectValuePair<HttpPrincipal, MethodHandler> ovp =
-				(ObjectValuePair<HttpPrincipal, MethodHandler>)
-					ois.readObject();
+			ObjectValuePair<HttpPrincipal, Object> ovp =
+				(ObjectValuePair<HttpPrincipal, Object>)ois.readObject();
 
 			HttpPrincipal httpPrincipal = ovp.getKey();
-			MethodHandler methodHandler = ovp.getValue();
+			Object ovpValue = ovp.getValue();
 
-			if (!isValidRequest(methodHandler)) {
-				return;
+			MethodHandler methodHandler = null;
+			MethodWrapper methodWrapper = null;
+
+			if (ovpValue instanceof MethodHandler) {
+				methodHandler = (MethodHandler)ovpValue;
+			}
+			else {
+				methodWrapper = (MethodWrapper)ovpValue;
+			}
+
+			if (methodHandler != null) {
+				if (!isValidRequest(methodHandler.getClassName())) {
+					return;
+				}
+			}
+			else {
+				if (!isValidRequest(methodWrapper.getClassName())) {
+					return;
+				}
 			}
 
 			long companyId = PortalInstances.getCompanyId(request);
@@ -110,7 +129,12 @@ public class TunnelServlet extends HttpServlet {
 			}
 
 			if (returnObj == null) {
-				returnObj = methodHandler.invoke(true);
+				if (methodHandler != null) {
+					returnObj = methodHandler.invoke(true);
+				}
+				else {
+					returnObj = MethodInvoker.invoke(methodWrapper);
+				}
 			}
 		}
 		catch (InvocationTargetException ite) {
@@ -137,9 +161,7 @@ public class TunnelServlet extends HttpServlet {
 		}
 	}
 
-	protected boolean isValidRequest(MethodHandler methodHandler) {
-		String className = methodHandler.getClassName();
-
+	protected boolean isValidRequest(String className) {
 		if (className.contains(".service.") &&
 			className.endsWith("ServiceUtil") &&
 			!className.endsWith("LocalServiceUtil")) {
