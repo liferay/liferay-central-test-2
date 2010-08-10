@@ -210,8 +210,8 @@ public class RuntimePortletUtil {
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
-		MethodHandler methodHandler = new MethodHandler(_initMethodKey,
-			servletContext, request,
+		MethodHandler methodHandler = new MethodHandler(
+			_initMethodKey, servletContext, request,
 			new PipingServletResponse(response, unsyncStringWriter),
 			pageContext);
 
