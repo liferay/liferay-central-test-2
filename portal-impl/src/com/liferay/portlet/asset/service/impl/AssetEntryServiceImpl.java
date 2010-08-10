@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -210,7 +211,14 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 
 			String link = sb.toString();
 
-			String value = entry.getSummary();
+			String value = null;
+
+			if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE)) {
+				value = StringPool.BLANK;
+			}
+			else {
+				value = entry.getSummary();
+			}
 
 			SyndEntry syndEntry = new SyndEntryImpl();
 
