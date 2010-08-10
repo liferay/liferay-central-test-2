@@ -121,7 +121,7 @@ AUI().add(
 									}
 								);
 
-								instance._table.appendChild(row);
+								instance._table.append(row);
 
 								row.removeClass(CSS_TEMPLATE);
 
