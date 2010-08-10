@@ -18,6 +18,7 @@
 	href="<%= rowURL %>"
 	name="name"
 	orderable="<%= true %>"
+	value="<%= HtmlUtil.escape(organization.getName()) %>"
 />
 
 <liferay-ui:search-container-column-text
