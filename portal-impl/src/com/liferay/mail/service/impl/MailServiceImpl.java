@@ -24,10 +24,9 @@ import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
@@ -56,14 +55,11 @@ public class MailServiceImpl implements MailService {
 			_log.debug("addForward");
 		}
 
-		MethodWrapper methodWrapper = new MethodWrapper(
-			Hook.class.getName(), "addForward",
-			new Object[] {
-				new LongWrapper(companyId), new LongWrapper(userId), filters,
-				emailAddresses, new BooleanWrapper(leaveCopy)
-			});
+		MethodHandler methodHandler = new MethodHandler(
+			_addForwardMethodKey, companyId, userId, filters, emailAddresses,
+			leaveCopy);
 
-		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodHandler);
 	}
 
 	public void addUser(
@@ -74,14 +70,10 @@ public class MailServiceImpl implements MailService {
 			_log.debug("addUser");
 		}
 
-		MethodWrapper methodWrapper = new MethodWrapper(
-			Hook.class.getName(), "addUser",
-			new Object[] {
-				new LongWrapper(companyId), new LongWrapper(userId), password,
-				firstName, middleName, lastName, emailAddress
-			});
-
-		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
+		MethodHandler methodHandler = new MethodHandler(
+			_addUserMethodKey, companyId, userId, password, firstName,
+			middleName, lastName, emailAddress);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodHandler);
 	}
 
 	public void addVacationMessage(
@@ -92,14 +84,10 @@ public class MailServiceImpl implements MailService {
 			_log.debug("addVacationMessage");
 		}
 
-		MethodWrapper methodWrapper = new MethodWrapper(
-			Hook.class.getName(), "addVacationMessage",
-			new Object[] {
-				new LongWrapper(companyId), new LongWrapper(userId),
-				emailAddress, vacationMessage
-			});
-
-		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
+		MethodHandler methodHandler = new MethodHandler(
+			_addVacationMessageMethodKey, companyId, userId, emailAddress,
+			vacationMessage);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodHandler);
 	}
 
 	public void clearSession() {
@@ -111,11 +99,9 @@ public class MailServiceImpl implements MailService {
 			_log.debug("deleteEmailAddress");
 		}
 
-		MethodWrapper methodWrapper = new MethodWrapper(
-			Hook.class.getName(), "deleteEmailAddress",
-			new Object[] {new LongWrapper(companyId), new LongWrapper(userId)});
-
-		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
+		MethodHandler methodHandler = new MethodHandler(
+			_deleteEmailAddressMethodKey, companyId, userId);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodHandler);
 	}
 
 	public void deleteUser(long companyId, long userId) {
@@ -123,11 +109,9 @@ public class MailServiceImpl implements MailService {
 			_log.debug("deleteUser");
 		}
 
-		MethodWrapper methodWrapper = new MethodWrapper(
-			Hook.class.getName(), "deleteUser",
-			new Object[] {new LongWrapper(companyId), new LongWrapper(userId)});
-
-		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
+		MethodHandler methodHandler = new MethodHandler(
+			_deleteUserMethodKey, companyId, userId);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodHandler);
 	}
 
 	public Session getSession() throws SystemException {
@@ -266,13 +250,9 @@ public class MailServiceImpl implements MailService {
 			_log.debug("updateBlocked");
 		}
 
-		MethodWrapper methodWrapper = new MethodWrapper(
-			Hook.class.getName(), "updateBlocked",
-			new Object[] {
-				new LongWrapper(companyId), new LongWrapper(userId), blocked
-			});
-
-		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
+		MethodHandler methodHandler = new MethodHandler(
+			_updateBlockedMethodKey, companyId, userId, blocked);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodHandler);
 	}
 
 	public void updateEmailAddress(
@@ -282,14 +262,9 @@ public class MailServiceImpl implements MailService {
 			_log.debug("updateEmailAddress");
 		}
 
-		MethodWrapper methodWrapper = new MethodWrapper(
-			Hook.class.getName(), "updateEmailAddress",
-			new Object[] {
-				new LongWrapper(companyId), new LongWrapper(userId),
-				emailAddress
-			});
-
-		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
+		MethodHandler methodHandler = new MethodHandler(
+			_updateEmailAddressMethodKey, companyId, userId, emailAddress);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodHandler);
 	}
 
 	public void updatePassword(long companyId, long userId, String password) {
@@ -297,14 +272,40 @@ public class MailServiceImpl implements MailService {
 			_log.debug("updatePassword");
 		}
 
-		MethodWrapper methodWrapper = new MethodWrapper(
-			Hook.class.getName(), "updatePassword",
-			new Object[] {
-				new LongWrapper(companyId), new LongWrapper(userId), password
-			});
-
-		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
+		MethodHandler methodHandler = new MethodHandler(
+			_updatePasswordMethodKey, companyId, userId, password);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodHandler);
 	}
+
+	private static final MethodKey _addForwardMethodKey = new MethodKey(
+		Hook.class.getName(), "addForward", long.class, long.class, List.class,
+		List.class, boolean.class);
+
+	private static final MethodKey _addUserMethodKey = new MethodKey(
+		Hook.class.getName(), "addUser", long.class, long.class, String.class,
+		String.class, String.class, String.class, String.class);
+
+	private static final MethodKey _addVacationMessageMethodKey = new MethodKey(
+		Hook.class.getName(), "addVacationMessage", long.class, long.class,
+		String.class, String.class);
+
+	private static final MethodKey _deleteEmailAddressMethodKey = new MethodKey(
+		Hook.class.getName(), "deleteEmailAddress", long.class, long.class);
+
+	private static final MethodKey _deleteUserMethodKey = new MethodKey(
+		Hook.class.getName(), "deleteUser", long.class, long.class);
+
+	private static final MethodKey _updateBlockedMethodKey = new MethodKey(
+		Hook.class.getName(), "updateBlocked", long.class, long.class,
+		List.class);
+
+	private static final MethodKey _updateEmailAddressMethodKey = new MethodKey(
+		Hook.class.getName(), "updateEmailAddress", long.class, long.class,
+		String.class);
+
+	private static final MethodKey _updatePasswordMethodKey = new MethodKey(
+		Hook.class.getName(), "updatePassword", long.class, long.class,
+		String.class);
 
 	private static Log _log = LogFactoryUtil.getLog(MailServiceImpl.class);
 

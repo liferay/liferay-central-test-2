@@ -16,11 +16,8 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.LayoutServiceUtil;
 
@@ -66,62 +63,21 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = new LongWrapper(parentLayoutId);
-
-			Object paramObj3 = localeNamesMap;
-
-			if (localeNamesMap == null) {
-				paramObj3 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj4 = localeTitlesMap;
-
-			if (localeTitlesMap == null) {
-				paramObj4 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj5 = description;
-
-			if (description == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = type;
-
-			if (type == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = new BooleanWrapper(hidden);
-
-			Object paramObj8 = friendlyURL;
-
-			if (friendlyURL == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj9 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"addLayout",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
-					});
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"addLayout", long.class, boolean.class, long.class,
+					java.util.Map.class, java.util.Map.class,
+					java.lang.String.class, java.lang.String.class,
+					boolean.class, java.lang.String.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, parentLayoutId, localeNamesMap,
+					localeTitlesMap, description, type, hidden, friendlyURL,
+					serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -153,62 +109,20 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = new LongWrapper(parentLayoutId);
-
-			Object paramObj3 = name;
-
-			if (name == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = title;
-
-			if (title == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = description;
-
-			if (description == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = type;
-
-			if (type == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = new BooleanWrapper(hidden);
-
-			Object paramObj8 = friendlyURL;
-
-			if (friendlyURL == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj9 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"addLayout",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
-					});
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"addLayout", long.class, boolean.class, long.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					boolean.class, java.lang.String.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, parentLayoutId, name, title, description,
+					type, hidden, friendlyURL, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -235,13 +149,12 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"deleteLayout", new Object[] { paramObj0 });
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"deleteLayout", long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, plid);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -267,18 +180,13 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = new LongWrapper(layoutId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"deleteLayout",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"deleteLayout", long.class, boolean.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, layoutId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -306,45 +214,17 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = layoutIds;
-
-			if (layoutIds == null) {
-				paramObj2 = new NullWrapper("[J");
-			}
-
-			Object paramObj3 = parameterMap;
-
-			if (parameterMap == null) {
-				paramObj3 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj4 = startDate;
-
-			if (startDate == null) {
-				paramObj4 = new NullWrapper("java.util.Date");
-			}
-
-			Object paramObj5 = endDate;
-
-			if (endDate == null) {
-				paramObj5 = new NullWrapper("java.util.Date");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"exportLayouts",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
-					});
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"exportLayouts", long.class, boolean.class, long[].class,
+					java.util.Map.class, java.util.Date.class,
+					java.util.Date.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, layoutIds, parameterMap, startDate, endDate);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -374,38 +254,17 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = parameterMap;
-
-			if (parameterMap == null) {
-				paramObj2 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj3 = startDate;
-
-			if (startDate == null) {
-				paramObj3 = new NullWrapper("java.util.Date");
-			}
-
-			Object paramObj4 = endDate;
-
-			if (endDate == null) {
-				paramObj4 = new NullWrapper("java.util.Date");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"exportLayouts",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"exportLayouts", long.class, boolean.class,
+					java.util.Map.class, java.util.Date.class,
+					java.util.Date.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, parameterMap, startDate, endDate);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -436,45 +295,17 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = layoutIds;
-
-			if (layoutIds == null) {
-				paramObj2 = new NullWrapper("[J");
-			}
-
-			Object paramObj3 = parameterMap;
-
-			if (parameterMap == null) {
-				paramObj3 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj4 = startDate;
-
-			if (startDate == null) {
-				paramObj4 = new NullWrapper("java.util.Date");
-			}
-
-			Object paramObj5 = endDate;
-
-			if (endDate == null) {
-				paramObj5 = new NullWrapper("java.util.Date");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"exportLayoutsAsFile",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
-					});
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"exportLayoutsAsFile", long.class, boolean.class,
+					long[].class, java.util.Map.class, java.util.Date.class,
+					java.util.Date.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, layoutIds, parameterMap, startDate, endDate);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -504,45 +335,17 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = new LongWrapper(groupId);
-
-			Object paramObj2 = portletId;
-
-			if (portletId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = parameterMap;
-
-			if (parameterMap == null) {
-				paramObj3 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj4 = startDate;
-
-			if (startDate == null) {
-				paramObj4 = new NullWrapper("java.util.Date");
-			}
-
-			Object paramObj5 = endDate;
-
-			if (endDate == null) {
-				paramObj5 = new NullWrapper("java.util.Date");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"exportPortletInfo",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
-					});
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"exportPortletInfo", long.class, long.class,
+					java.lang.String.class, java.util.Map.class,
+					java.util.Date.class, java.util.Date.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, plid,
+					groupId, portletId, parameterMap, startDate, endDate);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -573,45 +376,17 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = new LongWrapper(groupId);
-
-			Object paramObj2 = portletId;
-
-			if (portletId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = parameterMap;
-
-			if (parameterMap == null) {
-				paramObj3 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj4 = startDate;
-
-			if (startDate == null) {
-				paramObj4 = new NullWrapper("java.util.Date");
-			}
-
-			Object paramObj5 = endDate;
-
-			if (endDate == null) {
-				paramObj5 = new NullWrapper("java.util.Date");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"exportPortletInfoAsFile",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
-					});
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"exportPortletInfoAsFile", long.class, long.class,
+					java.lang.String.class, java.util.Map.class,
+					java.util.Date.class, java.util.Date.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, plid,
+					groupId, portletId, parameterMap, startDate, endDate);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -640,26 +415,16 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = new LongWrapper(layoutId);
-
-			Object paramObj3 = languageId;
-
-			if (languageId == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"getLayoutName",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"getLayoutName", long.class, boolean.class, long.class,
+					java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, layoutId, languageId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -688,34 +453,16 @@ public class LayoutServiceHttp {
 		java.lang.String preferencesValue)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-
-			Object paramObj1 = portletId;
-
-			if (portletId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = preferencesKey;
-
-			if (preferencesKey == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = preferencesValue;
-
-			if (preferencesValue == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"getLayoutReferences",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"getLayoutReferences", long.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, portletId, preferencesKey, preferencesValue);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
@@ -741,28 +488,14 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = parameterMap;
-
-			if (parameterMap == null) {
-				paramObj2 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj3 = bytes;
-
-			if (bytes == null) {
-				paramObj3 = new NullWrapper("[B");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"importLayouts",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"importLayouts", long.class, boolean.class,
+					java.util.Map.class, byte[].class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, parameterMap, bytes);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -790,28 +523,14 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = parameterMap;
-
-			if (parameterMap == null) {
-				paramObj2 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj3 = file;
-
-			if (file == null) {
-				paramObj3 = new NullWrapper("java.io.File");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"importLayouts",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"importLayouts", long.class, boolean.class,
+					java.util.Map.class, java.io.File.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, parameterMap, file);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -839,28 +558,14 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = parameterMap;
-
-			if (parameterMap == null) {
-				paramObj2 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj3 = is;
-
-			if (is == null) {
-				paramObj3 = new NullWrapper("java.io.InputStream");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"importLayouts",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"importLayouts", long.class, boolean.class,
+					java.util.Map.class, java.io.InputStream.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, parameterMap, is);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -888,36 +593,15 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = new LongWrapper(groupId);
-
-			Object paramObj2 = portletId;
-
-			if (portletId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = parameterMap;
-
-			if (parameterMap == null) {
-				paramObj3 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj4 = file;
-
-			if (file == null) {
-				paramObj4 = new NullWrapper("java.io.File");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"importPortletInfo",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"importPortletInfo", long.class, long.class,
+					java.lang.String.class, java.util.Map.class,
+					java.io.File.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, plid,
+					groupId, portletId, parameterMap, file);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -945,36 +629,15 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = new LongWrapper(groupId);
-
-			Object paramObj2 = portletId;
-
-			if (portletId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = parameterMap;
-
-			if (parameterMap == null) {
-				paramObj3 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj4 = is;
-
-			if (is == null) {
-				paramObj4 = new NullWrapper("java.io.InputStream");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"importPortletInfo",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"importPortletInfo", long.class, long.class,
+					java.lang.String.class, java.util.Map.class,
+					java.io.InputStream.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, plid,
+					groupId, portletId, parameterMap, is);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1006,82 +669,20 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(sourceGroupId);
-
-			Object paramObj1 = new LongWrapper(targetGroupId);
-
-			Object paramObj2 = new BooleanWrapper(privateLayout);
-
-			Object paramObj3 = layoutIdMap;
-
-			if (layoutIdMap == null) {
-				paramObj3 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj4 = parameterMap;
-
-			if (parameterMap == null) {
-				paramObj4 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj5 = scope;
-
-			if (scope == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = startDate;
-
-			if (startDate == null) {
-				paramObj6 = new NullWrapper("java.util.Date");
-			}
-
-			Object paramObj7 = endDate;
-
-			if (endDate == null) {
-				paramObj7 = new NullWrapper("java.util.Date");
-			}
-
-			Object paramObj8 = groupName;
-
-			if (groupName == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = cronText;
-
-			if (cronText == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj10 = schedulerStartDate;
-
-			if (schedulerStartDate == null) {
-				paramObj10 = new NullWrapper("java.util.Date");
-			}
-
-			Object paramObj11 = schedulerEndDate;
-
-			if (schedulerEndDate == null) {
-				paramObj11 = new NullWrapper("java.util.Date");
-			}
-
-			Object paramObj12 = description;
-
-			if (description == null) {
-				paramObj12 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"schedulePublishToLive",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12
-					});
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"schedulePublishToLive", long.class, long.class,
+					boolean.class, java.util.Map.class, java.util.Map.class,
+					java.lang.String.class, java.util.Date.class,
+					java.util.Date.class, java.lang.String.class,
+					java.lang.String.class, java.util.Date.class,
+					java.util.Date.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					sourceGroupId, targetGroupId, privateLayout, layoutIdMap,
+					parameterMap, scope, startDate, endDate, groupName,
+					cronText, schedulerStartDate, schedulerEndDate, description);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1115,89 +716,22 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(sourceGroupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = layoutIdMap;
-
-			if (layoutIdMap == null) {
-				paramObj2 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj3 = parameterMap;
-
-			if (parameterMap == null) {
-				paramObj3 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj4 = remoteAddress;
-
-			if (remoteAddress == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = new IntegerWrapper(remotePort);
-
-			Object paramObj6 = new BooleanWrapper(secureConnection);
-
-			Object paramObj7 = new LongWrapper(remoteGroupId);
-
-			Object paramObj8 = new BooleanWrapper(remotePrivateLayout);
-
-			Object paramObj9 = startDate;
-
-			if (startDate == null) {
-				paramObj9 = new NullWrapper("java.util.Date");
-			}
-
-			Object paramObj10 = endDate;
-
-			if (endDate == null) {
-				paramObj10 = new NullWrapper("java.util.Date");
-			}
-
-			Object paramObj11 = groupName;
-
-			if (groupName == null) {
-				paramObj11 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj12 = cronText;
-
-			if (cronText == null) {
-				paramObj12 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj13 = schedulerStartDate;
-
-			if (schedulerStartDate == null) {
-				paramObj13 = new NullWrapper("java.util.Date");
-			}
-
-			Object paramObj14 = schedulerEndDate;
-
-			if (schedulerEndDate == null) {
-				paramObj14 = new NullWrapper("java.util.Date");
-			}
-
-			Object paramObj15 = description;
-
-			if (description == null) {
-				paramObj15 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"schedulePublishToRemote",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15
-					});
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"schedulePublishToRemote", long.class, boolean.class,
+					java.util.Map.class, java.util.Map.class,
+					java.lang.String.class, int.class, boolean.class,
+					long.class, boolean.class, java.util.Date.class,
+					java.util.Date.class, java.lang.String.class,
+					java.lang.String.class, java.util.Date.class,
+					java.util.Date.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					sourceGroupId, privateLayout, layoutIdMap, parameterMap,
+					remoteAddress, remotePort, secureConnection, remoteGroupId,
+					remotePrivateLayout, startDate, endDate, groupName,
+					cronText, schedulerStartDate, schedulerEndDate, description);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1223,24 +757,14 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = new LongWrapper(parentLayoutId);
-
-			Object paramObj3 = layoutIds;
-
-			if (layoutIds == null) {
-				paramObj3 = new NullWrapper("[J");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"setLayouts",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"setLayouts", long.class, boolean.class, long.class,
+					long[].class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, parentLayoutId, layoutIds);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1266,26 +790,14 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = jobName;
-
-			if (jobName == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = groupName;
-
-			if (groupName == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"unschedulePublishToLive",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"unschedulePublishToLive", long.class,
+					java.lang.String.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					jobName, groupName);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1311,26 +823,14 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = jobName;
-
-			if (jobName == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = groupName;
-
-			if (groupName == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"unschedulePublishToRemote",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"unschedulePublishToRemote", long.class,
+					java.lang.String.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					jobName, groupName);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1363,77 +863,22 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = new LongWrapper(layoutId);
-
-			Object paramObj3 = new LongWrapper(parentLayoutId);
-
-			Object paramObj4 = localeNamesMap;
-
-			if (localeNamesMap == null) {
-				paramObj4 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj5 = localeTitlesMap;
-
-			if (localeTitlesMap == null) {
-				paramObj5 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj6 = description;
-
-			if (description == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = type;
-
-			if (type == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = new BooleanWrapper(hidden);
-
-			Object paramObj9 = friendlyURL;
-
-			if (friendlyURL == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj10 = iconImage;
-
-			if (iconImage == null) {
-				paramObj10 = new NullWrapper("java.lang.Boolean");
-			}
-
-			Object paramObj11 = iconBytes;
-
-			if (iconBytes == null) {
-				paramObj11 = new NullWrapper("[B");
-			}
-
-			Object paramObj12 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj12 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"updateLayout",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12
-					});
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"updateLayout", long.class, boolean.class, long.class,
+					long.class, java.util.Map.class, java.util.Map.class,
+					java.lang.String.class, java.lang.String.class,
+					boolean.class, java.lang.String.class,
+					java.lang.Boolean.class, byte[].class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, layoutId, parentLayoutId, localeNamesMap,
+					localeTitlesMap, description, type, hidden, friendlyURL,
+					iconImage, iconBytes, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1467,65 +912,21 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = new LongWrapper(layoutId);
-
-			Object paramObj3 = new LongWrapper(parentLayoutId);
-
-			Object paramObj4 = localeNamesMap;
-
-			if (localeNamesMap == null) {
-				paramObj4 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj5 = localeTitlesMap;
-
-			if (localeTitlesMap == null) {
-				paramObj5 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj6 = description;
-
-			if (description == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = type;
-
-			if (type == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = new BooleanWrapper(hidden);
-
-			Object paramObj9 = friendlyURL;
-
-			if (friendlyURL == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj10 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj10 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"updateLayout",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10
-					});
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"updateLayout", long.class, boolean.class, long.class,
+					long.class, java.util.Map.class, java.util.Map.class,
+					java.lang.String.class, java.lang.String.class,
+					boolean.class, java.lang.String.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, layoutId, parentLayoutId, localeNamesMap,
+					localeTitlesMap, description, type, hidden, friendlyURL,
+					serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1554,26 +955,16 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = new LongWrapper(layoutId);
-
-			Object paramObj3 = typeSettings;
-
-			if (typeSettings == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"updateLayout",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"updateLayout", long.class, boolean.class, long.class,
+					java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, layoutId, typeSettings);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1603,43 +994,18 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = new LongWrapper(layoutId);
-
-			Object paramObj3 = themeId;
-
-			if (themeId == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = colorSchemeId;
-
-			if (colorSchemeId == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = css;
-
-			if (css == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = new BooleanWrapper(wapTheme);
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"updateLookAndFeel",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
-					});
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"updateLookAndFeel", long.class, boolean.class, long.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, boolean.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, layoutId, themeId, colorSchemeId, css,
+					wapTheme);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1668,34 +1034,16 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = new LongWrapper(layoutId);
-
-			Object paramObj3 = name;
-
-			if (name == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = languageId;
-
-			if (languageId == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"updateName",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"updateName", long.class, boolean.class, long.class,
+					java.lang.String.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, layoutId, name, languageId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1724,28 +1072,16 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = languageId;
-
-			if (languageId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"updateName",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"updateName", long.class, java.lang.String.class,
+					java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, plid,
+					name, languageId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1774,22 +1110,16 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = new LongWrapper(layoutId);
-
-			Object paramObj3 = new LongWrapper(parentLayoutId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"updateParentLayoutId",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"updateParentLayoutId", long.class, boolean.class,
+					long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, layoutId, parentLayoutId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1817,18 +1147,15 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = new LongWrapper(parentPlid);
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"updateParentLayoutId",
-					new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"updateParentLayoutId", long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, plid,
+					parentPlid);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1857,22 +1184,16 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = new LongWrapper(layoutId);
-
-			Object paramObj3 = new IntegerWrapper(priority);
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"updatePriority",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"updatePriority", long.class, boolean.class, long.class,
+					int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, layoutId, priority);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1900,17 +1221,15 @@ public class LayoutServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = new IntegerWrapper(priority);
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
-					"updatePriority", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(LayoutServiceUtil.class.getName(),
+					"updatePriority", long.class, int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, plid,
+					priority);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

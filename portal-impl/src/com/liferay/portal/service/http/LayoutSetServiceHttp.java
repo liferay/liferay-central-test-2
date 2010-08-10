@@ -16,10 +16,8 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.LayoutSetServiceUtil;
 
@@ -59,24 +57,14 @@ public class LayoutSetServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = new BooleanWrapper(logo);
-
-			Object paramObj3 = file;
-
-			if (file == null) {
-				paramObj3 = new NullWrapper("java.io.File");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutSetServiceUtil.class.getName(),
-					"updateLogo",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(LayoutSetServiceUtil.class.getName(),
+					"updateLogo", long.class, boolean.class, boolean.class,
+					java.io.File.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, logo, file);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -104,41 +92,17 @@ public class LayoutSetServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = themeId;
-
-			if (themeId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = colorSchemeId;
-
-			if (colorSchemeId == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = css;
-
-			if (css == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = new BooleanWrapper(wapTheme);
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutSetServiceUtil.class.getName(),
-					"updateLookAndFeel",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
-					});
+			MethodKey methodKey = new MethodKey(LayoutSetServiceUtil.class.getName(),
+					"updateLookAndFeel", long.class, boolean.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, boolean.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, themeId, colorSchemeId, css, wapTheme);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -167,24 +131,16 @@ public class LayoutSetServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = settings;
-
-			if (settings == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutSetServiceUtil.class.getName(),
-					"updateSettings",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(LayoutSetServiceUtil.class.getName(),
+					"updateSettings", long.class, boolean.class,
+					java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, settings);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -213,24 +169,16 @@ public class LayoutSetServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new BooleanWrapper(privateLayout);
-
-			Object paramObj2 = virtualHost;
-
-			if (virtualHost == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(LayoutSetServiceUtil.class.getName(),
-					"updateVirtualHost",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(LayoutSetServiceUtil.class.getName(),
+					"updateVirtualHost", long.class, boolean.class,
+					java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					privateLayout, virtualHost);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

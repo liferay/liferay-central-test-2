@@ -23,6 +23,7 @@ import java.util.Arrays;
 /**
  * @author Brian Wing Shun Chan
  */
+@Deprecated
 public class MethodWrapper implements Serializable {
 
 	public MethodWrapper(String className, String methodName) {

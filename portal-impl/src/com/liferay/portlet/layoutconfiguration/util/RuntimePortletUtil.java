@@ -19,8 +19,8 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.util.JavaConstants;
-import com.liferay.portal.kernel.util.MethodInvoker;
-import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -210,15 +210,12 @@ public class RuntimePortletUtil {
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
-		MethodWrapper methodWrapper = new MethodWrapper(
-			"com.liferay.taglib.util.VelocityTaglib", "init",
-			new Object[] {
-				servletContext, request,
-				new PipingServletResponse(response, unsyncStringWriter),
-				pageContext
-			});
+		MethodHandler methodHandler = new MethodHandler(_initMethodKey,
+			servletContext, request,
+			new PipingServletResponse(response, unsyncStringWriter),
+			pageContext);
 
-		Object velocityTaglib = MethodInvoker.invoke(methodWrapper);
+		Object velocityTaglib = methodHandler.invoke(true);
 
 		velocityContext.put("taglibLiferay", velocityTaglib);
 		velocityContext.put("theme", velocityTaglib);
@@ -336,6 +333,10 @@ public class RuntimePortletUtil {
 				JavaConstants.JAVAX_PORTLET_RESPONSE, renderResponse);
 		}
 	}
+
+	private static final MethodKey _initMethodKey = new MethodKey(
+		"com.liferay.taglib.util.VelocityTaglib", "init", ServletContext.class,
+		HttpServletRequest.class, HttpServletResponse.class, PageContext.class);
 
 	private static Log _log = LogFactoryUtil.getLog(RuntimePortletUtil.class);
 

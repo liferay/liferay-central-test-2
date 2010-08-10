@@ -15,9 +15,9 @@
 package com.liferay.portal.verify;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodInvoker;
-import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.MethodCache;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
@@ -26,6 +26,8 @@ import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
+
+import java.lang.reflect.Method;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -67,13 +69,15 @@ public class VerifyUUID extends VerifyProcess {
 	public static void verifyModel(
 			String serviceClassName, String modelName, long pk)
 		throws Exception {
+		MethodKey methodKey = new MethodKey(
+			serviceClassName, "get" + modelName, long.class);
+		Method method = MethodCache.get(methodKey);
 
-		Object obj = MethodInvoker.invoke(
-			new MethodWrapper(
-				serviceClassName, "get" + modelName, new LongWrapper(pk)));
+		Object obj = new MethodHandler(methodKey, pk).invoke(true);
 
-		MethodInvoker.invoke(
-			new MethodWrapper(serviceClassName, "update" + modelName, obj));
+		methodKey = new MethodKey(
+			serviceClassName, "update" + modelName, method.getReturnType());
+		new MethodHandler(methodKey, obj).invoke(true);
 	}
 
 	protected void doVerify() throws Exception {

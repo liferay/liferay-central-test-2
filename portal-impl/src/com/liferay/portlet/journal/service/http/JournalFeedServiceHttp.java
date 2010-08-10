@@ -16,12 +16,8 @@ package com.liferay.portlet.journal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.DoubleWrapper;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -72,112 +68,26 @@ public class JournalFeedServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = feedId;
-
-			if (feedId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new BooleanWrapper(autoFeedId);
-
-			Object paramObj3 = name;
-
-			if (name == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = description;
-
-			if (description == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = type;
-
-			if (type == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = structureId;
-
-			if (structureId == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = templateId;
-
-			if (templateId == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = rendererTemplateId;
-
-			if (rendererTemplateId == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = new IntegerWrapper(delta);
-
-			Object paramObj10 = orderByCol;
-
-			if (orderByCol == null) {
-				paramObj10 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj11 = orderByType;
-
-			if (orderByType == null) {
-				paramObj11 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj12 = targetLayoutFriendlyUrl;
-
-			if (targetLayoutFriendlyUrl == null) {
-				paramObj12 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj13 = targetPortletId;
-
-			if (targetPortletId == null) {
-				paramObj13 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj14 = contentField;
-
-			if (contentField == null) {
-				paramObj14 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj15 = feedType;
-
-			if (feedType == null) {
-				paramObj15 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj16 = new DoubleWrapper(feedVersion);
-
-			Object paramObj17 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj17 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalFeedServiceUtil.class.getName(),
-					"addFeed",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15, paramObj16, paramObj17
-					});
+			MethodKey methodKey = new MethodKey(JournalFeedServiceUtil.class.getName(),
+					"addFeed", long.class, java.lang.String.class,
+					boolean.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, int.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, double.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					feedId, autoFeedId, name, description, type, structureId,
+					templateId, rendererTemplateId, delta, orderByCol,
+					orderByType, targetLayoutFriendlyUrl, targetPortletId,
+					contentField, feedType, feedVersion, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -205,15 +115,13 @@ public class JournalFeedServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(feedId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalFeedServiceUtil.class.getName(),
-					"deleteFeed", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(JournalFeedServiceUtil.class.getName(),
+					"deleteFeed", long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					feedId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -239,19 +147,13 @@ public class JournalFeedServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = feedId;
-
-			if (feedId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalFeedServiceUtil.class.getName(),
-					"deleteFeed", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(JournalFeedServiceUtil.class.getName(),
+					"deleteFeed", long.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					feedId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -277,17 +179,15 @@ public class JournalFeedServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(feedId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalFeedServiceUtil.class.getName(),
-					"getFeed", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(JournalFeedServiceUtil.class.getName(),
+					"getFeed", long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					feedId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -315,21 +215,15 @@ public class JournalFeedServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = feedId;
-
-			if (feedId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalFeedServiceUtil.class.getName(),
-					"getFeed", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(JournalFeedServiceUtil.class.getName(),
+					"getFeed", long.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					feedId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -365,110 +259,26 @@ public class JournalFeedServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = feedId;
-
-			if (feedId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = name;
-
-			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = description;
-
-			if (description == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = type;
-
-			if (type == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = structureId;
-
-			if (structureId == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = templateId;
-
-			if (templateId == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = rendererTemplateId;
-
-			if (rendererTemplateId == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = new IntegerWrapper(delta);
-
-			Object paramObj9 = orderByCol;
-
-			if (orderByCol == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj10 = orderByType;
-
-			if (orderByType == null) {
-				paramObj10 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj11 = targetLayoutFriendlyUrl;
-
-			if (targetLayoutFriendlyUrl == null) {
-				paramObj11 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj12 = targetPortletId;
-
-			if (targetPortletId == null) {
-				paramObj12 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj13 = contentField;
-
-			if (contentField == null) {
-				paramObj13 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj14 = feedType;
-
-			if (feedType == null) {
-				paramObj14 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj15 = new DoubleWrapper(feedVersion);
-
-			Object paramObj16 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj16 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalFeedServiceUtil.class.getName(),
-					"updateFeed",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15, paramObj16
-					});
+			MethodKey methodKey = new MethodKey(JournalFeedServiceUtil.class.getName(),
+					"updateFeed", long.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class, int.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					double.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					feedId, name, description, type, structureId, templateId,
+					rendererTemplateId, delta, orderByCol, orderByType,
+					targetLayoutFriendlyUrl, targetPortletId, contentField,
+					feedType, feedVersion, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

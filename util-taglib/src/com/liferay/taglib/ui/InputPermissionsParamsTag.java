@@ -14,11 +14,8 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.MethodInvoker;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.kernel.util.PortalClassInvoker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import javax.servlet.jsp.JspException;
@@ -35,29 +32,8 @@ public class InputPermissionsParamsTag extends TagSupport {
 			String modelName, PageContext pageContext)
 		throws Exception {
 
-		Object returnObj = null;
-
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			currentThread.setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
-
-			MethodWrapper methodWrapper = new MethodWrapper(
-				_TAG_CLASS, _TAG_DO_END_METHOD,
-				new Object[] {modelName, pageContext}
-			);
-
-			returnObj = MethodInvoker.invoke(methodWrapper);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
-		}
+		Object returnObj = PortalClassInvoker.invoke(
+			false, _doEndTagMethodKey, modelName, pageContext);
 
 		if (returnObj != null) {
 			return returnObj.toString();
@@ -85,10 +61,8 @@ public class InputPermissionsParamsTag extends TagSupport {
 	private static final String _TAG_CLASS =
 		"com.liferay.portal.servlet.taglib.ui.InputPermissionsParamsTagUtil";
 
-	private static final String _TAG_DO_END_METHOD = "doEndTag";
-
-	private static Log _log = LogFactoryUtil.getLog(
-		InputPermissionsParamsTag.class);
+	private static final MethodKey _doEndTagMethodKey = new MethodKey(
+		_TAG_CLASS, "doEndTag", String.class, PageContext.class);
 
 	private String _modelName;
 

@@ -28,8 +28,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.InetAddressUtil;
-import com.liferay.portal.kernel.util.MethodInvoker;
-import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.WeakValueConcurrentHashMap;
@@ -108,7 +107,7 @@ public class ClusterExecutorImpl
 			addresses.remove(getLocalControlAddress())) {
 
 			ClusterNodeResponse clusterNodeResponse = runLocalMethod(
-				clusterRequest.getMethodWrapper());
+				clusterRequest.getMethodHandler());
 
 			clusterNodeResponse.setMulticast(clusterRequest.isMulticast());
 			clusterNodeResponse.setUuid(clusterRequest.getUuid());
@@ -367,7 +366,7 @@ public class ClusterExecutorImpl
 		return addresses;
 	}
 
-	protected ClusterNodeResponse runLocalMethod(MethodWrapper methodWrapper)
+	protected ClusterNodeResponse runLocalMethod(MethodHandler methodHandler)
 		throws SystemException {
 
 		ClusterNodeResponse clusterNodeResponse = new ClusterNodeResponse();
@@ -377,16 +376,16 @@ public class ClusterExecutorImpl
 		clusterNodeResponse.setClusterNode(localClusterNode);
 		clusterNodeResponse.setClusterMessageType(ClusterMessageType.EXECUTE);
 
-		if (methodWrapper == null) {
+		if (methodHandler == null) {
 			clusterNodeResponse.setException(
 				new ClusterException(
-					"Payload is not of type " + MethodWrapper.class.getName()));
+					"Payload is not of type " + MethodHandler.class.getName()));
 
 			return clusterNodeResponse;
 		}
 
 		try {
-			Object returnValue = MethodInvoker.invoke(methodWrapper);
+			Object returnValue = methodHandler.invoke(true);
 
 			if (returnValue instanceof Serializable) {
 				clusterNodeResponse.setResult(returnValue);

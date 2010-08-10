@@ -23,28 +23,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
  */
 public class ClassLoaderProxy {
 
-	/**
-	 * @deprecated
-	 */
-	public ClassLoaderProxy(Object obj, ClassLoader classLoader) {
-		this(obj, obj.getClass().getName(), classLoader);
-	}
-
 	public ClassLoaderProxy(
-		Object obj, String className, ClassLoader classLoader) {
+		Object obj, ClassLoader classLoader) {
 
 		_obj = obj;
-		_className = className;
 		_classLoader = classLoader;
 	}
 
@@ -52,7 +40,7 @@ public class ClassLoaderProxy {
 		return _classLoader;
 	}
 
-	public Object invoke(String methodName, Object[] args) throws Throwable {
+	public Object invoke(MethodHandler methodHandler) throws Throwable {
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
@@ -60,83 +48,7 @@ public class ClassLoaderProxy {
 		try {
 			currentThread.setContextClassLoader(_classLoader);
 
-			Class<?> classObj = Class.forName(_className, true, _classLoader);
-
-			List<Class<?>> parameterTypes = new ArrayList<Class<?>>();
-
-			for (int i = 0; i < args.length; i++) {
-				Object arg = args[i];
-
-				Class<?> argClass = Class.forName(
-					arg.getClass().getName(), true, _classLoader);
-
-				if (ClassUtil.isSubclass(argClass, PrimitiveWrapper.class)) {
-					MethodKey methodKey = new MethodKey(
-						argClass.getName(), "getValue");
-
-					Method method = MethodCache.get(methodKey);
-
-					args[i] = method.invoke(arg, (Object[])null);
-
-					argClass = (Class<?>)argClass.getField("TYPE").get(arg);
-				}
-
-				if (ClassUtil.isSubclass(argClass, NullWrapper.class)) {
-					NullWrapper nullWrapper = (NullWrapper)arg;
-
-					argClass = Class.forName(
-						nullWrapper.getClassName(), true, _classLoader);
-
-					args[i] = null;
-				}
-
-				parameterTypes.add(argClass);
-			}
-
-			Method method = null;
-
-			try {
-				method = classObj.getMethod(
-					methodName,
-					parameterTypes.toArray(new Class[parameterTypes.size()]));
-			}
-			catch (NoSuchMethodException nsme) {
-				Method[] methods = ((Class<?>)classObj).getMethods();
-
-				for (int i = 0; i < methods.length; i++) {
-					Class<?>[] methodParameterTypes =
-						methods[i].getParameterTypes();
-
-					if (methods[i].getName().equals(methodName) &&
-						methodParameterTypes.length == parameterTypes.size()) {
-
-						boolean correctParams = true;
-
-						for (int j = 0; j < parameterTypes.size(); j++) {
-							Class<?> a = parameterTypes.get(j);
-							Class<?> b = methodParameterTypes[j];
-
-							if (!ClassUtil.isSubclass(a, b)) {
-								correctParams = false;
-
-								break;
-							}
-						}
-
-						if (correctParams) {
-							method = methods[i];
-
-							break;
-						}
-					}
-				}
-
-				if (method == null) {
-					throw nsme;
-				}
-			}
-
-			return method.invoke(_obj, args);
+			return methodHandler.invoke(_obj);
 		}
 		catch (InvocationTargetException ite) {
 			throw translateThrowable(ite.getCause(), contextClassLoader);
@@ -186,6 +98,5 @@ public class ClassLoaderProxy {
 
 	private Object _obj;
 	private ClassLoader _classLoader;
-	private String _className;
 
 }

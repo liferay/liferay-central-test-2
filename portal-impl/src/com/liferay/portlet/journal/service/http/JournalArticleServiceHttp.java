@@ -16,12 +16,8 @@ package com.liferay.portlet.journal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.DoubleWrapper;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -76,138 +72,34 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = articleId;
-
-			if (articleId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new BooleanWrapper(autoArticleId);
-
-			Object paramObj3 = title;
-
-			if (title == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = description;
-
-			if (description == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = content;
-
-			if (content == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = type;
-
-			if (type == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = structureId;
-
-			if (structureId == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = templateId;
-
-			if (templateId == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = new IntegerWrapper(displayDateMonth);
-
-			Object paramObj10 = new IntegerWrapper(displayDateDay);
-
-			Object paramObj11 = new IntegerWrapper(displayDateYear);
-
-			Object paramObj12 = new IntegerWrapper(displayDateHour);
-
-			Object paramObj13 = new IntegerWrapper(displayDateMinute);
-
-			Object paramObj14 = new IntegerWrapper(expirationDateMonth);
-
-			Object paramObj15 = new IntegerWrapper(expirationDateDay);
-
-			Object paramObj16 = new IntegerWrapper(expirationDateYear);
-
-			Object paramObj17 = new IntegerWrapper(expirationDateHour);
-
-			Object paramObj18 = new IntegerWrapper(expirationDateMinute);
-
-			Object paramObj19 = new BooleanWrapper(neverExpire);
-
-			Object paramObj20 = new IntegerWrapper(reviewDateMonth);
-
-			Object paramObj21 = new IntegerWrapper(reviewDateDay);
-
-			Object paramObj22 = new IntegerWrapper(reviewDateYear);
-
-			Object paramObj23 = new IntegerWrapper(reviewDateHour);
-
-			Object paramObj24 = new IntegerWrapper(reviewDateMinute);
-
-			Object paramObj25 = new BooleanWrapper(neverReview);
-
-			Object paramObj26 = new BooleanWrapper(indexable);
-
-			Object paramObj27 = new BooleanWrapper(smallImage);
-
-			Object paramObj28 = smallImageURL;
-
-			if (smallImageURL == null) {
-				paramObj28 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj29 = smallFile;
-
-			if (smallFile == null) {
-				paramObj29 = new NullWrapper("java.io.File");
-			}
-
-			Object paramObj30 = images;
-
-			if (images == null) {
-				paramObj30 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj31 = articleURL;
-
-			if (articleURL == null) {
-				paramObj31 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj32 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj32 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
-					"addArticle",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18, paramObj19, paramObj20, paramObj21,
-						paramObj22, paramObj23, paramObj24, paramObj25,
-						paramObj26, paramObj27, paramObj28, paramObj29,
-						paramObj30, paramObj31, paramObj32
-					});
+			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
+					"addArticle", long.class, java.lang.String.class,
+					boolean.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, int.class, int.class, int.class,
+					int.class, int.class, int.class, int.class, int.class,
+					int.class, int.class, boolean.class, int.class, int.class,
+					int.class, int.class, int.class, boolean.class,
+					boolean.class, boolean.class, java.lang.String.class,
+					java.io.File.class, java.util.Map.class,
+					java.lang.String.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					articleId, autoArticleId, title, description, content,
+					type, structureId, templateId, displayDateMonth,
+					displayDateDay, displayDateYear, displayDateHour,
+					displayDateMinute, expirationDateMonth, expirationDateDay,
+					expirationDateYear, expirationDateHour,
+					expirationDateMinute, neverExpire, reviewDateMonth,
+					reviewDateDay, reviewDateYear, reviewDateHour,
+					reviewDateMinute, neverReview, indexable, smallImage,
+					smallImageURL, smallFile, images, articleURL, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -246,117 +138,32 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = articleId;
-
-			if (articleId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new BooleanWrapper(autoArticleId);
-
-			Object paramObj3 = title;
-
-			if (title == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = description;
-
-			if (description == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = content;
-
-			if (content == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = type;
-
-			if (type == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = structureId;
-
-			if (structureId == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = templateId;
-
-			if (templateId == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = new IntegerWrapper(displayDateMonth);
-
-			Object paramObj10 = new IntegerWrapper(displayDateDay);
-
-			Object paramObj11 = new IntegerWrapper(displayDateYear);
-
-			Object paramObj12 = new IntegerWrapper(displayDateHour);
-
-			Object paramObj13 = new IntegerWrapper(displayDateMinute);
-
-			Object paramObj14 = new IntegerWrapper(expirationDateMonth);
-
-			Object paramObj15 = new IntegerWrapper(expirationDateDay);
-
-			Object paramObj16 = new IntegerWrapper(expirationDateYear);
-
-			Object paramObj17 = new IntegerWrapper(expirationDateHour);
-
-			Object paramObj18 = new IntegerWrapper(expirationDateMinute);
-
-			Object paramObj19 = new BooleanWrapper(neverExpire);
-
-			Object paramObj20 = new IntegerWrapper(reviewDateMonth);
-
-			Object paramObj21 = new IntegerWrapper(reviewDateDay);
-
-			Object paramObj22 = new IntegerWrapper(reviewDateYear);
-
-			Object paramObj23 = new IntegerWrapper(reviewDateHour);
-
-			Object paramObj24 = new IntegerWrapper(reviewDateMinute);
-
-			Object paramObj25 = new BooleanWrapper(neverReview);
-
-			Object paramObj26 = new BooleanWrapper(indexable);
-
-			Object paramObj27 = articleURL;
-
-			if (articleURL == null) {
-				paramObj27 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj28 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj28 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
-					"addArticle",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18, paramObj19, paramObj20, paramObj21,
-						paramObj22, paramObj23, paramObj24, paramObj25,
-						paramObj26, paramObj27, paramObj28
-					});
+			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
+					"addArticle", long.class, java.lang.String.class,
+					boolean.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, int.class, int.class, int.class,
+					int.class, int.class, int.class, int.class, int.class,
+					int.class, int.class, boolean.class, int.class, int.class,
+					int.class, int.class, int.class, boolean.class,
+					boolean.class, java.lang.String.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					articleId, autoArticleId, title, description, content,
+					type, structureId, templateId, displayDateMonth,
+					displayDateDay, displayDateYear, displayDateHour,
+					displayDateMinute, expirationDateMonth, expirationDateDay,
+					expirationDateYear, expirationDateHour,
+					expirationDateMinute, neverExpire, reviewDateMonth,
+					reviewDateDay, reviewDateYear, reviewDateHour,
+					reviewDateMinute, neverReview, indexable, articleURL,
+					serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -386,34 +193,16 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = oldArticleId;
-
-			if (oldArticleId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = newArticleId;
-
-			if (newArticleId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new BooleanWrapper(autoArticleId);
-
-			Object paramObj4 = new DoubleWrapper(version);
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
-					"copyArticle",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
+					"copyArticle", long.class, java.lang.String.class,
+					java.lang.String.class, boolean.class, double.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					oldArticleId, newArticleId, autoArticleId, version);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -443,37 +232,15 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = articleId;
-
-			if (articleId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new DoubleWrapper(version);
-
-			Object paramObj3 = articleURL;
-
-			if (articleURL == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj4 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
-					"deleteArticle",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
+					"deleteArticle", long.class, java.lang.String.class,
+					double.class, java.lang.String.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					articleId, version, articleURL, serviceContext);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -500,33 +267,15 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = articleId;
-
-			if (articleId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = articleURL;
-
-			if (articleURL == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj3 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
-					"deleteArticle",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
+					"deleteArticle", long.class, java.lang.String.class,
+					java.lang.String.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					articleId, articleURL, serviceContext);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -554,39 +303,17 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = articleId;
-
-			if (articleId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new DoubleWrapper(version);
-
-			Object paramObj3 = articleURL;
-
-			if (articleURL == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj4 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
-					"expireArticle",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
+					"expireArticle", long.class, java.lang.String.class,
+					double.class, java.lang.String.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					articleId, version, articleURL, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -614,21 +341,15 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = articleId;
-
-			if (articleId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
-					"getArticle", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
+					"getArticle", long.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					articleId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -657,24 +378,16 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = articleId;
-
-			if (articleId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new DoubleWrapper(version);
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
-					"getArticle",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
+					"getArticle", long.class, java.lang.String.class,
+					double.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					articleId, version);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -702,22 +415,15 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = urlTitle;
-
-			if (urlTitle == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
-					"getArticleByUrlTitle",
-					new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
+					"getArticleByUrlTitle", long.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					urlTitle);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -747,39 +453,17 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = articleId;
-
-			if (articleId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new DoubleWrapper(version);
-
-			Object paramObj3 = languageId;
-
-			if (languageId == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = themeDisplay;
-
-			if (themeDisplay == null) {
-				paramObj4 = new NullWrapper(
-						"com.liferay.portal.theme.ThemeDisplay");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
-					"getArticleContent",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
+					"getArticleContent", long.class, java.lang.String.class,
+					double.class, java.lang.String.class,
+					com.liferay.portal.theme.ThemeDisplay.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					articleId, version, languageId, themeDisplay);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -809,35 +493,17 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = articleId;
-
-			if (articleId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = languageId;
-
-			if (languageId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = themeDisplay;
-
-			if (themeDisplay == null) {
-				paramObj3 = new NullWrapper(
-						"com.liferay.portal.theme.ThemeDisplay");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
-					"getArticleContent",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
+					"getArticleContent", long.class, java.lang.String.class,
+					java.lang.String.class,
+					com.liferay.portal.theme.ThemeDisplay.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					articleId, languageId, themeDisplay);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -866,24 +532,16 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = articleId;
-
-			if (articleId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new IntegerWrapper(status);
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
-					"getLatestArticle",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
+					"getLatestArticle", long.class, java.lang.String.class,
+					int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					articleId, status);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -911,19 +569,13 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
-
-			Object paramObj1 = languageId;
-
-			if (languageId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
-					"removeArticleLocale", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
+					"removeArticleLocale", long.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					companyId, languageId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -950,30 +602,16 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = articleId;
-
-			if (articleId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new DoubleWrapper(version);
-
-			Object paramObj3 = languageId;
-
-			if (languageId == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
-					"removeArticleLocale",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
+					"removeArticleLocale", long.class, java.lang.String.class,
+					double.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					articleId, version, languageId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1002,30 +640,16 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = articleId;
-
-			if (articleId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new DoubleWrapper(version);
-
-			Object paramObj3 = content;
-
-			if (content == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
-					"updateArticle",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
+					"updateArticle", long.class, java.lang.String.class,
+					double.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					articleId, version, content);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1066,138 +690,34 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = articleId;
-
-			if (articleId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new DoubleWrapper(version);
-
-			Object paramObj3 = title;
-
-			if (title == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = description;
-
-			if (description == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = content;
-
-			if (content == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj6 = type;
-
-			if (type == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = structureId;
-
-			if (structureId == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = templateId;
-
-			if (templateId == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj9 = new IntegerWrapper(displayDateMonth);
-
-			Object paramObj10 = new IntegerWrapper(displayDateDay);
-
-			Object paramObj11 = new IntegerWrapper(displayDateYear);
-
-			Object paramObj12 = new IntegerWrapper(displayDateHour);
-
-			Object paramObj13 = new IntegerWrapper(displayDateMinute);
-
-			Object paramObj14 = new IntegerWrapper(expirationDateMonth);
-
-			Object paramObj15 = new IntegerWrapper(expirationDateDay);
-
-			Object paramObj16 = new IntegerWrapper(expirationDateYear);
-
-			Object paramObj17 = new IntegerWrapper(expirationDateHour);
-
-			Object paramObj18 = new IntegerWrapper(expirationDateMinute);
-
-			Object paramObj19 = new BooleanWrapper(neverExpire);
-
-			Object paramObj20 = new IntegerWrapper(reviewDateMonth);
-
-			Object paramObj21 = new IntegerWrapper(reviewDateDay);
-
-			Object paramObj22 = new IntegerWrapper(reviewDateYear);
-
-			Object paramObj23 = new IntegerWrapper(reviewDateHour);
-
-			Object paramObj24 = new IntegerWrapper(reviewDateMinute);
-
-			Object paramObj25 = new BooleanWrapper(neverReview);
-
-			Object paramObj26 = new BooleanWrapper(indexable);
-
-			Object paramObj27 = new BooleanWrapper(smallImage);
-
-			Object paramObj28 = smallImageURL;
-
-			if (smallImageURL == null) {
-				paramObj28 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj29 = smallFile;
-
-			if (smallFile == null) {
-				paramObj29 = new NullWrapper("java.io.File");
-			}
-
-			Object paramObj30 = images;
-
-			if (images == null) {
-				paramObj30 = new NullWrapper("java.util.Map");
-			}
-
-			Object paramObj31 = articleURL;
-
-			if (articleURL == null) {
-				paramObj31 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj32 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj32 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
-					"updateArticle",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18, paramObj19, paramObj20, paramObj21,
-						paramObj22, paramObj23, paramObj24, paramObj25,
-						paramObj26, paramObj27, paramObj28, paramObj29,
-						paramObj30, paramObj31, paramObj32
-					});
+			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
+					"updateArticle", long.class, java.lang.String.class,
+					double.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, java.lang.String.class,
+					java.lang.String.class, int.class, int.class, int.class,
+					int.class, int.class, int.class, int.class, int.class,
+					int.class, int.class, boolean.class, int.class, int.class,
+					int.class, int.class, int.class, boolean.class,
+					boolean.class, boolean.class, java.lang.String.class,
+					java.io.File.class, java.util.Map.class,
+					java.lang.String.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					articleId, version, title, description, content, type,
+					structureId, templateId, displayDateMonth, displayDateDay,
+					displayDateYear, displayDateHour, displayDateMinute,
+					expirationDateMonth, expirationDateDay, expirationDateYear,
+					expirationDateHour, expirationDateMinute, neverExpire,
+					reviewDateMonth, reviewDateDay, reviewDateYear,
+					reviewDateHour, reviewDateMinute, neverReview, indexable,
+					smallImage, smallImageURL, smallFile, images, articleURL,
+					serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -1226,30 +746,16 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = articleId;
-
-			if (articleId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = new DoubleWrapper(version);
-
-			Object paramObj3 = content;
-
-			if (content == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
-					"updateContent",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
+					"updateContent", long.class, java.lang.String.class,
+					double.class, java.lang.String.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					articleId, version, content);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {

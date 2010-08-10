@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.StringUtil_IW;
@@ -1337,6 +1338,19 @@ public class ServiceBuilder {
 		}
 
 		return getTypeGenericsName(type);
+	}
+
+	public String getLiteralClass(Type type) {
+		int dimensions = type.getDimensions();
+		StringBundler sb = new StringBundler(dimensions + 2);
+		sb.append(type.getValue());
+
+		for(int i = 0; i < dimensions; i++) {
+			sb.append("[]");
+		}
+
+		sb.append(".class");
+		return sb.toString();
 	}
 
 	public List<EntityColumn> getMappingEntities(String mappingTable)

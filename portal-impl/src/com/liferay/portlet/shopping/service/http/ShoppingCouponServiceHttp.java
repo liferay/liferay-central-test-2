@@ -16,12 +16,8 @@ package com.liferay.portlet.shopping.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.DoubleWrapper;
-import com.liferay.portal.kernel.util.IntegerWrapper;
-import com.liferay.portal.kernel.util.LongWrapper;
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -71,93 +67,26 @@ public class ShoppingCouponServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = code;
-
-			if (code == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = new BooleanWrapper(autoCode);
-
-			Object paramObj2 = name;
-
-			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = description;
-
-			if (description == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = new IntegerWrapper(startDateMonth);
-
-			Object paramObj5 = new IntegerWrapper(startDateDay);
-
-			Object paramObj6 = new IntegerWrapper(startDateYear);
-
-			Object paramObj7 = new IntegerWrapper(startDateHour);
-
-			Object paramObj8 = new IntegerWrapper(startDateMinute);
-
-			Object paramObj9 = new IntegerWrapper(endDateMonth);
-
-			Object paramObj10 = new IntegerWrapper(endDateDay);
-
-			Object paramObj11 = new IntegerWrapper(endDateYear);
-
-			Object paramObj12 = new IntegerWrapper(endDateHour);
-
-			Object paramObj13 = new IntegerWrapper(endDateMinute);
-
-			Object paramObj14 = new BooleanWrapper(neverExpire);
-
-			Object paramObj15 = new BooleanWrapper(active);
-
-			Object paramObj16 = limitCategories;
-
-			if (limitCategories == null) {
-				paramObj16 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj17 = limitSkus;
-
-			if (limitSkus == null) {
-				paramObj17 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj18 = new DoubleWrapper(minOrder);
-
-			Object paramObj19 = new DoubleWrapper(discount);
-
-			Object paramObj20 = discountType;
-
-			if (discountType == null) {
-				paramObj20 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj21 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj21 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCouponServiceUtil.class.getName(),
-					"addCoupon",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18, paramObj19, paramObj20, paramObj21
-					});
+			MethodKey methodKey = new MethodKey(ShoppingCouponServiceUtil.class.getName(),
+					"addCoupon", java.lang.String.class, boolean.class,
+					java.lang.String.class, java.lang.String.class, int.class,
+					int.class, int.class, int.class, int.class, int.class,
+					int.class, int.class, int.class, int.class, boolean.class,
+					boolean.class, java.lang.String.class,
+					java.lang.String.class, double.class, double.class,
+					java.lang.String.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, code,
+					autoCode, name, description, startDateMonth, startDateDay,
+					startDateYear, startDateHour, startDateMinute,
+					endDateMonth, endDateDay, endDateYear, endDateHour,
+					endDateMinute, neverExpire, active, limitCategories,
+					limitSkus, minOrder, discount, discountType, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -185,15 +114,13 @@ public class ShoppingCouponServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(couponId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCouponServiceUtil.class.getName(),
-					"deleteCoupon", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(ShoppingCouponServiceUtil.class.getName(),
+					"deleteCoupon", long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					couponId);
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -219,17 +146,15 @@ public class ShoppingCouponServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(couponId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCouponServiceUtil.class.getName(),
-					"getCoupon", new Object[] { paramObj0, paramObj1 });
+			MethodKey methodKey = new MethodKey(ShoppingCouponServiceUtil.class.getName(),
+					"getCoupon", long.class, long.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					couponId);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -259,41 +184,18 @@ public class ShoppingCouponServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(companyId);
-
-			Object paramObj2 = code;
-
-			if (code == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new BooleanWrapper(active);
-
-			Object paramObj4 = discountType;
-
-			if (discountType == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = new BooleanWrapper(andOperator);
-
-			Object paramObj6 = new IntegerWrapper(start);
-
-			Object paramObj7 = new IntegerWrapper(end);
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCouponServiceUtil.class.getName(),
-					"search",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
-					});
+			MethodKey methodKey = new MethodKey(ShoppingCouponServiceUtil.class.getName(),
+					"search", long.class, long.class, java.lang.String.class,
+					boolean.class, java.lang.String.class, boolean.class,
+					int.class, int.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					companyId, code, active, discountType, andOperator, start,
+					end);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
@@ -328,87 +230,25 @@ public class ShoppingCouponServiceHttp {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(couponId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = description;
-
-			if (description == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new IntegerWrapper(startDateMonth);
-
-			Object paramObj4 = new IntegerWrapper(startDateDay);
-
-			Object paramObj5 = new IntegerWrapper(startDateYear);
-
-			Object paramObj6 = new IntegerWrapper(startDateHour);
-
-			Object paramObj7 = new IntegerWrapper(startDateMinute);
-
-			Object paramObj8 = new IntegerWrapper(endDateMonth);
-
-			Object paramObj9 = new IntegerWrapper(endDateDay);
-
-			Object paramObj10 = new IntegerWrapper(endDateYear);
-
-			Object paramObj11 = new IntegerWrapper(endDateHour);
-
-			Object paramObj12 = new IntegerWrapper(endDateMinute);
-
-			Object paramObj13 = new BooleanWrapper(neverExpire);
-
-			Object paramObj14 = new BooleanWrapper(active);
-
-			Object paramObj15 = limitCategories;
-
-			if (limitCategories == null) {
-				paramObj15 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj16 = limitSkus;
-
-			if (limitSkus == null) {
-				paramObj16 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj17 = new DoubleWrapper(minOrder);
-
-			Object paramObj18 = new DoubleWrapper(discount);
-
-			Object paramObj19 = discountType;
-
-			if (discountType == null) {
-				paramObj19 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj20 = serviceContext;
-
-			if (serviceContext == null) {
-				paramObj20 = new NullWrapper(
-						"com.liferay.portal.service.ServiceContext");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ShoppingCouponServiceUtil.class.getName(),
-					"updateCoupon",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14, paramObj15, paramObj16, paramObj17,
-						paramObj18, paramObj19, paramObj20
-					});
+			MethodKey methodKey = new MethodKey(ShoppingCouponServiceUtil.class.getName(),
+					"updateCoupon", long.class, java.lang.String.class,
+					java.lang.String.class, int.class, int.class, int.class,
+					int.class, int.class, int.class, int.class, int.class,
+					int.class, int.class, boolean.class, boolean.class,
+					java.lang.String.class, java.lang.String.class,
+					double.class, double.class, java.lang.String.class,
+					com.liferay.portal.service.ServiceContext.class);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					couponId, name, description, startDateMonth, startDateDay,
+					startDateYear, startDateHour, startDateMinute,
+					endDateMonth, endDateDay, endDateYear, endDateHour,
+					endDateMinute, neverExpire, active, limitCategories,
+					limitSkus, minOrder, discount, discountType, serviceContext);
 
 			Object returnObj = null;
 
 			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
