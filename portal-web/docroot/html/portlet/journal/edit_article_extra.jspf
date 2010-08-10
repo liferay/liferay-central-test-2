@@ -31,7 +31,7 @@
 
 					<aui:field-wrapper label="name">
 						<span id="<portlet:namespace />structureNameLabel" class="structure-name-label">
-							<%= structureName %>
+							<%= HtmlUtil.escape(structureName) %>
 
 							<c:if test="<%= Validator.isNotNull(structureId) %>">
 								<span class="default-link">(<a href="javascript:;" id="<portlet:namespace />loadDefaultStructure"><liferay-ui:message key="use-default" /></a>)</span>
@@ -172,7 +172,7 @@
 											<portlet:param name="templateId" value="<%= tableIteratorObj.getTemplateId() %>" />
 										</portlet:renderURL>
 
-										<aui:a href="<%= templateURL %>" label="<%= tableIteratorObj.getName() %>" id="structureName" />
+										<aui:a href="<%= templateURL %>" label="<%= HtmlUtil.escape(tableIteratorObj.getName()) %>" id="structureName" />
 									</liferay-util:buffer>
 
 									<aui:input checked="<%= templateChecked %>" inlineField="<%= true %>" label="<%= templateLabel %>" name="templateId" type="radio" value="<%= tableIteratorObj.getTemplateId() %>" />

@@ -55,7 +55,7 @@ type = ParamUtil.getString(request, "type", type);
 		</span>
 
 		<span class="displaying-article-id-holder <%= article == null ? "aui-helper-hidden" : StringPool.BLANK %>">
-			<liferay-ui:message key="displaying-content" />: <span class="displaying-article-id"><%= article != null ? article.getTitle() : StringPool.BLANK %></span>
+			<liferay-ui:message key="displaying-content" />: <span class="displaying-article-id"><%= article != null ? HtmlUtil.escape(article.getTitle()) : StringPool.BLANK %></span>
 		</span>
 	</div>
 

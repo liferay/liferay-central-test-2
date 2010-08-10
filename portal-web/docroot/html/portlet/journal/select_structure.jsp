@@ -52,6 +52,7 @@
 
 		ResultRow row = new ResultRow(structure, structure.getId(), i);
 
+		String escapedStructureName = HtmlUtil.escape(structure.getName());
 		StringBundler sb = new StringBundler(7);
 
 		sb.append("javascript:opener.");
@@ -59,7 +60,7 @@
 		sb.append("selectStructure('");
 		sb.append(structure.getStructureId());
 		sb.append("', '");
-		sb.append(structure.getName());
+		sb.append(escapedStructureName);
 		sb.append("'); window.close();");
 
 		String rowHREF = sb.toString();
@@ -71,10 +72,10 @@
 		// Name and description
 
 		if (Validator.isNotNull(structure.getDescription())) {
-			row.addText(structure.getName().concat("<br />").concat(structure.getDescription()), rowHREF);
+			row.addText(escapedStructureName.concat("<br />").concat(HtmlUtil.escape(structure.getDescription())), rowHREF);
 		}
 		else {
-			row.addText(structure.getName(), rowHREF);
+			row.addText(escapedStructureName, rowHREF);
 		}
 
 		// Add result row
