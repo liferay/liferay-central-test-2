@@ -53,6 +53,8 @@
 	for (int i = 0; i < results.size(); i++) {
 		JournalTemplate template = (JournalTemplate)results.get(i);
 
+		template = template.toEscapedModel();
+
 		ResultRow row = new ResultRow(template, template.getId(), i);
 
 		StringBundler sb = new StringBundler(7);
