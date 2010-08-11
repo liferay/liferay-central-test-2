@@ -25,9 +25,11 @@ import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.WebKeys;
 
 import java.io.IOException;
 
@@ -36,6 +38,7 @@ import javax.portlet.PortletResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Tagnaouti Boubker
@@ -100,6 +103,24 @@ public class ReCaptchaImpl extends SimpleCaptchaImpl {
 		}
 
 		if (!GetterUtil.getBoolean(messages[0])) {
+			if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
+					(Validator.isNotNull(request.getRemoteUser()))) {
+
+				HttpSession session = request.getSession();
+
+				Integer count = (Integer)session.getAttribute(
+					WebKeys.CAPTCHA_COUNT);
+
+				if (count == null) {
+					count = new Integer(1);
+				}
+				else {
+					count = new Integer(count.intValue() + 1);
+				}
+
+				session.setAttribute(WebKeys.CAPTCHA_COUNT, count);
+			}
+
 			throw new CaptchaTextException();
 		}
 	}
