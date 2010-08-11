@@ -15,7 +15,6 @@
 package com.liferay.portal.captcha.simplecaptcha;
 
 import com.liferay.portal.kernel.captcha.Captcha;
-import com.liferay.portal.kernel.captcha.CaptchaMaxChallengesExceededException;
 import com.liferay.portal.kernel.captcha.CaptchaTextException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -58,9 +57,7 @@ public class SimpleCaptchaImpl implements Captcha {
 		initWordRenderers();
 	}
 
-	public void check(HttpServletRequest request)
-		throws CaptchaMaxChallengesExceededException, CaptchaTextException {
-
+	public void check(HttpServletRequest request) throws CaptchaTextException {
 		if (!isEnabled(request)) {
 			return;
 		}
@@ -78,22 +75,6 @@ public class SimpleCaptchaImpl implements Captcha {
 		}
 
 		if (!captchaText.equals(ParamUtil.getString(request, "captchaText"))) {
-			if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
-				(Validator.isNotNull(request.getRemoteUser()))) {
-
-				Integer count = (Integer)session.getAttribute(
-					WebKeys.CAPTCHA_COUNT);
-
-				if (count == null) {
-					count = new Integer(1);
-				}
-				else {
-					count = new Integer(count.intValue() + 1);
-				}
-
-				session.setAttribute(WebKeys.CAPTCHA_COUNT, count);
-			}
-
 			throw new CaptchaTextException();
 		}
 
@@ -102,10 +83,26 @@ public class SimpleCaptchaImpl implements Captcha {
 		}
 
 		session.removeAttribute(WebKeys.CAPTCHA_TEXT);
+
+		if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
+			(Validator.isNotNull(request.getRemoteUser()))) {
+
+			Integer count = (Integer)session.getAttribute(
+				WebKeys.CAPTCHA_COUNT);
+
+			if (count == null) {
+				count = new Integer(1);
+			}
+			else {
+				count = new Integer(count.intValue() + 1);
+			}
+
+			session.setAttribute(WebKeys.CAPTCHA_COUNT, count);
+		}
 	}
 
 	public void check(PortletRequest portletRequest)
-		throws CaptchaMaxChallengesExceededException, CaptchaTextException {
+		throws CaptchaTextException {
 
 		if (!isEnabled(portletRequest)) {
 			return;
@@ -127,22 +124,6 @@ public class SimpleCaptchaImpl implements Captcha {
 		if (!captchaText.equals(
 				ParamUtil.getString(portletRequest, "captchaText"))) {
 
-			if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
-				(Validator.isNotNull(portletRequest.getRemoteUser()))) {
-
-				Integer count = (Integer)portletSession.getAttribute(
-					WebKeys.CAPTCHA_COUNT);
-
-				if (count == null) {
-					count = new Integer(1);
-				}
-				else {
-					count = new Integer(count.intValue() + 1);
-				}
-
-				portletSession.setAttribute(WebKeys.CAPTCHA_COUNT, count);
-			}
-
 			throw new CaptchaTextException();
 		}
 
@@ -151,24 +132,34 @@ public class SimpleCaptchaImpl implements Captcha {
 		}
 
 		portletSession.removeAttribute(WebKeys.CAPTCHA_TEXT);
+
+		if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
+			(Validator.isNotNull(portletRequest.getRemoteUser()))) {
+
+			Integer count = (Integer)portletSession.getAttribute(
+				WebKeys.CAPTCHA_COUNT);
+
+			if (count == null) {
+				count = new Integer(1);
+			}
+			else {
+				count = new Integer(count.intValue() + 1);
+			}
+
+			portletSession.setAttribute(WebKeys.CAPTCHA_COUNT, count);
+		}
 	}
 
 	public String getTaglibPath() {
 		return _TAGLIB_PATH;
 	}
 
-	public boolean isEnabled(HttpServletRequest request)
-		throws CaptchaMaxChallengesExceededException {
-
+	public boolean isEnabled(HttpServletRequest request) {
 		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
 			HttpSession session = request.getSession();
 
 			Integer count = (Integer)session.getAttribute(
 				WebKeys.CAPTCHA_COUNT);
-
-			if (count != null && count >= PropsValues.CAPTCHA_MAX_CHALLENGES) {
-				throw new CaptchaMaxChallengesExceededException();
-			}
 
 			if ((count != null) &&
 				(PropsValues.CAPTCHA_MAX_CHALLENGES <= count.intValue())) {
@@ -187,21 +178,16 @@ public class SimpleCaptchaImpl implements Captcha {
 		}
 	}
 
-	public boolean isEnabled(PortletRequest portletRequest)
-		throws CaptchaMaxChallengesExceededException {
-
+	public boolean isEnabled(PortletRequest portletRequest) {
 		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
 			PortletSession portletSession = portletRequest.getPortletSession();
 
 			Integer count = (Integer)portletSession.getAttribute(
 				WebKeys.CAPTCHA_COUNT);
 
-			if (count != null && count >= PropsValues.CAPTCHA_MAX_CHALLENGES) {
-				throw new CaptchaMaxChallengesExceededException();
-			}
-
 			if ((count != null) &&
 				(PropsValues.CAPTCHA_MAX_CHALLENGES <= count.intValue())) {
+
 				return false;
 			}
 			else {
