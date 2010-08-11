@@ -287,6 +287,100 @@ public class SourceFormatter {
 		}
 	}
 
+	private static String _fixAntXMLProjectName(
+			String basedir, String fileName, String content)
+		throws IOException {
+
+		int x = 0;
+
+		if (fileName.endsWith("-ext/build.xml")) {
+			x = fileName.indexOf("ext/");
+
+			if (x == -1) {
+				x = 0;
+			}
+			else {
+				x = x + 5;
+			}
+		}
+		else if (fileName.endsWith("-hook/build.xml")) {
+			x = fileName.indexOf("hooks/");
+
+			if (x == -1) {
+				x = 0;
+			}
+			else {
+				x = x + 6;
+			}
+		}
+		else if (fileName.endsWith("-layouttpl/build.xml")) {
+			x = fileName.indexOf("layouttpl/");
+
+			if (x == -1) {
+				x = 0;
+			}
+			else {
+				x = x + 10;
+			}
+		}
+		else if (fileName.endsWith("-portlet/build.xml")) {
+			x = fileName.indexOf("portlets/");
+
+			if (x == -1) {
+				x = 0;
+			}
+			else {
+				x = x + 9;
+			}
+		}
+		else if (fileName.endsWith("-theme/build.xml")) {
+			x = fileName.indexOf("themes/");
+
+			if (x == -1) {
+				x = 0;
+			}
+			else {
+				x = x + 7;
+			}
+		}
+		else if (fileName.endsWith("-web/build.xml")) {
+			x = fileName.indexOf("webs/");
+
+			if (x == -1) {
+				x = 0;
+			}
+			else {
+				x = x + 5;
+			}
+		}
+		else {
+			return content;
+		}
+
+		int y = fileName.indexOf("/", x);
+
+		String correctProjectElementText =
+			"<project name=\"" + fileName.substring(x, y) + "\"";
+
+		if (!content.contains(correctProjectElementText)) {
+			x = content.indexOf("<project name=\"");
+
+			y = content.indexOf("\"", x) + 1;
+			y = content.indexOf("\"", y) + 1;
+
+			content =
+				content.substring(0, x) + correctProjectElementText +
+					content.substring(y);
+
+			_sourceFormatterHelper.printError(
+				fileName, fileName + " has an incorrect project name");
+
+			_fileUtil.write(basedir + fileName, content);
+		}
+
+		return content;
+	}
+
 	private static void _formatAntXML() throws DocumentException, IOException {
 		String basedir = "./";
 
@@ -300,7 +394,11 @@ public class SourceFormatter {
 			directoryScanner);
 
 		for (String fileName : fileNames) {
+			fileName = StringUtil.replace(fileName, "\\", "/");
+
 			String content = _fileUtil.read(basedir + fileName);
+
+			content = _fixAntXMLProjectName(basedir, fileName, content);
 
 			Document document = _saxReaderUtil.read(content);
 
