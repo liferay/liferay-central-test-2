@@ -148,8 +148,8 @@ else {
 			contentBox: '#addresses > fieldset',
 			fieldIndexes: '<portlet:namespace />addressesIndexes',
 			on: {
-				'autorow:clone': function(event) {
-					var row = event.row.get('contentBox');
+				'clone': function(event) {
+					var row = event.row;
 					var guid = event.guid;
 
 					var dynamicSelects = row.one('select[data-componentType=dynamic_select]');

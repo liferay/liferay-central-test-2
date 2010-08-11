@@ -182,10 +182,10 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 			{
 				contentBox: '#<%= randomNamespace %>languageSelector .lfr-panel-content',
 				on: {
-					'autorow:clone': function(event) {
+					'clone': function(event) {
 						var instance = this;
 
-						var row = event.row.get('contentBox');
+						var row = event.row;
 
 						var select = row.one('select');
 						var img = row.one('img.language-flag');
