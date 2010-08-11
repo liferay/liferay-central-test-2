@@ -28,12 +28,12 @@ DLFileVersion fileVersion = (DLFileVersion)request.getAttribute(WebKeys.DOCUMENT
 		<liferay-ui:icon
 			image='<%= "../file_system/small/" + fileVersion.getIcon() %>'
 			label="<%= true %>"
-			message="<%= fileVersion.getTitle() %>"
+			message="<%= HtmlUtil.escape(fileVersion.getTitle()) %>"
 			url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + fileVersion.getGroupId() + StringPool.SLASH + fileVersion.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileVersion.getTitle())) %>'
 		/>
 	</div>
 </c:if>
 
 <p class="asset-description">
-	<%= StringUtil.shorten(fileVersion.getDescription(), abstractLength) %>
+	<%= HtmlUtil.escape(StringUtil.shorten(fileVersion.getDescription(), abstractLength)) %>
 </p>

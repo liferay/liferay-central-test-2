@@ -32,5 +32,5 @@ Image smallImage = ImageLocalServiceUtil.getImage(image.getSmallImageId());
 </c:if>
 
 <p class="asset-description">
-	<%= StringUtil.shorten(image.getDescription(), abstractLength) %>
+	<%= HtmlUtil.escape(StringUtil.shorten(image.getDescription(), abstractLength)) %>
 </p>

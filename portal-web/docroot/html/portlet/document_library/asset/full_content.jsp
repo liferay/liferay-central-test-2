@@ -22,11 +22,11 @@ DLFileVersion fileVersion = (DLFileVersion)request.getAttribute(WebKeys.DOCUMENT
 
 <div class="asset-resource-info">
 	<aui:a href='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + fileVersion.getGroupId() + StringPool.SLASH + fileVersion.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileVersion.getTitle())) %>'>
-		<img class="dl-file-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/small/<%= fileVersion.getIcon() %>.png" /><%= fileVersion.getTitle() %>
+		<img class="dl-file-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/small/<%= fileVersion.getIcon() %>.png" /><%= HtmlUtil.escape(fileVersion.getTitle()) %>
 	</aui:a>
 </div>
 
-<p class="asset-description"><%= fileVersion.getDescription() %></p>
+<p class="asset-description"><%= HtmlUtil.escape(fileVersion.getDescription()) %></p>
 
 <liferay-ui:custom-attributes-available className="<%= DLFileEntry.class.getName() %>">
 	<liferay-ui:custom-attribute-list

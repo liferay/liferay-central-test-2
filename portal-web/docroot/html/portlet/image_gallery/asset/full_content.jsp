@@ -22,7 +22,7 @@ IGImage image = (IGImage)request.getAttribute(WebKeys.IMAGE_GALLERY_IMAGE);
 
 <img src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getLargeImageId() %>&amp;t=<%= ImageServletTokenUtil.getToken(image.getLargeImageId()) %>" />
 
-<p class="asset-description"><%= image.getDescription() %></p>
+<p class="asset-description"><%= HtmlUtil.escape(image.getDescription()) %></p>
 
 <liferay-ui:custom-attributes-available className="<%= IGImage.class.getName() %>">
 	<liferay-ui:custom-attribute-list
