@@ -73,7 +73,7 @@ else {
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
 
-<c:if test="<%= (messagesCount > 1) || MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.VIEW) %>">
+<c:if test="<%= (messagesCount > 1) || MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, ActionKeys.VIEW) %>">
 	<div class="taglib-discussion">
 		<form action="<%= HtmlUtil.escape(formAction) %>" method="post" name="<%= formName %>">
 		<input name="<%= namespace %><%= Constants.CMD %>" type="hidden" value="" />
@@ -93,7 +93,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 		MBMessage message = rootMessage;
 		%>
 
-		<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.ADD_DISCUSSION) %>">
+		<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, ActionKeys.ADD_DISCUSSION) %>">
 			<table class="add-comment" id="<%= randomNamespace %>messageScroll0">
 			<tr>
 				<td id="<%= randomNamespace %>messageScroll<%= message.getMessageId() %>">
@@ -150,7 +150,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 		</c:if>
 
 		<c:if test="<%= messagesCount > 1 %>">
-			<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.ADD_DISCUSSION) %>">
+			<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, ActionKeys.ADD_DISCUSSION) %>">
 				<br />
 			</c:if>
 
@@ -238,7 +238,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			for (i = 1; i <= messages.size(); i++) {
 				message = messages.get(i - 1);
 
-				if ((!message.isApproved() && (message.getUserId() != user.getUserId()) && !permissionChecker.isCommunityAdmin(scopeGroupId)) || !MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.VIEW)) {
+				if ((!message.isApproved() && (message.getUserId() != user.getUserId()) && !permissionChecker.isCommunityAdmin(scopeGroupId)) || !MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, ActionKeys.VIEW)) {
 					continue;
 				}
 			%>
@@ -330,7 +330,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 								</td>
 							</c:if>
 
-							<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.ADD_DISCUSSION) %>">
+							<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, ActionKeys.ADD_DISCUSSION) %>">
 								<td>
 
 									<%
@@ -360,7 +360,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 										/>
 								</td>
 
-								<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, message.getMessageId(), userId, ActionKeys.UPDATE_DISCUSSION) %>">
+								<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, message.getMessageId(), ActionKeys.UPDATE_DISCUSSION) %>">
 
 									<%
 									String taglibEditURL = "javascript:" + randomNamespace + "showForm('" + randomNamespace + "editForm" + i + "', '" + randomNamespace + "editReplyBody" + i + "');";
@@ -375,7 +375,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 									</td>
 								</c:if>
 
-								<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, message.getMessageId(), userId, ActionKeys.DELETE_DISCUSSION) %>">
+								<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, message.getMessageId(), ActionKeys.DELETE_DISCUSSION) %>">
 
 									<%
 									String taglibDeleteURL = "javascript:" + randomNamespace + "deleteMessage(" + i + ");";
@@ -409,7 +409,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 							</td>
 						</tr>
 
-						<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, message.getMessageId(), userId, ActionKeys.UPDATE_DISCUSSION) %>">
+						<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, message.getMessageId(), ActionKeys.UPDATE_DISCUSSION) %>">
 							<tr id="<%= randomNamespace %>editForm<%= i %>" style="display: none;">
 								<td>
 									<br />

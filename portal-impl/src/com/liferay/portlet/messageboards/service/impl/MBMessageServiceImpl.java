@@ -78,7 +78,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		MBDiscussionPermission.check(
 			getPermissionChecker(), user.getCompanyId(),
 			serviceContext.getScopeGroupId(), permissionClassName,
-			permissionClassPK, user.getUserId(), ActionKeys.ADD_DISCUSSION);
+			permissionClassPK, ActionKeys.ADD_DISCUSSION);
 
 		return mbMessageLocalService.addDiscussionMessage(
 			user.getUserId(), null, groupId, className, classPK, threadId,
@@ -160,7 +160,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		MBDiscussionPermission.check(
 			getPermissionChecker(), user.getCompanyId(), groupId,
-			permissionClassName, permissionClassPK, messageId, user.getUserId(),
+			permissionClassName, permissionClassPK, messageId,
 			ActionKeys.DELETE_DISCUSSION);
 
 		mbMessageLocalService.deleteDiscussionMessage(messageId);
@@ -535,8 +535,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		MBDiscussionPermission.check(
 			getPermissionChecker(), user.getCompanyId(),
 			serviceContext.getScopeGroupId(), permissionClassName,
-			permissionClassPK, messageId, user.getUserId(),
-			ActionKeys.UPDATE_DISCUSSION);
+			permissionClassPK, messageId, ActionKeys.UPDATE_DISCUSSION);
 
 		return mbMessageLocalService.updateDiscussionMessage(
 			getUserId(), messageId, subject, body,
