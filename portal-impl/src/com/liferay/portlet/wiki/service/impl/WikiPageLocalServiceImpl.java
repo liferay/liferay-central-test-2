@@ -1030,7 +1030,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			userId, nodeId, title, 0, oldPage.getContent(),
 			WikiPageConstants.REVERTED + " to " + version, false,
 			oldPage.getFormat(), getParentPageTitle(oldPage),
-			oldPage.getRedirectTitle(),	serviceContext);
+			oldPage.getRedirectTitle(), serviceContext);
 	}
 
 	public void subscribePage(long userId, long nodeId, String title)
