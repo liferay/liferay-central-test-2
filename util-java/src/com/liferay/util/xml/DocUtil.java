@@ -25,24 +25,24 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
  */
 public class DocUtil {
 
-	public static void add(Element element, String name, boolean text) {
-		add(element, name, String.valueOf(text));
+	public static Element add(Element element, String name, boolean text) {
+		return add(element, name, String.valueOf(text));
 	}
 
-	public static void add(Element element, String name, double text) {
-		add(element, name, String.valueOf(text));
+	public static Element add(Element element, String name, double text) {
+		return add(element, name, String.valueOf(text));
 	}
 
-	public static void add(Element element, String name, float text) {
-		add(element, name, String.valueOf(text));
+	public static Element add(Element element, String name, float text) {
+		return add(element, name, String.valueOf(text));
 	}
 
-	public static void add(Element element, String name, int text) {
-		add(element, name, String.valueOf(text));
+	public static Element add(Element element, String name, int text) {
+		return add(element, name, String.valueOf(text));
 	}
 
-	public static void add(Element element, String name, long text) {
-		add(element, name, String.valueOf(text));
+	public static Element add(Element element, String name, long text) {
+		return add(element, name, String.valueOf(text));
 	}
 
 	public static Element add(
@@ -53,49 +53,49 @@ public class DocUtil {
 		return element.addElement(qName);
 	}
 
-	public static void add(
+	public static Element add(
 		Element element, String name, Namespace namespace, boolean text) {
 
-		add(element, name, namespace, String.valueOf(text));
+		return add(element, name, namespace, String.valueOf(text));
 	}
 
-	public static void add(
+	public static Element add(
 		Element element, String name, Namespace namespace, double text) {
 
-		add(element, name, namespace, String.valueOf(text));
+		return add(element, name, namespace, String.valueOf(text));
 	}
 
-	public static void add(
+	public static Element add(
 		Element element, String name, Namespace namespace, float text) {
 
-		add(element, name, namespace, String.valueOf(text));
+		return add(element, name, namespace, String.valueOf(text));
 	}
 
-	public static void add(
+	public static Element add(
 		Element element, String name, Namespace namespace, int text) {
 
-		add(element, name, namespace, String.valueOf(text));
+		return add(element, name, namespace, String.valueOf(text));
 	}
 
-	public static void add(
+	public static Element add(
 		Element element, String name, Namespace namespace, long text) {
 
-		add(element, name, namespace, String.valueOf(text));
+		return add(element, name, namespace, String.valueOf(text));
 	}
 
-	public static void add(
+	public static Element add(
 		Element element, String name, Namespace namespace, Object text) {
 
-		add(element, name, namespace, String.valueOf(text));
+		return add(element, name, namespace, String.valueOf(text));
 	}
 
-	public static void add(
+	public static Element add(
 		Element element, String name, Namespace namespace, short text) {
 
-		add(element, name, namespace, String.valueOf(text));
+		return add(element, name, namespace, String.valueOf(text));
 	}
 
-	public static void add(
+	public static Element add(
 		Element element, String name, Namespace namespace, String text) {
 
 		QName qName = SAXReaderUtil.createQName(name, namespace);
@@ -103,20 +103,24 @@ public class DocUtil {
 		Element childElement = element.addElement(qName);
 
 		childElement.addText(GetterUtil.getString(text));
+
+		return childElement;
 	}
 
-	public static void add(Element element, String name, Object text) {
-		add(element, name, String.valueOf(text));
+	public static Element add(Element element, String name, Object text) {
+		return add(element, name, String.valueOf(text));
 	}
 
-	public static void add(Element element, String name, short text) {
-		add(element, name, String.valueOf(text));
+	public static Element add(Element element, String name, short text) {
+		return add(element, name, String.valueOf(text));
 	}
 
-	public static void add(Element element, String name, String text) {
+	public static Element add(Element element, String name, String text) {
 		Element childElement = element.addElement(name);
 
 		childElement.addText(GetterUtil.getString(text));
+
+		return childElement;
 	}
 
 }
