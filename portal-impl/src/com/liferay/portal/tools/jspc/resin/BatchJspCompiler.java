@@ -81,19 +81,20 @@ public class BatchJspCompiler {
 			return;
 		}
 
-		List<String> args = new ArrayList<String>();
+		List<String> arguments = new ArrayList<String>();
 
-		args.add("-app-dir");
-		args.add(_appDir);
-		args.add("-class-dir");
-		args.add(_classDir);
-		args.addAll(fileNames);
+		arguments.add("-app-dir");
+		arguments.add(_appDir);
+		arguments.add("-class-dir");
+		arguments.add(_classDir);
+		arguments.addAll(fileNames);
 
 		MethodKey methodKey = new MethodKey(
 			"com.caucho.jsp.JspCompiler", "main", String[].class);
 
 		MethodHandler methodHandler = new MethodHandler(
-			methodKey, args.toArray(new Object[args.size()]));
+			methodKey,
+			(Object)arguments.toArray(new String[arguments.size()]));
 
 		try {
 			methodHandler.invoke(false);
