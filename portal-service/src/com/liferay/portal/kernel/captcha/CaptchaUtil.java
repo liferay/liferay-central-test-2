@@ -28,13 +28,13 @@ import javax.servlet.http.HttpServletResponse;
 public class CaptchaUtil {
 
 	public static void check(HttpServletRequest request)
-		throws CaptchaTextException {
+		throws CaptchaMaxChallengesExceededException, CaptchaTextException {
 
 		getCaptcha().check(request);
 	}
 
 	public static void check(PortletRequest portletRequest)
-		throws CaptchaTextException {
+		throws CaptchaMaxChallengesExceededException, CaptchaTextException {
 
 		getCaptcha().check(portletRequest);
 	}
@@ -47,11 +47,15 @@ public class CaptchaUtil {
 		return getCaptcha().getTaglibPath();
 	}
 
-	public static boolean isEnabled(HttpServletRequest request) {
+	public static boolean isEnabled(HttpServletRequest request)
+		throws CaptchaMaxChallengesExceededException {
+
 		return getCaptcha().isEnabled(request);
 	}
 
-	public static boolean isEnabled(PortletRequest portletRequest) {
+	public static boolean isEnabled(PortletRequest portletRequest)
+		throws CaptchaMaxChallengesExceededException{
+
 		return getCaptcha().isEnabled(portletRequest);
 	}
 
