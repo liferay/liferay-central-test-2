@@ -13,8 +13,12 @@
 	vertical-align: middle;
 }
 
-.ie7 .breadcrumbs li {
+.ie7 .breadcrumbs li, .ie6 .breadcrumbs li {
 	display: inline;
+	zoom: 1;
+}
+
+.ie6 .breadcrumbs {
 	zoom: 1;
 }
 
