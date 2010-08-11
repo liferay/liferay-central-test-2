@@ -16,17 +16,18 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.util.FileImpl;
+import com.liferay.portal.xml.DocumentImpl;
+import com.liferay.portal.xml.ElementImpl;
 import com.liferay.util.xml.DocUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.util.Arrays;
 
 import org.apache.tools.ant.DirectoryScanner;
 
-import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 
 /**
  * @author Brian Wing Shun Chan
@@ -42,7 +43,6 @@ public class ExtInfoBuilder {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	public ExtInfoBuilder(
 			String basedir, String outputDir, String servletContextName)
 		throws Exception {
@@ -69,9 +69,12 @@ public class ExtInfoBuilder {
 
 		Arrays.sort(files);
 
-		Element rootElement = DocumentHelper.createElement("ext-info");
+		Element rootElement = new ElementImpl(
+			DocumentHelper.createElement("ext-info"));
 
-		Document document = DocumentHelper.createDocument(rootElement);
+		Document document = new DocumentImpl(DocumentHelper.createDocument());
+
+		document.setRootElement(rootElement);
 
 		DocUtil.add(rootElement, "servlet-context-name", servletContextName);
 
@@ -86,7 +89,7 @@ public class ExtInfoBuilder {
 
 		_fileUtil.write(
 			outputDir + "/ext-" + servletContextName + ".xml",
-			XMLFormatter.toString(document));
+			document.formattedString());
 	}
 
 	private static FileImpl _fileUtil = FileImpl.getInstance();

@@ -39,15 +39,6 @@ public class BeanToXMLUtil {
 		addFields(obj, el);
 	}
 
-	public static void addBean(Object obj, org.dom4j.Element parentEl) {
-		String classNameWithoutPackage = getClassNameWithoutPackage(
-			obj.getClass().getName());
-
-		org.dom4j.Element el = parentEl.addElement(classNameWithoutPackage);
-
-		addFields(obj, el);
-	}
-
 	public static void addFields(Object obj, Element parentEl) {
 		Method[] methods = obj.getClass().getMethods();
 
@@ -70,51 +61,6 @@ public class BeanToXMLUtil {
 						List<Object> list = (List<Object>)returnValue;
 
 						Element listEl = parentEl.addElement(memberName);
-
-						for (int j = 0; j < list.size(); j++) {
-							addBean(list.get(j), listEl);
-						}
-					}
-					else {
-						DocUtil.add(
-							parentEl, memberName, returnValue.toString());
-					}
-				}
-				catch (Exception e) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(e.getMessage());
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public static void addFields(Object obj, org.dom4j.Element parentEl) {
-		Method[] methods = obj.getClass().getMethods();
-
-		for (int i = 0; i < methods.length; i++) {
-			Method method = methods[i];
-
-			if (method.getName().startsWith("get") &&
-				!method.getName().equals("getClass")) {
-
-				String memberName = StringUtil.replace(
-					method.getName(), "get", StringPool.BLANK);
-
-				memberName = TextFormatter.format(memberName, TextFormatter.I);
-				memberName = TextFormatter.format(memberName, TextFormatter.K);
-
-				try {
-					Object returnValue = method.invoke(obj, new Object[] {});
-
-					if (returnValue instanceof List<?>) {
-						List<Object> list = (List<Object>)returnValue;
-
-						org.dom4j.Element listEl = parentEl.addElement(
-							memberName);
 
 						for (int j = 0; j < list.size(); j++) {
 							addBean(list.get(j), listEl);
