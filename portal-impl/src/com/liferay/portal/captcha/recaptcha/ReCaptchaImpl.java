@@ -104,7 +104,7 @@ public class ReCaptchaImpl extends SimpleCaptchaImpl {
 
 		if (!GetterUtil.getBoolean(messages[0])) {
 			if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
-					(Validator.isNotNull(request.getRemoteUser()))) {
+				(Validator.isNotNull(request.getRemoteUser()))) {
 
 				HttpSession session = request.getSession();
 
