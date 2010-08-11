@@ -21,11 +21,16 @@ String url = (String)request.getAttribute("liferay-ui:captcha:url");
 
 boolean captchaEnabled = false;
 
-if (portletRequest != null) {
-	captchaEnabled = CaptchaUtil.isEnabled(portletRequest);
+try {
+	if (portletRequest != null) {
+		captchaEnabled = CaptchaUtil.isEnabled(portletRequest);
+	}
+	else {
+		captchaEnabled = CaptchaUtil.isEnabled(request);
+	}
 }
-else {
-	captchaEnabled = CaptchaUtil.isEnabled(request);
+catch (CaptchaMaxChallengesExceededException e) {
+	captchaEnabled = true;
 }
 %>
 
