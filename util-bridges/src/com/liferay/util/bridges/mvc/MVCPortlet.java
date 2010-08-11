@@ -223,7 +223,7 @@ public class MVCPortlet extends LiferayPortlet {
 			ActionRequest request, ActionResponse response)
 		throws PortletException {
 
-		if ((_actionCommandCache == null) || _actionCommandCache.isEmpty()) {
+		if ((_actionCommandCache == null)) {
 			return super.callActionMethod(request, response);
 		}
 
