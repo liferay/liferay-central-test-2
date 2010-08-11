@@ -15,10 +15,11 @@ AUI().add(
 
 		var TPL_DELETE_BUTTON = '<button type="button" class="delete-row aui-buttonitem-content aui-buttonitem aui-state-default aui-buttonitem-icon-only aui-toolbar-last aui-toolbar-item" title=""><span class="aui-buttonitem-icon aui-icon aui-icon-minus"></span></button>';
 
-		var TPL_AUTOROW_CONTROLS = '<span class="lfr-autorow-controls aui-toolbar aui-toolbar-horizontal"><span class="aui-toolbar-content">' +
-										TPL_ADD_BUTTON +
-										TPL_DELETE_BUTTON +
-									'</span></span>';
+		var TPL_AUTOROW_CONTROLS =
+			'<span class="lfr-autorow-controls aui-toolbar aui-toolbar-horizontal"><span class="aui-toolbar-content">' +
+				TPL_ADD_BUTTON +
+				TPL_DELETE_BUTTON +
+			'</span></span>';
 
 		var TPL_LOADING = '<div class="' + CSS_ICON_LOADING + '"></div>';
 
