@@ -27,22 +27,22 @@ import java.lang.reflect.Method;
 public class ClearThreadLocalUtil {
 
 	public static void clearThreadLocal() throws Exception {
-		if (!_isInitialized) {
-			initial();
-		}
+		_init();
 
-		Thread[] threads = getThreads();
+		Thread[] threads = _getThreads();
 
-		ClassLoader classLoader =
-			Thread.currentThread().getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		for (Thread thread : threads) {
-			doClearThreadLocal(thread, classLoader);
+			_clearThreadLocal(thread, contextClassLoader);
 		}
 	}
 
-	private static void doClearThreadLocal(
-		Thread thread, ClassLoader classLoader) throws Exception {
+	private static void _clearThreadLocal(
+			Thread thread, ClassLoader classLoader)
+		throws Exception {
 
 		if (thread == null) {
 			return;
@@ -50,16 +50,16 @@ public class ClearThreadLocalUtil {
 
 		Object threadLocalMap = _threadLocalsField.get(thread);
 
-		Object inheritableThreadLocalMap =
-			_inheritableThreadLocalsField.get(thread);
+		Object inheritableThreadLocalMap = _inheritableThreadLocalsField.get(
+			thread);
 
-		doClearThreadLocalMap(threadLocalMap, classLoader);
-
-		doClearThreadLocalMap(inheritableThreadLocalMap, classLoader);
+		_clearThreadLocalMap(threadLocalMap, classLoader);
+		_clearThreadLocalMap(inheritableThreadLocalMap, classLoader);
 	}
 
-	private static void doClearThreadLocalMap(
-		Object threadLocalMap, ClassLoader classLoader) throws Exception {
+	private static void _clearThreadLocalMap(
+			Object threadLocalMap, ClassLoader classLoader)
+		throws Exception {
 
 		if (threadLocalMap == null) {
 			return;
@@ -73,34 +73,46 @@ public class ClearThreadLocalUtil {
 
 		int staleEntriesCount = 0;
 
-		for(Object tableEntry : table) {
+		for (Object tableEntry : table) {
 			if (tableEntry == null) {
 				continue;
 			}
 
-			boolean remove = false;
-
 			Object key = ((Reference<?>)tableEntry).get();
-
 			Object value = _tableValueField.get(tableEntry);
 
-			if (key != null && key.getClass().getClassLoader() == classLoader) {
-				remove = true;
+			boolean remove = false;
+
+			if (key != null) {
+				Class<?> keyClass = key.getClass();
+
+				ClassLoader keyClassLoader = keyClass.getClassLoader();
+
+				if (keyClassLoader == classLoader) {
+					remove = true;
+				}
 			}
 
-			if (value != null &&
-				value.getClass().getClassLoader() == classLoader) {
+			if (value != null) {
+				Class<?> valueClass = value.getClass();
 
-				remove = true;
+				ClassLoader valueClassLoader = valueClass.getClassLoader();
+
+				if (valueClassLoader == classLoader) {
+					remove = true;
+				}
 			}
 
 			if (remove) {
 				if (key != null) {
 					if (_log.isDebugEnabled()) {
+						Class<?> keyClass = key.getClass();
+
 						_log.debug(
 							"Clear a ThreadLocal with key of type " +
-							key.getClass().getCanonicalName());
+								keyClass.getCanonicalName());
 					}
+
 					_removeMethod.invoke(threadLocalMap, key);
 				}
 				else {
@@ -114,8 +126,31 @@ public class ClearThreadLocalUtil {
 		}
 	}
 
-	private static Thread[] getThreads() {
-		ThreadGroup threadGroup = Thread.currentThread( ).getThreadGroup( );
+	private static Field _getDeclaredField(Class<?> classObj, String name)
+		throws Exception {
+
+		Field field = classObj.getDeclaredField(name);
+
+		field.setAccessible(true);
+
+		return field;
+	}
+
+	private static Method _getDeclaredMethod(
+			Class<?> classObj, String name, Class<?> ... parameterTypes)
+		throws Exception {
+
+		Method method = classObj.getDeclaredMethod(name, parameterTypes);
+
+		method.setAccessible(true);
+
+		return method;
+	}
+
+	private static Thread[] _getThreads() {
+		Thread currentThread = Thread.currentThread();
+
+		ThreadGroup threadGroup = currentThread.getThreadGroup( );
 
 		while (threadGroup.getParent() != null) {
 			threadGroup = threadGroup.getParent();
@@ -136,40 +171,39 @@ public class ClearThreadLocalUtil {
 		}
 
 		return threads;
-
 	}
 
-	private static void initial() throws Exception {
+	private static void _init() throws Exception {
+		if (_initialized) {
+			return;
+		}
+
+		_inheritableThreadLocalsField = _getDeclaredField(
+			Thread.class, "inheritableThreadLocals");
+		_threadLocalsField = _getDeclaredField(Thread.class, "threadLocals");
+
 		Class<?> threadLocalMapClass = Class.forName(
 			"java.lang.ThreadLocal$ThreadLocalMap");
+
+		_expungeStaleEntriesMethod = _getDeclaredMethod(
+			threadLocalMapClass, "expungeStaleEntries");
+		_removeMethod = _getDeclaredMethod(
+			threadLocalMapClass, "remove", ThreadLocal.class);
+		_tableField = _getDeclaredField(threadLocalMapClass, "table");
+
 		Class<?> threadLocalMapEntryClass = Class.forName(
 			"java.lang.ThreadLocal$ThreadLocalMap$Entry");
 
-		_threadLocalsField = Thread.class.getDeclaredField("threadLocals");
-		_inheritableThreadLocalsField = Thread.class.getDeclaredField(
-			"inheritableThreadLocals");
-		_tableField = threadLocalMapClass.getDeclaredField("table");
-		_tableValueField = threadLocalMapEntryClass.getDeclaredField("value");
-		_removeMethod = threadLocalMapClass.getDeclaredMethod(
-			"remove", ThreadLocal.class);
-		_expungeStaleEntriesMethod = threadLocalMapClass.getDeclaredMethod(
-			"expungeStaleEntries");
+		_tableValueField = _getDeclaredField(threadLocalMapEntryClass, "value");
 
-		_threadLocalsField.setAccessible(true);
-		_inheritableThreadLocalsField.setAccessible(true);
-		_tableField.setAccessible(true);
-		_tableValueField.setAccessible(true);
-		_removeMethod.setAccessible(true);
-		_expungeStaleEntriesMethod.setAccessible(true);
-
-		_isInitialized = true;
+		_initialized = true;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ClearThreadLocalUtil.class);
 
 	private static Method _expungeStaleEntriesMethod;
 	private static Field _inheritableThreadLocalsField;
-	private static boolean _isInitialized;
+	private static boolean _initialized;
 	private static Method _removeMethod;
 	private static Field _tableField;
 	private static Field _tableValueField;
