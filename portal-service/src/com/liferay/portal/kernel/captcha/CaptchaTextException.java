@@ -14,12 +14,10 @@
 
 package com.liferay.portal.kernel.captcha;
 
-import com.liferay.portal.kernel.exception.PortalException;
-
 /**
  * @author Brian Wing Shun Chan
  */
-public class CaptchaTextException extends PortalException {
+public class CaptchaTextException extends CaptchaException {
 
 	public CaptchaTextException() {
 		super();

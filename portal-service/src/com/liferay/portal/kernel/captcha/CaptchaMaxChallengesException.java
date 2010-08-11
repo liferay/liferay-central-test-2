@@ -14,26 +14,24 @@
 
 package com.liferay.portal.kernel.captcha;
 
-import com.liferay.portal.kernel.exception.PortalException;
-
 /**
  * @author Jack Li
  */
-public class CaptchaMaxChallengesExceededException extends PortalException {
+public class CaptchaMaxChallengesException extends CaptchaException {
 
-	public CaptchaMaxChallengesExceededException() {
+	public CaptchaMaxChallengesException() {
 		super();
 	}
 
-	public CaptchaMaxChallengesExceededException(String msg) {
+	public CaptchaMaxChallengesException(String msg) {
 		super(msg);
 	}
 
-	public CaptchaMaxChallengesExceededException(String msg, Throwable cause) {
+	public CaptchaMaxChallengesException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public CaptchaMaxChallengesExceededException(Throwable cause) {
+	public CaptchaMaxChallengesException(Throwable cause) {
 		super(cause);
 	}
 

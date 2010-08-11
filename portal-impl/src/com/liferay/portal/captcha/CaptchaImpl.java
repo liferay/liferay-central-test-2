@@ -15,8 +15,7 @@
 package com.liferay.portal.captcha;
 
 import com.liferay.portal.kernel.captcha.Captcha;
-import com.liferay.portal.kernel.captcha.CaptchaMaxChallengesExceededException;
-import com.liferay.portal.kernel.captcha.CaptchaTextException;
+import com.liferay.portal.kernel.captcha.CaptchaException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.InstanceFactory;
@@ -37,17 +36,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class CaptchaImpl implements Captcha {
 
-	public void check(HttpServletRequest request)
-		throws CaptchaMaxChallengesExceededException, CaptchaTextException {
-
+	public void check(HttpServletRequest request) throws CaptchaException {
 		_initialize();
 
 		_captcha.check(request);
 	}
 
-	public void check(PortletRequest portletRequest)
-		throws CaptchaMaxChallengesExceededException, CaptchaTextException {
-
+	public void check(PortletRequest portletRequest) throws CaptchaException {
 		_initialize();
 
 		_captcha.check(portletRequest);
@@ -60,15 +55,15 @@ public class CaptchaImpl implements Captcha {
 	}
 
 	public boolean isEnabled(HttpServletRequest request)
-		throws CaptchaMaxChallengesExceededException {
+		throws CaptchaException {
 
 		_initialize();
 
 		return _captcha.isEnabled(request);
 	}
 
-	public boolean isEnabled(PortletRequest portletRequest) 
-		throws CaptchaMaxChallengesExceededException {
+	public boolean isEnabled(PortletRequest portletRequest)
+		throws CaptchaException {
 
 		_initialize();
 

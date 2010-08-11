@@ -15,7 +15,7 @@
 package com.liferay.portal.captcha.recaptcha;
 
 import com.liferay.portal.captcha.simplecaptcha.SimpleCaptchaImpl;
-import com.liferay.portal.kernel.captcha.CaptchaMaxChallengesExceededException;
+import com.liferay.portal.kernel.captcha.CaptchaException;
 import com.liferay.portal.kernel.captcha.CaptchaTextException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -44,9 +44,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ReCaptchaImpl extends SimpleCaptchaImpl {
 
-	public void check(HttpServletRequest request)
-		throws CaptchaMaxChallengesExceededException, CaptchaTextException {
-
+	public void check(HttpServletRequest request) throws CaptchaException {
 		if (!isEnabled(request)) {
 			return;
 		}
@@ -106,9 +104,7 @@ public class ReCaptchaImpl extends SimpleCaptchaImpl {
 		}
 	}
 
-	public void check(PortletRequest portletRequest)
-		throws CaptchaMaxChallengesExceededException, CaptchaTextException {
-
+	public void check(PortletRequest portletRequest) throws CaptchaException {
 		if (!isEnabled(portletRequest)) {
 			return;
 		}

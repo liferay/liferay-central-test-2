@@ -29,7 +29,7 @@ try {
 		captchaEnabled = CaptchaUtil.isEnabled(request);
 	}
 }
-catch (CaptchaMaxChallengesExceededException e) {
+catch (CaptchaMaxChallengesException cmce) {
 	captchaEnabled = true;
 }
 %>

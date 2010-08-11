@@ -15,7 +15,8 @@
 package com.liferay.portal.captcha.simplecaptcha;
 
 import com.liferay.portal.kernel.captcha.Captcha;
-import com.liferay.portal.kernel.captcha.CaptchaMaxChallengesExceededException;
+import com.liferay.portal.kernel.captcha.CaptchaException;
+import com.liferay.portal.kernel.captcha.CaptchaMaxChallengesException;
 import com.liferay.portal.kernel.captcha.CaptchaTextException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -58,9 +59,7 @@ public class SimpleCaptchaImpl implements Captcha {
 		initWordRenderers();
 	}
 
-	public void check(HttpServletRequest request)
-		throws CaptchaMaxChallengesExceededException, CaptchaTextException {
-
+	public void check(HttpServletRequest request) throws CaptchaException {
 		if (!isEnabled(request)) {
 			return;
 		}
@@ -104,9 +103,7 @@ public class SimpleCaptchaImpl implements Captcha {
 		session.removeAttribute(WebKeys.CAPTCHA_TEXT);
 	}
 
-	public void check(PortletRequest portletRequest)
-		throws CaptchaMaxChallengesExceededException, CaptchaTextException {
-
+	public void check(PortletRequest portletRequest) throws CaptchaException {
 		if (!isEnabled(portletRequest)) {
 			return;
 		}
@@ -158,7 +155,7 @@ public class SimpleCaptchaImpl implements Captcha {
 	}
 
 	public boolean isEnabled(HttpServletRequest request)
-		throws CaptchaMaxChallengesExceededException {
+		throws CaptchaException {
 
 		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
 			HttpSession session = request.getSession();
@@ -167,7 +164,7 @@ public class SimpleCaptchaImpl implements Captcha {
 				WebKeys.CAPTCHA_COUNT);
 
 			if (count != null && count >= PropsValues.CAPTCHA_MAX_CHALLENGES) {
-				throw new CaptchaMaxChallengesExceededException();
+				throw new CaptchaMaxChallengesException();
 			}
 
 			if ((count != null) &&
@@ -188,7 +185,7 @@ public class SimpleCaptchaImpl implements Captcha {
 	}
 
 	public boolean isEnabled(PortletRequest portletRequest)
-		throws CaptchaMaxChallengesExceededException {
+		throws CaptchaException {
 
 		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
 			PortletSession portletSession = portletRequest.getPortletSession();
@@ -197,11 +194,12 @@ public class SimpleCaptchaImpl implements Captcha {
 				WebKeys.CAPTCHA_COUNT);
 
 			if (count != null && count >= PropsValues.CAPTCHA_MAX_CHALLENGES) {
-				throw new CaptchaMaxChallengesExceededException();
+				throw new CaptchaMaxChallengesException();
 			}
 
 			if ((count != null) &&
 				(PropsValues.CAPTCHA_MAX_CHALLENGES <= count.intValue())) {
+
 				return false;
 			}
 			else {

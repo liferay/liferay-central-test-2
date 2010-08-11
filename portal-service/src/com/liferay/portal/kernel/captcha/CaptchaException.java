@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
@@ -12,9 +11,30 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-%>
 
-<%@ include file="/html/taglib/init.jsp" %>
+package com.liferay.portal.kernel.captcha;
 
-<%@ page import="com.liferay.portal.kernel.captcha.CaptchaMaxChallengesException" %>
-<%@ page import="com.liferay.portal.kernel.captcha.CaptchaUtil" %>
+import com.liferay.portal.kernel.exception.PortalException;
+
+/**
+ * @author Brian Wing Shun Chan
+ */
+public class CaptchaException extends PortalException {
+
+	public CaptchaException() {
+		super();
+	}
+
+	public CaptchaException(String msg) {
+		super(msg);
+	}
+
+	public CaptchaException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public CaptchaException(Throwable cause) {
+		super(cause);
+	}
+
+}

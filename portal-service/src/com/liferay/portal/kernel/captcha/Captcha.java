@@ -27,19 +27,17 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface Captcha {
 
-	public void check(HttpServletRequest request)
-		throws CaptchaMaxChallengesExceededException, CaptchaTextException;
+	public void check(HttpServletRequest request) throws CaptchaException;
 
-	public void check(PortletRequest portletRequest)
-		throws CaptchaMaxChallengesExceededException, CaptchaTextException;
+	public void check(PortletRequest portletRequest) throws CaptchaException;
 
 	public String getTaglibPath();
 
 	public boolean isEnabled(HttpServletRequest request)
-		throws CaptchaMaxChallengesExceededException;
+		throws CaptchaException;
 
 	public boolean isEnabled(PortletRequest portletRequest)
-		throws CaptchaMaxChallengesExceededException;
+		throws CaptchaException;
 
 	public void serveImage(
 			HttpServletRequest request, HttpServletResponse response)
