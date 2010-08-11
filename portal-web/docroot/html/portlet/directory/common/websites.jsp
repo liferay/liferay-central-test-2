@@ -34,11 +34,9 @@ if (classPK > 0) {
 
 	<%
 	for (Website website: websites) {
+		website = website.toEscapedModel();
 	%>
 
-		<%
-		website = website.toEscapedModel();
-		%>
 		<li class="<%= website.isPrimary() ? "primary" : "" %>">
 			<a href="<%= website.getUrl() %>"><%= website.getUrl() %></a>
 

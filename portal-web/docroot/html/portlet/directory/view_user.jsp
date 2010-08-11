@@ -19,11 +19,11 @@
 <%
 User selUser = PortalUtil.getSelectedUser(request);
 
+selUser = selUser.toEscapedModel();
+
 Contact selContact = selUser.getContact();
 
 List<Organization> organizations = OrganizationLocalServiceUtil.getUserOrganizations(selUser.getUserId(), true);
-
-selUser = selUser.toEscapedModel();
 
 request.setAttribute("user.selUser", selUser);
 request.setAttribute("user.selContact", selContact);
