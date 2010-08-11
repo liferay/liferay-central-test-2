@@ -917,6 +917,12 @@ public class JournalUtil {
 	public static void removeRecentArticle(
 		PortletRequest portletRequest, String articleId) {
 
+		removeRecentArticle(portletRequest, articleId, -1.0);
+	}
+
+	public static void removeRecentArticle(
+		PortletRequest portletRequest, String articleId, double version) {
+
 		Stack<JournalArticle> stack = getRecentArticles(portletRequest);
 
 		Iterator<JournalArticle> itr = stack.iterator();
@@ -924,10 +930,12 @@ public class JournalUtil {
 		while (itr.hasNext()) {
 			JournalArticle journalArticle = itr.next();
 
-			if (journalArticle.getArticleId().equals(articleId)) {
-				itr.remove();
+			if ((journalArticle.getArticleId().equals(articleId) 
+				&& journalArticle.getVersion() == version) ||
+					(journalArticle.getArticleId().equals(articleId))
+						&& version == -1.0) {
 
-				break;
+				itr.remove();
 			}
 		}
 	}

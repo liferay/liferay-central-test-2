@@ -235,13 +235,15 @@ public class EditArticleAction extends PortletAction {
 			String articleURL = ParamUtil.getString(
 				actionRequest, "articleURL");
 
+			double version = -1.0;
+
 			if (pos == -1) {
 				JournalArticleServiceUtil.deleteArticle(
 					groupId, articleId, articleURL, serviceContext);
 			}
 			else {
 				articleId = articleId.substring(0, pos);
-				double version = GetterUtil.getDouble(
+				version = GetterUtil.getDouble(
 					deleteArticleIds[i].substring(
 						pos + VERSION_SEPARATOR.length()));
 
@@ -249,7 +251,7 @@ public class EditArticleAction extends PortletAction {
 					groupId, articleId, version, articleURL, serviceContext);
 			}
 
-			JournalUtil.removeRecentArticle(actionRequest, deleteArticleIds[i]);
+			JournalUtil.removeRecentArticle(actionRequest, articleId, version);
 		}
 	}
 
