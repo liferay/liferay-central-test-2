@@ -76,7 +76,7 @@ public class LoginPostAction extends Action {
 				jsonObj.put("userAgent", userAgent);
 
 				MessageBusUtil.sendMessage(
-					DestinationNames.LIVE_USERS, jsonObj);
+					DestinationNames.LIVE_USERS, jsonObj.toString());
 			}
 
 			if (PrefsPropsUtil.getBoolean(

@@ -89,7 +89,7 @@ public class PortalSessionDestroyer extends BasePortalLifecycle {
 				jsonObj.put("sessionId", sessionId);
 
 				MessageBusUtil.sendMessage(
-					DestinationNames.LIVE_USERS, jsonObj);
+					DestinationNames.LIVE_USERS, jsonObj.toString());
 			}
 		}
 		catch (IllegalStateException ise) {
