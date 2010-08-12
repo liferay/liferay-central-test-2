@@ -130,7 +130,7 @@ public class NavItem implements Serializable {
 		}
 	}
 
-	public String icon() throws Exception {
+	public void icon() throws Exception {
 		HttpServletRequest request = _vars.getRequest();
 
 		Object velocityTaglib = request.getAttribute(WebKeys.VELOCITY_TAGLIB);
@@ -139,7 +139,7 @@ public class NavItem implements Serializable {
 			_VELOCITY_TAGLIB_CLASS, _VELOCITY_TAGLIB_LAYOUT_ICON_METHOD,
 			_VELOCITY_TAGLIB_LAYOUT_ICON_PARAMS);
 
-		return (String)method.invoke(velocityTaglib, new Object[] {_layout});
+		method.invoke(velocityTaglib, _layout);
 	}
 
 	private static final String _VELOCITY_TAGLIB_CLASS =
