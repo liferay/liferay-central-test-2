@@ -400,11 +400,12 @@ public class HookHotDeployListener
 
 		initLogger(portletClassLoader);
 
-		Document doc = SAXReaderUtil.read(xml, true);
+		Document document = SAXReaderUtil.read(xml, true);
 
-		Element root = doc.getRootElement();
+		Element rootElement = document.getRootElement();
 
-		String portalPropertiesLocation = root.elementText("portal-properties");
+		String portalPropertiesLocation = rootElement.elementText(
+			"portal-properties");
 
 		if (Validator.isNotNull(portalPropertiesLocation)) {
 			Configuration portalPropertiesConfiguration = null;
@@ -471,11 +472,12 @@ public class HookHotDeployListener
 
 		_languagesContainerMap.put(servletContextName, languagesContainer);
 
-		List<Element> languagePropertiesEls = root.elements(
+		List<Element> languagePropertiesElements = rootElement.elements(
 			"language-properties");
 
-		for (Element languagePropertiesEl : languagePropertiesEls) {
-			String languagePropertiesLocation = languagePropertiesEl.getText();
+		for (Element languagePropertiesElement : languagePropertiesElements) {
+			String languagePropertiesLocation =
+				languagePropertiesElement.getText();
 
 			try {
 				URL url = portletClassLoader.getResource(
@@ -515,7 +517,7 @@ public class HookHotDeployListener
 			}
 		}
 
-		String customJspDir = root.elementText("custom-jsp-dir");
+		String customJspDir = rootElement.elementText("custom-jsp-dir");
 
 		if (Validator.isNotNull(customJspDir)) {
 			if (_log.isDebugEnabled()) {
@@ -558,11 +560,11 @@ public class HookHotDeployListener
 			}
 		}
 
-		List<Element> serviceEls = root.elements("service");
+		List<Element> serviceElements = rootElement.elements("service");
 
-		for (Element serviceEl : serviceEls) {
-			String serviceType = serviceEl.elementText("service-type");
-			String serviceImpl = serviceEl.elementText("service-impl");
+		for (Element serviceElement : serviceElements) {
+			String serviceType = serviceElement.elementText("service-type");
+			String serviceImpl = serviceElement.elementText("service-impl");
 
 			Class<?> serviceTypeClass = portletClassLoader.loadClass(
 				serviceType);
@@ -599,11 +601,12 @@ public class HookHotDeployListener
 				servletContextName, modelListenersContainer);
 		}
 
-		List<Element> modelListenerEls = root.elements("model-listener");
+		List<Element> modelListenerElements = rootElement.elements(
+			"model-listener");
 
-		for (Element modelListenerEl : modelListenerEls) {
-			String modelName = modelListenerEl.elementText("model-name");
-			String modelListenerClassName = modelListenerEl.elementText(
+		for (Element modelListenerElement : modelListenerElements) {
+			String modelName = modelListenerElement.elementText("model-name");
+			String modelListenerClassName = modelListenerElement.elementText(
 				"model-listener-class");
 
 			ModelListener<BaseModel<?>> modelListener = initModelListener(
@@ -624,11 +627,11 @@ public class HookHotDeployListener
 			_eventsContainerMap.put(servletContextName, eventsContainer);
 		}
 
-		List<Element> eventEls = root.elements("event");
+		List<Element> eventElements = rootElement.elements("event");
 
-		for (Element eventEl : eventEls) {
-			String eventName = eventEl.elementText("event-type");
-			String eventClassName = eventEl.elementText("event-class");
+		for (Element eventElement : eventElements) {
+			String eventName = eventElement.elementText("event-type");
+			String eventClassName = eventElement.elementText("event-class");
 
 			Object obj = initEvent(
 				eventName, eventClassName, portletClassLoader);
