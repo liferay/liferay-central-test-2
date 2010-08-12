@@ -26,55 +26,64 @@ import java.lang.reflect.Method;
 public class ClearTimerThreadUtil {
 
 	public static void clearTimerThread() throws Exception {
-		if (!_capable) {
+		if (!_initialized) {
 			return;
 		}
 
 		Thread[] threads = ThreadUtil.getThreads();
-		for(Thread thread : threads) {
-			if (thread != null &&
-				thread.getClass().getName().equals("java.util.TimerThread")) {
-				Object queue = _queueField.get(thread);
-				synchronized(queue) {
-					_newTasksMayBeScheduledField.setBoolean(thread, false);
-					_clearMethod.invoke(queue);
-					queue.notify();
-				}
+
+		for (Thread thread : threads) {
+			if (thread == null) {
+				continue;
+			}
+
+			Class<?> threadClass = thread.getClass();
+
+			String threadClassName = threadClass.getName();
+
+			if (!threadClassName.equals("java.util.TimerThread")) {
+				continue;
+			}
+
+			Object queue = _queueField.get(thread);
+
+			synchronized (queue) {
+				_newTasksMayBeScheduledField.setBoolean(thread, false);
+
+				_clearMethod.invoke(queue);
+
+				queue.notify();
 			}
 		}
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		ClearTimerThreadUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(ClearTimerThreadUtil.class);
 
-	private static boolean _capable;
-	private static final Method _clearMethod;
-	private static final Field _newTasksMayBeScheduledField;
-	private static final Field _queueField;
+	private static Method _clearMethod;
+	private static boolean _initialized;
+	private static Field _newTasksMayBeScheduledField;
+	private static Field _queueField;
 
 	static {
 		try {
 			Class<?> timeThreadClass = Class.forName("java.util.TimerThread");
 
-			_newTasksMayBeScheduledField = timeThreadClass.getDeclaredField(
-				"newTasksMayBeScheduled");
-			_newTasksMayBeScheduledField.setAccessible(true);
-
-			_queueField = timeThreadClass.getDeclaredField("queue");
-			_queueField.setAccessible(true);
+			_newTasksMayBeScheduledField = ReflectionUtil.getDeclaredField(
+				timeThreadClass, "newTasksMayBeScheduled");
+			_queueField = ReflectionUtil.getDeclaredField(
+				timeThreadClass, "queue");
 
 			Class<?> taskQueueClass = Class.forName("java.util.TaskQueue");
 
-			_clearMethod = taskQueueClass.getDeclaredMethod("clear");
-			_clearMethod.setAccessible(true);
+			_clearMethod = ReflectionUtil.getDeclaredMethod(
+				taskQueueClass, "clear");
 
-			_capable = true;
-		} catch (Throwable t) {
-			_capable = false;
-			_log.error("Fail to initialize ClearTimerThreadUtil, this may "
-				+ "cause by a incompatible jvm. No TimerThread will be forced "
-				+ "clean up.", t);
-			throw new ExceptionInInitializerError(t);
+			_initialized = true;
+		}
+		catch (Throwable t) {
+			_initialized = false;
+
+			_log.warn("Failed to initialize ClearTimerThreadUtil", t);
 		}
 	}
 

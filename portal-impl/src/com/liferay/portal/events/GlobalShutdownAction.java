@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.util.ThreadLocalRegistry;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.search.lucene.LuceneHelperUtil;
@@ -41,8 +40,6 @@ import com.liferay.util.ThirdPartyThreadLocalRegistry;
 
 import java.sql.Connection;
 import java.sql.Statement;
-
-import java.util.Timer;
 
 /**
  * @author Brian Wing Shun Chan
@@ -142,10 +139,6 @@ public class GlobalShutdownAction extends SimpleAction {
 		ThirdPartyThreadLocalRegistry.resetThreadLocals();
 		ThreadLocalRegistry.resetThreadLocals();
 
-		clearReferences("com.mysql.jdbc.Connection", "cancelTimer");
-		clearReferences("org.apache.axis.utils.XMLUtils", "documentBuilder");
-		//clearReferences("org.joni.StackMachine", "stacks");
-
 		// Hypersonic
 
 		DB db = DBFactoryUtil.getDB();
@@ -219,40 +212,6 @@ public class GlobalShutdownAction extends SimpleAction {
 			}
 
 			threadGroup.destroy();
-		}
-	}
-
-	protected void clearReferences(String className, String fieldName) {
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader =
-			currentThread.getContextClassLoader();
-
-		Class<?> classObj = null;
-
-		try {
-			classObj = contextClassLoader.loadClass(className);
-
-			return;
-		}
-		catch (Exception e) {
-		}
-
-		Object fieldValue = ReflectionUtil.getFieldValue(classObj, fieldName);
-
-		if (fieldValue == null) {
-			return;
-		}
-
-		if (fieldValue instanceof ThreadLocal<?>) {
-			ThreadLocal<?> threadLocal = (ThreadLocal<?>)fieldValue;
-
-			threadLocal.remove();
-		}
-		else if (fieldValue instanceof Timer) {
-			Timer timer = (Timer)fieldValue;
-
-			timer.cancel();
 		}
 	}
 
