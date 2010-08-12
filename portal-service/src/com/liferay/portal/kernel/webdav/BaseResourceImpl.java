@@ -145,7 +145,9 @@ public class BaseResourceImpl implements Resource {
 		return ContentTypes.HTTPD_UNIX_DIRECTORY;
 	}
 
-	@SuppressWarnings("unused")
+	/**
+	 * @throws WebDAVException
+	 */
 	public InputStream getContentAsStream() throws WebDAVException {
 		return null;
 	}

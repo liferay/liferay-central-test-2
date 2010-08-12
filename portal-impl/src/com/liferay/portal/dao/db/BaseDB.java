@@ -130,7 +130,9 @@ public abstract class BaseDB implements DB {
 			template);
 	}
 
-	@SuppressWarnings("unused")
+	/**
+	 * @throws SQLException
+	 */
 	public List<Index> getIndexes() throws SQLException {
 		return Collections.EMPTY_LIST;
 	}

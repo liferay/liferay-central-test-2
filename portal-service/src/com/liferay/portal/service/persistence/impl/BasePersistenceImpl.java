@@ -84,12 +84,17 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		}
 	}
 
-	@SuppressWarnings("unused")
+	/**
+	 * @throws SystemException
+	 */
 	public T fetchByPrimaryKey(Serializable primaryKey) throws SystemException {
 		throw new UnsupportedOperationException();
 	}
 
-	@SuppressWarnings("unused")
+	/**
+	 * @throws NoSuchModelException
+	 * @throws SystemException
+	 */
 	public T findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 
@@ -193,7 +198,10 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 			new ModelListener[listenersList.size()]);
 	}
 
-	@SuppressWarnings("unused")
+	/**
+	 * @throws NoSuchModelException
+	 * @throws SystemException
+	 */
 	public T remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 

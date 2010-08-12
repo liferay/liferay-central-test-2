@@ -38,7 +38,10 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 		return getAssetRenderer(classPK, TYPE_LATEST_APPROVED);
 	}
 
-	@SuppressWarnings("unused")
+	/**
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
 	public AssetRenderer getAssetRenderer(long groupId, String urlTitle)
 		throws PortalException, SystemException {
 
