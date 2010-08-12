@@ -43,196 +43,212 @@ public class ServerDetector {
 	public static final String WEBSPHERE_ID = "websphere";
 
 	public static String getServerId() {
-		if (_serverId == null) {
-			if (isGeronimo()) {
-				_serverId = GERONIMO_ID;
-			}
-			else if (isGlassfish()) {
-				_serverId = GLASSFISH_ID;
-			}
-			else if (isJBoss()) {
-				_serverId = JBOSS_ID;
-			}
-			else if (isJOnAS()) {
-				_serverId = JONAS_ID;
-			}
-			else if (isOC4J()) {
-				_serverId = OC4J_ID;
-			}
-			else if (isResin()) {
-				_serverId = RESIN_ID;
-			}
-			else if (isWebLogic()) {
-				_serverId = WEBLOGIC_ID;
-			}
-			else if (isWebSphere()) {
-				_serverId = WEBSPHERE_ID;
-			}
-
-			if (isJetty()) {
-				if (_serverId == null) {
-					_serverId = JETTY_ID;
-				}
-			}
-			else if (isTomcat()) {
-				if (_serverId == null) {
-					_serverId = TOMCAT_ID;
-				}
-			}
-
-			if (_log.isInfoEnabled()) {
-				if (_serverId != null) {
-					_log.info("Detected server " + _serverId);
-				}
-				else {
-					_log.info("No server detected");
-				}
-			}
-
-			if (_serverId == null) {
-				throw new RuntimeException("Server is not supported");
-			}
-		}
-
-		return _serverId;
+		return _instance._serverId;
 	}
 
 	public static boolean isGeronimo() {
-		if (_geronimo == null) {
-			_geronimo = _detect(
-				"/org/apache/geronimo/system/main/Daemon.class");
-		}
-
-		return _geronimo.booleanValue();
+		return _instance._geronimo;
 	}
 
 	public static boolean isGlassfish() {
-		if (_glassfish == null) {
-			String value = System.getProperty("com.sun.aas.instanceRoot");
-
-			if (value != null) {
-				_glassfish = Boolean.TRUE;
-			}
-			else {
-				_glassfish = Boolean.FALSE;
-			}
-		}
-
-		return _glassfish.booleanValue();
+		return _instance._glassfish;
 	}
 
 	public static boolean isJBoss() {
-		if (_jBoss == null) {
-			_jBoss = _detect("/org/jboss/Main.class");
-		}
-
-		return _jBoss.booleanValue();
+		return _instance._jBoss;
 	}
 
 	public static boolean isJetty() {
-		if (_jetty == null) {
-			_jetty = _detect("/org/mortbay/jetty/Server.class");
-		}
-
-		return _jetty.booleanValue();
+		return _instance._jetty;
 	}
 
 	public static boolean isJOnAS() {
-		if (_jonas == null) {
-			_jonas = _detect("/org/objectweb/jonas/server/Server.class");
-
-			if (!_jonas && (System.getProperty("jonas.root") != null)) {
-				_jonas = Boolean.TRUE;
-			}
-		}
-
-		return _jonas.booleanValue();
+		return _instance._jonas;
 	}
 
 	public static boolean isOC4J() {
-		if (_oc4j == null) {
-			_oc4j = _detect("oracle.oc4j.util.ClassUtils");
-		}
-
-		return _oc4j.booleanValue();
+		return _instance._oc4j;
 	}
 
 	public static boolean isResin() {
-		if (_resin == null) {
-			_resin = _detect("/com/caucho/server/resin/Resin.class");
-		}
-
-		return _resin.booleanValue();
+		return _instance._resin;
 	}
 
 	public static boolean isSupportsComet() {
-		return false;
+		return _instance._supportsComet;
 	}
 
 	public static boolean isTomcat() {
-		if (_tomcat == null) {
-			_tomcat = _detect("/org/apache/catalina/startup/Bootstrap.class");
-		}
-
-		if (_tomcat == null) {
-			_tomcat = _detect("/org/apache/catalina/startup/Embedded.class");
-		}
-
-		return _tomcat.booleanValue();
+		return _instance._tomcat;
 	}
 
 	public static boolean isWebLogic() {
-		if (_webLogic == null) {
-			_webLogic = _detect("/weblogic/Server.class");
-		}
-
-		return _webLogic.booleanValue();
+		return _instance._webLogic;
 	}
 
 	public static boolean isWebSphere() {
-		if (_webSphere == null) {
-			_webSphere = _detect(
-				"/com/ibm/websphere/product/VersionInfo.class");
-		}
-
-		return _webSphere.booleanValue();
-	}
-
-	private static Boolean _detect(String className) {
-		try {
-			ClassLoader.getSystemClassLoader().loadClass(className);
-
-			return Boolean.TRUE;
-		}
-		catch (ClassNotFoundException cnfe) {
-			Class<?> classObj = _instance.getClass();
-
-			if (classObj.getResource(className) != null) {
-				return Boolean.TRUE;
-			}
-			else {
-				return Boolean.FALSE;
-			}
-		}
+		return _instance._webSphere;
 	}
 
 	private ServerDetector() {
+		if (_isGeronimo()) {
+			_serverId = GERONIMO_ID;
+			_geronimo = true;
+		}
+		else if (_isGlassfish()) {
+			_serverId = GLASSFISH_ID;
+			_glassfish = true;
+		}
+		else if (_isJBoss()) {
+			_serverId = JBOSS_ID;
+			_jBoss = true;
+		}
+		else if (_isJOnAS()) {
+			_serverId = JONAS_ID;
+			_jonas = true;
+		}
+		else if (_isOC4J()) {
+			_serverId = OC4J_ID;
+			_oc4j = true;
+		}
+		else if (_isResin()) {
+			_serverId = RESIN_ID;
+			_resin = true;
+		}
+		else if (_isWebLogic()) {
+			_serverId = WEBLOGIC_ID;
+			_webLogic = true;
+		}
+		else if (_isWebSphere()) {
+			_serverId = WEBSPHERE_ID;
+			_webSphere = true;
+		}
+
+		if (_isJetty()) {
+			if (_serverId == null) {
+				_serverId = JETTY_ID;
+				_jetty = true;
+			}
+		}
+		else if (_isTomcat()) {
+			if (_serverId == null) {
+				_serverId = TOMCAT_ID;
+				_tomcat = true;
+			}
+		}
+
+		if (_log.isInfoEnabled()) {
+			if (_serverId != null) {
+				_log.info("Detected server " + _serverId);
+			}
+			else {
+				_log.info("No server detected");
+			}
+		}
+
+		if (_serverId == null) {
+			throw new RuntimeException("Server is not supported");
+		}
+	}
+
+	private boolean _detect(String className) {
+		try {
+			ClassLoader systemClassLoader =
+				ClassLoader.getSystemClassLoader();
+
+			systemClassLoader.loadClass(className);
+
+			return true;
+		}
+		catch (ClassNotFoundException cnfe) {
+			Class<?> classObj = getClass();
+
+			if (classObj.getResource(className) != null) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	}
+
+	private boolean _isGeronimo() {
+		return _detect(
+			"/org/apache/geronimo/system/main/Daemon.class");
+	}
+
+	private boolean _isGlassfish() {
+		String value = System.getProperty("com.sun.aas.instanceRoot");
+
+		if (value != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	private boolean _isJBoss() {
+		return _detect("/org/jboss/Main.class");
+	}
+
+	private boolean _isJetty() {
+		return _detect("/org/mortbay/jetty/Server.class");
+	}
+
+	private boolean _isJOnAS() {
+		boolean jonas = _detect("/org/objectweb/jonas/server/Server.class");
+
+		if (!_jonas && (System.getProperty("jonas.root") != null)) {
+			jonas = true;
+		}
+
+		return jonas;
+	}
+
+	private boolean _isOC4J() {
+		return _detect("oracle.oc4j.util.ClassUtils");
+	}
+
+	private boolean _isResin() {
+		return _detect("/com/caucho/server/resin/Resin.class");
+	}
+
+	private boolean _isTomcat() {
+		boolean tomcat = _detect(
+			"/org/apache/catalina/startup/Bootstrap.class");
+
+		if (!tomcat) {
+			tomcat = _detect("/org/apache/catalina/startup/Embedded.class");
+		}
+
+		return tomcat;
+	}
+
+	private boolean _isWebLogic() {
+		return _detect("/weblogic/Server.class");
+	}
+
+	private boolean _isWebSphere() {
+		return _detect(
+			"/com/ibm/websphere/product/VersionInfo.class");
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ServerDetector.class);
 
 	private static ServerDetector _instance = new ServerDetector();
 
-	private static String _serverId;
-	private static Boolean _geronimo;
-	private static Boolean _glassfish;
-	private static Boolean _jBoss;
-	private static Boolean _jetty;
-	private static Boolean _jonas;
-	private static Boolean _oc4j;
-	private static Boolean _resin;
-	private static Boolean _tomcat;
-	private static Boolean _webLogic;
-	private static Boolean _webSphere;
+	private String _serverId;
+	private boolean _geronimo;
+	private boolean _glassfish;
+	private boolean _jBoss;
+	private boolean _jetty;
+	private boolean _jonas;
+	private boolean _oc4j;
+	private boolean _resin;
+	private boolean _supportsComet;
+	private boolean _tomcat;
+	private boolean _webLogic;
+	private boolean _webSphere;
 
 }
