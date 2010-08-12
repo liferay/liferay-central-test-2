@@ -66,7 +66,7 @@ String wmode = (String)request.getAttribute("liferay-ui:flash:wmode");
 			height: '<%= height %>',
 			id: '<%= id %>',
 			url: '<%= movie %>',
-			version: '<%= version %>',
+			version: <%= version %>,
 			width: '<%= width %>'
 		}
 	).render();
