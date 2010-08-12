@@ -11,7 +11,6 @@
 			<param name="ee.license.dir" value="liferay-portal-5.2-ee-sp3/ee" />
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2-ee-sp3.zip" />
 			<param name="legacy.theme.ids" value="classic,controlpanel" />
-			<param name="license.type" value="ee" />
 			<param name="lp.version" value="5.2.7" />
 			<param name="test.name" value="SampleData527TestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-5.2-ee-sp3/tomcat-6.0.18" />

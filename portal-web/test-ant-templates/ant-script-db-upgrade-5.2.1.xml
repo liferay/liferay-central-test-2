@@ -10,7 +10,6 @@
 			<param name="ee.deploy.dir" value="liferay-portal-5.2.1/deploy" />
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.1.zip" />
 			<param name="legacy.theme.ids" value="classic,controlpanel" />
-			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.2.1" />
 			<param name="portlet.plugins.includes" value="web-form-portlet" />
 			<param name="test.name" value="SampleData521TestSuite" />

@@ -9,7 +9,6 @@
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.1.1.zip" />
 			<param name="legacy.config" value="true" />
 			<param name="legacy.theme.ids" value="classic" />
-			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.1.1" />
 			<param name="test.name" value="SampleData511TestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-tomcat-6.0-5.1.1" />

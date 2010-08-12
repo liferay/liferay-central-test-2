@@ -8,7 +8,6 @@
 		<antcall target="run-versioned-upgrade-test">
 			<param name="file.name" value="liferay-portal-tomcat-6.0-5.2.0.zip" />
 			<param name="legacy.theme.ids" value="classic,controlpanel" />
-			<param name="license.type" value="ce" />
 			<param name="lp.version" value="5.2.0" />
 			<param name="test.name" value="SampleData520TestSuite" />
 			<param name="tomcat.folder.dir" value="liferay-portal-5.2.0/tomcat-6.0.18" />
