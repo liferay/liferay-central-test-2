@@ -617,7 +617,6 @@ AUI().add(
 									comboBox.destroy();
 
 									listItem.addClass('sortable-item');
-									instance._sortable.add(listItem);
 
 									instance._deleteButton(listItem);
 
