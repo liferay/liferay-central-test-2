@@ -23,6 +23,8 @@ String portletId = portlet.getPortletId();
 String rootPortletId = portlet.getRootPortletId();
 String instanceId = portlet.getInstanceId();
 
+boolean lazyInitializing = LazyInitializableUtil.isLazyInitializing(rootPortletId);
+
 String portletPrimaryKey = PortletPermissionUtil.getPrimaryKey(plid, portletId);
 
 String queryString = (String)request.getAttribute(WebKeys.RENDER_PORTLET_QUERY_STRING);
@@ -59,17 +61,19 @@ boolean modePrint = layoutTypePortlet.hasModePrintPortletId(portletId);
 
 InvokerPortlet invokerPortlet = null;
 
-try {
-	invokerPortlet = PortletInstanceFactoryUtil.create(portlet, application);
-}
-/*catch (UnavailableException ue) {
-	ue.printStackTrace();
-}*/
-catch (PortletException pe) {
-	pe.printStackTrace();
-}
-catch (RuntimeException re) {
-	re.printStackTrace();
+if(!lazyInitializing) {
+	try {
+		invokerPortlet = PortletInstanceFactoryUtil.create(portlet, application);
+	}
+	/*catch (UnavailableException ue) {
+		ue.printStackTrace();
+	}*/
+	catch (PortletException pe) {
+		pe.printStackTrace();
+	}
+	catch (RuntimeException re) {
+		re.printStackTrace();
+	}
 }
 
 PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletId);
@@ -686,7 +690,7 @@ if ((invokerPortlet != null) && invokerPortlet.isStrutsPortlet()) {
 boolean portletException = false;
 Boolean portletVisibility = null;
 
-if (portlet.isActive() && access && supportsMimeType) {
+if (portlet.isActive() && access && supportsMimeType && !lazyInitializing) {
 	try {
 		invokerPortlet.render(renderRequestImpl, renderResponseImpl);
 
@@ -853,6 +857,10 @@ if ((layout.isTypePanel() || layout.isTypeControlPanel()) && !portletDisplay.get
 			renderRequestImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringResponse.getString());
 
 			String portletContent = StringPool.BLANK;
+
+			if(lazyInitializing) {
+				portletContent = "/portal/portlet_initializing.jsp";
+			}
 
 			if (portletException) {
 				portletContent = "/portal/portlet_error.jsp";
