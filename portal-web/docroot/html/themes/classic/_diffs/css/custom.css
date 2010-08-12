@@ -151,7 +151,11 @@ body #banner .logo a {
 	padding: 4px 15px;
 }
 
-#navigation .selected a, #navigation a:hover, #navigation a:focus, #navigation .child-menu li a {
+#navigation .aui-dd-drop a {
+	cursor: move;
+}
+
+#navigation .selected a, #navigation a:hover, #navigation a:focus, #navigation .child-menu li a, #navigation .aui-dd-dragging, .lfr-navigation-proxy {
 	background: #313334;
 	color: #FFF;
 	outline: 0;

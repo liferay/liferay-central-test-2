@@ -430,45 +430,44 @@ AUI().add(
 						var instance = this;
 
 						var navBlock = instance.get('navBlock');
-						var navList = navBlock.one('ul');
 
-						if (instance.get('isSortable')) {
-							var items = navList.all('li');
-							var anchors = navList.all('a');
+						var sortable = new A.Sortable(
+							{
+								container: navBlock,
+								moveType: 'move',
+								nodes: 'li',
+								opacity: '.5',
+								opacityNode: 'currentNode'
+							}
+						);
 
-							anchors.setStyle('cursor', 'move');
+						sortable.delegate.on(
+							'drag:end',
+							function(event) {
+								var dragNode = event.target.get('node');
 
-							anchors.each(
-								function(item, index, collection) {
-									var span = item.one('span');
+								instance._saveSortables(dragNode);
 
-									if (span) {
-										span.setStyle('cursor', 'pointer');
+								Liferay.fire(
+									'navigation',
+									{
+										item: dragNode.getDOM(),
+										type: 'sort'
 									}
-								}
-							);
+								);
+							}
+						);
 
-							instance._sortable = new A.Sortable(
-								{
-									nodes: items,
-									on: {
-										'drag:end': function(event) {
-											var dragNode = event.target.get('node');
+						sortable.delegate.on(
+							'drag:start',
+							function(event) {
+								var dragNode = event.target.get('dragNode');
 
-											instance._saveSortables(dragNode);
+								dragNode.addClass('lfr-navigation-proxy');
+							}
+						);
 
-											Liferay.fire(
-												'navigation',
-												{
-													item: dragNode.getDOM(),
-													type: 'sort'
-												}
-											);
-										}
-									}
-								}
-							);
-						}
+						sortable.delegate.dd.removeInvalid('a');
 					},
 
 					_onKeypress: function(event) {
@@ -689,6 +688,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-form-combobox', 'aui-io-request', 'aui-sortable', 'json-parse', 'node-event-simulate', 'overlay', 'selector-css3', 'substitute']
+		requires: ['aui-form-combobox', 'aui-io-request', 'dd-constrain', 'json-parse', 'node-event-simulate', 'overlay', 'selector-css3', 'sortable', 'substitute']
 	}
 );
