@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.util.ClearThreadLocalUtil;
+import com.liferay.portal.kernel.util.ClearTimerThreadUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.util.InitUtil;
@@ -77,6 +78,13 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 			ClearThreadLocalUtil.clearThreadLocal();
 		}
 		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		try {
+			ClearTimerThreadUtil.clearTimerThread();
+		}
+		catch(Exception e) {
 			_log.error(e, e);
 		}
 	}

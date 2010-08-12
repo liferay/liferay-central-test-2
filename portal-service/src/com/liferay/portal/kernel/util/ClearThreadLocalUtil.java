@@ -27,9 +27,11 @@ import java.lang.reflect.Method;
 public class ClearThreadLocalUtil {
 
 	public static void clearThreadLocal() throws Exception {
-		_init();
+		if (!_capable) {
+			return;
+		}
 
-		Thread[] threads = _getThreads();
+		Thread[] threads = ThreadUtil.getThreads();
 
 		Thread currentThread = Thread.currentThread();
 
@@ -126,87 +128,55 @@ public class ClearThreadLocalUtil {
 		}
 	}
 
-	private static Field _getDeclaredField(Class<?> classObj, String name)
-		throws Exception {
+	private static final Log _log = LogFactoryUtil.getLog(
+		ClearThreadLocalUtil.class);
 
-		Field field = classObj.getDeclaredField(name);
+	private static boolean _capable;
+	private static final Method _expungeStaleEntriesMethod;
+	private static final Field _inheritableThreadLocalsField;
+	private static final Method _removeMethod;
+	private static final Field _tableField;
+	private static final Field _tableValueField;
+	private static final Field _threadLocalsField;
 
-		field.setAccessible(true);
+	static {
+		try {
+			_inheritableThreadLocalsField = Thread.class.getDeclaredField(
+				"inheritableThreadLocals");
+			_inheritableThreadLocalsField.setAccessible(true);
 
-		return field;
-	}
+			_threadLocalsField = Thread.class.getDeclaredField("threadLocals");
+			_threadLocalsField.setAccessible(true);
 
-	private static Method _getDeclaredMethod(
-			Class<?> classObj, String name, Class<?> ... parameterTypes)
-		throws Exception {
+			Class<?> threadLocalMapClass = Class.forName(
+				"java.lang.ThreadLocal$ThreadLocalMap");
 
-		Method method = classObj.getDeclaredMethod(name, parameterTypes);
+			_expungeStaleEntriesMethod = threadLocalMapClass.getDeclaredMethod(
+				"expungeStaleEntries");
+			_expungeStaleEntriesMethod.setAccessible(true);
 
-		method.setAccessible(true);
+			_removeMethod = threadLocalMapClass.getDeclaredMethod(
+				"remove", ThreadLocal.class);
+			_removeMethod.setAccessible(true);
 
-		return method;
-	}
+			_tableField = threadLocalMapClass.getDeclaredField("table");
+			_tableField.setAccessible(true);
 
-	private static Thread[] _getThreads() {
-		Thread currentThread = Thread.currentThread();
+			Class<?> threadLocalMapEntryClass = Class.forName(
+				"java.lang.ThreadLocal$ThreadLocalMap$Entry");
 
-		ThreadGroup threadGroup = currentThread.getThreadGroup( );
+			_tableValueField = threadLocalMapEntryClass.getDeclaredField(
+				"value");
+			_tableValueField.setAccessible(true);
 
-		while (threadGroup.getParent() != null) {
-			threadGroup = threadGroup.getParent();
+			_capable = true;
+		} catch (Throwable t) {
+			_capable = false;
+			_log.error("Fail to initialize ClearThreadLocalUtil, this may "
+				+ "cause by a incompatible jvm. No ThreadLocal will be forced "
+				+ "clean up.", t);
+			throw new ExceptionInInitializerError(t);
 		}
-
-		int threadCountGuess = threadGroup.activeCount();
-
-		Thread[] threads = new Thread[threadCountGuess];
-
-		int threadCountActual = threadGroup.enumerate(threads);
-
-		while (threadCountActual == threadCountGuess) {
-			threadCountGuess *= 2;
-
-			threads = new Thread[threadCountGuess];
-
-			threadCountActual = threadGroup.enumerate(threads);
-		}
-
-		return threads;
 	}
-
-	private static void _init() throws Exception {
-		if (_initialized) {
-			return;
-		}
-
-		_inheritableThreadLocalsField = _getDeclaredField(
-			Thread.class, "inheritableThreadLocals");
-		_threadLocalsField = _getDeclaredField(Thread.class, "threadLocals");
-
-		Class<?> threadLocalMapClass = Class.forName(
-			"java.lang.ThreadLocal$ThreadLocalMap");
-
-		_expungeStaleEntriesMethod = _getDeclaredMethod(
-			threadLocalMapClass, "expungeStaleEntries");
-		_removeMethod = _getDeclaredMethod(
-			threadLocalMapClass, "remove", ThreadLocal.class);
-		_tableField = _getDeclaredField(threadLocalMapClass, "table");
-
-		Class<?> threadLocalMapEntryClass = Class.forName(
-			"java.lang.ThreadLocal$ThreadLocalMap$Entry");
-
-		_tableValueField = _getDeclaredField(threadLocalMapEntryClass, "value");
-
-		_initialized = true;
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(ClearThreadLocalUtil.class);
-
-	private static Method _expungeStaleEntriesMethod;
-	private static Field _inheritableThreadLocalsField;
-	private static boolean _initialized;
-	private static Method _removeMethod;
-	private static Field _tableField;
-	private static Field _tableValueField;
-	private static Field _threadLocalsField;
 
 }
