@@ -14,50 +14,33 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 /**
  * @author Brian Wing Shun Chan
  */
 public class ReflectionUtil {
 
-	public static Object getFieldValue(Class<?> classObj, String fieldName) {
-		try {
-			Field field = classObj.getDeclaredField(fieldName);
+	public static Field getDeclaredField(Class<?> classObj, String name)
+		throws Exception {
 
-			field.setAccessible(true);
+		Field field = classObj.getDeclaredField(name);
 
-			return field.get(null);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
+		field.setAccessible(true);
 
-			return null;
-		}
+		return field;
 	}
 
-	public static Object newInstance(String className, String p1) {
-		try {
-			Class<?> classObject = Class.forName(className);
+	public static Method getDeclaredMethod(
+			Class<?> classObj, String name, Class<?> ... parameterTypes)
+		throws Exception {
 
-			Constructor<?> classConstructor = classObject.getConstructor(
-				new Class[] {String.class});
+		Method method = classObj.getDeclaredMethod(name, parameterTypes);
 
-			Object[] arguments = new Object[] {p1};
+		method.setAccessible(true);
 
-			return classConstructor.newInstance(arguments);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			return null;
-		}
+		return method;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(ReflectionUtil.class);
 
 }
