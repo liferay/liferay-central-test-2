@@ -235,7 +235,7 @@ public class EditArticleAction extends PortletAction {
 			String articleURL = ParamUtil.getString(
 				actionRequest, "articleURL");
 
-			double version = -1.0;
+			double version = 0;
 
 			if (pos == -1) {
 				JournalArticleServiceUtil.deleteArticle(
