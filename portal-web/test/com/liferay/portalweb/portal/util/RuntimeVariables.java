@@ -86,6 +86,11 @@ public class RuntimeVariables {
 				text, "[$CLUSTER_NODE_2$]", TestPropsValues.CLUSTER_NODE_2);
 		}
 
+		if (Validator.isNotNull(TestPropsValues.VM_HOST)) {
+			text = StringUtil.replace(
+				text, "[$VM_HOST$]", TestPropsValues.VM_HOST);
+		}
+
 		if (_contextReplace == null) {
 			return text;
 		}

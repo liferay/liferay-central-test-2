@@ -44,4 +44,6 @@ public class TestPropsValues {
 	public static final String[] THEME_IDS = StringUtil.split(
 		TestPropsUtil.get("theme.ids"));
 
+	public static final String VM_HOST = TestPropsUtil.get("vm.host");
+
 }

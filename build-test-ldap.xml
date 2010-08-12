@@ -3,6 +3,25 @@
 <project name="portal-test-ldap" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
+	<target name="prepare-java-jdk">
+		<echo file="set-java-home.bat">if not exist C:\Java\jdk-1.6.0_21 ${unzip.executable} -oq ${java.jdk.zip} -d C:\Java
+${setx.executable} /m JAVA_HOME C:\Java\jdk-1.6.0_21
+if not %PATH:~0,7%==C:\Java ${setx.executable} /m PATH "C:\Java\jdk-1.6.0_21\bin;%PATH%"
+shutdown -r -t 15</echo>
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} set-java-home.bat ${vm.username}@${vm.host}:/" />
+		</exec>
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} C:\set-java-home.bat" />
+		</exec>
+
+		<delete file="set-java-home.bat" />
+
+		<sleep seconds="120" />
+	</target>
+
 	<target name="prepare-ldap-apache">
 		<if>
 			<or>
@@ -10,30 +29,48 @@
 					<isset property="apache.directory.win32.dir" />
 				</not>
 				<not>
-					<isset property="apache.directory.win32.install" />
+					<isset property="apache.directory.win32.zip" />
 				</not>
 			</or>
 			<then>
 				<fail>
 .
 
-Please set "apache.directory.win32.dir" and "apache.directory.win32.install" in
+Please set "apache.directory.win32.dir" and "apache.directory.win32.zip" in
 test.properties to point to an ApacheDS installation file.
 				</fail>
 			</then>
 		</if>
 
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${apache.directory.win32.dir}${apache.directory.win32.install} ${vm.username}@${vm.host}:/" />
+			<arg line="-pw ${vm.password} ${apache.directory.win32.dir}${apache.directory.win32.zip} ${vm.username}@${vm.host}:/" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} C:\${apache.directory.win32.install} /silent" />
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} ${unzip.executable} -oq C:\${apache.directory.win32.zip} -d C:\" />
 		</exec>
 
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} sc start apacheds" />
-		</exec>
+		<trycatch property="e">
+			<try>
+				<parallel timeout="30000">
+					<sequential>
+						<echo file="start-ldap.bat">cd C:\apacheds_1.5.7
+apacheds.bat</echo>
+
+						<exec executable="${pscp.executable}">
+							<arg line="-pw ${vm.password} start-ldap.bat ${vm.username}@${vm.host}:/" />
+						</exec>
+
+						<exec executable="${plink.executable}">
+							<arg line="-pw ${vm.password} ${vm.username}@${vm.host} C:\start-ldap.bat" />
+						</exec>
+					</sequential>
+				</parallel>
+			</try>
+			<catch>
+				<delete file="start-ldap.bat" />
+			</catch>
+		</trycatch>
 
 		<tstamp>
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
@@ -85,52 +122,33 @@ userpassword:: e1NIQX1xVXFQNWN5eG02WWNUQWh6MDVIcGg1Z3Z1OU09</echo>
 
 		<delete file="${tstamp.value}" />
 
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} C:\Java\jdk1.6.0_14\bin\java.exe -jar C:\Progra~1\apacheds-1.0.2\bin\apacheds-tools.jar import -e -f C:/${tstamp.value}" />
+		<echo file="import-ldap-users.bat">cd C:\apacheds_1.5.7\bin
+java -jar apacheds-tools.jar import -e -f C:/${tstamp.value}</echo>
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} import-ldap-users.bat ${vm.username}@${vm.host}:/" />
 		</exec>
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} C:\import-ldap-users.bat" />
+		</exec>
+
+		<delete file="import-ldap-users.bat" />
 	</target>
 
-	<target name="test-ldap-smoke-tomcat-mysql">
-		<antcall target="prepare-mysql" />
-
+	<target name="run-ldap-tomcat">
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
-			<param name="vm.vmdk.suffix" value="generic" />
+			<param name="vm.vmdk.suffix" value="alpha-2010-02-02" />
 		 </antcall>
 
-		<ant antfile="build-test-tomcat.xml" target="prepare-vm-tomcat"> </ant>
+		<antcall target="prepare-java-jdk" />
 
 		<antcall target="prepare-ldap-apache" />
 
-		<antcall target="rebuild-database" inheritAll="false" />
-
-		<antcall target="revert-test-properties" />
-
-		<replace
-			file="portal-impl/test/test-portal-impl.properties"
-			token="localhost:8080"
-			value="${vm.host}:8080"
-		/>
-
-		<replace
-			file="portal-web/test/test-portal-web.properties"
-			token="localhost:8080"
-			value="${vm.host}:8080"
-		/>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\liferay-portal-${lp.version}\tomcat-6.0.26\bin\startup.bat" />
-		</exec>
-
-		<sleep seconds="30" />
-
-		<antcall target="start-selenium" />
-
-		<antcall target="run-selenium-test">
-			<param name="test.class" value="LDAPTestSuite" />
-		</antcall>
-
-		<antcall target="stop-selenium" />
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+			<property name="test.class" value="${test.name}" />
+		</ant>
 
 		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
 			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx stop hard" />

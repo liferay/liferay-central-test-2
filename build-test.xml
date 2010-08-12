@@ -259,6 +259,13 @@
 		/>
 	</target>
 
+	<target name="build-test-ant-script-ldap">
+		<antcall target="create-ant-script">
+			<param name="ant.script.template" value="ant-script-ldap.xml" />
+			<param name="ant.script.file.name" value="build-test-${test.ant.script.command}.xml" />
+		</antcall>
+	</target>
+
 	<target name="build-test-ant-scripts">
 		<delete dir="portal-web/test-ant-scripts" />
 
@@ -527,6 +534,11 @@
 			<param name="test.ant.script.command" value="db-upgrade-smoke" />
 			<param name="test.ant.script.dbs" value="db2,mysql,oracle,postgresql,sql-server" />
 			<param name="test.ant.script.versions" value="5.1.0,5.1.1,5.1.2,5.2.0,5.2.1,5.2.2,5.2.3,5.2.7,6.0.0" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-ldap">
+			<param name="test.ant.script.command" value="ldap-smoke" />
+			<param name="test.ant.script.suite" value="LDAPSmokeTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
