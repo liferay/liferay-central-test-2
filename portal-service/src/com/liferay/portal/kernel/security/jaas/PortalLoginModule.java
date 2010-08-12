@@ -57,7 +57,7 @@ public class PortalLoginModule implements LoginModule {
 		_loginModule.initialize(subject, callbackHandler, sharedState, options);
 	}
 
-	public boolean login() throws LoginException {
+ 	public boolean login() throws LoginException {
 		return _loginModule.login();
 	}
 
@@ -68,7 +68,7 @@ public class PortalLoginModule implements LoginModule {
 	private static final String _CLASS_NAME =
 		"com.liferay.portal.security.jaas.PortalLoginModule";
 
- 	private static Log _log = LogFactoryUtil.getLog(PortalLoginModule.class);
+	private static Log _log = LogFactoryUtil.getLog(PortalLoginModule.class);
 
 	private LoginModule _loginModule;
 

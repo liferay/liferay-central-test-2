@@ -18,12 +18,19 @@ import com.liferay.portal.kernel.security.jaas.PortalGroup;
 import com.liferay.portal.kernel.security.jaas.PortalPrincipal;
 import com.liferay.portal.security.jaas.ext.BasicLoginModule;
 
+import java.security.Principal;
+
+import java.util.Set;
+
+import javax.security.auth.Subject;
+import javax.security.auth.login.LoginException;
+
 /**
  * @author Brian Wing Shun Chan
  */
 public class PortalLoginModule extends BasicLoginModule {
 
-	public boolean commit() {
+	public boolean commit() throws LoginException {
 		boolean commitValue = super.commit();
 
 		if (commitValue) {
@@ -31,7 +38,11 @@ public class PortalLoginModule extends BasicLoginModule {
 
 			group.addMember(new PortalPrincipal("users"));
 
-			getSubject().getPrincipals().add(group);
+			Subject subject = getSubject();
+
+			Set<Principal> principals = subject.getPrincipals();
+
+			principals.add(group);
 		}
 
 		return commitValue;

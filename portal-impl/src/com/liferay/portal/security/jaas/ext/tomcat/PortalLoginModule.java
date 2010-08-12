@@ -17,18 +17,29 @@ package com.liferay.portal.security.jaas.ext.tomcat;
 import com.liferay.portal.kernel.security.jaas.PortalRole;
 import com.liferay.portal.security.jaas.ext.BasicLoginModule;
 
+import java.security.Principal;
+
+import java.util.Set;
+
+import javax.security.auth.Subject;
+import javax.security.auth.login.LoginException;
+
 /**
  * @author Brian Wing Shun Chan
  */
 public class PortalLoginModule extends BasicLoginModule {
 
-	public boolean commit() {
+	public boolean commit() throws LoginException {
 		boolean commitValue = super.commit();
 
 		if (commitValue) {
 			PortalRole role = new PortalRole("users");
 
-			getSubject().getPrincipals().add(role);
+			Subject subject = getSubject();
+
+			Set<Principal> principals = subject.getPrincipals();
+
+			principals.add(role);
 		}
 
 		return commitValue;

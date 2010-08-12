@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.security.Principal;
 
 import java.util.Map;
+import java.util.Set;
 
 import javax.security.auth.Subject;
 import javax.security.auth.callback.Callback;
@@ -45,9 +46,16 @@ public class BasicLoginModule implements LoginModule {
 		return true;
 	}
 
-	public boolean commit() {
-		if (getPrincipal() != null) {
-			getSubject().getPrincipals().add(getPrincipal());
+	@SuppressWarnings("unused")
+	public boolean commit() throws LoginException {
+		Principal principal = getPrincipal();
+
+		if (principal != null) {
+			Subject subject = getSubject();
+
+			Set<Principal> principals = subject.getPrincipals();
+
+			principals.add(getPrincipal());
 
 			return true;
 		}
@@ -88,46 +96,24 @@ public class BasicLoginModule implements LoginModule {
 	}
 
 	public boolean logout() {
-		getSubject().getPrincipals().clear();
+		Subject subject = getSubject();
+
+		Set<Principal> principals = subject.getPrincipals();
+
+		principals.clear();
 
 		return true;
-	}
-
-	protected Subject getSubject() {
-		return _subject;
-	}
-
-	protected Principal getPrincipal() {
-		return _principal;
-	}
-
-	protected void setPrincipal(Principal principal) {
-		_principal = principal;
-	}
-
-	protected Principal getPortalPrincipal(String name) {
-		return new PortalPrincipal(name);
-	}
-
-	protected String getPassword() {
-		return _password;
-	}
-
-	protected void setPassword(String password) {
-		_password = password;
 	}
 
 	protected String[] authenticate()
 		throws IOException, UnsupportedCallbackException {
 
 		NameCallback nameCallback = new NameCallback("name: ");
-		PasswordCallback passwordCallback =
-			new PasswordCallback("password: ", false);
+		PasswordCallback passwordCallback = new PasswordCallback(
+			"password: ", false);
 
 		_callbackHandler.handle(
-			new Callback[] {
-				nameCallback, passwordCallback
-			});
+			new Callback[] {nameCallback, passwordCallback});
 
 		String name = nameCallback.getName();
 
@@ -156,11 +142,35 @@ public class BasicLoginModule implements LoginModule {
 		return null;
 	}
 
+	protected String getPassword() {
+		return _password;
+	}
+
+	protected Principal getPortalPrincipal(String name) throws LoginException {
+		return new PortalPrincipal(name);
+	}
+
+	protected Principal getPrincipal() {
+		return _principal;
+	}
+
+	protected Subject getSubject() {
+		return _subject;
+	}
+
+	protected void setPassword(String password) {
+		_password = password;
+	}
+
+	protected void setPrincipal(Principal principal) {
+		_principal = principal;
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(BasicLoginModule.class);
 
-	private Subject _subject;
 	private CallbackHandler _callbackHandler;
-	private Principal _principal;
 	private String _password;
+	private Principal _principal;
+	private Subject _subject;
 
 }

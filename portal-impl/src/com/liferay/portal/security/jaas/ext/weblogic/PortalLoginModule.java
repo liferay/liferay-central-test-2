@@ -14,18 +14,26 @@
 
 package com.liferay.portal.security.jaas.ext.weblogic;
 
-import com.liferay.portal.kernel.util.ReflectionUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.security.jaas.ext.BasicLoginModule;
 
 import java.security.Principal;
+
+import javax.security.auth.login.LoginException;
 
 /**
  * @author Brian Wing Shun Chan
  */
 public class PortalLoginModule extends BasicLoginModule {
 
-	protected Principal getPortalPrincipal(String name) {
-		return (Principal)ReflectionUtil.newInstance(_WLS_USER_IMPL, name);
+	protected Principal getPortalPrincipal(String name) throws LoginException {
+		try {
+			return (Principal)InstanceFactory.newInstance(
+				_WLS_USER_IMPL, String.class, name);
+		}
+		catch (Exception e) {
+			throw new LoginException(e.getMessage());
+		}
 	}
 
 	private static final String _WLS_USER_IMPL =

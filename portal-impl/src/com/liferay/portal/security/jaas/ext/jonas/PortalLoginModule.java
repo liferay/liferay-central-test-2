@@ -16,48 +16,67 @@ package com.liferay.portal.security.jaas.ext.jonas;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.MethodCache;
-import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.security.jaas.ext.BasicLoginModule;
 
 import java.lang.reflect.Method;
 
 import java.security.Principal;
 
+import java.util.Set;
+
+import javax.security.auth.Subject;
+import javax.security.auth.login.LoginException;
+
 /**
  * @author Brian Wing Shun Chan
  */
 public class PortalLoginModule extends BasicLoginModule {
 
-	public boolean commit() {
+	public boolean commit() throws LoginException {
 		boolean commitValue = super.commit();
 
 		if (commitValue) {
-			getSubject().getPrincipals().add(getPrincipal());
-			getSubject().getPrivateCredentials().add(getPassword());
+			Subject subject = getSubject();
 
-			Principal group = (Principal)ReflectionUtil.newInstance(
-				_JGROUP, "Roles");
-			Object role = ReflectionUtil.newInstance(_JROLE, "users");
+			Set<Principal> principals = subject.getPrincipals();
+
+			principals.add(getPrincipal());
+
+			Set<Object> privateCredentials = subject.getPrivateCredentials();
+
+			privateCredentials.add(getPassword());
 
 			try {
+				Principal group = (Principal)InstanceFactory.newInstance(
+					_JGROUP, String.class, "Roles");
+				Object role = InstanceFactory.newInstance(
+					_JROLE, String.class, "users");
+
 				Method method = MethodCache.get(
 					_JGROUP, "addMember", new Class[] {role.getClass()});
 
 				method.invoke(group, new Object[] {role});
+
+				principals.add(group);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
 			}
-
-			getSubject().getPrincipals().add(group);
 		}
 
 		return commitValue;
 	}
 
-	protected Principal getPortalPrincipal(String name) {
-		return (Principal)ReflectionUtil.newInstance(_JPRINCIPAL, name);
+	protected Principal getPortalPrincipal(String name) throws LoginException {
+		try {
+			return (Principal)InstanceFactory.newInstance(
+				_JPRINCIPAL, String.class, name);
+		}
+		catch (Exception e) {
+			throw new LoginException(e.getMessage());
+		}
 	}
 
 	private static final String _JGROUP =
