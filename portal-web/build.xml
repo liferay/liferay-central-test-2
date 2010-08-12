@@ -9,7 +9,7 @@
 
 	<!--
 	When upgrading CKEditor, make sure to delete
-	docroot/html/js/editor/_ckeditor/ckeditor.js.
+	docroot/html/js/editor/ckeditor_diffs/ckeditor.js.
 	-->
 
 	<property name="ckeditor.file" value="ckeditor_3.2.zip" />
@@ -159,7 +159,7 @@
 
 				<if>
 					<not>
-						<available file="docroot/html/js/editor/_ckeditor/ckeditor.js" />
+						<available file="docroot/html/js/editor/ckeditor_diffs/ckeditor.js" />
 					</not>
 					<then>
 						<replace file="docroot/html/js/editor/ckeditor/_source/core/dtd.js">
@@ -206,18 +206,18 @@
 
 						<copy
 							file="docroot/html/js/editor/ckeditor/ckeditor.js"
-							tofile="docroot/html/js/editor/_ckeditor/ckeditor.js"
+							tofile="docroot/html/js/editor/ckeditor_diffs/ckeditor.js"
 						/>
 					</then>
 				</if>
 
 				<copy todir="docroot/html/js/editor/ckeditor" overwrite="true">
-					<fileset dir="docroot/html/js/editor/_ckeditor" />
+					<fileset dir="docroot/html/js/editor/ckeditor_diffs" />
 				</copy>
 			</then>
 			<else>
 				<copy todir="docroot/html/js/editor/ckeditor">
-					<fileset dir="docroot/html/js/editor/_ckeditor" />
+					<fileset dir="docroot/html/js/editor/ckeditor_diffs" />
 				</copy>
 			</else>
 		</if>
@@ -237,12 +237,12 @@
 				<unzip src="third-party/${codepress.file}" dest="docroot/html/js/editor" />
 
 				<copy todir="docroot/html/js/editor/codepress" overwrite="true">
-					<fileset dir="docroot/html/js/editor/_codepress" />
+					<fileset dir="docroot/html/js/editor/codepress_diffs" />
 				</copy>
 			</then>
 			<else>
 				<copy todir="docroot/html/js/editor/codepress">
-					<fileset dir="docroot/html/js/editor/_codepress" />
+					<fileset dir="docroot/html/js/editor/codepress_diffs" />
 				</copy>
 			</else>
 		</if>
@@ -372,7 +372,7 @@
 				</copy>
 
 				<copy todir="docroot/html/js/editor/fckeditor" overwrite="true">
-					<fileset dir="docroot/html/js/editor/_fckeditor" />
+					<fileset dir="docroot/html/js/editor/fckeditor_diffs" />
 				</copy>
 
 				<mkdir dir="docroot/html/js/editor/ckeditor/editor/filemanager/browser/liferay" />
@@ -404,7 +404,7 @@
 			</then>
 			<else>
 				<copy todir="docroot/html/js/editor/fckeditor">
-					<fileset dir="docroot/html/js/editor/_fckeditor" />
+					<fileset dir="docroot/html/js/editor/fckeditor_diffs" />
 				</copy>
 			</else>
 		</if>
@@ -897,7 +897,7 @@
 		<war
 			basedir="docroot"
 			destfile="${war.file}.war"
-			excludes="WEB-INF/web.xml,html/js/editor/_fckeditor/**,html/js/editor/fckeditor/_samples/**"
+			excludes="WEB-INF/web.xml,html/js/editor/fckeditor/_samples/**,html/js/editor/fckeditor_diffs/**"
 			webxml="docroot/WEB-INF/web.xml"
 		/>
 	</target>
