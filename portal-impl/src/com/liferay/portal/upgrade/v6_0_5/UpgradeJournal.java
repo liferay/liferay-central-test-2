@@ -12,25 +12,31 @@
  * details.
  */
 
-package com.liferay.portal.upgrade;
+package com.liferay.portal.upgrade.v6_0_5;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.upgrade.v6_0_5.UpgradeJournal;
-import com.liferay.portal.upgrade.v6_0_5.UpgradeSchema;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
+import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
+import com.liferay.portal.upgrade.v6_0_5.util.JournalArticleTable;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class UpgradeProcess_6_0_5 extends UpgradeProcess {
-
-	public int getThreshold() {
-		return ReleaseInfo.RELEASE_6_0_5_BUILD_NUMBER;
-	}
+public class UpgradeJournal extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		upgrade(UpgradeSchema.class);
-		upgrade(UpgradeJournal.class);
+		try {
+			runSQL("alter_column_type JournalArticle title VARCHAR(300) null");
+		}
+		catch (Exception e) {
+			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
+				JournalArticleTable.TABLE_NAME,
+				JournalArticleTable.TABLE_COLUMNS);
+
+			upgradeTable.setCreateSQL(JournalArticleTable.TABLE_SQL_CREATE);
+
+			upgradeTable.updateTable();
+		}
 	}
 
 }
