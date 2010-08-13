@@ -3,24 +3,6 @@
 <project name="portal-test-ldap" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
-	<target name="prepare-java-jdk">
-		<echo file="execute-remote-command.bat">
-			if not exist C:\Java\jdk-1.6.0_21 ${unzip.executable} -oq ${java.jdk.zip} -d C:\Java
-			${setx.executable} /m JAVA_HOME C:\Java\jdk-1.6.0_21
-			if not %PATH:~0,7%==C:\Java ${setx.executable} /m PATH "C:\Java\jdk-1.6.0_21\bin;%PATH%"
-		</echo>
-
-		<antcall target="execute-remote-command" />
-
-		<echo>Restarting ${vm.host}...</echo>
-
-		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
-			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx reset" />
-		</exec>
-
-		<sleep seconds="60" />
-	</target>
-
 	<target name="prepare-ldap-apache">
 		<if>
 			<or>
@@ -41,6 +23,22 @@ test.properties to point to an ApacheDS installation file.
 			</then>
 		</if>
 
+		<echo file="execute-remote-command.bat">
+			if not exist C:\Java\jdk-1.6.0_21 ${unzip.executable} -oq ${java.jdk.zip} -d C:\Java
+			${setx.executable} /m JAVA_HOME C:\Java\jdk-1.6.0_21
+			if not %PATH:~0,7%==C:\Java ${setx.executable} /m PATH "C:\Java\jdk-1.6.0_21\bin;%PATH%"
+		</echo>
+
+		<antcall target="execute-remote-command" />
+
+		<echo>Restarting ${vm.host}.</echo>
+
+		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
+			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx reset" />
+		</exec>
+
+		<sleep seconds="60" />
+
 		<exec executable="${pscp.executable}">
 			<arg line="-pw ${vm.password} ${apache.directory.win32.dir}${apache.directory.win32.zip} ${vm.username}@${vm.host}:/" />
 		</exec>
@@ -48,37 +46,36 @@ test.properties to point to an ApacheDS installation file.
 		<exec executable="${plink.executable}">
 			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} ${unzip.executable} -oq C:\${apache.directory.win32.zip} -d C:\" />
 		</exec>
+	</target>
 
-		<trycatch property="e">
-			<try>
-				<parallel timeout="30000">
-					<sequential>
-						<echo file="execute-remote-command.bat">
-							cd C:\apacheds_1.5.7
-							apacheds.bat
-						</echo>
+	<target name="run-ldap-tomcat">
+		<antcall target="prepare-vm-server">
+			<param name="build.war" value="false" />
+			<param name="vm.vmdk.suffix" value="alpha-2010-02-02" />
+		 </antcall>
 
-						<antcall target="execute-remote-command" />
-					</sequential>
-				</parallel>
-			</try>
-			<catch>
-				<if>
-					<not>
-						<equals arg1="${e}" arg2="Parallel execution timed out" />
-					</not>
-					<then>
-						<echo>ERROR: ${e}</echo>
-					</then>
-				</if>
-			</catch>
-		</trycatch>
+		<antcall target="prepare-ldap-apache" />
 
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
+		<parallel>
+			<daemons>
+				<echo file="execute-remote-command.bat">
+					cd C:\apacheds_1.5.7
+					apacheds.bat
+				</echo>
 
-		<echo file="${tstamp.value}">version: 1
+				<antcall target="execute-remote-command" />
+			</daemons>
+
+			<sequential>
+				<waitfor>
+					<socket port="10389" server="${vm.host}" />
+				</waitfor>
+
+				<tstamp>
+					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+				</tstamp>
+
+				<echo file="${tstamp.value}">version: 1
 dn: dc=example,dc=com
 objectClass: domain
 objectClass: extensibleObject
@@ -118,33 +115,24 @@ mail: martinluther@liferay.com
 sn: Luther
 userpassword:: e1NIQX1xVXFQNWN5eG02WWNUQWh6MDVIcGg1Z3Z1OU09</echo>
 
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${tstamp.value} ${vm.username}@${vm.host}:/" />
-		</exec>
+				<exec executable="${pscp.executable}">
+					<arg line="-pw ${vm.password} ${tstamp.value} ${vm.username}@${vm.host}:/" />
+				</exec>
 
-		<delete file="${tstamp.value}" />
+				<delete file="${tstamp.value}" />
 
-		<echo file="execute-remote-command.bat">
-			cd C:\apacheds_1.5.7\bin
-			java -jar apacheds-tools.jar import -e -f C:/${tstamp.value}
-		</echo>
+				<echo file="execute-remote-command.bat">
+					cd C:\apacheds_1.5.7\bin
+					java -jar apacheds-tools.jar import -e -f C:/${tstamp.value}
+				</echo>
 
-		<antcall target="execute-remote-command" />
-	</target>
+				<antcall target="execute-remote-command" />
 
-	<target name="run-ldap-tomcat">
-		<antcall target="prepare-vm-server">
-			<param name="build.war" value="false" />
-			<param name="vm.vmdk.suffix" value="alpha-2010-02-02" />
-		 </antcall>
-
-		<antcall target="prepare-java-jdk" />
-
-		<antcall target="prepare-ldap-apache" />
-
-		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
-			<property name="test.class" value="${test.name}" />
-		</ant>
+				<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+					<property name="test.class" value="${test.name}" />
+				</ant>
+			</sequential>
+		</parallel>
 
 		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
 			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx stop hard" />
