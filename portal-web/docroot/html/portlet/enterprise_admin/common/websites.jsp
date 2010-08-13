@@ -98,10 +98,15 @@ else {
 </aui:fieldset>
 
 <aui:script use="liferay-auto-fields">
-	new Liferay.AutoFields(
-		{
-			contentBox: '#websites > fieldset',
-			fieldIndexes: '<portlet:namespace />websitesIndexes'
+	Liferay.once(
+		'enterpriseadmin:revealwebsites',
+		function() {
+			new Liferay.AutoFields(
+				{
+					contentBox: '#websites > fieldset',
+					fieldIndexes: '<portlet:namespace />websitesIndexes'
+				}
+			).render();
 		}
-	).render();
+	);
 </aui:script>

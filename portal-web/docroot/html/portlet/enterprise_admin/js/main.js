@@ -150,22 +150,24 @@ AUI().add(
 						return;
 					}
 
+					Liferay.fire('enterpriseadmin:reveal'+id[1]);
+
 					id = '#' + id[1];
 
 					var section = A.one(id);
-					var selected = instance._navigation.all('.selected');
+					var selected = instance._navigation.one('li.selected');
 
 					if (selected) {
 						selected.removeClass('selected');
 					}
+
+					li.addClass('selected');
 
 					instance._sections.removeClass('selected').hide('aui-helper-hidden-accessible');
 
 					if (section) {
 						section.addClass('selected').show('aui-helper-hidden-accessible');
 					}
-
-					li.addClass('selected');
 				}
 			},
 

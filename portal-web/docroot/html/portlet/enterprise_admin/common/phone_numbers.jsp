@@ -101,10 +101,15 @@ else {
 </aui:fieldset>
 
 <aui:script use="liferay-auto-fields">
-	new Liferay.AutoFields(
-		{
-			contentBox: '#phoneNumbers > fieldset',
-			fieldIndexes: '<portlet:namespace />phonesIndexes'
+	Liferay.once(
+		'enterpriseadmin:revealphoneNumbers',
+		function() {
+			new Liferay.AutoFields(
+				{
+					contentBox: '#phoneNumbers > fieldset',
+					fieldIndexes: '<portlet:namespace />phonesIndexes'
+				}
+			).render();
 		}
-	).render();
+	);
 </aui:script>

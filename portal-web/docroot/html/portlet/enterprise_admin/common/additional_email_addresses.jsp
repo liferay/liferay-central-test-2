@@ -97,10 +97,15 @@ else {
 </aui:fieldset>
 
 <aui:script use="liferay-auto-fields">
-	new Liferay.AutoFields(
-		{
-			contentBox: '#additionalEmailAddresses > fieldset',
-			fieldIndexes: '<portlet:namespace />emailAddressesIndexes'
+	Liferay.once(
+		'enterpriseadmin:revealadditionalEmailAddresses',
+		function() {
+			new Liferay.AutoFields(
+				{
+					contentBox: '#additionalEmailAddresses > fieldset',
+					fieldIndexes: '<portlet:namespace />emailAddressesIndexes'
+				}
+			).render();
 		}
-	).render();
+	);
 </aui:script>
