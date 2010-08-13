@@ -204,6 +204,31 @@ public class OracleDB extends BaseDB {
 		return _ORACLE;
 	}
 
+	protected String replaceTemplate(String template, String[] actual) {
+
+		// LPS-12048
+
+		Matcher matcher = _varcharPattern.matcher(template);
+
+		StringBuffer sb = new StringBuffer();
+
+		while (matcher.find()) {
+			int size = GetterUtil.getInteger(matcher.group()) * 4;
+
+			if (size > 4000) {
+				size = 4000;
+			}
+
+			matcher.appendReplacement(sb, "VARCHAR(" + size + ")");
+		}
+
+		matcher.appendTail(sb);
+
+		template = sb.toString();
+
+		return super.replaceTemplate(template, actual);
+	}
+
 	protected String reword(String data) throws IOException {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));
@@ -242,31 +267,6 @@ public class OracleDB extends BaseDB {
 		unsyncBufferedReader.close();
 
 		return sb.toString();
-	}
-
-	protected String replaceTemplate(String template, String[] actual) {
-
-		// See http://www.coderanch.com/t/307419/JDBC/java/Fit-or-not-fit-Oracle
-
-		Matcher matcher = _varcharPattern.matcher(template);
-
-		StringBuffer sb = new StringBuffer();
-
-		while (matcher.find()) {
-			int size = GetterUtil.getInteger(matcher.group()) * 4;
-
-			if (size > 4000) {
-				size = 4000;
-			}
-
-			matcher.appendReplacement(sb, "VARCHAR(" + size + ")");
-		}
-
-		matcher.appendTail(sb);
-
-		template = sb.toString();
-
-		return super.replaceTemplate(template, actual);
 	}
 
 	private void _convertToOracleCSV(String line, StringBundler sb) {
@@ -312,7 +312,7 @@ public class OracleDB extends BaseDB {
 
 	private static OracleDB _instance = new OracleDB();
 
-	private static Pattern _varcharPattern =
-		Pattern.compile("VARCHAR(\\(\\d+\\))");
+	private static Pattern _varcharPattern = Pattern.compile(
+		"VARCHAR(\\(\\d+\\))");
 
 }
