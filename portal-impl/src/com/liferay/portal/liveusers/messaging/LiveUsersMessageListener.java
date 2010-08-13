@@ -36,22 +36,22 @@ public class LiveUsersMessageListener implements MessageListener {
 		}
 	}
 
-	protected void doCommandSignIn(JSONObject jsonObj) throws Exception {
-		long companyId = jsonObj.getLong("companyId");
-		long userId = jsonObj.getLong("userId");
-		String sessionId = jsonObj.getString("sessionId");
-		String remoteAddr = jsonObj.getString("remoteAddr");
-		String remoteHost = jsonObj.getString("remoteHost");
-		String userAgent = jsonObj.getString("userAgent");
+	protected void doCommandSignIn(JSONObject jsonObject) throws Exception {
+		long companyId = jsonObject.getLong("companyId");
+		long userId = jsonObject.getLong("userId");
+		String sessionId = jsonObject.getString("sessionId");
+		String remoteAddr = jsonObject.getString("remoteAddr");
+		String remoteHost = jsonObject.getString("remoteHost");
+		String userAgent = jsonObject.getString("userAgent");
 
 		LiveUsers.signIn(
 			companyId, userId, sessionId, remoteAddr, remoteHost, userAgent);
 	}
 
-	protected void doCommandSignOut(JSONObject jsonObj) throws Exception {
-		long companyId = jsonObj.getLong("companyId");
-		long userId = jsonObj.getLong("userId");
-		String sessionId = jsonObj.getString("sessionId");
+	protected void doCommandSignOut(JSONObject jsonObject) throws Exception {
+		long companyId = jsonObject.getLong("companyId");
+		long userId = jsonObject.getLong("userId");
+		String sessionId = jsonObject.getString("sessionId");
 
 		LiveUsers.signOut(companyId, userId, sessionId);
 	}
@@ -59,15 +59,15 @@ public class LiveUsersMessageListener implements MessageListener {
 	protected void doReceive(Message message) throws Exception {
 		String payload = (String)message.getPayload();
 
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject(payload);
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(payload);
 
-		String command = jsonObj.getString("command");
+		String command = jsonObject.getString("command");
 
 		if (command.equals("signIn")) {
-			doCommandSignIn(jsonObj);
+			doCommandSignIn(jsonObject);
 		}
 		else if (command.equals("signOut")) {
-			doCommandSignOut(jsonObj);
+			doCommandSignOut(jsonObject);
 		}
 	}
 

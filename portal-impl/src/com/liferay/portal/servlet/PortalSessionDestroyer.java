@@ -81,15 +81,15 @@ public class PortalSessionDestroyer extends BasePortalLifecycle {
 				long companyId = getCompanyId(userId);
 				String sessionId = session.getId();
 
-				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-				jsonObj.put("command", "signOut");
-				jsonObj.put("companyId", companyId);
-				jsonObj.put("userId", userId);
-				jsonObj.put("sessionId", sessionId);
+				jsonObject.put("command", "signOut");
+				jsonObject.put("companyId", companyId);
+				jsonObject.put("userId", userId);
+				jsonObject.put("sessionId", sessionId);
 
 				MessageBusUtil.sendMessage(
-					DestinationNames.LIVE_USERS, jsonObj.toString());
+					DestinationNames.LIVE_USERS, jsonObject.toString());
 			}
 		}
 		catch (IllegalStateException ise) {

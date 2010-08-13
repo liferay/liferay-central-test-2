@@ -65,18 +65,18 @@ public class LoginPostAction extends Action {
 				String remoteHost = request.getRemoteHost();
 				String userAgent = request.getHeader(HttpHeaders.USER_AGENT);
 
-				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-				jsonObj.put("command", "signIn");
-				jsonObj.put("companyId", companyId);
-				jsonObj.put("userId", userId);
-				jsonObj.put("sessionId", sessionId);
-				jsonObj.put("remoteAddr", remoteAddr);
-				jsonObj.put("remoteHost", remoteHost);
-				jsonObj.put("userAgent", userAgent);
+				jsonObject.put("command", "signIn");
+				jsonObject.put("companyId", companyId);
+				jsonObject.put("userId", userId);
+				jsonObject.put("sessionId", sessionId);
+				jsonObject.put("remoteAddr", remoteAddr);
+				jsonObject.put("remoteHost", remoteHost);
+				jsonObject.put("userAgent", userAgent);
 
 				MessageBusUtil.sendMessage(
-					DestinationNames.LIVE_USERS, jsonObj.toString());
+					DestinationNames.LIVE_USERS, jsonObject.toString());
 			}
 
 			if (PrefsPropsUtil.getBoolean(
