@@ -172,7 +172,7 @@ JkShmFile logs/jk-runtime-status</echo>
 
 		<antcall target="prepare-cluster-vms" />
 
-		<ant antfile="build-test-tomcat.xml" target="prepare-zip-tomcat"> </ant>
+		<ant antfile="build-test-tomcat.xml" target="prepare-zip-tomcat" />
 
 		<antcall target="prepare-cluster-apache-node-1" />
 
