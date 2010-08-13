@@ -45,7 +45,7 @@ public class ViewPageAction extends PortletAction {
 
 		String title = ParamUtil.getString(renderRequest, "title");
 
-		if (Validator.isNull(title)) {
+		if (Validator.isNull(title) || ParamUtil.getLong(renderRequest, "categoryId") > 0) {
 			long categoryId = ParamUtil.getLong(renderRequest, "categoryId");
 
 			if (categoryId > 0) {

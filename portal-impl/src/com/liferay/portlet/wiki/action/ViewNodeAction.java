@@ -15,6 +15,7 @@
 package com.liferay.portlet.wiki.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.wiki.NoSuchNodeException;
@@ -30,6 +31,7 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Jorge Ferrer
+ * @author Jack Li
  */
 public class ViewNodeAction extends PortletAction {
 
@@ -58,7 +60,14 @@ public class ViewNodeAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(defaultForward);
+		long categoryId = ParamUtil.getLong(renderRequest, "categoryId");
+
+		if (categoryId > 0) {
+			return mapping.findForward("portlet.wiki.view_categorized_pages");
+		}
+		else {
+			return mapping.findForward(defaultForward);
+		}
 	}
 
 	public ActionForward render(

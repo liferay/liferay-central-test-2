@@ -33,6 +33,8 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("nodeName", node.getName());
+
+portletURL.setParameter("categoryId", "0");
 %>
 
 <c:if test="<%= portletName.equals(PortletKeys.WIKI_ADMIN) %>">
