@@ -17,13 +17,30 @@ package com.liferay.portlet.directory.util;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.User;
 import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoColumnConstants;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
+import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
+
+import java.io.Serializable;
+
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.portlet.PortletURL;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Marcellus Tavares
  */
 public class DirectoryOpenSearchImpl extends HitsOpenSearchImpl {
 
@@ -55,6 +72,56 @@ public class DirectoryOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public String getTitle(String keywords) {
 		return TITLE + keywords;
+	}
+
+	protected void addSearchAttributes(
+		long companyId, SearchContext searchContext, String keywords) {
+
+		if (Validator.isNotNull(keywords)) {
+			Map<String, Serializable> attributes =
+				new HashMap<String, Serializable>();
+
+			attributes.put("emailAddress", keywords);
+			attributes.put("firstName", keywords);
+			attributes.put("lastName", keywords);
+			attributes.put("middleName", keywords);
+			attributes.put("params", getUserParams(companyId, keywords));
+			attributes.put("screenName", keywords);
+
+			searchContext.setAttributes(attributes);
+		}
+	}
+
+	protected LinkedHashMap<String, Object> getUserParams(
+		long companyId, String keywords) {
+
+		LinkedHashMap<String, Object> userParams =
+			new LinkedHashMap<String, Object>();
+
+		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
+			companyId, User.class.getName());
+
+		Enumeration<String> enu = expandoBridge.getAttributeNames();
+
+		while (enu.hasMoreElements()) {
+			String attributeName = enu.nextElement();
+
+			UnicodeProperties properties = expandoBridge.getAttributeProperties(
+				attributeName);
+
+			String indexable = properties.getProperty(
+				ExpandoBridgeIndexer.INDEXABLE);
+
+			if (GetterUtil.getBoolean(indexable)) {
+				int type = expandoBridge.getAttributeType(attributeName);
+
+				if (type == ExpandoColumnConstants.STRING) {
+					userParams.put(attributeName, keywords);
+				}
+			}
+		}
+
+		return userParams;
 	}
 
 }

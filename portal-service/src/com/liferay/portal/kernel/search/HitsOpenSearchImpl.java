@@ -73,6 +73,9 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 			searchContext.setStart(start);
 			searchContext.setUserId(userId);
 
+			addSearchAttributes(
+				themeDisplay.getCompanyId(), searchContext, keywords);
+
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				themeDisplay.getCompanyId(), getPortletId());
 
@@ -154,6 +157,10 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 		catch (Exception e) {
 			throw new SearchException(e);
 		}
+	}
+
+	protected void addSearchAttributes(
+		long companyId, SearchContext searchContext, String keywords) {
 	}
 
 	protected String getURL(
