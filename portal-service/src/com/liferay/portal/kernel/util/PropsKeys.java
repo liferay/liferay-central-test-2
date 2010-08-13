@@ -529,6 +529,8 @@ public interface PropsKeys {
 
 	public static final String EHCACHE_SINGLE_VM_CONFIG_LOCATION = "ehcache.single.vm.config.location";
 
+	public static final String EHCACHE_STATISTICS_ENABLED = "ehcache.statistics.enabled";
+
 	public static final String FACEBOOK_CONNECT_APP_ID = "facebook.connect.app.id";
 
 	public static final String FACEBOOK_CONNECT_APP_SECRET = "facebook.connect.app.secret";

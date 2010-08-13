@@ -96,6 +96,9 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 					cache = _cacheManager.getEhcache(name);
 
+					cache.setStatisticsEnabled(
+						PropsValues.EHCACHE_STATISTICS_ENABLED);
+
 					if (_log.isInfoEnabled()) {
 						_log.info(
 							"Cache name " + name + " is using implementation " +
