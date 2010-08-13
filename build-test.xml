@@ -114,37 +114,7 @@
 								<property name="test.ant.script.properties" value="upgrade.processes=\$${line.separator}com.liferay.portal.upgrade.UpgradeProcess_5_2_7_to_6_0_0,\$${line.separator}com.liferay.portal.upgrade.UpgradeProcess_6_0_1,\$${line.separator}com.liferay.portal.upgrade.UpgradeProcess_6_0_2,\$${line.separator}com.liferay.portal.upgrade.UpgradeProcess_6_0_3,\$${line.separator}com.liferay.portal.upgrade.UpgradeProcess_6_0_5$${line.separator}$${line.separator}permissions.user.check.algorithm=5$${line.separator}image.hook.impl=com.liferay.portal.image.DatabaseHook" />
 							</then>
 							<elseif>
-								<equals arg1="@{test.ant.script.version}" arg2="5.1.0" />
-								<then>
-									<property name="test.ant.script.properties" value="permissions.user.check.algorithm=5" />
-								</then>
-							</elseif>
-							<elseif>
-								<equals arg1="@{test.ant.script.version}" arg2="5.1.1" />
-								<then>
-									<property name="test.ant.script.properties" value="permissions.user.check.algorithm=5" />
-								</then>
-							</elseif>
-							<elseif>
 								<equals arg1="@{test.ant.script.version}" arg2="5.1.2" />
-								<then>
-									<property name="test.ant.script.properties" value="permissions.user.check.algorithm=5" />
-								</then>
-							</elseif>
-							<elseif>
-								<equals arg1="@{test.ant.script.version}" arg2="5.2.0" />
-								<then>
-									<property name="test.ant.script.properties" value="permissions.user.check.algorithm=5" />
-								</then>
-							</elseif>
-							<elseif>
-								<equals arg1="@{test.ant.script.version}" arg2="5.2.1" />
-								<then>
-									<property name="test.ant.script.properties" value="permissions.user.check.algorithm=5" />
-								</then>
-							</elseif>
-							<elseif>
-								<equals arg1="@{test.ant.script.version}" arg2="5.2.2" />
 								<then>
 									<property name="test.ant.script.properties" value="permissions.user.check.algorithm=5" />
 								</then>
@@ -477,39 +447,9 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
-			<param name="test.ant.script.command" value="db-upgrade-5.1.0" />
-			<param name="test.ant.script.dbs" value="db2,mysql,oracle,postgresql,sql-server" />
-			<param name="test.ant.script.version" value="5.1.0" />
-		</antcall>
-
-		<antcall target="build-test-ant-script-db-upgrade">
-			<param name="test.ant.script.command" value="db-upgrade-5.1.1" />
-			<param name="test.ant.script.dbs" value="db2,mysql,oracle,postgresql,sql-server" />
-			<param name="test.ant.script.version" value="5.1.1" />
-		</antcall>
-
-		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-5.1.2" />
 			<param name="test.ant.script.dbs" value="db2,mysql,oracle,postgresql,sql-server" />
 			<param name="test.ant.script.version" value="5.1.2" />
-		</antcall>
-
-		<antcall target="build-test-ant-script-db-upgrade">
-			<param name="test.ant.script.command" value="db-upgrade-5.2.0" />
-			<param name="test.ant.script.dbs" value="db2,mysql,oracle,postgresql,sql-server" />
-			<param name="test.ant.script.version" value="5.2.0" />
-		</antcall>
-
-		<antcall target="build-test-ant-script-db-upgrade">
-			<param name="test.ant.script.command" value="db-upgrade-5.2.1" />
-			<param name="test.ant.script.dbs" value="db2,mysql,oracle,postgresql,sql-server" />
-			<param name="test.ant.script.version" value="5.2.1" />
-		</antcall>
-
-		<antcall target="build-test-ant-script-db-upgrade">
-			<param name="test.ant.script.command" value="db-upgrade-5.2.2" />
-			<param name="test.ant.script.dbs" value="db2,mysql,oracle,postgresql,sql-server" />
-			<param name="test.ant.script.version" value="5.2.2" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
@@ -533,7 +473,7 @@
 		<antcall target="build-test-ant-script-db-upgrade-smoke">
 			<param name="test.ant.script.command" value="db-upgrade-smoke" />
 			<param name="test.ant.script.dbs" value="db2,mysql,oracle,postgresql,sql-server" />
-			<param name="test.ant.script.versions" value="5.1.0,5.1.1,5.1.2,5.2.0,5.2.1,5.2.2,5.2.3,5.2.7,6.0.0" />
+			<param name="test.ant.script.versions" value="5.1.2,5.2.3,5.2.7,6.0.0" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-ldap">
