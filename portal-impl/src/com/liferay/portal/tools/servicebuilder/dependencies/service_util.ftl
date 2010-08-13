@@ -109,7 +109,7 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 
 				ClassLoaderProxy classLoaderProxy = new ClassLoaderProxy(obj, portletClassLoader);
 
-				_service = new ${entity.name}${sessionTypeName}ServiceClp(${entity.name}${sessionTypeName}Service.class.getName(), classLoaderProxy);
+				_service = new ${entity.name}${sessionTypeName}ServiceClp(classLoaderProxy);
 
 				ClpSerializer.setClassLoader(portletClassLoader);
 			<#else>
