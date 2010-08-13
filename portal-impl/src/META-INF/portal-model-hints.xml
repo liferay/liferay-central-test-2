@@ -1235,7 +1235,7 @@
 		</field>
 		<field name="version" type="double" />
 		<field name="title" type="String">
-			<hint name="max-length">100</hint>
+			<hint name="max-length">300</hint>
 		</field>
 		<field name="urlTitle" type="String">
 			<hint name="max-length">150</hint>
