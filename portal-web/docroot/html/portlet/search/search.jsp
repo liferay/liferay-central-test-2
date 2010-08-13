@@ -188,10 +188,10 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 
 				// Summary
 
+				String entryClassName = el.elementText("entryClassName");
 				String entryTitle = el.elementText("title");
 				String entryHref = el.element("link").attributeValue("href");
 				String summary = el.elementText("summary");
-				String entryClassName = el.elementText("entryClassName");
 
 				// Group id
 
