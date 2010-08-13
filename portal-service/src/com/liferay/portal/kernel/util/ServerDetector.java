@@ -145,10 +145,6 @@ public class ServerDetector {
 				_log.info("No server detected");
 			}
 		}
-
-		if (_serverId == null) {
-			throw new RuntimeException("Server is not supported");
-		}
 	}
 
 	private boolean _detect(String className) {
