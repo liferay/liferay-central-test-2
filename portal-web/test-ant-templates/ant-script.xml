@@ -25,6 +25,17 @@
 		</ant>
 	</target>
 
+	<target name="test-${test.ant.script.command}-tomcat-db2">
+		<antcall target="prepare-db2">
+			${test.ant.script.file.properties}
+		</antcall>
+
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+			${test.ant.script.file.plugins}
+			${test.ant.script.file.suite}
+		</ant>
+	</target>
+
 	<target name="test-${test.ant.script.command}-tomcat-hsql">
 		<antcall target="prepare-hsql">
 			${test.ant.script.file.properties}
