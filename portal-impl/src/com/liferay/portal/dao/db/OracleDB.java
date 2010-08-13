@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -32,6 +33,8 @@ import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author Alexander Chow
@@ -241,6 +244,31 @@ public class OracleDB extends BaseDB {
 		return sb.toString();
 	}
 
+	protected String replaceTemplate(String template, String[] actual) {
+
+		// See http://www.coderanch.com/t/307419/JDBC/java/Fit-or-not-fit-Oracle
+
+		Matcher matcher = _varcharPattern.matcher(template);
+
+		StringBuffer sb = new StringBuffer();
+
+		while (matcher.find()) {
+			int size = GetterUtil.getInteger(matcher.group()) * 4;
+
+			if (size > 4000) {
+				size = 4000;
+			}
+
+			matcher.appendReplacement(sb, "VARCHAR(" + size + ")");
+		}
+
+		matcher.appendTail(sb);
+
+		template = sb.toString();
+
+		return super.replaceTemplate(template, actual);
+	}
+
 	private void _convertToOracleCSV(String line, StringBundler sb) {
 		int x = line.indexOf("values (");
 		int y = line.lastIndexOf(");");
@@ -283,5 +311,8 @@ public class OracleDB extends BaseDB {
 	};
 
 	private static OracleDB _instance = new OracleDB();
+
+	private static Pattern _varcharPattern =
+		Pattern.compile("VARCHAR(\\(\\d+\\))");
 
 }
