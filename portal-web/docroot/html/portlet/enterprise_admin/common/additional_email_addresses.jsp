@@ -98,7 +98,7 @@ else {
 
 <aui:script use="liferay-auto-fields">
 	Liferay.once(
-		'enterpriseadmin:revealadditionalEmailAddresses',
+		'enterpriseAdmin:revealadditionalEmailAddresses',
 		function() {
 			new Liferay.AutoFields(
 				{

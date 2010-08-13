@@ -99,7 +99,7 @@ else {
 
 <aui:script use="liferay-auto-fields">
 	Liferay.once(
-		'enterpriseadmin:revealwebsites',
+		'enterpriseAdmin:revealwebsites',
 		function() {
 			new Liferay.AutoFields(
 				{

@@ -144,7 +144,7 @@ else {
 
 <aui:script use="liferay-auto-fields,liferay-dynamic-select">
 	Liferay.once(
-		'enterpriseadmin:revealaddresses',
+		'enterpriseAdmin:revealaddresses',
 		function() {
 			var addresses = new Liferay.AutoFields(
 				{

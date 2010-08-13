@@ -102,7 +102,7 @@ else {
 
 <aui:script use="liferay-auto-fields">
 	Liferay.once(
-		'enterpriseadmin:revealphoneNumbers',
+		'enterpriseAdmin:revealphoneNumbers',
 		function() {
 			new Liferay.AutoFields(
 				{

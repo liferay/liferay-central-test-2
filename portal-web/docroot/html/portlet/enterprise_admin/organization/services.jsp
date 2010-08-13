@@ -253,7 +253,7 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", local
 
 <aui:script use="liferay-auto-fields">
 	Liferay.once(
-		'enterpriseadmin:revealservices',
+		'enterpriseAdmin:revealservices',
 		function() {
 			new Liferay.AutoFields(
 				{
