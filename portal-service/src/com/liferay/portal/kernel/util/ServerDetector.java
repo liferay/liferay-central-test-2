@@ -137,14 +137,20 @@ public class ServerDetector {
 			}
 		}
 
-		if (_log.isInfoEnabled()) {
-			if (_serverId != null) {
-				_log.info("Detected server " + _serverId);
-			}
-			else {
-				_log.info("No server detected");
+		if (System.getProperty("external-properties") == null) {
+			if (_log.isInfoEnabled()) {
+				if (_serverId != null) {
+					_log.info("Detected server " + _serverId);
+				}
+				else {
+					_log.info("No server detected");
+				}
 			}
 		}
+
+		/*if (_serverId == null) {
+			throw new RuntimeException("Server is not supported");
+		}*/
 	}
 
 	private boolean _detect(String className) {
