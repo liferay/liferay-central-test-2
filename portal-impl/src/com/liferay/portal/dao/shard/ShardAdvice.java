@@ -370,13 +370,13 @@ public class ShardAdvice {
 
 	private static Log _log = LogFactoryUtil.getLog(ShardAdvice.class);
 
-	private static ShardSelector _shardSelector;
 	private static ThreadLocal<Stack<String>> _companyServiceStack =
 		new ThreadLocal<Stack<String>>();
 	private static ThreadLocal<Object> _globalCall = new ThreadLocal<Object>();
 	private static ThreadLocal<String> _shardName =
 		new InitialThreadLocal<String>(
 			ShardAdvice.class + "._shardName", PropsValues.SHARD_DEFAULT_NAME);
+	private static ShardSelector _shardSelector;
 
 	private ShardDataSourceTargetSource _shardDataSourceTargetSource;
 	private ShardSessionFactoryTargetSource _shardSessionFactoryTargetSource;
