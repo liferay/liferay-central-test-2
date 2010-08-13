@@ -708,6 +708,14 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portlet.enterpriseadmin.util.OrganizationIndexer">
+		<priority value="WARN" />
+	</category>
+
+	<category name="com.liferay.portlet.enterpriseadmin.util.OrganizationSearchTerms">
+		<priority value="WARN" />
+	</category>
+
 	<category name="com.liferay.portlet.journal">
 		<priority value="ERROR" />
 	</category>

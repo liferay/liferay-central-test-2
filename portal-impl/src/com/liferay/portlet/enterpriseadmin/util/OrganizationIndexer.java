@@ -14,6 +14,10 @@
 
 package com.liferay.portlet.enterpriseadmin.util;
 
+import com.liferay.portal.NoSuchCountryException;
+import com.liferay.portal.NoSuchRegionException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
@@ -115,15 +119,29 @@ public class OrganizationIndexer extends ExpandoIndexer {
 		List<String> countries = new ArrayList<String>();
 
 		if (regionId > 0) {
-			Region region = RegionServiceUtil.getRegion(regionId);
+			try {
+				Region region = RegionServiceUtil.getRegion(regionId);
 
-			regions.add(region.getName().toLowerCase());
+				regions.add(region.getName().toLowerCase());
+			}
+			catch (NoSuchRegionException nsre) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsre.getMessage());
+				}
+			}
 		}
 
 		if (countryId > 0) {
-			Country country = CountryServiceUtil.getCountry(countryId);
+			try {
+				Country country = CountryServiceUtil.getCountry(countryId);
 
-			countries.add(country.getName().toLowerCase());
+				countries.add(country.getName().toLowerCase());
+			}
+			catch (NoSuchCountryException nsce) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsce.getMessage());
+				}
+			}
 		}
 
 		for (Address address : addresses) {
@@ -404,5 +422,7 @@ public class OrganizationIndexer extends ExpandoIndexer {
 
 		SearchEngineUtil.updateDocuments(companyId, documents);
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(OrganizationIndexer.class);
 
 }

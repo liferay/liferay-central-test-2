@@ -14,9 +14,13 @@
 
 package com.liferay.portlet.enterpriseadmin.search;
 
+import com.liferay.portal.NoSuchCountryException;
+import com.liferay.portal.NoSuchRegionException;
 import com.liferay.portal.kernel.dao.search.DAOParamUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Country;
 import com.liferay.portal.model.Region;
@@ -58,9 +62,16 @@ public class OrganizationSearchTerms extends OrganizationDisplayTerms {
 		String countryName = null;
 
 		if (countryId != 0) {
-			Country country = CountryServiceUtil.getCountry(countryId);
+			try {
+				Country country = CountryServiceUtil.getCountry(countryId);
 
-			countryName = country.getName().toLowerCase();
+				countryName = country.getName().toLowerCase();
+			}
+			catch (NoSuchCountryException nsce) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsce.getMessage());
+				}
+			}
 		}
 
 		return countryName;
@@ -79,12 +90,22 @@ public class OrganizationSearchTerms extends OrganizationDisplayTerms {
 		String regionName = null;
 
 		if (regionId != 0) {
-			Region region = RegionServiceUtil.getRegion(regionId);
+			try {
+				Region region = RegionServiceUtil.getRegion(regionId);
 
-			regionName = region.getName().toLowerCase();
+				regionName = region.getName().toLowerCase();
+			}
+			catch (NoSuchRegionException nsre) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsre.getMessage());
+				}
+			}
 		}
 
 		return regionName;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		OrganizationSearchTerms.class);
 
 }
