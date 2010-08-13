@@ -85,41 +85,59 @@ AUI().add(
 
 					instance.messages.closeTool.on('click', instance.clearMessages, instance);
 
-					instance.addMenu(
-						{
-							boundingBox: '#' + instance._namespace + 'addContentContainer',
-							name: 'addContent',
-							trigger: '#' + instance._namespace + 'addContent'
-						}
-					);
+					instance.dockBar.once(
+						'mousemove',
+						function() {
+							instance.addMenu(
+								{
+									boundingBox: '#' + instance._namespace + 'addContentContainer',
+									name: 'addContent',
+									trigger: '#' + instance._namespace + 'addContent'
+								}
+							);
 
-					instance.addMenu(
-						{
-							boundingBox: '#' + instance._namespace + 'manageContentContainer',
-							name: 'manageContent',
-							trigger: '#' + instance._namespace + 'manageContent'
-						}
-					);
+							instance.addMenu(
+								{
+									boundingBox: '#' + instance._namespace + 'manageContentContainer',
+									name: 'manageContent',
+									trigger: '#' + instance._namespace + 'manageContent'
+								}
+							);
 
-					instance.addMenu(
-						{
-							boundingBox: '#' + instance._namespace + 'myPlacesContainer',
-							name: 'myPlaces',
-							trigger: '#' + instance._namespace + 'myPlaces'
-						}
-					);
+							instance.addMenu(
+								{
+									boundingBox: '#' + instance._namespace + 'myPlacesContainer',
+									name: 'myPlaces',
+									trigger: '#' + instance._namespace + 'myPlaces'
+								}
+							);
 
-					var userOptionsContainer = A.one('#' + instance._namespace + 'userOptionsContainer');
+							var userOptionsContainer = A.one('#' + instance._namespace + 'userOptionsContainer');
 
-					if (userOptionsContainer) {
-						instance.addMenu(
-							{
-								boundingBox: userOptionsContainer,
-								name: 'userOptions',
-								trigger: '#' + instance._namespace + 'userAvatar'
+							if (userOptionsContainer) {
+								instance.addMenu(
+									{
+										boundingBox: userOptionsContainer,
+										name: 'userOptions',
+										trigger: '#' + instance._namespace + 'userAvatar'
+									}
+								);
 							}
-						);
-					}
+
+							var isStaging = body.hasClass('staging') || body.hasClass('remote-staging');
+							var isLiveView = body.hasClass('live-view');
+
+							if (isStaging || isLiveView) {
+								instance.addMenu(
+									{
+										boundingBox: '#' + instance._namespace + 'stagingContainer',
+										name: 'staging',
+										trigger: '#' + instance._namespace + 'staging'
+									}
+								);
+							}
+						}
+					);
 
 					var addApplication = A.one('#' + instance._namespace + 'addApplication');
 
@@ -215,19 +233,6 @@ AUI().add(
 						);
 					}
 
-					var isStaging = body.hasClass('staging') || body.hasClass('remote-staging');
-					var isLiveView = body.hasClass('live-view');
-
-					if (isStaging || isLiveView) {
-						instance.addMenu(
-							{
-								boundingBox: '#' + instance._namespace + 'stagingContainer',
-								name: 'staging',
-								trigger: '#' + instance._namespace + 'staging'
-							}
-						);
-					}
-
 					if (instance.addContent) {
 						instance.addContent.get('boundingBox').delegate(
 							'click',
@@ -287,7 +292,7 @@ AUI().add(
 						{
 							hideDelay: 500,
 							hideOn: 'mouseleave',
-							showOn: 'mouseenter'
+							showOn: 'mouseover'
 						}
 					);
 
