@@ -221,12 +221,6 @@
 		</for>
 
 		<echo file="portal-web/test-ant-scripts/build-test-${test.ant.script.command}.xml" append="true"><![CDATA[${line.separator}</project>]]></echo>
-
-		<replace
-			file="portal-web/test-ant-scripts/build-test-db-upgrade-smoke.xml"
-			token="&lt;antcall target=&quot;test-db-upgrade-5.1.0-smoke-tomcat-postgresql&quot; /&gt;"
-			value="&lt;!--&lt;antcall target=&quot;test-db-upgrade-5.1.0-smoke-tomcat-postgresql&quot; /&gt;--&gt;"
-		/>
 	</target>
 
 	<target name="build-test-ant-script-ldap">
