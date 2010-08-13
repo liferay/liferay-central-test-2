@@ -16,6 +16,7 @@ package com.liferay.portal.dao.shard;
 
 import com.liferay.portal.dao.jdbc.spring.MappingSqlQueryImpl;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
+import com.liferay.portal.kernel.dao.shard.ShardUtil;
 
 import java.util.List;
 

@@ -12,28 +12,21 @@
  * details.
  */
 
-package com.liferay.portal.dao.shard;
-
-import com.liferay.portal.dao.jdbc.spring.SqlUpdateImpl;
-import com.liferay.portal.kernel.dao.shard.ShardUtil;
+package com.liferay.portal.kernel.dao.shard;
 
 import javax.sql.DataSource;
-
-import org.springframework.dao.DataAccessException;
 
 /**
  * @author Alexander Chow
  */
-public class ShardSqlUpdateImpl extends SqlUpdateImpl {
+public interface Shard {
 
-	public ShardSqlUpdateImpl(DataSource dataSource, String sql, int[] types) {
-		super(dataSource, sql, types);
-	}
+	public DataSource getDataSource();
 
-	public int update(Object... params) throws DataAccessException {
-		setDataSource(ShardUtil.getDataSource());
+	public boolean isEnabled();
 
-		return super.update(params);
-	}
+	public String popCompanyService();
+
+	public void pushCompanyService(long companyId);
 
 }

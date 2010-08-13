@@ -27,7 +27,7 @@ public class RoundRobinShardSelector implements ShardSelector {
 	public String getShardName(
 		String scope, String shardName, Map<String, String> params) {
 
-		if (scope.equals(ShardUtil.COMPANY_SCOPE)) {
+		if (scope.equals(ShardSelector.COMPANY_SCOPE)) {
 			int instances = PortalInstances.getCompanyIds().length;
 			int shards = PropsValues.SHARD_AVAILABLE_NAMES.length;
 

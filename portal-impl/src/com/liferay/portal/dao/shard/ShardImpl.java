@@ -14,28 +14,20 @@
 
 package com.liferay.portal.dao.shard;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.util.PropsValues;
-
 import javax.sql.DataSource;
+
+import com.liferay.portal.kernel.dao.shard.Shard;
 
 /**
  * @author Alexander Chow
  */
-public class ShardUtil {
+public class ShardImpl implements Shard {
 
-	public static String COMPANY_SCOPE = "COMPANY_SCOPE";
-
-	public static DataSource getDataSource() {
+	public DataSource getDataSource() {
 		return _shardAdvice.getDataSource();
 	}
 
-	public static ShardSelector getShardSelector() {
-		return _shardSelector;
-	}
-
-	public static boolean isEnabled() {
+	public boolean isEnabled() {
 		if (_shardAdvice != null) {
 			return true;
 		}
@@ -44,7 +36,7 @@ public class ShardUtil {
 		}
 	}
 
-	public static String popCompanyService() {
+	public String popCompanyService() {
 		String value = null;
 
 		if (_shardAdvice != null) {
@@ -54,15 +46,9 @@ public class ShardUtil {
 		return value;
 	}
 
-	public static void pushCompanyService(long companyId) {
+	public void pushCompanyService(long companyId) {
 		if (_shardAdvice != null) {
 			_shardAdvice.pushCompanyService(companyId);
-		}
-	}
-
-	public static void pushCompanyService(String shardName) {
-		if (_shardAdvice != null) {
-			_shardAdvice.pushCompanyService(shardName);
 		}
 	}
 
@@ -70,19 +56,6 @@ public class ShardUtil {
 		_shardAdvice = shardAdvice;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ShardUtil.class);
-
 	private static ShardAdvice _shardAdvice;
-	private static ShardSelector _shardSelector;
-
-	static {
-		try {
-			_shardSelector = (ShardSelector)Class.forName(
-				PropsValues.SHARD_SELECTOR).newInstance();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
 
 }

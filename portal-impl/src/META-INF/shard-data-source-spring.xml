@@ -107,8 +107,12 @@
 		<property name="shardDataSourceTargetSource" ref="shardDataSourceTargetSource" />
 		<property name="shardSessionFactoryTargetSource" ref="shardSessionFactoryTargetSource" />
 	</bean>
-	<bean id="com.liferay.portal.dao.shard.ShardUtil" class="com.liferay.portal.dao.shard.ShardUtil">
-		<property name="shardAdvice" ref="com.liferay.portal.dao.shard.ShardAdvice" />
+	<bean id="com.liferay.portal.kernel.dao.shard.ShardUtil" class="com.liferay.portal.kernel.dao.shard.ShardUtil">
+		<property name="shard">
+			<bean class="com.liferay.portal.dao.shard.ShardImpl">
+				<property name="shardAdvice" ref="com.liferay.portal.dao.shard.ShardAdvice" />
+			</bean>
+		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.util.InfrastructureUtil" class="com.liferay.portal.kernel.util.InfrastructureUtil">
 		<property name="dataSource" ref="liferayDataSource" />

@@ -14,7 +14,7 @@
 
 package com.liferay.portal.search.lucene;
 
-import com.liferay.portal.dao.shard.ShardUtil;
+import com.liferay.portal.kernel.dao.shard.ShardUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;

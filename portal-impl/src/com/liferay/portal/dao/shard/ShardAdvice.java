@@ -311,10 +311,8 @@ public class ShardAdvice {
 			shardParams.put("virtualHost", virtualHost);
 		}
 
-		ShardSelector shardSelector = ShardUtil.getShardSelector();
-
-		shardName = shardSelector.getShardName(
-			ShardUtil.COMPANY_SCOPE, shardName, shardParams);
+		shardName = _shardSelector.getShardName(
+			ShardSelector.COMPANY_SCOPE, shardName, shardParams);
 
 		return shardName;
 	}
@@ -372,6 +370,7 @@ public class ShardAdvice {
 
 	private static Log _log = LogFactoryUtil.getLog(ShardAdvice.class);
 
+	private static ShardSelector _shardSelector;
 	private static ThreadLocal<Stack<String>> _companyServiceStack =
 		new ThreadLocal<Stack<String>>();
 	private static ThreadLocal<Object> _globalCall = new ThreadLocal<Object>();
@@ -381,5 +380,15 @@ public class ShardAdvice {
 
 	private ShardDataSourceTargetSource _shardDataSourceTargetSource;
 	private ShardSessionFactoryTargetSource _shardSessionFactoryTargetSource;
+
+	static {
+		try {
+			_shardSelector = (ShardSelector)Class.forName(
+				PropsValues.SHARD_SELECTOR).newInstance();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
 
 }
