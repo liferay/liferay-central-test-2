@@ -4,22 +4,21 @@
 	<import file="build-test.xml" />
 
 	<target name="prepare-java-jdk">
-		<echo file="set-java-home.bat">if not exist C:\Java\jdk-1.6.0_21 ${unzip.executable} -oq ${java.jdk.zip} -d C:\Java
-${setx.executable} /m JAVA_HOME C:\Java\jdk-1.6.0_21
-if not %PATH:~0,7%==C:\Java ${setx.executable} /m PATH "C:\Java\jdk-1.6.0_21\bin;%PATH%"
-shutdown -r -t 15</echo>
+		<echo file="execute-remote-command.bat">
+			if not exist C:\Java\jdk-1.6.0_21 ${unzip.executable} -oq ${java.jdk.zip} -d C:\Java
+			${setx.executable} /m JAVA_HOME C:\Java\jdk-1.6.0_21
+			if not %PATH:~0,7%==C:\Java ${setx.executable} /m PATH "C:\Java\jdk-1.6.0_21\bin;%PATH%"
+		</echo>
 
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} set-java-home.bat ${vm.username}@${vm.host}:/" />
+		<antcall target="execute-remote-command" />
+
+		<echo>Restarting ${vm.host}...</echo>
+
+		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
+			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx reset" />
 		</exec>
 
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} C:\set-java-home.bat" />
-		</exec>
-
-		<delete file="set-java-home.bat" />
-
-		<sleep seconds="120" />
+		<sleep seconds="60" />
 	</target>
 
 	<target name="prepare-ldap-apache">
@@ -54,21 +53,24 @@ test.properties to point to an ApacheDS installation file.
 			<try>
 				<parallel timeout="30000">
 					<sequential>
-						<echo file="start-ldap.bat">cd C:\apacheds_1.5.7
-apacheds.bat</echo>
+						<echo file="execute-remote-command.bat">
+							cd C:\apacheds_1.5.7
+							apacheds.bat
+						</echo>
 
-						<exec executable="${pscp.executable}">
-							<arg line="-pw ${vm.password} start-ldap.bat ${vm.username}@${vm.host}:/" />
-						</exec>
-
-						<exec executable="${plink.executable}">
-							<arg line="-pw ${vm.password} ${vm.username}@${vm.host} C:\start-ldap.bat" />
-						</exec>
+						<antcall target="execute-remote-command" />
 					</sequential>
 				</parallel>
 			</try>
 			<catch>
-				<delete file="start-ldap.bat" />
+				<if>
+					<not>
+						<equals arg1="${e}" arg2="Parallel execution timed out" />
+					</not>
+					<then>
+						<echo>ERROR: ${e}</echo>
+					</then>
+				</if>
 			</catch>
 		</trycatch>
 
@@ -122,18 +124,12 @@ userpassword:: e1NIQX1xVXFQNWN5eG02WWNUQWh6MDVIcGg1Z3Z1OU09</echo>
 
 		<delete file="${tstamp.value}" />
 
-		<echo file="import-ldap-users.bat">cd C:\apacheds_1.5.7\bin
-java -jar apacheds-tools.jar import -e -f C:/${tstamp.value}</echo>
+		<echo file="execute-remote-command.bat">
+			cd C:\apacheds_1.5.7\bin
+			java -jar apacheds-tools.jar import -e -f C:/${tstamp.value}
+		</echo>
 
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} import-ldap-users.bat ${vm.username}@${vm.host}:/" />
-		</exec>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} C:\import-ldap-users.bat" />
-		</exec>
-
-		<delete file="import-ldap-users.bat" />
+		<antcall target="execute-remote-command" />
 	</target>
 
 	<target name="run-ldap-tomcat">

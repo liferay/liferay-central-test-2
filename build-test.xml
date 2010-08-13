@@ -1378,6 +1378,22 @@
 		<echo file="portal-web/test-ant-scripts/${ant.script.file.name}">${template.content}</echo>
 	</target>
 
+	<target name="execute-remote-command">
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} execute-remote-command.bat ${vm.username}@${vm.host}:/" />
+		</exec>
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} C:/execute-remote-command.bat" />
+		</exec>
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c del C:\execute-remote-command.bat" />
+		</exec>
+
+		<delete file="execute-remote-command.bat" />
+	</target>
+
 	<target name="prepare-common">
 		<antcall target="prepare-portal-properties" inheritAll="false" />
 
