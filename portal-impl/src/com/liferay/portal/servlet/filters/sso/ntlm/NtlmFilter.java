@@ -193,6 +193,13 @@ public class NtlmFilter extends BasePortalFilter {
 						request.getRemoteAddr());
 
 					if (serverChallenge == null) {
+						response.setHeader(
+							HttpHeaders.WWW_AUTHENTICATE, "NTLM");
+						response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+						response.setContentLength(0);
+
+						response.flushBuffer();
+
 						return;
 					}
 
@@ -213,6 +220,13 @@ public class NtlmFilter extends BasePortalFilter {
 					}
 
 					if (ntlmUserAccount == null) {
+						response.setHeader(
+							HttpHeaders.WWW_AUTHENTICATE, "NTLM");
+						response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+						response.setContentLength(0);
+
+						response.flushBuffer();
+
 						return;
 					}
 
