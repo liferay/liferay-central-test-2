@@ -453,6 +453,7 @@ public class PortalImpl implements Portal {
 		_reservedParams.add("p_p_col_count");
 		_reservedParams.add("p_p_static");
 		_reservedParams.add("p_p_isolated");
+		_reservedParams.add("p_f_id");
 		_reservedParams.add("saveLastPath");
 		_reservedParams.add("scroll");
 	}

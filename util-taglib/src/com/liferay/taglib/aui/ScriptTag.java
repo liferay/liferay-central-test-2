@@ -17,6 +17,7 @@ package com.liferay.taglib.aui;
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.servlet.taglib.BaseBodyTagSupport;
 import com.liferay.portal.kernel.servlet.taglib.aui.ScriptData;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
@@ -38,6 +39,12 @@ public class ScriptTag extends BaseBodyTagSupport {
 			(HttpServletRequest)pageContext.getRequest();
 
 		String position = _position;
+
+		String fragmentId = ParamUtil.getString(request, "p_f_id");
+
+		if (Validator.isNotNull(fragmentId)) {
+			position = _POSITION_INLINE;
+		}
 
 		try {
 			if (Validator.isNull(position)) {
