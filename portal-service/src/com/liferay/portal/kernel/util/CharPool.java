@@ -143,6 +143,8 @@ public class CharPool {
 
 	public static final char QUOTE = '\"';
 
+	public static final char RAQUO = '»';
+
 	public static final char RETURN = '\r';
 
 	public static final char SEMICOLON = ';';

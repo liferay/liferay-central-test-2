@@ -92,6 +92,7 @@
 <%@ page import="com.liferay.portal.kernel.util.BreadcrumbsUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.CalendarFactoryUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.CalendarUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.CharPool" %>
 <%@ page import="com.liferay.portal.kernel.util.Constants" %>
 <%@ page import="com.liferay.portal.kernel.util.ContentTypes" %>
 <%@ page import="com.liferay.portal.kernel.util.DateFormatFactoryUtil" %>

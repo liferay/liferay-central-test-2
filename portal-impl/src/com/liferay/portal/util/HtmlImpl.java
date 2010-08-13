@@ -89,6 +89,11 @@ public class HtmlImpl implements Html {
 
 					break;
 
+				case '»':
+					sb.append("&raquo;");
+
+					break;
+
 				default:
 					sb.append(c);
 

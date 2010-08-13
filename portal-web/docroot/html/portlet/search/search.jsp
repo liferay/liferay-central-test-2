@@ -191,6 +191,7 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 				String entryTitle = el.elementText("title");
 				String entryHref = el.element("link").attributeValue("href");
 				String summary = el.elementText("summary");
+				String entryClassName = el.elementText("entryClassName");
 
 				// Group id
 
@@ -206,13 +207,19 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 					}
 				}
 
-				if (portlet.getPortletId().equals(PortletKeys.DOCUMENT_LIBRARY)) {
+				String portletId = portlet.getPortletId();
+
+				if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY) || (portletId.equals(PortletKeys.SEARCH) && entryClassName.equals(DLFileEntry.class.getName()))) {
 					long folderId = GetterUtil.getLong(HttpUtil.getParameter(entryHref, "_20_folderId", false));
 					String name = GetterUtil.getString(HttpUtil.getParameter(entryHref, "_20_name", false));
 
 					DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(entryGroupId, folderId, name);
 
 					entryTitle = fileEntry.getTitle();
+
+					if (portletId.equals(PortletKeys.SEARCH)) { 
+						entryTitle = PortalUtil.getPortletTitle(PortletKeys.DOCUMENT_LIBRARY, locale) + " " + CharPool.RAQUO + " " + entryTitle;
+					}
 
 					if (dlLinkToViewURL) {
 						long dlPlid = PortalUtil.getPlidFromPortletId(fileEntry.getGroupId(), PortletKeys.DOCUMENT_LIBRARY);

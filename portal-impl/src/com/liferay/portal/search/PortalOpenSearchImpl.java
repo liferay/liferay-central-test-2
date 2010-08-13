@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -140,9 +141,9 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 				double score = results.score(i);
 
 				addSearchResult(
-					root, groupId, entryClassName, entryClassPK,
-					portletTitle + " &raquo; " + title, url, modifedDate,
-					content, score, format);
+					root, resultGroupId, entryClassName, entryClassPK,
+					portletTitle + " " + CharPool.RAQUO + " " + title, url,
+					modifedDate, content, score, format);
 			}
 
 			if (_log.isDebugEnabled()) {
