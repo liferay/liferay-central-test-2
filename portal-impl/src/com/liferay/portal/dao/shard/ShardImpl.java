@@ -14,9 +14,9 @@
 
 package com.liferay.portal.dao.shard;
 
-import javax.sql.DataSource;
-
 import com.liferay.portal.kernel.dao.shard.Shard;
+
+import javax.sql.DataSource;
 
 /**
  * @author Alexander Chow

@@ -217,7 +217,7 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 
 					entryTitle = fileEntry.getTitle();
 
-					if (portletId.equals(PortletKeys.SEARCH)) { 
+					if (portletId.equals(PortletKeys.SEARCH)) {
 						entryTitle = PortalUtil.getPortletTitle(PortletKeys.DOCUMENT_LIBRARY, locale) + " " + CharPool.RAQUO + " " + entryTitle;
 					}
 
