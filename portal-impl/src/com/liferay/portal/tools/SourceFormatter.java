@@ -343,7 +343,9 @@ public class SourceFormatter {
 				x = x + 7;
 			}
 		}
-		else if (fileName.endsWith("-web/build.xml")) {
+		else if (fileName.endsWith("-web/build.xml") &&
+				 !fileName.endsWith("/ext-web/build.xml")) {
+
 			x = fileName.indexOf("webs/");
 
 			if (x == -1) {
