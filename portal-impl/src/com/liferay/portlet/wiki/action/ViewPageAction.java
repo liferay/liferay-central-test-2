@@ -43,11 +43,10 @@ public class ViewPageAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
+		long categoryId = ParamUtil.getLong(renderRequest, "categoryId");
 		String title = ParamUtil.getString(renderRequest, "title");
 
-		if (Validator.isNull(title) || ParamUtil.getLong(renderRequest, "categoryId") > 0) {
-			long categoryId = ParamUtil.getLong(renderRequest, "categoryId");
-
+		if ((categoryId > 0) || Validator.isNull(title)) {
 			if (categoryId > 0) {
 				return ViewNodeAction.viewNode(
 					mapping, renderRequest,

@@ -1857,14 +1857,14 @@
 
 		<action path="/wiki/import_pages" type="com.liferay.portlet.wiki.action.ImportPagesAction">
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
-			<forward name="portlet.wiki.view_categorized_pages" path="portlet.wiki.view_categorized_pages" />
 			<forward name="portlet.wiki.import_pages" path="portlet.wiki.import_pages" />
+			<forward name="portlet.wiki.view_categorized_pages" path="portlet.wiki.view_categorized_pages" />
 		</action>
 
 		<action path="/wiki/move_page" type="com.liferay.portlet.wiki.action.MovePageAction">
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
-			<forward name="portlet.wiki.view_categorized_pages" path="portlet.wiki.view_categorized_pages" />
 			<forward name="portlet.wiki.move_page" path="portlet.wiki.move_page" />
+			<forward name="portlet.wiki.view_categorized_pages" path="portlet.wiki.view_categorized_pages" />
 		</action>
 
 		<action path="/wiki/rss" type="com.liferay.portlet.wiki.action.RSSAction">
