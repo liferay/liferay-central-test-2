@@ -52,6 +52,12 @@ public class ShardImpl implements Shard {
 		}
 	}
 
+	public void pushCompanyService(String shardName) {
+		if (_shardAdvice != null) {
+			_shardAdvice.pushCompanyService(shardName);
+		}
+	}
+
 	public void setShardAdvice(ShardAdvice shardAdvice) {
 		_shardAdvice = shardAdvice;
 	}

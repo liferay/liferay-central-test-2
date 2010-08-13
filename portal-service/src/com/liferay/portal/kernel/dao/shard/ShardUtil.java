@@ -53,6 +53,12 @@ public class ShardUtil {
 		}
 	}
 
+	public static void pushCompanyService(String shardName) {
+		if (_shard != null) {
+			_shard.pushCompanyService(shardName);
+		}
+	}
+
 	public void setShard(Shard shard) {
 		_shard = shard;
 	}

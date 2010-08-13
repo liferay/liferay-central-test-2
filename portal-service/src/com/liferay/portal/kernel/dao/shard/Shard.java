@@ -29,4 +29,6 @@ public interface Shard {
 
 	public void pushCompanyService(long companyId);
 
+	public void pushCompanyService(String shardName);
+
 }
