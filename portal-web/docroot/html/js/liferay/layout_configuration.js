@@ -277,6 +277,8 @@ AUI().add(
 			_loadContent: function() {
 				var instance = this;
 
+				Liferay.fire('initLayout');
+
 				instance.init();
 
 				Liferay.Util.addInputType();

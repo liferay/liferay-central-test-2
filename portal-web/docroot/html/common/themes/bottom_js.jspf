@@ -85,13 +85,20 @@ if (layout != null) {
 		}
 
 		<c:if test="<%= layout.isTypePortlet() %>">
+			Liferay.once(
+				'initLayout',
+				function() {
+					Liferay.Layout.init(layoutOptions);
+				}
+			);
+
 			var mainContent = A.one('#main-content');
 
 			if (mainContent) {
 				mainContent.once(
 					'mousemove',
 					function() {
-						Liferay.Layout.init(layoutOptions);
+						Liferay.fire('initLayout');
 					}
 				);
 			}
