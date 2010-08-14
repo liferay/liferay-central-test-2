@@ -23,15 +23,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class N1_AssertMessageBoardsContentUpdatedTest extends BaseTestCase {
 	public void testN1_AssertMessageBoardsContentUpdated()
 		throws Exception {
-		selenium.open("/");
+		selenium.open("/web/guest/home/");
 		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//div[4]/ul/li[5]/a"));
-		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Node: [$CLUSTER_NODE_1$]"),
-			selenium.getText("//div[@id='wrapper']/div[6]"));
 		assertTrue(selenium.isElementPresent("link=Test Category 2"));
+		assertEquals(RuntimeVariables.replace("Node: [$CLUSTER_NODE_1$]"),
+			selenium.getText("//div[@id='content']/div[3]"));
 	}
 }

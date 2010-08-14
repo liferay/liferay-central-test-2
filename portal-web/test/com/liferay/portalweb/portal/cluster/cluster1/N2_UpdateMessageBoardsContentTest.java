@@ -22,13 +22,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class N2_UpdateMessageBoardsContentTest extends BaseTestCase {
 	public void testN2_UpdateMessageBoardsContent() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[5]/ul/li/strong/span")) {
+				if (selenium.isVisible("//td[5]/ul/li/strong/a")) {
 					break;
 				}
 			}
@@ -38,7 +40,8 @@ public class N2_UpdateMessageBoardsContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//td[5]/ul/li/strong/span");
+		selenium.clickAt("//td[5]/ul/li/strong/a",
+			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -46,7 +49,8 @@ public class N2_UpdateMessageBoardsContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Edit")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -56,7 +60,8 @@ public class N2_UpdateMessageBoardsContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_19_name", RuntimeVariables.replace("Test Category 2"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

@@ -22,15 +22,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertLBFailoverToNodeOneTest extends BaseTestCase {
 	public void testAssertLBFailoverToNodeOne() throws Exception {
-		selenium.open("/");
+		selenium.open("/web/guest/home/");
 		Thread.sleep(5000);
 		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//li[5]/a/span"));
-		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Node: [$CLUSTER_NODE_1$]"),
-			selenium.getText("//div[@id='wrapper']/div[6]"));
+			selenium.getText("//div[@id='content']/div[3]"));
 	}
 }

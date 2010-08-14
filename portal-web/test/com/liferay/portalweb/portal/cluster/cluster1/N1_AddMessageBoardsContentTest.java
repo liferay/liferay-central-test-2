@@ -22,15 +22,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class N1_AddMessageBoardsContentTest extends BaseTestCase {
 	public void testN1_AddMessageBoardsContent() throws Exception {
-		selenium.open("/");
+		selenium.open("/web/guest/home/");
 		Thread.sleep(5000);
 		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//li[5]/a/span"));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("_145_addApplication");
+		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -39,7 +37,7 @@ public class N1_AddMessageBoardsContentTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id='Collaboration-MessageBoards']/p")) {
+							"//div[@title='Message Boards']/p/a")) {
 					break;
 				}
 			}
@@ -49,7 +47,8 @@ public class N1_AddMessageBoardsContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id='Collaboration-MessageBoards']/p/a");
+		selenium.clickAt("//div[@title='Message Boards']/p/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -75,6 +74,6 @@ public class N1_AddMessageBoardsContentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Category 1"));
 		assertEquals(RuntimeVariables.replace("Node: [$CLUSTER_NODE_1$]"),
-			selenium.getText("//div[@id='wrapper']/div[6]"));
+			selenium.getText("//div[@id='content']/div[3]"));
 	}
 }

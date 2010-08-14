@@ -22,9 +22,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertNodeOneTest extends BaseTestCase {
 	public void testAssertNodeOne() throws Exception {
-		selenium.click(RuntimeVariables.replace("//li[5]/a/span"));
-		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Node: [$CLUSTER_NODE_1$]"),
-			selenium.getText("//div[@id='wrapper']/div[6]"));
+		selenium.open("/web/guest/home/");
+		assertEquals(RuntimeVariables.replace("Node: [$CLUSTER_NODE_2$]"),
+			selenium.getText("//div[@id='content']/div[3]"));
 	}
 }

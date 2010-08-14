@@ -58,6 +58,13 @@
 		</antcall>
 	</target>
 
+	<target name="build-test-ant-script-cluster">
+		<antcall target="create-ant-script">
+			<param name="ant.script.template" value="ant-script-cluster.xml" />
+			<param name="ant.script.file.name" value="build-test-${test.ant.script.command}.xml" />
+		</antcall>
+	</target>
+
 	<target name="build-test-ant-script-db-failover">
 		<antcall target="create-ant-script">
 			<param name="ant.script.template" value="ant-script-db-failover.xml" />
@@ -234,6 +241,13 @@
 		<delete dir="portal-web/test-ant-scripts" />
 
 		<mkdir dir="portal-web/test-ant-scripts" />
+
+		<antcall target="build-test-ant-script-cluster">
+			<param name="test.ant.script.command" value="cluster-smoke" />
+			<param name="test.ant.script.suite.1" value="Cluster1TestSuite" />
+			<param name="test.ant.script.suite.2" value="Cluster2TestSuite" />
+			<param name="test.ant.script.suite.3" value="Cluster3TestSuite" />
+		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-admin" />

@@ -22,7 +22,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertNodeOneTest extends BaseTestCase {
 	public void testAssertNodeOne() throws Exception {
-		selenium.open("/");
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -47,6 +47,6 @@ public class AssertNodeOneTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace("//li[5]/a/span"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Node: [$CLUSTER_NODE_1$]"),
-			selenium.getText("//div[@id='wrapper']/div[6]"));
+			selenium.getText("//div[@id='content']/div[3]"));
 	}
 }

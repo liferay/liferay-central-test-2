@@ -135,10 +135,10 @@ JkShmFile logs/jk-runtime-status</echo>
 	</target>
 
 	<target name="prepare-cluster-vm-node">
-		<echo>Copying ${vm.drive}\${cluster-node.host}\${cluster-node.host}.vmdk.cluster-${cluster-node.value} to ${vm.drive}\${cluster-node.host}\${cluster-node.host}.vmdk</echo>
+		<echo>Copying ${vm.drive}\${cluster-node.host}\${cluster-node.host}.vmdk.alpha-2010-02-02 to ${vm.drive}\${cluster-node.host}\${cluster-node.host}.vmdk</echo>
 
 		<exec executable="cmd">
-			<arg line="/c copy /y ${vm.drive}\${cluster-node.host}\${cluster-node.host}.vmdk.cluster-${cluster-node.value} ${vm.drive}\${cluster-node.host}\${cluster-node.host}.vmdk" />
+			<arg line="/c copy /y ${vm.drive}\${cluster-node.host}\${cluster-node.host}.vmdk.alpha-2010-02-02 ${vm.drive}\${cluster-node.host}\${cluster-node.host}.vmdk" />
 		</exec>
 
 		<exec dir="${vm.drive}/${cluster-node.host}" executable="${vmware-cmd.executable}">
@@ -146,19 +146,35 @@ JkShmFile logs/jk-runtime-status</echo>
 		</exec>
 
 		<sleep seconds="30" />
+
+		<echo file="execute-remote-command.bat">
+			if not exist C:\Java\jdk-1.6.0_21 ${unzip.executable} -oq ${java.jdk.zip} -d C:\Java
+			${setx.executable} /m JAVA_HOME C:\Java\jdk-1.6.0_21
+			if not %PATH:~0,7%==C:\Java ${setx.executable} /m PATH "C:\Java\jdk-1.6.0_21\bin;%PATH%"
+		</echo>
+
+		<antcall target="execute-remote-command">
+			<param name="vm.host" value="${cluster-node.host}" />
+		</antcall>
+
+		<echo>Restarting ${cluster-node.host}.</echo>
+
+		<exec dir="${vm.drive}/${cluster-node.host}" executable="${vmware-cmd.executable}">
+			<arg line="${vm.drive}\${cluster-node.host}\${cluster-node.host}.vmx reset" />
+		</exec>
+
+		<sleep seconds="60" />
 	</target>
 
 	<target name="prepare-cluster-vm-node-1">
 		<antcall target="prepare-cluster-vm-node">
 			<param name="cluster-node.host" value="${vm.host.cluster-node-1}" />
-			<param name="cluster-node.value" value="node-1" />
 		</antcall>
 	</target>
 
 	<target name="prepare-cluster-vm-node-2">
 		<antcall target="prepare-cluster-vm-node">
 			<param name="cluster-node.host" value="${vm.host.cluster-node-2}" />
-			<param name="cluster-node.value" value="node-2" />
 		</antcall>
 	</target>
 
@@ -167,9 +183,7 @@ JkShmFile logs/jk-runtime-status</echo>
 		<antcall target="prepare-cluster-vm-node-2" />
 	</target>
 
-	<target name="test-cluster-smoke-tomcat-mysql">
-		<antcall target="prepare-mysql" />
-
+	<target name="run-cluster-tomcat">
 		<antcall target="prepare-cluster-vms" />
 
 		<ant antfile="build-test-tomcat.xml" target="prepare-zip-tomcat" />
@@ -209,7 +223,7 @@ JkShmFile logs/jk-runtime-status</echo>
 		<antcall target="start-selenium" />
 
 		<antcall target="run-selenium-test">
-			<param name="test.class" value="Cluster1TestSuite" />
+			<param name="test.class" value="${test.ant.script.suite.1}" />
 		</antcall>
 
 		<antcall target="stop-selenium" />
@@ -227,7 +241,7 @@ JkShmFile logs/jk-runtime-status</echo>
 		<antcall target="start-selenium" />
 
 		<antcall target="run-selenium-test">
-			<param name="test.class" value="Cluster2TestSuite" />
+			<param name="test.class" value="${test.ant.script.suite.2}" />
 		</antcall>
 
 		<antcall target="stop-selenium" />
@@ -251,7 +265,7 @@ JkShmFile logs/jk-runtime-status</echo>
 		<antcall target="start-selenium" />
 
 		<antcall target="run-selenium-test">
-			<param name="test.class" value="Cluster3TestSuite" />
+			<param name="test.class" value="${test.ant.script.suite.3}" />
 		</antcall>
 
 		<antcall target="stop-selenium" />
