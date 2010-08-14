@@ -96,12 +96,14 @@ AUI().add(
 								}
 							);
 
-							instance.addContent.on(
-								'show',
-								function() {
-									Liferay.fire('initNavigation');
-								}
-							);
+							if (instance.addContent) {
+								instance.addContent.on(
+									'show',
+									function() {
+										Liferay.fire('initNavigation');
+									}
+								);								
+							}
 
 							instance.addMenu(
 								{
