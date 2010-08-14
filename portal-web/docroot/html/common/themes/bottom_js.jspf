@@ -104,19 +104,26 @@ if (layout != null) {
 			}
 		</c:if>
 
+		Liferay.once(
+			'initNavigation',
+			function() {
+				new Liferay.Navigation(
+					{
+						layoutIds: [<%= ListUtil.toString(layouts, "layoutId") %>],
+						navBlock: navBlock,
+						hasPermission: <%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) %>
+					}
+				);
+			}
+		);
+
 		var navBlock = A.one('#navigation');
 
 		if (navBlock) {
 			navBlock.once(
 				'mousemove',
 				function() {
-					new Liferay.Navigation(
-						{
-							layoutIds: [<%= ListUtil.toString(layouts, "layoutId") %>],
-							navBlock: navBlock,
-							hasPermission: <%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) %>
-						}
-					);
+					Liferay.fire('initNavigation');
 				}
 			);
 		}

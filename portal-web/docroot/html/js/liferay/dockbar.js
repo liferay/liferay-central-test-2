@@ -96,6 +96,13 @@ AUI().add(
 								}
 							);
 
+							instance.addContent.on(
+								'show',
+								function() {
+									Liferay.fire('initNavigation');
+								}
+							);
+
 							instance.addMenu(
 								{
 									boundingBox: '#' + instance._namespace + 'manageContentContainer',
