@@ -30,6 +30,7 @@ import com.liferay.portal.upgrade.v6_0_3.UpgradeLookAndFeel;
 import com.liferay.portal.upgrade.v6_0_3.UpgradePermission;
 import com.liferay.portal.upgrade.v6_0_3.UpgradeScopes;
 import com.liferay.portal.upgrade.v6_0_3.UpgradeSitemap;
+import com.liferay.portal.upgrade.v6_0_5.UpgradeJournal;
 
 /**
  * @author Douglas Wong
@@ -60,6 +61,8 @@ public class UpgradeProcess_5_2_8_to_6_0_5 extends UpgradeProcess {
 		upgrade(UpgradePermission.class);
 		upgrade(UpgradeScopes.class);
 		upgrade(UpgradeSitemap.class);
+
+		upgrade(UpgradeJournal.class);
 	}
 
 }
