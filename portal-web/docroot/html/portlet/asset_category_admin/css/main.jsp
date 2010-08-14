@@ -235,6 +235,10 @@
 	margin: 10px;
 }
 
+.portlet-asset-category-admin .aui-tree-node-selected .aui-tree-label {
+	cursor: move;
+}
+
 .portlet-asset-category-admin .vocabulary-treeview-container {
 	padding: 5px;
 }
