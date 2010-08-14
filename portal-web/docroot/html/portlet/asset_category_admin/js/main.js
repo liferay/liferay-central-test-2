@@ -307,7 +307,40 @@ AUI().add(
 						childrenList.empty();
 						childrenList.append(boundingBox);
 
-						instance.treeView = new A.TreeViewDD(
+						var VocabularyTree = A.Component.create({
+							NAME: 'VocabularyTree',
+
+							EXTENDS: A.TreeViewDD,
+
+							prototype: {
+								destroy: function() {
+									VocabularyTree.superclass.destroy.apply(this, arguments);
+
+									var helper = this.get('helper');
+
+									if (helper) {
+										helper.remove();
+									}
+								},
+
+								_updateNodeState: function(event) {
+									var dropNode = event.drop.get('node');
+
+									if (dropNode && dropNode.hasClass('vocabulary-category')) {
+										this._appendState(dropNode);
+									}
+									else {
+										VocabularyTree.superclass._updateNodeState.apply(this, arguments);
+									}
+								}
+							}
+						});
+
+						if (instance.treeView) {
+							instance.treeView.destroy();
+						}
+
+						instance.treeView = new VocabularyTree(
 							{
 								boundingBox: boundingBox,
 								on: {
@@ -344,10 +377,12 @@ AUI().add(
 						var vocabularyContainer = A.one(instance._vocabularyContainerSelector);
 						var listLinks = vocabularyContainer.all('li');
 
+						listLinks.unplug(A.Plugin.Drop);
+
 						listLinks.plug(
 							A.Plugin.Drop,
 							{
-								bubbleTargets: instance
+								bubbleTargets: [instance, instance.treeView]
 							}
 						);
 
