@@ -102,7 +102,7 @@ AUI().add(
 									function() {
 										Liferay.fire('initNavigation');
 									}
-								);								
+								);
 							}
 
 							instance.addMenu(
