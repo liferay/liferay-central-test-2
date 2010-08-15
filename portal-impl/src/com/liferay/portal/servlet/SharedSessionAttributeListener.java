@@ -113,7 +113,7 @@ public class SharedSessionAttributeListener
 
 		if (sharedSessionAttributeCache.contains(event.getName())) {
 			sharedSessionAttributeCache.setAttribute(
-				event.getName(), event.getValue());
+				event.getName(), session.getAttribute(event.getName()));
 		}
 	}
 
