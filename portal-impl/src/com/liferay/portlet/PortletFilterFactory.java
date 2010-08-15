@@ -119,6 +119,8 @@ public class PortletFilterFactory {
 
 		portletFilter.destroy();
 
+		FilterConfigFactory.destroy(portletFilterModel);
+
 		portletFilters.remove(portletFilterModel.getFilterName());
 	}
 
