@@ -68,6 +68,7 @@ public abstract class PortalClassLoaderServletContextListener
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
+			PortletClassLoaderUtil.setClassLoader(null);
 		}
 	}
 
