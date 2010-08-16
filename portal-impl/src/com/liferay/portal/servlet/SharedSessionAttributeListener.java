@@ -112,8 +112,9 @@ public class SharedSessionAttributeListener
 			SharedSessionAttributeCache.getInstance(session);
 
 		if (sharedSessionAttributeCache.contains(event.getName())) {
-			sharedSessionAttributeCache.setAttribute(
-				event.getName(), session.getAttribute(event.getName()));
+			Object value = session.getAttribute(event.getName());
+
+			sharedSessionAttributeCache.setAttribute(event.getName(), value);
 		}
 	}
 
