@@ -800,7 +800,7 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 			<packageset dir="util-java/src" />
 			<packageset dir="util-taglib/src" />
 
-			<tag name="generated" description="ServiceBuilder generated this class. Modifications in this class will be overwritten the next time is generated." />
+			<tag name="generated" description="ServiceBuilder generated this class. Modifications in this class will be overwritten the next time it is generated." />
 		</javadoc>
 	</target>
 
