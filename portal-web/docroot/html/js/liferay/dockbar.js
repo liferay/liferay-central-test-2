@@ -100,6 +100,7 @@ AUI().add(
 								instance.addContent.on(
 									'show',
 									function() {
+										Liferay.fire('initLayout');
 										Liferay.fire('initNavigation');
 									}
 								);
