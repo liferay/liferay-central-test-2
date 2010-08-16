@@ -374,7 +374,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			throw new NodeNameException(name + " is reserved");
 		}
 
-		if (!Validator.isVariableName(name)) {
+		if (!Validator.isName(name)) {
 			throw new NodeNameException();
 		}
 
