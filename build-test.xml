@@ -237,6 +237,13 @@
 		</antcall>
 	</target>
 
+	<target name="build-test-ant-script-tck">
+		<antcall target="create-ant-script">
+			<param name="ant.script.template" value="ant-script-tck.xml" />
+			<param name="ant.script.file.name" value="build-test-${test.ant.script.command}.xml" />
+		</antcall>
+	</target>
+
 	<target name="build-test-ant-scripts">
 		<delete dir="portal-web/test-ant-scripts" />
 
@@ -1303,6 +1310,10 @@
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="tags-wiki" />
 			<param name="test.ant.script.suite" value="TagsWikiTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-tck">
+			<param name="test.ant.script.command" value="tck-286" />
 		</antcall>
 	</target>
 
