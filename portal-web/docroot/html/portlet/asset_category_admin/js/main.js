@@ -307,27 +307,6 @@ AUI().add(
 						childrenList.empty();
 						childrenList.append(boundingBox);
 
-						var VocabularyTree = A.Component.create(
-							{
-								NAME: 'VocabularyTree',
-
-								EXTENDS: A.TreeViewDD,
-
-								prototype: {
-									_updateNodeState: function(event) {
-										var dropNode = event.drop.get('node');
-
-										if (dropNode && dropNode.hasClass('vocabulary-category')) {
-											this._appendState(dropNode);
-										}
-										else {
-											VocabularyTree.superclass._updateNodeState.apply(this, arguments);
-										}
-									}
-								}
-							}
-						);
-
 						if (instance.treeView) {
 							instance.treeView.destroy();
 						}
@@ -1417,6 +1396,29 @@ AUI().add(
 					_selectedVocabularyName: null,
 					_vocabularyItemSelector: '.vocabulary-list li',
 					_vocabularyContainerSelector: '.vocabulary-list'
+				}
+			}
+		);
+
+		var VocabularyTree = A.Component.create(
+			{
+				NAME: 'VocabularyTree',
+
+				EXTENDS: A.TreeViewDD,
+
+				prototype: {
+					_updateNodeState: function(event) {
+						var instance = this;
+
+						var dropNode = event.drop.get('node');
+
+						if (dropNode && dropNode.hasClass('vocabulary-category')) {
+							instance._appendState(dropNode);
+						}
+						else {
+							VocabularyTree.superclass._updateNodeState.apply(instance, arguments);
+						}
+					}
 				}
 			}
 		);
