@@ -115,12 +115,12 @@ public class ResourceCodeLocalServiceImpl
 	public ResourceCode getResourceCode(long companyId, String name, int scope)
 		throws SystemException {
 
+		// Always cache the resource code. This table exists to improve
+		// performance. Create the resource code if one does not exist.
+
 		if (Validator.isNull(name)) {
 			name = StringPool.BLANK;
 		}
-
-		// Always cache the resource code. This table exists to improve
-		// performance. Create the resource code if one does not exist.
 
 		String key = encodeKey(companyId, name, scope);
 
