@@ -161,30 +161,30 @@
 				<if>
 					<equals arg1="@{test.ant.script.db}" arg2="db2" />
 					<then>
-						<property name="test.ant.script.db.minimal" value="drop database lportal;${line.separator}create database lportal;" />
+						<var name="test.ant.script.db.minimal" value="drop database lportal;${line.separator}create database lportal;" />
 					</then>
 					<elseif>
 						<equals arg1="@{test.ant.script.db}" arg2="mysql" />
 						<then>
-							<property name="test.ant.script.db.minimal" value="drop database if exists lportal;${line.separator}create database lportal character set utf8;" />
+							<var name="test.ant.script.db.minimal" value="drop database if exists lportal;${line.separator}create database lportal character set utf8;" />
 						</then>
 					</elseif>
 					<elseif>
 						<equals arg1="@{test.ant.script.db}" arg2="oracle" />
 						<then>
-							<property name="test.ant.script.db.minimal" value="&lt;![CDATA[drop user &amp;1 cascade;${line.separator}create user &amp;1 identified by &amp;2;${line.separator}grant connect,resource to &amp;1;${line.separator}exit;]]&gt;" />
+							<var name="test.ant.script.db.minimal" value="&lt;![CDATA[drop user &amp;1 cascade;${line.separator}create user &amp;1 identified by &amp;2;${line.separator}grant connect,resource to &amp;1;${line.separator}exit;]]&gt;" />
 						</then>
 					</elseif>
 					<elseif>
 						<equals arg1="@{test.ant.script.db}" arg2="postgresql" />
 						<then>
-							<property name="test.ant.script.db.minimal" value="drop database lportal;${line.separator}create database lportal encoding = 'UNICODE';" />
+							<var name="test.ant.script.db.minimal" value="drop database lportal;${line.separator}create database lportal encoding = 'UNICODE';" />
 						</then>
 					</elseif>
 					<elseif>
 						<equals arg1="@{test.ant.script.db}" arg2="sql-server" />
 						<then>
-							<property name="test.ant.script.db.minimal" value="drop database lportal;${line.separator}create database lportal;" />
+							<var name="test.ant.script.db.minimal" value="drop database lportal;${line.separator}create database lportal;" />
 						</then>
 					</elseif>
 				</if>
@@ -192,10 +192,10 @@
 				<if>
 					<equals arg1="@{test.ant.script.db}" arg2="oracle" />
 					<then>
-						<property name="test.ant.script.db.schema" value="username" />
+						<var name="test.ant.script.db.schema" value="username" />
 					</then>
 					<else>
-						<property name="test.ant.script.db.schema" value="schema" />
+						<var name="test.ant.script.db.schema" value="schema" />
 					</else>
 				</if>
 
