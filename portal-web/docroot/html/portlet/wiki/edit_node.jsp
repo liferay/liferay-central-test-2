@@ -48,6 +48,8 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 
 		<aui:input name="description" />
 
+		<liferay-util:include page="/html/portlet/wiki/tree_js.jsp" />
+
 		<c:if test="<%= node == null %>">
 			<aui:field-wrapper label="permissions">
 				<liferay-ui:input-permissions
