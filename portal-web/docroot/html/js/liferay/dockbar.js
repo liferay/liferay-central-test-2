@@ -103,6 +103,30 @@ AUI().add(
 										Liferay.fire('initNavigation');
 									}
 								);
+
+								instance.addContent.get('boundingBox').delegate(
+									'click',
+									function(event) {
+										var item = event.currentTarget;
+
+										var portletId = item.attr('data-portlet-id');
+
+										if ((/^\d+$/).test(portletId)) {
+											Liferay.Portlet.add(
+												{
+													portletId: portletId
+												}
+											);
+										}
+
+										if (!event.shiftKey) {
+											Liferay.Dockbar.MenuManager.hideAll();
+										}
+
+										event.halt();
+									},
+									'.app-shortcut'
+								);
 							}
 
 							instance.addMenu(
@@ -239,32 +263,6 @@ AUI().add(
 
 								Liferay.Dockbar.manageLayouts.focus();
 							}
-						);
-					}
-
-					if (instance.addContent) {
-						instance.addContent.get('boundingBox').delegate(
-							'click',
-							function(event) {
-								var item = event.currentTarget;
-
-								var portletId = item.attr('data-portlet-id');
-
-								if ((/^\d+$/).test(portletId)) {
-									Liferay.Portlet.add(
-										{
-											portletId: portletId
-										}
-									);
-								}
-
-								if (!event.shiftKey) {
-									Liferay.Dockbar.MenuManager.hideAll();
-								}
-
-								event.halt();
-							},
-							'.app-shortcut'
 						);
 					}
 				}
