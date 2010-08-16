@@ -37,6 +37,10 @@ import org.springframework.util.ReflectionUtils;
 public class BeanReferenceAnnotationBeanPostProcessor
 	implements BeanFactoryAware, BeanPostProcessor {
 
+	public void destroy() {
+		_beans.clear();
+	}
+
 	public Object postProcessAfterInitialization(Object bean, String beanName)
 		throws BeansException {
 
