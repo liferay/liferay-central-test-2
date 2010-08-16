@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.service.base.ResourceCodeLocalServiceBaseImpl;
@@ -113,6 +114,10 @@ public class ResourceCodeLocalServiceImpl
 
 	public ResourceCode getResourceCode(long companyId, String name, int scope)
 		throws SystemException {
+
+		if (Validator.isNull(name)) {
+			name = StringPool.BLANK;
+		}
 
 		// Always cache the resource code. This table exists to improve
 		// performance. Create the resource code if one does not exist.
