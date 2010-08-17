@@ -23,6 +23,9 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AddPageCalendarTest extends BaseTestCase {
 	public void testAddPageCalendar() throws Exception {
 		selenium.open("/web/guest/home/");
+		selenium.clickAt("main-content", RuntimeVariables.replace(""));
+		selenium.clickAt("dockbar", RuntimeVariables.replace(""));
+		selenium.clickAt("navigation", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
