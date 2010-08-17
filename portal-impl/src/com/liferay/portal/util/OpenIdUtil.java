@@ -33,6 +33,10 @@ import org.openid4java.consumer.InMemoryNonceVerifier;
 public class OpenIdUtil {
 
 	public static ConsumerManager getConsumerManager() {
+		if (_instance._manager == null) {
+			_instance._initManager();
+		}
+
 		return _instance._manager;
 	}
 
@@ -71,7 +75,7 @@ public class OpenIdUtil {
 		return result;
 	}
 
-	private OpenIdUtil() {
+	private void _initManager() {
 		try {
 			_manager = new ConsumerManager();
 
