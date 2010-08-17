@@ -29,8 +29,6 @@ searchURL.setParameter("groupId", String.valueOf(groupId));
 response.setContentType(ContentTypes.TEXT_XML_UTF8);
 %>
 
-<?xml version="1.0" encoding="UTF-8"?>
-
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
 	<ShortName><%= LanguageUtil.format(pageContext, "x-search", company.getName(), false) %></ShortName>
 	<Description><%= LanguageUtil.format(pageContext, "x-search-provider", company.getName(), false) %></Description>
