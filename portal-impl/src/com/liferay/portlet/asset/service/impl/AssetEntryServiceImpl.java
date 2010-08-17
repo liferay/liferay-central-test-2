@@ -66,11 +66,12 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		String className = entry.getClassName();
 		long classPK = entry.getClassPK();
 
-		AssetRendererFactory factory = AssetRendererFactoryRegistryUtil.
-			getAssetRendererFactoryByClassName(className);
+		AssetRendererFactory assetRendererFactory =
+			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
+				className);
 
 		try {
-			if (!factory.hasPermission(
+			if (!assetRendererFactory.hasPermission(
 					getPermissionChecker(), classPK, ActionKeys.DELETE)) {
 
 				throw new PrincipalException();
@@ -321,11 +322,12 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			String className = entry.getClassName();
 			long classPK = entry.getClassPK();
 
-			AssetRendererFactory factory = AssetRendererFactoryRegistryUtil.
-				getAssetRendererFactoryByClassName(className);
+			AssetRendererFactory assetRendererFactory =
+				AssetRendererFactoryRegistryUtil.
+					getAssetRendererFactoryByClassName(className);
 
 			try {
-				if (factory.hasPermission(
+				if (assetRendererFactory.hasPermission(
 						permissionChecker, classPK, ActionKeys.VIEW)) {
 
 					filteredEntries.add(entry);
