@@ -395,60 +395,6 @@ Liferay.provide(
 			}
 
 			if (!themeDisplay.layoutMaximized) {
-			/*	portlet.delegate(
-					'click',
-					function(event) {
-						var target = event.currentTarget;
-						var parent = target.get('parentNode');
-						var parentClass = parent.get('className');
-						var preventDefault = false;
-						var halt = false;
-
-						if (parentClass.indexOf('portlet-configuration') > -1) {
-							preventDefault = true;
-
-							var configurationURL = target.attr('href');
-
-							instance.openConfiguration(portlet, portletId, configurationURL, namespacedId);
-						}
-						else if (parentClass.indexOf('portlet-minimize') > -1) {
-							instance.minimize(portlet, target);
-
-							halt = true;
-						}
-						else if (parentClass.indexOf('portlet-maximize') > -1) {
-							submitForm(document.hrefFm, target.attr('href'));
-
-							halt = true;
-						}
-						else if (parentClass.indexOf('portlet-close') > -1) {
-							instance.close(portlet);
-
-							halt = true;
-						}
-						else if (parentClass.indexOf('portlet-refresh') > -1) {
-							instance.refresh(portlet, event);
-						}
-						else if (parentClass.indexOf('portlet-print') > -1) {
-							location.href = target.attr('href');
-
-							halt = true;
-						}
-						else if (parentClass.indexOf('portlet-css') > -1) {
-							instance._loadCSSEditor(portletId);
-						}
-
-						if (preventDefault) {
-							event.preventDefault();
-						}
-						else if (halt) {
-							event.halt();
-						}
-					},
-					'.portlet-action-item a'
-				);
-*/
-
 				var configurationLink = portlet.all('.portlet-configuration a');
 
 				configurationLink.on(
@@ -533,7 +479,6 @@ Liferay.provide(
 						}
 					);
 				}
-
 			}
 
 			Liferay.fire(
