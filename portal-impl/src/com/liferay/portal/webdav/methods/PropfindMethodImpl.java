@@ -134,6 +134,7 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 		props.add(LOCKDISCOVERY_PAIR);
 
 		// RFC 3253 Currently Unsupported
+
 		//props.add(new Tuple("checked-in", WebDAVUtil.DAV_URI));
 		//props.add(new Tuple("checked-out", WebDAVUtil.DAV_URI));
 		//props.add(new Tuple("version-name", WebDAVUtil.DAV_URI));

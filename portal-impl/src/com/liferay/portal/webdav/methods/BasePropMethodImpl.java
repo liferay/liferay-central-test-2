@@ -50,43 +50,43 @@ public abstract class BasePropMethodImpl implements Method {
 
 	public static final String ALLPROP = "allprop";
 
+	public static final Tuple ALLPROP_PAIR = new Tuple(
+		ALLPROP, WebDAVUtil.DAV_URI);
+
 	public static final String CREATIONDATE = "creationdate";
 
-	public static final String LOCKDISCOVERY = "lockdiscovery";
+	public static final Tuple CREATIONDATE_PAIR = new Tuple(
+		CREATIONDATE, WebDAVUtil.DAV_URI);
 
 	public static final String DISPLAYNAME = "displayname";
 
-	public static final String GETLASTMODIFIED = "getlastmodified";
-
-	public static final String GETCONTENTTYPE = "getcontenttype";
+	public static final Tuple DISPLAYNAME_PAIR = new Tuple(
+		DISPLAYNAME, WebDAVUtil.DAV_URI);
 
 	public static final String GETCONTENTLENGTH = "getcontentlength";
 
+	public static final Tuple GETCONTENTLENGTH_PAIR = new Tuple(
+		GETCONTENTLENGTH, WebDAVUtil.DAV_URI);
+
+	public static final String GETCONTENTTYPE = "getcontenttype";
+
+	public static final Tuple GETCONTENTTYPE_PAIR = new Tuple(
+		GETCONTENTTYPE, WebDAVUtil.DAV_URI);
+
+	public static final String GETLASTMODIFIED = "getlastmodified";
+
+	public static final Tuple GETLASTMODIFIED_PAIR = new Tuple(
+		GETCONTENTLENGTH, WebDAVUtil.DAV_URI);
+
+	public static final String LOCKDISCOVERY = "lockdiscovery";
+
+	public static final Tuple LOCKDISCOVERY_PAIR = new Tuple(
+		LOCKDISCOVERY, WebDAVUtil.DAV_URI);
+
 	public static final String RESOURCETYPE = "resourcetype";
 
-	public static final Tuple ALL_PROPS_PAIR =
-		new Tuple(ALLPROP, WebDAVUtil.DAV_URI);
-
-	public static final Tuple CREATIONDATE_PAIR =
-		new Tuple(CREATIONDATE, WebDAVUtil.DAV_URI);
-
-	public static final Tuple DISPLAYNAME_PAIR =
-		new Tuple(DISPLAYNAME, WebDAVUtil.DAV_URI);
-
-	public static final Tuple GETLASTMODIFIED_PAIR =
-		new Tuple(GETCONTENTLENGTH, WebDAVUtil.DAV_URI);
-
-	public static final Tuple GETCONTENTTYPE_PAIR =
-		new Tuple(GETCONTENTTYPE, WebDAVUtil.DAV_URI);
-
-	public static final Tuple GETCONTENTLENGTH_PAIR =
-		new Tuple(GETLASTMODIFIED, WebDAVUtil.DAV_URI);
-
-	public static final Tuple LOCKDISCOVERY_PAIR =
-		new Tuple(LOCKDISCOVERY, WebDAVUtil.DAV_URI);
-
-	public static final Tuple RESOURCETYPE_PAIR =
-		new Tuple(RESOURCETYPE, WebDAVUtil.DAV_URI);
+	public static final Tuple RESOURCETYPE_PAIR = new Tuple(
+		RESOURCETYPE, WebDAVUtil.DAV_URI);
 
 	protected Element addElement(Element element, String name) {
 		QName qName = SAXReaderUtil.createQName(name, WebDAVUtil.DAV_URI);
@@ -100,24 +100,20 @@ public abstract class BasePropMethodImpl implements Method {
 		return addElement(childElement, name2);
 	}
 
-	protected void addResponse(
-			WebDAVStorage storage, WebDAVRequest webDavRequest,
-			Resource resource, Set<Tuple> props, Element multistatus,
-			long depth)
+	protected void addResponse(String href, Element multistatusElement)
 		throws Exception {
 
-		addResponse(webDavRequest, resource, props, multistatus);
+		Element responseElement = DocUtil.add(
+			multistatusElement, "response", WebDAVUtil.DAV_URI);
 
-		if (resource.isCollection() && (depth != 0)) {
-			Iterator<Resource> itr = storage.getResources(
-				webDavRequest).iterator();
+		DocUtil.add(responseElement, "href", WebDAVUtil.DAV_URI, href);
 
-			while (itr.hasNext()) {
-				resource = itr.next();
+		Element propstatElement = DocUtil.add(
+			responseElement, "propstat", WebDAVUtil.DAV_URI);
 
-				addResponse(webDavRequest, resource, props, multistatus);
-			}
-		}
+		DocUtil.add(
+			propstatElement, "status", WebDAVUtil.DAV_URI,
+			"HTTP/1.1 404 Not Found");
 	}
 
 	protected void addResponse(
@@ -131,29 +127,30 @@ public abstract class BasePropMethodImpl implements Method {
 
 		// Start building multistatus response
 
-		Element response = DocUtil.add(
+		Element responseElement = DocUtil.add(
 			multistatus, "response", WebDAVUtil.DAV_URI);
 
-		DocUtil.add(response, "href", WebDAVUtil.DAV_URI, resource.getHREF());
+		DocUtil.add(
+			responseElement, "href", WebDAVUtil.DAV_URI, resource.getHREF());
 
 		// Build success and failure propstat elements
 
-		Element successStat = DocUtil.add(
-			response, "propstat", WebDAVUtil.DAV_URI);
-		Element successProp = DocUtil.add(
-			successStat, "prop", WebDAVUtil.DAV_URI);
-		Element failureStat = DocUtil.add(
-			response, "propstat", WebDAVUtil.DAV_URI);
-		Element failureProp = DocUtil.add(
-			failureStat, "prop", WebDAVUtil.DAV_URI);
+		Element successStatElement = DocUtil.add(
+			responseElement, "propstat", WebDAVUtil.DAV_URI);
+		Element successPropElement = DocUtil.add(
+			successStatElement, "prop", WebDAVUtil.DAV_URI);
+		Element failureStatElement = DocUtil.add(
+			responseElement, "propstat", WebDAVUtil.DAV_URI);
+		Element failurePropElement = DocUtil.add(
+			failureStatElement, "prop", WebDAVUtil.DAV_URI);
 
 		boolean hasSuccess = false;
 		boolean hasFailure = false;
 
 		// Check DAV properties
 
-		if (props.contains(ALL_PROPS_PAIR)) {
-			props.remove(ALL_PROPS_PAIR);
+		if (props.contains(ALLPROP_PAIR)) {
+			props.remove(ALLPROP_PAIR);
 
 			if (resource.isCollection()) {
 				props.addAll(_ALL_COLLECTION_PROPS);
@@ -167,7 +164,7 @@ public abstract class BasePropMethodImpl implements Method {
 			props.remove(CREATIONDATE_PAIR);
 
 			DocUtil.add(
-				successProp, CREATIONDATE, WebDAVUtil.DAV_URI,
+				successPropElement, CREATIONDATE, WebDAVUtil.DAV_URI,
 				resource.getCreateDate());
 
 			hasSuccess = true;
@@ -177,7 +174,7 @@ public abstract class BasePropMethodImpl implements Method {
 			props.remove(DISPLAYNAME_PAIR);
 
 			DocUtil.add(
-				successProp, DISPLAYNAME, WebDAVUtil.DAV_URI,
+				successPropElement, DISPLAYNAME, WebDAVUtil.DAV_URI,
 				resource.getDisplayName());
 
 			hasSuccess = true;
@@ -187,7 +184,7 @@ public abstract class BasePropMethodImpl implements Method {
 			props.remove(GETLASTMODIFIED_PAIR);
 
 			DocUtil.add(
-				successProp, GETLASTMODIFIED, WebDAVUtil.DAV_URI,
+				successPropElement, GETLASTMODIFIED, WebDAVUtil.DAV_URI,
 				resource.getModifiedDate());
 
 			hasSuccess = true;
@@ -197,7 +194,7 @@ public abstract class BasePropMethodImpl implements Method {
 			props.remove(GETCONTENTTYPE_PAIR);
 
 			DocUtil.add(
-				successProp, GETCONTENTTYPE, WebDAVUtil.DAV_URI,
+				successPropElement, GETCONTENTTYPE, WebDAVUtil.DAV_URI,
 				resource.getContentType());
 
 			hasSuccess = true;
@@ -208,14 +205,14 @@ public abstract class BasePropMethodImpl implements Method {
 
 			if (!resource.isCollection()) {
 				DocUtil.add(
-					successProp, GETCONTENTLENGTH, WebDAVUtil.DAV_URI,
+					successPropElement, GETCONTENTLENGTH, WebDAVUtil.DAV_URI,
 					resource.getSize());
 
 				hasSuccess = true;
 			}
 			else {
 				DocUtil.add(
-					failureProp, GETCONTENTLENGTH, WebDAVUtil.DAV_URI);
+					failurePropElement, GETCONTENTLENGTH, WebDAVUtil.DAV_URI);
 
 				hasFailure = true;
 			}
@@ -228,6 +225,7 @@ public abstract class BasePropMethodImpl implements Method {
 
 			if (lock != null) {
 				long now = System.currentTimeMillis();
+
 				long timeRemaining =
 					(lock.getExpirationDate().getTime() - now) / Time.SECOND;
 
@@ -235,36 +233,41 @@ public abstract class BasePropMethodImpl implements Method {
 					timeRemaining = 1;
 				}
 
-				Element lockDiscovery = addElement(successProp, LOCKDISCOVERY);
+				Element lockDiscoveryElement = addElement(
+					successPropElement, LOCKDISCOVERY);
 
-				Element activeLock = addElement(lockDiscovery, "activelock");
+				Element activeLockElement = addElement(
+					lockDiscoveryElement, "activelock");
 
-				addElement(activeLock, "locktype", "write");
-				addElement(activeLock, "lockscope", "exclusive");
+				addElement(activeLockElement, "locktype", "write");
+				addElement(activeLockElement, "lockscope", "exclusive");
 
 				if (resource.isCollection()) {
 					DocUtil.add(
-						activeLock, "depth", WebDAVUtil.DAV_URI, "Infinity");
+						activeLockElement, "depth", WebDAVUtil.DAV_URI,
+						"Infinity");
 				}
 
 				DocUtil.add(
-					activeLock, "owner", WebDAVUtil.DAV_URI, lock.getOwner());
+					activeLockElement, "owner", WebDAVUtil.DAV_URI,
+					lock.getOwner());
 				DocUtil.add(
-					activeLock, "timeout", WebDAVUtil.DAV_URI,
+					activeLockElement, "timeout", WebDAVUtil.DAV_URI,
 					"Second-" + timeRemaining);
 
 				if (webDavRequest.getUserId() == lock.getUserId()) {
-					Element lockToken =
-						addElement(activeLock, "locktoken", "href");
+					Element lockTokenElement = addElement(
+						activeLockElement, "locktoken", "href");
 
-					lockToken.addText("opaquelocktoken:" + lock.getUuid());
+					lockTokenElement.addText(
+						"opaquelocktoken:" + lock.getUuid());
 				}
 
 				hasSuccess = true;
 			}
 			else {
 				DocUtil.add(
-					failureProp, LOCKDISCOVERY, WebDAVUtil.DAV_URI);
+					failurePropElement, LOCKDISCOVERY, WebDAVUtil.DAV_URI);
 
 				hasFailure = true;
 			}
@@ -273,11 +276,12 @@ public abstract class BasePropMethodImpl implements Method {
 		if (props.contains(RESOURCETYPE_PAIR)) {
 			props.remove(RESOURCETYPE_PAIR);
 
-			Element resourceType =
-				DocUtil.add(successProp, RESOURCETYPE, WebDAVUtil.DAV_URI);
+			Element resourceTypeElement = DocUtil.add(
+				successPropElement, RESOURCETYPE, WebDAVUtil.DAV_URI);
 
 			if (resource.isCollection()) {
-				DocUtil.add(resourceType, "collection", WebDAVUtil.DAV_URI);
+				DocUtil.add(
+					resourceTypeElement, "collection", WebDAVUtil.DAV_URI);
 			}
 
 			hasSuccess = true;
@@ -301,12 +305,12 @@ public abstract class BasePropMethodImpl implements Method {
 			if (customProps.contains(tuple)) {
 				String text = webDavProps.getText(name, prefix, uri);
 
-				DocUtil.add(successProp, name, namespace, text);
+				DocUtil.add(successPropElement, name, namespace, text);
 
 				hasSuccess = true;
 			}
 			else {
-				DocUtil.add(failureProp, name, namespace);
+				DocUtil.add(failurePropElement, name, namespace);
 
 				hasFailure = true;
 			}
@@ -316,35 +320,42 @@ public abstract class BasePropMethodImpl implements Method {
 
 		if (hasSuccess) {
 			DocUtil.add(
-				successStat, "status", WebDAVUtil.DAV_URI, "HTTP/1.1 200 OK");
+				successStatElement, "status", WebDAVUtil.DAV_URI,
+				"HTTP/1.1 200 OK");
 		}
 		else {
-			response.remove(successStat);
+			responseElement.remove(successStatElement);
 		}
 
 		if (!hasSuccess && hasFailure) {
 			DocUtil.add(
-				failureStat, "status", WebDAVUtil.DAV_URI,
+				failureStatElement, "status", WebDAVUtil.DAV_URI,
 				"HTTP/1.1 404 Not Found");
 		}
 		else {
-			response.remove(failureStat);
+			responseElement.remove(failureStatElement);
 		}
 	}
 
-	protected void addResponse(String href, Element multistatus)
+	protected void addResponse(
+			WebDAVStorage storage, WebDAVRequest webDavRequest,
+			Resource resource, Set<Tuple> props, Element multistatusElement,
+			long depth)
 		throws Exception {
 
-		Element response = DocUtil.add(
-			multistatus, "response", WebDAVUtil.DAV_URI);
+		addResponse(webDavRequest, resource, props, multistatusElement);
 
-		DocUtil.add(response, "href", WebDAVUtil.DAV_URI, href);
+		if (resource.isCollection() && (depth != 0)) {
+			Iterator<Resource> itr = storage.getResources(
+				webDavRequest).iterator();
 
-		Element propstat = DocUtil.add(
-			response, "propstat", WebDAVUtil.DAV_URI);
+			while (itr.hasNext()) {
+				resource = itr.next();
 
-		DocUtil.add(
-			propstat, "status", WebDAVUtil.DAV_URI, "HTTP/1.1 404 Not Found");
+				addResponse(
+					webDavRequest, resource, props, multistatusElement);
+			}
+		}
 	}
 
 	protected int writeResponseXML(
@@ -355,20 +366,21 @@ public abstract class BasePropMethodImpl implements Method {
 
 		long depth = WebDAVUtil.getDepth(webDavRequest.getHttpServletRequest());
 
-		Document doc = SAXReaderUtil.createDocument();
+		Document document = SAXReaderUtil.createDocument();
 
-		Element multistatus = SAXReaderUtil.createElement(
+		Element multistatusElement = SAXReaderUtil.createElement(
 			SAXReaderUtil.createQName("multistatus", WebDAVUtil.DAV_URI));
 
-		doc.setRootElement(multistatus);
+		document.setRootElement(multistatusElement);
 
 		Resource resource = storage.getResource(webDavRequest);
 
 		if (resource != null) {
 			addResponse(
-				storage, webDavRequest, resource, props, multistatus, depth);
+				storage, webDavRequest, resource, props, multistatusElement,
+				depth);
 
-			String xml = doc.formattedString(StringPool.FOUR_SPACES);
+			String xml = document.formattedString(StringPool.FOUR_SPACES);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Response XML\n" + xml);
@@ -406,13 +418,13 @@ public abstract class BasePropMethodImpl implements Method {
 		}
 	}
 
-	private final List<Tuple> _ALL_COLLECTION_PROPS = Arrays.asList(
+	private static final List<Tuple> _ALL_COLLECTION_PROPS = Arrays.asList(
 		new Tuple[] {
 			CREATIONDATE_PAIR, DISPLAYNAME_PAIR, GETLASTMODIFIED_PAIR,
 			GETCONTENTTYPE_PAIR, LOCKDISCOVERY_PAIR, RESOURCETYPE_PAIR
 		});
 
-	private final List<Tuple> _ALL_SIMPLE_PROPS = Arrays.asList(
+	private static final List<Tuple> _ALL_SIMPLE_PROPS = Arrays.asList(
 		new Tuple[] {
 			CREATIONDATE_PAIR, DISPLAYNAME_PAIR, GETLASTMODIFIED_PAIR,
 			GETCONTENTTYPE_PAIR, GETCONTENTLENGTH_PAIR, LOCKDISCOVERY_PAIR,
