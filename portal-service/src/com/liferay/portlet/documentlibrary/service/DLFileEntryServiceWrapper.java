@@ -151,6 +151,13 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService {
 		return _dlFileEntryService.getGroupFileEntriesCount(groupId, userId);
 	}
 
+	public com.liferay.portal.model.Lock getFileEntryLock(long groupId,
+		long folderId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntryService.getFileEntryLock(groupId, folderId, name);
+	}
+
 	public boolean hasFileEntryLock(long groupId, long folderId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,

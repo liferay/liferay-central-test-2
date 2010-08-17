@@ -282,6 +282,14 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		}
 	}
 
+	public Lock getFileEntryLock(long groupId, long folderId, String name)
+		throws PortalException, SystemException {
+
+		String lockId = DLUtil.getLockId(groupId, folderId, name);
+
+		return lockLocalService.getLock(DLFileEntry.class.getName(), lockId);
+	}
+
 	public boolean hasFileEntryLock(long groupId, long folderId, String name)
 		throws PortalException, SystemException {
 

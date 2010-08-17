@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.webdav;
 
+import com.liferay.portal.model.Lock;
+
 import java.io.InputStream;
 
 /**
@@ -25,6 +27,8 @@ public interface Resource {
  	public String getHREF();
 
 	public String getDisplayName();
+
+	public Lock getLock();
 
 	public boolean isCollection();
 

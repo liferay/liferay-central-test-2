@@ -583,6 +583,7 @@ Liferay.Service.registerClass(
 		getFoldersFileEntriesCount: true,
 		getGroupFileEntries: true,
 		getGroupFileEntriesCount: true,
+		getFileEntryLock: true,
 		hasFileEntryLock: true,
 		lockFileEntry: true,
 		moveFileEntry: true,

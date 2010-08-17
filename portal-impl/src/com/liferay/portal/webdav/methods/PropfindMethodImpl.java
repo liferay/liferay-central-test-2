@@ -86,7 +86,7 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 
 			Element root = doc.getRootElement();
 
-			if (root.element("allprop") != null) {
+			if (root.element(ALLPROP) != null) {
 
 				// Generate props if <allprop> tag is used. See LEP-6162.
 
@@ -126,15 +126,17 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 	}
 
 	protected Set<Tuple> generateProps(Set<Tuple> props) {
-		props.add(new Tuple("displayname", WebDAVUtil.DAV_URI));
-		props.add(new Tuple("resourcetype", WebDAVUtil.DAV_URI));
-		props.add(new Tuple("getcontenttype", WebDAVUtil.DAV_URI));
-		props.add(new Tuple("getcontentlength", WebDAVUtil.DAV_URI));
-		props.add(new Tuple("getlastmodified", WebDAVUtil.DAV_URI));
-		props.add(new Tuple("lockdiscovery", WebDAVUtil.DAV_URI));
-		props.add(new Tuple("checked-in", WebDAVUtil.DAV_URI));
-		props.add(new Tuple("checked-out", WebDAVUtil.DAV_URI));
-		props.add(new Tuple("version-name", WebDAVUtil.DAV_URI));
+		props.add(DISPLAYNAME_PAIR);
+		props.add(RESOURCETYPE_PAIR);
+		props.add(GETCONTENTTYPE_PAIR);
+		props.add(GETCONTENTLENGTH_PAIR);
+		props.add(GETLASTMODIFIED_PAIR);
+		props.add(LOCKDISCOVERY_PAIR);
+
+		// RFC 3253 Currently Unsupported
+		//props.add(new Tuple("checked-in", WebDAVUtil.DAV_URI));
+		//props.add(new Tuple("checked-out", WebDAVUtil.DAV_URI));
+		//props.add(new Tuple("version-name", WebDAVUtil.DAV_URI));
 
 		return props;
 	}

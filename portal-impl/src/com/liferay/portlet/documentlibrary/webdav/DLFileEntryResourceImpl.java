@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.webdav.BaseResourceImpl;
 import com.liferay.portal.kernel.webdav.WebDAVException;
 import com.liferay.portal.kernel.webdav.WebDAVRequest;
+import com.liferay.portal.model.Lock;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
@@ -51,6 +52,18 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 
 	public boolean isCollection() {
 		return false;
+	}
+
+	public Lock getLock() {
+		try {
+			return DLFileEntryServiceUtil.getFileEntryLock(
+				_fileEntry.getGroupId(), _fileEntry.getFolderId(),
+				_fileEntry.getName());
+		}
+		catch (Exception e) {
+		}
+
+		return null;
 	}
 
 	public boolean isLocked() {

@@ -651,6 +651,45 @@ public class DLFileEntryServiceHttp {
 		}
 	}
 
+	public static com.liferay.portal.model.Lock getFileEntryLock(
+		HttpPrincipal httpPrincipal, long groupId, long folderId,
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
+					"getFileEntryLock", long.class, long.class,
+					java.lang.String.class);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					folderId, name);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.Lock)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static boolean hasFileEntryLock(HttpPrincipal httpPrincipal,
 		long groupId, long folderId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,

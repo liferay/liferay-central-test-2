@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.webdav.Resource;
 import com.liferay.portal.kernel.webdav.WebDAVRequest;
@@ -26,7 +27,9 @@ import com.liferay.portal.kernel.webdav.WebDAVUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Namespace;
+import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.WebDAVProps;
 import com.liferay.portal.service.WebDAVPropsLocalServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -44,6 +47,58 @@ import javax.servlet.http.HttpServletResponse;
  * @author Alexander Chow
  */
 public abstract class BasePropMethodImpl implements Method {
+
+	public static final String ALLPROP = "allprop";
+
+	public static final String CREATIONDATE = "creationdate";
+
+	public static final String LOCKDISCOVERY = "lockdiscovery";
+
+	public static final String DISPLAYNAME = "displayname";
+
+	public static final String GETLASTMODIFIED = "getlastmodified";
+
+	public static final String GETCONTENTTYPE = "getcontenttype";
+
+	public static final String GETCONTENTLENGTH = "getcontentlength";
+
+	public static final String RESOURCETYPE = "resourcetype";
+
+	public static final Tuple ALL_PROPS_PAIR =
+		new Tuple(ALLPROP, WebDAVUtil.DAV_URI);
+
+	public static final Tuple CREATIONDATE_PAIR =
+		new Tuple(CREATIONDATE, WebDAVUtil.DAV_URI);
+
+	public static final Tuple DISPLAYNAME_PAIR =
+		new Tuple(DISPLAYNAME, WebDAVUtil.DAV_URI);
+
+	public static final Tuple GETLASTMODIFIED_PAIR =
+		new Tuple(GETCONTENTLENGTH, WebDAVUtil.DAV_URI);
+
+	public static final Tuple GETCONTENTTYPE_PAIR =
+		new Tuple(GETCONTENTTYPE, WebDAVUtil.DAV_URI);
+
+	public static final Tuple GETCONTENTLENGTH_PAIR =
+		new Tuple(GETLASTMODIFIED, WebDAVUtil.DAV_URI);
+
+	public static final Tuple LOCKDISCOVERY_PAIR =
+		new Tuple(LOCKDISCOVERY, WebDAVUtil.DAV_URI);
+
+	public static final Tuple RESOURCETYPE_PAIR =
+		new Tuple(RESOURCETYPE, WebDAVUtil.DAV_URI);
+
+	protected Element addElement(Element element, String name) {
+		QName qName = SAXReaderUtil.createQName(name, WebDAVUtil.DAV_URI);
+
+		return element.addElement(qName);
+	}
+
+	protected Element addElement(Element element, String name1, String name2) {
+		Element childElement = addElement(element, name1);
+
+		return addElement(childElement, name2);
+	}
 
 	protected void addResponse(
 			WebDAVStorage storage, WebDAVRequest webDavRequest,
@@ -97,8 +152,8 @@ public abstract class BasePropMethodImpl implements Method {
 
 		// Check DAV properties
 
-		if (props.contains(_ALL_PROPS_PAIR)) {
-			props.remove(_ALL_PROPS_PAIR);
+		if (props.contains(ALL_PROPS_PAIR)) {
+			props.remove(ALL_PROPS_PAIR);
 
 			if (resource.isCollection()) {
 				props.addAll(_ALL_COLLECTION_PROPS);
@@ -108,69 +163,118 @@ public abstract class BasePropMethodImpl implements Method {
 			}
 		}
 
-		if (props.contains(_CREATIONDATE_PAIR)) {
-			props.remove(_CREATIONDATE_PAIR);
+		if (props.contains(CREATIONDATE_PAIR)) {
+			props.remove(CREATIONDATE_PAIR);
 
 			DocUtil.add(
-				successProp, _CREATIONDATE, WebDAVUtil.DAV_URI,
+				successProp, CREATIONDATE, WebDAVUtil.DAV_URI,
 				resource.getCreateDate());
 
 			hasSuccess = true;
 		}
 
-		if (props.contains(_DISPLAYNAME_PAIR)) {
-			props.remove(_DISPLAYNAME_PAIR);
+		if (props.contains(DISPLAYNAME_PAIR)) {
+			props.remove(DISPLAYNAME_PAIR);
 
 			DocUtil.add(
-				successProp, _DISPLAYNAME, WebDAVUtil.DAV_URI,
+				successProp, DISPLAYNAME, WebDAVUtil.DAV_URI,
 				resource.getDisplayName());
 
 			hasSuccess = true;
 		}
 
-		if (props.contains(_GETLASTMODIFIED_PAIR)) {
-			props.remove(_GETLASTMODIFIED_PAIR);
+		if (props.contains(GETLASTMODIFIED_PAIR)) {
+			props.remove(GETLASTMODIFIED_PAIR);
 
 			DocUtil.add(
-				successProp, _GETLASTMODIFIED, WebDAVUtil.DAV_URI,
+				successProp, GETLASTMODIFIED, WebDAVUtil.DAV_URI,
 				resource.getModifiedDate());
 
 			hasSuccess = true;
 		}
 
-		if (props.contains(_GETCONTENTTYPE_PAIR)) {
-			props.remove(_GETCONTENTTYPE_PAIR);
+		if (props.contains(GETCONTENTTYPE_PAIR)) {
+			props.remove(GETCONTENTTYPE_PAIR);
 
 			DocUtil.add(
-				successProp, _GETCONTENTTYPE, WebDAVUtil.DAV_URI,
+				successProp, GETCONTENTTYPE, WebDAVUtil.DAV_URI,
 				resource.getContentType());
 
 			hasSuccess = true;
 		}
 
-		if (props.contains(_GETCONTENTLENGTH_PAIR)) {
-			props.remove(_GETCONTENTLENGTH_PAIR);
+		if (props.contains(GETCONTENTLENGTH_PAIR)) {
+			props.remove(GETCONTENTLENGTH_PAIR);
 
 			if (!resource.isCollection()) {
 				DocUtil.add(
-					successProp, _GETCONTENTLENGTH, WebDAVUtil.DAV_URI,
+					successProp, GETCONTENTLENGTH, WebDAVUtil.DAV_URI,
 					resource.getSize());
 
 				hasSuccess = true;
 			}
 			else {
 				DocUtil.add(
-					failureProp, _GETCONTENTLENGTH, WebDAVUtil.DAV_URI);
+					failureProp, GETCONTENTLENGTH, WebDAVUtil.DAV_URI);
 
 				hasFailure = true;
 			}
 		}
 
-		if (props.contains(_RESOURCETYPE_PAIR)) {
-			props.remove(_RESOURCETYPE_PAIR);
+		if (props.contains(LOCKDISCOVERY_PAIR)) {
+			props.remove(LOCKDISCOVERY_PAIR);
+
+			Lock lock = resource.getLock();
+
+			if (lock != null) {
+				long now = System.currentTimeMillis();
+				long timeRemaining =
+					(lock.getExpirationDate().getTime() - now) / Time.SECOND;
+
+				if (timeRemaining <= 0) {
+					timeRemaining = 1;
+				}
+
+				Element lockDiscovery = addElement(successProp, LOCKDISCOVERY);
+
+				Element activeLock = addElement(lockDiscovery, "activelock");
+
+				addElement(activeLock, "locktype", "write");
+				addElement(activeLock, "lockscope", "exclusive");
+
+				if (resource.isCollection()) {
+					DocUtil.add(
+						activeLock, "depth", WebDAVUtil.DAV_URI, "Infinity");
+				}
+
+				DocUtil.add(
+					activeLock, "owner", WebDAVUtil.DAV_URI, lock.getOwner());
+				DocUtil.add(
+					activeLock, "timeout", WebDAVUtil.DAV_URI,
+					"Second-" + timeRemaining);
+
+				if (webDavRequest.getUserId() == lock.getUserId()) {
+					Element lockToken =
+						addElement(activeLock, "locktoken", "href");
+
+					lockToken.addText("opaquelocktoken:" + lock.getUuid());
+				}
+
+				hasSuccess = true;
+			}
+			else {
+				DocUtil.add(
+					failureProp, LOCKDISCOVERY, WebDAVUtil.DAV_URI);
+
+				hasFailure = true;
+			}
+		}
+
+		if (props.contains(RESOURCETYPE_PAIR)) {
+			props.remove(RESOURCETYPE_PAIR);
 
 			Element resourceType =
-				DocUtil.add(successProp, _RESOURCETYPE, WebDAVUtil.DAV_URI);
+				DocUtil.add(successProp, RESOURCETYPE, WebDAVUtil.DAV_URI);
 
 			if (resource.isCollection()) {
 				DocUtil.add(resourceType, "collection", WebDAVUtil.DAV_URI);
@@ -302,51 +406,17 @@ public abstract class BasePropMethodImpl implements Method {
 		}
 	}
 
-	private static final String _ALLPROPS = "allprops";
-
-	private static final String _CREATIONDATE = "creationdate";
-
-	private static final String _DISPLAYNAME = "displayname";
-
-	private static final String _GETLASTMODIFIED = "getlastmodified";
-
-	private static final String _GETCONTENTTYPE = "getcontenttype";
-
-	private static final String _GETCONTENTLENGTH = "getcontentlength";
-
-	private static final String _RESOURCETYPE = "resourcetype";
-
-	private static final Tuple _ALL_PROPS_PAIR =
-		new Tuple(_ALLPROPS, WebDAVUtil.DAV_URI);
-
-	private static final Tuple _CREATIONDATE_PAIR =
-		new Tuple(_CREATIONDATE, WebDAVUtil.DAV_URI);
-
-	private static final Tuple _DISPLAYNAME_PAIR =
-		new Tuple(_DISPLAYNAME, WebDAVUtil.DAV_URI);
-
-	private static final Tuple _GETLASTMODIFIED_PAIR =
-		new Tuple(_GETCONTENTLENGTH, WebDAVUtil.DAV_URI);
-
-	private static final Tuple _GETCONTENTTYPE_PAIR =
-		new Tuple(_GETCONTENTTYPE, WebDAVUtil.DAV_URI);
-
-	private static final Tuple _GETCONTENTLENGTH_PAIR =
-		new Tuple(_GETLASTMODIFIED, WebDAVUtil.DAV_URI);
-
-	private static final Tuple _RESOURCETYPE_PAIR =
-		new Tuple(_RESOURCETYPE, WebDAVUtil.DAV_URI);
-
 	private final List<Tuple> _ALL_COLLECTION_PROPS = Arrays.asList(
 		new Tuple[] {
-			_CREATIONDATE_PAIR, _DISPLAYNAME_PAIR, _GETLASTMODIFIED_PAIR,
-			_GETCONTENTTYPE_PAIR, _RESOURCETYPE_PAIR
+			CREATIONDATE_PAIR, DISPLAYNAME_PAIR, GETLASTMODIFIED_PAIR,
+			GETCONTENTTYPE_PAIR, LOCKDISCOVERY_PAIR, RESOURCETYPE_PAIR
 		});
 
 	private final List<Tuple> _ALL_SIMPLE_PROPS = Arrays.asList(
 		new Tuple[] {
-			_CREATIONDATE_PAIR, _DISPLAYNAME_PAIR, _GETLASTMODIFIED_PAIR,
-			_GETCONTENTTYPE_PAIR, _GETCONTENTLENGTH_PAIR, _RESOURCETYPE_PAIR
+			CREATIONDATE_PAIR, DISPLAYNAME_PAIR, GETLASTMODIFIED_PAIR,
+			GETCONTENTTYPE_PAIR, GETCONTENTLENGTH_PAIR, LOCKDISCOVERY_PAIR,
+			RESOURCETYPE_PAIR
 		});
 
 	private static Log _log = LogFactoryUtil.getLog(BasePropMethodImpl.class);

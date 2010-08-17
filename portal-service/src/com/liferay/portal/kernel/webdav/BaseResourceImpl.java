@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Lock;
 
 import java.io.InputStream;
 
@@ -95,6 +96,10 @@ public class BaseResourceImpl implements Resource {
 
 	public String getDisplayName() {
 		return _displayName;
+	}
+
+	public Lock getLock() {
+		return null;
 	}
 
 	public boolean isCollection() {

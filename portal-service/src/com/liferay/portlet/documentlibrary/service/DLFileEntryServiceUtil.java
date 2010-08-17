@@ -156,6 +156,13 @@ public class DLFileEntryServiceUtil {
 		return getService().getGroupFileEntriesCount(groupId, userId);
 	}
 
+	public static com.liferay.portal.model.Lock getFileEntryLock(long groupId,
+		long folderId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFileEntryLock(groupId, folderId, name);
+	}
+
 	public static boolean hasFileEntryLock(long groupId, long folderId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,
