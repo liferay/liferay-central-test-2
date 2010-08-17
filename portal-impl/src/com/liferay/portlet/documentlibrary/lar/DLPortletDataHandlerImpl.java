@@ -70,10 +70,12 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 	public static void exportFileEntry(
 			PortletDataContext context, Element foldersElement,
 			Element fileEntriesElement, Element fileRanksElement,
-			DLFileEntry fileEntry)
+			DLFileEntry fileEntry, boolean checkDateRange)
 		throws Exception {
 
-		if (!context.isWithinDateRange(fileEntry.getModifiedDate())) {
+		if (checkDateRange &&
+			!context.isWithinDateRange(fileEntry.getModifiedDate())) {
+
 			return;
 		}
 
@@ -498,7 +500,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		for (DLFileEntry fileEntry : fileEntries) {
 			exportFileEntry(
 				context, foldersElement, fileEntriesElement, fileRanksElement,
-				fileEntry);
+				fileEntry, true);
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "shortcuts")) {
@@ -942,7 +944,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		for (DLFileEntry fileEntry : fileEntries) {
 			exportFileEntry(
 				context, foldersElement, fileEntriesElement, fileRanksElement,
-				fileEntry);
+				fileEntry, true);
 		}
 
 		return document.formattedString();

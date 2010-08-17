@@ -195,7 +195,7 @@ public class JournalContentPortletDataHandlerImpl
 			JournalPortletDataHandlerImpl.exportTemplate(
 				context, rootElement, dlFoldersElement, dlFilesElement,
 				dlFileRanksElement, igFoldersElement, igImagesElement,
-				template);
+				template, false);
 		}
 
 		return document.formattedString();

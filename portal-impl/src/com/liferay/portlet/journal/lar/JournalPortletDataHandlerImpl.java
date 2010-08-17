@@ -243,10 +243,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			content = exportDLFileEntries(
 				context, dlFoldersElement, dlFileEntriesElement,
-				dlFileRanksElement, articleElement, content);
+				dlFileRanksElement, articleElement, content, checkDateRange);
 			content = exportIGImages(
 				context, igFoldersElement, igImagesElement, articleElement,
-				content);
+				content, checkDateRange);
 			content = exportLayoutFriendlyURLs(context, content);
 
 			article.setContent(content);
@@ -258,7 +258,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String exportDLFileEntries(
 		PortletDataContext context, Element foldersElement,
 		Element fileEntriesElement, Element fileRanksElement,
-		Element entityElement, String content) {
+		Element entityElement, String content, boolean checkDateRange) {
 
 		StringBuilder sb = new StringBuilder(content);
 
@@ -393,7 +393,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				DLPortletDataHandlerImpl.exportFileEntry(
 					context, foldersElement, fileEntriesElement,
-					fileRanksElement, fileEntry);
+					fileRanksElement, fileEntry, checkDateRange);
 
 				String dlReference = "[$dl-reference=" + path + "$]";
 
@@ -438,7 +438,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	protected static String exportIGImages(
 		PortletDataContext context, Element foldersElement,
-		Element imagesElement, Element entityElement, String content) {
+		Element imagesElement, Element entityElement, String content,
+		boolean checkDateRange) {
 
 		StringBuilder sb = new StringBuilder(content);
 
@@ -555,7 +556,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				igReferenceElement.addAttribute("path", path);
 
 				IGPortletDataHandlerImpl.exportImage(
-					context, foldersElement, imagesElement, image);
+					context, foldersElement, imagesElement, image,
+					checkDateRange);
 
 				String igReference = "[$ig-reference=" + path + "$]";
 
@@ -728,7 +730,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext context, Element templatesElement,
 			Element dlFoldersElement, Element dlFileEntriesElement,
 			Element dlFileRanksElement, Element igFoldersElement,
-			Element igImagesElement, JournalTemplate template)
+			Element igImagesElement, JournalTemplate template,
+			boolean checkDateRange)
 		throws Exception {
 
 		String path = getTemplatePath(context, template);
@@ -765,10 +768,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			content = exportDLFileEntries(
 				context, dlFoldersElement, dlFileEntriesElement,
-				dlFileRanksElement, templateElement, content);
+				dlFileRanksElement, templateElement, content, checkDateRange);
 			content = exportIGImages(
 				context, igFoldersElement, igImagesElement, templateElement,
-				content);
+				content, checkDateRange);
 			content = exportLayoutFriendlyURLs(context, content);
 
 			content = StringUtil.replace(
@@ -1870,7 +1873,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				exportTemplate(
 					context, templatesElement, dlFoldersElement,
 					dlFilesElement, dlFileRanksElement, igFoldersElement,
-					igImagesElement, template);
+					igImagesElement, template, true);
 			}
 		}
 

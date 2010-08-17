@@ -59,10 +59,12 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public static void exportImage(
 			PortletDataContext context, Element foldersElement,
-			Element imagesElement, IGImage image)
+			Element imagesElement, IGImage image, boolean checkDateRange)
 		throws Exception {
 
-		if (!context.isWithinDateRange(image.getModifiedDate())) {
+		if (checkDateRange &&
+			!context.isWithinDateRange(image.getModifiedDate())) {
+
 			return;
 		}
 
@@ -400,7 +402,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			folder.getGroupId(), folder.getFolderId());
 
 		for (IGImage image : images) {
-			exportImage(context, foldersElement, imagesElement, image);
+			exportImage(context, foldersElement, imagesElement, image, true);
 		}
 	}
 
@@ -550,7 +552,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 		for (IGImage image : images) {
-			exportImage(context, null, imagesElement, image);
+			exportImage(context, null, imagesElement, image, true);
 		}
 
 		return document.formattedString();
