@@ -15,6 +15,7 @@
 package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ReflectionUtil;
 
 import java.lang.reflect.Field;
 
@@ -71,9 +72,13 @@ public class EhCacheProvider extends CacheProviderWrapper {
 			FailSafeTimer failSafeTimer = cacheManager.getTimer();
 
 			failSafeTimer.cancel();
+
+			Field timerField = ReflectionUtil.getDeclaredField(
+				CacheManager.class, "cacheManagerTimer");
+			timerField.set(cacheManager, null);
 		}
-		catch (SystemException se) {
-			throw new CacheException(se);
+		catch (Exception e) {
+			throw new CacheException(e);
 		}
 	}
 

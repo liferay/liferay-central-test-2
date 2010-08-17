@@ -19,8 +19,11 @@ import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.PortalCacheManager;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+
+import java.lang.reflect.Field;
 
 import java.net.URL;
 
@@ -47,6 +50,15 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 		FailSafeTimer failSafeTimer = _cacheManager.getTimer();
 
 		failSafeTimer.cancel();
+
+		try {
+			Field timerField = ReflectionUtil.getDeclaredField(
+					CacheManager.class, "cacheManagerTimer");
+			timerField.set(_cacheManager, null);
+		}
+		catch(Exception e) {
+			throw new RuntimeException(e);
+		}
 
 		if (PropsValues.EHCACHE_PORTAL_CACHE_MANAGER_JMX_ENABLED) {
 			_managementService = new ManagementService(
