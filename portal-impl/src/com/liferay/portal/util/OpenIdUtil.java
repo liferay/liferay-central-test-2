@@ -33,9 +33,7 @@ import org.openid4java.consumer.InMemoryNonceVerifier;
 public class OpenIdUtil {
 
 	public static ConsumerManager getConsumerManager() {
-		if (_instance._manager == null) {
-			_instance._initManager();
-		}
+		_instance._initialize();
 
 		return _instance._manager;
 	}
@@ -75,12 +73,15 @@ public class OpenIdUtil {
 		return result;
 	}
 
-	private void _initManager() {
+	private void _initialize() {
 		try {
-			_manager = new ConsumerManager();
+			if (_manager == null) {
+				_manager = new ConsumerManager();
 
-			_manager.setAssociations(new InMemoryConsumerAssociationStore());
-			_manager.setNonceVerifier(new InMemoryNonceVerifier(5000));
+				_manager.setAssociations(
+					new InMemoryConsumerAssociationStore());
+				_manager.setNonceVerifier(new InMemoryNonceVerifier(5000));
+			}
 		}
 		catch (ConsumerException ce) {
 			_log.error(ce.getMessage());
