@@ -65,7 +65,8 @@ public class AggregateClassLoader extends ClassLoader {
 	}
 
 	public AggregateClassLoader(ClassLoader classLoader) {
-		_parentClassLoaderRef = new WeakReference<ClassLoader>(classLoader);
+		_parentClassLoaderReference = new WeakReference<ClassLoader>(
+			classLoader);
 	}
 
 	public void addClassLoader(ClassLoader classLoader) {
@@ -86,7 +87,8 @@ public class AggregateClassLoader extends ClassLoader {
 			}
 		}
 		else {
-			_classLoaderRefs.add(new WeakReference<ClassLoader>(classLoader));
+			_classLoaderReferences.add(
+				new WeakReference<ClassLoader>(classLoader));
 		}
 	}
 
@@ -113,7 +115,8 @@ public class AggregateClassLoader extends ClassLoader {
 
 		AggregateClassLoader aggregateClassLoader = (AggregateClassLoader)obj;
 
-		if (_classLoaderRefs.equals(aggregateClassLoader._classLoaderRefs) &&
+		if (_classLoaderReferences.equals(
+				aggregateClassLoader._classLoaderReferences) &&
 			(((getParent() == null) &&
 			  (aggregateClassLoader.getParent() == null)) ||
 			 ((getParent() != null) &&
@@ -127,25 +130,30 @@ public class AggregateClassLoader extends ClassLoader {
 
 	public List<ClassLoader> getClassLoaders() {
 		List<ClassLoader> classLoaders = new ArrayList<ClassLoader>(
-			_classLoaderRefs.size());
-		Iterator<WeakReference<ClassLoader>> iterator =
-			_classLoaderRefs.iterator();
-		while (iterator.hasNext()) {
-			WeakReference<ClassLoader> weakReference = iterator.next();
+			_classLoaderReferences.size());
+
+		Iterator<WeakReference<ClassLoader>> itr =
+			_classLoaderReferences.iterator();
+
+		while (itr.hasNext()) {
+			WeakReference<ClassLoader> weakReference = itr.next();
+
 			ClassLoader classLoader = weakReference.get();
+
 			if (classLoader == null) {
-				iterator.remove();
+				itr.remove();
 			}
 			else {
 				classLoaders.add(classLoader);
 			}
 		}
+
 		return classLoaders;
 	}
 
 	public int hashCode() {
-		if (_classLoaderRefs != null) {
-			return _classLoaderRefs.hashCode();
+		if (_classLoaderReferences != null) {
+			return _classLoaderReferences.hashCode();
 		}
 		else {
 			return 0;
@@ -180,11 +188,13 @@ public class AggregateClassLoader extends ClassLoader {
 		}
 
 		if (loadedClass == null) {
-			ClassLoader parentClassLoader = _parentClassLoaderRef.get();
+			ClassLoader parentClassLoader = _parentClassLoaderReference.get();
+
 			if (parentClassLoader == null) {
 				throw new ClassNotFoundException(
-					"Parent ClassLoader has been GCed.");
+					"Parent class loader has been garbage collected");
 			}
+
 			loadedClass = _loadClass(parentClassLoader, name, resolve);
 		}
 		else if (resolve) {
@@ -196,11 +206,12 @@ public class AggregateClassLoader extends ClassLoader {
 
 	private static Log _log = LogFactoryUtil.getLog(AggregateClassLoader.class);
 
-	private List<WeakReference<ClassLoader>> _classLoaderRefs =
+	private List<WeakReference<ClassLoader>> _classLoaderReferences =
 		new ArrayList<WeakReference<ClassLoader>>();
 
 	private static Class<?> _findClass(ClassLoader classLoader, String name)
 		throws ClassNotFoundException {
+
 		try {
 			return (Class<?>) _findClassMethod.invoke(classLoader, name);
 		}
@@ -209,14 +220,14 @@ public class AggregateClassLoader extends ClassLoader {
 				"Unable to find class " + name, ite.getTargetException());
 		}
 		catch (Exception e) {
-			throw new ClassNotFoundException(
-				"Unable to find class " + name, e);
+			throw new ClassNotFoundException("Unable to find class " + name, e);
 		}
 	}
 
 	private static Class<?> _loadClass(
 			ClassLoader classLoader, String name, boolean resolve)
 		throws ClassNotFoundException {
+
 		try {
 			return (Class<?>) _loadClassMethod.invoke(
 				classLoader, name, resolve);
@@ -234,6 +245,8 @@ public class AggregateClassLoader extends ClassLoader {
 	private static Method _findClassMethod;
 	private static Method _loadClassMethod;
 
+	private WeakReference<ClassLoader> _parentClassLoaderReference;
+
 	static {
 		try {
 			_findClassMethod = ReflectionUtil.getDeclaredMethod(
@@ -243,11 +256,9 @@ public class AggregateClassLoader extends ClassLoader {
 		}
 		catch (Exception e) {
 			if (_log.isErrorEnabled()) {
-				_log.error("Unable to locate findClass method", e);
+				_log.error("Unable to locate required methods", e);
 			}
 		}
 	}
-
-	private WeakReference<ClassLoader> _parentClassLoaderRef;
 
 }
