@@ -277,8 +277,8 @@ public class RuntimePortletUtil {
 			return StringPool.BLANK;
 		}
 
-		Portlet renderPortlet =
-				(Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
+		Portlet renderPortlet = (Portlet)request.getAttribute(
+			WebKeys.RENDER_PORTLET);
 
 		Boolean renderPortletResource = (Boolean)request.getAttribute(
 			WebKeys.RENDER_PORTLET_RESOURCE);
@@ -316,12 +316,12 @@ public class RuntimePortletUtil {
 			return sb.toString();
 		}
 		finally {
-
 			request.setAttribute(WebKeys.RENDER_PORTLET, renderPortlet);
 
 			if (renderPortletResource == null) {
 				request.removeAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
-			} else {
+			}
+			else {
 				request.setAttribute(
 					WebKeys.RENDER_PORTLET_RESOURCE, renderPortletResource);
 			}
