@@ -472,7 +472,6 @@ public class WikiUtil {
 
 		Matcher matcher = _editPageURLPattern.matcher(content);
 
-		// Escape and prefix URLs in the content
 		content = _convertURLs(editPageURLString, matcher);
 
 		String viewPageURLString = StringPool.BLANK;
@@ -488,8 +487,7 @@ public class WikiUtil {
 
 		matcher = _viewPageURLPattern.matcher(content);
 
-		// Escape and prefix URLs in the content
-		content = this._convertURLs(viewPageURLString, matcher);
+		content = _convertURLs(viewPageURLString, matcher);
 
 		content = _replaceAttachments(
 			content, page.getTitle(), attachmentURLPrefix);
@@ -499,35 +497,24 @@ public class WikiUtil {
 		return content;
 	}
 
-	/**
-	 * A helper function to escape and prefix URLs in the Creole content of our
-	 * wiki page.
-	 *
-	 * @param matchExpression Regex that will match the URL that we need to
-	 * 		escape. The first capture group will be replaced with the escaped
-	 * 		URL.
-	 * @param matcher The matcher to use for finding and replacing URLs.
-	 * @return Content with escaped URLs.
-	 */
-	private String _convertURLs(String matchExpression, Matcher matcher) {
+	private String _convertURLs(String url, Matcher matcher) {
 		StringBuffer sb = new StringBuffer();
-		String replacement = "";
 
 		while (matcher.find()) {
+			String replacement = null;
+
 			if (matcher.groupCount() >= 1) {
-				// If there's a capture group, modify matchExpression
-				// so that we use our escaped capture instead of the original
 				String encodedTitle = HttpUtil.encodeURL(matcher.group(1));
-				replacement = matchExpression.replace("$1", encodedTitle);
-			} else {
-				replacement = matchExpression;
+
+				replacement = url.replace("$1", encodedTitle);
+			}
+			else {
+				replacement = url;
 			}
 
-			// Replace the current match with our escaped version
 			matcher.appendReplacement(sb, replacement);
 		}
 
-		// Append the rest of the string (that wasn't matched)
 		return matcher.appendTail(sb).toString();
 	}
 
@@ -647,8 +634,8 @@ public class WikiUtil {
 	private static WikiUtil _instance = new WikiUtil();
 
 	private static Pattern _editPageURLPattern = Pattern.compile(
-		"\\[\\$BEGIN_PAGE_TITLE_EDIT\\$\\](.*?)"
-		+ "\\[\\$END_PAGE_TITLE_EDIT\\$\\]");
+		"\\[\\$BEGIN_PAGE_TITLE_EDIT\\$\\](.*?)" +
+			"\\[\\$END_PAGE_TITLE_EDIT\\$\\]");
 	private static Pattern _viewPageURLPattern = Pattern.compile(
 		"\\[\\$BEGIN_PAGE_TITLE\\$\\](.*?)\\[\\$END_PAGE_TITLE\\$\\]");
 	private static Pattern _wikiLinkPattern = Pattern.compile(
