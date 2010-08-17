@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Namespace;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.WebDAVProps;
 import com.liferay.portal.service.WebDAVPropsLocalServiceUtil;
 import com.liferay.portal.webdav.InvalidRequestException;
@@ -88,7 +89,13 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 			throw new InvalidRequestException();
 		}
 		else if (resource.isLocked()) {
-			throw new LockException();
+			Lock lock = resource.getLock();
+
+			if ((lock == null) ||
+				!lock.getUuid().equals(webDavRequest.getLockUuid())) {
+
+				throw new LockException();
+			}
 		}
 
 		webDavProps = WebDAVPropsLocalServiceUtil.getWebDAVProps(
@@ -150,47 +157,43 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 
 				list = prop.elements();
 
-				if (list.size() != 1) {
-					throw new InvalidRequestException(
-						"<prop /> should only have one subelement.");
-				}
+				for (Element customProp : list) {
+					String name = customProp.getName();
+					String prefix = customProp.getNamespacePrefix();
+					String uri = customProp.getNamespaceURI();
+					String text = customProp.getText();
 
-				Element customProp = list.get(0);
+					Namespace namespace = null;
 
-				String name = customProp.getName();
-				String prefix = customProp.getNamespacePrefix();
-				String uri = customProp.getNamespaceURI();
-				String text = customProp.getText();
-
-				Namespace namespace = null;
-
-				if (uri.equals(WebDAVUtil.DAV_URI.getURI())) {
-					namespace = WebDAVUtil.DAV_URI;
-				}
-				else if (Validator.isNull(prefix)) {
-					namespace = SAXReaderUtil.createNamespace(uri);
-				}
-				else {
-					namespace = SAXReaderUtil.createNamespace(prefix, uri);
-				}
-
-				if (instruction.getName().equals("set")) {
-					if (Validator.isNull(text)) {
-						webDavProps.addProp(name, prefix, uri);
+					if (uri.equals(WebDAVUtil.DAV_URI.getURI())) {
+						namespace = WebDAVUtil.DAV_URI;
+					}
+					else if (Validator.isNull(prefix)) {
+						namespace = SAXReaderUtil.createNamespace(uri);
 					}
 					else {
-						webDavProps.addProp(name, prefix, uri, text);
+						namespace = SAXReaderUtil.createNamespace(prefix, uri);
 					}
 
-					newProps.add(new Tuple(customProp.getName(), namespace));
-				}
-				else if (instruction.getName().equals("remove")) {
-					webDavProps.removeProp(name, prefix, uri);
-				}
-				else {
-					throw new InvalidRequestException(
-						"Instead of set/remove instruction, received " +
-							instruction);
+					if (instruction.getName().equals("set")) {
+						if (Validator.isNull(text)) {
+							webDavProps.addProp(name, prefix, uri);
+						}
+						else {
+							webDavProps.addProp(name, prefix, uri, text);
+						}
+
+						newProps.add(
+							new Tuple(customProp.getName(), namespace));
+					}
+					else if (instruction.getName().equals("remove")) {
+						webDavProps.removeProp(name, prefix, uri);
+					}
+					else {
+						throw new InvalidRequestException(
+							"Instead of set/remove instruction, received " +
+								instruction);
+					}
 				}
 			}
 
