@@ -55,11 +55,14 @@ public class MailingListMessageListener implements MessageListener {
 			(MailingListRequest)message.getPayload();
 
 		Folder folder = null;
+		Store store = null;
 
 		Message[] messages = null;
 
 		try {
-			folder = getFolder(mailingListRequest);
+			store = getStore(mailingListRequest);
+			
+			folder = getFolder(store);
 
 			messages = folder.getMessages();
 
@@ -83,10 +86,38 @@ public class MailingListMessageListener implements MessageListener {
 				catch (Exception e) {
 				}
 			}
+
+			if ((store != null) && store.isConnected()) {
+				try {
+					store.close();
+				}
+				catch (MessagingException e) {
+				}
+			}
 		}
 	}
 
-	protected Folder getFolder(MailingListRequest mailingListRequest)
+	protected Folder getFolder(Store store)
+		throws Exception {
+
+		store.connect();
+
+		Folder defaultFolder = store.getDefaultFolder();
+
+		Folder[] folders = defaultFolder.list();
+
+		if ((folders != null) && (folders.length == 0)) {
+			throw new MessagingException("Inbox not found");
+		}
+
+		Folder folder = folders[0];
+
+		folder.open(Folder.READ_WRITE);
+
+		return folder;
+	}
+
+	protected Store getStore(MailingListRequest mailingListRequest)
 		throws Exception {
 
 		String protocol = mailingListRequest.getInProtocol();
@@ -111,19 +142,7 @@ public class MailingListMessageListener implements MessageListener {
 
 		store.connect();
 
-		Folder defaultFolder = store.getDefaultFolder();
-
-		Folder[] folders = defaultFolder.list();
-
-		if ((folders != null) && (folders.length == 0)) {
-			throw new MessagingException("Inbox not found");
-		}
-
-		Folder folder = folders[0];
-
-		folder.open(Folder.READ_WRITE);
-
-		return folder;
+		return store;
 	}
 
 	protected void processMessage(
