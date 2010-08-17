@@ -128,40 +128,40 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 						XMLFormatter.toString(xml, StringPool.FOUR_SPACES));
 			}
 
-			Document doc = SAXReaderUtil.read(xml);
+			Document document = SAXReaderUtil.read(xml);
 
-			Element root = doc.getRootElement();
+			Element rootElement = document.getRootElement();
 
-			Iterator<Element> itr = root.elements().iterator();
+			Iterator<Element> itr = rootElement.elements().iterator();
 
 			while (itr.hasNext()) {
-				Element instruction = itr.next();
+				Element instructionElement = itr.next();
 
-				List<Element> list = instruction.elements();
+				List<Element> propElements = instructionElement.elements();
 
-				if (list.size() != 1) {
+				if (propElements.size() != 1) {
 					throw new InvalidRequestException(
 						"There should only be one <prop /> per set or remove " +
 							"instruction.");
 				}
 
-				Element prop = list.get(0);
+				Element propElement = propElements.get(0);
 
-				if (!prop.getName().equals("prop") ||
-					!prop.getNamespaceURI().equals(
+				if (!propElement.getName().equals("prop") ||
+					!propElement.getNamespaceURI().equals(
 						WebDAVUtil.DAV_URI.getURI())) {
 
 					throw new InvalidRequestException(
-						"Invalid <prop /> element " + prop);
+						"Invalid <prop /> element " + propElement);
 				}
 
-				list = prop.elements();
+				List<Element> customPropElements = propElement.elements();
 
-				for (Element customProp : list) {
-					String name = customProp.getName();
-					String prefix = customProp.getNamespacePrefix();
-					String uri = customProp.getNamespaceURI();
-					String text = customProp.getText();
+				for (Element customPropElement : customPropElements) {
+					String name = customPropElement.getName();
+					String prefix = customPropElement.getNamespacePrefix();
+					String uri = customPropElement.getNamespaceURI();
+					String text = customPropElement.getText();
 
 					Namespace namespace = null;
 
@@ -175,7 +175,7 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 						namespace = SAXReaderUtil.createNamespace(prefix, uri);
 					}
 
-					if (instruction.getName().equals("set")) {
+					if (instructionElement.getName().equals("set")) {
 						if (Validator.isNull(text)) {
 							webDavProps.addProp(name, prefix, uri);
 						}
@@ -184,15 +184,15 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 						}
 
 						newProps.add(
-							new Tuple(customProp.getName(), namespace));
+							new Tuple(customPropElement.getName(), namespace));
 					}
-					else if (instruction.getName().equals("remove")) {
+					else if (instructionElement.getName().equals("remove")) {
 						webDavProps.removeProp(name, prefix, uri);
 					}
 					else {
 						throw new InvalidRequestException(
 							"Instead of set/remove instruction, received " +
-								instruction);
+								instructionElement);
 					}
 				}
 			}
