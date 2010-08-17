@@ -73,9 +73,10 @@ public class EhCacheProvider extends CacheProviderWrapper {
 
 			failSafeTimer.cancel();
 
-			Field timerField = ReflectionUtil.getDeclaredField(
+			Field cacheManagerTimerField = ReflectionUtil.getDeclaredField(
 				CacheManager.class, "cacheManagerTimer");
-			timerField.set(cacheManager, null);
+
+			cacheManagerTimerField.set(cacheManager, null);
 		}
 		catch (Exception e) {
 			throw new CacheException(e);

@@ -52,11 +52,12 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 		failSafeTimer.cancel();
 
 		try {
-			Field timerField = ReflectionUtil.getDeclaredField(
-					CacheManager.class, "cacheManagerTimer");
-			timerField.set(_cacheManager, null);
+			Field cacheManagerTimerField = ReflectionUtil.getDeclaredField(
+				CacheManager.class, "cacheManagerTimer");
+
+			cacheManagerTimerField.set(_cacheManager, null);
 		}
-		catch(Exception e) {
+		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 
