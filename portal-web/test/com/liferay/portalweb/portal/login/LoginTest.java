@@ -155,40 +155,5 @@ public class LoginTest extends BaseTestCase {
 
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//div/div[4]/div/ul/li[2]/a/span[1]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//div/div[4]/div/ul/li[2]/a/span[1]");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//nav/ul/li[1]/a/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
 	}
 }
