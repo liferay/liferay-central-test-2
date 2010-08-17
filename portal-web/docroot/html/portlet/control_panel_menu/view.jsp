@@ -139,7 +139,7 @@
 					</c:if>
 
 					<c:if test="<%= !manageableOrganizations.isEmpty() %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="communitiesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "organizations") %>'>
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="organizationsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "organizations") %>'>
 							<ul>
 
 								<%
