@@ -273,17 +273,17 @@ public class LayoutAction extends Action {
 		if (Validator.isNull(forwardURL)) {
 			forwardURL =
 				themeDisplay.getPathMain() + "/portal/layout?p_l_id=" + plid;
+		}
 
-			if (Validator.isNotNull(themeDisplay.getDoAsUserId())) {
-				forwardURL = HttpUtil.addParameter(
-					forwardURL, "doAsUserId", themeDisplay.getDoAsUserId());
-			}
+		if (Validator.isNotNull(themeDisplay.getDoAsUserId())) {
+			forwardURL = HttpUtil.addParameter(
+				forwardURL, "doAsUserId", themeDisplay.getDoAsUserId());
+		}
 
-			if (Validator.isNotNull(themeDisplay.getDoAsUserLanguageId())) {
-				forwardURL = HttpUtil.addParameter(
-					forwardURL, "doAsUserLanguageId",
-					themeDisplay.getDoAsUserLanguageId());
-			}
+		if (Validator.isNotNull(themeDisplay.getDoAsUserLanguageId())) {
+			forwardURL = HttpUtil.addParameter(
+				forwardURL, "doAsUserLanguageId",
+				themeDisplay.getDoAsUserLanguageId());
 		}
 
 		if (_log.isDebugEnabled()) {
