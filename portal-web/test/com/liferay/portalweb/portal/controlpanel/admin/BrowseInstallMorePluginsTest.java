@@ -50,12 +50,10 @@ public class BrowseInstallMorePluginsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Portlet Plugins", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("No portlet plugins were found."),
-			selenium.getText("//form/div[2]"));
+		assertTrue(selenium.isElementPresent("//form/div[2]"));
 		selenium.clickAt("link=Theme Plugins", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("No theme plugins were found."),
-			selenium.getText("//form/div[2]"));
+		assertTrue(selenium.isElementPresent("//form/div[2]"));
 		selenium.clickAt("link=Layout Template Plugins",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -64,11 +62,9 @@ public class BrowseInstallMorePluginsTest extends BaseTestCase {
 			selenium.getText("//form/div[2]"));
 		selenium.clickAt("link=Hook Plugins", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("No hook plugins were found."),
-			selenium.getText("//form/div[2]"));
+		assertTrue(selenium.isElementPresent("//form/div[2]"));
 		selenium.clickAt("link=Web Plugins", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("No web plugins were found."),
-			selenium.getText("//form/div[2]"));
+		assertTrue(selenium.isElementPresent("//form/div[2]"));
 	}
 }
