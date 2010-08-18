@@ -60,7 +60,9 @@ boolean modePrint = layoutTypePortlet.hasModePrintPortletId(portletId);
 InvokerPortlet invokerPortlet = null;
 
 try {
-	invokerPortlet = PortletInstanceFactoryUtil.create(portlet, application);
+	if (portlet.isReady()) {
+		invokerPortlet = PortletInstanceFactoryUtil.create(portlet, application);
+	}
 }
 /*catch (UnavailableException ue) {
 	ue.printStackTrace();
@@ -686,7 +688,7 @@ if ((invokerPortlet != null) && invokerPortlet.isStrutsPortlet()) {
 boolean portletException = false;
 Boolean portletVisibility = null;
 
-if (portlet.isActive() && access && supportsMimeType) {
+if (portlet.isActive() && portlet.isReady() && access && supportsMimeType) {
 	try {
 		invokerPortlet.render(renderRequestImpl, renderResponseImpl);
 
@@ -853,6 +855,10 @@ if ((layout.isTypePanel() || layout.isTypeControlPanel()) && !portletDisplay.get
 			renderRequestImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringResponse.getString());
 
 			String portletContent = StringPool.BLANK;
+
+			if (!portlet.isReady()) {
+				portletContent = "/portal/portlet_not_ready.jsp";
+			}
 
 			if (portletException) {
 				portletContent = "/portal/portlet_error.jsp";

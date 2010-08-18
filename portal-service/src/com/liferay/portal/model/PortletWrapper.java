@@ -907,6 +907,18 @@ public class PortletWrapper implements Portlet {
 		_portlet.setSystem(system);
 	}
 
+	public boolean getReady() {
+		return _portlet.getReady();
+	}
+
+	public boolean isReady() {
+		return _portlet.isReady();
+	}
+
+	public void setReady(boolean ready) {
+		_portlet.setReady(ready);
+	}
+
 	public boolean getInclude() {
 		return _portlet.getInclude();
 	}

@@ -353,6 +353,16 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			}
 		}
 
+		// Ready
+
+		for (Portlet portlet : portlets) {
+			boolean ready = GetterUtil.getBoolean(
+				servletContext.getInitParameter(
+					"portlets-ready-by-default"), true);
+
+			portlet.setReady(ready);
+		}
+
 		// ClpMessageListener
 
 		registerClpMessageListeners(servletContext, portletClassLoader);

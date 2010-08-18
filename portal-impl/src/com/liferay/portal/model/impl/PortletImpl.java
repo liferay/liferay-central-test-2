@@ -72,6 +72,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.PortletMode;
 import javax.portlet.WindowState;
@@ -2361,6 +2362,40 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
+	 * Returns <code>true</code> if the portlet is ready to be used.
+	 *
+	 * @return <code>true</code> if the portlet is ready to be used
+	 */
+	public boolean getReady() {
+		return isReady();
+	}
+
+	/**
+	 * Returns <code>true</code> if the portlet is ready to be used.
+	 *
+	 * @return <code>true</code> if the portlet is ready to be used
+	 */
+	public boolean isReady() {
+		Boolean ready = _readyMap.get(getRootPortletId());
+
+		if (ready == null) {
+			return false;
+		}
+		else {
+			return ready;
+		}
+	}
+
+	/**
+	 * Set to <code>true</code> if the portlet is ready to be used.
+	 *
+	 * @param system boolean value for whether the portlet is ready to be used
+	 */
+	public void setReady(boolean ready) {
+		_readyMap.put(getRootPortletId(), ready);
+	}
+
+	/**
 	 * Gets the init parameters of the portlet.
 	 *
 	 * @return init parameters of the portlet
@@ -3029,6 +3064,12 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Log instance for this class.
 	 */
 	private static Log _log = LogFactoryUtil.getLog(PortletImpl.class);
+
+	/**
+	 * Map of the ready states of all portlets keyed by their root portlet id.
+	 */
+	private static Map<String, Boolean> _readyMap =
+		new ConcurrentHashMap<String, Boolean>();
 
 	/**
 	 * Package this plugin belongs to.

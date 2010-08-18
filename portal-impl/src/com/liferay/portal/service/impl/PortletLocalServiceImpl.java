@@ -1380,6 +1380,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			portletElement.elementText("include"),
 			portletModel.isInclude()));
 
+		if (Validator.isNull(servletContextName)) {
+			portletModel.setReady(true);
+		}
+
 		if (!portletModel.isAjaxable() &&
 			(portletModel.getRenderWeight() < 1)) {
 

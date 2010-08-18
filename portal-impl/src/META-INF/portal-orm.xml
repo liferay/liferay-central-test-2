@@ -2851,6 +2851,7 @@
 			<transient name="processingEvents" />
 			<transient name="publicRenderParameters" />
 			<transient name="publishingEvents" />
+			<transient name="ready" />
 			<transient name="remoteable" />
 			<transient name="renderWeight" />
 			<transient name="resourceBundle" />

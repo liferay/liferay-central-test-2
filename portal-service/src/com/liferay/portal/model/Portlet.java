@@ -1545,6 +1545,27 @@ public interface Portlet extends PortletModel {
 	public void setSystem(boolean system);
 
 	/**
+	* Returns <code>true</code> if the portlet is ready to be used.
+	*
+	* @return <code>true</code> if the portlet is ready to be used
+	*/
+	public boolean getReady();
+
+	/**
+	* Returns <code>true</code> if the portlet is ready to be used.
+	*
+	* @return <code>true</code> if the portlet is ready to be used
+	*/
+	public boolean isReady();
+
+	/**
+	* Set to <code>true</code> if the portlet is ready to be used.
+	*
+	* @param system boolean value for whether the portlet is ready to be used
+	*/
+	public void setReady(boolean ready);
+
+	/**
 	* Returns <code>true</code> to include the portlet and make it available to
 	* be made active.
 	*
