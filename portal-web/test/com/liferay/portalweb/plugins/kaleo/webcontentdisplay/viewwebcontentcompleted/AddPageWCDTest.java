@@ -23,7 +23,9 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AddPageWCDTest extends BaseTestCase {
 	public void testAddPageWCD() throws Exception {
 		selenium.open("/web/guest/home/");
-		Thread.sleep(5000);
+		selenium.clickAt("main-content", RuntimeVariables.replace(""));
+		selenium.clickAt("dockbar", RuntimeVariables.replace(""));
+		selenium.clickAt("navigation", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

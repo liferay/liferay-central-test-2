@@ -28,6 +28,9 @@ public class TearDownTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
+				selenium.clickAt("main-content", RuntimeVariables.replace(""));
+				selenium.clickAt("navigation", RuntimeVariables.replace(""));
+				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -47,8 +50,11 @@ public class TearDownTest extends BaseTestCase {
 				}
 
 				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Manage Pages"));
 				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("main-content", RuntimeVariables.replace(""));
+				selenium.clickAt("navigation", RuntimeVariables.replace(""));
+				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -77,9 +83,28 @@ public class TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li/div/div[1]", RuntimeVariables.replace(""));
+				selenium.clickAt("//li/div/div[1]",
+					RuntimeVariables.replace("Drop Down Arrow"));
 
 			case 2:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (RuntimeVariables.replace("Welcome")
+												.equals(selenium.getText(
+										"//li/ul/li[1]/div/div[3]/a"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
 
 				boolean page1Present = selenium.isElementPresent(
 						"//li[2]/div/div[3]/a");
@@ -90,11 +115,10 @@ public class TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li[2]/div/div[3]/a",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace("//li[2]/div/div[3]/a"));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//ul[2]/li[1]/span/span/a",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("//td[2]/ul/li[1]/span/span/a",
+					RuntimeVariables.replace("Page"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
@@ -113,11 +137,10 @@ public class TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li[2]/div/div[3]/a",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace("//li[2]/div/div[3]/a"));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//ul[2]/li[1]/span/span/a",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("//td[2]/ul/li[1]/span/span/a",
+					RuntimeVariables.replace("Page"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
@@ -136,11 +159,10 @@ public class TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li[2]/div/div[3]/a",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace("//li[2]/div/div[3]/a"));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//ul[2]/li[1]/span/span/a",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("//td[2]/ul/li[1]/span/span/a",
+					RuntimeVariables.replace("Page"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
@@ -159,11 +181,10 @@ public class TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li[2]/div/div[3]/a",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace("//li[2]/div/div[3]/a"));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//ul[2]/li[1]/span/span/a",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("//td[2]/ul/li[1]/span/span/a",
+					RuntimeVariables.replace("Page"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
@@ -182,11 +203,10 @@ public class TearDownTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li[2]/div/div[3]/a",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace("//li[2]/div/div[3]/a"));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//ul[2]/li[1]/span/span/a",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("//td[2]/ul/li[1]/span/span/a",
+					RuntimeVariables.replace("Page"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));

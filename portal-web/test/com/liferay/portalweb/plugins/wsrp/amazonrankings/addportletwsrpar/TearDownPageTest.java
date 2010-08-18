@@ -28,6 +28,9 @@ public class TearDownPageTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
+				selenium.clickAt("main-content", RuntimeVariables.replace(""));
+				selenium.clickAt("navigation", RuntimeVariables.replace(""));
+				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -47,8 +50,11 @@ public class TearDownPageTest extends BaseTestCase {
 				}
 
 				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
-					RuntimeVariables.replace("Manage Page"));
+					RuntimeVariables.replace("Manage Pages"));
 				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("main-content", RuntimeVariables.replace(""));
+				selenium.clickAt("navigation", RuntimeVariables.replace(""));
+				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -88,7 +94,9 @@ public class TearDownPageTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("//li/ul/li/div/div[3]/a")) {
+						if (RuntimeVariables.replace("Welcome")
+												.equals(selenium.getText(
+										"//li/ul/li[1]/div/div[3]/a"))) {
 							break;
 						}
 					}
