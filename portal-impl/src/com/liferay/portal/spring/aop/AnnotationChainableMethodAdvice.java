@@ -44,11 +44,12 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 
 	public void setBeanFactory(BeanFactory beanFactory) {
 		if (beanFactory == null) {
-			_annotationsMapRegistry.remove(_beanFactory);
+			_beanFactoryAnnotations.remove(_beanFactory);
 		}
 		else {
 			_beanFactory = beanFactory;
-			_annotationsMapRegistry.putIfAbsent(
+
+			_beanFactoryAnnotations.putIfAbsent(
 				_beanFactory,
 				new ConcurrentHashMap<MethodTargetClassKey, Annotation[]>());
 		}
@@ -72,9 +73,9 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 
 	protected T findAnnotation(MethodTargetClassKey methodTargetClassKey){
 		Map<MethodTargetClassKey, Annotation[]> annotationsMap =
-			_annotationsMapRegistry.get(_beanFactory);
-		Annotation[] annotations = annotationsMap.get(
-			methodTargetClassKey);
+			_beanFactoryAnnotations.get(_beanFactory);
+
+		Annotation[] annotations = annotationsMap.get(methodTargetClassKey);
 
 		if (annotations != null) {
 			return getAnnotation(annotations);
@@ -111,11 +112,11 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 		return _nullAnnotation;
 	}
 
-	private static ConcurrentMap<
-		BeanFactory, Map<MethodTargetClassKey, Annotation[]>>
-			_annotationsMapRegistry =
-				new ConcurrentHashMap<
-					BeanFactory, Map<MethodTargetClassKey, Annotation[]>>();
+	private static ConcurrentMap
+		<BeanFactory, Map<MethodTargetClassKey, Annotation[]>>
+			_beanFactoryAnnotations =
+				new ConcurrentHashMap
+					<BeanFactory, Map<MethodTargetClassKey, Annotation[]>>();
 	private static Annotation[] _emptyAnnotations = new Annotation[0];
 
 	private Class<? extends Annotation> _annotationType;
