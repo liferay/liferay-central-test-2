@@ -45,6 +45,8 @@ import javax.portlet.RenderResponse;
 public class AlloyPortlet extends GenericPortlet {
 
 	public void init(PortletConfig portletConfig) throws PortletException {
+		super.init(portletConfig);
+
 		LiferayPortletConfig liferayPortletConfig =
 			(LiferayPortletConfig)portletConfig;
 
@@ -58,8 +60,6 @@ public class AlloyPortlet extends GenericPortlet {
 		_defaultRouteParameters = new HashMap<String, String>();
 
 		router.urlToParameters("GET/", _defaultRouteParameters);
-
-		super.init(portletConfig);
 	}
 
 	public void processAction(
