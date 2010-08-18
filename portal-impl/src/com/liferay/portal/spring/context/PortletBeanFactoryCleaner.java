@@ -29,7 +29,6 @@ import org.springframework.aop.ClassFilter;
 import org.springframework.aop.Pointcut;
 import org.springframework.aop.aspectj.AspectJExpressionPointcut;
 import org.springframework.aop.aspectj.AspectJPointcutAdvisor;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.ListableBeanFactory;
@@ -37,86 +36,103 @@ import org.springframework.beans.factory.ListableBeanFactory;
 /**
  * @author Shuyang Zhou
  */
-public class PortletBeanFactoryCleanUpHook implements BeanFactoryAware {
+public class PortletBeanFactoryCleaner implements BeanFactoryAware {
+
+	public static void readBeans() {
+		if (_beanFactory == null) {
+			throw new IllegalStateException("BeanFactory is null");
+		}
+
+		if (!(_beanFactory instanceof ListableBeanFactory)) {
+			return;
+		}
+
+		ListableBeanFactory listableBeanFactory =
+			(ListableBeanFactory)_beanFactory;
+
+		String[] names = listableBeanFactory.getBeanDefinitionNames();
+
+		for (String name : names) {
+			try {
+				_readBean(listableBeanFactory, name);
+			}
+			catch (Exception e) {
+			}
+		}
+	}
 
 	public void destroy() {
-		for(BeanFactoryAware beanFactoryAware : _beanFactoryAwares) {
+		for (BeanFactoryAware beanFactoryAware : _beanFactoryAwares) {
 			try {
 				beanFactoryAware.setBeanFactory(null);
 			}
-			catch(Throwable	t) {
+			catch (Exception e) {
 			}
 		}
+
 		_beanFactoryAwares.clear();
 
-		for(AspectJExpressionPointcut aspectJExpressionPointcut :
-			_aspectJExpressionPointcuts) {
+		for (AspectJExpressionPointcut aspectJExpressionPointcut :
+				_aspectJExpressionPointcuts) {
+
 			try {
 				Map<Method, ShadowMatch> shadowMatchCache =
 					(Map<Method, ShadowMatch>)_shadowMatchCacheField.get(
 						aspectJExpressionPointcut);
+
 				shadowMatchCache.clear();
 			}
-			catch(Exception e) {
+			catch (Exception e) {
 			}
 		}
+
 		_aspectJExpressionPointcuts.clear();
 	}
 
-	public static void hookUp() {
-		if (_beanFactory == null) {
-			throw new IllegalStateException("BeanFactory is null");
-		}
-		if (_beanFactory instanceof ListableBeanFactory) {
-			ListableBeanFactory listableBeanFactory =
-				(ListableBeanFactory) _beanFactory;
-			String[] names = listableBeanFactory.getBeanDefinitionNames();
-			for(String name : names) {
-				try {
-					Object bean = listableBeanFactory.getBean(name);
-					if (bean instanceof BeanFactoryAware) {
-						_beanFactoryAwares.add((BeanFactoryAware)bean);
-					}
-					else if (bean instanceof AspectJPointcutAdvisor) {
-						AspectJPointcutAdvisor aspectJPointcutAdvisor =
-							(AspectJPointcutAdvisor)bean;
-						Pointcut pointcut =
-							aspectJPointcutAdvisor.getPointcut();
-						ClassFilter classFilter = pointcut.getClassFilter();
-						if (classFilter instanceof AspectJExpressionPointcut) {
-							AspectJExpressionPointcut aspectJExpressionPointcut
-								= (AspectJExpressionPointcut)classFilter;
-							_beanFactoryAwares.add(aspectJExpressionPointcut);
-							_aspectJExpressionPointcuts.add(
-								aspectJExpressionPointcut);
-						}
-					}
-				}
-				catch(Exception e) {
-				}
-			}
-		}
-	}
-
-	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+	public void setBeanFactory(BeanFactory beanFactory) {
 		_beanFactory = beanFactory;
 	}
 
-	private static BeanFactory _beanFactory;
+	private static void _readBean(
+			ListableBeanFactory listableBeanFactory, String name)
+		throws Exception {
 
-	private static Set<BeanFactoryAware> _beanFactoryAwares =
-		new HashSet<BeanFactoryAware>();
+		Object bean = listableBeanFactory.getBean(name);
+
+		if (bean instanceof AspectJPointcutAdvisor) {
+			AspectJPointcutAdvisor aspectJPointcutAdvisor =
+				(AspectJPointcutAdvisor)bean;
+
+			Pointcut pointcut = aspectJPointcutAdvisor.getPointcut();
+
+			ClassFilter classFilter = pointcut.getClassFilter();
+
+			if (classFilter instanceof AspectJExpressionPointcut) {
+				AspectJExpressionPointcut aspectJExpressionPointcut =
+					(AspectJExpressionPointcut)classFilter;
+
+				_beanFactoryAwares.add(aspectJExpressionPointcut);
+				_aspectJExpressionPointcuts.add(aspectJExpressionPointcut);
+			}
+		}
+		else if (bean instanceof BeanFactoryAware) {
+			_beanFactoryAwares.add((BeanFactoryAware)bean);
+		}
+	}
 
 	private static Set<AspectJExpressionPointcut> _aspectJExpressionPointcuts =
 		new HashSet<AspectJExpressionPointcut>();
-
+	private static BeanFactory _beanFactory;
+	private static Set<BeanFactoryAware> _beanFactoryAwares =
+		new HashSet<BeanFactoryAware>();
 	private static Field _shadowMatchCacheField;
 
 	static {
 		try {
 			_shadowMatchCacheField = ReflectionUtil.getDeclaredField(
 				AspectJExpressionPointcut.class, "shadowMatchCache");
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			throw new ExceptionInInitializerError(e);
 		}
 	}
