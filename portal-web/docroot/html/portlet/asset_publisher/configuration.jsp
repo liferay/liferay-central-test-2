@@ -420,13 +420,13 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 						<aui:fieldset>
 							<span class="aui-field-row">
 								<aui:select inlineField="<%= true %>" inlineLabel="left" label="order-by" name="orderByColumn1">
-									<aui:option label="title" selected='<%= orderByColumn2.equals("title") %>' />
-									<aui:option label="create-date" selected='<%= orderByColumn2.equals("createDate") %>' value="createDate" />
-									<aui:option label="modified-date" selected='<%= orderByColumn2.equals("modifiedDate") %>' value="modifiedDate" />
-									<aui:option label="publish-date" selected='<%= orderByColumn2.equals("publishDate") %>' value="publishDate" />
-									<aui:option label="expiration-date" selected='<%= orderByColumn2.equals("expirationDate") %>' value="expirationDate" />
-									<aui:option label="priority" selected='<%= orderByColumn2.equals("priority") %>'><liferay-ui:message key="priority" /></aui:option>
-									<aui:option label="view-count" selected='<%= orderByColumn2.equals("viewCount") %>' value="viewCount" />
+									<aui:option label="title" selected='<%= orderByColumn1.equals("title") %>' />
+									<aui:option label="create-date" selected='<%= orderByColumn1.equals("createDate") %>' value="createDate" />
+									<aui:option label="modified-date" selected='<%= orderByColumn1.equals("modifiedDate") %>' value="modifiedDate" />
+									<aui:option label="publish-date" selected='<%= orderByColumn1.equals("publishDate") %>' value="publishDate" />
+									<aui:option label="expiration-date" selected='<%= orderByColumn1.equals("expirationDate") %>' value="expirationDate" />
+									<aui:option label="priority" selected='<%= orderByColumn1.equals("priority") %>'><liferay-ui:message key="priority" /></aui:option>
+									<aui:option label="view-count" selected='<%= orderByColumn1.equals("viewCount") %>' value="viewCount" />
 								</aui:select>
 
 								<aui:select inlineField="<%= true %>" label="" name="orderByType1">
