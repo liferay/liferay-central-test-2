@@ -97,7 +97,7 @@ public class MBMessagePermission {
 
 			if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
 				if (!MBCategoryPermission.contains(
-					permissionChecker, category, ActionKeys.VIEW)) {
+						permissionChecker, category, ActionKeys.VIEW)) {
 
 					return false;
 				}
