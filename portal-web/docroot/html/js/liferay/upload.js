@@ -504,7 +504,6 @@ AUI().add(
 					container.append(instance._fileList);
 
 					uploadTarget.append(instance._browseButton);
-					uploadTarget.append(instance._buttonPlaceHolder);
 					uploadTarget.append(instance._uploadButton);
 					uploadTarget.append(instance._cancelButton);
 
@@ -516,26 +515,47 @@ AUI().add(
 					);
 
 					if (instance._overlayButton) {
-						var buttonWidth = instance._browseButton.get('offsetWidth');
-						var buttonHeight = instance._browseButton.get('offsetHeight');
+						var ie6 = Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() < 7;
+						var browseButton = instance._browseButton;
+						var movieContentBox = instance._movieContentBox;
 
-						var flashObj = A.one('#' + instance._uploader.movieName);
+						var regionStyles = {};
 
-						if (flashObj) {
-							var buttonOffset = instance._browseButton.getXY();
-							var left = buttonOffset[0] + 'px';
-							var top = buttonOffset[1] + 'px';
+						var calculateOffset = function() {
+							var buttonWidth = browseButton.get('offsetWidth');
+							var buttonHeight = browseButton.get('offsetHeight');
 
-							flashObj.setStyles(
-								{
-									left: left,
-									top: top,
-									zIndex: 100000
-								}
-							);
+							var buttonOffset = browseButton.getXY();
+							var deltaX = 0;
+							var deltaY = 0;
+
+							if (!ie6) {
+								deltaX = A.DOM.docScrollX();
+								deltaY = A.DOM.docScrollY();
+							}
+
+							regionStyles.left = buttonOffset[0] - deltaX;
+							regionStyles.top = buttonOffset[1] - deltaY;
+
+							movieContentBox.setStyles(regionStyles);
+
+							instance._uploader.setButtonDimensions(buttonWidth, buttonHeight);
+						};
+
+						calculateOffset();
+
+						var calculateTask = new A.DelayedTask(calculateOffset);
+
+						if (!ie6) {
+							var onWindowChange = function(event) {
+								calculateTask.delay(200);
+							};
+
+							var win = A.getWin();
+
+							win.on('scroll', onWindowChange);
+							win.on('resize', onWindowChange);
 						}
-
-						instance._uploader.setButtonDimensions(buttonWidth, buttonHeight);
 					}
 					else {
 						instance._browseButton.on(
@@ -639,18 +659,15 @@ AUI().add(
 					instance._allowedFileTypes = fileTypes.join(';');
 				}
 
-				instance._buttonPlaceHolder = A.Node.create('<div id="' + instance._buttonPlaceHolderId + '"></div>');
-
-				A.getBody().prepend(instance._buttonPlaceHolder);
-
 				instance._uploader = new SWFUpload(
 					{
 						auto_upload: false,
 						browse_link_class: 'browse-button liferay-button',
 						browse_link_innerhtml: instance._browseText,
+						button_cursor: SWFUpload.CURSOR.HAND,
 						button_height: instance._buttonHeight,
 						button_image_url: instance._buttonUrl,
-						button_placeholder_id: instance._buttonPlaceHolderId,
+						button_placeholder_id: '',
 						button_text: instance._buttonText,
 						button_text_left_padding: 0,
 						button_text_style: '',
@@ -682,17 +699,28 @@ AUI().add(
 					}
 				);
 
+				instance._movieBoundingBox = A.Node.create('<div class="lfr-upload-movie"><div class="lfr-upload-movie-content"></div></div>');
+				instance._movieContentBox = instance._movieBoundingBox.get('firstChild');
+
+				var movieBoundingBox = instance._movieBoundingBox;
+				var movieContentBox = instance._movieContentBox;
+
+				A.getBody().prepend(movieBoundingBox);
+
 				var movieElement = instance._uploader.getMovieElement();
 
 				if (movieElement) {
-					movieElement.style.position = 'fixed';
+					movieContentBox.appendChild(movieElement);
 
-					if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() < 7) {
-						movieElement.style.position = 'absolute';
+					var defaultStyles = {
+						zIndex: 100000
+					};
+
+					if (!(Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() < 7)) {
+						defaultStyles.top = 0;
 					}
 
-					movieElement.style.top = '0';
-					movieElement.style.zIndex = '100000';
+					movieContentBox.setStyles(defaultStyles);
 				}
 
 				window[instance._swfUpload] = instance._uploader;

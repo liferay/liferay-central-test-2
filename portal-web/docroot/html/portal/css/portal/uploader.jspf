@@ -120,3 +120,25 @@
 .lfr-upload-container .file-uploading .progress-bar {
 	display: block;
 }
+
+.lfr-upload-movie {
+	bottom: 0px;
+	height: 1px;
+	left: 0pt;
+	position: absolute;
+	width: 1px;
+	z-index: 100000;
+}
+
+.lfr-upload-movie-content {
+	overflow: hidden;
+	position: fixed;
+}
+
+.ie6 .lfr-upload-movie {
+	position: static;
+}
+
+.ie6 .lfr-upload-movie-content {
+	position: absolute;
+}
