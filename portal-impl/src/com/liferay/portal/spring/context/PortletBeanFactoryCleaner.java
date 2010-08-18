@@ -14,6 +14,8 @@
 
 package com.liferay.portal.spring.context;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 
 import java.lang.reflect.Field;
@@ -40,7 +42,11 @@ public class PortletBeanFactoryCleaner implements BeanFactoryAware {
 
 	public static void readBeans() {
 		if (_beanFactory == null) {
-			throw new IllegalStateException("BeanFactory is null");
+			if (_log.isWarnEnabled()) {
+				_log.warn("BeanFactory is null");
+			}
+
+			return;
 		}
 
 		if (!(_beanFactory instanceof ListableBeanFactory)) {
@@ -119,6 +125,9 @@ public class PortletBeanFactoryCleaner implements BeanFactoryAware {
 			_beanFactoryAwares.add((BeanFactoryAware)bean);
 		}
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		PortletBeanFactoryCleaner.class);
 
 	private static Set<AspectJExpressionPointcut> _aspectJExpressionPointcuts =
 		new HashSet<AspectJExpressionPointcut>();
