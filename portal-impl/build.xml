@@ -192,12 +192,13 @@
 			<fileset file="${jdk.src.dir}/src/JavaResearchLicense.txt" />
 		</copy>
 
-        <javac
+		<javac
 			classpathref="project.classpath"
 			compiler="${javac.compiler}"
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
 			destdir="${liferay.doclet.dir}/classes"
+			encoding="${javac.encoding}"
 			fork="${javac.fork}"
 			includeAntRuntime="false"
 			memoryMaximumSize="${javac.memoryMaximumSize}"
@@ -276,11 +277,11 @@
 		<ant dir="../portal-service" target="compile" inheritAll="false" />
 	</target>
 
-    <target name="build-service-counter">
-        <antcall target="build-service">
-            <param name="service.file" value="src/com/liferay/counter/service.xml" />
-        </antcall>
-    </target>
+	<target name="build-service-counter">
+		<antcall target="build-service">
+			<param name="service.file" value="src/com/liferay/counter/service.xml" />
+		</antcall>
+	</target>
 
 	<target name="build-service-portal">
 		<antcall target="build-service">
@@ -424,7 +425,7 @@
 	</target>
 
 	<target name="build-services">
-        <antcall target="build-service-counter" />
+		<antcall target="build-service-counter" />
 		<antcall target="build-service-portal" />
 		<antcall target="build-service-portlets" />
 	</target>
@@ -815,6 +816,7 @@ ${exception.message}
 							debug="${javac.debug}"
 							deprecation="${javac.deprecation}"
 							destdir="${app.server.classes.portal.dir}"
+							encoding="${javac.encoding}"
 							fork="${javac.fork}"
 							includeAntRuntime="false"
 							memoryMaximumSize="${javac.memoryMaximumSize}"
@@ -829,6 +831,7 @@ ${exception.message}
 							debug="${javac.debug}"
 							deprecation="${javac.deprecation}"
 							destdir="${app.server.classes.portal.dir}"
+							encoding="${javac.encoding}"
 							includeAntRuntime="false"
 							nowarn="${javac.nowarn}"
 							srcdir="src"

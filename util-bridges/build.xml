@@ -25,6 +25,7 @@
 			compiler="${javac.compiler}"
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
+			encoding="${javac.encoding}"
 			destdir="classes"
 			includeAntRuntime="false"
 			nowarn="${javac.nowarn}"

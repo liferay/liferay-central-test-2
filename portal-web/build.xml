@@ -602,6 +602,7 @@
 			compiler="${javac.compiler}"
 			deprecation="${javac.deprecation}"
 			destdir="${jspc.classes.dir}"
+			encoding="${javac.encoding}"
 			includeAntRuntime="false"
 			nowarn="on"
 			srcdir="${jspc.classes.dir}"

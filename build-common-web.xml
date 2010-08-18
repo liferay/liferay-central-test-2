@@ -40,6 +40,7 @@
 					debug="${javac.debug}"
 					deprecation="${javac.deprecation}"
 					destdir="${compile.file.dest}"
+					encoding="${javac.encoding}"
 					includeAntRuntime="false"
 					nowarn="${javac.nowarn}"
 					srcdir="docroot/WEB-INF/src"
