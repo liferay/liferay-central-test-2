@@ -15,7 +15,6 @@
 %>
 
 <aui:fieldset cssClass='<%= (proposalId > 0) ? "aui-helper-hidden" : "" %>'>
-
 	<aui:input name="scope" type="hidden" value='<%= (results.isEmpty() ? "all-pages" : "selected-pages") %>' />
 
 	<%
