@@ -290,6 +290,10 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 
 	<c:choose>
 		<c:when test="<%= selectPages %>">
+			<div class="portlet-msg-info">
+				<liferay-ui:message key="note-that-selecting-no-pages-from-tree-reverts-to-implicit-selection-of-all-pages" />
+			</div>
+
 			<div id="<portlet:namespace />pane">
 				<liferay-util:include page="/html/portlet/communities/tree_js.jsp">
 					<liferay-util:param name="selectableTree" value="1" />

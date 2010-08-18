@@ -23,6 +23,9 @@ List exportLayouts = new ArrayList();
 if (selLayout != null) {
 	exportLayouts.add(selLayout);
 }
+else if (!results.isEmpty()) {
+	exportLayouts = results;
+}
 else {
 	exportLayouts = LayoutLocalServiceUtil.getLayouts(selGroup.getGroupId(), privateLayout);
 }
