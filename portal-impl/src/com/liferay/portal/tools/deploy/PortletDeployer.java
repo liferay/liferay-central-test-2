@@ -163,7 +163,7 @@ public class PortletDeployer extends BaseDeployer {
 		sb.append("</listener-class>");
 		sb.append("</listener>");
 
-		// Ignore filter
+		// Ignore filters
 
 		sb.append(getIgnoreFiltersContent(srcFile));
 
