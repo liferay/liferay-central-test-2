@@ -70,6 +70,8 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 	public void contextInitialized(ServletContextEvent event) {
 		super.contextInitialized(event);
 
+		PortletBeanFactoryCleanUpHook.hookUp();
+
 		ClassLoader classLoader = PortletClassLoaderUtil.getClassLoader();
 
 		ServletContext servletContext = event.getServletContext();
