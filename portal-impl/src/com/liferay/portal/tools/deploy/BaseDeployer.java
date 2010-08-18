@@ -1045,6 +1045,7 @@ public class BaseDeployer {
 			return StringPool.BLANK;
 		}
 	}
+
 	protected String getPluginPackageLicensesXml(List<License> licenses) {
 		if (licenses.isEmpty()) {
 			return StringPool.BLANK;
