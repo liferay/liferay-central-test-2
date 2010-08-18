@@ -100,6 +100,7 @@ public class ServiceManager implements ServiceManagerMBean {
 
 	public void setServiceMonitorAdvice(
 		ServiceMonitorAdvice serviceMonitorAdvice) {
+
 		_serviceMonitorAdvice = serviceMonitorAdvice;
 	}
 
