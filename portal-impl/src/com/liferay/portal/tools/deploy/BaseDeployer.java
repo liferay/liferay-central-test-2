@@ -1025,6 +1025,26 @@ public class BaseDeployer {
 		return sb.toString();
 	}
 
+	protected String getIgnoreFiltersContent(File srcFile) throws Exception {
+		boolean ignoreFiltersEnabled = true;
+
+		Properties properties = getPluginPackageProperties(srcFile);
+
+		if (properties != null) {
+			ignoreFiltersEnabled = GetterUtil.getBoolean(
+				properties.getProperty("ignore-filters-enabled"), true);
+		}
+
+		if (ignoreFiltersEnabled) {
+			String ignoreFiltersContent = FileUtil.read(
+				DeployUtil.getResourcePath("ignore-filters-web.xml"));
+
+			return ignoreFiltersContent;
+		}
+		else {
+			return StringPool.BLANK;
+		}
+	}
 	protected String getPluginPackageLicensesXml(List<License> licenses) {
 		if (licenses.isEmpty()) {
 			return StringPool.BLANK;

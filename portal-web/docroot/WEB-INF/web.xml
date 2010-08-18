@@ -130,6 +130,10 @@
 		</init-param>
 	</filter>
 	<filter>
+		<filter-name>Ignore Filter - JSPF</filter-name>
+		<filter-class>com.liferay.portal.servlet.filters.ignore.IgnoreFilter</filter-class>
+	</filter>
+	<filter>
 		<filter-name>I18n Filter</filter-name>
 		<filter-class>com.liferay.portal.servlet.filters.i18n.I18nFilter</filter-class>
 	</filter>
@@ -225,6 +229,10 @@
 		<filter-name>Valid Html Filter</filter-name>
 		<filter-class>com.liferay.portal.servlet.filters.validhtml.ValidHtmlFilter</filter-class>
 	</filter>
+	<filter-mapping>
+		<filter-name>Ignore Filter - JSPF</filter-name>
+		<url-pattern>*.jspf</url-pattern>
+	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Thread Local Filter</filter-name>
 		<url-pattern>/*</url-pattern>

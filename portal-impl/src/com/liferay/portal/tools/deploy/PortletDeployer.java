@@ -163,6 +163,10 @@ public class PortletDeployer extends BaseDeployer {
 		sb.append("</listener-class>");
 		sb.append("</listener>");
 
+		// Ignore filter
+
+		sb.append(getIgnoreFiltersContent(srcFile));
+
 		// Speed filters
 
 		sb.append(getSpeedFiltersContent(srcFile));

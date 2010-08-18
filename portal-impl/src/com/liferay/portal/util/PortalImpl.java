@@ -3821,7 +3821,11 @@ public class PortalImpl implements Portal {
 		}
 		else if ((e instanceof PortalException) && _log.isInfoEnabled()) {
 			if (e instanceof NoSuchLayoutException) {
-				_log.info(e.getMessage());
+				String msg = e.getMessage();
+
+				if (Validator.isNotNull(msg)) {
+					_log.info(msg);
+				}
 			}
 			else {
 				_log.info(e, e);
