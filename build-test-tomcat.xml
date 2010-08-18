@@ -189,7 +189,7 @@ web.server.display.node=true</echo>
 			</or>
 			<then>
 				<copy
-					file="${hudson.portal.dependencies.dir}/${lp.version}/license"
+					file="${hudson.license.dependencies.dir}/${lp.version}/license"
 					todir="${app.server.parent.dir}/${ee.license.dir}"
 				/>
 			</then>
