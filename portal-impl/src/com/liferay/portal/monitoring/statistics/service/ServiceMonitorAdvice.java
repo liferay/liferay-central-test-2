@@ -35,10 +35,6 @@ import org.aopalliance.intercept.MethodInvocation;
  */
 public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 
-	public static ServiceMonitorAdvice getInstance() {
-		return _instance;
-	}
-
 	public void addMonitoredClass(String className) {
 		_monitoredClasses.add(className);
 	}
@@ -188,18 +184,16 @@ public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 		return false;
 	}
 
-	private static ServiceMonitorAdvice _instance = new ServiceMonitorAdvice();
-
 	private static ThreadLocal<ServiceRequestDataSample>
 		_serviceRequestDataSampleThreadLocal =
 			new AutoResetThreadLocal<ServiceRequestDataSample>(
 				ServiceRequestDataSample.class +
 					"._serviceRequestDataSampleThreadLocal");
 
-	private boolean _active;
-	private Set<String> _monitoredClasses = new HashSet<String>();
-	private Set<MethodKey> _monitoredMethods = new HashSet<MethodKey>();
-	private String _monitoringDestinationName;
-	private boolean _permissiveMode;
+	private static boolean _active;
+	private static Set<String> _monitoredClasses = new HashSet<String>();
+	private static Set<MethodKey> _monitoredMethods = new HashSet<MethodKey>();
+	private static String _monitoringDestinationName;
+	private static boolean _permissiveMode;
 
 }

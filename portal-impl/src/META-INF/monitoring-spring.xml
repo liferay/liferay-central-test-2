@@ -93,6 +93,7 @@
 	</bean>
 	<bean id="com.liferay.portal.monitoring.jmx.ServiceManager" class="com.liferay.portal.monitoring.jmx.ServiceManager">
 		<property name="serverStatistics" ref="serviceStatistics" />
+		<property name="serviceMonitorAdvice" ref="serviceAdvice" />
 	</bean>
 	<bean id="monitoringMBeanExporter" class="org.springframework.jmx.export.MBeanExporter">
 		<property name="beans">

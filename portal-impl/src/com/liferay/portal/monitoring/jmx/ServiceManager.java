@@ -98,8 +98,12 @@ public class ServiceManager implements ServiceManagerMBean {
 		_serverStatistics = serverStatistics;
 	}
 
+	public void setServiceMonitorAdvice(
+		ServiceMonitorAdvice serviceMonitorAdvice) {
+		_serviceMonitorAdvice = serviceMonitorAdvice;
+	}
+
 	private ServerStatistics _serverStatistics;
-	private ServiceMonitorAdvice _serviceMonitorAdvice =
-		ServiceMonitorAdvice.getInstance();
+	private ServiceMonitorAdvice _serviceMonitorAdvice;
 
 }

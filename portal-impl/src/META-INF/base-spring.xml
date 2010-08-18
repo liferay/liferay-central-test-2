@@ -13,7 +13,7 @@
 		<property name="dataSource" ref="liferayDataSource" />
 		<property name="sessionFactory" ref="liferaySessionFactory" />
 	</bean>
-	<bean id="serviceAdvice" class="com.liferay.portal.monitoring.statistics.service.ServiceMonitorAdvice" factory-method="getInstance">
+	<bean id="serviceAdvice" class="com.liferay.portal.monitoring.statistics.service.ServiceMonitorAdvice">
 		<property name="monitoringDestinationName" value="liferay/monitoring" />
 		<property name="nextMethodInterceptor" ref="asyncAdvice" />
 	</bean>
