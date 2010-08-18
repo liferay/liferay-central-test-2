@@ -35,6 +35,13 @@ import org.aopalliance.intercept.MethodInvocation;
  */
 public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 
+	/**
+	 * @deprecated
+	 */
+	public static ServiceMonitorAdvice getInstance() {
+		return new ServiceMonitorAdvice();
+	}
+
 	public void addMonitoredClass(String className) {
 		_monitoredClasses.add(className);
 	}
