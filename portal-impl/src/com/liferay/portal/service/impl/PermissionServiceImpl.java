@@ -54,7 +54,9 @@ import com.liferay.portlet.journal.service.permission.JournalFeedPermission;
 import com.liferay.portlet.journal.service.permission.JournalStructurePermission;
 import com.liferay.portlet.journal.service.permission.JournalTemplatePermission;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
+import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.service.permission.PollsQuestionPermission;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
@@ -319,6 +321,11 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		else if (name.equals(MBCategory.class.getName())) {
 			MBCategoryPermission.check(
 				permissionChecker, groupId, GetterUtil.getLong(primKey),
+				ActionKeys.PERMISSIONS);
+		}
+		else if (name.equals(MBMessage.class.getName())) {
+			MBMessagePermission.check(
+				permissionChecker, GetterUtil.getLong(primKey),
 				ActionKeys.PERMISSIONS);
 		}
 		else if (name.equals(PollsQuestion.class.getName())) {
