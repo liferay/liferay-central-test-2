@@ -117,6 +117,14 @@ public class WikiPagePermission {
 	public static boolean contains(
 		PermissionChecker permissionChecker, WikiPage page, String actionId) {
 
+		if (actionId.equals(ActionKeys.VIEW)) {
+			WikiPage redirectPage = page.getRedirectPage();
+
+			if (redirectPage != null) {
+				page = redirectPage;
+			}
+		}
+
 		if (page.isPending()) {
 			Boolean hasPermission = WorkflowPermissionUtil.hasPermission(
 				permissionChecker, page.getGroupId(), WikiPage.class.getName(),

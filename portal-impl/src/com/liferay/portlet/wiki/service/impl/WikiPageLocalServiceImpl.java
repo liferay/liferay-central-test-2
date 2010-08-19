@@ -982,6 +982,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			StringPool.DOUBLE_OPEN_BRACKET + redirectTitle +
 				StringPool.DOUBLE_CLOSE_BRACKET;
 
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+
 		addPage(
 			userId, nodeId, title, version, content, summary, false, format,
 			head, parentTitle, redirectTitle, serviceContext);
