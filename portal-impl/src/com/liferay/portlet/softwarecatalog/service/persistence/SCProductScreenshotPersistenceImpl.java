@@ -1710,6 +1710,12 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		}
 	}
 
+	public void destroy() {
+		EntityCacheUtil.removeCache(SCProductScreenshotImpl.class.getName());
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
+	}
+
 	@BeanReference(type = SCLicensePersistence.class)
 	protected SCLicensePersistence scLicensePersistence;
 	@BeanReference(type = SCFrameworkVersionPersistence.class)

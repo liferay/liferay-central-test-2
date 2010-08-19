@@ -2397,6 +2397,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		}
 	}
 
+	public void destroy() {
+		EntityCacheUtil.removeCache(JournalArticleImageImpl.class.getName());
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
+	}
+
 	@BeanReference(type = JournalArticlePersistence.class)
 	protected JournalArticlePersistence journalArticlePersistence;
 	@BeanReference(type = JournalArticleImagePersistence.class)

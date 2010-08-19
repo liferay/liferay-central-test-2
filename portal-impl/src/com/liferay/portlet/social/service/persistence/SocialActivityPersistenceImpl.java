@@ -4213,6 +4213,12 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	public void destroy() {
+		EntityCacheUtil.removeCache(SocialActivityImpl.class.getName());
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
+	}
+
 	@BeanReference(type = SocialActivityPersistence.class)
 	protected SocialActivityPersistence socialActivityPersistence;
 	@BeanReference(type = SocialEquityAssetEntryPersistence.class)

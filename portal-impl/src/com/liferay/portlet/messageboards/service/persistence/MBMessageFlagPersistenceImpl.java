@@ -3410,6 +3410,12 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 		}
 	}
 
+	public void destroy() {
+		EntityCacheUtil.removeCache(MBMessageFlagImpl.class.getName());
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
+	}
+
 	@BeanReference(type = MBBanPersistence.class)
 	protected MBBanPersistence mbBanPersistence;
 	@BeanReference(type = MBCategoryPersistence.class)

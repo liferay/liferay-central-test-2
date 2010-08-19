@@ -2242,6 +2242,12 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 		}
 	}
 
+	public void destroy() {
+		EntityCacheUtil.removeCache(DLFileRankImpl.class.getName());
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
+	}
+
 	@BeanReference(type = DLFileEntryPersistence.class)
 	protected DLFileEntryPersistence dlFileEntryPersistence;
 	@BeanReference(type = DLFileRankPersistence.class)

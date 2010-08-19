@@ -538,6 +538,12 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 		}
 	}
 
+	public void destroy() {
+		EntityCacheUtil.removeCache(CounterImpl.class.getName());
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
+	}
+
 	@BeanReference(type = CounterPersistence.class)
 	protected CounterPersistence counterPersistence;
 	@BeanReference(type = ResourcePersistence.class)

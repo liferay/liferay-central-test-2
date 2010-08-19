@@ -5137,6 +5137,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	public void destroy() {
+		EntityCacheUtil.removeCache(IGImageImpl.class.getName());
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
+	}
+
 	@BeanReference(type = IGFolderPersistence.class)
 	protected IGFolderPersistence igFolderPersistence;
 	@BeanReference(type = IGImagePersistence.class)

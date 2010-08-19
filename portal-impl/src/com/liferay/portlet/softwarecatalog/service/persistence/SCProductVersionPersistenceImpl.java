@@ -1756,6 +1756,12 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 		removeSCFrameworkVersion = new RemoveSCFrameworkVersion(this);
 	}
 
+	public void destroy() {
+		EntityCacheUtil.removeCache(SCProductVersionImpl.class.getName());
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
+	}
+
 	@BeanReference(type = SCLicensePersistence.class)
 	protected SCLicensePersistence scLicensePersistence;
 	@BeanReference(type = SCFrameworkVersionPersistence.class)

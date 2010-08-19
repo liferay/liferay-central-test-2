@@ -907,18 +907,6 @@ public class PortletWrapper implements Portlet {
 		_portlet.setSystem(system);
 	}
 
-	public boolean getReady() {
-		return _portlet.getReady();
-	}
-
-	public boolean isReady() {
-		return _portlet.isReady();
-	}
-
-	public void setReady(boolean ready) {
-		_portlet.setReady(ready);
-	}
-
 	public boolean getInclude() {
 		return _portlet.getInclude();
 	}
@@ -929,6 +917,18 @@ public class PortletWrapper implements Portlet {
 
 	public void setInclude(boolean include) {
 		_portlet.setInclude(include);
+	}
+
+	public boolean getReady() {
+		return _portlet.getReady();
+	}
+
+	public boolean isReady() {
+		return _portlet.isReady();
+	}
+
+	public void setReady(boolean ready) {
+		_portlet.setReady(ready);
 	}
 
 	public java.util.Map<java.lang.String, java.lang.String> getInitParams() {

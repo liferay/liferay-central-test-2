@@ -3084,6 +3084,12 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		}
 	}
 
+	public void destroy() {
+		EntityCacheUtil.removeCache(TasksReviewImpl.class.getName());
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
+	}
+
 	@BeanReference(type = TasksProposalPersistence.class)
 	protected TasksProposalPersistence tasksProposalPersistence;
 	@BeanReference(type = TasksReviewPersistence.class)

@@ -1836,6 +1836,12 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		}
 	}
 
+	public void destroy() {
+		EntityCacheUtil.removeCache(MembershipRequestImpl.class.getName());
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
+	}
+
 	@BeanReference(type = AccountPersistence.class)
 	protected AccountPersistence accountPersistence;
 	@BeanReference(type = AddressPersistence.class)

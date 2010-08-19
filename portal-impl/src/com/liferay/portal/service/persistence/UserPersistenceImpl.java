@@ -7266,6 +7266,12 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		removeUserGroup = new RemoveUserGroup(this);
 	}
 
+	public void destroy() {
+		EntityCacheUtil.removeCache(UserImpl.class.getName());
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
+	}
+
 	@BeanReference(type = AccountPersistence.class)
 	protected AccountPersistence accountPersistence;
 	@BeanReference(type = AddressPersistence.class)

@@ -1611,6 +1611,12 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		removeAssetEntry = new RemoveAssetEntry(this);
 	}
 
+	public void destroy() {
+		EntityCacheUtil.removeCache(AssetTagImpl.class.getName());
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
+	}
+
 	@BeanReference(type = AssetCategoryPersistence.class)
 	protected AssetCategoryPersistence assetCategoryPersistence;
 	@BeanReference(type = AssetCategoryPropertyPersistence.class)

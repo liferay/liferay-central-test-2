@@ -1911,6 +1911,12 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		removeSCProductEntry = new RemoveSCProductEntry(this);
 	}
 
+	public void destroy() {
+		EntityCacheUtil.removeCache(SCLicenseImpl.class.getName());
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
+	}
+
 	@BeanReference(type = SCLicensePersistence.class)
 	protected SCLicensePersistence scLicensePersistence;
 	@BeanReference(type = SCFrameworkVersionPersistence.class)

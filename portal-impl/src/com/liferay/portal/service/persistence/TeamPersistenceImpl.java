@@ -1936,6 +1936,12 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		removeUser = new RemoveUser(this);
 	}
 
+	public void destroy() {
+		EntityCacheUtil.removeCache(TeamImpl.class.getName());
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
+	}
+
 	@BeanReference(type = AccountPersistence.class)
 	protected AccountPersistence accountPersistence;
 	@BeanReference(type = AddressPersistence.class)
