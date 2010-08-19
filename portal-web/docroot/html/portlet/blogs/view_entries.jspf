@@ -66,7 +66,7 @@ showSearch = showSearch && !results.isEmpty();
 
 <c:if test="<%= Validator.isNotNull(tagName) %>">
 	<h1 class="entry-title">
-		<%= HtmlUtil.escape(LanguageUtil.format(pageContext, "entries-with-tag-x", tagName)) %>
+		<%= LanguageUtil.format(pageContext, "entries-with-tag-x", HtmlUtil.escape(tagName)) %>
 	</h1>
 
 	<%

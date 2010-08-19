@@ -84,7 +84,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 
 		<c:if test="<%= Validator.isNotNull(tagName) %>">
 			<h1 class="entry-title">
-				<%= HtmlUtil.escape(LanguageUtil.format(pageContext, "images-with-tag-x", tagName)) %>
+				<%= LanguageUtil.format(pageContext, "images-with-tag-x", HtmlUtil.escape(tagName)) %>
 			</h1>
 		</c:if>
 
