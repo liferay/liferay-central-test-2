@@ -65,6 +65,10 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	public void clearCache(T model) {
 	}
 
+	public void destroy() {
+		removeCaches();
+	}
+
 	public void closeSession(Session session) {
 		_sessionFactory.closeSession(session);
 	}
@@ -313,6 +317,10 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 				}
 			}
 		}
+	}
+
+	protected void removeCaches() {
+		throw new UnsupportedOperationException();
 	}
 
 	/**
