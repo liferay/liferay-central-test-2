@@ -661,6 +661,20 @@ Liferay.provide(
 						closeButton.on('click', dialog.close, dialog);
 					}
 
+					var rolesSearchContainer = iframeBody.one('#rolesSearchContainerSearchContainer');
+
+					if (rolesSearchContainer) {
+						rolesSearchContainer.delegate(
+							'click',
+							function(event){
+								event.preventDefault();
+
+								submitForm(document.hrefFm, event.currentTarget.attr('href'));
+							},
+							'a'
+						);
+					}
+
 					bodyNode.loadingmask.hide();
 				}
 			);
