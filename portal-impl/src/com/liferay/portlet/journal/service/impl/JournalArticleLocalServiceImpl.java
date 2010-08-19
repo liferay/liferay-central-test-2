@@ -2021,8 +2021,19 @@ public class JournalArticleLocalServiceImpl
 	protected void checkStructure(JournalArticle article)
 		throws DocumentException, PortalException, SystemException {
 
-		JournalStructure structure = journalStructurePersistence.findByG_S(
-			article.getGroupId(), article.getStructureId());
+		Group companyGroup = groupLocalService.getCompanyGroup(
+			article.getCompanyId());
+
+		JournalStructure structure = null;
+
+		try {
+			structure = journalStructurePersistence.findByG_S(
+				article.getGroupId(), article.getStructureId());
+		}
+		catch (NoSuchStructureException nsse) {
+			structure = journalStructurePersistence.findByG_S(
+				companyGroup.getGroupId(), article.getStructureId());
+		}
 
 		String content = GetterUtil.getString(article.getContent());
 
