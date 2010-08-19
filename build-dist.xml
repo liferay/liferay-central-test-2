@@ -595,6 +595,20 @@ release was successful.</echo>
 			<replacevalue><![CDATA[<attribute name="Port"><value-factory bean="ServiceBindingManager" method="getIntBinding"><parameter>jboss:service=Naming</parameter><parameter>Port</parameter></value-factory></attribute>]]></replacevalue>
 		</replace>
 
+		<replace file="${app.server.parent.dir}/jboss-5.1.0/server/web/conf/login-config.xml">
+			<replacetoken><![CDATA[</policy>]]></replacetoken>
+			<replacevalue><![CDATA[
+  <!-- used for JAAS authentication with Liferay -->
+  <application-policy name="PortalRealm">
+    <authentication>
+      <login-module code="com.liferay.portal.security.jaas.PortalLoginModule" flag="required"/>
+    </authentication>
+  </application-policy>
+				
+</policy>]]>
+			</replacevalue>
+		</replace>
+
 		<move file="${app.server.parent.dir}/jboss-5.1.0/server/web" tofile="${app.server.parent.dir}/jboss-5.1.0/server/default" />
 	</target>
 
