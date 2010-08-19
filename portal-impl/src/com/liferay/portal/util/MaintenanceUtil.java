@@ -110,7 +110,11 @@ public class MaintenanceUtil {
 
 		for (HttpSession session : sessions) {
 			if (!sessionId.equals(session.getId())) {
-				session.invalidate();
+				try {
+					session.invalidate();
+				}
+				catch (IllegalStateException ise) {
+				}
 			}
 		}
 	}
