@@ -2379,7 +2379,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		Boolean ready = _readyMap.get(getRootPortletId());
 
 		if (ready == null) {
-			return false;
+			return true;
 		}
 		else {
 			return ready;
