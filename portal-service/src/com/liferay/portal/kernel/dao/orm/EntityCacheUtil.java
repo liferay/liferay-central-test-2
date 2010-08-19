@@ -65,16 +65,16 @@ public class EntityCacheUtil {
 			entityCacheEnabled, classObj, primaryKeyObj, result);
 	}
 
+	public static void removeCache(String className) {
+		getEntityCache().removeCache(className);
+	}
+
 	public static void removeResult(
 		boolean entityCacheEnabled, Class<?> classObj,
 		Serializable primaryKeyObj) {
 
 		getEntityCache().removeResult(
 			entityCacheEnabled, classObj, primaryKeyObj);
-	}
-
-	public static void removeCache(String className) {
-		getEntityCache().removeCache(className);
 	}
 
 	public void setEntityCache(EntityCache finderCache) {

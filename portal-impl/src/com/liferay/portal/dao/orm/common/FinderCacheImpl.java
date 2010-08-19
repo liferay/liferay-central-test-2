@@ -157,6 +157,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 	public void removeCache(String className) {
 		String groupKey = _GROUP_KEY_PREFIX.concat(className);
+
 		_portalCaches.remove(groupKey);
 		_multiVMPool.removeCache(groupKey);
 	}
@@ -190,7 +191,8 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 	}
 
 	private PortalCache _getPortalCache(
-			String className, boolean createIfAbsent) {
+		String className, boolean createIfAbsent) {
+
 		String groupKey = _GROUP_KEY_PREFIX.concat(className);
 
 		PortalCache portalCache = _portalCaches.get(groupKey);
