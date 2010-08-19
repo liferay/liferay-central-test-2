@@ -28,18 +28,22 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl;
 import com.liferay.portlet.imagegallery.lar.IGPortletDataHandlerImpl;
 import com.liferay.portlet.journal.NoSuchArticleException;
+import com.liferay.portlet.journal.NoSuchStructureException;
+import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
-import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
-import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
+import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -172,15 +176,26 @@ public class JournalContentPortletDataHandlerImpl
 		Element igImagesElement = rootElement.addElement("ig-images");
 
 		JournalPortletDataHandlerImpl.exportArticle(
-			context, rootElement, dlFoldersElement, dlFilesElement,
-			dlFileRanksElement, igFoldersElement, igImagesElement, article,
-			false);
+			context, rootElement, rootElement, rootElement, dlFoldersElement,
+			dlFilesElement, dlFileRanksElement, igFoldersElement,
+			igImagesElement, article, false);
+
+		Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
+			article.getCompanyId());
 
 		String structureId = article.getStructureId();
 
 		if (Validator.isNotNull(structureId)) {
-			JournalStructure structure = JournalStructureUtil.findByG_S(
-				article.getGroupId(), structureId);
+			JournalStructure structure = null;
+
+			try {
+				structure = JournalStructureLocalServiceUtil.getStructure(
+					article.getGroupId(), structureId);
+			}
+			catch (NoSuchStructureException nsse) {
+				structure = JournalStructureLocalServiceUtil.getStructure(
+					companyGroup.getGroupId(), structureId);
+			}
 
 			JournalPortletDataHandlerImpl.exportStructure(
 				context, rootElement, structure);
@@ -189,8 +204,16 @@ public class JournalContentPortletDataHandlerImpl
 		String templateId = article.getTemplateId();
 
 		if (Validator.isNotNull(templateId)) {
-			JournalTemplate template = JournalTemplateUtil.findByG_T(
-				article.getGroupId(), templateId);
+			JournalTemplate template = null;
+
+			try {
+				template = JournalTemplateLocalServiceUtil.getTemplate(
+					context.getScopeGroupId(), templateId);
+			}
+			catch (NoSuchTemplateException nste) {
+				template = JournalTemplateLocalServiceUtil.getTemplate(
+					companyGroup.getGroupId(), templateId);
+			}
 
 			JournalPortletDataHandlerImpl.exportTemplate(
 				context, rootElement, dlFoldersElement, dlFilesElement,

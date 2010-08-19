@@ -54,6 +54,8 @@ import com.liferay.portlet.imagegallery.lar.IGPortletDataHandlerImpl;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
+import com.liferay.portlet.journal.NoSuchStructureException;
+import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalArticleImage;
@@ -114,6 +116,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	protected static void exportArticle(
 			PortletDataContext context, Element articlesElement,
+			Element structuresElement, Element templatesElement,
 			Element dlFoldersElement, Element dlFileEntriesElement,
 			Element dlFileRanksElement, Element igFoldersElement,
 			Element igImagesElement, JournalArticle article,
@@ -152,20 +155,48 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		article.setUserUuid(article.getUserUuid());
 
+		Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
+			article.getCompanyId());
+
 		if (Validator.isNotNull(article.getStructureId())) {
-			JournalStructure structure =
-				JournalStructureLocalServiceUtil.getStructure(
-					context.getScopeGroupId(), article.getStructureId());
+			JournalStructure structure = null;
+
+			try {
+				structure = JournalStructureLocalServiceUtil.getStructure(
+					article.getGroupId(), article.getStructureId());
+			}
+			catch (NoSuchStructureException nsse) {
+				structure = JournalStructureLocalServiceUtil.getStructure(
+					companyGroup.getGroupId(), article.getStructureId());
+			}
 
 			articleElement.addAttribute("structure-uuid", structure.getUuid());
+
+			if (structure.getGroupId() == companyGroup.getGroupId()) {
+				exportStructure(context, structuresElement, structure);
+			}
 		}
 
 		if (Validator.isNotNull(article.getTemplateId())) {
-			JournalTemplate template =
-				JournalTemplateLocalServiceUtil.getTemplate(
+			JournalTemplate template = null;
+
+			try {
+				template = JournalTemplateLocalServiceUtil.getTemplate(
 					context.getScopeGroupId(), article.getTemplateId());
+			}
+			catch (NoSuchTemplateException nste) {
+				template = JournalTemplateLocalServiceUtil.getTemplate(
+					companyGroup.getGroupId(), article.getTemplateId());
+			}
 
 			articleElement.addAttribute("template-uuid", template.getUuid());
+
+			if (template.getGroupId() == companyGroup.getGroupId()) {
+				exportTemplate(
+					context, templatesElement, dlFoldersElement,
+					dlFileEntriesElement, dlFileRanksElement, igFoldersElement,
+					igImagesElement, template, checkDateRange);
+			}
 		}
 
 		Image smallImage = ImageUtil.fetchByPrimaryKey(
@@ -1898,7 +1929,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			for (JournalArticle article : articles) {
 				exportArticle(
-					context, articlesElement, dlFoldersElement, dlFilesElement,
+					context, articlesElement, structuresElement,
+					templatesElement, dlFoldersElement, dlFilesElement,
 					dlFileRanksElement, igFoldersElement, igImagesElement,
 					article, true);
 			}
