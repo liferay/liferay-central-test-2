@@ -71,6 +71,7 @@ public class SourceFormatter {
 						_formatJSP();
 						_formatAntXML();
 						_formatFriendlyURLRoutesXML();
+						_formatSH();
 						_formatWebXML();
 					}
 					catch (Exception e) {
@@ -1070,6 +1071,33 @@ public class SourceFormatter {
 		content = _formatTaglibQuotes(fileName, content, StringPool.APOSTROPHE);
 
 		return content;
+	}
+
+	private static void _formatSH() throws IOException {
+		_formatSH("ext/create.sh");
+		_formatSH("hooks/create.sh");
+		_formatSH("layouttpl/create.sh");
+		_formatSH("portlets/create.sh");
+		_formatSH("themes/create.sh");
+	}
+
+	private static void _formatSH(String fileName) throws IOException {
+		File file = new File(fileName);
+
+		if (!file.exists()) {
+			return;
+		}
+
+		String content = _fileUtil.read(new File(fileName), true);
+
+		if (content.contains("\r")) {
+			_sourceFormatterHelper.printError(
+				fileName, "Invalid new line character");
+
+			content = StringUtil.replace(content, "\r", "");
+
+			_fileUtil.write(fileName, content);
+		}
 	}
 
 	private static String _formatTaglibQuotes(
