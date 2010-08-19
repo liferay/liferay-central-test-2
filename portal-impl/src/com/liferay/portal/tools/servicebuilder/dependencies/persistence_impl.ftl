@@ -349,12 +349,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		}
 	}
 
-	protected void removeCaches() {
-		EntityCacheUtil.removeCache(${entity.name}Impl.class.getName());
-		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
-		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
-	}
-
 	protected ${entity.name} removeImpl(${entity.name} ${entity.varName}) throws SystemException {
 		${entity.varName} = toUnwrappedModel(${entity.varName});
 
@@ -3176,6 +3170,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			shrinkTreeRight${pkColumn.methodName} = new ShrinkTreeRight${pkColumn.methodName}();
 			updateTree = new UpdateTree();
 		</#if>
+	}
+
+	public void destroy() {
+		EntityCacheUtil.removeCache(${entity.name}Impl.class.getName());
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	<#list referenceList as tempEntity>
