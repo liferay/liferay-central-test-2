@@ -1683,6 +1683,7 @@ public class ServiceBuilder {
 		String methodName = method.getName();
 
 		if (methodName.equals("afterPropertiesSet") ||
+			methodName.equals("destroy") ||
 			methodName.equals("equals") ||
 			methodName.equals("getClass") ||
 			methodName.equals("hashCode") ||
