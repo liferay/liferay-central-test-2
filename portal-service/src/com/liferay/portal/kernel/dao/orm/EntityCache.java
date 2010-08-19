@@ -41,6 +41,8 @@ public interface EntityCache {
 		boolean entityCacheEnabled, Class<?> classObj,
 		Serializable primaryKeyObj, Object result);
 
+	public void removeCache(String className);
+
 	public void removeResult(
 		boolean entityCacheEnabled, Class<?> classObj,
 		Serializable primaryKeyObj);

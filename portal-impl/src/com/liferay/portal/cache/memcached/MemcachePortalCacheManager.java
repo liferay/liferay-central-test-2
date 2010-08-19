@@ -69,6 +69,10 @@ public class MemcachePortalCacheManager implements PortalCacheManager {
 		return memcachePortalCache;
 	}
 
+	public void removeCache(String name) {
+		_memcachePortalCaches.remove(name);
+	}
+
 	public void setDebug(boolean debug) {
 		_debug = debug;
 	}

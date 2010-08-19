@@ -96,6 +96,10 @@ public class MultiVMPoolImpl implements MultiVMPool {
 		portalCache.remove(key);
 	}
 
+	public void removeCache(String name) {
+		_portalCacheManager.removeCache(name);
+	}
+
 	public void setPortalCacheManager(PortalCacheManager portalCacheManager) {
 		_portalCacheManager = portalCacheManager;
 	}

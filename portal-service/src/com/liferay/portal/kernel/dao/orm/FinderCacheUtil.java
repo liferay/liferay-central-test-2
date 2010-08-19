@@ -80,6 +80,10 @@ public class FinderCacheUtil {
 		getFinderCache().putResult(finderPath, args, result);
 	}
 
+	public static void removeCache(String className) {
+		getFinderCache().removeCache(className);
+	}
+
 	public static void removeResult(FinderPath finderPath, Object[] args) {
 		getFinderCache().removeResult(finderPath, args);
 	}

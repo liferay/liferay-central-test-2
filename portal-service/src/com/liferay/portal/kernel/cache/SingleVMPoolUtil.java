@@ -106,6 +106,10 @@ public class SingleVMPoolUtil {
 		getSingleVMPool().remove(portalCache, key);
 	}
 
+	public static void removeCache(String name) {
+		getSingleVMPool().removeCache(name);
+	}
+
 	public void setSingleVMPool(SingleVMPool singleVMPool) {
 		_singleVMPool = singleVMPool;
 	}

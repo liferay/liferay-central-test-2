@@ -88,6 +88,10 @@ public class MultiVMPoolUtil {
 		getMultiVMPool().remove(portalCache, key);
 	}
 
+	public static void removeCache(String name) {
+		getMultiVMPool().removeCache(name);
+	}
+
 	public void setMultiVMPool(MultiVMPool multiVMPool) {
 		_multiVMPool = multiVMPool;
 	}

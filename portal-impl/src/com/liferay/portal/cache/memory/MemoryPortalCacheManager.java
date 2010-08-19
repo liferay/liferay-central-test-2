@@ -52,6 +52,10 @@ public class MemoryPortalCacheManager implements PortalCacheManager {
 		return portalCache;
 	}
 
+	public void removeCache(String name) {
+		_portalCaches.remove(name);
+	}
+
 	public void setCacheInitialCapacity(int cacheInitialCapacity) {
 		_cacheInitialCapacity = cacheInitialCapacity;
 	}

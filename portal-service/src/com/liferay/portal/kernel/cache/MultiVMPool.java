@@ -58,4 +58,6 @@ public interface MultiVMPool {
 	 */
 	public void remove(PortalCache portalCache, String key);
 
+	public void removeCache(String name);
+
 }

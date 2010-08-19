@@ -136,6 +136,10 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 		return _cacheManager;
 	}
 
+	public void removeCache(String name) {
+		_cacheManager.removeCache(name);
+	}
+
 	public void setConfigPropertyKey(String configPropertyKey) {
 		_configPropertyKey = configPropertyKey;
 	}

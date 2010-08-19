@@ -58,6 +58,10 @@ public class PooledMemcachePortalCacheManager implements PortalCacheManager {
 		return portalCache;
 	}
 
+	public void removeCache(String name) {
+		_portalCaches.remove(name);
+	}
+
 	public void setDebug(boolean debug) {
 		_debug = debug;
 	}

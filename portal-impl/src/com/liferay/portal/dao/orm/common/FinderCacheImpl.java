@@ -155,6 +155,12 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 		portalCache.put(cacheKey, primaryKey);
 	}
 
+	public void removeCache(String className) {
+		String groupKey = _GROUP_KEY_PREFIX.concat(className);
+		_portalCaches.remove(groupKey);
+		_multiVMPool.removeCache(groupKey);
+	}
+
 	public void removeResult(FinderPath finderPath, Object[] args) {
 		if (!PropsValues.VALUE_OBJECT_FINDER_CACHE_ENABLED ||
 			!finderPath.isFinderCacheEnabled() ||

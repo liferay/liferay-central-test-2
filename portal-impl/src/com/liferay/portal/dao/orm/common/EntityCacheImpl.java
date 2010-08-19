@@ -237,6 +237,12 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		portalCache.put(cacheKey, result);
 	}
 
+	public void removeCache(String className) {
+		String groupKey = _GROUP_KEY_PREFIX.concat(className);
+		_portalCaches.remove(groupKey);
+		_multiVMPool.removeCache(groupKey);
+	}
+
 	public void removeResult(
 		boolean entityCacheEnabled, Class<?> classObj,
 		Serializable primaryKeyObj) {

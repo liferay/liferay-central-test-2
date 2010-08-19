@@ -73,6 +73,10 @@ public class EntityCacheUtil {
 			entityCacheEnabled, classObj, primaryKeyObj);
 	}
 
+	public static void removeCache(String className) {
+		getEntityCache().removeCache(className);
+	}
+
 	public void setEntityCache(EntityCache finderCache) {
 		_finderCache = finderCache;
 	}

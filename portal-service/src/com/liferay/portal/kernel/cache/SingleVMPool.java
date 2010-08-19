@@ -70,4 +70,6 @@ public interface SingleVMPool {
 	 */
 	public void remove(PortalCache portalCache, String key);
 
+	public void removeCache(String name);
+
 }

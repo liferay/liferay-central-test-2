@@ -26,4 +26,6 @@ public interface PortalCacheManager {
 	public PortalCache getCache(String name, boolean blocking)
 		throws PortalCacheException;
 
+	public void removeCache(String name);
+
 }
