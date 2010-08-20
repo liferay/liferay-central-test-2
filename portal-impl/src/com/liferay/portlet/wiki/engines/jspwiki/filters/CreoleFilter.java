@@ -14,7 +14,9 @@
 
 package com.liferay.portlet.wiki.engines.jspwiki.filters;
 
+import com.ecyrd.jspwiki.WikiContext;
 import com.ecyrd.jspwiki.WikiEngine;
+import com.ecyrd.jspwiki.filters.FilterException;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -37,20 +39,28 @@ public class CreoleFilter extends org.wikiwizard.jspwiki.filters.CreoleFilter {
 		}
 	}
 
-	public void postSave(WikiContext wikiContext, String content) {
+	public void postSave(WikiContext wikiContext, String content)
+		throws FilterException {
+
 		super.postSave(wikiContext, content);
 	}
 
-	public String postTranslate(WikiContext wikiContext, String htmlContent) {
-		super.postTranslate(wikiContext, htmlContent);
+	public String postTranslate(WikiContext wikiContext, String htmlContent)
+		throws FilterException {
+
+		return super.postTranslate(wikiContext, htmlContent);
 	}
 
-	public String preSave(WikiContext wikiContext, String content) {
-		super.preSave(wikiContext, content);
+	public String preSave(WikiContext wikiContext, String content)
+		throws FilterException {
+
+		return super.preSave(wikiContext, content);
 	}
 
-	public String preTranslate(WikiContext wikiContext, String content) {
-		super.preTranslate(wikiContext, content);
+	public String preTranslate(WikiContext wikiContext, String content)
+		throws FilterException {
+
+		return super.preTranslate(wikiContext, content);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(CreoleFilter.class);
