@@ -138,11 +138,10 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 		}
 		finally {
 			try {
-				ThreadLocal<?> cacheThreadLocal =
-					(ThreadLocal<?>)_cacheField.get(null);
+				ThreadLocal<?> cache = (ThreadLocal<?>)_cacheField.get(null);
 
-				if (cacheThreadLocal != null) {
-					cacheThreadLocal.remove();
+				if (cache != null) {
+					cache.remove();
 				}
 			}
 			catch (Exception e) {
