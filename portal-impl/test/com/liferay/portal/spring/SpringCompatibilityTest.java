@@ -18,6 +18,8 @@ import com.liferay.portal.util.BaseTestCase;
 
 import java.lang.reflect.Field;
 
+import java.util.Map;
+
 import org.springframework.aop.framework.AdvisedSupport;
 
 /**
@@ -51,6 +53,37 @@ public class SpringCompatibilityTest extends BaseTestCase {
 			fail(
 				advisedSupportClass.getClass().getName() + " is not " +
 					AdvisedSupport.class.getName());
+		}
+	}
+
+	public void testAspectJExpressionPointcut() {
+		Class<?> aspectJExpressionPointcutClass = null;
+
+		try {
+			aspectJExpressionPointcutClass = Class.forName(
+				"org.springframework.aop.aspectj.AspectJExpressionPointcut");
+		}
+		catch (Exception e) {
+			fail(e.getMessage());
+		}
+
+		Field shadowMatchCacheField = null;
+
+		try {
+			shadowMatchCacheField =
+				aspectJExpressionPointcutClass.getDeclaredField(
+					"shadowMatchCache");
+		}
+		catch (Exception e) {
+			fail(e.getMessage());
+		}
+
+		Class<?> shadowMatchCacheClass = shadowMatchCacheField.getType();
+
+		if (!Map.class.isAssignableFrom(shadowMatchCacheClass)) {
+			fail(
+				shadowMatchCacheClass.getClass().getName() + " is not " +
+					Map.class.getName());
 		}
 	}
 
