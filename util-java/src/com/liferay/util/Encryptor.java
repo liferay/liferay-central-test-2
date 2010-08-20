@@ -125,7 +125,9 @@ public class Encryptor {
 		throws EncryptorException {
 
 		String algorithm = key.getAlgorithm();
+
 		Cipher cipher = _decryptCipherMap.get(algorithm);
+
 		try {
 			if (cipher == null) {
 				Security.addProvider(getProvider());
@@ -136,7 +138,8 @@ public class Encryptor {
 
 				_decryptCipherMap.put(algorithm, cipher);
 			}
-			synchronized(cipher) {
+
+			synchronized (cipher) {
 				return cipher.doFinal(encryptedBytes);
 			}
 		}
@@ -180,7 +183,9 @@ public class Encryptor {
 		throws EncryptorException {
 
 		String algorithm = key.getAlgorithm();
+
 		Cipher cipher = _encryptCipherMap.get(algorithm);
+
 		try {
 			if (cipher == null) {
 				Security.addProvider(getProvider());
@@ -191,7 +196,8 @@ public class Encryptor {
 
 				_encryptCipherMap.put(algorithm, cipher);
 			}
-			synchronized(cipher) {
+
+			synchronized (cipher) {
 				return cipher.doFinal(plainBytes);
 			}
 		}
@@ -217,7 +223,6 @@ public class Encryptor {
 
 	private static Map<String, Cipher> _decryptCipherMap =
 		new ConcurrentHashMap<String, Cipher>(1, 1f, 1);
-
 	private static Map<String, Cipher> _encryptCipherMap =
 		new ConcurrentHashMap<String, Cipher>(1, 1f, 1);
 
