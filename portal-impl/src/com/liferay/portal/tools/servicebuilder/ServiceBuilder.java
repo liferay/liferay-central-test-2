@@ -2122,7 +2122,7 @@ public class ServiceBuilder {
 
 		if (!xmlFile.exists()) {
 			String xml =
-				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+				"<?xml version=\"1.0\"?>\n" +
 				"<!DOCTYPE hibernate-mapping PUBLIC \"-//Hibernate/Hibernate Mapping DTD 3.0//EN\" \"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd\">\n" +
 				"\n" +
 				"<hibernate-mapping default-lazy=\"false\" auto-import=\"false\">\n" +
@@ -2371,7 +2371,7 @@ public class ServiceBuilder {
 
 		if (!xmlFile.exists()) {
 			String xml =
-				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+				"<?xml version=\"1.0\"?>\n" +
 				"\n" +
 				"<model-hints>\n" +
 				"</model-hints>";
@@ -2521,7 +2521,7 @@ public class ServiceBuilder {
 
 		if (!xmlFile.exists()) {
 			String xml =
-				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+				"<?xml version=\"1.0\"?>\n" +
 				"<entity-mappings version=\"1.0\" xmlns=\"http://java.sun.com/xml/ns/persistence/orm\"\n" +
 				"\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
 				"\txsi:schemaLocation=\"http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd\"\n" +
@@ -3309,7 +3309,7 @@ public class ServiceBuilder {
 		File xmlFile = new File(_springFileName);
 
 		String xml =
-			"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+			"<?xml version=\"1.0\"?>\n" +
 			"\n" +
 			"<beans\n" +
 			"\tdefault-destroy-method=\"destroy\"\n" +
