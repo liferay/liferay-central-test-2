@@ -189,7 +189,7 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 		"select * from Layout where plid = ?";
 
 	private static final String _GET_LAYOUT_UUID =
-		"select uuid_ from Layout where groupId = ? AND privateLayout = ? " +
-			"AND layoutId = ?";
+		"select uuid_ from Layout where groupId = ? and privateLayout = ? " +
+			"and layoutId = ?";
 
 }

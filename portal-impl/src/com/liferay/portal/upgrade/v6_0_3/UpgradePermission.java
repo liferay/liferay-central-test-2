@@ -183,7 +183,7 @@ public class UpgradePermission extends UpgradeProcess {
 			sb.append("User_.userId = Users_Roles.userId and ");
 			sb.append("Users_Roles.roleId = ?) union all (select User_.* ");
 			sb.append("from User_, UserGroupRole where User_.userId = ");
-			sb.append("UserGroupRole.userId AND UserGroupRole.roleId = ?)");
+			sb.append("UserGroupRole.userId and UserGroupRole.roleId = ?)");
 
 			String sql = sb.toString();
 
@@ -293,10 +293,10 @@ public class UpgradePermission extends UpgradeProcess {
 			sb.append("Resource_, ResourceCode, Permission_, ");
 			sb.append("Roles_Permissions where Resource_.codeId = ");
 			sb.append("ResourceCode.codeId and ResourceCode.name = ");
-			sb.append("'com.liferay.portlet.journal' AND ");
-			sb.append("ResourceCode.scope = 4 AND Resource_.resourceId = ");
-			sb.append("Permission_.resourceId AND Permission_.actionId = ");
-			sb.append("'APPROVE_ARTICLE' AND Permission_.permissionId = ");
+			sb.append("'com.liferay.portlet.journal' and ");
+			sb.append("ResourceCode.scope = 4 and Resource_.resourceId = ");
+			sb.append("Permission_.resourceId and Permission_.actionId = ");
+			sb.append("'APPROVE_ARTICLE' and Permission_.permissionId = ");
 			sb.append("Roles_Permissions.permissionId");
 
 			String sql = sb.toString();
@@ -334,13 +334,13 @@ public class UpgradePermission extends UpgradeProcess {
 			sb.append("ResourcePermission.roleId, ResourcePermission.primKey ");
 			sb.append("from ResourcePermission, ResourceAction where ");
 			sb.append("ResourceAction.name = 'com.liferay.portlet.journal' ");
-			sb.append("AND ResourceAction.name = ResourcePermission.name AND ");
-			sb.append("ResourceAction.actionId = 'APPROVE_ARTICLE' AND ");
-			sb.append("ResourcePermission.scope = 4 AND ");
+			sb.append("and ResourceAction.name = ResourcePermission.name and ");
+			sb.append("ResourceAction.actionId = 'APPROVE_ARTICLE' and ");
+			sb.append("ResourcePermission.scope = 4 and ");
 			sb.append("ResourcePermission.actionIds >= ");
-			sb.append("ResourceAction.bitwiseValue AND ");
+			sb.append("ResourceAction.bitwiseValue and ");
 			sb.append("ResourcePermission.actionIds / ");
-			sb.append("MOD(ResourceAction.bitwiseValue, 2) = 1");
+			sb.append("mod(ResourceAction.bitwiseValue, 2) = 1");
 
 			String sql = sb.toString();
 
