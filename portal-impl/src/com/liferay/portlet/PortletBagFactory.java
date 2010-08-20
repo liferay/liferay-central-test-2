@@ -309,9 +309,11 @@ public class PortletBagFactory {
 	protected String getPluginPropertyValue(String propertyKey)
 		throws Exception {
 
-		Class<?> clazz = _classLoader.loadClass(PortletProps.class.getName());
+		Class<?> classObj = _classLoader.loadClass(
+			PortletProps.class.getName());
 
-		java.lang.reflect.Method method = clazz.getMethod("get", String.class);
+		java.lang.reflect.Method method = classObj.getMethod(
+			"get", String.class);
 
 		return (String)method.invoke(null, propertyKey);
 	}
