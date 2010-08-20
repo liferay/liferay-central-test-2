@@ -238,8 +238,8 @@ public class UnsyncPrintWriterTest extends TestCase {
 
 			_writerField.setAccessible(true);
 		}
-		catch (Throwable t) {
-			throw new ExceptionInInitializerError(t);
+		catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

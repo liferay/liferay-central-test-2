@@ -279,7 +279,7 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 				MethodCache.class, "cache");
 		}
 		catch (Exception e) {
-			throw new ExceptionInInitializerError(e);
+			_log.error(e, e);
 		}
 	}
 

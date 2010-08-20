@@ -71,7 +71,7 @@ public class AxisCleanUpFilter extends BaseFilter {
 				MethodCache.class, "cache");
 		}
 		catch (Exception e) {
-			throw new ExceptionInInitializerError(e);
+			_log.error(e, e);
 		}
 	}
 
