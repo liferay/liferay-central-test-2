@@ -47,6 +47,9 @@ public class SQLTransformer {
 		else if (db.getType().equals(DB.TYPE_SQLSERVER)) {
 			_vendorSQLServer = true;
 		}
+		else if (db.getType().equals(DB.TYPE_SYBASE)) {
+			_vendorSybase = true;
+		}
 	}
 
 	private String _removeLower(String sql) {
@@ -98,7 +101,7 @@ public class SQLTransformer {
 		else if (_vendorPostgreSQL) {
 			return matcher.replaceAll("CAST($1 AS TEXT)");
 		}
-		else if (_vendorSQLServer) {
+		else if (_vendorSQLServer || _vendorSybase) {
 			return matcher.replaceAll("CAST($1 AS NVARCHAR)");
 		}
 		else {
@@ -137,7 +140,7 @@ public class SQLTransformer {
 				newSQL = _removeLower(newSQL);
 			}
 		}
-		else if (_vendorSQLServer) {
+		else if (_vendorSQLServer || _vendorSybase) {
 			newSQL = _replaceMod(newSQL);
 		}
 
@@ -168,5 +171,6 @@ public class SQLTransformer {
 	private boolean _vendorMySQL;
 	private boolean _vendorPostgreSQL;
 	private boolean _vendorSQLServer;
+	private boolean _vendorSybase;
 
 }
