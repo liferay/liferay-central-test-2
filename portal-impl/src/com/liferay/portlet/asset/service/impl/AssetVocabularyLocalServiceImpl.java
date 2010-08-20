@@ -74,10 +74,12 @@ public class AssetVocabularyLocalServiceImpl
 		vocabulary.setCreateDate(now);
 		vocabulary.setModifiedDate(now);
 		vocabulary.setName(name);
-		vocabulary.setTitleMap(titleMap);
 
 		if (Validator.isNotNull(title)) {
 			vocabulary.setTitle(title);
+		}
+		else {
+			vocabulary.setTitleMap(titleMap);
 		}
 
 		vocabulary.setDescriptionMap(descriptionMap);
