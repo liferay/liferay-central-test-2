@@ -147,7 +147,7 @@ public class ${entity.name}ServiceHttp {
 		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method)>
 			<#assign parameters = method.parameters>
 
-			private static final Class[] _${method.name}ParameterTypes${method_index} = new Class[] {
+			private static final Class<?>[] _${method.name}ParameterTypes${method_index} = new Class[] {
 
 			<#list parameters as parameter>
 				${serviceBuilder.getLiteralClass(parameter.type)}
