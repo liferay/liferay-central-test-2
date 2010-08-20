@@ -27,10 +27,30 @@ import java.util.Properties;
  */
 public class CreoleFilter extends org.wikiwizard.jspwiki.filters.CreoleFilter {
 
+	public void destroy(WikiEngine wikiEngine)  {
+		super.destroy(wikiEngine);
+	}
+
 	public void initialize(WikiEngine wikiEngine, Properties properties) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Initializing");
 		}
+	}
+
+	public void postSave(WikiContext wikiContext, String content) {
+		super.postSave(wikiContext, content);
+	}
+
+	public String postTranslate(WikiContext wikiContext, String htmlContent) {
+		super.postTranslate(wikiContext, htmlContent);
+	}
+
+	public String preSave(WikiContext wikiContext, String content) {
+		super.preSave(wikiContext, content);
+	}
+
+	public String preTranslate(WikiContext wikiContext, String content) {
+		super.preTranslate(wikiContext, content);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(CreoleFilter.class);
