@@ -792,7 +792,7 @@ public class StringUtil {
 			return null;
 		}
 
-		return s.replaceFirst(String.valueOf(oldSub), String.valueOf(newSub));
+		return replaceFirst(s, String.valueOf(oldSub), String.valueOf(newSub));
 	}
 
 	public static String replaceFirst(String s, char oldSub, String newSub) {
@@ -800,7 +800,7 @@ public class StringUtil {
 			return null;
 		}
 
-		return s.replaceFirst(String.valueOf(oldSub), newSub);
+		return replaceFirst(s, String.valueOf(oldSub), newSub);
 	}
 
 	public static String replaceFirst(String s, String oldSub, String newSub) {
@@ -808,7 +808,29 @@ public class StringUtil {
 			return null;
 		}
 
-		return s.replaceFirst(oldSub, newSub);
+		int y = s.indexOf(oldSub);
+
+		if (y >= 0) {
+			StringBundler sb = new StringBundler();
+
+			int length = oldSub.length();
+			int x = 0;
+
+			while (x <= y) {
+				sb.append(s.substring(x, y));
+				sb.append(newSub);
+
+				x = y + length;
+				y = s.indexOf(oldSub, x);
+			}
+
+			sb.append(s.substring(x));
+
+			return sb.toString();
+		}
+		else {
+			return s;
+		}
 	}
 
 	public static String replaceFirst(
