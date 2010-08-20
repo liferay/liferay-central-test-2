@@ -141,6 +141,12 @@ public class XMLFormatter {
 			content = StringUtil.replace(content, " \n", "\n");
 		}
 
+		if (content.startsWith("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")) {
+			content = StringUtil.replaceFirst(
+				content, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>",
+				"<?xml version=\"1.0\"?>");
+		}
+
 		return content;
 	}
 
@@ -153,11 +159,11 @@ public class XMLFormatter {
 	public static String toString(String xml, String indent)
 		throws DocumentException, IOException {
 
-		SAXReader reader = new SAXReader();
+		SAXReader saxReader = new SAXReader();
 
-		Document doc = reader.read(new UnsyncStringReader(xml));
+		Document document = saxReader.read(new UnsyncStringReader(xml));
 
-		return toString(doc, indent);
+		return toString(document, indent);
 	}
 
 }
