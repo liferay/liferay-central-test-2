@@ -86,6 +86,19 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService {
 		return _blogsEntryService.getGroupEntries(groupId, status, max);
 	}
 
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
+		long groupId, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _blogsEntryService.getGroupEntries(groupId, status, start, end);
+	}
+
+	public int getGroupEntriesCount(long groupId, int status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _blogsEntryService.getGroupEntriesCount(groupId, status);
+	}
+
 	public java.lang.String getGroupEntriesRSS(long groupId, int status,
 		int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,

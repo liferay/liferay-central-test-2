@@ -527,6 +527,7 @@ Liferay.Service.registerClass(
 		getCompanyEntries: true,
 		getEntry: true,
 		getGroupEntries: true,
+		getGroupEntriesCount: true,
 		getGroupsEntries: true,
 		getOrganizationEntries: true,
 		updateEntry: true
