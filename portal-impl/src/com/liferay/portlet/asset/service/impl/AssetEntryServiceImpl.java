@@ -347,6 +347,9 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			filteredEntries = filteredEntries.subList(start, end);
 		}
 
+		entryQuery.setStart(start);
+		entryQuery.setEnd(end);
+
 		return new Object[] {filteredEntries, length};
 	}
 
