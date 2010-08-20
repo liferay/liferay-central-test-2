@@ -79,13 +79,7 @@ public class ${entity.name}ServiceHttp {
 
 			{
 				try {
-					MethodKey methodKey = new MethodKey(${entity.name}ServiceUtil.class.getName(), "${method.name}"
-
-					<#list parameters as parameter>
-						, ${serviceBuilder.getLiteralClass(parameter.type)}
-					</#list>
-
-					);
+					MethodKey methodKey = new MethodKey(${entity.name}ServiceUtil.class.getName(), "${method.name}", _${method.name}ParameterTypes${method_index});
 
 					MethodHandler methodHandler = new MethodHandler(methodKey
 
@@ -149,4 +143,19 @@ public class ${entity.name}ServiceHttp {
 		private static Log _log = LogFactoryUtil.getLog(${entity.name}ServiceHttp.class);
 	</#if>
 
+	<#list methods as method>
+		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method)>
+			<#assign parameters = method.parameters>
+			private static final Class[] _${method.name}ParameterTypes${method_index} = new Class[] {
+
+			<#list parameters as parameter>
+				${serviceBuilder.getLiteralClass(parameter.type)}
+				<#if parameter_has_next>
+					,
+				</#if>
+			</#list>
+
+			};
+		</#if>
+	</#list>
 }
