@@ -243,7 +243,7 @@ public class AssetVocabularyLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
-		long userId,
+		long userId, java.lang.String title,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String settings,
@@ -251,8 +251,8 @@ public class AssetVocabularyLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addVocabulary(userId, titleMap, descriptionMap, settings,
-			serviceContext);
+				   .addVocabulary(userId, title, titleMap, descriptionMap,
+			settings, serviceContext);
 	}
 
 	public static void addVocabularyResources(
@@ -324,7 +324,7 @@ public class AssetVocabularyLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetVocabulary updateVocabulary(
-		long vocabularyId,
+		long vocabularyId, java.lang.String title,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String settings,
@@ -332,8 +332,8 @@ public class AssetVocabularyLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateVocabulary(vocabularyId, titleMap, descriptionMap,
-			settings, serviceContext);
+				   .updateVocabulary(vocabularyId, title, titleMap,
+			descriptionMap, settings, serviceContext);
 	}
 
 	public static AssetVocabularyLocalService getService() {

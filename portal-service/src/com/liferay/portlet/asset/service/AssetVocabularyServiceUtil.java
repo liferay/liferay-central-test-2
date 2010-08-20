@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class AssetVocabularyServiceUtil {
 	public static com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
+		java.lang.String title,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String settings,
@@ -42,7 +43,7 @@ public class AssetVocabularyServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addVocabulary(titleMap, descriptionMap, settings,
+				   .addVocabulary(title, titleMap, descriptionMap, settings,
 			serviceContext);
 	}
 
@@ -81,7 +82,7 @@ public class AssetVocabularyServiceUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetVocabulary updateVocabulary(
-		long vocabularyId,
+		long vocabularyId, java.lang.String title,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String settings,
@@ -89,8 +90,8 @@ public class AssetVocabularyServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateVocabulary(vocabularyId, titleMap, descriptionMap,
-			settings, serviceContext);
+				   .updateVocabulary(vocabularyId, title, titleMap,
+			descriptionMap, settings, serviceContext);
 	}
 
 	public static AssetVocabularyService getService() {

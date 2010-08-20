@@ -224,7 +224,7 @@ public interface AssetVocabularyLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
-		long userId,
+		long userId, java.lang.String title,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String settings,
@@ -284,7 +284,7 @@ public interface AssetVocabularyLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetVocabulary updateVocabulary(
-		long vocabularyId,
+		long vocabularyId, java.lang.String title,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String settings,

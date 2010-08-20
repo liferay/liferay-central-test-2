@@ -55,7 +55,7 @@ import com.liferay.portlet.asset.service.AssetVocabularyServiceUtil;
  */
 public class AssetVocabularyServiceHttp {
 	public static com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
-		HttpPrincipal httpPrincipal,
+		HttpPrincipal httpPrincipal, java.lang.String title,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String settings,
@@ -64,11 +64,12 @@ public class AssetVocabularyServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
-					"addVocabulary", java.util.Map.class, java.util.Map.class,
+					"addVocabulary", java.lang.String.class,
+					java.util.Map.class, java.util.Map.class,
 					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
+			MethodHandler methodHandler = new MethodHandler(methodKey, title,
 					titleMap, descriptionMap, settings, serviceContext);
 
 			Object returnObj = null;
@@ -276,7 +277,7 @@ public class AssetVocabularyServiceHttp {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetVocabulary updateVocabulary(
-		HttpPrincipal httpPrincipal, long vocabularyId,
+		HttpPrincipal httpPrincipal, long vocabularyId, java.lang.String title,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String settings,
@@ -285,12 +286,13 @@ public class AssetVocabularyServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
-					"updateVocabulary", long.class, java.util.Map.class,
-					java.util.Map.class, java.lang.String.class,
+					"updateVocabulary", long.class, java.lang.String.class,
+					java.util.Map.class, java.util.Map.class,
+					java.lang.String.class,
 					com.liferay.portal.service.ServiceContext.class);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					vocabularyId, titleMap, descriptionMap, settings,
+					vocabularyId, title, titleMap, descriptionMap, settings,
 					serviceContext);
 
 			Object returnObj = null;

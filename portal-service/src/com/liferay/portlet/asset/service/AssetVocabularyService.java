@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 	PortalException.class, SystemException.class})
 public interface AssetVocabularyService {
 	public com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
+		java.lang.String title,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String settings,
@@ -77,7 +78,7 @@ public interface AssetVocabularyService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetVocabulary updateVocabulary(
-		long vocabularyId,
+		long vocabularyId, java.lang.String title,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String settings,
