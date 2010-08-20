@@ -165,12 +165,11 @@ public class EditStructureAction extends PortletAction {
 		String[] deleteStructureIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "deleteStructureIds"));
 
-		for (String _deleteStructureId : deleteStructureIds) {
+		for (String deleteStructureId : deleteStructureIds) {
 			JournalStructureServiceUtil.deleteStructure(
-				groupId, _deleteStructureId);
+				groupId, deleteStructureId);
 
-			JournalUtil.removeRecentStructure(
-				actionRequest, _deleteStructureId);
+			JournalUtil.removeRecentStructure(actionRequest, deleteStructureId);
 		}
 	}
 
