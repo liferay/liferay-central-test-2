@@ -142,7 +142,7 @@ public class PortletBeanFactoryCleaner implements BeanFactoryAware {
 				AspectJExpressionPointcut.class, "shadowMatchCache");
 		}
 		catch (Exception e) {
-			throw new ExceptionInInitializerError(e);
+			_log.error(e, e);
 		}
 	}
 
