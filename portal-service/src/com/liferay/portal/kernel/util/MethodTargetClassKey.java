@@ -47,8 +47,8 @@ public class MethodTargetClassKey {
 
 		MethodTargetClassKey methodTargetClassKey = (MethodTargetClassKey)obj;
 
-		if (Validator.equals(_method, methodTargetClassKey._method) &&
-			Validator.equals(_targetClass, methodTargetClassKey._targetClass)) {
+		if (_targetClass == methodTargetClassKey._targetClass &&
+			Validator.equals(_method, methodTargetClassKey._method)) {
 
 			return true;
 		}
