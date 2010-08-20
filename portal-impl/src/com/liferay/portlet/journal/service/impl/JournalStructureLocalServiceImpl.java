@@ -30,6 +30,7 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.journal.DuplicateStructureElementException;
 import com.liferay.portlet.journal.DuplicateStructureIdException;
 import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.RequiredStructureException;
@@ -43,6 +44,7 @@ import com.liferay.portlet.journal.model.JournalStructureConstants;
 import com.liferay.portlet.journal.service.base.JournalStructureLocalServiceBaseImpl;
 import com.liferay.portlet.journal.util.JournalUtil;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -416,7 +418,7 @@ public class JournalStructureLocalServiceImpl
 		}
 
 		validateParentStructureId(groupId, structureId, parentStructureId);
-		validate(name, description, xsd);
+		validate(groupId, parentStructureId, name, description, xsd);
 
 		JournalStructure structure = journalStructurePersistence.findByG_S(
 			groupId, structureId);
@@ -438,6 +440,27 @@ public class JournalStructureLocalServiceImpl
 		return structure;
 	}
 
+	protected void appendParentStructureElements(
+			long groupId, String parentStructureId, List<Element> children)
+		throws Exception {
+
+		if (Validator.isNull(parentStructureId)) {
+			return;
+		}
+
+		JournalStructure parentStructure =
+			journalStructurePersistence.findByG_S(groupId, parentStructureId);
+
+		appendParentStructureElements(
+			groupId, parentStructure.getParentStructureId(), children);
+
+		Document doc = SAXReaderUtil.read(parentStructure.getXsd());
+
+		Element root = doc.getRootElement();
+
+		children.addAll(root.elements());
+	}
+
 	protected void validate(
 			long groupId, String structureId, boolean autoStructureId,
 			String parentStructureId, String name, String description,
@@ -456,10 +479,12 @@ public class JournalStructureLocalServiceImpl
 		}
 
 		validateParentStructureId(groupId, structureId, parentStructureId);
-		validate(name, description, xsd);
+		validate(groupId, parentStructureId, name, description, xsd);
 	}
 
-	protected void validate(String name, String description, String xsd)
+	protected void validate(
+			long groupId, String parentStructureId, String name,
+			String description, String xsd)
 		throws PortalException {
 
 		if (Validator.isNull(name)) {
@@ -474,19 +499,30 @@ public class JournalStructureLocalServiceImpl
 		}
 		else {
 			try {
+				List<Element> children = new ArrayList<Element>();
+
+				appendParentStructureElements(
+					groupId, parentStructureId, children);
+
 				Document doc = SAXReaderUtil.read(xsd);
 
 				Element root = doc.getRootElement();
 
-				List<Element> children = root.elements();
-
-				if (children.size() == 0) {
+				if (root.elements().size() == 0) {
 					throw new StructureXsdException();
 				}
+
+				children.addAll(root.elements());
 
 				Set<String> elNames = new HashSet<String>();
 
 				validate(children, elNames);
+			}
+			catch (DuplicateStructureElementException dsee) {
+				throw dsee;
+			}
+			catch (StructureXsdException sxe) {
+				throw sxe;
 			}
 			catch (Exception e) {
 				throw new StructureXsdException();
@@ -537,7 +573,7 @@ public class JournalStructureLocalServiceImpl
 				String elNameLowerCase = completePath.toLowerCase();
 
 				if (elNames.contains(elNameLowerCase)) {
-					throw new StructureXsdException();
+					throw new DuplicateStructureElementException();
 				}
 				else {
 					elNames.add(elNameLowerCase);

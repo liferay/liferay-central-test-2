@@ -39,6 +39,7 @@
 <%@ page import="com.liferay.portlet.journal.ArticleVersionException" %>
 <%@ page import="com.liferay.portlet.journal.DuplicateArticleIdException" %>
 <%@ page import="com.liferay.portlet.journal.DuplicateFeedIdException" %>
+<%@ page import="com.liferay.portlet.journal.DuplicateStructureElementException" %>
 <%@ page import="com.liferay.portlet.journal.DuplicateStructureIdException" %>
 <%@ page import="com.liferay.portlet.journal.DuplicateTemplateIdException" %>
 <%@ page import="com.liferay.portlet.journal.FeedContentFieldException" %>

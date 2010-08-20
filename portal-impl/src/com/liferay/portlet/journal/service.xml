@@ -446,6 +446,7 @@
 		<exception>DuplicateArticleId</exception>
 		<exception>DuplicateArticleImageId</exception>
 		<exception>DuplicateFeedId</exception>
+		<exception>DuplicateStructureElement</exception>
 		<exception>DuplicateStructureId</exception>
 		<exception>DuplicateTemplateId</exception>
 		<exception>FeedContentField</exception>

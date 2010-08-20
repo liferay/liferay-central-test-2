@@ -96,6 +96,7 @@ int tabIndex = 1;
 		title='<%= (structure != null) ? structure.getName() : "new-structure" %>'
 	/>
 
+	<liferay-ui:error exception="<%= DuplicateStructureElementException.class %>" message="please-enter-unique-structure-field-names-including-the-parent-structure" />
 	<liferay-ui:error exception="<%= DuplicateStructureIdException.class %>" message="please-enter-a-unique-id" />
 	<liferay-ui:error exception="<%= StructureDescriptionException.class %>" message="please-enter-a-valid-description" />
 	<liferay-ui:error exception="<%= StructureIdException.class %>" message="please-enter-a-valid-id" />
