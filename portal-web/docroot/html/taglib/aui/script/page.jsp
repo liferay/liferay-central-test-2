@@ -56,9 +56,15 @@ if (scriptData == null) {
 					useSB.append(StringPool.APOSTROPHE);
 					useSB.append(StringPool.COMMA_AND_SPACE);
 				}
+
+				String loadMethod = "use";
+
+				if (BrowserSnifferUtil.isIe(request) && (BrowserSnifferUtil.getMajorVersion(request) < 8)) {
+					loadMethod = "ready";
+				}
 				%>
 
-				AUI().use(
+				AUI().<%= loadMethod %>(
 
 					<%
 					useSB.writeTo(out);
