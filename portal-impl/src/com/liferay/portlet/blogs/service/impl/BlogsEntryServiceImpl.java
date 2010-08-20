@@ -156,7 +156,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	}
 
 	public List<BlogsEntry> getGroupEntries(long groupId, int status, int max)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
 			return blogsEntryPersistence.filterFindByGroupId(groupId, 0, max);
@@ -169,7 +169,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 	public List<BlogsEntry> getGroupEntries(
 			long groupId, int status, int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
 			return blogsEntryPersistence.filterFindByGroupId(
@@ -182,7 +182,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	}
 
 	public int getGroupEntriesCount(long groupId, int status)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
 			return blogsEntryPersistence.filterCountByGroupId(groupId);
