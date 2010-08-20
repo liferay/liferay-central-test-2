@@ -47,6 +47,9 @@ public class SQLTransformer {
 		else if (db.getType().equals(DB.TYPE_SQLSERVER)) {
 			_vendorSQLServer = true;
 		}
+		else if (db.getType().equals(DB.TYPE_DERBY)) {
+			_vendorDerbyDB = true;
+		}
 	}
 
 	private String _removeLower(String sql) {
@@ -97,6 +100,9 @@ public class SQLTransformer {
 		}
 		else if (_vendorSQLServer) {
 			return matcher.replaceAll("CAST($1 AS NVARCHAR)");
+		}
+		else if (_vendorDerbyDB) {
+			return matcher.replaceAll("CAST($1 AS CHAR(254))");
 		}
 		else {
 			return matcher.replaceAll("$1");
@@ -153,6 +159,7 @@ public class SQLTransformer {
 	private static Pattern _modPattern = Pattern.compile(
 		"MOD\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
 
+	private boolean _vendorDerbyDB;
 	private boolean _vendorMySQL;
 	private boolean _vendorOracle;
 	private boolean _vendorPostgreSQL;
