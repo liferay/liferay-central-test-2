@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
@@ -157,34 +158,38 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	public List<BlogsEntry> getGroupEntries(long groupId, int status, int max)
 		throws PortalException, SystemException {
 
-		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
-
-		int lastIntervalStart = 0;
-		boolean listNotExhausted = true;
-
-		while ((entries.size() < max) && listNotExhausted) {
-			List<BlogsEntry> entryList =
-				blogsEntryLocalService.getGroupEntries(
-					groupId, status, lastIntervalStart,
-					lastIntervalStart + max);
-
-			Iterator<BlogsEntry> itr = entryList.iterator();
-
-			lastIntervalStart += max;
-			listNotExhausted = (entryList.size() == max);
-
-			while (itr.hasNext() && (entries.size() < max)) {
-				BlogsEntry entry = itr.next();
-
-				if (BlogsEntryPermission.contains(
-						getPermissionChecker(), entry, ActionKeys.VIEW)) {
-
-					entries.add(entry);
-				}
-			}
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return blogsEntryPersistence.filterFindByGroupId(groupId, 0, max);
 		}
+		else {
+			return blogsEntryPersistence.filterFindByG_S(
+				groupId, status, 0, max);
+		}
+	}
 
-		return entries;
+	public List<BlogsEntry> getGroupEntries(
+			long groupId, int status, int start, int end)
+		throws PortalException, SystemException {
+
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return blogsEntryPersistence.filterFindByGroupId(
+				groupId, start, end);
+		}
+		else {
+			return blogsEntryPersistence.filterFindByG_S(
+				groupId, status, start, end);
+		}
+	}
+
+	public int getGroupEntriesCount(long groupId, int status)
+		throws PortalException, SystemException {
+
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return blogsEntryPersistence.filterCountByGroupId(groupId);
+		}
+		else {
+			return blogsEntryPersistence.filterCountByG_S(groupId, status);
+		}
 	}
 
 	public String getGroupEntriesRSS(

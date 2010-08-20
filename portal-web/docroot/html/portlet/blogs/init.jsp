@@ -43,6 +43,7 @@
 <%@ page import="com.liferay.portlet.blogs.NoSuchEntryException" %>
 <%@ page import="com.liferay.portlet.blogs.model.BlogsEntry" %>
 <%@ page import="com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.blogs.service.BlogsEntryServiceUtil" %>
 <%@ page import="com.liferay.portlet.blogs.service.permission.BlogsEntryPermission" %>
 <%@ page import="com.liferay.portlet.blogs.service.permission.BlogsPermission" %>
 <%@ page import="com.liferay.portlet.blogs.util.BlogsUtil" %>
