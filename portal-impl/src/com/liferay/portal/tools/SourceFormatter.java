@@ -1105,11 +1105,11 @@ public class SourceFormatter {
 
 		String quoteFix = StringPool.APOSTROPHE;
 
-	    if (quoteFix.equals(quoteType)) {
-	    	quoteFix = StringPool.QUOTE;
-	    }
+		if (quoteFix.equals(quoteType)) {
+			quoteFix = StringPool.QUOTE;
+		}
 
-	    Pattern pattern = Pattern.compile(_getTaglibRegex(quoteType));
+		Pattern pattern = Pattern.compile(_getTaglibRegex(quoteType));
 
 		Matcher matcher = pattern.matcher(content);
 
