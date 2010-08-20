@@ -37,8 +37,6 @@ import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -311,21 +309,11 @@ public class PortletBagFactory {
 	protected String getPluginPropertyValue(String propertyKey)
 		throws Exception {
 
-		Thread currentThread = Thread.currentThread();
+		Class<?> clazz = _classLoader.loadClass(PortletProps.class.getName());
 
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+		java.lang.reflect.Method method = clazz.getMethod("get", String.class);
 
-		try {
-			currentThread.setContextClassLoader(_classLoader);
-
-			MethodHandler methodHandler = new MethodHandler(
-				_getMethodKey, propertyKey);
-
-			return (String)methodHandler.invoke(false);
-		}
-		finally {
-			currentThread.setContextClassLoader(contextClassLoader);
-		}
+		return (String)method.invoke(null, propertyKey);
 	}
 
 	protected void initResourceBundle(
@@ -669,9 +657,6 @@ public class PortletBagFactory {
 		return (URLEncoder)newInstance(
 			URLEncoder.class, portlet.getURLEncoderClass());
 	}
-
-	private static final MethodKey _getMethodKey = new MethodKey(
-		PortletProps.class.getName(), "get", String.class);
 
 	private static Log _log = LogFactoryUtil.getLog(PortletBagFactory.class);
 
