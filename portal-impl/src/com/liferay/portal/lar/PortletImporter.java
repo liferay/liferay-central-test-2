@@ -505,14 +505,14 @@ public class PortletImporter {
 			serviceContext.setUuid(vocabulary.getUuid());
 
 			importedVocabulary = AssetVocabularyLocalServiceUtil.addVocabulary(
-				userId, vocabulary.getTitleMap(),
+				userId, vocabulary.getTitle(), vocabulary.getTitleMap(),
 				vocabulary.getDescriptionMap(), vocabulary.getSettings(),
 				serviceContext);
 		}
 		else {
 			importedVocabulary =
 				AssetVocabularyLocalServiceUtil.updateVocabulary(
-					existingVocabulary.getVocabularyId(),
+					existingVocabulary.getVocabularyId(), vocabulary.getTitle(),
 					vocabulary.getTitleMap(), vocabulary.getDescriptionMap(),
 					vocabulary.getSettings(),serviceContext);
 		}

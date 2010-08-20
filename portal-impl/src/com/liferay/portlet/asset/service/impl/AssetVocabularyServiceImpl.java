@@ -39,8 +39,9 @@ public class AssetVocabularyServiceImpl
 	extends AssetVocabularyServiceBaseImpl {
 
 	public AssetVocabulary addVocabulary(
-			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
-			String settings, ServiceContext serviceContext)
+			String title, Map<Locale, String> titleMap,
+			Map<Locale, String> descriptionMap, String settings,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		AssetPermission.check(
@@ -48,7 +49,8 @@ public class AssetVocabularyServiceImpl
 			ActionKeys.ADD_VOCABULARY);
 
 		return assetVocabularyLocalService.addVocabulary(
-			getUserId(), titleMap, descriptionMap, settings, serviceContext);
+			getUserId(), title, titleMap, descriptionMap, settings,
+			serviceContext);
 	}
 
 	public void deleteVocabulary(long vocabularyId)
@@ -91,7 +93,7 @@ public class AssetVocabularyServiceImpl
 	}
 
 	public AssetVocabulary updateVocabulary(
-			long vocabularyId, Map<Locale, String> titleMap,
+			long vocabularyId, String title, Map<Locale, String> titleMap,
 			Map<Locale, String> descriptionMap, String settings,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -100,7 +102,8 @@ public class AssetVocabularyServiceImpl
 			getPermissionChecker(), vocabularyId, ActionKeys.UPDATE);
 
 		return assetVocabularyLocalService.updateVocabulary(
-			vocabularyId, titleMap, descriptionMap, settings, serviceContext);
+			vocabularyId, title, titleMap, descriptionMap, settings,
+			serviceContext);
 	}
 
 	protected List<AssetVocabulary> filterVocabularies(

@@ -585,13 +585,14 @@ public class LayoutImporter {
 
 					assetVocabulary =
 						AssetVocabularyLocalServiceUtil.addVocabulary(
-							context.getUserId(userUuid), titleMap, null,
-							StringPool.BLANK, serviceContext);
+							context.getUserId(userUuid), StringPool.BLANK,
+							titleMap, null, StringPool.BLANK, serviceContext);
 				}
 				else {
 					assetVocabulary =
 						AssetVocabularyLocalServiceUtil.updateVocabulary(
 							existingAssetVocabulary.getVocabularyId(),
+							existingAssetVocabulary.getTitle(),
 							existingAssetVocabulary.getTitleMap(),
 							existingAssetVocabulary.getDescriptionMap(),
 							existingAssetVocabulary.getSettings(),
@@ -604,8 +605,8 @@ public class LayoutImporter {
 				titleMap.put(LocaleUtil.getDefault(), vocabularyName);
 
 				assetVocabulary = AssetVocabularyLocalServiceUtil.addVocabulary(
-					context.getUserId(userUuid), titleMap, null,
-					StringPool.BLANK, serviceContext);
+					context.getUserId(userUuid), StringPool.BLANK, titleMap,
+					null, StringPool.BLANK, serviceContext);
 			}
 		}
 		catch (DuplicateVocabularyException dve) {

@@ -650,7 +650,8 @@ AUI().add(
 
 						Liferay.Service.Asset.AssetVocabulary.addVocabulary(
 							{
-								title: A.JSON.stringify(titleMap),
+								title: '',
+								titleMap: A.JSON.stringify(titleMap),
 								description: '',
 								settings: '',
 								serviceContext: A.JSON.stringify(
@@ -1374,7 +1375,8 @@ AUI().add(
 						Liferay.Service.Asset.AssetVocabulary.updateVocabulary(
 							{
 								vocabularyId: vocabularyId,
-								title: A.JSON.stringify(titleMap),
+								title: '',
+								titleMap: A.JSON.stringify(titleMap),
 								description: '',
 								settings: '',
 								serviceContext: A.JSON.stringify(

@@ -46,7 +46,7 @@ public class AssetVocabularyLocalServiceImpl
 	extends AssetVocabularyLocalServiceBaseImpl {
 
 	public AssetVocabulary addVocabulary(
-			long userId, Map<Locale, String> titleMap,
+			long userId, String title, Map<Locale, String> titleMap,
 			Map<Locale, String> descriptionMap, String settings,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -75,6 +75,11 @@ public class AssetVocabularyLocalServiceImpl
 		vocabulary.setModifiedDate(now);
 		vocabulary.setName(name);
 		vocabulary.setTitleMap(titleMap);
+
+		if (Validator.isNotNull(title)) {
+			vocabulary.setTitle(title);
+		}
+
 		vocabulary.setDescriptionMap(descriptionMap);
 		vocabulary.setSettings(settings);
 
@@ -191,8 +196,8 @@ public class AssetVocabularyLocalServiceImpl
 
 			AssetVocabulary vocabulary =
 				assetVocabularyLocalService.addVocabulary(
-					defaultUserId, titleMap, null, StringPool.BLANK,
-					serviceContext);
+					defaultUserId, StringPool.BLANK, titleMap, null,
+					StringPool.BLANK, serviceContext);
 
 			vocabularies = ListUtil.copy(vocabularies);
 
@@ -215,7 +220,7 @@ public class AssetVocabularyLocalServiceImpl
 	}
 
 	public AssetVocabulary updateVocabulary(
-			long vocabularyId, Map<Locale, String> titleMap,
+			long vocabularyId, String title, Map<Locale, String> titleMap,
 			Map<Locale, String> descriptionMap, String settings,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -233,6 +238,11 @@ public class AssetVocabularyLocalServiceImpl
 		vocabulary.setModifiedDate(new Date());
 		vocabulary.setName(name);
 		vocabulary.setTitleMap(titleMap);
+
+		if (Validator.isNotNull(title)) {
+			vocabulary.setTitle(title);
+		}
+
 		vocabulary.setDescriptionMap(descriptionMap);
 		vocabulary.setSettings(settings);
 
