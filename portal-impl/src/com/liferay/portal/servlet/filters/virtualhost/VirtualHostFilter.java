@@ -189,7 +189,9 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 		String contextPath = PortalUtil.getPathContext();
 
-		String friendlyURL = request.getRequestURI();
+		String originalFriendlyURL = request.getRequestURI();
+
+		String friendlyURL = originalFriendlyURL;
 
 		if ((Validator.isNotNull(contextPath)) &&
 			(friendlyURL.indexOf(contextPath) != -1)) {
@@ -226,6 +228,9 @@ public class VirtualHostFilter extends BasePortalFilter {
 				break;
 			}
 		}
+
+		friendlyURL = StringUtil.replace(
+			friendlyURL, PropsValues.WIDGET_SERVLET_MAPPING, StringPool.BLANK);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Friendly URL " + friendlyURL);
@@ -281,7 +286,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 					forwardURL.append(i18nLanguageId);
 				}
 
-				if (friendlyURL.startsWith(
+				if (originalFriendlyURL.startsWith(
 						PropsValues.WIDGET_SERVLET_MAPPING)) {
 
 					forwardURL.append(PropsValues.WIDGET_SERVLET_MAPPING);
