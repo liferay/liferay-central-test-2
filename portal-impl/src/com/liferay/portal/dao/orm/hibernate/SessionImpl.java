@@ -25,6 +25,9 @@ import java.io.Serializable;
 
 import java.sql.Connection;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @author Brian Wing Shun Chan
  */
@@ -65,6 +68,8 @@ public class SessionImpl implements Session {
 		try {
 			queryString = SQLTransformer.transform(queryString);
 
+			queryString = _jpqlTohql(queryString);
+
 			return new QueryImpl(_session.createQuery(queryString));
 		}
 		catch (Exception e) {
@@ -77,6 +82,8 @@ public class SessionImpl implements Session {
 
 		try {
 			queryString = SQLTransformer.transform(queryString);
+
+			queryString = _jpqlTohql(queryString);
 
 			return new SQLQueryImpl(_session.createSQLQuery(queryString));
 		}
@@ -176,6 +183,26 @@ public class SessionImpl implements Session {
 		}
 	}
 
+
+	private String _jpqlTohql(String queryString) {
+
+		Matcher countMatcher = _JPQL_COUNT.matcher(queryString);
+
+		if (countMatcher.find()) {
+			String countExpression = countMatcher.group(1);
+			String entityAlias = countMatcher.group(3);
+
+			if (entityAlias.equals(countExpression)) {
+				queryString = countMatcher.replaceFirst(_HQL_COUNT);
+			}
+		}
+
+		return queryString;
+	}
+
 	private org.hibernate.Session _session;
+
+	private static final Pattern _JPQL_COUNT = Pattern.compile("SELECT COUNT\\((\\S+)\\) FROM (\\S+) (\\S+)");
+	private static final String _HQL_COUNT = "SELECT COUNT(*) FROM $2 $3";
 
 }
