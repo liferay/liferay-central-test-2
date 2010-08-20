@@ -26,15 +26,7 @@ String className = (String)request.getAttribute("liferay-ui:asset-categories-sum
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset-categories-summary:classPK"));
 PortletURL portletURL = (PortletURL)request.getAttribute("liferay-ui:asset-categories-summary:portletURL");
 
-long groupId = scopeGroupId;
-
-Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-if (group.isLayout()) {
-	groupId = group.getParentGroupId();
-}
-
-List<AssetVocabulary> vocabularies = AssetVocabularyServiceUtil.getGroupsVocabularies(new long[] {groupId, themeDisplay.getCompanyGroupId()});
+List<AssetVocabulary> vocabularies = AssetVocabularyServiceUtil.getGroupsVocabularies(new long[] {themeDisplay.getParentGroupId(), themeDisplay.getCompanyGroupId()});
 List<AssetCategory> categories = AssetCategoryServiceUtil.getCategories(className, classPK);
 %>
 

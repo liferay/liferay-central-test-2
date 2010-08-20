@@ -32,9 +32,7 @@ if (searchFolderId > 0) {
 else {
 	List folderIds = new ArrayList();
 
-	long groupId = _getParentGroupId(themeDisplay.getScopeGroup());
-
-	long rootSearchFolderId = DLFileEntryImpl.getFolderId(groupId, DLFileEntryImpl.getRepositoryId(scopeGroupId, searchFolderIds));
+	long rootSearchFolderId = DLFileEntryImpl.getFolderId(themeDisplay.getParentGroupId(), DLFileEntryImpl.getRepositoryId(scopeGroupId, searchFolderIds));
 
 	folderIds.add(new Long(rootSearchFolderId));
 
@@ -187,15 +185,5 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "sea
 %>
 
 <%!
-private long _getParentGroupId(Group group) {
-	long parentGroupId = group.getGroupId();
-
-	if (group.isLayout()) {
-		parentGroupId = group.getParentGroupId();
-	}
-
-	return parentGroupId;
-}
-
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.document_library.search.jsp");
 %>
