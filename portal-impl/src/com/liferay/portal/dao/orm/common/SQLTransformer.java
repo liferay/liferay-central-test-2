@@ -36,7 +36,7 @@ public class SQLTransformer {
 		DB db = DBFactoryUtil.getDB();
 
 		if (db.getType().equals(DB.TYPE_DERBY)) {
-			_vendorDerbyDB = true;
+			_vendorDerby = true;
 		}
 		else if (db.getType().equals(DB.TYPE_MYSQL)) {
 			_vendorMySQL = true;
@@ -92,7 +92,7 @@ public class SQLTransformer {
 	private String _replaceCastText(String sql) {
 		Matcher matcher = _castTextPattern.matcher(sql);
 
-		if (_vendorDerbyDB) {
+		if (_vendorDerby) {
 			return matcher.replaceAll("CAST($1 AS CHAR(254))");
 		}
 		else if (_vendorPostgreSQL) {
@@ -112,6 +112,12 @@ public class SQLTransformer {
 		return matcher.replaceAll("$1 % $2");
 	}
 
+	private String _replaceUnion(String sql) {
+		Matcher matcher = _unionAllPattern.matcher(sql);
+
+		return matcher.replaceAll("$1 $2");
+	}
+
 	private String _transform(String sql) {
 		if (sql == null) {
 			return sql;
@@ -119,7 +125,12 @@ public class SQLTransformer {
 
 		String newSQL = sql;
 
-		if (_vendorMySQL) {
+		newSQL = _replaceCastText(newSQL);
+
+		if (_vendorDerby) {
+			newSQL = _replaceUnion(newSQL);
+		}
+		else if (_vendorMySQL) {
 			DB db = DBFactoryUtil.getDB();
 
 			if (!db.isSupportsStringCaseSensitiveQuery()) {
@@ -129,8 +140,6 @@ public class SQLTransformer {
 		else if (_vendorSQLServer) {
 			newSQL = _replaceMod(newSQL);
 		}
-
-		newSQL = _replaceCastText(newSQL);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Original SQL " + sql);
@@ -152,8 +161,10 @@ public class SQLTransformer {
 		"CAST_TEXT\\((.+?)\\)", Pattern.CASE_INSENSITIVE);
 	private static Pattern _modPattern = Pattern.compile(
 		"MOD\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
+	private static Pattern _unionAllPattern = Pattern.compile(
+		"SELECT \\* FROM(.*)TEMP_TABLE(.*)", Pattern.CASE_INSENSITIVE);
 
-	private boolean _vendorDerbyDB;
+	private boolean _vendorDerby;
 	private boolean _vendorMySQL;
 	private boolean _vendorPostgreSQL;
 	private boolean _vendorSQLServer;
