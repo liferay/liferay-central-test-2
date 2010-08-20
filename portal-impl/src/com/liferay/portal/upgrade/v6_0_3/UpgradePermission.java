@@ -340,7 +340,7 @@ public class UpgradePermission extends UpgradeProcess {
 			sb.append("ResourcePermission.actionIds >= ");
 			sb.append("ResourceAction.bitwiseValue AND ");
 			sb.append("ResourcePermission.actionIds / ");
-			sb.append("ResourceAction.bitwiseValue % 2 = 1");
+			sb.append("mod(ResourceAction.bitwiseValue, 2) = 1");
 
 			String sql = sb.toString();
 
