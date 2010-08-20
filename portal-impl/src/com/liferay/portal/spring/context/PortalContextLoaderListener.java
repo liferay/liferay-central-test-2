@@ -75,6 +75,7 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 
 		AutowireCapableBeanFactory autowireCapableBeanFactory =
 			applicationContext.getAutowireCapableBeanFactory();
+
 		clearFilteredPropertyDescriptorsCache(autowireCapableBeanFactory);
 	}
 
@@ -102,15 +103,18 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		}
 	}
 
-	private void clearFilteredPropertyDescriptorsCache(
+	protected void clearFilteredPropertyDescriptorsCache(
 		AutowireCapableBeanFactory autowireCapableBeanFactory) {
+
 		try {
 			Map<Class, PropertyDescriptor[]> filteredPropertyDescriptorsCache =
 				(Map<Class, PropertyDescriptor[]>)
 					_filteredPropertyDescriptorsCacheField.get(
 						autowireCapableBeanFactory);
+
 			filteredPropertyDescriptorsCache.clear();
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			_log.error(e, e);
 		}
 	}
@@ -126,8 +130,9 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 				ReflectionUtil.getDeclaredField(
 					AbstractAutowireCapableBeanFactory.class,
 					"filteredPropertyDescriptorsCache");
-		} catch (Exception e) {
-			throw new ExceptionInInitializerError(e);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 	}
 
