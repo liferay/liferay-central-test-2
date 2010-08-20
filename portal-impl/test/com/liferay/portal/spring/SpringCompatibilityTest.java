@@ -27,32 +27,37 @@ import org.springframework.aop.framework.AdvisedSupport;
  */
 public class SpringCompatibilityTest extends BaseTestCase {
 
-	public void testJdkDynamicAopProxy() {
-		Class<?> jdkDynamicAopProxyClass = null;
+		public void testAbstractAutowireCapableBeanFactory() {
+		Class<?> AbstractAutowireCapableBeanFactoryClass = null;
 
 		try {
-			jdkDynamicAopProxyClass = Class.forName(
-				"org.springframework.aop.framework.JdkDynamicAopProxy");
+			AbstractAutowireCapableBeanFactoryClass = Class.forName(
+				"org.springframework.beans.factory.support."
+				+ "AbstractAutowireCapableBeanFactory");
 		}
 		catch (Exception e) {
 			fail(e.getMessage());
 		}
 
-		Field advisedField = null;
+		Field filteredPropertyDescriptorsCacheField = null;
 
 		try {
-			advisedField = jdkDynamicAopProxyClass.getDeclaredField("advised");
+			filteredPropertyDescriptorsCacheField =
+				AbstractAutowireCapableBeanFactoryClass.getDeclaredField(
+					"filteredPropertyDescriptorsCache");
 		}
 		catch (Exception e) {
 			fail(e.getMessage());
 		}
 
-		Class<?> advisedSupportClass = advisedField.getType();
+		Class<?> filteredPropertyDescriptorsCacheClass =
+			filteredPropertyDescriptorsCacheField.getType();
 
-		if (!advisedSupportClass.equals(AdvisedSupport.class)) {
+		if (!Map.class.isAssignableFrom(
+			filteredPropertyDescriptorsCacheClass)) {
 			fail(
-				advisedSupportClass.getClass().getName() + " is not " +
-					AdvisedSupport.class.getName());
+				filteredPropertyDescriptorsCacheClass.getClass().getName() +
+				" is not " + Map.class.getName());
 		}
 	}
 
@@ -84,6 +89,35 @@ public class SpringCompatibilityTest extends BaseTestCase {
 			fail(
 				shadowMatchCacheClass.getClass().getName() + " is not " +
 					Map.class.getName());
+		}
+	}
+
+	public void testJdkDynamicAopProxy() {
+		Class<?> jdkDynamicAopProxyClass = null;
+
+		try {
+			jdkDynamicAopProxyClass = Class.forName(
+				"org.springframework.aop.framework.JdkDynamicAopProxy");
+		}
+		catch (Exception e) {
+			fail(e.getMessage());
+		}
+
+		Field advisedField = null;
+
+		try {
+			advisedField = jdkDynamicAopProxyClass.getDeclaredField("advised");
+		}
+		catch (Exception e) {
+			fail(e.getMessage());
+		}
+
+		Class<?> advisedSupportClass = advisedField.getType();
+
+		if (!advisedSupportClass.equals(AdvisedSupport.class)) {
+			fail(
+				advisedSupportClass.getClass().getName() + " is not " +
+					AdvisedSupport.class.getName());
 		}
 	}
 

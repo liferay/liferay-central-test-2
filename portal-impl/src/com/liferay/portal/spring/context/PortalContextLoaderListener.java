@@ -26,11 +26,20 @@ import com.liferay.portal.kernel.util.ClearThreadLocalUtil;
 import com.liferay.portal.kernel.util.ClearTimerThreadUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.util.InitUtil;
+
+import java.beans.PropertyDescriptor;
+
+import java.lang.reflect.Field;
+
+import java.util.Map;
 
 import javax.servlet.ServletContextEvent;
 
 import org.springframework.beans.CachedIntrospectionResults;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.ContextLoaderListener;
@@ -63,6 +72,10 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 
 			classLoader = classLoader.getParent();
 		}
+
+		AutowireCapableBeanFactory autowireCapableBeanFactory =
+			applicationContext.getAutowireCapableBeanFactory();
+		clearFilteredPropertyDescriptorsCache(autowireCapableBeanFactory);
 	}
 
 	public void contextDestroyed(ServletContextEvent event) {
@@ -89,6 +102,33 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		}
 	}
 
-	private Log _log = LogFactoryUtil.getLog(PortalContextLoaderListener.class);
+	private void clearFilteredPropertyDescriptorsCache(
+		AutowireCapableBeanFactory autowireCapableBeanFactory) {
+		try {
+			Map<Class, PropertyDescriptor[]> filteredPropertyDescriptorsCache =
+				(Map<Class, PropertyDescriptor[]>)
+					_filteredPropertyDescriptorsCacheField.get(
+						autowireCapableBeanFactory);
+			filteredPropertyDescriptorsCache.clear();
+		} catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	private static Field _filteredPropertyDescriptorsCacheField;
+
+	private static Log _log = LogFactoryUtil.getLog(
+		PortalContextLoaderListener.class);
+
+	static {
+		try {
+			_filteredPropertyDescriptorsCacheField =
+				ReflectionUtil.getDeclaredField(
+					AbstractAutowireCapableBeanFactory.class,
+					"filteredPropertyDescriptorsCache");
+		} catch (Exception e) {
+			throw new ExceptionInInitializerError(e);
+		}
+	}
 
 }
