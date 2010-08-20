@@ -27,7 +27,7 @@ import org.springframework.aop.framework.AdvisedSupport;
  */
 public class SpringCompatibilityTest extends BaseTestCase {
 
-		public void testAbstractAutowireCapableBeanFactory() {
+	public void testAbstractAutowireCapableBeanFactory() {
 		Class<?> AbstractAutowireCapableBeanFactoryClass = null;
 
 		try {
