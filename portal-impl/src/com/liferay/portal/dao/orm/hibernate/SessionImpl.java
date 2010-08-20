@@ -68,7 +68,7 @@ public class SessionImpl implements Session {
 		try {
 			queryString = SQLTransformer.transform(queryString);
 
-			queryString = _jpqlTohql(queryString);
+			queryString = _jpqlToHql(queryString);
 
 			return new QueryImpl(_session.createQuery(queryString));
 		}
@@ -83,7 +83,7 @@ public class SessionImpl implements Session {
 		try {
 			queryString = SQLTransformer.transform(queryString);
 
-			queryString = _jpqlTohql(queryString);
+			queryString = _jpqlToHql(queryString);
 
 			return new SQLQueryImpl(_session.createSQLQuery(queryString));
 		}
@@ -183,26 +183,26 @@ public class SessionImpl implements Session {
 		}
 	}
 
+	private String _jpqlToHql(String queryString) {
+		Matcher matcher = _jpqlCountPattern.matcher(queryString);
 
-	private String _jpqlTohql(String queryString) {
-
-		Matcher countMatcher = _JPQL_COUNT.matcher(queryString);
-
-		if (countMatcher.find()) {
-			String countExpression = countMatcher.group(1);
-			String entityAlias = countMatcher.group(3);
+		if (matcher.find()) {
+			String countExpression = matcher.group(1);
+			String entityAlias = matcher.group(3);
 
 			if (entityAlias.equals(countExpression)) {
-				queryString = countMatcher.replaceFirst(_HQL_COUNT);
+				queryString = matcher.replaceFirst(_HQL_COUNT_SQL);
 			}
 		}
 
 		return queryString;
 	}
 
-	private org.hibernate.Session _session;
+	private static final String _HQL_COUNT_SQL = "SELECT COUNT(*) FROM $2 $3";
 
-	private static final Pattern _JPQL_COUNT = Pattern.compile("SELECT COUNT\\((\\S+)\\) FROM (\\S+) (\\S+)");
-	private static final String _HQL_COUNT = "SELECT COUNT(*) FROM $2 $3";
+	private static Pattern _jpqlCountPattern = Pattern.compile(
+		"SELECT COUNT\\((\\S+)\\) FROM (\\S+) (\\S+)");
+
+	private org.hibernate.Session _session;
 
 }
