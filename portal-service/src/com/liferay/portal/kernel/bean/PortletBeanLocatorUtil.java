@@ -35,9 +35,13 @@ public class PortletBeanLocatorUtil {
 		BeanLocator beanLocator = getBeanLocator(servletContextName);
 
 		if (beanLocator == null) {
-			_log.error("BeanLocator is null");
+			_log.error(
+				"BeanLocator is null for servlet context " +
+					servletContextName);
 
-			throw new BeanLocatorException("BeanLocator has not been set");
+			throw new BeanLocatorException(
+				"BeanLocator has not been set for servlet context " +
+					servletContextName);
 		}
 		else {
 			return beanLocator.locate(name);
@@ -49,10 +53,14 @@ public class PortletBeanLocatorUtil {
 
 		if (_log.isDebugEnabled()) {
 			if (beanLocator != null) {
-				_log.debug("Setting BeanLocator " + beanLocator.hashCode());
+				_log.debug(
+					"Setting BeanLocator " + beanLocator.hashCode() +
+						" for servlet context " + servletContextName);
 			}
 			else {
-				_log.debug("Setting BeanLocator null");
+				_log.debug(
+					"Removing BeanLocator for servlet context " +
+						servletContextName);
 			}
 		}
 
