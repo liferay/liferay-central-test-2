@@ -32,9 +32,9 @@ if (searchFolderId > 0) {
 else {
 	List folderIds = new ArrayList();
 
-	long rootSearchFolderId = DLFileEntryImpl.getFolderId(themeDisplay.getParentGroupId(), DLFileEntryImpl.getRepositoryId(scopeGroupId, searchFolderIds));
+	long folderId = DLFileEntryImpl.getFolderId(themeDisplay.getParentGroupId(), DLFileEntryImpl.getRepositoryId(scopeGroupId, searchFolderIds));
 
-	folderIds.add(new Long(rootSearchFolderId));
+	folderIds.add(new Long(folderId));
 
 	DLFolderServiceUtil.getSubfolderIds(folderIds, scopeGroupId, searchFolderIds);
 
