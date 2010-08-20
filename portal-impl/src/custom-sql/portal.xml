@@ -10,7 +10,7 @@
 						(ResourcePermission.companyId = [$COMPANY_ID$]) AND
 						(ResourcePermission.name = '[$CLASS_NAME$]') AND
 						(ResourcePermission.roleId IN ([$ROLE_IDS$])) AND
-						(mod(ResourcePermission.actionIds, 2) = 1) AND
+						(MOD(ResourcePermission.actionIds, 2) = 1) AND
 						(
 							(
 								(ResourcePermission.scope = 1) AND
@@ -254,7 +254,7 @@
 				(ResourcePermission.scope = ?) AND
 				(ResourceAction.actionId = ?) AND
 				(ResourcePermission.roleId = ?) AND
-				(mod((ResourcePermission.actionIds / ResourceAction.bitwiseValue), 2) = 1)
+				(MOD((ResourcePermission.actionIds / ResourceAction.bitwiseValue), 2) = 1)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByType">
