@@ -29,7 +29,7 @@ import java.util.Properties;
  */
 public class CreoleFilter extends org.wikiwizard.jspwiki.filters.CreoleFilter {
 
-	public void destroy(WikiEngine wikiEngine)  {
+	public void destroy(WikiEngine wikiEngine) {
 		super.destroy(wikiEngine);
 	}
 
