@@ -86,11 +86,6 @@ OrderByComparator orderByComparator = BookmarksUtil.getEntriesOrderByComparator(
 
 			rowHREF = tempRowURL.toString();
 		}
-		else {
-			rowHREF = themeDisplay.getPathMain().concat("/bookmarks/open_entry?entryId=").concat(String.valueOf(entry.getEntryId()));
-
-			target = "_blank";
-		}
 		%>
 
 		<%@ include file="/html/portlet/bookmarks/entry_columns.jspf" %>
