@@ -28,6 +28,13 @@ public class UnicodeFormatter {
 		return new String(array);
 	}
 
+	public static char[] byteToHex(byte b, char[] hexes) {
+		hexes[0] = _HEX_DIGITS[(b >> 4) & 0x0f];
+		hexes[1] = _HEX_DIGITS[b & 0x0f];
+
+		return hexes;
+	}
+
 	public static String charToHex(char c) {
 		byte hi = (byte)(c >>> 8);
 		byte lo = (byte)(c & 0xff);
