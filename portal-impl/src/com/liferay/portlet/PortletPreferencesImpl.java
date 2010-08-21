@@ -46,7 +46,7 @@ public class PortletPreferencesImpl
 	implements Cloneable, PortletPreferences, Serializable {
 
 	public PortletPreferencesImpl() {
-		this(0, 0, 0, 0, null, new HashMap<String, Preference>());
+		this(0, 0, 0, 0, null, Collections.EMPTY_MAP);
 	}
 
 	public PortletPreferencesImpl(
@@ -311,6 +311,9 @@ public class PortletPreferencesImpl
 
 	protected Map<String, Preference> getPreferences() {
 		if (_modifiedPreferences == null) {
+			if (_originalPreferences == Collections.EMPTY_MAP) {
+				_originalPreferences = new HashMap<String, Preference>();
+			}
 			return _originalPreferences;
 		}
 		else {
