@@ -60,14 +60,18 @@ public interface Http {
 
 	public String decodePath(String path);
 
+	@Deprecated
 	public String decodeURL(String url);
 
+	@Deprecated
 	public String decodeURL(String url, boolean unescapeSpace);
 
 	public String encodePath(String path);
 
+	@Deprecated
 	public String encodeURL(String url);
 
+	@Deprecated
 	public String encodeURL(String url, boolean escapeSpaces);
 
 	public String fixPath(String path);

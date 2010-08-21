@@ -21,9 +21,9 @@ import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
@@ -82,7 +82,7 @@ public class StrutsURLEncoder implements URLEncoder {
 				}
 				else {
 					liferayPortletURL.setParameter(
-						param, HttpUtil.decodeURL(value), true);
+						param, URLCodec.decodeURL(value), true);
 				}
 			}
 		}

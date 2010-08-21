@@ -23,11 +23,11 @@ import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
@@ -306,7 +306,7 @@ public class ServletResponseUtil {
 
 			try {
 				if (!ascii) {
-					String encodedFileName = HttpUtil.encodeURL(fileName, true);
+					String encodedFileName = URLCodec.encodeURL(fileName, true);
 
 					if (BrowserSnifferUtil.isIe(request)) {
 						contentDisposition =

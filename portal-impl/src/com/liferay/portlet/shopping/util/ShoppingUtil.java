@@ -20,12 +20,12 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MathUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.shopping.NoSuchCartException;
@@ -887,7 +887,7 @@ public class ShoppingUtil {
 		ShoppingPreferences preferences, ShoppingOrder order, double total,
 		String returnURL, String notifyURL) {
 
-		String payPalEmailAddress = HttpUtil.encodeURL(
+		String payPalEmailAddress = URLCodec.encodeURL(
 			preferences.getPayPalEmailAddress());
 
 		NumberFormat doubleFormat = NumberFormat.getNumberInstance(
@@ -898,15 +898,15 @@ public class ShoppingUtil {
 
 		String amount = doubleFormat.format(total);
 
-		returnURL = HttpUtil.encodeURL(returnURL);
-		notifyURL = HttpUtil.encodeURL(notifyURL);
+		returnURL = URLCodec.encodeURL(returnURL);
+		notifyURL = URLCodec.encodeURL(notifyURL);
 
-		String firstName = HttpUtil.encodeURL(order.getBillingFirstName());
-		String lastName = HttpUtil.encodeURL(order.getBillingLastName());
-		String address1 = HttpUtil.encodeURL(order.getBillingStreet());
-		String city = HttpUtil.encodeURL(order.getBillingCity());
-		String state = HttpUtil.encodeURL(order.getBillingState());
-		String zip = HttpUtil.encodeURL(order.getBillingZip());
+		String firstName = URLCodec.encodeURL(order.getBillingFirstName());
+		String lastName = URLCodec.encodeURL(order.getBillingLastName());
+		String address1 = URLCodec.encodeURL(order.getBillingStreet());
+		String city = URLCodec.encodeURL(order.getBillingCity());
+		String state = URLCodec.encodeURL(order.getBillingState());
+		String zip = URLCodec.encodeURL(order.getBillingZip());
 
 		String currencyCode = preferences.getCurrencyId();
 

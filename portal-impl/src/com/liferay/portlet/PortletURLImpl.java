@@ -28,11 +28,11 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Http;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.model.Company;
@@ -1236,7 +1236,7 @@ public class PortletURLImpl
 
 		sb.append("wsrp-navigationalState");
 		sb.append(StringPool.EQUAL);
-		sb.append(HttpUtil.encodeURL(parameterSb.toString()));
+		sb.append(URLCodec.encodeURL(parameterSb.toString()));
 
 		sb.append("/wsrp_rewrite");
 
@@ -1264,11 +1264,11 @@ public class PortletURLImpl
 
 	protected String processValue(Key key, String value) {
 		if (key == null) {
-			return HttpUtil.encodeURL(value);
+			return URLCodec.encodeURL(value);
 		}
 		else {
 			try {
-				return HttpUtil.encodeURL(Encryptor.encrypt(key, value));
+				return URLCodec.encodeURL(Encryptor.encrypt(key, value));
 			}
 			catch (EncryptorException ee) {
 				return value;

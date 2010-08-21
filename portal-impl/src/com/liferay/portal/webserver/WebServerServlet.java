@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.Validator_IW;
 import com.liferay.portal.kernel.webdav.WebDAVUtil;
@@ -269,7 +270,7 @@ public class WebServerServlet extends HttpServlet {
 		else {
 			groupId = GetterUtil.getLong(pathArray[0]);
 			folderId = GetterUtil.getLong(pathArray[1]);
-			fileName = HttpUtil.decodeURL(pathArray[2], true);
+			fileName = URLCodec.decodeURL(pathArray[2]);
 
 			dlFileEntry = DLFileEntryServiceUtil.getFileEntryByTitle(
 				groupId, folderId, fileName);

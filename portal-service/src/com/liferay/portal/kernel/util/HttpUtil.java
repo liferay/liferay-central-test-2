@@ -59,10 +59,12 @@ public class HttpUtil {
 		return getHttp().decodePath(path);
 	}
 
+	@Deprecated
 	public static String decodeURL(String url) {
 		return getHttp().decodeURL(url);
 	}
 
+	@Deprecated
 	public static String decodeURL(String url, boolean unescapeSpace) {
 		return getHttp().decodeURL(url, unescapeSpace);
 	}
@@ -71,10 +73,12 @@ public class HttpUtil {
 		return getHttp().encodePath(path);
 	}
 
+	@Deprecated
 	public static String encodeURL(String url) {
 		return getHttp().encodeURL(url);
 	}
 
+	@Deprecated
 	public static String encodeURL(String url, boolean escapeSpaces) {
 		return getHttp().encodeURL(url, escapeSpaces);
 	}

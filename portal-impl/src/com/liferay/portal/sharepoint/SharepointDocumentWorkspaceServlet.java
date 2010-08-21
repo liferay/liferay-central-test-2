@@ -18,9 +18,9 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -109,7 +109,7 @@ public class SharepointDocumentWorkspaceServlet extends HttpServlet {
 		if (beginPos != -1) {
 			documentName = xml.substring(beginPos + 10, endPos);
 
-			documentName = HttpUtil.decodeURL(documentName);
+			documentName = URLCodec.decodeURL(documentName);
 		}
 
 		String path = documentName;

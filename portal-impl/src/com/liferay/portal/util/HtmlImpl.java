@@ -16,10 +16,10 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Html;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.URLCodec;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -127,7 +127,7 @@ public class HtmlImpl implements Html {
 			prefix = "\\x";
 		}
 		else if (type == ESCAPE_MODE_URL) {
-			return HttpUtil.encodeURL(text, true);
+			return URLCodec.encodeURL(text, true);
 		}
 		else {
 			return escape(text);

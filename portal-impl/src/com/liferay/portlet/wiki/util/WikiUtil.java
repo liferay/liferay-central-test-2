@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -504,7 +505,7 @@ public class WikiUtil {
 			String replacement = null;
 
 			if (matcher.groupCount() >= 1) {
-				String encodedTitle = HttpUtil.encodeURL(matcher.group(1));
+				String encodedTitle = URLCodec.encodeURL(matcher.group(1));
 
 				replacement = url.replace("$1", encodedTitle);
 			}

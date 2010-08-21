@@ -27,11 +27,11 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
@@ -1398,7 +1398,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			sb.append(fileEntry.getFolderId());
 			sb.append(StringPool.SLASH);
 			sb.append(
-				HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())));
+				URLCodec.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())));
 
 			content = StringUtil.replace(content, dlReference, sb.toString());
 		}

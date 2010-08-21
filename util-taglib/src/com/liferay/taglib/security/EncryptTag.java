@@ -17,10 +17,10 @@ package com.liferay.taglib.security;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Http;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.util.PortalUtil;
@@ -94,11 +94,11 @@ public class EncryptTag extends TagSupport {
 					sb.append(param).append(StringPool.EQUAL);
 
 					if (_unencryptedParamsSet.contains(param)) {
-						sb.append(HttpUtil.encodeURL(value));
+						sb.append(URLCodec.encodeURL(value));
 					}
 					else {
 						try {
-							sb.append(HttpUtil.encodeURL(
+							sb.append(URLCodec.encodeURL(
 								Encryptor.encrypt(key, value)));
 						}
 						catch (EncryptorException ee) {

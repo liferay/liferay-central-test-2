@@ -16,7 +16,7 @@ package com.liferay.portal.apache.bridges.struts;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portlet.PortletResponseImpl;
 import com.liferay.portlet.PortletURLImplWrapper;
 
@@ -39,7 +39,7 @@ public class LiferayStrutsPortletURLImpl extends PortletURLImplWrapper {
 		// Add parameters from the query string because bridges passes these
 		// through instead of setting them on the portlet URL
 
-		String decodedValue = HttpUtil.decodeURL(value);
+		String decodedValue = URLCodec.decodeURL(value);
 
 		try {
 			if (name.equals(StrutsPortletURL.PAGE)) {

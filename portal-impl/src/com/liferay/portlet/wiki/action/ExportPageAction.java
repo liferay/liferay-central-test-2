@@ -18,11 +18,11 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
@@ -127,7 +127,7 @@ public class ExportPageAction extends PortletAction {
 		String attachmentURLPrefix =
 			themeDisplay.getPathMain() + "/wiki/get_page_attachment?" +
 				"p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + nodeId +
-					"&title=" + HttpUtil.encodeURL(title) + "&fileName=";
+					"&title=" + URLCodec.encodeURL(title) + "&fileName=";
 
 		try {
 			content = WikiUtil.convert(

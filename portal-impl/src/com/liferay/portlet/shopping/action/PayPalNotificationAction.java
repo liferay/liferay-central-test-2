@@ -18,8 +18,8 @@ import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.shopping.NoSuchOrderException;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
@@ -69,7 +69,7 @@ public class PayPalNotificationAction extends Action {
 
 				String value = request.getParameter(name);
 
-				query = query + "&" + name + "=" + HttpUtil.encodeURL(value);
+				query = query + "&" + name + "=" + URLCodec.encodeURL(value);
 			}
 
 			if (_log.isDebugEnabled()) {

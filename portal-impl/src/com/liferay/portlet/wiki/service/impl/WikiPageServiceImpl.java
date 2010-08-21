@@ -24,12 +24,12 @@ import com.liferay.portal.kernel.util.DiffResult;
 import com.liferay.portal.kernel.util.DiffUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.velocity.VelocityContext;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -356,7 +356,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 			link.append(entryURL);
 			link.append(StringPool.AMPERSAND);
-			link.append(HttpUtil.encodeURL(page.getTitle()));
+			link.append(URLCodec.encodeURL(page.getTitle()));
 
 			SyndEntry syndEntry = new SyndEntryImpl();
 

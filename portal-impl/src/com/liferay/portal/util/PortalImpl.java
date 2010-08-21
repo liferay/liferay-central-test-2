@@ -68,6 +68,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.QName;
@@ -3795,7 +3796,7 @@ public class PortalImpl implements Portal {
 		sb.append("&exception=");
 		sb.append(e.getClass().getName());
 		sb.append("&previousURL=");
-		sb.append(HttpUtil.encodeURL(PortalUtil.getCurrentURL(actionRequest)));
+		sb.append(URLCodec.encodeURL(PortalUtil.getCurrentURL(actionRequest)));
 
 		actionResponse.sendRedirect(sb.toString());
 	}
