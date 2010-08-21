@@ -107,10 +107,11 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		AutowireCapableBeanFactory autowireCapableBeanFactory) {
 
 		try {
-			Map<Class, PropertyDescriptor[]> filteredPropertyDescriptorsCache =
-				(Map<Class, PropertyDescriptor[]>)
-					_filteredPropertyDescriptorsCacheField.get(
-						autowireCapableBeanFactory);
+			Map<Class<?>, PropertyDescriptor[]>
+				filteredPropertyDescriptorsCache =
+					(Map<Class<?>, PropertyDescriptor[]>)
+						_filteredPropertyDescriptorsCacheField.get(
+							autowireCapableBeanFactory);
 
 			filteredPropertyDescriptorsCache.clear();
 		}
