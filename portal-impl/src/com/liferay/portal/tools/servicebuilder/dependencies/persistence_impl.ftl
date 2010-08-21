@@ -377,17 +377,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		try {
 			session = openSession();
 
-			if (${entity.varName}.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(${entity.name}Impl.class, ${entity.varName}.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(${entity.varName});
-
-			session.flush();
+			BatchSessionUtil.delete(session, ${entity.varName});
 		}
 		catch (Exception e) {
 			throw processException(e);

@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
 import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.model.impl.ResourcePermissionImpl;
 import com.liferay.portal.util.PropsValues;
 
 /**
@@ -32,6 +33,36 @@ public class BatchSessionImpl implements BatchSession {
 
 	public void setEnabled(boolean enabled) {
 		_enabled.set(enabled);
+	}
+
+	public void delete(Session session, BaseModel<?> model)
+		throws ORMException {
+
+		if (model.isCachedModel() || isEnabled()) {
+			Object staleObject = session.get(ResourcePermissionImpl.class,
+				model.getPrimaryKeyObj());
+
+			if (staleObject != null) {
+				session.evict(staleObject);
+			}
+		}
+
+		session.delete(model);
+
+		if (!isEnabled()) {
+			session.flush();
+
+			return;
+		}
+
+		if ((PropsValues.HIBERNATE_JDBC_BATCH_SIZE == 0) ||
+			((_counter.get() % PropsValues.HIBERNATE_JDBC_BATCH_SIZE) == 0)) {
+
+			session.flush();
+			session.clear();
+		}
+
+		_counter.set(_counter.get() + 1);
 	}
 
 	public void update(Session session, BaseModel<?> model, boolean merge)

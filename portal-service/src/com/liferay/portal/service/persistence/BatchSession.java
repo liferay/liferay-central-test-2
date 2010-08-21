@@ -53,6 +53,37 @@ public interface BatchSession {
 	public void setEnabled(boolean enabled);
 
 	/**
+	 * Deletes the model instance in the database, and possibly flushes the
+	 * session.
+	 *
+	 * <p>
+	 * The session will be flushed if one of the following is <code>true</code>:
+	 * </p>
+	 *
+	 * <ul>
+	 * <li>
+	 * Update batching is disabled
+	 * </li>
+	 * <li>
+	 * The batch size is set to zero
+	 * </li>
+	 * <li>
+	 * Enough updates and/or deletions have been queued to fill another batch
+	 * </li>
+	 * </ul>
+	 *
+	 * <p>
+	 * The batch size may be set in portal.properties with the key
+	 * <code>hibernate.jdbc.batch_size</code>.
+	 * </p>
+	 *
+	 * @param  session the session to perform the update on
+	 * @param  model the model instance to update
+	 * @throws ORMException if a database exception occurred
+	 */
+	public void delete(Session session, BaseModel<?> model) throws ORMException;
+
+	/**
 	 * Updates the model instance in the database or adds it if it does not yet
 	 * exist, and possibly flushes the session.
 	 *
@@ -68,7 +99,7 @@ public interface BatchSession {
 	 * The batch size is set to zero
 	 * </li>
 	 * <li>
-	 * Enough updates have been queued to fill another batch
+	 * Enough updates/or deletions have been queued to fill another batch
 	 * </li>
 	 * </ul>
 	 *

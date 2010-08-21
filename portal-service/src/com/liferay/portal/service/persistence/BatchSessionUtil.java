@@ -36,6 +36,12 @@ public class BatchSessionUtil {
 		getBatchSession().setEnabled(enabled);
 	}
 
+	public static void delete(Session session, BaseModel<?> model)
+		throws ORMException {
+
+		getBatchSession().delete(session, model);
+	}
+
 	public static void update(
 			Session session, BaseModel<?> model, boolean merge)
 		throws ORMException {
