@@ -31,6 +31,7 @@ import com.liferay.portal.util.PropsValues;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -258,6 +259,10 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 		}
 		else if (result instanceof List<?>) {
 			List<Object> list = (List<Object>)result;
+
+			if (list.isEmpty()) {
+				return Collections.EMPTY_LIST;
+			}
 
 			List<Object> cachedList = new ArrayList<Object>(list.size());
 
