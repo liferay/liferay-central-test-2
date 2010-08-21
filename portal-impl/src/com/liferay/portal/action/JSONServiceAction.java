@@ -425,9 +425,7 @@ public class JSONServiceAction extends JSONAction {
 
 		Method[] methods = classObj.getMethods();
 
-		for (int i = 0; i < methods.length; i++) {
-			Method curMethod = methods[i];
-
+		for (Method curMethod : methods) {
 			if (curMethod.getName().equals(methodName)) {
 				Type[] curParameterTypes = curMethod.getGenericParameterTypes();
 
@@ -501,9 +499,7 @@ public class JSONServiceAction extends JSONAction {
 
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		for (int i = 0; i < assetEntryDisplays.length; i++) {
-			AssetEntryDisplay assetEntryDisplay = assetEntryDisplays[i];
-
+		for (AssetEntryDisplay assetEntryDisplay : assetEntryDisplays) {
 			jsonArray.put(toJSONObject(assetEntryDisplay));
 		}
 
@@ -523,9 +519,7 @@ public class JSONServiceAction extends JSONAction {
 
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		for (int i = 0; i < assetEntryTypes.length; i++) {
-			AssetEntryType assetEntryType = assetEntryTypes[i];
-
+		for (AssetEntryType assetEntryType : assetEntryTypes) {
 			jsonArray.put(toJSONObject(assetEntryType));
 		}
 
