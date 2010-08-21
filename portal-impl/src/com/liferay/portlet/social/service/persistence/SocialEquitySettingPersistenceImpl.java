@@ -260,19 +260,7 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		try {
 			session = openSession();
 
-			if (socialEquitySetting.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(SocialEquitySettingImpl.class,
-						socialEquitySetting.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(socialEquitySetting);
-
-			session.flush();
+			BatchSessionUtil.delete(session, socialEquitySetting);
 		}
 		catch (Exception e) {
 			throw processException(e);

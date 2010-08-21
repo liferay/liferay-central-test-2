@@ -527,18 +527,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		try {
 			session = openSession();
 
-			if (wikiPage.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(WikiPageImpl.class,
-						wikiPage.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(wikiPage);
-
-			session.flush();
+			BatchSessionUtil.delete(session, wikiPage);
 		}
 		catch (Exception e) {
 			throw processException(e);

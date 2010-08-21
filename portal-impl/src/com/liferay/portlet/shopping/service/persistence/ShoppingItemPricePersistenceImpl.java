@@ -221,19 +221,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 		try {
 			session = openSession();
 
-			if (shoppingItemPrice.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(ShoppingItemPriceImpl.class,
-						shoppingItemPrice.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(shoppingItemPrice);
-
-			session.flush();
+			BatchSessionUtil.delete(session, shoppingItemPrice);
 		}
 		catch (Exception e) {
 			throw processException(e);

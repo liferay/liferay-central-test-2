@@ -298,19 +298,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		try {
 			session = openSession();
 
-			if (assetVocabulary.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(AssetVocabularyImpl.class,
-						assetVocabulary.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(assetVocabulary);
-
-			session.flush();
+			BatchSessionUtil.delete(session, assetVocabulary);
 		}
 		catch (Exception e) {
 			throw processException(e);

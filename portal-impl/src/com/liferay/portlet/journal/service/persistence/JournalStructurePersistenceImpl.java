@@ -312,19 +312,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		try {
 			session = openSession();
 
-			if (journalStructure.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(JournalStructureImpl.class,
-						journalStructure.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(journalStructure);
-
-			session.flush();
+			BatchSessionUtil.delete(session, journalStructure);
 		}
 		catch (Exception e) {
 			throw processException(e);

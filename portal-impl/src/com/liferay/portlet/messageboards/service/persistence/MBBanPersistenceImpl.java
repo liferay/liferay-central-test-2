@@ -256,18 +256,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 		try {
 			session = openSession();
 
-			if (mbBan.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(MBBanImpl.class,
-						mbBan.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(mbBan);
-
-			session.flush();
+			BatchSessionUtil.delete(session, mbBan);
 		}
 		catch (Exception e) {
 			throw processException(e);

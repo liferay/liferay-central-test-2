@@ -231,19 +231,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 		try {
 			session = openSession();
 
-			if (layoutSetPrototype.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(LayoutSetPrototypeImpl.class,
-						layoutSetPrototype.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(layoutSetPrototype);
-
-			session.flush();
+			BatchSessionUtil.delete(session, layoutSetPrototype);
 		}
 		catch (Exception e) {
 			throw processException(e);

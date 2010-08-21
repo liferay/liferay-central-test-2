@@ -251,18 +251,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 		try {
 			session = openSession();
 
-			if (pluginSetting.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(PluginSettingImpl.class,
-						pluginSetting.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(pluginSetting);
-
-			session.flush();
+			BatchSessionUtil.delete(session, pluginSetting);
 		}
 		catch (Exception e) {
 			throw processException(e);

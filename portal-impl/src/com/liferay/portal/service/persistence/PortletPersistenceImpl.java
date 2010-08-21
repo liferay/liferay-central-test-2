@@ -236,18 +236,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		try {
 			session = openSession();
 
-			if (portlet.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(PortletImpl.class,
-						portlet.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(portlet);
-
-			session.flush();
+			BatchSessionUtil.delete(session, portlet);
 		}
 		catch (Exception e) {
 			throw processException(e);

@@ -309,18 +309,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		try {
 			session = openSession();
 
-			if (calEvent.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(CalEventImpl.class,
-						calEvent.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(calEvent);
-
-			session.flush();
+			BatchSessionUtil.delete(session, calEvent);
 		}
 		catch (Exception e) {
 			throw processException(e);

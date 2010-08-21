@@ -472,18 +472,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		try {
 			session = openSession();
 
-			if (blogsEntry.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(BlogsEntryImpl.class,
-						blogsEntry.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(blogsEntry);
-
-			session.flush();
+			BatchSessionUtil.delete(session, blogsEntry);
 		}
 		catch (Exception e) {
 			throw processException(e);

@@ -274,18 +274,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		try {
 			session = openSession();
 
-			if (subscription.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(SubscriptionImpl.class,
-						subscription.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(subscription);
-
-			session.flush();
+			BatchSessionUtil.delete(session, subscription);
 		}
 		catch (Exception e) {
 			throw processException(e);

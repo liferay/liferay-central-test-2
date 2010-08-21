@@ -263,18 +263,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 		try {
 			session = openSession();
 
-			if (mbStatsUser.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(MBStatsUserImpl.class,
-						mbStatsUser.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(mbStatsUser);
-
-			session.flush();
+			BatchSessionUtil.delete(session, mbStatsUser);
 		}
 		catch (Exception e) {
 			throw processException(e);

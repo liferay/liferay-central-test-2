@@ -271,18 +271,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		try {
 			session = openSession();
 
-			if (permission.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(PermissionImpl.class,
-						permission.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(permission);
-
-			session.flush();
+			BatchSessionUtil.delete(session, permission);
 		}
 		catch (Exception e) {
 			throw processException(e);

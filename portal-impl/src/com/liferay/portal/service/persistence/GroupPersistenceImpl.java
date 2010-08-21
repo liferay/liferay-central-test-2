@@ -430,18 +430,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		try {
 			session = openSession();
 
-			if (group.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(GroupImpl.class,
-						group.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(group);
-
-			session.flush();
+			BatchSessionUtil.delete(session, group);
 		}
 		catch (Exception e) {
 			throw processException(e);

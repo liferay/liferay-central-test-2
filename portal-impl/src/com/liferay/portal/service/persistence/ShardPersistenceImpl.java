@@ -230,18 +230,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 		try {
 			session = openSession();
 
-			if (shard.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(ShardImpl.class,
-						shard.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(shard);
-
-			session.flush();
+			BatchSessionUtil.delete(session, shard);
 		}
 		catch (Exception e) {
 			throw processException(e);

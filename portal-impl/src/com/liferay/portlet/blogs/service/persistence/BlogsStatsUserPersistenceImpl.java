@@ -296,18 +296,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		try {
 			session = openSession();
 
-			if (blogsStatsUser.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(BlogsStatsUserImpl.class,
-						blogsStatsUser.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(blogsStatsUser);
-
-			session.flush();
+			BatchSessionUtil.delete(session, blogsStatsUser);
 		}
 		catch (Exception e) {
 			throw processException(e);

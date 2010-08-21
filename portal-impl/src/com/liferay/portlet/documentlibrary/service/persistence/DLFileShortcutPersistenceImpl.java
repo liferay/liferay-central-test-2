@@ -314,18 +314,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		try {
 			session = openSession();
 
-			if (dlFileShortcut.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(DLFileShortcutImpl.class,
-						dlFileShortcut.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(dlFileShortcut);
-
-			session.flush();
+			BatchSessionUtil.delete(session, dlFileShortcut);
 		}
 		catch (Exception e) {
 			throw processException(e);

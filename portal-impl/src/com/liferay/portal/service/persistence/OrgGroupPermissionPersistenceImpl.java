@@ -231,19 +231,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 		try {
 			session = openSession();
 
-			if (orgGroupPermission.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(OrgGroupPermissionImpl.class,
-						orgGroupPermission.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(orgGroupPermission);
-
-			session.flush();
+			BatchSessionUtil.delete(session, orgGroupPermission);
 		}
 		catch (Exception e) {
 			throw processException(e);

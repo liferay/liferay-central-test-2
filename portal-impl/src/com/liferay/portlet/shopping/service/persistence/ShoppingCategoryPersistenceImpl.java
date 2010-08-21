@@ -236,19 +236,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 		try {
 			session = openSession();
 
-			if (shoppingCategory.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(ShoppingCategoryImpl.class,
-						shoppingCategory.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(shoppingCategory);
-
-			session.flush();
+			BatchSessionUtil.delete(session, shoppingCategory);
 		}
 		catch (Exception e) {
 			throw processException(e);

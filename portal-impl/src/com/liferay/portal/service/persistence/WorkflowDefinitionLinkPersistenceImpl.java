@@ -264,19 +264,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		try {
 			session = openSession();
 
-			if (workflowDefinitionLink.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(WorkflowDefinitionLinkImpl.class,
-						workflowDefinitionLink.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(workflowDefinitionLink);
-
-			session.flush();
+			BatchSessionUtil.delete(session, workflowDefinitionLink);
 		}
 		catch (Exception e) {
 			throw processException(e);

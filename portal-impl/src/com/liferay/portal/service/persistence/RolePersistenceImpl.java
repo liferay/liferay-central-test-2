@@ -312,18 +312,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		try {
 			session = openSession();
 
-			if (role.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(RoleImpl.class,
-						role.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(role);
-
-			session.flush();
+			BatchSessionUtil.delete(session, role);
 		}
 		catch (Exception e) {
 			throw processException(e);

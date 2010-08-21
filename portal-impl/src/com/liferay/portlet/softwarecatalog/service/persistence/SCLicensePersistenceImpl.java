@@ -249,18 +249,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		try {
 			session = openSession();
 
-			if (scLicense.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(SCLicenseImpl.class,
-						scLicense.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(scLicense);
-
-			session.flush();
+			BatchSessionUtil.delete(session, scLicense);
 		}
 		catch (Exception e) {
 			throw processException(e);

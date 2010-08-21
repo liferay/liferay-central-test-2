@@ -213,18 +213,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 		try {
 			session = openSession();
 
-			if (listType.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(ListTypeImpl.class,
-						listType.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(listType);
-
-			session.flush();
+			BatchSessionUtil.delete(session, listType);
 		}
 		catch (Exception e) {
 			throw processException(e);

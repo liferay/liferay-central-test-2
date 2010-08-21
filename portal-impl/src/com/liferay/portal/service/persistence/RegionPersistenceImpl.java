@@ -238,18 +238,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		try {
 			session = openSession();
 
-			if (region.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(RegionImpl.class,
-						region.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(region);
-
-			session.flush();
+			BatchSessionUtil.delete(session, region);
 		}
 		catch (Exception e) {
 			throw processException(e);

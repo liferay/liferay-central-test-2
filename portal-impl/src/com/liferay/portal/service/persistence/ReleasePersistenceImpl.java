@@ -214,18 +214,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 		try {
 			session = openSession();
 
-			if (release.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(ReleaseImpl.class,
-						release.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(release);
-
-			session.flush();
+			BatchSessionUtil.delete(session, release);
 		}
 		catch (Exception e) {
 			throw processException(e);

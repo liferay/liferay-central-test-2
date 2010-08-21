@@ -254,18 +254,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		try {
 			session = openSession();
 
-			if (assetTagStats.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(AssetTagStatsImpl.class,
-						assetTagStats.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(assetTagStats);
-
-			session.flush();
+			BatchSessionUtil.delete(session, assetTagStats);
 		}
 		catch (Exception e) {
 			throw processException(e);

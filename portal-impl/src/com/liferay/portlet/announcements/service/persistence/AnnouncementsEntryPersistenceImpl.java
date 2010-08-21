@@ -275,19 +275,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		try {
 			session = openSession();
 
-			if (announcementsEntry.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(AnnouncementsEntryImpl.class,
-						announcementsEntry.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(announcementsEntry);
-
-			session.flush();
+			BatchSessionUtil.delete(session, announcementsEntry);
 		}
 		catch (Exception e) {
 			throw processException(e);

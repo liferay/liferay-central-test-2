@@ -286,18 +286,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 		try {
 			session = openSession();
 
-			if (assetLink.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(AssetLinkImpl.class,
-						assetLink.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(assetLink);
-
-			session.flush();
+			BatchSessionUtil.delete(session, assetLink);
 		}
 		catch (Exception e) {
 			throw processException(e);

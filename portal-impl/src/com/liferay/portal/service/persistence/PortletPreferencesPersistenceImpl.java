@@ -281,19 +281,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		try {
 			session = openSession();
 
-			if (portletPreferences.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(PortletPreferencesImpl.class,
-						portletPreferences.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(portletPreferences);
-
-			session.flush();
+			BatchSessionUtil.delete(session, portletPreferences);
 		}
 		catch (Exception e) {
 			throw processException(e);

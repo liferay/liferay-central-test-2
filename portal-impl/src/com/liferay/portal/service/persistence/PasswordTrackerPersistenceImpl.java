@@ -218,19 +218,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		try {
 			session = openSession();
 
-			if (passwordTracker.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(PasswordTrackerImpl.class,
-						passwordTracker.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(passwordTracker);
-
-			session.flush();
+			BatchSessionUtil.delete(session, passwordTracker);
 		}
 		catch (Exception e) {
 			throw processException(e);

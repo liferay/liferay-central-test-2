@@ -239,19 +239,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		try {
 			session = openSession();
 
-			if (serviceComponent.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(ServiceComponentImpl.class,
-						serviceComponent.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(serviceComponent);
-
-			session.flush();
+			BatchSessionUtil.delete(session, serviceComponent);
 		}
 		catch (Exception e) {
 			throw processException(e);

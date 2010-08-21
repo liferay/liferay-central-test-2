@@ -220,18 +220,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 		try {
 			session = openSession();
 
-			if (browserTracker.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(BrowserTrackerImpl.class,
-						browserTracker.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(browserTracker);
-
-			session.flush();
+			BatchSessionUtil.delete(session, browserTracker);
 		}
 		catch (Exception e) {
 			throw processException(e);

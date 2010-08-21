@@ -349,18 +349,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		try {
 			session = openSession();
 
-			if (igImage.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(IGImageImpl.class,
-						igImage.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(igImage);
-
-			session.flush();
+			BatchSessionUtil.delete(session, igImage);
 		}
 		catch (Exception e) {
 			throw processException(e);

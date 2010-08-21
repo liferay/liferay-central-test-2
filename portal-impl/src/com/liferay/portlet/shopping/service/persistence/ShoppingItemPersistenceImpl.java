@@ -291,18 +291,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		try {
 			session = openSession();
 
-			if (shoppingItem.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(ShoppingItemImpl.class,
-						shoppingItem.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(shoppingItem);
-
-			session.flush();
+			BatchSessionUtil.delete(session, shoppingItem);
 		}
 		catch (Exception e) {
 			throw processException(e);

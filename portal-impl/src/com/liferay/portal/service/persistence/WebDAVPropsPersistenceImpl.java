@@ -222,18 +222,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		try {
 			session = openSession();
 
-			if (webDAVProps.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(WebDAVPropsImpl.class,
-						webDAVProps.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(webDAVProps);
-
-			session.flush();
+			BatchSessionUtil.delete(session, webDAVProps);
 		}
 		catch (Exception e) {
 			throw processException(e);

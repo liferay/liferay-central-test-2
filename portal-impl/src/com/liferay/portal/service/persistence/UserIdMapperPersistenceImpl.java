@@ -261,18 +261,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 		try {
 			session = openSession();
 
-			if (userIdMapper.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(UserIdMapperImpl.class,
-						userIdMapper.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(userIdMapper);
-
-			session.flush();
+			BatchSessionUtil.delete(session, userIdMapper);
 		}
 		catch (Exception e) {
 			throw processException(e);

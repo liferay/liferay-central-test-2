@@ -213,18 +213,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 		try {
 			session = openSession();
 
-			if (contact.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(ContactImpl.class,
-						contact.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(contact);
-
-			session.flush();
+			BatchSessionUtil.delete(session, contact);
 		}
 		catch (Exception e) {
 			throw processException(e);

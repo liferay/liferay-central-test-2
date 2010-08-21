@@ -222,19 +222,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 		try {
 			session = openSession();
 
-			if (workflowInstanceLink.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(WorkflowInstanceLinkImpl.class,
-						workflowInstanceLink.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(workflowInstanceLink);
-
-			session.flush();
+			BatchSessionUtil.delete(session, workflowInstanceLink);
 		}
 		catch (Exception e) {
 			throw processException(e);

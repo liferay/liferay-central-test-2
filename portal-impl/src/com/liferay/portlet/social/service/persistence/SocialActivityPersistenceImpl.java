@@ -356,18 +356,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		try {
 			session = openSession();
 
-			if (socialActivity.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(SocialActivityImpl.class,
-						socialActivity.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(socialActivity);
-
-			session.flush();
+			BatchSessionUtil.delete(session, socialActivity);
 		}
 		catch (Exception e) {
 			throw processException(e);

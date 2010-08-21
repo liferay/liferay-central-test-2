@@ -270,18 +270,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		try {
 			session = openSession();
 
-			if (userGroupRole.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(UserGroupRoleImpl.class,
-						userGroupRole.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(userGroupRole);
-
-			session.flush();
+			BatchSessionUtil.delete(session, userGroupRole);
 		}
 		catch (Exception e) {
 			throw processException(e);

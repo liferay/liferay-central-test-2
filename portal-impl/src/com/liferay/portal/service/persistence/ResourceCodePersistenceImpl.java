@@ -256,18 +256,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 		try {
 			session = openSession();
 
-			if (resourceCode.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(ResourceCodeImpl.class,
-						resourceCode.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(resourceCode);
-
-			session.flush();
+			BatchSessionUtil.delete(session, resourceCode);
 		}
 		catch (Exception e) {
 			throw processException(e);

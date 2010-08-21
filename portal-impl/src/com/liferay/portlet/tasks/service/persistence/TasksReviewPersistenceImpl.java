@@ -298,18 +298,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		try {
 			session = openSession();
 
-			if (tasksReview.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(TasksReviewImpl.class,
-						tasksReview.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(tasksReview);
-
-			session.flush();
+			BatchSessionUtil.delete(session, tasksReview);
 		}
 		catch (Exception e) {
 			throw processException(e);

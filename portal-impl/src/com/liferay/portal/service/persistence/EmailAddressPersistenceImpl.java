@@ -273,18 +273,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		try {
 			session = openSession();
 
-			if (emailAddress.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(EmailAddressImpl.class,
-						emailAddress.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(emailAddress);
-
-			session.flush();
+			BatchSessionUtil.delete(session, emailAddress);
 		}
 		catch (Exception e) {
 			throw processException(e);

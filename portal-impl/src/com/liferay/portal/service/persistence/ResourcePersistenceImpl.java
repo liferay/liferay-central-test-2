@@ -229,18 +229,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		try {
 			session = openSession();
 
-			if (resource.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(ResourceImpl.class,
-						resource.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(resource);
-
-			session.flush();
+			BatchSessionUtil.delete(session, resource);
 		}
 		catch (Exception e) {
 			throw processException(e);

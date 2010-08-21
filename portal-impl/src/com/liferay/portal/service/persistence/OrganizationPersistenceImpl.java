@@ -297,18 +297,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		try {
 			session = openSession();
 
-			if (organization.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(OrganizationImpl.class,
-						organization.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(organization);
-
-			session.flush();
+			BatchSessionUtil.delete(session, organization);
 		}
 		catch (Exception e) {
 			throw processException(e);

@@ -268,18 +268,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		try {
 			session = openSession();
 
-			if (phone.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(PhoneImpl.class,
-						phone.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(phone);
-
-			session.flush();
+			BatchSessionUtil.delete(session, phone);
 		}
 		catch (Exception e) {
 			throw processException(e);

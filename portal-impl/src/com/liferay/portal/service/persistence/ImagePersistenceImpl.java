@@ -213,18 +213,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		try {
 			session = openSession();
 
-			if (image.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(ImageImpl.class,
-						image.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(image);
-
-			session.flush();
+			BatchSessionUtil.delete(session, image);
 		}
 		catch (Exception e) {
 			throw processException(e);

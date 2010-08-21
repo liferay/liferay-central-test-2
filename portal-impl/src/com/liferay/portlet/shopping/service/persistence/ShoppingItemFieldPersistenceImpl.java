@@ -221,19 +221,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 		try {
 			session = openSession();
 
-			if (shoppingItemField.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(ShoppingItemFieldImpl.class,
-						shoppingItemField.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(shoppingItemField);
-
-			session.flush();
+			BatchSessionUtil.delete(session, shoppingItemField);
 		}
 		catch (Exception e) {
 			throw processException(e);

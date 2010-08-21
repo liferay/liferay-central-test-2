@@ -290,19 +290,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		try {
 			session = openSession();
 
-			if (bookmarksFolder.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(BookmarksFolderImpl.class,
-						bookmarksFolder.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(bookmarksFolder);
-
-			session.flush();
+			BatchSessionUtil.delete(session, bookmarksFolder);
 		}
 		catch (Exception e) {
 			throw processException(e);

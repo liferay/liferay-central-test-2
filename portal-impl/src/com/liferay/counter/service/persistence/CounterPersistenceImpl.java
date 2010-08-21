@@ -202,18 +202,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 		try {
 			session = openSession();
 
-			if (counter.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(CounterImpl.class,
-						counter.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(counter);
-
-			session.flush();
+			BatchSessionUtil.delete(session, counter);
 		}
 		catch (Exception e) {
 			throw processException(e);

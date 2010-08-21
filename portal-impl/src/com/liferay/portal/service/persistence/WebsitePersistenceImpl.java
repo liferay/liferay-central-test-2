@@ -270,18 +270,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		try {
 			session = openSession();
 
-			if (website.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(WebsiteImpl.class,
-						website.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(website);
-
-			session.flush();
+			BatchSessionUtil.delete(session, website);
 		}
 		catch (Exception e) {
 			throw processException(e);

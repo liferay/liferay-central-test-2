@@ -278,18 +278,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		try {
 			session = openSession();
 
-			if (mbMailingList.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(MBMailingListImpl.class,
-						mbMailingList.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(mbMailingList);
-
-			session.flush();
+			BatchSessionUtil.delete(session, mbMailingList);
 		}
 		catch (Exception e) {
 			throw processException(e);

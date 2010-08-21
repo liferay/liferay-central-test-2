@@ -304,19 +304,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		try {
 			session = openSession();
 
-			if (resourcePermission.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(ResourcePermissionImpl.class,
-						resourcePermission.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(resourcePermission);
-
-			session.flush();
+			BatchSessionUtil.delete(session, resourcePermission);
 		}
 		catch (Exception e) {
 			throw processException(e);

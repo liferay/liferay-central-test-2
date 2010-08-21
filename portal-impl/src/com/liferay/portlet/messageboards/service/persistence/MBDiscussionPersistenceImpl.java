@@ -252,18 +252,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 		try {
 			session = openSession();
 
-			if (mbDiscussion.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(MBDiscussionImpl.class,
-						mbDiscussion.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(mbDiscussion);
-
-			session.flush();
+			BatchSessionUtil.delete(session, mbDiscussion);
 		}
 		catch (Exception e) {
 			throw processException(e);

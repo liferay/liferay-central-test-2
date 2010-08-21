@@ -244,18 +244,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		try {
 			session = openSession();
 
-			if (team.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(TeamImpl.class,
-						team.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(team);
-
-			session.flush();
+			BatchSessionUtil.delete(session, team);
 		}
 		catch (Exception e) {
 			throw processException(e);

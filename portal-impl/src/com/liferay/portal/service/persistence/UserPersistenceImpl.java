@@ -459,18 +459,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		try {
 			session = openSession();
 
-			if (user.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(UserImpl.class,
-						user.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(user);
-
-			session.flush();
+			BatchSessionUtil.delete(session, user);
 		}
 		catch (Exception e) {
 			throw processException(e);

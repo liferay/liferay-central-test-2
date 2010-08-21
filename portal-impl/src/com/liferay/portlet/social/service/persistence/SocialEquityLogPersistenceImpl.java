@@ -337,19 +337,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		try {
 			session = openSession();
 
-			if (socialEquityLog.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(SocialEquityLogImpl.class,
-						socialEquityLog.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(socialEquityLog);
-
-			session.flush();
+			BatchSessionUtil.delete(session, socialEquityLog);
 		}
 		catch (Exception e) {
 			throw processException(e);

@@ -238,18 +238,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 		try {
 			session = openSession();
 
-			if (expandoRow.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(ExpandoRowImpl.class,
-						expandoRow.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(expandoRow);
-
-			session.flush();
+			BatchSessionUtil.delete(session, expandoRow);
 		}
 		catch (Exception e) {
 			throw processException(e);

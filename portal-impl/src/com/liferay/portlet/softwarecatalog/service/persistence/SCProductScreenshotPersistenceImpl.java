@@ -273,19 +273,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		try {
 			session = openSession();
 
-			if (scProductScreenshot.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(SCProductScreenshotImpl.class,
-						scProductScreenshot.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(scProductScreenshot);
-
-			session.flush();
+			BatchSessionUtil.delete(session, scProductScreenshot);
 		}
 		catch (Exception e) {
 			throw processException(e);

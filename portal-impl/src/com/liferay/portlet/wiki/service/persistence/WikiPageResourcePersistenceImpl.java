@@ -250,19 +250,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 		try {
 			session = openSession();
 
-			if (wikiPageResource.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(WikiPageResourceImpl.class,
-						wikiPageResource.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(wikiPageResource);
-
-			session.flush();
+			BatchSessionUtil.delete(session, wikiPageResource);
 		}
 		catch (Exception e) {
 			throw processException(e);

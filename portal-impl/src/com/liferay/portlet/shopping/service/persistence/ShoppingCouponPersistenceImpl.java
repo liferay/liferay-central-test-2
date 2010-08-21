@@ -236,18 +236,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 		try {
 			session = openSession();
 
-			if (shoppingCoupon.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(ShoppingCouponImpl.class,
-						shoppingCoupon.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(shoppingCoupon);
-
-			session.flush();
+			BatchSessionUtil.delete(session, shoppingCoupon);
 		}
 		catch (Exception e) {
 			throw processException(e);

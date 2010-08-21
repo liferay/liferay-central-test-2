@@ -325,18 +325,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 		try {
 			session = openSession();
 
-			if (dlFolder.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(DLFolderImpl.class,
-						dlFolder.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(dlFolder);
-
-			session.flush();
+			BatchSessionUtil.delete(session, dlFolder);
 		}
 		catch (Exception e) {
 			throw processException(e);

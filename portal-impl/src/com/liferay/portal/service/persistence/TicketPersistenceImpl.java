@@ -214,18 +214,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 		try {
 			session = openSession();
 
-			if (ticket.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(TicketImpl.class,
-						ticket.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(ticket);
-
-			session.flush();
+			BatchSessionUtil.delete(session, ticket);
 		}
 		catch (Exception e) {
 			throw processException(e);

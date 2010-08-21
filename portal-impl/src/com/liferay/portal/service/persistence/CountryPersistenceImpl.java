@@ -250,18 +250,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		try {
 			session = openSession();
 
-			if (country.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(CountryImpl.class,
-						country.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(country);
-
-			session.flush();
+			BatchSessionUtil.delete(session, country);
 		}
 		catch (Exception e) {
 			throw processException(e);

@@ -248,18 +248,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		try {
 			session = openSession();
 
-			if (passwordPolicy.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(PasswordPolicyImpl.class,
-						passwordPolicy.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(passwordPolicy);
-
-			session.flush();
+			BatchSessionUtil.delete(session, passwordPolicy);
 		}
 		catch (Exception e) {
 			throw processException(e);

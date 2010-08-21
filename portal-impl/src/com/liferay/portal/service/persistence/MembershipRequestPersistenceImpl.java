@@ -244,19 +244,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		try {
 			session = openSession();
 
-			if (membershipRequest.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(MembershipRequestImpl.class,
-						membershipRequest.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(membershipRequest);
-
-			session.flush();
+			BatchSessionUtil.delete(session, membershipRequest);
 		}
 		catch (Exception e) {
 			throw processException(e);

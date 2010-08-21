@@ -318,18 +318,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 		try {
 			session = openSession();
 
-			if (mbMessageFlag.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(MBMessageFlagImpl.class,
-						mbMessageFlag.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(mbMessageFlag);
-
-			session.flush();
+			BatchSessionUtil.delete(session, mbMessageFlag);
 		}
 		catch (Exception e) {
 			throw processException(e);

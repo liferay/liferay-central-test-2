@@ -283,18 +283,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		try {
 			session = openSession();
 
-			if (mbCategory.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(MBCategoryImpl.class,
-						mbCategory.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(mbCategory);
-
-			session.flush();
+			BatchSessionUtil.delete(session, mbCategory);
 		}
 		catch (Exception e) {
 			throw processException(e);

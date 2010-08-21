@@ -393,18 +393,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		try {
 			session = openSession();
 
-			if (layout.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(LayoutImpl.class,
-						layout.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(layout);
-
-			session.flush();
+			BatchSessionUtil.delete(session, layout);
 		}
 		catch (Exception e) {
 			throw processException(e);

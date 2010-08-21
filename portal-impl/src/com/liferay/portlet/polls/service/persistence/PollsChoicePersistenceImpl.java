@@ -258,18 +258,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		try {
 			session = openSession();
 
-			if (pollsChoice.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(PollsChoiceImpl.class,
-						pollsChoice.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(pollsChoice);
-
-			session.flush();
+			BatchSessionUtil.delete(session, pollsChoice);
 		}
 		catch (Exception e) {
 			throw processException(e);

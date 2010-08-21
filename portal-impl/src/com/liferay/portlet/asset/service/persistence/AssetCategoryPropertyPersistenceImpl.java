@@ -272,19 +272,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		try {
 			session = openSession();
 
-			if (assetCategoryProperty.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(AssetCategoryPropertyImpl.class,
-						assetCategoryProperty.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(assetCategoryProperty);
-
-			session.flush();
+			BatchSessionUtil.delete(session, assetCategoryProperty);
 		}
 		catch (Exception e) {
 			throw processException(e);

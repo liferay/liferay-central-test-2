@@ -249,19 +249,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 		try {
 			session = openSession();
 
-			if (announcementsFlag.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(AnnouncementsFlagImpl.class,
-						announcementsFlag.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(announcementsFlag);
-
-			session.flush();
+			BatchSessionUtil.delete(session, announcementsFlag);
 		}
 		catch (Exception e) {
 			throw processException(e);

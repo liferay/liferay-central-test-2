@@ -245,19 +245,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		try {
 			session = openSession();
 
-			if (announcementsDelivery.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(AnnouncementsDeliveryImpl.class,
-						announcementsDelivery.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(announcementsDelivery);
-
-			session.flush();
+			BatchSessionUtil.delete(session, announcementsDelivery);
 		}
 		catch (Exception e) {
 			throw processException(e);

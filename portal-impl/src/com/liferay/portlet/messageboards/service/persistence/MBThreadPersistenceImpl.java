@@ -325,18 +325,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		try {
 			session = openSession();
 
-			if (mbThread.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(MBThreadImpl.class,
-						mbThread.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(mbThread);
-
-			session.flush();
+			BatchSessionUtil.delete(session, mbThread);
 		}
 		catch (Exception e) {
 			throw processException(e);

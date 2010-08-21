@@ -294,18 +294,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		try {
 			session = openSession();
 
-			if (scProductEntry.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(SCProductEntryImpl.class,
-						scProductEntry.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(scProductEntry);
-
-			session.flush();
+			BatchSessionUtil.delete(session, scProductEntry);
 		}
 		catch (Exception e) {
 			throw processException(e);

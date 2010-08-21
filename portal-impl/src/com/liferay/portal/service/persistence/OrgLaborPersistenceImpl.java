@@ -213,18 +213,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		try {
 			session = openSession();
 
-			if (orgLabor.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(OrgLaborImpl.class,
-						orgLabor.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(orgLabor);
-
-			session.flush();
+			BatchSessionUtil.delete(session, orgLabor);
 		}
 		catch (Exception e) {
 			throw processException(e);

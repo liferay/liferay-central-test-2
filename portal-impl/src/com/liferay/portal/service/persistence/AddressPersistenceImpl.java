@@ -287,18 +287,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		try {
 			session = openSession();
 
-			if (address.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(AddressImpl.class,
-						address.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(address);
-
-			session.flush();
+			BatchSessionUtil.delete(session, address);
 		}
 		catch (Exception e) {
 			throw processException(e);

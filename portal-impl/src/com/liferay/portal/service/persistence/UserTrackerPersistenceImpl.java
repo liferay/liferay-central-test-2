@@ -238,18 +238,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 		try {
 			session = openSession();
 
-			if (userTracker.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(UserTrackerImpl.class,
-						userTracker.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(userTracker);
-
-			session.flush();
+			BatchSessionUtil.delete(session, userTracker);
 		}
 		catch (Exception e) {
 			throw processException(e);

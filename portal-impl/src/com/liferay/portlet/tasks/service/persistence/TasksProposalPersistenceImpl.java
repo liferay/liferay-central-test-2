@@ -261,18 +261,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 		try {
 			session = openSession();
 
-			if (tasksProposal.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(TasksProposalImpl.class,
-						tasksProposal.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(tasksProposal);
-
-			session.flush();
+			BatchSessionUtil.delete(session, tasksProposal);
 		}
 		catch (Exception e) {
 			throw processException(e);

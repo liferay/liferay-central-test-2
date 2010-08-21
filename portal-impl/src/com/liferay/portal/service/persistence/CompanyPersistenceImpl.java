@@ -262,18 +262,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		try {
 			session = openSession();
 
-			if (company.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(CompanyImpl.class,
-						company.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(company);
-
-			session.flush();
+			BatchSessionUtil.delete(session, company);
 		}
 		catch (Exception e) {
 			throw processException(e);

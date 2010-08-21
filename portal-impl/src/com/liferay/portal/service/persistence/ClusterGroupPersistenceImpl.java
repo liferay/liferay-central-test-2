@@ -202,18 +202,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 		try {
 			session = openSession();
 
-			if (clusterGroup.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(ClusterGroupImpl.class,
-						clusterGroup.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(clusterGroup);
-
-			session.flush();
+			BatchSessionUtil.delete(session, clusterGroup);
 		}
 		catch (Exception e) {
 			throw processException(e);

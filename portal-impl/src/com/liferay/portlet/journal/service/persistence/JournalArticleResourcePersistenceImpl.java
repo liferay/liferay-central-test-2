@@ -248,19 +248,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 		try {
 			session = openSession();
 
-			if (journalArticleResource.isCachedModel() ||
-					BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(JournalArticleResourceImpl.class,
-						journalArticleResource.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(journalArticleResource);
-
-			session.flush();
+			BatchSessionUtil.delete(session, journalArticleResource);
 		}
 		catch (Exception e) {
 			throw processException(e);

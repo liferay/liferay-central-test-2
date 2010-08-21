@@ -244,18 +244,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		try {
 			session = openSession();
 
-			if (lock.isCachedModel() || BatchSessionUtil.isEnabled()) {
-				Object staleObject = session.get(LockImpl.class,
-						lock.getPrimaryKeyObj());
-
-				if (staleObject != null) {
-					session.evict(staleObject);
-				}
-			}
-
-			session.delete(lock);
-
-			session.flush();
+			BatchSessionUtil.delete(session, lock);
 		}
 		catch (Exception e) {
 			throw processException(e);
