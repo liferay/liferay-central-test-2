@@ -25,15 +25,6 @@ public class MethodTargetClassKey {
 	public MethodTargetClassKey(Method method, Class<?> targetClass) {
 		_method = method;
 		_targetClass = targetClass;
-
-		if (_targetClass != null) {
-			try {
-				_targetMethod = _targetClass.getDeclaredMethod(
-					_method.getName(), _method.getParameterTypes());
-			}
-			catch (Throwable t) {
-			}
-		}
 	}
 
 	public boolean equals(Object obj) {
@@ -65,6 +56,14 @@ public class MethodTargetClassKey {
 	}
 
 	public Method getTargetMethod() {
+		if (_targetMethod == null && _targetClass != null) {
+			try {
+				_targetMethod = _targetClass.getDeclaredMethod(
+					_method.getName(), _method.getParameterTypes());
+			}
+			catch (Throwable t) {
+			}
+		}
 		return _targetMethod;
 	}
 
