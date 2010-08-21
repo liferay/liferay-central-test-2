@@ -62,9 +62,7 @@ public class BookmarksEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(BookmarksEntryServiceUtil.class.getName(),
-					"addEntry", long.class, long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"addEntry", _addEntryParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, name, url, comments, serviceContext);
@@ -100,7 +98,7 @@ public class BookmarksEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(BookmarksEntryServiceUtil.class.getName(),
-					"deleteEntry", long.class);
+					"deleteEntry", _deleteEntryParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
 
@@ -132,7 +130,7 @@ public class BookmarksEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(BookmarksEntryServiceUtil.class.getName(),
-					"getEntry", long.class);
+					"getEntry", _getEntryParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
 
@@ -168,7 +166,7 @@ public class BookmarksEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(BookmarksEntryServiceUtil.class.getName(),
-					"openEntry", long.class);
+					"openEntry", _openEntryParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
 
@@ -206,10 +204,7 @@ public class BookmarksEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(BookmarksEntryServiceUtil.class.getName(),
-					"updateEntry", long.class, long.class, long.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"updateEntry", _updateEntryParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId,
 					groupId, folderId, name, url, comments, serviceContext);
@@ -241,4 +236,23 @@ public class BookmarksEntryServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(BookmarksEntryServiceHttp.class);
+	private static final Class<?>[] _addEntryParameterTypes0 = new Class[] {
+			long.class, long.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _deleteEntryParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getEntryParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _openEntryParameterTypes3 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _updateEntryParameterTypes4 = new Class[] {
+			long.class, long.class, long.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
 }

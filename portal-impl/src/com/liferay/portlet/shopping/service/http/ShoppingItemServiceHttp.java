@@ -60,8 +60,7 @@ public class ShoppingItemServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingItemServiceUtil.class.getName(),
-					"addBookItems", long.class, long.class,
-					java.lang.String[].class);
+					"addBookItems", _addBookItemsParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					categoryId, isbns);
@@ -106,16 +105,7 @@ public class ShoppingItemServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingItemServiceUtil.class.getName(),
-					"addItem", long.class, long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					boolean.class, int.class, boolean.class,
-					java.lang.Boolean.class, boolean.class,
-					java.lang.String.class, java.io.File.class, boolean.class,
-					java.lang.String.class, java.io.File.class, boolean.class,
-					java.lang.String.class, java.io.File.class,
-					java.util.List.class, java.util.List.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"addItem", _addItemParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					categoryId, sku, name, description, properties,
@@ -156,7 +146,7 @@ public class ShoppingItemServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingItemServiceUtil.class.getName(),
-					"deleteItem", long.class);
+					"deleteItem", _deleteItemParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, itemId);
 
@@ -188,7 +178,7 @@ public class ShoppingItemServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingItemServiceUtil.class.getName(),
-					"getItem", long.class);
+					"getItem", _getItemParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, itemId);
 
@@ -236,16 +226,7 @@ public class ShoppingItemServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingItemServiceUtil.class.getName(),
-					"updateItem", long.class, long.class, long.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, boolean.class, int.class,
-					boolean.class, java.lang.Boolean.class, boolean.class,
-					java.lang.String.class, java.io.File.class, boolean.class,
-					java.lang.String.class, java.io.File.class, boolean.class,
-					java.lang.String.class, java.io.File.class,
-					java.util.List.class, java.util.List.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"updateItem", _updateItemParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, itemId,
 					groupId, categoryId, sku, name, description, properties,
@@ -282,4 +263,35 @@ public class ShoppingItemServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ShoppingItemServiceHttp.class);
+	private static final Class<?>[] _addBookItemsParameterTypes0 = new Class[] {
+			long.class, long.class, java.lang.String[].class
+		};
+	private static final Class<?>[] _addItemParameterTypes1 = new Class[] {
+			long.class, long.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class, boolean.class,
+			int.class, boolean.class, java.lang.Boolean.class, boolean.class,
+			java.lang.String.class, java.io.File.class, boolean.class,
+			java.lang.String.class, java.io.File.class, boolean.class,
+			java.lang.String.class, java.io.File.class, java.util.List.class,
+			java.util.List.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _deleteItemParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getItemParameterTypes3 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _updateItemParameterTypes4 = new Class[] {
+			long.class, long.class, long.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class, boolean.class,
+			int.class, boolean.class, java.lang.Boolean.class, boolean.class,
+			java.lang.String.class, java.io.File.class, boolean.class,
+			java.lang.String.class, java.io.File.class, boolean.class,
+			java.lang.String.class, java.io.File.class, java.util.List.class,
+			java.util.List.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
 }

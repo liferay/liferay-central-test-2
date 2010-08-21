@@ -65,11 +65,7 @@ public class SCProductVersionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(SCProductVersionServiceUtil.class.getName(),
-					"addProductVersion", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, boolean.class, boolean.class,
-					long[].class,
-					com.liferay.portal.service.ServiceContext.class);
+					"addProductVersion", _addProductVersionParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					productEntryId, version, changeLog, downloadPageURL,
@@ -108,7 +104,7 @@ public class SCProductVersionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(SCProductVersionServiceUtil.class.getName(),
-					"deleteProductVersion", long.class);
+					"deleteProductVersion", _deleteProductVersionParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					productVersionId);
@@ -141,7 +137,7 @@ public class SCProductVersionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(SCProductVersionServiceUtil.class.getName(),
-					"getProductVersion", long.class);
+					"getProductVersion", _getProductVersionParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					productVersionId);
@@ -178,7 +174,7 @@ public class SCProductVersionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(SCProductVersionServiceUtil.class.getName(),
-					"getProductVersions", long.class, int.class, int.class);
+					"getProductVersions", _getProductVersionsParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					productEntryId, start, end);
@@ -215,7 +211,8 @@ public class SCProductVersionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(SCProductVersionServiceUtil.class.getName(),
-					"getProductVersionsCount", long.class);
+					"getProductVersionsCount",
+					_getProductVersionsCountParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					productEntryId);
@@ -256,10 +253,7 @@ public class SCProductVersionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(SCProductVersionServiceUtil.class.getName(),
-					"updateProductVersion", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, boolean.class, boolean.class,
-					long[].class);
+					"updateProductVersion", _updateProductVersionParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					productVersionId, version, changeLog, downloadPageURL,
@@ -293,4 +287,27 @@ public class SCProductVersionServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(SCProductVersionServiceHttp.class);
+	private static final Class<?>[] _addProductVersionParameterTypes0 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class, boolean.class,
+			boolean.class, long[].class,
+			com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _deleteProductVersionParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getProductVersionParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getProductVersionsParameterTypes3 = new Class[] {
+			long.class, int.class, int.class
+		};
+	private static final Class<?>[] _getProductVersionsCountParameterTypes4 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _updateProductVersionParameterTypes5 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class, boolean.class,
+			boolean.class, long[].class
+		};
 }

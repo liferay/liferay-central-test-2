@@ -129,18 +129,6 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	public void addStructureResources(
-			long groupId, String structureId, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		JournalStructure structure = journalStructurePersistence.findByG_S(
-			groupId, structureId);
-
-		addStructureResources(
-			structure, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addStructureResources(
 			JournalStructure structure, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -153,6 +141,29 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	public void addStructureResources(
+			JournalStructure structure, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		resourceLocalService.addModelResources(
+			structure.getCompanyId(), structure.getGroupId(),
+			structure.getUserId(), JournalStructure.class.getName(),
+			structure.getId(), communityPermissions, guestPermissions);
+	}
+
+	public void addStructureResources(
+			long groupId, String structureId, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		JournalStructure structure = journalStructurePersistence.findByG_S(
+			groupId, structureId);
+
+		addStructureResources(
+			structure, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addStructureResources(
 			long groupId, String structureId, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -162,17 +173,6 @@ public class JournalStructureLocalServiceImpl
 
 		addStructureResources(
 			structure, communityPermissions, guestPermissions);
-	}
-
-	public void addStructureResources(
-			JournalStructure structure, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		resourceLocalService.addModelResources(
-			structure.getCompanyId(), structure.getGroupId(),
-			structure.getUserId(), JournalStructure.class.getName(),
-			structure.getId(), communityPermissions, guestPermissions);
 	}
 
 	public void checkNewLine(long groupId, String structureId)
@@ -248,17 +248,6 @@ public class JournalStructureLocalServiceImpl
 		return newStructure;
 	}
 
-	public void deleteStructure(long groupId, String structureId)
-		throws PortalException, SystemException {
-
-		structureId = structureId.trim().toUpperCase();
-
-		JournalStructure structure = journalStructurePersistence.findByG_S(
-			groupId, structureId);
-
-		deleteStructure(structure);
-	}
-
 	public void deleteStructure(JournalStructure structure)
 		throws PortalException, SystemException {
 
@@ -299,6 +288,17 @@ public class JournalStructureLocalServiceImpl
 		// Structure
 
 		journalStructurePersistence.remove(structure);
+	}
+
+	public void deleteStructure(long groupId, String structureId)
+		throws PortalException, SystemException {
+
+		structureId = structureId.trim().toUpperCase();
+
+		JournalStructure structure = journalStructurePersistence.findByG_S(
+			groupId, structureId);
+
+		deleteStructure(structure);
 	}
 
 	public void deleteStructures(long groupId)
@@ -441,7 +441,7 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	protected void appendParentStructureElements(
-			long groupId, String parentStructureId, List<Element> children)
+			long groupId, String parentStructureId, List<Element> elements)
 		throws Exception {
 
 		if (Validator.isNull(parentStructureId)) {
@@ -452,13 +452,71 @@ public class JournalStructureLocalServiceImpl
 			journalStructurePersistence.findByG_S(groupId, parentStructureId);
 
 		appendParentStructureElements(
-			groupId, parentStructure.getParentStructureId(), children);
+			groupId, parentStructure.getParentStructureId(), elements);
 
-		Document doc = SAXReaderUtil.read(parentStructure.getXsd());
+		Document document = SAXReaderUtil.read(parentStructure.getXsd());
 
-		Element root = doc.getRootElement();
+		Element rootElement = document.getRootElement();
 
-		children.addAll(root.elements());
+		elements.addAll(rootElement.elements());
+	}
+
+	protected void validate(List<Element> elements, Set<String> elNames)
+		throws PortalException {
+
+		for (Element element : elements) {
+			if (element.getName().equals("meta-data")) {
+				continue;
+			}
+
+			String elName = element.attributeValue("name", StringPool.BLANK);
+			String elType = element.attributeValue("type", StringPool.BLANK);
+
+			if (Validator.isNull(elName) ||
+				elName.startsWith(JournalStructureConstants.RESERVED)) {
+
+				throw new StructureXsdException();
+			}
+			else {
+				char[] c = elName.toCharArray();
+
+				for (int i = 0; i < c.length; i++) {
+					if ((!Validator.isChar(c[i])) &&
+						(!Validator.isDigit(c[i])) && (c[i] != CharPool.DASH) &&
+						(c[i] != CharPool.UNDERLINE)) {
+
+						throw new StructureXsdException();
+					}
+				}
+
+				String completePath = elName;
+
+				Element parentElement = element.getParent();
+
+				while (!parentElement.isRootElement()) {
+					completePath =
+						parentElement.attributeValue("name", StringPool.BLANK) +
+							StringPool.SLASH + completePath;
+
+					parentElement = parentElement.getParent();
+				}
+
+				String elNameLowerCase = completePath.toLowerCase();
+
+				if (elNames.contains(elNameLowerCase)) {
+					throw new DuplicateStructureElementException();
+				}
+				else {
+					elNames.add(elNameLowerCase);
+				}
+			}
+
+			if (Validator.isNull(elType)) {
+				throw new StructureXsdException();
+			}
+
+			validate(element.elements(), elNames);
+		}
 	}
 
 	protected void validate(
@@ -499,24 +557,24 @@ public class JournalStructureLocalServiceImpl
 		}
 		else {
 			try {
-				List<Element> children = new ArrayList<Element>();
+				List<Element> elements = new ArrayList<Element>();
 
 				appendParentStructureElements(
-					groupId, parentStructureId, children);
+					groupId, parentStructureId, elements);
 
-				Document doc = SAXReaderUtil.read(xsd);
+				Document document = SAXReaderUtil.read(xsd);
 
-				Element root = doc.getRootElement();
+				Element rootElement = document.getRootElement();
 
-				if (root.elements().size() == 0) {
+				if (rootElement.elements().isEmpty()) {
 					throw new StructureXsdException();
 				}
 
-				children.addAll(root.elements());
+				elements.addAll(rootElement.elements());
 
 				Set<String> elNames = new HashSet<String>();
 
-				validate(children, elNames);
+				validate(elements, elNames);
 			}
 			catch (DuplicateStructureElementException dsee) {
 				throw dsee;
@@ -527,64 +585,6 @@ public class JournalStructureLocalServiceImpl
 			catch (Exception e) {
 				throw new StructureXsdException();
 			}
-		}
-	}
-
-	protected void validate(List<Element> children, Set<String> elNames)
-		throws PortalException {
-
-		for (Element el : children) {
-			if (el.getName().equals("meta-data")) {
-				continue;
-			}
-
-			String elName = el.attributeValue("name", StringPool.BLANK);
-			String elType = el.attributeValue("type", StringPool.BLANK);
-
-			if (Validator.isNull(elName) ||
-				elName.startsWith(JournalStructureConstants.RESERVED)) {
-
-				throw new StructureXsdException();
-			}
-			else {
-				char[] c = elName.toCharArray();
-
-				for (int i = 0; i < c.length; i++) {
-					if ((!Validator.isChar(c[i])) &&
-						(!Validator.isDigit(c[i])) && (c[i] != CharPool.DASH) &&
-						(c[i] != CharPool.UNDERLINE)) {
-
-						throw new StructureXsdException();
-					}
-				}
-
-				String completePath = elName;
-
-				Element parent = el.getParent();
-
-				while (!parent.isRootElement()) {
-					completePath =
-						parent.attributeValue("name", StringPool.BLANK) +
-							StringPool.SLASH + completePath;
-
-					parent = parent.getParent();
-				}
-
-				String elNameLowerCase = completePath.toLowerCase();
-
-				if (elNames.contains(elNameLowerCase)) {
-					throw new DuplicateStructureElementException();
-				}
-				else {
-					elNames.add(elNameLowerCase);
-				}
-			}
-
-			if (Validator.isNull(elType)) {
-				throw new StructureXsdException();
-			}
-
-			validate(el.elements(), elNames);
 		}
 	}
 

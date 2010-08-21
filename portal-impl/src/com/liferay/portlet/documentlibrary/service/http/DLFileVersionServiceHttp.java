@@ -61,7 +61,7 @@ public class DLFileVersionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLFileVersionServiceUtil.class.getName(),
-					"updateDescription", long.class, java.lang.String.class);
+					"updateDescription", _updateDescriptionParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					fileVersionId, description);
@@ -93,4 +93,7 @@ public class DLFileVersionServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DLFileVersionServiceHttp.class);
+	private static final Class<?>[] _updateDescriptionParameterTypes0 = new Class[] {
+			long.class, java.lang.String.class
+		};
 }

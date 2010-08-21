@@ -58,7 +58,7 @@ public class PermissionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"checkPermission", long.class, long.class);
+					"checkPermission", _checkPermissionParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					resourceId);
@@ -91,8 +91,7 @@ public class PermissionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"checkPermission", long.class, java.lang.String.class,
-					long.class);
+					"checkPermission", _checkPermissionParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					name, primKey);
@@ -125,8 +124,7 @@ public class PermissionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"checkPermission", long.class, java.lang.String.class,
-					java.lang.String.class);
+					"checkPermission", _checkPermissionParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					name, primKey);
@@ -158,8 +156,7 @@ public class PermissionServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"hasGroupPermission", long.class, java.lang.String.class,
-					long.class);
+					"hasGroupPermission", _hasGroupPermissionParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					actionId, resourceId);
@@ -191,8 +188,7 @@ public class PermissionServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"hasUserPermission", long.class, java.lang.String.class,
-					long.class);
+					"hasUserPermission", _hasUserPermissionParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					actionId, resourceId);
@@ -228,9 +224,7 @@ public class PermissionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"hasUserPermissions", long.class, long.class,
-					java.util.List.class, java.lang.String.class,
-					com.liferay.portal.security.permission.PermissionCheckerBag.class);
+					"hasUserPermissions", _hasUserPermissionsParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					groupId, resources, actionId, permissionCheckerBag);
@@ -267,8 +261,7 @@ public class PermissionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"setGroupPermissions", long.class,
-					java.lang.String[].class, long.class);
+					"setGroupPermissions", _setGroupPermissionsParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					actionIds, resourceId);
@@ -302,9 +295,7 @@ public class PermissionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"setGroupPermissions", java.lang.String.class,
-					java.lang.String.class, long.class,
-					java.lang.String[].class, long.class);
+					"setGroupPermissions", _setGroupPermissionsParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK, groupId, actionIds, resourceId);
@@ -338,8 +329,8 @@ public class PermissionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"setOrgGroupPermissions", long.class, long.class,
-					java.lang.String[].class, long.class);
+					"setOrgGroupPermissions",
+					_setOrgGroupPermissionsParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					organizationId, groupId, actionIds, resourceId);
@@ -373,9 +364,7 @@ public class PermissionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"setRolePermission", long.class, long.class,
-					java.lang.String.class, int.class, java.lang.String.class,
-					java.lang.String.class);
+					"setRolePermission", _setRolePermissionParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
 					groupId, name, scope, primKey, actionId);
@@ -408,8 +397,7 @@ public class PermissionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"setRolePermissions", long.class, long.class,
-					java.lang.String[].class, long.class);
+					"setRolePermissions", _setRolePermissionsParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
 					groupId, actionIds, resourceId);
@@ -442,8 +430,7 @@ public class PermissionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"setUserPermissions", long.class, long.class,
-					java.lang.String[].class, long.class);
+					"setUserPermissions", _setUserPermissionsParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					groupId, actionIds, resourceId);
@@ -476,7 +463,7 @@ public class PermissionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"unsetRolePermission", long.class, long.class, long.class);
+					"unsetRolePermission", _unsetRolePermissionParameterTypes12);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
 					groupId, permissionId);
@@ -510,9 +497,7 @@ public class PermissionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"unsetRolePermission", long.class, long.class,
-					java.lang.String.class, int.class, java.lang.String.class,
-					java.lang.String.class);
+					"unsetRolePermission", _unsetRolePermissionParameterTypes13);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
 					groupId, name, scope, primKey, actionId);
@@ -546,8 +531,8 @@ public class PermissionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"unsetRolePermissions", long.class, long.class,
-					java.lang.String.class, int.class, java.lang.String.class);
+					"unsetRolePermissions",
+					_unsetRolePermissionsParameterTypes14);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
 					groupId, name, scope, actionId);
@@ -580,8 +565,8 @@ public class PermissionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PermissionServiceUtil.class.getName(),
-					"unsetUserPermissions", long.class, long.class,
-					java.lang.String[].class, long.class);
+					"unsetUserPermissions",
+					_unsetUserPermissionsParameterTypes15);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					groupId, actionIds, resourceId);
@@ -609,4 +594,57 @@ public class PermissionServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PermissionServiceHttp.class);
+	private static final Class<?>[] _checkPermissionParameterTypes0 = new Class[] {
+			long.class, long.class
+		};
+	private static final Class<?>[] _checkPermissionParameterTypes1 = new Class[] {
+			long.class, java.lang.String.class, long.class
+		};
+	private static final Class<?>[] _checkPermissionParameterTypes2 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class
+		};
+	private static final Class<?>[] _hasGroupPermissionParameterTypes3 = new Class[] {
+			long.class, java.lang.String.class, long.class
+		};
+	private static final Class<?>[] _hasUserPermissionParameterTypes4 = new Class[] {
+			long.class, java.lang.String.class, long.class
+		};
+	private static final Class<?>[] _hasUserPermissionsParameterTypes5 = new Class[] {
+			long.class, long.class, java.util.List.class, java.lang.String.class,
+			com.liferay.portal.security.permission.PermissionCheckerBag.class
+		};
+	private static final Class<?>[] _setGroupPermissionsParameterTypes6 = new Class[] {
+			long.class, java.lang.String[].class, long.class
+		};
+	private static final Class<?>[] _setGroupPermissionsParameterTypes7 = new Class[] {
+			java.lang.String.class, java.lang.String.class, long.class,
+			java.lang.String[].class, long.class
+		};
+	private static final Class<?>[] _setOrgGroupPermissionsParameterTypes8 = new Class[] {
+			long.class, long.class, java.lang.String[].class, long.class
+		};
+	private static final Class<?>[] _setRolePermissionParameterTypes9 = new Class[] {
+			long.class, long.class, java.lang.String.class, int.class,
+			java.lang.String.class, java.lang.String.class
+		};
+	private static final Class<?>[] _setRolePermissionsParameterTypes10 = new Class[] {
+			long.class, long.class, java.lang.String[].class, long.class
+		};
+	private static final Class<?>[] _setUserPermissionsParameterTypes11 = new Class[] {
+			long.class, long.class, java.lang.String[].class, long.class
+		};
+	private static final Class<?>[] _unsetRolePermissionParameterTypes12 = new Class[] {
+			long.class, long.class, long.class
+		};
+	private static final Class<?>[] _unsetRolePermissionParameterTypes13 = new Class[] {
+			long.class, long.class, java.lang.String.class, int.class,
+			java.lang.String.class, java.lang.String.class
+		};
+	private static final Class<?>[] _unsetRolePermissionsParameterTypes14 = new Class[] {
+			long.class, long.class, java.lang.String.class, int.class,
+			java.lang.String.class
+		};
+	private static final Class<?>[] _unsetUserPermissionsParameterTypes15 = new Class[] {
+			long.class, long.class, java.lang.String[].class, long.class
+		};
 }

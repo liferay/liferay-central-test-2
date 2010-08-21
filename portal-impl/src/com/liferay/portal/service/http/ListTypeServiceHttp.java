@@ -58,7 +58,7 @@ public class ListTypeServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ListTypeServiceUtil.class.getName(),
-					"getListType", int.class);
+					"getListType", _getListTypeParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					listTypeId);
@@ -94,7 +94,7 @@ public class ListTypeServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ListTypeServiceUtil.class.getName(),
-					"getListTypes", java.lang.String.class);
+					"getListTypes", _getListTypesParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, type);
 
@@ -126,7 +126,7 @@ public class ListTypeServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ListTypeServiceUtil.class.getName(),
-					"validate", int.class, java.lang.String.class);
+					"validate", _validateParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					listTypeId, type);
@@ -159,7 +159,7 @@ public class ListTypeServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ListTypeServiceUtil.class.getName(),
-					"validate", int.class, long.class, java.lang.String.class);
+					"validate", _validateParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					listTypeId, classNameId, type);
@@ -187,4 +187,16 @@ public class ListTypeServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ListTypeServiceHttp.class);
+	private static final Class<?>[] _getListTypeParameterTypes0 = new Class[] {
+			int.class
+		};
+	private static final Class<?>[] _getListTypesParameterTypes1 = new Class[] {
+			java.lang.String.class
+		};
+	private static final Class<?>[] _validateParameterTypes2 = new Class[] {
+			int.class, java.lang.String.class
+		};
+	private static final Class<?>[] _validateParameterTypes3 = new Class[] {
+			int.class, long.class, java.lang.String.class
+		};
 }

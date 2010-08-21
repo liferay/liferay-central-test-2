@@ -60,7 +60,7 @@ public class RatingsEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RatingsEntryServiceUtil.class.getName(),
-					"deleteEntry", java.lang.String.class, long.class);
+					"deleteEntry", _deleteEntryParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK);
@@ -94,8 +94,7 @@ public class RatingsEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RatingsEntryServiceUtil.class.getName(),
-					"updateEntry", java.lang.String.class, long.class,
-					double.class);
+					"updateEntry", _updateEntryParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK, score);
@@ -127,4 +126,10 @@ public class RatingsEntryServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(RatingsEntryServiceHttp.class);
+	private static final Class<?>[] _deleteEntryParameterTypes0 = new Class[] {
+			java.lang.String.class, long.class
+		};
+	private static final Class<?>[] _updateEntryParameterTypes1 = new Class[] {
+			java.lang.String.class, long.class, double.class
+		};
 }

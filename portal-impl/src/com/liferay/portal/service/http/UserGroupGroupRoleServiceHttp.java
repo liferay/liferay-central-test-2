@@ -58,8 +58,8 @@ public class UserGroupGroupRoleServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(UserGroupGroupRoleServiceUtil.class.getName(),
-					"addUserGroupGroupRoles", long.class, long.class,
-					long[].class);
+					"addUserGroupGroupRoles",
+					_addUserGroupGroupRolesParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					userGroupId, groupId, roleIds);
@@ -92,8 +92,8 @@ public class UserGroupGroupRoleServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(UserGroupGroupRoleServiceUtil.class.getName(),
-					"addUserGroupGroupRoles", long[].class, long.class,
-					long.class);
+					"addUserGroupGroupRoles",
+					_addUserGroupGroupRolesParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					userGroupIds, groupId, roleId);
@@ -126,8 +126,8 @@ public class UserGroupGroupRoleServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(UserGroupGroupRoleServiceUtil.class.getName(),
-					"deleteUserGroupGroupRoles", long.class, long.class,
-					long[].class);
+					"deleteUserGroupGroupRoles",
+					_deleteUserGroupGroupRolesParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					userGroupId, groupId, roleIds);
@@ -160,8 +160,8 @@ public class UserGroupGroupRoleServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(UserGroupGroupRoleServiceUtil.class.getName(),
-					"deleteUserGroupGroupRoles", long[].class, long.class,
-					long.class);
+					"deleteUserGroupGroupRoles",
+					_deleteUserGroupGroupRolesParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					userGroupIds, groupId, roleId);
@@ -189,4 +189,16 @@ public class UserGroupGroupRoleServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UserGroupGroupRoleServiceHttp.class);
+	private static final Class<?>[] _addUserGroupGroupRolesParameterTypes0 = new Class[] {
+			long.class, long.class, long[].class
+		};
+	private static final Class<?>[] _addUserGroupGroupRolesParameterTypes1 = new Class[] {
+			long[].class, long.class, long.class
+		};
+	private static final Class<?>[] _deleteUserGroupGroupRolesParameterTypes2 = new Class[] {
+			long.class, long.class, long[].class
+		};
+	private static final Class<?>[] _deleteUserGroupGroupRolesParameterTypes3 = new Class[] {
+			long[].class, long.class, long.class
+		};
 }

@@ -59,9 +59,7 @@ public class PluginSettingServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PluginSettingServiceUtil.class.getName(),
-					"updatePluginSetting", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					boolean.class);
+					"updatePluginSetting", _updatePluginSettingParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, pluginId, pluginType, roles, active);
@@ -93,4 +91,8 @@ public class PluginSettingServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PluginSettingServiceHttp.class);
+	private static final Class<?>[] _updatePluginSettingParameterTypes0 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, boolean.class
+		};
 }

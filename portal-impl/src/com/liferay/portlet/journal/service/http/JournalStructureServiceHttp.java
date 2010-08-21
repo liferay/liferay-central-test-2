@@ -64,11 +64,7 @@ public class JournalStructureServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalStructureServiceUtil.class.getName(),
-					"addStructure", long.class, java.lang.String.class,
-					boolean.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"addStructure", _addStructureParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					structureId, autoStructureId, parentStructureId, name,
@@ -108,8 +104,7 @@ public class JournalStructureServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalStructureServiceUtil.class.getName(),
-					"copyStructure", long.class, java.lang.String.class,
-					java.lang.String.class, boolean.class);
+					"copyStructure", _copyStructureParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					oldStructureId, newStructureId, autoStructureId);
@@ -146,7 +141,7 @@ public class JournalStructureServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalStructureServiceUtil.class.getName(),
-					"deleteStructure", long.class, java.lang.String.class);
+					"deleteStructure", _deleteStructureParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					structureId);
@@ -179,7 +174,7 @@ public class JournalStructureServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalStructureServiceUtil.class.getName(),
-					"getStructure", long.class, java.lang.String.class);
+					"getStructure", _getStructureParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					structureId);
@@ -220,10 +215,7 @@ public class JournalStructureServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalStructureServiceUtil.class.getName(),
-					"updateStructure", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"updateStructure", _updateStructureParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					structureId, parentStructureId, name, description, xsd,
@@ -256,4 +248,26 @@ public class JournalStructureServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(JournalStructureServiceHttp.class);
+	private static final Class<?>[] _addStructureParameterTypes0 = new Class[] {
+			long.class, java.lang.String.class, boolean.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _copyStructureParameterTypes1 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			boolean.class
+		};
+	private static final Class<?>[] _deleteStructureParameterTypes2 = new Class[] {
+			long.class, java.lang.String.class
+		};
+	private static final Class<?>[] _getStructureParameterTypes3 = new Class[] {
+			long.class, java.lang.String.class
+		};
+	private static final Class<?>[] _updateStructureParameterTypes4 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
 }

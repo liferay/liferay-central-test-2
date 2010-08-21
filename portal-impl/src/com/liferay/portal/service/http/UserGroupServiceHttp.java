@@ -58,7 +58,7 @@ public class UserGroupServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(UserGroupServiceUtil.class.getName(),
-					"addGroupUserGroups", long.class, long[].class);
+					"addGroupUserGroups", _addGroupUserGroupsParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userGroupIds);
@@ -92,8 +92,7 @@ public class UserGroupServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(UserGroupServiceUtil.class.getName(),
-					"addUserGroup", java.lang.String.class,
-					java.lang.String.class);
+					"addUserGroup", _addUserGroupParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					description);
@@ -130,7 +129,7 @@ public class UserGroupServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(UserGroupServiceUtil.class.getName(),
-					"deleteUserGroup", long.class);
+					"deleteUserGroup", _deleteUserGroupParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					userGroupId);
@@ -163,7 +162,7 @@ public class UserGroupServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(UserGroupServiceUtil.class.getName(),
-					"getUserGroup", long.class);
+					"getUserGroup", _getUserGroupParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					userGroupId);
@@ -200,7 +199,7 @@ public class UserGroupServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(UserGroupServiceUtil.class.getName(),
-					"getUserGroup", java.lang.String.class);
+					"getUserGroup", _getUserGroupParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, name);
 
@@ -235,7 +234,7 @@ public class UserGroupServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(UserGroupServiceUtil.class.getName(),
-					"getUserUserGroups", long.class);
+					"getUserUserGroups", _getUserUserGroupsParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId);
 
@@ -267,7 +266,7 @@ public class UserGroupServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(UserGroupServiceUtil.class.getName(),
-					"unsetGroupUserGroups", long.class, long[].class);
+					"unsetGroupUserGroups", _unsetGroupUserGroupsParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userGroupIds);
@@ -301,8 +300,7 @@ public class UserGroupServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(UserGroupServiceUtil.class.getName(),
-					"updateUserGroup", long.class, java.lang.String.class,
-					java.lang.String.class);
+					"updateUserGroup", _updateUserGroupParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					userGroupId, name, description);
@@ -334,4 +332,28 @@ public class UserGroupServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UserGroupServiceHttp.class);
+	private static final Class<?>[] _addGroupUserGroupsParameterTypes0 = new Class[] {
+			long.class, long[].class
+		};
+	private static final Class<?>[] _addUserGroupParameterTypes1 = new Class[] {
+			java.lang.String.class, java.lang.String.class
+		};
+	private static final Class<?>[] _deleteUserGroupParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getUserGroupParameterTypes3 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getUserGroupParameterTypes4 = new Class[] {
+			java.lang.String.class
+		};
+	private static final Class<?>[] _getUserUserGroupsParameterTypes5 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _unsetGroupUserGroupsParameterTypes6 = new Class[] {
+			long.class, long[].class
+		};
+	private static final Class<?>[] _updateUserGroupParameterTypes7 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class
+		};
 }

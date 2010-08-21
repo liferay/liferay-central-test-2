@@ -62,9 +62,7 @@ public class BookmarksFolderServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(BookmarksFolderServiceUtil.class.getName(),
-					"addFolder", long.class, java.lang.String.class,
-					java.lang.String.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"addFolder", _addFolderParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					parentFolderId, name, description, serviceContext);
@@ -100,7 +98,7 @@ public class BookmarksFolderServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(BookmarksFolderServiceUtil.class.getName(),
-					"deleteFolder", long.class);
+					"deleteFolder", _deleteFolderParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, folderId);
 
@@ -132,7 +130,7 @@ public class BookmarksFolderServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(BookmarksFolderServiceUtil.class.getName(),
-					"getFolder", long.class);
+					"getFolder", _getFolderParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, folderId);
 
@@ -171,10 +169,7 @@ public class BookmarksFolderServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(BookmarksFolderServiceUtil.class.getName(),
-					"updateFolder", long.class, long.class,
-					java.lang.String.class, java.lang.String.class,
-					boolean.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"updateFolder", _updateFolderParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					folderId, parentFolderId, name, description,
@@ -207,4 +202,19 @@ public class BookmarksFolderServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(BookmarksFolderServiceHttp.class);
+	private static final Class<?>[] _addFolderParameterTypes0 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _deleteFolderParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getFolderParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _updateFolderParameterTypes3 = new Class[] {
+			long.class, long.class, java.lang.String.class,
+			java.lang.String.class, boolean.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
 }

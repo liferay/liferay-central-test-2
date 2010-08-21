@@ -61,8 +61,7 @@ public class PollsVoteServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PollsVoteServiceUtil.class.getName(),
-					"addVote", long.class, long.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"addVote", _addVoteParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					questionId, choiceId, serviceContext);
@@ -94,4 +93,8 @@ public class PollsVoteServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PollsVoteServiceHttp.class);
+	private static final Class<?>[] _addVoteParameterTypes0 = new Class[] {
+			long.class, long.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
 }

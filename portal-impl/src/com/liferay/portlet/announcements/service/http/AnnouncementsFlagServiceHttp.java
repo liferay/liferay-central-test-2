@@ -60,7 +60,7 @@ public class AnnouncementsFlagServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AnnouncementsFlagServiceUtil.class.getName(),
-					"addFlag", long.class, int.class);
+					"addFlag", _addFlagParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId,
 					value);
@@ -92,7 +92,7 @@ public class AnnouncementsFlagServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AnnouncementsFlagServiceUtil.class.getName(),
-					"deleteFlag", long.class);
+					"deleteFlag", _deleteFlagParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, flagId);
 
@@ -124,7 +124,7 @@ public class AnnouncementsFlagServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AnnouncementsFlagServiceUtil.class.getName(),
-					"getFlag", long.class, int.class);
+					"getFlag", _getFlagParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId,
 					value);
@@ -156,4 +156,13 @@ public class AnnouncementsFlagServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(AnnouncementsFlagServiceHttp.class);
+	private static final Class<?>[] _addFlagParameterTypes0 = new Class[] {
+			long.class, int.class
+		};
+	private static final Class<?>[] _deleteFlagParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getFlagParameterTypes2 = new Class[] {
+			long.class, int.class
+		};
 }

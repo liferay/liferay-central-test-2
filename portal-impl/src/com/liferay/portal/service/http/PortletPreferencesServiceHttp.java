@@ -58,7 +58,8 @@ public class PortletPreferencesServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PortletPreferencesServiceUtil.class.getName(),
-					"deleteArchivedPreferences", long.class);
+					"deleteArchivedPreferences",
+					_deleteArchivedPreferencesParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					portletItemId);
@@ -92,9 +93,8 @@ public class PortletPreferencesServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PortletPreferencesServiceUtil.class.getName(),
-					"restoreArchivedPreferences", long.class,
-					java.lang.String.class, java.lang.String.class,
-					javax.portlet.PortletPreferences.class);
+					"restoreArchivedPreferences",
+					_restoreArchivedPreferencesParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					name, portletId, preferences);
@@ -128,9 +128,8 @@ public class PortletPreferencesServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PortletPreferencesServiceUtil.class.getName(),
-					"updateArchivePreferences", long.class, long.class,
-					java.lang.String.class, java.lang.String.class,
-					javax.portlet.PortletPreferences.class);
+					"updateArchivePreferences",
+					_updateArchivePreferencesParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					groupId, name, portletId, preferences);
@@ -158,4 +157,15 @@ public class PortletPreferencesServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PortletPreferencesServiceHttp.class);
+	private static final Class<?>[] _deleteArchivedPreferencesParameterTypes0 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _restoreArchivedPreferencesParameterTypes1 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			javax.portlet.PortletPreferences.class
+		};
+	private static final Class<?>[] _updateArchivePreferencesParameterTypes2 = new Class[] {
+			long.class, long.class, java.lang.String.class,
+			java.lang.String.class, javax.portlet.PortletPreferences.class
+		};
 }

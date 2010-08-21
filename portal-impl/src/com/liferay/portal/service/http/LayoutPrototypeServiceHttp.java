@@ -60,8 +60,7 @@ public class LayoutPrototypeServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(LayoutPrototypeServiceUtil.class.getName(),
-					"addLayoutPrototype", java.util.Map.class,
-					java.lang.String.class, boolean.class);
+					"addLayoutPrototype", _addLayoutPrototypeParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, nameMap,
 					description, active);
@@ -98,7 +97,8 @@ public class LayoutPrototypeServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(LayoutPrototypeServiceUtil.class.getName(),
-					"deleteLayoutPrototype", long.class);
+					"deleteLayoutPrototype",
+					_deleteLayoutPrototypeParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					layoutPrototypeId);
@@ -131,7 +131,7 @@ public class LayoutPrototypeServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(LayoutPrototypeServiceUtil.class.getName(),
-					"getLayoutPrototype", long.class);
+					"getLayoutPrototype", _getLayoutPrototypeParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					layoutPrototypeId);
@@ -169,8 +169,7 @@ public class LayoutPrototypeServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(LayoutPrototypeServiceUtil.class.getName(),
-					"search", long.class, java.lang.Boolean.class,
-					com.liferay.portal.kernel.util.OrderByComparator.class);
+					"search", _searchParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, active, obc);
@@ -209,8 +208,8 @@ public class LayoutPrototypeServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(LayoutPrototypeServiceUtil.class.getName(),
-					"updateLayoutPrototype", long.class, java.util.Map.class,
-					java.lang.String.class, boolean.class);
+					"updateLayoutPrototype",
+					_updateLayoutPrototypeParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					layoutPrototypeId, nameMap, description, active);
@@ -242,4 +241,21 @@ public class LayoutPrototypeServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutPrototypeServiceHttp.class);
+	private static final Class<?>[] _addLayoutPrototypeParameterTypes0 = new Class[] {
+			java.util.Map.class, java.lang.String.class, boolean.class
+		};
+	private static final Class<?>[] _deleteLayoutPrototypeParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getLayoutPrototypeParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _searchParameterTypes3 = new Class[] {
+			long.class, java.lang.Boolean.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class
+		};
+	private static final Class<?>[] _updateLayoutPrototypeParameterTypes4 = new Class[] {
+			long.class, java.util.Map.class, java.lang.String.class,
+			boolean.class
+		};
 }

@@ -66,10 +66,7 @@ public class PollsQuestionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PollsQuestionServiceUtil.class.getName(),
-					"addQuestion", java.util.Map.class, java.util.Map.class,
-					int.class, int.class, int.class, int.class, int.class,
-					boolean.class, java.util.List.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"addQuestion", _addQuestionParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					titleMap, descriptionMap, expirationDateMonth,
@@ -108,7 +105,7 @@ public class PollsQuestionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PollsQuestionServiceUtil.class.getName(),
-					"deleteQuestion", long.class);
+					"deleteQuestion", _deleteQuestionParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					questionId);
@@ -141,7 +138,7 @@ public class PollsQuestionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PollsQuestionServiceUtil.class.getName(),
-					"getQuestion", long.class);
+					"getQuestion", _getQuestionParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					questionId);
@@ -184,10 +181,7 @@ public class PollsQuestionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PollsQuestionServiceUtil.class.getName(),
-					"updateQuestion", long.class, java.util.Map.class,
-					java.util.Map.class, int.class, int.class, int.class,
-					int.class, int.class, boolean.class, java.util.List.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"updateQuestion", _updateQuestionParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					questionId, titleMap, descriptionMap, expirationDateMonth,
@@ -221,4 +215,21 @@ public class PollsQuestionServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PollsQuestionServiceHttp.class);
+	private static final Class<?>[] _addQuestionParameterTypes0 = new Class[] {
+			java.util.Map.class, java.util.Map.class, int.class, int.class,
+			int.class, int.class, int.class, boolean.class, java.util.List.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _deleteQuestionParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getQuestionParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _updateQuestionParameterTypes3 = new Class[] {
+			long.class, java.util.Map.class, java.util.Map.class, int.class,
+			int.class, int.class, int.class, int.class, boolean.class,
+			java.util.List.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
 }

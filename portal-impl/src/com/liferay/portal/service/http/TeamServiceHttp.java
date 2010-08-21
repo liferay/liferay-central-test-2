@@ -59,8 +59,7 @@ public class TeamServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(TeamServiceUtil.class.getName(),
-					"addTeam", long.class, java.lang.String.class,
-					java.lang.String.class);
+					"addTeam", _addTeamParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					name, description);
@@ -96,7 +95,7 @@ public class TeamServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(TeamServiceUtil.class.getName(),
-					"deleteTeam", long.class);
+					"deleteTeam", _deleteTeamParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, teamId);
 
@@ -129,8 +128,7 @@ public class TeamServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(TeamServiceUtil.class.getName(),
-					"updateTeam", long.class, java.lang.String.class,
-					java.lang.String.class);
+					"updateTeam", _updateTeamParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, teamId,
 					name, description);
@@ -162,4 +160,13 @@ public class TeamServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(TeamServiceHttp.class);
+	private static final Class<?>[] _addTeamParameterTypes0 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class
+		};
+	private static final Class<?>[] _deleteTeamParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _updateTeamParameterTypes2 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class
+		};
 }

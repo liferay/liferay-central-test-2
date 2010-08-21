@@ -62,9 +62,7 @@ public class ShoppingOrderServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingOrderServiceUtil.class.getName(),
-					"completeOrder", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					double.class, java.lang.String.class, java.lang.String.class);
+					"completeOrder", _completeOrderParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					number, ppTxnId, ppPaymentStatus, ppPaymentGross,
@@ -98,7 +96,7 @@ public class ShoppingOrderServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingOrderServiceUtil.class.getName(),
-					"deleteOrder", long.class, long.class);
+					"deleteOrder", _deleteOrderParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					orderId);
@@ -131,7 +129,7 @@ public class ShoppingOrderServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingOrderServiceUtil.class.getName(),
-					"getOrder", long.class, long.class);
+					"getOrder", _getOrderParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					orderId);
@@ -168,7 +166,7 @@ public class ShoppingOrderServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingOrderServiceUtil.class.getName(),
-					"sendEmail", long.class, long.class, java.lang.String.class);
+					"sendEmail", _sendEmailParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					orderId, emailType);
@@ -204,9 +202,7 @@ public class ShoppingOrderServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingOrderServiceUtil.class.getName(),
-					"updateOrder", long.class, long.class,
-					java.lang.String.class, java.lang.String.class,
-					double.class, java.lang.String.class, java.lang.String.class);
+					"updateOrder", _updateOrderParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					orderId, ppTxnId, ppPaymentStatus, ppPaymentGross,
@@ -258,20 +254,7 @@ public class ShoppingOrderServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingOrderServiceUtil.class.getName(),
-					"updateOrder", long.class, long.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					boolean.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class, int.class,
-					int.class, java.lang.String.class, java.lang.String.class);
+					"updateOrder", _updateOrderParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					orderId, billingFirstName, billingLastName,
@@ -310,4 +293,38 @@ public class ShoppingOrderServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ShoppingOrderServiceHttp.class);
+	private static final Class<?>[] _completeOrderParameterTypes0 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, double.class, java.lang.String.class,
+			java.lang.String.class
+		};
+	private static final Class<?>[] _deleteOrderParameterTypes1 = new Class[] {
+			long.class, long.class
+		};
+	private static final Class<?>[] _getOrderParameterTypes2 = new Class[] {
+			long.class, long.class
+		};
+	private static final Class<?>[] _sendEmailParameterTypes3 = new Class[] {
+			long.class, long.class, java.lang.String.class
+		};
+	private static final Class<?>[] _updateOrderParameterTypes4 = new Class[] {
+			long.class, long.class, java.lang.String.class,
+			java.lang.String.class, double.class, java.lang.String.class,
+			java.lang.String.class
+		};
+	private static final Class<?>[] _updateOrderParameterTypes5 = new Class[] {
+			long.class, long.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, boolean.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class, int.class, int.class,
+			java.lang.String.class, java.lang.String.class
+		};
 }

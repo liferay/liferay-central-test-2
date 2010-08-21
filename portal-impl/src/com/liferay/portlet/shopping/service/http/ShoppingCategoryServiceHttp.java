@@ -62,9 +62,7 @@ public class ShoppingCategoryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingCategoryServiceUtil.class.getName(),
-					"addCategory", long.class, java.lang.String.class,
-					java.lang.String.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"addCategory", _addCategoryParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					parentCategoryId, name, description, serviceContext);
@@ -101,7 +99,7 @@ public class ShoppingCategoryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingCategoryServiceUtil.class.getName(),
-					"deleteCategory", long.class);
+					"deleteCategory", _deleteCategoryParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					categoryId);
@@ -134,7 +132,7 @@ public class ShoppingCategoryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingCategoryServiceUtil.class.getName(),
-					"getCategory", long.class);
+					"getCategory", _getCategoryParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					categoryId);
@@ -174,10 +172,7 @@ public class ShoppingCategoryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingCategoryServiceUtil.class.getName(),
-					"updateCategory", long.class, long.class,
-					java.lang.String.class, java.lang.String.class,
-					boolean.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"updateCategory", _updateCategoryParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					categoryId, parentCategoryId, name, description,
@@ -210,4 +205,19 @@ public class ShoppingCategoryServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ShoppingCategoryServiceHttp.class);
+	private static final Class<?>[] _addCategoryParameterTypes0 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _deleteCategoryParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getCategoryParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _updateCategoryParameterTypes3 = new Class[] {
+			long.class, long.class, java.lang.String.class,
+			java.lang.String.class, boolean.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
 }

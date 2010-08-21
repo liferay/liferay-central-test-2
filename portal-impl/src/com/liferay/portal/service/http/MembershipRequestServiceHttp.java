@@ -58,7 +58,7 @@ public class MembershipRequestServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(MembershipRequestServiceUtil.class.getName(),
-					"addMembershipRequest", long.class, java.lang.String.class);
+					"addMembershipRequest", _addMembershipRequestParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					comments);
@@ -95,7 +95,8 @@ public class MembershipRequestServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(MembershipRequestServiceUtil.class.getName(),
-					"deleteMembershipRequests", long.class, int.class);
+					"deleteMembershipRequests",
+					_deleteMembershipRequestsParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					statusId);
@@ -128,7 +129,7 @@ public class MembershipRequestServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(MembershipRequestServiceUtil.class.getName(),
-					"getMembershipRequest", long.class);
+					"getMembershipRequest", _getMembershipRequestParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					membershipRequestId);
@@ -165,8 +166,7 @@ public class MembershipRequestServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(MembershipRequestServiceUtil.class.getName(),
-					"updateStatus", long.class, java.lang.String.class,
-					int.class);
+					"updateStatus", _updateStatusParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					membershipRequestId, reviewComments, statusId);
@@ -194,4 +194,16 @@ public class MembershipRequestServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(MembershipRequestServiceHttp.class);
+	private static final Class<?>[] _addMembershipRequestParameterTypes0 = new Class[] {
+			long.class, java.lang.String.class
+		};
+	private static final Class<?>[] _deleteMembershipRequestsParameterTypes1 = new Class[] {
+			long.class, int.class
+		};
+	private static final Class<?>[] _getMembershipRequestParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _updateStatusParameterTypes3 = new Class[] {
+			long.class, java.lang.String.class, int.class
+		};
 }

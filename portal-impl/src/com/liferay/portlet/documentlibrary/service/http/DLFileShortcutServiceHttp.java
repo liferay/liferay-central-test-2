@@ -62,9 +62,7 @@ public class DLFileShortcutServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLFileShortcutServiceUtil.class.getName(),
-					"addFileShortcut", long.class, long.class, long.class,
-					java.lang.String.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"addFileShortcut", _addFileShortcutParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, toFolderId, toName, serviceContext);
@@ -101,7 +99,7 @@ public class DLFileShortcutServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLFileShortcutServiceUtil.class.getName(),
-					"deleteFileShortcut", long.class);
+					"deleteFileShortcut", _deleteFileShortcutParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					fileShortcutId);
@@ -134,7 +132,7 @@ public class DLFileShortcutServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLFileShortcutServiceUtil.class.getName(),
-					"getFileShortcut", long.class);
+					"getFileShortcut", _getFileShortcutParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					fileShortcutId);
@@ -173,9 +171,7 @@ public class DLFileShortcutServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLFileShortcutServiceUtil.class.getName(),
-					"updateFileShortcut", long.class, long.class, long.class,
-					java.lang.String.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"updateFileShortcut", _updateFileShortcutParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					fileShortcutId, folderId, toFolderId, toName, serviceContext);
@@ -207,4 +203,18 @@ public class DLFileShortcutServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DLFileShortcutServiceHttp.class);
+	private static final Class<?>[] _addFileShortcutParameterTypes0 = new Class[] {
+			long.class, long.class, long.class, java.lang.String.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _deleteFileShortcutParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getFileShortcutParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _updateFileShortcutParameterTypes3 = new Class[] {
+			long.class, long.class, long.class, java.lang.String.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
 }

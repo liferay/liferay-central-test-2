@@ -60,8 +60,7 @@ public class RoleServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
-					"addRole", java.lang.String.class, java.util.Map.class,
-					java.lang.String.class, int.class);
+					"addRole", _addRoleParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					titleMap, description, type);
@@ -98,7 +97,7 @@ public class RoleServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
-					"addUserRoles", long.class, long[].class);
+					"addUserRoles", _addUserRolesParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					roleIds);
@@ -130,7 +129,7 @@ public class RoleServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
-					"deleteRole", long.class);
+					"deleteRole", _deleteRoleParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId);
 
@@ -161,7 +160,7 @@ public class RoleServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
-					"getGroupRoles", long.class);
+					"getGroupRoles", _getGroupRolesParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
@@ -193,7 +192,7 @@ public class RoleServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
-					"getRole", long.class);
+					"getRole", _getRoleParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId);
 
@@ -229,7 +228,7 @@ public class RoleServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
-					"getRole", long.class, java.lang.String.class);
+					"getRole", _getRoleParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, name);
@@ -265,7 +264,8 @@ public class RoleServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
-					"getUserGroupGroupRoles", long.class, long.class);
+					"getUserGroupGroupRoles",
+					_getUserGroupGroupRolesParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					groupId);
@@ -297,7 +297,7 @@ public class RoleServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
-					"getUserGroupRoles", long.class, long.class);
+					"getUserGroupRoles", _getUserGroupRolesParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					groupId);
@@ -330,7 +330,7 @@ public class RoleServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
-					"getUserRelatedRoles", long.class, java.util.List.class);
+					"getUserRelatedRoles", _getUserRelatedRolesParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					groups);
@@ -362,7 +362,7 @@ public class RoleServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
-					"getUserRoles", long.class);
+					"getUserRoles", _getUserRolesParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId);
 
@@ -394,8 +394,7 @@ public class RoleServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
-					"hasUserRole", long.class, long.class,
-					java.lang.String.class, boolean.class);
+					"hasUserRole", _hasUserRoleParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					companyId, name, inherited);
@@ -432,8 +431,7 @@ public class RoleServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
-					"hasUserRoles", long.class, long.class,
-					java.lang.String[].class, boolean.class);
+					"hasUserRoles", _hasUserRolesParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					companyId, names, inherited);
@@ -470,7 +468,7 @@ public class RoleServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
-					"unsetUserRoles", long.class, long[].class);
+					"unsetUserRoles", _unsetUserRolesParameterTypes12);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					roleIds);
@@ -505,9 +503,7 @@ public class RoleServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RoleServiceUtil.class.getName(),
-					"updateRole", long.class, java.lang.String.class,
-					java.util.Map.class, java.lang.String.class,
-					java.lang.String.class);
+					"updateRole", _updateRoleParameterTypes13);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, roleId,
 					name, titleMap, description, subtype);
@@ -539,4 +535,48 @@ public class RoleServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(RoleServiceHttp.class);
+	private static final Class<?>[] _addRoleParameterTypes0 = new Class[] {
+			java.lang.String.class, java.util.Map.class, java.lang.String.class,
+			int.class
+		};
+	private static final Class<?>[] _addUserRolesParameterTypes1 = new Class[] {
+			long.class, long[].class
+		};
+	private static final Class<?>[] _deleteRoleParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getGroupRolesParameterTypes3 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getRoleParameterTypes4 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getRoleParameterTypes5 = new Class[] {
+			long.class, java.lang.String.class
+		};
+	private static final Class<?>[] _getUserGroupGroupRolesParameterTypes6 = new Class[] {
+			long.class, long.class
+		};
+	private static final Class<?>[] _getUserGroupRolesParameterTypes7 = new Class[] {
+			long.class, long.class
+		};
+	private static final Class<?>[] _getUserRelatedRolesParameterTypes8 = new Class[] {
+			long.class, java.util.List.class
+		};
+	private static final Class<?>[] _getUserRolesParameterTypes9 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _hasUserRoleParameterTypes10 = new Class[] {
+			long.class, long.class, java.lang.String.class, boolean.class
+		};
+	private static final Class<?>[] _hasUserRolesParameterTypes11 = new Class[] {
+			long.class, long.class, java.lang.String[].class, boolean.class
+		};
+	private static final Class<?>[] _unsetUserRolesParameterTypes12 = new Class[] {
+			long.class, long[].class
+		};
+	private static final Class<?>[] _updateRoleParameterTypes13 = new Class[] {
+			long.class, java.lang.String.class, java.util.Map.class,
+			java.lang.String.class, java.lang.String.class
+		};
 }

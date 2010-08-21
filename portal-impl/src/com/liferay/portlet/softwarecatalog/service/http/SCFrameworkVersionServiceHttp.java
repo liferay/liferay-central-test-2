@@ -62,9 +62,7 @@ public class SCFrameworkVersionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(SCFrameworkVersionServiceUtil.class.getName(),
-					"addFrameworkVersion", java.lang.String.class,
-					java.lang.String.class, boolean.class, int.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"addFrameworkVersion", _addFrameworkVersionParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					url, active, priority, serviceContext);
@@ -101,7 +99,8 @@ public class SCFrameworkVersionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(SCFrameworkVersionServiceUtil.class.getName(),
-					"deleteFrameworkVersion", long.class);
+					"deleteFrameworkVersion",
+					_deleteFrameworkVersionParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					frameworkVersionId);
@@ -134,7 +133,7 @@ public class SCFrameworkVersionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(SCFrameworkVersionServiceUtil.class.getName(),
-					"getFrameworkVersion", long.class);
+					"getFrameworkVersion", _getFrameworkVersionParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					frameworkVersionId);
@@ -170,7 +169,7 @@ public class SCFrameworkVersionServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(SCFrameworkVersionServiceUtil.class.getName(),
-					"getFrameworkVersions", long.class, boolean.class);
+					"getFrameworkVersions", _getFrameworkVersionsParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					active);
@@ -202,8 +201,7 @@ public class SCFrameworkVersionServiceHttp {
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(SCFrameworkVersionServiceUtil.class.getName(),
-					"getFrameworkVersions", long.class, boolean.class,
-					int.class, int.class);
+					"getFrameworkVersions", _getFrameworkVersionsParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					active, start, end);
@@ -238,9 +236,8 @@ public class SCFrameworkVersionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(SCFrameworkVersionServiceUtil.class.getName(),
-					"updateFrameworkVersion", long.class,
-					java.lang.String.class, java.lang.String.class,
-					boolean.class, int.class);
+					"updateFrameworkVersion",
+					_updateFrameworkVersionParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					frameworkVersionId, name, url, active, priority);
@@ -272,4 +269,24 @@ public class SCFrameworkVersionServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(SCFrameworkVersionServiceHttp.class);
+	private static final Class<?>[] _addFrameworkVersionParameterTypes0 = new Class[] {
+			java.lang.String.class, java.lang.String.class, boolean.class,
+			int.class, com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _deleteFrameworkVersionParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getFrameworkVersionParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getFrameworkVersionsParameterTypes3 = new Class[] {
+			long.class, boolean.class
+		};
+	private static final Class<?>[] _getFrameworkVersionsParameterTypes4 = new Class[] {
+			long.class, boolean.class, int.class, int.class
+		};
+	private static final Class<?>[] _updateFrameworkVersionParameterTypes5 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			boolean.class, int.class
+		};
 }

@@ -57,7 +57,8 @@ public class PortalServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PortalServiceUtil.class.getName(),
-					"getAutoDeployDirectory");
+					"getAutoDeployDirectory",
+					_getAutoDeployDirectoryParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey);
 
@@ -87,7 +88,7 @@ public class PortalServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PortalServiceUtil.class.getName(),
-					"getBuildNumber");
+					"getBuildNumber", _getBuildNumberParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey);
 
@@ -113,7 +114,7 @@ public class PortalServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PortalServiceUtil.class.getName(),
-					"test");
+					"test", _testParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey);
 
@@ -135,7 +136,7 @@ public class PortalServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PortalServiceUtil.class.getName(),
-					"testCounterRollback");
+					"testCounterRollback", _testCounterRollbackParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey);
 
@@ -158,4 +159,14 @@ public class PortalServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PortalServiceHttp.class);
+	private static final Class<?>[] _getAutoDeployDirectoryParameterTypes0 = new Class[] {
+			
+		};
+	private static final Class<?>[] _getBuildNumberParameterTypes1 = new Class[] {
+			
+		};
+	private static final Class<?>[] _testParameterTypes2 = new Class[] {  };
+	private static final Class<?>[] _testCounterRollbackParameterTypes3 = new Class[] {
+			
+		};
 }

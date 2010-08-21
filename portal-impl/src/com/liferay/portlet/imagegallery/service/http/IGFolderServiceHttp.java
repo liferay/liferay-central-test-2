@@ -62,9 +62,7 @@ public class IGFolderServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGFolderServiceUtil.class.getName(),
-					"addFolder", long.class, java.lang.String.class,
-					java.lang.String.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"addFolder", _addFolderParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					parentFolderId, name, description, serviceContext);
@@ -103,9 +101,7 @@ public class IGFolderServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGFolderServiceUtil.class.getName(),
-					"copyFolder", long.class, long.class,
-					java.lang.String.class, java.lang.String.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"copyFolder", _copyFolderParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					sourceFolderId, parentFolderId, name, description,
@@ -142,7 +138,7 @@ public class IGFolderServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGFolderServiceUtil.class.getName(),
-					"deleteFolder", long.class);
+					"deleteFolder", _deleteFolderParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, folderId);
 
@@ -174,7 +170,7 @@ public class IGFolderServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGFolderServiceUtil.class.getName(),
-					"getFolder", long.class);
+					"getFolder", _getFolderParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, folderId);
 
@@ -211,7 +207,7 @@ public class IGFolderServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGFolderServiceUtil.class.getName(),
-					"getFolder", long.class, long.class, java.lang.String.class);
+					"getFolder", _getFolderParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentFolderId, name);
@@ -247,7 +243,7 @@ public class IGFolderServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGFolderServiceUtil.class.getName(),
-					"getFolders", long.class, long.class);
+					"getFolders", _getFoldersParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentFolderId);
@@ -280,7 +276,7 @@ public class IGFolderServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGFolderServiceUtil.class.getName(),
-					"getFolders", long.class, long.class, int.class, int.class);
+					"getFolders", _getFoldersParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentFolderId, start, end);
@@ -312,7 +308,7 @@ public class IGFolderServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGFolderServiceUtil.class.getName(),
-					"getFoldersCount", long.class, long.class);
+					"getFoldersCount", _getFoldersCountParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentFolderId);
@@ -348,10 +344,7 @@ public class IGFolderServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGFolderServiceUtil.class.getName(),
-					"updateFolder", long.class, long.class,
-					java.lang.String.class, java.lang.String.class,
-					boolean.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"updateFolder", _updateFolderParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					folderId, parentFolderId, name, description,
@@ -384,4 +377,36 @@ public class IGFolderServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(IGFolderServiceHttp.class);
+	private static final Class<?>[] _addFolderParameterTypes0 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _copyFolderParameterTypes1 = new Class[] {
+			long.class, long.class, java.lang.String.class,
+			java.lang.String.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _deleteFolderParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getFolderParameterTypes3 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getFolderParameterTypes4 = new Class[] {
+			long.class, long.class, java.lang.String.class
+		};
+	private static final Class<?>[] _getFoldersParameterTypes5 = new Class[] {
+			long.class, long.class
+		};
+	private static final Class<?>[] _getFoldersParameterTypes6 = new Class[] {
+			long.class, long.class, int.class, int.class
+		};
+	private static final Class<?>[] _getFoldersCountParameterTypes7 = new Class[] {
+			long.class, long.class
+		};
+	private static final Class<?>[] _updateFolderParameterTypes8 = new Class[] {
+			long.class, long.class, java.lang.String.class,
+			java.lang.String.class, boolean.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
 }

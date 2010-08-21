@@ -60,7 +60,7 @@ public class TasksReviewServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(TasksReviewServiceUtil.class.getName(),
-					"approveReview", long.class, int.class);
+					"approveReview", _approveReviewParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					proposalId, stage);
@@ -97,7 +97,7 @@ public class TasksReviewServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(TasksReviewServiceUtil.class.getName(),
-					"rejectReview", long.class, int.class);
+					"rejectReview", _rejectReviewParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					proposalId, stage);
@@ -134,7 +134,7 @@ public class TasksReviewServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(TasksReviewServiceUtil.class.getName(),
-					"updateReviews", long.class, long[][].class);
+					"updateReviews", _updateReviewsParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					proposalId, userIdsPerStage);
@@ -162,4 +162,13 @@ public class TasksReviewServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(TasksReviewServiceHttp.class);
+	private static final Class<?>[] _approveReviewParameterTypes0 = new Class[] {
+			long.class, int.class
+		};
+	private static final Class<?>[] _rejectReviewParameterTypes1 = new Class[] {
+			long.class, int.class
+		};
+	private static final Class<?>[] _updateReviewsParameterTypes2 = new Class[] {
+			long.class, long[][].class
+		};
 }

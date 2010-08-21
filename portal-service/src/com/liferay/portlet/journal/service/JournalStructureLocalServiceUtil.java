@@ -255,16 +255,6 @@ public class JournalStructureLocalServiceUtil {
 			parentStructureId, name, description, xsd, serviceContext);
 	}
 
-	public static void addStructureResources(long groupId,
-		java.lang.String structureId, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.addStructureResources(groupId, structureId,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
 	public static void addStructureResources(
 		com.liferay.portlet.journal.model.JournalStructure structure,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -275,16 +265,6 @@ public class JournalStructureLocalServiceUtil {
 			addGuestPermissions);
 	}
 
-	public static void addStructureResources(long groupId,
-		java.lang.String structureId, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.addStructureResources(groupId, structureId, communityPermissions,
-			guestPermissions);
-	}
-
 	public static void addStructureResources(
 		com.liferay.portlet.journal.model.JournalStructure structure,
 		java.lang.String[] communityPermissions,
@@ -293,6 +273,26 @@ public class JournalStructureLocalServiceUtil {
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.addStructureResources(structure, communityPermissions,
+			guestPermissions);
+	}
+
+	public static void addStructureResources(long groupId,
+		java.lang.String structureId, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.addStructureResources(groupId, structureId,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public static void addStructureResources(long groupId,
+		java.lang.String structureId, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.addStructureResources(groupId, structureId, communityPermissions,
 			guestPermissions);
 	}
 
@@ -312,18 +312,18 @@ public class JournalStructureLocalServiceUtil {
 			newStructureId, autoStructureId);
 	}
 
-	public static void deleteStructure(long groupId,
-		java.lang.String structureId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteStructure(groupId, structureId);
-	}
-
 	public static void deleteStructure(
 		com.liferay.portlet.journal.model.JournalStructure structure)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteStructure(structure);
+	}
+
+	public static void deleteStructure(long groupId,
+		java.lang.String structureId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteStructure(groupId, structureId);
 	}
 
 	public static void deleteStructures(long groupId)

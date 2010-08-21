@@ -58,7 +58,7 @@ public class ClassNameServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ClassNameServiceUtil.class.getName(),
-					"getClassName", long.class);
+					"getClassName", _getClassNameParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					classNameId);
@@ -94,7 +94,7 @@ public class ClassNameServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ClassNameServiceUtil.class.getName(),
-					"getClassName", java.lang.String.class);
+					"getClassName", _getClassNameParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, value);
 
@@ -125,7 +125,7 @@ public class ClassNameServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ClassNameServiceUtil.class.getName(),
-					"getClassNameId", java.lang.Class.class);
+					"getClassNameId", _getClassNameIdParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, classObj);
 
@@ -152,7 +152,7 @@ public class ClassNameServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ClassNameServiceUtil.class.getName(),
-					"getClassNameId", java.lang.String.class);
+					"getClassNameId", _getClassNameIdParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, value);
 
@@ -175,4 +175,16 @@ public class ClassNameServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ClassNameServiceHttp.class);
+	private static final Class<?>[] _getClassNameParameterTypes0 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getClassNameParameterTypes1 = new Class[] {
+			java.lang.String.class
+		};
+	private static final Class<?>[] _getClassNameIdParameterTypes2 = new Class[] {
+			java.lang.Class.class
+		};
+	private static final Class<?>[] _getClassNameIdParameterTypes3 = new Class[] {
+			java.lang.String.class
+		};
 }

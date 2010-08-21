@@ -61,8 +61,7 @@ public class AssetTagPropertyServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagPropertyServiceUtil.class.getName(),
-					"addTagProperty", long.class, java.lang.String.class,
-					java.lang.String.class);
+					"addTagProperty", _addTagPropertyParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, tagId,
 					key, value);
@@ -99,7 +98,7 @@ public class AssetTagPropertyServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagPropertyServiceUtil.class.getName(),
-					"deleteTagProperty", long.class);
+					"deleteTagProperty", _deleteTagPropertyParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					tagPropertyId);
@@ -131,7 +130,7 @@ public class AssetTagPropertyServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagPropertyServiceUtil.class.getName(),
-					"getTagProperties", long.class);
+					"getTagProperties", _getTagPropertiesParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, tagId);
 
@@ -162,7 +161,7 @@ public class AssetTagPropertyServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagPropertyServiceUtil.class.getName(),
-					"getTagPropertyValues", long.class, java.lang.String.class);
+					"getTagPropertyValues", _getTagPropertyValuesParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, key);
@@ -196,8 +195,7 @@ public class AssetTagPropertyServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagPropertyServiceUtil.class.getName(),
-					"updateTagProperty", long.class, java.lang.String.class,
-					java.lang.String.class);
+					"updateTagProperty", _updateTagPropertyParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					tagPropertyId, key, value);
@@ -229,4 +227,19 @@ public class AssetTagPropertyServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(AssetTagPropertyServiceHttp.class);
+	private static final Class<?>[] _addTagPropertyParameterTypes0 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class
+		};
+	private static final Class<?>[] _deleteTagPropertyParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getTagPropertiesParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getTagPropertyValuesParameterTypes3 = new Class[] {
+			long.class, java.lang.String.class
+		};
+	private static final Class<?>[] _updateTagPropertyParameterTypes4 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class
+		};
 }

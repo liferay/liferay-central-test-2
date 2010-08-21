@@ -61,8 +61,7 @@ public class AssetCategoryPropertyServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetCategoryPropertyServiceUtil.class.getName(),
-					"addCategoryProperty", long.class, java.lang.String.class,
-					java.lang.String.class);
+					"addCategoryProperty", _addCategoryPropertyParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId,
 					key, value);
@@ -99,7 +98,8 @@ public class AssetCategoryPropertyServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetCategoryPropertyServiceUtil.class.getName(),
-					"deleteCategoryProperty", long.class);
+					"deleteCategoryProperty",
+					_deleteCategoryPropertyParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					categoryPropertyId);
@@ -131,7 +131,8 @@ public class AssetCategoryPropertyServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetCategoryPropertyServiceUtil.class.getName(),
-					"getCategoryProperties", long.class);
+					"getCategoryProperties",
+					_getCategoryPropertiesParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
 
@@ -162,8 +163,8 @@ public class AssetCategoryPropertyServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetCategoryPropertyServiceUtil.class.getName(),
-					"getCategoryPropertyValues", long.class,
-					java.lang.String.class);
+					"getCategoryPropertyValues",
+					_getCategoryPropertyValuesParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, key);
@@ -197,8 +198,8 @@ public class AssetCategoryPropertyServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetCategoryPropertyServiceUtil.class.getName(),
-					"updateCategoryProperty", long.class,
-					java.lang.String.class, java.lang.String.class);
+					"updateCategoryProperty",
+					_updateCategoryPropertyParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					categoryPropertyId, key, value);
@@ -230,4 +231,19 @@ public class AssetCategoryPropertyServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(AssetCategoryPropertyServiceHttp.class);
+	private static final Class<?>[] _addCategoryPropertyParameterTypes0 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class
+		};
+	private static final Class<?>[] _deleteCategoryPropertyParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getCategoryPropertiesParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getCategoryPropertyValuesParameterTypes3 = new Class[] {
+			long.class, java.lang.String.class
+		};
+	private static final Class<?>[] _updateCategoryPropertyParameterTypes4 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class
+		};
 }

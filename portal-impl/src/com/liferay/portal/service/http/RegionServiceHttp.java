@@ -59,8 +59,7 @@ public class RegionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RegionServiceUtil.class.getName(),
-					"addRegion", long.class, java.lang.String.class,
-					java.lang.String.class, boolean.class);
+					"addRegion", _addRegionParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					countryId, regionCode, name, active);
@@ -96,7 +95,7 @@ public class RegionServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RegionServiceUtil.class.getName(),
-					"getRegions");
+					"getRegions", _getRegionsParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey);
 
@@ -127,7 +126,7 @@ public class RegionServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RegionServiceUtil.class.getName(),
-					"getRegions", long.class);
+					"getRegions", _getRegionsParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, countryId);
 
@@ -158,7 +157,7 @@ public class RegionServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RegionServiceUtil.class.getName(),
-					"getRegions", boolean.class);
+					"getRegions", _getRegionsParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, active);
 
@@ -189,7 +188,7 @@ public class RegionServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RegionServiceUtil.class.getName(),
-					"getRegions", long.class, boolean.class);
+					"getRegions", _getRegionsParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					countryId, active);
@@ -222,7 +221,7 @@ public class RegionServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RegionServiceUtil.class.getName(),
-					"getRegion", long.class);
+					"getRegion", _getRegionParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, regionId);
 
@@ -253,4 +252,21 @@ public class RegionServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(RegionServiceHttp.class);
+	private static final Class<?>[] _addRegionParameterTypes0 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			boolean.class
+		};
+	private static final Class<?>[] _getRegionsParameterTypes1 = new Class[] {  };
+	private static final Class<?>[] _getRegionsParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getRegionsParameterTypes3 = new Class[] {
+			boolean.class
+		};
+	private static final Class<?>[] _getRegionsParameterTypes4 = new Class[] {
+			long.class, boolean.class
+		};
+	private static final Class<?>[] _getRegionParameterTypes5 = new Class[] {
+			long.class
+		};
 }

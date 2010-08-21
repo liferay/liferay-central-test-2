@@ -61,8 +61,7 @@ public class MBBanServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(MBBanServiceUtil.class.getName(),
-					"addBan", long.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"addBan", _addBanParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					banUserId, serviceContext);
@@ -99,8 +98,7 @@ public class MBBanServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(MBBanServiceUtil.class.getName(),
-					"deleteBan", long.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"deleteBan", _deleteBanParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					banUserId, serviceContext);
@@ -128,4 +126,10 @@ public class MBBanServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(MBBanServiceHttp.class);
+	private static final Class<?>[] _addBanParameterTypes0 = new Class[] {
+			long.class, com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _deleteBanParameterTypes1 = new Class[] {
+			long.class, com.liferay.portal.service.ServiceContext.class
+		};
 }

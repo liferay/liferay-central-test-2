@@ -232,27 +232,27 @@ public interface JournalStructureLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void addStructureResources(long groupId,
-		java.lang.String structureId, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
 	public void addStructureResources(
 		com.liferay.portlet.journal.model.JournalStructure structure,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void addStructureResources(long groupId,
-		java.lang.String structureId, java.lang.String[] communityPermissions,
+	public void addStructureResources(
+		com.liferay.portlet.journal.model.JournalStructure structure,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void addStructureResources(
-		com.liferay.portlet.journal.model.JournalStructure structure,
-		java.lang.String[] communityPermissions,
+	public void addStructureResources(long groupId,
+		java.lang.String structureId, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void addStructureResources(long groupId,
+		java.lang.String structureId, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -267,12 +267,12 @@ public interface JournalStructureLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteStructure(long groupId, java.lang.String structureId)
+	public void deleteStructure(
+		com.liferay.portlet.journal.model.JournalStructure structure)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteStructure(
-		com.liferay.portlet.journal.model.JournalStructure structure)
+	public void deleteStructure(long groupId, java.lang.String structureId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

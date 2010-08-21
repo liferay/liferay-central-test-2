@@ -59,8 +59,7 @@ public class EmailAddressServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(EmailAddressServiceUtil.class.getName(),
-					"addEmailAddress", java.lang.String.class, long.class,
-					java.lang.String.class, int.class, boolean.class);
+					"addEmailAddress", _addEmailAddressParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK, address, typeId, primary);
@@ -97,7 +96,7 @@ public class EmailAddressServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(EmailAddressServiceUtil.class.getName(),
-					"deleteEmailAddress", long.class);
+					"deleteEmailAddress", _deleteEmailAddressParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					emailAddressId);
@@ -130,7 +129,7 @@ public class EmailAddressServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(EmailAddressServiceUtil.class.getName(),
-					"getEmailAddress", long.class);
+					"getEmailAddress", _getEmailAddressParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					emailAddressId);
@@ -167,7 +166,7 @@ public class EmailAddressServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(EmailAddressServiceUtil.class.getName(),
-					"getEmailAddresses", java.lang.String.class, long.class);
+					"getEmailAddresses", _getEmailAddressesParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK);
@@ -205,8 +204,7 @@ public class EmailAddressServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(EmailAddressServiceUtil.class.getName(),
-					"updateEmailAddress", long.class, java.lang.String.class,
-					int.class, boolean.class);
+					"updateEmailAddress", _updateEmailAddressParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					emailAddressId, address, typeId, primary);
@@ -238,4 +236,20 @@ public class EmailAddressServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(EmailAddressServiceHttp.class);
+	private static final Class<?>[] _addEmailAddressParameterTypes0 = new Class[] {
+			java.lang.String.class, long.class, java.lang.String.class,
+			int.class, boolean.class
+		};
+	private static final Class<?>[] _deleteEmailAddressParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getEmailAddressParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getEmailAddressesParameterTypes3 = new Class[] {
+			java.lang.String.class, long.class
+		};
+	private static final Class<?>[] _updateEmailAddressParameterTypes4 = new Class[] {
+			long.class, java.lang.String.class, int.class, boolean.class
+		};
 }

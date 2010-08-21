@@ -62,9 +62,7 @@ public class SCLicenseServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(SCLicenseServiceUtil.class.getName(),
-					"addLicense", java.lang.String.class,
-					java.lang.String.class, boolean.class, boolean.class,
-					boolean.class);
+					"addLicense", _addLicenseParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					url, openSource, active, recommended);
@@ -100,7 +98,7 @@ public class SCLicenseServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(SCLicenseServiceUtil.class.getName(),
-					"deleteLicense", long.class);
+					"deleteLicense", _deleteLicenseParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, licenseId);
 
@@ -132,7 +130,7 @@ public class SCLicenseServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(SCLicenseServiceUtil.class.getName(),
-					"getLicense", long.class);
+					"getLicense", _getLicenseParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, licenseId);
 
@@ -170,9 +168,7 @@ public class SCLicenseServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(SCLicenseServiceUtil.class.getName(),
-					"updateLicense", long.class, java.lang.String.class,
-					java.lang.String.class, boolean.class, boolean.class,
-					boolean.class);
+					"updateLicense", _updateLicenseParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					licenseId, name, url, openSource, active, recommended);
@@ -204,4 +200,18 @@ public class SCLicenseServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(SCLicenseServiceHttp.class);
+	private static final Class<?>[] _addLicenseParameterTypes0 = new Class[] {
+			java.lang.String.class, java.lang.String.class, boolean.class,
+			boolean.class, boolean.class
+		};
+	private static final Class<?>[] _deleteLicenseParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getLicenseParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _updateLicenseParameterTypes3 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			boolean.class, boolean.class, boolean.class
+		};
 }

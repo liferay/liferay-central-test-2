@@ -58,7 +58,7 @@ public class ImageServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ImageServiceUtil.class.getName(),
-					"getImage", long.class);
+					"getImage", _getImageParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, imageId);
 
@@ -89,4 +89,7 @@ public class ImageServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ImageServiceHttp.class);
+	private static final Class<?>[] _getImageParameterTypes0 = new Class[] {
+			long.class
+		};
 }

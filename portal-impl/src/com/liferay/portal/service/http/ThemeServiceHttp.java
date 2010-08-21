@@ -57,7 +57,7 @@ public class ThemeServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ThemeServiceUtil.class.getName(),
-					"getThemes", long.class);
+					"getThemes", _getThemesParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
 
@@ -84,7 +84,7 @@ public class ThemeServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ThemeServiceUtil.class.getName(),
-					"getWARThemes");
+					"getWARThemes", _getWARThemesParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey);
 
@@ -107,4 +107,8 @@ public class ThemeServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ThemeServiceHttp.class);
+	private static final Class<?>[] _getThemesParameterTypes0 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getWARThemesParameterTypes1 = new Class[] {  };
 }

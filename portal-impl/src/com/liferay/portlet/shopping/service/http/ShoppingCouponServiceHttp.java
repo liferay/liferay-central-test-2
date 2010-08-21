@@ -68,14 +68,7 @@ public class ShoppingCouponServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingCouponServiceUtil.class.getName(),
-					"addCoupon", java.lang.String.class, boolean.class,
-					java.lang.String.class, java.lang.String.class, int.class,
-					int.class, int.class, int.class, int.class, int.class,
-					int.class, int.class, int.class, int.class, boolean.class,
-					boolean.class, java.lang.String.class,
-					java.lang.String.class, double.class, double.class,
-					java.lang.String.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"addCoupon", _addCouponParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, code,
 					autoCode, name, description, startDateMonth, startDateDay,
@@ -116,7 +109,7 @@ public class ShoppingCouponServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingCouponServiceUtil.class.getName(),
-					"deleteCoupon", long.class, long.class);
+					"deleteCoupon", _deleteCouponParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					couponId);
@@ -149,7 +142,7 @@ public class ShoppingCouponServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingCouponServiceUtil.class.getName(),
-					"getCoupon", long.class, long.class);
+					"getCoupon", _getCouponParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					couponId);
@@ -188,9 +181,7 @@ public class ShoppingCouponServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingCouponServiceUtil.class.getName(),
-					"search", long.class, long.class, java.lang.String.class,
-					boolean.class, java.lang.String.class, boolean.class,
-					int.class, int.class);
+					"search", _searchParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					companyId, code, active, discountType, andOperator, start,
@@ -235,13 +226,7 @@ public class ShoppingCouponServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingCouponServiceUtil.class.getName(),
-					"updateCoupon", long.class, java.lang.String.class,
-					java.lang.String.class, int.class, int.class, int.class,
-					int.class, int.class, int.class, int.class, int.class,
-					int.class, int.class, boolean.class, boolean.class,
-					java.lang.String.class, java.lang.String.class,
-					double.class, double.class, java.lang.String.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"updateCoupon", _updateCouponParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					couponId, name, description, startDateMonth, startDateDay,
@@ -277,4 +262,31 @@ public class ShoppingCouponServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ShoppingCouponServiceHttp.class);
+	private static final Class<?>[] _addCouponParameterTypes0 = new Class[] {
+			java.lang.String.class, boolean.class, java.lang.String.class,
+			java.lang.String.class, int.class, int.class, int.class, int.class,
+			int.class, int.class, int.class, int.class, int.class, int.class,
+			boolean.class, boolean.class, java.lang.String.class,
+			java.lang.String.class, double.class, double.class,
+			java.lang.String.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _deleteCouponParameterTypes1 = new Class[] {
+			long.class, long.class
+		};
+	private static final Class<?>[] _getCouponParameterTypes2 = new Class[] {
+			long.class, long.class
+		};
+	private static final Class<?>[] _searchParameterTypes3 = new Class[] {
+			long.class, long.class, java.lang.String.class, boolean.class,
+			java.lang.String.class, boolean.class, int.class, int.class
+		};
+	private static final Class<?>[] _updateCouponParameterTypes4 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			int.class, int.class, int.class, int.class, int.class, int.class,
+			int.class, int.class, int.class, int.class, boolean.class,
+			boolean.class, java.lang.String.class, java.lang.String.class,
+			double.class, double.class, java.lang.String.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
 }

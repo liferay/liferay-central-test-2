@@ -67,13 +67,7 @@ public class SCProductEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(SCProductEntryServiceUtil.class.getName(),
-					"addProductEntry", java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					long[].class, java.util.List.class, java.util.List.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"addProductEntry", _addProductEntryParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					type, tags, shortDescription, longDescription, pageURL,
@@ -112,7 +106,7 @@ public class SCProductEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(SCProductEntryServiceUtil.class.getName(),
-					"deleteProductEntry", long.class);
+					"deleteProductEntry", _deleteProductEntryParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					productEntryId);
@@ -145,7 +139,7 @@ public class SCProductEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(SCProductEntryServiceUtil.class.getName(),
-					"getProductEntry", long.class);
+					"getProductEntry", _getProductEntryParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					productEntryId);
@@ -188,12 +182,7 @@ public class SCProductEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(SCProductEntryServiceUtil.class.getName(),
-					"updateProductEntry", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					long[].class, java.util.List.class, java.util.List.class);
+					"updateProductEntry", _updateProductEntryParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					productEntryId, name, type, tags, shortDescription,
@@ -227,4 +216,27 @@ public class SCProductEntryServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(SCProductEntryServiceHttp.class);
+	private static final Class<?>[] _addProductEntryParameterTypes0 = new Class[] {
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, long[].class, java.util.List.class,
+			java.util.List.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _deleteProductEntryParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getProductEntryParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _updateProductEntryParameterTypes3 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, long[].class, java.util.List.class,
+			java.util.List.class
+		};
 }

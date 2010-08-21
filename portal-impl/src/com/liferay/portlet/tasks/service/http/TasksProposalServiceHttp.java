@@ -63,10 +63,7 @@ public class TasksProposalServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(TasksProposalServiceUtil.class.getName(),
-					"addProposal", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, long.class, boolean.class,
-					boolean.class);
+					"addProposal", _addProposalParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					className, classPK, name, description, reviewUserId,
@@ -108,10 +105,7 @@ public class TasksProposalServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(TasksProposalServiceUtil.class.getName(),
-					"addProposal", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, long.class,
-					java.lang.String[].class, java.lang.String[].class);
+					"addProposal", _addProposalParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					className, classPK, name, description, reviewUserId,
@@ -149,7 +143,7 @@ public class TasksProposalServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(TasksProposalServiceUtil.class.getName(),
-					"deleteProposal", long.class);
+					"deleteProposal", _deleteProposalParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					proposalId);
@@ -184,8 +178,7 @@ public class TasksProposalServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(TasksProposalServiceUtil.class.getName(),
-					"updateProposal", long.class, java.lang.String.class,
-					int.class, int.class, int.class, int.class, int.class);
+					"updateProposal", _updateProposalParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					proposalId, description, dueDateMonth, dueDateDay,
@@ -218,4 +211,21 @@ public class TasksProposalServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(TasksProposalServiceHttp.class);
+	private static final Class<?>[] _addProposalParameterTypes0 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class, long.class,
+			boolean.class, boolean.class
+		};
+	private static final Class<?>[] _addProposalParameterTypes1 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class, long.class,
+			java.lang.String[].class, java.lang.String[].class
+		};
+	private static final Class<?>[] _deleteProposalParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _updateProposalParameterTypes3 = new Class[] {
+			long.class, java.lang.String.class, int.class, int.class, int.class,
+			int.class, int.class
+		};
 }

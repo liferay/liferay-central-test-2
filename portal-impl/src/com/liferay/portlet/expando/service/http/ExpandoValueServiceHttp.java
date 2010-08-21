@@ -62,9 +62,7 @@ public class ExpandoValueServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ExpandoValueServiceUtil.class.getName(),
-					"addValue", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class, long.class,
-					java.lang.Object.class);
+					"addValue", _addValueParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, className, tableName, columnName, classPK, data);
@@ -103,9 +101,7 @@ public class ExpandoValueServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ExpandoValueServiceUtil.class.getName(),
-					"addValue", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class, long.class,
-					java.lang.String.class);
+					"addValue", _addValueParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, className, tableName, columnName, classPK, data);
@@ -143,8 +139,7 @@ public class ExpandoValueServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ExpandoValueServiceUtil.class.getName(),
-					"getData", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class, long.class);
+					"getData", _getDataParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, className, tableName, columnName, classPK);
@@ -183,8 +178,7 @@ public class ExpandoValueServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ExpandoValueServiceUtil.class.getName(),
-					"getJSONData", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class, long.class);
+					"getJSONData", _getJSONDataParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, className, tableName, columnName, classPK);
@@ -216,4 +210,20 @@ public class ExpandoValueServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ExpandoValueServiceHttp.class);
+	private static final Class<?>[] _addValueParameterTypes0 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, long.class, java.lang.Object.class
+		};
+	private static final Class<?>[] _addValueParameterTypes1 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, long.class, java.lang.String.class
+		};
+	private static final Class<?>[] _getDataParameterTypes2 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, long.class
+		};
+	private static final Class<?>[] _getJSONDataParameterTypes3 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, long.class
+		};
 }

@@ -60,9 +60,7 @@ public class PhoneServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PhoneServiceUtil.class.getName(),
-					"addPhone", java.lang.String.class, long.class,
-					java.lang.String.class, java.lang.String.class, int.class,
-					boolean.class);
+					"addPhone", _addPhoneParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK, number, extension, typeId, primary);
@@ -98,7 +96,7 @@ public class PhoneServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PhoneServiceUtil.class.getName(),
-					"deletePhone", long.class);
+					"deletePhone", _deletePhoneParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, phoneId);
 
@@ -130,7 +128,7 @@ public class PhoneServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PhoneServiceUtil.class.getName(),
-					"getPhone", long.class);
+					"getPhone", _getPhoneParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, phoneId);
 
@@ -166,7 +164,7 @@ public class PhoneServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PhoneServiceUtil.class.getName(),
-					"getPhones", java.lang.String.class, long.class);
+					"getPhones", _getPhonesParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK);
@@ -204,8 +202,7 @@ public class PhoneServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PhoneServiceUtil.class.getName(),
-					"updatePhone", long.class, java.lang.String.class,
-					java.lang.String.class, int.class, boolean.class);
+					"updatePhone", _updatePhoneParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, phoneId,
 					number, extension, typeId, primary);
@@ -237,4 +234,21 @@ public class PhoneServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PhoneServiceHttp.class);
+	private static final Class<?>[] _addPhoneParameterTypes0 = new Class[] {
+			java.lang.String.class, long.class, java.lang.String.class,
+			java.lang.String.class, int.class, boolean.class
+		};
+	private static final Class<?>[] _deletePhoneParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getPhoneParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getPhonesParameterTypes3 = new Class[] {
+			java.lang.String.class, long.class
+		};
+	private static final Class<?>[] _updatePhoneParameterTypes4 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			int.class, boolean.class
+		};
 }

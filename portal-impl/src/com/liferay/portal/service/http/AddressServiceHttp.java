@@ -62,11 +62,7 @@ public class AddressServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AddressServiceUtil.class.getName(),
-					"addAddress", java.lang.String.class, long.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, long.class, long.class, int.class,
-					boolean.class, boolean.class);
+					"addAddress", _addAddressParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK, street1, street2, street3, city, zip,
@@ -103,7 +99,7 @@ public class AddressServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AddressServiceUtil.class.getName(),
-					"deleteAddress", long.class);
+					"deleteAddress", _deleteAddressParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, addressId);
 
@@ -135,7 +131,7 @@ public class AddressServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AddressServiceUtil.class.getName(),
-					"getAddress", long.class);
+					"getAddress", _getAddressParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, addressId);
 
@@ -171,7 +167,7 @@ public class AddressServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AddressServiceUtil.class.getName(),
-					"getAddresses", java.lang.String.class, long.class);
+					"getAddresses", _getAddressesParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK);
@@ -211,10 +207,7 @@ public class AddressServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AddressServiceUtil.class.getName(),
-					"updateAddress", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class, long.class,
-					long.class, int.class, boolean.class, boolean.class);
+					"updateAddress", _updateAddressParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					addressId, street1, street2, street3, city, zip, regionId,
@@ -247,4 +240,25 @@ public class AddressServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(AddressServiceHttp.class);
+	private static final Class<?>[] _addAddressParameterTypes0 = new Class[] {
+			java.lang.String.class, long.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class, long.class,
+			long.class, int.class, boolean.class, boolean.class
+		};
+	private static final Class<?>[] _deleteAddressParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getAddressParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getAddressesParameterTypes3 = new Class[] {
+			java.lang.String.class, long.class
+		};
+	private static final Class<?>[] _updateAddressParameterTypes4 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, long.class, long.class, int.class,
+			boolean.class, boolean.class
+		};
 }

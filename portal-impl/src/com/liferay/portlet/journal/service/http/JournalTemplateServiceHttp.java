@@ -65,12 +65,7 @@ public class JournalTemplateServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class.getName(),
-					"addTemplate", long.class, java.lang.String.class,
-					boolean.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, boolean.class,
-					java.lang.String.class, boolean.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"addTemplate", _addTemplateParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					templateId, autoTemplateId, structureId, name, description,
@@ -114,13 +109,7 @@ public class JournalTemplateServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class.getName(),
-					"addTemplate", long.class, java.lang.String.class,
-					boolean.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, boolean.class,
-					java.lang.String.class, boolean.class, boolean.class,
-					java.lang.String.class, java.io.File.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"addTemplate", _addTemplateParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					templateId, autoTemplateId, structureId, name, description,
@@ -161,8 +150,7 @@ public class JournalTemplateServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class.getName(),
-					"copyTemplate", long.class, java.lang.String.class,
-					java.lang.String.class, boolean.class);
+					"copyTemplate", _copyTemplateParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					oldTemplateId, newTemplateId, autoTemplateId);
@@ -199,7 +187,7 @@ public class JournalTemplateServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class.getName(),
-					"deleteTemplate", long.class, java.lang.String.class);
+					"deleteTemplate", _deleteTemplateParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					templateId);
@@ -232,7 +220,8 @@ public class JournalTemplateServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class.getName(),
-					"getStructureTemplates", long.class, java.lang.String.class);
+					"getStructureTemplates",
+					_getStructureTemplatesParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					structureId);
@@ -269,7 +258,7 @@ public class JournalTemplateServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class.getName(),
-					"getTemplate", long.class, java.lang.String.class);
+					"getTemplate", _getTemplateParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					templateId);
@@ -310,11 +299,7 @@ public class JournalTemplateServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class.getName(),
-					"updateTemplate", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					boolean.class, java.lang.String.class, boolean.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"updateTemplate", _updateTemplateParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					templateId, structureId, name, description, xsl, formatXsl,
@@ -357,12 +342,7 @@ public class JournalTemplateServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalTemplateServiceUtil.class.getName(),
-					"updateTemplate", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					boolean.class, java.lang.String.class, boolean.class,
-					boolean.class, java.lang.String.class, java.io.File.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"updateTemplate", _updateTemplateParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					templateId, structureId, name, description, xsl, formatXsl,
@@ -396,4 +376,45 @@ public class JournalTemplateServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(JournalTemplateServiceHttp.class);
+	private static final Class<?>[] _addTemplateParameterTypes0 = new Class[] {
+			long.class, java.lang.String.class, boolean.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class, boolean.class,
+			java.lang.String.class, boolean.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _addTemplateParameterTypes1 = new Class[] {
+			long.class, java.lang.String.class, boolean.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class, boolean.class,
+			java.lang.String.class, boolean.class, boolean.class,
+			java.lang.String.class, java.io.File.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _copyTemplateParameterTypes2 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			boolean.class
+		};
+	private static final Class<?>[] _deleteTemplateParameterTypes3 = new Class[] {
+			long.class, java.lang.String.class
+		};
+	private static final Class<?>[] _getStructureTemplatesParameterTypes4 = new Class[] {
+			long.class, java.lang.String.class
+		};
+	private static final Class<?>[] _getTemplateParameterTypes5 = new Class[] {
+			long.class, java.lang.String.class
+		};
+	private static final Class<?>[] _updateTemplateParameterTypes6 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, boolean.class, java.lang.String.class,
+			boolean.class, com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _updateTemplateParameterTypes7 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, boolean.class, java.lang.String.class,
+			boolean.class, boolean.class, java.lang.String.class,
+			java.io.File.class, com.liferay.portal.service.ServiceContext.class
+		};
 }

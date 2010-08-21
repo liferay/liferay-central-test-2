@@ -63,10 +63,7 @@ public class IGImageServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
-					"addImage", long.class, long.class, java.lang.String.class,
-					java.lang.String.class, java.io.File.class,
-					java.lang.String.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"addImage", _addImageParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, name, description, file, contentType,
@@ -103,7 +100,7 @@ public class IGImageServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
-					"deleteImage", long.class);
+					"deleteImage", _deleteImageParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, imageId);
 
@@ -136,8 +133,8 @@ public class IGImageServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
-					"deleteImageByFolderIdAndNameWithExtension", long.class,
-					long.class, java.lang.String.class);
+					"deleteImageByFolderIdAndNameWithExtension",
+					_deleteImageByFolderIdAndNameWithExtensionParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, nameWithExtension);
@@ -169,8 +166,7 @@ public class IGImageServiceHttp {
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
-					"getGroupImages", long.class, long.class, int.class,
-					int.class);
+					"getGroupImages", _getGroupImagesParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userId, start, end);
@@ -202,7 +198,7 @@ public class IGImageServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
-					"getGroupImagesCount", long.class, long.class);
+					"getGroupImagesCount", _getGroupImagesCountParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userId);
@@ -235,7 +231,7 @@ public class IGImageServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
-					"getImage", long.class);
+					"getImage", _getImageParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, imageId);
 
@@ -272,8 +268,8 @@ public class IGImageServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
-					"getImageByFolderIdAndNameWithExtension", long.class,
-					long.class, java.lang.String.class);
+					"getImageByFolderIdAndNameWithExtension",
+					_getImageByFolderIdAndNameWithExtensionParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, nameWithExtension);
@@ -310,7 +306,8 @@ public class IGImageServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
-					"getImageByLargeImageId", long.class);
+					"getImageByLargeImageId",
+					_getImageByLargeImageIdParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					largeImageId);
@@ -347,7 +344,8 @@ public class IGImageServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
-					"getImageBySmallImageId", long.class);
+					"getImageBySmallImageId",
+					_getImageBySmallImageIdParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					smallImageId);
@@ -383,7 +381,7 @@ public class IGImageServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
-					"getImages", long.class, long.class);
+					"getImages", _getImagesParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId);
@@ -415,7 +413,7 @@ public class IGImageServiceHttp {
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
-					"getImages", long.class, long.class, int.class, int.class);
+					"getImages", _getImagesParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, start, end);
@@ -447,7 +445,7 @@ public class IGImageServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
-					"getImagesCount", long.class, long.class);
+					"getImagesCount", _getImagesCountParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId);
@@ -483,10 +481,7 @@ public class IGImageServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGImageServiceUtil.class.getName(),
-					"updateImage", long.class, long.class, long.class,
-					java.lang.String.class, java.lang.String.class,
-					java.io.File.class, java.lang.String.class,
-					com.liferay.portal.service.ServiceContext.class);
+					"updateImage", _updateImageParameterTypes12);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, imageId,
 					groupId, folderId, name, description, file, contentType,
@@ -519,4 +514,45 @@ public class IGImageServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(IGImageServiceHttp.class);
+	private static final Class<?>[] _addImageParameterTypes0 = new Class[] {
+			long.class, long.class, java.lang.String.class,
+			java.lang.String.class, java.io.File.class, java.lang.String.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _deleteImageParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _deleteImageByFolderIdAndNameWithExtensionParameterTypes2 =
+		new Class[] { long.class, long.class, java.lang.String.class };
+	private static final Class<?>[] _getGroupImagesParameterTypes3 = new Class[] {
+			long.class, long.class, int.class, int.class
+		};
+	private static final Class<?>[] _getGroupImagesCountParameterTypes4 = new Class[] {
+			long.class, long.class
+		};
+	private static final Class<?>[] _getImageParameterTypes5 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getImageByFolderIdAndNameWithExtensionParameterTypes6 =
+		new Class[] { long.class, long.class, java.lang.String.class };
+	private static final Class<?>[] _getImageByLargeImageIdParameterTypes7 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getImageBySmallImageIdParameterTypes8 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getImagesParameterTypes9 = new Class[] {
+			long.class, long.class
+		};
+	private static final Class<?>[] _getImagesParameterTypes10 = new Class[] {
+			long.class, long.class, int.class, int.class
+		};
+	private static final Class<?>[] _getImagesCountParameterTypes11 = new Class[] {
+			long.class, long.class
+		};
+	private static final Class<?>[] _updateImageParameterTypes12 = new Class[] {
+			long.class, long.class, long.class, java.lang.String.class,
+			java.lang.String.class, java.io.File.class, java.lang.String.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
 }

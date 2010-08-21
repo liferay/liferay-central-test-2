@@ -66,12 +66,7 @@ public class AnnouncementsEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AnnouncementsEntryServiceUtil.class.getName(),
-					"addEntry", long.class, long.class, long.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class, int.class,
-					int.class, int.class, int.class, int.class, int.class,
-					int.class, int.class, int.class, int.class, int.class,
-					boolean.class);
+					"addEntry", _addEntryParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, plid,
 					classNameId, classPK, title, content, url, type,
@@ -111,7 +106,7 @@ public class AnnouncementsEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AnnouncementsEntryServiceUtil.class.getName(),
-					"deleteEntry", long.class);
+					"deleteEntry", _deleteEntryParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
 
@@ -148,11 +143,7 @@ public class AnnouncementsEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AnnouncementsEntryServiceUtil.class.getName(),
-					"updateEntry", long.class, java.lang.String.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, int.class, int.class, int.class,
-					int.class, int.class, int.class, int.class, int.class,
-					int.class, int.class, int.class);
+					"updateEntry", _updateEntryParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId,
 					title, content, url, type, displayDateMonth,
@@ -188,4 +179,20 @@ public class AnnouncementsEntryServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(AnnouncementsEntryServiceHttp.class);
+	private static final Class<?>[] _addEntryParameterTypes0 = new Class[] {
+			long.class, long.class, long.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, int.class, int.class, int.class, int.class,
+			int.class, int.class, int.class, int.class, int.class, int.class,
+			int.class, boolean.class
+		};
+	private static final Class<?>[] _deleteEntryParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _updateEntryParameterTypes2 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class, int.class, int.class,
+			int.class, int.class, int.class, int.class, int.class, int.class,
+			int.class, int.class, int.class
+		};
 }

@@ -61,10 +61,7 @@ public class OrgLaborServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(OrgLaborServiceUtil.class.getName(),
-					"addOrgLabor", long.class, int.class, int.class, int.class,
-					int.class, int.class, int.class, int.class, int.class,
-					int.class, int.class, int.class, int.class, int.class,
-					int.class, int.class);
+					"addOrgLabor", _addOrgLaborParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					organizationId, typeId, sunOpen, sunClose, monOpen,
@@ -103,7 +100,7 @@ public class OrgLaborServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(OrgLaborServiceUtil.class.getName(),
-					"deleteOrgLabor", long.class);
+					"deleteOrgLabor", _deleteOrgLaborParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					orgLaborId);
@@ -136,7 +133,7 @@ public class OrgLaborServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(OrgLaborServiceUtil.class.getName(),
-					"getOrgLabor", long.class);
+					"getOrgLabor", _getOrgLaborParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					orgLaborId);
@@ -173,7 +170,7 @@ public class OrgLaborServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(OrgLaborServiceUtil.class.getName(),
-					"getOrgLabors", long.class);
+					"getOrgLabors", _getOrgLaborsParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					organizationId);
@@ -213,10 +210,7 @@ public class OrgLaborServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(OrgLaborServiceUtil.class.getName(),
-					"updateOrgLabor", long.class, int.class, int.class,
-					int.class, int.class, int.class, int.class, int.class,
-					int.class, int.class, int.class, int.class, int.class,
-					int.class, int.class, int.class);
+					"updateOrgLabor", _updateOrgLaborParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					orgLaborId, typeId, sunOpen, sunClose, monOpen, monClose,
@@ -250,4 +244,23 @@ public class OrgLaborServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(OrgLaborServiceHttp.class);
+	private static final Class<?>[] _addOrgLaborParameterTypes0 = new Class[] {
+			long.class, int.class, int.class, int.class, int.class, int.class,
+			int.class, int.class, int.class, int.class, int.class, int.class,
+			int.class, int.class, int.class, int.class
+		};
+	private static final Class<?>[] _deleteOrgLaborParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getOrgLaborParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getOrgLaborsParameterTypes3 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _updateOrgLaborParameterTypes4 = new Class[] {
+			long.class, int.class, int.class, int.class, int.class, int.class,
+			int.class, int.class, int.class, int.class, int.class, int.class,
+			int.class, int.class, int.class, int.class
+		};
 }

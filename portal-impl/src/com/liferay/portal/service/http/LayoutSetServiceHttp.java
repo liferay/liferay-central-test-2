@@ -58,8 +58,7 @@ public class LayoutSetServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(LayoutSetServiceUtil.class.getName(),
-					"updateLogo", long.class, boolean.class, boolean.class,
-					java.io.File.class);
+					"updateLogo", _updateLogoParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, logo, file);
@@ -94,9 +93,7 @@ public class LayoutSetServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(LayoutSetServiceUtil.class.getName(),
-					"updateLookAndFeel", long.class, boolean.class,
-					java.lang.String.class, java.lang.String.class,
-					java.lang.String.class, boolean.class);
+					"updateLookAndFeel", _updateLookAndFeelParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, themeId, colorSchemeId, css, wapTheme);
@@ -134,8 +131,7 @@ public class LayoutSetServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(LayoutSetServiceUtil.class.getName(),
-					"updateSettings", long.class, boolean.class,
-					java.lang.String.class);
+					"updateSettings", _updateSettingsParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, settings);
@@ -173,8 +169,7 @@ public class LayoutSetServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(LayoutSetServiceUtil.class.getName(),
-					"updateVirtualHost", long.class, boolean.class,
-					java.lang.String.class);
+					"updateVirtualHost", _updateVirtualHostParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, virtualHost);
@@ -206,4 +201,17 @@ public class LayoutSetServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutSetServiceHttp.class);
+	private static final Class<?>[] _updateLogoParameterTypes0 = new Class[] {
+			long.class, boolean.class, boolean.class, java.io.File.class
+		};
+	private static final Class<?>[] _updateLookAndFeelParameterTypes1 = new Class[] {
+			long.class, boolean.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class, boolean.class
+		};
+	private static final Class<?>[] _updateSettingsParameterTypes2 = new Class[] {
+			long.class, boolean.class, java.lang.String.class
+		};
+	private static final Class<?>[] _updateVirtualHostParameterTypes3 = new Class[] {
+			long.class, boolean.class, java.lang.String.class
+		};
 }

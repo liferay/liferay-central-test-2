@@ -65,13 +65,7 @@ public class PasswordPolicyServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PasswordPolicyServiceUtil.class.getName(),
-					"addPasswordPolicy", java.lang.String.class,
-					java.lang.String.class, boolean.class, boolean.class,
-					long.class, boolean.class, boolean.class, int.class,
-					int.class, int.class, int.class, int.class, int.class,
-					boolean.class, int.class, boolean.class, long.class,
-					long.class, int.class, boolean.class, int.class,
-					long.class, long.class, long.class);
+					"addPasswordPolicy", _addPasswordPolicyParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
 					description, changeable, changeRequired, minAge,
@@ -113,7 +107,7 @@ public class PasswordPolicyServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PasswordPolicyServiceUtil.class.getName(),
-					"deletePasswordPolicy", long.class);
+					"deletePasswordPolicy", _deletePasswordPolicyParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					passwordPolicyId);
@@ -154,13 +148,7 @@ public class PasswordPolicyServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(PasswordPolicyServiceUtil.class.getName(),
-					"updatePasswordPolicy", long.class, java.lang.String.class,
-					java.lang.String.class, boolean.class, boolean.class,
-					long.class, boolean.class, boolean.class, int.class,
-					int.class, int.class, int.class, int.class, int.class,
-					boolean.class, int.class, boolean.class, long.class,
-					long.class, int.class, boolean.class, int.class,
-					long.class, long.class, long.class);
+					"updatePasswordPolicy", _updatePasswordPolicyParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					passwordPolicyId, name, description, changeable,
@@ -198,4 +186,22 @@ public class PasswordPolicyServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PasswordPolicyServiceHttp.class);
+	private static final Class<?>[] _addPasswordPolicyParameterTypes0 = new Class[] {
+			java.lang.String.class, java.lang.String.class, boolean.class,
+			boolean.class, long.class, boolean.class, boolean.class, int.class,
+			int.class, int.class, int.class, int.class, int.class, boolean.class,
+			int.class, boolean.class, long.class, long.class, int.class,
+			boolean.class, int.class, long.class, long.class, long.class
+		};
+	private static final Class<?>[] _deletePasswordPolicyParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _updatePasswordPolicyParameterTypes2 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
+			boolean.class, boolean.class, long.class, boolean.class,
+			boolean.class, int.class, int.class, int.class, int.class, int.class,
+			int.class, boolean.class, int.class, boolean.class, long.class,
+			long.class, int.class, boolean.class, int.class, long.class,
+			long.class, long.class
+		};
 }

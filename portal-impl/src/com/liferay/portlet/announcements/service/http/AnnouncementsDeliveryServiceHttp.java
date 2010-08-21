@@ -61,8 +61,7 @@ public class AnnouncementsDeliveryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AnnouncementsDeliveryServiceUtil.class.getName(),
-					"updateDelivery", long.class, java.lang.String.class,
-					boolean.class, boolean.class, boolean.class);
+					"updateDelivery", _updateDeliveryParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					type, email, sms, website);
@@ -94,4 +93,8 @@ public class AnnouncementsDeliveryServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(AnnouncementsDeliveryServiceHttp.class);
+	private static final Class<?>[] _updateDeliveryParameterTypes0 = new Class[] {
+			long.class, java.lang.String.class, boolean.class, boolean.class,
+			boolean.class
+		};
 }

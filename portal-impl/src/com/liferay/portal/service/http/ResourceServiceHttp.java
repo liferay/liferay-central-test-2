@@ -59,8 +59,7 @@ public class ResourceServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ResourceServiceUtil.class.getName(),
-					"getResource", long.class, java.lang.String.class,
-					int.class, java.lang.String.class);
+					"getResource", _getResourceParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, name, scope, primKey);
@@ -92,4 +91,8 @@ public class ResourceServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ResourceServiceHttp.class);
+	private static final Class<?>[] _getResourceParameterTypes0 = new Class[] {
+			long.class, java.lang.String.class, int.class,
+			java.lang.String.class
+		};
 }

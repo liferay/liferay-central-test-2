@@ -59,7 +59,7 @@ public class MBMessageFlagServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageFlagServiceUtil.class.getName(),
-					"addAnswerFlag", long.class);
+					"addAnswerFlag", _addAnswerFlagParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, messageId);
 
@@ -91,7 +91,7 @@ public class MBMessageFlagServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageFlagServiceUtil.class.getName(),
-					"deleteAnswerFlag", long.class);
+					"deleteAnswerFlag", _deleteAnswerFlagParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, messageId);
 
@@ -118,4 +118,10 @@ public class MBMessageFlagServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(MBMessageFlagServiceHttp.class);
+	private static final Class<?>[] _addAnswerFlagParameterTypes0 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _deleteAnswerFlagParameterTypes1 = new Class[] {
+			long.class
+		};
 }

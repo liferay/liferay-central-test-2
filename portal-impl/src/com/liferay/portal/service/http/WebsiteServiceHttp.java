@@ -59,8 +59,7 @@ public class WebsiteServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(WebsiteServiceUtil.class.getName(),
-					"addWebsite", java.lang.String.class, long.class,
-					java.lang.String.class, int.class, boolean.class);
+					"addWebsite", _addWebsiteParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK, url, typeId, primary);
@@ -96,7 +95,7 @@ public class WebsiteServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(WebsiteServiceUtil.class.getName(),
-					"deleteWebsite", long.class);
+					"deleteWebsite", _deleteWebsiteParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, websiteId);
 
@@ -128,7 +127,7 @@ public class WebsiteServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(WebsiteServiceUtil.class.getName(),
-					"getWebsite", long.class);
+					"getWebsite", _getWebsiteParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, websiteId);
 
@@ -164,7 +163,7 @@ public class WebsiteServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(WebsiteServiceUtil.class.getName(),
-					"getWebsites", java.lang.String.class, long.class);
+					"getWebsites", _getWebsitesParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK);
@@ -202,8 +201,7 @@ public class WebsiteServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(WebsiteServiceUtil.class.getName(),
-					"updateWebsite", long.class, java.lang.String.class,
-					int.class, boolean.class);
+					"updateWebsite", _updateWebsiteParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					websiteId, url, typeId, primary);
@@ -235,4 +233,20 @@ public class WebsiteServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(WebsiteServiceHttp.class);
+	private static final Class<?>[] _addWebsiteParameterTypes0 = new Class[] {
+			java.lang.String.class, long.class, java.lang.String.class,
+			int.class, boolean.class
+		};
+	private static final Class<?>[] _deleteWebsiteParameterTypes1 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getWebsiteParameterTypes2 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getWebsitesParameterTypes3 = new Class[] {
+			java.lang.String.class, long.class
+		};
+	private static final Class<?>[] _updateWebsiteParameterTypes4 = new Class[] {
+			long.class, java.lang.String.class, int.class, boolean.class
+		};
 }
