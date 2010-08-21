@@ -1350,22 +1350,6 @@
 		<put name="portlet_content" value="/portlet/wiki_display/view.jsp" />
 	</definition>
 
-	<definition name="portlet.wiki_display.view_all_pages" extends="portlet.wiki_display">
-		<put name="portlet_content" value="/portlet/wiki_display/view_all_pages.jsp" />
-	</definition>
-
-	<definition name="portlet.wiki_display.view_draft_pages" extends="portlet.wiki_display">
-		<put name="portlet_content" value="/portlet/wiki_display/view_draft_pages.jsp" />
-	</definition>
-
-	<definition name="portlet.wiki_display.view_orphan_pages" extends="portlet.wiki_display">
-		<put name="portlet_content" value="/portlet/wiki_display/view_orphan_pages.jsp" />
-	</definition>
-
-	<definition name="portlet.wiki_display.view_recent_changes" extends="portlet.wiki_display">
-		<put name="portlet_content" value="/portlet/wiki_display/view_recent_changes.jsp" />
-	</definition>
-
 	<!-- Words -->
 
 	<definition name="portlet.words" extends="portlet" />
