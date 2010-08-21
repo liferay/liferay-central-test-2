@@ -33,7 +33,7 @@ public class PortalSessionCreator extends BasePortalLifecycle {
 	public PortalSessionCreator(HttpSessionEvent httpSessionEvent) {
 		_httpSessionEvent = httpSessionEvent;
 
-		registerPortalLifecycle();
+		registerPortalLifecycle(true);
 	}
 
 	protected void doPortalDestroy() {

@@ -173,7 +173,7 @@ public class HotDeployUtil {
 
 			};
 
-			PortalLifecycleUtil.register(portalLifecycle);
+			PortalLifecycleUtil.register(portalLifecycle, true);
 		}
 		else {
 

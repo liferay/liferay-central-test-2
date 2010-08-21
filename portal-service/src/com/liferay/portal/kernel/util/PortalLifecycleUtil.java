@@ -48,6 +48,11 @@ public class PortalLifecycleUtil {
 	}
 
 	public static synchronized void register(PortalLifecycle portalLifecycle) {
+		register(portalLifecycle, false);
+	}
+
+	public static synchronized void register(
+		PortalLifecycle portalLifecycle, boolean skipDestroy) {
 		if (_portalLifecyclesInit == null) {
 			portalLifecycle.portalInit();
 		}
@@ -55,7 +60,9 @@ public class PortalLifecycleUtil {
 			_portalLifecyclesInit.add(portalLifecycle);
 		}
 
-		_portalLifecyclesDestroy.add(portalLifecycle);
+		if (!skipDestroy) {
+			_portalLifecyclesDestroy.add(portalLifecycle);
+		}
 	}
 
 	public static synchronized void removeDestroy(
