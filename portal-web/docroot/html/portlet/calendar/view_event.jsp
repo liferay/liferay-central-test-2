@@ -46,7 +46,8 @@ request.setAttribute("view_event.jsp-event", event);
 
 <liferay-ui:header
 	backURL="<%= redirect %>"
-	title='<%= event.getTitle() %>'
+	escapeXml="<%= false %>"
+	title="<%= event.getTitle() %>"
 />
 
 <aui:layout cssClass="event">
@@ -241,5 +242,7 @@ request.setAttribute("view_event.jsp-event", event);
 PortalUtil.setPageSubtitle(event.getTitle(), request);
 PortalUtil.setPageDescription(event.getDescription(), request);
 
-PortalUtil.addPortletBreadcrumbEntry(request, event.getTitle(), currentURL);
+String eventTitle = HtmlUtil.unescape(event.getTitle());
+
+PortalUtil.addPortletBreadcrumbEntry(request, eventTitle, currentURL);
 %>
