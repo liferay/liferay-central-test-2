@@ -40,6 +40,14 @@ Liferay.Service = {
 			serviceUrl = instance.tunnelUrl;
 		}
 
+		if (options.servletContextName) {
+			serviceUrl = '/' + options.servletContextName + '/json';
+
+			if (tunnelEnabled) {
+				serviceUrl = '/' + options.servletContextName + '/secure/json';
+			}
+		}
+
 		options.serviceParameters = Liferay.Service.getParameters(options);
 		options.doAsUserId = themeDisplay.getDoAsUserIdEncoded();
 
@@ -88,7 +96,7 @@ Liferay.Service = {
 		var serviceParameters = [];
 
 		for (var key in options) {
-			if ((key != 'serviceClassName') && (key != 'serviceMethodName') && (key != 'serviceParameterTypes')) {
+			if ((key != 'servletContextName') && (key != 'serviceClassName') && (key != 'serviceMethodName') && (key != 'serviceParameterTypes')) {
 				serviceParameters.push(key);
 			}
 		}
@@ -103,7 +111,7 @@ Liferay.Service = {
 			var levels = namespace.split('.');
 
 			for (var i = (levels[0] == 'Liferay') ? 1 : 0; i < levels.length; i++) {
-		 		curLevel[levels[i]] = curLevel[levels[i]] || {};
+				curLevel[levels[i]] = curLevel[levels[i]] || {};
 				curLevel = curLevel[levels[i]];
 			}
 		}
@@ -114,10 +122,14 @@ Liferay.Service = {
 		return curLevel;
 	},
 
-	register: function(serviceName, servicePackage) {
+	register: function(serviceName, servicePackage, servletContextName) {
 		var module = Liferay.Service.namespace(serviceName);
 
 		module.servicePackage = servicePackage.replace(/[.]$/, '') + '.';
+
+		if (servletContextName) {
+			module.servletContextName = servletContextName;
+		}
 
 		return module;
 	},
@@ -139,6 +151,7 @@ Liferay.Service = {
 					handler = function(params, callback) {
 						params.serviceClassName = moduleClassName.serviceClassName;
 						params.serviceMethodName = index;
+						params.servletContextName = module.servletContextName;
 
 						return Liferay.Service.ajax(params, callback);
 					};

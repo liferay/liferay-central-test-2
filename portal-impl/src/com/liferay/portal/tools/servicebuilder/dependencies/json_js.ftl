@@ -1,1 +1,1 @@
-Liferay.Service.register("Liferay.Service.${portletShortName}", "${packagePath}.service");
+Liferay.Service.register("Liferay.Service.${portletShortName}", "${packagePath}.service"<#if pluginName != "">, "${pluginName}"</#if>);
