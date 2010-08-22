@@ -14,7 +14,6 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
@@ -22,9 +21,9 @@ import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.PropertyResourceBundle;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Utf8PropertyResourceBundle;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
@@ -162,9 +161,8 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 					sb.append(portletInfo.getDescription());
 					sb.append(StringPool.NEW_LINE);
 
-					resourceBundle = new Utf8PropertyResourceBundle(
-						new UnsyncByteArrayInputStream(
-							sb.toString().getBytes()));
+					resourceBundle = new PropertyResourceBundle(
+						sb.toString(), StringPool.UTF8);
 				}
 				catch (Exception e) {
 					_log.error(e, e);
