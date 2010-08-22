@@ -808,6 +808,10 @@ public class StringUtil {
 			return null;
 		}
 
+		if (oldSub.equals(newSub)) {
+			return s;
+		}
+
 		int y = s.indexOf(oldSub);
 
 		if (y >= 0) {
@@ -870,6 +874,10 @@ public class StringUtil {
 	public static String replaceLast(String s, String oldSub, String newSub) {
 		if ((s == null) || (oldSub == null) || (newSub == null)) {
 			return null;
+		}
+
+		if (oldSub.equals(newSub)) {
+			return s;
 		}
 
 		int y = s.lastIndexOf(oldSub);
