@@ -21,6 +21,8 @@ import java.sql.Connection;
  */
 public interface TransactionDefinition {
 
+	public static final int ISOLATION_COUNTER = -3;
+
 	public static final int ISOLATION_DEFAULT = -1;
 
 	public static final int ISOLATION_PORTAL = -2;

@@ -78,6 +78,10 @@ public class PortalTransactionAnnotationParser
 			ruleBasedTransactionAttribute.setIsolationLevel(
 				PropsValues.TRANSACTION_ISOLATION_PORTAL);
 		}
+		else if (isolationLevel == TransactionDefinition.ISOLATION_COUNTER) {
+			ruleBasedTransactionAttribute.setIsolationLevel(
+				PropsValues.TRANSACTION_ISOLATION_COUNTER);
+		}
 		else {
 			ruleBasedTransactionAttribute.setIsolationLevel(isolationLevel);
 		}

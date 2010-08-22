@@ -20,6 +20,7 @@ package com.liferay.portal.kernel.annotation;
 public enum Isolation {
 
 	DEFAULT(TransactionDefinition.ISOLATION_DEFAULT),
+	COUNTER(TransactionDefinition.ISOLATION_COUNTER),
 	PORTAL(TransactionDefinition.ISOLATION_PORTAL),
 	READ_COMMITTED(TransactionDefinition.ISOLATION_READ_COMMITTED),
 	READ_UNCOMMITTED(TransactionDefinition.ISOLATION_READ_UNCOMMITTED),
