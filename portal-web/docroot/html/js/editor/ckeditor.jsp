@@ -15,8 +15,8 @@
 %>
 
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.HttpUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.URLCodec" %>
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
 <%@ page import="com.liferay.util.TextFormatter" %>
 
@@ -50,7 +50,7 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 			textArea.value = parent.<%= HtmlUtil.escape(initMethod) %>();
 
 			CKEDITOR.config.toolbar = '<%= TextFormatter.format(HtmlUtil.escape(toolbarSet), TextFormatter.M) %>';
-			CKEDITOR.config.customConfig = '<%= request.getContextPath() %>/html/js/editor/ckeditor/ckconfig.jsp?p_l_id=<%= plid %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>';
+			CKEDITOR.config.customConfig = '<%= request.getContextPath() %>/html/js/editor/ckeditor/ckconfig.jsp?p_l_id=<%= plid %>&p_main_path=<%= URLCodec.encodeURL(mainPath) %>&doAsUserId=<%= URLCodec.encodeURL(doAsUserId) %>&cssPath=<%= URLCodec.encodeURL(cssPath) %>&cssClasses=<%= URLCodec.encodeURL(cssClasses) %>';
 
 			ckEditor.on(
 				'instanceReady',
@@ -117,7 +117,7 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 <script type="text/javascript">
 
 	<%
-	String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId));
+	String connectorURL = URLCodec.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&doAsUserId=" + URLCodec.encodeURL(doAsUserId));
 	%>
 
 	CKEDITOR.replace(

@@ -41,7 +41,7 @@ sb.append(themeDisplay.getPathContext());
 sb.append("/html/js/editor/editor.jsp?p_l_id=");
 sb.append(plid);
 sb.append("&amp;p_main_path=");
-sb.append(HttpUtil.encodeURL(themeDisplay.getPathMain()));
+sb.append(URLCodec.encodeURL(themeDisplay.getPathMain()));
 sb.append("&amp;doAsUserId=");
 
 String doAsUserId = themeDisplay.getDoAsUserId();
@@ -50,7 +50,7 @@ if (Validator.isNull(doAsUserId)) {
 	doAsUserId = Encryptor.encrypt(company.getKeyObj(), String.valueOf(themeDisplay.getUserId()));
 }
 
-sb.append(HttpUtil.encodeURL(doAsUserId));
+sb.append(URLCodec.encodeURL(doAsUserId));
 
 sb.append("&amp;editorImpl=");
 sb.append(editorImpl);
@@ -71,7 +71,7 @@ if (Validator.isNotNull(onChangeMethod)) {
 }
 
 sb.append("&amp;cssPath=");
-sb.append(HttpUtil.encodeURL(themeDisplay.getPathThemeCss()));
+sb.append(URLCodec.encodeURL(themeDisplay.getPathThemeCss()));
 
 String cssClasses = "portlet ";
 
@@ -82,7 +82,7 @@ if (portlet != null) {
 }
 
 sb.append("&amp;cssClasses=");
-sb.append(HttpUtil.encodeURL(cssClasses));
+sb.append(URLCodec.encodeURL(cssClasses));
 
 String editorURL = sb.toString();
 %>

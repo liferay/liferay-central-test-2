@@ -16,9 +16,9 @@
 
 <%@ page import="com.liferay.portal.kernel.util.ContentTypes" %>
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.HttpUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.PropsKeys" %>
+<%@ page import="com.liferay.portal.kernel.util.URLCodec" %>
 <%@ page import="com.liferay.portal.util.PropsUtil" %>
 
 <%
@@ -28,7 +28,7 @@ String doAsUserId = ParamUtil.getString(request, "doAsUserId");
 String cssPath = ParamUtil.getString(request, "cssPath");
 String cssClasses = ParamUtil.getString(request, "cssClasses");
 
-String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId));
+String connectorURL = URLCodec.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&doAsUserId=" + URLCodec.encodeURL(doAsUserId));
 
 response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 %>

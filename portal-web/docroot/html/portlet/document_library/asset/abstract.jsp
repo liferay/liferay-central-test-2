@@ -29,7 +29,7 @@ DLFileVersion fileVersion = (DLFileVersion)request.getAttribute(WebKeys.DOCUMENT
 			image='<%= "../file_system/small/" + fileVersion.getIcon() %>'
 			label="<%= true %>"
 			message="<%= HtmlUtil.escape(fileVersion.getTitle()) %>"
-			url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + fileVersion.getGroupId() + StringPool.SLASH + fileVersion.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileVersion.getTitle())) %>'
+			url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + fileVersion.getGroupId() + StringPool.SLASH + fileVersion.getFolderId() + StringPool.SLASH + URLCodec.encodeURL(HtmlUtil.unescape(fileVersion.getTitle())) %>'
 		/>
 	</div>
 </c:if>

@@ -49,7 +49,7 @@ if (MathUtil.isEven(count.getValue())) {
 <tr class="<%= className %>">
 	<td>
 		<input id="<portlet:namespace />structure_el<%= count.getValue() %>_depth" type="hidden" value="<%= depth %>" />
-		<input id="<portlet:namespace />structure_el<%= count.getValue() %>_metadata_xml" type="hidden" value="<%= HttpUtil.encodeURL(elMetadataXML) %>" />
+		<input id="<portlet:namespace />structure_el<%= count.getValue() %>_metadata_xml" type="hidden" value="<%= URLCodec.encodeURL(elMetadataXML) %>" />
 
 		<table class="lfr-table">
 		<tr>
