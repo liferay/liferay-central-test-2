@@ -99,6 +99,7 @@ import com.liferay.util.log4j.Log4JUtil;
 
 import java.io.File;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -491,7 +492,7 @@ public class HookHotDeployListener
 
 				Properties properties = new Properties();
 
-				properties.load(is);
+				properties.load(new InputStreamReader(is, StringPool.UTF8));
 
 				is.close();
 
@@ -500,8 +501,6 @@ public class HookHotDeployListener
 				for (Map.Entry<Object, Object> entry : properties.entrySet()) {
 					String key = (String)entry.getKey();
 					String value = (String)entry.getValue();
-
-					value = LanguageResources.fixValue(value);
 
 					languageMap.put(key, value);
 				}
