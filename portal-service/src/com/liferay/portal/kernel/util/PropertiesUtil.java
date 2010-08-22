@@ -16,10 +16,23 @@ package com.liferay.portal.kernel.util;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
+import com.liferay.portal.kernel.nio.charset.CharsetDecoderUtil;
+import com.liferay.portal.kernel.nio.charset.CharsetEncoderUtil;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.io.Reader;
+
+import java.lang.reflect.Method;
+
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CharsetEncoder;
 
 import java.util.Collections;
 import java.util.Enumeration;
@@ -173,11 +186,74 @@ public class PropertiesUtil {
 	}
 
 	public static Properties load(String s) throws IOException {
-		Properties p = new Properties();
+		return load(s, StringPool.UTF8);
+	}
 
-		load(p, s);
+	public static Properties load(String s, String charsetName)
+		throws IOException {
+		if (JavaProps.isJDK6()) {
+			return loadJDK6(new UnsyncStringReader(s));
+		}
+		else {
+			ByteBuffer byteBuffer = CharsetEncoderUtil.encode(charsetName, s);
+			InputStream is = new UnsyncByteArrayInputStream(
+				byteBuffer.array(), byteBuffer.arrayOffset(),
+				byteBuffer.limit());
+			return loadJDK5(is, charsetName);
+		}
+	}
 
-		return p;
+	public static Properties load(InputStream is, String charsetName)
+		throws IOException {
+		if (JavaProps.isJDK6()) {
+			return loadJDK6(new InputStreamReader(is, charsetName));
+		}
+		else {
+			return loadJDK5(is, charsetName);
+		}
+	}
+
+	public static Properties loadJDK5(InputStream is, String charsetName)
+		throws IOException{
+		Properties iso8859_1Properties = new Properties();
+		iso8859_1Properties.load(is);
+
+		Properties properties = new Properties();
+
+		CharsetEncoder charsetEncoder =
+			CharsetEncoderUtil.getCharsetEncoder(StringPool.ISO_8859_1);
+		CharsetDecoder charsetDecoder =
+			CharsetDecoderUtil.getCharsetDecoder(charsetName);
+
+		for(Map.Entry<Object, Object> entry : iso8859_1Properties.entrySet()) {
+			String key = (String) entry.getKey();
+			String value = (String) entry.getValue();
+
+			key = charsetDecoder.decode(
+				charsetEncoder.encode(CharBuffer.wrap(key))).toString();
+			value = charsetDecoder.decode(
+				charsetEncoder.encode(CharBuffer.wrap(value))).toString();
+
+			properties.put(key, value);
+		}
+
+		return properties;
+	}
+
+	public static Properties loadJDK6(Reader reader) throws IOException {
+		try {
+			Properties properties = new Properties();
+			_jdk6LoadMethod.invoke(properties, reader);
+			return properties;
+		}
+		catch (Exception e) {
+			if (e.getCause() instanceof IOException) {
+				throw (IOException)e.getCause();
+			}
+			throw new IllegalStateException(
+				"Fail to invoke java.util.Properties.load(Reader reader) "
+				+ "on JDK6", e);
+		}
 	}
 
 	public static void merge(Properties properties1, Properties properties2) {
@@ -243,6 +319,19 @@ public class PropertiesUtil {
 			if (!key.equals(trimmedKey)) {
 				properties.remove(key);
 				properties.setProperty(trimmedKey, value);
+			}
+		}
+	}
+
+	private static Method _jdk6LoadMethod;
+	static {
+		if (JavaProps.isJDK6()) {
+			try {
+				_jdk6LoadMethod = ReflectionUtil.getDeclaredMethod(
+					Properties.class, "load", Reader.class);
+			}
+			catch (Throwable t) {
+				throw new ExceptionInInitializerError(t);
 			}
 		}
 	}
