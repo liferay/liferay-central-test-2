@@ -53,7 +53,8 @@ public class URLCodecTest extends TestCase {
 		".-*_",
 		" ",
 		"~`!@#$%^&()+={[}]|\\:;\"'<,>?/",
-		"中文测试"
+		"中文测试",
+		"/abc/def"
 	};
 
 	private static final String[] _encodedURLStrings =

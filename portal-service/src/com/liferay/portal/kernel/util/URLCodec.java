@@ -79,7 +79,7 @@ public class URLCodec {
 					}
 
 					sb.append(charBuffer);
-					i += byteBuffer.capacity() * 3;
+					i += byteBuffer.capacity() * 3 - 1;
 					break;
 				default:
 					sb.append(c);
@@ -142,6 +142,8 @@ public class URLCodec {
 						charsetName);
 				}
 
+				i += charBuffer.length() - 1;
+
 				ByteBuffer byteBuffer = null;
 
 				try {
@@ -158,7 +160,6 @@ public class URLCodec {
 					sb.append(UnicodeFormatter.byteToHex(
 						byteBuffer.get(), hexes));
 				}
-				i += charBuffer.capacity();
 			}
 		}
 
@@ -233,6 +234,9 @@ public class URLCodec {
 						count++;
 					}
 				}
+			}
+			else {
+				break;
 			}
 		}
 
