@@ -46,10 +46,26 @@ public class ConfigurePortletDisplayGuestTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Please configure this portlet to make it visible to all users."));
 		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		selenium.select("_86_groupId", RuntimeVariables.replace("label=Guest"));
-		selenium.select("_86_type", RuntimeVariables.replace("label=General"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_86_groupId")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.select("_86_groupId", RuntimeVariables.replace("label=Liferay"));
+		selenium.select("_86_type",
+			RuntimeVariables.replace("label=Announcements"));
 		selenium.select("_86_pageURL", RuntimeVariables.replace("label=Normal"));
 		selenium.select("_86_pageDelta", RuntimeVariables.replace("label=10"));
 		selenium.select("_86_orderByCol",
