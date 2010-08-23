@@ -279,9 +279,10 @@ if (portlet.isStatic()) {
 }
 
 // Deny access to edit mode if you do not have permission
-
-if (!PropsValues.TCK_URL && portletMode.equals(PortletMode.EDIT) && !PortletPermissionUtil.contains(permissionChecker, plid, portletId, ActionKeys.PREFERENCES)) {
-	access = false;
+if (access) {
+	if (!PropsValues.TCK_URL && portletMode.equals(PortletMode.EDIT) && !PortletPermissionUtil.contains(permissionChecker, plid, portletId, ActionKeys.PREFERENCES)) {
+		access = false;
+	}
 }
 
 // Deny access
