@@ -51,6 +51,7 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.LayoutTypePortletConstants;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
@@ -58,6 +59,7 @@ import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.service.persistence.UserUtil;
@@ -360,6 +362,13 @@ public class LayoutImporter {
 			long plid = newLayoutsMap.get(layoutId).getPlid();
 			long oldPlid = GetterUtil.getLong(
 				portletElement.attributeValue("old-plid"));
+
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				context.getCompanyId(), portletId);
+
+			if (portlet.isUndeployedPortlet() || !portlet.isActive()) {
+				continue;
+			}
 
 			Layout layout = null;
 
