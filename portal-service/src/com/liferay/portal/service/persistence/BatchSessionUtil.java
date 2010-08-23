@@ -24,6 +24,12 @@ import com.liferay.portal.model.BaseModel;
  */
 public class BatchSessionUtil {
 
+	public static void delete(Session session, BaseModel<?> model)
+		throws ORMException {
+
+		getBatchSession().delete(session, model);
+	}
+
 	public static BatchSession getBatchSession() {
 		return _batchSession;
 	}
@@ -34,12 +40,6 @@ public class BatchSessionUtil {
 
 	public static void setEnabled(boolean enabled) {
 		getBatchSession().setEnabled(enabled);
-	}
-
-	public static void delete(Session session, BaseModel<?> model)
-		throws ORMException {
-
-		getBatchSession().delete(session, model);
 	}
 
 	public static void update(
