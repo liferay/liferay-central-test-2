@@ -27,6 +27,7 @@ import java.util.Set;
 
 /**
  * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
 public class PropertyResourceBundle extends ResourceBundle {
 

@@ -49,6 +49,7 @@ import javax.xml.namespace.QName;
 /**
  * @author Brian Wing Shun Chan
  * @author Eduardo Lundgren
+ * @author Shuyang Zhou
  */
 public class PortletConfigImpl implements LiferayPortletConfig {
 
