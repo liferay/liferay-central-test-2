@@ -17,13 +17,14 @@ package com.liferay.portal.language;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.tools.LangBuilder;
 
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 import java.net.URL;
 
@@ -38,6 +39,21 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Shuyang Zhou
  */
 public class LanguageResources {
+
+	public static String fixValue(String value) {
+		if (value.endsWith(LangBuilder.AUTOMATIC_COPY)) {
+			value = value.substring(
+				0, value.length() - LangBuilder.AUTOMATIC_COPY.length());
+		}
+
+		if (value.endsWith(LangBuilder.AUTOMATIC_TRANSLATION)) {
+			value = value.substring(
+				0,
+				value.length() - LangBuilder.AUTOMATIC_TRANSLATION.length());
+		}
+
+		return value;
+	}
 
 	public static String getMessage(Locale locale, String key) {
 		if (locale == null) {
@@ -142,6 +158,8 @@ public class LanguageResources {
 				for (Map.Entry<Object, Object> entry : properties.entrySet()) {
 					String key = (String)entry.getKey();
 					String value = (String)entry.getValue();
+
+					value = fixValue(value);
 
 					languageMap.put(key, value);
 				}

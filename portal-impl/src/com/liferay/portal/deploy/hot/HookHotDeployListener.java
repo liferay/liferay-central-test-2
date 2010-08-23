@@ -501,6 +501,8 @@ public class HookHotDeployListener
 					String key = (String)entry.getKey();
 					String value = (String)entry.getValue();
 
+					value = LanguageResources.fixValue(value);
+
 					languageMap.put(key, value);
 				}
 
