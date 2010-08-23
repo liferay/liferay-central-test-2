@@ -135,7 +135,6 @@
 <%@ page import="com.liferay.portal.kernel.util.TimeZoneUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.UnicodeFormatter" %>
 <%@ page import="com.liferay.portal.kernel.util.UnicodeProperties" %>
-<%@ page import="com.liferay.portal.kernel.util.URLCodec" %>
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowConstants" %>
 <%@ page import="com.liferay.portal.language.LanguageImpl" %>

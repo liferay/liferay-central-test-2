@@ -186,7 +186,7 @@ if (row == null) {
 				IGFolder curFolder = folder;
 
 				while (true) {
-					sb.insert(0, URLCodec.encodeURL(curFolder.getName(), true));
+					sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
 					sb.insert(0, StringPool.SLASH);
 
 					if (curFolder.getParentFolderId() == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {

@@ -31,7 +31,7 @@ editPageURL.setPortletMode(PortletMode.VIEW);
 
 editPageURL.setParameter("struts_action", "/wiki/edit_page");
 
-String attachmentURLPrefix = themeDisplay.getPathMain() + "/wiki/get_page_attachment?p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + URLCodec.encodeURL(wikiPage.getTitle()) + "&fileName=";
+String attachmentURLPrefix = themeDisplay.getPathMain() + "/wiki/get_page_attachment?p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + HttpUtil.encodeURL(wikiPage.getTitle()) + "&fileName=";
 
 WikiPageDisplay pageDisplay = null;
 

@@ -17,7 +17,6 @@ package com.liferay.portal.webserver;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.URLCodec;
 
 import java.util.Date;
 
@@ -98,10 +97,10 @@ public class WebServerEntry {
 		}
 
 		if (path.endsWith(StringPool.SLASH)) {
-			path = path + URLCodec.encodeURL(name, true);
+			path = path + HttpUtil.encodeURL(name, true);
 		}
 		else {
-			path = path + StringPool.SLASH + URLCodec.encodeURL(name, true);
+			path = path + StringPool.SLASH + HttpUtil.encodeURL(name, true);
 		}
 
 		return path;

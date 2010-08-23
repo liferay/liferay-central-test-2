@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
-import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.translator.model.Translation;
@@ -44,7 +43,7 @@ public class TranslationWebCacheItem implements WebCacheItem {
 			sb.append("http://babelfish.yahoo.com/translate_txt?");
 			sb.append("ei=UTF-8&doit=done&fr=bf-res&intl=1&tt=urltext");
 			sb.append("&trtext=");
-			sb.append(URLCodec.encodeURL(_fromText));
+			sb.append(HttpUtil.encodeURL(_fromText));
 			sb.append("&lp=");
 			sb.append(_translationId);
 

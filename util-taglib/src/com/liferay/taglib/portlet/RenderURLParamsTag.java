@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.StringTokenizer;
@@ -104,7 +103,7 @@ public class RenderURLParamsTag extends TagSupport {
 						value = kvp[1];
 					}
 
-					value = URLCodec.decodeURL(value);
+					value = HttpUtil.decodeURL(value);
 
 					sb.append("<input name=\"");
 					sb.append(key);

@@ -15,10 +15,10 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -197,13 +197,13 @@ public class PortletURLUtil {
 
 		if (Validator.isNotNull(doAsUserId)) {
 			sb.append("&doAsUserId=");
-			sb.append(URLCodec.encodeURL(doAsUserId));
+			sb.append(HttpUtil.encodeURL(doAsUserId));
 		}
 
 		String currentURL = PortalUtil.getCurrentURL(request);
 
 		sb.append("&currentURL=");
-		sb.append(URLCodec.encodeURL(currentURL));
+		sb.append(HttpUtil.encodeURL(currentURL));
 
 		String ppid = ParamUtil.getString(request, "p_p_id");
 
@@ -222,7 +222,7 @@ public class PortletURLUtil {
 						sb.append(StringPool.AMPERSAND);
 						sb.append(name);
 						sb.append(StringPool.EQUAL);
-						sb.append(URLCodec.encodeURL(values[i]));
+						sb.append(HttpUtil.encodeURL(values[i]));
 					}
 				}
 			}

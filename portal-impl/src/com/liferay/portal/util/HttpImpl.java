@@ -25,16 +25,18 @@ import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.SystemProperties;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 import java.net.InetAddress;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -181,26 +183,44 @@ public class HttpImpl implements Http {
 			url += StringPool.AMPERSAND;
 		}
 
-		return url + name + StringPool.EQUAL + URLCodec.encodeURL(value)
-			+ anchor;
+		return url + name + StringPool.EQUAL + encodeURL(value) + anchor;
 	}
 
 	public String decodePath(String path) {
 		path =  StringUtil.replace(path, StringPool.SLASH, _TEMP_SLASH);
-		path = URLCodec.decodeURL(path);
+		path = decodeURL(path, true);
 		path =  StringUtil.replace(path, _TEMP_SLASH, StringPool.SLASH);
 
 		return path;
 	}
 
-	@Deprecated
 	public String decodeURL(String url) {
-		return URLCodec.decodeURL(url);
+		return decodeURL(url, false);
 	}
 
-	@Deprecated
 	public String decodeURL(String url, boolean unescapeSpace) {
-		return URLCodec.decodeURL(url);
+		if (url == null) {
+			return null;
+		}
+
+		if (url.length() == 0) {
+			return StringPool.BLANK;
+		}
+
+		try {
+			url = URLDecoder.decode(url, StringPool.UTF8);
+
+			if (unescapeSpace) {
+				url = StringUtil.replace(url, "%20", StringPool.PLUS);
+			}
+
+			return url;
+		}
+		catch (UnsupportedEncodingException uee) {
+			_log.error(uee, uee);
+
+			return StringPool.BLANK;
+		}
 	}
 
 	public void destroy() {
@@ -209,20 +229,39 @@ public class HttpImpl implements Http {
 
 	public String encodePath(String path) {
 		path = StringUtil.replace(path, StringPool.SLASH, _TEMP_SLASH);
-		path = URLCodec.encodeURL(path, true);
+		path = encodeURL(path, true);
 		path = StringUtil.replace(path, _TEMP_SLASH, StringPool.SLASH);
 
 		return path;
 	}
 
-	@Deprecated
 	public String encodeURL(String url) {
-		return URLCodec.encodeURL(url, false);
+		return encodeURL(url, false);
 	}
 
-	@Deprecated
 	public String encodeURL(String url, boolean escapeSpaces) {
-		return URLCodec.encodeURL(url, escapeSpaces);
+		if (url == null) {
+			return null;
+		}
+
+		if (url.length() == 0) {
+			return StringPool.BLANK;
+		}
+
+		try {
+			url = URLEncoder.encode(url, StringPool.UTF8);
+
+			if (escapeSpaces) {
+				url = StringUtil.replace(url, StringPool.PLUS, "%20");
+			}
+
+			return url;
+		}
+		catch (UnsupportedEncodingException uee) {
+			_log.error(uee, uee);
+
+			return StringPool.BLANK;
+		}
 	}
 
 	public String fixPath(String path) {
@@ -528,7 +567,7 @@ public class HttpImpl implements Http {
 				for (String value : values) {
 					sb.append(name);
 					sb.append(StringPool.EQUAL);
-					sb.append(URLCodec.encodeURL(value));
+					sb.append(encodeURL(value));
 					sb.append(StringPool.AMPERSAND);
 				}
 			}

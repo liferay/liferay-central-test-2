@@ -19,8 +19,8 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.DiffResult;
 import com.liferay.portal.kernel.util.DiffUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
@@ -112,7 +112,7 @@ public class CompareVersionsAction extends PortletAction {
 			String attachmentURLPrefix =
 				themeDisplay.getPathMain() + "/wiki/get_page_attachment?" +
 					"p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + nodeId +
-						"&title=" + URLCodec.encodeURL(title) + "&fileName=";
+						"&title=" + HttpUtil.encodeURL(title) + "&fileName=";
 
 			String htmlDiffResult = WikiUtil.diffHtml(
 				sourcePage, targetPage, viewPageURL, editPageURL,

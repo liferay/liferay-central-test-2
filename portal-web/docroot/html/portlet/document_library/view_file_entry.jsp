@@ -69,7 +69,7 @@ try {
 catch (Exception e) {
 }
 
-String fileUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + URLCodec.encodeURL(HtmlUtil.unescape(title));
+String fileUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(title));
 String webDavUrl = StringPool.BLANK;
 
 if (portletDisplay.isWebDAVEnabled()) {
@@ -79,7 +79,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 		DLFolder curFolder = DLFolderLocalServiceUtil.getFolder(folderId);
 
 		while (true) {
-			sb.insert(0, URLCodec.encodeURL(curFolder.getName(), true));
+			sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
 			sb.insert(0, StringPool.SLASH);
 
 			if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
@@ -92,7 +92,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 	}
 
 	sb.append(StringPool.SLASH);
-	sb.append(URLCodec.encodeURL(HtmlUtil.unescape(title), true));
+	sb.append(HttpUtil.encodeURL(HtmlUtil.unescape(title), true));
 
 	Group group = themeDisplay.getScopeGroup();
 
@@ -378,7 +378,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 				sb.append(StringPool.SLASH);
 				sb.append(folderId);
 				sb.append(StringPool.SLASH);
-				sb.append(URLCodec.encodeURL(HtmlUtil.unescape(title)));
+				sb.append(HttpUtil.encodeURL(HtmlUtil.unescape(title)));
 				sb.append("?version=");
 				sb.append(String.valueOf(curFileVersion.getVersion()));
 

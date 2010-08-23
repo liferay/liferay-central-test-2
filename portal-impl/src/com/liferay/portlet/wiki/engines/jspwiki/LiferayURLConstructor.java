@@ -17,8 +17,8 @@ package com.liferay.portlet.wiki.engines.jspwiki;
 import com.ecyrd.jspwiki.WikiContext;
 import com.ecyrd.jspwiki.url.URLConstructor;
 
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.wiki.util.WikiUtil;
 
@@ -78,12 +78,12 @@ public class LiferayURLConstructor implements URLConstructor {
 			if (name.indexOf(StringPool.SLASH) == -1) {
 				path =
 					"[$ATTACHMENT_URL_PREFIX$][$WIKI_PAGE_NAME$]/" +
-						URLCodec.encodeURL(WikiUtil.decodeJSPWikiName(name));
+						HttpUtil.encodeURL(WikiUtil.decodeJSPWikiName(name));
 			}
 			else {
 				path =
 					"[$ATTACHMENT_URL_PREFIX$]" +
-						URLCodec.encodeURL(WikiUtil.decodeJSPWikiName(name));
+						HttpUtil.encodeURL(WikiUtil.decodeJSPWikiName(name));
 			}
 		}
 		else {

@@ -18,10 +18,10 @@ import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.model.User;
 import com.liferay.portal.sharepoint.methods.Method;
 import com.liferay.portal.sharepoint.methods.MethodFactory;
@@ -113,11 +113,11 @@ public class SharepointServlet extends HttpServlet {
 			for (String param : params) {
 				String[] kvp = param.split(StringPool.EQUAL);
 
-				String key = URLCodec.decodeURL(kvp[0]);
+				String key = HttpUtil.decodeURL(kvp[0]);
 				String value = StringPool.BLANK;
 
 				if (kvp.length > 1) {
-					value = URLCodec.decodeURL(kvp[1]);
+					value = HttpUtil.decodeURL(kvp[1]);
 				}
 
 				sharepointRequest.addParam(key, value);

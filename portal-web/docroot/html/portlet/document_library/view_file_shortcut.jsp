@@ -224,7 +224,7 @@ if (Validator.isNotNull(folder.getName())) {
 							image='<%= "../file_system/small/" + conversion %>'
 							label="<%= true %>"
 							message="<%= conversion.toUpperCase() %>"
-							url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + toFolder.getFolderId() + StringPool.SLASH + URLCodec.encodeURL(HtmlUtil.unescape(toFileEntry.getTitle())) + "?targetExtension=" + conversion %>'
+							url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + toFolder.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(toFileEntry.getTitle())) + "?targetExtension=" + conversion %>'
 						/>
 
 					<%

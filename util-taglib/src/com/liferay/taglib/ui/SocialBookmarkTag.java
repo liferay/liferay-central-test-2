@@ -16,9 +16,9 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
-import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.taglib.util.IncludeTag;
 
 import java.util.HashMap;
@@ -80,7 +80,7 @@ public class SocialBookmarkTag extends IncludeTag {
 	private String getPostUrl() {
 		Map<String, String> vars = new HashMap<String, String>();
 
-		vars.put("liferay:social-bookmark:title", URLCodec.encodeURL(_title));
+		vars.put("liferay:social-bookmark:title", HttpUtil.encodeURL(_title));
 		vars.put("liferay:social-bookmark:url", _url);
 
 		String postUrl = PropsUtil.get(

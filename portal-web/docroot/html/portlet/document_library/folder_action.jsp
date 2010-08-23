@@ -170,7 +170,7 @@ if (row == null) {
 				DLFolder curFolder = folder;
 
 				while (true) {
-					sb.insert(0, URLCodec.encodeURL(curFolder.getName(), true));
+					sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
 					sb.insert(0, StringPool.SLASH);
 
 					if (curFolder.getParentFolderId() == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {

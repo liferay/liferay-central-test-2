@@ -33,13 +33,13 @@ import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ColorScheme;
@@ -202,8 +202,8 @@ public class EditPagesAction extends PortletAction {
 					redirect = StringUtil.replace(redirect, oldPath, newPath);
 
 					redirect = StringUtil.replace(
-						redirect, URLCodec.encodeURL(oldPath),
-						URLCodec.encodeURL(newPath));
+						redirect, HttpUtil.encodeURL(oldPath),
+						HttpUtil.encodeURL(newPath));
 				}
 			}
 

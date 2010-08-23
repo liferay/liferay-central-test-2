@@ -34,7 +34,6 @@ import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
@@ -910,11 +909,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR + "blogs/rss";
 
 		sb.append("http://blogsearch.google.com/ping?name=");
-		sb.append(URLCodec.encodeURL(name));
+		sb.append(HttpUtil.encodeURL(name));
 		sb.append("&url=");
-		sb.append(URLCodec.encodeURL(url));
+		sb.append(HttpUtil.encodeURL(url));
 		sb.append("&changesURL=");
-		sb.append(URLCodec.encodeURL(changesURL));
+		sb.append(HttpUtil.encodeURL(changesURL));
 
 		String location = sb.toString();
 

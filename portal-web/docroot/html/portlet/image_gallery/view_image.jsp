@@ -32,7 +32,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 	StringBuilder sb = new StringBuilder();
 
 	while (true) {
-		sb.insert(0, URLCodec.encodeURL(folder.getName(), true));
+		sb.insert(0, HttpUtil.encodeURL(folder.getName(), true));
 		sb.insert(0, StringPool.SLASH);
 
 		if (folder.getParentFolderId() == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
@@ -44,7 +44,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 	}
 
 	sb.append(StringPool.SLASH);
-	sb.append(URLCodec.encodeURL(image.getNameWithExtension(), true));
+	sb.append(HttpUtil.encodeURL(image.getNameWithExtension(), true));
 
 	Group group = themeDisplay.getScopeGroup();
 

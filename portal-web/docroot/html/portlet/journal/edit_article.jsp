@@ -821,10 +821,10 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	%>
 
 	Liferay.Portlet.Journal.PROXY = {};
-	Liferay.Portlet.Journal.PROXY.doAsUserId = '<%= URLCodec.encodeURL(doAsUserId) %>';
+	Liferay.Portlet.Journal.PROXY.doAsUserId = '<%= HttpUtil.encodeURL(doAsUserId) %>';
 	Liferay.Portlet.Journal.PROXY.editorImpl = '<%= PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY) %>';
 	Liferay.Portlet.Journal.PROXY.instanceIdKey = '<%= instanceIdKey %>';
-	Liferay.Portlet.Journal.PROXY.pathThemeCss = '<%= URLCodec.encodeURL(themeDisplay.getPathThemeCss()) %>';
+	Liferay.Portlet.Journal.PROXY.pathThemeCss = '<%= HttpUtil.encodeURL(themeDisplay.getPathThemeCss()) %>';
 	Liferay.Portlet.Journal.PROXY.portletNamespace = '<portlet:namespace />';
 
 	new Liferay.Portlet.Journal(Liferay.Portlet.Journal.PROXY.portletNamespace, '<%= HtmlUtil.escape(articleId) %>');

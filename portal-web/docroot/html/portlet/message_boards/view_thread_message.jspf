@@ -413,7 +413,7 @@
 					%>
 
 							<div>
-								<img alt="<liferay-ui:message key="attachment" />" src="<%= themeDisplay.getPathMain() %>/message_boards/get_message_attachment?messageId=<%= message.getMessageId() %>&attachment=<%= URLCodec.encodeURL(fileName) %>" />
+								<img alt="<liferay-ui:message key="attachment" />" src="<%= themeDisplay.getPathMain() %>/message_boards/get_message_attachment?messageId=<%= message.getMessageId() %>&attachment=<%= HttpUtil.encodeURL(fileName) %>" />
 							</div>
 
 							<br />

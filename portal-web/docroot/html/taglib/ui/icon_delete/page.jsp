@@ -25,7 +25,7 @@ if (url.startsWith("javascript:")) {
 }
 
 if (url.startsWith(Http.HTTP_WITH_SLASH) || url.startsWith(Http.HTTPS_WITH_SLASH)) {
-	url = "submitForm(document.hrefFm, '" + URLCodec.encodeURL(url) + "');";
+	url = "submitForm(document.hrefFm, '" + HttpUtil.encodeURL(url) + "');";
 }
 
 if (url.startsWith("wsrp_rewrite?")) {

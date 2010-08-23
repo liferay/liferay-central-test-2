@@ -132,7 +132,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 			DLFolder folder = fileEntry.getFolder();
 
-			String rowHREF = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + scopeGroupId + StringPool.SLASH + folderId + StringPool.SLASH + URLCodec.encodeURL(HtmlUtil.unescape(fileEntry.getTitle()));
+			String rowHREF = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + scopeGroupId + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle()));
 
 			row.addText(folder.getName(), rowHREF);
 			row.addText(fileEntry.getTitle(), rowHREF);

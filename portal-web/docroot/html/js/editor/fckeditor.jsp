@@ -15,8 +15,8 @@
 %>
 
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.HttpUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.URLCodec" %>
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
 
 <%
@@ -71,7 +71,7 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 
 				var fckEditor = new FCKeditor("FCKeditor1");
 
-				fckEditor.Config["CustomConfigurationsPath"] = "<%= request.getContextPath() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_main_path=<%= URLCodec.encodeURL(mainPath) %>&doAsUserId=<%= URLCodec.encodeURL(doAsUserId) %>&cssPath=<%= URLCodec.encodeURL(cssPath) %>&cssClasses=<%= URLCodec.encodeURL(cssClasses) %>";
+				fckEditor.Config["CustomConfigurationsPath"] = "<%= request.getContextPath() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>";
 
 				fckEditor.BasePath = "fckeditor/";
 				fckEditor.Width = "100%";

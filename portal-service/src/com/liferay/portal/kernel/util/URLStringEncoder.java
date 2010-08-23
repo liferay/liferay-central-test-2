@@ -20,11 +20,11 @@ package com.liferay.portal.kernel.util;
 public class URLStringEncoder implements StringEncoder {
 
 	public String decode(String s) {
-		return URLCodec.decodeURL(s);
+		return HttpUtil.decodeURL(s);
 	}
 
 	public String encode(String s) {
-		return URLCodec.encodeURL(s);
+		return HttpUtil.encodeURL(s);
 	}
 
 }

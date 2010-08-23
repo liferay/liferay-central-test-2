@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MathUtil;
 import com.liferay.portal.kernel.util.NotificationThreadLocal;
@@ -35,7 +36,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
@@ -1498,7 +1498,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			portalURL + serviceContext.getPathMain() +
 				"/wiki/get_page_attachment?p_l_id=" + serviceContext.getPlid() +
 					"&nodeId=" + page.getNodeId() + "&title=" +
-						URLCodec.encodeURL(page.getTitle()) + "&fileName=";
+						HttpUtil.encodeURL(page.getTitle()) + "&fileName=";
 
 		String pageDiffs = StringPool.BLANK;
 
@@ -1527,7 +1527,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			pageURL =
 				layoutFullURL + Portal.FRIENDLY_URL_SEPARATOR + "wiki/" +
 					node.getNodeId() + StringPool.SLASH +
-						URLCodec.encodeURL(page.getTitle());
+						HttpUtil.encodeURL(page.getTitle());
 
 			if (previousVersionPage != null) {
 				StringBundler sb = new StringBundler(16);
@@ -1538,11 +1538,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				sb.append("&p_p_state=");
 				sb.append(WindowState.MAXIMIZED);
 				sb.append("&struts_action=");
-				sb.append(URLCodec.encodeURL("/wiki/compare_versions"));
+				sb.append(HttpUtil.encodeURL("/wiki/compare_versions"));
 				sb.append("&nodeId=");
 				sb.append(node.getNodeId());
 				sb.append("&title=");
-				sb.append(URLCodec.encodeURL(page.getTitle()));
+				sb.append(HttpUtil.encodeURL(page.getTitle()));
 				sb.append("&sourceVersion=");
 				sb.append(previousVersionPage.getVersion());
 				sb.append("&targetVersion=");
