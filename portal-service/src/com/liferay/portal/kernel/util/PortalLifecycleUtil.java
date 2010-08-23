@@ -48,19 +48,26 @@ public class PortalLifecycleUtil {
 	}
 
 	public static synchronized void register(PortalLifecycle portalLifecycle) {
-		register(portalLifecycle, false);
+		register(portalLifecycle, PortalLifecycle.METHOD_ALL);
 	}
 
 	public static synchronized void register(
-		PortalLifecycle portalLifecycle, boolean skipDestroy) {
-		if (_portalLifecyclesInit == null) {
-			portalLifecycle.portalInit();
-		}
-		else {
-			_portalLifecyclesInit.add(portalLifecycle);
+		PortalLifecycle portalLifecycle, int method) {
+
+		if ((method == PortalLifecycle.METHOD_ALL) ||
+			(method == PortalLifecycle.METHOD_INIT)) {
+
+			if (_portalLifecyclesInit == null) {
+				portalLifecycle.portalInit();
+			}
+			else {
+				_portalLifecyclesInit.add(portalLifecycle);
+			}
 		}
 
-		if (!skipDestroy) {
+		if ((method == PortalLifecycle.METHOD_ALL) ||
+			(method == PortalLifecycle.METHOD_DESTROY)) {
+
 			_portalLifecyclesDestroy.add(portalLifecycle);
 		}
 	}

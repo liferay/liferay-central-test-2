@@ -44,7 +44,7 @@ public class PortalSessionDestroyer extends BasePortalLifecycle {
 	public PortalSessionDestroyer(HttpSessionEvent httpSessionEvent) {
 		_httpSessionEvent = httpSessionEvent;
 
-		registerPortalLifecycle(true);
+		registerPortalLifecycle(METHOD_INIT);
 	}
 
 	protected void doPortalDestroy() {

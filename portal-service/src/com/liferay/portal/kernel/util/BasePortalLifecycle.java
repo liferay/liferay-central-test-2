@@ -50,8 +50,8 @@ public abstract class BasePortalLifecycle implements PortalLifecycle {
 		PortalLifecycleUtil.register(this);
 	}
 
-	public void registerPortalLifecycle(boolean skipDestroy) {
-		PortalLifecycleUtil.register(this, skipDestroy);
+	public void registerPortalLifecycle(int method) {
+		PortalLifecycleUtil.register(this, method);
 	}
 
 	protected abstract void doPortalDestroy() throws Exception;
