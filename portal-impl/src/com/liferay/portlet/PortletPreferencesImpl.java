@@ -314,6 +314,7 @@ public class PortletPreferencesImpl
 			if (_originalPreferences == Collections.EMPTY_MAP) {
 				_originalPreferences = new HashMap<String, Preference>();
 			}
+
 			return _originalPreferences;
 		}
 		else {
