@@ -22,6 +22,7 @@ import java.util.Properties;
 
 /**
  * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
 public class PropertiesUtilTest extends TestCase {
 

@@ -45,6 +45,7 @@ import java.util.Properties;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class PropertiesUtil {
 
