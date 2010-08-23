@@ -64,6 +64,7 @@ public class MethodTargetClassKey {
 			catch (Throwable t) {
 			}
 		}
+
 		return _targetMethod;
 	}
 
