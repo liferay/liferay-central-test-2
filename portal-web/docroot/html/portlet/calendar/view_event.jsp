@@ -242,7 +242,5 @@ request.setAttribute("view_event.jsp-event", event);
 PortalUtil.setPageSubtitle(event.getTitle(), request);
 PortalUtil.setPageDescription(event.getDescription(), request);
 
-String eventTitle = HtmlUtil.unescape(event.getTitle());
-
-PortalUtil.addPortletBreadcrumbEntry(request, eventTitle, currentURL);
+PortalUtil.addPortletBreadcrumbEntry(request, HtmlUtil.unescape(event.getTitle()), currentURL);
 %>
