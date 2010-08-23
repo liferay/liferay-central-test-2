@@ -27,14 +27,6 @@ import com.liferay.portal.util.PropsValues;
  */
 public class BatchSessionImpl implements BatchSession {
 
-	public boolean isEnabled() {
-		return _enabled.get();
-	}
-
-	public void setEnabled(boolean enabled) {
-		_enabled.set(enabled);
-	}
-
 	public void delete(Session session, BaseModel<?> model)
 		throws ORMException {
 
@@ -63,6 +55,14 @@ public class BatchSessionImpl implements BatchSession {
 		}
 
 		_counter.set(_counter.get() + 1);
+	}
+
+	public boolean isEnabled() {
+		return _enabled.get();
+	}
+
+	public void setEnabled(boolean enabled) {
+		_enabled.set(enabled);
 	}
 
 	public void update(Session session, BaseModel<?> model, boolean merge)
