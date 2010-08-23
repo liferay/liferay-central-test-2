@@ -198,7 +198,7 @@ public class HttpImpl implements Http {
 		return decodeURL(url, false);
 	}
 
-	public String decodeURL(String url, boolean unescapeSpace) {
+	public String decodeURL(String url, boolean unescapeSpaces) {
 		if (url == null) {
 			return null;
 		}
@@ -210,7 +210,7 @@ public class HttpImpl implements Http {
 		try {
 			url = URLDecoder.decode(url, StringPool.UTF8);
 
-			if (unescapeSpace) {
+			if (unescapeSpaces) {
 				url = StringUtil.replace(url, "%20", StringPool.PLUS);
 			}
 
