@@ -38,21 +38,6 @@ import com.liferay.portal.model.BaseModel;
 public interface BatchSession {
 
 	/**
-	 * Determines if update batching is enabled
-	 *
-	 * @return <code>true</code> if update batching is enabled;
-	 *		   <code>false</code> otherwise
-	 */
-	public boolean isEnabled();
-
-	/**
-	 * Sets whether update batching is enabled.
-	 *
-	 * @param enabled whether update batching is enabled.
-	 */
-	public void setEnabled(boolean enabled);
-
-	/**
 	 * Deletes the model instance in the database, and possibly flushes the
 	 * session.
 	 *
@@ -82,6 +67,21 @@ public interface BatchSession {
 	 * @throws ORMException if a database exception occurred
 	 */
 	public void delete(Session session, BaseModel<?> model) throws ORMException;
+
+	/**
+	 * Determines if update batching is enabled
+	 *
+	 * @return <code>true</code> if update batching is enabled;
+	 *		   <code>false</code> otherwise
+	 */
+	public boolean isEnabled();
+
+	/**
+	 * Sets whether update batching is enabled.
+	 *
+	 * @param enabled whether update batching is enabled.
+	 */
+	public void setEnabled(boolean enabled);
 
 	/**
 	 * Updates the model instance in the database or adds it if it does not yet
