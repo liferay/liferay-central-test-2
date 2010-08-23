@@ -25,18 +25,16 @@ import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.SystemProperties;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 
 import java.net.InetAddress;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -199,28 +197,7 @@ public class HttpImpl implements Http {
 	}
 
 	public String decodeURL(String url, boolean unescapeSpaces) {
-		if (url == null) {
-			return null;
-		}
-
-		if (url.length() == 0) {
-			return StringPool.BLANK;
-		}
-
-		try {
-			url = URLDecoder.decode(url, StringPool.UTF8);
-
-			if (unescapeSpaces) {
-				url = StringUtil.replace(url, "%20", StringPool.PLUS);
-			}
-
-			return url;
-		}
-		catch (UnsupportedEncodingException uee) {
-			_log.error(uee, uee);
-
-			return StringPool.BLANK;
-		}
+		return URLCodec.decodeURL(url, StringPool.UTF8, unescapeSpaces);
 	}
 
 	public void destroy() {
@@ -240,28 +217,7 @@ public class HttpImpl implements Http {
 	}
 
 	public String encodeURL(String url, boolean escapeSpaces) {
-		if (url == null) {
-			return null;
-		}
-
-		if (url.length() == 0) {
-			return StringPool.BLANK;
-		}
-
-		try {
-			url = URLEncoder.encode(url, StringPool.UTF8);
-
-			if (escapeSpaces) {
-				url = StringUtil.replace(url, StringPool.PLUS, "%20");
-			}
-
-			return url;
-		}
-		catch (UnsupportedEncodingException uee) {
-			_log.error(uee, uee);
-
-			return StringPool.BLANK;
-		}
+		return URLCodec.encodeURL(url, StringPool.UTF8, escapeSpaces);
 	}
 
 	public String fixPath(String path) {
