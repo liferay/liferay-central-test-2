@@ -24,56 +24,55 @@ import java.net.URLEncoder;
 public class URLCodecTest extends TestCase {
 
 	public void testDecodeURL() throws Exception {
-		for(int i = 0; i < _rawURLStrings.length; i++) {
+		for (int i = 0; i < _RAW_URLS.length; i++) {
 			String result = URLCodec.decodeURL(
-				_encodedURLStrings[i], StringPool.UTF8);
-			assertEquals(_rawURLStrings[i], result);
+				_ENCODED_URLS[i], StringPool.UTF8, false);
+
+			assertEquals(_RAW_URLS[i], result);
+
 			result = URLCodec.decodeURL(
-				_escapeSpacesEncodeURLStrings[i], StringPool.UTF8);
-			assertEquals(_rawURLStrings[i], result);
+				_ESCAPE_SPACES_ENCODED_URLS[i], StringPool.UTF8, true);
+
+			assertEquals(_RAW_URLS[i], result);
 		}
 	}
 
 	public void testEncodeURL() throws Exception {
-		for(int i = 0; i < _rawURLStrings.length; i++) {
+		for (int i = 0; i < _RAW_URLS.length; i++) {
 			String result = URLCodec.encodeURL(
-				_rawURLStrings[i], StringPool.UTF8, false);
-			assertTrue(_encodedURLStrings[i].equalsIgnoreCase(result));
-			result = URLCodec.encodeURL(
-				_rawURLStrings[i], StringPool.UTF8, true);
+				_RAW_URLS[i], StringPool.UTF8, false);
+
+			assertTrue(_ENCODED_URLS[i].equalsIgnoreCase(result));
+
+			result = URLCodec.encodeURL(_RAW_URLS[i], StringPool.UTF8, true);
+
 			assertTrue(
-				_escapeSpacesEncodeURLStrings[i].equalsIgnoreCase(result));
+				_ESCAPE_SPACES_ENCODED_URLS[i].equalsIgnoreCase(result));
 		}
 	}
 
-	private static final String[] _rawURLStrings = {
-		"abcdefghijklmnopqrstuvwxyz",
-		"ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-		"0123456789",
-		".-*_",
-		" ",
-		"~`!@#$%^&()+={[}]|\\:;\"'<,>?/",
-		"中文测试",
+	private static final String[] _ENCODED_URLS = new String[8];
+
+	private static final String[] _ESCAPE_SPACES_ENCODED_URLS = new String[8];
+
+	private static final String[] _RAW_URLS = {
+		"abcdefghijklmnopqrstuvwxyz", "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+		"0123456789", ".-*_", " ", "~`!@#$%^&()+={[}]|\\:;\"'<,>?/", "中文测试",
 		"/abc/def"
 	};
 
-	private static final String[] _encodedURLStrings =
-		new String[_rawURLStrings.length];
-
-	private static final String[] _escapeSpacesEncodeURLStrings =
-		new String[_rawURLStrings.length];
-
 	static {
 		try {
-			for(int i = 0; i < _rawURLStrings.length; i++) {
-				_encodedURLStrings[i] = URLEncoder.encode(
-					_rawURLStrings[i], StringPool.UTF8);
-				_escapeSpacesEncodeURLStrings[i] = StringUtil.replace(
-					_encodedURLStrings[i], StringPool.PLUS, "%20");
+			for (int i = 0; i < _RAW_URLS.length; i++) {
+				_ENCODED_URLS[i] = URLEncoder.encode(
+					_RAW_URLS[i], StringPool.UTF8);
+
+				_ESCAPE_SPACES_ENCODED_URLS[i] = StringUtil.replace(
+					_ENCODED_URLS[i], StringPool.PLUS, "%20");
 			}
 		}
-		catch(Throwable t) {
-			throw new ExceptionInInitializerError(t);
+		catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
