@@ -23,58 +23,75 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 /**
  * @author Shuyang Zhou
  */
 public class PropertyResourceBundle extends ResourceBundle {
 
-	public PropertyResourceBundle(String s, String charsetName)
+	@SuppressWarnings("rawtypes")
+	public PropertyResourceBundle(String string, String charsetName)
 		throws IOException {
-		lookup = new HashMap(PropertiesUtil.load(s, charsetName));
+
+		_map = new HashMap(PropertiesUtil.load(string, charsetName));
 	}
 
-	public PropertyResourceBundle(InputStream stream, String charsetName)
+	@SuppressWarnings("rawtypes")
+	public PropertyResourceBundle(InputStream inputStream, String charsetName)
 		throws IOException {
-		lookup = new HashMap(PropertiesUtil.load(stream, charsetName));
+
+		_map = new HashMap(PropertiesUtil.load(inputStream, charsetName));
 	}
 
 	public Object handleGetObject(String key) {
 		if (key == null) {
 			throw new NullPointerException();
 		}
-		return lookup.get(key);
+
+		return _map.get(key);
 	}
 
 	public Enumeration<String> getKeys() {
-		final Iterator<String> iterator = lookup.keySet().iterator();
+		final Set<String> keys = _map.keySet();
+
 		final Enumeration<String> parentKeys = parent.getKeys();
 
-		return new Enumeration<String>() {
+		final Iterator<String> itr = keys.iterator();
 
+		return new Enumeration<String>() {
 			String next = null;
 
 			public boolean hasMoreElements() {
 				if (next == null) {
-					if (iterator.hasNext()) {
-						next = iterator.next();
+					if (itr.hasNext()) {
+						next = itr.next();
 					}
 					else if (parentKeys != null) {
-						while (next == null && parentKeys.hasMoreElements()) {
+						while ((next == null) && parentKeys.hasMoreElements()) {
 							next = parentKeys.nextElement();
-							if (lookup.keySet().contains(next)) {
+
+							if (keys.contains(next)) {
 								next = null;
 							}
 						}
 					}
 				}
-				return next != null;
+
+				if (next != null) {
+					return true;
+				}
+				else {
+					return false;
+				}
 			}
 
 			public String nextElement() {
 				if (hasMoreElements()) {
 					String result = next;
+
 					next = null;
+
 					return result;
 				}
 				else {
@@ -84,6 +101,6 @@ public class PropertyResourceBundle extends ResourceBundle {
 		};
 	}
 
-	private Map lookup;
+	private Map<String, String> _map;
 
 }
