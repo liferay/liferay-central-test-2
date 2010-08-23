@@ -19,6 +19,12 @@ package com.liferay.portal.kernel.util;
  */
 public interface PortalLifecycle {
 
+	public static final int METHOD_ALL = 0;
+
+	public static final int METHOD_DESTROY = 1;
+
+	public static final int METHOD_INIT = 2;
+
 	public void portalDestroy();
 
 	public void portalInit();
