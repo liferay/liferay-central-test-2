@@ -26,54 +26,52 @@ import java.util.Properties;
 public class PropertiesUtilTest extends TestCase {
 
 	public void testLoad() throws Exception {
+		Properties properties = PropertiesUtil.load(_PROPERTIES_STRING);
 
-		Properties properties = PropertiesUtil.load(propertiesString);
-
-		for(String[] property : propertyArray) {
+		for (String[] property : _PROPERTIES_ARRAY) {
 			assertEquals(property[1], properties.get(property[0]));
 		}
 	}
 
 	public void testLoadJDK5() throws Exception {
+		byte[] utf8Encoded = _PROPERTIES_STRING.getBytes(StringPool.UTF8);
 
-		byte[] utf8Encoded = propertiesString.getBytes(StringPool.UTF8);
 		Properties properties = PropertiesUtil.loadJDK5(
 			new UnsyncByteArrayInputStream(utf8Encoded), StringPool.UTF8);
 
-		for(String[] property : propertyArray) {
+		for (String[] property : _PROPERTIES_ARRAY) {
 			assertEquals(property[1], properties.get(property[0]));
 		}
 	}
 
 	public void testLoadJDK6() throws Exception {
-
 		if (JavaProps.isJDK6()) {
 			Properties properties = PropertiesUtil.loadJDK6(
-				new UnsyncStringReader(propertiesString));
+				new UnsyncStringReader(_PROPERTIES_STRING));
 
-			for(String[] property : propertyArray) {
+			for (String[] property : _PROPERTIES_ARRAY) {
 				assertEquals(property[1], properties.get(property[0]));
 			}
 		}
 	}
 
-	private final static String[][] propertyArray = {
-		{"testKey", "testValue"},
-		{"测试键", "测试值"}
+	private static final String[][] _PROPERTIES_ARRAY = {
+		{"testKey", "testValue"}, {"测试键", "测试值"}
 	};
 
-	private static String propertiesString;
+	private static final String _PROPERTIES_STRING;
 
 	static {
-		StringBundler sb = new StringBundler(propertyArray.length * 4);
+		StringBundler sb = new StringBundler(_PROPERTIES_ARRAY.length * 4);
 
-		for(String[] property : propertyArray) {
+		for (String[] property : _PROPERTIES_ARRAY) {
 			sb.append(property[0]);
 			sb.append(StringPool.EQUAL);
 			sb.append(property[1]);
 			sb.append(StringPool.NEW_LINE);
 		}
-		propertiesString = sb.toString();
+
+		_PROPERTIES_STRING = sb.toString();
 	}
 
 }

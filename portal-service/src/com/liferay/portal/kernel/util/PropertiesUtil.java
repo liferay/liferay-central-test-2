@@ -17,6 +17,8 @@ package com.liferay.portal.kernel.util;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.nio.charset.CharsetDecoderUtil;
 import com.liferay.portal.kernel.nio.charset.CharsetEncoderUtil;
 
@@ -191,20 +193,24 @@ public class PropertiesUtil {
 
 	public static Properties load(String s, String charsetName)
 		throws IOException {
+
 		if (JavaProps.isJDK6()) {
 			return loadJDK6(new UnsyncStringReader(s));
 		}
 		else {
 			ByteBuffer byteBuffer = CharsetEncoderUtil.encode(charsetName, s);
+
 			InputStream is = new UnsyncByteArrayInputStream(
 				byteBuffer.array(), byteBuffer.arrayOffset(),
 				byteBuffer.limit());
+
 			return loadJDK5(is, charsetName);
 		}
 	}
 
 	public static Properties load(InputStream is, String charsetName)
 		throws IOException {
+
 		if (JavaProps.isJDK6()) {
 			return loadJDK6(new InputStreamReader(is, charsetName));
 		}
@@ -214,20 +220,23 @@ public class PropertiesUtil {
 	}
 
 	public static Properties loadJDK5(InputStream is, String charsetName)
-		throws IOException{
+		throws IOException {
+
 		Properties iso8859_1Properties = new Properties();
+
 		iso8859_1Properties.load(is);
 
 		Properties properties = new Properties();
 
-		CharsetEncoder charsetEncoder =
-			CharsetEncoderUtil.getCharsetEncoder(StringPool.ISO_8859_1);
-		CharsetDecoder charsetDecoder =
-			CharsetDecoderUtil.getCharsetDecoder(charsetName);
+		CharsetEncoder charsetEncoder = CharsetEncoderUtil.getCharsetEncoder(
+			StringPool.ISO_8859_1);
 
-		for(Map.Entry<Object, Object> entry : iso8859_1Properties.entrySet()) {
-			String key = (String) entry.getKey();
-			String value = (String) entry.getValue();
+		CharsetDecoder charsetDecoder = CharsetDecoderUtil.getCharsetDecoder(
+			charsetName);
+
+		for (Map.Entry<Object, Object> entry : iso8859_1Properties.entrySet()) {
+			String key = (String)entry.getKey();
+			String value = (String)entry.getValue();
 
 			key = charsetDecoder.decode(
 				charsetEncoder.encode(CharBuffer.wrap(key))).toString();
@@ -243,16 +252,20 @@ public class PropertiesUtil {
 	public static Properties loadJDK6(Reader reader) throws IOException {
 		try {
 			Properties properties = new Properties();
+
 			_jdk6LoadMethod.invoke(properties, reader);
+
 			return properties;
 		}
 		catch (Exception e) {
-			if (e.getCause() instanceof IOException) {
-				throw (IOException)e.getCause();
+			Throwable cause = e.getCause();
+
+			if (cause instanceof IOException) {
+				throw (IOException)cause;
 			}
+
 			throw new IllegalStateException(
-				"Fail to invoke java.util.Properties.load(Reader reader) "
-				+ "on JDK6", e);
+				"Failed to invoke java.util.Properties.load(Reader reader)", e);
 		}
 	}
 
@@ -323,15 +336,18 @@ public class PropertiesUtil {
 		}
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(PropertiesUtil.class);
+
 	private static Method _jdk6LoadMethod;
+
 	static {
 		if (JavaProps.isJDK6()) {
 			try {
 				_jdk6LoadMethod = ReflectionUtil.getDeclaredMethod(
 					Properties.class, "load", Reader.class);
 			}
-			catch (Throwable t) {
-				throw new ExceptionInInitializerError(t);
+			catch (Exception e) {
+				_log.error(e, e);
 			}
 		}
 	}
