@@ -20,6 +20,7 @@ import java.net.URLEncoder;
 
 /**
  * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
 public class URLCodecTest extends TestCase {
 

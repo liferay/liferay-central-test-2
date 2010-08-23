@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class UnicodeFormatter {
 

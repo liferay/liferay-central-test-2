@@ -29,6 +29,7 @@ import java.util.BitSet;
 
 /**
  * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
 public class URLCodec {
 
