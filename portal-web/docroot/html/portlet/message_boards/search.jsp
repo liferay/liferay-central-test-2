@@ -23,22 +23,16 @@ long breadcrumbsCategoryId = ParamUtil.getLong(request, "breadcrumbsCategoryId")
 long breadcrumbsMessageId = ParamUtil.getLong(request, "breadcrumbsMessageId");
 
 long searchCategoryId = ParamUtil.getLong(request, "searchCategoryId");
-long searchCategoryIds = ParamUtil.getLong(request, "searchCategoryIds");
 
 long[] categoryIdsArray = null;
 
-if (searchCategoryId > 0) {
-	categoryIdsArray = new long[] {searchCategoryId};
-}
-else {
-	List categoryIds = new ArrayList();
+List categoryIds = new ArrayList();
 
-	categoryIds.add(new Long(searchCategoryIds));
+categoryIds.add(new Long(searchCategoryId));
 
-	MBCategoryServiceUtil.getSubcategoryIds(categoryIds, scopeGroupId, searchCategoryIds);
+MBCategoryServiceUtil.getSubcategoryIds(categoryIds, scopeGroupId, searchCategoryId);
 
-	categoryIdsArray = StringUtil.split(StringUtil.merge(categoryIds), 0L);
-}
+categoryIdsArray = StringUtil.split(StringUtil.merge(categoryIds), 0L);
 
 long threadId = ParamUtil.getLong(request, "threadId");
 String keywords = ParamUtil.getString(request, "keywords");
@@ -54,7 +48,6 @@ String keywords = ParamUtil.getString(request, "keywords");
 	<aui:input name="breadcrumbsCategoryId" type="hidden" value="<%= breadcrumbsCategoryId %>" />
 	<aui:input name="breadcrumbsMessageId" type="hidden" value="<%= breadcrumbsMessageId %>" />
 	<aui:input name="searchCategoryId" type="hidden" value="<%= searchCategoryId %>" />
-	<aui:input name="searchCategoryIds" type="hidden" value="<%= searchCategoryIds %>" />
 	<aui:input name="threadId" type="hidden" value="<%= threadId %>" />
 
 	<liferay-ui:header
@@ -70,7 +63,6 @@ String keywords = ParamUtil.getString(request, "keywords");
 	portletURL.setParameter("breadcrumbsCategoryId", String.valueOf(breadcrumbsCategoryId));
 	portletURL.setParameter("breadcrumbsMessageId", String.valueOf(breadcrumbsMessageId));
 	portletURL.setParameter("searchCategoryId", String.valueOf(searchCategoryId));
-	portletURL.setParameter("searchCategoryIds", String.valueOf(searchCategoryIds));
 	portletURL.setParameter("threadId", String.valueOf(threadId));
 	portletURL.setParameter("keywords", keywords);
 
