@@ -50,12 +50,13 @@ public class AddWikiPageNameBackSlashTest extends BaseTestCase {
 		selenium.type("_36_title", RuntimeVariables.replace("\\Test"));
 		selenium.type("_36_content",
 			RuntimeVariables.replace("This is a wiki page test."));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter a valid title."));
 		assertTrue(selenium.isTextPresent(
-				"This page does not exist yet and the title is not valid."));
+				"This page does not exist yet. Use the form below to create it. "));
 	}
 }

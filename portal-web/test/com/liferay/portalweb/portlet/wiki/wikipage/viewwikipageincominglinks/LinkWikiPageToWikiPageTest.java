@@ -84,7 +84,7 @@ public class LinkWikiPageToWikiPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Wiki2 Page2 Test2", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
+		assertTrue(selenium.isPartialText("//div[2]/h1/span",
 				"Wiki2 Page2 Test2"));
 	}
 }

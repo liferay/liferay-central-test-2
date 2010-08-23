@@ -49,14 +49,16 @@ public class NextCategoryMessageTest extends BaseTestCase {
 		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("T\u00e9st3 M\u00e9ssag\u00e93"),
-			selenium.getText("//form/div[2]"));
-		selenium.clickAt("//form/div[1]/div[1]/a", RuntimeVariables.replace(""));
+			selenium.getText("//div[1]/h1/span"));
+		selenium.clickAt("//form/div[2]/div[1]/a",
+			RuntimeVariables.replace("Next"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("T\u00e9st2 M\u00e9ssag\u00e92"),
-			selenium.getText("//form/div[2]"));
-		selenium.clickAt("//div[1]/div[1]/a[2]", RuntimeVariables.replace(""));
+			selenium.getText("//div[1]/h1/span"));
+		selenium.clickAt("//form/div[2]/div[1]/a[2]",
+			RuntimeVariables.replace("Next"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("T\u00e9st1 M\u00e9ssag\u00e91"),
-			selenium.getText("//form/div[2]"));
+			selenium.getText("//div[1]/h1/span"));
 	}
 }

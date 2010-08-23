@@ -51,7 +51,7 @@ public class EditFrontPageCommentBodyTest extends BaseTestCase {
 				"This is a wiki page test comment. Edited."));
 		selenium.keyPress("_36_editReplyBody1", RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_36_editReplyBody1", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("//input[@value='Update']",
+		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(

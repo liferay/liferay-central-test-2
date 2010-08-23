@@ -59,10 +59,10 @@ public class AddFrontPageChildPage3Test extends BaseTestCase {
 		selenium.clickAt("link=Front3 Page3 Child3 Page3 Test3",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
+		assertTrue(selenium.isPartialText("//div[2]/h1/span",
 				"Front3 Page3 Child3 Page3 Test3"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a front3 page3 child3 page3 test3."),
-			selenium.getText("//div[@class='wiki-body']"));
+			selenium.getText("//div/div[5]/div"));
 	}
 }

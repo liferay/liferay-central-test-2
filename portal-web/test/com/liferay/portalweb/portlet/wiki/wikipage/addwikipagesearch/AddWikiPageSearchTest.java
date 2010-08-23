@@ -63,7 +63,7 @@ public class AddWikiPageSearchTest extends BaseTestCase {
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertTrue(selenium.isPartialText("//div/h1", "Wiki Page Name Search"));
 		assertEquals(RuntimeVariables.replace("Wiki Page Content Search"),
-			selenium.getText("//section/div/div/div/div[4]/div"));
+			selenium.getText("//div[6]/div"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -96,6 +96,6 @@ public class AddWikiPageSearchTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isPartialText("//div/h1", "Wiki Page Name Search"));
 		assertEquals(RuntimeVariables.replace("Wiki Page Content Search"),
-			selenium.getText("//div/div/div/div[3]/div"));
+			selenium.getText("//div[5]/div"));
 	}
 }

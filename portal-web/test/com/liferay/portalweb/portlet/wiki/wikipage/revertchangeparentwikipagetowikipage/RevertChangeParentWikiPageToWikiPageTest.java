@@ -57,7 +57,7 @@ public class RevertChangeParentWikiPageToWikiPageTest extends BaseTestCase {
 			selenium.getText(
 				"//ul[@class='breadcrumbs lfr-component']/li[4]/span/a"));
 		assertEquals(RuntimeVariables.replace("This is a wiki1 page1 test1."),
-			selenium.getText("//div[@class='wiki-body']"));
+			selenium.getText("//div/div[5]/div"));
 		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=History", RuntimeVariables.replace(""));
@@ -123,6 +123,6 @@ public class RevertChangeParentWikiPageToWikiPageTest extends BaseTestCase {
 			selenium.getText(
 				"//ul[@class='breadcrumbs lfr-component']/li[3]/span/a"));
 		assertEquals(RuntimeVariables.replace("This is a wiki1 page1 test1."),
-			selenium.getText("//div[@class='wiki-body']"));
+			selenium.getText("//div/div[5]/div"));
 	}
 }

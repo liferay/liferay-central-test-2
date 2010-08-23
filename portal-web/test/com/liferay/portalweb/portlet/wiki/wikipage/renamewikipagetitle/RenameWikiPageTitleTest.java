@@ -46,9 +46,8 @@ public class RenameWikiPageTitleTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Wiki Page Test", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
-				"Wiki Page Test"));
-		assertFalse(selenium.isPartialText("//h1[@class='page-title']",
+		assertTrue(selenium.isPartialText("//div[2]/h1/span", "Wiki Page Test"));
+		assertFalse(selenium.isPartialText("//div[2]/h1/span",
 				"Wiki Page Test Renamed"));
 		assertFalse(selenium.isTextPresent("(Redirected from Wiki Page Test)"));
 		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
@@ -60,12 +59,12 @@ public class RenameWikiPageTitleTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Rename']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
+		assertTrue(selenium.isPartialText("//div[2]/h1/span",
 				"Wiki Page Test Renamed"));
 		assertEquals(RuntimeVariables.replace(
 				"(Redirected from Wiki Page Test)"),
 			selenium.getText("//div[@class='page-redirect']"));
 		assertNotEquals(RuntimeVariables.replace("Wiki Page Test"),
-			selenium.getText("//h1[@class='page-title']"));
+			selenium.getText("//div[2]/h1/span"));
 	}
 }

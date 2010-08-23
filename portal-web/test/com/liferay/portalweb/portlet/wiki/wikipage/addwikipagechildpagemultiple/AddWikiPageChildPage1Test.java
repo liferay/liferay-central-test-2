@@ -63,10 +63,10 @@ public class AddWikiPageChildPage1Test extends BaseTestCase {
 		selenium.clickAt("link=Front1 Page1 Child1 Page1 Test1",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
+		assertTrue(selenium.isPartialText("//div[2]/h1/span",
 				"Front1 Page1 Child1 Page1 Test1"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a front1 page1 child1 page1 test1."),
-			selenium.getText("//div[@class='wiki-body']"));
+			selenium.getText("//div/div[5]/div"));
 	}
 }

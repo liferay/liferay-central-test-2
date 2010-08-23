@@ -44,9 +44,9 @@ public class ViewWikiPageAllPagesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Wiki Page Test"),
-			selenium.getText("//tr[3]/td[1]/a"));
 		assertEquals(RuntimeVariables.replace("FrontPage"),
+			selenium.getText("//tr[3]/td[1]/a"));
+		assertEquals(RuntimeVariables.replace("Wiki Page Test"),
 			selenium.getText("//tr[4]/td[1]/a"));
 	}
 }

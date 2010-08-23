@@ -85,7 +85,6 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 				assertTrue(selenium.isTextPresent("Test Localized Structure"));
 				assertTrue(selenium.isElementPresent(
 						"link=Test Localized Template"));
-				selenium.click("//input[@value='Edit']");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -93,28 +92,9 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("//input[@value='Stop Editing']")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(
-					"//ul[@id='_15_structureTree']/li[1]/span[2]/div/div[4]/input");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (RuntimeVariables.replace("page-name")
+						if (RuntimeVariables.replace("")
 												.equals(selenium.getValue(
-										"_15_fieldLabel"))) {
+										"page-name"))) {
 							break;
 						}
 					}
@@ -130,7 +110,8 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("_15_localizedCheckbox")) {
+						if (selenium.isVisible(
+									"//span[2]/div/span/span/span/input[2]")) {
 							break;
 						}
 					}
@@ -141,7 +122,7 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 				}
 
 				boolean localized1Checked = selenium.isChecked(
-						"_15_localizedCheckbox");
+						"//span[2]/div/span/span/span/input[2]");
 
 				if (localized1Checked) {
 					label = 2;
@@ -149,16 +130,10 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("_15_localizedCheckbox",
+				selenium.clickAt("//span[2]/div/span/span/span/input[2]",
 					RuntimeVariables.replace(""));
 
 			case 2:
-				selenium.clickAt("//input[@value='Save']",
-					RuntimeVariables.replace(""));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
-				selenium.click(
-					"//ul[@id='_15_structureTree']/li[2]/span[2]/div/div[4]/input[1]");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -166,9 +141,9 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("page-description")
+						if (RuntimeVariables.replace("")
 												.equals(selenium.getValue(
-										"_15_fieldLabel"))) {
+										"page-description"))) {
 							break;
 						}
 					}
@@ -184,7 +159,8 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("_15_localizedCheckbox")) {
+						if (selenium.isVisible(
+									"//li[2]/span[2]/div/span/span/span/input[2]")) {
 							break;
 						}
 					}
@@ -195,7 +171,7 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 				}
 
 				boolean localized2Checked = selenium.isChecked(
-						"_15_localizedCheckbox");
+						"//li[2]/span[2]/div/span/span/span/input[2]");
 
 				if (localized2Checked) {
 					label = 3;
@@ -203,33 +179,10 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("_15_localizedCheckbox",
+				selenium.clickAt("//li[2]/span[2]/div/span/span/span/input[2]",
 					RuntimeVariables.replace(""));
 
 			case 3:
-				selenium.clickAt("//input[@value='Save']",
-					RuntimeVariables.replace(""));
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
-				selenium.click("//input[@value='Stop Editing']");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isVisible("//input[@value='Edit']")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				Thread.sleep(5000);
 				selenium.type("page-name",
 					RuntimeVariables.replace("Hello World Page Name"));
 				selenium.type("page-description",
@@ -243,7 +196,8 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("_15_saveArticleBtn")) {
+						if (selenium.isVisible(
+									"//input[@value='Save as Draft']")) {
 							break;
 						}
 					}
@@ -253,34 +207,14 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("_15_saveArticleBtn",
+				selenium.clickAt("//input[@value='Save as Draft']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isTextPresent(
-									"Your request processed successfully.")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
-				Thread.sleep(5000);
+				assertEquals(RuntimeVariables.replace(
+						"Your request processed successfully."),
+					selenium.getText("//section/div/div/div/div"));
 				selenium.select("_15_languageId",
 					RuntimeVariables.replace("label=Chinese (China)"));
-				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to switch the language view[\\s\\S] Changes made to this language will not be saved.$"));
 				Thread.sleep(5000);
 				assertEquals("Chinese (China)",
 					selenium.getSelectedLabel("_15_languageId"));
@@ -293,6 +227,7 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 						"\u4e16\u754c\u60a8\u597d Page Description"));
 				selenium.clickAt("//input[@value='Publish']",
 					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {

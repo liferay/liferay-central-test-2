@@ -54,13 +54,13 @@ public class AddFrontPageTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertEquals(RuntimeVariables.replace("Test Wiki Article"),
-			selenium.getText("//div[@class='wiki-body']/h2"));
+			selenium.getText("//div/div[5]/div/h2"));
 		assertEquals(RuntimeVariables.replace("this is italics"),
 			selenium.getText("//i"));
 		assertEquals(RuntimeVariables.replace("bold"), selenium.getText("//b"));
 		assertTrue(selenium.isElementPresent("link=Link to website"));
 		assertEquals(RuntimeVariables.replace(
 				"this is a list item this is a sub list item"),
-			selenium.getText("//div[@class='wiki-body']/ul/li"));
+			selenium.getText("//div/div[5]/div/ul/li"));
 	}
 }

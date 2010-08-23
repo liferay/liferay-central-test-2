@@ -58,10 +58,10 @@ public class AddFrontPageChildPageTest extends BaseTestCase {
 		selenium.clickAt("link=Front Page Child Page Test",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
+		assertTrue(selenium.isPartialText("//div[2]/h1/span",
 				"Front Page Child Page Test"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a front page child page test."),
-			selenium.getText("//div[@class='wiki-body']"));
+			selenium.getText("//div/div[5]/div"));
 	}
 }

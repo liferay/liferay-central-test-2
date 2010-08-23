@@ -82,7 +82,7 @@ public class EditCategoryMessageSubjectTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"T\u00e9st M\u00e9ssag\u00e9 Edit\u00e9d"),
-			selenium.getText("//form/div[2]"));
+			selenium.getText("//div[1]/h1/span"));
 		assertEquals(RuntimeVariables.replace(
 				"T\u00e9st M\u00e9ssag\u00e9 Edit\u00e9d"),
 			selenium.getText("//a/strong"));

@@ -63,7 +63,7 @@ public class AddSubcategoryMessage3Test extends BaseTestCase {
 		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("T\u00e9st3 M\u00e9ssag\u00e93"),
-			selenium.getText("//form/div[2]"));
+			selenium.getText("//div[1]/h1/span"));
 		assertEquals(RuntimeVariables.replace("T\u00e9st3 M\u00e9ssag\u00e93"),
 			selenium.getText("//a/strong"));
 		assertEquals(RuntimeVariables.replace(

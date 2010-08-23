@@ -67,6 +67,25 @@ public class ViewWCDWebContentLocalizedTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"link=Web Content Display Test Page"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Hello World Page Name")
+										.equals(selenium.getText(
+								"//td[@class='page-name']"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Hello World Page Name"),
 			selenium.getText("//td[@class='page-name']"));
 		assertEquals(RuntimeVariables.replace("Hello World Page Description"),

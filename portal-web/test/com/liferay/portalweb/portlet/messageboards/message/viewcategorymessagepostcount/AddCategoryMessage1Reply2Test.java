@@ -59,7 +59,7 @@ public class AddCategoryMessage1Reply2Test extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("T\u00e9st1 M\u00e9ssag\u00e91"),
-			selenium.getText("//form/div[2]"));
+			selenium.getText("//div[1]/h1/span"));
 		assertEquals(RuntimeVariables.replace(
 				"RE: T\u00e9st1 M\u00e9ssag\u00e91"),
 			selenium.getText("//a/strong"));

@@ -45,7 +45,7 @@ public class AddWikiPageName255CharacterChildPage1Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Test||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||",
+		selenium.clickAt("link=lllllllll1lllllllll2lllllllll3lllllllll4lllllllll5lllllllll6lllllllll7lllllllll8lllllllll9llllllll10llllllll11llllllll12llllllll13llllllll14llllllll15llllllll16llllllll17llllllll18llllllll19llllllll20llllllll21llllllll22llllllll23llllllll24llllllll25llll",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
@@ -65,10 +65,10 @@ public class AddWikiPageName255CharacterChildPage1Test extends BaseTestCase {
 		selenium.clickAt("link=Front1 Page1 Child1 Page1 Test1",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
+		assertTrue(selenium.isPartialText("//div[2]/h1/span",
 				"Front1 Page1 Child1 Page1 Test1"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a front1 page1 child1 page1 test1."),
-			selenium.getText("//div[@class='wiki-body']"));
+			selenium.getText("//div/div[5]/div"));
 	}
 }

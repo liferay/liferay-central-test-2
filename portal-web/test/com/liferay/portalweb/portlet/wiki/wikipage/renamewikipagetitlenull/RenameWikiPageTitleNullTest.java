@@ -46,8 +46,7 @@ public class RenameWikiPageTitleNullTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Wiki Page Test", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
-				"Wiki Page Test"));
+		assertTrue(selenium.isPartialText("//div[2]/h1/span", "Wiki Page Test"));
 		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Move", RuntimeVariables.replace(""));
@@ -56,8 +55,7 @@ public class RenameWikiPageTitleNullTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Rename']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
-				"Wiki Page Test"));
+		assertTrue(selenium.isPartialText("//div[2]/h1/span", "Wiki Page Test"));
 		assertTrue(selenium.isTextPresent(
 				"You have entered invalid data. Please try again."));
 		assertTrue(selenium.isTextPresent("Please enter a valid title."));

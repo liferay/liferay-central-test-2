@@ -85,8 +85,11 @@ public class SplitThreadCategoryMessageReplyTest extends BaseTestCase {
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("RE: T\u00e9st M\u00e9ssag\u00e9"),
+			selenium.getText("//tr[3]/td[1]/a"));
+		assertEquals(RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"),
 			selenium.getText("//tr[4]/td[1]/a"));
-		selenium.clickAt("//tr[3]/td[1]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//tr[4]/td[1]/a",
+			RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("RE: T\u00e9st M\u00e9ssag\u00e9"));
 		assertFalse(selenium.isTextPresent(

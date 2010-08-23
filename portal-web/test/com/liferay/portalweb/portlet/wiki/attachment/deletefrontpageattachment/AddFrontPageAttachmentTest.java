@@ -113,7 +113,7 @@ public class AddFrontPageAttachmentTest extends BaseTestCase {
 
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=1 Attachments"));
+		assertTrue(selenium.isElementPresent("link=1 Attachment"));
 		assertFalse(selenium.isElementPresent("link=0 Attachments"));
 	}
 }

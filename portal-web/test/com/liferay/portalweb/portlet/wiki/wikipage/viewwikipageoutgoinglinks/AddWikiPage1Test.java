@@ -57,9 +57,9 @@ public class AddWikiPage1Test extends BaseTestCase {
 				"Your request processed successfully."));
 		selenium.clickAt("link=Wiki1 Page1 Test1", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
+		assertTrue(selenium.isPartialText("//div[2]/h1/span",
 				"Wiki1 Page1 Test1"));
 		assertEquals(RuntimeVariables.replace("This is a wiki1 page1 test1."),
-			selenium.getText("//div[@class='wiki-body']"));
+			selenium.getText("//div/div[5]/div"));
 	}
 }

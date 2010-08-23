@@ -47,7 +47,7 @@ public class AddWikiPageNameSymbolTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Page']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_36_title", RuntimeVariables.replace("Test@"));
+		selenium.type("_36_title", RuntimeVariables.replace("Test\\"));
 		selenium.type("_36_content",
 			RuntimeVariables.replace("This is a wiki page test."));
 		selenium.clickAt("//input[@value='Publish']",
@@ -75,7 +75,7 @@ public class AddWikiPageNameSymbolTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Page']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_36_title", RuntimeVariables.replace("Test&amp;"));
+		selenium.type("_36_title", RuntimeVariables.replace("Test["));
 		selenium.type("_36_content",
 			RuntimeVariables.replace("This is a wiki page test."));
 		selenium.clickAt("//input[@value='Publish']",
@@ -89,7 +89,7 @@ public class AddWikiPageNameSymbolTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Page']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_36_title", RuntimeVariables.replace("Test/"));
+		selenium.type("_36_title", RuntimeVariables.replace("Test]"));
 		selenium.type("_36_content",
 			RuntimeVariables.replace("This is a wiki page test."));
 		selenium.clickAt("//input[@value='Publish']",
@@ -103,7 +103,63 @@ public class AddWikiPageNameSymbolTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Page']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_36_title", RuntimeVariables.replace("Test?"));
+		selenium.type("_36_title", RuntimeVariables.replace("Test;"));
+		selenium.type("_36_content",
+			RuntimeVariables.replace("This is a wiki page test."));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Please enter a valid title."));
+		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//input[@value='Add Page']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_36_title", RuntimeVariables.replace("Test:"));
+		selenium.type("_36_content",
+			RuntimeVariables.replace("This is a wiki page test."));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Please enter a valid title."));
+		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//input[@value='Add Page']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_36_title", RuntimeVariables.replace("Test|"));
+		selenium.type("_36_content",
+			RuntimeVariables.replace("This is a wiki page test."));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Please enter a valid title."));
+		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//input[@value='Add Page']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_36_title", RuntimeVariables.replace("Test<"));
+		selenium.type("_36_content",
+			RuntimeVariables.replace("This is a wiki page test."));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Please enter a valid title."));
+		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//input[@value='Add Page']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_36_title", RuntimeVariables.replace("Test>"));
 		selenium.type("_36_content",
 			RuntimeVariables.replace("This is a wiki page test."));
 		selenium.clickAt("//input[@value='Publish']",

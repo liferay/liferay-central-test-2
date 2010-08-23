@@ -59,6 +59,7 @@ public class TearDownMBCategoryTest extends BaseTestCase {
 					continue;
 				}
 
+				Thread.sleep(5000);
 				selenium.clickAt("//td[5]/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
@@ -96,6 +97,7 @@ public class TearDownMBCategoryTest extends BaseTestCase {
 					continue;
 				}
 
+				Thread.sleep(5000);
 				selenium.clickAt("//td[5]/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
@@ -133,6 +135,7 @@ public class TearDownMBCategoryTest extends BaseTestCase {
 					continue;
 				}
 
+				Thread.sleep(5000);
 				selenium.clickAt("//td[5]/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
@@ -170,6 +173,7 @@ public class TearDownMBCategoryTest extends BaseTestCase {
 					continue;
 				}
 
+				Thread.sleep(5000);
 				selenium.clickAt("//td[5]/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
@@ -207,6 +211,7 @@ public class TearDownMBCategoryTest extends BaseTestCase {
 					continue;
 				}
 
+				Thread.sleep(5000);
 				selenium.clickAt("//td[5]/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 

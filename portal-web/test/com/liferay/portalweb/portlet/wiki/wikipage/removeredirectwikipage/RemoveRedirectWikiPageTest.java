@@ -46,7 +46,7 @@ public class RemoveRedirectWikiPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Wiki Page Test", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
+		assertTrue(selenium.isPartialText("//div[2]/h1/span",
 				"Wiki Page Test Renamed"));
 		assertTrue(selenium.isTextPresent("(Redirected from Wiki Page Test)"));
 		selenium.clickAt("//div[@class='page-redirect']",
@@ -143,11 +143,10 @@ public class RemoveRedirectWikiPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Wiki Page Test", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
-				"Wiki Page Test"));
+		assertTrue(selenium.isPartialText("//div[2]/h1/span", "Wiki Page Test"));
 		assertEquals(RuntimeVariables.replace("This is a remove redirect test."),
-			selenium.getText("//div[@class='wiki-body']"));
-		assertFalse(selenium.isPartialText("//h1[@class='page-title']",
+			selenium.getText("//div/div[5]/div"));
+		assertFalse(selenium.isPartialText("//div[2]/h1/span",
 				"Wiki Page Test Renamed"));
 		assertFalse(selenium.isTextPresent("(Redirected from Wiki Page Test)"));
 		selenium.open("/web/guest/home/");
@@ -175,10 +174,10 @@ public class RemoveRedirectWikiPageTest extends BaseTestCase {
 		selenium.clickAt("link=Wiki Page Test Renamed",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
+		assertTrue(selenium.isPartialText("//div[2]/h1/span",
 				"Wiki Page Test Renamed"));
 		assertEquals(RuntimeVariables.replace("This is a wiki page test."),
-			selenium.getText("//div[@class='wiki-body']"));
+			selenium.getText("//div/div[5]/div"));
 		assertFalse(selenium.isTextPresent("(Redirected from Wiki Page Test)"));
 	}
 }

@@ -49,7 +49,7 @@ public class EditFrontPageMinorChangeTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertEquals(RuntimeVariables.replace("Test Wiki Article"),
-					selenium.getText("//div[@class='wiki-body']/h2"));
+					selenium.getText("//div/div[5]/div/h2"));
 				assertEquals(RuntimeVariables.replace("this is italics"),
 					selenium.getText("//i"));
 				assertEquals(RuntimeVariables.replace("bold"),
@@ -57,7 +57,7 @@ public class EditFrontPageMinorChangeTest extends BaseTestCase {
 				assertTrue(selenium.isElementPresent("link=Link to website"));
 				assertEquals(RuntimeVariables.replace(
 						"this is a list item this is a sub list item"),
-					selenium.getText("//div[@class='wiki-body']/ul/li"));
+					selenium.getText("//div/div[5]/div/ul/li"));
 				selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.type("_36_content",
@@ -81,7 +81,7 @@ public class EditFrontPageMinorChangeTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertEquals(RuntimeVariables.replace("Test Wiki Article"),
-					selenium.getText("//div[@class='wiki-body']/h2"));
+					selenium.getText("//div/h2"));
 				assertEquals(RuntimeVariables.replace("this is italics"),
 					selenium.getText("//i"));
 				assertEquals(RuntimeVariables.replace("bold"),
@@ -89,9 +89,9 @@ public class EditFrontPageMinorChangeTest extends BaseTestCase {
 				assertTrue(selenium.isElementPresent("link=Link to website"));
 				assertEquals(RuntimeVariables.replace(
 						"this is a list item this is a sub list item"),
-					selenium.getText("//div[@class='wiki-body']/ul/li"));
+					selenium.getText("//div[6]/div/ul/li"));
 				assertEquals(RuntimeVariables.replace("Minor Edit."),
-					selenium.getText("//div[@class='wiki-body']/p[4]"));
+					selenium.getText("//p[4]"));
 				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {

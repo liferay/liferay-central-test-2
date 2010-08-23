@@ -45,7 +45,8 @@ public class DeleteWikiPageTest extends BaseTestCase {
 		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Wiki Page Test"));
-		selenium.clickAt("//td[6]/ul/li/strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//tr[4]/td[6]/ul/li/strong/a",
+			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

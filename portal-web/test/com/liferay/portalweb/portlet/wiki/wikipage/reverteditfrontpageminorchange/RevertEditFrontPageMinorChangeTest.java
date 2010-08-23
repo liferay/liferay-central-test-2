@@ -43,16 +43,16 @@ public class RevertEditFrontPageMinorChangeTest extends BaseTestCase {
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Test Wiki Article"),
-			selenium.getText("//div[@class='wiki-body']/h2"));
+			selenium.getText("//div/div[5]/div/h2"));
 		assertEquals(RuntimeVariables.replace("this is italics"),
 			selenium.getText("//i"));
 		assertEquals(RuntimeVariables.replace("bold"), selenium.getText("//b"));
 		assertTrue(selenium.isElementPresent("link=Link to website"));
 		assertEquals(RuntimeVariables.replace(
 				"this is a list item this is a sub list item"),
-			selenium.getText("//div[@class='wiki-body']/ul/li"));
+			selenium.getText("//div/div[5]/div/ul/li"));
 		assertEquals(RuntimeVariables.replace("Minor Edit."),
-			selenium.getText("//div[@class='wiki-body']/p[4]"));
+			selenium.getText("//div/div[5]/div/p[4]"));
 		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=History", RuntimeVariables.replace(""));
@@ -85,14 +85,14 @@ public class RevertEditFrontPageMinorChangeTest extends BaseTestCase {
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Test Wiki Article"),
-			selenium.getText("//div[@class='wiki-body']/h2"));
+			selenium.getText("//div/div[5]/div/h2"));
 		assertEquals(RuntimeVariables.replace("this is italics"),
 			selenium.getText("//i"));
 		assertEquals(RuntimeVariables.replace("bold"), selenium.getText("//b"));
 		assertTrue(selenium.isElementPresent("link=Link to website"));
 		assertEquals(RuntimeVariables.replace(
 				"this is a list item this is a sub list item"),
-			selenium.getText("//div[@class='wiki-body']/ul/li"));
+			selenium.getText("//div/div[5]/div/ul/li"));
 		assertFalse(selenium.isTextPresent("Minor Edit."));
 	}
 }

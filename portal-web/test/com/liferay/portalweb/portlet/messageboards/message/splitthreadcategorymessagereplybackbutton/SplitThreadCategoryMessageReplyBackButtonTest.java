@@ -74,6 +74,6 @@ public class SplitThreadCategoryMessageReplyBackButtonTest extends BaseTestCase 
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace(
 				"A thread cannot be split at its root message."),
-			selenium.getText("//form/div[1]"));
+			selenium.getText("//form/div[2]"));
 	}
 }
