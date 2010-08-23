@@ -14,7 +14,7 @@
 		<property name="companyLocalService" ref="com.liferay.portal.service.CompanyLocalService" />
 	</bean>
 	<bean id="serviceStatistics" class="com.liferay.portal.monitoring.statistics.service.ServerStatistics" />
-	<bean id="com.liferay.portal.monitoring.MonitoringService" class="com.liferay.portal.monitoring.DefaultMonitoringService">
+	<bean id="com.liferay.portal.monitoring.MonitoringProcessor" class="com.liferay.portal.monitoring.DefaultMonitoringProcessor">
 		<property name="dataSampleProcessors">
 			<map>
 				<entry key="com.liferay.monitoring.Portal">
@@ -46,8 +46,8 @@
 	<!-- JMX -->
 
 	<bean id="com.liferay.portal.monitoring.jmx.DataSampleThreadLocalManager" class="com.liferay.portal.monitoring.jmx.DataSampleThreadLocalManager" />
-	<bean id="com.liferay.portal.monitoring.jmx.MonitoringServiceManager" class="com.liferay.portal.monitoring.jmx.MonitoringServiceManager">
-		<property name="monitoringService" ref="com.liferay.portal.monitoring.MonitoringService" />
+	<bean id="com.liferay.portal.monitoring.jmx.MonitoringProcessorManager" class="com.liferay.portal.monitoring.jmx.MonitoringProcessorManager">
+		<property name="monitoringProcessor" ref="com.liferay.portal.monitoring.MonitoringProcessor" />
 	</bean>
 	<bean id="com.liferay.portal.servlet.filters.monitoring.jmx.MonitoringFilterManager" class="com.liferay.portal.servlet.filters.monitoring.jmx.MonitoringFilterManager" />
 	<bean id="com.liferay.portlet.MonitoringPortletManager" class="com.liferay.portlet.MonitoringPortletManager" />
@@ -101,7 +101,7 @@
 				<entry key="com.liferay.portal.monitoring:classification=instrumentation,name=DataSampleThreadLocalManager" value-ref="com.liferay.portal.monitoring.jmx.DataSampleThreadLocalManager" />
 				<entry key="com.liferay.portal.monitoring:classification=instrumentation,name=MonitoringFilterManager" value-ref="com.liferay.portal.servlet.filters.monitoring.jmx.MonitoringFilterManager" />
 				<entry key="com.liferay.portal.monitoring:classification=instrumentation,name=MonitoringPortletManager" value-ref="com.liferay.portlet.MonitoringPortletManager" />
-				<entry key="com.liferay.portal.monitoring:classification=monitoring_service,name=MonitoringServiceManager" value-ref="com.liferay.portal.monitoring.jmx.MonitoringServiceManager" />
+				<entry key="com.liferay.portal.monitoring:classification=monitoring_service,name=MonitoringServiceManager" value-ref="com.liferay.portal.monitoring.jmx.MonitoringProcessorManager" />
 				<entry key="com.liferay.portal.monitoring:classification=portal_statistic,name=PortalRequestManager" value-ref="com.liferay.portal.monitoring.jmx.PortalRequestManager" />
 				<entry key="com.liferay.portal.monitoring:classification=portlet_statistic,name=ActionRequestPortletContainerManager" value-ref="com.liferay.portal.monitoring.jmx.ActionRequestPortletContainerManager" />
 				<entry key="com.liferay.portal.monitoring:classification=portlet_statistic,name=EventRequestPortletContainerManager" value-ref="com.liferay.portal.monitoring.jmx.EventRequestPortletContainerManager" />
@@ -119,7 +119,7 @@
 		<property name="name" value="liferay/monitoring" />
 	</bean>
 	<bean id="messageListener.monitoring" class="com.liferay.portal.monitoring.messaging.MonitoringMessageListener">
-		<property name="dataSampleProcessor" ref="com.liferay.portal.monitoring.MonitoringService" />
+		<property name="dataSampleProcessor" ref="com.liferay.portal.monitoring.MonitoringProcessor" />
 	</bean>
 	<bean id="messagingConfigurator.monitoring" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator">
 		<property name="destinations">

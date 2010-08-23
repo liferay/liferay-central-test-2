@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 import com.liferay.portal.kernel.util.MethodKey;
-import com.liferay.portal.monitoring.MonitoringService;
+import com.liferay.portal.monitoring.MonitoringProcessor;
 import com.liferay.portal.monitoring.RequestStatus;
 import com.liferay.portal.monitoring.statistics.DataSampleThreadLocal;
 import com.liferay.portal.spring.aop.ChainableMethodAdvice;
@@ -94,7 +94,7 @@ public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 		Class<?>[] interfaces = classObj.getInterfaces();
 
 		for (int i = 0; i < interfaces.length; i++) {
-			if (interfaces[i].isAssignableFrom(MonitoringService.class)) {
+			if (interfaces[i].isAssignableFrom(MonitoringProcessor.class)) {
 				return null;
 			}
 		}

@@ -15,7 +15,7 @@
 package com.liferay.portal.monitoring.jmx;
 
 import com.liferay.portal.monitoring.Level;
-import com.liferay.portal.monitoring.MonitoringService;
+import com.liferay.portal.monitoring.MonitoringProcessor;
 
 import java.util.Set;
 
@@ -23,10 +23,11 @@ import java.util.Set;
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */
-public class MonitoringServiceManager implements MonitoringServiceManagerMBean {
+public class MonitoringProcessorManager
+	implements MonitoringProcessorManagerMBean {
 
 	public String getLevel(String namespace) {
-		Level level = _monitoringService.getLevel(
+		Level level = _monitoringProcessor.getLevel(
 			namespace);
 
 		if (level == null) {
@@ -37,7 +38,7 @@ public class MonitoringServiceManager implements MonitoringServiceManagerMBean {
 	}
 
 	public String[] getNamespaces() {
-		Set<String> namespaces = _monitoringService.getNamespaces();
+		Set<String> namespaces = _monitoringProcessor.getNamespaces();
 
 		return namespaces.toArray(new String[namespaces.size()]);
 	}
@@ -45,13 +46,13 @@ public class MonitoringServiceManager implements MonitoringServiceManagerMBean {
 	public void setLevel(String namespace, String levelName) {
 		Level level = Level.valueOf(levelName);
 
-		_monitoringService.setLevel(namespace, level);
+		_monitoringProcessor.setLevel(namespace, level);
 	}
 
-	public void setMonitoringService(MonitoringService monitoringService) {
-		_monitoringService = monitoringService;
+	public void setMonitoringProcessor(MonitoringProcessor monitoringProcessor) {
+		_monitoringProcessor = monitoringProcessor;
 	}
 
-	private MonitoringService _monitoringService;
+	private MonitoringProcessor _monitoringProcessor;
 
 }

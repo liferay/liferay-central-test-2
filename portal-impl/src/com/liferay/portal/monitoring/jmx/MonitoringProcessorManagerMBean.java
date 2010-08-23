@@ -12,20 +12,18 @@
  * details.
  */
 
-package com.liferay.portal.monitoring;
-
-import java.util.Set;
+package com.liferay.portal.monitoring.jmx;
 
 /**
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */
-public interface MonitoringService {
+public interface MonitoringProcessorManagerMBean {
 
-	public Level getLevel(String namespace);
+	public String[] getNamespaces();
 
-	public Set<String> getNamespaces();
+	public String getLevel(String namespace);
 
-	public void setLevel(String namespace, Level level);
+	public void setLevel(String namespace, String levelName);
 
 }

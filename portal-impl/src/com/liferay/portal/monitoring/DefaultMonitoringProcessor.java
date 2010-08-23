@@ -27,8 +27,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */
-public class DefaultMonitoringService
-	implements DataSampleProcessor<DataSample>, MonitoringService {
+public class DefaultMonitoringProcessor
+	implements DataSampleProcessor<DataSample>, MonitoringProcessor {
 
 	public Level getLevel(String namespace) {
 		Level level = _levels.get(namespace);
