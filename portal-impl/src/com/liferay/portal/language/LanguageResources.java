@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.tools.LangBuilder;
 
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 
 import java.net.URL;
 
