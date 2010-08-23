@@ -133,13 +133,13 @@ public class AnnotationTransactionAttributeSource
 
 		int isolationLevel = transactional.isolation().value();
 
-		if (isolationLevel == TransactionDefinition.ISOLATION_PORTAL) {
-			ruleBasedTransactionAttribute.setIsolationLevel(
-				PropsValues.TRANSACTION_ISOLATION_PORTAL);
-		}
-		else if (isolationLevel == TransactionDefinition.ISOLATION_COUNTER) {
+		if (isolationLevel == TransactionDefinition.ISOLATION_COUNTER) {
 			ruleBasedTransactionAttribute.setIsolationLevel(
 				PropsValues.TRANSACTION_ISOLATION_COUNTER);
+		}
+		else if (isolationLevel == TransactionDefinition.ISOLATION_PORTAL) {
+			ruleBasedTransactionAttribute.setIsolationLevel(
+				PropsValues.TRANSACTION_ISOLATION_PORTAL);
 		}
 		else {
 			ruleBasedTransactionAttribute.setIsolationLevel(isolationLevel);

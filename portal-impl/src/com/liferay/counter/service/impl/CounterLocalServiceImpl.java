@@ -35,43 +35,37 @@ public class CounterLocalServiceImpl
 	}
 
 	@Transactional(
-		isolation = Isolation.COUNTER,
-		propagation = Propagation.REQUIRES_NEW)
+		isolation = Isolation.COUNTER, propagation = Propagation.REQUIRES_NEW)
 	public long increment() throws SystemException {
 		return counterFinder.increment();
 	}
 
 	@Transactional(
-		isolation = Isolation.COUNTER,
-		propagation = Propagation.REQUIRES_NEW)
+		isolation = Isolation.COUNTER, propagation = Propagation.REQUIRES_NEW)
 	public long increment(String name) throws SystemException {
 		return counterFinder.increment(name);
 	}
 
 	@Transactional(
-		isolation = Isolation.COUNTER,
-		propagation = Propagation.REQUIRES_NEW)
+		isolation = Isolation.COUNTER, propagation = Propagation.REQUIRES_NEW)
 	public long increment(String name, int size) throws SystemException {
 		return counterFinder.increment(name, size);
 	}
 
 	@Transactional(
-		isolation = Isolation.COUNTER,
-		propagation = Propagation.REQUIRES_NEW)
+		isolation = Isolation.COUNTER, propagation = Propagation.REQUIRES_NEW)
 	public void rename(String oldName, String newName) throws SystemException {
 		counterFinder.rename(oldName, newName);
 	}
 
 	@Transactional(
-		isolation = Isolation.COUNTER,
-		propagation = Propagation.REQUIRES_NEW)
+		isolation = Isolation.COUNTER, propagation = Propagation.REQUIRES_NEW)
 	public void reset(String name) throws SystemException {
 		counterFinder.reset(name);
 	}
 
 	@Transactional(
-		isolation = Isolation.COUNTER,
-		propagation = Propagation.REQUIRES_NEW)
+		isolation = Isolation.COUNTER, propagation = Propagation.REQUIRES_NEW)
 	public void reset(String name, long size) throws SystemException {
 		counterFinder.reset(name, size);
 	}
