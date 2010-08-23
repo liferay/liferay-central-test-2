@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
 import com.liferay.portal.model.BaseModel;
-import com.liferay.portal.model.impl.ResourcePermissionImpl;
 import com.liferay.portal.util.PropsValues;
 
 /**
@@ -31,8 +30,8 @@ public class BatchSessionImpl implements BatchSession {
 		throws ORMException {
 
 		if (model.isCachedModel() || isEnabled()) {
-			Object staleObject = session.get(ResourcePermissionImpl.class,
-				model.getPrimaryKeyObj());
+			Object staleObject = session.get(
+				model.getClass(), model.getPrimaryKeyObj());
 
 			if (staleObject != null) {
 				session.evict(staleObject);
