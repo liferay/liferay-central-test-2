@@ -163,6 +163,8 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			result = localCache.get(localCacheKey);
 		}
 
+		boolean load = false;
+
 		if (result == null) {
 			PortalCache portalCache = _getPortalCache(classObj.getName(), true);
 
@@ -176,6 +178,8 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 						"Load " + classObj + " " + primaryKeyObj +
 							" from session");
 				}
+
+				load = true;
 
 				Session session = null;
 
@@ -203,9 +207,16 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			}
 		}
 
-		result = _objectToResult(result);
+		if (!load) {
+			return _objectToResult(result);
+		}
 
-		return result;
+		if (result instanceof String) {
+			return null;
+		}
+		else {
+			return result;
+		}
 	}
 
 	public void putResult(

@@ -232,6 +232,10 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 		else if (primaryKey instanceof List<?>) {
 			List<Object> cachedList = (List<Object>)primaryKey;
 
+			if (cachedList.isEmpty()) {
+				return Collections.EMPTY_LIST;
+			}
+
 			List<Object> list = new ArrayList<Object>(cachedList.size());
 
 			for (Object curPrimaryKey : cachedList) {
