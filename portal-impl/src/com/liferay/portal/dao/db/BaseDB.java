@@ -165,6 +165,10 @@ public abstract class BaseDB implements DB {
 		return _SUPPORTS_DATE_MILLISECONDS;
 	}
 
+	public boolean isSupportsInlineDistinct() {
+		return _SUPPORTS_INLINE_DISTINCT;
+	}
+
 	public boolean isSupportsScrollableResults() {
 		return _SUPPORTS_SCROLLABLE_RESULTS;
 	}
@@ -923,15 +927,17 @@ public abstract class BaseDB implements DB {
 		" IDENTITY", "COMMIT_TRANSACTION"
 	};
 
-	private static boolean _SUPPORTS_ALTER_COLUMN_NAME = true;
+	private static final boolean _SUPPORTS_ALTER_COLUMN_NAME = true;
 
-	private static boolean _SUPPORTS_ALTER_COLUMN_TYPE = true;
+	private static final boolean _SUPPORTS_ALTER_COLUMN_TYPE = true;
 
-	private static boolean _SUPPORTS_DATE_MILLISECONDS = true;
+	private static final boolean _SUPPORTS_DATE_MILLISECONDS = true;
 
-	private static boolean _SUPPORTS_SCROLLABLE_RESULTS = true;
+	private static final boolean _SUPPORTS_INLINE_DISTINCT = true;
 
-	private static boolean _SUPPORTS_UPDATE_WITH_INNER_JOIN;
+	private static final boolean _SUPPORTS_SCROLLABLE_RESULTS = true;
+
+	private static final boolean _SUPPORTS_UPDATE_WITH_INNER_JOIN = true;
 
 	private static Log _log = LogFactoryUtil.getLog(BaseDB.class);
 

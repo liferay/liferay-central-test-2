@@ -59,6 +59,10 @@ public class DB2DB extends BaseDB {
 		return _SUPPORTS_ALTER_COLUMN_TYPE;
 	}
 
+	public boolean isSupportsInlineDistinct() {
+		return _SUPPORTS_INLINE_DISTINCT;
+	}
+
 	public boolean isSupportsScrollableResults() {
 		return _SUPPORTS_SCROLLABLE_RESULTS;
 	}
@@ -216,9 +220,11 @@ public class DB2DB extends BaseDB {
 		" generated always as identity", "commit"
 	};
 
-	private static boolean _SUPPORTS_ALTER_COLUMN_TYPE;
+	private static final boolean _SUPPORTS_ALTER_COLUMN_TYPE = false;
 
-	private static boolean _SUPPORTS_SCROLLABLE_RESULTS;
+	private static final boolean _SUPPORTS_INLINE_DISTINCT = false;
+
+	private static final boolean _SUPPORTS_SCROLLABLE_RESULTS = false;
 
 	private static DB2DB _instance = new DB2DB();
 

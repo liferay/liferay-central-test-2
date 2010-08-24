@@ -199,9 +199,9 @@ public class MySQLDB extends BaseDB {
 		"  auto_increment", "commit"
 	};
 
-	private static boolean _SUPPORTS_DATE_MILLISECONDS = false;
+	private static final boolean _SUPPORTS_DATE_MILLISECONDS = false;
 
-	private static boolean _SUPPORTS_UPDATE_WITH_INNER_JOIN = true;
+	private static final boolean _SUPPORTS_UPDATE_WITH_INNER_JOIN = true;
 
 	private static MySQLDB _instance = new MySQLDB();
 

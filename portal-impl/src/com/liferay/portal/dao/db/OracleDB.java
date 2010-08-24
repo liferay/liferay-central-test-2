@@ -164,6 +164,10 @@ public class OracleDB extends BaseDB {
 		return indexes;
 	}
 
+	public boolean isSupportsInlineDistinct() {
+		return _SUPPORTS_INLINE_DISTINCT;
+	}
+
 	protected OracleDB() {
 		super(TYPE_ORACLE);
 	}
@@ -309,6 +313,8 @@ public class OracleDB extends BaseDB {
 		" varchar2(4000)", " clob", " varchar2",
 		"", "commit"
 	};
+
+	private static final boolean _SUPPORTS_INLINE_DISTINCT = false;
 
 	private static OracleDB _instance = new OracleDB();
 

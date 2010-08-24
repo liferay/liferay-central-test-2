@@ -149,7 +149,7 @@ public class IngresDB extends BaseDB {
 		"", "commit;\\g"
 	};
 
-	private static boolean _SUPPORTS_ALTER_COLUMN_NAME;
+	private static final boolean _SUPPORTS_ALTER_COLUMN_NAME = false;
 
 	private static Log _log = LogFactoryUtil.getLog(IngresDB.class);
 
