@@ -453,6 +453,7 @@ public class PortalImpl implements Portal {
 		_reservedParams.add("p_p_col_count");
 		_reservedParams.add("p_p_static");
 		_reservedParams.add("p_p_isolated");
+		_reservedParams.add("p_o_p_id");
 		_reservedParams.add("p_f_id");
 		_reservedParams.add("saveLastPath");
 		_reservedParams.add("scroll");
@@ -1992,6 +1993,17 @@ public class PortalImpl implements Portal {
 		return originalRequest;
 	}
 
+	public String getOuterPortletId(HttpServletRequest request) {
+		String outerPortletId = (String)request.getAttribute(
+			WebKeys.OUTER_PORTLET_ID);
+
+		if (outerPortletId == null) {
+			outerPortletId = request.getParameter("p_o_p_id");
+		}
+
+		return outerPortletId;
+	}
+
 	public long getParentGroupId(long groupId)
 		throws PortalException, SystemException {
 
@@ -3340,19 +3352,15 @@ public class PortalImpl implements Portal {
 		}
 
 		if (layout.isTypePortlet()) {
+			String checkPortletId = portletId;
 
-			String porletIdToCheck = portletId;
-			
-			String topPortletId = (String)request.getAttribute("_top_pid");
-			if (topPortletId == null) {
-				topPortletId = request.getParameter("_top_pid");
+			String outerPortletId = getOuterPortletId(request);
+
+			if (outerPortletId != null) {
+				checkPortletId = outerPortletId;
 			}
 
-			if (topPortletId != null) {
-				porletIdToCheck = topPortletId;
-			}
-
-			if (layoutTypePortlet.hasPortletId(porletIdToCheck)) {
+			if (layoutTypePortlet.hasPortletId(checkPortletId)) {
 				return true;
 			}
 		}

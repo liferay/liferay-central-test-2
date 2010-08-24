@@ -821,6 +821,15 @@ public class PortletURLImpl
 			}
 		}
 
+		String outerPortletId = PortalUtil.getOuterPortletId(_request);
+
+		if (outerPortletId != null) {
+			sb.append(StringPool.AMPERSAND);
+			sb.append("p_o_p_id");
+			sb.append(StringPool.EQUAL);
+			sb.append(processValue(key, outerPortletId));
+		}
+
 		if (_doAsUserId > 0) {
 			try {
 				Company company = PortalUtil.getCompany(_request);
@@ -1021,18 +1030,6 @@ public class PortletURLImpl
 				sb.append("#p_");
 				sb.append(_portletId);
 			}
-		}
-
-		String topPortletId = (String) _request.getAttribute("_top_pid");
-		if (topPortletId == null) {
-			topPortletId = _request.getParameter("_top_pid");
-		}
-
-		if (topPortletId != null) {
-			sb.append(CharPool.AMPERSAND);
-			sb.append("_top_pid");
-			sb.append(CharPool.EQUAL);
-			sb.append(topPortletId);
 		}
 
 		String result = sb.toString();
