@@ -675,6 +675,11 @@ public class SeleneseToJavaBuilder {
 				sb.append(param3);
 				sb.append(");");
 			}
+			else if (param1.equals("storeLocation")) {
+				sb.append("String ");
+				sb.append(param2);
+				sb.append(" = selenium.getLocation();");
+			}
 			else if (param1.equals("storeText")) {
 				sb.append("String ");
 				sb.append(param3);
