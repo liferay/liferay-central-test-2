@@ -21,17 +21,22 @@ import com.liferay.portal.kernel.util.Digester;
 import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.security.Key;
 import java.security.Provider;
 import java.security.SecureRandom;
 import java.security.Security;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class Encryptor {
 
@@ -120,14 +125,26 @@ public class Encryptor {
 	public static byte[] decryptUnencodedAsBytes(Key key, byte[] encryptedBytes)
 		throws EncryptorException {
 
+		String algorithm = key.getAlgorithm();
+
+		String cacheKey = algorithm + StringPool.POUND + key.toString();
+
+		Cipher cipher = _decryptCipherMap.get(cacheKey);
+
 		try {
-			Security.addProvider(getProvider());
+			if (cipher == null) {
+				Security.addProvider(getProvider());
 
-			Cipher cipher = Cipher.getInstance(key.getAlgorithm());
+				cipher = Cipher.getInstance(algorithm);
 
-			cipher.init(Cipher.DECRYPT_MODE, key);
+				cipher.init(Cipher.DECRYPT_MODE, key);
 
-			return cipher.doFinal(encryptedBytes);
+				_decryptCipherMap.put(cacheKey, cipher);
+			}
+
+			synchronized (cipher) {
+				return cipher.doFinal(encryptedBytes);
+			}
 		}
 		catch (Exception e) {
 			throw new EncryptorException(e);
@@ -168,14 +185,26 @@ public class Encryptor {
 	public static byte[] encryptUnencoded(Key key, byte[] plainBytes)
 		throws EncryptorException {
 
+		String algorithm = key.getAlgorithm();
+
+		String cacheKey = algorithm + StringPool.POUND + key.toString();
+
+		Cipher cipher = _encryptCipherMap.get(cacheKey);
+
 		try {
-			Security.addProvider(getProvider());
+			if (cipher == null) {
+				Security.addProvider(getProvider());
 
-			Cipher cipher = Cipher.getInstance(key.getAlgorithm());
+				cipher = Cipher.getInstance(algorithm);
 
-			cipher.init(Cipher.ENCRYPT_MODE, key);
+				cipher.init(Cipher.ENCRYPT_MODE, key);
 
-			return cipher.doFinal(plainBytes);
+				_encryptCipherMap.put(cacheKey, cipher);
+			}
+
+			synchronized (cipher) {
+				return cipher.doFinal(plainBytes);
+			}
 		}
 		catch (Exception e) {
 			throw new EncryptorException(e);
@@ -196,5 +225,10 @@ public class Encryptor {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(Encryptor.class);
+
+	private static Map<String, Cipher> _decryptCipherMap =
+		new ConcurrentHashMap<String, Cipher>(1, 1f, 1);
+	private static Map<String, Cipher> _encryptCipherMap =
+		new ConcurrentHashMap<String, Cipher>(1, 1f, 1);
 
 }
