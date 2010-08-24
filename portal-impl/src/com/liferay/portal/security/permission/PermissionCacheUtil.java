@@ -127,8 +127,8 @@ public class PermissionCacheUtil {
 		CacheKeyGenerator cacheKeyGenerator =
 			CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME);
 
-		cacheKeyGenerator.append(Long.toString(userId));
-		cacheKeyGenerator.append(Long.toString(groupId));
+		cacheKeyGenerator.append(String.valueOf(userId));
+		cacheKeyGenerator.append(String.valueOf(groupId));
 
 		return cacheKeyGenerator.finish();
 	}
@@ -140,8 +140,8 @@ public class PermissionCacheUtil {
 		CacheKeyGenerator cacheKeyGenerator =
 			CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME);
 
-		cacheKeyGenerator.append(Long.toString(userId));
-		cacheKeyGenerator.append(Long.toString(groupId));
+		cacheKeyGenerator.append(String.valueOf(userId));
+		cacheKeyGenerator.append(String.valueOf(groupId));
 		cacheKeyGenerator.append(name);
 		cacheKeyGenerator.append(primKey);
 		cacheKeyGenerator.append(actionId);
