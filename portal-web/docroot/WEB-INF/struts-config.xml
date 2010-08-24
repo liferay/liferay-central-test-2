@@ -811,6 +811,15 @@
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
 
+		<action path="/enterprise_admin_communities/edit_proposal" type="com.liferay.portlet.communities.action.EditProposalAction">
+			<forward name="portlet.communities.edit_proposal" path="portlet.communities.edit_proposal" />
+			<forward name="portlet.communities.error" path="portlet.communities.error" />
+		</action>
+
+		<action path="/enterprise_admin_communities/edit_proposal_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
+			<forward name="portlet.message_boards.error" path="portlet.communities.error" />
+		</action>
+
 		<action path="/enterprise_admin_organizations/edit_team" type="com.liferay.portlet.communities.action.EditTeamAction">
 			<forward name="portlet.communities.edit_team" path="portlet.communities.edit_team" />
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
