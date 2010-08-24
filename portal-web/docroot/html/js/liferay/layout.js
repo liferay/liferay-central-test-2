@@ -121,7 +121,7 @@ AUI().add(
 										if (activeDropNode != lastActiveDropNode) {
 											var referencePortlet = Liferay.Layout.getLastPortletNode(activeDropNode);
 
-											if (referencePortlet.isStatic) {
+											if (referencePortlet && referencePortlet.isStatic) {
 												var options = Liferay.Layout.options;
 												var dropColumn = activeDropNode.one(options.dropContainer);
 												var foundReferencePortlet = Liferay.Layout.findReferencePortlet(dropColumn);
