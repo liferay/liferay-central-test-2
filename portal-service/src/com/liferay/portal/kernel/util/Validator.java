@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -264,24 +262,9 @@ public class Validator {
 	}
 
 	public static boolean isEmailAddress(String emailAddress) {
-		Boolean valid = null;
+		Matcher matcher = _emailAddressPattern.matcher(emailAddress);
 
-		try {
-			valid = (Boolean)PortalClassInvoker.invoke(
-				true, isValidMethodKey, emailAddress);
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e);
-			}
-		}
-
-		if (valid == null) {
-			return false;
-		}
-		else {
-			return valid.booleanValue();
-		}
+		return matcher.matches();
 	}
 
 	public static boolean isEmailAddressSpecialChar(char c) {
@@ -639,8 +622,8 @@ public class Validator {
 
 	private static final String _XML_EMPTY = "<root />";
 
-	private static Log _log = LogFactoryUtil.getLog(Validator.class);
-
+	private static Pattern _emailAddressPattern = Pattern.compile(
+		"(\\w+\\.)*\\w+@(\\w+\\.)+[A-Za-z]+");
 	private static Pattern _ipAddressPattern = Pattern.compile(
 		"\\b" +
 		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\." +
@@ -648,8 +631,6 @@ public class Validator {
 		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\." +
 		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])" +
 		"\\b");
-	private static MethodKey isValidMethodKey = new MethodKey(
-		"com.liferay.util.mail.InternetAddressUtil", "isValid", String.class);
 	private static Pattern _variableNamePattern = Pattern.compile(
 		"[_a-zA-Z]+[_a-zA-Z0-9]*");
 
