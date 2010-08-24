@@ -127,7 +127,8 @@ public class Encryptor {
 
 		String algorithm = key.getAlgorithm();
 
-		String cacheKey = algorithm + StringPool.POUND + key.toString();
+		String cacheKey = algorithm.concat(StringPool.POUND).concat(
+			key.toString());
 
 		Cipher cipher = _decryptCipherMap.get(cacheKey);
 
@@ -187,7 +188,8 @@ public class Encryptor {
 
 		String algorithm = key.getAlgorithm();
 
-		String cacheKey = algorithm + StringPool.POUND + key.toString();
+		String cacheKey = algorithm.concat(StringPool.POUND).concat(
+			key.toString());
 
 		Cipher cipher = _encryptCipherMap.get(cacheKey);
 
