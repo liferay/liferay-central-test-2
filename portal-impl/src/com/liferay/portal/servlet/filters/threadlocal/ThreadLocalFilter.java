@@ -14,6 +14,8 @@
 
 package com.liferay.portal.servlet.filters.threadlocal;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ThreadLocalRegistry;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 
@@ -25,6 +27,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author Brian Wing Shun Chan
  */
 public class ThreadLocalFilter extends BasePortalFilter {
+
+	public static final boolean ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(ThreadLocalFilter.class.getName()));
 
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
