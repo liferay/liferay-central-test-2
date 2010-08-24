@@ -14,6 +14,8 @@
 
 package com.liferay.portal.spring.transaction;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.lang.reflect.Method;
@@ -51,9 +53,13 @@ public class TransactionInterceptor
 
 		Class<?> declaringClass = method.getDeclaringClass();
 
-		String joinPointIdentification =
-			declaringClass.getName().concat(StringPool.PERIOD).concat(
-				method.getName());
+		String joinPointIdentification = StringPool.BLANK;
+
+		if (_log.isDebugEnabled()) {
+			joinPointIdentification =
+				declaringClass.getName().concat(StringPool.PERIOD).concat(
+					method.getName());
+		}
 
 		TransactionInfo transactionInfo = createTransactionIfNecessary(
 			getTransactionManager(), transactionAttribute,
@@ -77,5 +83,8 @@ public class TransactionInterceptor
 
 		return returnValue;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		TransactionInterceptor.class);
 
 }
