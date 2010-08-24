@@ -35,7 +35,7 @@ boolean runtimePortlet = (renderPortletResource != null) && renderPortletResourc
 
 boolean access = false;
 
-if (PortalUtil.isAllowAddPortletDefaultResource(request, portlet)) {
+if (PortalUtil.isAllowAddPortletDefaultResource(request, portlet) && !portlet.isUndeployedPortlet()) {
 	PortalUtil.addPortletDefaultResource(request, portlet);
 
 	access = PortletPermissionUtil.contains(permissionChecker, plid, portlet, ActionKeys.VIEW);
