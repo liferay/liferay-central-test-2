@@ -685,6 +685,11 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 					changeLog, extraSettings, file, serviceContext);
 			}
 
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Added " + StringUtil.merge(pathArray, StringPool.SLASH));
+			}
+
 			return HttpServletResponse.SC_CREATED;
 		}
 		catch (PrincipalException pe) {
