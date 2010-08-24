@@ -283,6 +283,11 @@ public class RuntimePortletUtil {
 		Boolean renderPortletResource = (Boolean)request.getAttribute(
 			WebKeys.RENDER_PORTLET_RESOURCE);
 
+		String topParentPorletId = (String)request.getAttribute("_top_pid");
+		if (topParentPorletId == null) {
+			request.setAttribute("_top_pid", renderPortlet.getPortletId());
+		}
+
 		try {
 			request.setAttribute(WebKeys.RENDER_PORTLET_RESOURCE, Boolean.TRUE);
 
@@ -316,6 +321,10 @@ public class RuntimePortletUtil {
 			return sb.toString();
 		}
 		finally {
+			if (topParentPorletId == null) {
+				request.removeAttribute("_top_pid");
+			}
+
 			request.setAttribute(WebKeys.RENDER_PORTLET, renderPortlet);
 
 			if (renderPortletResource == null) {

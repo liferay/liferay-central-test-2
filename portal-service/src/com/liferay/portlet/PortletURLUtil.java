@@ -15,6 +15,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -226,6 +227,18 @@ public class PortletURLUtil {
 					}
 				}
 			}
+		}
+
+		String topPortletId = (String)request.getAttribute("_top_pid");
+		if (topPortletId == null) {
+			topPortletId = request.getParameter("_top_pid");
+		}
+
+		if (topPortletId != null) {
+			sb.append(CharPool.AMPERSAND);
+			sb.append("_top_pid");
+			sb.append(CharPool.EQUAL);
+			sb.append(topPortletId);
 		}
 
 		return sb.toString();

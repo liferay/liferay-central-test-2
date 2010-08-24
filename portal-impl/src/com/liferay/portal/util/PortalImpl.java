@@ -3339,10 +3339,22 @@ public class PortalImpl implements Portal {
 			return true;
 		}
 
-		if (layout.isTypePortlet() &&
-			layoutTypePortlet.hasPortletId(portletId)) {
+		if (layout.isTypePortlet()) {
 
-			return true;
+			String porletIdToCheck = portletId;
+			
+			String topPortletId = (String)request.getAttribute("_top_pid");
+			if (topPortletId == null) {
+				topPortletId = request.getParameter("_top_pid");
+			}
+
+			if (topPortletId != null) {
+				porletIdToCheck = topPortletId;
+			}
+
+			if (layoutTypePortlet.hasPortletId(porletIdToCheck)) {
+				return true;
+			}
 		}
 
 		if (themeDisplay.isSignedIn() &&

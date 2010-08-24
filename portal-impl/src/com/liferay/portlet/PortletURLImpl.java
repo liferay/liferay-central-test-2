@@ -1023,6 +1023,18 @@ public class PortletURLImpl
 			}
 		}
 
+		String topPortletId = (String) _request.getAttribute("_top_pid");
+		if (topPortletId == null) {
+			topPortletId = _request.getParameter("_top_pid");
+		}
+
+		if (topPortletId != null) {
+			sb.append(CharPool.AMPERSAND);
+			sb.append("_top_pid");
+			sb.append(CharPool.EQUAL);
+			sb.append(topPortletId);
+		}
+
 		String result = sb.toString();
 
 		if (result.endsWith(StringPool.AMPERSAND) ||
