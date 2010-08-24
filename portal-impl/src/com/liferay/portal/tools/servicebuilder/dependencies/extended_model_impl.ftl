@@ -12,6 +12,8 @@ import ${packagePath}.model.${entity.name};
  * <p>
  * Never reference this class directly. All methods that expect a ${entity.humanName} model instance should use the {@link ${entity.name}} interface instead.
  * </p>
+ *
+ * @author ${author}
  */
 public class ${entity.name}Impl extends ${entity.name}ModelImpl implements ${entity.name} {
 
