@@ -59,6 +59,7 @@ primary
 private
 protected
 public
+read
 return
 rowId
 sale
