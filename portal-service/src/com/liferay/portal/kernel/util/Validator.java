@@ -14,7 +14,6 @@
 
 package com.liferay.portal.kernel.util;
 
-
 import java.net.MalformedURLException;
 import java.net.URL;
 
