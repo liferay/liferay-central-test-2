@@ -27,11 +27,11 @@ public class ReleaseInfo {
 
 	static String version = "6.0.6";
 
-	static String versionDisplayName = "6.0.5 CE";
+	static String versionDisplayName = "6.0.6 CE";
 
 	static String codeName = "Bunyan";
 
-	static String build = "6005";
+	static String build = "6006";
 
 	static String date = "August 25, 2010";
 
