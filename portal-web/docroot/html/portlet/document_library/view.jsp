@@ -104,7 +104,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 	</c:when>
 	<c:when test='<%= topLink.equals("documents-home") %>'>
 		<aui:layout>
-			<c:if test="<%= folder != null %>">
+			<c:if test="<%= (folder != null) && (folder.getFolderId() != defaultFolderId) %>">
 
 				<%
 				long parentFolderId = defaultFolderId;
@@ -114,7 +114,10 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 					DLFolder parentFolder = folder.getParentFolder();
 
 					parentFolderId = parentFolder.getFolderId();
-					parentFolderName = parentFolder.getName();
+
+					if (parentFolder.getFolderId() != defaultFolderId) {
+						parentFolderName = parentFolder.getName();
+					}
 				}
 				%>
 

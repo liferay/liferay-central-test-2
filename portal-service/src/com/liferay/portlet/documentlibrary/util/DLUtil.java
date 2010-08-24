@@ -17,6 +17,7 @@ package com.liferay.portlet.documentlibrary.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -26,6 +27,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
@@ -39,6 +41,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderResponse;
 
@@ -148,7 +151,34 @@ public class DLUtil {
 			portletURL.setParameter("struts_action", "/document_library/view");
 		}
 
-		List<DLFolder> ancestorFolders = folder.getAncestors();
+		PortletPreferences preferences =
+			PortletPreferencesFactoryUtil.getPortletPreferences(
+				request, PortalUtil.getPortletId(request));
+
+		long defaultFolderId = GetterUtil.getLong(
+			preferences.getValue(
+				"rootFolderId",
+				String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)));
+
+		List<DLFolder> ancestorFolders = Collections.EMPTY_LIST;
+
+		if (folder.getFolderId() != defaultFolderId) {
+			ancestorFolders = folder.getAncestors();
+
+			int indexOfRootFolder = -1;
+
+			for (int i = 0; i < ancestorFolders.size(); i++) {
+				DLFolder ancestorFolder = ancestorFolders.get(i);
+
+				if (defaultFolderId == ancestorFolder.getFolderId()) {
+					indexOfRootFolder = i;
+				}
+			}
+
+			if (indexOfRootFolder > -1) {
+				ancestorFolders = ancestorFolders.subList(0, indexOfRootFolder);
+			}
+		}
 
 		Collections.reverse(ancestorFolders);
 
@@ -163,8 +193,9 @@ public class DLUtil {
 		portletURL.setParameter(
 			"folderId", String.valueOf(folder.getFolderId()));
 
-		if (folder.getFolderId() !=
-				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+		if ((folder.getFolderId() !=
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
+			(folder.getFolderId() != defaultFolderId)) {
 
 			PortalUtil.addPortletBreadcrumbEntry(
 				request, folder.getName(), portletURL.toString());
