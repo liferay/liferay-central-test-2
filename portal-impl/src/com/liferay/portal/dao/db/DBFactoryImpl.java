@@ -14,6 +14,7 @@
 
 package com.liferay.portal.dao.db;
 
+import com.liferay.portal.dao.orm.hibernate.DialectImpl;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactory;
 import com.liferay.portal.kernel.log.Log;
@@ -69,6 +70,12 @@ public class DBFactoryImpl implements DBFactory {
 
 	public DB getDB(Object dialect) {
 		DB db = null;
+
+		if (dialect instanceof DialectImpl) {
+			DialectImpl dialectImpl = (DialectImpl)dialect;
+
+			dialect = dialectImpl.getWrappedDialect();
+		}
 
 		if (dialect instanceof DB2Dialect) {
 			if (dialect instanceof DerbyDialect) {

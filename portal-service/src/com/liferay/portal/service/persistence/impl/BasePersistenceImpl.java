@@ -15,6 +15,8 @@
 package com.liferay.portal.service.persistence.impl;
 
 import com.liferay.portal.NoSuchModelException;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Dialect;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.ORMException;
@@ -161,6 +163,10 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		return _dataSource;
 	}
 
+	public DB getDB() {
+		return _db;
+	}
+
 	public Dialect getDialect() {
 		return _dialect;
 	}
@@ -229,6 +235,8 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		_sessionFactory = sessionFactory;
 		_dialect = _sessionFactory.getDialect();
+		_db = DBFactoryUtil.getDB(_dialect);
+		System.out.println("## db " + _db + " " + _dialect);
 	}
 
 	public void unregisterListener(ModelListener<T> listener) {
@@ -373,6 +381,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	private static Log _log = LogFactoryUtil.getLog(BasePersistenceImpl.class);
 
 	private DataSource _dataSource;
+	private DB _db;
 	private Dialect _dialect;
 	private SessionFactory _sessionFactory;
 

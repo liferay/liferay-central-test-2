@@ -29,6 +29,10 @@ public class DialectImpl implements Dialect {
 		return _dialect.supportsLimit();
 	}
 
+	public org.hibernate.dialect.Dialect getWrappedDialect() {
+		return _dialect;
+	}
+
 	private org.hibernate.dialect.Dialect _dialect;
 
 }
