@@ -43,11 +43,75 @@ public class AssertImportLARTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("This is a test folder!"));
-		assertTrue(selenium.isTextPresent("This is a test3 folder3."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace(
+							"Test Folder\nThis is a test folder!")
+										.equals(selenium.getText("//td[1]/a[1]"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace(
+				"Test Folder\nThis is a test folder!"),
+			selenium.getText("//td[1]/a[1]"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace(
+							"Test3 Folder3\nThis is a test3 folder3.")
+										.equals(selenium.getText(
+								"//tr[4]/td[1]/a[1]"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace(
+				"Test3 Folder3\nThis is a test3 folder3."),
+			selenium.getText("//tr[4]/td[1]/a[1]"));
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("This is a test subfolder!"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace(
+							"Test Subfolder\nThis is a test subfolder!")
+										.equals(selenium.getText("//td[1]/a"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace(
+				"Test Subfolder\nThis is a test subfolder!"),
+			selenium.getText("//td[1]/a"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -72,9 +136,48 @@ public class AssertImportLARTest extends BaseTestCase {
 		selenium.clickAt("//tr[4]/td[1]/a[1]/strong",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("This is a test3 subfolder3."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace(
+							"Test3 Subfolder3\nThis is a test3 subfolder3.")
+										.equals(selenium.getText("//td[1]/a"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace(
+				"Test3 Subfolder3\nThis is a test3 subfolder3."),
+			selenium.getText("//td[1]/a"));
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//img[@alt='Test Image - This is the Liferay logo!']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isElementPresent(
 				"//img[@alt='Test Image - This is the Liferay logo!']"));
 	}

@@ -46,33 +46,6 @@ public class ViewFolderImageEditingWindowTest extends BaseTestCase {
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		selenium.clickAt("//img[@alt='Test1 Image1 - This is Test1 Image1.']",
-			RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//a[@class='aui-image-viewer-close']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		Thread.sleep(5000);
-		assertTrue(selenium.isElementPresent("//img[@alt='Download (12.9k)']"));
-		assertTrue(selenium.isElementPresent("//img[@alt='View']"));
-		assertTrue(selenium.isElementPresent("//img[@alt='Edit']"));
-		assertTrue(selenium.isElementPresent("//img[@alt='Permissions']"));
-		assertTrue(selenium.isElementPresent("//img[@alt='Delete']"));
-		selenium.click("//a[@class='aui-image-viewer-close']");
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -117,6 +90,5 @@ public class ViewFolderImageEditingWindowTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("//img[@alt='Permissions']"));
 		assertTrue(selenium.isElementPresent("//img[@alt='Delete']"));
 		selenium.click("//a[@class='aui-image-viewer-close']");
-		Thread.sleep(5000);
 	}
 }

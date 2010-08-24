@@ -45,7 +45,8 @@ public class AddSubfolder3Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[2]/ul/li[3]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[4]/a",
+			RuntimeVariables.replace("Add Subfolder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_31_name", RuntimeVariables.replace("Test3 Subfolder3"));
 		selenium.type("_31_description",

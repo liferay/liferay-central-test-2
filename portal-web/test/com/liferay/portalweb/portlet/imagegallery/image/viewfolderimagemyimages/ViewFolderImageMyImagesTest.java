@@ -45,6 +45,24 @@ public class ViewFolderImageMyImagesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=My Images", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//img[@alt='Test1 Image1 - This is Test1 Image1.']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isElementPresent(
 				"//img[@alt='Test1 Image1 - This is Test1 Image1.']"));
 		assertEquals(RuntimeVariables.replace("Test1 Image1"),

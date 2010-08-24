@@ -80,7 +80,7 @@ public class MoveFolderImageToFolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Image Home")) {
+				if (selenium.isElementPresent("link=Images Home")) {
 					break;
 				}
 			}
@@ -90,7 +90,7 @@ public class MoveFolderImageToFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Image Home", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Images Home", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//tr[4]/td[4]/input");
 		selenium.selectWindow("null");
