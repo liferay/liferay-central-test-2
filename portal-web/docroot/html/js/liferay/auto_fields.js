@@ -132,7 +132,7 @@ AUI().add(
 							function(event) {
 								var form = event.form;
 
-								form.all('.lfr-form-row').each(instance._clearHiddenRows);
+								form.all('.lfr-form-row:hidden').each(instance._clearHiddenRows);
 
 								var fieldOrder = instance.serialize();
 
@@ -143,7 +143,7 @@ AUI().add(
 						instance._undoManager.on(
 							'clearList',
 							function(event) {
-								contentBox.all('.lfr-form-row').each(instance._clearHiddenRows);
+								contentBox.all('.lfr-form-row:hidden').each(instance._clearHiddenRows);
 							}
 						);
 					},
@@ -176,19 +176,11 @@ AUI().add(
 					deleteRow: function(node) {
 						var instance = this;
 
-						var visible = 0;
+						var visibleRows = instance._contentBox.all('.lfr-form-row:visible').size();
 
-						instance._contentBox.all('.lfr-form-row').each(
-							function(item, index, collection) {
-								if (!item.hasClass('aui-helper-hidden') && !item.hasClass('aui-helper-hidden-accessible')) {
-									visible++;
-								}
-							}
-						);
+						var deleteRow = (visibleRows > 1);
 
-						var deleteRow = (visible > 1);
-
-						if (visible == 1) {
+						if (visibleRows == 1) {
 							instance.addRow(node);
 
 							deleteRow = true;
@@ -216,17 +208,8 @@ AUI().add(
 					serialize: function(filter) {
 						var instance = this;
 
-						var visible = [];
+						var visibleRows = instance._contentBox.all('.lfr-form-row:visible');
 
-						instance._contentBox.all('.lfr-form-row').each(
-							function(item, index, collection) {
-								if (!item.hasClass('aui-helper-hidden') && !item.hasClass('aui-helper-hidden-accessible')) {
-									visible.push(item);
-								}
-							}
-						);
-
-						var visibleRows = A.all(visible);
 						var serializedData = [];
 
 						if (filter) {
@@ -284,9 +267,7 @@ AUI().add(
 					},
 
 					_clearHiddenRows: function(item, index, collection) {
-						if (item.hasClass('aui-helper-hidden') || item.hasClass('aui-helper-hidden-accessible')) {
-							item.remove(true);
-						}
+						item.remove(true);
 					},
 
 					_createClone: function(node) {
@@ -384,24 +365,19 @@ AUI().add(
 
 						instance._sortable = new A.Sortable(
 							{
-								constrain: {
-									stickY: true
-								},
-								dd: {
-									handles: [sortableHandle]
-								},
-								nodes: rows
+								container: instance._contentBox,
+								handles: [sortableHandle],
+								nodes: '.lfr-form-row',
+								opacity: 0
 							}
 						);
 
 						instance._undoManager.on(
 							'clearList',
 							function(event) {
-								rows.each(
+								rows.all('.lfr-form-row:hidden').each(
 									function(item, index, collection) {
-										if (item.hasClass('aui-helper-hidden') || item.hasClass('aui-helper-hidden-accessible')) {
-											A.DD.DDM.getDrag(item).destroy();
-										}
+										A.DD.DDM.getDrag(item).destroy();
 									}
 								);
 							}
@@ -417,6 +393,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-base', 'aui-data-set', 'aui-io-request', 'aui-parse-content', 'aui-sortable', 'base', 'liferay-undo-manager']
+		requires: ['aui-base', 'aui-data-set', 'aui-io-request', 'aui-parse-content', 'sortable', 'base', 'liferay-undo-manager']
 	}
 );
