@@ -83,7 +83,8 @@ public class ClearTimerThreadUtil {
 		catch (Throwable t) {
 			_initialized = false;
 
-			_log.warn("Failed to initialize ClearTimerThreadUtil", t);
+			_log.warn("Failed to initialize ClearTimerThreadUtil, no Timer "
+				+ "will be forcibly removed");
 		}
 	}
 
