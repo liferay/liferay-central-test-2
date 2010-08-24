@@ -50,7 +50,6 @@ public class BatchSessionImpl implements BatchSession {
 			((_counter.get() % PropsValues.HIBERNATE_JDBC_BATCH_SIZE) == 0)) {
 
 			session.flush();
-			session.clear();
 		}
 
 		_counter.set(_counter.get() + 1);
@@ -102,7 +101,6 @@ public class BatchSessionImpl implements BatchSession {
 			((_counter.get() % PropsValues.HIBERNATE_JDBC_BATCH_SIZE) == 0)) {
 
 			session.flush();
-			session.clear();
 		}
 
 		_counter.set(_counter.get() + 1);
