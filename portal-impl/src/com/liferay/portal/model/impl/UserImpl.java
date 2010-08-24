@@ -103,6 +103,13 @@ public class UserImpl extends UserModelImpl implements User {
 	}
 
 	public String getDigest(String password) {
+		if (Validator.isNull(getScreenName())) {
+			throw new IllegalStateException("Screen name cannot be null");
+		}
+		else if (Validator.isNull(getEmailAddress())) {
+			throw new IllegalStateException("Email address cannot be null");
+		}
+
 		StringBundler sb = new StringBundler(5);
 
 		String digest1 = DigesterUtil.digestHex(

@@ -395,6 +395,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setPasswordUnencrypted(password1);
 		user.setPasswordEncrypted(true);
 		user.setPasswordReset(false);
+		user.setDigest(StringPool.BLANK);
 		user.setScreenName(screenName);
 		user.setEmailAddress(emailAddress);
 		user.setFacebookId(facebookId);
@@ -659,11 +660,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		String digest = user.getDigest();
 
 		if (Validator.isNull(digest)) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"User must first log in through the portal " +
-						user.getUserId());
-			}
+			_log.error(
+				"User must first login through the portal " +
+					user.getUserId());
 
 			return userId;
 		}
@@ -845,6 +844,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				userPersistence.update(user, false);
 			}
 			else {
+				user.setDigest(StringPool.BLANK);
+
+				userPersistence.update(user, false);
+
 				throw new PasswordExpiredException();
 			}
 		}
@@ -2107,6 +2110,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setPasswordEncrypted(true);
 		user.setPasswordReset(passwordReset);
 		user.setPasswordModifiedDate(new Date());
+		user.setDigest(StringPool.BLANK);
 		user.setGraceLoginCount(0);
 
 		if (!silentUpdate) {
@@ -2155,6 +2159,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setPasswordEncrypted(passwordEncrypted);
 		user.setPasswordReset(passwordReset);
 		user.setPasswordModifiedDate(passwordModifiedDate);
+		user.setDigest(StringPool.BLANK);
 
 		userPersistence.update(user, false);
 
@@ -2243,6 +2248,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		validateScreenName(user.getCompanyId(), userId, screenName);
 
+		if (!user.getScreenName().equalsIgnoreCase(screenName)) {
+			user.setDigest(StringPool.BLANK);
+		}
+
 		user.setScreenName(screenName);
 
 		userPersistence.update(user, false);
@@ -2320,6 +2329,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				userId, newPassword1, newPassword2, passwordReset);
 
 			password = newPassword1;
+
+			user.setDigest(StringPool.BLANK);
 		}
 
 		user.setModifiedDate(now);
@@ -2337,7 +2348,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user.setReminderQueryAnswer(reminderQueryAnswer);
 		}
 
-		user.setScreenName(screenName);
+		if (!user.getScreenName().equalsIgnoreCase(screenName)) {
+			user.setScreenName(screenName);
+
+			user.setDigest(StringPool.BLANK);
+		}
 
 		setEmailAddress(
 			user, password, firstName, middleName, lastName, emailAddress);
@@ -2581,16 +2596,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		// Update digest
-
-		if (authResult == Authenticator.SUCCESS) {
-			String digest = user.getDigest(password);
-
-			user.setDigest(digest);
-
-			userPersistence.update(user, false);
-		}
-
 		// Post-authentication pipeline
 
 		if (authResult == Authenticator.SUCCESS) {
@@ -2608,6 +2613,26 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				authResult = AuthPipeline.authenticateByUserId(
 					PropsKeys.AUTH_PIPELINE_POST, companyId, userId, password,
 					headerMap, parameterMap);
+			}
+		}
+
+		// Update digest
+
+		if (authResult == Authenticator.SUCCESS) {
+			boolean updateDigest = true;
+
+			if (PropsValues.AUTH_PIPELINE_ENABLE_LIFERAY_CHECK) {
+				if (Validator.isNotNull(user.getDigest())) {
+					updateDigest = false;
+				}
+			}
+
+			if (updateDigest) {
+				String digest = user.getDigest(password);
+
+				user.setDigest(digest);
+
+				userPersistence.update(user, false);
 			}
 		}
 
@@ -2982,6 +3007,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		user.setEmailAddress(emailAddress);
+		user.setDigest(StringPool.BLANK);
 	}
 
 	protected void updateUserGroupRoles(
