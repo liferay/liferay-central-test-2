@@ -257,7 +257,12 @@ public class PluginsEnvironmentBuilder {
 
 			System.out.println("Updating " + classpathFile);
 
-			FileUtil.write(classpathFile, sb.toString());
+			String content = sb.toString();
+
+			content = StringUtil.replace(
+				content, "\"/portal", "\"/portal-trunk");
+
+			FileUtil.write(classpathFile, content);
 		}
 
 		// SVN
