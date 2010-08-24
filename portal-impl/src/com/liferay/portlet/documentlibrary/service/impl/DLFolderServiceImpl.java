@@ -272,14 +272,23 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			List<Long> folderIds, long groupId, long folderId)
 		throws SystemException {
 
+		getSubfolderIds(folderIds, groupId, folderId, true);
+	}
+
+	public void getSubfolderIds(
+			List<Long> folderIds, long groupId, long folderId, boolean recurse)
+		throws SystemException {
+
 		List<DLFolder> folders = dlFolderPersistence.filterFindByG_P(
 			groupId, folderId);
 
 		for (DLFolder folder : folders) {
 			folderIds.add(folder.getFolderId());
 
-			getSubfolderIds(
-				folderIds, folder.getGroupId(), folder.getFolderId());
+			if (recurse) {
+				getSubfolderIds(
+					folderIds, folder.getGroupId(), folder.getFolderId());
+			}
 		}
 	}
 

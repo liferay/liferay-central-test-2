@@ -86,13 +86,15 @@ if (folder != null) {
 
 		// Statistics
 
-		List subfolderIds = new ArrayList();
+		List<Long> subfolderIds = new ArrayList<Long>();
 
-		subfolderIds.add(new Long(curFolder.getFolderId()));
+		DLFolderServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId(), false);
 
-		DLFolderServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
+		int foldersCount = subfolderIds.size();
 
-		int foldersCount = subfolderIds.size() - 1;
+		subfolderIds.clear();
+		subfolderIds.add(curFolder.getFolderId());
+
 		int fileEntriesCount = DLFileEntryServiceUtil.getFoldersFileEntriesCount(scopeGroupId, subfolderIds, WorkflowConstants.STATUS_APPROVED);
 
 		row.addText(String.valueOf(foldersCount), rowURL);

@@ -15,13 +15,15 @@
 %>
 
 <%
-List subfolderIds = new ArrayList();
+List<Long> subfolderIds = new ArrayList<Long>();
 
-subfolderIds.add(new Long(curFolder.getFolderId()));
+DLFolderServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId(), false);
 
-DLFolderServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
+int curFoldersCount = subfolderIds.size();
 
-int curFoldersCount = subfolderIds.size() - 1;
+subfolderIds.clear();
+subfolderIds.add(curFolder.getFolderId());
+
 int curFileEntriesCount = DLFolderServiceUtil.getFileEntriesAndFileShortcutsCount(scopeGroupId, subfolderIds, status);
 
 for (int j = 0; j < folderColumns.length; j++) {
