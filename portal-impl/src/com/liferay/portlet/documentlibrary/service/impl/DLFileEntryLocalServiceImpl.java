@@ -994,23 +994,23 @@ public class DLFileEntryLocalServiceImpl
 		boolean updatedFileVersion = false;
 
 		try {
-			DLFileVersion latestFileVersion =
-				dlFileVersionLocalService.getLatestFileVersion(
-					groupId, folderId, name);
+			DLFileVersion latestFileVersion = fileEntry.getLatestFileVersion();
 
 			if (size == 0) {
 				size = latestFileVersion.getSize();
 			}
 
-			if (latestFileVersion.getStatus() !=
-					WorkflowConstants.STATUS_APPROVED) {
+			if (!latestFileVersion.isApproved()) {
+				if (!PropsValues.DL_FILE_ENTRY_DRAFTS_ENABLED) {
+					serviceContext.setWorkflowAction(
+						WorkflowConstants.ACTION_SAVE_DRAFT);
 
-				serviceContext.setWorkflowAction(
-					WorkflowConstants.ACTION_SAVE_DRAFT);
+					version = latestFileVersion.getVersion();
+				}
 
-				version = latestFileVersion.getVersion();
-
-				updatedFileVersion = true;
+				if (version.equals(latestFileVersion.getVersion())) {
+					updatedFileVersion = true;
+				}
 
 				updateFileVersion(
 					user, latestFileVersion, sourceFileName, extension, title,
@@ -1107,9 +1107,14 @@ public class DLFileEntryLocalServiceImpl
 
 		// Workflow
 
-		WorkflowHandlerRegistryUtil.startWorkflowInstance(
-			user.getCompanyId(), groupId, userId, DLFileEntry.class.getName(),
-			fileEntry.getFileEntryId(), fileEntry, serviceContext);
+		if (serviceContext.getWorkflowAction() ==
+				WorkflowConstants.ACTION_PUBLISH) {
+
+			WorkflowHandlerRegistryUtil.startWorkflowInstance(
+				user.getCompanyId(), groupId, userId,
+				DLFileEntry.class.getName(), fileEntry.getFileEntryId(),
+				fileEntry, serviceContext);
+		}
 
 		return fileEntry;
 	}
@@ -1321,10 +1326,25 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	protected String getNextVersion(
-		DLFileEntry fileEntry, boolean majorVersion, int workflowAction) {
+			DLFileEntry fileEntry, boolean majorVersion, int workflowAction)
+		throws PortalException, SystemException {
 
 		if (Validator.isNull(fileEntry.getVersion())) {
 			return DLFileEntryConstants.DEFAULT_VERSION;
+		}
+
+		try {
+			DLFileVersion fileVersion = fileEntry.getLatestFileVersion();
+
+			String version = fileVersion.getVersion();
+
+			if (!fileVersion.isApproved() &&
+				version.equals(DLFileEntryConstants.DEFAULT_VERSION)) {
+
+				return DLFileEntryConstants.DEFAULT_VERSION;
+			}
+		}
+		catch (NoSuchFileVersionException nsfve) {
 		}
 
 		if (workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT) {

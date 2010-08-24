@@ -150,6 +150,7 @@ public class HookHotDeployListener
 		"control.panel.entry.class.default",
 		"convert.processes",
 		"default.landing.page.path",
+		"dl.file.entry.drafts.enabled",
 		"dl.hook.impl",
 		"dl.webdav.hold.lock",
 		"dl.webdav.save.to.single.version",
@@ -1616,6 +1617,7 @@ public class HookHotDeployListener
 	private static final String[] _PROPS_VALUES_BOOLEAN = new String[] {
 		"auth.forward.by.last.path",
 		"captcha.check.portal.create_account",
+		"dl.file.entry.drafts.enabled",
 		"dl.webdav.hold.lock",
 		"dl.webdav.save.to.single.version",
 		"field.enable.com.liferay.portal.model.Contact.birthday",

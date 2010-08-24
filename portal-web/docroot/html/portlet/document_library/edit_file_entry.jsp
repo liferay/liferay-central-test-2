@@ -162,6 +162,7 @@ portletURL.setParameter("name", name);
 	<aui:input name="uploadProgressId" type="hidden" value="<%= uploadProgressId %>" />
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 	<aui:input name="name" type="hidden" value="<%= name %>" />
+	<aui:input name="workflowAction" type="hidden" value="<%= WorkflowConstants.ACTION_PUBLISH %>" />
 
 	<liferay-ui:error exception="<%= DuplicateFileException.class %>" message="please-enter-a-unique-document-name" />
 	<liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="please-enter-a-unique-document-name" />
@@ -291,10 +292,12 @@ portletURL.setParameter("name", name);
 
 		<%
 		boolean approved = false;
+		boolean draft = false;
 		boolean pending = false;
 
 		if (fileVersion != null) {
 			approved = fileVersion.isApproved();
+			draft = fileVersion.isDraft();
 			pending = fileVersion.isPending();
 		}
 		%>
@@ -314,18 +317,28 @@ portletURL.setParameter("name", name);
 		<aui:button-row>
 
 			<%
+			String saveButtonLabel = "save";
+
+			if ((fileVersion == null) || draft || approved) {
+				saveButtonLabel = "save-as-draft";
+			}
+
 			String publishButtonLabel = "publish";
 
 			if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, DLFileEntry.class.getName())) {
 				publishButtonLabel = "submit-for-publication";
 			}
 
-			if (pending) {
+			if (pending && !PropsValues.DL_FILE_ENTRY_DRAFTS_ENABLED) {
 				publishButtonLabel = "save";
 			}
 			%>
 
-			<aui:button disabled="<%= isLocked && !hasLock %>" name="publishButton" type="submit" value="<%= publishButtonLabel %>" />
+			<c:if test="<%= PropsValues.DL_FILE_ENTRY_DRAFTS_ENABLED %>">
+				<aui:button disabled="<%= isLocked && !hasLock %>" onClick='<%= renderResponse.getNamespace() + "saveFileEntry(true);" %>' name="saveButton" value="<%= saveButtonLabel %>" />
+			</c:if>
+
+			<aui:button disabled="<%= isLocked && !hasLock || (pending && PropsValues.DL_FILE_ENTRY_DRAFTS_ENABLED) %>" name="publishButton" type="submit" value="<%= publishButtonLabel %>" />
 
 			<c:if test="<%= (fileEntry != null) && ((isLocked && hasLock) || !isLocked) %>">
 				<c:choose>
@@ -367,8 +380,12 @@ portletURL.setParameter("name", name);
 		nameEl.innerHTML = "";
 	}
 
-	function <portlet:namespace />saveFileEntry() {
+	function <portlet:namespace />saveFileEntry(draft) {
 		<%= HtmlUtil.escape(uploadProgressId) %>.startProgress();
+
+		if (draft) {
+			document.<portlet:namespace />fm.<portlet:namespace />workflowAction.value = "<%= WorkflowConstants.ACTION_SAVE_DRAFT %>";
+		}
 
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= (fileEntry == null) ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
