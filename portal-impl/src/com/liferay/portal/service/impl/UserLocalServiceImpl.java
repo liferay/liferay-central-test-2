@@ -2558,7 +2558,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user.setPassword(PwdEncryptor.encrypt(user.getPassword()));
 			user.setPasswordEncrypted(true);
 
-			userLocalService.updateUser(user, false);
+			userPersistence.update(user, false);
 		}
 
 		// Check password policy to see if the is account locked out or if the
@@ -2591,7 +2591,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			user.setDigest(digest);
 
-			userLocalService.updateUser(user, false);
+			userPersistence.update(user, false);
 		}
 
 		// Post-authentication pipeline
