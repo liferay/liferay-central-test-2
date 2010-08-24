@@ -16,9 +16,9 @@ package com.liferay.portal.security.permission;
 
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
+import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
-import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.Map;
@@ -124,36 +124,29 @@ public class PermissionCacheUtil {
 	}
 
 	private static String _encodeKey(long userId, long groupId) {
-		StringBundler sb = new StringBundler(5);
+		CacheKeyGenerator cacheKeyGenerator =
+			CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME);
 
-		sb.append(CACHE_NAME);
-		sb.append(StringPool.POUND);
-		sb.append(userId);
-		sb.append(StringPool.POUND);
-		sb.append(groupId);
+		cacheKeyGenerator.append(Long.toString(userId));
+		cacheKeyGenerator.append(Long.toString(groupId));
 
-		return sb.toString();
+		return cacheKeyGenerator.finish();
 	}
 
 	private static String _encodeKey(
 		long userId, long groupId, String name, String primKey,
 		String actionId) {
 
-		StringBundler sb = new StringBundler(11);
+		CacheKeyGenerator cacheKeyGenerator =
+			CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME);
 
-		sb.append(CACHE_NAME);
-		sb.append(StringPool.POUND);
-		sb.append(userId);
-		sb.append(StringPool.POUND);
-		sb.append(groupId);
-		sb.append(StringPool.POUND);
-		sb.append(name);
-		sb.append(StringPool.POUND);
-		sb.append(primKey);
-		sb.append(StringPool.POUND);
-		sb.append(actionId);
+		cacheKeyGenerator.append(Long.toString(userId));
+		cacheKeyGenerator.append(Long.toString(groupId));
+		cacheKeyGenerator.append(name);
+		cacheKeyGenerator.append(primKey);
+		cacheKeyGenerator.append(actionId);
 
-		return sb.toString();
+		return cacheKeyGenerator.finish();
 	}
 
 	private static ThreadLocal<LRUMap> _localCache;
