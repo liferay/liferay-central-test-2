@@ -49,7 +49,9 @@ public class MonitoringProcessorManager
 		_monitoringProcessor.setLevel(namespace, level);
 	}
 
-	public void setMonitoringProcessor(MonitoringProcessor monitoringProcessor) {
+	public void setMonitoringProcessor(
+		MonitoringProcessor monitoringProcessor) {
+
 		_monitoringProcessor = monitoringProcessor;
 	}
 
