@@ -366,7 +366,7 @@ public class LayoutImporter {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				context.getCompanyId(), portletId);
 
-			if (portlet.isUndeployedPortlet() || !portlet.isActive()) {
+			if (!portlet.isActive() || portlet.isUndeployedPortlet()) {
 				continue;
 			}
 
