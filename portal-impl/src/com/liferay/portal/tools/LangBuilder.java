@@ -128,7 +128,8 @@ public class LangBuilder {
 		Properties properties = new Properties();
 
 		if (propertiesFile.exists()) {
-			properties.load(new FileInputStream(propertiesFile));
+			properties = PropertiesUtil.load(
+				new FileInputStream(propertiesFile), StringPool.UTF8);
 		}
 
 		String translationId = "en_" + languageId;
@@ -165,13 +166,13 @@ public class LangBuilder {
 				String key = line.substring(0, pos);
 				String value = line.substring(pos + 1, line.length());
 
-				String translatedText = _getProperty(properties, key);
+				String translatedText = properties.getProperty(key);
 
 				if ((translatedText == null) && (_renameKeys != null)) {
 					String renameKey = _renameKeys.getProperty(key);
 
 					if (renameKey != null) {
-						translatedText = _getProperty(properties, key);
+						translatedText = properties.getProperty(key);
 					}
 				}
 
@@ -192,7 +193,7 @@ public class LangBuilder {
 						String baseKey = line.substring(0, pos);
 
 						translatedText =
-							_getProperty(properties, baseKey) + AUTOMATIC_COPY;
+							properties.getProperty(baseKey) + AUTOMATIC_COPY;
 					}
 					else if (key.equals("lang.dir")) {
 						translatedText = "ltr";
@@ -277,20 +278,6 @@ public class LangBuilder {
 
 		unsyncBufferedReader.close();
 		unsyncBufferedWriter.close();
-	}
-
-	private String _getProperty(Properties properties, String key)
-		throws IOException {
-
-		String value = properties.getProperty(key);
-
-		if (Validator.isNotNull(value)) {
-			value = new String(
-				value.getBytes(StringPool.ISO_8859_1),
-				StringPool.UTF8);
-		}
-
-		return value;
 	}
 
 	private String _orderProperties(File propertiesFile) throws IOException {
