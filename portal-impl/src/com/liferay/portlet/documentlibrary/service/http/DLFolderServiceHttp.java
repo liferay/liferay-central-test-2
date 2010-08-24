@@ -761,13 +761,42 @@ public class DLFolderServiceHttp {
 		}
 	}
 
+	public static void getSubfolderIds(HttpPrincipal httpPrincipal,
+		java.util.List<java.lang.Long> folderIds, long groupId, long folderId,
+		boolean recurse)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
+					"getSubfolderIds", _getSubfolderIdsParameterTypes20);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					folderIds, groupId, folderId, recurse);
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static boolean hasInheritableLock(HttpPrincipal httpPrincipal,
 		long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
-					"hasInheritableLock", _hasInheritableLockParameterTypes20);
+					"hasInheritableLock", _hasInheritableLockParameterTypes21);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, folderId);
 
@@ -804,7 +833,7 @@ public class DLFolderServiceHttp {
 			java.rmi.RemoteException {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
-					"lockFolder", _lockFolderParameterTypes21);
+					"lockFolder", _lockFolderParameterTypes22);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, folderId);
 
@@ -846,7 +875,7 @@ public class DLFolderServiceHttp {
 			java.rmi.RemoteException {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
-					"lockFolder", _lockFolderParameterTypes22);
+					"lockFolder", _lockFolderParameterTypes23);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					folderId, owner, inheritable, expirationTime);
@@ -888,7 +917,7 @@ public class DLFolderServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
-					"refreshFolderLock", _refreshFolderLockParameterTypes23);
+					"refreshFolderLock", _refreshFolderLockParameterTypes24);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					lockUuid, expirationTime);
@@ -925,7 +954,7 @@ public class DLFolderServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
-					"unlockFolder", _unlockFolderParameterTypes24);
+					"unlockFolder", _unlockFolderParameterTypes25);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, lockUuid);
@@ -958,7 +987,7 @@ public class DLFolderServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
-					"unlockFolder", _unlockFolderParameterTypes25);
+					"unlockFolder", _unlockFolderParameterTypes26);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentFolderId, name, lockUuid);
@@ -994,7 +1023,7 @@ public class DLFolderServiceHttp {
 			java.rmi.RemoteException {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
-					"updateFolder", _updateFolderParameterTypes26);
+					"updateFolder", _updateFolderParameterTypes27);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					folderId, parentFolderId, name, description, serviceContext);
@@ -1036,7 +1065,7 @@ public class DLFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"verifyInheritableLock",
-					_verifyInheritableLockParameterTypes27);
+					_verifyInheritableLockParameterTypes28);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					folderId, lockUuid);
@@ -1128,31 +1157,34 @@ public class DLFolderServiceHttp {
 	private static final Class<?>[] _getSubfolderIdsParameterTypes19 = new Class[] {
 			java.util.List.class, long.class, long.class
 		};
-	private static final Class<?>[] _hasInheritableLockParameterTypes20 = new Class[] {
-			long.class
+	private static final Class<?>[] _getSubfolderIdsParameterTypes20 = new Class[] {
+			java.util.List.class, long.class, long.class, boolean.class
 		};
-	private static final Class<?>[] _lockFolderParameterTypes21 = new Class[] {
+	private static final Class<?>[] _hasInheritableLockParameterTypes21 = new Class[] {
 			long.class
 		};
 	private static final Class<?>[] _lockFolderParameterTypes22 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _lockFolderParameterTypes23 = new Class[] {
 			long.class, java.lang.String.class, boolean.class, long.class
 		};
-	private static final Class<?>[] _refreshFolderLockParameterTypes23 = new Class[] {
+	private static final Class<?>[] _refreshFolderLockParameterTypes24 = new Class[] {
 			java.lang.String.class, long.class
 		};
-	private static final Class<?>[] _unlockFolderParameterTypes24 = new Class[] {
+	private static final Class<?>[] _unlockFolderParameterTypes25 = new Class[] {
 			long.class, long.class, java.lang.String.class
 		};
-	private static final Class<?>[] _unlockFolderParameterTypes25 = new Class[] {
+	private static final Class<?>[] _unlockFolderParameterTypes26 = new Class[] {
 			long.class, long.class, java.lang.String.class,
 			java.lang.String.class
 		};
-	private static final Class<?>[] _updateFolderParameterTypes26 = new Class[] {
+	private static final Class<?>[] _updateFolderParameterTypes27 = new Class[] {
 			long.class, long.class, java.lang.String.class,
 			java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
-	private static final Class<?>[] _verifyInheritableLockParameterTypes27 = new Class[] {
+	private static final Class<?>[] _verifyInheritableLockParameterTypes28 = new Class[] {
 			long.class, java.lang.String.class
 		};
 }

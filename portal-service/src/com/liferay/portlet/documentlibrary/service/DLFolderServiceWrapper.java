@@ -172,6 +172,12 @@ public class DLFolderServiceWrapper implements DLFolderService {
 		_dlFolderService.getSubfolderIds(folderIds, groupId, folderId);
 	}
 
+	public void getSubfolderIds(java.util.List<java.lang.Long> folderIds,
+		long groupId, long folderId, boolean recurse)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_dlFolderService.getSubfolderIds(folderIds, groupId, folderId, recurse);
+	}
+
 	public boolean hasInheritableLock(long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
