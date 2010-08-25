@@ -54,6 +54,11 @@ public class URLCodec {
 			return StringPool.BLANK;
 		}
 
+		/*if (unescapeSpaces) {
+			encodedURLString = StringUtil.replace(
+				encodedURLString, "%20", StringPool.PLUS);
+		}*/
+
 		StringBuilder sb = new StringBuilder(encodedURLString.length());
 
 		CharsetDecoder charsetDecoder = null;
