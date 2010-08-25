@@ -1487,7 +1487,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 							query = new StringBundler(<#if entity.getOrder()??>${finderColsList?size + 2}<#else>${finderColsList?size + 1}</#if>);
 						}
 
-						query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_WHERE);
+						if (getDB().isSupportsInlineDistinct()) {
+							query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_WHERE);
+						}
+						else {
+							query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_NO_INLINE_DISTINCT_WHERE);
+						}
 
 						<#include "persistence_impl_finder_cols.ftl">
 
@@ -3537,6 +3542,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 	<#if entity.isPermissionCheckEnabled()>
 		private static final String _FILTER_SQL_SELECT_${entity.alias?upper_case}_WHERE = "SELECT DISTINCT {${entity.alias}.*} FROM ${entity.table} ${entity.alias} WHERE ";
+
+		private static final String _FILTER_SQL_SELECT_${entity.alias?upper_case}_NO_INLINE_DISTINCT_WHERE = "SELECT {${entity.alias}.*} FROM (SELECT DISTINCT ${entity.PKVarName} FROM ${entity.table}) ${entity.alias}2 INNER JOIN ${entity.table} ${entity.alias} ON (${entity.alias}2.${entity.PKVarName} = ${entity.alias}.${entity.PKVarName}) WHERE ";
 
 		private static final String _FILTER_SQL_COUNT_${entity.alias?upper_case}_WHERE = "SELECT COUNT(DISTINCT ${entity.alias}.${entity.PKVarName}) AS COUNT_VALUE FROM ${entity.table} ${entity.alias} WHERE ";
 
