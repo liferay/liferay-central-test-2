@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.servlet.UncommittedServletResponse;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
@@ -44,25 +45,30 @@ import org.apache.axis.utils.cache.MethodCache;
 public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 
 	public void destroy() {
-		DestroyThread destroyThread = new DestroyThread();
-
-		destroyThread.start();
-
-		try {
-			destroyThread.join();
+		if (ServerDetector.isWebLogic()) {
+			doDestroy();
 		}
-		catch (InterruptedException ie) {
-			throw new RuntimeException(ie);
-		}
+		else {
+			DestroyThread destroyThread = new DestroyThread();
 
-		Exception e = destroyThread.getException();
+			destroyThread.start();
 
-		if (e != null) {
-			if (e instanceof RuntimeException) {
-				throw (RuntimeException)e;
+			try {
+				destroyThread.join();
 			}
-			else {
-				throw new RuntimeException(e);
+			catch (InterruptedException ie) {
+				throw new RuntimeException(ie);
+			}
+
+			Exception e = destroyThread.getException();
+
+			if (e != null) {
+				if (e instanceof RuntimeException) {
+					throw (RuntimeException)e;
+				}
+				else {
+					throw new RuntimeException(e);
+				}
 			}
 		}
 	}
@@ -70,25 +76,30 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 	public void init(ServletConfig servletConfig) throws ServletException {
 		_servletConfig = servletConfig;
 
-		InitThread initThread = new InitThread();
-
-		initThread.start();
-
-		try {
-			initThread.join();
+		if (ServerDetector.isWebLogic()) {
+			doInit();
 		}
-		catch (InterruptedException ie) {
-			throw new ServletException(ie);
-		}
+		else {
+			InitThread initThread = new InitThread();
 
-		Exception e = initThread.getException();
+			initThread.start();
 
-		if (e != null) {
-			if (e instanceof ServletException) {
-				throw (ServletException)e;
+			try {
+				initThread.join();
 			}
-			else {
-				throw new ServletException(e);
+			catch (InterruptedException ie) {
+				throw new ServletException(ie);
+			}
+
+			Exception e = initThread.getException();
+
+			if (e != null) {
+				if (e instanceof ServletException) {
+					throw (ServletException)e;
+				}
+				else {
+					throw new ServletException(e);
+				}
 			}
 		}
 	}
@@ -150,14 +161,17 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 		}
 	}
 
-	protected void callParentDestroy() {
+	protected void doDestroy() {
 		_ready = false;
 
 		super.destroy();
 	}
 
-	protected void callParentInit() throws ServletException {
+	protected void doInit() throws ServletException {
 		super.init(_servletConfig);
+
+		_fixContent = GetterUtil.getBoolean(
+			_servletConfig.getInitParameter("fix-content"), true);
 
 		_ready = true;
 	}
@@ -235,7 +249,7 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 
 		public void run() {
 			try {
-				callParentDestroy();
+				doDestroy();
 			}
 			catch (Exception e) {
 				_exception = e;
@@ -258,10 +272,7 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 
 		public void run() {
 			try {
-				callParentInit();
-
-				_fixContent = GetterUtil.getBoolean(
-					_servletConfig.getInitParameter("fix-content"), true);
+				doInit();
 			}
 			catch (Exception e) {
 				_exception = e;
