@@ -1151,7 +1151,7 @@ public class DLFileEntryLocalServiceImpl
 
 			if (DLUtil.compareVersions(
 					fileEntry.getVersion(),
-					latestFileVersion.getVersion()) < 0) {
+					latestFileVersion.getVersion()) <= 0) {
 
 				fileEntry.setTitle(latestFileVersion.getTitle());
 				fileEntry.setDescription(latestFileVersion.getDescription());
