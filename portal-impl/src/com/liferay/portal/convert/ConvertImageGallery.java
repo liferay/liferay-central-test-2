@@ -99,7 +99,7 @@ public class ConvertImageGallery extends ConvertProcess {
 			if (_sourceHook instanceof DatabaseHook) {
 				DB db = DBFactoryUtil.getDB();
 
-				db.runSQL("update Image set text_ = \"\"");
+				db.runSQL("update Image set text_ = ''");
 			}
 
 			PropsValues.IMAGE_HOOK_IMPL = targetHookClassName;
