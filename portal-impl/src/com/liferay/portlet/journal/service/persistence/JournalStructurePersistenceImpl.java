@@ -1461,7 +1461,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -2471,7 +2476,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
@@ -3413,6 +3423,8 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	private static final String _FINDER_COLUMN_G_P_PARENTSTRUCTUREID_2 = "journalStructure.parentStructureId = ?";
 	private static final String _FINDER_COLUMN_G_P_PARENTSTRUCTUREID_3 = "(journalStructure.parentStructureId IS NULL OR journalStructure.parentStructureId = ?)";
 	private static final String _FILTER_SQL_SELECT_JOURNALSTRUCTURE_WHERE = "SELECT DISTINCT {journalStructure.*} FROM JournalStructure journalStructure WHERE ";
+	private static final String _FILTER_SQL_SELECT_JOURNALSTRUCTURE_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {journalStructure.*} FROM (SELECT DISTINCT id FROM JournalStructure) journalStructure2 INNER JOIN JournalStructure journalStructure ON (journalStructure2.id = journalStructure.id) WHERE ";
 	private static final String _FILTER_SQL_COUNT_JOURNALSTRUCTURE_WHERE = "SELECT COUNT(DISTINCT journalStructure.id) AS COUNT_VALUE FROM JournalStructure journalStructure WHERE ";
 	private static final String _FILTER_COLUMN_PK = "journalStructure.id";
 	private static final String _FILTER_COLUMN_USERID = "journalStructure.userId";

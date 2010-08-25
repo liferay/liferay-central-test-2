@@ -1525,7 +1525,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SQL_SELECT_IGIMAGE_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_IGIMAGE_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -2502,7 +2507,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SQL_SELECT_IGIMAGE_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_IGIMAGE_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
@@ -3116,7 +3126,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SQL_SELECT_IGIMAGE_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_IGIMAGE_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
@@ -3765,7 +3780,12 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				query = new StringBundler(5);
 			}
 
-			query.append(_FILTER_SQL_SELECT_IGIMAGE_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_IGIMAGE_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
 
@@ -5193,6 +5213,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	}
 
 	private static final String _FILTER_SQL_SELECT_IGIMAGE_WHERE = "SELECT DISTINCT {igImage.*} FROM IGImage igImage WHERE ";
+	private static final String _FILTER_SQL_SELECT_IGIMAGE_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {igImage.*} FROM (SELECT DISTINCT imageId FROM IGImage) igImage2 INNER JOIN IGImage igImage ON (igImage2.imageId = igImage.imageId) WHERE ";
 	private static final String _FILTER_SQL_COUNT_IGIMAGE_WHERE = "SELECT COUNT(DISTINCT igImage.imageId) AS COUNT_VALUE FROM IGImage igImage WHERE ";
 	private static final String _FILTER_COLUMN_PK = "igImage.imageId";
 	private static final String _FILTER_COLUMN_USERID = "igImage.userId";

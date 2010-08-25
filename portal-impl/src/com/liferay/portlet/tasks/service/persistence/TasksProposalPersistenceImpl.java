@@ -861,7 +861,12 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SQL_SELECT_TASKSPROPOSAL_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_TASKSPROPOSAL_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_TASKSPROPOSAL_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1326,7 +1331,12 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SQL_SELECT_TASKSPROPOSAL_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_TASKSPROPOSAL_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_TASKSPROPOSAL_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
@@ -2055,6 +2065,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "tasksProposal.classPK = ?";
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_3 = "(tasksProposal.classPK IS NULL OR tasksProposal.classPK = ?)";
 	private static final String _FILTER_SQL_SELECT_TASKSPROPOSAL_WHERE = "SELECT DISTINCT {tasksProposal.*} FROM TasksProposal tasksProposal WHERE ";
+	private static final String _FILTER_SQL_SELECT_TASKSPROPOSAL_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {tasksProposal.*} FROM (SELECT DISTINCT proposalId FROM TasksProposal) tasksProposal2 INNER JOIN TasksProposal tasksProposal ON (tasksProposal2.proposalId = tasksProposal.proposalId) WHERE ";
 	private static final String _FILTER_SQL_COUNT_TASKSPROPOSAL_WHERE = "SELECT COUNT(DISTINCT tasksProposal.proposalId) AS COUNT_VALUE FROM TasksProposal tasksProposal WHERE ";
 	private static final String _FILTER_COLUMN_PK = "tasksProposal.proposalId";
 	private static final String _FILTER_COLUMN_USERID = "tasksProposal.userId";

@@ -1376,7 +1376,12 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SQL_SELECT_POLLSQUESTION_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_POLLSQUESTION_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_POLLSQUESTION_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1898,6 +1903,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "pollsQuestion.groupId = ?";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "pollsQuestion.groupId = ?";
 	private static final String _FILTER_SQL_SELECT_POLLSQUESTION_WHERE = "SELECT DISTINCT {pollsQuestion.*} FROM PollsQuestion pollsQuestion WHERE ";
+	private static final String _FILTER_SQL_SELECT_POLLSQUESTION_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {pollsQuestion.*} FROM (SELECT DISTINCT questionId FROM PollsQuestion) pollsQuestion2 INNER JOIN PollsQuestion pollsQuestion ON (pollsQuestion2.questionId = pollsQuestion.questionId) WHERE ";
 	private static final String _FILTER_SQL_COUNT_POLLSQUESTION_WHERE = "SELECT COUNT(DISTINCT pollsQuestion.questionId) AS COUNT_VALUE FROM PollsQuestion pollsQuestion WHERE ";
 	private static final String _FILTER_COLUMN_PK = "pollsQuestion.questionId";
 	private static final String _FILTER_COLUMN_USERID = "pollsQuestion.userId";

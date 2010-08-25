@@ -1470,7 +1470,12 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SQL_SELECT_DLFOLDER_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_DLFOLDER_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_DLFOLDER_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -2274,7 +2279,12 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SQL_SELECT_DLFOLDER_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_DLFOLDER_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_DLFOLDER_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
@@ -3811,6 +3821,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	private static final String _FINDER_COLUMN_G_P_N_NAME_2 = "dlFolder.name = ?";
 	private static final String _FINDER_COLUMN_G_P_N_NAME_3 = "(dlFolder.name IS NULL OR dlFolder.name = ?)";
 	private static final String _FILTER_SQL_SELECT_DLFOLDER_WHERE = "SELECT DISTINCT {dlFolder.*} FROM DLFolder dlFolder WHERE ";
+	private static final String _FILTER_SQL_SELECT_DLFOLDER_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {dlFolder.*} FROM (SELECT DISTINCT folderId FROM DLFolder) dlFolder2 INNER JOIN DLFolder dlFolder ON (dlFolder2.folderId = dlFolder.folderId) WHERE ";
 	private static final String _FILTER_SQL_COUNT_DLFOLDER_WHERE = "SELECT COUNT(DISTINCT dlFolder.folderId) AS COUNT_VALUE FROM DLFolder dlFolder WHERE ";
 	private static final String _FILTER_COLUMN_PK = "dlFolder.folderId";
 	private static final String _FILTER_COLUMN_USERID = "dlFolder.userId";

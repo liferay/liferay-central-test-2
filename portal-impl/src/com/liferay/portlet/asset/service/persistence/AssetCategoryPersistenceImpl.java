@@ -1536,7 +1536,12 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SQL_SELECT_ASSETCATEGORY_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_ASSETCATEGORY_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_ASSETCATEGORY_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -5461,6 +5466,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	private static final String _FINDER_COLUMN_P_N_V_NAME_3 = "(assetCategory.name IS NULL OR assetCategory.name = ?) AND ";
 	private static final String _FINDER_COLUMN_P_N_V_VOCABULARYID_2 = "assetCategory.vocabularyId = ?";
 	private static final String _FILTER_SQL_SELECT_ASSETCATEGORY_WHERE = "SELECT DISTINCT {assetCategory.*} FROM AssetCategory assetCategory WHERE ";
+	private static final String _FILTER_SQL_SELECT_ASSETCATEGORY_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {assetCategory.*} FROM (SELECT DISTINCT categoryId FROM AssetCategory) assetCategory2 INNER JOIN AssetCategory assetCategory ON (assetCategory2.categoryId = assetCategory.categoryId) WHERE ";
 	private static final String _FILTER_SQL_COUNT_ASSETCATEGORY_WHERE = "SELECT COUNT(DISTINCT assetCategory.categoryId) AS COUNT_VALUE FROM AssetCategory assetCategory WHERE ";
 	private static final String _FILTER_COLUMN_PK = "assetCategory.categoryId";
 	private static final String _FILTER_COLUMN_USERID = "assetCategory.userId";

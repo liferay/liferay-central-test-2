@@ -1432,7 +1432,12 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SQL_SELECT_JOURNALFEED_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_JOURNALFEED_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_JOURNALFEED_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -2271,6 +2276,8 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 	private static final String _FINDER_COLUMN_G_F_FEEDID_2 = "journalFeed.feedId = ?";
 	private static final String _FINDER_COLUMN_G_F_FEEDID_3 = "(journalFeed.feedId IS NULL OR journalFeed.feedId = ?)";
 	private static final String _FILTER_SQL_SELECT_JOURNALFEED_WHERE = "SELECT DISTINCT {journalFeed.*} FROM JournalFeed journalFeed WHERE ";
+	private static final String _FILTER_SQL_SELECT_JOURNALFEED_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {journalFeed.*} FROM (SELECT DISTINCT id FROM JournalFeed) journalFeed2 INNER JOIN JournalFeed journalFeed ON (journalFeed2.id = journalFeed.id) WHERE ";
 	private static final String _FILTER_SQL_COUNT_JOURNALFEED_WHERE = "SELECT COUNT(DISTINCT journalFeed.id) AS COUNT_VALUE FROM JournalFeed journalFeed WHERE ";
 	private static final String _FILTER_COLUMN_PK = "journalFeed.id";
 	private static final String _FILTER_COLUMN_USERID = "journalFeed.userId";

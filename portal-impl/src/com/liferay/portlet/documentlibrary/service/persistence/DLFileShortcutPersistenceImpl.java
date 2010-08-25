@@ -1441,7 +1441,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SQL_SELECT_DLFILESHORTCUT_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_DLFILESHORTCUT_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_DLFILESHORTCUT_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
@@ -1924,7 +1929,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SQL_SELECT_DLFILESHORTCUT_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_DLFILESHORTCUT_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_DLFILESHORTCUT_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_F_S_GROUPID_2);
 
@@ -2436,7 +2446,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SQL_SELECT_DLFILESHORTCUT_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_DLFILESHORTCUT_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_DLFILESHORTCUT_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_TF_TN_GROUPID_2);
 
@@ -2988,7 +3003,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				query = new StringBundler(5);
 			}
 
-			query.append(_FILTER_SQL_SELECT_DLFILESHORTCUT_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_DLFILESHORTCUT_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_DLFILESHORTCUT_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_TF_TN_S_GROUPID_2);
 
@@ -4043,6 +4063,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	private static final String _FINDER_COLUMN_G_TF_TN_S_TONAME_3 = "(dlFileShortcut.toName IS NULL OR dlFileShortcut.toName = ?) AND ";
 	private static final String _FINDER_COLUMN_G_TF_TN_S_STATUS_2 = "dlFileShortcut.status = ?";
 	private static final String _FILTER_SQL_SELECT_DLFILESHORTCUT_WHERE = "SELECT DISTINCT {dlFileShortcut.*} FROM DLFileShortcut dlFileShortcut WHERE ";
+	private static final String _FILTER_SQL_SELECT_DLFILESHORTCUT_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {dlFileShortcut.*} FROM (SELECT DISTINCT fileShortcutId FROM DLFileShortcut) dlFileShortcut2 INNER JOIN DLFileShortcut dlFileShortcut ON (dlFileShortcut2.fileShortcutId = dlFileShortcut.fileShortcutId) WHERE ";
 	private static final String _FILTER_SQL_COUNT_DLFILESHORTCUT_WHERE = "SELECT COUNT(DISTINCT dlFileShortcut.fileShortcutId) AS COUNT_VALUE FROM DLFileShortcut dlFileShortcut WHERE ";
 	private static final String _FILTER_COLUMN_PK = "dlFileShortcut.fileShortcutId";
 	private static final String _FILTER_COLUMN_USERID = "dlFileShortcut.userId";

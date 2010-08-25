@@ -1454,7 +1454,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SQL_SELECT_IGFOLDER_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_IGFOLDER_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_IGFOLDER_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -2258,7 +2263,12 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SQL_SELECT_IGFOLDER_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_IGFOLDER_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_IGFOLDER_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
@@ -3314,6 +3324,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	private static final String _FINDER_COLUMN_G_P_N_NAME_2 = "igFolder.name = ?";
 	private static final String _FINDER_COLUMN_G_P_N_NAME_3 = "(igFolder.name IS NULL OR igFolder.name = ?)";
 	private static final String _FILTER_SQL_SELECT_IGFOLDER_WHERE = "SELECT DISTINCT {igFolder.*} FROM IGFolder igFolder WHERE ";
+	private static final String _FILTER_SQL_SELECT_IGFOLDER_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {igFolder.*} FROM (SELECT DISTINCT folderId FROM IGFolder) igFolder2 INNER JOIN IGFolder igFolder ON (igFolder2.folderId = igFolder.folderId) WHERE ";
 	private static final String _FILTER_SQL_COUNT_IGFOLDER_WHERE = "SELECT COUNT(DISTINCT igFolder.folderId) AS COUNT_VALUE FROM IGFolder igFolder WHERE ";
 	private static final String _FILTER_COLUMN_PK = "igFolder.folderId";
 	private static final String _FILTER_COLUMN_USERID = "igFolder.userId";

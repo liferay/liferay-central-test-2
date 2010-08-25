@@ -912,7 +912,12 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SQL_SELECT_SHOPPINGORDER_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_SHOPPINGORDER_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_SHOPPINGORDER_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1712,7 +1717,12 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 				query = new StringBundler(5);
 			}
 
-			query.append(_FILTER_SQL_SELECT_SHOPPINGORDER_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_SHOPPINGORDER_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_SHOPPINGORDER_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_U_PPPS_GROUPID_2);
 
@@ -2429,6 +2439,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	private static final String _FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_2 = "shoppingOrder.ppPaymentStatus = ?";
 	private static final String _FINDER_COLUMN_G_U_PPPS_PPPAYMENTSTATUS_3 = "(shoppingOrder.ppPaymentStatus IS NULL OR shoppingOrder.ppPaymentStatus = ?)";
 	private static final String _FILTER_SQL_SELECT_SHOPPINGORDER_WHERE = "SELECT DISTINCT {shoppingOrder.*} FROM ShoppingOrder shoppingOrder WHERE ";
+	private static final String _FILTER_SQL_SELECT_SHOPPINGORDER_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {shoppingOrder.*} FROM (SELECT DISTINCT orderId FROM ShoppingOrder) shoppingOrder2 INNER JOIN ShoppingOrder shoppingOrder ON (shoppingOrder2.orderId = shoppingOrder.orderId) WHERE ";
 	private static final String _FILTER_SQL_COUNT_SHOPPINGORDER_WHERE = "SELECT COUNT(DISTINCT shoppingOrder.orderId) AS COUNT_VALUE FROM ShoppingOrder shoppingOrder WHERE ";
 	private static final String _FILTER_COLUMN_PK = "shoppingOrder.orderId";
 	private static final String _FILTER_COLUMN_USERID = "shoppingOrder.userId";

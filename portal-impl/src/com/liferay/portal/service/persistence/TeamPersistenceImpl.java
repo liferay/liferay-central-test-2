@@ -829,7 +829,12 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SQL_SELECT_TEAM_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_TEAM_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_TEAM_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -2221,6 +2226,8 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	private static final String _FINDER_COLUMN_G_N_NAME_2 = "team.name = ?";
 	private static final String _FINDER_COLUMN_G_N_NAME_3 = "(team.name IS NULL OR team.name = ?)";
 	private static final String _FILTER_SQL_SELECT_TEAM_WHERE = "SELECT DISTINCT {team.*} FROM Team team WHERE ";
+	private static final String _FILTER_SQL_SELECT_TEAM_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {team.*} FROM (SELECT DISTINCT teamId FROM Team) team2 INNER JOIN Team team ON (team2.teamId = team.teamId) WHERE ";
 	private static final String _FILTER_SQL_COUNT_TEAM_WHERE = "SELECT COUNT(DISTINCT team.teamId) AS COUNT_VALUE FROM Team team WHERE ";
 	private static final String _FILTER_COLUMN_PK = "team.teamId";
 	private static final String _FILTER_COLUMN_USERID = "team.userId";

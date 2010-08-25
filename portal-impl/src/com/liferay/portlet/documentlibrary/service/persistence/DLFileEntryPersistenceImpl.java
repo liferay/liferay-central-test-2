@@ -1572,7 +1572,12 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SQL_SELECT_DLFILEENTRY_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_DLFILEENTRY_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_DLFILEENTRY_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -2375,7 +2380,12 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SQL_SELECT_DLFILEENTRY_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_DLFILEENTRY_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_DLFILEENTRY_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
@@ -2992,7 +3002,12 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SQL_SELECT_DLFILEENTRY_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_DLFILEENTRY_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_DLFILEENTRY_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_F_GROUPID_2);
 
@@ -3781,7 +3796,12 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query = new StringBundler(5);
 			}
 
-			query.append(_FILTER_SQL_SELECT_DLFILEENTRY_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_DLFILEENTRY_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_DLFILEENTRY_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_U_F_GROUPID_2);
 
@@ -5994,6 +6014,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	}
 
 	private static final String _FILTER_SQL_SELECT_DLFILEENTRY_WHERE = "SELECT DISTINCT {dlFileEntry.*} FROM DLFileEntry dlFileEntry WHERE ";
+	private static final String _FILTER_SQL_SELECT_DLFILEENTRY_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {dlFileEntry.*} FROM (SELECT DISTINCT fileEntryId FROM DLFileEntry) dlFileEntry2 INNER JOIN DLFileEntry dlFileEntry ON (dlFileEntry2.fileEntryId = dlFileEntry.fileEntryId) WHERE ";
 	private static final String _FILTER_SQL_COUNT_DLFILEENTRY_WHERE = "SELECT COUNT(DISTINCT dlFileEntry.fileEntryId) AS COUNT_VALUE FROM DLFileEntry dlFileEntry WHERE ";
 	private static final String _FILTER_COLUMN_PK = "dlFileEntry.fileEntryId";
 	private static final String _FILTER_COLUMN_USERID = "dlFileEntry.userId";

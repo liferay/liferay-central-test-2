@@ -791,7 +791,12 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SQL_SELECT_ASSETTAG_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_ASSETTAG_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_ASSETTAG_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1811,6 +1816,8 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	private static final String _SQL_CONTAINSASSETENTRY = "SELECT COUNT(*) AS COUNT_VALUE FROM AssetEntries_AssetTags WHERE tagId = ? AND entryId = ?";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "assetTag.groupId = ?";
 	private static final String _FILTER_SQL_SELECT_ASSETTAG_WHERE = "SELECT DISTINCT {assetTag.*} FROM AssetTag assetTag WHERE ";
+	private static final String _FILTER_SQL_SELECT_ASSETTAG_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {assetTag.*} FROM (SELECT DISTINCT tagId FROM AssetTag) assetTag2 INNER JOIN AssetTag assetTag ON (assetTag2.tagId = assetTag.tagId) WHERE ";
 	private static final String _FILTER_SQL_COUNT_ASSETTAG_WHERE = "SELECT COUNT(DISTINCT assetTag.tagId) AS COUNT_VALUE FROM AssetTag assetTag WHERE ";
 	private static final String _FILTER_COLUMN_PK = "assetTag.tagId";
 	private static final String _FILTER_COLUMN_USERID = "assetTag.userId";

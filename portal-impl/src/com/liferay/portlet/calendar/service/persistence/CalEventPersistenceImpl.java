@@ -1766,7 +1766,12 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SQL_SELECT_CALEVENT_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_CALEVENT_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_CALEVENT_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -2591,7 +2596,12 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SQL_SELECT_CALEVENT_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_CALEVENT_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_CALEVENT_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_T_GROUPID_2);
 
@@ -3071,7 +3081,12 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SQL_SELECT_CALEVENT_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_CALEVENT_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_CALEVENT_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_R_GROUPID_2);
 
@@ -4020,6 +4035,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	private static final String _FINDER_COLUMN_G_R_GROUPID_2 = "calEvent.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_R_REPEATING_2 = "calEvent.repeating = ?";
 	private static final String _FILTER_SQL_SELECT_CALEVENT_WHERE = "SELECT DISTINCT {calEvent.*} FROM CalEvent calEvent WHERE ";
+	private static final String _FILTER_SQL_SELECT_CALEVENT_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {calEvent.*} FROM (SELECT DISTINCT eventId FROM CalEvent) calEvent2 INNER JOIN CalEvent calEvent ON (calEvent2.eventId = calEvent.eventId) WHERE ";
 	private static final String _FILTER_SQL_COUNT_CALEVENT_WHERE = "SELECT COUNT(DISTINCT calEvent.eventId) AS COUNT_VALUE FROM CalEvent calEvent WHERE ";
 	private static final String _FILTER_COLUMN_PK = "calEvent.eventId";
 	private static final String _FILTER_COLUMN_USERID = "calEvent.userId";

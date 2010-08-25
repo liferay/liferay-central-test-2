@@ -797,7 +797,12 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SQL_SELECT_SHOPPINGCATEGORY_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_SHOPPINGCATEGORY_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_SHOPPINGCATEGORY_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1264,7 +1269,12 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SQL_SELECT_SHOPPINGCATEGORY_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_SHOPPINGCATEGORY_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_SHOPPINGCATEGORY_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
@@ -1761,6 +1771,8 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "shoppingCategory.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_P_PARENTCATEGORYID_2 = "shoppingCategory.parentCategoryId = ?";
 	private static final String _FILTER_SQL_SELECT_SHOPPINGCATEGORY_WHERE = "SELECT DISTINCT {shoppingCategory.*} FROM ShoppingCategory shoppingCategory WHERE ";
+	private static final String _FILTER_SQL_SELECT_SHOPPINGCATEGORY_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {shoppingCategory.*} FROM (SELECT DISTINCT categoryId FROM ShoppingCategory) shoppingCategory2 INNER JOIN ShoppingCategory shoppingCategory ON (shoppingCategory2.categoryId = shoppingCategory.categoryId) WHERE ";
 	private static final String _FILTER_SQL_COUNT_SHOPPINGCATEGORY_WHERE = "SELECT COUNT(DISTINCT shoppingCategory.categoryId) AS COUNT_VALUE FROM ShoppingCategory shoppingCategory WHERE ";
 	private static final String _FILTER_COLUMN_PK = "shoppingCategory.categoryId";
 	private static final String _FILTER_COLUMN_USERID = "shoppingCategory.userId";

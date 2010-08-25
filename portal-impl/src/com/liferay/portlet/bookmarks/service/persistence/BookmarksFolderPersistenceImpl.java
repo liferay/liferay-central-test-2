@@ -1404,7 +1404,12 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_BOOKMARKSFOLDER_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -2210,7 +2215,12 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_BOOKMARKSFOLDER_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_BOOKMARKSFOLDER_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
 
@@ -2933,6 +2943,8 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "bookmarksFolder.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_P_PARENTFOLDERID_2 = "bookmarksFolder.parentFolderId = ?";
 	private static final String _FILTER_SQL_SELECT_BOOKMARKSFOLDER_WHERE = "SELECT DISTINCT {bookmarksFolder.*} FROM BookmarksFolder bookmarksFolder WHERE ";
+	private static final String _FILTER_SQL_SELECT_BOOKMARKSFOLDER_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {bookmarksFolder.*} FROM (SELECT DISTINCT folderId FROM BookmarksFolder) bookmarksFolder2 INNER JOIN BookmarksFolder bookmarksFolder ON (bookmarksFolder2.folderId = bookmarksFolder.folderId) WHERE ";
 	private static final String _FILTER_SQL_COUNT_BOOKMARKSFOLDER_WHERE = "SELECT COUNT(DISTINCT bookmarksFolder.folderId) AS COUNT_VALUE FROM BookmarksFolder bookmarksFolder WHERE ";
 	private static final String _FILTER_COLUMN_PK = "bookmarksFolder.folderId";
 	private static final String _FILTER_COLUMN_USERID = "bookmarksFolder.userId";

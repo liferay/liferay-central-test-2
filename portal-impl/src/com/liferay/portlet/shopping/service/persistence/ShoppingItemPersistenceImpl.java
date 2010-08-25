@@ -1384,7 +1384,12 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SQL_SELECT_SHOPPINGITEM_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_SHOPPINGITEM_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_SHOPPINGITEM_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
 
@@ -2472,6 +2477,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 	private static final String _FINDER_COLUMN_C_S_SKU_2 = "shoppingItem.sku = ?";
 	private static final String _FINDER_COLUMN_C_S_SKU_3 = "(shoppingItem.sku IS NULL OR shoppingItem.sku = ?)";
 	private static final String _FILTER_SQL_SELECT_SHOPPINGITEM_WHERE = "SELECT DISTINCT {shoppingItem.*} FROM ShoppingItem shoppingItem WHERE ";
+	private static final String _FILTER_SQL_SELECT_SHOPPINGITEM_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {shoppingItem.*} FROM (SELECT DISTINCT itemId FROM ShoppingItem) shoppingItem2 INNER JOIN ShoppingItem shoppingItem ON (shoppingItem2.itemId = shoppingItem.itemId) WHERE ";
 	private static final String _FILTER_SQL_COUNT_SHOPPINGITEM_WHERE = "SELECT COUNT(DISTINCT shoppingItem.itemId) AS COUNT_VALUE FROM ShoppingItem shoppingItem WHERE ";
 	private static final String _FILTER_COLUMN_PK = "shoppingItem.itemId";
 	private static final String _FILTER_COLUMN_USERID = "shoppingItem.userId";

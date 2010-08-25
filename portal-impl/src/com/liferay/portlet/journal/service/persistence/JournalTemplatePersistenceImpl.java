@@ -1500,7 +1500,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SQL_SELECT_JOURNALTEMPLATE_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_JOURNALTEMPLATE_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_JOURNALTEMPLATE_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -2635,7 +2640,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SQL_SELECT_JOURNALTEMPLATE_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_JOURNALTEMPLATE_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_JOURNALTEMPLATE_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
@@ -3644,6 +3654,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_2 = "journalTemplate.structureId = ?";
 	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_3 = "(journalTemplate.structureId IS NULL OR journalTemplate.structureId = ?)";
 	private static final String _FILTER_SQL_SELECT_JOURNALTEMPLATE_WHERE = "SELECT DISTINCT {journalTemplate.*} FROM JournalTemplate journalTemplate WHERE ";
+	private static final String _FILTER_SQL_SELECT_JOURNALTEMPLATE_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {journalTemplate.*} FROM (SELECT DISTINCT id FROM JournalTemplate) journalTemplate2 INNER JOIN JournalTemplate journalTemplate ON (journalTemplate2.id = journalTemplate.id) WHERE ";
 	private static final String _FILTER_SQL_COUNT_JOURNALTEMPLATE_WHERE = "SELECT COUNT(DISTINCT journalTemplate.id) AS COUNT_VALUE FROM JournalTemplate journalTemplate WHERE ";
 	private static final String _FILTER_COLUMN_PK = "journalTemplate.id";
 	private static final String _FILTER_COLUMN_USERID = "journalTemplate.userId";

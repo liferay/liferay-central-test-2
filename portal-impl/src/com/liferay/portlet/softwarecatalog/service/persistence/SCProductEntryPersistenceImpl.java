@@ -899,7 +899,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 				query = new StringBundler(3);
 			}
 
-			query.append(_FILTER_SQL_SELECT_SCPRODUCTENTRY_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_SCPRODUCTENTRY_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_SCPRODUCTENTRY_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1703,7 +1708,12 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 				query = new StringBundler(4);
 			}
 
-			query.append(_FILTER_SQL_SELECT_SCPRODUCTENTRY_WHERE);
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(_FILTER_SQL_SELECT_SCPRODUCTENTRY_WHERE);
+			}
+			else {
+				query.append(_FILTER_SQL_SELECT_SCPRODUCTENTRY_NO_INLINE_DISTINCT_WHERE);
+			}
 
 			query.append(_FINDER_COLUMN_G_U_GROUPID_2);
 
@@ -3202,6 +3212,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 	private static final String _FINDER_COLUMN_RG_RA_REPOARTIFACTID_2 = "lower(scProductEntry.repoArtifactId) = lower(?)";
 	private static final String _FINDER_COLUMN_RG_RA_REPOARTIFACTID_3 = "(scProductEntry.repoArtifactId IS NULL OR lower(scProductEntry.repoArtifactId) = lower(?))";
 	private static final String _FILTER_SQL_SELECT_SCPRODUCTENTRY_WHERE = "SELECT DISTINCT {scProductEntry.*} FROM SCProductEntry scProductEntry WHERE ";
+	private static final String _FILTER_SQL_SELECT_SCPRODUCTENTRY_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {scProductEntry.*} FROM (SELECT DISTINCT productEntryId FROM SCProductEntry) scProductEntry2 INNER JOIN SCProductEntry scProductEntry ON (scProductEntry2.productEntryId = scProductEntry.productEntryId) WHERE ";
 	private static final String _FILTER_SQL_COUNT_SCPRODUCTENTRY_WHERE = "SELECT COUNT(DISTINCT scProductEntry.productEntryId) AS COUNT_VALUE FROM SCProductEntry scProductEntry WHERE ";
 	private static final String _FILTER_COLUMN_PK = "scProductEntry.productEntryId";
 	private static final String _FILTER_COLUMN_USERID = "scProductEntry.userId";
