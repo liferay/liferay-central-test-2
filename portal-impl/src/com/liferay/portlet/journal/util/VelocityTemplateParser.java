@@ -182,9 +182,10 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 		for (Element el : parent.elements("dynamic-element")) {
 			Element content = el.element("dynamic-content");
 
-			if (content == null) {
-				throw new TransformException(
-					"Element missing \"dynamic-content\"");
+			String data = StringPool.BLANK;
+
+			if (content != null) {
+				data = content.getText();
 			}
 
 			String name = el.attributeValue("name", "");
@@ -197,12 +198,12 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 			String type = el.attributeValue("type", "");
 
 			TemplateNode node = new TemplateNode(
-				themeDisplay, name, CDATAUtil.strip(content.getText()), type);
+				themeDisplay, name, CDATAUtil.strip(data), type);
 
 			if (el.element("dynamic-element") != null) {
 				node.appendChildren(extractDynamicContents(themeDisplay, el));
 			}
-			else if (content.element("option") != null) {
+			else if ((content != null) && (content.element("option") != null)) {
 				for (Element option : content.elements("option")) {
 					node.appendOption(CDATAUtil.strip(option.getText()));
 				}
