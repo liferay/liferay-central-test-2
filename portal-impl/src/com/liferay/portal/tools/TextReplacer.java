@@ -27,44 +27,66 @@ import org.apache.tools.ant.DirectoryScanner;
 public class TextReplacer {
 
 	public static void main(String[] args) {
-		String dir = System.getProperty("text.replacer.dir");
+		String dirs = System.getProperty("text.replacer.dirs");
 		String includes = System.getProperty("text.replacer.includes");
 		String excludes = System.getProperty("text.replacer.excludes");
 		String tokenFile = System.getProperty("text.replacer.token.file");
 		String valueFile = System.getProperty("text.replacer.value.file");
 
-		new TextReplacer(dir, includes, excludes, tokenFile, valueFile);
+		new TextReplacer(dirs, includes, excludes, tokenFile, valueFile);
 	}
 
 	public TextReplacer(
-		String dir, String includes, String excludes, String tokenFile,
+		String dirs, String includes, String excludes, String tokenFile,
 		String valueFile) {
 
 		try {
-			if (!dir.endsWith("/")) {
-				dir += "/";
+			String token = _fileUtil.read(tokenFile);
+
+			if (token == null) {
+				System.out.println(tokenFile + " does not exist");
+
+				return;
 			}
 
-			String token = _fileUtil.read(tokenFile);
 			String value = _fileUtil.read(valueFile);
 
-			DirectoryScanner directoryScanner = new DirectoryScanner();
+			if (value == null) {
+				System.out.println(valueFile + " does not exist");
 
-			directoryScanner.setBasedir(dir);
-			directoryScanner.setIncludes(StringUtil.split(includes));
-			directoryScanner.setExcludes(StringUtil.split(excludes));
+				return;
+			}
 
-			directoryScanner.scan();
+			for (String dir : StringUtil.split(dirs)) {
+				if (!dir.endsWith("/")) {
+					dir += "/";
+				}
 
-			for (String fileName : directoryScanner.getIncludedFiles()) {
-				File file = new File(dir + fileName);
+				if (!_fileUtil.exists(dir)) {
+					System.out.println(dir + " does not exist");
 
-				String content = _fileUtil.read(file);
+					continue;
+				}
 
-				String newContent = StringUtil.replace(content, token, value);
+				DirectoryScanner directoryScanner = new DirectoryScanner();
 
-				if (!content.equals(newContent)) {
-					_fileUtil.write(file, newContent);
+				directoryScanner.setBasedir(dir);
+				directoryScanner.setIncludes(StringUtil.split(includes));
+				directoryScanner.setExcludes(StringUtil.split(excludes));
+
+				directoryScanner.scan();
+
+				for (String fileName : directoryScanner.getIncludedFiles()) {
+					File file = new File(dir + fileName);
+
+					String content = _fileUtil.read(file);
+
+					String newContent = StringUtil.replace(
+						content, token, value);
+
+					if (!content.equals(newContent)) {
+						_fileUtil.write(file, newContent);
+					}
 				}
 			}
 		}
