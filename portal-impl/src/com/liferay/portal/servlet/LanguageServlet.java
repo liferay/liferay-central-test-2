@@ -17,6 +17,7 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -93,6 +94,9 @@ public class LanguageServlet extends HttpServlet {
 		}
 
 		response.setContentType(ContentTypes.TEXT_PLAIN_UTF8);
+		response.setHeader(
+			HttpHeaders.CONTENT_DISPOSITION,
+			"attachment; filename=language.txt");
 
 		ServletResponseUtil.write(response, value.getBytes(StringPool.UTF8));
 	}
