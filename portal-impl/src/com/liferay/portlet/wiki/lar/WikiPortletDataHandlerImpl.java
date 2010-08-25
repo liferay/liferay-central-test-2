@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -390,7 +391,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 				page.isHead()) {
 
 				for (String attachment : page.getAttachmentsFiles()) {
-					int pos = attachment.lastIndexOf(StringPool.SLASH);
+					int pos = attachment.lastIndexOf(CharPool.SLASH);
 
 					String name = attachment.substring(pos + 1);
 					String binPath = getPageAttachementBinPath(

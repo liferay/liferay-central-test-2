@@ -17,6 +17,7 @@ package com.liferay.portal.servlet.filters.i18n;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -80,7 +81,7 @@ public class I18nFilter extends BasePortalFilter {
 
 		String i18nLanguageId = requestURI.substring(1);
 
-		int pos = requestURI.indexOf(StringPool.SLASH, 1);
+		int pos = requestURI.indexOf(CharPool.SLASH, 1);
 
 		if (pos != -1) {
 			i18nLanguageId = i18nLanguageId.substring(0, pos - 1);
@@ -150,10 +151,10 @@ public class I18nFilter extends BasePortalFilter {
 
 				requestURI += StringPool.SLASH;
 
-				x = requestURI.indexOf(StringPool.SLASH, 1);
+				x = requestURI.indexOf(CharPool.SLASH, 1);
 			}
 
-			int y = requestURI.indexOf(StringPool.SLASH, x + 1);
+			int y = requestURI.indexOf(CharPool.SLASH, x + 1);
 
 			if (y == -1) {
 
@@ -161,7 +162,7 @@ public class I18nFilter extends BasePortalFilter {
 
 				requestURI += StringPool.SLASH;
 
-				y = requestURI.indexOf(StringPool.SLASH, x + 1);
+				y = requestURI.indexOf(CharPool.SLASH, x + 1);
 			}
 
 			String groupFriendlyURL = requestURI.substring(x, y);

@@ -18,8 +18,8 @@ import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.SetUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
@@ -583,7 +583,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		ResourceActionsUtil.checkAction(name, actionId);
 
-		if (name.indexOf(StringPool.PERIOD) != -1) {
+		if (name.indexOf(CharPool.PERIOD) != -1) {
 
 			// Check unsupported model actions
 

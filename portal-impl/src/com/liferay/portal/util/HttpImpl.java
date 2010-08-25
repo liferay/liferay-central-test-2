@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -164,14 +165,14 @@ public class HttpImpl implements Http {
 
 		String anchor = StringPool.BLANK;
 
-		int pos = url.indexOf(StringPool.POUND);
+		int pos = url.indexOf(CharPool.POUND);
 
 		if (pos != -1) {
 			anchor = url.substring(pos);
 			url = url.substring(0, pos);
 		}
 
-		if (url.indexOf(StringPool.QUESTION) == -1) {
+		if (url.indexOf(CharPool.QUESTION) == -1) {
 			url += StringPool.QUESTION;
 		}
 
@@ -279,7 +280,7 @@ public class HttpImpl implements Http {
 	public String getDomain(String url) {
 		url = removeProtocol(url);
 
-		int pos = url.indexOf(StringPool.SLASH);
+		int pos = url.indexOf(CharPool.SLASH);
 
 		if (pos != -1) {
 			return url.substring(0, pos);
@@ -392,7 +393,7 @@ public class HttpImpl implements Http {
 			return url;
 		}
 
-		int pos = url.indexOf(StringPool.QUESTION);
+		int pos = url.indexOf(CharPool.QUESTION);
 
 		if (pos == -1) {
 			return StringPool.BLANK;
@@ -568,7 +569,7 @@ public class HttpImpl implements Http {
 	public String removeDomain(String url) {
 		url = removeProtocol(url);
 
-		int pos = url.indexOf(StringPool.SLASH);
+		int pos = url.indexOf(CharPool.SLASH);
 
 		if (pos > 0) {
 			return url.substring(pos);
@@ -579,7 +580,7 @@ public class HttpImpl implements Http {
 	}
 
 	public String removeParameter(String url, String name) {
-		int pos = url.indexOf(StringPool.QUESTION);
+		int pos = url.indexOf(CharPool.QUESTION);
 
 		if (pos == -1) {
 			return url;
@@ -587,7 +588,7 @@ public class HttpImpl implements Http {
 
 		String anchor = StringPool.BLANK;
 
-		int anchorPos = url.indexOf(StringPool.POUND);
+		int anchorPos = url.indexOf(CharPool.POUND);
 
 		if (anchorPos != -1) {
 			anchor = url.substring(anchorPos);

@@ -17,12 +17,12 @@ package com.liferay.portal.cluster;
 import com.liferay.portal.kernel.cluster.Address;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.IPDetector;
 import com.liferay.portal.kernel.util.OSDetector;
 import com.liferay.portal.kernel.util.SocketUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsValues;
 
@@ -145,7 +145,7 @@ public abstract class ClusterBase {
 		String host = autodetectAddress;
 		int port = 80;
 
-		int index = autodetectAddress.indexOf(StringPool.COLON);
+		int index = autodetectAddress.indexOf(CharPool.COLON);
 
 		if (index != -1) {
 			host = autodetectAddress.substring(0, index);
@@ -183,7 +183,7 @@ public abstract class ClusterBase {
 		for (String systemProperty :
 				PropsValues.CLUSTER_LINK_CHANNEL_SYSTEM_PROPERTIES) {
 
-			int index = systemProperty.indexOf(StringPool.COLON);
+			int index = systemProperty.indexOf(CharPool.COLON);
 
 			if (index == -1) {
 				continue;

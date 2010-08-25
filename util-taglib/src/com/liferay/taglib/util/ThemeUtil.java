@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -104,7 +105,7 @@ public class ThemeUtil {
 			ServletContextPool.put(servletContextName, servletContext);
 		}
 
-		int pos = page.lastIndexOf(StringPool.PERIOD);
+		int pos = page.lastIndexOf(CharPool.PERIOD);
 
 		StringBundler sb = new StringBundler(7);
 
@@ -266,7 +267,7 @@ public class ThemeUtil {
 			ServletContextPool.put(servletContextName, servletContext);
 		}
 
-		int pos = page.lastIndexOf(StringPool.PERIOD);
+		int pos = page.lastIndexOf(CharPool.PERIOD);
 
 		StringBundler sb = new StringBundler(7);
 

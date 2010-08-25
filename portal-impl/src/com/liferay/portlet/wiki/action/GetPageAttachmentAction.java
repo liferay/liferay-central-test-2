@@ -16,9 +16,9 @@ package com.liferay.portlet.wiki.action;
 
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.documentlibrary.service.DLServiceUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
@@ -95,7 +95,7 @@ public class GetPageAttachmentAction extends PortletAction {
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		int pos = fileName.indexOf(StringPool.SLASH);
+		int pos = fileName.indexOf(CharPool.SLASH);
 
 		if (pos != -1) {
 			title = fileName.substring(0, pos);

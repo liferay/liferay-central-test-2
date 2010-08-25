@@ -18,6 +18,7 @@ import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.struts.LastPath;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -208,7 +209,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 		for (String languageId : languageIds) {
 			if (friendlyURL.startsWith(languageId)) {
-				int pos = friendlyURL.indexOf(StringPool.SLASH, 1);
+				int pos = friendlyURL.indexOf(CharPool.SLASH, 1);
 
 				if (((pos != -1) && (pos != languageId.length())) ||
 					((pos == -1) && !friendlyURL.equals(languageId))) {

@@ -14,7 +14,7 @@
 
 package com.liferay.portal.security.auth;
 
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
@@ -30,8 +30,8 @@ public class DefaultScreenNameValidator implements ScreenNameValidator {
 		if (Validator.isEmailAddress(screenName) ||
 			(screenName.equalsIgnoreCase(CYRUS)) ||
 			(screenName.equalsIgnoreCase(POSTFIX)) ||
-			(screenName.indexOf(StringPool.SLASH) != -1) ||
-			(screenName.indexOf(StringPool.UNDERLINE) != -1)) {
+			(screenName.indexOf(CharPool.SLASH) != -1) ||
+			(screenName.indexOf(CharPool.UNDERLINE) != -1)) {
 
 			return false;
 		}

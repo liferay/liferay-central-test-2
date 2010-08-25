@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
@@ -397,8 +398,8 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 			String url = con.getMetaData().getURL();
 
-			int x = url.indexOf(StringPool.COLON);
-			int y = url.indexOf(StringPool.COLON, x + 1);
+			int x = url.indexOf(CharPool.COLON);
+			int y = url.indexOf(CharPool.COLON, x + 1);
 
 			String urlPrefix = url.substring(x + 1, y);
 

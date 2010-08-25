@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.googleapps.GUserManager;
 import com.liferay.portal.kernel.googleapps.GoogleAppsFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.FullNameGenerator;
 import com.liferay.portal.security.auth.FullNameGeneratorFactory;
@@ -151,7 +151,7 @@ public class GoogleHook implements Hook {
 	}
 
 	private String _getNickname(String emailAddress) {
-		int pos = emailAddress.indexOf(StringPool.AT);
+		int pos = emailAddress.indexOf(CharPool.AT);
 
 		return emailAddress.substring(0, pos);
 	}

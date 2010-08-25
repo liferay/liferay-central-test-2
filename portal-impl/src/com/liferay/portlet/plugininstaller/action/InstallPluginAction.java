@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -259,7 +260,7 @@ public class InstallPluginAction extends PortletAction {
 		else {
 			fileName = GetterUtil.getString(uploadRequest.getFileName("file"));
 
-			int pos = fileName.lastIndexOf(StringPool.PERIOD);
+			int pos = fileName.lastIndexOf(CharPool.PERIOD);
 
 			if (pos != -1) {
 				deploymentContext = fileName.substring(0, pos);
@@ -355,9 +356,9 @@ public class InstallPluginAction extends PortletAction {
 					BaseDeployer.DEPLOY_TO_PREFIX + deploymentContext + ".war";
 			}
 			else {
-				fileName = url.substring(url.lastIndexOf(StringPool.SLASH) + 1);
+				fileName = url.substring(url.lastIndexOf(CharPool.SLASH) + 1);
 
-				int pos = fileName.lastIndexOf(StringPool.PERIOD);
+				int pos = fileName.lastIndexOf(CharPool.PERIOD);
 
 				if (pos != -1) {
 					deploymentContext = fileName.substring(0, pos);

@@ -18,8 +18,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
@@ -368,7 +368,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			throw new DuplicateFolderNameException();
 		}
 
-		if (name.indexOf(StringPool.PERIOD) != -1) {
+		if (name.indexOf(CharPool.PERIOD) != -1) {
 			String nameWithExtension = name;
 
 			name = FileUtil.stripExtension(nameWithExtension);

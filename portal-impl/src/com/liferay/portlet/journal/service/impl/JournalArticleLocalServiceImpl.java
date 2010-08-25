@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -2975,7 +2976,7 @@ public class JournalArticleLocalServiceImpl
 
 	protected void validate(String articleId) throws PortalException {
 		if ((Validator.isNull(articleId)) ||
-			(articleId.indexOf(StringPool.SPACE) != -1)) {
+			(articleId.indexOf(CharPool.SPACE) != -1)) {
 
 			throw new ArticleIdException();
 		}

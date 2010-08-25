@@ -14,6 +14,7 @@
 
 package com.liferay.util.bridges.php;
 
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -48,7 +49,7 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 
 		StringBundler sb = new StringBundler();
 
-		int pos = phpURI.indexOf(StringPool.QUESTION);
+		int pos = phpURI.indexOf(CharPool.QUESTION);
 
 		if (pos != -1) {
 			_path = phpURI.substring(0, pos);

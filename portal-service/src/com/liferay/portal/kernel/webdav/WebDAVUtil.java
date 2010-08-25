@@ -19,6 +19,7 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -229,7 +230,7 @@ public class WebDAVUtil {
 			beg += TOKEN_PREFIX.length();
 
 			if (beg < value.length()) {
-				int end = value.indexOf(">", beg);
+				int end = value.indexOf(CharPool.GREATER_THAN, beg);
 
 				token = GetterUtil.getString(value.substring(beg, end));
 			}

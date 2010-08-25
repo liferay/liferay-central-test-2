@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -223,11 +224,11 @@ public class S3Hook extends BaseHook {
 
 				String key = s3Object.getKey();
 
-				int x = key.indexOf(StringPool.SLASH);
+				int x = key.indexOf(CharPool.SLASH);
 
-				x = key.indexOf(StringPool.SLASH, x + 1);
+				x = key.indexOf(CharPool.SLASH, x + 1);
 
-				int y = key.lastIndexOf(StringPool.SLASH);
+				int y = key.lastIndexOf(CharPool.SLASH);
 
 				list.add(key.substring(x, y));
 			}
@@ -363,9 +364,9 @@ public class S3Hook extends BaseHook {
 
 				String newPrefix = getKey(companyId, newRepositoryId);
 
-				int x = oldKey.indexOf(StringPool.SLASH);
+				int x = oldKey.indexOf(CharPool.SLASH);
 
-				x = oldKey.indexOf(StringPool.SLASH, x + 1);
+				x = oldKey.indexOf(CharPool.SLASH, x + 1);
 
 				String newKey =
 					newPrefix + oldKey.substring(x + 1, oldKey.length());
@@ -434,9 +435,9 @@ public class S3Hook extends BaseHook {
 
 				int x = oldKey.indexOf(StringPool.SLASH);
 
-				x = oldKey.indexOf(StringPool.SLASH, x + 1);
+				x = oldKey.indexOf(CharPool.SLASH, x + 1);
 
-				x = oldKey.indexOf(StringPool.SLASH, x + 1);
+				x = oldKey.indexOf(CharPool.SLASH, x + 1);
 
 				String newKey =
 					newPrefix + oldKey.substring(x + 1, oldKey.length());
@@ -529,11 +530,11 @@ public class S3Hook extends BaseHook {
 	}
 
 	protected String getFileName(String key) {
-		int x = key.indexOf(StringPool.SLASH);
+		int x = key.indexOf(CharPool.SLASH);
 
-		x = key.indexOf(StringPool.SLASH, x + 1);
+		x = key.indexOf(CharPool.SLASH, x + 1);
 
-		int y = key.lastIndexOf(StringPool.SLASH);
+		int y = key.lastIndexOf(CharPool.SLASH);
 
 		return key.substring(x + 1, y);
 	}
@@ -558,7 +559,7 @@ public class S3Hook extends BaseHook {
 
 			String headKey = keys[keys.length - 1];
 
-			int x = headKey.lastIndexOf(StringPool.SLASH);
+			int x = headKey.lastIndexOf(CharPool.SLASH);
 
 			return headKey.substring(x + 1, headKey.length());
 		}

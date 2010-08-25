@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -530,7 +531,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			return true;
 		}
 		catch (NoSuchFolderException nsfe) {
-			if (name.indexOf(StringPool.PERIOD) == -1) {
+			if (name.indexOf(CharPool.PERIOD) == -1) {
 				return false;
 			}
 

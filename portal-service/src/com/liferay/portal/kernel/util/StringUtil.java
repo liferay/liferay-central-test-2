@@ -1599,7 +1599,7 @@ public class StringUtil {
 					}
 
 					if (token.length() > width) {
-						int pos = token.indexOf(StringPool.OPEN_PARENTHESIS);
+						int pos = token.indexOf(CharPool.OPEN_PARENTHESIS);
 
 						if (pos != -1) {
 							sb.append(token.substring(0, pos + 1));

@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.journal.model.JournalTemplate;
@@ -43,9 +44,9 @@ public class JournalTemplateVelocityResourceListener
 			int pos = source.indexOf(JOURNAL_SEPARATOR + StringPool.SLASH);
 
 			if (pos != -1) {
-				int x = source.indexOf(StringPool.SLASH, pos);
-				int y = source.indexOf(StringPool.SLASH, x + 1);
-				int z = source.indexOf(StringPool.SLASH, y + 1);
+				int x = source.indexOf(CharPool.SLASH, pos);
+				int y = source.indexOf(CharPool.SLASH, x + 1);
+				int z = source.indexOf(CharPool.SLASH, y + 1);
 
 				long companyId = GetterUtil.getLong(source.substring(x + 1, y));
 				long groupId = GetterUtil.getLong(source.substring(y + 1, z));

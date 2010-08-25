@@ -310,13 +310,13 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			beginPos = currentLocation;
 
-			int endPos1 = content.indexOf(StringPool.APOSTROPHE, beginPos);
-			int endPos2 = content.indexOf(StringPool.CLOSE_BRACKET, beginPos);
+			int endPos1 = content.indexOf(CharPool.APOSTROPHE, beginPos);
+			int endPos2 = content.indexOf(CharPool.CLOSE_BRACKET, beginPos);
 			int endPos3 = content.indexOf(
-				StringPool.CLOSE_PARENTHESIS, beginPos);
-			int endPos4 = content.indexOf(StringPool.LESS_THAN, beginPos);
-			int endPos5 = content.indexOf(StringPool.QUOTE, beginPos);
-			int endPos6 = content.indexOf(StringPool.SPACE, beginPos);
+				CharPool.CLOSE_PARENTHESIS, beginPos);
+			int endPos4 = content.indexOf(CharPool.LESS_THAN, beginPos);
+			int endPos5 = content.indexOf(CharPool.QUOTE, beginPos);
+			int endPos6 = content.indexOf(CharPool.SPACE, beginPos);
 
 			int endPos = endPos1;
 
@@ -369,7 +369,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 				else {
 					oldParameters = oldParameters.substring(
-						oldParameters.indexOf(StringPool.QUESTION) + 1);
+						oldParameters.indexOf(CharPool.QUESTION) + 1);
 
 					map = MapUtil.toLinkedHashMap(
 						oldParameters.split(StringPool.AMPERSAND),
@@ -483,13 +483,13 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				return sb.toString();
 			}
 
-			int endPos1 = content.indexOf(StringPool.APOSTROPHE, beginPos);
-			int endPos2 = content.indexOf(StringPool.CLOSE_BRACKET, beginPos);
+			int endPos1 = content.indexOf(CharPool.APOSTROPHE, beginPos);
+			int endPos2 = content.indexOf(CharPool.CLOSE_BRACKET, beginPos);
 			int endPos3 = content.indexOf(
-				StringPool.CLOSE_PARENTHESIS, beginPos);
-			int endPos4 = content.indexOf(StringPool.LESS_THAN, beginPos);
-			int endPos5 = content.indexOf(StringPool.QUOTE, beginPos);
-			int endPos6 = content.indexOf(StringPool.SPACE, beginPos);
+				CharPool.CLOSE_PARENTHESIS, beginPos);
+			int endPos4 = content.indexOf(CharPool.LESS_THAN, beginPos);
+			int endPos5 = content.indexOf(CharPool.QUOTE, beginPos);
+			int endPos6 = content.indexOf(CharPool.SPACE, beginPos);
 
 			int endPos = endPos1;
 
@@ -651,17 +651,17 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			int endPos1 = content.indexOf(
-				StringPool.APOSTROPHE, beginPos + hrefLength);
+				CharPool.APOSTROPHE, beginPos + hrefLength);
 			int endPos2 = content.indexOf(
-				StringPool.CLOSE_BRACKET, beginPos + hrefLength);
+				CharPool.CLOSE_BRACKET, beginPos + hrefLength);
 			int endPos3 = content.indexOf(
-				StringPool.CLOSE_PARENTHESIS, beginPos + hrefLength);
+				CharPool.CLOSE_PARENTHESIS, beginPos + hrefLength);
 			int endPos4 = content.indexOf(
-				StringPool.LESS_THAN, beginPos + hrefLength);
+				CharPool.LESS_THAN, beginPos + hrefLength);
 			int endPos5 = content.indexOf(
-				StringPool.QUOTE, beginPos + hrefLength);
+				CharPool.QUOTE, beginPos + hrefLength);
 			int endPos6 = content.indexOf(
-				StringPool.SPACE, beginPos + hrefLength);
+				CharPool.SPACE, beginPos + hrefLength);
 
 			int endPos = endPos1;
 
@@ -703,7 +703,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			int beginGroupPos = content.indexOf(
-				StringPool.SLASH, beginPos + hrefLength + 1);
+				CharPool.SLASH, beginPos + hrefLength + 1);
 
 			if (beginGroupPos == -1) {
 				beginPos--;
@@ -712,7 +712,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			int endGroupPos = content.indexOf(
-				StringPool.SLASH, beginGroupPos + 1);
+				CharPool.SLASH, beginGroupPos + 1);
 
 			if (endGroupPos == -1) {
 				beginPos--;
@@ -1198,14 +1198,14 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				if (fileName.contains(StringPool.SLASH)) {
 					fileName = fileName.substring(
-						fileName.lastIndexOf(StringPool.SLASH) + 1);
+						fileName.lastIndexOf(CharPool.SLASH) + 1);
 				}
 
 				if (fileName.endsWith(".xml")) {
 					continue;
 				}
 
-				int pos = fileName.lastIndexOf(StringPool.PERIOD);
+				int pos = fileName.lastIndexOf(CharPool.PERIOD);
 
 				if (pos != -1) {
 					fileName = fileName.substring(0, pos);

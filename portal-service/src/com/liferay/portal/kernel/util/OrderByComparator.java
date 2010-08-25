@@ -46,8 +46,8 @@ public abstract class OrderByComparator implements Comparator, Serializable {
 		for (int i = 0; i < parts.length; i++) {
 			String part = parts[i];
 
-			int x = part.indexOf(StringPool.PERIOD);
-			int y = part.indexOf(StringPool.SPACE, x);
+			int x = part.indexOf(CharPool.PERIOD);
+			int y = part.indexOf(CharPool.SPACE, x);
 
 			if (y == -1) {
 				y = part.length();

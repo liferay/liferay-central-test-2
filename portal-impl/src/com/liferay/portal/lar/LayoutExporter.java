@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
@@ -708,13 +709,13 @@ public class LayoutExporter {
 			return;
 		}
 
-		int x = url.indexOf(StringPool.SLASH, 1);
+		int x = url.indexOf(CharPool.SLASH, 1);
 
 		if (x == -1) {
 			return;
 		}
 
-		int y = url.indexOf(StringPool.SLASH, x + 1);
+		int y = url.indexOf(CharPool.SLASH, x + 1);
 
 		if (y == -1) {
 			return;

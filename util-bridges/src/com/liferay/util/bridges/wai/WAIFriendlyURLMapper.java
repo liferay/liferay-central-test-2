@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.Router;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PortletConstants;
@@ -78,7 +79,8 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 		Map<String, Object> requestContext) {
 
 		int x = friendlyURLPath.indexOf(_MAPPING);
-		int y = friendlyURLPath.indexOf("/", x + _MAPPING.length() + 1);
+		int y = friendlyURLPath.indexOf(
+			CharPool.SLASH, x + _MAPPING.length() + 1);
 
 		if (x == -1) {
 			return;

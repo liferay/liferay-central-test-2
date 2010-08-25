@@ -121,7 +121,7 @@ public class UnicodeProperties extends HashMap<String, String> {
 		line = line.trim();
 
 		if (!_isComment(line)) {
-			int pos = line.indexOf(StringPool.EQUAL);
+			int pos = line.indexOf(CharPool.EQUAL);
 
 			if (pos != -1) {
 				String key = line.substring(0, pos).trim();

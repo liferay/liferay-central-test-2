@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -706,15 +707,15 @@ public class PortalLDAPUtil {
 		int start = 0;
 		int end = 0;
 
-		int x = attributeId.indexOf(StringPool.SEMICOLON);
+		int x = attributeId.indexOf(CharPool.SEMICOLON);
 
 		if (x < 0) {
 			originalAttributeId = attributeId;
 			end = PropsValues.LDAP_RANGE_SIZE - 1;
 		}
 		else {
-			int y = attributeId.indexOf(StringPool.EQUAL, x);
-			int z = attributeId.indexOf(StringPool.DASH, y);
+			int y = attributeId.indexOf(CharPool.EQUAL, x);
+			int z = attributeId.indexOf(CharPool.DASH, y);
 
 			originalAttributeId = attributeId.substring(0, x);
 			start = GetterUtil.getInteger(attributeId.substring(y + 1, z));

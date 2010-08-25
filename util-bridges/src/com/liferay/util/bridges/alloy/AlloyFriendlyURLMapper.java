@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.servlet.HttpMethods;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortalUtil;
 
@@ -65,7 +66,7 @@ public class AlloyFriendlyURLMapper extends DefaultFriendlyURLMapper {
 
 		// Remove method
 
-		int pos = friendlyURLPath.indexOf(StringPool.SLASH);
+		int pos = friendlyURLPath.indexOf(CharPool.SLASH);
 
 		friendlyURLPath = friendlyURLPath.substring(pos);
 

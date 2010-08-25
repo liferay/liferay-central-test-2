@@ -17,6 +17,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.Base64;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -139,7 +140,7 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 
 		emailAddress = emailAddress.trim().toLowerCase();
 
-		int pos = emailAddress.indexOf(StringPool.AT);
+		int pos = emailAddress.indexOf(CharPool.AT);
 
 		if (pos == -1) {
 			return false;

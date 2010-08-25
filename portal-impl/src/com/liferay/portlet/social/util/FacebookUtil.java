@@ -16,6 +16,7 @@ package com.liferay.portlet.social.util;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.StringPool;
@@ -71,7 +72,7 @@ public class FacebookUtil {
 		String appPath = StringPool.BLANK;
 
 		if (pos != -1) {
-			pos = path.indexOf(StringPool.SLASH, pos + 3);
+			pos = path.indexOf(CharPool.SLASH, pos + 3);
 
 			if (pos != -1) {
 				appPath = path.substring(pos);
@@ -86,7 +87,7 @@ public class FacebookUtil {
 
 		if (currentURL.startsWith(Http.HTTP)) {
 			int pos = currentURL.indexOf(
-				StringPool.SLASH, Http.HTTPS_WITH_SLASH.length());
+				CharPool.SLASH, Http.HTTPS_WITH_SLASH.length());
 
 			path = currentURL.substring(pos);
 		}

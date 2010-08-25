@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -62,7 +63,7 @@ public class I18nServlet extends HttpServlet {
 				String urlPattern = el.elementText("url-pattern");
 
 				String languageId = urlPattern.substring(
-					0, urlPattern.lastIndexOf(StringPool.SLASH));
+					0, urlPattern.lastIndexOf(CharPool.SLASH));
 
 				_languageIds.add(languageId);
 			}
@@ -119,7 +120,7 @@ public class I18nServlet extends HttpServlet {
 
 		String i18nLanguageId = request.getServletPath();
 
-		int pos = i18nLanguageId.lastIndexOf(StringPool.SLASH);
+		int pos = i18nLanguageId.lastIndexOf(CharPool.SLASH);
 
 		i18nLanguageId = i18nLanguageId.substring(pos + 1);
 

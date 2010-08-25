@@ -17,6 +17,7 @@ package com.liferay.portal.util;
 import com.liferay.portal.CookieNotSupportedException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.CookieUtil;
@@ -166,19 +167,19 @@ public class CookieKeys {
 			return host;
 		}
 
-		int x = host.lastIndexOf(StringPool.PERIOD);
+		int x = host.lastIndexOf(CharPool.PERIOD);
 
 		if (x <= 0) {
 			return null;
 		}
 
-		int y = host.lastIndexOf(StringPool.PERIOD, x - 1);
+		int y = host.lastIndexOf(CharPool.PERIOD, x - 1);
 
 		if (y <= 0) {
 			return StringPool.PERIOD + host;
 		}
 
-		int z = host.lastIndexOf(StringPool.PERIOD, y - 1);
+		int z = host.lastIndexOf(CharPool.PERIOD, y - 1);
 
 		String domain = null;
 

@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.dao.orm.CacheMode;
 import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.ScrollableResults;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -214,7 +215,7 @@ public class QueryImpl implements Query {
 	}
 
 	private String _transformPositionalParams(String queryString) {
-		if (queryString.indexOf(StringPool.QUESTION) == -1) {
+		if (queryString.indexOf(CharPool.QUESTION) == -1) {
 			return queryString;
 		}
 
@@ -224,7 +225,7 @@ public class QueryImpl implements Query {
 		int from = 0;
 		int to = 0;
 
-		while ((to = queryString.indexOf(StringPool.QUESTION, from)) != -1) {
+		while ((to = queryString.indexOf(CharPool.QUESTION, from)) != -1) {
 			sb.append(queryString.substring(from, to));
 			sb.append(StringPool.QUESTION);
 			sb.append(i++);

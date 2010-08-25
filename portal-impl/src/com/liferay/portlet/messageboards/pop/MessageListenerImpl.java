@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.pop.MessageListenerException;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -216,7 +217,7 @@ public class MessageListenerImpl implements MessageListener {
 	}
 
 	protected long getCategoryId(String recipient) {
-		int pos = recipient.indexOf(StringPool.AT);
+		int pos = recipient.indexOf(CharPool.AT);
 
 		String target = recipient.substring(
 			MBUtil.POP_PORTLET_PREFIX.length() + getOffset(), pos);
@@ -228,7 +229,7 @@ public class MessageListenerImpl implements MessageListener {
 
 	protected Company getCompany(String recipient) throws Exception {
 		int pos =
-			recipient.indexOf(StringPool.AT) +
+			recipient.indexOf(CharPool.AT) +
 				MBUtil.POP_SERVER_SUBDOMAIN_LENGTH + 1;
 
 		if (MBUtil.POP_SERVER_SUBDOMAIN_LENGTH > 0) {
@@ -263,7 +264,7 @@ public class MessageListenerImpl implements MessageListener {
 
 		// Get the parent message ID from the recipient address
 
-		int pos = recipient.indexOf(StringPool.AT);
+		int pos = recipient.indexOf(CharPool.AT);
 
 		String target = recipient.substring(
 			MBUtil.POP_PORTLET_PREFIX.length(), pos);

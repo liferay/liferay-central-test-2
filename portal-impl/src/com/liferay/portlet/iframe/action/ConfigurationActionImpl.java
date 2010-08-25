@@ -16,6 +16,7 @@ package com.liferay.portlet.iframe.action;
 
 import com.liferay.portal.kernel.portlet.BaseConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -93,7 +94,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		preferences.setValue("hidden-variables", hiddenVariables);
 
 		for (String htmlAttribute : htmlAttributes) {
-			int pos = htmlAttribute.indexOf(StringPool.EQUAL);
+			int pos = htmlAttribute.indexOf(CharPool.EQUAL);
 
 			if (pos == -1) {
 				continue;

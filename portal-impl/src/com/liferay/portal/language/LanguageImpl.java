@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.language.Language;
 import com.liferay.portal.kernel.language.LanguageWrapper;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -422,7 +423,7 @@ public class LanguageImpl implements Language {
 		String value = null;
 
 		try {
-			int pos = desc.indexOf(StringPool.SPACE);
+			int pos = desc.indexOf(CharPool.SPACE);
 
 			int x = GetterUtil.getInteger(desc.substring(0, pos));
 
@@ -509,7 +510,7 @@ public class LanguageImpl implements Language {
 		for (int i = 0; i < localesArray.length; i++) {
 			String languageId = localesArray[i];
 
-			int pos = languageId.indexOf(StringPool.UNDERLINE);
+			int pos = languageId.indexOf(CharPool.UNDERLINE);
 
 			String language = languageId.substring(0, pos);
 			//String country = languageId.substring(pos + 1);
@@ -592,7 +593,7 @@ public class LanguageImpl implements Language {
 
 		if ((value == null) || value.equals(defaultValue)) {
 			if (key.endsWith(StringPool.CLOSE_BRACKET)) {
-				int pos = key.lastIndexOf(StringPool.OPEN_BRACKET);
+				int pos = key.lastIndexOf(CharPool.OPEN_BRACKET);
 
 				if (pos != -1) {
 					key = key.substring(0, pos);

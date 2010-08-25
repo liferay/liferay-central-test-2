@@ -14,6 +14,7 @@
 
 package com.liferay.portal.struts;
 
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portlet.PortletResponseImpl;
@@ -39,7 +40,7 @@ public class StrutsActionPortletURL extends PortletURLImplWrapper {
 	public void setParameter(String name, String value) {
 		if (name.equals("struts_action")) {
 			if (!value.startsWith(_strutsPath)) {
-				int pos = value.lastIndexOf(StringPool.SLASH);
+				int pos = value.lastIndexOf(CharPool.SLASH);
 
 				value = _strutsPath + value.substring(pos + 1, value.length());
 			}
@@ -58,7 +59,7 @@ public class StrutsActionPortletURL extends PortletURLImplWrapper {
 					String value = values[i];
 
 					if (!value.startsWith(_strutsPath)) {
-						int pos = value.lastIndexOf(StringPool.SLASH);
+						int pos = value.lastIndexOf(CharPool.SLASH);
 
 						value =
 							_strutsPath +

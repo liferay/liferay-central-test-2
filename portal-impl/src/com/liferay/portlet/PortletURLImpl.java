@@ -786,7 +786,7 @@ public class PortletURLImpl
 
 			if (Validator.isNotNull(friendlyURLPath)) {
 				if (themeDisplay.isFacebook()) {
-					int pos = friendlyURLPath.indexOf(StringPool.SLASH, 1);
+					int pos = friendlyURLPath.indexOf(CharPool.SLASH, 1);
 
 					if (pos != -1) {
 						sb.append(friendlyURLPath.substring(pos));
@@ -1044,7 +1044,7 @@ public class PortletURLImpl
 
 			// Facebook requires the path portion of the URL to end with a slash
 
-			int pos = result.indexOf(StringPool.QUESTION);
+			int pos = result.indexOf(CharPool.QUESTION);
 
 			if (pos == -1) {
 				if (!result.endsWith(StringPool.SLASH)) {

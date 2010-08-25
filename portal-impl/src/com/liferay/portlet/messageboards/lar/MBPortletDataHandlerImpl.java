@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -336,7 +337,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				message.isAttachments()) {
 
 				for (String attachment : message.getAttachmentsFiles()) {
-					int pos = attachment.lastIndexOf(StringPool.FORWARD_SLASH);
+					int pos = attachment.lastIndexOf(CharPool.FORWARD_SLASH);
 
 					String name = attachment.substring(pos + 1);
 					String binPath = getMessageAttachementBinPath(

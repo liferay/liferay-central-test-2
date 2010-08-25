@@ -20,8 +20,8 @@ import com.liferay.portal.PasswordPolicyNameException;
 import com.liferay.portal.RequiredPasswordPolicyException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
@@ -318,8 +318,8 @@ public class PasswordPolicyLocalServiceImpl
 		throws PortalException, SystemException {
 
 		if ((Validator.isNull(name)) || (Validator.isNumber(name)) ||
-			(name.indexOf(StringPool.COMMA) != -1) ||
-			(name.indexOf(StringPool.STAR) != -1)) {
+			(name.indexOf(CharPool.COMMA) != -1) ||
+			(name.indexOf(CharPool.STAR) != -1)) {
 
 			throw new PasswordPolicyNameException();
 		}

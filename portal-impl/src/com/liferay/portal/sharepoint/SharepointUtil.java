@@ -15,6 +15,7 @@
 package com.liferay.portal.sharepoint;
 
 import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -62,7 +63,7 @@ public class SharepointUtil {
 		String groupFolderName = pathArray[0];
 
 		if (groupFolderName != null) {
-			int pos = groupFolderName.lastIndexOf(StringPool.OPEN_BRACKET);
+			int pos = groupFolderName.lastIndexOf(CharPool.OPEN_BRACKET);
 
 			if (pos != -1) {
 				 groupId = GetterUtil.getLong(

@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -205,7 +206,7 @@ public class OpenIdAction extends PortletAction {
 				String fullName = GetterUtil.getString(
 					sregResp.getAttributeValue("fullname"));
 
-				int pos = fullName.indexOf(StringPool.SPACE);
+				int pos = fullName.indexOf(CharPool.SPACE);
 
 				if ((pos != -1) && ((pos + 1) < fullName.length())) {
 					firstName = fullName.substring(0, pos);

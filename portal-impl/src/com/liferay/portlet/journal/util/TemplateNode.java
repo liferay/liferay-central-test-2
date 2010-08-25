@@ -16,6 +16,7 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -81,7 +82,7 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 		if (getType().equals("link_to_layout")) {
 			String data = (String)get("data");
 
-			int pos = data.indexOf(StringPool.AT);
+			int pos = data.indexOf(CharPool.AT);
 
 			if (pos != -1) {
 				data = data.substring(0, pos);
@@ -175,7 +176,7 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 	protected long getLayoutId() {
 		String data = (String)get("data");
 
-		int pos = data.indexOf(StringPool.AT);
+		int pos = data.indexOf(CharPool.AT);
 
 		if (pos != -1) {
 			data = data.substring(0, pos);
@@ -187,7 +188,7 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 	protected String getLayoutType() {
 		String data = (String)get("data");
 
-		int pos = data.indexOf(StringPool.AT);
+		int pos = data.indexOf(CharPool.AT);
 
 		if (pos != -1) {
 			data = data.substring(pos + 1);

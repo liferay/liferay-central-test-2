@@ -19,8 +19,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.util.Base64;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
@@ -108,7 +108,7 @@ public class SharepointFilter extends BasePortalFilter {
 			_log.debug("Decoded credentials are " + decodedCredentials);
 		}
 
-		int pos = decodedCredentials.indexOf(StringPool.COLON);
+		int pos = decodedCredentials.indexOf(CharPool.COLON);
 
 		if (pos == -1) {
 			return user;

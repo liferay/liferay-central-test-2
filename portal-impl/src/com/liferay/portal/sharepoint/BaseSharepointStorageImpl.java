@@ -14,6 +14,7 @@
 
 package com.liferay.portal.sharepoint;
 
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -220,20 +221,20 @@ public abstract class BaseSharepointStorageImpl implements SharepointStorage {
 	}
 
 	protected String getParentFolderPath(String path) {
-		int pos = path.lastIndexOf(StringPool.FORWARD_SLASH);
+		int pos = path.lastIndexOf(CharPool.FORWARD_SLASH);
 
 		return path.substring(0, pos);
 	}
 
 	protected String getResourceName(String path) {
-		int pos = path.lastIndexOf(StringPool.FORWARD_SLASH);
+		int pos = path.lastIndexOf(CharPool.FORWARD_SLASH);
 
 		return path.substring(pos + 1);
 	}
 
 	protected String removeFoldersFromPath(String path, int index) {
 		for (int i = 0; i < index; i++) {
-			int pos = path.indexOf(StringPool.SLASH);
+			int pos = path.indexOf(CharPool.SLASH);
 
 			path = path.substring(pos + 1);
 		}

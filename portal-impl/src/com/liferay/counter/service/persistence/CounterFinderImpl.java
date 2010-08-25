@@ -24,9 +24,9 @@ import com.liferay.portal.kernel.dao.orm.LockMode;
 import com.liferay.portal.kernel.dao.orm.ObjectNotFoundException;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Dummy;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.util.PropsUtil;
@@ -266,7 +266,7 @@ public class CounterFinderImpl
 
 		String incrementType = null;
 
-		int pos = name.indexOf(StringPool.POUND);
+		int pos = name.indexOf(CharPool.POUND);
 
 		if (pos != -1) {
 			incrementType = name.substring(0, pos);

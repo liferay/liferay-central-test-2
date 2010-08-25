@@ -17,6 +17,7 @@ package com.liferay.portlet.messageboards.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -456,15 +457,15 @@ public class MBUtil {
 	}
 
 	public static long getMessageId(String mailId) {
-		int x = mailId.indexOf(StringPool.LESS_THAN) + 1;
-		int y = mailId.indexOf(StringPool.AT);
+		int x = mailId.indexOf(CharPool.LESS_THAN) + 1;
+		int y = mailId.indexOf(CharPool.AT);
 
 		long messageId = 0;
 
 		if ((x > 0 ) && (y != -1)) {
 			String temp = mailId.substring(x, y);
 
-			int z = temp.lastIndexOf(StringPool.PERIOD);
+			int z = temp.lastIndexOf(CharPool.PERIOD);
 
 			if (z != -1) {
 				messageId = GetterUtil.getLong(temp.substring(z + 1));
@@ -743,7 +744,7 @@ public class MBUtil {
 
 		String subject = StringUtil.reverse(message.getSubject());
 
-		int pos = subject.indexOf(StringPool.LESS_THAN);
+		int pos = subject.indexOf(CharPool.LESS_THAN);
 
 		if (pos != -1) {
 			parentMessageId = StringUtil.reverse(subject.substring(0, pos + 1));

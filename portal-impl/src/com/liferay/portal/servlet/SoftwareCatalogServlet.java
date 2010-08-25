@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -128,7 +129,7 @@ public class SoftwareCatalogServlet extends HttpServlet {
 				path, StringPool.DOUBLE_SLASH, StringPool.SLASH);
 
 			if (Validator.isNotNull(path)) {
-				int pos = path.indexOf(StringPool.SLASH, 1);
+				int pos = path.indexOf(CharPool.SLASH, 1);
 
 				if (pos == -1) {
 					pos = path.length();

@@ -18,8 +18,8 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Base64;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.util.StringTokenizer;
@@ -103,7 +103,7 @@ public class BasicAuthHeaderAutoLogin implements AutoLogin {
 				_log.debug("Decoded credentials are " + decodedCredentials);
 			}
 
-			int pos = decodedCredentials.indexOf(StringPool.COLON);
+			int pos = decodedCredentials.indexOf(CharPool.COLON);
 
 			if (pos == -1) {
 				return credentials;

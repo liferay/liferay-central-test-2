@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -580,7 +581,7 @@ public class JournalTemplateLocalServiceImpl
 	protected void validate(String templateId) throws PortalException {
 		if ((Validator.isNull(templateId)) ||
 			(Validator.isNumber(templateId)) ||
-			(templateId.indexOf(StringPool.SPACE) != -1)) {
+			(templateId.indexOf(CharPool.SPACE) != -1)) {
 
 			throw new TemplateIdException();
 		}

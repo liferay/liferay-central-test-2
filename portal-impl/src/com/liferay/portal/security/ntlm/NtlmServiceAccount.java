@@ -14,6 +14,7 @@
 
 package com.liferay.portal.security.ntlm;
 
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringPool;
 
 /**
@@ -45,7 +46,7 @@ public class NtlmServiceAccount {
 	public void setAccount(String account) {
 		_account = account;
 
-		_accountName = _account.substring(0, _account.indexOf(StringPool.AT));
+		_accountName = _account.substring(0, _account.indexOf(CharPool.AT));
 		_computerName = _account.substring(
 			0, _account.indexOf(StringPool.DOLLAR));
 	}

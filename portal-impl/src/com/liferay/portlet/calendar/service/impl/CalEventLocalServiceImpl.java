@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -803,7 +804,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				fileName = "liferay.";
 			}
 			else {
-				int pos = fileName.lastIndexOf(StringPool.PERIOD);
+				int pos = fileName.lastIndexOf(CharPool.PERIOD);
 
 				if (pos != -1) {
 					extension = fileName.substring(pos);

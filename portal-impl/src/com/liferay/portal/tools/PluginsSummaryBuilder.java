@@ -103,7 +103,7 @@ public class PluginsSummaryBuilder {
 
 		String content = FileUtil.read(file);
 
-		int x = file.indexOf(File.separator);
+		int x = file.indexOf(File.separatorChar);
 
 		String type = file.substring(0, x);
 

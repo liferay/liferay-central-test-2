@@ -622,7 +622,7 @@ public class JournalStructureLocalServiceImpl
 
 		if ((Validator.isNull(structureId)) ||
 			(Validator.isNumber(structureId)) ||
-			(structureId.indexOf(StringPool.SPACE) != -1)) {
+			(structureId.indexOf(CharPool.SPACE) != -1)) {
 
 			throw new StructureIdException();
 		}

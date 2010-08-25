@@ -19,8 +19,8 @@ import com.liferay.portal.TeamNameException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
@@ -185,8 +185,8 @@ public class TeamLocalServiceImpl extends TeamLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if ((Validator.isNull(name)) || (Validator.isNumber(name)) ||
-			(name.indexOf(StringPool.COMMA) != -1) ||
-			(name.indexOf(StringPool.STAR) != -1)) {
+			(name.indexOf(CharPool.COMMA) != -1) ||
+			(name.indexOf(CharPool.STAR) != -1)) {
 
 			throw new TeamNameException();
 		}

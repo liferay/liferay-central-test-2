@@ -16,7 +16,7 @@ package com.liferay.portlet.shopping.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
@@ -241,7 +241,7 @@ public class ShoppingCouponLocalServiceImpl
 		if (!autoCode) {
 			if ((Validator.isNull(code)) ||
 				(Validator.isNumber(code)) ||
-				(code.indexOf(StringPool.SPACE) != -1)) {
+				(code.indexOf(CharPool.SPACE) != -1)) {
 
 				throw new CouponCodeException();
 			}

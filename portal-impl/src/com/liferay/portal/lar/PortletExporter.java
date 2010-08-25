@@ -478,7 +478,7 @@ public class PortletExporter {
 
 				String entryKey = entry.getKey();
 
-				int index = entryKey.indexOf(StringPool.POUND);
+				int index = entryKey.indexOf(CharPool.POUND);
 
 				String className = entryKey.substring(0, index);
 				String key = entryKey.substring(index + 1);

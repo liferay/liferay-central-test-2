@@ -15,10 +15,10 @@
 package com.liferay.portlet.polls.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
@@ -187,7 +187,7 @@ public class EditQuestionAction extends PortletAction {
 				try {
 					String id = param.substring(
 						CHOICE_DESCRIPTION_PREFIX.length(),
-						param.indexOf(StringPool.UNDERLINE));
+						param.indexOf(CharPool.UNDERLINE));
 
 					if (readParameters.contains(id)) {
 						continue;

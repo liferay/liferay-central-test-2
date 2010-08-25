@@ -14,6 +14,7 @@
 
 package com.liferay.portal.apache.bridges.struts;
 
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
@@ -105,7 +106,7 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 		if (_path != null) {
 			String pathNoQueryString = _path;
 
-			int pos = _path.indexOf(StringPool.QUESTION);
+			int pos = _path.indexOf(CharPool.QUESTION);
 
 			if (pos != -1) {
 				pathNoQueryString = _path.substring(0, pos);

@@ -143,7 +143,7 @@ public class SeleneseToJavaBuilder {
 			fileName, StringPool.BACK_SLASH, StringPool.SLASH);
 
 		int x = fileName.lastIndexOf(StringPool.SLASH);
-		int y = fileName.indexOf(StringPool.PERIOD);
+		int y = fileName.indexOf(CharPool.PERIOD);
 
 		String testPackagePath = StringUtil.replace(
 			fileName.substring(0, x), StringPool.SLASH, StringPool.PERIOD);

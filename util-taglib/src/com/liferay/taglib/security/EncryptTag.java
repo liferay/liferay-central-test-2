@@ -16,6 +16,7 @@ package com.liferay.taglib.security;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -64,7 +65,7 @@ public class EncryptTag extends TagSupport {
 			sb.append(_protocol);
 			sb.append(Http.PROTOCOL_DELIMITER);
 
-			int pos = _url.indexOf(StringPool.QUESTION);
+			int pos = _url.indexOf(CharPool.QUESTION);
 
 			if (pos == -1) {
 				sb.append(_url);
@@ -85,7 +86,7 @@ public class EncryptTag extends TagSupport {
 				while (st.hasMoreTokens()) {
 					String paramAndValue = st.nextToken();
 
-					int x = paramAndValue.indexOf(StringPool.EQUAL);
+					int x = paramAndValue.indexOf(CharPool.EQUAL);
 
 					String param = paramAndValue.substring(0, x);
 					String value = paramAndValue.substring(

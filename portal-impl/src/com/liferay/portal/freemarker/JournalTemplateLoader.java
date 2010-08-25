@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.journal.NoSuchTemplateException;
@@ -40,9 +41,9 @@ public class JournalTemplateLoader extends FreeMarkerTemplateLoader {
 			int pos = name.indexOf(JOURNAL_SEPARATOR + StringPool.SLASH);
 
 			if (pos != -1) {
-				int x = name.indexOf(StringPool.SLASH, pos);
-				int y = name.indexOf(StringPool.SLASH, x + 1);
-				int z = name.indexOf(StringPool.SLASH, y + 1);
+				int x = name.indexOf(CharPool.SLASH, pos);
+				int y = name.indexOf(CharPool.SLASH, x + 1);
+				int z = name.indexOf(CharPool.SLASH, y + 1);
 
 				long companyId = GetterUtil.getLong(name.substring(x + 1, y));
 				long groupId = GetterUtil.getLong(name.substring(y + 1, z));

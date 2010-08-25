@@ -16,6 +16,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Element;
@@ -104,7 +105,7 @@ public class PortletQNameImpl implements PortletQName {
 
 		String localPart = qNameEl.getTextTrim();
 
-		int pos = localPart.indexOf(StringPool.COLON);
+		int pos = localPart.indexOf(CharPool.COLON);
 
 		if (pos == -1) {
 			if (_log.isDebugEnabled()) {

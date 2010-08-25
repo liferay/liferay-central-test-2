@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.struts.LastPath;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -297,7 +298,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		if (portlet == null) {
 			String strutsPath = path.substring(
-				1, path.lastIndexOf(StringPool.SLASH));
+				1, path.lastIndexOf(CharPool.SLASH));
 
 			portlet = PortletLocalServiceUtil.getPortletByStrutsPath(
 				companyId, strutsPath);
@@ -695,7 +696,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 				if (portlet == null) {
 					String strutsPath = path.substring(
-						1, path.lastIndexOf(StringPool.SLASH));
+						1, path.lastIndexOf(CharPool.SLASH));
 
 					portlet = PortletLocalServiceUtil.getPortletByStrutsPath(
 						companyId, strutsPath);
@@ -763,7 +764,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				}
 
 				String strutsPath = path.substring(
-					1, path.lastIndexOf(StringPool.SLASH));
+					1, path.lastIndexOf(CharPool.SLASH));
 
 				if (portlet != null) {
 					if (!strutsPath.equals(portlet.getStrutsPath())) {

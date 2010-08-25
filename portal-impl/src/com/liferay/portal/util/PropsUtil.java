@@ -199,7 +199,7 @@ public class PropsUtil {
 
 		if (defaultLiferayHome.endsWith("/..")) {
 			int pos = defaultLiferayHome.lastIndexOf(
-				StringPool.SLASH, defaultLiferayHome.length() - 4);
+				CharPool.SLASH, defaultLiferayHome.length() - 4);
 
 			if (pos != -1) {
 				defaultLiferayHome = defaultLiferayHome.substring(0, pos);

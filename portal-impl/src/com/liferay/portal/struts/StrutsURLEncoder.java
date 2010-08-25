@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.servlet.URLEncoder;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -140,7 +141,7 @@ public class StrutsURLEncoder implements URLEncoder {
 			String strutsAction = path;
 			String queryString = StringPool.BLANK;
 
-			int pos = strutsAction.indexOf(StringPool.QUESTION);
+			int pos = strutsAction.indexOf(CharPool.QUESTION);
 
 			if (pos != -1) {
 				strutsAction = path.substring(0, pos);

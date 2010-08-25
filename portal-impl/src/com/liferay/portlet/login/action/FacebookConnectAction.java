@@ -17,6 +17,7 @@ package com.liferay.portlet.login.action;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -238,7 +239,7 @@ public class FacebookConnectAction extends PortletAction {
 			int x = content.indexOf("access_token=");
 
 			if (x >= 0) {
-				int y = content.indexOf(StringPool.AMPERSAND, x);
+				int y = content.indexOf(CharPool.AMPERSAND, x);
 
 				if (y < x) {
 					y = content.length();

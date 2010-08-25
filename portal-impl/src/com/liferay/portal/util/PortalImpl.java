@@ -1138,7 +1138,7 @@ public class PortalImpl implements Portal {
 							Http.PROTOCOL_DELIMITER.length());
 
 					currentURL = currentURL.substring(
-						currentURL.indexOf(StringPool.SLASH));
+						currentURL.indexOf(CharPool.SLASH));
 				}
 
 				if (Validator.isNotNull(currentURL) &&
@@ -2440,7 +2440,7 @@ public class PortalImpl implements Portal {
 			int x = url.indexOf(FRIENDLY_URL_SEPARATOR);
 
 			if (x != -1) {
-				int y = url.indexOf(StringPool.SLASH, x + 3);
+				int y = url.indexOf(CharPool.SLASH, x + 3);
 
 				if (y == -1) {
 					y = url.length();

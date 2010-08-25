@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.googleapps.GUserManager;
 import com.liferay.portal.kernel.googleapps.GoogleAppsException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -99,7 +100,7 @@ public class GUserManagerImpl extends GBaseManagerImpl implements GUserManager {
 	}
 
 	public GUser getGUser(String emailAddress) throws GoogleAppsException {
-		int pos = emailAddress.indexOf(StringPool.AT);
+		int pos = emailAddress.indexOf(CharPool.AT);
 
 		if (pos == -1) {
 			return null;

@@ -20,6 +20,7 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.struts.LastPath;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -155,7 +156,7 @@ public class FriendlyURLServlet extends HttpServlet {
 
 		String friendlyURL = null;
 
-		int pos = path.indexOf(StringPool.SLASH, 1);
+		int pos = path.indexOf(CharPool.SLASH, 1);
 
 		if (pos != -1) {
 			friendlyURL = path.substring(0, pos);

@@ -16,8 +16,8 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -366,7 +366,7 @@ public class JournalFeedLocalServiceImpl
 
 		if (!autoFeedId) {
 			if ((Validator.isNull(feedId)) || (Validator.isNumber(feedId)) ||
-				(feedId.indexOf(StringPool.SPACE) != -1)) {
+				(feedId.indexOf(CharPool.SPACE) != -1)) {
 
 				throw new FeedIdException();
 			}

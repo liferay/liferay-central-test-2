@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
 import com.liferay.portal.kernel.scheduler.TimeUnit;
 import com.liferay.portal.kernel.scheduler.TriggerType;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -733,7 +734,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		List<Portlet> portlets = null;
 
-		int pos = portletName.indexOf(StringPool.STAR);
+		int pos = portletName.indexOf(CharPool.STAR);
 
 		if (pos == -1) {
 			portlets = new ArrayList<Portlet>();

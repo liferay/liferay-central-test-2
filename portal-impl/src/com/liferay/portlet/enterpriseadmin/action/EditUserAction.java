@@ -42,6 +42,7 @@ import com.liferay.portal.WebsiteURLException;
 import com.liferay.portal.kernel.bean.BeanParamUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -180,7 +181,7 @@ public class EditUserAction extends PortletAction {
 					themeDisplay.isI18n()) {
 
 					String i18nLanguageId = user.getLanguageId();
-					int pos = i18nLanguageId.indexOf(StringPool.UNDERLINE);
+					int pos = i18nLanguageId.indexOf(CharPool.UNDERLINE);
 
 					if (pos != -1){
 						i18nLanguageId = i18nLanguageId.substring(0, pos);

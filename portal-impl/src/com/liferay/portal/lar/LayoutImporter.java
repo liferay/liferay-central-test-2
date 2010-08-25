@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -544,13 +545,13 @@ public class LayoutImporter {
 			return;
 		}
 
-		int x = url.indexOf(StringPool.SLASH, 1);
+		int x = url.indexOf(CharPool.SLASH, 1);
 
 		if (x == -1) {
 			return;
 		}
 
-		int y = url.indexOf(StringPool.SLASH, x + 1);
+		int y = url.indexOf(CharPool.SLASH, x + 1);
 
 		if (y == -1) {
 			return;
@@ -950,7 +951,7 @@ public class LayoutImporter {
 			String key = zipEntry;
 
 			if (key.contains(StringPool.SLASH)) {
-				key = key.substring(key.lastIndexOf(StringPool.SLASH));
+				key = key.substring(key.lastIndexOf(CharPool.SLASH));
 			}
 
 			if (key.equals("liferay-look-and-feel.xml")) {

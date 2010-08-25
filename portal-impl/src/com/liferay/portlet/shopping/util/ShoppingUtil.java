@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -812,7 +813,7 @@ public class ShoppingUtil {
 	}
 
 	public static long getItemId(String itemId) {
-		int pos = itemId.indexOf(StringPool.PIPE);
+		int pos = itemId.indexOf(CharPool.PIPE);
 
 		if (pos != -1) {
 			itemId = itemId.substring(0, pos);
@@ -822,7 +823,7 @@ public class ShoppingUtil {
 	}
 
 	public static String getItemFields(String itemId) {
-		int pos = itemId.indexOf(StringPool.PIPE);
+		int pos = itemId.indexOf(CharPool.PIPE);
 
 		if (pos == -1) {
 			return StringPool.BLANK;

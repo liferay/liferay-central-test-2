@@ -16,6 +16,7 @@ package com.liferay.util.bridges.mvc;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -98,7 +99,7 @@ public class ActionCommandCache {
 		if (actionCommands == null) {
 			actionCommands = new ArrayList<ActionCommand>();
 
-			int nextSeparator = actionCommandChain.indexOf(StringPool.COMMA);
+			int nextSeparator = actionCommandChain.indexOf(CharPool.COMMA);
 
 			int currentIndex = 0;
 
@@ -123,7 +124,7 @@ public class ActionCommandCache {
 				currentIndex = nextSeparator + 1;
 
 				nextSeparator = actionCommandChain.indexOf(
-					StringPool.COMMA, currentIndex);
+					CharPool.COMMA, currentIndex);
 
 				if (nextSeparator == -1) {
 					break;

@@ -55,7 +55,7 @@ public class SystemEnv {
 			String line;
 
 			while ((line = unsyncBufferedReader.readLine()) != null) {
-				int pos = line.indexOf(StringPool.EQUAL);
+				int pos = line.indexOf(CharPool.EQUAL);
 
 				if (pos != -1) {
 					String key = line.substring(0, pos);

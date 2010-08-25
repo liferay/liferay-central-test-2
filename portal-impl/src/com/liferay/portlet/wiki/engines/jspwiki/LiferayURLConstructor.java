@@ -17,6 +17,7 @@ package com.liferay.portlet.wiki.engines.jspwiki;
 import com.ecyrd.jspwiki.WikiContext;
 import com.ecyrd.jspwiki.url.URLConstructor;
 
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -47,7 +48,7 @@ public class LiferayURLConstructor implements URLConstructor {
 				parameters = StringPool.QUESTION + parameters;
 			}
 			else if (context.equals(WikiContext.NONE)) {
-				if (name.indexOf(StringPool.QUESTION) != -1) {
+				if (name.indexOf(CharPool.QUESTION) != -1) {
 					parameters = "&amp;" + parameters;
 				}
 				else {
@@ -75,7 +76,7 @@ public class LiferayURLConstructor implements URLConstructor {
 					"[$END_PAGE_TITLE$]";
 		}
 		else if (context.equals(WikiContext.ATTACH)) {
-			if (name.indexOf(StringPool.SLASH) == -1) {
+			if (name.indexOf(CharPool.SLASH) == -1) {
 				path =
 					"[$ATTACHMENT_URL_PREFIX$][$WIKI_PAGE_NAME$]/" +
 						HttpUtil.encodeURL(WikiUtil.decodeJSPWikiName(name));

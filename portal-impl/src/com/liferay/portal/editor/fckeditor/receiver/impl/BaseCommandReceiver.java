@@ -337,7 +337,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 	}
 
 	private String _getExtension(String fileName) {
-		return fileName.substring(fileName.lastIndexOf(".") + 1);
+		return fileName.substring(fileName.lastIndexOf(CharPool.PERIOD) + 1);
 	}
 
 	private void _writeDocument(Document doc, HttpServletResponse response) {

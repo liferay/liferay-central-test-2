@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.struts.LastPath;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -137,7 +138,7 @@ public class CacheFilter extends BasePortalFilter {
 
 		String friendlyURL = null;
 
-		int pos = pathInfo.indexOf(StringPool.SLASH, 1);
+		int pos = pathInfo.indexOf(CharPool.SLASH, 1);
 
 		if (pos != -1) {
 			friendlyURL = pathInfo.substring(0, pos);

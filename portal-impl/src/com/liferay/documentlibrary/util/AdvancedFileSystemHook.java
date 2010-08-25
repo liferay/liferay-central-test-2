@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -216,7 +217,7 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 			ext += _HOOK_EXTENSION;
 		}
 
-		int pos = fileName.lastIndexOf(StringPool.SLASH);
+		int pos = fileName.lastIndexOf(CharPool.SLASH);
 
 		if (pos == -1) {
 			StringBundler sb = new StringBundler();
@@ -267,8 +268,8 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 		for (int i = 0; i < versionNumbers.length; i++) {
 			String versionNumberFragment = versionNumbers[i];
 
-			int x = versionNumberFragment.lastIndexOf(StringPool.UNDERLINE);
-			int y = versionNumberFragment.lastIndexOf(StringPool.PERIOD);
+			int x = versionNumberFragment.lastIndexOf(CharPool.UNDERLINE);
+			int y = versionNumberFragment.lastIndexOf(CharPool.PERIOD);
 
 			if (x > -1) {
 				versionNumberFragment = versionNumberFragment.substring(

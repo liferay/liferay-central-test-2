@@ -17,6 +17,7 @@ package com.liferay.portal.struts;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -183,7 +184,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		if (forward != null) {
 			String queryString = StringPool.BLANK;
 
-			int pos = forward.indexOf(StringPool.QUESTION);
+			int pos = forward.indexOf(CharPool.QUESTION);
 
 			if (pos != -1) {
 				queryString = forward.substring(pos + 1, forward.length());
@@ -442,7 +443,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			}
 
 			String strutsPath = path.substring(
-				1, path.lastIndexOf(StringPool.SLASH));
+				1, path.lastIndexOf(CharPool.SLASH));
 
 			if (!strutsPath.equals(portlet.getStrutsPath())) {
 				if (_log.isWarnEnabled()) {
