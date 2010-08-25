@@ -15,16 +15,11 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.StringUtil;
-import org.apache.tools.ant.DirectoryScanner;
 import com.liferay.portal.util.FileImpl;
 
-import java.io.FileOutputStream;
 import java.io.File;
 
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
+import org.apache.tools.ant.DirectoryScanner;
 
 /**
  * @author Brian Wing Shun Chan
