@@ -356,7 +356,7 @@
 			<param name="test.ant.script.command" value="db-sharding-plugins-google-adsense" />
 			<param name="test.ant.script.plugins" value="google-adsense-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
-			<param name="test.ant.script.suite" value="PluginsGoogleAdsenseTestSuite" />
+			<param name="test.ant.script.suite" value="PluginsGoogleAdSenseTestSuite" />
 			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
 		</antcall>
 
