@@ -70,7 +70,7 @@ public class AddSettingsAddress2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_130_addressStreet1_3")) {
+				if (selenium.isElementPresent("_130_addressStreet1_2")) {
 					break;
 				}
 			}
@@ -80,12 +80,12 @@ public class AddSettingsAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_130_addressStreet1_3",
+		selenium.type("_130_addressStreet1_2",
 			RuntimeVariables.replace("123. Liferay Ln."));
-		selenium.type("_130_addressCity3",
+		selenium.type("_130_addressCity2",
 			RuntimeVariables.replace("Rays of Light"));
-		selenium.type("_130_addressZip3", RuntimeVariables.replace("12345"));
-		selenium.select("_130_addressTypeId3",
+		selenium.type("_130_addressZip2", RuntimeVariables.replace("12345"));
+		selenium.select("_130_addressTypeId2",
 			RuntimeVariables.replace("label=Billing"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

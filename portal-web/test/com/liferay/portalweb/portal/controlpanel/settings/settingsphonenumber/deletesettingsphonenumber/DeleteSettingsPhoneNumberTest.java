@@ -46,8 +46,24 @@ public class DeleteSettingsPhoneNumberTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("phoneNumbersLink", RuntimeVariables.replace(""));
 		assertEquals("1231231234", selenium.getValue("_130_phoneNumber0"));
-		selenium.clickAt("//div[7]/div/fieldset/div[2]/div/span/span/button[2]",
-			RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//button[2]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//button[2]", RuntimeVariables.replace(""));
 		assertFalse(selenium.isTextPresent("1231231234"));
 	}
 }

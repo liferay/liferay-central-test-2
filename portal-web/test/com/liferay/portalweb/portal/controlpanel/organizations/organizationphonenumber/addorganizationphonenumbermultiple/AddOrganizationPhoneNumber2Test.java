@@ -83,7 +83,7 @@ public class AddOrganizationPhoneNumber2Test extends BaseTestCase {
 
 					try {
 						if (selenium.isElementPresent(
-									"//div[5]/div/fieldset/div[2]/div/span/span/button[1]")) {
+									"//div[5]/fieldset/div[2]/div/span/span/button[1]")) {
 							break;
 						}
 					}
@@ -93,7 +93,7 @@ public class AddOrganizationPhoneNumber2Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[5]/div/fieldset/div[2]/div/span/span/button[1]",
+				selenium.clickAt("//div[5]/fieldset/div[2]/div/span/span/button[1]",
 					RuntimeVariables.replace("Add Row"));
 
 				for (int second = 0;; second++) {
@@ -102,7 +102,7 @@ public class AddOrganizationPhoneNumber2Test extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("_126_phoneNumber3")) {
+						if (selenium.isElementPresent("_126_phoneNumber2")) {
 							break;
 						}
 					}
@@ -112,13 +112,13 @@ public class AddOrganizationPhoneNumber2Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.type("_126_phoneNumber3",
+				selenium.type("_126_phoneNumber2",
 					RuntimeVariables.replace("5628020523"));
-				selenium.type("_126_phoneExtension3",
+				selenium.type("_126_phoneExtension2",
 					RuntimeVariables.replace("321"));
-				selenium.select("_126_phoneTypeId3",
+				selenium.select("_126_phoneTypeId2",
 					RuntimeVariables.replace("label=Toll-Free"));
-				selenium.clickAt("_126_phonePrimary3",
+				selenium.clickAt("_126_phonePrimary2",
 					RuntimeVariables.replace(""));
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));

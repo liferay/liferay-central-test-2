@@ -54,8 +54,7 @@ public class DeleteSettingsWebsiteTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[9]/div/fieldset/div[2]/div/span/span/button[2]")) {
+				if (selenium.isVisible("//button[2]")) {
 					break;
 				}
 			}
@@ -65,8 +64,7 @@ public class DeleteSettingsWebsiteTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[9]/div/fieldset/div[2]/div/span/span/button[2]",
-			RuntimeVariables.replace("Delete Row"));
+		selenium.clickAt("//button[2]", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

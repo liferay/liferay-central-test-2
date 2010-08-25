@@ -85,7 +85,7 @@ public class AddOrganizationEmailAddress3Test extends BaseTestCase {
 
 					try {
 						if (selenium.isElementPresent(
-									"_126_emailAddressAddress5")) {
+									"_126_emailAddressAddress3")) {
 							break;
 						}
 					}
@@ -95,11 +95,11 @@ public class AddOrganizationEmailAddress3Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.type("_126_emailAddressAddress5",
+				selenium.type("_126_emailAddressAddress3",
 					RuntimeVariables.replace("Selenium@Selenium.com"));
-				selenium.select("_126_emailAddressTypeId5",
+				selenium.select("_126_emailAddressTypeId3",
 					RuntimeVariables.replace("label=E-mail"));
-				selenium.clickAt("_126_emailAddressPrimary5",
+				selenium.clickAt("_126_emailAddressPrimary3",
 					RuntimeVariables.replace(""));
 				Thread.sleep(5000);
 				selenium.clickAt("//input[@value='Save']",

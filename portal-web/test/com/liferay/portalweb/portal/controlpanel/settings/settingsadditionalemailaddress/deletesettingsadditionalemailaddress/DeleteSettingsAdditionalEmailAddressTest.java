@@ -56,8 +56,7 @@ public class DeleteSettingsAdditionalEmailAddressTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//div[8]/div/fieldset/div[2]/div/span/span/button[2]")) {
+				if (selenium.isVisible("//button[2]")) {
 					break;
 				}
 			}
@@ -67,8 +66,7 @@ public class DeleteSettingsAdditionalEmailAddressTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[8]/div/fieldset/div[2]/div/span/span/button[2]",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//button[2]", RuntimeVariables.replace(""));
 		assertFalse(selenium.isTextPresent("Admin@Liferay.com"));
 	}
 }

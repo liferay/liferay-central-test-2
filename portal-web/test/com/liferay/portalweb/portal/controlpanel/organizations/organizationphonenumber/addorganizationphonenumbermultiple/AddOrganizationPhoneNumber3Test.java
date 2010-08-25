@@ -102,7 +102,7 @@ public class AddOrganizationPhoneNumber3Test extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("_126_phoneNumber5")) {
+						if (selenium.isElementPresent("_126_phoneNumber3")) {
 							break;
 						}
 					}
@@ -112,13 +112,13 @@ public class AddOrganizationPhoneNumber3Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.type("_126_phoneNumber5",
+				selenium.type("_126_phoneNumber3",
 					RuntimeVariables.replace("5628020523"));
-				selenium.type("_126_phoneExtension5",
+				selenium.type("_126_phoneExtension3",
 					RuntimeVariables.replace("321"));
-				selenium.select("_126_phoneTypeId5",
+				selenium.select("_126_phoneTypeId3",
 					RuntimeVariables.replace("label=Toll-Free"));
-				selenium.clickAt("_126_phonePrimary5",
+				selenium.clickAt("_126_phonePrimary3",
 					RuntimeVariables.replace(""));
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));

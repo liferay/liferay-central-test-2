@@ -80,7 +80,7 @@ public class AddUserWebsite2Test extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[12]/div/fieldset/div[2]/div/span/span/button[1]")) {
+									"//div[12]/fieldset/div[2]/div/span/span/button[1]")) {
 							break;
 						}
 					}
@@ -90,11 +90,11 @@ public class AddUserWebsite2Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[12]/div/fieldset/div[2]/div/span/span/button[1]",
+				selenium.clickAt("//div[12]/fieldset/div[2]/div/span/span/button[1]",
 					RuntimeVariables.replace("Add Row"));
-				selenium.type("_125_websiteUrl3",
+				selenium.type("_125_websiteUrl2",
 					RuntimeVariables.replace("http://www.selenium01.com"));
-				selenium.select("_125_websiteTypeId3",
+				selenium.select("_125_websiteTypeId2",
 					RuntimeVariables.replace("label=Personal"));
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));

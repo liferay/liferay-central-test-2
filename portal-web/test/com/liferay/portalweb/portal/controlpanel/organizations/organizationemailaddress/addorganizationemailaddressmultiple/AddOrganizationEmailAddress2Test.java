@@ -75,7 +75,7 @@ public class AddOrganizationEmailAddress2Test extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("additionalEmailAddressesLink",
 					RuntimeVariables.replace(""));
-				selenium.clickAt("//div[6]/div/fieldset/div[2]/div/span/span/button[1]",
+				selenium.clickAt("//div[6]/fieldset/div[2]/div/span/span/button[1]",
 					RuntimeVariables.replace("Add Row"));
 
 				for (int second = 0;; second++) {
@@ -85,7 +85,7 @@ public class AddOrganizationEmailAddress2Test extends BaseTestCase {
 
 					try {
 						if (selenium.isElementPresent(
-									"_126_emailAddressAddress3")) {
+									"_126_emailAddressAddress2")) {
 							break;
 						}
 					}
@@ -95,11 +95,11 @@ public class AddOrganizationEmailAddress2Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.type("_126_emailAddressAddress3",
+				selenium.type("_126_emailAddressAddress2",
 					RuntimeVariables.replace("Selenium@Selenium.com"));
-				selenium.select("_126_emailAddressTypeId3",
+				selenium.select("_126_emailAddressTypeId2",
 					RuntimeVariables.replace("label=E-mail"));
-				selenium.clickAt("_126_emailAddressPrimary3",
+				selenium.clickAt("_126_emailAddressPrimary2",
 					RuntimeVariables.replace(""));
 				Thread.sleep(5000);
 				selenium.clickAt("//input[@value='Save']",

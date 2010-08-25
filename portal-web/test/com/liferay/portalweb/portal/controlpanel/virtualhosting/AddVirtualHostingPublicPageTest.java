@@ -120,9 +120,10 @@ public class AddVirtualHostingPublicPageTest extends BaseTestCase {
 					continue;
 				}
 
-			case 2:
 				Thread.sleep(5000);
-				selenium.click("//li/div/div[1]");
+				selenium.click("//div[2]/ul/li/div/div[1]");
+
+			case 2:
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {

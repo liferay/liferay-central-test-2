@@ -69,6 +69,7 @@ public class AddOrganizationPageTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -96,10 +97,24 @@ public class AddOrganizationPageTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Add Page']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.click("//li/div/div[1]");
+				Thread.sleep(5000);
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
-					selenium.getText("//section/div/div/div/div[1]"));
+					selenium.getText("//section/div/div/div/div"));
+
+				boolean pagePresent = selenium.isVisible(
+						"//li/ul/li[1]/div/div[3]/a");
+
+				if (pagePresent) {
+					label = 3;
+
+					continue;
+				}
+
+				selenium.clickAt("//li/div/div[1]",
+					RuntimeVariables.replace("Drop Down Arrow"));
+
+			case 3:
 				assertEquals(RuntimeVariables.replace("Selenium Test Home Page"),
 					selenium.getText("//li/ul/li[1]/div/div[3]/a"));
 

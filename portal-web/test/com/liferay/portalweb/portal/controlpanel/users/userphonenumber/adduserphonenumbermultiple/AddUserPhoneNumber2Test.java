@@ -81,7 +81,7 @@ public class AddUserPhoneNumber2Test extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[10]/div/fieldset/div[2]/div/span/span/button[1]")) {
+									"//div[10]/fieldset/div[2]/div/span/span/button[1]")) {
 							break;
 						}
 					}
@@ -91,13 +91,13 @@ public class AddUserPhoneNumber2Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[10]/div/fieldset/div[2]/div/span/span/button[1]",
+				selenium.clickAt("//div[10]/fieldset/div[2]/div/span/span/button[1]",
 					RuntimeVariables.replace(""));
-				selenium.type("_125_phoneNumber3",
+				selenium.type("_125_phoneNumber2",
 					RuntimeVariables.replace("123-123-1234"));
-				selenium.type("_125_phoneExtension3",
+				selenium.type("_125_phoneExtension2",
 					RuntimeVariables.replace("123"));
-				selenium.select("_125_phoneTypeId3",
+				selenium.select("_125_phoneTypeId2",
 					RuntimeVariables.replace("label=Business"));
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));

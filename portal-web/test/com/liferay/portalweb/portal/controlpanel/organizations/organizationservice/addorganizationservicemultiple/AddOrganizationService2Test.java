@@ -99,7 +99,7 @@ public class AddOrganizationService2Test extends BaseTestCase {
 
 					try {
 						if (selenium.isElementPresent(
-									"//div[8]/div/fieldset/div[2]/div/span/span/button[1]")) {
+									"//div[8]/fieldset/div[2]/div/span/span/button[1]")) {
 							break;
 						}
 					}
@@ -109,7 +109,7 @@ public class AddOrganizationService2Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[8]/div/fieldset/div[2]/div/span/span/button[1]",
+				selenium.clickAt("//div[8]/fieldset/div[2]/div/span/span/button[1]",
 					RuntimeVariables.replace("Add Row"));
 
 				for (int second = 0;; second++) {
@@ -118,7 +118,7 @@ public class AddOrganizationService2Test extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("_126_orgLaborTypeId3")) {
+						if (selenium.isElementPresent("_126_orgLaborTypeId2")) {
 							break;
 						}
 					}
@@ -128,35 +128,35 @@ public class AddOrganizationService2Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.select("_126_orgLaborTypeId3",
+				selenium.select("_126_orgLaborTypeId2",
 					RuntimeVariables.replace("label=Training"));
-				selenium.select("_126_sunOpen3",
+				selenium.select("_126_sunOpen2",
 					RuntimeVariables.replace("label=09:00"));
-				selenium.select("_126_sunClose3",
+				selenium.select("_126_sunClose2",
 					RuntimeVariables.replace("label=05:00"));
-				selenium.select("_126_monOpen3",
+				selenium.select("_126_monOpen2",
 					RuntimeVariables.replace("label=09:00"));
-				selenium.select("_126_monClose3",
+				selenium.select("_126_monClose2",
 					RuntimeVariables.replace("label=05:00"));
-				selenium.select("_126_tueOpen3",
+				selenium.select("_126_tueOpen2",
 					RuntimeVariables.replace("label=09:00"));
-				selenium.select("_126_tueClose3",
+				selenium.select("_126_tueClose2",
 					RuntimeVariables.replace("label=05:00"));
-				selenium.select("_126_wedOpen3",
+				selenium.select("_126_wedOpen2",
 					RuntimeVariables.replace("label=09:00"));
-				selenium.select("_126_wedClose3",
+				selenium.select("_126_wedClose2",
 					RuntimeVariables.replace("label=05:00"));
-				selenium.select("_126_thuOpen3",
+				selenium.select("_126_thuOpen2",
 					RuntimeVariables.replace("label=09:00"));
-				selenium.select("_126_thuClose3",
+				selenium.select("_126_thuClose2",
 					RuntimeVariables.replace("label=05:00"));
-				selenium.select("_126_friOpen3",
+				selenium.select("_126_friOpen2",
 					RuntimeVariables.replace("label=09:00"));
-				selenium.select("_126_friClose3",
+				selenium.select("_126_friClose2",
 					RuntimeVariables.replace("label=05:00"));
-				selenium.select("_126_satOpen3",
+				selenium.select("_126_satOpen2",
 					RuntimeVariables.replace("label=09:00"));
-				selenium.select("_126_satClose3",
+				selenium.select("_126_satClose2",
 					RuntimeVariables.replace("label=05:00"));
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));

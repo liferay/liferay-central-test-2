@@ -95,18 +95,18 @@ public class AddOrganizationAddress3Test extends BaseTestCase {
 				selenium.clickAt("//div[2]/span/span/button[1]",
 					RuntimeVariables.replace("Add Row"));
 				Thread.sleep(5000);
-				selenium.type("_126_addressStreet1_5",
+				selenium.type("_126_addressStreet1_3",
 					RuntimeVariables.replace("12345 Selenium St"));
-				selenium.type("_126_addressCity5",
+				selenium.type("_126_addressCity3",
 					RuntimeVariables.replace("Diamond Bar"));
-				selenium.type("_126_addressZip5",
+				selenium.type("_126_addressZip3",
 					RuntimeVariables.replace("41111"));
-				selenium.select("_126_addressCountryId5",
+				selenium.select("_126_addressCountryId3",
 					RuntimeVariables.replace("label=United States"));
 				Thread.sleep(5000);
-				selenium.select("_126_addressRegionId5",
+				selenium.select("_126_addressRegionId3",
 					RuntimeVariables.replace("label=California"));
-				selenium.select("_126_addressTypeId5",
+				selenium.select("_126_addressTypeId3",
 					RuntimeVariables.replace("label=Billing"));
 				Thread.sleep(5000);
 				selenium.clickAt("//input[@value='Save']",

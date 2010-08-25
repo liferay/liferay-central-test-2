@@ -118,7 +118,7 @@ public class AddOrganizationService3Test extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("_126_orgLaborTypeId5")) {
+						if (selenium.isElementPresent("_126_orgLaborTypeId3")) {
 							break;
 						}
 					}
@@ -128,35 +128,35 @@ public class AddOrganizationService3Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.select("_126_orgLaborTypeId5",
+				selenium.select("_126_orgLaborTypeId3",
 					RuntimeVariables.replace("label=Training"));
-				selenium.select("_126_sunOpen5",
+				selenium.select("_126_sunOpen3",
 					RuntimeVariables.replace("label=09:00"));
-				selenium.select("_126_sunClose5",
+				selenium.select("_126_sunClose3",
 					RuntimeVariables.replace("label=05:00"));
-				selenium.select("_126_monOpen5",
+				selenium.select("_126_monOpen3",
 					RuntimeVariables.replace("label=09:00"));
-				selenium.select("_126_monClose5",
+				selenium.select("_126_monClose3",
 					RuntimeVariables.replace("label=05:00"));
-				selenium.select("_126_tueOpen5",
+				selenium.select("_126_tueOpen3",
 					RuntimeVariables.replace("label=09:00"));
-				selenium.select("_126_tueClose5",
+				selenium.select("_126_tueClose3",
 					RuntimeVariables.replace("label=05:00"));
-				selenium.select("_126_wedOpen5",
+				selenium.select("_126_wedOpen3",
 					RuntimeVariables.replace("label=09:00"));
-				selenium.select("_126_wedClose5",
+				selenium.select("_126_wedClose3",
 					RuntimeVariables.replace("label=05:00"));
-				selenium.select("_126_thuOpen5",
+				selenium.select("_126_thuOpen3",
 					RuntimeVariables.replace("label=09:00"));
-				selenium.select("_126_thuClose5",
+				selenium.select("_126_thuClose3",
 					RuntimeVariables.replace("label=05:00"));
-				selenium.select("_126_friOpen5",
+				selenium.select("_126_friOpen3",
 					RuntimeVariables.replace("label=09:00"));
-				selenium.select("_126_friClose5",
+				selenium.select("_126_friClose3",
 					RuntimeVariables.replace("label=05:00"));
-				selenium.select("_126_satOpen5",
+				selenium.select("_126_satOpen3",
 					RuntimeVariables.replace("label=09:00"));
-				selenium.select("_126_satClose5",
+				selenium.select("_126_satClose3",
 					RuntimeVariables.replace("label=05:00"));
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));

@@ -100,7 +100,7 @@ public class AddOrganizationWebsite3Test extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("_126_websiteUrl5")) {
+						if (selenium.isElementPresent("_126_websiteUrl3")) {
 							break;
 						}
 					}
@@ -110,11 +110,11 @@ public class AddOrganizationWebsite3Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.type("_126_websiteUrl5",
+				selenium.type("_126_websiteUrl3",
 					RuntimeVariables.replace("http://www.liferay.com"));
-				selenium.select("_126_websiteTypeId5",
+				selenium.select("_126_websiteTypeId3",
 					RuntimeVariables.replace("label=Public"));
-				selenium.clickAt("_126_websitePrimary5",
+				selenium.clickAt("_126_websitePrimary3",
 					RuntimeVariables.replace(""));
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));

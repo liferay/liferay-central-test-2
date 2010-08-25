@@ -64,10 +64,10 @@ public class AddSettingsPhoneNumber3Test extends BaseTestCase {
 
 		selenium.clickAt("//div[2]/span/span/button[1]",
 			RuntimeVariables.replace("Add Row"));
-		selenium.type("_130_phoneNumber5",
+		selenium.type("_130_phoneNumber3",
 			RuntimeVariables.replace("123-123-1234"));
-		selenium.type("_130_phoneExtension5", RuntimeVariables.replace("123"));
-		selenium.select("_130_phoneTypeId5",
+		selenium.type("_130_phoneExtension3", RuntimeVariables.replace("123"));
+		selenium.select("_130_phoneTypeId3",
 			RuntimeVariables.replace("label=Other"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

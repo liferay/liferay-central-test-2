@@ -45,7 +45,7 @@ public class AddSettingsWebsite3Test extends BaseTestCase {
 		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("websitesLink", RuntimeVariables.replace(""));
-		selenium.clickAt("//div[9]/div/fieldset/div[2]/div[2]/span/span/button[1]",
+		selenium.clickAt("//div[9]/fieldset/div[2]/div[2]/span/span/button[1]",
 			RuntimeVariables.replace("Add Row"));
 
 		for (int second = 0;; second++) {
@@ -54,7 +54,7 @@ public class AddSettingsWebsite3Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_130_websiteUrl5")) {
+				if (selenium.isElementPresent("_130_websiteUrl3")) {
 					break;
 				}
 			}
@@ -64,9 +64,9 @@ public class AddSettingsWebsite3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_130_websiteUrl5",
+		selenium.type("_130_websiteUrl3",
 			RuntimeVariables.replace("http://www.liferay.com"));
-		selenium.select("_130_websiteTypeId5",
+		selenium.select("_130_websiteTypeId3",
 			RuntimeVariables.replace("label=Public"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

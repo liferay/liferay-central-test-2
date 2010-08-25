@@ -77,7 +77,7 @@ public class AddUserAddress3Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_125_addressStreet1_5")) {
+				if (selenium.isVisible("_125_addressStreet1_3")) {
 					break;
 				}
 			}
@@ -87,18 +87,18 @@ public class AddUserAddress3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_125_addressStreet1_5",
+		selenium.type("_125_addressStreet1_3",
 			RuntimeVariables.replace("1220 Brea Canyon Rd"));
-		selenium.select("_125_addressTypeId5",
+		selenium.select("_125_addressTypeId3",
 			RuntimeVariables.replace("label=Business"));
-		selenium.type("_125_addressStreet2_5",
+		selenium.type("_125_addressStreet2_3",
 			RuntimeVariables.replace("Ste 12"));
-		selenium.type("_125_addressZip5", RuntimeVariables.replace("91789"));
-		selenium.type("_125_addressStreet3_5",
+		selenium.type("_125_addressZip3", RuntimeVariables.replace("91789"));
+		selenium.type("_125_addressStreet3_3",
 			RuntimeVariables.replace("Walnut"));
-		selenium.type("_125_addressCity5",
+		selenium.type("_125_addressCity3",
 			RuntimeVariables.replace("Los Angeles"));
-		selenium.select("_125_addressCountryId5",
+		selenium.select("_125_addressCountryId3",
 			RuntimeVariables.replace("label=United States"));
 
 		for (int second = 0;; second++) {
@@ -110,7 +110,7 @@ public class AddUserAddress3Test extends BaseTestCase {
 				if (RuntimeVariables.replace(
 							"AlabamaAlaskaArizonaArkansasCaliforniaColoradoConnecticutDelawareDistrict of ColumbiaFloridaGeorgiaHawaiiIdahoIllinoisIndianaIowaKansasKentucky Louisiana MaineMarylandMassachusettsMichiganMinnesotaMississippiMissouriMontanaNebraskaNevadaNew HampshireNew JerseyNew MexicoNew YorkNorth CarolinaNorth DakotaOhioOklahoma OregonPennsylvaniaPuerto RicoRhode IslandSouth CarolinaSouth DakotaTennesseeTexasUtahVermontVirginiaWashingtonWest VirginiaWisconsinWyoming")
 										.equals(selenium.getText(
-								"_125_addressRegionId5"))) {
+								"_125_addressRegionId3"))) {
 					break;
 				}
 			}
@@ -120,7 +120,7 @@ public class AddUserAddress3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_125_addressRegionId5",
+		selenium.select("_125_addressRegionId3",
 			RuntimeVariables.replace("label=California"));
 		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

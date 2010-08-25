@@ -98,10 +98,23 @@ public class AddOrganizationPageTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				Thread.sleep(5000);
-				selenium.clickAt("//li/div/div[1]", RuntimeVariables.replace(""));
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div"));
+
+				boolean pagePresent = selenium.isVisible(
+						"//li/ul/li[1]/div/div[3]/a");
+
+				if (pagePresent) {
+					label = 3;
+
+					continue;
+				}
+
+				selenium.clickAt("//li/div/div[1]",
+					RuntimeVariables.replace("Drop Down Arrow"));
+
+			case 3:
 				assertEquals(RuntimeVariables.replace("Selenium Test Home Page"),
 					selenium.getText("//li/ul/li[1]/div/div[3]/a"));
 

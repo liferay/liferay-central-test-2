@@ -81,7 +81,7 @@ public class AddOrganizationWebsite2Test extends BaseTestCase {
 
 					try {
 						if (selenium.isElementPresent(
-									"//div[7]/div/fieldset/div[2]/div/span/span/button[1]")) {
+									"//div[7]/fieldset/div[2]/div/span/span/button[1]")) {
 							break;
 						}
 					}
@@ -91,7 +91,7 @@ public class AddOrganizationWebsite2Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[7]/div/fieldset/div[2]/div/span/span/button[1]",
+				selenium.clickAt("//div[7]/fieldset/div[2]/div/span/span/button[1]",
 					RuntimeVariables.replace("Add Row"));
 
 				for (int second = 0;; second++) {
@@ -100,7 +100,7 @@ public class AddOrganizationWebsite2Test extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("_126_websiteUrl3")) {
+						if (selenium.isElementPresent("_126_websiteUrl2")) {
 							break;
 						}
 					}
@@ -110,11 +110,11 @@ public class AddOrganizationWebsite2Test extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.type("_126_websiteUrl3",
+				selenium.type("_126_websiteUrl2",
 					RuntimeVariables.replace("http://www.liferay.com"));
-				selenium.select("_126_websiteTypeId3",
+				selenium.select("_126_websiteTypeId2",
 					RuntimeVariables.replace("label=Public"));
-				selenium.clickAt("_126_websitePrimary3",
+				selenium.clickAt("_126_websitePrimary2",
 					RuntimeVariables.replace(""));
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));

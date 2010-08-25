@@ -56,7 +56,7 @@ public class AddUserAdditionalEmailAddress2Test extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[11]/div/fieldset/div[2]/div/span/span/button[1]")) {
+							"//div[11]/fieldset/div[2]/div/span/span/button[1]")) {
 					break;
 				}
 			}
@@ -66,7 +66,7 @@ public class AddUserAdditionalEmailAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[11]/div/fieldset/div[2]/div/span/span/button[1]",
+		selenium.clickAt("//div[11]/fieldset/div[2]/div/span/span/button[1]",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -75,7 +75,7 @@ public class AddUserAdditionalEmailAddress2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_125_emailAddressAddress3")) {
+				if (selenium.isVisible("_125_emailAddressAddress2")) {
 					break;
 				}
 			}
@@ -85,9 +85,9 @@ public class AddUserAdditionalEmailAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_125_emailAddressAddress3",
+		selenium.type("_125_emailAddressAddress2",
 			RuntimeVariables.replace("testuser01@selenium.com"));
-		selenium.select("_125_emailAddressTypeId3",
+		selenium.select("_125_emailAddressTypeId2",
 			RuntimeVariables.replace("label=E-mail 2"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

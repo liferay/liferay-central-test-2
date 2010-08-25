@@ -77,7 +77,7 @@ public class AddUserAddress2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_125_addressStreet1_3")) {
+				if (selenium.isVisible("_125_addressStreet1_2")) {
 					break;
 				}
 			}
@@ -87,17 +87,17 @@ public class AddUserAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_125_addressStreet1_3",
+		selenium.type("_125_addressStreet1_2",
 			RuntimeVariables.replace("123 Lets"));
-		selenium.select("_125_addressTypeId3",
+		selenium.select("_125_addressTypeId2",
 			RuntimeVariables.replace("label=Other"));
-		selenium.type("_125_addressStreet2_3",
+		selenium.type("_125_addressStreet2_2",
 			RuntimeVariables.replace("897 Hope"));
-		selenium.type("_125_addressZip3", RuntimeVariables.replace("00000"));
-		selenium.type("_125_addressStreet3_3",
+		selenium.type("_125_addressZip2", RuntimeVariables.replace("00000"));
+		selenium.type("_125_addressStreet3_2",
 			RuntimeVariables.replace("7896 This"));
-		selenium.type("_125_addressCity3", RuntimeVariables.replace("Works"));
-		selenium.select("_125_addressCountryId3",
+		selenium.type("_125_addressCity2", RuntimeVariables.replace("Works"));
+		selenium.select("_125_addressCountryId2",
 			RuntimeVariables.replace("label=Canada"));
 
 		for (int second = 0;; second++) {
@@ -109,7 +109,7 @@ public class AddUserAddress2Test extends BaseTestCase {
 				if (RuntimeVariables.replace(
 							"AlbertaBritish ColumbiaManitobaNew BrunswickNewfoundland and LabradorNorthwest TerritoriesNova ScotiaNunavutOntarioPrince Edward IslandQuebecSaskatchewanYukon")
 										.equals(selenium.getText(
-								"_125_addressRegionId3"))) {
+								"_125_addressRegionId2"))) {
 					break;
 				}
 			}
@@ -119,7 +119,7 @@ public class AddUserAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_125_addressRegionId3",
+		selenium.select("_125_addressRegionId2",
 			RuntimeVariables.replace("label=Ontario"));
 		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

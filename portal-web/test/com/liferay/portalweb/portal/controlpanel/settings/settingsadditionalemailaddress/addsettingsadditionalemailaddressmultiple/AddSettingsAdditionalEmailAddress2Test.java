@@ -55,7 +55,7 @@ public class AddSettingsAdditionalEmailAddress2Test extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[8]/div/fieldset/div[2]/div/span/span/button[1]")) {
+							"//div[8]/fieldset/div[2]/div/span/span/button[1]")) {
 					break;
 				}
 			}
@@ -65,11 +65,11 @@ public class AddSettingsAdditionalEmailAddress2Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[8]/div/fieldset/div[2]/div/span/span/button[1]",
+		selenium.clickAt("//div[8]/fieldset/div[2]/div/span/span/button[1]",
 			RuntimeVariables.replace(""));
-		selenium.type("_130_emailAddressAddress3",
+		selenium.type("_130_emailAddressAddress2",
 			RuntimeVariables.replace("Admin@Liferay.com"));
-		selenium.select("_130_emailAddressTypeId3",
+		selenium.select("_130_emailAddressTypeId2",
 			RuntimeVariables.replace("label=E-mail"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
