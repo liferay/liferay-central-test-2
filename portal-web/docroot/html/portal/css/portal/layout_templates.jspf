@@ -26,3 +26,7 @@
 .lfr-page-layouts-content {
 	padding-left: 1em;
 }
+
+.ie6 .lfr-layout-template-column {
+	width: 20%;
+}
