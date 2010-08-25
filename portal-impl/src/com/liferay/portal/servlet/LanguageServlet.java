@@ -95,11 +95,13 @@ public class LanguageServlet extends HttpServlet {
 
 		response.setContentType(ContentTypes.TEXT_PLAIN_UTF8);
 		response.setHeader(
-			HttpHeaders.CONTENT_DISPOSITION,
-			"attachment; filename=language.txt");
+			HttpHeaders.CONTENT_DISPOSITION, _CONTENT_DISPOSITION);
 
 		ServletResponseUtil.write(response, value.getBytes(StringPool.UTF8));
 	}
+
+	private static final String _CONTENT_DISPOSITION =
+		"attachment; filename=language.txt";
 
 	private static Log _log = LogFactoryUtil.getLog(LanguageServlet.class);
 
