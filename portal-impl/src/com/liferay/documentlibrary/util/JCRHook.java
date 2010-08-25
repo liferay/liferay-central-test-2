@@ -382,6 +382,10 @@ public class JCRHook extends BaseHook {
 
 			VersionHistory versionHistory = contentNode.getVersionHistory();
 
+			if (versionHistory.hasVersionLabel(versionLabel) == false) {
+				throw new NoSuchFileException(fileName);
+			}
+
 			Version version = versionHistory.getVersionByLabel(versionLabel);
 
 			versionHistory.removeVersion(version.getName());
