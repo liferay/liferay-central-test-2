@@ -921,6 +921,10 @@ public class HttpImpl implements Http {
 					PostMethod postMethod = (PostMethod)httpMethod;
 
 					postMethod.setRequestBody(nvpArray);
+
+					postMethod.addRequestHeader(
+						HttpHeaders.CONTENT_TYPE,
+						ContentTypes.APPLICATION_X_WWW_FORM_URLENCODED_UTF8);
 				}
 			}
 			else if (method == Http.Method.DELETE) {

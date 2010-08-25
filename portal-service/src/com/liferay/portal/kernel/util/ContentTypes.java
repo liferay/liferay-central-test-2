@@ -31,6 +31,9 @@ public interface ContentTypes {
 	public static final String APPLICATION_X_WWW_FORM_URLENCODED =
 		"application/x-www-form-urlencoded";
 
+	public static final String APPLICATION_X_WWW_FORM_URLENCODED_UTF8 =
+		"application/x-www-form-urlencoded; charset=UTF-8";
+
 	public static final String APPLICATION_ZIP = "application/zip";
 
 	public static final String HTTPD_UNIX_DIRECTORY = "httpd/unix-directory";
