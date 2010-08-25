@@ -14,6 +14,7 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -197,7 +198,7 @@ public class TextFormatter {
 
 	private static String _formatA(String s) {
 		return StringUtil.replace(
-			s.toUpperCase(), StringPool.SPACE, StringPool.UNDERLINE);
+			s.toUpperCase(), CharPool.SPACE, CharPool.UNDERLINE);
 	}
 
 	private static String _formatB(String s) {
@@ -207,7 +208,7 @@ public class TextFormatter {
 
 	private static String _formatC(String s) {
 		return StringUtil.replace(
-			s.toLowerCase(), StringPool.SPACE, StringPool.UNDERLINE);
+			s.toLowerCase(), CharPool.SPACE, CharPool.UNDERLINE);
 	}
 
 	private static String _formatD(String s) {
@@ -236,7 +237,7 @@ public class TextFormatter {
 
 		for (int i = 0; i < charArray.length; i++) {
 			if (Character.isUpperCase(charArray[i])) {
-				sb.append(StringPool.SPACE);
+				sb.append(CharPool.SPACE);
 				sb.append(Character.toLowerCase(charArray[i]));
 			}
 			else {
@@ -280,8 +281,8 @@ public class TextFormatter {
 	}
 
 	private static String _formatJ(String s) {
-		s = StringUtil.replace(s, StringPool.DASH, StringPool.SPACE);
-		s = StringUtil.replace(s, StringPool.UNDERLINE, StringPool.SPACE);
+		s = StringUtil.replace(s, CharPool.DASH, CharPool.SPACE);
+		s = StringUtil.replace(s, CharPool.UNDERLINE, CharPool.SPACE);
 
 		char[] charArray = s.toCharArray();
 
@@ -301,7 +302,7 @@ public class TextFormatter {
 
 	private static String _formatK(String s) {
 		s = _formatH(s);
-		s = StringUtil.replace(s, StringPool.SPACE, StringPool.DASH);
+		s = StringUtil.replace(s, CharPool.SPACE, CharPool.DASH);
 
 		return s;
 	}
@@ -340,11 +341,11 @@ public class TextFormatter {
 	}
 
 	private static String _formatN(String s) {
-		return StringUtil.replace(s, StringPool.DASH, StringPool.UNDERLINE);
+		return StringUtil.replace(s, CharPool.DASH, CharPool.UNDERLINE);
 	}
 
 	private static String _formatO(String s) {
-		return StringUtil.replace(s, StringPool.UNDERLINE, StringPool.DASH);
+		return StringUtil.replace(s, CharPool.UNDERLINE, CharPool.DASH);
 	}
 
 }

@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.translator.util;
 
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -58,7 +59,8 @@ public class TranslationWebCacheItem implements WebCacheItem {
 
 			String toText = text.substring(x, y).trim();
 
-			toText = StringUtil.replace(toText, "\n", " ");
+			toText = StringUtil.replace(
+				toText, CharPool.NEW_LINE, CharPool.SPACE);
 
 			translation.setToText(toText);
 		}

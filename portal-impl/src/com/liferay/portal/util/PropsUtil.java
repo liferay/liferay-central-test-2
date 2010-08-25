@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ServerDetector;
@@ -191,7 +192,7 @@ public class PropsUtil {
 		}
 
 		defaultLiferayHome = StringUtil.replace(
-			defaultLiferayHome, StringPool.BACK_SLASH, StringPool.SLASH);
+			defaultLiferayHome, CharPool.BACK_SLASH, CharPool.SLASH);
 
 		defaultLiferayHome = StringUtil.replace(
 			defaultLiferayHome, StringPool.DOUBLE_SLASH, StringPool.SLASH);

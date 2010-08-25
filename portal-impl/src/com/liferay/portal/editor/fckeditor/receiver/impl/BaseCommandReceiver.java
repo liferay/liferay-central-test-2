@@ -20,6 +20,7 @@ import com.liferay.portal.editor.fckeditor.receiver.CommandReceiver;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -173,7 +174,8 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 
 		DiskFileItem fileItem = (DiskFileItem)fields.get("NewFile");
 
-		String fileName = StringUtil.replace(fileItem.getName(), "\\", "/");
+		String fileName = StringUtil.replace(
+			fileItem.getName(), CharPool.BACK_SLASH, CharPool.SLASH);
 		String[] fileNameArray = StringUtil.split(fileName, "/");
 		fileName = fileNameArray[fileNameArray.length - 1];
 

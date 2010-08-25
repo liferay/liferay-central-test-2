@@ -45,6 +45,7 @@ import com.liferay.portal.kernel.sanitizer.SanitizerUtil;
 import com.liferay.portal.kernel.sanitizer.SanitizerWrapper;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -783,7 +784,7 @@ public class HookHotDeployListener
 	}
 
 	protected Locale getLocale(String languagePropertiesLocation) {
-		int x = languagePropertiesLocation.indexOf(StringPool.UNDERLINE);
+		int x = languagePropertiesLocation.indexOf(CharPool.UNDERLINE);
 		int y = languagePropertiesLocation.indexOf(".properties");
 
 		Locale locale = null;
@@ -799,7 +800,7 @@ public class HookHotDeployListener
 	}
 
 	protected BasePersistence<?> getPersistence(String modelName) {
-		int pos = modelName.lastIndexOf(StringPool.PERIOD);
+		int pos = modelName.lastIndexOf(CharPool.PERIOD);
 
 		String entityName = modelName.substring(pos + 1);
 
@@ -815,7 +816,7 @@ public class HookHotDeployListener
 		String fileName = portalJspFile.getName();
 		String filePath = portalJspFile.toString();
 
-		int fileNameIndex = fileName.lastIndexOf(StringPool.PERIOD);
+		int fileNameIndex = fileName.lastIndexOf(CharPool.PERIOD);
 
 		if (fileNameIndex > 0) {
 			int filePathIndex = filePath.lastIndexOf(fileName);
@@ -1414,7 +1415,7 @@ public class HookHotDeployListener
 
 		for (String key : _PROPS_VALUES_BOOLEAN) {
 			String fieldName = StringUtil.replace(
-				key.toUpperCase(), StringPool.PERIOD,  StringPool.UNDERLINE);
+				key.toUpperCase(), CharPool.PERIOD,  CharPool.UNDERLINE);
 
 			if (!containsKey(portalProperties, key)) {
 				continue;
@@ -1436,7 +1437,7 @@ public class HookHotDeployListener
 
 		for (String key : _PROPS_VALUES_INTEGER) {
 			String fieldName = StringUtil.replace(
-				key.toUpperCase(), StringPool.PERIOD,  StringPool.UNDERLINE);
+				key.toUpperCase(), CharPool.PERIOD,  CharPool.UNDERLINE);
 
 			if (!containsKey(portalProperties, key)) {
 				continue;
@@ -1458,7 +1459,7 @@ public class HookHotDeployListener
 
 		for (String key : _PROPS_VALUES_LONG) {
 			String fieldName = StringUtil.replace(
-				key.toUpperCase(), StringPool.PERIOD,  StringPool.UNDERLINE);
+				key.toUpperCase(), CharPool.PERIOD,  CharPool.UNDERLINE);
 
 			if (!containsKey(portalProperties, key)) {
 				continue;
@@ -1480,7 +1481,7 @@ public class HookHotDeployListener
 
 		for (String key : _PROPS_VALUES_STRING) {
 			String fieldName = StringUtil.replace(
-				key.toUpperCase(), StringPool.PERIOD,  StringPool.UNDERLINE);
+				key.toUpperCase(), CharPool.PERIOD,  CharPool.UNDERLINE);
 
 			if (!containsKey(portalProperties, key)) {
 				continue;
@@ -1501,7 +1502,7 @@ public class HookHotDeployListener
 
 		for (String key : _PROPS_VALUES_STRING_ARRAY) {
 			String fieldName = StringUtil.replace(
-				key.toUpperCase(), StringPool.PERIOD,  StringPool.UNDERLINE);
+				key.toUpperCase(), CharPool.PERIOD, CharPool.UNDERLINE);
 
 			if (!containsKey(portalProperties, key)) {
 				continue;

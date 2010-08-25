@@ -16,9 +16,9 @@ package com.liferay.portal.cache.ehcache;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.PropertiesUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.HtmlImpl;
@@ -78,7 +78,7 @@ public class LiferayCacheManagerPeerProviderFactory
 		}
 
 		portalPropertiesString = StringUtil.replace(
-			portalPropertiesString, StringPool.COMMA, StringPool.NEW_LINE);
+			portalPropertiesString, CharPool.COMMA, CharPool.NEW_LINE);
 
 		Properties portalProperties = null;
 

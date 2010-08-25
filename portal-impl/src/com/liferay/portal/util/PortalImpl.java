@@ -269,7 +269,7 @@ public class PortalImpl implements Portal {
 
 		int pos = _globalLibDir.lastIndexOf(".jar!");
 
-		pos = _globalLibDir.lastIndexOf(StringPool.SLASH, pos);
+		pos = _globalLibDir.lastIndexOf(CharPool.SLASH, pos);
 
 		_globalLibDir = _globalLibDir.substring(0, pos + 1);
 
@@ -1268,7 +1268,7 @@ public class PortalImpl implements Portal {
 
 		authorizationHeader = authorizationHeader.substring("Digest ".length());
 		authorizationHeader = StringUtil.replace(
-			authorizationHeader, StringPool.COMMA, StringPool.NEW_LINE);
+			authorizationHeader, CharPool.COMMA, CharPool.NEW_LINE);
 
 		UnicodeProperties authorizationProperties = new UnicodeProperties();
 
@@ -3056,13 +3056,13 @@ public class PortalImpl implements Portal {
 
 		// LEP-4787
 
-		int x = url.indexOf(StringPool.SEMICOLON);
+		int x = url.indexOf(CharPool.SEMICOLON);
 
 		if (x != -1) {
 			return url;
 		}
 
-		x = url.indexOf(StringPool.QUESTION);
+		x = url.indexOf(CharPool.QUESTION);
 
 		if (x != -1) {
 			StringBundler sb = new StringBundler(4);
@@ -3085,7 +3085,7 @@ public class PortalImpl implements Portal {
 		sb.append(url);
 
 		if (x != -1) {
-			int y = url.lastIndexOf(StringPool.SLASH);
+			int y = url.lastIndexOf(CharPool.SLASH);
 
 			if (x + 1 == y) {
 				sb.append(StringPool.SLASH);
@@ -3870,7 +3870,7 @@ public class PortalImpl implements Portal {
 			else {
 				String name = e.getClass().getName();
 
-				name = name.substring(name.lastIndexOf(StringPool.PERIOD) + 1);
+				name = name.substring(name.lastIndexOf(CharPool.PERIOD) + 1);
 
 				if (name.startsWith("NoSuch") && name.endsWith("Exception")) {
 					status = HttpServletResponse.SC_NOT_FOUND;

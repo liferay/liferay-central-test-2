@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -107,7 +108,7 @@ public class MinifierFilter extends BasePortalFilter {
 
 				String importDir = StringPool.BLANK;
 
-				int slashPos = importFileName.lastIndexOf(StringPool.SLASH);
+				int slashPos = importFileName.lastIndexOf(CharPool.SLASH);
 
 				if (slashPos != -1) {
 					importDir = StringPool.SLASH.concat(
@@ -284,7 +285,7 @@ public class MinifierFilter extends BasePortalFilter {
 		}
 
 		realPath = StringUtil.replace(
-			realPath, StringPool.BACK_SLASH, StringPool.SLASH);
+			realPath, CharPool.BACK_SLASH, CharPool.SLASH);
 
 		File file = new File(realPath);
 

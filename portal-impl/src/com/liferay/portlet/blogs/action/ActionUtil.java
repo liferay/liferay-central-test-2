@@ -14,8 +14,8 @@
 
 package com.liferay.portlet.blogs.action;
 
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -53,13 +53,13 @@ public class ActionUtil {
 					themeDisplay.getScopeGroupId(), urlTitle);
 			}
 			catch (NoSuchEntryException nsee) {
-				if (urlTitle.indexOf(StringPool.UNDERLINE) != -1) {
+				if (urlTitle.indexOf(CharPool.UNDERLINE) != -1) {
 
 					// Check another URL title for backwards compatibility. See
 					// LEP-5733.
 
 					urlTitle = StringUtil.replace(
-						urlTitle, StringPool.UNDERLINE, StringPool.DASH);
+						urlTitle, CharPool.UNDERLINE, CharPool.DASH);
 
 					entry = BlogsEntryServiceUtil.getEntry(
 						themeDisplay.getScopeGroupId(), urlTitle);

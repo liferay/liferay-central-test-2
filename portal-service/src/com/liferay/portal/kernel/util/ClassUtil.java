@@ -122,7 +122,7 @@ public class ClassUtil {
 		}
 
 		className = StringUtil.replace(
-			className, StringPool.PERIOD, StringPool.SLASH);
+			className, CharPool.PERIOD, CharPool.SLASH);
 
 		className = StringUtil.replace(className, "/class", _CLASS_EXTENSION);
 

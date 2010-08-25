@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.image.SpriteProcessor;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.SortedProperties;
@@ -148,8 +149,7 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 					renderedImages.add(renderedImage);
 
 					String key = StringUtil.replace(
-						file.toString(), StringPool.BACK_SLASH,
-						StringPool.SLASH);
+						file.toString(), CharPool.BACK_SLASH, CharPool.SLASH);
 
 					key = key.substring(
 						spritePropertiesRootPath.toString().length());

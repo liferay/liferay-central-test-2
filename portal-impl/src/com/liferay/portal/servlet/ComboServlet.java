@@ -15,6 +15,7 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -103,7 +104,7 @@ public class ComboServlet extends HttpServlet {
 		}
 
 		basePath = StringUtil.replace(
-			basePath, StringPool.BACK_SLASH, StringPool.SLASH);
+			basePath, CharPool.BACK_SLASH, CharPool.SLASH);
 
 		File baseDir = new File(basePath);
 
@@ -118,7 +119,7 @@ public class ComboServlet extends HttpServlet {
 		}
 
 		filePath = StringUtil.replace(
-			filePath, StringPool.BACK_SLASH, StringPool.SLASH);
+			filePath, CharPool.BACK_SLASH, CharPool.SLASH);
 
 		File file = new File(filePath);
 

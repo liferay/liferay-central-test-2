@@ -16,12 +16,12 @@ package com.liferay.portal.deploy;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StreamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -72,7 +72,7 @@ public class DeployUtil {
 		}
 
 		destDir = StringUtil.replace(
-			destDir, StringPool.BACK_SLASH, StringPool.SLASH);
+			destDir, CharPool.BACK_SLASH, CharPool.SLASH);
 
 		return destDir;
 	}

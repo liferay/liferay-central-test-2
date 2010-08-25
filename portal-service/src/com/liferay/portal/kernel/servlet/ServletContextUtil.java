@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
@@ -191,7 +192,7 @@ public class ServletContextUtil {
 		}
 
 		className = StringUtil.replace(
-			className, StringPool.SLASH, StringPool.PERIOD);
+			className, CharPool.SLASH, CharPool.PERIOD);
 
 		return className;
 	}

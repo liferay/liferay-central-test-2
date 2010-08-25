@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -83,7 +84,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 		if (like) {
 			value = StringUtil.replace(
-				value, StringPool.PERCENT, StringPool.STAR);
+				value, CharPool.PERCENT, CharPool.STAR);
 
 			value = value.toLowerCase();
 

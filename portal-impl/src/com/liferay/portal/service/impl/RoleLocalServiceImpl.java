@@ -25,9 +25,9 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
@@ -138,8 +138,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		for (String name : systemRoles) {
 			String description = PropsUtil.get(
-				"system.role." + StringUtil.replace(name, " ", ".") +
-					".description");
+				"system.role." +
+				StringUtil.replace(name, CharPool.SPACE, CharPool.PERIOD) +
+				".description");
 			int type = RoleConstants.TYPE_REGULAR;
 
 			checkSystemRole(companyId, name, description, type);
@@ -152,7 +153,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		for (String name : systemCommunityRoles) {
 			String description = PropsUtil.get(
 				"system.community.role." +
-					StringUtil.replace(name, " ", ".") + ".description");
+				StringUtil.replace(name, CharPool.SPACE, CharPool.PERIOD) +
+				".description");
 			int type = RoleConstants.TYPE_COMMUNITY;
 
 			checkSystemRole(companyId, name, description, type);
@@ -166,7 +168,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		for (String name : systemOrganizationRoles) {
 			String description = PropsUtil.get(
 				"system.organization.role." +
-					StringUtil.replace(name, " ", ".") + ".description");
+					StringUtil.replace(name, CharPool.SPACE, CharPool.PERIOD) +
+					".description");
 			int type = RoleConstants.TYPE_ORGANIZATION;
 
 			checkSystemRole(companyId, name, description, type);
@@ -529,8 +532,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		if ((classNameId == PortalUtil.getClassNameId(Role.class)) &&
 			((Validator.isNull(name)) || (Validator.isNumber(name)) ||
-			 (name.indexOf(StringPool.COMMA) != -1) ||
-			 (name.indexOf(StringPool.STAR) != -1))) {
+			 (name.indexOf(CharPool.COMMA) != -1) ||
+			 (name.indexOf(CharPool.STAR) != -1))) {
 
 			throw new RoleNameException();
 		}

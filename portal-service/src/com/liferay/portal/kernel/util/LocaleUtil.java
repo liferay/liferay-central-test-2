@@ -104,7 +104,7 @@ public class LocaleUtil {
 			locale = _locales.get(languageId);
 
 			if (locale == null) {
-				int pos = languageId.indexOf(StringPool.UNDERLINE);
+				int pos = languageId.indexOf(CharPool.UNDERLINE);
 
 				if (pos == -1) {
 					if (Arrays.binarySearch(_isoLanguages, languageId) < 0) {
@@ -217,7 +217,7 @@ public class LocaleUtil {
 
 	private String _toW3cLanguageId(String languageId) {
 		return StringUtil.replace(
-			languageId, StringPool.UNDERLINE, StringPool.MINUS);
+			languageId, CharPool.UNDERLINE, CharPool.MINUS);
 	}
 
 	private String[] _toW3cLanguageIds(Locale[] locales) {

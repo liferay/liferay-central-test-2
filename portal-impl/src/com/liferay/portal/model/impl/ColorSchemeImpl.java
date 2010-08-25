@@ -16,6 +16,7 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.SafeProperties;
 import com.liferay.portal.kernel.util.StringPool;
@@ -108,14 +109,14 @@ public class ColorSchemeImpl implements ColorScheme {
 		if (Validator.isNotNull(_cssClass) &&
 			Validator.isNotNull(_colorSchemeImagesPath)) {
 
-			int pos = _cssClass.indexOf(StringPool.SPACE);
+			int pos = _cssClass.indexOf(CharPool.SPACE);
 
 			if (pos > 0) {
 				if (_colorSchemeImagesPath.endsWith(
 						_cssClass.substring(0, pos))) {
 
 					String subclassPath = StringUtil.replace(
-						_cssClass, StringPool.SPACE, StringPool.SLASH);
+						_cssClass, CharPool.SPACE, CharPool.SLASH);
 
 					return _colorSchemeImagesPath + subclassPath.substring(pos);
 				}

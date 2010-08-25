@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileComparator;
 import com.liferay.portal.kernel.util.JavaProps;
@@ -392,7 +393,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 	public String getAbsolutePath(File file) {
 		return StringUtil.replace(
-			file.getAbsolutePath(), StringPool.BACK_SLASH, StringPool.SLASH);
+			file.getAbsolutePath(), CharPool.BACK_SLASH, CharPool.SLASH);
 	}
 
 	public byte[] getBytes(File file) throws IOException {
@@ -432,7 +433,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 			return null;
 		}
 
-		int pos = fileName.lastIndexOf(StringPool.PERIOD);
+		int pos = fileName.lastIndexOf(CharPool.PERIOD);
 
 		if (pos > 0) {
 			return fileName.substring(pos + 1, fileName.length()).toLowerCase();
@@ -443,10 +444,10 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	public String getPath(String fullFileName) {
-		int pos = fullFileName.lastIndexOf(StringPool.SLASH);
+		int pos = fullFileName.lastIndexOf(CharPool.SLASH);
 
 		if (pos == -1) {
-			pos = fullFileName.lastIndexOf(StringPool.BACK_SLASH);
+			pos = fullFileName.lastIndexOf(CharPool.BACK_SLASH);
 		}
 
 		String shortFileName = fullFileName.substring(0, pos);
@@ -459,10 +460,10 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	public String getShortFileName(String fullFileName) {
-		int pos = fullFileName.lastIndexOf(StringPool.SLASH);
+		int pos = fullFileName.lastIndexOf(CharPool.SLASH);
 
 		if (pos == -1) {
-			pos = fullFileName.lastIndexOf(StringPool.BACK_SLASH);
+			pos = fullFileName.lastIndexOf(CharPool.BACK_SLASH);
 		}
 
 		String shortFileName =
@@ -587,7 +588,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 	public String replaceSeparator(String fileName) {
 		return StringUtil.replace(
-			fileName, StringPool.BACK_SLASH, StringPool.SLASH);
+			fileName, CharPool.BACK_SLASH, CharPool.SLASH);
 	}
 
 	public File[] sortFiles(File[] files) {

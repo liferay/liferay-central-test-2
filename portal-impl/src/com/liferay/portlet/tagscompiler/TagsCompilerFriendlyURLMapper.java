@@ -16,6 +16,7 @@ package com.liferay.portlet.tagscompiler;
 
 import com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -47,7 +48,7 @@ public class TagsCompilerFriendlyURLMapper extends BaseFriendlyURLMapper {
 		addParameter(parameterMap, "p_p_state", WindowState.NORMAL);
 		addParameter(parameterMap, "p_p_mode", PortletMode.VIEW);
 
-		int x = friendlyURLPath.indexOf(StringPool.SLASH, 1);
+		int x = friendlyURLPath.indexOf(CharPool.SLASH, 1);
 		int y = friendlyURLPath.length();
 
 		String[] entries = StringUtil.split(
@@ -58,7 +59,7 @@ public class TagsCompilerFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 			for (int i = 0; i < entries.length; i++) {
 				String entry = StringUtil.replace(
-					entries[i], StringPool.PLUS, StringPool.SPACE);
+					entries[i], CharPool.PLUS, CharPool.SPACE);
 
 				if (i != 0) {
 					sb.append(StringPool.COMMA);
