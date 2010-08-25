@@ -406,7 +406,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 					dialog.io.after(
 						'success',
 						function(event){
-							dialog.close();
+							window.location.reload(true);
 						}
 					);
 
