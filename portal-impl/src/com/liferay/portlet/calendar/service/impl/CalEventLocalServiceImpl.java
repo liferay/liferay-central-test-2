@@ -1483,9 +1483,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		return weekDay;
 	}
 
-	protected TZSRecurrence toRecurrence(
-		RRule rRule, Calendar startDate) {
-
+	protected TZSRecurrence toRecurrence(RRule rRule, Calendar startDate) {
 		Recur recur = rRule.getRecur();
 
 		Calendar recStartCal = CalendarFactoryUtil.getCalendar(
