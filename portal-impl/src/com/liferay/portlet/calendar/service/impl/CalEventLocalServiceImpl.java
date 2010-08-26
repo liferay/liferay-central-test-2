@@ -1005,7 +1005,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		if (multiDayEvent) {
 			repeating = true;
 
-			Calendar recStartCal = CalendarFactoryUtil.getCalendar(timeZone);
+			Calendar recStartCal = CalendarFactoryUtil.getCalendar(
+				TimeZoneUtil.getTimeZone(StringPool.UTC));
 
 			recStartCal.setTime(startDate.getTime());
 
@@ -1015,20 +1016,21 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			recurrence = new TZSRecurrence(
 				recStartCal, duration, Recurrence.DAILY);
 
-			Calendar until = (Calendar) startDate.clone();
+			Calendar until = CalendarFactoryUtil.getCalendar(
+				TimeZoneUtil.getTimeZone(StringPool.UTC));
 
 			until.setTimeInMillis(until.getTimeInMillis() + diffMillis);
 
 			recurrence.setUntil(until);
 
-			endDate = recurrence.getUntil();
+			endDate.setTime(recurrence.getUntil().getTime());
 		}
 		else if (rrule != null) {
 			repeating = true;
-			recurrence = toRecurrence(rrule, timeZone, startDate);
+			recurrence = toRecurrence(rrule, startDate);
 
 			if (recurrence.getUntil() != null) {
-				endDate = recurrence.getUntil();
+				endDate.setTime(recurrence.getUntil().getTime());
 			}
 		}
 
@@ -1482,11 +1484,12 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	protected TZSRecurrence toRecurrence(
-		RRule rRule, TimeZone timeZone, Calendar startDate) {
+		RRule rRule, Calendar startDate) {
 
 		Recur recur = rRule.getRecur();
 
-		Calendar recStartCal = CalendarFactoryUtil.getCalendar(timeZone);
+		Calendar recStartCal = CalendarFactoryUtil.getCalendar(
+			TimeZoneUtil.getTimeZone(StringPool.UTC));
 
 		recStartCal.setTime(startDate.getTime());
 
@@ -1500,7 +1503,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			recurrence.setInterval(recur.getInterval());
 		}
 
-		Calendar until = Calendar.getInstance(timeZone);
+		Calendar until = Calendar.getInstance(
+			TimeZoneUtil.getTimeZone(StringPool.UTC));
 
 		String frequency = recur.getFrequency();
 

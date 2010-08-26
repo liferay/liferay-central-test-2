@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -220,7 +221,8 @@ public class EditEventAction extends PortletAction {
 			Calendar recStartCal = null;
 
 			if (timeZoneSensitive) {
-				recStartCal = CalendarFactoryUtil.getCalendar(timeZone);
+				recStartCal = CalendarFactoryUtil.getCalendar(
+					TimeZoneUtil.getTimeZone(StringPool.UTC));
 
 				recStartCal.setTime(startDate.getTime());
 			}
@@ -360,20 +362,27 @@ public class EditEventAction extends PortletAction {
 				recurrence.setOccurrence(endDateOccurrence);
 			}
 			else if (endDateType == 2) {
+				Calendar endDate = CalendarFactoryUtil.getCalendar(timeZone);
+
+				endDate.set(Calendar.MONTH, endDateMonth);
+				endDate.set(Calendar.DATE, endDateDay);
+				endDate.set(Calendar.YEAR, endDateYear);
+				endDate.set(Calendar.HOUR_OF_DAY, startDateHour);
+				endDate.set(Calendar.MINUTE, startDateMinute);
+				endDate.set(Calendar.SECOND, 0);
+				endDate.set(Calendar.MILLISECOND, 0);
+
 				Calendar recEndCal = null;
 
 				if (timeZoneSensitive) {
-					recEndCal = CalendarFactoryUtil.getCalendar(timeZone);
+					recEndCal = CalendarFactoryUtil.getCalendar(
+						TimeZoneUtil.getTimeZone(StringPool.UTC));
 
-					recEndCal.setTime(startDate.getTime());
+					recEndCal.setTime(endDate.getTime());
 				}
 				else {
-					recEndCal = (Calendar)startDate.clone();
+					recEndCal = (Calendar)endDate.clone();
 				}
-
-				recEndCal.set(Calendar.MONTH, endDateMonth);
-				recEndCal.set(Calendar.DATE, endDateDay);
-				recEndCal.set(Calendar.YEAR, endDateYear);
 
 				recurrence.setUntil(recEndCal);
 			}
