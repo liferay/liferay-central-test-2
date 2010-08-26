@@ -25,6 +25,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.portlet.MimeResponse;
 import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,6 +47,7 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 		reservedAttrs.add(JavaConstants.JAVAX_PORTLET_PORTLET);
 		reservedAttrs.add(JavaConstants.JAVAX_PORTLET_REQUEST);
 		reservedAttrs.add(JavaConstants.JAVAX_PORTLET_RESPONSE);
+		reservedAttrs.add(MimeResponse.MARKUP_HEAD_ELEMENT);
 		reservedAttrs.add(PortletRequest.LIFECYCLE_PHASE);
 	}
 

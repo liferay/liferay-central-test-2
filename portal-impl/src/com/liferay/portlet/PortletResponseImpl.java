@@ -621,6 +621,9 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 
 		if (markupHeadElements == null) {
 			markupHeadElements = new ArrayList<String>();
+
+			request.setAttribute(
+				MimeResponse.MARKUP_HEAD_ELEMENT, markupHeadElements);
 		}
 
 		for (Element element : elements) {
@@ -646,9 +649,6 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 				}
 			}
 		}
-
-		request.setAttribute(
-			MimeResponse.MARKUP_HEAD_ELEMENT, markupHeadElements);
 	}
 
 	protected void init(
