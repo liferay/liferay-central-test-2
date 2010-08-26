@@ -100,7 +100,6 @@ if (themeDisplay.isThemeImagesFastLoad() && !auiImage) {
 String imgClass = "icon";
 
 if (auiImage) {
-
 	StringBundler sb = new StringBundler(4);
 
 	sb.append(details);
@@ -109,6 +108,7 @@ if (auiImage) {
 	sb.append("/aui/icon_sprite.png'); height: 16px; width: 16px;\"");
 
 	details = sb.toString();
+
 	imgClass = imgClass.concat(" aui-icon-").concat(image.substring(_AUI_PATH.length()));
 }
 
