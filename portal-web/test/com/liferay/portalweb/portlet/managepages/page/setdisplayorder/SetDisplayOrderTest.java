@@ -58,8 +58,11 @@ public class SetDisplayOrderTest extends BaseTestCase {
 				assertEquals(RuntimeVariables.replace("Child3 Test3 Page3"),
 					selenium.getText(
 						"//nav[@id='navigation']/ul/li[2]/ul/li[3]"));
+				selenium.clickAt("main-content", RuntimeVariables.replace(""));
+				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
+				selenium.clickAt("navigation", RuntimeVariables.replace(""));
 				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Manage Pages"));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -68,7 +71,7 @@ public class SetDisplayOrderTest extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("Guest")
+						if (RuntimeVariables.replace("Liferay")
 												.equals(selenium.getText(
 										"//div/div[3]/a"))) {
 							break;
@@ -102,7 +105,7 @@ public class SetDisplayOrderTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li[2]/div/div[1]",
+				selenium.clickAt("//li/ul/li[2]/div/div[1]",
 					RuntimeVariables.replace(""));
 
 			case 3:

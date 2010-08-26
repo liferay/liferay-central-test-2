@@ -45,8 +45,7 @@ public class MoveFolderDocumentToFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Test1 Document1\nThis is test1 document1."));
+		assertTrue(selenium.isTextPresent("This is test1 document1."));
 		selenium.clickAt("//td[5]/ul/li/strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -117,8 +116,7 @@ public class MoveFolderDocumentToFolderTest extends BaseTestCase {
 
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertFalse(selenium.isTextPresent(
-				"Test1 Document1\nThis is test1 document1."));
+		assertFalse(selenium.isTextPresent("This is test1 document1."));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -143,7 +141,6 @@ public class MoveFolderDocumentToFolderTest extends BaseTestCase {
 		selenium.clickAt("//tr[4]/td[1]/a[2]/strong",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Test1 Document1\nThis is test1 document1."));
+		assertTrue(selenium.isTextPresent("This is test1 document1."));
 	}
 }

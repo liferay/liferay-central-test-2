@@ -45,8 +45,7 @@ public class EditFolderDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Test1 Document1\nThis is test1 document1."));
+		assertTrue(selenium.isTextPresent("This is test1 document1."));
 		selenium.clickAt("//td[5]/ul/li/strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -73,7 +72,8 @@ public class EditFolderDocumentTest extends BaseTestCase {
 			RuntimeVariables.replace("Test1 Document1 Edited1"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("This is test1 document1. Edited1."));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -102,8 +102,9 @@ public class EditFolderDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"Test1 Document1 Edited1\nThis is test1 document1. Edited1.")) {
+				if (RuntimeVariables.replace(
+							"This is test1 document1. Edited1.")
+										.equals(selenium.getText("//a/div"))) {
 					break;
 				}
 			}
@@ -113,7 +114,8 @@ public class EditFolderDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isTextPresent(
-				"Test1 Document1 Edited1\nThis is test1 document1. Edited1."));
+		assertEquals(RuntimeVariables.replace(
+				"This is test1 document1. Edited1."),
+			selenium.getText("//a/div"));
 	}
 }

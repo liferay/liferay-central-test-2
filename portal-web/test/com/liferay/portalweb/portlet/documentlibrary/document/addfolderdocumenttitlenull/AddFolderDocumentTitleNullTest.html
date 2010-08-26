@@ -34,7 +34,7 @@
 	<td>Add Document</td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
+	<td>waitForElementPresent</td>
 	<td>link=Use the classic uploader.</td>
 	<td></td>
 </tr>
@@ -65,7 +65,7 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>//input[@value='Publish']</td>
 	<td></td>
 </tr>
 <tr>
@@ -80,13 +80,13 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//td[1]/a</td>
-	<td>test_document.txt<br />This is test1 document1.</td>
+	<td>//a/span/span</td>
+	<td>test_document.txt</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//td[1]/a</td>
-	<td>test_document.txt<br />This is test1 document1.</td>
+	<td>//a/span/span</td>
+	<td>test_document.txt</td>
 </tr>
 
 </tbody></table>

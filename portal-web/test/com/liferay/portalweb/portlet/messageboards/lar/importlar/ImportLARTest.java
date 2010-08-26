@@ -72,12 +72,10 @@ public class ImportLARTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\messageboards\\lar\\importlar\\dependencies\\Message_Boards-Selenium.portlet.lar"));
 		assertFalse(selenium.isChecked("_86_DELETE_PORTLET_DATACheckbox"));
-		selenium.clickAt("_86_DELETE_PORTLET_DATACheckbox",
-			RuntimeVariables.replace(""));
+		selenium.check("_86_DELETE_PORTLET_DATACheckbox");
 		assertTrue(selenium.isChecked("_86_DELETE_PORTLET_DATACheckbox"));
 		assertFalse(selenium.isChecked("_86_PORTLET_DATACheckbox"));
-		selenium.clickAt("_86_PORTLET_DATACheckbox",
-			RuntimeVariables.replace(""));
+		selenium.check("_86_PORTLET_DATACheckbox");
 		assertTrue(selenium.isChecked("_86_PORTLET_DATACheckbox"));
 		selenium.clickAt("//input[@value='Import']",
 			RuntimeVariables.replace(""));

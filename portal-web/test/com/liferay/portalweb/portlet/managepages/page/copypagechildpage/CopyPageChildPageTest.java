@@ -52,6 +52,9 @@ public class CopyPageChildPageTest extends BaseTestCase {
 				selenium.clickAt("link=Child Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("main-content", RuntimeVariables.replace(""));
+				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
+				selenium.clickAt("navigation", RuntimeVariables.replace(""));
 				assertEquals(RuntimeVariables.replace("Child Test Page"),
 					selenium.getText("//nav/ul/li[3]/span/a"));
 				assertFalse(selenium.isElementPresent(
@@ -61,7 +64,7 @@ public class CopyPageChildPageTest extends BaseTestCase {
 				assertFalse(selenium.isTextPresent("Sign In"));
 				assertFalse(selenium.isTextPresent("Hello World"));
 				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Manage Pages"));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -70,7 +73,7 @@ public class CopyPageChildPageTest extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("Guest")
+						if (RuntimeVariables.replace("Liferay")
 												.equals(selenium.getText(
 										"//div/div[3]/a"))) {
 							break;
@@ -91,7 +94,8 @@ public class CopyPageChildPageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li/div/div[1]", RuntimeVariables.replace(""));
+				selenium.clickAt("//li/ul/li[2]/div/div[1]",
+					RuntimeVariables.replace(""));
 
 			case 2:
 
@@ -120,7 +124,7 @@ public class CopyPageChildPageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li[2]/div/div[1]",
+				selenium.clickAt("//li/ul/li[2]/div/div[1]",
 					RuntimeVariables.replace(""));
 
 			case 3:
@@ -142,10 +146,7 @@ public class CopyPageChildPageTest extends BaseTestCase {
 				}
 
 				selenium.clickAt("//li[2]/ul/li/div/div[3]/a",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//ul[2]/li[1]/span/span/a",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Child Test Page"));
 				selenium.waitForPageToLoad("30000");
 				selenium.select("_88_type",
 					RuntimeVariables.replace("label=Portlet"));

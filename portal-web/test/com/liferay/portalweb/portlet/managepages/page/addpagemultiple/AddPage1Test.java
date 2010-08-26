@@ -50,7 +50,7 @@ public class AddPage1Test extends BaseTestCase {
 				}
 
 				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Manage Pages"));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -59,7 +59,7 @@ public class AddPage1Test extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("Guest")
+						if (RuntimeVariables.replace("Liferay")
 												.equals(selenium.getText(
 										"//div/div[3]/a"))) {
 							break;
@@ -80,7 +80,8 @@ public class AddPage1Test extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li/div/div[1]", RuntimeVariables.replace(""));
+				selenium.clickAt("//div[2]/ul/li/div/div[1]",
+					RuntimeVariables.replace(""));
 
 			case 2:
 

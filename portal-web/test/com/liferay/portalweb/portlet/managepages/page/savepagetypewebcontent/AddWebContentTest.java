@@ -105,7 +105,7 @@ public class AddWebContentTest extends BaseTestCase {
 		selenium.type("//body",
 			RuntimeVariables.replace("This is a test Web Content"));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("//input[@value='Save and Approve']",
+		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
@@ -135,7 +135,7 @@ public class AddWebContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//span/span/a")) {
+				if (selenium.isElementPresent("link=Test Web Content")) {
 					break;
 				}
 			}
@@ -145,8 +145,6 @@ public class AddWebContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//span/span/a"));
-		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Web Content"));
 	}
 }

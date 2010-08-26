@@ -74,7 +74,6 @@ public class AddFolder2Test extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
-		assertTrue(selenium.isTextPresent(
-				"Test2 Folder2\nThis is test2 folder2."));
+		assertTrue(selenium.isTextPresent("This is test2 folder2."));
 	}
 }

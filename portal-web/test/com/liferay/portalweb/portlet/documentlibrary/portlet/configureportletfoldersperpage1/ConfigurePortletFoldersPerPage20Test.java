@@ -108,11 +108,8 @@ public class ConfigurePortletFoldersPerPage20Test extends BaseTestCase {
 		selenium.clickAt("link=Document Library Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Test1 Folder1\nThis is test1 folder1."));
-		assertTrue(selenium.isTextPresent(
-				"Test2 Folder2\nThis is test2 folder2."));
-		assertTrue(selenium.isTextPresent(
-				"Test3 Folder3\nThis is test3 folder3."));
+		assertTrue(selenium.isTextPresent("This is test1 folder1."));
+		assertTrue(selenium.isTextPresent("This is test2 folder2."));
+		assertTrue(selenium.isTextPresent("This is test3 folder3."));
 	}
 }

@@ -55,7 +55,7 @@ public class AddFolderDocumentTitleDuplicateTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Use the classic uploader.")) {
+				if (selenium.isElementPresent("link=Use the classic uploader.")) {
 					break;
 				}
 			}
@@ -89,7 +89,8 @@ public class AddFolderDocumentTitleDuplicateTest extends BaseTestCase {
 		selenium.type("_20_title", RuntimeVariables.replace("Test1 Document1"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("This is test1 document1."));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

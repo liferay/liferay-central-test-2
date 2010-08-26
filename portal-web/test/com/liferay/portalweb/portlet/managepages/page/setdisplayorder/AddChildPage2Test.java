@@ -49,8 +49,11 @@ public class AddChildPage2Test extends BaseTestCase {
 				selenium.clickAt("link=Manage Pages Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("main-content", RuntimeVariables.replace(""));
+				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
+				selenium.clickAt("navigation", RuntimeVariables.replace(""));
 				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Manage Pages"));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -59,7 +62,7 @@ public class AddChildPage2Test extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("Guest")
+						if (RuntimeVariables.replace("Liferay")
 												.equals(selenium.getText(
 										"//div/div[3]/a"))) {
 							break;
@@ -91,7 +94,7 @@ public class AddChildPage2Test extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li[2]/div/div[1]",
+				selenium.clickAt("//li/ul/li[2]/div/div[1]",
 					RuntimeVariables.replace(""));
 
 			case 2:

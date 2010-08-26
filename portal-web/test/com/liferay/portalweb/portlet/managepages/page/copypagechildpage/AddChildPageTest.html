@@ -24,14 +24,29 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAt</td>
+	<td>main-content</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>dockbar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>navigation</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAtAndWait</td>
 	<td>//div/div[3]/div/ul/li[1]/a</td>
-	<td></td>
+	<td>Manage Pages</td>
 </tr>
 <tr>
 	<td>waitForText</td>
 	<td>//div/div[3]/a</td>
-	<td>Guest</td>
+	<td>Liferay</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -55,7 +70,7 @@
 </tr>
 <tr>
 	<td>store</td>
-	<td>eval(selenium.isElementPresent('//li[2]/ul/li/div/div[3]/a'))</td>
+	<td>eval(selenium.isElementPresent('//li[2]/ul/li[1]/div/div[3]/a'))</td>
 	<td>childPagePresent</td>
 </tr>
 <tr>
@@ -65,7 +80,7 @@
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//li[2]/div/div[1]</td>
+	<td>//li/ul/li[2]/div/div[1]</td>
 	<td></td>
 </tr>
 <tr>
@@ -80,12 +95,12 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//li[2]/ul/li/div/div[3]/a</td>
+	<td>//li[2]/ul/li[1]/div/div[3]/a</td>
 	<td>Child Test Page</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//li[2]/ul/li/div/div[3]/a</td>
+	<td>//li[2]/ul/li[1]/div/div[3]/a</td>
 	<td>Child Test Page</td>
 </tr>
 

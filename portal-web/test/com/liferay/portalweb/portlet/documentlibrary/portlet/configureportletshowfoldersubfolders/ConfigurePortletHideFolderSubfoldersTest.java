@@ -129,8 +129,7 @@ public class ConfigurePortletHideFolderSubfoldersTest extends BaseTestCase {
 				selenium.clickAt("link=Document Library Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				assertFalse(selenium.isTextPresent(
-						"Test1 Folder1\nThis is test1 folder1."));
+				assertFalse(selenium.isTextPresent("This is test1 folder1."));
 				assertFalse(selenium.isElementPresent("link=Test1 Subfolder1"));
 
 			case 100:

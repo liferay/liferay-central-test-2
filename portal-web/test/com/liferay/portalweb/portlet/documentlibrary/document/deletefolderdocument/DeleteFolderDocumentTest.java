@@ -45,8 +45,7 @@ public class DeleteFolderDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Test1 Document1\nThis is test1 document1."));
+		assertTrue(selenium.isTextPresent("This is test1 document1."));
 		selenium.clickAt("//td[5]/ul/li/strong/a", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -56,7 +55,7 @@ public class DeleteFolderDocumentTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a")) {
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a")) {
 					break;
 				}
 			}
@@ -67,7 +66,7 @@ public class DeleteFolderDocumentTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -91,7 +90,6 @@ public class DeleteFolderDocumentTest extends BaseTestCase {
 
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertFalse(selenium.isTextPresent(
-				"Test1 Document1\nThis is test1 document1."));
+		assertFalse(selenium.isTextPresent("This is test1 document1."));
 	}
 }

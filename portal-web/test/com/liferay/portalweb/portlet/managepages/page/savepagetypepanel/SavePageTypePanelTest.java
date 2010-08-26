@@ -48,8 +48,11 @@ public class SavePageTypePanelTest extends BaseTestCase {
 				selenium.clickAt("link=Manage Pages Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("main-content", RuntimeVariables.replace(""));
+				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
+				selenium.clickAt("navigation", RuntimeVariables.replace(""));
 				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Manage Pages"));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -58,7 +61,7 @@ public class SavePageTypePanelTest extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("Guest")
+						if (RuntimeVariables.replace("Liferay")
 												.equals(selenium.getText(
 										"//div/div[3]/a"))) {
 							break;
@@ -100,9 +103,6 @@ public class SavePageTypePanelTest extends BaseTestCase {
 				}
 
 				selenium.clickAt("//li[2]/div/div[3]/a",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//ul[2]/li[1]/span/span/a",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
@@ -157,8 +157,8 @@ public class SavePageTypePanelTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				assertEquals(RuntimeVariables.replace("Manage Pages Test Page"),
 					selenium.getText("//nav/ul/li[2]/span/a"));
-				assertEquals(RuntimeVariables.replace(
-						"Install More Applications"), selenium.getText("//p/a"));
+				assertEquals(RuntimeVariables.replace("Liferay"),
+					selenium.getText("//p/a"));
 				assertEquals(RuntimeVariables.replace("Manage Pages Test Page"),
 					selenium.getText("//td[2]/h2"));
 				assertEquals(RuntimeVariables.replace(

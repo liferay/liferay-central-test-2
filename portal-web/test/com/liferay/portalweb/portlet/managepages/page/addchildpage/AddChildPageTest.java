@@ -49,8 +49,11 @@ public class AddChildPageTest extends BaseTestCase {
 				selenium.clickAt("link=Manage Pages Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("main-content", RuntimeVariables.replace(""));
+				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
+				selenium.clickAt("navigation", RuntimeVariables.replace(""));
 				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Manage Pages"));
 				selenium.waitForPageToLoad("30000");
 
 				for (int second = 0;; second++) {
@@ -59,7 +62,7 @@ public class AddChildPageTest extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("Guest")
+						if (RuntimeVariables.replace("Liferay")
 												.equals(selenium.getText(
 										"//div/div[3]/a"))) {
 							break;
@@ -83,7 +86,7 @@ public class AddChildPageTest extends BaseTestCase {
 					selenium.getText("//section/div/div/div/div"));
 
 				boolean childPagePresent = selenium.isElementPresent(
-						"//li[2]/ul/li/div/div[3]/a");
+						"//li[2]/ul/li[1]/div/div[3]/a");
 
 				if (childPagePresent) {
 					label = 2;
@@ -91,7 +94,8 @@ public class AddChildPageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li[2]/div/div[1]",
+				Thread.sleep(5000);
+				selenium.clickAt("//li/ul/li[2]/div/div[1]",
 					RuntimeVariables.replace(""));
 
 			case 2:
@@ -106,7 +110,7 @@ public class AddChildPageTest extends BaseTestCase {
 					try {
 						if (RuntimeVariables.replace("Child Test Page")
 												.equals(selenium.getText(
-										"//li[2]/ul/li/div/div[3]/a"))) {
+										"//li[2]/ul/li[1]/div/div[3]/a"))) {
 							break;
 						}
 					}
@@ -117,7 +121,7 @@ public class AddChildPageTest extends BaseTestCase {
 				}
 
 				assertEquals(RuntimeVariables.replace("Child Test Page"),
-					selenium.getText("//li[2]/ul/li/div/div[3]/a"));
+					selenium.getText("//li[2]/ul/li[1]/div/div[3]/a"));
 
 			case 100:
 				label = -1;

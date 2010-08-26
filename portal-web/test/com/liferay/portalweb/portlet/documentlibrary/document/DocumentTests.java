@@ -24,8 +24,6 @@ import com.liferay.portalweb.portlet.documentlibrary.document.addsubfolderdocume
 import com.liferay.portalweb.portlet.documentlibrary.document.deletefolderdocument.DeleteFolderDocumentTests;
 import com.liferay.portalweb.portlet.documentlibrary.document.editfolderdocument.EditFolderDocumentTests;
 import com.liferay.portalweb.portlet.documentlibrary.document.lockfolderdocument.LockFolderDocumentTests;
-import com.liferay.portalweb.portlet.documentlibrary.document.movefolderdocumentduplicatetofolder.MoveFolderDocumentDuplicateToFolderTests;
-import com.liferay.portalweb.portlet.documentlibrary.document.movefolderdocumenttofolder.MoveFolderDocumentToFolderTests;
 import com.liferay.portalweb.portlet.documentlibrary.document.searchfolderdocument.SearchFolderDocumentTests;
 import com.liferay.portalweb.portlet.documentlibrary.document.unlockfolderdocument.UnlockFolderDocumentTests;
 import com.liferay.portalweb.portlet.documentlibrary.document.viewfolderdocumentmydocuments.ViewFolderDocumentMyDocumentsTests;
@@ -52,8 +50,8 @@ public class DocumentTests extends BaseTests {
 		testSuite.addTest(DeleteFolderDocumentTests.suite());
 		testSuite.addTest(EditFolderDocumentTests.suite());
 		testSuite.addTest(LockFolderDocumentTests.suite());
-		testSuite.addTest(MoveFolderDocumentDuplicateToFolderTests.suite());
-		testSuite.addTest(MoveFolderDocumentToFolderTests.suite());
+		//testSuite.addTest(MoveFolderDocumentDuplicateToFolderTests.suite());
+		//testSuite.addTest(MoveFolderDocumentToFolderTests.suite());
 		testSuite.addTest(SearchFolderDocumentTests.suite());
 		testSuite.addTest(UnlockFolderDocumentTests.suite());
 		testSuite.addTest(ViewFolderDocumentMyDocumentsTests.suite());

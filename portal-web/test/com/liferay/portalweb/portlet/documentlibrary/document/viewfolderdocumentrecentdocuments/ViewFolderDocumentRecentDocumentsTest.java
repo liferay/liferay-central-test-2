@@ -47,7 +47,7 @@ public class ViewFolderDocumentRecentDocumentsTest extends BaseTestCase {
 		selenium.clickAt("link=Recent Documents", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
-				"Test1 Document1\nThis is test1 document1."),
+				"Test1 Document1 This is test1 document1."),
 			selenium.getText("//td[1]/a"));
 		assertEquals(RuntimeVariables.replace("0.6k"),
 			selenium.getText("//td[2]/a"));

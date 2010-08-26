@@ -110,11 +110,8 @@ public class ConfigurePortletDocumentsPerPage20Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Test1 Document1\nThis is test1 document1."));
-		assertTrue(selenium.isTextPresent(
-				"Test2 Document2\nThis is test2 document2."));
-		assertTrue(selenium.isTextPresent(
-				"Test3 Document3\nThis is test3 document3."));
+		assertTrue(selenium.isTextPresent("This is test1 document1."));
+		assertTrue(selenium.isTextPresent("This is test2 document2."));
+		assertTrue(selenium.isTextPresent("This is test3 document3."));
 	}
 }

@@ -55,7 +55,7 @@ public class AddFolderDocument1Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Use the classic uploader.")) {
+				if (selenium.isElementPresent("link=Use the classic uploader.")) {
 					break;
 				}
 			}
@@ -89,7 +89,8 @@ public class AddFolderDocument1Test extends BaseTestCase {
 		selenium.type("_20_title", RuntimeVariables.replace("Test1 Document1"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("This is test1 document1."));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -121,8 +122,8 @@ public class AddFolderDocument1Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"Test1 Document1\nThis is test1 document1.")) {
+				if (RuntimeVariables.replace("This is test1 document1.")
+										.equals(selenium.getText("//a/div"))) {
 					break;
 				}
 			}
@@ -132,7 +133,7 @@ public class AddFolderDocument1Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isTextPresent(
-				"Test1 Document1\nThis is test1 document1."));
+		assertEquals(RuntimeVariables.replace("This is test1 document1."),
+			selenium.getText("//a/div"));
 	}
 }

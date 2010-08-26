@@ -50,47 +50,24 @@ public class TearDownDocumentTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
-				boolean document1Present = selenium.isElementPresent(
-						"//td[5]/ul/li/strong/a");
+				boolean folderPresent = selenium.isElementPresent(
+						"//a[2]/strong");
 
-				if (!document1Present) {
+				if (!folderPresent) {
 					label = 2;
 
 					continue;
 				}
 
-				selenium.clickAt("//td[5]/ul/li/strong/a",
-					RuntimeVariables.replace(""));
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isVisible(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
+				selenium.clickAt("//a[2]/strong", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 2:
 
-				boolean document2Present = selenium.isElementPresent(
+				boolean document1Present = selenium.isElementPresent(
 						"//td[5]/ul/li/strong/a");
 
-				if (!document2Present) {
+				if (!document1Present) {
 					label = 3;
 
 					continue;
@@ -106,7 +83,7 @@ public class TearDownDocumentTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a")) {
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a")) {
 							break;
 						}
 					}
@@ -117,17 +94,17 @@ public class TearDownDocumentTest extends BaseTestCase {
 				}
 
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 3:
 
-				boolean document3Present = selenium.isElementPresent(
+				boolean document2Present = selenium.isElementPresent(
 						"//td[5]/ul/li/strong/a");
 
-				if (!document3Present) {
+				if (!document2Present) {
 					label = 4;
 
 					continue;
@@ -143,7 +120,7 @@ public class TearDownDocumentTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a")) {
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a")) {
 							break;
 						}
 					}
@@ -154,17 +131,17 @@ public class TearDownDocumentTest extends BaseTestCase {
 				}
 
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 4:
 
-				boolean document4Present = selenium.isElementPresent(
+				boolean document3Present = selenium.isElementPresent(
 						"//td[5]/ul/li/strong/a");
 
-				if (!document4Present) {
+				if (!document3Present) {
 					label = 5;
 
 					continue;
@@ -180,7 +157,7 @@ public class TearDownDocumentTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a")) {
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a")) {
 							break;
 						}
 					}
@@ -191,17 +168,17 @@ public class TearDownDocumentTest extends BaseTestCase {
 				}
 
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 5:
 
-				boolean document5Present = selenium.isElementPresent(
+				boolean document4Present = selenium.isElementPresent(
 						"//td[5]/ul/li/strong/a");
 
-				if (!document5Present) {
+				if (!document4Present) {
 					label = 6;
 
 					continue;
@@ -217,7 +194,7 @@ public class TearDownDocumentTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a")) {
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a")) {
 							break;
 						}
 					}
@@ -228,12 +205,49 @@ public class TearDownDocumentTest extends BaseTestCase {
 				}
 
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 6:
+
+				boolean document5Present = selenium.isElementPresent(
+						"//td[5]/ul/li/strong/a");
+
+				if (!document5Present) {
+					label = 7;
+
+					continue;
+				}
+
+				selenium.clickAt("//td[5]/ul/li/strong/a",
+					RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.click(RuntimeVariables.replace(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+
+			case 7:
 			case 100:
 				label = -1;
 			}

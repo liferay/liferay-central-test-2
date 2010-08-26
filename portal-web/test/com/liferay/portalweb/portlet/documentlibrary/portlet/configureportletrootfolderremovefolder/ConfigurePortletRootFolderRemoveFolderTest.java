@@ -116,7 +116,7 @@ public class ConfigurePortletRootFolderRemoveFolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Test1 Folder1"),
 			selenium.getText("//nav/ul/li[3]/span/a"));
-		selenium.clickAt("link=Document Home", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Documents Home", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("//nav/ul/li[3]/span/a"));
 	}

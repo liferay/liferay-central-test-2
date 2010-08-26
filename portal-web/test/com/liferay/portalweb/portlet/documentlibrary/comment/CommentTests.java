@@ -16,7 +16,6 @@ package com.liferay.portalweb.portlet.documentlibrary.comment;
 
 import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portlet.documentlibrary.comment.addfolderdocumentcomment.AddFolderDocumentCommentTests;
-import com.liferay.portalweb.portlet.documentlibrary.comment.movefolderdocumentcommenttofolder.MoveFolderDocumentCommentToFolderTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -30,7 +29,7 @@ public class CommentTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTest(AddFolderDocumentCommentTests.suite());
-		testSuite.addTest(MoveFolderDocumentCommentToFolderTests.suite());
+		//testSuite.addTest(MoveFolderDocumentCommentToFolderTests.suite());
 
 		return testSuite;
 	}

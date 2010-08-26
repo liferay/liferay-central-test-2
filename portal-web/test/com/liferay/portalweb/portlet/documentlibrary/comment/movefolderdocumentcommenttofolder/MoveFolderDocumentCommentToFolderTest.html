@@ -26,22 +26,22 @@
 <tr>
 	<td>clickAtAndWait</td>
 	<td>//a/strong</td>
-	<td></td>
+	<td>Test1 Folder1</td>
 </tr>
 <tr>
 	<td>clickAt</td>
 	<td>//td[5]/ul/li/strong/a</td>
-	<td></td>
+	<td>Actions</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
-	<td></td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a</td>
+	<td>Edit</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
-	<td></td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a</td>
+	<td>Edit</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -59,23 +59,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>selectWindow</td>
+	<td>storeLocation</td>
+	<td>moveFolderURL</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
 	<td>name=folder</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Document Home</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Document Home</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//tr[4]/td[4]/input</td>
 	<td></td>
 </tr>
 <tr>
@@ -84,13 +74,68 @@
 	<td></td>
 </tr>
 <tr>
+	<td>openWindow</td>
+	<td>${moveFolderURL}</td>
+	<td>folderSelectionWindow</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>folderSelectionWindow</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>name=folderSelectionWindow</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//span/a</td>
+	<td>Documents Home</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//span/a</td>
+	<td>Documents Home</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//tr[4]/td[4]/input</td>
+	<td>Choose</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//tr[4]/td[4]/input</td>
+	<td>Choose</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>_20_folderName</td>
+	<td>Test2 Folder2</td>
+</tr>
+<tr>
 	<td>assertText</td>
 	<td>_20_folderName</td>
 	<td>Test2 Folder2</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>//input[@value='Move']</td>
 	<td></td>
 </tr>
 <tr>

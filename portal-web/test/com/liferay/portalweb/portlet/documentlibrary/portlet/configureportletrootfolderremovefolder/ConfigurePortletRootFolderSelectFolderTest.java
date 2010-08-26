@@ -133,10 +133,10 @@ public class ConfigurePortletRootFolderSelectFolderTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Test1 Folder1"),
-			selenium.getText("//nav/ul/li[3]/span/a"));
-		selenium.clickAt("link=Document Home", RuntimeVariables.replace(""));
+			selenium.getText("//h4"));
+		selenium.clickAt("link=Documents Home", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Test1 Folder1"),
-			selenium.getText("//nav/ul/li[3]/span/a"));
+			selenium.getText("//h4"));
 	}
 }

@@ -55,7 +55,7 @@ public class AddFolderDocumentTitleNullTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Use the classic uploader.")) {
+				if (selenium.isElementPresent("link=Use the classic uploader.")) {
 					break;
 				}
 			}
@@ -89,7 +89,8 @@ public class AddFolderDocumentTitleNullTest extends BaseTestCase {
 		selenium.type("_20_title", RuntimeVariables.replace(""));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("This is test1 document1."));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -121,9 +122,9 @@ public class AddFolderDocumentTitleNullTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace(
-							"test_document.txt\nThis is test1 document1.")
-										.equals(selenium.getText("//td[1]/a"))) {
+				if (RuntimeVariables.replace("test_document.txt")
+										.equals(selenium.getText(
+								"//a/span/span"))) {
 					break;
 				}
 			}
@@ -133,8 +134,7 @@ public class AddFolderDocumentTitleNullTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace(
-				"test_document.txt\nThis is test1 document1."),
-			selenium.getText("//td[1]/a"));
+		assertEquals(RuntimeVariables.replace("test_document.txt"),
+			selenium.getText("//a/span/span"));
 	}
 }
