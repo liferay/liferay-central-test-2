@@ -51,6 +51,10 @@ public class TransactionInterceptor
 			transactionAttributeSource.getTransactionAttribute(
 				method, targetClass);
 
+		if (transactionAttribute == null) {
+			return methodInvocation.proceed();
+		}
+
 		Class<?> declaringClass = method.getDeclaringClass();
 
 		String joinPointIdentification = StringPool.BLANK;

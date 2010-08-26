@@ -65,7 +65,7 @@ public class PortalTransactionAnnotationParser
 			annotation = _deepSearchTypes(candidateQueue);
 		}
 
-		if (annotation == null) {
+		if (annotation == null || !annotation.enabled()) {
 			return null;
 		}
 

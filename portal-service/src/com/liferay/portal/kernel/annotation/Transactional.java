@@ -30,6 +30,8 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.TYPE})
 public @interface Transactional {
 
+	public boolean enabled() default true;
+
 	public Isolation isolation() default Isolation.DEFAULT;
 
 	public Class<? extends Throwable>[] noRollbackFor() default {};
