@@ -44,6 +44,21 @@ import javax.servlet.http.HttpServletRequest;
 public class ActionUtil
 	extends com.liferay.portlet.enterpriseadmin.action.ActionUtil {
 
+	public static void copyLookAndFeel(
+			Layout targetLayout, Layout sourceLayout)
+		throws Exception {
+
+		LayoutServiceUtil.updateLookAndFeel(
+			targetLayout.getGroupId(), targetLayout.isPrivateLayout(),
+			targetLayout.getLayoutId(),	sourceLayout.getThemeId(),
+			sourceLayout.getColorSchemeId(), sourceLayout.getCss(), false);
+
+		LayoutServiceUtil.updateLookAndFeel(
+			targetLayout.getGroupId(), targetLayout.isPrivateLayout(),
+			targetLayout.getLayoutId(),	sourceLayout.getWapThemeId(),
+			sourceLayout.getWapColorSchemeId(),	sourceLayout.getCss(), true);
+	}
+
 	public static void copyPreferences(
 			HttpServletRequest request, Layout targetLayout,
 			Layout sourceLayout)
@@ -99,11 +114,6 @@ public class ActionUtil
 				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, targetLayout.getPlid(),
 				sourcePortletId, sourcePreferences);
 		}
-		
-		LayoutServiceUtil.updateLookAndFeel(targetLayout.getGroupId(),
-				targetLayout.isPrivateLayout(), targetLayout.getLayoutId(),
-				sourceLayout.getThemeId(), sourceLayout.getColorSchemeId(),
-				sourceLayout.getCss(), sourceLayout.getTheme().isWapTheme());
 	}
 
 	public static void copyPreferences(

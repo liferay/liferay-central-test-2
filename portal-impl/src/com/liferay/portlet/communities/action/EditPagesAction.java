@@ -490,6 +490,8 @@ public class EditPagesAction extends PortletAction {
 				if (parentLayout.isTypePortlet()) {
 					ActionUtil.copyPreferences(
 						actionRequest, layout, parentLayout);
+
+					ActionUtil.copyLookAndFeel(layout, parentLayout);
 				}
 			}
 			else if (layoutPrototypeId > 0) {
@@ -512,25 +514,7 @@ public class EditPagesAction extends PortletAction {
 				ActionUtil.copyPreferences(
 					actionRequest, layout, layoutPrototypeLayout);
 
-				if (Validator.isNotNull(layoutPrototypeLayout.getThemeId())) {
-					LayoutServiceUtil.updateLookAndFeel(
-						layout.getGroupId(), layout.isPrivateLayout(),
-						layout.getLayoutId(),
-						layoutPrototypeLayout.getThemeId(),
-						layoutPrototypeLayout.getColorSchemeId(),
-						layoutPrototypeLayout.getCss(),	false);
-				}
-
-				if (Validator.isNotNull(
-						layoutPrototypeLayout.getWapThemeId())) {
-
-					LayoutServiceUtil.updateLookAndFeel(
-						layout.getGroupId(), layout.isPrivateLayout(),
-						layout.getLayoutId(),
-						layoutPrototypeLayout.getWapThemeId(),
-						layoutPrototypeLayout.getWapColorSchemeId(),
-						layoutPrototypeLayout.getCss(),	true);
-				}
+				ActionUtil.copyLookAndFeel(layout, layoutPrototypeLayout);
 			}
 			else {
 				LayoutServiceUtil.addLayout(
@@ -576,6 +560,8 @@ public class EditPagesAction extends PortletAction {
 
 							ActionUtil.copyPreferences(
 								actionRequest, layout, copyLayout);
+
+							ActionUtil.copyLookAndFeel(layout, copyLayout);
 						}
 					}
 					catch (NoSuchLayoutException nsle) {
