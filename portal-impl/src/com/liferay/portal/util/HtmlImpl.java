@@ -89,7 +89,7 @@ public class HtmlImpl implements Html {
 
 					break;
 
-				case '\u00bb': // '»'
+				case '\u00bb': // 'ï¿½'
 					sb.append("&raquo;");
 
 					break;
@@ -101,7 +101,12 @@ public class HtmlImpl implements Html {
 			}
 		}
 
-		return sb.toString();
+		if (sb.length() == text.length()) {
+			return text;
+		}
+		else {
+			return sb.toString();
+		}
 	}
 
 	public String escape(String text, int type) {
@@ -150,7 +155,12 @@ public class HtmlImpl implements Html {
 			}
 		}
 
-		return sb.toString();
+		if (sb.length() == text.length()) {
+			return text;
+		}
+		else {
+			return sb.toString();
+		}
 	}
 
 	public String escapeAttribute(String attribute) {
