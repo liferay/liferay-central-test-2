@@ -29,12 +29,6 @@ import java.io.Writer;
  */
 public class StringBundler {
 
-	public static final int THREADLOCAL_BUFFER_THRESHOLD =
-		GetterUtil.getInteger(
-			System.getProperty(
-				StringBundler.class.getName() +
-					".threadlocal.buffer.threshold"));
-
 	public StringBundler() {
 		_array = new String[_DEFAULT_ARRAY_CAPACITY];
 	}
@@ -253,15 +247,19 @@ public class StringBundler {
 		}
 
 		StringBuilder sb = null;
-		if (length > _threadLocalBufferThreshold) {
+
+		if (length > _threadLocalBufferLimit) {
 			sb = _stringBuilderThreadLocal.get();
+
 			if (sb == null) {
 				sb = new StringBuilder(length);
+
 				_stringBuilderThreadLocal.set(sb);
 			}
 			else if (sb.capacity() < length) {
 				sb.setLength(length);
 			}
+
 			sb.setLength(0);
 		}
 		else {
@@ -293,22 +291,24 @@ public class StringBundler {
 
 	private static final String _FALSE = "false";
 
+	private static final int _THREADLOCAL_BUFFER_LIMIT = GetterUtil.getInteger(
+		System.getProperty(
+			StringBundler.class.getName() + ".threadlocal.buffer.limit"));
+
 	private static final String _TRUE = "true";
 
-	private static final ThreadLocal<StringBuilder> _stringBuilderThreadLocal;
-
-	private static final int _threadLocalBufferThreshold;
+	private static ThreadLocal<StringBuilder> _stringBuilderThreadLocal;
+	private static int _threadLocalBufferLimit;
 
 	static {
-
-		if (THREADLOCAL_BUFFER_THRESHOLD > 0) {
+		if (_THREADLOCAL_BUFFER_LIMIT > 0) {
 			_stringBuilderThreadLocal =
 				new SoftReferenceThreadLocal<StringBuilder>();
-			_threadLocalBufferThreshold = THREADLOCAL_BUFFER_THRESHOLD;
+			_threadLocalBufferLimit = _THREADLOCAL_BUFFER_LIMIT;
 		}
 		else {
 			_stringBuilderThreadLocal = null;
-			_threadLocalBufferThreshold = Integer.MAX_VALUE;
+			_threadLocalBufferLimit = Integer.MAX_VALUE;
 		}
 	}
 

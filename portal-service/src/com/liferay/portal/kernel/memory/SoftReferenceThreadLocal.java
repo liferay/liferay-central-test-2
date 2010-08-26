@@ -23,19 +23,23 @@ public class SoftReferenceThreadLocal<T> extends ThreadLocal<T> {
 
 	public T get() {
 		SoftReference<T> softReference = _softReferenceThreadLocal.get();
-		if (softReference == _nullPlaceHolder) {
+
+		if (softReference == _nullSoftReference) {
 			return null;
 		}
 
 		T value = null;
+
 		if (softReference != null) {
 			value = softReference.get();
 		}
 
 		if (value == null) {
 			value = initialValue();
+
 			set(value);
 		}
+
 		return value;
 	}
 
@@ -45,17 +49,17 @@ public class SoftReferenceThreadLocal<T> extends ThreadLocal<T> {
 
 	public void set(T value) {
 		if (value == null) {
-			_softReferenceThreadLocal.set((SoftReference<T>) _nullPlaceHolder);
+			_softReferenceThreadLocal.set((SoftReference<T>)_nullSoftReference);
 		}
 		else {
 			_softReferenceThreadLocal.set(new SoftReference<T>(value));
 		}
 	}
 
-	private static final SoftReference<Object> _nullPlaceHolder =
+	private static SoftReference<Object> _nullSoftReference =
 		new SoftReference<Object>(null);
 
-	private final ThreadLocal<SoftReference<T>> _softReferenceThreadLocal =
+	private ThreadLocal<SoftReference<T>> _softReferenceThreadLocal =
 		new ThreadLocal<SoftReference<T>>();
 
 }
