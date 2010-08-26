@@ -163,11 +163,11 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 				}
 
 				sb.append("href=\"");
-				sb.append(layoutURL);
+				sb.append(HtmlUtil.escapeHREF(layoutURL));
 				sb.append("\" ");
 				sb.append(target);
 				sb.append("> ");
-				sb.append(layoutChild.getName(themeDisplay.getLocale()));
+				sb.append(HtmlUtil.escape(layoutChild.getName(themeDisplay.getLocale())));
 				sb.append("</a>");
 
 				if (open) {
