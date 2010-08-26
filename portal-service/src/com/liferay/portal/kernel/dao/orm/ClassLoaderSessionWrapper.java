@@ -23,10 +23,9 @@ import java.sql.Connection;
  */
 public class ClassLoaderSessionWrapper implements Session {
 
-	public ClassLoaderSessionWrapper(
-		ClassLoader classLoader, Session wrappedSession) {
+	public ClassLoaderSessionWrapper(ClassLoader classLoader, Session session) {
 		_classLoader = classLoader;
-		_wrappedSession = wrappedSession;
+		_session = session;
 	}
 
 	public void clear() throws ORMException {
@@ -36,11 +35,10 @@ public class ClassLoaderSessionWrapper implements Session {
 
 		try {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(_classLoader);
 			}
 
-			_wrappedSession.clear();
+			_session.clear();
 		}
 		finally {
 			if (contextClassLoader != _classLoader) {
@@ -57,15 +55,13 @@ public class ClassLoaderSessionWrapper implements Session {
 
 		try {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(_classLoader);
 			}
 
-			return _wrappedSession.close();
+			return _session.close();
 		}
 		finally {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
@@ -78,15 +74,13 @@ public class ClassLoaderSessionWrapper implements Session {
 
 		try {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(_classLoader);
 			}
 
-			return _wrappedSession.contains(object);
+			return _session.contains(object);
 		}
 		finally {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
@@ -99,15 +93,13 @@ public class ClassLoaderSessionWrapper implements Session {
 
 		try {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(_classLoader);
 			}
 
-			return _wrappedSession.createQuery(queryString);
+			return _session.createQuery(queryString);
 		}
 		finally {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
@@ -120,15 +112,13 @@ public class ClassLoaderSessionWrapper implements Session {
 
 		try {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(_classLoader);
 			}
 
-			return _wrappedSession.createSQLQuery(queryString);
+			return _session.createSQLQuery(queryString);
 		}
 		finally {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
@@ -141,15 +131,13 @@ public class ClassLoaderSessionWrapper implements Session {
 
 		try {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(_classLoader);
 			}
 
-			_wrappedSession.delete(object);
+			_session.delete(object);
 		}
 		finally {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
@@ -162,15 +150,13 @@ public class ClassLoaderSessionWrapper implements Session {
 
 		try {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(_classLoader);
 			}
 
-			_wrappedSession.evict(object);
+			_session.evict(object);
 		}
 		finally {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
@@ -183,58 +169,55 @@ public class ClassLoaderSessionWrapper implements Session {
 
 		try {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(_classLoader);
 			}
 
-			_wrappedSession.flush();
+			_session.flush();
 		}
 		finally {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
 	}
 
-	public Object get(Class<?> clazz, Serializable id) throws ORMException {
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		try {
-			if (contextClassLoader != _classLoader) {
-
-				currentThread.setContextClassLoader(_classLoader);
-			}
-
-			return _wrappedSession.get(clazz, id);
-		}
-		finally {
-			if (contextClassLoader != _classLoader) {
-
-				currentThread.setContextClassLoader(contextClassLoader);
-			}
-		}
-	}
-
-	public Object get(Class<?> clazz, Serializable id, LockMode lockMode)
+	public Object get(Class<?> classObject, Serializable id)
 		throws ORMException {
+
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(_classLoader);
 			}
 
-			return _wrappedSession.get(clazz, id, lockMode);
+			return _session.get(classObject, id);
 		}
 		finally {
 			if (contextClassLoader != _classLoader) {
+				currentThread.setContextClassLoader(contextClassLoader);
+			}
+		}
+	}
 
+	public Object get(Class<?> classObject, Serializable id, LockMode lockMode)
+		throws ORMException {
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		try {
+			if (contextClassLoader != _classLoader) {
+				currentThread.setContextClassLoader(_classLoader);
+			}
+
+			return _session.get(classObject, id, lockMode);
+		}
+		finally {
+			if (contextClassLoader != _classLoader) {
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
@@ -247,36 +230,34 @@ public class ClassLoaderSessionWrapper implements Session {
 
 		try {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(_classLoader);
 			}
 
-			return _wrappedSession.getWrappedSession();
+			return _session.getWrappedSession();
 		}
 		finally {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
 	}
 
-	public Object load(Class<?> clazz, Serializable id) throws ORMException {
+	public Object load(Class<?> classObject, Serializable id)
+		throws ORMException {
+
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(_classLoader);
 			}
 
-			return _wrappedSession.load(clazz, id);
+			return _session.load(classObject, id);
 		}
 		finally {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
@@ -289,15 +270,13 @@ public class ClassLoaderSessionWrapper implements Session {
 
 		try {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(_classLoader);
 			}
 
-			return _wrappedSession.merge(object);
+			return _session.merge(object);
 		}
 		finally {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
@@ -310,15 +289,13 @@ public class ClassLoaderSessionWrapper implements Session {
 
 		try {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(_classLoader);
 			}
 
-			return _wrappedSession.save(object);
+			return _session.save(object);
 		}
 		finally {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
@@ -331,21 +308,19 @@ public class ClassLoaderSessionWrapper implements Session {
 
 		try {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(_classLoader);
 			}
 
-			_wrappedSession.saveOrUpdate(object);
+			_session.saveOrUpdate(object);
 		}
 		finally {
 			if (contextClassLoader != _classLoader) {
-
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
 	}
 
-	private final ClassLoader _classLoader;
-	private final Session _wrappedSession;
+	private ClassLoader _classLoader;
+	private Session _session;
 
 }
