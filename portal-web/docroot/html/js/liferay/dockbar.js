@@ -5,267 +5,20 @@ AUI().add(
 			init: function() {
 				var instance = this;
 
-				var body = A.getBody();
-
 				var dockBar = A.one('#dockbar');
 
 				if (dockBar) {
-					dockBar.one('.pin-dockbar').on(
-						'click',
-						function(event) {
-							body.toggleClass('lfr-dockbar-pinned');
-
-							var pinned = body.hasClass('lfr-dockbar-pinned');
-
-							A.io.request(
-								themeDisplay.getPathMain() + '/portal/session_click',
-								{
-									data: {
-										'liferay_dockbar_pinned': pinned
-									}
-								}
-							);
-
-							event.halt();
-
-							Liferay.fire(
-								'dockbar:pinned',
-								{
-									pinned: pinned
-								}
-							);
-						}
-					);
-
 					instance.dockBar = dockBar;
 
 					instance._namespace = dockBar.attr('data-namespace');
 
-					instance.MenuManager = new A.OverlayManager(
-						{
-							zIndexBase: 100000
-						}
-					);
+					Liferay.once('initDockbar', instance._init, instance);
 
-					instance.UnderlayManager = new A.OverlayManager(
-						{
-							zIndexBase: 300
-						}
-					);
-
-					instance._toolbarItems = {};
-
-					instance.addUnderlay(
-						{
-							align: {
-								node: instance.dockBar,
-								points: ['tc', 'bc']
-							},
-							bodyContent: '',
-							boundingBox: '#' + instance._namespace + 'dockbarMessages',
-							header: 'My messages',
-							name: 'messages',
-							visible: false
-						}
-					);
-
-					instance.messages.on(
-						'visibleChange',
+					instance.dockBar.once('mousemove',
 						function(event) {
-							if (event.newVal) {
-								A.getBody().addClass('showing-messages');
-
-								Liferay.Dockbar.MenuManager.hideAll();
-							}
-							else {
-								A.getBody().removeClass('showing-messages');
-							}
+							Liferay.fire('initDockbar');
 						}
 					);
-
-					instance.messages.closeTool.on('click', instance.clearMessages, instance);
-
-					instance.dockBar.once(
-						'mousemove',
-						function() {
-							instance.addMenu(
-								{
-									boundingBox: '#' + instance._namespace + 'addContentContainer',
-									name: 'addContent',
-									trigger: '#' + instance._namespace + 'addContent'
-								}
-							);
-
-							if (instance.addContent) {
-								instance.addContent.on(
-									'show',
-									function() {
-										Liferay.fire('initLayout');
-										Liferay.fire('initNavigation');
-									}
-								);
-
-								instance.addContent.get('boundingBox').delegate(
-									'click',
-									function(event) {
-										var item = event.currentTarget;
-
-										var portletId = item.attr('data-portlet-id');
-
-										if ((/^\d+$/).test(portletId)) {
-											Liferay.Portlet.add(
-												{
-													portletId: portletId
-												}
-											);
-										}
-
-										if (!event.shiftKey) {
-											Liferay.Dockbar.MenuManager.hideAll();
-										}
-
-										event.halt();
-									},
-									'.app-shortcut'
-								);
-							}
-
-							instance.addMenu(
-								{
-									boundingBox: '#' + instance._namespace + 'manageContentContainer',
-									name: 'manageContent',
-									trigger: '#' + instance._namespace + 'manageContent'
-								}
-							);
-
-							instance.addMenu(
-								{
-									boundingBox: '#' + instance._namespace + 'myPlacesContainer',
-									name: 'myPlaces',
-									trigger: '#' + instance._namespace + 'myPlaces'
-								}
-							);
-
-							var userOptionsContainer = A.one('#' + instance._namespace + 'userOptionsContainer');
-
-							if (userOptionsContainer) {
-								instance.addMenu(
-									{
-										boundingBox: userOptionsContainer,
-										name: 'userOptions',
-										trigger: '#' + instance._namespace + 'userAvatar'
-									}
-								);
-							}
-
-							var isStaging = body.hasClass('staging') || body.hasClass('remote-staging');
-							var isLiveView = body.hasClass('live-view');
-
-							if (isStaging || isLiveView) {
-								instance.addMenu(
-									{
-										boundingBox: '#' + instance._namespace + 'stagingContainer',
-										name: 'staging',
-										trigger: '#' + instance._namespace + 'staging'
-									}
-								);
-							}
-						}
-					);
-
-					var addApplication = A.one('#' + instance._namespace + 'addApplication');
-
-					if (addApplication) {
-						addApplication.on(
-							'click',
-							function(event) {
-								Liferay.Dockbar.addContent.hide();
-
-								if (!Liferay.Dockbar.addApplication) {
-									var setAddApplicationUI = function(visible) {
-										var body = A.getBody();
-
-										body.toggleClass('lfr-has-sidebar', visible);
-									};
-
-									instance.addUnderlay(
-										{
-											after: {
-												render: function(event) {
-													setAddApplicationUI(true);
-												}
-											},
-											className: 'add-application',
-											io: {
-												after: {
-													success: Liferay.Dockbar._loadAddApplications
-												},
-												data: {
-													doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-													p_l_id: themeDisplay.getPlid(),
-													p_p_id: 87,
-													p_p_state: 'exclusive'
-												},
-												uri: themeDisplay.getPathMain() + '/portal/render_portlet'
-											},
-											name: 'addApplication',
-											width: '255px'
-										}
-									);
-
-									Liferay.Dockbar.addApplication.after(
-										'visibleChange',
-										function(event) {
-											if (event.newVal) {
-												Liferay.Util.focusFormField('#layout_configuration_content');
-											}
-
-											setAddApplicationUI(event.newVal);
-										}
-									);
-								}
-								else {
-									Liferay.Dockbar.addApplication.show();
-								}
-
-								Liferay.Dockbar.addApplication.focus();
-							}
-						);
-					}
-
-					var pageTemplate = A.one('#pageTemplate');
-
-					if (pageTemplate) {
-						pageTemplate.on(
-							'click',
-							function(event) {
-								Liferay.Dockbar.manageContent.hide();
-
-								if (!Liferay.Dockbar.manageLayouts) {
-									instance.addUnderlay(
-										{
-											className: 'manage-layouts',
-											io: {
-												data: {
-													doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-													p_l_id: themeDisplay.getPlid(),
-													redirect: Liferay.currentURL
-												},
-												uri: themeDisplay.getPathMain() + '/layout_configuration/templates'
-											},
-											name: 'manageLayouts',
-											width: '670px'
-										}
-									);
-								}
-								else {
-									Liferay.Dockbar.manageLayouts.show();
-								}
-
-								Liferay.Dockbar.manageLayouts.focus();
-							}
-						);
-					}
 				}
 			},
 
@@ -496,6 +249,262 @@ AUI().add(
 				}
 
 				return '<div class="dockbar-message ' + cssClass + '" id="' + messageId + '">' + message + '</div>';
+			},
+
+			_init: function() {
+				var instance = this;
+
+				var dockBar = instance.dockBar;
+
+				var body = A.getBody();
+
+				dockBar.one('.pin-dockbar').on(
+					'click',
+					function(event) {
+						body.toggleClass('lfr-dockbar-pinned');
+
+						var pinned = body.hasClass('lfr-dockbar-pinned');
+
+						A.io.request(
+							themeDisplay.getPathMain() + '/portal/session_click',
+							{
+								data: {
+									'liferay_dockbar_pinned': pinned
+								}
+							}
+						);
+
+						event.halt();
+
+						Liferay.fire(
+							'dockbar:pinned',
+							{
+								pinned: pinned
+							}
+						);
+					}
+				);
+
+				instance.MenuManager = new A.OverlayManager(
+					{
+						zIndexBase: 100000
+					}
+				);
+
+				instance.UnderlayManager = new A.OverlayManager(
+					{
+						zIndexBase: 300
+					}
+				);
+
+				instance._toolbarItems = {};
+
+				instance.addUnderlay(
+					{
+						align: {
+							node: instance.dockBar,
+							points: ['tc', 'bc']
+						},
+						bodyContent: '',
+						boundingBox: '#' + instance._namespace + 'dockbarMessages',
+						header: 'My messages',
+						name: 'messages',
+						visible: false
+					}
+				);
+
+				instance.messages.on(
+					'visibleChange',
+					function(event) {
+						if (event.newVal) {
+							A.getBody().addClass('showing-messages');
+
+							Liferay.Dockbar.MenuManager.hideAll();
+						}
+						else {
+							A.getBody().removeClass('showing-messages');
+						}
+					}
+				);
+
+				instance.messages.closeTool.on('click', instance.clearMessages, instance);
+
+				instance.addMenu(
+					{
+						boundingBox: '#' + instance._namespace + 'addContentContainer',
+						name: 'addContent',
+						trigger: '#' + instance._namespace + 'addContent'
+					}
+				);
+
+				if (instance.addContent) {
+					instance.addContent.on(
+						'show',
+						function() {
+							Liferay.fire('initLayout');
+							Liferay.fire('initNavigation');
+						}
+					);
+
+					instance.addContent.get('boundingBox').delegate(
+						'click',
+						function(event) {
+							var item = event.currentTarget;
+
+							var portletId = item.attr('data-portlet-id');
+
+							if ((/^\d+$/).test(portletId)) {
+								Liferay.Portlet.add(
+									{
+										portletId: portletId
+									}
+								);
+							}
+
+							if (!event.shiftKey) {
+								Liferay.Dockbar.MenuManager.hideAll();
+							}
+
+							event.halt();
+						},
+						'.app-shortcut'
+					);
+				}
+
+				instance.addMenu(
+					{
+						boundingBox: '#' + instance._namespace + 'manageContentContainer',
+						name: 'manageContent',
+						trigger: '#' + instance._namespace + 'manageContent'
+					}
+				);
+
+				instance.addMenu(
+					{
+						boundingBox: '#' + instance._namespace + 'myPlacesContainer',
+						name: 'myPlaces',
+						trigger: '#' + instance._namespace + 'myPlaces'
+					}
+				);
+
+				var userOptionsContainer = A.one('#' + instance._namespace + 'userOptionsContainer');
+
+				if (userOptionsContainer) {
+					instance.addMenu(
+						{
+							boundingBox: userOptionsContainer,
+							name: 'userOptions',
+							trigger: '#' + instance._namespace + 'userAvatar'
+						}
+					);
+				}
+
+				var isStaging = body.hasClass('staging') || body.hasClass('remote-staging');
+				var isLiveView = body.hasClass('live-view');
+
+				if (isStaging || isLiveView) {
+					instance.addMenu(
+						{
+							boundingBox: '#' + instance._namespace + 'stagingContainer',
+							name: 'staging',
+							trigger: '#' + instance._namespace + 'staging'
+						}
+					);
+				}
+
+				var addApplication = A.one('#' + instance._namespace + 'addApplication');
+
+				if (addApplication) {
+					addApplication.on(
+						'click',
+						function(event) {
+							Liferay.Dockbar.addContent.hide();
+
+							if (!Liferay.Dockbar.addApplication) {
+								var setAddApplicationUI = function(visible) {
+									var body = A.getBody();
+
+									body.toggleClass('lfr-has-sidebar', visible);
+								};
+
+								instance.addUnderlay(
+									{
+										after: {
+											render: function(event) {
+												setAddApplicationUI(true);
+											}
+										},
+										className: 'add-application',
+										io: {
+											after: {
+												success: Liferay.Dockbar._loadAddApplications
+											},
+											data: {
+												doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+												p_l_id: themeDisplay.getPlid(),
+												p_p_id: 87,
+												p_p_state: 'exclusive'
+											},
+											uri: themeDisplay.getPathMain() + '/portal/render_portlet'
+										},
+										name: 'addApplication',
+										width: '255px'
+									}
+								);
+
+								Liferay.Dockbar.addApplication.after(
+									'visibleChange',
+									function(event) {
+										if (event.newVal) {
+											Liferay.Util.focusFormField('#layout_configuration_content');
+										}
+
+										setAddApplicationUI(event.newVal);
+									}
+								);
+							}
+							else {
+								Liferay.Dockbar.addApplication.show();
+							}
+
+							Liferay.Dockbar.addApplication.focus();
+						}
+					);
+				}
+
+				var pageTemplate = A.one('#pageTemplate');
+
+				if (pageTemplate) {
+					pageTemplate.on(
+						'click',
+						function(event) {
+							Liferay.Dockbar.manageContent.hide();
+
+							if (!Liferay.Dockbar.manageLayouts) {
+								instance.addUnderlay(
+									{
+										className: 'manage-layouts',
+										io: {
+											data: {
+												doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+												p_l_id: themeDisplay.getPlid(),
+												redirect: Liferay.currentURL
+											},
+											uri: themeDisplay.getPathMain() + '/layout_configuration/templates'
+										},
+										name: 'manageLayouts',
+										width: '670px'
+									}
+								);
+							}
+							else {
+								Liferay.Dockbar.manageLayouts.show();
+							}
+
+							Liferay.Dockbar.manageLayouts.focus();
+						}
+					);
+				}
 			}
 		};
 
