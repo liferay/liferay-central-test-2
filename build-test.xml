@@ -337,7 +337,7 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-sharding">
-			<param name="test.ant.script.command" value="db-sharding-plugins-chat" />
+			<param name="test.ant.script.command" value="db-sharding-chat" />
 			<param name="test.ant.script.plugins" value="chat-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsChatTestSuite" />
@@ -345,7 +345,7 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-sharding">
-			<param name="test.ant.script.command" value="db-sharding-plugins-flash" />
+			<param name="test.ant.script.command" value="db-sharding-flash" />
 			<param name="test.ant.script.plugins" value="flash-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsFlashTestSuite" />
@@ -353,7 +353,7 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-sharding">
-			<param name="test.ant.script.command" value="db-sharding-plugins-google-adsense" />
+			<param name="test.ant.script.command" value="db-sharding-google-adsense" />
 			<param name="test.ant.script.plugins" value="google-adsense-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsGoogleAdSenseTestSuite" />
@@ -361,7 +361,7 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-sharding">
-			<param name="test.ant.script.command" value="db-sharding-plugins-google-gadget" />
+			<param name="test.ant.script.command" value="db-sharding-google-gadget" />
 			<param name="test.ant.script.plugins" value="google-gadget-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsGoogleGadgetTestSuite" />
@@ -369,7 +369,7 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-sharding">
-			<param name="test.ant.script.command" value="db-sharding-plugins-google-maps" />
+			<param name="test.ant.script.command" value="db-sharding-google-maps" />
 			<param name="test.ant.script.plugins" value="google-maps-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsGoogleMapsTestSuite" />
@@ -377,7 +377,7 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-sharding">
-			<param name="test.ant.script.command" value="db-sharding-plugins-ip-geocoder" />
+			<param name="test.ant.script.command" value="db-sharding-ip-geocoder" />
 			<param name="test.ant.script.plugins" value="ip-geocoder-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsIPGeocoderTestSuite" />
@@ -385,7 +385,7 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-sharding">
-			<param name="test.ant.script.command" value="db-sharding-plugins-knowledge-base" />
+			<param name="test.ant.script.command" value="db-sharding-knowledge-base" />
 			<param name="test.ant.script.plugins" value="knowledge-base-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsKnowledgeBaseTestSuite" />
@@ -393,7 +393,7 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-sharding">
-			<param name="test.ant.script.command" value="db-sharding-plugins-mail" />
+			<param name="test.ant.script.command" value="db-sharding-mail" />
 			<param name="test.ant.script.plugins" value="mail-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsMailTestSuite" />
@@ -401,7 +401,7 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-sharding">
-			<param name="test.ant.script.command" value="db-sharding-plugins-opensocial" />
+			<param name="test.ant.script.command" value="db-sharding-opensocial" />
 			<param name="test.ant.script.plugins" value="opensocial-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsOpenSocialTestSuite" />
@@ -409,7 +409,12 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-sharding">
-			<param name="test.ant.script.command" value="db-sharding-plugins-social-coding" />
+			<param name="test.ant.script.command" value="db-sharding-smoke" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-smoke.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-social-coding" />
 			<param name="test.ant.script.plugins" value="social-coding-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsSocialCodingTestSuite" />
@@ -417,7 +422,7 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-sharding">
-			<param name="test.ant.script.command" value="db-sharding-plugins-social-networking" />
+			<param name="test.ant.script.command" value="db-sharding-social-networking" />
 			<param name="test.ant.script.plugins" value="social-networking-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsSocialNetworkingTestSuite" />
@@ -425,7 +430,7 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-sharding">
-			<param name="test.ant.script.command" value="db-sharding-plugins-twitter" />
+			<param name="test.ant.script.command" value="db-sharding-twitter" />
 			<param name="test.ant.script.plugins" value="twitter-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsTwitterTestSuite" />
@@ -433,7 +438,7 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-sharding">
-			<param name="test.ant.script.command" value="db-sharding-plugins-weather" />
+			<param name="test.ant.script.command" value="db-sharding-weather" />
 			<param name="test.ant.script.plugins" value="weather-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsWeatherTestSuite" />
@@ -441,7 +446,7 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-sharding">
-			<param name="test.ant.script.command" value="db-sharding-plugins-web-form" />
+			<param name="test.ant.script.command" value="db-sharding-web-form" />
 			<param name="test.ant.script.plugins" value="web-form-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsWebFormTestSuite" />
@@ -449,16 +454,11 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-sharding">
-			<param name="test.ant.script.command" value="db-sharding-plugins-wsrp" />
+			<param name="test.ant.script.command" value="db-sharding-wsrp" />
 			<param name="test.ant.script.plugins" value="wsrp-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsWSRPTestSuite" />
 			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
-		</antcall>
-
-		<antcall target="build-test-ant-script-db-sharding">
-			<param name="test.ant.script.command" value="db-sharding-smoke" />
-			<param name="test.ant.script.template" value="ant-script-db-sharding-smoke.xml" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
