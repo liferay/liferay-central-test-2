@@ -2901,12 +2901,11 @@ public class JournalArticleLocalServiceImpl
 		if (Validator.isNull(title)) {
 			throw new ArticleTitleException();
 		}
-		else if (Validator.isNull(content)) {
-			throw new ArticleContentException();
-		}
 		else if (Validator.isNull(type)) {
 			throw new ArticleTypeException();
 		}
+
+		validateContent(content);
 
 		if (Validator.isNotNull(structureId)) {
 			Group companyGroup = groupLocalService.getCompanyGroup(companyId);
@@ -2979,6 +2978,19 @@ public class JournalArticleLocalServiceImpl
 			(articleId.indexOf(CharPool.SPACE) != -1)) {
 
 			throw new ArticleIdException();
+		}
+	}
+
+	protected void validateContent(String content) throws PortalException {
+		if (Validator.isNull(content)) {
+			throw new ArticleContentException();
+		}
+
+		try {
+			SAXReaderUtil.read(content);
+		}
+		catch (DocumentException de) {
+			throw new ArticleContentException();
 		}
 	}
 
