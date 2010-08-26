@@ -14,13 +14,10 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.memory.SoftReferenceThreadLocal;
 
 import java.io.IOException;
 import java.io.Writer;
-
-import java.lang.reflect.Constructor;
 
 /**
  * <p>
@@ -32,9 +29,11 @@ import java.lang.reflect.Constructor;
  */
 public class StringBundler {
 
-	public static final int UNSAFE_CREATE_THRESHOLD = GetterUtil.getInteger(
-		System.getProperty(
-			StringBundler.class.getName() + ".unsafe.create.threshold"));
+	public static final int THREADLOCAL_BUFFER_THRESHOLD =
+		GetterUtil.getInteger(
+			System.getProperty(
+				StringBundler.class.getName() +
+					".threadlocal.buffer.threshold"));
 
 	public StringBundler() {
 		_array = new String[_DEFAULT_ARRAY_CAPACITY];
@@ -243,23 +242,37 @@ public class StringBundler {
 			return _array[0].concat(_array[1]);
 		}
 
+		if (_arrayIndex == 3) {
+			return _array[0].concat(_array[1]).concat(_array[2]);
+		}
+
 		int length = 0;
 
 		for (int i = 0; i < _arrayIndex; i++) {
 			length += _array[i].length();
 		}
 
-		if ((_unsafeStringConstructor != null) &&
-			(length >= UNSAFE_CREATE_THRESHOLD)) {
-
-			return unsafeCreate(_array, _arrayIndex, length);
-		}
-		else if (_arrayIndex == 3) {
-			return _array[0].concat(_array[1]).concat(_array[2]);
+		StringBuilder sb = null;
+		if (length > _threadLocalBufferThreshold) {
+			sb = _stringBuilderThreadLocal.get();
+			if (sb == null) {
+				sb = new StringBuilder(length);
+				_stringBuilderThreadLocal.set(sb);
+			}
+			else if (sb.capacity() < length) {
+				sb.setLength(length);
+			}
+			sb.setLength(0);
 		}
 		else {
-			return safeCreate(_array, _arrayIndex, length);
+			sb = new StringBuilder(length);
 		}
+
+		for (int i = 0; i < _arrayIndex; i++) {
+			sb.append(_array[i]);
+		}
+
+		return sb.toString();
 	}
 
 	public void writeTo(Writer writer) throws IOException {
@@ -276,58 +289,26 @@ public class StringBundler {
 		_array = newArray;
 	}
 
-	protected String safeCreate(String[] array, int index, int length) {
-		StringBuilder sb = new StringBuilder(length);
-
-		for (int i = 0; i < index; i++) {
-			sb.append(array[i]);
-		}
-
-		return sb.toString();
-	}
-
-	protected String unsafeCreate(String[] array, int index, int length) {
-		char[] charArray = new char[length];
-
-		int offset = 0;
-
-		for (int i = 0; i < index; i++) {
-			String s = array[i];
-
-			s.getChars(0, s.length(), charArray, offset);
-
-			offset += s.length();
-		}
-
-		try {
-			return _unsafeStringConstructor.newInstance(0, length, charArray);
-		}
-		catch (Exception e) {
-			throw new IllegalStateException(e);
-		}
-	}
-
 	private static final int _DEFAULT_ARRAY_CAPACITY = 16;
 
 	private static final String _FALSE = "false";
 
 	private static final String _TRUE = "true";
 
-	private static Log _log = LogFactoryUtil.getLog(StringBundler.class);
+	private static final ThreadLocal<StringBuilder> _stringBuilderThreadLocal;
 
-	private static Constructor<String> _unsafeStringConstructor;
+	private static final int _threadLocalBufferThreshold;
 
 	static {
-		if (UNSAFE_CREATE_THRESHOLD > 0) {
-			try {
-				_unsafeStringConstructor = String.class.getDeclaredConstructor(
-					int.class, int.class, char[].class);
 
-				_unsafeStringConstructor.setAccessible(true);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
+		if (THREADLOCAL_BUFFER_THRESHOLD > 0) {
+			_stringBuilderThreadLocal =
+				new SoftReferenceThreadLocal<StringBuilder>();
+			_threadLocalBufferThreshold = THREADLOCAL_BUFFER_THRESHOLD;
+		}
+		else {
+			_stringBuilderThreadLocal = null;
+			_threadLocalBufferThreshold = Integer.MAX_VALUE;
 		}
 	}
 
