@@ -10,7 +10,6 @@
 			#else
 				<li>
 			#end
-
 				<a href="$nav_item.getURL()" $nav_item.getTarget()><span>$nav_item.icon() $nav_item.getName()</span></a>
 
 				#if ($nav_item.hasChildren())
@@ -21,7 +20,6 @@
 							#else
 								<li>
 							#end
-
 								<a href="$nav_child.getURL()" $nav_child.getTarget()>$nav_child.getName()</a>
 							</li>
 						#end
