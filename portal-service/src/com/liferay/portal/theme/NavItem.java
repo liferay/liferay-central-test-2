@@ -93,7 +93,7 @@ public class NavItem implements Serializable {
 	}
 
 	public String getURL() throws Exception {
-		return getRegularURL();
+		return HtmlUtil.escapeHREF(getRegularURL());
 	}
 
 	public String getRegularURL() throws Exception {
