@@ -20,12 +20,13 @@ import java.sql.Connection;
 
 /**
  * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
-public class ClassLoaderSessionWrapper implements Session {
+public class ClassLoaderSession implements Session {
 
-	public ClassLoaderSessionWrapper(ClassLoader classLoader, Session session) {
-		_classLoader = classLoader;
+	public ClassLoaderSession(Session session, ClassLoader classLoader) {
 		_session = session;
+		_classLoader = classLoader;
 	}
 
 	public void clear() throws ORMException {

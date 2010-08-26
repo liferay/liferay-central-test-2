@@ -14,7 +14,7 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
-import com.liferay.portal.kernel.dao.orm.ClassLoaderSessionWrapper;
+import com.liferay.portal.kernel.dao.orm.ClassLoaderSession;
 import com.liferay.portal.kernel.dao.orm.Dialect;
 import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Session;
@@ -29,6 +29,7 @@ import org.hibernate.engine.SessionFactoryImplementor;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class SessionFactoryImpl implements SessionFactory {
 
@@ -91,8 +92,8 @@ public class SessionFactoryImpl implements SessionFactory {
 
 			// LPS-4190
 
-			liferaySession = new ClassLoaderSessionWrapper(
-				_sessionFactoryClassLoader, liferaySession);
+			liferaySession = new ClassLoaderSession(
+				liferaySession, _sessionFactoryClassLoader);
 		}
 
 		return liferaySession;
