@@ -28,6 +28,7 @@ import com.liferay.portalweb.plugins.ipgeocoder.IPGeocoderTests;
 import com.liferay.portalweb.plugins.journalpolice.JournalPoliceTests;
 import com.liferay.portalweb.plugins.mail.MailTests;
 import com.liferay.portalweb.plugins.novellcollaboration.NovellCollaborationTests;
+import com.liferay.portalweb.plugins.opensocial.OpenSocialTests;
 import com.liferay.portalweb.plugins.randombibleverse.RandomBibleVerseTests;
 import com.liferay.portalweb.plugins.releasetools.ReleaseToolsTests;
 import com.liferay.portalweb.plugins.rubyconsole.RubyConsoleTests;
@@ -77,6 +78,7 @@ public class Plugins1TestSuite extends BaseTests {
 		testSuite.addTest(JournalPoliceTests.suite());
 		testSuite.addTest(MailTests.suite());
 		testSuite.addTest(NovellCollaborationTests.suite());
+		testSuite.addTest(OpenSocialTests.suite());
 		testSuite.addTest(RandomBibleVerseTests.suite());
 		testSuite.addTest(ReleaseToolsTests.suite());
 		testSuite.addTest(RubyConsoleTests.suite());

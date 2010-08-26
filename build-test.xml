@@ -404,7 +404,7 @@
 			<param name="test.ant.script.command" value="db-sharding-plugins-opensocial" />
 			<param name="test.ant.script.plugins" value="opensocial-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
-			<param name="test.ant.script.suite" value="PluginsOpensocialTestSuite" />
+			<param name="test.ant.script.suite" value="PluginsOpenSocialTestSuite" />
 			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
 		</antcall>
 
@@ -615,6 +615,13 @@
 			<param name="test.ant.script.plugins" value="novell-collaboration-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsNovellCollaborationTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="plugins-opensocial" />
+			<param name="test.ant.script.plugins" value="opensocial-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsOpenSocialTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
