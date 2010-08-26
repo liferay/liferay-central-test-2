@@ -22,6 +22,7 @@ import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.Team;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.MembershipRequestLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.TeamLocalServiceUtil;
@@ -98,6 +99,11 @@ public class ActionUtil
 				PortletKeys.PREFS_OWNER_TYPE_LAYOUT, targetLayout.getPlid(),
 				sourcePortletId, sourcePreferences);
 		}
+		
+		LayoutServiceUtil.updateLookAndFeel(targetLayout.getGroupId(),
+				targetLayout.isPrivateLayout(), targetLayout.getLayoutId(),
+				sourceLayout.getThemeId(), sourceLayout.getColorSchemeId(),
+				sourceLayout.getCss(), sourceLayout.getTheme().isWapTheme());
 	}
 
 	public static void copyPreferences(
