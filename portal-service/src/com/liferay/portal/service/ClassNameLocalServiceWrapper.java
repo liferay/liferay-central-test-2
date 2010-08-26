@@ -223,6 +223,12 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService {
 		return _classNameLocalService.addClassName(value);
 	}
 
+	public com.liferay.portal.model.ClassName addClassNameOnMissing(
+		java.lang.String value)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _classNameLocalService.addClassNameOnMissing(value);
+	}
+
 	public void checkClassNames()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_classNameLocalService.checkClassNames();

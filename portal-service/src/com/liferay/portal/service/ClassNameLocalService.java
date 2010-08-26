@@ -208,6 +208,10 @@ public interface ClassNameLocalService {
 		java.lang.String value)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public com.liferay.portal.model.ClassName addClassNameOnMissing(
+		java.lang.String value)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void checkClassNames()
 		throws com.liferay.portal.kernel.exception.SystemException;
 

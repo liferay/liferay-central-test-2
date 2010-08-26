@@ -231,6 +231,12 @@ public class ClassNameLocalServiceUtil {
 		return getService().addClassName(value);
 	}
 
+	public static com.liferay.portal.model.ClassName addClassNameOnMissing(
+		java.lang.String value)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().addClassNameOnMissing(value);
+	}
+
 	public static void checkClassNames()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().checkClassNames();

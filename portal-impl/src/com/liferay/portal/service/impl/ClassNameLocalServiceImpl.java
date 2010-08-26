@@ -45,6 +45,18 @@ public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 		return className;
 	}
 
+	public ClassName addClassNameOnMissing(String value)
+		throws SystemException {
+		ClassName className = classNamePersistence.fetchByValue(value);
+
+		if (className == null) {
+			className = addClassName(value);
+		}
+
+		_classNames.put(value, className);
+		return className;
+	}
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void checkClassNames() throws SystemException {
 		if (_classNames.isEmpty()) {
@@ -68,6 +80,7 @@ public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 		return classNamePersistence.findByPrimaryKey(classNameId);
 	}
 
+	@Transactional(enabled = false)
 	public ClassName getClassName(String value) throws SystemException {
 		if (Validator.isNull(value)) {
 			return _nullClassName;
@@ -79,22 +92,18 @@ public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 		ClassName className = _classNames.get(value);
 
 		if (className == null) {
-			className = classNamePersistence.fetchByValue(value);
-
-			if (className == null) {
-				className = classNameLocalService.addClassName(value);
-			}
-
-			_classNames.put(value, className);
+			className = classNameLocalService.addClassNameOnMissing(value);
 		}
 
 		return className;
 	}
 
+	@Transactional(enabled = false)
 	public long getClassNameId(Class<?> classObj) {
 		return getClassNameId(classObj.getName());
 	}
 
+	@Transactional(enabled = false)
 	public long getClassNameId(String value) {
 		try {
 			ClassName className = getClassName(value);
