@@ -180,6 +180,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.events.GlobalStartupAction">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.events.LogMemoryUsageAction">
 		<priority value="DEBUG" />
 	</category>
