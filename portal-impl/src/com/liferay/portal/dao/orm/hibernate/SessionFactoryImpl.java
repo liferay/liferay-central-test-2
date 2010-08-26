@@ -14,7 +14,7 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
-import com.liferay.portal.kernel.bean.ClassLoaderBeanHandler;
+import com.liferay.portal.kernel.dao.orm.ClassLoaderSessionWrapper;
 import com.liferay.portal.kernel.dao.orm.Dialect;
 import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.dao.orm.Session;
@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PropsValues;
-
-import java.lang.reflect.Proxy;
 
 import java.sql.Connection;
 
@@ -93,11 +91,8 @@ public class SessionFactoryImpl implements SessionFactory {
 
 			// LPS-4190
 
-			liferaySession = (Session)Proxy.newProxyInstance(
-				_sessionFactoryClassLoader,
-				new Class[] {Session.class},
-				new ClassLoaderBeanHandler(
-					liferaySession, _sessionFactoryClassLoader));
+			liferaySession = new ClassLoaderSessionWrapper(
+				_sessionFactoryClassLoader, liferaySession);
 		}
 
 		return liferaySession;
