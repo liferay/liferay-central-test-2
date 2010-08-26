@@ -26,7 +26,10 @@ import javax.portlet.PortletURL;
  */
 public class HtmlEngine implements WikiEngine {
 
-	public String convert(WikiPage page, PortletURL portletURL) {
+	public String convert(
+		WikiPage page, PortletURL viewPageURL, PortletURL editPageURL,
+		String attachmentURLPrefix) {
+
 		return page.getContent();
 	}
 

@@ -457,7 +457,8 @@ public class WikiUtil {
 
 		WikiEngine engine = _getEngine(page.getFormat());
 
-		String content = engine.convert(page, editPageURL);
+		String content = engine.convert(
+			page, viewPageURL, editPageURL, attachmentURLPrefix);
 
 		String editPageURLString = StringPool.BLANK;
 

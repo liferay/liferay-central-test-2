@@ -27,12 +27,14 @@ import javax.portlet.PortletURL;
 public interface WikiEngine {
 
 	/**
-	 * Convert the content of the given page to HTML using the portletURL to
-	 * build links.
+	 * Convert the content of the given page to HTML using the view and edit
+	 * URLs to build links.
 	 *
 	 * @return HTML string
 	 */
-	public String convert(WikiPage page, PortletURL portletURL)
+	public String convert(
+			WikiPage page, PortletURL viewPageURL, PortletURL editPageURL,
+			String attachmentURLPrefix)
 		throws PageContentException;
 
 	/**

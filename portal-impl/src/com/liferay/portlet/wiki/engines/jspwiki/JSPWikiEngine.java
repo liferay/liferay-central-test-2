@@ -46,7 +46,9 @@ import javax.portlet.PortletURL;
 public class JSPWikiEngine implements WikiEngine {
 
 	public String convert(
-			com.liferay.portlet.wiki.model.WikiPage page, PortletURL portletURL)
+			com.liferay.portlet.wiki.model.WikiPage page,
+			PortletURL viewPageURL, PortletURL editPageURL,
+			String attachmentURLPrefix)
 		throws PageContentException {
 
 		try {
