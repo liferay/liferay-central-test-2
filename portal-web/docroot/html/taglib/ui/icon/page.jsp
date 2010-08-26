@@ -20,7 +20,7 @@
 String cssClassHtml = StringPool.BLANK;
 
 if (Validator.isNotNull(cssClass)) {
-	cssClassHtml = "class=\"" + cssClass + "\"";
+	cssClassHtml = "class=\"".concat(cssClass).concat("\"");
 }
 
 if (themeDisplay.isThemeImagesFastLoad() && !auiImage) {
@@ -29,7 +29,7 @@ if (themeDisplay.isThemeImagesFastLoad() && !auiImage) {
 
 	String imageFileName = StringUtil.replace(src, "common/../", "");
 
-	String imagesPath = theme.getContextPath() + theme.getImagesPath();
+	String imagesPath = theme.getContextPath().concat(theme.getImagesPath());
 
 	if (imageFileName.startsWith(imagesPath)) {
 		imageFileName = imageFileName.substring(imagesPath.length());
@@ -43,7 +43,7 @@ if (themeDisplay.isThemeImagesFastLoad() && !auiImage) {
 				spriteFileName = StringUtil.replace(spriteFileName, ".png", ".gif");
 			}
 
-			spriteFileName = themeDisplay.getPathThemeImages() + spriteFileName;
+			spriteFileName = themeDisplay.getPathThemeImages().concat(spriteFileName);
 		}
 	}
 
@@ -72,23 +72,44 @@ if (themeDisplay.isThemeImagesFastLoad() && !auiImage) {
 					spriteFileName = StringUtil.replace(spriteFileName, ".png", ".gif");
 				}
 
-				spriteFileName = portlet.getContextPath() + spriteFileName;
+				spriteFileName = portlet.getContextPath().concat(spriteFileName);
 			}
 		}
 	}
 
 	if (spriteImage != null) {
-		src = themeDisplay.getPathThemeImages() + "/spacer.png";
+		src = themeDisplay.getPathThemeImages().concat("/spacer.png");
 
-		details += " style=\"background-image: url('" + spriteFileName + "'); background-position: 50% -" + spriteImage.getOffset() + "px; background-repeat: no-repeat; height: " + spriteImage.getHeight() + "px; width: " + spriteImage.getWidth() + "px;\"";
+		StringBundler sb = new StringBundler(10);
+
+		sb.append(details);
+		sb.append(" style=\"background-image: url('");
+		sb.append(spriteFileName);
+		sb.append("'); background-position: 50% -");
+		sb.append(spriteImage.getOffset());
+		sb.append("px; background-repeat: no-repeat; height: ");
+		sb.append(spriteImage.getHeight());
+		sb.append("px; width: ");
+		sb.append(spriteImage.getWidth());
+		sb.append("px;\"");
+
+		details = sb.toString();
 	}
 }
 
 String imgClass = "icon";
 
 if (auiImage) {
-	details += " style=\"background-image: url('" + themeDisplay.getPathThemeImages() + "/aui/icon_sprite.png'); height: 16px; width: 16px;\"";
-	imgClass += " aui-icon-" + image.substring(_AUI_PATH.length());
+
+	StringBundler sb = new StringBundler(4);
+
+	sb.append(details);
+	sb.append(" style=\"background-image: url('");
+	sb.append(themeDisplay.getPathThemeImages());
+	sb.append("/aui/icon_sprite.png'); height: 16px; width: 16px;\"");
+
+	details = sb.toString();
+	imgClass = imgClass.concat(" aui-icon-").concat(image.substring(_AUI_PATH.length()));
 }
 
 boolean urlIsNotNull = Validator.isNotNull(url);
