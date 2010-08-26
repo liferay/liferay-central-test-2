@@ -277,9 +277,23 @@ public class SeleneseToJavaBuilder {
 
 				sb.append("selenium.");
 				sb.append(param1);
-				sb.append("(\"");
-				sb.append(param2);
-				sb.append("\", RuntimeVariables.replace(");
+				sb.append("(");
+
+				if (param2.startsWith("${")) {
+					sb.append("RuntimeVariables.getValue(\"");
+
+					String text = param2.substring(2, param2.length() - 1);
+
+					sb.append(text);
+					sb.append("\")");
+				}
+				else {
+					sb.append("\"");
+					sb.append(param2);
+					sb.append("\"");
+				}
+
+				sb.append(", RuntimeVariables.replace(");
 
 				if (param3.startsWith("${")) {
 					sb.append("RuntimeVariables.getValue(\"");
@@ -679,6 +693,12 @@ public class SeleneseToJavaBuilder {
 				sb.append("String ");
 				sb.append(param2);
 				sb.append(" = selenium.getLocation();");
+
+				sb.append("RuntimeVariables.setValue(\"");
+				sb.append(param2);
+				sb.append("\", ");
+				sb.append(param2);
+				sb.append(");");
 			}
 			else if (param1.equals("storeText")) {
 				sb.append("String ");
