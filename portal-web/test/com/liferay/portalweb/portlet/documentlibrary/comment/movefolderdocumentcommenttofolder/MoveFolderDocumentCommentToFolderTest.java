@@ -74,9 +74,10 @@ public class MoveFolderDocumentCommentToFolderTest extends BaseTestCase {
 		selenium.selectWindow("name=folder");
 
 		String moveFolderURL = selenium.getLocation();
+		RuntimeVariables.setValue("moveFolderURL", moveFolderURL);
 		selenium.close();
 		selenium.selectWindow("null");
-		selenium.openWindow("${moveFolderURL}",
+		selenium.openWindow(RuntimeVariables.getValue("moveFolderURL"),
 			RuntimeVariables.replace("folderSelectionWindow"));
 		Thread.sleep(5000);
 		selenium.waitForPopUp("folderSelectionWindow",
