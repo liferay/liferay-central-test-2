@@ -98,7 +98,11 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 			for (int i = 0; i < results.getDocs().length; i++) {
 				Document result = results.doc(i);
 
-				String portletId = result.get(Field.PORTLET_ID);
+				String portletId = getPortletId();
+
+				if (Validator.isNull(portletId)) {
+					portletId = result.get(Field.PORTLET_ID);
+				}
 
 				String snippet = results.snippet(i);
 

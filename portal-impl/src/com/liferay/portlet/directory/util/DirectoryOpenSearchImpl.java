@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
-import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -49,7 +48,7 @@ public class DirectoryOpenSearchImpl extends HitsOpenSearchImpl {
 	public static final String TITLE = "Liferay Directory Search: ";
 
 	public String getPortletId() {
-		return UserIndexer.PORTLET_ID;
+		return DirectoryIndexer.PORTLET_ID;
 	}
 
 	public String getSearchPath() {

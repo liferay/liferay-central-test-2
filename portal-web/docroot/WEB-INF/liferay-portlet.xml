@@ -109,6 +109,7 @@
 		<portlet-name>11</portlet-name>
 		<icon>/html/icons/directory.png</icon>
 		<struts-path>directory</struts-path>
+		<indexer-class>com.liferay.portlet.directory.util.DirectoryIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.directory.util.DirectoryOpenSearchImpl</open-search-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<use-default-template>false</use-default-template>
