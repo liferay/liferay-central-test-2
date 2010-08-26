@@ -282,6 +282,12 @@ public class VerifyProperties extends VerifyProcess {
 	};
 
 	private static final String[][] _RENAMED_SYSTEM_KEYS = new String[][] {
+		new String[] {
+			"com.liferay.portal.kernel.util.StringBundler.unsafe.create." +
+				"threshold",
+			"com.liferay.portal.kernel.util.StringBundler.threadlocal.buffer." +
+				"limit",
+		}
 	};
 
 	private static Log _log = LogFactoryUtil.getLog(VerifyProperties.class);
