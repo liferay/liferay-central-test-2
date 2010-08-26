@@ -34,26 +34,18 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 
 	public ClassName addClassName(String value) throws SystemException {
-		long classNameId = counterLocalService.increment();
-
-		ClassName className = classNamePersistence.create(classNameId);
-
-		className.setValue(value);
-
-		classNamePersistence.update(className, false);
-
-		return className;
-	}
-
-	public ClassName addClassNameOnMissing(String value)
-		throws SystemException {
 		ClassName className = classNamePersistence.fetchByValue(value);
 
 		if (className == null) {
-			className = addClassName(value);
+			long classNameId = counterLocalService.increment();
+
+			className = classNamePersistence.create(classNameId);
+
+			className.setValue(value);
+
+			classNamePersistence.update(className, false);
 		}
 
-		_classNames.put(value, className);
 		return className;
 	}
 
@@ -92,7 +84,9 @@ public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 		ClassName className = _classNames.get(value);
 
 		if (className == null) {
-			className = classNameLocalService.addClassNameOnMissing(value);
+			className = classNameLocalService.addClassName(value);
+
+			_classNames.put(value, className);
 		}
 
 		return className;
