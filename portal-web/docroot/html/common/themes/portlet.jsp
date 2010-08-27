@@ -149,10 +149,14 @@ boolean wsrp = ParamUtil.getBoolean(request, "wsrp");
 				</liferay-theme:wrap-portlet>
 			</c:when>
 			<c:otherwise>
+				<%
+				boolean showPortletActions = tilesPortletDecorateBoolean && (portletDisplay.isShowPortletCssIcon() || 
+					portletDisplay.isShowConfigurationIcon() || portletDisplay.isShowEditIcon() || portletDisplay.isShowCloseIcon());
+				%>
 				<div class="portlet-borderless-container" <%= containerStyles %>>
-					<c:if test="<%= (tilesPortletDecorateBoolean && portletDisplay.isShowConfigurationIcon()) || portletDisplay.isShowBackIcon() %>">
+					<c:if test="<%= showPortletActions || portletDisplay.isShowBackIcon() %>">
 						<div class="portlet-borderless-bar">
-							<c:if test="<%= tilesPortletDecorateBoolean && portletDisplay.isShowConfigurationIcon() %>">
+							<c:if test="<%= showPortletActions %>">
 								<span class="portlet-title-default"><%= portletDisplay.getTitle() %></span>
 
 								<span class="portlet-actions">
