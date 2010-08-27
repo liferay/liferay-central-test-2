@@ -215,14 +215,6 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 		public boolean isPending();
 	</#if>
 
-	/**
-	 * Gets a copy of this ${entity.humanName} as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public ${entity.name} toEscapedModel();
-
 	<#--
 	Copy methods from com.liferay.portal.model.BaseModel and java.lang.Object to
 	correctly generate wrappers.
@@ -251,6 +243,8 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 	public int compareTo(${entity.name} ${entity.varName});
 
 	public int hashCode();
+
+	public ${entity.name} toEscapedModel();
 
 	public String toString();
 

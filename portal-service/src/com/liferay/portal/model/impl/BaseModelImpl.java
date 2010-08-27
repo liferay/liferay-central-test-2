@@ -63,6 +63,10 @@ public abstract class BaseModelImpl<T> implements BaseModel<T> {
 
 	public abstract Object clone();
 
+	public T toEscapedModel() {
+		throw new UnsupportedOperationException();
+	}
+
 	private boolean _new;
 	private boolean _cachedModel;
 	private boolean _escapedModel;

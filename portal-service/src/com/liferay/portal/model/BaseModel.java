@@ -118,6 +118,14 @@ public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 	public Object clone();
 
 	/**
+	 * Gets a copy of this entity as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
+	 *
+	 * @return the escaped model instance
+	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
+	 */
+	public T toEscapedModel();
+
+	/**
 	 * Gets the XML representation of this model instance.
 	 *
 	 * @return the XML representation of this model instance
