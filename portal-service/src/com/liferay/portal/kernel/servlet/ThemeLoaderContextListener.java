@@ -26,8 +26,8 @@ import javax.servlet.ServletContextListener;
  */
 public class ThemeLoaderContextListener implements ServletContextListener {
 
-	public void contextInitialized(ServletContextEvent event) {
-		ServletContext servletContext = event.getServletContext();
+	public void contextInitialized(ServletContextEvent servletContextEvent) {
+		ServletContext servletContext = servletContextEvent.getServletContext();
 
 		Thread currentThread = Thread.currentThread();
 
@@ -37,8 +37,8 @@ public class ThemeLoaderContextListener implements ServletContextListener {
 			new HotDeployEvent(servletContext, contextClassLoader));
 	}
 
-	public void contextDestroyed(ServletContextEvent event) {
-		ServletContext servletContext = event.getServletContext();
+	public void contextDestroyed(ServletContextEvent servletContextEvent) {
+		ServletContext servletContext = servletContextEvent.getServletContext();
 
 		Thread currentThread = Thread.currentThread();
 
