@@ -21,8 +21,6 @@ import org.jamwiki.model.SearchResultEntry;
 import org.jamwiki.model.Topic;
 
 /**
- * Dummy class only here to keep JAMWiki from complaining.
- *
  * @author Jonathan Potter
  */
 public class LiferaySearchEngine implements SearchEngine {
