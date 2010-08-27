@@ -86,13 +86,13 @@ public class AssetUtil {
 
 		Collections.reverse(ancestorCategories);
 
-		 for (AssetCategory ancestorCategory : ancestorCategories) {
-			   portletURL.setParameter("categoryId", String.valueOf(
-				   ancestorCategory.getCategoryId()));
+		for (AssetCategory ancestorCategory : ancestorCategories) {
+			portletURL.setParameter("categoryId", String.valueOf(
+				ancestorCategory.getCategoryId()));
 
-			   PortalUtil.addPortletBreadcrumbEntry(
-				   request, ancestorCategory.getName(), portletURL.toString());
-		   }
+			PortalUtil.addPortletBreadcrumbEntry(
+				request, ancestorCategory.getName(), portletURL.toString());
+		}
 
 		portletURL.setParameter("categoryId", String.valueOf(assetCategoryId));
 
