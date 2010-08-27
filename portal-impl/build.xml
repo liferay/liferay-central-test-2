@@ -795,9 +795,8 @@ ${exception.message}
 			/>
 		</copy>
 
-		<copy todir="${portal-impl.classes.dir}">
-			<fileset dir="src" excludes="**/*.java" />
-		</copy>
+		<copy file="${project.dir}/classes/log4j.properties" todir="${app.server.classes.portal.dir}" />
+		<copy file="${project.dir}/classes/logging.properties" todir="${app.server.classes.portal.dir}" />
 
 		<if>
 			<not>
@@ -820,10 +819,12 @@ ${exception.message}
 					/>
 				</move>
 
-				<concat destfile="${portal-impl.classes.dir}/logging.properties">
-					<fileset file="${project.dir}/classes/logging.properties" />
+				<concat destfile="${portal-impl.classes.dir}/logging.properties.new">
+					<fileset file="${portal-impl.classes.dir}/logging.properties" />
 					<fileset file="${portal-impl.classes.dir}/jamwiki-0.9.1/main/resources/logging.properties" />
 				</concat>
+
+				<move file="${portal-impl.classes.dir}/logging.properties.new" tofile="${portal-impl.classes.dir}/logging.properties" />
 
 				<delete dir="${portal-impl.classes.dir}/jamwiki-0.9.1" />
 
@@ -833,6 +834,10 @@ ${exception.message}
 				</echo>
 			</then>
 		</if>
+
+		<copy todir="${portal-impl.classes.dir}">
+			<fileset dir="src" excludes="**/*.java" />
+		</copy>
 	</target>
 
 	<target name="compile-fast">
@@ -919,7 +924,7 @@ ${exception.message}
 			<else>
 				<antcall target="build-common-java.deploy" />
 
-				<copy file="${project.dir}/classes/log4j.properties" todir="${app.server.classes.portal.dir}" />
+				<copy file="classes/log4j.properties" todir="${app.server.classes.portal.dir}" />
 				<copy file="classes/logging.properties" todir="${app.server.classes.portal.dir}" />
 			</else>
 		</if>
