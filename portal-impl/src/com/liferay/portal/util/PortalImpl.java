@@ -3153,6 +3153,7 @@ public class PortalImpl implements Portal {
 			strutsAction.equals("/document_library/edit_file_entry") ||
 			strutsAction.equals("/image_gallery/edit_image") ||
 			strutsAction.equals("/wiki/edit_page_attachment") ||
+			strutsAction.equals("/wiki_admin/edit_page_attachment") ||
 			actionName.equals("addFile")) {
 
 			alwaysAllowDoAsUser = true;
