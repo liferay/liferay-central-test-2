@@ -230,10 +230,6 @@ public class BlogsEntryWrapper implements BlogsEntry {
 		return _blogsEntry.isPending();
 	}
 
-	public com.liferay.portlet.blogs.model.BlogsEntry toEscapedModel() {
-		return _blogsEntry.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _blogsEntry.isNew();
 	}
@@ -281,6 +277,10 @@ public class BlogsEntryWrapper implements BlogsEntry {
 
 	public int hashCode() {
 		return _blogsEntry.hashCode();
+	}
+
+	public com.liferay.portlet.blogs.model.BlogsEntry toEscapedModel() {
+		return _blogsEntry.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

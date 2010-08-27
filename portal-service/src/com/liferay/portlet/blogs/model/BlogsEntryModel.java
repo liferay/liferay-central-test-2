@@ -402,14 +402,6 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 	 */
 	public boolean isPending();
 
-	/**
-	 * Gets a copy of this blogs entry as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public BlogsEntry toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -433,6 +425,8 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 	public int compareTo(BlogsEntry blogsEntry);
 
 	public int hashCode();
+
+	public BlogsEntry toEscapedModel();
 
 	public String toString();
 

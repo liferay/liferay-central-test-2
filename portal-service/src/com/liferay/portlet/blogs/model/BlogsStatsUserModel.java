@@ -212,14 +212,6 @@ public interface BlogsStatsUserModel extends BaseModel<BlogsStatsUser> {
 	 */
 	public void setRatingsAverageScore(double ratingsAverageScore);
 
-	/**
-	 * Gets a copy of this blogs stats user as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public BlogsStatsUser toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -243,6 +235,8 @@ public interface BlogsStatsUserModel extends BaseModel<BlogsStatsUser> {
 	public int compareTo(BlogsStatsUser blogsStatsUser);
 
 	public int hashCode();
+
+	public BlogsStatsUser toEscapedModel();
 
 	public String toString();
 

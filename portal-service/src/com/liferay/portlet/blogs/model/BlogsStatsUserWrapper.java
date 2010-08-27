@@ -126,10 +126,6 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 		_blogsStatsUser.setRatingsAverageScore(ratingsAverageScore);
 	}
 
-	public com.liferay.portlet.blogs.model.BlogsStatsUser toEscapedModel() {
-		return _blogsStatsUser.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _blogsStatsUser.isNew();
 	}
@@ -178,6 +174,10 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 
 	public int hashCode() {
 		return _blogsStatsUser.hashCode();
+	}
+
+	public com.liferay.portlet.blogs.model.BlogsStatsUser toEscapedModel() {
+		return _blogsStatsUser.toEscapedModel();
 	}
 
 	public java.lang.String toString() {
