@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * @author Brian Wing Shun Chan
@@ -31,7 +32,7 @@ public class DLFileEntryVersionUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	public Object getNewValue(Object oldValue) throws Exception {
 		double version = GetterUtil.getDouble(String.valueOf(oldValue));
 
-		NumberFormat numberFormat = NumberFormat.getInstance();
+		NumberFormat numberFormat = NumberFormat.getInstance(Locale.US);
 
 		numberFormat.setMaximumFractionDigits(1);
 		numberFormat.setMinimumFractionDigits(1);
