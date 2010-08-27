@@ -27,10 +27,6 @@ import java.util.regex.Pattern;
  */
 public class CallbackMatcher {
 
-	public CallbackMatcher(String regex) {
-		_pattern = Pattern.compile(regex);
-	}
-
 	public String replaceMatches(CharSequence charSequence, Callback callback) {
 		Matcher matcher = _pattern.matcher(charSequence);
 
@@ -55,6 +51,10 @@ public class CallbackMatcher {
 		}
 
 		return sb.toString();
+	}
+
+	public void setRegex(String regex) {
+		_pattern = Pattern.compile(regex);
 	}
 
 	public interface Callback {
