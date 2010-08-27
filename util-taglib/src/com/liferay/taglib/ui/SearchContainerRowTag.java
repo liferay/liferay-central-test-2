@@ -253,7 +253,9 @@ public class SearchContainerRowTag extends ParamAndPropertyAncestorTagImpl {
 		Object model = _results.get(_rowIndex);
 
 		if (isEscapedModel()) {
-			model = ((BaseModel)model).toEscapedModel();
+			BaseModel baseModel = (BaseModel)model;
+
+			model = baseModel.toEscapedModel();
 		}
 
 		if (_log.isDebugEnabled()) {
