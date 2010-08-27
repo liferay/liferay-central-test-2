@@ -918,6 +918,9 @@ ${exception.message}
 			</then>
 			<else>
 				<antcall target="build-common-java.deploy" />
+
+				<copy file="${project.dir}/classes/log4j.properties" todir="${app.server.classes.portal.dir}" />
+				<copy file="classes/logging.properties" todir="${app.server.classes.portal.dir}" />
 			</else>
 		</if>
 	</target>
@@ -973,7 +976,7 @@ ${exception.message}
 			<then>
 				<jar
 					basedir="classes"
-					excludes="portal-*.properties,system-*.properties,**/samplesqlbuilder/dependencies/*.txt"
+					excludes="log4j.properties,logging.properties,portal-*.properties,system-*.properties,**/samplesqlbuilder/dependencies/*.txt"
 					jarfile="${jar.file}.jar"
 				/>
 			</then>
