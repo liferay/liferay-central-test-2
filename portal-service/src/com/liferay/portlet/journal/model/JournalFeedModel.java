@@ -406,14 +406,6 @@ public interface JournalFeedModel extends BaseModel<JournalFeed> {
 	 */
 	public void setFeedVersion(double feedVersion);
 
-	/**
-	 * Gets a copy of this journal feed as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public JournalFeed toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -437,6 +429,8 @@ public interface JournalFeedModel extends BaseModel<JournalFeed> {
 	public int compareTo(JournalFeed journalFeed);
 
 	public int hashCode();
+
+	public JournalFeed toEscapedModel();
 
 	public String toString();
 

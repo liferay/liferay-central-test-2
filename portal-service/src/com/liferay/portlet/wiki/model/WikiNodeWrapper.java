@@ -133,10 +133,6 @@ public class WikiNodeWrapper implements WikiNode {
 		_wikiNode.setLastPostDate(lastPostDate);
 	}
 
-	public com.liferay.portlet.wiki.model.WikiNode toEscapedModel() {
-		return _wikiNode.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _wikiNode.isNew();
 	}
@@ -184,6 +180,10 @@ public class WikiNodeWrapper implements WikiNode {
 
 	public int hashCode() {
 		return _wikiNode.hashCode();
+	}
+
+	public com.liferay.portlet.wiki.model.WikiNode toEscapedModel() {
+		return _wikiNode.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

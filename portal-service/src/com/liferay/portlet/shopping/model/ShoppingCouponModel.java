@@ -338,14 +338,6 @@ public interface ShoppingCouponModel extends BaseModel<ShoppingCoupon> {
 	 */
 	public void setDiscountType(String discountType);
 
-	/**
-	 * Gets a copy of this shopping coupon as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public ShoppingCoupon toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -369,6 +361,8 @@ public interface ShoppingCouponModel extends BaseModel<ShoppingCoupon> {
 	public int compareTo(ShoppingCoupon shoppingCoupon);
 
 	public int hashCode();
+
+	public ShoppingCoupon toEscapedModel();
 
 	public String toString();
 

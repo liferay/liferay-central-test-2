@@ -230,14 +230,6 @@ public interface OrganizationModel extends BaseModel<Organization> {
 	 */
 	public void setComments(String comments);
 
-	/**
-	 * Gets a copy of this organization as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Organization toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -261,6 +253,8 @@ public interface OrganizationModel extends BaseModel<Organization> {
 	public int compareTo(Organization organization);
 
 	public int hashCode();
+
+	public Organization toEscapedModel();
 
 	public String toString();
 

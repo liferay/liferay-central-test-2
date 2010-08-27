@@ -258,14 +258,6 @@ public interface BookmarksEntryModel extends BaseModel<BookmarksEntry> {
 	 */
 	public void setPriority(int priority);
 
-	/**
-	 * Gets a copy of this bookmarks entry as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public BookmarksEntry toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -289,6 +281,8 @@ public interface BookmarksEntryModel extends BaseModel<BookmarksEntry> {
 	public int compareTo(BookmarksEntry bookmarksEntry);
 
 	public int hashCode();
+
+	public BookmarksEntry toEscapedModel();
 
 	public String toString();
 

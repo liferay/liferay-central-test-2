@@ -306,14 +306,6 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry> {
 	 */
 	public void setRepoArtifactId(String repoArtifactId);
 
-	/**
-	 * Gets a copy of this s c product entry as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public SCProductEntry toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -337,6 +329,8 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry> {
 	public int compareTo(SCProductEntry scProductEntry);
 
 	public int hashCode();
+
+	public SCProductEntry toEscapedModel();
 
 	public String toString();
 

@@ -129,10 +129,6 @@ public class PortletItemWrapper implements PortletItem {
 		_portletItem.setClassNameId(classNameId);
 	}
 
-	public com.liferay.portal.model.PortletItem toEscapedModel() {
-		return _portletItem.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _portletItem.isNew();
 	}
@@ -180,6 +176,10 @@ public class PortletItemWrapper implements PortletItem {
 
 	public int hashCode() {
 		return _portletItem.hashCode();
+	}
+
+	public com.liferay.portal.model.PortletItem toEscapedModel() {
+		return _portletItem.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

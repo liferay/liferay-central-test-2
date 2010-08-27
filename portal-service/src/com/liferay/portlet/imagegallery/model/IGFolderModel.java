@@ -215,14 +215,6 @@ public interface IGFolderModel extends BaseModel<IGFolder> {
 	 */
 	public void setDescription(String description);
 
-	/**
-	 * Gets a copy of this i g folder as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public IGFolder toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -246,6 +238,8 @@ public interface IGFolderModel extends BaseModel<IGFolder> {
 	public int compareTo(IGFolder igFolder);
 
 	public int hashCode();
+
+	public IGFolder toEscapedModel();
 
 	public String toString();
 

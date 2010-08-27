@@ -155,14 +155,6 @@ public interface ImageModel extends BaseModel<Image> {
 	 */
 	public void setSize(int size);
 
-	/**
-	 * Gets a copy of this image as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Image toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -186,6 +178,8 @@ public interface ImageModel extends BaseModel<Image> {
 	public int compareTo(Image image);
 
 	public int hashCode();
+
+	public Image toEscapedModel();
 
 	public String toString();
 

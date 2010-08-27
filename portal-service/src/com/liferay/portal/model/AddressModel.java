@@ -350,14 +350,6 @@ public interface AddressModel extends BaseModel<Address> {
 	 */
 	public void setPrimary(boolean primary);
 
-	/**
-	 * Gets a copy of this address as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Address toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -381,6 +373,8 @@ public interface AddressModel extends BaseModel<Address> {
 	public int compareTo(Address address);
 
 	public int hashCode();
+
+	public Address toEscapedModel();
 
 	public String toString();
 

@@ -92,10 +92,6 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 		_resourcePermission.setActionIds(actionIds);
 	}
 
-	public com.liferay.portal.model.ResourcePermission toEscapedModel() {
-		return _resourcePermission.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _resourcePermission.isNew();
 	}
@@ -144,6 +140,10 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 
 	public int hashCode() {
 		return _resourcePermission.hashCode();
+	}
+
+	public com.liferay.portal.model.ResourcePermission toEscapedModel() {
+		return _resourcePermission.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

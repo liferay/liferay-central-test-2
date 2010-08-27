@@ -173,10 +173,6 @@ public class AccountWrapper implements Account {
 		_account.setSize(size);
 	}
 
-	public com.liferay.portal.model.Account toEscapedModel() {
-		return _account.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _account.isNew();
 	}
@@ -224,6 +220,10 @@ public class AccountWrapper implements Account {
 
 	public int hashCode() {
 		return _account.hashCode();
+	}
+
+	public com.liferay.portal.model.Account toEscapedModel() {
+		return _account.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

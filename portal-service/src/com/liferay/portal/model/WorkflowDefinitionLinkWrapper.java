@@ -131,10 +131,6 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 		_workflowDefinitionLink.setWorkflowDefinitionVersion(workflowDefinitionVersion);
 	}
 
-	public com.liferay.portal.model.WorkflowDefinitionLink toEscapedModel() {
-		return _workflowDefinitionLink.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _workflowDefinitionLink.isNew();
 	}
@@ -183,6 +179,10 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 
 	public int hashCode() {
 		return _workflowDefinitionLink.hashCode();
+	}
+
+	public com.liferay.portal.model.WorkflowDefinitionLink toEscapedModel() {
+		return _workflowDefinitionLink.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

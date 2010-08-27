@@ -329,14 +329,6 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut> {
 	 */
 	public boolean isPending();
 
-	/**
-	 * Gets a copy of this d l file shortcut as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public DLFileShortcut toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -360,6 +352,8 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut> {
 	public int compareTo(DLFileShortcut dlFileShortcut);
 
 	public int hashCode();
+
+	public DLFileShortcut toEscapedModel();
 
 	public String toString();
 

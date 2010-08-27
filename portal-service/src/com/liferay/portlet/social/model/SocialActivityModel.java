@@ -247,14 +247,6 @@ public interface SocialActivityModel extends BaseModel<SocialActivity> {
 	 */
 	public void setReceiverUserUuid(String receiverUserUuid);
 
-	/**
-	 * Gets a copy of this social activity as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public SocialActivity toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -278,6 +270,8 @@ public interface SocialActivityModel extends BaseModel<SocialActivity> {
 	public int compareTo(SocialActivity socialActivity);
 
 	public int hashCode();
+
+	public SocialActivity toEscapedModel();
 
 	public String toString();
 

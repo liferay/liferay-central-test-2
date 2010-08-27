@@ -197,10 +197,6 @@ public class JournalTemplateWrapper implements JournalTemplate {
 		_journalTemplate.setSmallImageURL(smallImageURL);
 	}
 
-	public com.liferay.portlet.journal.model.JournalTemplate toEscapedModel() {
-		return _journalTemplate.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _journalTemplate.isNew();
 	}
@@ -249,6 +245,10 @@ public class JournalTemplateWrapper implements JournalTemplate {
 
 	public int hashCode() {
 		return _journalTemplate.hashCode();
+	}
+
+	public com.liferay.portlet.journal.model.JournalTemplate toEscapedModel() {
+		return _journalTemplate.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

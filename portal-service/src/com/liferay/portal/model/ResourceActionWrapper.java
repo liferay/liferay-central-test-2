@@ -68,10 +68,6 @@ public class ResourceActionWrapper implements ResourceAction {
 		_resourceAction.setBitwiseValue(bitwiseValue);
 	}
 
-	public com.liferay.portal.model.ResourceAction toEscapedModel() {
-		return _resourceAction.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _resourceAction.isNew();
 	}
@@ -119,6 +115,10 @@ public class ResourceActionWrapper implements ResourceAction {
 
 	public int hashCode() {
 		return _resourceAction.hashCode();
+	}
+
+	public com.liferay.portal.model.ResourceAction toEscapedModel() {
+		return _resourceAction.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

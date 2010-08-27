@@ -353,10 +353,6 @@ public class ShoppingItemWrapper implements ShoppingItem {
 		_shoppingItem.setLargeImageURL(largeImageURL);
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingItem toEscapedModel() {
-		return _shoppingItem.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _shoppingItem.isNew();
 	}
@@ -405,6 +401,10 @@ public class ShoppingItemWrapper implements ShoppingItem {
 
 	public int hashCode() {
 		return _shoppingItem.hashCode();
+	}
+
+	public com.liferay.portlet.shopping.model.ShoppingItem toEscapedModel() {
+		return _shoppingItem.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

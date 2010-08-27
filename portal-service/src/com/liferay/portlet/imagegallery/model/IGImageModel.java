@@ -271,14 +271,6 @@ public interface IGImageModel extends BaseModel<IGImage> {
 	 */
 	public void setCustom2ImageId(long custom2ImageId);
 
-	/**
-	 * Gets a copy of this i g image as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public IGImage toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -302,6 +294,8 @@ public interface IGImageModel extends BaseModel<IGImage> {
 	public int compareTo(IGImage igImage);
 
 	public int hashCode();
+
+	public IGImage toEscapedModel();
 
 	public String toString();
 

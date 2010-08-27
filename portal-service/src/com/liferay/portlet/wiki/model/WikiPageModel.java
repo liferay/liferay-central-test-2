@@ -460,14 +460,6 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 	 */
 	public boolean isPending();
 
-	/**
-	 * Gets a copy of this wiki page as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public WikiPage toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -491,6 +483,8 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 	public int compareTo(WikiPage wikiPage);
 
 	public int hashCode();
+
+	public WikiPage toEscapedModel();
 
 	public String toString();
 

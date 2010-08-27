@@ -147,14 +147,6 @@ public interface PluginSettingModel extends BaseModel<PluginSetting> {
 	 */
 	public void setActive(boolean active);
 
-	/**
-	 * Gets a copy of this plugin setting as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public PluginSetting toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -178,6 +170,8 @@ public interface PluginSettingModel extends BaseModel<PluginSetting> {
 	public int compareTo(PluginSetting pluginSetting);
 
 	public int hashCode();
+
+	public PluginSetting toEscapedModel();
 
 	public String toString();
 

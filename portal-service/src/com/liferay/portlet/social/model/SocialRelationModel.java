@@ -153,14 +153,6 @@ public interface SocialRelationModel extends BaseModel<SocialRelation> {
 	 */
 	public void setType(int type);
 
-	/**
-	 * Gets a copy of this social relation as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public SocialRelation toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -184,6 +176,8 @@ public interface SocialRelationModel extends BaseModel<SocialRelation> {
 	public int compareTo(SocialRelation socialRelation);
 
 	public int hashCode();
+
+	public SocialRelation toEscapedModel();
 
 	public String toString();
 

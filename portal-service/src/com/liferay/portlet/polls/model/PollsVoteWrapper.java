@@ -85,10 +85,6 @@ public class PollsVoteWrapper implements PollsVote {
 		_pollsVote.setVoteDate(voteDate);
 	}
 
-	public com.liferay.portlet.polls.model.PollsVote toEscapedModel() {
-		return _pollsVote.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _pollsVote.isNew();
 	}
@@ -136,6 +132,10 @@ public class PollsVoteWrapper implements PollsVote {
 
 	public int hashCode() {
 		return _pollsVote.hashCode();
+	}
+
+	public com.liferay.portlet.polls.model.PollsVote toEscapedModel() {
+		return _pollsVote.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

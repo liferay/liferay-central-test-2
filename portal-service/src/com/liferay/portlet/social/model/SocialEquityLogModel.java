@@ -232,14 +232,6 @@ public interface SocialEquityLogModel extends BaseModel<SocialEquityLog> {
 	 */
 	public void setValue(int value);
 
-	/**
-	 * Gets a copy of this social equity log as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public SocialEquityLog toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -263,6 +255,8 @@ public interface SocialEquityLogModel extends BaseModel<SocialEquityLog> {
 	public int compareTo(SocialEquityLog socialEquityLog);
 
 	public int hashCode();
+
+	public SocialEquityLog toEscapedModel();
 
 	public String toString();
 

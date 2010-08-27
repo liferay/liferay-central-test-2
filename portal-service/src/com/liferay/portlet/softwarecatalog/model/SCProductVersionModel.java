@@ -252,14 +252,6 @@ public interface SCProductVersionModel extends BaseModel<SCProductVersion> {
 	 */
 	public void setRepoStoreArtifact(boolean repoStoreArtifact);
 
-	/**
-	 * Gets a copy of this s c product version as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public SCProductVersion toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -283,6 +275,8 @@ public interface SCProductVersionModel extends BaseModel<SCProductVersion> {
 	public int compareTo(SCProductVersion scProductVersion);
 
 	public int hashCode();
+
+	public SCProductVersion toEscapedModel();
 
 	public String toString();
 

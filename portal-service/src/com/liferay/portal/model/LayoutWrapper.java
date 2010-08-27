@@ -240,10 +240,6 @@ public class LayoutWrapper implements Layout {
 		_layout.setDlFolderId(dlFolderId);
 	}
 
-	public com.liferay.portal.model.Layout toEscapedModel() {
-		return _layout.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _layout.isNew();
 	}
@@ -291,6 +287,10 @@ public class LayoutWrapper implements Layout {
 
 	public int hashCode() {
 		return _layout.hashCode();
+	}
+
+	public com.liferay.portal.model.Layout toEscapedModel() {
+		return _layout.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

@@ -69,10 +69,6 @@ public class BrowserTrackerWrapper implements BrowserTracker {
 		_browserTracker.setBrowserKey(browserKey);
 	}
 
-	public com.liferay.portal.model.BrowserTracker toEscapedModel() {
-		return _browserTracker.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _browserTracker.isNew();
 	}
@@ -120,6 +116,10 @@ public class BrowserTrackerWrapper implements BrowserTracker {
 
 	public int hashCode() {
 		return _browserTracker.hashCode();
+	}
+
+	public com.liferay.portal.model.BrowserTracker toEscapedModel() {
+		return _browserTracker.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

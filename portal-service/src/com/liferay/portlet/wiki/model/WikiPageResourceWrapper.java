@@ -68,10 +68,6 @@ public class WikiPageResourceWrapper implements WikiPageResource {
 		_wikiPageResource.setTitle(title);
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPageResource toEscapedModel() {
-		return _wikiPageResource.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _wikiPageResource.isNew();
 	}
@@ -120,6 +116,10 @@ public class WikiPageResourceWrapper implements WikiPageResource {
 
 	public int hashCode() {
 		return _wikiPageResource.hashCode();
+	}
+
+	public com.liferay.portlet.wiki.model.WikiPageResource toEscapedModel() {
+		return _wikiPageResource.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

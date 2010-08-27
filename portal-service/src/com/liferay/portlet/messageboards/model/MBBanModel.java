@@ -200,14 +200,6 @@ public interface MBBanModel extends BaseModel<MBBan> {
 	 */
 	public void setBanUserUuid(String banUserUuid);
 
-	/**
-	 * Gets a copy of this message boards ban as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public MBBan toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -231,6 +223,8 @@ public interface MBBanModel extends BaseModel<MBBan> {
 	public int compareTo(MBBan mbBan);
 
 	public int hashCode();
+
+	public MBBan toEscapedModel();
 
 	public String toString();
 

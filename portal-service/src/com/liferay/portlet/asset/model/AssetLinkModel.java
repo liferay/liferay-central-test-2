@@ -199,14 +199,6 @@ public interface AssetLinkModel extends BaseModel<AssetLink> {
 	 */
 	public void setWeight(int weight);
 
-	/**
-	 * Gets a copy of this asset link as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public AssetLink toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -230,6 +222,8 @@ public interface AssetLinkModel extends BaseModel<AssetLink> {
 	public int compareTo(AssetLink assetLink);
 
 	public int hashCode();
+
+	public AssetLink toEscapedModel();
 
 	public String toString();
 

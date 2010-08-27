@@ -205,14 +205,6 @@ public interface LayoutSetPrototypeModel extends BaseModel<LayoutSetPrototype> {
 	 */
 	public void setActive(boolean active);
 
-	/**
-	 * Gets a copy of this layout set prototype as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public LayoutSetPrototype toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -236,6 +228,8 @@ public interface LayoutSetPrototypeModel extends BaseModel<LayoutSetPrototype> {
 	public int compareTo(LayoutSetPrototype layoutSetPrototype);
 
 	public int hashCode();
+
+	public LayoutSetPrototype toEscapedModel();
 
 	public String toString();
 

@@ -201,14 +201,6 @@ public interface AssetCategoryPropertyModel extends BaseModel<AssetCategoryPrope
 	 */
 	public void setValue(String value);
 
-	/**
-	 * Gets a copy of this asset category property as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public AssetCategoryProperty toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -232,6 +224,8 @@ public interface AssetCategoryPropertyModel extends BaseModel<AssetCategoryPrope
 	public int compareTo(AssetCategoryProperty assetCategoryProperty);
 
 	public int hashCode();
+
+	public AssetCategoryProperty toEscapedModel();
 
 	public String toString();
 

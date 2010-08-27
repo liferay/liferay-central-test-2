@@ -117,14 +117,6 @@ public interface ShardModel extends BaseModel<Shard> {
 	 */
 	public void setName(String name);
 
-	/**
-	 * Gets a copy of this shard as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Shard toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -148,6 +140,8 @@ public interface ShardModel extends BaseModel<Shard> {
 	public int compareTo(Shard shard);
 
 	public int hashCode();
+
+	public Shard toEscapedModel();
 
 	public String toString();
 

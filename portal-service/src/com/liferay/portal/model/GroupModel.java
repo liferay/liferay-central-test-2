@@ -269,14 +269,6 @@ public interface GroupModel extends BaseModel<Group> {
 	 */
 	public void setActive(boolean active);
 
-	/**
-	 * Gets a copy of this group as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Group toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -300,6 +292,8 @@ public interface GroupModel extends BaseModel<Group> {
 	public int compareTo(Group group);
 
 	public int hashCode();
+
+	public Group toEscapedModel();
 
 	public String toString();
 

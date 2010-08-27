@@ -161,14 +161,6 @@ public interface WebDAVPropsModel extends BaseModel<WebDAVProps> {
 	 */
 	public void setProps(String props);
 
-	/**
-	 * Gets a copy of this web d a v props as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public WebDAVProps toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -192,6 +184,8 @@ public interface WebDAVPropsModel extends BaseModel<WebDAVProps> {
 	public int compareTo(WebDAVProps webDAVProps);
 
 	public int hashCode();
+
+	public WebDAVProps toEscapedModel();
 
 	public String toString();
 

@@ -68,10 +68,6 @@ public class UserTrackerPathWrapper implements UserTrackerPath {
 		_userTrackerPath.setPathDate(pathDate);
 	}
 
-	public com.liferay.portal.model.UserTrackerPath toEscapedModel() {
-		return _userTrackerPath.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _userTrackerPath.isNew();
 	}
@@ -120,6 +116,10 @@ public class UserTrackerPathWrapper implements UserTrackerPath {
 
 	public int hashCode() {
 		return _userTrackerPath.hashCode();
+	}
+
+	public com.liferay.portal.model.UserTrackerPath toEscapedModel() {
+		return _userTrackerPath.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

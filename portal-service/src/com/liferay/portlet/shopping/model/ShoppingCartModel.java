@@ -236,14 +236,6 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart> {
 	 */
 	public void setInsure(boolean insure);
 
-	/**
-	 * Gets a copy of this shopping cart as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public ShoppingCart toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -267,6 +259,8 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart> {
 	public int compareTo(ShoppingCart shoppingCart);
 
 	public int hashCode();
+
+	public ShoppingCart toEscapedModel();
 
 	public String toString();
 

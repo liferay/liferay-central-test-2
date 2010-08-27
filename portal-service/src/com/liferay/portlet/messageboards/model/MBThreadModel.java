@@ -298,14 +298,6 @@ public interface MBThreadModel extends BaseModel<MBThread> {
 	 */
 	public boolean isPending();
 
-	/**
-	 * Gets a copy of this message boards thread as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public MBThread toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -329,6 +321,8 @@ public interface MBThreadModel extends BaseModel<MBThread> {
 	public int compareTo(MBThread mbThread);
 
 	public int hashCode();
+
+	public MBThread toEscapedModel();
 
 	public String toString();
 

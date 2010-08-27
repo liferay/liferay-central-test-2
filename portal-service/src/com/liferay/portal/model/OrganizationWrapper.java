@@ -136,10 +136,6 @@ public class OrganizationWrapper implements Organization {
 		_organization.setComments(comments);
 	}
 
-	public com.liferay.portal.model.Organization toEscapedModel() {
-		return _organization.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _organization.isNew();
 	}
@@ -187,6 +183,10 @@ public class OrganizationWrapper implements Organization {
 
 	public int hashCode() {
 		return _organization.hashCode();
+	}
+
+	public com.liferay.portal.model.Organization toEscapedModel() {
+		return _organization.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

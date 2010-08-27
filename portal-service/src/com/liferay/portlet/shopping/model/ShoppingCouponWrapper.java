@@ -193,10 +193,6 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 		_shoppingCoupon.setDiscountType(discountType);
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingCoupon toEscapedModel() {
-		return _shoppingCoupon.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _shoppingCoupon.isNew();
 	}
@@ -245,6 +241,10 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 
 	public int hashCode() {
 		return _shoppingCoupon.hashCode();
+	}
+
+	public com.liferay.portlet.shopping.model.ShoppingCoupon toEscapedModel() {
+		return _shoppingCoupon.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

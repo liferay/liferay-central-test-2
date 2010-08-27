@@ -305,14 +305,6 @@ public interface AccountModel extends BaseModel<Account> {
 	 */
 	public void setSize(String size);
 
-	/**
-	 * Gets a copy of this account as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Account toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -336,6 +328,8 @@ public interface AccountModel extends BaseModel<Account> {
 	public int compareTo(Account account);
 
 	public int hashCode();
+
+	public Account toEscapedModel();
 
 	public String toString();
 

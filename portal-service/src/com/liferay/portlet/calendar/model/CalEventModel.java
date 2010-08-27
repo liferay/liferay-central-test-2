@@ -406,14 +406,6 @@ public interface CalEventModel extends BaseModel<CalEvent> {
 	 */
 	public void setSecondReminder(int secondReminder);
 
-	/**
-	 * Gets a copy of this cal event as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public CalEvent toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -437,6 +429,8 @@ public interface CalEventModel extends BaseModel<CalEvent> {
 	public int compareTo(CalEvent calEvent);
 
 	public int hashCode();
+
+	public CalEvent toEscapedModel();
 
 	public String toString();
 

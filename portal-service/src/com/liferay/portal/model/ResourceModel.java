@@ -96,14 +96,6 @@ public interface ResourceModel extends BaseModel<Resource> {
 	 */
 	public void setPrimKey(String primKey);
 
-	/**
-	 * Gets a copy of this resource as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Resource toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -127,6 +119,8 @@ public interface ResourceModel extends BaseModel<Resource> {
 	public int compareTo(Resource resource);
 
 	public int hashCode();
+
+	public Resource toEscapedModel();
 
 	public String toString();
 

@@ -97,14 +97,6 @@ public interface ListTypeModel extends BaseModel<ListType> {
 	 */
 	public void setType(String type);
 
-	/**
-	 * Gets a copy of this list type as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public ListType toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -128,6 +120,8 @@ public interface ListTypeModel extends BaseModel<ListType> {
 	public int compareTo(ListType listType);
 
 	public int hashCode();
+
+	public ListType toEscapedModel();
 
 	public String toString();
 

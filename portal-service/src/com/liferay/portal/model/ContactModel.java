@@ -517,14 +517,6 @@ public interface ContactModel extends BaseModel<Contact> {
 	 */
 	public void setHoursOfOperation(String hoursOfOperation);
 
-	/**
-	 * Gets a copy of this contact as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Contact toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -548,6 +540,8 @@ public interface ContactModel extends BaseModel<Contact> {
 	public int compareTo(Contact contact);
 
 	public int hashCode();
+
+	public Contact toEscapedModel();
 
 	public String toString();
 

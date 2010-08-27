@@ -337,10 +337,6 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 		_passwordPolicy.setResetTicketMaxAge(resetTicketMaxAge);
 	}
 
-	public com.liferay.portal.model.PasswordPolicy toEscapedModel() {
-		return _passwordPolicy.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _passwordPolicy.isNew();
 	}
@@ -388,6 +384,10 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 
 	public int hashCode() {
 		return _passwordPolicy.hashCode();
+	}
+
+	public com.liferay.portal.model.PasswordPolicy toEscapedModel() {
+		return _passwordPolicy.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

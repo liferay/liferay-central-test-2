@@ -137,10 +137,6 @@ public class ShoppingCartWrapper implements ShoppingCart {
 		_shoppingCart.setInsure(insure);
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingCart toEscapedModel() {
-		return _shoppingCart.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _shoppingCart.isNew();
 	}
@@ -189,6 +185,10 @@ public class ShoppingCartWrapper implements ShoppingCart {
 
 	public int hashCode() {
 		return _shoppingCart.hashCode();
+	}
+
+	public com.liferay.portlet.shopping.model.ShoppingCart toEscapedModel() {
+		return _shoppingCart.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

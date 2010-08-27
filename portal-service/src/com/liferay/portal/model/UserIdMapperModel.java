@@ -142,14 +142,6 @@ public interface UserIdMapperModel extends BaseModel<UserIdMapper> {
 	 */
 	public void setExternalUserId(String externalUserId);
 
-	/**
-	 * Gets a copy of this user id mapper as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public UserIdMapper toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -173,6 +165,8 @@ public interface UserIdMapperModel extends BaseModel<UserIdMapper> {
 	public int compareTo(UserIdMapper userIdMapper);
 
 	public int hashCode();
+
+	public UserIdMapper toEscapedModel();
 
 	public String toString();
 

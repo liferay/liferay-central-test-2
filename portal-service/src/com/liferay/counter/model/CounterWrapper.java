@@ -52,10 +52,6 @@ public class CounterWrapper implements Counter {
 		_counter.setCurrentId(currentId);
 	}
 
-	public com.liferay.counter.model.Counter toEscapedModel() {
-		return _counter.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _counter.isNew();
 	}
@@ -103,6 +99,10 @@ public class CounterWrapper implements Counter {
 
 	public int hashCode() {
 		return _counter.hashCode();
+	}
+
+	public com.liferay.counter.model.Counter toEscapedModel() {
+		return _counter.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

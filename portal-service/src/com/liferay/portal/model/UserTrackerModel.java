@@ -187,14 +187,6 @@ public interface UserTrackerModel extends BaseModel<UserTracker> {
 	 */
 	public void setUserAgent(String userAgent);
 
-	/**
-	 * Gets a copy of this user tracker as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public UserTracker toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -218,6 +210,8 @@ public interface UserTrackerModel extends BaseModel<UserTracker> {
 	public int compareTo(UserTracker userTracker);
 
 	public int hashCode();
+
+	public UserTracker toEscapedModel();
 
 	public String toString();
 

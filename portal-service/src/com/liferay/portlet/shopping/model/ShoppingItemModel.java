@@ -620,14 +620,6 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 	 */
 	public void setLargeImageURL(String largeImageURL);
 
-	/**
-	 * Gets a copy of this shopping item as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public ShoppingItem toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -651,6 +643,8 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 	public int compareTo(ShoppingItem shoppingItem);
 
 	public int hashCode();
+
+	public ShoppingItem toEscapedModel();
 
 	public String toString();
 

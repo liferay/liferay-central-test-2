@@ -60,10 +60,6 @@ public class ListTypeWrapper implements ListType {
 		_listType.setType(type);
 	}
 
-	public com.liferay.portal.model.ListType toEscapedModel() {
-		return _listType.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _listType.isNew();
 	}
@@ -111,6 +107,10 @@ public class ListTypeWrapper implements ListType {
 
 	public int hashCode() {
 		return _listType.hashCode();
+	}
+
+	public com.liferay.portal.model.ListType toEscapedModel() {
+		return _listType.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

@@ -262,10 +262,6 @@ public class WikiPageWrapper implements WikiPage {
 		return _wikiPage.isPending();
 	}
 
-	public com.liferay.portlet.wiki.model.WikiPage toEscapedModel() {
-		return _wikiPage.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _wikiPage.isNew();
 	}
@@ -313,6 +309,10 @@ public class WikiPageWrapper implements WikiPage {
 
 	public int hashCode() {
 		return _wikiPage.hashCode();
+	}
+
+	public com.liferay.portlet.wiki.model.WikiPage toEscapedModel() {
+		return _wikiPage.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

@@ -108,10 +108,6 @@ public class PollsChoiceWrapper implements PollsChoice {
 		_pollsChoice.setDescriptionMap(descriptionMap);
 	}
 
-	public com.liferay.portlet.polls.model.PollsChoice toEscapedModel() {
-		return _pollsChoice.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _pollsChoice.isNew();
 	}
@@ -160,6 +156,10 @@ public class PollsChoiceWrapper implements PollsChoice {
 
 	public int hashCode() {
 		return _pollsChoice.hashCode();
+	}
+
+	public com.liferay.portlet.polls.model.PollsChoice toEscapedModel() {
+		return _pollsChoice.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

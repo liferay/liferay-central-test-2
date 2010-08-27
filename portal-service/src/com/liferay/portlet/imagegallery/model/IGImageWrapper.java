@@ -157,10 +157,6 @@ public class IGImageWrapper implements IGImage {
 		_igImage.setCustom2ImageId(custom2ImageId);
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGImage toEscapedModel() {
-		return _igImage.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _igImage.isNew();
 	}
@@ -208,6 +204,10 @@ public class IGImageWrapper implements IGImage {
 
 	public int hashCode() {
 		return _igImage.hashCode();
+	}
+
+	public com.liferay.portlet.imagegallery.model.IGImage toEscapedModel() {
+		return _igImage.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

@@ -88,10 +88,6 @@ public class RatingsStatsWrapper implements RatingsStats {
 		_ratingsStats.setAverageScore(averageScore);
 	}
 
-	public com.liferay.portlet.ratings.model.RatingsStats toEscapedModel() {
-		return _ratingsStats.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _ratingsStats.isNew();
 	}
@@ -140,6 +136,10 @@ public class RatingsStatsWrapper implements RatingsStats {
 
 	public int hashCode() {
 		return _ratingsStats.hashCode();
+	}
+
+	public com.liferay.portlet.ratings.model.RatingsStats toEscapedModel() {
+		return _ratingsStats.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

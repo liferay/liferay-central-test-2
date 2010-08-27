@@ -76,10 +76,6 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField {
 		_shoppingItemField.setDescription(description);
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingItemField toEscapedModel() {
-		return _shoppingItemField.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _shoppingItemField.isNew();
 	}
@@ -128,6 +124,10 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField {
 
 	public int hashCode() {
 		return _shoppingItemField.hashCode();
+	}
+
+	public com.liferay.portlet.shopping.model.ShoppingItemField toEscapedModel() {
+		return _shoppingItemField.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

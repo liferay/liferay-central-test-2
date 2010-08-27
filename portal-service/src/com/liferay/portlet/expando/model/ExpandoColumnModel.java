@@ -153,14 +153,6 @@ public interface ExpandoColumnModel extends BaseModel<ExpandoColumn> {
 	 */
 	public void setTypeSettings(String typeSettings);
 
-	/**
-	 * Gets a copy of this expando column as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public ExpandoColumn toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -184,6 +176,8 @@ public interface ExpandoColumnModel extends BaseModel<ExpandoColumn> {
 	public int compareTo(ExpandoColumn expandoColumn);
 
 	public int hashCode();
+
+	public ExpandoColumn toEscapedModel();
 
 	public String toString();
 

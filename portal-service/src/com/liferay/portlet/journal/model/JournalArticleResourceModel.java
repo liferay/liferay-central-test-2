@@ -97,14 +97,6 @@ public interface JournalArticleResourceModel extends BaseModel<JournalArticleRes
 	 */
 	public void setArticleId(String articleId);
 
-	/**
-	 * Gets a copy of this journal article resource as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public JournalArticleResource toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -128,6 +120,8 @@ public interface JournalArticleResourceModel extends BaseModel<JournalArticleRes
 	public int compareTo(JournalArticleResource journalArticleResource);
 
 	public int hashCode();
+
+	public JournalArticleResource toEscapedModel();
 
 	public String toString();
 

@@ -95,14 +95,6 @@ public interface OrgGroupPermissionModel extends BaseModel<OrgGroupPermission> {
 	 */
 	public void setPermissionId(long permissionId);
 
-	/**
-	 * Gets a copy of this org group permission as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public OrgGroupPermission toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -126,6 +118,8 @@ public interface OrgGroupPermissionModel extends BaseModel<OrgGroupPermission> {
 	public int compareTo(OrgGroupPermission orgGroupPermission);
 
 	public int hashCode();
+
+	public OrgGroupPermission toEscapedModel();
 
 	public String toString();
 

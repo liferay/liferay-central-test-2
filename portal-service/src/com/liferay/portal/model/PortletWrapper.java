@@ -80,10 +80,6 @@ public class PortletWrapper implements Portlet {
 		_portlet.setActive(active);
 	}
 
-	public com.liferay.portal.model.Portlet toEscapedModel() {
-		return _portlet.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _portlet.isNew();
 	}
@@ -131,6 +127,10 @@ public class PortletWrapper implements Portlet {
 
 	public int hashCode() {
 		return _portlet.hashCode();
+	}
+
+	public com.liferay.portal.model.Portlet toEscapedModel() {
+		return _portlet.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

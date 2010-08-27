@@ -189,10 +189,6 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 		_announcementsEntry.setAlert(alert);
 	}
 
-	public com.liferay.portlet.announcements.model.AnnouncementsEntry toEscapedModel() {
-		return _announcementsEntry.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _announcementsEntry.isNew();
 	}
@@ -241,6 +237,10 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 
 	public int hashCode() {
 		return _announcementsEntry.hashCode();
+	}
+
+	public com.liferay.portlet.announcements.model.AnnouncementsEntry toEscapedModel() {
+		return _announcementsEntry.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

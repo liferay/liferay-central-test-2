@@ -345,14 +345,6 @@ public interface JournalTemplateModel extends BaseModel<JournalTemplate> {
 	 */
 	public void setSmallImageURL(String smallImageURL);
 
-	/**
-	 * Gets a copy of this journal template as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public JournalTemplate toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -376,6 +368,8 @@ public interface JournalTemplateModel extends BaseModel<JournalTemplate> {
 	public int compareTo(JournalTemplate journalTemplate);
 
 	public int hashCode();
+
+	public JournalTemplate toEscapedModel();
 
 	public String toString();
 

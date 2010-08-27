@@ -187,10 +187,6 @@ public class AssetCategoryWrapper implements AssetCategory {
 		_assetCategory.setVocabularyId(vocabularyId);
 	}
 
-	public com.liferay.portlet.asset.model.AssetCategory toEscapedModel() {
-		return _assetCategory.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _assetCategory.isNew();
 	}
@@ -239,6 +235,10 @@ public class AssetCategoryWrapper implements AssetCategory {
 
 	public int hashCode() {
 		return _assetCategory.hashCode();
+	}
+
+	public com.liferay.portlet.asset.model.AssetCategory toEscapedModel() {
+		return _assetCategory.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

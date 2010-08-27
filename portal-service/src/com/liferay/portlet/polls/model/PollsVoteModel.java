@@ -141,14 +141,6 @@ public interface PollsVoteModel extends BaseModel<PollsVote> {
 	 */
 	public void setVoteDate(Date voteDate);
 
-	/**
-	 * Gets a copy of this polls vote as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public PollsVote toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -172,6 +164,8 @@ public interface PollsVoteModel extends BaseModel<PollsVote> {
 	public int compareTo(PollsVote pollsVote);
 
 	public int hashCode();
+
+	public PollsVote toEscapedModel();
 
 	public String toString();
 

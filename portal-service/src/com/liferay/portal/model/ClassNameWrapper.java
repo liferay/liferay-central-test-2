@@ -56,10 +56,6 @@ public class ClassNameWrapper implements ClassName {
 		_className.setValue(value);
 	}
 
-	public com.liferay.portal.model.ClassName toEscapedModel() {
-		return _className.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _className.isNew();
 	}
@@ -107,6 +103,10 @@ public class ClassNameWrapper implements ClassName {
 
 	public int hashCode() {
 		return _className.hashCode();
+	}
+
+	public com.liferay.portal.model.ClassName toEscapedModel() {
+		return _className.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

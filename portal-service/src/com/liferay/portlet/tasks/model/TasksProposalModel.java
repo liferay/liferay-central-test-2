@@ -265,14 +265,6 @@ public interface TasksProposalModel extends BaseModel<TasksProposal> {
 	 */
 	public void setDueDate(Date dueDate);
 
-	/**
-	 * Gets a copy of this tasks proposal as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public TasksProposal toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -296,6 +288,8 @@ public interface TasksProposalModel extends BaseModel<TasksProposal> {
 	public int compareTo(TasksProposal tasksProposal);
 
 	public int hashCode();
+
+	public TasksProposal toEscapedModel();
 
 	public String toString();
 

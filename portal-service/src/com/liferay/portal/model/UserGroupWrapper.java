@@ -76,10 +76,6 @@ public class UserGroupWrapper implements UserGroup {
 		_userGroup.setDescription(description);
 	}
 
-	public com.liferay.portal.model.UserGroup toEscapedModel() {
-		return _userGroup.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _userGroup.isNew();
 	}
@@ -127,6 +123,10 @@ public class UserGroupWrapper implements UserGroup {
 
 	public int hashCode() {
 		return _userGroup.hashCode();
+	}
+
+	public com.liferay.portal.model.UserGroup toEscapedModel() {
+		return _userGroup.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

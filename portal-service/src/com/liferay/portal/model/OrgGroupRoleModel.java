@@ -95,14 +95,6 @@ public interface OrgGroupRoleModel extends BaseModel<OrgGroupRole> {
 	 */
 	public void setRoleId(long roleId);
 
-	/**
-	 * Gets a copy of this org group role as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public OrgGroupRole toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -126,6 +118,8 @@ public interface OrgGroupRoleModel extends BaseModel<OrgGroupRole> {
 	public int compareTo(OrgGroupRole orgGroupRole);
 
 	public int hashCode();
+
+	public OrgGroupRole toEscapedModel();
 
 	public String toString();
 

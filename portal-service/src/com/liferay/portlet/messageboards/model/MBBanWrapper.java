@@ -118,10 +118,6 @@ public class MBBanWrapper implements MBBan {
 		_mbBan.setBanUserUuid(banUserUuid);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBBan toEscapedModel() {
-		return _mbBan.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _mbBan.isNew();
 	}
@@ -169,6 +165,10 @@ public class MBBanWrapper implements MBBan {
 
 	public int hashCode() {
 		return _mbBan.hashCode();
+	}
+
+	public com.liferay.portlet.messageboards.model.MBBan toEscapedModel() {
+		return _mbBan.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

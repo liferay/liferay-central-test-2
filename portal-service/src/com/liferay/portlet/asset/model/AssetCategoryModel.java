@@ -329,14 +329,6 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory> {
 	 */
 	public void setVocabularyId(long vocabularyId);
 
-	/**
-	 * Gets a copy of this asset category as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public AssetCategory toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -360,6 +352,8 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory> {
 	public int compareTo(AssetCategory assetCategory);
 
 	public int hashCode();
+
+	public AssetCategory toEscapedModel();
 
 	public String toString();
 

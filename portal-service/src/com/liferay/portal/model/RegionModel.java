@@ -132,14 +132,6 @@ public interface RegionModel extends BaseModel<Region> {
 	 */
 	public void setActive(boolean active);
 
-	/**
-	 * Gets a copy of this region as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Region toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -163,6 +155,8 @@ public interface RegionModel extends BaseModel<Region> {
 	public int compareTo(Region region);
 
 	public int hashCode();
+
+	public Region toEscapedModel();
 
 	public String toString();
 

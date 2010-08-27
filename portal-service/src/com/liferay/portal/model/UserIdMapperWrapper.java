@@ -85,10 +85,6 @@ public class UserIdMapperWrapper implements UserIdMapper {
 		_userIdMapper.setExternalUserId(externalUserId);
 	}
 
-	public com.liferay.portal.model.UserIdMapper toEscapedModel() {
-		return _userIdMapper.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _userIdMapper.isNew();
 	}
@@ -136,6 +132,10 @@ public class UserIdMapperWrapper implements UserIdMapper {
 
 	public int hashCode() {
 		return _userIdMapper.hashCode();
+	}
+
+	public com.liferay.portal.model.UserIdMapper toEscapedModel() {
+		return _userIdMapper.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

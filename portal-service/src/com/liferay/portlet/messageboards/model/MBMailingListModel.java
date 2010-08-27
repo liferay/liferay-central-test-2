@@ -461,14 +461,6 @@ public interface MBMailingListModel extends BaseModel<MBMailingList> {
 	 */
 	public void setActive(boolean active);
 
-	/**
-	 * Gets a copy of this message boards mailing list as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public MBMailingList toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -492,6 +484,8 @@ public interface MBMailingListModel extends BaseModel<MBMailingList> {
 	public int compareTo(MBMailingList mbMailingList);
 
 	public int hashCode();
+
+	public MBMailingList toEscapedModel();
 
 	public String toString();
 

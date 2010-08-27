@@ -241,14 +241,6 @@ public interface EmailAddressModel extends BaseModel<EmailAddress> {
 	 */
 	public void setPrimary(boolean primary);
 
-	/**
-	 * Gets a copy of this email address as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public EmailAddress toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -272,6 +264,8 @@ public interface EmailAddressModel extends BaseModel<EmailAddress> {
 	public int compareTo(EmailAddress emailAddress);
 
 	public int hashCode();
+
+	public EmailAddress toEscapedModel();
 
 	public String toString();
 

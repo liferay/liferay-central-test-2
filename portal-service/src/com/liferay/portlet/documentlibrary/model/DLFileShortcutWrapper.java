@@ -190,10 +190,6 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 		return _dlFileShortcut.isPending();
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileShortcut toEscapedModel() {
-		return _dlFileShortcut.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _dlFileShortcut.isNew();
 	}
@@ -242,6 +238,10 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 
 	public int hashCode() {
 		return _dlFileShortcut.hashCode();
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFileShortcut toEscapedModel() {
+		return _dlFileShortcut.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

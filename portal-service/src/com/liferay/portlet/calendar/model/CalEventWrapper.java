@@ -233,10 +233,6 @@ public class CalEventWrapper implements CalEvent {
 		_calEvent.setSecondReminder(secondReminder);
 	}
 
-	public com.liferay.portlet.calendar.model.CalEvent toEscapedModel() {
-		return _calEvent.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _calEvent.isNew();
 	}
@@ -284,6 +280,10 @@ public class CalEventWrapper implements CalEvent {
 
 	public int hashCode() {
 		return _calEvent.hashCode();
+	}
+
+	public com.liferay.portlet.calendar.model.CalEvent toEscapedModel() {
+		return _calEvent.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

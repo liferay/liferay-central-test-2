@@ -149,10 +149,6 @@ public class PhoneWrapper implements Phone {
 		_phone.setPrimary(primary);
 	}
 
-	public com.liferay.portal.model.Phone toEscapedModel() {
-		return _phone.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _phone.isNew();
 	}
@@ -200,6 +196,10 @@ public class PhoneWrapper implements Phone {
 
 	public int hashCode() {
 		return _phone.hashCode();
+	}
+
+	public com.liferay.portal.model.Phone toEscapedModel() {
+		return _phone.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

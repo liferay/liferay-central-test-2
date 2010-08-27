@@ -585,14 +585,6 @@ public interface PasswordPolicyModel extends BaseModel<PasswordPolicy> {
 	 */
 	public void setResetTicketMaxAge(long resetTicketMaxAge);
 
-	/**
-	 * Gets a copy of this password policy as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public PasswordPolicy toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -616,6 +608,8 @@ public interface PasswordPolicyModel extends BaseModel<PasswordPolicy> {
 	public int compareTo(PasswordPolicy passwordPolicy);
 
 	public int hashCode();
+
+	public PasswordPolicy toEscapedModel();
 
 	public String toString();
 

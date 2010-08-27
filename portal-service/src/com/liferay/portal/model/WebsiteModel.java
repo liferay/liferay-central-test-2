@@ -241,14 +241,6 @@ public interface WebsiteModel extends BaseModel<Website> {
 	 */
 	public void setPrimary(boolean primary);
 
-	/**
-	 * Gets a copy of this website as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Website toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -272,6 +264,8 @@ public interface WebsiteModel extends BaseModel<Website> {
 	public int compareTo(Website website);
 
 	public int hashCode();
+
+	public Website toEscapedModel();
 
 	public String toString();
 

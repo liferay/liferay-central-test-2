@@ -117,10 +117,6 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 		_assetTagProperty.setValue(value);
 	}
 
-	public com.liferay.portlet.asset.model.AssetTagProperty toEscapedModel() {
-		return _assetTagProperty.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _assetTagProperty.isNew();
 	}
@@ -169,6 +165,10 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 
 	public int hashCode() {
 		return _assetTagProperty.hashCode();
+	}
+
+	public com.liferay.portlet.asset.model.AssetTagProperty toEscapedModel() {
+		return _assetTagProperty.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

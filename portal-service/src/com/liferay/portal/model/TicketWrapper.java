@@ -96,10 +96,6 @@ public class TicketWrapper implements Ticket {
 		_ticket.setExpirationDate(expirationDate);
 	}
 
-	public com.liferay.portal.model.Ticket toEscapedModel() {
-		return _ticket.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _ticket.isNew();
 	}
@@ -147,6 +143,10 @@ public class TicketWrapper implements Ticket {
 
 	public int hashCode() {
 		return _ticket.hashCode();
+	}
+
+	public com.liferay.portal.model.Ticket toEscapedModel() {
+		return _ticket.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

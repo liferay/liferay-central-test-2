@@ -156,14 +156,6 @@ public interface MBStatsUserModel extends BaseModel<MBStatsUser> {
 	 */
 	public void setLastPostDate(Date lastPostDate);
 
-	/**
-	 * Gets a copy of this message boards stats user as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public MBStatsUser toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -187,6 +179,8 @@ public interface MBStatsUserModel extends BaseModel<MBStatsUser> {
 	public int compareTo(MBStatsUser mbStatsUser);
 
 	public int hashCode();
+
+	public MBStatsUser toEscapedModel();
 
 	public String toString();
 

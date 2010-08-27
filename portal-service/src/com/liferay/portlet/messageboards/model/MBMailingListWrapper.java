@@ -261,10 +261,6 @@ public class MBMailingListWrapper implements MBMailingList {
 		_mbMailingList.setActive(active);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBMailingList toEscapedModel() {
-		return _mbMailingList.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _mbMailingList.isNew();
 	}
@@ -313,6 +309,10 @@ public class MBMailingListWrapper implements MBMailingList {
 
 	public int hashCode() {
 		return _mbMailingList.hashCode();
+	}
+
+	public com.liferay.portlet.messageboards.model.MBMailingList toEscapedModel() {
+		return _mbMailingList.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

@@ -125,10 +125,6 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 		_shoppingCategory.setDescription(description);
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingCategory toEscapedModel() {
-		return _shoppingCategory.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _shoppingCategory.isNew();
 	}
@@ -177,6 +173,10 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 
 	public int hashCode() {
 		return _shoppingCategory.hashCode();
+	}
+
+	public com.liferay.portlet.shopping.model.ShoppingCategory toEscapedModel() {
+		return _shoppingCategory.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

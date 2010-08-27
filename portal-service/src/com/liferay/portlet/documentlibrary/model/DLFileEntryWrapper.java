@@ -206,10 +206,6 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		_dlFileEntry.setReadCount(readCount);
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry toEscapedModel() {
-		return _dlFileEntry.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _dlFileEntry.isNew();
 	}
@@ -258,6 +254,10 @@ public class DLFileEntryWrapper implements DLFileEntry {
 
 	public int hashCode() {
 		return _dlFileEntry.hashCode();
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry toEscapedModel() {
+		return _dlFileEntry.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

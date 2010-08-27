@@ -141,10 +141,6 @@ public class WebsiteWrapper implements Website {
 		_website.setPrimary(primary);
 	}
 
-	public com.liferay.portal.model.Website toEscapedModel() {
-		return _website.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _website.isNew();
 	}
@@ -192,6 +188,10 @@ public class WebsiteWrapper implements Website {
 
 	public int hashCode() {
 		return _website.hashCode();
+	}
+
+	public com.liferay.portal.model.Website toEscapedModel() {
+		return _website.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

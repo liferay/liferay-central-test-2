@@ -117,10 +117,6 @@ public class TeamWrapper implements Team {
 		_team.setDescription(description);
 	}
 
-	public com.liferay.portal.model.Team toEscapedModel() {
-		return _team.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _team.isNew();
 	}
@@ -168,6 +164,10 @@ public class TeamWrapper implements Team {
 
 	public int hashCode() {
 		return _team.hashCode();
+	}
+
+	public com.liferay.portal.model.Team toEscapedModel() {
+		return _team.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

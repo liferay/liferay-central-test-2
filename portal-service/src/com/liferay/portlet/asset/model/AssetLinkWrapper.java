@@ -117,10 +117,6 @@ public class AssetLinkWrapper implements AssetLink {
 		_assetLink.setWeight(weight);
 	}
 
-	public com.liferay.portlet.asset.model.AssetLink toEscapedModel() {
-		return _assetLink.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _assetLink.isNew();
 	}
@@ -168,6 +164,10 @@ public class AssetLinkWrapper implements AssetLink {
 
 	public int hashCode() {
 		return _assetLink.hashCode();
+	}
+
+	public com.liferay.portlet.asset.model.AssetLink toEscapedModel() {
+		return _assetLink.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

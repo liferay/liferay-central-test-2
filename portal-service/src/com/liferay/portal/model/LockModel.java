@@ -237,14 +237,6 @@ public interface LockModel extends BaseModel<Lock> {
 	 */
 	public void setExpirationDate(Date expirationDate);
 
-	/**
-	 * Gets a copy of this lock as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Lock toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -268,6 +260,8 @@ public interface LockModel extends BaseModel<Lock> {
 	public int compareTo(Lock lock);
 
 	public int hashCode();
+
+	public Lock toEscapedModel();
 
 	public String toString();
 

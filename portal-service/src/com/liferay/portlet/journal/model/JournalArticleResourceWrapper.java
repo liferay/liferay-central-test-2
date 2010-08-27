@@ -61,10 +61,6 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 		_journalArticleResource.setArticleId(articleId);
 	}
 
-	public com.liferay.portlet.journal.model.JournalArticleResource toEscapedModel() {
-		return _journalArticleResource.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _journalArticleResource.isNew();
 	}
@@ -113,6 +109,10 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 
 	public int hashCode() {
 		return _journalArticleResource.hashCode();
+	}
+
+	public com.liferay.portlet.journal.model.JournalArticleResource toEscapedModel() {
+		return _journalArticleResource.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

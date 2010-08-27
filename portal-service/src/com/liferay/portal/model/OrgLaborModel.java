@@ -290,14 +290,6 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	 */
 	public void setSatClose(int satClose);
 
-	/**
-	 * Gets a copy of this org labor as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public OrgLabor toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -321,6 +313,8 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	public int compareTo(OrgLabor orgLabor);
 
 	public int hashCode();
+
+	public OrgLabor toEscapedModel();
 
 	public String toString();
 

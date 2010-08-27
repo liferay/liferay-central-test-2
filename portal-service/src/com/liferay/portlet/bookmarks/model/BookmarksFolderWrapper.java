@@ -125,10 +125,6 @@ public class BookmarksFolderWrapper implements BookmarksFolder {
 		_bookmarksFolder.setDescription(description);
 	}
 
-	public com.liferay.portlet.bookmarks.model.BookmarksFolder toEscapedModel() {
-		return _bookmarksFolder.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _bookmarksFolder.isNew();
 	}
@@ -177,6 +173,10 @@ public class BookmarksFolderWrapper implements BookmarksFolder {
 
 	public int hashCode() {
 		return _bookmarksFolder.hashCode();
+	}
+
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder toEscapedModel() {
+		return _bookmarksFolder.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

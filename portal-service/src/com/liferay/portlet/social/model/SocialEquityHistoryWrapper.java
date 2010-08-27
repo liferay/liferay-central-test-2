@@ -93,10 +93,6 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 		_socialEquityHistory.setPersonalEquity(personalEquity);
 	}
 
-	public com.liferay.portlet.social.model.SocialEquityHistory toEscapedModel() {
-		return _socialEquityHistory.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _socialEquityHistory.isNew();
 	}
@@ -145,6 +141,10 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 
 	public int hashCode() {
 		return _socialEquityHistory.hashCode();
+	}
+
+	public com.liferay.portlet.social.model.SocialEquityHistory toEscapedModel() {
+		return _socialEquityHistory.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

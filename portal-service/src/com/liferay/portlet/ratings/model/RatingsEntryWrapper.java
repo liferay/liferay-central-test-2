@@ -121,10 +121,6 @@ public class RatingsEntryWrapper implements RatingsEntry {
 		_ratingsEntry.setScore(score);
 	}
 
-	public com.liferay.portlet.ratings.model.RatingsEntry toEscapedModel() {
-		return _ratingsEntry.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _ratingsEntry.isNew();
 	}
@@ -173,6 +169,10 @@ public class RatingsEntryWrapper implements RatingsEntry {
 
 	public int hashCode() {
 		return _ratingsEntry.hashCode();
+	}
+
+	public com.liferay.portlet.ratings.model.RatingsEntry toEscapedModel() {
+		return _ratingsEntry.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

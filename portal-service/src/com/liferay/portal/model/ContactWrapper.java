@@ -289,10 +289,6 @@ public class ContactWrapper implements Contact {
 		_contact.setHoursOfOperation(hoursOfOperation);
 	}
 
-	public com.liferay.portal.model.Contact toEscapedModel() {
-		return _contact.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _contact.isNew();
 	}
@@ -340,6 +336,10 @@ public class ContactWrapper implements Contact {
 
 	public int hashCode() {
 		return _contact.hashCode();
+	}
+
+	public com.liferay.portal.model.Contact toEscapedModel() {
+		return _contact.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

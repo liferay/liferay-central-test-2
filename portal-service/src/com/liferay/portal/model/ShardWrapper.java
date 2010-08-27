@@ -72,10 +72,6 @@ public class ShardWrapper implements Shard {
 		_shard.setName(name);
 	}
 
-	public com.liferay.portal.model.Shard toEscapedModel() {
-		return _shard.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _shard.isNew();
 	}
@@ -123,6 +119,10 @@ public class ShardWrapper implements Shard {
 
 	public int hashCode() {
 		return _shard.hashCode();
+	}
+
+	public com.liferay.portal.model.Shard toEscapedModel() {
+		return _shard.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

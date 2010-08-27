@@ -83,14 +83,6 @@ public interface CounterModel extends BaseModel<Counter> {
 	 */
 	public void setCurrentId(long currentId);
 
-	/**
-	 * Gets a copy of this counter as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Counter toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -114,6 +106,8 @@ public interface CounterModel extends BaseModel<Counter> {
 	public int compareTo(Counter counter);
 
 	public int hashCode();
+
+	public Counter toEscapedModel();
 
 	public String toString();
 

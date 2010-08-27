@@ -278,10 +278,6 @@ public class MBMessageWrapper implements MBMessage {
 		return _mbMessage.isPending();
 	}
 
-	public com.liferay.portlet.messageboards.model.MBMessage toEscapedModel() {
-		return _mbMessage.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _mbMessage.isNew();
 	}
@@ -330,6 +326,10 @@ public class MBMessageWrapper implements MBMessage {
 
 	public int hashCode() {
 		return _mbMessage.hashCode();
+	}
+
+	public com.liferay.portlet.messageboards.model.MBMessage toEscapedModel() {
+		return _mbMessage.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

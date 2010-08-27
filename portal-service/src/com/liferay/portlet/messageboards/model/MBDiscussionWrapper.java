@@ -72,10 +72,6 @@ public class MBDiscussionWrapper implements MBDiscussion {
 		_mbDiscussion.setThreadId(threadId);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBDiscussion toEscapedModel() {
-		return _mbDiscussion.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _mbDiscussion.isNew();
 	}
@@ -124,6 +120,10 @@ public class MBDiscussionWrapper implements MBDiscussion {
 
 	public int hashCode() {
 		return _mbDiscussion.hashCode();
+	}
+
+	public com.liferay.portlet.messageboards.model.MBDiscussion toEscapedModel() {
+		return _mbDiscussion.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

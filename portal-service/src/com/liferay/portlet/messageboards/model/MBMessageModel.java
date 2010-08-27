@@ -484,14 +484,6 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 	 */
 	public boolean isPending();
 
-	/**
-	 * Gets a copy of this message-boards message as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public MBMessage toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -515,6 +507,8 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 	public int compareTo(MBMessage mbMessage);
 
 	public int hashCode();
+
+	public MBMessage toEscapedModel();
 
 	public String toString();
 

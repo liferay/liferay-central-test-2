@@ -330,14 +330,6 @@ public interface AnnouncementsEntryModel extends BaseModel<AnnouncementsEntry> {
 	 */
 	public void setAlert(boolean alert);
 
-	/**
-	 * Gets a copy of this announcements entry as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public AnnouncementsEntry toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -361,6 +353,8 @@ public interface AnnouncementsEntryModel extends BaseModel<AnnouncementsEntry> {
 	public int compareTo(AnnouncementsEntry announcementsEntry);
 
 	public int hashCode();
+
+	public AnnouncementsEntry toEscapedModel();
 
 	public String toString();
 

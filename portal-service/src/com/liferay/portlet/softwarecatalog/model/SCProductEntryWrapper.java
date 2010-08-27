@@ -173,10 +173,6 @@ public class SCProductEntryWrapper implements SCProductEntry {
 		_scProductEntry.setRepoArtifactId(repoArtifactId);
 	}
 
-	public com.liferay.portlet.softwarecatalog.model.SCProductEntry toEscapedModel() {
-		return _scProductEntry.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _scProductEntry.isNew();
 	}
@@ -225,6 +221,10 @@ public class SCProductEntryWrapper implements SCProductEntry {
 
 	public int hashCode() {
 		return _scProductEntry.hashCode();
+	}
+
+	public com.liferay.portlet.softwarecatalog.model.SCProductEntry toEscapedModel() {
+		return _scProductEntry.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

@@ -115,14 +115,6 @@ public interface PasswordPolicyRelModel extends BaseModel<PasswordPolicyRel> {
 	 */
 	public void setClassPK(long classPK);
 
-	/**
-	 * Gets a copy of this password policy rel as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public PasswordPolicyRel toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -146,6 +138,8 @@ public interface PasswordPolicyRelModel extends BaseModel<PasswordPolicyRel> {
 	public int compareTo(PasswordPolicyRel passwordPolicyRel);
 
 	public int hashCode();
+
+	public PasswordPolicyRel toEscapedModel();
 
 	public String toString();
 

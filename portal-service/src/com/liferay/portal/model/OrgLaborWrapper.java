@@ -172,10 +172,6 @@ public class OrgLaborWrapper implements OrgLabor {
 		_orgLabor.setSatClose(satClose);
 	}
 
-	public com.liferay.portal.model.OrgLabor toEscapedModel() {
-		return _orgLabor.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _orgLabor.isNew();
 	}
@@ -223,6 +219,10 @@ public class OrgLaborWrapper implements OrgLabor {
 
 	public int hashCode() {
 		return _orgLabor.hashCode();
+	}
+
+	public com.liferay.portal.model.OrgLabor toEscapedModel() {
+		return _orgLabor.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

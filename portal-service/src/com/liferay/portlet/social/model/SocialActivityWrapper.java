@@ -146,10 +146,6 @@ public class SocialActivityWrapper implements SocialActivity {
 		_socialActivity.setReceiverUserUuid(receiverUserUuid);
 	}
 
-	public com.liferay.portlet.social.model.SocialActivity toEscapedModel() {
-		return _socialActivity.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _socialActivity.isNew();
 	}
@@ -198,6 +194,10 @@ public class SocialActivityWrapper implements SocialActivity {
 
 	public int hashCode() {
 		return _socialActivity.hashCode();
+	}
+
+	public com.liferay.portlet.social.model.SocialActivity toEscapedModel() {
+		return _socialActivity.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

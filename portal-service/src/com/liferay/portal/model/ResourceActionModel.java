@@ -111,14 +111,6 @@ public interface ResourceActionModel extends BaseModel<ResourceAction> {
 	 */
 	public void setBitwiseValue(long bitwiseValue);
 
-	/**
-	 * Gets a copy of this resource action as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public ResourceAction toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -142,6 +134,8 @@ public interface ResourceActionModel extends BaseModel<ResourceAction> {
 	public int compareTo(ResourceAction resourceAction);
 
 	public int hashCode();
+
+	public ResourceAction toEscapedModel();
 
 	public String toString();
 

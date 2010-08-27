@@ -102,10 +102,6 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 		_socialEquityAssetEntry.setInformationB(informationB);
 	}
 
-	public com.liferay.portlet.social.model.SocialEquityAssetEntry toEscapedModel() {
-		return _socialEquityAssetEntry.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _socialEquityAssetEntry.isNew();
 	}
@@ -154,6 +150,10 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 
 	public int hashCode() {
 		return _socialEquityAssetEntry.hashCode();
+	}
+
+	public com.liferay.portlet.social.model.SocialEquityAssetEntry toEscapedModel() {
+		return _socialEquityAssetEntry.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

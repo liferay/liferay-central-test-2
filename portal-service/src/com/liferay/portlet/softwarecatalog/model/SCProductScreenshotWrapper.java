@@ -92,10 +92,6 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 		_scProductScreenshot.setPriority(priority);
 	}
 
-	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot toEscapedModel() {
-		return _scProductScreenshot.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _scProductScreenshot.isNew();
 	}
@@ -144,6 +140,10 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 
 	public int hashCode() {
 		return _scProductScreenshot.hashCode();
+	}
+
+	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot toEscapedModel() {
+		return _scProductScreenshot.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

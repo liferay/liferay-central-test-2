@@ -544,14 +544,6 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 	 */
 	public boolean isPending();
 
-	/**
-	 * Gets a copy of this journal article as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public JournalArticle toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -575,6 +567,8 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 	public int compareTo(JournalArticle journalArticle);
 
 	public int hashCode();
+
+	public JournalArticle toEscapedModel();
 
 	public String toString();
 

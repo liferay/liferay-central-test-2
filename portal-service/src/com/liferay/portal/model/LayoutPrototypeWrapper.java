@@ -118,10 +118,6 @@ public class LayoutPrototypeWrapper implements LayoutPrototype {
 		_layoutPrototype.setActive(active);
 	}
 
-	public com.liferay.portal.model.LayoutPrototype toEscapedModel() {
-		return _layoutPrototype.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _layoutPrototype.isNew();
 	}
@@ -170,6 +166,10 @@ public class LayoutPrototypeWrapper implements LayoutPrototype {
 
 	public int hashCode() {
 		return _layoutPrototype.hashCode();
+	}
+
+	public com.liferay.portal.model.LayoutPrototype toEscapedModel() {
+		return _layoutPrototype.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

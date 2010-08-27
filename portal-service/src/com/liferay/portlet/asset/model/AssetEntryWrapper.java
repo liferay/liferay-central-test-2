@@ -245,10 +245,6 @@ public class AssetEntryWrapper implements AssetEntry {
 		_assetEntry.setViewCount(viewCount);
 	}
 
-	public com.liferay.portlet.asset.model.AssetEntry toEscapedModel() {
-		return _assetEntry.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _assetEntry.isNew();
 	}
@@ -296,6 +292,10 @@ public class AssetEntryWrapper implements AssetEntry {
 
 	public int hashCode() {
 		return _assetEntry.hashCode();
+	}
+
+	public com.liferay.portlet.asset.model.AssetEntry toEscapedModel() {
+		return _assetEntry.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

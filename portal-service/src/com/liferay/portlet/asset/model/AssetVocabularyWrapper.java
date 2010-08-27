@@ -203,10 +203,6 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 		_assetVocabulary.setSettings(settings);
 	}
 
-	public com.liferay.portlet.asset.model.AssetVocabulary toEscapedModel() {
-		return _assetVocabulary.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _assetVocabulary.isNew();
 	}
@@ -255,6 +251,10 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 
 	public int hashCode() {
 		return _assetVocabulary.hashCode();
+	}
+
+	public com.liferay.portlet.asset.model.AssetVocabulary toEscapedModel() {
+		return _assetVocabulary.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

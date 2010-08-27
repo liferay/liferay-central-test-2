@@ -176,14 +176,6 @@ public interface ReleaseModel extends BaseModel<Release> {
 	 */
 	public void setTestString(String testString);
 
-	/**
-	 * Gets a copy of this release as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Release toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -207,6 +199,8 @@ public interface ReleaseModel extends BaseModel<Release> {
 	public int compareTo(Release release);
 
 	public int hashCode();
+
+	public Release toEscapedModel();
 
 	public String toString();
 

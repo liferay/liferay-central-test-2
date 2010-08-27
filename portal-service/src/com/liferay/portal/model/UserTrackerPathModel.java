@@ -112,14 +112,6 @@ public interface UserTrackerPathModel extends BaseModel<UserTrackerPath> {
 	 */
 	public void setPathDate(Date pathDate);
 
-	/**
-	 * Gets a copy of this user tracker path as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public UserTrackerPath toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -143,6 +135,8 @@ public interface UserTrackerPathModel extends BaseModel<UserTrackerPath> {
 	public int compareTo(UserTrackerPath userTrackerPath);
 
 	public int hashCode();
+
+	public UserTrackerPath toEscapedModel();
 
 	public String toString();
 

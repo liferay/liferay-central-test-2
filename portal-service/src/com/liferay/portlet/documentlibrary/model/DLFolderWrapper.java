@@ -141,10 +141,6 @@ public class DLFolderWrapper implements DLFolder {
 		_dlFolder.setLastPostDate(lastPostDate);
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFolder toEscapedModel() {
-		return _dlFolder.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _dlFolder.isNew();
 	}
@@ -193,6 +189,10 @@ public class DLFolderWrapper implements DLFolder {
 
 	public int hashCode() {
 		return _dlFolder.hashCode();
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFolder toEscapedModel() {
+		return _dlFolder.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

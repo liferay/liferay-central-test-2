@@ -137,10 +137,6 @@ public class LockWrapper implements Lock {
 		_lock.setExpirationDate(expirationDate);
 	}
 
-	public com.liferay.portal.model.Lock toEscapedModel() {
-		return _lock.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _lock.isNew();
 	}
@@ -188,6 +184,10 @@ public class LockWrapper implements Lock {
 
 	public int hashCode() {
 		return _lock.hashCode();
+	}
+
+	public com.liferay.portal.model.Lock toEscapedModel() {
+		return _lock.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

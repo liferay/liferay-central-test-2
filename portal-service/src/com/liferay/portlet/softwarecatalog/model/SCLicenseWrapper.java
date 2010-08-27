@@ -96,10 +96,6 @@ public class SCLicenseWrapper implements SCLicense {
 		_scLicense.setRecommended(recommended);
 	}
 
-	public com.liferay.portlet.softwarecatalog.model.SCLicense toEscapedModel() {
-		return _scLicense.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _scLicense.isNew();
 	}
@@ -148,6 +144,10 @@ public class SCLicenseWrapper implements SCLicense {
 
 	public int hashCode() {
 		return _scLicense.hashCode();
+	}
+
+	public com.liferay.portlet.softwarecatalog.model.SCLicense toEscapedModel() {
+		return _scLicense.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

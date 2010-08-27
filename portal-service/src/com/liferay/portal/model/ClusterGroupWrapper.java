@@ -72,10 +72,6 @@ public class ClusterGroupWrapper implements ClusterGroup {
 		_clusterGroup.setWholeCluster(wholeCluster);
 	}
 
-	public com.liferay.portal.model.ClusterGroup toEscapedModel() {
-		return _clusterGroup.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _clusterGroup.isNew();
 	}
@@ -123,6 +119,10 @@ public class ClusterGroupWrapper implements ClusterGroup {
 
 	public int hashCode() {
 		return _clusterGroup.hashCode();
+	}
+
+	public com.liferay.portal.model.ClusterGroup toEscapedModel() {
+		return _clusterGroup.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

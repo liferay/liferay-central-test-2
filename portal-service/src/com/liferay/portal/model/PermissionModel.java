@@ -110,14 +110,6 @@ public interface PermissionModel extends BaseModel<Permission> {
 	 */
 	public void setResourceId(long resourceId);
 
-	/**
-	 * Gets a copy of this permission as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Permission toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -141,6 +133,8 @@ public interface PermissionModel extends BaseModel<Permission> {
 	public int compareTo(Permission permission);
 
 	public int hashCode();
+
+	public Permission toEscapedModel();
 
 	public String toString();
 

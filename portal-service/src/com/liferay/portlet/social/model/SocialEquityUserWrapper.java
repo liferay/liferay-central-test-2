@@ -126,10 +126,6 @@ public class SocialEquityUserWrapper implements SocialEquityUser {
 		_socialEquityUser.setRank(rank);
 	}
 
-	public com.liferay.portlet.social.model.SocialEquityUser toEscapedModel() {
-		return _socialEquityUser.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _socialEquityUser.isNew();
 	}
@@ -178,6 +174,10 @@ public class SocialEquityUserWrapper implements SocialEquityUser {
 
 	public int hashCode() {
 		return _socialEquityUser.hashCode();
+	}
+
+	public com.liferay.portlet.social.model.SocialEquityUser toEscapedModel() {
+		return _socialEquityUser.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

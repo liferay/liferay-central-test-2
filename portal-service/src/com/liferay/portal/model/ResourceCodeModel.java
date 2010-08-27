@@ -110,14 +110,6 @@ public interface ResourceCodeModel extends BaseModel<ResourceCode> {
 	 */
 	public void setScope(int scope);
 
-	/**
-	 * Gets a copy of this resource code as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public ResourceCode toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -141,6 +133,8 @@ public interface ResourceCodeModel extends BaseModel<ResourceCode> {
 	public int compareTo(ResourceCode resourceCode);
 
 	public int hashCode();
+
+	public ResourceCode toEscapedModel();
 
 	public String toString();
 

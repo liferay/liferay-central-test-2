@@ -171,14 +171,6 @@ public interface DLFileRankModel extends BaseModel<DLFileRank> {
 	 */
 	public void setName(String name);
 
-	/**
-	 * Gets a copy of this d l file rank as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public DLFileRank toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -202,6 +194,8 @@ public interface DLFileRankModel extends BaseModel<DLFileRank> {
 	public int compareTo(DLFileRank dlFileRank);
 
 	public int hashCode();
+
+	public DLFileRank toEscapedModel();
 
 	public String toString();
 

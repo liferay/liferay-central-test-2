@@ -104,10 +104,6 @@ public class ExpandoValueWrapper implements ExpandoValue {
 		_expandoValue.setData(data);
 	}
 
-	public com.liferay.portlet.expando.model.ExpandoValue toEscapedModel() {
-		return _expandoValue.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _expandoValue.isNew();
 	}
@@ -156,6 +152,10 @@ public class ExpandoValueWrapper implements ExpandoValue {
 
 	public int hashCode() {
 		return _expandoValue.hashCode();
+	}
+
+	public com.liferay.portlet.expando.model.ExpandoValue toEscapedModel() {
+		return _expandoValue.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

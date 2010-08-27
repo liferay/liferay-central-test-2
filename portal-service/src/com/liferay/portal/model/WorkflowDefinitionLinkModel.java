@@ -220,14 +220,6 @@ public interface WorkflowDefinitionLinkModel extends BaseModel<WorkflowDefinitio
 	 */
 	public void setWorkflowDefinitionVersion(int workflowDefinitionVersion);
 
-	/**
-	 * Gets a copy of this workflow definition link as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public WorkflowDefinitionLink toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -251,6 +243,8 @@ public interface WorkflowDefinitionLinkModel extends BaseModel<WorkflowDefinitio
 	public int compareTo(WorkflowDefinitionLink workflowDefinitionLink);
 
 	public int hashCode();
+
+	public WorkflowDefinitionLink toEscapedModel();
 
 	public String toString();
 

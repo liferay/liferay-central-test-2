@@ -272,14 +272,6 @@ public interface MBCategoryModel extends BaseModel<MBCategory> {
 	 */
 	public void setLastPostDate(Date lastPostDate);
 
-	/**
-	 * Gets a copy of this message boards category as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public MBCategory toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -303,6 +295,8 @@ public interface MBCategoryModel extends BaseModel<MBCategory> {
 	public int compareTo(MBCategory mbCategory);
 
 	public int hashCode();
+
+	public MBCategory toEscapedModel();
 
 	public String toString();
 

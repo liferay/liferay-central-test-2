@@ -72,10 +72,6 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel {
 		_passwordPolicyRel.setClassPK(classPK);
 	}
 
-	public com.liferay.portal.model.PasswordPolicyRel toEscapedModel() {
-		return _passwordPolicyRel.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _passwordPolicyRel.isNew();
 	}
@@ -124,6 +120,10 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel {
 
 	public int hashCode() {
 		return _passwordPolicyRel.hashCode();
+	}
+
+	public com.liferay.portal.model.PasswordPolicyRel toEscapedModel() {
+		return _passwordPolicyRel.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

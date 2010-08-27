@@ -222,10 +222,6 @@ public class DLFileVersionWrapper implements DLFileVersion {
 		return _dlFileVersion.isPending();
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileVersion toEscapedModel() {
-		return _dlFileVersion.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _dlFileVersion.isNew();
 	}
@@ -274,6 +270,10 @@ public class DLFileVersionWrapper implements DLFileVersion {
 
 	public int hashCode() {
 		return _dlFileVersion.hashCode();
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion toEscapedModel() {
+		return _dlFileVersion.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

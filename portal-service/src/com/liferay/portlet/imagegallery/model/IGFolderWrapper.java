@@ -125,10 +125,6 @@ public class IGFolderWrapper implements IGFolder {
 		_igFolder.setDescription(description);
 	}
 
-	public com.liferay.portlet.imagegallery.model.IGFolder toEscapedModel() {
-		return _igFolder.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _igFolder.isNew();
 	}
@@ -177,6 +173,10 @@ public class IGFolderWrapper implements IGFolder {
 
 	public int hashCode() {
 		return _igFolder.hashCode();
+	}
+
+	public com.liferay.portlet.imagegallery.model.IGFolder toEscapedModel() {
+		return _igFolder.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

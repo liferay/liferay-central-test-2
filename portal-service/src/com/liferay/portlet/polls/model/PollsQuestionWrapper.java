@@ -203,10 +203,6 @@ public class PollsQuestionWrapper implements PollsQuestion {
 		_pollsQuestion.setLastVoteDate(lastVoteDate);
 	}
 
-	public com.liferay.portlet.polls.model.PollsQuestion toEscapedModel() {
-		return _pollsQuestion.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _pollsQuestion.isNew();
 	}
@@ -255,6 +251,10 @@ public class PollsQuestionWrapper implements PollsQuestion {
 
 	public int hashCode() {
 		return _pollsQuestion.hashCode();
+	}
+
+	public com.liferay.portlet.polls.model.PollsQuestion toEscapedModel() {
+		return _pollsQuestion.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

@@ -125,14 +125,6 @@ public interface ServiceComponentModel extends BaseModel<ServiceComponent> {
 	 */
 	public void setData(String data);
 
-	/**
-	 * Gets a copy of this service component as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public ServiceComponent toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -156,6 +148,8 @@ public interface ServiceComponentModel extends BaseModel<ServiceComponent> {
 	public int compareTo(ServiceComponent serviceComponent);
 
 	public int hashCode();
+
+	public ServiceComponent toEscapedModel();
 
 	public String toString();
 

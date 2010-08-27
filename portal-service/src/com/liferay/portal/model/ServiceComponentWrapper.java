@@ -76,10 +76,6 @@ public class ServiceComponentWrapper implements ServiceComponent {
 		_serviceComponent.setData(data);
 	}
 
-	public com.liferay.portal.model.ServiceComponent toEscapedModel() {
-		return _serviceComponent.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _serviceComponent.isNew();
 	}
@@ -128,6 +124,10 @@ public class ServiceComponentWrapper implements ServiceComponent {
 
 	public int hashCode() {
 		return _serviceComponent.hashCode();
+	}
+
+	public com.liferay.portal.model.ServiceComponent toEscapedModel() {
+		return _serviceComponent.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

@@ -124,10 +124,6 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 		_socialEquitySetting.setValue(value);
 	}
 
-	public com.liferay.portlet.social.model.SocialEquitySetting toEscapedModel() {
-		return _socialEquitySetting.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _socialEquitySetting.isNew();
 	}
@@ -176,6 +172,10 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 
 	public int hashCode() {
 		return _socialEquitySetting.hashCode();
+	}
+
+	public com.liferay.portlet.social.model.SocialEquitySetting toEscapedModel() {
+		return _socialEquitySetting.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

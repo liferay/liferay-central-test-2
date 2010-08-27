@@ -128,14 +128,6 @@ public interface PasswordTrackerModel extends BaseModel<PasswordTracker> {
 	 */
 	public void setPassword(String password);
 
-	/**
-	 * Gets a copy of this password tracker as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public PasswordTracker toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -159,6 +151,8 @@ public interface PasswordTrackerModel extends BaseModel<PasswordTracker> {
 	public int compareTo(PasswordTracker passwordTracker);
 
 	public int hashCode();
+
+	public PasswordTracker toEscapedModel();
 
 	public String toString();
 

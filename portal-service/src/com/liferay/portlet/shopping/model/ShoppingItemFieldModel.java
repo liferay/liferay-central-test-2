@@ -127,14 +127,6 @@ public interface ShoppingItemFieldModel extends BaseModel<ShoppingItemField> {
 	 */
 	public void setDescription(String description);
 
-	/**
-	 * Gets a copy of this shopping item field as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public ShoppingItemField toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -158,6 +150,8 @@ public interface ShoppingItemFieldModel extends BaseModel<ShoppingItemField> {
 	public int compareTo(ShoppingItemField shoppingItemField);
 
 	public int hashCode();
+
+	public ShoppingItemField toEscapedModel();
 
 	public String toString();
 

@@ -310,10 +310,6 @@ public class JournalArticleWrapper implements JournalArticle {
 		return _journalArticle.isPending();
 	}
 
-	public com.liferay.portlet.journal.model.JournalArticle toEscapedModel() {
-		return _journalArticle.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _journalArticle.isNew();
 	}
@@ -362,6 +358,10 @@ public class JournalArticleWrapper implements JournalArticle {
 
 	public int hashCode() {
 		return _journalArticle.hashCode();
+	}
+
+	public com.liferay.portlet.journal.model.JournalArticle toEscapedModel() {
+		return _journalArticle.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

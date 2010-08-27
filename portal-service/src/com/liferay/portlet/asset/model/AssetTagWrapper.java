@@ -117,10 +117,6 @@ public class AssetTagWrapper implements AssetTag {
 		_assetTag.setAssetCount(assetCount);
 	}
 
-	public com.liferay.portlet.asset.model.AssetTag toEscapedModel() {
-		return _assetTag.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _assetTag.isNew();
 	}
@@ -168,6 +164,10 @@ public class AssetTagWrapper implements AssetTag {
 
 	public int hashCode() {
 		return _assetTag.hashCode();
+	}
+
+	public com.liferay.portlet.asset.model.AssetTag toEscapedModel() {
+		return _assetTag.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

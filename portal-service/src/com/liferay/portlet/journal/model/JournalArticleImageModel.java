@@ -177,14 +177,6 @@ public interface JournalArticleImageModel extends BaseModel<JournalArticleImage>
 	 */
 	public void setTempImage(boolean tempImage);
 
-	/**
-	 * Gets a copy of this journal article image as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public JournalArticleImage toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -208,6 +200,8 @@ public interface JournalArticleImageModel extends BaseModel<JournalArticleImage>
 	public int compareTo(JournalArticleImage journalArticleImage);
 
 	public int hashCode();
+
+	public JournalArticleImage toEscapedModel();
 
 	public String toString();
 

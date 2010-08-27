@@ -120,10 +120,6 @@ public class CompanyWrapper implements Company {
 		_company.setMaxUsers(maxUsers);
 	}
 
-	public com.liferay.portal.model.Company toEscapedModel() {
-		return _company.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _company.isNew();
 	}
@@ -171,6 +167,10 @@ public class CompanyWrapper implements Company {
 
 	public int hashCode() {
 		return _company.hashCode();
+	}
+
+	public com.liferay.portal.model.Company toEscapedModel() {
+		return _company.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

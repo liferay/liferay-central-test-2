@@ -185,14 +185,6 @@ public interface PollsChoiceModel extends BaseModel<PollsChoice> {
 	 */
 	public void setDescriptionMap(Map<Locale, String> descriptionMap);
 
-	/**
-	 * Gets a copy of this polls choice as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public PollsChoice toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -216,6 +208,8 @@ public interface PollsChoiceModel extends BaseModel<PollsChoice> {
 	public int compareTo(PollsChoice pollsChoice);
 
 	public int hashCode();
+
+	public PollsChoice toEscapedModel();
 
 	public String toString();
 

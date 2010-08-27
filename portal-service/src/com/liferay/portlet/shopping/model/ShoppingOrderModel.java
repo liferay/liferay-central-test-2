@@ -854,14 +854,6 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder> {
 	 */
 	public void setSendShippingEmail(boolean sendShippingEmail);
 
-	/**
-	 * Gets a copy of this shopping order as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public ShoppingOrder toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -885,6 +877,8 @@ public interface ShoppingOrderModel extends BaseModel<ShoppingOrder> {
 	public int compareTo(ShoppingOrder shoppingOrder);
 
 	public int hashCode();
+
+	public ShoppingOrder toEscapedModel();
 
 	public String toString();
 

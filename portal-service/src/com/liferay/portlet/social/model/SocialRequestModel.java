@@ -276,14 +276,6 @@ public interface SocialRequestModel extends BaseModel<SocialRequest> {
 	 */
 	public void setStatus(int status);
 
-	/**
-	 * Gets a copy of this social request as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public SocialRequest toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -307,6 +299,8 @@ public interface SocialRequestModel extends BaseModel<SocialRequest> {
 	public int compareTo(SocialRequest socialRequest);
 
 	public int hashCode();
+
+	public SocialRequest toEscapedModel();
 
 	public String toString();
 

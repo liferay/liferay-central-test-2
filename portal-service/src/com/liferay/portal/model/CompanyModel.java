@@ -205,14 +205,6 @@ public interface CompanyModel extends BaseModel<Company> {
 	 */
 	public void setMaxUsers(int maxUsers);
 
-	/**
-	 * Gets a copy of this company as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Company toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -236,6 +228,8 @@ public interface CompanyModel extends BaseModel<Company> {
 	public int compareTo(Company company);
 
 	public int hashCode();
+
+	public Company toEscapedModel();
 
 	public String toString();
 

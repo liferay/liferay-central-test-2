@@ -93,10 +93,6 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 		_mbMessageFlag.setFlag(flag);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBMessageFlag toEscapedModel() {
-		return _mbMessageFlag.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _mbMessageFlag.isNew();
 	}
@@ -145,6 +141,10 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 
 	public int hashCode() {
 		return _mbMessageFlag.hashCode();
+	}
+
+	public com.liferay.portlet.messageboards.model.MBMessageFlag toEscapedModel() {
+		return _mbMessageFlag.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

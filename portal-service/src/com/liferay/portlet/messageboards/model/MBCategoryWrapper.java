@@ -157,10 +157,6 @@ public class MBCategoryWrapper implements MBCategory {
 		_mbCategory.setLastPostDate(lastPostDate);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBCategory toEscapedModel() {
-		return _mbCategory.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _mbCategory.isNew();
 	}
@@ -209,6 +205,10 @@ public class MBCategoryWrapper implements MBCategory {
 
 	public int hashCode() {
 		return _mbCategory.hashCode();
+	}
+
+	public com.liferay.portlet.messageboards.model.MBCategory toEscapedModel() {
+		return _mbCategory.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

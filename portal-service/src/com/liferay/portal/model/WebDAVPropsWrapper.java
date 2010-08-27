@@ -96,10 +96,6 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 		_webDAVProps.setProps(props);
 	}
 
-	public com.liferay.portal.model.WebDAVProps toEscapedModel() {
-		return _webDAVProps.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _webDAVProps.isNew();
 	}
@@ -147,6 +143,10 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 
 	public int hashCode() {
 		return _webDAVProps.hashCode();
+	}
+
+	public com.liferay.portal.model.WebDAVProps toEscapedModel() {
+		return _webDAVProps.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

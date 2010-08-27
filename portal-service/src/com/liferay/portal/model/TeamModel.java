@@ -200,14 +200,6 @@ public interface TeamModel extends BaseModel<Team> {
 	 */
 	public void setDescription(String description);
 
-	/**
-	 * Gets a copy of this team as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Team toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -231,6 +223,8 @@ public interface TeamModel extends BaseModel<Team> {
 	public int compareTo(Team team);
 
 	public int hashCode();
+
+	public Team toEscapedModel();
 
 	public String toString();
 

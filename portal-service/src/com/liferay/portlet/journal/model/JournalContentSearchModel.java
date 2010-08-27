@@ -161,14 +161,6 @@ public interface JournalContentSearchModel extends BaseModel<JournalContentSearc
 	 */
 	public void setArticleId(String articleId);
 
-	/**
-	 * Gets a copy of this journal content search as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public JournalContentSearch toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -192,6 +184,8 @@ public interface JournalContentSearchModel extends BaseModel<JournalContentSearc
 	public int compareTo(JournalContentSearch journalContentSearch);
 
 	public int hashCode();
+
+	public JournalContentSearch toEscapedModel();
 
 	public String toString();
 

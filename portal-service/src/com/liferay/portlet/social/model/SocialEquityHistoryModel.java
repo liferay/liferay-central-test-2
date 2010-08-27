@@ -155,14 +155,6 @@ public interface SocialEquityHistoryModel extends BaseModel<SocialEquityHistory>
 	 */
 	public void setPersonalEquity(int personalEquity);
 
-	/**
-	 * Gets a copy of this social equity history as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public SocialEquityHistory toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -186,6 +178,8 @@ public interface SocialEquityHistoryModel extends BaseModel<SocialEquityHistory>
 	public int compareTo(SocialEquityHistory socialEquityHistory);
 
 	public int hashCode();
+
+	public SocialEquityHistory toEscapedModel();
 
 	public String toString();
 

@@ -118,14 +118,6 @@ public interface ClusterGroupModel extends BaseModel<ClusterGroup> {
 	 */
 	public void setWholeCluster(boolean wholeCluster);
 
-	/**
-	 * Gets a copy of this cluster group as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public ClusterGroup toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -149,6 +141,8 @@ public interface ClusterGroupModel extends BaseModel<ClusterGroup> {
 	public int compareTo(ClusterGroup clusterGroup);
 
 	public int hashCode();
+
+	public ClusterGroup toEscapedModel();
 
 	public String toString();
 

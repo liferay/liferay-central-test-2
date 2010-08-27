@@ -373,10 +373,6 @@ public class UserWrapper implements User {
 		_user.setActive(active);
 	}
 
-	public com.liferay.portal.model.User toEscapedModel() {
-		return _user.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _user.isNew();
 	}
@@ -424,6 +420,10 @@ public class UserWrapper implements User {
 
 	public int hashCode() {
 		return _user.hashCode();
+	}
+
+	public com.liferay.portal.model.User toEscapedModel() {
+		return _user.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

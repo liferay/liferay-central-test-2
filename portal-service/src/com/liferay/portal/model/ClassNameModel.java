@@ -89,14 +89,6 @@ public interface ClassNameModel extends BaseModel<ClassName> {
 	 */
 	public void setValue(String value);
 
-	/**
-	 * Gets a copy of this class name as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public ClassName toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -120,6 +112,8 @@ public interface ClassNameModel extends BaseModel<ClassName> {
 	public int compareTo(ClassName className);
 
 	public int hashCode();
+
+	public ClassName toEscapedModel();
 
 	public String toString();
 

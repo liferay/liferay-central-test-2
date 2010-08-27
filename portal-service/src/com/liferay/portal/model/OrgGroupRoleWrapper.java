@@ -61,10 +61,6 @@ public class OrgGroupRoleWrapper implements OrgGroupRole {
 		_orgGroupRole.setRoleId(roleId);
 	}
 
-	public com.liferay.portal.model.OrgGroupRole toEscapedModel() {
-		return _orgGroupRole.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _orgGroupRole.isNew();
 	}
@@ -112,6 +108,10 @@ public class OrgGroupRoleWrapper implements OrgGroupRole {
 
 	public int hashCode() {
 		return _orgGroupRole.hashCode();
+	}
+
+	public com.liferay.portal.model.OrgGroupRole toEscapedModel() {
+		return _orgGroupRole.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

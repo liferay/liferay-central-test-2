@@ -112,14 +112,6 @@ public interface WikiPageResourceModel extends BaseModel<WikiPageResource> {
 	 */
 	public void setTitle(String title);
 
-	/**
-	 * Gets a copy of this wiki page resource as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public WikiPageResource toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -143,6 +135,8 @@ public interface WikiPageResourceModel extends BaseModel<WikiPageResource> {
 	public int compareTo(WikiPageResource wikiPageResource);
 
 	public int hashCode();
+
+	public WikiPageResource toEscapedModel();
 
 	public String toString();
 

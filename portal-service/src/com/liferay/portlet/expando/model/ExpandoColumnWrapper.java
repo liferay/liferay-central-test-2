@@ -92,10 +92,6 @@ public class ExpandoColumnWrapper implements ExpandoColumn {
 		_expandoColumn.setTypeSettings(typeSettings);
 	}
 
-	public com.liferay.portlet.expando.model.ExpandoColumn toEscapedModel() {
-		return _expandoColumn.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _expandoColumn.isNew();
 	}
@@ -144,6 +140,10 @@ public class ExpandoColumnWrapper implements ExpandoColumn {
 
 	public int hashCode() {
 		return _expandoColumn.hashCode();
+	}
+
+	public com.liferay.portlet.expando.model.ExpandoColumn toEscapedModel() {
+		return _expandoColumn.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

@@ -206,14 +206,6 @@ public interface RatingsEntryModel extends BaseModel<RatingsEntry> {
 	 */
 	public void setScore(double score);
 
-	/**
-	 * Gets a copy of this ratings entry as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public RatingsEntry toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -237,6 +229,8 @@ public interface RatingsEntryModel extends BaseModel<RatingsEntry> {
 	public int compareTo(RatingsEntry ratingsEntry);
 
 	public int hashCode();
+
+	public RatingsEntry toEscapedModel();
 
 	public String toString();
 

@@ -145,10 +145,6 @@ public class SCProductVersionWrapper implements SCProductVersion {
 		_scProductVersion.setRepoStoreArtifact(repoStoreArtifact);
 	}
 
-	public com.liferay.portlet.softwarecatalog.model.SCProductVersion toEscapedModel() {
-		return _scProductVersion.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _scProductVersion.isNew();
 	}
@@ -197,6 +193,10 @@ public class SCProductVersionWrapper implements SCProductVersion {
 
 	public int hashCode() {
 		return _scProductVersion.hashCode();
+	}
+
+	public com.liferay.portlet.softwarecatalog.model.SCProductVersion toEscapedModel() {
+		return _scProductVersion.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

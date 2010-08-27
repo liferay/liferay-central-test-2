@@ -157,10 +157,6 @@ public class GroupWrapper implements Group {
 		_group.setActive(active);
 	}
 
-	public com.liferay.portal.model.Group toEscapedModel() {
-		return _group.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _group.isNew();
 	}
@@ -208,6 +204,10 @@ public class GroupWrapper implements Group {
 
 	public int hashCode() {
 		return _group.hashCode();
+	}
+
+	public com.liferay.portal.model.Group toEscapedModel() {
+		return _group.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

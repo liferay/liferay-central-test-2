@@ -104,10 +104,6 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 		_journalArticleImage.setTempImage(tempImage);
 	}
 
-	public com.liferay.portlet.journal.model.JournalArticleImage toEscapedModel() {
-		return _journalArticleImage.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _journalArticleImage.isNew();
 	}
@@ -156,6 +152,10 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 
 	public int hashCode() {
 		return _journalArticleImage.hashCode();
+	}
+
+	public com.liferay.portlet.journal.model.JournalArticleImage toEscapedModel() {
+		return _journalArticleImage.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

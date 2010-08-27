@@ -60,10 +60,6 @@ public class ResourceWrapper implements Resource {
 		_resource.setPrimKey(primKey);
 	}
 
-	public com.liferay.portal.model.Resource toEscapedModel() {
-		return _resource.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _resource.isNew();
 	}
@@ -111,6 +107,10 @@ public class ResourceWrapper implements Resource {
 
 	public int hashCode() {
 		return _resource.hashCode();
+	}
+
+	public com.liferay.portal.model.Resource toEscapedModel() {
+		return _resource.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

@@ -72,10 +72,6 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 		_assetTagStats.setAssetCount(assetCount);
 	}
 
-	public com.liferay.portlet.asset.model.AssetTagStats toEscapedModel() {
-		return _assetTagStats.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _assetTagStats.isNew();
 	}
@@ -124,6 +120,10 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 
 	public int hashCode() {
 		return _assetTagStats.hashCode();
+	}
+
+	public com.liferay.portlet.asset.model.AssetTagStats toEscapedModel() {
+		return _assetTagStats.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

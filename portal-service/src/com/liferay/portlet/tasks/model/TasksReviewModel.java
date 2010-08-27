@@ -285,14 +285,6 @@ public interface TasksReviewModel extends BaseModel<TasksReview> {
 	 */
 	public void setRejected(boolean rejected);
 
-	/**
-	 * Gets a copy of this tasks review as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public TasksReview toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -316,6 +308,8 @@ public interface TasksReviewModel extends BaseModel<TasksReview> {
 	public int compareTo(TasksReview tasksReview);
 
 	public int hashCode();
+
+	public TasksReview toEscapedModel();
 
 	public String toString();
 

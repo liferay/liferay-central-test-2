@@ -97,10 +97,6 @@ public class JournalContentSearchWrapper implements JournalContentSearch {
 		_journalContentSearch.setArticleId(articleId);
 	}
 
-	public com.liferay.portlet.journal.model.JournalContentSearch toEscapedModel() {
-		return _journalContentSearch.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _journalContentSearch.isNew();
 	}
@@ -149,6 +145,10 @@ public class JournalContentSearchWrapper implements JournalContentSearch {
 
 	public int hashCode() {
 		return _journalContentSearch.hashCode();
+	}
+
+	public com.liferay.portlet.journal.model.JournalContentSearch toEscapedModel() {
+		return _journalContentSearch.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

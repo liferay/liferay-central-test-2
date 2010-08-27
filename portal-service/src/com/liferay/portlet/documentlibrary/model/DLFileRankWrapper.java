@@ -101,10 +101,6 @@ public class DLFileRankWrapper implements DLFileRank {
 		_dlFileRank.setName(name);
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileRank toEscapedModel() {
-		return _dlFileRank.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _dlFileRank.isNew();
 	}
@@ -153,6 +149,10 @@ public class DLFileRankWrapper implements DLFileRank {
 
 	public int hashCode() {
 		return _dlFileRank.hashCode();
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFileRank toEscapedModel() {
+		return _dlFileRank.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

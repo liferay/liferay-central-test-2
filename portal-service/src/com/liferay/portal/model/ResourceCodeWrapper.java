@@ -68,10 +68,6 @@ public class ResourceCodeWrapper implements ResourceCode {
 		_resourceCode.setScope(scope);
 	}
 
-	public com.liferay.portal.model.ResourceCode toEscapedModel() {
-		return _resourceCode.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _resourceCode.isNew();
 	}
@@ -119,6 +115,10 @@ public class ResourceCodeWrapper implements ResourceCode {
 
 	public int hashCode() {
 		return _resourceCode.hashCode();
+	}
+
+	public com.liferay.portal.model.ResourceCode toEscapedModel() {
+		return _resourceCode.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

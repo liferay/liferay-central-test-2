@@ -201,10 +201,6 @@ public class AddressWrapper implements Address {
 		_address.setPrimary(primary);
 	}
 
-	public com.liferay.portal.model.Address toEscapedModel() {
-		return _address.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _address.isNew();
 	}
@@ -252,6 +248,10 @@ public class AddressWrapper implements Address {
 
 	public int hashCode() {
 		return _address.hashCode();
+	}
+
+	public com.liferay.portal.model.Address toEscapedModel() {
+		return _address.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

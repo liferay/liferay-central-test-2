@@ -104,10 +104,6 @@ public class ReleaseWrapper implements Release {
 		_release.setTestString(testString);
 	}
 
-	public com.liferay.portal.model.Release toEscapedModel() {
-		return _release.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _release.isNew();
 	}
@@ -155,6 +151,10 @@ public class ReleaseWrapper implements Release {
 
 	public int hashCode() {
 		return _release.hashCode();
+	}
+
+	public com.liferay.portal.model.Release toEscapedModel() {
+		return _release.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

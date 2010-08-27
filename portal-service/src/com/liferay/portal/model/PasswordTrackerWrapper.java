@@ -77,10 +77,6 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 		_passwordTracker.setPassword(password);
 	}
 
-	public com.liferay.portal.model.PasswordTracker toEscapedModel() {
-		return _passwordTracker.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _passwordTracker.isNew();
 	}
@@ -129,6 +125,10 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 
 	public int hashCode() {
 		return _passwordTracker.hashCode();
+	}
+
+	public com.liferay.portal.model.PasswordTracker toEscapedModel() {
+		return _passwordTracker.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

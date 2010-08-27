@@ -207,14 +207,6 @@ public interface ShoppingItemPriceModel extends BaseModel<ShoppingItemPrice> {
 	 */
 	public void setStatus(int status);
 
-	/**
-	 * Gets a copy of this shopping item price as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public ShoppingItemPrice toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -238,6 +230,8 @@ public interface ShoppingItemPriceModel extends BaseModel<ShoppingItemPrice> {
 	public int compareTo(ShoppingItemPrice shoppingItemPrice);
 
 	public int hashCode();
+
+	public ShoppingItemPrice toEscapedModel();
 
 	public String toString();
 

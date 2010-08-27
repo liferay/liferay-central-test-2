@@ -663,14 +663,6 @@ public interface UserModel extends BaseModel<User> {
 	 */
 	public void setActive(boolean active);
 
-	/**
-	 * Gets a copy of this user as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public User toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -694,6 +686,8 @@ public interface UserModel extends BaseModel<User> {
 	public int compareTo(User user);
 
 	public int hashCode();
+
+	public User toEscapedModel();
 
 	public String toString();
 

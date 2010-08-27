@@ -68,10 +68,6 @@ public class ExpandoRowWrapper implements ExpandoRow {
 		_expandoRow.setClassPK(classPK);
 	}
 
-	public com.liferay.portlet.expando.model.ExpandoRow toEscapedModel() {
-		return _expandoRow.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _expandoRow.isNew();
 	}
@@ -120,6 +116,10 @@ public class ExpandoRowWrapper implements ExpandoRow {
 
 	public int hashCode() {
 		return _expandoRow.hashCode();
+	}
+
+	public com.liferay.portlet.expando.model.ExpandoRow toEscapedModel() {
+		return _expandoRow.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

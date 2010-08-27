@@ -137,10 +137,6 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 		_scFrameworkVersion.setPriority(priority);
 	}
 
-	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion toEscapedModel() {
-		return _scFrameworkVersion.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _scFrameworkVersion.isNew();
 	}
@@ -189,6 +185,10 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 
 	public int hashCode() {
 		return _scFrameworkVersion.hashCode();
+	}
+
+	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion toEscapedModel() {
+		return _scFrameworkVersion.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

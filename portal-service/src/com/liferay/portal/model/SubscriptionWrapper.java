@@ -121,10 +121,6 @@ public class SubscriptionWrapper implements Subscription {
 		_subscription.setFrequency(frequency);
 	}
 
-	public com.liferay.portal.model.Subscription toEscapedModel() {
-		return _subscription.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _subscription.isNew();
 	}
@@ -172,6 +168,10 @@ public class SubscriptionWrapper implements Subscription {
 
 	public int hashCode() {
 		return _subscription.hashCode();
+	}
+
+	public com.liferay.portal.model.Subscription toEscapedModel() {
+		return _subscription.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

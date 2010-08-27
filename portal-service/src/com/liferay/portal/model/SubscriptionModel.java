@@ -206,14 +206,6 @@ public interface SubscriptionModel extends BaseModel<Subscription> {
 	 */
 	public void setFrequency(String frequency);
 
-	/**
-	 * Gets a copy of this subscription as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Subscription toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -237,6 +229,8 @@ public interface SubscriptionModel extends BaseModel<Subscription> {
 	public int compareTo(Subscription subscription);
 
 	public int hashCode();
+
+	public Subscription toEscapedModel();
 
 	public String toString();
 

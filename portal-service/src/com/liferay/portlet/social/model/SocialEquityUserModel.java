@@ -210,14 +210,6 @@ public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 	 */
 	public void setRank(int rank);
 
-	/**
-	 * Gets a copy of this social equity user as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public SocialEquityUser toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -241,6 +233,8 @@ public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 	public int compareTo(SocialEquityUser socialEquityUser);
 
 	public int hashCode();
+
+	public SocialEquityUser toEscapedModel();
 
 	public String toString();
 

@@ -167,14 +167,6 @@ public interface SocialEquityAssetEntryModel extends BaseModel<SocialEquityAsset
 	 */
 	public void setInformationB(double informationB);
 
-	/**
-	 * Gets a copy of this social equity asset entry as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public SocialEquityAssetEntry toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -198,6 +190,8 @@ public interface SocialEquityAssetEntryModel extends BaseModel<SocialEquityAsset
 	public int compareTo(SocialEquityAssetEntry socialEquityAssetEntry);
 
 	public int hashCode();
+
+	public SocialEquityAssetEntry toEscapedModel();
 
 	public String toString();
 

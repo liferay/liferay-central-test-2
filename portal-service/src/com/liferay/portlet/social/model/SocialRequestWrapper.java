@@ -162,10 +162,6 @@ public class SocialRequestWrapper implements SocialRequest {
 		_socialRequest.setStatus(status);
 	}
 
-	public com.liferay.portlet.social.model.SocialRequest toEscapedModel() {
-		return _socialRequest.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _socialRequest.isNew();
 	}
@@ -214,6 +210,10 @@ public class SocialRequestWrapper implements SocialRequest {
 
 	public int hashCode() {
 		return _socialRequest.hashCode();
+	}
+
+	public com.liferay.portlet.social.model.SocialRequest toEscapedModel() {
+		return _socialRequest.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

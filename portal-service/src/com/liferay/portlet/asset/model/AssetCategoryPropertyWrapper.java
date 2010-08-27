@@ -118,10 +118,6 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty {
 		_assetCategoryProperty.setValue(value);
 	}
 
-	public com.liferay.portlet.asset.model.AssetCategoryProperty toEscapedModel() {
-		return _assetCategoryProperty.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _assetCategoryProperty.isNew();
 	}
@@ -170,6 +166,10 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty {
 
 	public int hashCode() {
 		return _assetCategoryProperty.hashCode();
+	}
+
+	public com.liferay.portlet.asset.model.AssetCategoryProperty toEscapedModel() {
+		return _assetCategoryProperty.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

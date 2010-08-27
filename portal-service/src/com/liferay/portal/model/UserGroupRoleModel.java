@@ -111,14 +111,6 @@ public interface UserGroupRoleModel extends BaseModel<UserGroupRole> {
 	 */
 	public void setRoleId(long roleId);
 
-	/**
-	 * Gets a copy of this user group role as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public UserGroupRole toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -142,6 +134,8 @@ public interface UserGroupRoleModel extends BaseModel<UserGroupRole> {
 	public int compareTo(UserGroupRole userGroupRole);
 
 	public int hashCode();
+
+	public UserGroupRole toEscapedModel();
 
 	public String toString();
 

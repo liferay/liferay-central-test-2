@@ -130,10 +130,6 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 		_workflowInstanceLink.setWorkflowInstanceId(workflowInstanceId);
 	}
 
-	public com.liferay.portal.model.WorkflowInstanceLink toEscapedModel() {
-		return _workflowInstanceLink.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _workflowInstanceLink.isNew();
 	}
@@ -182,6 +178,10 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 
 	public int hashCode() {
 		return _workflowInstanceLink.hashCode();
+	}
+
+	public com.liferay.portal.model.WorkflowInstanceLink toEscapedModel() {
+		return _workflowInstanceLink.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

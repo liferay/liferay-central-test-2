@@ -236,14 +236,6 @@ public interface SCFrameworkVersionModel extends BaseModel<SCFrameworkVersion> {
 	 */
 	public void setPriority(int priority);
 
-	/**
-	 * Gets a copy of this s c framework version as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public SCFrameworkVersion toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -267,6 +259,8 @@ public interface SCFrameworkVersionModel extends BaseModel<SCFrameworkVersion> {
 	public int compareTo(SCFrameworkVersion scFrameworkVersion);
 
 	public int hashCode();
+
+	public SCFrameworkVersion toEscapedModel();
 
 	public String toString();
 

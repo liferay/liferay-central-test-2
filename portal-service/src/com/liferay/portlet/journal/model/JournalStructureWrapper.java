@@ -149,10 +149,6 @@ public class JournalStructureWrapper implements JournalStructure {
 		_journalStructure.setXsd(xsd);
 	}
 
-	public com.liferay.portlet.journal.model.JournalStructure toEscapedModel() {
-		return _journalStructure.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _journalStructure.isNew();
 	}
@@ -201,6 +197,10 @@ public class JournalStructureWrapper implements JournalStructure {
 
 	public int hashCode() {
 		return _journalStructure.hashCode();
+	}
+
+	public com.liferay.portlet.journal.model.JournalStructure toEscapedModel() {
+		return _journalStructure.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

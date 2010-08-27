@@ -116,10 +116,6 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem {
 		_shoppingOrderItem.setShippedDate(shippedDate);
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingOrderItem toEscapedModel() {
-		return _shoppingOrderItem.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _shoppingOrderItem.isNew();
 	}
@@ -168,6 +164,10 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem {
 
 	public int hashCode() {
 		return _shoppingOrderItem.hashCode();
+	}
+
+	public com.liferay.portlet.shopping.model.ShoppingOrderItem toEscapedModel() {
+		return _shoppingOrderItem.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

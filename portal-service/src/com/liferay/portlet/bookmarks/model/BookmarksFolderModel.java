@@ -215,14 +215,6 @@ public interface BookmarksFolderModel extends BaseModel<BookmarksFolder> {
 	 */
 	public void setDescription(String description);
 
-	/**
-	 * Gets a copy of this bookmarks folder as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public BookmarksFolder toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -246,6 +238,8 @@ public interface BookmarksFolderModel extends BaseModel<BookmarksFolder> {
 	public int compareTo(BookmarksFolder bookmarksFolder);
 
 	public int hashCode();
+
+	public BookmarksFolder toEscapedModel();
 
 	public String toString();
 

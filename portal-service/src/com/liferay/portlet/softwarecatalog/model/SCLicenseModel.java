@@ -161,14 +161,6 @@ public interface SCLicenseModel extends BaseModel<SCLicense> {
 	 */
 	public void setRecommended(boolean recommended);
 
-	/**
-	 * Gets a copy of this s c license as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public SCLicense toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -192,6 +184,8 @@ public interface SCLicenseModel extends BaseModel<SCLicense> {
 	public int compareTo(SCLicense scLicense);
 
 	public int hashCode();
+
+	public SCLicense toEscapedModel();
 
 	public String toString();
 

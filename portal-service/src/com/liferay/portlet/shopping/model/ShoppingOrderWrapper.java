@@ -473,10 +473,6 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 		_shoppingOrder.setSendShippingEmail(sendShippingEmail);
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingOrder toEscapedModel() {
-		return _shoppingOrder.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _shoppingOrder.isNew();
 	}
@@ -525,6 +521,10 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 
 	public int hashCode() {
 		return _shoppingOrder.hashCode();
+	}
+
+	public com.liferay.portlet.shopping.model.ShoppingOrder toEscapedModel() {
+		return _shoppingOrder.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

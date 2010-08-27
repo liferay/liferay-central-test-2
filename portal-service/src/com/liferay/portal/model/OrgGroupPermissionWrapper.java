@@ -61,10 +61,6 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 		_orgGroupPermission.setPermissionId(permissionId);
 	}
 
-	public com.liferay.portal.model.OrgGroupPermission toEscapedModel() {
-		return _orgGroupPermission.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _orgGroupPermission.isNew();
 	}
@@ -113,6 +109,10 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 
 	public int hashCode() {
 		return _orgGroupPermission.hashCode();
+	}
+
+	public com.liferay.portal.model.OrgGroupPermission toEscapedModel() {
+		return _orgGroupPermission.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

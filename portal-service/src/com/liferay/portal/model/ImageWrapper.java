@@ -92,10 +92,6 @@ public class ImageWrapper implements Image {
 		_image.setSize(size);
 	}
 
-	public com.liferay.portal.model.Image toEscapedModel() {
-		return _image.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _image.isNew();
 	}
@@ -143,6 +139,10 @@ public class ImageWrapper implements Image {
 
 	public int hashCode() {
 		return _image.hashCode();
+	}
+
+	public com.liferay.portal.model.Image toEscapedModel() {
+		return _image.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

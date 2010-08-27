@@ -68,10 +68,6 @@ public class PermissionWrapper implements Permission {
 		_permission.setResourceId(resourceId);
 	}
 
-	public com.liferay.portal.model.Permission toEscapedModel() {
-		return _permission.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _permission.isNew();
 	}
@@ -119,6 +115,10 @@ public class PermissionWrapper implements Permission {
 
 	public int hashCode() {
 		return _permission.hashCode();
+	}
+
+	public com.liferay.portal.model.Permission toEscapedModel() {
+		return _permission.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

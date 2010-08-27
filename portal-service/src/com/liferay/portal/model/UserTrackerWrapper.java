@@ -109,10 +109,6 @@ public class UserTrackerWrapper implements UserTracker {
 		_userTracker.setUserAgent(userAgent);
 	}
 
-	public com.liferay.portal.model.UserTracker toEscapedModel() {
-		return _userTracker.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _userTracker.isNew();
 	}
@@ -160,6 +156,10 @@ public class UserTrackerWrapper implements UserTracker {
 
 	public int hashCode() {
 		return _userTracker.hashCode();
+	}
+
+	public com.liferay.portal.model.UserTracker toEscapedModel() {
+		return _userTracker.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

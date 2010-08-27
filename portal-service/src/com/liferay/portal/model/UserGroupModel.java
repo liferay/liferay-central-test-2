@@ -125,14 +125,6 @@ public interface UserGroupModel extends BaseModel<UserGroup> {
 	 */
 	public void setDescription(String description);
 
-	/**
-	 * Gets a copy of this user group as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public UserGroup toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -156,6 +148,8 @@ public interface UserGroupModel extends BaseModel<UserGroup> {
 	public int compareTo(UserGroup userGroup);
 
 	public int hashCode();
+
+	public UserGroup toEscapedModel();
 
 	public String toString();
 

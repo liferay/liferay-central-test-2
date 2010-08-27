@@ -96,10 +96,6 @@ public class CountryWrapper implements Country {
 		_country.setActive(active);
 	}
 
-	public com.liferay.portal.model.Country toEscapedModel() {
-		return _country.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _country.isNew();
 	}
@@ -147,6 +143,10 @@ public class CountryWrapper implements Country {
 
 	public int hashCode() {
 		return _country.hashCode();
+	}
+
+	public com.liferay.portal.model.Country toEscapedModel() {
+		return _country.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

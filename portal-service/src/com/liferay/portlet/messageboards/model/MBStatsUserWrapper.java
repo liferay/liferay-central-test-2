@@ -94,10 +94,6 @@ public class MBStatsUserWrapper implements MBStatsUser {
 		_mbStatsUser.setLastPostDate(lastPostDate);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBStatsUser toEscapedModel() {
-		return _mbStatsUser.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _mbStatsUser.isNew();
 	}
@@ -146,6 +142,10 @@ public class MBStatsUserWrapper implements MBStatsUser {
 
 	public int hashCode() {
 		return _mbStatsUser.hashCode();
+	}
+
+	public com.liferay.portlet.messageboards.model.MBStatsUser toEscapedModel() {
+		return _mbStatsUser.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

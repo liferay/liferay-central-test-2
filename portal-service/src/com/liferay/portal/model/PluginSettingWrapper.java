@@ -88,10 +88,6 @@ public class PluginSettingWrapper implements PluginSetting {
 		_pluginSetting.setActive(active);
 	}
 
-	public com.liferay.portal.model.PluginSetting toEscapedModel() {
-		return _pluginSetting.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _pluginSetting.isNew();
 	}
@@ -139,6 +135,10 @@ public class PluginSettingWrapper implements PluginSetting {
 
 	public int hashCode() {
 		return _pluginSetting.hashCode();
+	}
+
+	public com.liferay.portal.model.PluginSetting toEscapedModel() {
+		return _pluginSetting.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

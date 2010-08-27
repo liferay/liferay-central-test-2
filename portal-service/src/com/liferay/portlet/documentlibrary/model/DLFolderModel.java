@@ -244,14 +244,6 @@ public interface DLFolderModel extends BaseModel<DLFolder> {
 	 */
 	public void setLastPostDate(Date lastPostDate);
 
-	/**
-	 * Gets a copy of this d l folder as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public DLFolder toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -275,6 +267,8 @@ public interface DLFolderModel extends BaseModel<DLFolder> {
 	public int compareTo(DLFolder dlFolder);
 
 	public int hashCode();
+
+	public DLFolder toEscapedModel();
 
 	public String toString();
 

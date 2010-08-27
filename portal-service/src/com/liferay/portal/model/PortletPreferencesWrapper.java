@@ -84,10 +84,6 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 		_portletPreferences.setPreferences(preferences);
 	}
 
-	public com.liferay.portal.model.PortletPreferences toEscapedModel() {
-		return _portletPreferences.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _portletPreferences.isNew();
 	}
@@ -136,6 +132,10 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 
 	public int hashCode() {
 		return _portletPreferences.hashCode();
+	}
+
+	public com.liferay.portal.model.PortletPreferences toEscapedModel() {
+		return _portletPreferences.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

@@ -116,14 +116,6 @@ public interface MBDiscussionModel extends BaseModel<MBDiscussion> {
 	 */
 	public void setThreadId(long threadId);
 
-	/**
-	 * Gets a copy of this message boards discussion as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public MBDiscussion toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -147,6 +139,8 @@ public interface MBDiscussionModel extends BaseModel<MBDiscussion> {
 	public int compareTo(MBDiscussion mbDiscussion);
 
 	public int hashCode();
+
+	public MBDiscussion toEscapedModel();
 
 	public String toString();
 

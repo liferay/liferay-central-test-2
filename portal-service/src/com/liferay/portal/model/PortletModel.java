@@ -132,14 +132,6 @@ public interface PortletModel extends BaseModel<Portlet> {
 	 */
 	public void setActive(boolean active);
 
-	/**
-	 * Gets a copy of this portlet as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Portlet toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -163,6 +155,8 @@ public interface PortletModel extends BaseModel<Portlet> {
 	public int compareTo(Portlet portlet);
 
 	public int hashCode();
+
+	public Portlet toEscapedModel();
 
 	public String toString();
 

@@ -80,10 +80,6 @@ public class RegionWrapper implements Region {
 		_region.setActive(active);
 	}
 
-	public com.liferay.portal.model.Region toEscapedModel() {
-		return _region.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _region.isNew();
 	}
@@ -131,6 +127,10 @@ public class RegionWrapper implements Region {
 
 	public int hashCode() {
 		return _region.hashCode();
+	}
+
+	public com.liferay.portal.model.Region toEscapedModel() {
+		return _region.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

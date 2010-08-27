@@ -114,10 +114,6 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 		_announcementsDelivery.setWebsite(website);
 	}
 
-	public com.liferay.portlet.announcements.model.AnnouncementsDelivery toEscapedModel() {
-		return _announcementsDelivery.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _announcementsDelivery.isNew();
 	}
@@ -166,6 +162,10 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 
 	public int hashCode() {
 		return _announcementsDelivery.hashCode();
+	}
+
+	public com.liferay.portlet.announcements.model.AnnouncementsDelivery toEscapedModel() {
+		return _announcementsDelivery.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

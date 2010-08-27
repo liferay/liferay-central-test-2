@@ -174,10 +174,6 @@ public class MBThreadWrapper implements MBThread {
 		return _mbThread.isPending();
 	}
 
-	public com.liferay.portlet.messageboards.model.MBThread toEscapedModel() {
-		return _mbThread.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _mbThread.isNew();
 	}
@@ -226,6 +222,10 @@ public class MBThreadWrapper implements MBThread {
 
 	public int hashCode() {
 		return _mbThread.hashCode();
+	}
+
+	public com.liferay.portlet.messageboards.model.MBThread toEscapedModel() {
+		return _mbThread.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

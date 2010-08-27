@@ -137,10 +137,6 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 		_socialEquityLog.setValue(value);
 	}
 
-	public com.liferay.portlet.social.model.SocialEquityLog toEscapedModel() {
-		return _socialEquityLog.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _socialEquityLog.isNew();
 	}
@@ -189,6 +185,10 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 
 	public int hashCode() {
 		return _socialEquityLog.hashCode();
+	}
+
+	public com.liferay.portlet.social.model.SocialEquityLog toEscapedModel() {
+		return _socialEquityLog.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

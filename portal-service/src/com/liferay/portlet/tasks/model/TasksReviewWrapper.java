@@ -166,10 +166,6 @@ public class TasksReviewWrapper implements TasksReview {
 		_tasksReview.setRejected(rejected);
 	}
 
-	public com.liferay.portlet.tasks.model.TasksReview toEscapedModel() {
-		return _tasksReview.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _tasksReview.isNew();
 	}
@@ -218,6 +214,10 @@ public class TasksReviewWrapper implements TasksReview {
 
 	public int hashCode() {
 		return _tasksReview.hashCode();
+	}
+
+	public com.liferay.portlet.tasks.model.TasksReview toEscapedModel() {
+		return _tasksReview.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

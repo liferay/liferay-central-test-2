@@ -422,14 +422,6 @@ public interface LayoutModel extends BaseModel<Layout> {
 	 */
 	public void setDlFolderId(long dlFolderId);
 
-	/**
-	 * Gets a copy of this layout as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Layout toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -453,6 +445,8 @@ public interface LayoutModel extends BaseModel<Layout> {
 	public int compareTo(Layout layout);
 
 	public int hashCode();
+
+	public Layout toEscapedModel();
 
 	public String toString();
 

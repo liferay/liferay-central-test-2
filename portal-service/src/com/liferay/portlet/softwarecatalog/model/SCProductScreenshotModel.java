@@ -151,14 +151,6 @@ public interface SCProductScreenshotModel extends BaseModel<SCProductScreenshot>
 	 */
 	public void setPriority(int priority);
 
-	/**
-	 * Gets a copy of this s c product screenshot as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public SCProductScreenshot toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -182,6 +174,8 @@ public interface SCProductScreenshotModel extends BaseModel<SCProductScreenshot>
 	public int compareTo(SCProductScreenshot scProductScreenshot);
 
 	public int hashCode();
+
+	public SCProductScreenshot toEscapedModel();
 
 	public String toString();
 

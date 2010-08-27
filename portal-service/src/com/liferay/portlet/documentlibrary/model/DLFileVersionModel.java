@@ -390,14 +390,6 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 	 */
 	public boolean isPending();
 
-	/**
-	 * Gets a copy of this d l file version as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public DLFileVersion toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -421,6 +413,8 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 	public int compareTo(DLFileVersion dlFileVersion);
 
 	public int hashCode();
+
+	public DLFileVersion toEscapedModel();
 
 	public String toString();
 

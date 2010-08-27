@@ -161,14 +161,6 @@ public interface TicketModel extends BaseModel<Ticket> {
 	 */
 	public void setExpirationDate(Date expirationDate);
 
-	/**
-	 * Gets a copy of this ticket as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Ticket toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -192,6 +184,8 @@ public interface TicketModel extends BaseModel<Ticket> {
 	public int compareTo(Ticket ticket);
 
 	public int hashCode();
+
+	public Ticket toEscapedModel();
 
 	public String toString();
 

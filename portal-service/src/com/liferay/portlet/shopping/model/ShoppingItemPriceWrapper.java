@@ -124,10 +124,6 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 		_shoppingItemPrice.setStatus(status);
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingItemPrice toEscapedModel() {
-		return _shoppingItemPrice.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _shoppingItemPrice.isNew();
 	}
@@ -176,6 +172,10 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 
 	public int hashCode() {
 		return _shoppingItemPrice.hashCode();
+	}
+
+	public com.liferay.portlet.shopping.model.ShoppingItemPrice toEscapedModel() {
+		return _shoppingItemPrice.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

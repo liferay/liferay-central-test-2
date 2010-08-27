@@ -190,14 +190,6 @@ public interface AnnouncementsDeliveryModel extends BaseModel<AnnouncementsDeliv
 	 */
 	public void setWebsite(boolean website);
 
-	/**
-	 * Gets a copy of this announcements delivery as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public AnnouncementsDelivery toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -221,6 +213,8 @@ public interface AnnouncementsDeliveryModel extends BaseModel<AnnouncementsDeliv
 	public int compareTo(AnnouncementsDelivery announcementsDelivery);
 
 	public int hashCode();
+
+	public AnnouncementsDelivery toEscapedModel();
 
 	public String toString();
 

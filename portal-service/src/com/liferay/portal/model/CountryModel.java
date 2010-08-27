@@ -163,14 +163,6 @@ public interface CountryModel extends BaseModel<Country> {
 	 */
 	public void setActive(boolean active);
 
-	/**
-	 * Gets a copy of this country as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Country toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -194,6 +186,8 @@ public interface CountryModel extends BaseModel<Country> {
 	public int compareTo(Country country);
 
 	public int hashCode();
+
+	public Country toEscapedModel();
 
 	public String toString();
 

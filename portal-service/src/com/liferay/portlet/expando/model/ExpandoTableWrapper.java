@@ -72,10 +72,6 @@ public class ExpandoTableWrapper implements ExpandoTable {
 		_expandoTable.setName(name);
 	}
 
-	public com.liferay.portlet.expando.model.ExpandoTable toEscapedModel() {
-		return _expandoTable.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _expandoTable.isNew();
 	}
@@ -124,6 +120,10 @@ public class ExpandoTableWrapper implements ExpandoTable {
 
 	public int hashCode() {
 		return _expandoTable.hashCode();
+	}
+
+	public com.liferay.portlet.expando.model.ExpandoTable toEscapedModel() {
+		return _expandoTable.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

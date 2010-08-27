@@ -139,14 +139,6 @@ public interface PortletPreferencesModel extends BaseModel<PortletPreferences> {
 	 */
 	public void setPreferences(String preferences);
 
-	/**
-	 * Gets a copy of this portlet preferences as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public PortletPreferences toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -170,6 +162,8 @@ public interface PortletPreferencesModel extends BaseModel<PortletPreferences> {
 	public int compareTo(PortletPreferences portletPreferences);
 
 	public int hashCode();
+
+	public PortletPreferences toEscapedModel();
 
 	public String toString();
 

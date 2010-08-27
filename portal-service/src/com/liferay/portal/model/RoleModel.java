@@ -248,14 +248,6 @@ public interface RoleModel extends BaseModel<Role> {
 	 */
 	public void setSubtype(String subtype);
 
-	/**
-	 * Gets a copy of this role as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public Role toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -279,6 +271,8 @@ public interface RoleModel extends BaseModel<Role> {
 	public int compareTo(Role role);
 
 	public int hashCode();
+
+	public Role toEscapedModel();
 
 	public String toString();
 

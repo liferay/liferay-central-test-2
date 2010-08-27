@@ -61,10 +61,6 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole {
 		_userGroupGroupRole.setRoleId(roleId);
 	}
 
-	public com.liferay.portal.model.UserGroupGroupRole toEscapedModel() {
-		return _userGroupGroupRole.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _userGroupGroupRole.isNew();
 	}
@@ -113,6 +109,10 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole {
 
 	public int hashCode() {
 		return _userGroupGroupRole.hashCode();
+	}
+
+	public com.liferay.portal.model.UserGroupGroupRole toEscapedModel() {
+		return _userGroupGroupRole.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

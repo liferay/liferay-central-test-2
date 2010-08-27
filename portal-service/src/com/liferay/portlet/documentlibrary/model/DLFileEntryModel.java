@@ -362,14 +362,6 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry> {
 	 */
 	public void setReadCount(int readCount);
 
-	/**
-	 * Gets a copy of this d l file entry as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public DLFileEntry toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -393,6 +385,8 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry> {
 	public int compareTo(DLFileEntry dlFileEntry);
 
 	public int hashCode();
+
+	public DLFileEntry toEscapedModel();
 
 	public String toString();
 

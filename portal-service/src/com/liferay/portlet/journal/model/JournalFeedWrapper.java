@@ -230,10 +230,6 @@ public class JournalFeedWrapper implements JournalFeed {
 		_journalFeed.setFeedVersion(feedVersion);
 	}
 
-	public com.liferay.portlet.journal.model.JournalFeed toEscapedModel() {
-		return _journalFeed.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _journalFeed.isNew();
 	}
@@ -282,6 +278,10 @@ public class JournalFeedWrapper implements JournalFeed {
 
 	public int hashCode() {
 		return _journalFeed.hashCode();
+	}
+
+	public com.liferay.portlet.journal.model.JournalFeed toEscapedModel() {
+		return _journalFeed.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

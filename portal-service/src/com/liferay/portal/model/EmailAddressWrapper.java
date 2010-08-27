@@ -141,10 +141,6 @@ public class EmailAddressWrapper implements EmailAddress {
 		_emailAddress.setPrimary(primary);
 	}
 
-	public com.liferay.portal.model.EmailAddress toEscapedModel() {
-		return _emailAddress.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _emailAddress.isNew();
 	}
@@ -192,6 +188,10 @@ public class EmailAddressWrapper implements EmailAddress {
 
 	public int hashCode() {
 		return _emailAddress.hashCode();
+	}
+
+	public com.liferay.portal.model.EmailAddress toEscapedModel() {
+		return _emailAddress.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

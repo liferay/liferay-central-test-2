@@ -260,14 +260,6 @@ public interface JournalStructureModel extends BaseModel<JournalStructure> {
 	 */
 	public void setXsd(String xsd);
 
-	/**
-	 * Gets a copy of this journal structure as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public JournalStructure toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -291,6 +283,8 @@ public interface JournalStructureModel extends BaseModel<JournalStructure> {
 	public int compareTo(JournalStructure journalStructure);
 
 	public int hashCode();
+
+	public JournalStructure toEscapedModel();
 
 	public String toString();
 

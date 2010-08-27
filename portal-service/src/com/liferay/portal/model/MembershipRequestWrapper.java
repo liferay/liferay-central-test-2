@@ -134,10 +134,6 @@ public class MembershipRequestWrapper implements MembershipRequest {
 		_membershipRequest.setStatusId(statusId);
 	}
 
-	public com.liferay.portal.model.MembershipRequest toEscapedModel() {
-		return _membershipRequest.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _membershipRequest.isNew();
 	}
@@ -186,6 +182,10 @@ public class MembershipRequestWrapper implements MembershipRequest {
 
 	public int hashCode() {
 		return _membershipRequest.hashCode();
+	}
+
+	public com.liferay.portal.model.MembershipRequest toEscapedModel() {
+		return _membershipRequest.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

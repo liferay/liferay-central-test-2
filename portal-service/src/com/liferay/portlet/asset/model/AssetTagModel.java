@@ -200,14 +200,6 @@ public interface AssetTagModel extends BaseModel<AssetTag> {
 	 */
 	public void setAssetCount(int assetCount);
 
-	/**
-	 * Gets a copy of this asset tag as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public AssetTag toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -231,6 +223,8 @@ public interface AssetTagModel extends BaseModel<AssetTag> {
 	public int compareTo(AssetTag assetTag);
 
 	public int hashCode();
+
+	public AssetTag toEscapedModel();
 
 	public String toString();
 

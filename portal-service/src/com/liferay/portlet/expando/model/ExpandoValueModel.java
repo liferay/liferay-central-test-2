@@ -172,14 +172,6 @@ public interface ExpandoValueModel extends BaseModel<ExpandoValue> {
 	 */
 	public void setData(String data);
 
-	/**
-	 * Gets a copy of this expando value as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public ExpandoValue toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -203,6 +195,8 @@ public interface ExpandoValueModel extends BaseModel<ExpandoValue> {
 	public int compareTo(ExpandoValue expandoValue);
 
 	public int hashCode();
+
+	public ExpandoValue toEscapedModel();
 
 	public String toString();
 

@@ -142,10 +142,6 @@ public class RoleWrapper implements Role {
 		_role.setSubtype(subtype);
 	}
 
-	public com.liferay.portal.model.Role toEscapedModel() {
-		return _role.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _role.isNew();
 	}
@@ -193,6 +189,10 @@ public class RoleWrapper implements Role {
 
 	public int hashCode() {
 		return _role.hashCode();
+	}
+
+	public com.liferay.portal.model.Role toEscapedModel() {
+		return _role.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

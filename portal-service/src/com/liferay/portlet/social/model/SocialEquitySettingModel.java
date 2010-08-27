@@ -209,14 +209,6 @@ public interface SocialEquitySettingModel extends BaseModel<SocialEquitySetting>
 	 */
 	public void setValue(int value);
 
-	/**
-	 * Gets a copy of this social equity setting as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public SocialEquitySetting toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -240,6 +232,8 @@ public interface SocialEquitySettingModel extends BaseModel<SocialEquitySetting>
 	public int compareTo(SocialEquitySetting socialEquitySetting);
 
 	public int hashCode();
+
+	public SocialEquitySetting toEscapedModel();
 
 	public String toString();
 

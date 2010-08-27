@@ -141,14 +141,6 @@ public interface AnnouncementsFlagModel extends BaseModel<AnnouncementsFlag> {
 	 */
 	public void setValue(int value);
 
-	/**
-	 * Gets a copy of this announcements flag as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public AnnouncementsFlag toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -172,6 +164,8 @@ public interface AnnouncementsFlagModel extends BaseModel<AnnouncementsFlag> {
 	public int compareTo(AnnouncementsFlag announcementsFlag);
 
 	public int hashCode();
+
+	public AnnouncementsFlag toEscapedModel();
 
 	public String toString();
 

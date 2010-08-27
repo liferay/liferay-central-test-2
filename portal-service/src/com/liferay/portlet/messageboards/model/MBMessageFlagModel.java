@@ -155,14 +155,6 @@ public interface MBMessageFlagModel extends BaseModel<MBMessageFlag> {
 	 */
 	public void setFlag(int flag);
 
-	/**
-	 * Gets a copy of this message boards message flag as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public MBMessageFlag toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -186,6 +178,8 @@ public interface MBMessageFlagModel extends BaseModel<MBMessageFlag> {
 	public int compareTo(MBMessageFlag mbMessageFlag);
 
 	public int hashCode();
+
+	public MBMessageFlag toEscapedModel();
 
 	public String toString();
 

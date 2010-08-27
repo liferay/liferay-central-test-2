@@ -92,10 +92,6 @@ public class SocialRelationWrapper implements SocialRelation {
 		_socialRelation.setType(type);
 	}
 
-	public com.liferay.portlet.social.model.SocialRelation toEscapedModel() {
-		return _socialRelation.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _socialRelation.isNew();
 	}
@@ -144,6 +140,10 @@ public class SocialRelationWrapper implements SocialRelation {
 
 	public int hashCode() {
 		return _socialRelation.hashCode();
+	}
+
+	public com.liferay.portlet.social.model.SocialRelation toEscapedModel() {
+		return _socialRelation.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

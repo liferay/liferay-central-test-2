@@ -107,14 +107,6 @@ public interface ExpandoRowModel extends BaseModel<ExpandoRow> {
 	 */
 	public void setClassPK(long classPK);
 
-	/**
-	 * Gets a copy of this expando row as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public ExpandoRow toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -138,6 +130,8 @@ public interface ExpandoRowModel extends BaseModel<ExpandoRow> {
 	public int compareTo(ExpandoRow expandoRow);
 
 	public int hashCode();
+
+	public ExpandoRow toEscapedModel();
 
 	public String toString();
 

@@ -230,14 +230,6 @@ public interface WikiNodeModel extends BaseModel<WikiNode> {
 	 */
 	public void setLastPostDate(Date lastPostDate);
 
-	/**
-	 * Gets a copy of this wiki node as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public WikiNode toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -261,6 +253,8 @@ public interface WikiNodeModel extends BaseModel<WikiNode> {
 	public int compareTo(WikiNode wikiNode);
 
 	public int hashCode();
+
+	public WikiNode toEscapedModel();
 
 	public String toString();
 

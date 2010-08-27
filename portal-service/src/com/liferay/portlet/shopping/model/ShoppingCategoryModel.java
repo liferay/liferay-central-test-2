@@ -215,14 +215,6 @@ public interface ShoppingCategoryModel extends BaseModel<ShoppingCategory> {
 	 */
 	public void setDescription(String description);
 
-	/**
-	 * Gets a copy of this shopping category as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public ShoppingCategory toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -246,6 +238,8 @@ public interface ShoppingCategoryModel extends BaseModel<ShoppingCategory> {
 	public int compareTo(ShoppingCategory shoppingCategory);
 
 	public int hashCode();
+
+	public ShoppingCategory toEscapedModel();
 
 	public String toString();
 

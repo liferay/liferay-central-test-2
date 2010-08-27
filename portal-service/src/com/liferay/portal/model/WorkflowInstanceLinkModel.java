@@ -219,14 +219,6 @@ public interface WorkflowInstanceLinkModel extends BaseModel<WorkflowInstanceLin
 	 */
 	public void setWorkflowInstanceId(long workflowInstanceId);
 
-	/**
-	 * Gets a copy of this workflow instance link as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public WorkflowInstanceLink toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -250,6 +242,8 @@ public interface WorkflowInstanceLinkModel extends BaseModel<WorkflowInstanceLin
 	public int compareTo(WorkflowInstanceLink workflowInstanceLink);
 
 	public int hashCode();
+
+	public WorkflowInstanceLink toEscapedModel();
 
 	public String toString();
 

@@ -85,10 +85,6 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 		_announcementsFlag.setValue(value);
 	}
 
-	public com.liferay.portlet.announcements.model.AnnouncementsFlag toEscapedModel() {
-		return _announcementsFlag.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _announcementsFlag.isNew();
 	}
@@ -137,6 +133,10 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 
 	public int hashCode() {
 		return _announcementsFlag.hashCode();
+	}
+
+	public com.liferay.portlet.announcements.model.AnnouncementsFlag toEscapedModel() {
+		return _announcementsFlag.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

@@ -110,14 +110,6 @@ public interface BrowserTrackerModel extends BaseModel<BrowserTracker> {
 	 */
 	public void setBrowserKey(long browserKey);
 
-	/**
-	 * Gets a copy of this browser tracker as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public BrowserTracker toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -141,6 +133,8 @@ public interface BrowserTrackerModel extends BaseModel<BrowserTracker> {
 	public int compareTo(BrowserTracker browserTracker);
 
 	public int hashCode();
+
+	public BrowserTracker toEscapedModel();
 
 	public String toString();
 

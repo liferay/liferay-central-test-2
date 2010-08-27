@@ -153,10 +153,6 @@ public class TasksProposalWrapper implements TasksProposal {
 		_tasksProposal.setDueDate(dueDate);
 	}
 
-	public com.liferay.portlet.tasks.model.TasksProposal toEscapedModel() {
-		return _tasksProposal.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _tasksProposal.isNew();
 	}
@@ -205,6 +201,10 @@ public class TasksProposalWrapper implements TasksProposal {
 
 	public int hashCode() {
 		return _tasksProposal.hashCode();
+	}
+
+	public com.liferay.portlet.tasks.model.TasksProposal toEscapedModel() {
+		return _tasksProposal.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

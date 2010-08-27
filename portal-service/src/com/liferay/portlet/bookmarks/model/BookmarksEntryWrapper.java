@@ -149,10 +149,6 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 		_bookmarksEntry.setPriority(priority);
 	}
 
-	public com.liferay.portlet.bookmarks.model.BookmarksEntry toEscapedModel() {
-		return _bookmarksEntry.toEscapedModel();
-	}
-
 	public boolean isNew() {
 		return _bookmarksEntry.isNew();
 	}
@@ -201,6 +197,10 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 
 	public int hashCode() {
 		return _bookmarksEntry.hashCode();
+	}
+
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry toEscapedModel() {
+		return _bookmarksEntry.toEscapedModel();
 	}
 
 	public java.lang.String toString() {

@@ -358,14 +358,6 @@ public interface AssetVocabularyModel extends BaseModel<AssetVocabulary> {
 	 */
 	public void setSettings(String settings);
 
-	/**
-	 * Gets a copy of this asset vocabulary as an escaped model instance by wrapping it with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
-	 *
-	 * @return the escaped model instance
-	 * @see com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
-	 */
-	public AssetVocabulary toEscapedModel();
-
 	public boolean isNew();
 
 	public void setNew(boolean n);
@@ -389,6 +381,8 @@ public interface AssetVocabularyModel extends BaseModel<AssetVocabulary> {
 	public int compareTo(AssetVocabulary assetVocabulary);
 
 	public int hashCode();
+
+	public AssetVocabulary toEscapedModel();
 
 	public String toString();
 
