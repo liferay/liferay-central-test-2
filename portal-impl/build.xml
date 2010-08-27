@@ -798,6 +798,41 @@ ${exception.message}
 		<copy todir="${portal-impl.classes.dir}">
 			<fileset dir="src" excludes="**/*.java" />
 		</copy>
+
+		<if>
+			<not>
+				<available file="${portal-impl.classes.dir}/jamwiki.properties" />
+			</not>
+			<then>
+				<unzip
+					dest="${portal-impl.classes.dir}"
+					src="${project.dir}/tools/jamwiki-0.9.1-src.zip"
+				>
+					<patternset
+						includes="**/main/resources/ApplicationResources.properties,**/main/resources/logging.properties,**/main/resources/interwiki.properties"
+					/>
+				</unzip>
+
+				<move todir="${portal-impl.classes.dir}">
+					<fileset
+						dir="${portal-impl.classes.dir}/jamwiki-0.9.1/main/resources"
+						excludes="logging.properties"
+					/>
+				</move>
+
+				<concat destfile="${portal-impl.classes.dir}/logging.properties">
+					<fileset file="${project.dir}/classes/logging.properties" />
+					<fileset file="${portal-impl.classes.dir}/jamwiki-0.9.1/main/resources/logging.properties" />
+				</concat>
+
+				<delete dir="${portal-impl.classes.dir}/jamwiki-0.9.1" />
+
+				<echo file="${portal-impl.classes.dir}/jamwiki.properties">
+					database-type=com.liferay.portlet.wiki.engines.mediawiki.LiferayDataHandler
+					search-engine=com.liferay.portlet.wiki.engines.mediawiki.LiferaySearchEngine
+				</echo>
+			</then>
+		</if>
 	</target>
 
 	<target name="compile-fast">
