@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.text.NumberFormat;
+
 import java.util.Locale;
 
 /**
