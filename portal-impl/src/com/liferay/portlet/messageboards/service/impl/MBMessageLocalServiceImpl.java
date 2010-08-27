@@ -719,7 +719,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Workflow
 
-		workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
+		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
 			message.getCompanyId(), message.getGroupId(),
 			message.getWorkflowClassName(), message.getMessageId());
 	}

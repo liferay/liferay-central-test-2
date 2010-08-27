@@ -272,7 +272,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Workflow
 
-		workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
+		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
 			entry.getCompanyId(), entry.getGroupId(),
 			BlogsEntry.class.getName(), entry.getEntryId());
 	}

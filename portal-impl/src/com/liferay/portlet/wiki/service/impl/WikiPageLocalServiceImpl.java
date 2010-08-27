@@ -480,7 +480,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Workflow
 
-		workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
+		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
 			page.getCompanyId(), page.getGroupId(),
 			WikiPage.class.getName(), page.getResourcePrimKey());
 
