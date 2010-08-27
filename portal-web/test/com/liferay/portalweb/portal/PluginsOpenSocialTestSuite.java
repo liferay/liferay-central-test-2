@@ -14,8 +14,8 @@
 
 package com.liferay.portalweb.portal;
 
-import com.liferay.portalweb.portal.login.LoginTests;
 import com.liferay.portalweb.plugins.opensocial.OpenSocialTests;
+import com.liferay.portalweb.portal.login.LoginTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
