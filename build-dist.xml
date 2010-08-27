@@ -521,8 +521,8 @@ release was successful.</echo>
 		</if>
 
 		<unzip
-			src="${app.server.parent.dir}/${app.server.geronimo.zip.name}"
 			dest="${app.server.parent.dir}"
+			src="${app.server.parent.dir}/${app.server.geronimo.zip.name}"
 		>
 			<mapper
 				type="glob"
@@ -549,8 +549,8 @@ release was successful.</echo>
 		</if>
 
 		<unzip
-			 src="${app.server.parent.dir}/${app.server.glassfish.zip.name}"
 			 dest="${app.server.parent.dir}"
+			 src="${app.server.parent.dir}/${app.server.glassfish.zip.name}"
 		>
 			<patternset
 				includes="glassfishv3/glassfish/**"
@@ -579,7 +579,10 @@ release was successful.</echo>
 			</then>
 		</if>
 
-		<unzip src="${app.server.parent.dir}/${app.server.jboss.zip.name}" dest="${app.server.parent.dir}">
+		<unzip
+			dest="${app.server.parent.dir}"
+			src="${app.server.parent.dir}/${app.server.jboss.zip.name}"
+		>
 			<patternset
 				excludes="jboss-5.1.0.GA/server/all/**,jboss-5.1.0.GA/server/default/**,jboss-5.1.0.GA/server/minimal/**,jboss-5.1.0.GA/server/standard/**"
 			/>
@@ -626,7 +629,10 @@ release was successful.</echo>
 			</then>
 		</if>
 
-		<unzip src="${app.server.parent.dir}/${app.server.jetty.zip.name}" dest="${app.server.parent.dir}">
+		<unzip
+			dest="${app.server.parent.dir}"
+			src="${app.server.parent.dir}/${app.server.jetty.zip.name}"
+		>
 			<patternset
 				excludes="jetty-6.1.24/bin/**,jetty-6.1.24/contexts/**,jetty-6.1.24/contrib/**,jetty-6.1.24/distribution/**,jetty-6.1.24/examples/**,jetty-6.1.24/extras/**,jetty-6.1.24/javadoc/**,jetty-6.1.24/jxr/**,jetty-6.1.24/modules/**,jetty-6.1.24/patches/**,jetty-6.1.24/patches/**,jetty-6.1.24/project-website/**,jetty-6.1.24/webapps/**"
 			/>
@@ -653,7 +659,10 @@ release was successful.</echo>
 			</then>
 		</if>
 
-		<unzip src="${app.server.parent.dir}/${app.server.jonas.zip.name}" dest="${app.server.parent.dir}">
+		<unzip
+			dest="${app.server.parent.dir}"
+			src="${app.server.parent.dir}/${app.server.jonas.zip.name}"
+		>
 			<patternset
 				excludes="jonas-full-5.1.2/examples/**,jonas-full-5.1.2/tutorial/**"
 			/>
@@ -708,7 +717,10 @@ release was successful.</echo>
 			</then>
 		</if>
 
-		<unzip src="${app.server.parent.dir}/${app.server.resin.zip.name}" dest="${app.server.parent.dir}">
+		<unzip
+			dest="${app.server.parent.dir}"
+			src="${app.server.parent.dir}/${app.server.resin.zip.name}"
+		>
 			<patternset
 				excludes="resin-3.1.10/php/**,resin-3.1.10/webapps/**"
 			/>
@@ -733,7 +745,10 @@ release was successful.</echo>
 			</then>
 		</if>
 
-		<unzip src="${app.server.parent.dir}/${app.server.tomcat.zip.name}" dest="${app.server.parent.dir}">
+		<unzip
+			dest="${app.server.parent.dir}"
+			src="${app.server.parent.dir}/${app.server.tomcat.zip.name}"
+		>
 			<patternset
 				excludes="apache-tomcat-6.0.26/webapps/**"
 			/>
