@@ -2498,7 +2498,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// User input validation
 
 		if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
-			if (!Validator.isEmailAddress(login)) {
+			if (Validator.isNull(login)) {
 				throw new UserEmailAddressException();
 			}
 		}
@@ -2713,7 +2713,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		emailAddress = emailAddress.trim().toLowerCase();
 
-		if (!Validator.isEmailAddress(emailAddress)) {
+		if (Validator.isNull(emailAddress)) {
 			throw new UserEmailAddressException();
 		}
 
