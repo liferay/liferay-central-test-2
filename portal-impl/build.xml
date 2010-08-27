@@ -795,8 +795,8 @@ ${exception.message}
 			/>
 		</copy>
 
-		<copy file="${project.dir}/classes/log4j.properties" todir="${app.server.classes.portal.dir}" />
-		<copy file="${project.dir}/classes/logging.properties" todir="${app.server.classes.portal.dir}" />
+		<copy file="${project.dir}/classes/log4j.properties" todir="${portal-impl.classes.dir}" />
+		<copy file="${project.dir}/classes/logging.properties" todir="${portal-impl.classes.dir}" />
 
 		<if>
 			<not>
