@@ -383,7 +383,9 @@ public class JCRHook extends BaseHook {
 			VersionHistory versionHistory = contentNode.getVersionHistory();
 
 			if (!versionHistory.hasVersionLabel(versionLabel)) {
-				throw new NoSuchFileException(fileName + ';' + versionLabel);
+				throw new NoSuchFileException(
+					"{fileName=" + fileName + ", versionLabel=" +
+						versionLabel + "}");
 			}
 
 			Version version = versionHistory.getVersionByLabel(versionLabel);
@@ -393,7 +395,9 @@ public class JCRHook extends BaseHook {
 			session.save();
 		}
 		catch (PathNotFoundException pnfe) {
-			throw new NoSuchFileException(fileName + ';' + versionLabel);
+			throw new NoSuchFileException(
+				"{fileName=" + fileName + ", versionLabel=" +
+					versionLabel + "}");
 		}
 		catch (RepositoryException re) {
 			throw new SystemException(re);
@@ -848,7 +852,9 @@ public class JCRHook extends BaseHook {
 			indexer.reindex(fileModel);
 		}
 		catch (PathNotFoundException pnfe) {
-			throw new NoSuchFileException(fileName + ';' + versionLabel);
+			throw new NoSuchFileException(
+				"{fileName=" + fileName + ", versionLabel=" + versionLabel +
+					"}");
 		}
 		catch (RepositoryException re) {
 			throw new SystemException(re);
@@ -948,7 +954,8 @@ public class JCRHook extends BaseHook {
 
 				if (!versionHistory.hasVersionLabel(versionLabel)) {
 					throw new NoSuchFileException(
-							fileName + ';' + versionLabel);
+						"{fileName=" + fileName + ", versionLabel=" +
+							versionLabel + "}");
 				}
 
 				Version version = versionHistory.getVersionByLabel(
@@ -958,7 +965,9 @@ public class JCRHook extends BaseHook {
 			}
 		}
 		catch (PathNotFoundException pnfe) {
-			throw new NoSuchFileException(fileName + ';' + versionLabel);
+			throw new NoSuchFileException(
+				"{fileName=" + fileName + ", versionLabel=" +
+					versionLabel + "}");
 		}
 		catch (RepositoryException re) {
 			throw new SystemException(re);
