@@ -27,11 +27,6 @@ import org.jamwiki.model.Topic;
 import org.jamwiki.model.TopicType;
 
 /**
- * This class implements a JAMWiki DataHandler and acts as a back end for the
- * JAMWiki parser. Most of these methods are stubs, and are only here so that
- * the parser will be happy, but some of these interact usefully with the
- * parser.
- *
  * @author Jonathan Potter
  */
 public class LiferayDataHandler extends DummyDataHandler {
