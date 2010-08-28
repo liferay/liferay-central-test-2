@@ -52,6 +52,8 @@ AUI().add(
 					instance._positionHelper = A.Node.create('<div class="lfr-position-helper"></div>');
 					instance._positionHelper.append(instance._container);
 
+					instance._positionHelper._hideClass = 'aui-helper-hidden-accessible';
+
 					A.getBody().prepend(instance._positionHelper);
 
 					instance._positionHelper.hide();
@@ -121,7 +123,7 @@ AUI().add(
 					onTriggerClick: function(trigger) {
 						var instance = this;
 
-						var panelHidden = instance._positionHelper.hasClass('aui-helper-hidden');
+						var panelHidden = instance._positionHelper.test(':hidden');
 
 						if (panelHidden) {
 							instance.show(trigger);
