@@ -63,6 +63,8 @@ public class MailingListMessageListener implements MessageListener {
 		try {
 			store = getStore(mailingListRequest);
 
+			store.connect();
+			
 			folder = getFolder(store);
 
 			messages = folder.getMessages();
@@ -99,7 +101,6 @@ public class MailingListMessageListener implements MessageListener {
 	}
 
 	protected Folder getFolder(Store store) throws Exception {
-		store.connect();
 
 		Folder defaultFolder = store.getDefaultFolder();
 
@@ -138,8 +139,6 @@ public class MailingListMessageListener implements MessageListener {
 			protocol, host, port, StringPool.BLANK, user, password);
 
 		Store store = session.getStore(urlName);
-
-		store.connect();
 
 		return store;
 	}
