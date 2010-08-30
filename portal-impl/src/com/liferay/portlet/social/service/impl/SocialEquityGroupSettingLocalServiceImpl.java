@@ -17,81 +17,63 @@ package com.liferay.portlet.social.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Group;
-import com.liferay.portlet.social.NoSuchEquityGroupSettingException;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.social.model.SocialEquityGroupSetting;
 import com.liferay.portlet.social.service.base.SocialEquityGroupSettingLocalServiceBaseImpl;
 
 /**
- * The implementation of the social equity group setting local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.portlet.social.service.SocialEquityGroupSettingLocalService} interface.
- * </p>
- *
- * <p>
- * Never reference this interface directly. Always use {@link com.liferay.portlet.social.service.SocialEquityGroupSettingLocalServiceUtil} to access the social equity group setting local service.
- * </p>
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
- *
  * @author Zsolt Berentey
- * @see com.liferay.portlet.social.service.base.SocialEquityGroupSettingLocalServiceBaseImpl
- * @see com.liferay.portlet.social.service.SocialEquityGroupSettingLocalServiceUtil
  */
 public class SocialEquityGroupSettingLocalServiceImpl
 	extends SocialEquityGroupSettingLocalServiceBaseImpl {
 
-	public boolean isSocialEquityEnabled(
-			long groupId, String className, int type)
+	public boolean isEnabled(long groupId, String className, int type)
 		throws SystemException {
 
-		try {
-			SocialEquityGroupSetting socialEquityGroupSetting =
-				socialEquityGroupSettingPersistence.findByG_C_T(
-					groupId, className, type);
-
-			return socialEquityGroupSetting.getEnabled();
+		if (className.equals(Group.class.getName())) {
+			return false;
 		}
-		catch (NoSuchEquityGroupSettingException e) {
-			if (Group.class.getName().equals(className)) {
-				return false;
-			}
 
-			return true;
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		SocialEquityGroupSetting equityGroupSetting =
+			socialEquityGroupSettingPersistence.fetchByG_C_T(
+				groupId, classNameId, type);
+
+		if (equityGroupSetting != null) {
+			return equityGroupSetting.isEnabled();
 		}
+
+		return true;
 	}
 
-	public void updateSetting(
+	public void updateEquityGroupSetting(
 			long groupId, String className, int type, boolean value)
 		throws PortalException, SystemException {
 
-		SocialEquityGroupSetting socialEquityGroupSetting = null;
+		long classNameId = PortalUtil.getClassNameId(className);
 
-		try {
-			socialEquityGroupSetting =
-				socialEquityGroupSettingPersistence.findByG_C_T(
-					groupId, className, type);
+		SocialEquityGroupSetting equityGroupSetting =
+			socialEquityGroupSettingPersistence.findByG_C_T(
+				groupId, classNameId, type);
 
-			socialEquityGroupSetting.setEnabled(value);
-
-		}
-		catch (NoSuchEquityGroupSettingException e) {
-			socialEquityGroupSetting = createSocialEquityGroupSetting(
-				counterLocalService.increment());
-
+		if (equityGroupSetting == null) {
 			Group group = groupLocalService.getGroup(groupId);
 
-			socialEquityGroupSetting.setCompanyId(group.getCompanyId());
-			socialEquityGroupSetting.setGroupId(groupId);
-			socialEquityGroupSetting.setClassName(className);
-			socialEquityGroupSetting.setType(type);
-			socialEquityGroupSetting.setEnabled(value);
+			long equityGroupSettingId = counterLocalService.increment();
+
+			equityGroupSetting = socialEquityGroupSettingPersistence.create(
+				equityGroupSettingId);
+
+			equityGroupSetting.setGroupId(groupId);
+			equityGroupSetting.setCompanyId(group.getCompanyId());
+			equityGroupSetting.setClassNameId(classNameId);
+			equityGroupSetting.setType(type);
 		}
 
-		socialEquityGroupSettingPersistence.update(
-			socialEquityGroupSetting, false);
+		equityGroupSetting.setEnabled(value);
+
+		socialEquityGroupSettingPersistence.update(equityGroupSetting, false);
 	}
 
 }

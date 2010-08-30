@@ -41,7 +41,7 @@ public class SocialEquityUserLocalServiceImpl
 		projectionList.add(ProjectionFactoryUtil.sum("contributionK"));
 		projectionList.add(ProjectionFactoryUtil.sum("contributionB"));
 
-		return getSocialEquityValue(userId, projectionList);
+		return getEquityValue(userId, projectionList);
 	}
 
 	public SocialEquityValue getParticipationEquity(long userId)
@@ -52,10 +52,10 @@ public class SocialEquityUserLocalServiceImpl
 		projectionList.add(ProjectionFactoryUtil.sum("participationK"));
 		projectionList.add(ProjectionFactoryUtil.sum("participationB"));
 
-		return getSocialEquityValue(userId, projectionList);
+		return getEquityValue(userId, projectionList);
 	}
 
-	public List<SocialEquityUser> getRankedSocialEquityUsers(
+	public List<SocialEquityUser> getRankedEquityUsers(
 			long groupId, int start, int end,
 			OrderByComparator orderByComparator)
 		throws SystemException {
@@ -64,13 +64,11 @@ public class SocialEquityUserLocalServiceImpl
 			groupId, start, end, orderByComparator);
 	}
 
-	public int getRankedSocialEquityUsersCount(long groupId)
-		throws SystemException {
-
+	public int getRankedEquityUsersCount(long groupId) throws SystemException {
 		return socialEquityUserPersistence.countByGroupRanked(groupId);
 	}
 
-	protected SocialEquityValue getSocialEquityValue(
+	protected SocialEquityValue getEquityValue(
 			long userId, ProjectionList projectionList)
 		throws SystemException {
 

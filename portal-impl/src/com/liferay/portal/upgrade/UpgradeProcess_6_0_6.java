@@ -12,18 +12,23 @@
  * details.
  */
 
-package com.liferay.portlet.social.model.impl;
+package com.liferay.portal.upgrade;
 
-import com.liferay.portlet.social.model.SocialEquityGroupSetting;
+import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.upgrade.v6_0_6.UpgradeSchema;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class SocialEquityGroupSettingImpl
-	extends SocialEquityGroupSettingModelImpl
-	implements SocialEquityGroupSetting {
+public class UpgradeProcess_6_0_6 extends UpgradeProcess {
 
-	public SocialEquityGroupSettingImpl() {
+	public int getThreshold() {
+		return ReleaseInfo.RELEASE_6_0_6_BUILD_NUMBER;
+	}
+
+	protected void doUpgrade() throws Exception {
+		upgrade(UpgradeSchema.class);
 	}
 
 }

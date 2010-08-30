@@ -122,7 +122,7 @@
 
 		<!-- Other fields -->
 
-		<column name="className" type="String" />
+		<column name="classNameId" type="long" />
 		<column name="type" type="int" />
 		<column name="enabled" type="boolean" />
 
@@ -130,7 +130,7 @@
 
 		<finder name="G_C_T" return-type="SocialEquityGroupSetting" unique="true">
 			<finder-column name="groupId" />
-			<finder-column name="className" />
+			<finder-column name="classNameId" />
 			<finder-column name="type" />
 		</finder>
 

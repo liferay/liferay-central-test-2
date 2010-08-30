@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.increment.BufferedIncrement;
 import com.liferay.portal.kernel.increment.SocialEquityIncrement;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.NoSuchEntryException;
@@ -80,15 +79,14 @@ public class SocialEquityLogLocalServiceImpl
 		catch (NoSuchUserException nsue) {
 		}
 
-		long groupId = assetEntry.getGroupId();
-
 		List<SocialEquitySetting> equitySettings =
 			socialEquitySettingLocalService.getEquitySettings(
-				groupId, assetEntry.getClassNameId(), actionId);
+				assetEntry.getGroupId(), assetEntry.getClassNameId(), actionId);
 
 		for (SocialEquitySetting equitySetting : equitySettings) {
-			if (checkSocialEquityEnabled(
-				groupId, assetEntry.getClassName(), equitySetting.getType())) {
+			if (socialEquityGroupSettingLocalService.isEnabled(
+					assetEntry.getGroupId(), assetEntry.getClassName(),
+					equitySetting.getType())) {
 
 				addEquityLog(user, assetEntry, assetEntryUser, equitySetting);
 			}
@@ -207,9 +205,9 @@ public class SocialEquityLogLocalServiceImpl
 
 		// Information Equity
 
-		if (checkSocialEquityEnabled(
-			assetEntry.getGroupId(), assetEntry.getClassName(),
-			SocialEquitySettingConstants.TYPE_INFORMATION)) {
+		if (socialEquityGroupSettingLocalService.isEnabled(
+				assetEntry.getGroupId(), assetEntry.getClassName(),
+				SocialEquitySettingConstants.TYPE_INFORMATION)) {
 
 			List<SocialEquityLog> equityLogs =
 				socialEquityLogPersistence.findByAEI_AID_A_T(
@@ -240,9 +238,9 @@ public class SocialEquityLogLocalServiceImpl
 
 		// Participation Equity
 
-		if (checkSocialEquityEnabled(
-			assetEntry.getGroupId(), assetEntry.getClassName(),
-			SocialEquitySettingConstants.TYPE_PARTICIPATION)) {
+		if (socialEquityGroupSettingLocalService.isEnabled(
+				assetEntry.getGroupId(), assetEntry.getClassName(),
+				SocialEquitySettingConstants.TYPE_PARTICIPATION)) {
 
 			List<SocialEquityLog> equityLogs =
 				socialEquityLogPersistence.findByU_AID_A_T(
@@ -443,8 +441,8 @@ public class SocialEquityLogLocalServiceImpl
 			SocialEquitySetting equitySetting)
 		throws PortalException, SystemException {
 
-		if (!checkActionRestrictions(
-			user.getUserId(), assetEntry.getEntryId(), equitySetting)) {
+		if (!isAddEquityLog(
+				user.getUserId(), assetEntry.getEntryId(), equitySetting)) {
 
 			return;
 		}
@@ -562,7 +560,7 @@ public class SocialEquityLogLocalServiceImpl
 		return ((double)value / lifespan) * -1;
 	}
 
-	protected boolean checkActionRestrictions(
+	protected boolean isAddEquityLog(
 			long userId, long assetEntryId, SocialEquitySetting equitySetting)
 		throws SystemException {
 
@@ -624,20 +622,6 @@ public class SocialEquityLogLocalServiceImpl
 		else {
 			return false;
 		}
-	}
-
-	protected boolean checkSocialEquityEnabled(
-			long groupId, String className, int type)
-		throws SystemException {
-
-		if (!socialEquityGroupSettingLocalService.isSocialEquityEnabled(
-			groupId, Group.class.getName(), type)) {
-
-			return false;
-		}
-
-		return socialEquityGroupSettingLocalService.isSocialEquityEnabled(
-			groupId, className, type);
 	}
 
 	protected int getEquityDate() {

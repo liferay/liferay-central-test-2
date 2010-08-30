@@ -12,18 +12,17 @@
  * details.
  */
 
-package com.liferay.portlet.social.model.impl;
+package com.liferay.portal.upgrade.v6_0_6;
 
-import com.liferay.portlet.social.model.SocialEquityGroupSetting;
+import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class SocialEquityGroupSettingImpl
-	extends SocialEquityGroupSettingModelImpl
-	implements SocialEquityGroupSetting {
+public class UpgradeSchema extends UpgradeProcess {
 
-	public SocialEquityGroupSettingImpl() {
+	protected void doUpgrade() throws Exception {
+		runSQLTemplate("update-6.0.5-6.0.6.sql", false);
 	}
 
 }

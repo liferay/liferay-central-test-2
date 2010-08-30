@@ -131,7 +131,7 @@ public class SocialEquitySettingLocalServiceImpl
 		return equitySettings;
 	}
 
-	public void updateSocialEquitySettings(
+	public void updateEquitySettings(
 			long groupId, String className,
 			List<SocialEquityActionMapping> equityActionMappings)
 		throws PortalException, SystemException {
@@ -139,7 +139,7 @@ public class SocialEquitySettingLocalServiceImpl
 		for (SocialEquityActionMapping equityActionMapping :
 				equityActionMappings) {
 
-			updateSocialEquitySettings(groupId, className, equityActionMapping);
+			updateEquitySettings(groupId, className, equityActionMapping);
 		}
 	}
 
@@ -219,7 +219,7 @@ public class SocialEquitySettingLocalServiceImpl
 		return equitySetting;
 	}
 
-	protected void updateSocialEquitySettings(
+	protected void updateEquitySettings(
 			long groupId, String className,
 			SocialEquityActionMapping equityActionMapping)
 		throws PortalException, SystemException {

@@ -19,11 +19,11 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, 5, portletURL, null, null);
 
-int total = SocialEquityUserLocalServiceUtil.getRankedSocialEquityUsersCount(scopeGroupId);
+int total = SocialEquityUserLocalServiceUtil.getRankedEquityUsersCount(scopeGroupId);
 
 searchContainer.setTotal(total);
 
-List<SocialEquityUser> results = SocialEquityUserLocalServiceUtil.getRankedSocialEquityUsers(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd(), new SocialEquityUserRankComparator(true));
+List<SocialEquityUser> results = SocialEquityUserLocalServiceUtil.getRankedEquityUsers(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd(), new SocialEquityUserRankComparator(true));
 
 searchContainer.setResults(results);
 
