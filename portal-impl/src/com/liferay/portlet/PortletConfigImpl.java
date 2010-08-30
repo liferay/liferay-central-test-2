@@ -175,8 +175,14 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 			return resourceBundle;
 		}
 		else {
-			String resourceBundleId = _portlet.getPortletId().concat(
-				StringPool.PERIOD).concat(locale.toString());
+			StringBundler sb = new StringBundler(4);
+
+			sb.append(_portlet.getPortletId());
+			sb.append(locale.getLanguage());
+			sb.append(locale.getCountry());
+			sb.append(locale.getVariant());
+
+			String resourceBundleId = sb.toString();
 
 			ResourceBundle resourceBundle = _resourceBundles.get(
 				resourceBundleId);
