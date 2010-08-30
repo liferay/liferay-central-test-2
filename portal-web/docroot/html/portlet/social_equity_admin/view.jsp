@@ -33,14 +33,6 @@ portletURL.setParameter("struts_action", "/social_equity_admin/view");
 	<aui:input name="redirect" value="<%= currentURL %>" type="hidden" />
 
 	<%
-	String taglibOnClick = renderResponse.getNamespace() + "saveServer('updateRanks');";
-	%>
-
-	<aui:button-row>
-		<aui:button type="button" onClick="<%= taglibOnClick %>" value="update-ranking" />
-	</aui:button-row>
-
-	<%
 	for (String className : equityActionMappingsMap.keySet()) {
 		List<SocialEquityActionMapping> equityActionMappings = equityActionMappingsMap.get(className);
 	%>
@@ -101,10 +93,3 @@ portletURL.setParameter("struts_action", "/social_equity_admin/view");
 		<aui:button type="submit" />
 	</aui:button-row>
 </aui:form>
-
-<aui:script>
-	function <portlet:namespace />saveServer(cmd) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
-		submitForm(document.<portlet:namespace />fm);
-	}
-</aui:script>
