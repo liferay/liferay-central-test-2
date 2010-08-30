@@ -829,8 +829,8 @@ ${exception.message}
 				<delete dir="${portal-impl.classes.dir}/jamwiki-0.9.1" />
 
 				<echo file="${portal-impl.classes.dir}/jamwiki.properties">
-					props-initialized=true
 					database-type=com.liferay.portlet.wiki.engines.mediawiki.LiferayDataHandler
+					props-initialized=true
 					search-engine=com.liferay.portlet.wiki.engines.mediawiki.LiferaySearchEngine
 				</echo>
 			</then>
