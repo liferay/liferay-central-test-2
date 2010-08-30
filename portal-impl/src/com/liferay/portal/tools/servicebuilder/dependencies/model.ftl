@@ -87,7 +87,7 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 
 		public ${column.type} get${column.methodName}();
 
-        <#if column.localized>
+		<#if column.localized>
 			/**
 			 * Gets the localized ${column.humanName} of this ${entity.humanName}. Uses the default language if no localization exists for the requested language.
 			 *
