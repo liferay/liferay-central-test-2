@@ -106,6 +106,38 @@
 			<finder-column name="assetEntryId" />
 		</finder>
 	</entity>
+	<entity name="SocialEquityGroupSetting" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="equityGroupSettingId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+
+		<!-- Other fields -->
+
+		<column name="className" type="String" />
+		<column name="type" type="int" />
+		<column name="enabled" type="boolean" />
+
+		<!-- Finder methods -->
+
+		<finder name="G_C_T" return-type="SocialEquityGroupSetting" unique="true">
+			<finder-column name="groupId" />
+			<finder-column name="className" />
+			<finder-column name="type" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portal" entity="Group" />
+	</entity>
 	<entity name="SocialEquityHistory" local-service="true" remote-service="false">
 
 		<!-- PK fields -->

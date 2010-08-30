@@ -1805,6 +1805,14 @@
 		<field name="informationK" type="double" />
 		<field name="informationB" type="double" />
 	</model>
+	<model name="com.liferay.portlet.social.model.SocialEquityGroupSetting">
+		<field name="equityGroupSettingId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="className" type="String" />
+		<field name="type" type="int" />
+		<field name="enabled" type="boolean" />
+	</model>
 	<model name="com.liferay.portlet.social.model.SocialEquityHistory">
 		<field name="equityHistoryId" type="long" />
 		<field name="groupId" type="long" />

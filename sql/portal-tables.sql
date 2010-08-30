@@ -1505,6 +1505,15 @@ create table SocialEquityAssetEntry (
 	informationB DOUBLE
 );
 
+create table SocialEquityGroupSetting (
+	equityGroupSettingId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	className VARCHAR(75) null,
+	type_ INTEGER,
+	enabled BOOLEAN
+);
+
 create table SocialEquityHistory (
 	equityHistoryId LONG not null primary key,
 	groupId LONG,

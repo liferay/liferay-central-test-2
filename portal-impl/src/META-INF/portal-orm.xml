@@ -2331,6 +2331,19 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.social.model.impl.SocialEquityGroupSettingModelImpl">
+		<attributes>
+			<id name="equityGroupSettingId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="className" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<basic name="enabled" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.social.model.impl.SocialEquityHistoryModelImpl">
 		<attributes>
 			<id name="equityHistoryId" />
@@ -3250,6 +3263,10 @@
 	</entity>
 	<entity class="com.liferay.portlet.social.model.impl.SocialEquityAssetEntryImpl" name="SocialEquityAssetEntry">
 		<table name="SocialEquityAssetEntry" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portlet.social.model.impl.SocialEquityGroupSettingImpl" name="SocialEquityGroupSetting">
+		<table name="SocialEquityGroupSetting" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.social.model.impl.SocialEquityHistoryImpl" name="SocialEquityHistory">

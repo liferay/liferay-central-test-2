@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.increment.BufferedIncrement;
 import com.liferay.portal.kernel.increment.SocialEquityIncrement;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.NoSuchEntryException;
@@ -79,12 +80,18 @@ public class SocialEquityLogLocalServiceImpl
 		catch (NoSuchUserException nsue) {
 		}
 
+		long groupId = assetEntry.getGroupId();
+
 		List<SocialEquitySetting> equitySettings =
 			socialEquitySettingLocalService.getEquitySettings(
-				assetEntry.getGroupId(), assetEntry.getClassNameId(), actionId);
+				groupId, assetEntry.getClassNameId(), actionId);
 
 		for (SocialEquitySetting equitySetting : equitySettings) {
-			addEquityLog(user, assetEntry, assetEntryUser, equitySetting);
+			if (checkSocialEquityEnabled(
+				groupId, assetEntry.getClassName(), equitySetting.getType())) {
+
+				addEquityLog(user, assetEntry, assetEntryUser, equitySetting);
+			}
 		}
 	}
 
@@ -200,54 +207,65 @@ public class SocialEquityLogLocalServiceImpl
 
 		// Information Equity
 
-		List<SocialEquityLog> equityLogs =
-			socialEquityLogPersistence.findByAEI_AID_A_T(
-				assetEntryId, actionId, true,
-				SocialEquitySettingConstants.TYPE_INFORMATION);
+		if (checkSocialEquityEnabled(
+			assetEntry.getGroupId(), assetEntry.getClassName(),
+			SocialEquitySettingConstants.TYPE_INFORMATION)) {
 
-		SocialEquityValue socialEquityValue = new SocialEquityValue(0,0);
+			List<SocialEquityLog> equityLogs =
+				socialEquityLogPersistence.findByAEI_AID_A_T(
+					assetEntryId, actionId, true,
+					SocialEquitySettingConstants.TYPE_INFORMATION);
 
-		for (SocialEquityLog equityLog : equityLogs) {
-			double k = calculateK(equityLog.getValue(),equityLog.getLifespan());
-			double b = calculateB(
-				equityLog.getActionDate(), equityLog.getValue(),
-				equityLog.getLifespan());
+			SocialEquityValue socialEquityValue = new SocialEquityValue(0,0);
 
-			socialEquityValue.subtract(new SocialEquityValue(k,b));
+			for (SocialEquityLog equityLog : equityLogs) {
+				double k = calculateK(
+					equityLog.getValue(),equityLog.getLifespan());
+				double b = calculateB(
+					equityLog.getActionDate(), equityLog.getValue(),
+					equityLog.getLifespan());
 
-			equityLog.setActive(false);
+				socialEquityValue.subtract(new SocialEquityValue(k,b));
 
-			socialEquityLogPersistence.remove(equityLog);
+				socialEquityLogPersistence.remove(equityLog);
+			}
+
+			socialEquityLogLocalService.incrementSocialEquityAssetEntry_IQ(
+				assetEntryId, socialEquityValue);
+
+			socialEquityLogLocalService.incrementSocialEquityUser_CQ(
+				assetEntry.getGroupId(), assetEntry.getUserId(),
+				socialEquityValue);
 		}
-
-		socialEquityLogLocalService.incrementSocialEquityAssetEntry_IQ(
-			assetEntryId, socialEquityValue);
-
-		socialEquityLogLocalService.incrementSocialEquityUser_CQ(
-			assetEntry.getGroupId(), assetEntry.getUserId(), socialEquityValue);
 
 		// Participation Equity
-		equityLogs = socialEquityLogPersistence.findByU_AID_A_T(
-			userId, actionId, true,
-			SocialEquitySettingConstants.TYPE_PARTICIPATION);
 
-		socialEquityValue = new SocialEquityValue(0,0);
+		if (checkSocialEquityEnabled(
+			assetEntry.getGroupId(), assetEntry.getClassName(),
+			SocialEquitySettingConstants.TYPE_PARTICIPATION)) {
 
-		for (SocialEquityLog equityLog : equityLogs) {
-			double k = calculateK(equityLog.getValue(),equityLog.getLifespan());
-			double b = calculateB(
-				equityLog.getActionDate(), equityLog.getValue(),
-				equityLog.getLifespan());
+			List<SocialEquityLog> equityLogs =
+				socialEquityLogPersistence.findByU_AID_A_T(
+					userId, actionId, true,
+					SocialEquitySettingConstants.TYPE_PARTICIPATION);
 
-			socialEquityValue.subtract(new SocialEquityValue(k,b));
+			SocialEquityValue socialEquityValue = new SocialEquityValue(0,0);
 
-			equityLog.setActive(false);
+			for (SocialEquityLog equityLog : equityLogs) {
+				double k = calculateK(
+					equityLog.getValue(),equityLog.getLifespan());
+				double b = calculateB(
+					equityLog.getActionDate(), equityLog.getValue(),
+					equityLog.getLifespan());
 
-			socialEquityLogPersistence.remove(equityLog);
+				socialEquityValue.subtract(new SocialEquityValue(k,b));
+
+				socialEquityLogPersistence.remove(equityLog);
+			}
+
+			socialEquityLogLocalService.incrementSocialEquityUser_PQ(
+				user.getGroup().getGroupId(), userId, socialEquityValue);
 		}
-
-		socialEquityLogLocalService.incrementSocialEquityUser_PQ(
-			user.getGroup().getGroupId(), userId, socialEquityValue);
 	}
 
 	public void deactivateEquityLogs(
@@ -606,6 +624,20 @@ public class SocialEquityLogLocalServiceImpl
 		else {
 			return false;
 		}
+	}
+
+	protected boolean checkSocialEquityEnabled(
+			long groupId, String className, int type)
+		throws SystemException {
+
+		if (!socialEquityGroupSettingLocalService.isSocialEquityEnabled(
+			groupId, Group.class.getName(), type)) {
+
+			return false;
+		}
+
+		return socialEquityGroupSettingLocalService.isSocialEquityEnabled(
+			groupId, className, type);
 	}
 
 	protected int getEquityDate() {
