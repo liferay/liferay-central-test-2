@@ -91,7 +91,7 @@ public class TearDownGmailUserTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("//div[2]/div/div/span/span[1]")) {
+						if (selenium.isVisible("//input[@type='checkbox']")) {
 							break;
 						}
 					}
@@ -101,7 +101,7 @@ public class TearDownGmailUserTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[2]/div/div/span/span[1]",
+				selenium.clickAt("//input[@type='checkbox']",
 					RuntimeVariables.replace("All"));
 				Thread.sleep(5000);
 
@@ -112,7 +112,7 @@ public class TearDownGmailUserTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[2]/div/div/div/div/div[2]/div/div/div/div[1]/div[1]/div[1]/div/div/div[1]/div[3]")) {
+									"//div[1]/div[1]/div/div/div[2]/div[3]")) {
 							break;
 						}
 					}
@@ -122,7 +122,7 @@ public class TearDownGmailUserTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[2]/div/div/div/div/div[2]/div/div/div/div[1]/div[1]/div[1]/div/div/div[1]/div[3]",
+				selenium.clickAt("//div[1]/div[1]/div/div/div[2]/div[3]",
 					RuntimeVariables.replace("Delete"));
 				Thread.sleep(5000);
 				Thread.sleep(5000);
