@@ -68,12 +68,12 @@ public class PortletConfigFactoryImpl implements PortletConfigFactory {
 		Map<String, PortletConfig> portletConfigs =
 			_pool.get(portlet.getRootPortletId());
 
-		PortletConfig portletConfig = portletConfigs.get(
-			portlet.getPortletId());
-
-		if (portletConfig == null) {
+		if (portletConfigs == null) {
 			return null;
 		}
+
+		PortletConfig portletConfig = portletConfigs.get(
+			portlet.getPortletId());
 
 		PortletContext portletContext = portletConfig.getPortletContext();
 
