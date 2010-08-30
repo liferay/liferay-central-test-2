@@ -808,7 +808,7 @@ ${exception.message}
 					src="${project.dir}/tools/jamwiki-0.9.1-src.zip"
 				>
 					<patternset
-						includes="**/main/resources/ApplicationResources.properties,**/main/resources/logging.properties,**/main/resources/interwiki.properties"
+						includes="**/main/resources/ApplicationResources.properties,**/main/resources/jamwiki-configuration.xml,**/main/resources/logging.properties,**/main/resources/interwiki.properties"
 					/>
 				</unzip>
 
