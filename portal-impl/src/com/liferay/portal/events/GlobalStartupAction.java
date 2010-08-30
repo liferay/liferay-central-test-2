@@ -38,11 +38,14 @@ import com.liferay.portal.util.BrowserLauncher;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.util.SystemProperties;
 
 import java.io.File;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.jamwiki.Environment;
 
 /**
  * @author Brian Wing Shun Chan
@@ -226,6 +229,11 @@ public class GlobalStartupAction extends SimpleAction {
 		catch (Exception e) {
 			_log.error(e);
 		}
+
+		// JAMWiki
+
+		String tempDirectory = SystemProperties.get(SystemProperties.TMP_DIR);
+		Environment.setValue(Environment.PROP_BASE_FILE_DIR, tempDirectory);
 
 		// JCR
 

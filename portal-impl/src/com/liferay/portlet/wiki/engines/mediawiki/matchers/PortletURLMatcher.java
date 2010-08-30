@@ -40,7 +40,7 @@ public class PortletURLMatcher extends CallbackMatcher {
 		return replaceMatches(charSequence, _callBack);
 	}
 
-	private static final String _TITLE_PLACEHOLDER = "[$TITLE_PLACEHOLDER$]";
+	private static final String _TITLE_PLACEHOLDER = "__TITLE_PLACEHOLDER__";
 
 	private Callback _callBack = new Callback() {
 

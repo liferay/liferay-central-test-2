@@ -41,7 +41,7 @@
 
 <pre>
 [[Internal Link | Optional Label]]
-[http://www.example.com/external/link Optional Label]
+[http://example.com External Link]
 </pre>
 
 <h4>
@@ -61,7 +61,7 @@
 
 <pre>
 [[Image:attached-image.png]]
-[[Image:Page Name/other-image.jpg]]
+[[Image:Page Name/image.jpg]]
 </pre>
 
 <h4>
@@ -69,7 +69,10 @@
 </h4>
 
 <pre>
-Table of contents: added automatically
-Code block: start each line with a space
-&lt;code&gt;Inline code&lt;/code&gt;
+Table of contents:
+	Added automatically
+Code block:
+	Start each line with a space
+Inline code:
+	&lt;code&gt;Test.java&lt;/code&gt;
 </pre>
