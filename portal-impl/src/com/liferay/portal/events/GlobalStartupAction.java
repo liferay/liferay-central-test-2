@@ -232,8 +232,9 @@ public class GlobalStartupAction extends SimpleAction {
 
 		// JAMWiki
 
-		String tempDirectory = SystemProperties.get(SystemProperties.TMP_DIR);
-		Environment.setValue(Environment.PROP_BASE_FILE_DIR, tempDirectory);
+		String tmpDir = SystemProperties.get(SystemProperties.TMP_DIR);
+
+		Environment.setValue(Environment.PROP_BASE_FILE_DIR, tmpDir);
 
 		// JCR
 
