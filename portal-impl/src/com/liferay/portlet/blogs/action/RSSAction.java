@@ -78,7 +78,8 @@ public class RSSAction extends PortletAction {
 		double version = ParamUtil.getDouble(
 			resourceRequest, "version", RSSUtil.DEFAULT_VERSION);
 		String displayStyle = ParamUtil.getString(
-			resourceRequest, "displayStyle", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
+			resourceRequest, "displayStyle",
+			RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 
 		String feedURL =
 			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
