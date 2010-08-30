@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Portal;
@@ -28,17 +27,14 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.util.RSSUtil;
-import com.liferay.util.servlet.ServletResponseUtil;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
+import java.io.OutputStream;
+
 import javax.portlet.PortletConfig;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
 import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
@@ -46,48 +42,24 @@ import org.apache.struts.action.ActionMapping;
  */
 public class RSSAction extends PortletAction {
 
-	public ActionForward strutsExecute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response)
-		throws Exception {
-
-		try {
-			ServletResponseUtil.sendFile(
-				request, response, null, getRSS(request),
-				ContentTypes.TEXT_XML_UTF8);
-
-			return null;
-		}
-		catch (Exception e) {
-			PortalUtil.sendError(e, request, response);
-
-			return null;
-		}
-	}
-
-	public void processAction(
+	public void serveResource(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
+		resourceResponse.setContentType(ContentTypes.TEXT_XML_UTF8);
+
+		OutputStream os = resourceResponse.getPortletOutputStream();
+
 		try {
-			HttpServletRequest request = PortalUtil.getHttpServletRequest(
-				actionRequest);
-			HttpServletResponse response = PortalUtil.getHttpServletResponse(
-				actionResponse);
-
-			ServletResponseUtil.sendFile(
-				request, response, null, getRSS(request),
-				ContentTypes.TEXT_XML_UTF8);
-
-			setForward(actionRequest, ActionConstants.COMMON_NULL);
+			os.write(getRSS(resourceRequest));
 		}
-		catch (Exception e) {
-			PortalUtil.sendError(e, actionRequest, actionResponse);
+		finally {
+			os.close();
 		}
 	}
 
-	protected byte[] getRSS(HttpServletRequest request) throws Exception {
+	protected byte[] getRSS(ResourceRequest request) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 

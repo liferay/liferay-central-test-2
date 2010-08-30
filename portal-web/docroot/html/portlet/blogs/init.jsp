@@ -74,30 +74,6 @@ String rssFormat = preferences.getValue("rss-format", "atom10");
 String rssFormatType = RSSUtil.getFormatType(rssFormat);
 double rssFormatVersion = RSSUtil.getFormatVersion(rssFormat);
 
-StringBuilder rssURLParams = new StringBuilder();
-
-if ((rssDelta != SearchContainer.DEFAULT_DELTA) || !rssFormatType.equals(RSSUtil.DEFAULT_TYPE) || (rssFormatVersion != RSSUtil.DEFAULT_VERSION) || !rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) {
-	if (rssDelta != SearchContainer.DEFAULT_DELTA) {
-		rssURLParams.append("&max=");
-		rssURLParams.append(rssDelta);
-	}
-
-	if (!rssFormatType.equals(RSSUtil.DEFAULT_TYPE)) {
-		rssURLParams.append("&type=");
-		rssURLParams.append(rssFormatType);
-	}
-
-	if (rssFormatVersion != RSSUtil.DEFAULT_VERSION) {
-		rssURLParams.append("&version=");
-		rssURLParams.append(rssFormatVersion);
-	}
-
-	if (!rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) {
-		rssURLParams.append("&displayStyle=");
-		rssURLParams.append(rssDisplayStyle);
-	}
-}
-
 boolean showSearch = true;
 boolean showEditEntryPermissions = true;
 

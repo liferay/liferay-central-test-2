@@ -106,10 +106,28 @@ for (Object result : results) {
 <%
 }
 
-String rssURL = PortalUtil.getLayoutURL(layout, themeDisplay) + Portal.FRIENDLY_URL_SEPARATOR + "blogs/rss";
+ResourceURL rssURL = new PortletURLImpl(request, PortletKeys.BLOGS, layout.getPlid(), PortletRequest.RESOURCE_PHASE);
 
-if (rssURLParams.length() > 0) {
-	rssURL += "?" + rssURLParams.substring(1);
+rssURL.setCacheability(ResourceURL.FULL);
+
+rssURL.setParameter("struts_action", "/blogs/rss");
+
+if ((rssDelta != SearchContainer.DEFAULT_DELTA) || !rssFormatType.equals(RSSUtil.DEFAULT_TYPE) || (rssFormatVersion != RSSUtil.DEFAULT_VERSION) || !rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) {
+	if (rssDelta != SearchContainer.DEFAULT_DELTA) {
+		rssURL.setParameter("max", String.valueOf(rssDelta));
+	}
+
+	if (!rssFormatType.equals(RSSUtil.DEFAULT_TYPE)) {
+		rssURL.setParameter("type", rssFormatType);
+	}
+
+	if (rssFormatVersion != RSSUtil.DEFAULT_VERSION) {
+		rssURL.setParameter("version", String.valueOf(rssFormatVersion));
+	}
+
+	if (!rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) {
+		rssURL.setParameter("displayStyle", rssDisplayStyle);
+	}
 }
 %>
 
@@ -119,7 +137,7 @@ if (rssURLParams.length() > 0) {
 		label="<%= true %>"
 		method="get"
 		target="_blank"
-		url="<%= rssURL %>"
+		url="<%= rssURL.toString() %>"
 	/>
 
 	<c:if test="<%= showSubscribeButton %>">

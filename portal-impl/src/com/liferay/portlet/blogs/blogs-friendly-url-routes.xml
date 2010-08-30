@@ -10,8 +10,8 @@
 	</route>
 	<route>
 		<pattern>/rss</pattern>
-		<implicit-parameter name="p_p_lifecycle">1</implicit-parameter>
-		<implicit-parameter name="p_p_state">exclusive</implicit-parameter>
+		<ignored-parameter name="p_p_cacheability" />
+		<implicit-parameter name="p_p_lifecycle">2</implicit-parameter>
 		<implicit-parameter name="struts_action">/blogs/rss</implicit-parameter>
 	</route>
 	<route>
