@@ -15,6 +15,7 @@
 package com.liferay.portlet.socialequityadmin.action;
 
 import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -23,6 +24,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.social.model.SocialEquityActionMapping;
 import com.liferay.portlet.social.model.SocialEquitySetting;
 import com.liferay.portlet.social.model.SocialEquitySettingConstants;
+import com.liferay.portlet.social.service.SocialEquityLogLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialEquitySettingLocalServiceUtil;
 
 import java.util.ArrayList;
@@ -55,15 +57,21 @@ public class ViewAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String[] classNames = PortalUtil.getSocialEquityClassNames();
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		for (String className : classNames) {
-			List<SocialEquityActionMapping> mergedEquityActionMappings =
-				getMergedEquityActionMappings(actionRequest, className);
+		if ("updateRanking".equals(cmd)) {
+			SocialEquityLogLocalServiceUtil.updateRanks();
+		} else {
+			String[] classNames = PortalUtil.getSocialEquityClassNames();
 
-			SocialEquitySettingLocalServiceUtil.updateSocialEquitySettings(
-				themeDisplay.getScopeGroupId(), className,
-				mergedEquityActionMappings);
+			for (String className : classNames) {
+				List<SocialEquityActionMapping> mergedEquityActionMappings =
+					getMergedEquityActionMappings(actionRequest, className);
+
+				SocialEquitySettingLocalServiceUtil.updateSocialEquitySettings(
+					themeDisplay.getScopeGroupId(), className,
+					mergedEquityActionMappings);
+			}
 		}
 
 		sendRedirect(actionRequest, actionResponse);
