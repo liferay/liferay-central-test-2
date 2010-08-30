@@ -1812,7 +1812,7 @@ file.
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.postgresql.host} C:\Progra~1\PostgreSQL\8.3\bin\psql.exe -U ${db.postgresql.username} -f C:\${temp.dir}\${sql.file}" />
+			<arg line="-pw ${vm.password} ${vm.username}@${db.postgresql.host} C:\Progra~1\PostgreSQL\8.4\bin\psql.exe -U ${db.postgresql.username} -f C:\${temp.dir}\${sql.file}" />
 		</exec>
 
 		<exec executable="${plink.executable}">
