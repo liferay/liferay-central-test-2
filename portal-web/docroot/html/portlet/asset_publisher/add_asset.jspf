@@ -15,7 +15,7 @@
 %>
 
 <%
-Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, renderResponse, allAssetTagNames, classNameIds);
+Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, renderResponse, allAssetTagNames, assetEntryQuery.getAllCategoryIds(), classNameIds);
 %>
 
 <c:if test="<%= !addPortletURLs.isEmpty() %>">
@@ -50,7 +50,7 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 </c:if>
 
 <%!
-public PortletURL getAddPortletURL(RenderRequest renderRequest, PortletResponse portletResponse, String[] allAssetTagNames, String className) throws Exception {
+public PortletURL getAddPortletURL(RenderRequest renderRequest, PortletResponse portletResponse, String[] allAssetTagNames, long[] allAssetCategoryIds, String className) throws Exception {
 	ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 	AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
@@ -77,6 +77,7 @@ public PortletURL getAddPortletURL(RenderRequest renderRequest, PortletResponse 
 
 				addPortletURL.setParameter("referringPortletResource", portletDisplay.getId());
 
+				addPortletURL.setParameter("assetCategoryIds", StringUtil.merge(allAssetCategoryIds));
 				addPortletURL.setParameter("assetTagNames", StringUtil.merge(allAssetTagNames));
 			}
 		}
@@ -85,7 +86,7 @@ public PortletURL getAddPortletURL(RenderRequest renderRequest, PortletResponse 
 	return addPortletURL;
 }
 
-public Map<String, PortletURL> getAddPortletURLs(RenderRequest renderRequest, PortletResponse portletResponse, String[] allAssetTagNames, long[] classNameIds) throws Exception {
+public Map<String, PortletURL> getAddPortletURLs(RenderRequest renderRequest, PortletResponse portletResponse, String[] allAssetTagNames, long[] allAssetCategoryIds, long[] classNameIds) throws Exception {
 	ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 	Map<String, PortletURL> addPortletURLs = new TreeMap<String, PortletURL>(new ModelResourceComparator(themeDisplay.getLocale()));
@@ -93,7 +94,7 @@ public Map<String, PortletURL> getAddPortletURLs(RenderRequest renderRequest, Po
 	for (long classNameId : classNameIds) {
 		ClassName className = ClassNameServiceUtil.getClassName(classNameId);
 
-		PortletURL addPortletURL = getAddPortletURL(renderRequest, portletResponse, allAssetTagNames, className.getValue());
+		PortletURL addPortletURL = getAddPortletURL(renderRequest, portletResponse, allAssetTagNames, allAssetCategoryIds, className.getValue());
 
 		if (addPortletURL != null) {
 			addPortletURLs.put(className.getValue(), addPortletURL);
