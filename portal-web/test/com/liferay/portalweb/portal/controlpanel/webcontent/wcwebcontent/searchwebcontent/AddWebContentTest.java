@@ -104,43 +104,6 @@ public class AddWebContentTest extends BaseTestCase {
 		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body", RuntimeVariables.replace("Web Content Content"));
 		selenium.selectFrame("relative=top");
-		selenium.select("_15_type",
-			RuntimeVariables.replace("label=Announcements"));
-		selenium.select("_15_displayDateMonth",
-			RuntimeVariables.replace("label=April"));
-		selenium.select("_15_displayDateDay",
-			RuntimeVariables.replace("label=10"));
-		selenium.select("_15_displayDateYear",
-			RuntimeVariables.replace("label=2010"));
-		selenium.select("_15_displayDateHour",
-			RuntimeVariables.replace("label=12"));
-		selenium.select("_15_displayDateMinute",
-			RuntimeVariables.replace("label=:00"));
-		selenium.clickAt("_15_neverExpireCheckbox", RuntimeVariables.replace(""));
-		selenium.select("_15_expirationDateMonth",
-			RuntimeVariables.replace("label=January"));
-		selenium.select("_15_expirationDateDay",
-			RuntimeVariables.replace("label=27"));
-		selenium.select("_15_expirationDateYear",
-			RuntimeVariables.replace("label=2011"));
-		selenium.select("_15_expirationDateHour",
-			RuntimeVariables.replace("label=12"));
-		selenium.select("_15_expirationDateMinute",
-			RuntimeVariables.replace("label=:00"));
-		selenium.clickAt("_15_neverReviewCheckbox", RuntimeVariables.replace(""));
-		selenium.select("_15_reviewDateMonth",
-			RuntimeVariables.replace("label=September"));
-		selenium.select("_15_reviewDateDay",
-			RuntimeVariables.replace("label=16"));
-		selenium.select("_15_reviewDateYear",
-			RuntimeVariables.replace("label=2011"));
-		selenium.select("_15_reviewDateHour",
-			RuntimeVariables.replace("label=12"));
-		selenium.select("_15_reviewDateMinute",
-			RuntimeVariables.replace("label=:00"));
-		selenium.type("_15_description",
-			RuntimeVariables.replace("Web Content Description"));
-		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

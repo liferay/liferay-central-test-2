@@ -70,7 +70,8 @@ public class AddOrganizationPageTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				Thread.sleep(5000);
-				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+				selenium.clickAt("//strong/a",
+					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -102,7 +103,7 @@ public class AddOrganizationPageTest extends BaseTestCase {
 						"Your request processed successfully."),
 					selenium.getText("//section/div/div/div/div"));
 
-				boolean pagePresent = selenium.isVisible(
+				boolean pagePresent = selenium.isElementPresent(
 						"//li/ul/li[1]/div/div[3]/a");
 
 				if (pagePresent) {
@@ -111,10 +112,29 @@ public class AddOrganizationPageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li/div/div[1]",
+				selenium.clickAt("//div[2]/ul/li/div/div[1]",
 					RuntimeVariables.replace("Drop Down Arrow"));
 
 			case 3:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (RuntimeVariables.replace("Selenium Test Home Page")
+												.equals(selenium.getText(
+										"//li/ul/li[1]/div/div[3]/a"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				assertEquals(RuntimeVariables.replace("Selenium Test Home Page"),
 					selenium.getText("//li/ul/li[1]/div/div[3]/a"));
 

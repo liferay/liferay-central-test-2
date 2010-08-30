@@ -80,13 +80,23 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//input[@value='Save as Draft']</td>
+	<td>//input[@value='Publish']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//section/div/div/div/div</td>
 	<td>Your request processed successfully.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[3]/a</td>
+	<td>Web Content Name Expired</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//td[3]/a</td>
+	<td>Web Content Name Expired</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>

@@ -93,7 +93,7 @@ public class AddOrganizationPhoneNumberInvalidTest extends BaseTestCase {
 					selenium.getText("//section/div/div/div/div[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a valid phone number."),
-					selenium.getText("//div[5]/div[1]"));
+					selenium.getText("//div[@id='phoneNumbers']/div"));
 
 			case 100:
 				label = -1;

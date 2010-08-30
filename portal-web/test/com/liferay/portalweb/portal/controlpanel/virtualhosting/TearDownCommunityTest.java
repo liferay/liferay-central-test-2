@@ -53,7 +53,7 @@ public class TearDownCommunityTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 
 				boolean guestFirst1 = selenium.isPartialText("//tr[3]/td[1]",
-						"Guest");
+						"Liferay");
 
 				if (guestFirst1) {
 					label = 2;
@@ -89,7 +89,7 @@ public class TearDownCommunityTest extends BaseTestCase {
 			case 2:
 
 				boolean guestFirst2 = selenium.isPartialText("//tr[3]/td[1]",
-						"Guest");
+						"Liferay");
 
 				if (guestFirst2) {
 					label = 3;
@@ -125,7 +125,7 @@ public class TearDownCommunityTest extends BaseTestCase {
 			case 3:
 
 				boolean guestFirst3 = selenium.isPartialText("//tr[3]/td[1]",
-						"Guest");
+						"Liferay");
 
 				if (guestFirst3) {
 					label = 4;
@@ -161,7 +161,7 @@ public class TearDownCommunityTest extends BaseTestCase {
 			case 4:
 
 				boolean guestFirst4 = selenium.isPartialText("//tr[3]/td[1]",
-						"Guest");
+						"Liferay");
 
 				if (guestFirst4) {
 					label = 5;
@@ -197,7 +197,7 @@ public class TearDownCommunityTest extends BaseTestCase {
 			case 5:
 
 				boolean guestFirst5 = selenium.isPartialText("//tr[3]/td[1]",
-						"Guest");
+						"Liferay");
 
 				if (guestFirst5) {
 					label = 6;

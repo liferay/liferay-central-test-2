@@ -31,7 +31,7 @@ public class AssertNotMergeOrganizationPageTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -61,5 +61,8 @@ public class AssertNotMergeOrganizationPageTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Selenium Test Home Page"));
 		selenium.close();
 		selenium.selectWindow("null");
+		selenium.open("/web/guest/home/");
+		assertTrue(selenium.isElementPresent("link=Welcome"));
+		assertFalse(selenium.isElementPresent("link=Selenium Test Home Page"));
 	}
 }

@@ -47,6 +47,8 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Web Content']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.type("_15_title",
+			RuntimeVariables.replace("Hello World Localized Article"));
 		selenium.click("//fieldset/div/div/span/span/input");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Selecting a template will change the structure, available input fields, and available templates[\\s\\S] Do you want to proceed[\\s\\S]$"));
@@ -75,161 +77,20 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 		Thread.sleep(5000);
 		assertTrue(selenium.isPartialText("//fieldset/div/div/div/div/span",
 				"Test Localized Structure"));
-		assertTrue(selenium.isElementPresent("link=Test Localized Template"));
-		selenium.clickAt("_15_editStructureBtn",
-			RuntimeVariables.replace("Edit"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//div[4]/span[2]/span/input")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//div[4]/span[2]/span/input",
-			RuntimeVariables.replace("Edit Options"));
-		assertFalse(selenium.isChecked("_15_localizedCheckbox"));
-		selenium.clickAt("_15_localizedCheckbox", RuntimeVariables.replace(""));
-		assertTrue(selenium.isChecked("_15_localizedCheckbox"));
-		selenium.clickAt("_15_save", RuntimeVariables.replace("Save"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace(
-							"Your request processed successfully.")
-										.equals(selenium.getText(
-								"_15_journalMessage"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
-			selenium.getText("_15_journalMessage"));
-		selenium.clickAt("_15_close", RuntimeVariables.replace("Close"));
-		Thread.sleep(5000);
-		selenium.clickAt("//li[2]/span[2]/div/div[4]/span[2]/span/input",
-			RuntimeVariables.replace("Edit Options"));
-		assertFalse(selenium.isChecked("_15_localizedCheckbox"));
-		selenium.clickAt("_15_localizedCheckbox", RuntimeVariables.replace(""));
-		assertTrue(selenium.isChecked("_15_localizedCheckbox"));
-		selenium.clickAt("_15_save", RuntimeVariables.replace("Save"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace(
-							"Your request processed successfully.")
-										.equals(selenium.getText(
-								"_15_journalMessage"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
-			selenium.getText("_15_journalMessage"));
-		selenium.clickAt("_15_close", RuntimeVariables.replace("Close"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("_15_saveStructureBtn")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("_15_saveStructureBtn",
-			RuntimeVariables.replace("Save"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//div/button[1]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//div/button[1]", RuntimeVariables.replace("Save"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace(
-							"Your request processed successfully.")
-										.equals(selenium.getText(
-								"_15_saveStructureMessage"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
-			selenium.getText("_15_saveStructureMessage"));
-		selenium.clickAt("closethick", RuntimeVariables.replace(""));
-		selenium.clickAt("_15_editStructureBtn",
-			RuntimeVariables.replace("Stop Editing"));
-		Thread.sleep(5000);
-		selenium.type("page-name",
-			RuntimeVariables.replace("Hello World Page Name"));
-		selenium.type("page-description",
-			RuntimeVariables.replace("Hello World Page Description"));
-		selenium.type("_15_title",
-			RuntimeVariables.replace("Hello World Localized Article"));
-		Thread.sleep(5000);
+		assertFalse(selenium.isChecked("//span[2]/div/span/span/span/input[2]"));
+		selenium.clickAt("//span[2]/div/span/span/span/input[2]",
+			RuntimeVariables.replace("Localized"));
+		assertTrue(selenium.isChecked("//span[2]/div/span/span/span/input[2]"));
+		assertFalse(selenium.isChecked(
+				"//li[2]/span[2]/div/span/span/span/input[2]"));
+		selenium.clickAt("//li[2]/span[2]/div/span/span/span/input[2]",
+			RuntimeVariables.replace("Localized"));
+		assertTrue(selenium.isChecked(
+				"//li[2]/span[2]/div/span/span/span/input[2]"));
 		selenium.clickAt("//input[@value='Save as Draft']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -250,6 +111,10 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		selenium.type("page-name",
+			RuntimeVariables.replace("Hello World Page Name"));
+		selenium.type("page-description",
+			RuntimeVariables.replace("Hello World Page Description"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -269,6 +134,8 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 
 		selenium.select("_15_languageId",
 			RuntimeVariables.replace("label=Chinese (China)"));
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Would you like to save the changes made to this language[\\s\\S]$"));
 		Thread.sleep(5000);
 		selenium.type("page-name",
 			RuntimeVariables.replace("\u4e16\u754c\u60a8\u597d Page Name"));

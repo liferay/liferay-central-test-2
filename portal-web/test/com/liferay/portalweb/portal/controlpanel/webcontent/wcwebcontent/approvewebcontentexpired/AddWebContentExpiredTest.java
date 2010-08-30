@@ -106,12 +106,17 @@ public class AddWebContentExpiredTest extends BaseTestCase {
 		selenium.type("//body",
 			RuntimeVariables.replace("Web Content Content Expired"));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("//input[@value='Save as Draft']",
+		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));
+		assertEquals(RuntimeVariables.replace("Web Content Name Expired"),
+			selenium.getText("//td[3]/a"));
+		selenium.clickAt("//td[3]/a",
+			RuntimeVariables.replace("Web Content Name Expired"));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//input[@value='Expire']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

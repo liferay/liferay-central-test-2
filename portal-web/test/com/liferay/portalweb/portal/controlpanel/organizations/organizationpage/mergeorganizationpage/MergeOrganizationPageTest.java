@@ -70,7 +70,8 @@ public class MergeOrganizationPageTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				Thread.sleep(5000);
-				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+				selenium.clickAt("//strong/a",
+					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {

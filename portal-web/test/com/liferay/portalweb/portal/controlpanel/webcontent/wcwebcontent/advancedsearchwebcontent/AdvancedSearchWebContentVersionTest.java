@@ -89,7 +89,7 @@ public class AdvancedSearchWebContentVersionTest extends BaseTestCase {
 				selenium.type("_15_version", RuntimeVariables.replace(""));
 				assertEquals(RuntimeVariables.replace("Web Content Name"),
 					selenium.getText("//td[3]/a"));
-				selenium.type("_15_version", RuntimeVariables.replace("11.01"));
+				selenium.type("_15_version", RuntimeVariables.replace("1.1"));
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");

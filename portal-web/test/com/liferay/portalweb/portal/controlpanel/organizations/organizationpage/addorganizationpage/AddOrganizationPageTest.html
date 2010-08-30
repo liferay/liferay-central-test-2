@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>AddOrganizationPageTest</title>
 </head>
 <body>
@@ -69,17 +66,17 @@
 <tr>
 	<td>clickAt</td>
 	<td>//strong/a</td>
-	<td></td>
+	<td>Actions</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
-	<td></td>
+	<td>Manage Pages</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
 	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
-	<td></td>
+	<td>Manage Pages</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -103,7 +100,7 @@
 </tr>
 <tr>
 	<td>store</td>
-	<td>eval(selenium.isVisible('//li/ul/li[1]/div/div[3]/a'))</td>
+	<td>eval(selenium.isElementPresent('//li/ul/li[1]/div/div[3]/a'))</td>
 	<td>pagePresent</td>
 </tr>
 <tr>
@@ -113,13 +110,18 @@
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//li/div/div[1]</td>
+	<td>//div[2]/ul/li/div/div[1]</td>
 	<td>Drop Down Arrow</td>
 </tr>
 <tr>
 	<td>label</td>
 	<td>PagePresent</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//li/ul/li[1]/div/div[3]/a</td>
+	<td>Selenium Test Home Page</td>
 </tr>
 <tr>
 	<td>assertText</td>
