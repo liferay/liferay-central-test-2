@@ -57,10 +57,12 @@ public class ViewAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		long groupId = themeDisplay.getScopeGroupId();
+
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if ("updateRanking".equals(cmd)) {
-			SocialEquityLogLocalServiceUtil.updateRanks();
+			SocialEquityLogLocalServiceUtil.updateRanks(groupId);
 		} else {
 			String[] classNames = PortalUtil.getSocialEquityClassNames();
 
@@ -69,8 +71,7 @@ public class ViewAction extends PortletAction {
 					getMergedEquityActionMappings(actionRequest, className);
 
 				SocialEquitySettingLocalServiceUtil.updateSocialEquitySettings(
-					themeDisplay.getScopeGroupId(), className,
-					mergedEquityActionMappings);
+					groupId, className, mergedEquityActionMappings);
 			}
 		}
 

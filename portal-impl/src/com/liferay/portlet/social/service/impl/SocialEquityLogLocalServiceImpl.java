@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.increment.BufferedIncrement;
 import com.liferay.portal.kernel.increment.SocialEquityIncrement;
-import com.liferay.portal.kernel.messaging.async.Async;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PropsValues;
@@ -377,7 +376,6 @@ public class SocialEquityLogLocalServiceImpl
 		runSQL(sql);
 	}
 
-	@Async
 	public void updateRanks() {
 		DataSource dataSource = socialEquityLogPersistence.getDataSource();
 
@@ -390,6 +388,33 @@ public class SocialEquityLogLocalServiceImpl
 
 		sql = StringUtil.replace(
 			sql, "[$ACTION_DATE$]", String.valueOf(getEquityDate()));
+
+		jdbcTemplate.query(sql, updateRanksHandler);
+
+		updateRanksHandler.flush();
+	}
+
+	public void updateRanks(long groupId) {
+		DataSource dataSource = socialEquityLogPersistence.getDataSource();
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+
+		UpdateRanksHandler updateRanksHandler = new UpdateRanksHandler(
+			jdbcTemplate);
+
+		String sql = CustomSQLUtil.get(
+			_FIND_SOCIAL_EQUITY_USER_BY_RANK_FOR_GROUP);
+
+		sql = StringUtil.replace(
+			sql,
+			new String[] {
+				"[$GROUP_ID$]",
+				"[$ACTION_DATE$]"
+			},
+			new String[] {
+				String.valueOf(groupId),
+				String.valueOf(getEquityDate())
+			});
 
 		jdbcTemplate.query(sql, updateRanksHandler);
 
@@ -646,6 +671,10 @@ public class SocialEquityLogLocalServiceImpl
 	private static final String _FIND_SOCIAL_EQUITY_USER_BY_RANK =
 		SocialEquityLogLocalServiceImpl.class.getName() +
 			".findSocialEquityUserByRank";
+
+	private static final String _FIND_SOCIAL_EQUITY_USER_BY_RANK_FOR_GROUP =
+		SocialEquityLogLocalServiceImpl.class.getName() +
+			".findSocialEquityUserByRankForGroup";
 
 	private static final String _UPDATE_SOCIAL_EQUITY_ASSET_ENTRY_IQ =
 		SocialEquityLogLocalServiceImpl.class.getName() +

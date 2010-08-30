@@ -292,6 +292,10 @@ public class SocialEquityLogLocalServiceUtil {
 		getService().updateRanks();
 	}
 
+	public static void updateRanks(long groupId) {
+		getService().updateRanks(groupId);
+	}
+
 	public static SocialEquityLogLocalService getService() {
 		if (_service == null) {
 			_service = (SocialEquityLogLocalService)PortalBeanLocatorUtil.locate(SocialEquityLogLocalService.class.getName());

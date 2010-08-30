@@ -250,4 +250,6 @@ public interface SocialEquityLogLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void updateRanks();
+
+	public void updateRanks(long groupId);
 }

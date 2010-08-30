@@ -294,6 +294,10 @@ public class SocialEquityLogLocalServiceWrapper
 		_socialEquityLogLocalService.updateRanks();
 	}
 
+	public void updateRanks(long groupId) {
+		_socialEquityLogLocalService.updateRanks(groupId);
+	}
+
 	public SocialEquityLogLocalService getWrappedSocialEquityLogLocalService() {
 		return _socialEquityLogLocalService;
 	}
