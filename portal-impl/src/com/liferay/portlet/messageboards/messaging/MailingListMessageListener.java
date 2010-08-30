@@ -64,7 +64,7 @@ public class MailingListMessageListener implements MessageListener {
 			store = getStore(mailingListRequest);
 
 			store.connect();
-			
+
 			folder = getFolder(store);
 
 			messages = folder.getMessages();
@@ -101,7 +101,6 @@ public class MailingListMessageListener implements MessageListener {
 	}
 
 	protected Folder getFolder(Store store) throws Exception {
-
 		Folder defaultFolder = store.getDefaultFolder();
 
 		Folder[] folders = defaultFolder.list();
