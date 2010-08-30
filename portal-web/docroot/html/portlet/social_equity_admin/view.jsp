@@ -33,11 +33,11 @@ portletURL.setParameter("struts_action", "/social_equity_admin/view");
 	<aui:input name="redirect" value="<%= currentURL %>" type="hidden" />
 
 	<%
-		String updateRanksCmd = renderResponse.getNamespace() + "saveServer('updateRanking');";
+	String taglibOnClick = renderResponse.getNamespace() + "saveServer('updateRanks');";
 	%>
 
 	<aui:button-row>
-		<aui:button type="button" onClick="<%= updateRanksCmd %>" value="update-ranking" />
+		<aui:button type="button" onClick="<%= taglibOnClick %>" value="update-ranking" />
 	</aui:button-row>
 
 	<%

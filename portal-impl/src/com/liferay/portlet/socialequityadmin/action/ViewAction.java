@@ -54,25 +54,13 @@ public class ViewAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		long groupId = themeDisplay.getScopeGroupId();
-
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		if ("updateRanking".equals(cmd)) {
-			SocialEquityLogLocalServiceUtil.updateRanks(groupId);
-		} else {
-			String[] classNames = PortalUtil.getSocialEquityClassNames();
-
-			for (String className : classNames) {
-				List<SocialEquityActionMapping> mergedEquityActionMappings =
-					getMergedEquityActionMappings(actionRequest, className);
-
-				SocialEquitySettingLocalServiceUtil.updateSocialEquitySettings(
-					groupId, className, mergedEquityActionMappings);
-			}
+		if (cmd.equals("updateRanks")) {
+			updateRanks(actionRequest);
+		}
+		else {
+			updateSocialEquitySettings(actionRequest);
 		}
 
 		sendRedirect(actionRequest, actionResponse);
@@ -217,6 +205,32 @@ public class ViewAction extends PortletAction {
 
 		if (value >= 0) {
 			BeanPropertiesUtil.setProperty(equityActionMapping, param, value);
+		}
+	}
+
+	protected void updateRanks(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		SocialEquityLogLocalServiceUtil.updateRanks(
+			themeDisplay.getScopeGroupId());
+	}
+
+	protected void updateSocialEquitySettings(ActionRequest actionRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String[] classNames = PortalUtil.getSocialEquityClassNames();
+
+		for (String className : classNames) {
+			List<SocialEquityActionMapping> mergedEquityActionMappings =
+				getMergedEquityActionMappings(actionRequest, className);
+
+			SocialEquitySettingLocalServiceUtil.updateSocialEquitySettings(
+				themeDisplay.getScopeGroupId(), className,
+				mergedEquityActionMappings);
 		}
 	}
 

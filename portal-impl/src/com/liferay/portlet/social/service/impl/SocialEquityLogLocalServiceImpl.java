@@ -384,7 +384,7 @@ public class SocialEquityLogLocalServiceImpl
 		UpdateRanksHandler updateRanksHandler = new UpdateRanksHandler(
 			jdbcTemplate);
 
-		String sql = CustomSQLUtil.get(_FIND_SOCIAL_EQUITY_USER_BY_RANK);
+		String sql = CustomSQLUtil.get(_FIND_SOCIAL_EQUITY_USER);
 
 		sql = StringUtil.replace(
 			sql, "[$ACTION_DATE$]", String.valueOf(getEquityDate()));
@@ -402,18 +402,17 @@ public class SocialEquityLogLocalServiceImpl
 		UpdateRanksHandler updateRanksHandler = new UpdateRanksHandler(
 			jdbcTemplate);
 
-		String sql = CustomSQLUtil.get(
-			_FIND_SOCIAL_EQUITY_USER_BY_RANK_FOR_GROUP);
+		String sql = CustomSQLUtil.get(_FIND_SOCIAL_EQUITY_USER_BY_GROUP);
 
 		sql = StringUtil.replace(
 			sql,
 			new String[] {
-				"[$GROUP_ID$]",
-				"[$ACTION_DATE$]"
+				"[$ACTION_DATE$]",
+				"[$GROUP_ID$]"
 			},
 			new String[] {
-				String.valueOf(groupId),
-				String.valueOf(getEquityDate())
+				String.valueOf(getEquityDate()),
+				String.valueOf(groupId)
 			});
 
 		jdbcTemplate.query(sql, updateRanksHandler);
@@ -668,13 +667,13 @@ public class SocialEquityLogLocalServiceImpl
 		SocialEquityLogLocalServiceImpl.class.getName() +
 			".checkSocialEquityUser_PQ";
 
-	private static final String _FIND_SOCIAL_EQUITY_USER_BY_RANK =
+	private static final String _FIND_SOCIAL_EQUITY_USER =
 		SocialEquityLogLocalServiceImpl.class.getName() +
-			".findSocialEquityUserByRank";
+			".findSocialEquityUser";
 
-	private static final String _FIND_SOCIAL_EQUITY_USER_BY_RANK_FOR_GROUP =
+	private static final String _FIND_SOCIAL_EQUITY_USER_BY_GROUP =
 		SocialEquityLogLocalServiceImpl.class.getName() +
-			".findSocialEquityUserByRankForGroup";
+			".findSocialEquityUserByGroup";
 
 	private static final String _UPDATE_SOCIAL_EQUITY_ASSET_ENTRY_IQ =
 		SocialEquityLogLocalServiceImpl.class.getName() +
