@@ -28,14 +28,14 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.util.RSSUtil;
 
-import java.io.OutputStream;
-
 import javax.portlet.PortletConfig;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+
+import java.io.OutputStream;
 
 /**
  * @author Brian Wing Shun Chan
@@ -66,6 +66,7 @@ public class RSSAction extends PortletAction {
 		Layout layout = themeDisplay.getLayout();
 
 		long plid = ParamUtil.getLong(request, "p_l_id");
+		long doAsGroupId = ParamUtil.getLong(request, "doAsGroupId");
 		long companyId = ParamUtil.getLong(request, "companyId");
 		long groupId = ParamUtil.getLong(request, "groupId");
 		long organizationId = ParamUtil.getLong(request, "organizationId");
@@ -111,11 +112,16 @@ public class RSSAction extends PortletAction {
 				feedURL, entryURL, themeDisplay);
 		}
 		else if (layout != null) {
-			if (layout.hasScopeGroup()) {
-				groupId = layout.getScopeGroup().getGroupId();
+			if (layout.isTypeControlPanel()) {
+				groupId = doAsGroupId;
 			}
 			else {
-				groupId = layout.getGroupId();
+				if (layout.hasScopeGroup()) {
+					groupId = layout.getScopeGroup().getGroupId();
+				}
+				else {
+					groupId = layout.getGroupId();
+				}
 			}
 
 			feedURL =
