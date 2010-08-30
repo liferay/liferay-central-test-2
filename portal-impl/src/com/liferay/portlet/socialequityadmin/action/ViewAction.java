@@ -61,11 +61,11 @@ public class ViewAction extends PortletAction {
 		if (cmd.equals("updateRanks")) {
 			updateRanks(actionRequest);
 		}
-		else if ("toggleInformationEnabled".equals(cmd)) {
+		else if (cmd.equals("toggleInformationEnabled")) {
 			toggleFeature(
 				actionRequest, SocialEquitySettingConstants.TYPE_INFORMATION);
 		}
-		else if ("toggleParticipationEnabled".equals(cmd)) {
+		else if (cmd.equals("toggleParticipationEnabled")) {
 			toggleFeature(
 				actionRequest, SocialEquitySettingConstants.TYPE_PARTICIPATION);
 		}
