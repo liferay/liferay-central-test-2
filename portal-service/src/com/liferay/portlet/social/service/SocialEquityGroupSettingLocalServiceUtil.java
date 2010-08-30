@@ -229,17 +229,16 @@ public class SocialEquityGroupSettingLocalServiceUtil {
 			merge);
 	}
 
-	public static boolean isSocialEquityEnabled(long groupId,
-		java.lang.String className, int type)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().isSocialEquityEnabled(groupId, className, type);
+	public static boolean isEnabled(long groupId, java.lang.String className,
+		int type) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().isEnabled(groupId, className, type);
 	}
 
-	public static void updateSetting(long groupId, java.lang.String className,
-		int type, boolean value)
+	public static void updateEquityGroupSetting(long groupId,
+		java.lang.String className, int type, boolean value)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updateSetting(groupId, className, type, value);
+		getService().updateEquityGroupSetting(groupId, className, type, value);
 	}
 
 	public static SocialEquityGroupSettingLocalService getService() {

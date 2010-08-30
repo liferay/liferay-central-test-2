@@ -238,13 +238,13 @@ public class SocialEquitySettingLocalServiceUtil {
 		return getService().getEquitySettings(groupId, classNameId, actionId);
 	}
 
-	public static void updateSocialEquitySettings(long groupId,
+	public static void updateEquitySettings(long groupId,
 		java.lang.String className,
 		java.util.List<com.liferay.portlet.social.model.SocialEquityActionMapping> equityActionMappings)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.updateSocialEquitySettings(groupId, className, equityActionMappings);
+			.updateEquitySettings(groupId, className, equityActionMappings);
 	}
 
 	public static SocialEquitySettingLocalService getService() {

@@ -1809,7 +1809,7 @@
 		<field name="equityGroupSettingId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
-		<field name="className" type="String" />
+		<field name="classNameId" type="long" />
 		<field name="type" type="int" />
 		<field name="enabled" type="boolean" />
 	</model>

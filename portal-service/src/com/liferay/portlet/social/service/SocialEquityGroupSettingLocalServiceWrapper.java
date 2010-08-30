@@ -225,19 +225,18 @@ public class SocialEquityGroupSettingLocalServiceWrapper
 			merge);
 	}
 
-	public boolean isSocialEquityEnabled(long groupId,
-		java.lang.String className, int type)
+	public boolean isEnabled(long groupId, java.lang.String className, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _socialEquityGroupSettingLocalService.isSocialEquityEnabled(groupId,
+		return _socialEquityGroupSettingLocalService.isEnabled(groupId,
 			className, type);
 	}
 
-	public void updateSetting(long groupId, java.lang.String className,
-		int type, boolean value)
+	public void updateEquityGroupSetting(long groupId,
+		java.lang.String className, int type, boolean value)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_socialEquityGroupSettingLocalService.updateSetting(groupId, className,
-			type, value);
+		_socialEquityGroupSettingLocalService.updateEquityGroupSetting(groupId,
+			className, type, value);
 	}
 
 	public SocialEquityGroupSettingLocalService getWrappedSocialEquityGroupSettingLocalService() {

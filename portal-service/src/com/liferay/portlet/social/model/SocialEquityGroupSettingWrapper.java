@@ -65,8 +65,12 @@ public class SocialEquityGroupSettingWrapper implements SocialEquityGroupSetting
 		return _socialEquityGroupSetting.getClassName();
 	}
 
-	public void setClassName(java.lang.String className) {
-		_socialEquityGroupSetting.setClassName(className);
+	public long getClassNameId() {
+		return _socialEquityGroupSetting.getClassNameId();
+	}
+
+	public void setClassNameId(long classNameId) {
+		_socialEquityGroupSetting.setClassNameId(classNameId);
 	}
 
 	public int getType() {

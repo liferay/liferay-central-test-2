@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.social.model;
 
-import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 
@@ -97,19 +96,25 @@ public interface SocialEquityGroupSettingModel extends BaseModel<SocialEquityGro
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Gets the class name of this social equity group setting.
+	 * Gets the class name of the model instance this social equity group setting is polymorphically associated with.
 	 *
-	 * @return the class name of this social equity group setting
+	 * @return the class name of the model instance this social equity group setting is polymorphically associated with
 	 */
-	@AutoEscape
 	public String getClassName();
 
 	/**
-	 * Sets the class name of this social equity group setting.
+	 * Gets the class name id of this social equity group setting.
 	 *
-	 * @param className the class name of this social equity group setting
+	 * @return the class name id of this social equity group setting
 	 */
-	public void setClassName(String className);
+	public long getClassNameId();
+
+	/**
+	 * Sets the class name id of this social equity group setting.
+	 *
+	 * @param classNameId the class name id of this social equity group setting
+	 */
+	public void setClassNameId(long classNameId);
 
 	/**
 	 * Gets the type of this social equity group setting.

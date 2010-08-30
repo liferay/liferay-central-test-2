@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -56,11 +57,11 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 			{ "equityGroupSettingId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "companyId", new Integer(Types.BIGINT) },
-			{ "className", new Integer(Types.VARCHAR) },
+			{ "classNameId", new Integer(Types.BIGINT) },
 			{ "type_", new Integer(Types.INTEGER) },
 			{ "enabled", new Integer(Types.BOOLEAN) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table SocialEquityGroupSetting (equityGroupSettingId LONG not null primary key,groupId LONG,companyId LONG,className VARCHAR(75) null,type_ INTEGER,enabled BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table SocialEquityGroupSetting (equityGroupSettingId LONG not null primary key,groupId LONG,companyId LONG,classNameId LONG,type_ INTEGER,enabled BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table SocialEquityGroupSetting";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -124,24 +125,29 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 	}
 
 	public String getClassName() {
-		if (_className == null) {
+		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
 		}
-		else {
-			return _className;
+
+		return PortalUtil.getClassName(getClassNameId());
+	}
+
+	public long getClassNameId() {
+		return _classNameId;
+	}
+
+	public void setClassNameId(long classNameId) {
+		_classNameId = classNameId;
+
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
+
+			_originalClassNameId = classNameId;
 		}
 	}
 
-	public void setClassName(String className) {
-		_className = className;
-
-		if (_originalClassName == null) {
-			_originalClassName = className;
-		}
-	}
-
-	public String getOriginalClassName() {
-		return GetterUtil.getString(_originalClassName);
+	public long getOriginalClassNameId() {
+		return _originalClassNameId;
 	}
 
 	public int getType() {
@@ -204,7 +210,7 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 		clone.setEquityGroupSettingId(getEquityGroupSettingId());
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
-		clone.setClassName(getClassName());
+		clone.setClassNameId(getClassNameId());
 		clone.setType(getType());
 		clone.setEnabled(getEnabled());
 
@@ -262,8 +268,8 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
-		sb.append(", className=");
-		sb.append(getClassName());
+		sb.append(", classNameId=");
+		sb.append(getClassNameId());
 		sb.append(", type=");
 		sb.append(getType());
 		sb.append(", enabled=");
@@ -293,8 +299,8 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>className</column-name><column-value><![CDATA[");
-		sb.append(getClassName());
+			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
+		sb.append(getClassNameId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
@@ -315,8 +321,9 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
 	private long _companyId;
-	private String _className;
-	private String _originalClassName;
+	private long _classNameId;
+	private long _originalClassNameId;
+	private boolean _setOriginalClassNameId;
 	private int _type;
 	private int _originalType;
 	private boolean _setOriginalType;

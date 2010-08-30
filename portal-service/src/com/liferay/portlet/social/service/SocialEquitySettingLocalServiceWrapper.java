@@ -239,12 +239,11 @@ public class SocialEquitySettingLocalServiceWrapper
 			classNameId, actionId);
 	}
 
-	public void updateSocialEquitySettings(long groupId,
-		java.lang.String className,
+	public void updateEquitySettings(long groupId, java.lang.String className,
 		java.util.List<com.liferay.portlet.social.model.SocialEquityActionMapping> equityActionMappings)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_socialEquitySettingLocalService.updateSocialEquitySettings(groupId,
+		_socialEquitySettingLocalService.updateEquitySettings(groupId,
 			className, equityActionMappings);
 	}
 

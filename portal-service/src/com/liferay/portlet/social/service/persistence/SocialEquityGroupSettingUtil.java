@@ -202,52 +202,51 @@ public class SocialEquityGroupSettingUtil {
 	}
 
 	/**
-	* Finds the social equity group setting where groupId = &#63; and className = &#63; and type = &#63; or throws a {@link com.liferay.portlet.social.NoSuchEquityGroupSettingException} if it could not be found.
+	* Finds the social equity group setting where groupId = &#63; and classNameId = &#63; and type = &#63; or throws a {@link com.liferay.portlet.social.NoSuchEquityGroupSettingException} if it could not be found.
 	*
 	* @param groupId the group id to search with
-	* @param className the class name to search with
+	* @param classNameId the class name id to search with
 	* @param type the type to search with
 	* @return the matching social equity group setting
 	* @throws com.liferay.portlet.social.NoSuchEquityGroupSettingException if a matching social equity group setting could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portlet.social.model.SocialEquityGroupSetting findByG_C_T(
-		long groupId, java.lang.String className, int type)
+		long groupId, long classNameId, int type)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityGroupSettingException {
-		return getPersistence().findByG_C_T(groupId, className, type);
+		return getPersistence().findByG_C_T(groupId, classNameId, type);
 	}
 
 	/**
-	* Finds the social equity group setting where groupId = &#63; and className = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Finds the social equity group setting where groupId = &#63; and classNameId = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
 	* @param groupId the group id to search with
-	* @param className the class name to search with
+	* @param classNameId the class name id to search with
 	* @param type the type to search with
 	* @return the matching social equity group setting, or <code>null</code> if a matching social equity group setting could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portlet.social.model.SocialEquityGroupSetting fetchByG_C_T(
-		long groupId, java.lang.String className, int type)
+		long groupId, long classNameId, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByG_C_T(groupId, className, type);
+		return getPersistence().fetchByG_C_T(groupId, classNameId, type);
 	}
 
 	/**
-	* Finds the social equity group setting where groupId = &#63; and className = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Finds the social equity group setting where groupId = &#63; and classNameId = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param groupId the group id to search with
-	* @param className the class name to search with
+	* @param classNameId the class name id to search with
 	* @param type the type to search with
 	* @return the matching social equity group setting, or <code>null</code> if a matching social equity group setting could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portlet.social.model.SocialEquityGroupSetting fetchByG_C_T(
-		long groupId, java.lang.String className, int type,
-		boolean retrieveFromCache)
+		long groupId, long classNameId, int type, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .fetchByG_C_T(groupId, className, type, retrieveFromCache);
+				   .fetchByG_C_T(groupId, classNameId, type, retrieveFromCache);
 	}
 
 	/**
@@ -300,18 +299,17 @@ public class SocialEquityGroupSettingUtil {
 	}
 
 	/**
-	* Removes the social equity group setting where groupId = &#63; and className = &#63; and type = &#63; from the database.
+	* Removes the social equity group setting where groupId = &#63; and classNameId = &#63; and type = &#63; from the database.
 	*
 	* @param groupId the group id to search with
-	* @param className the class name to search with
+	* @param classNameId the class name id to search with
 	* @param type the type to search with
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeByG_C_T(long groupId, java.lang.String className,
-		int type)
+	public static void removeByG_C_T(long groupId, long classNameId, int type)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchEquityGroupSettingException {
-		getPersistence().removeByG_C_T(groupId, className, type);
+		getPersistence().removeByG_C_T(groupId, classNameId, type);
 	}
 
 	/**
@@ -325,17 +323,17 @@ public class SocialEquityGroupSettingUtil {
 	}
 
 	/**
-	* Counts all the social equity group settings where groupId = &#63; and className = &#63; and type = &#63;.
+	* Counts all the social equity group settings where groupId = &#63; and classNameId = &#63; and type = &#63;.
 	*
 	* @param groupId the group id to search with
-	* @param className the class name to search with
+	* @param classNameId the class name id to search with
 	* @param type the type to search with
 	* @return the number of matching social equity group settings
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByG_C_T(long groupId, java.lang.String className,
-		int type) throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByG_C_T(groupId, className, type);
+	public static int countByG_C_T(long groupId, long classNameId, int type)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByG_C_T(groupId, classNameId, type);
 	}
 
 	/**

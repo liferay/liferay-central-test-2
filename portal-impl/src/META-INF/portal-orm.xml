@@ -2336,7 +2336,7 @@
 			<id name="equityGroupSettingId" />
 			<basic name="groupId" />
 			<basic name="companyId" />
-			<basic name="className" />
+			<basic name="classNameId" />
 			<basic name="type">
 				<column name="TYPE_" />
 			</basic>

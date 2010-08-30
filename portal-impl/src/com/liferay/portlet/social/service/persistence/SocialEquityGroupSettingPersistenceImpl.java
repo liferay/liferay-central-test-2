@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.GroupPersistence;
@@ -77,14 +76,14 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 			SocialEquityGroupSettingModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_ENTITY, "fetchByG_C_T",
 			new String[] {
-				Long.class.getName(), String.class.getName(),
+				Long.class.getName(), Long.class.getName(),
 				Integer.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_COUNT_BY_G_C_T = new FinderPath(SocialEquityGroupSettingModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityGroupSettingModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByG_C_T",
 			new String[] {
-				Long.class.getName(), String.class.getName(),
+				Long.class.getName(), Long.class.getName(),
 				Integer.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(SocialEquityGroupSettingModelImpl.ENTITY_CACHE_ENABLED,
@@ -107,8 +106,7 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_T,
 			new Object[] {
 				new Long(socialEquityGroupSetting.getGroupId()),
-				
-			socialEquityGroupSetting.getClassName(),
+				new Long(socialEquityGroupSetting.getClassNameId()),
 				new Integer(socialEquityGroupSetting.getType())
 			}, socialEquityGroupSetting);
 	}
@@ -159,8 +157,7 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_T,
 			new Object[] {
 				new Long(socialEquityGroupSetting.getGroupId()),
-				
-			socialEquityGroupSetting.getClassName(),
+				new Long(socialEquityGroupSetting.getClassNameId()),
 				new Integer(socialEquityGroupSetting.getType())
 			});
 	}
@@ -260,8 +257,7 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_T,
 			new Object[] {
 				new Long(socialEquityGroupSettingModelImpl.getOriginalGroupId()),
-				
-			socialEquityGroupSettingModelImpl.getOriginalClassName(),
+				new Long(socialEquityGroupSettingModelImpl.getOriginalClassNameId()),
 				new Integer(socialEquityGroupSettingModelImpl.getOriginalType())
 			});
 
@@ -305,28 +301,24 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 
 		if (!isNew &&
 				((socialEquityGroupSetting.getGroupId() != socialEquityGroupSettingModelImpl.getOriginalGroupId()) ||
-				!Validator.equals(socialEquityGroupSetting.getClassName(),
-					socialEquityGroupSettingModelImpl.getOriginalClassName()) ||
+				(socialEquityGroupSetting.getClassNameId() != socialEquityGroupSettingModelImpl.getOriginalClassNameId()) ||
 				(socialEquityGroupSetting.getType() != socialEquityGroupSettingModelImpl.getOriginalType()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_T,
 				new Object[] {
 					new Long(socialEquityGroupSettingModelImpl.getOriginalGroupId()),
-					
-				socialEquityGroupSettingModelImpl.getOriginalClassName(),
+					new Long(socialEquityGroupSettingModelImpl.getOriginalClassNameId()),
 					new Integer(socialEquityGroupSettingModelImpl.getOriginalType())
 				});
 		}
 
 		if (isNew ||
 				((socialEquityGroupSetting.getGroupId() != socialEquityGroupSettingModelImpl.getOriginalGroupId()) ||
-				!Validator.equals(socialEquityGroupSetting.getClassName(),
-					socialEquityGroupSettingModelImpl.getOriginalClassName()) ||
+				(socialEquityGroupSetting.getClassNameId() != socialEquityGroupSettingModelImpl.getOriginalClassNameId()) ||
 				(socialEquityGroupSetting.getType() != socialEquityGroupSettingModelImpl.getOriginalType()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_T,
 				new Object[] {
 					new Long(socialEquityGroupSetting.getGroupId()),
-					
-				socialEquityGroupSetting.getClassName(),
+					new Long(socialEquityGroupSetting.getClassNameId()),
 					new Integer(socialEquityGroupSetting.getType())
 				}, socialEquityGroupSetting);
 		}
@@ -348,7 +340,7 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 		socialEquityGroupSettingImpl.setEquityGroupSettingId(socialEquityGroupSetting.getEquityGroupSettingId());
 		socialEquityGroupSettingImpl.setGroupId(socialEquityGroupSetting.getGroupId());
 		socialEquityGroupSettingImpl.setCompanyId(socialEquityGroupSetting.getCompanyId());
-		socialEquityGroupSettingImpl.setClassName(socialEquityGroupSetting.getClassName());
+		socialEquityGroupSettingImpl.setClassNameId(socialEquityGroupSetting.getClassNameId());
 		socialEquityGroupSettingImpl.setType(socialEquityGroupSetting.getType());
 		socialEquityGroupSettingImpl.setEnabled(socialEquityGroupSetting.isEnabled());
 
@@ -442,19 +434,19 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 	}
 
 	/**
-	 * Finds the social equity group setting where groupId = &#63; and className = &#63; and type = &#63; or throws a {@link com.liferay.portlet.social.NoSuchEquityGroupSettingException} if it could not be found.
+	 * Finds the social equity group setting where groupId = &#63; and classNameId = &#63; and type = &#63; or throws a {@link com.liferay.portlet.social.NoSuchEquityGroupSettingException} if it could not be found.
 	 *
 	 * @param groupId the group id to search with
-	 * @param className the class name to search with
+	 * @param classNameId the class name id to search with
 	 * @param type the type to search with
 	 * @return the matching social equity group setting
 	 * @throws com.liferay.portlet.social.NoSuchEquityGroupSettingException if a matching social equity group setting could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public SocialEquityGroupSetting findByG_C_T(long groupId, String className,
+	public SocialEquityGroupSetting findByG_C_T(long groupId, long classNameId,
 		int type) throws NoSuchEquityGroupSettingException, SystemException {
 		SocialEquityGroupSetting socialEquityGroupSetting = fetchByG_C_T(groupId,
-				className, type);
+				classNameId, type);
 
 		if (socialEquityGroupSetting == null) {
 			StringBundler msg = new StringBundler(8);
@@ -464,8 +456,8 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 			msg.append("groupId=");
 			msg.append(groupId);
 
-			msg.append(", className=");
-			msg.append(className);
+			msg.append(", classNameId=");
+			msg.append(classNameId);
 
 			msg.append(", type=");
 			msg.append(type);
@@ -483,32 +475,32 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 	}
 
 	/**
-	 * Finds the social equity group setting where groupId = &#63; and className = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Finds the social equity group setting where groupId = &#63; and classNameId = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param groupId the group id to search with
-	 * @param className the class name to search with
+	 * @param classNameId the class name id to search with
 	 * @param type the type to search with
 	 * @return the matching social equity group setting, or <code>null</code> if a matching social equity group setting could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public SocialEquityGroupSetting fetchByG_C_T(long groupId,
-		String className, int type) throws SystemException {
-		return fetchByG_C_T(groupId, className, type, true);
+		long classNameId, int type) throws SystemException {
+		return fetchByG_C_T(groupId, classNameId, type, true);
 	}
 
 	/**
-	 * Finds the social equity group setting where groupId = &#63; and className = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Finds the social equity group setting where groupId = &#63; and classNameId = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param groupId the group id to search with
-	 * @param className the class name to search with
+	 * @param classNameId the class name id to search with
 	 * @param type the type to search with
 	 * @return the matching social equity group setting, or <code>null</code> if a matching social equity group setting could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public SocialEquityGroupSetting fetchByG_C_T(long groupId,
-		String className, int type, boolean retrieveFromCache)
+		long classNameId, int type, boolean retrieveFromCache)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, className, type };
+		Object[] finderArgs = new Object[] { groupId, classNameId, type };
 
 		Object result = null;
 
@@ -529,17 +521,7 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 
 				query.append(_FINDER_COLUMN_G_C_T_GROUPID_2);
 
-				if (className == null) {
-					query.append(_FINDER_COLUMN_G_C_T_CLASSNAME_1);
-				}
-				else {
-					if (className.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_G_C_T_CLASSNAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_G_C_T_CLASSNAME_2);
-					}
-				}
+				query.append(_FINDER_COLUMN_G_C_T_CLASSNAMEID_2);
 
 				query.append(_FINDER_COLUMN_G_C_T_TYPE_2);
 
@@ -551,9 +533,7 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				if (className != null) {
-					qPos.add(className);
-				}
+				qPos.add(classNameId);
 
 				qPos.add(type);
 
@@ -573,9 +553,7 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 					cacheResult(socialEquityGroupSetting);
 
 					if ((socialEquityGroupSetting.getGroupId() != groupId) ||
-							(socialEquityGroupSetting.getClassName() == null) ||
-							!socialEquityGroupSetting.getClassName()
-														 .equals(className) ||
+							(socialEquityGroupSetting.getClassNameId() != classNameId) ||
 							(socialEquityGroupSetting.getType() != type)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_T,
 							finderArgs, socialEquityGroupSetting);
@@ -713,17 +691,17 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 	}
 
 	/**
-	 * Removes the social equity group setting where groupId = &#63; and className = &#63; and type = &#63; from the database.
+	 * Removes the social equity group setting where groupId = &#63; and classNameId = &#63; and type = &#63; from the database.
 	 *
 	 * @param groupId the group id to search with
-	 * @param className the class name to search with
+	 * @param classNameId the class name id to search with
 	 * @param type the type to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByG_C_T(long groupId, String className, int type)
+	public void removeByG_C_T(long groupId, long classNameId, int type)
 		throws NoSuchEquityGroupSettingException, SystemException {
 		SocialEquityGroupSetting socialEquityGroupSetting = findByG_C_T(groupId,
-				className, type);
+				classNameId, type);
 
 		remove(socialEquityGroupSetting);
 	}
@@ -740,17 +718,17 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 	}
 
 	/**
-	 * Counts all the social equity group settings where groupId = &#63; and className = &#63; and type = &#63;.
+	 * Counts all the social equity group settings where groupId = &#63; and classNameId = &#63; and type = &#63;.
 	 *
 	 * @param groupId the group id to search with
-	 * @param className the class name to search with
+	 * @param classNameId the class name id to search with
 	 * @param type the type to search with
 	 * @return the number of matching social equity group settings
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByG_C_T(long groupId, String className, int type)
+	public int countByG_C_T(long groupId, long classNameId, int type)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, className, type };
+		Object[] finderArgs = new Object[] { groupId, classNameId, type };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_C_T,
 				finderArgs, this);
@@ -767,17 +745,7 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 
 				query.append(_FINDER_COLUMN_G_C_T_GROUPID_2);
 
-				if (className == null) {
-					query.append(_FINDER_COLUMN_G_C_T_CLASSNAME_1);
-				}
-				else {
-					if (className.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_G_C_T_CLASSNAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_G_C_T_CLASSNAME_2);
-					}
-				}
+				query.append(_FINDER_COLUMN_G_C_T_CLASSNAMEID_2);
 
 				query.append(_FINDER_COLUMN_G_C_T_TYPE_2);
 
@@ -789,9 +757,7 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(groupId);
 
-				if (className != null) {
-					qPos.add(className);
-				}
+				qPos.add(classNameId);
 
 				qPos.add(type);
 
@@ -915,9 +881,7 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 	private static final String _SQL_COUNT_SOCIALEQUITYGROUPSETTING = "SELECT COUNT(socialEquityGroupSetting) FROM SocialEquityGroupSetting socialEquityGroupSetting";
 	private static final String _SQL_COUNT_SOCIALEQUITYGROUPSETTING_WHERE = "SELECT COUNT(socialEquityGroupSetting) FROM SocialEquityGroupSetting socialEquityGroupSetting WHERE ";
 	private static final String _FINDER_COLUMN_G_C_T_GROUPID_2 = "socialEquityGroupSetting.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_C_T_CLASSNAME_1 = "socialEquityGroupSetting.className IS NULL AND ";
-	private static final String _FINDER_COLUMN_G_C_T_CLASSNAME_2 = "socialEquityGroupSetting.className = ? AND ";
-	private static final String _FINDER_COLUMN_G_C_T_CLASSNAME_3 = "(socialEquityGroupSetting.className IS NULL OR socialEquityGroupSetting.className = ?) AND ";
+	private static final String _FINDER_COLUMN_G_C_T_CLASSNAMEID_2 = "socialEquityGroupSetting.classNameId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_T_TYPE_2 = "socialEquityGroupSetting.type = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "socialEquityGroupSetting.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SocialEquityGroupSetting exists with the primary key ";

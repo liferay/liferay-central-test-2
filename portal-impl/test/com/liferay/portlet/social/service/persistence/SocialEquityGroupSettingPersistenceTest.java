@@ -67,7 +67,7 @@ public class SocialEquityGroupSettingPersistenceTest
 
 		newSocialEquityGroupSetting.setGroupId(nextLong());
 		newSocialEquityGroupSetting.setCompanyId(nextLong());
-		newSocialEquityGroupSetting.setClassName(randomString());
+		newSocialEquityGroupSetting.setClassNameId(nextLong());
 		newSocialEquityGroupSetting.setType(nextInt());
 		newSocialEquityGroupSetting.setEnabled(randomBoolean());
 
@@ -81,8 +81,8 @@ public class SocialEquityGroupSettingPersistenceTest
 			newSocialEquityGroupSetting.getGroupId());
 		assertEquals(existingSocialEquityGroupSetting.getCompanyId(),
 			newSocialEquityGroupSetting.getCompanyId());
-		assertEquals(existingSocialEquityGroupSetting.getClassName(),
-			newSocialEquityGroupSetting.getClassName());
+		assertEquals(existingSocialEquityGroupSetting.getClassNameId(),
+			newSocialEquityGroupSetting.getClassNameId());
 		assertEquals(existingSocialEquityGroupSetting.getType(),
 			newSocialEquityGroupSetting.getType());
 		assertEquals(existingSocialEquityGroupSetting.getEnabled(),
@@ -168,7 +168,7 @@ public class SocialEquityGroupSettingPersistenceTest
 
 		socialEquityGroupSetting.setGroupId(nextLong());
 		socialEquityGroupSetting.setCompanyId(nextLong());
-		socialEquityGroupSetting.setClassName(randomString());
+		socialEquityGroupSetting.setClassNameId(nextLong());
 		socialEquityGroupSetting.setType(nextInt());
 		socialEquityGroupSetting.setEnabled(randomBoolean());
 
