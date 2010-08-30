@@ -924,8 +924,8 @@ ${exception.message}
 			<else>
 				<antcall target="build-common-java.deploy" />
 
-				<copy file="${project.dir}/classes/log4j.properties" todir="${app.server.classes.portal.dir}" />
-				<copy file="${project.dir}/classes/logging.properties" todir="${app.server.classes.portal.dir}" />
+				<copy file="classes/log4j.properties" todir="${app.server.classes.portal.dir}" />
+				<copy file="classes/logging.properties" todir="${app.server.classes.portal.dir}" />
 			</else>
 		</if>
 	</target>
