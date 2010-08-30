@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.zip.ZipWriterFactoryUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
@@ -477,6 +478,18 @@ public class LayoutExporter {
 			"layout-uuid", layout.getUuid());
 		layoutElement.addAttribute(
 			"layout-id", String.valueOf(layout.getLayoutId()));
+
+		long parentLayoutId = layout.getParentLayoutId();
+
+		if (parentLayoutId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
+			Layout parentLayout = LayoutLocalServiceUtil.getLayout(
+				layout.getGroupId(), layout.isPrivateLayout(), parentLayoutId);
+
+			if (parentLayout != null) {
+				layoutElement.addAttribute(
+					"parent-layout-uuid", parentLayout.getUuid());
+			}
+		}
 
 		boolean deleteLayout = MapUtil.getBoolean(
 			context.getParameterMap(), "delete_" + layout.getPlid());

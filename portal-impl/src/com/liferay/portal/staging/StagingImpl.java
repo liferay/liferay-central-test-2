@@ -290,20 +290,22 @@ public class StagingImpl implements Staging {
 
 		long parentLayoutId = layout.getParentLayoutId();
 
+		Layout parent = null;
+
 		while (parentLayoutId > 0) {
+			parent = LayoutLocalServiceUtil.getLayout(
+				layout.getGroupId(), layout.isPrivateLayout(),
+				parentLayoutId);
+
 			try {
-				LayoutLocalServiceUtil.getLayout(
-					liveGroupId, layout.isPrivateLayout(), parentLayoutId);
+				LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+					parent.getUuid(), liveGroupId);
 
 				// If one parent is found all others are assumed to exist
 
 				break;
 			}
 			catch (NoSuchLayoutException nsle) {
-				Layout parent = LayoutLocalServiceUtil.getLayout(
-					layout.getGroupId(), layout.isPrivateLayout(),
-					parentLayoutId);
-
 				missingParents.add(parent);
 
 				parentLayoutId = parent.getParentLayoutId();

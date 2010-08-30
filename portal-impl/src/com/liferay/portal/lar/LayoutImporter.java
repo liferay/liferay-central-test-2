@@ -774,6 +774,9 @@ public class LayoutImporter {
 		Node parentLayoutNode = rootElement.selectSingleNode(
 			"./layouts/layout[@layout-id='" + parentLayoutId + "']");
 
+		String parentLayoutUuid = GetterUtil.getString(
+			layoutElement.attributeValue("parent-layout-uuid"));
+
 		if ((parentLayoutId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) &&
 			(parentLayoutNode != null)) {
 
@@ -785,6 +788,13 @@ public class LayoutImporter {
 				rootElement, (Element)parentLayoutNode);
 
 			Layout parentLayout = newLayoutsMap.get(parentLayoutId);
+
+			parentLayoutId = parentLayout.getLayoutId();
+		}
+		else if (Validator.isNotNull(parentLayoutUuid)) {
+			Layout parentLayout =
+				LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+					parentLayoutUuid, groupId);
 
 			parentLayoutId = parentLayout.getLayoutId();
 		}
