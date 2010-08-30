@@ -1,4 +1,3 @@
-<%@ page import="com.liferay.portlet.social.service.SocialEquityGroupSettingLocalServiceUtil" %>
 <%
 /**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
@@ -23,26 +22,6 @@ Map<String, List<SocialEquityActionMapping>> equityActionMappingsMap = (Map<Stri
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/social_equity_admin/view");
-
-String updateRanksOnClick = renderResponse.getNamespace() + "saveServer('updateRanks');";
-String toggleInformationEquityOnClick = renderResponse.getNamespace() + "saveServer('toggleInformationEnabled');";
-String toggleParticipationEquityOnClick = renderResponse.getNamespace() + "saveServer('toggleParticipationEnabled');";
-
-boolean informationEquityEnabled = SocialEquityGroupSettingLocalServiceUtil.isSocialEquityEnabled(themeDisplay.getScopeGroupId(), Group.class.getName(), SocialEquitySettingConstants.TYPE_INFORMATION);
-boolean participationEquityEnabled = SocialEquityGroupSettingLocalServiceUtil.isSocialEquityEnabled(themeDisplay.getScopeGroupId(), Group.class.getName(), SocialEquitySettingConstants.TYPE_PARTICIPATION);
-
-String toggleInformationEquityLabel = "enable-information-equity";
-
-if (informationEquityEnabled) {
-	toggleInformationEquityLabel = "disable-information-equity";
-}
-
-String toggleParticipationEquityLabel = "enable-participation-equity";
-
-if (participationEquityEnabled) {
-	toggleParticipationEquityLabel = "disable-participation-equity";
-}
-
 %>
 
 <portlet:actionURL var="editEquityActionMappingsURL">
@@ -53,10 +32,12 @@ if (participationEquityEnabled) {
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" value="<%= currentURL %>" type="hidden" />
 
+	<%
+	String taglibOnClick = renderResponse.getNamespace() + "saveServer('updateRanks');";
+	%>
+
 	<aui:button-row>
-		<aui:button type="button" onClick="<%= toggleInformationEquityOnClick %>" value="<%=toggleInformationEquityLabel %>" />
-		<aui:button type="button" onClick="<%= toggleParticipationEquityOnClick %>" value="<%=toggleParticipationEquityLabel %>" />
-		<aui:button type="button" onClick="<%= updateRanksOnClick %>" value="update-ranking" />
+		<aui:button type="button" onClick="<%= taglibOnClick %>" value="update-ranking" />
 	</aui:button-row>
 
 	<%
@@ -65,22 +46,6 @@ if (participationEquityEnabled) {
 	%>
 
 		<h3><%= ResourceActionsUtil.getModelResource(locale, className) %></h3>
-
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="features" />:
-			</td>
-			<td>
-				<aui:input disabled="<%=!informationEquityEnabled %>" inlineLabel="left" label="information-equity" name='<%=className + ".informationEquityEnabled" %>' type="checkbox" value="<%= SocialEquityGroupSettingLocalServiceUtil.isSocialEquityEnabled(themeDisplay.getScopeGroupId(), className, SocialEquitySettingConstants.TYPE_INFORMATION) %>" />
-			</td>
-			<td>
-				<aui:input disabled="<%=!participationEquityEnabled %>" inlineLabel="left" label="participation-equity" name='<%=className + ".participationEquityEnabled" %>' type="checkbox" value="<%= SocialEquityGroupSettingLocalServiceUtil.isSocialEquityEnabled(themeDisplay.getScopeGroupId(), className, SocialEquitySettingConstants.TYPE_PARTICIPATION) %>" />
-			</td>
-		</tr>
-		</table>
-
-		<br />
 
 		<liferay-ui:search-container
 			headerNames="name"

@@ -18,4 +18,3 @@
 
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
 <%@ page import="com.liferay.portlet.social.model.SocialEquityActionMapping" %>
-<%@ page import="com.liferay.portlet.social.model.SocialEquitySettingConstants" %>

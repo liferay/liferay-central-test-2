@@ -17,7 +17,6 @@ package com.liferay.portlet.socialequityadmin.action;
 import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -25,7 +24,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.social.model.SocialEquityActionMapping;
 import com.liferay.portlet.social.model.SocialEquitySetting;
 import com.liferay.portlet.social.model.SocialEquitySettingConstants;
-import com.liferay.portlet.social.service.SocialEquityGroupSettingLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialEquityLogLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialEquitySettingLocalServiceUtil;
 
@@ -60,14 +58,6 @@ public class ViewAction extends PortletAction {
 
 		if (cmd.equals("updateRanks")) {
 			updateRanks(actionRequest);
-		}
-		else if (cmd.equals("toggleInformationEnabled")) {
-			toggleFeature(
-				actionRequest, SocialEquitySettingConstants.TYPE_INFORMATION);
-		}
-		else if (cmd.equals("toggleParticipationEnabled")) {
-			toggleFeature(
-				actionRequest, SocialEquitySettingConstants.TYPE_PARTICIPATION);
 		}
 		else {
 			updateSocialEquitySettings(actionRequest);
@@ -201,22 +191,6 @@ public class ViewAction extends PortletAction {
 		return mergedEquityActionMappings;
 	}
 
-	protected void toggleFeature(ActionRequest actionRequest, int type)
-		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		long scopeGroupId = themeDisplay.getScopeGroupId();
-
-		boolean featureEnabled =
-			SocialEquityGroupSettingLocalServiceUtil.isSocialEquityEnabled(
-				scopeGroupId, Group.class.getName(), type);
-
-		SocialEquityGroupSettingLocalServiceUtil.updateSetting(
-			scopeGroupId, Group.class.getName(), type, !featureEnabled);
-	}
-
 	protected void updateModel(
 			ActionRequest actionRequest,
 			SocialEquityActionMapping equityActionMapping, String param)
@@ -248,8 +222,6 @@ public class ViewAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long scopeGroupId = themeDisplay.getScopeGroupId();
-
 		String[] classNames = PortalUtil.getSocialEquityClassNames();
 
 		for (String className : classNames) {
@@ -257,25 +229,8 @@ public class ViewAction extends PortletAction {
 				getMergedEquityActionMappings(actionRequest, className);
 
 			SocialEquitySettingLocalServiceUtil.updateSocialEquitySettings(
-				scopeGroupId, className, mergedEquityActionMappings);
-
-			boolean informationEquityEnabled = ParamUtil.getBoolean(
-				actionRequest, className + ".informationEquityEnabled",
-				false);
-
-			SocialEquityGroupSettingLocalServiceUtil.updateSetting(
-				scopeGroupId, className,
-				SocialEquitySettingConstants.TYPE_INFORMATION,
-				informationEquityEnabled);
-
-			boolean participationEquityEnabled = ParamUtil.getBoolean(
-				actionRequest, className + ".participationEquityEnabled",
-				false);
-
-			SocialEquityGroupSettingLocalServiceUtil.updateSetting(
-				scopeGroupId, className,
-				SocialEquitySettingConstants.TYPE_PARTICIPATION,
-				participationEquityEnabled);
+				themeDisplay.getScopeGroupId(), className,
+				mergedEquityActionMappings);
 		}
 	}
 
