@@ -22,23 +22,15 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Time;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetCategoryServiceUtil;
-import com.liferay.portlet.expando.model.CustomAttributesDisplay;
-import com.liferay.portlet.expando.model.ExpandoColumn;
-import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -356,32 +348,6 @@ public abstract class BaseIndexer implements Indexer {
 		}
 
 		searchQuery.addTerms(_KEYWORDS_FIELDS, keywords);
-		
-		List<CustomAttributesDisplay> customAttributesDisplays = 
-			PortletLocalServiceUtil.getCustomAttributesDisplays();
-		for (Iterator iter = customAttributesDisplays.iterator(); iter
-				.hasNext();) {
-			CustomAttributesDisplay customAttributesDisplay = 
-				(CustomAttributesDisplay) iter.next();
-			List<ExpandoColumn> expandoColumns = ExpandoColumnLocalServiceUtil
-					.getDefaultTableColumns(searchContext.getCompanyId(),
-							customAttributesDisplay.getClassName());
-			for (Iterator iterator = expandoColumns.iterator(); iterator
-					.hasNext();) {
-				ExpandoColumn expandoColumn = (ExpandoColumn) iterator.next();
-				UnicodeProperties properties = expandoColumn
-						.getTypeSettingsProperties();
-
-				boolean indexable = GetterUtil.getBoolean(properties
-						.get(ExpandoBridgeIndexer.INDEXABLE));
-
-				if (indexable) {
-					String fieldName = ExpandoBridgeIndexerUtil
-							.encodeFieldName(expandoColumn.getName());
-					searchQuery.addTerm(fieldName, keywords);
-				}
-			}
-		}
 	}
 
 	protected void addSearchNodeIds(
