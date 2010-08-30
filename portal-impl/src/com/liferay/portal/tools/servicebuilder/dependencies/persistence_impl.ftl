@@ -293,7 +293,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	 * @throws SystemException if a system exception occurred
 	 */
 	public ${entity.name} remove(Serializable primaryKey) throws NoSuchModelException, SystemException {
-		<#if entity.hasPrimitivePK()>
+		<#if entity.hasPrimitivePK(false)>
 			return remove(((${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")})primaryKey).${entity.PKClassName}Value());
 		<#else>
 			return remove((${entity.PKClassName})primaryKey);
@@ -659,7 +659,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	 * @throws SystemException if a system exception occurred
 	 */
 	public ${entity.name} findByPrimaryKey(Serializable primaryKey) throws NoSuchModelException, SystemException {
-		<#if entity.hasPrimitivePK()>
+		<#if entity.hasPrimitivePK(false)>
 			return findByPrimaryKey(((${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")})primaryKey).${entity.PKClassName}Value());
 		<#else>
 			return findByPrimaryKey((${entity.PKClassName})primaryKey);
@@ -696,7 +696,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	 * @throws SystemException if a system exception occurred
 	 */
 	public ${entity.name} fetchByPrimaryKey(Serializable primaryKey) throws SystemException {
-		<#if entity.hasPrimitivePK()>
+		<#if entity.hasPrimitivePK(false)>
 			return fetchByPrimaryKey(((${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")})primaryKey).${entity.PKClassName}Value());
 		<#else>
 			return fetchByPrimaryKey((${entity.PKClassName})primaryKey);

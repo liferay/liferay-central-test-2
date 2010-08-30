@@ -611,7 +611,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 	}
 
 	public int hashCode() {
-		<#if entity.hasPrimitivePK()>
+		<#if entity.hasPrimitivePK(false)>
 			<#if entity.PKClassName == "int">
 				return getPrimaryKey();
 			<#else>
