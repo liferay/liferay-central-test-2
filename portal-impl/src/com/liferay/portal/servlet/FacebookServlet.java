@@ -14,95 +14,10 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.NoSuchLayoutException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.StringServletResponse;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.servlet.filters.gzip.GZipFilter;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.social.util.FacebookUtil;
-import com.liferay.util.servlet.ServletResponseUtil;
-
-import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 /**
- * @author Brian Wing Shun Chan
+ * @author	   Brian Wing Shun Chan
+ * @deprecated {@link com.liferay.portal.facebook.FacebookServlet}
  */
-public class FacebookServlet extends HttpServlet {
-
-	public void service(
-			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
-
-		try {
-			String[] facebookData = FacebookUtil.getFacebookData(request);
-
-			if ((facebookData == null) ||
-				!PortalUtil.isValidResourceId(facebookData[1])) {
-
-				PortalUtil.sendError(
-					HttpServletResponse.SC_NOT_FOUND,
-					new NoSuchLayoutException(), request, response);
-			}
-			else {
-				String facebookCanvasPageURL = facebookData[0];
-				String redirect = facebookData[1];
-
-				request.setAttribute(
-					WebKeys.FACEBOOK_CANVAS_PAGE_URL, facebookCanvasPageURL);
-				request.setAttribute(GZipFilter.SKIP_FILTER, Boolean.TRUE);
-
-				ServletContext servletContext = getServletContext();
-
-				RequestDispatcher requestDispatcher =
-					servletContext.getRequestDispatcher(redirect);
-
-				StringServletResponse stringResponse =
-					new StringServletResponse(response);
-
-				requestDispatcher.forward(request, stringResponse);
-
-				String fbml = stringResponse.getString();
-
-				fbml = fixFbml(fbml);
-
-				ServletResponseUtil.write(response, fbml);
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			PortalUtil.sendError(
-				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, request,
-				response);
-		}
-	}
-
-	protected String fixFbml(String fbml) {
-		fbml = StringUtil.replace(
-			fbml,
-			new String[] {
-				"<nobr>",
-				"</nobr>"
-			},
-			new String[] {
-				StringPool.BLANK,
-				StringPool.BLANK
-			});
-
-		return fbml;
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(FacebookServlet.class);
-
+public class FacebookServlet
+	extends com.liferay.portal.facebook.FacebookServlet {
 }

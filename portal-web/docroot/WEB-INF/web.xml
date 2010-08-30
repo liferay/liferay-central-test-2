@@ -833,7 +833,7 @@
 	</servlet>
 	<servlet>
 		<servlet-name>Facebook Servlet</servlet-name>
-		<servlet-class>com.liferay.portal.servlet.FacebookServlet</servlet-class>
+		<servlet-class>com.liferay.portal.facebook.FacebookServlet</servlet-class>
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet>

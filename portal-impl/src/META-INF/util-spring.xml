@@ -99,6 +99,11 @@
 			</bean>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.facebook.FacebookConnectUtil" class="com.liferay.portal.kernel.facebook.FacebookConnectUtil">
+		<property name="facebookConnect">
+			<bean class="com.liferay.portal.facebook.FacebookConnectImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.freemarker.FreeMarkerEngine" class="com.liferay.portal.freemarker.FreeMarkerEngineImpl" />
 	<bean id="com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil" class="com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil">
 		<property name="freeMarkerEngine" ref="com.liferay.portal.kernel.freemarker.FreeMarkerEngine" />
