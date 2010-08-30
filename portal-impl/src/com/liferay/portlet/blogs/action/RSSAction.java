@@ -28,14 +28,14 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.util.RSSUtil;
 
+import java.io.OutputStream;
+
 import javax.portlet.PortletConfig;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-
-import java.io.OutputStream;
 
 /**
  * @author Brian Wing Shun Chan
@@ -49,36 +49,36 @@ public class RSSAction extends PortletAction {
 
 		resourceResponse.setContentType(ContentTypes.TEXT_XML_UTF8);
 
-		OutputStream os = resourceResponse.getPortletOutputStream();
+		OutputStream outputStream = resourceResponse.getPortletOutputStream();
 
 		try {
-			os.write(getRSS(resourceRequest));
+			outputStream.write(getRSS(resourceRequest));
 		}
 		finally {
-			os.close();
+			outputStream.close();
 		}
 	}
 
-	protected byte[] getRSS(ResourceRequest request) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+	protected byte[] getRSS(ResourceRequest resourceRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 
-		long plid = ParamUtil.getLong(request, "p_l_id");
-		long doAsGroupId = ParamUtil.getLong(request, "doAsGroupId");
-		long companyId = ParamUtil.getLong(request, "companyId");
-		long groupId = ParamUtil.getLong(request, "groupId");
-		long organizationId = ParamUtil.getLong(request, "organizationId");
+		long plid = ParamUtil.getLong(resourceRequest, "p_l_id");
+		long companyId = ParamUtil.getLong(resourceRequest, "companyId");
+		long groupId = ParamUtil.getLong(resourceRequest, "groupId");
+		long organizationId = ParamUtil.getLong(
+			resourceRequest, "organizationId");
 		int status = WorkflowConstants.STATUS_APPROVED;
 		int max = ParamUtil.getInteger(
-			request, "max", SearchContainer.DEFAULT_DELTA);
+			resourceRequest, "max", SearchContainer.DEFAULT_DELTA);
 		String type = ParamUtil.getString(
-			request, "type", RSSUtil.DEFAULT_TYPE);
+			resourceRequest, "type", RSSUtil.DEFAULT_TYPE);
 		double version = ParamUtil.getDouble(
-			request, "version", RSSUtil.DEFAULT_VERSION);
+			resourceRequest, "version", RSSUtil.DEFAULT_VERSION);
 		String displayStyle = ParamUtil.getString(
-			request, "displayStyle", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
+			resourceRequest, "displayStyle", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 
 		String feedURL =
 			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
@@ -112,16 +112,11 @@ public class RSSAction extends PortletAction {
 				feedURL, entryURL, themeDisplay);
 		}
 		else if (layout != null) {
-			if (layout.isTypeControlPanel()) {
-				groupId = doAsGroupId;
+			if (layout.hasScopeGroup()) {
+				groupId = layout.getScopeGroup().getGroupId();
 			}
 			else {
-				if (layout.hasScopeGroup()) {
-					groupId = layout.getScopeGroup().getGroupId();
-				}
-				else {
-					groupId = layout.getGroupId();
-				}
+				groupId = layout.getGroupId();
 			}
 
 			feedURL =
