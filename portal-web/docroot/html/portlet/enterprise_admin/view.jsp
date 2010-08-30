@@ -102,33 +102,48 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 				var count = parseInt(responseData);
 
 				if (count > 0) {
-					var message = null;
+					<portlet:namespace />getUsersCount(
+						className, ids, true,
+						function(event, id, obj) {
+							responseData = this.get('responseData')
+							count = parseInt(responseData);
 
-					if (id && (id.split(",").length > 1)) {
-						if (className == '<%= Organization.class.getName() %>') {
-							message = '<%= UnicodeLanguageUtil.get(pageContext, "one-or-more-organizations-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-organizations-by-automatically-unassociating-the-deactivated-users") %>';
-						}
-						else {
-							message = '<%= UnicodeLanguageUtil.get(pageContext, "one-or-more-user-groups-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-groups-by-automatically-unassociating-the-deactivated-users") %>';
-						}
-					}
-					else {
-						if (className == '<%= Organization.class.getName() %>') {
-							message = '<%= UnicodeLanguageUtil.get(pageContext, "the-selected-organization-is-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-organization-by-automatically-unassociating-the-deactivated-users") %>';
-						}
-						else {
-							message = '<%= UnicodeLanguageUtil.get(pageContext, "the-selected-user-group-is-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-group-by-automatically-unassociating-the-deactivated-users") %>';
-						}
-					}
+							if (count > 0) {
+								if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this") %>')) {
+									<portlet:namespace />doDeleteOrganizations(ids);
+								}
+							}
+							else {
+								var message = null;
 
-					if (confirm(message)) {
-						if (className == '<%= Organization.class.getName() %>') {
-							<portlet:namespace />doDeleteOrganizations(ids);
+								if (id && (id.toString().split(",").length > 1)) {
+									if (className == '<%= Organization.class.getName() %>') {
+										message = '<%= UnicodeLanguageUtil.get(pageContext, "one-or-more-organizations-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-organizations-by-automatically-unassociating-the-deactivated-users") %>';
+									}
+									else {
+										message = '<%= UnicodeLanguageUtil.get(pageContext, "one-or-more-user-groups-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-groups-by-automatically-unassociating-the-deactivated-users") %>';
+									}
+								}
+								else {
+									if (className == '<%= Organization.class.getName() %>') {
+										message = '<%= UnicodeLanguageUtil.get(pageContext, "the-selected-organization-is-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-organization-by-automatically-unassociating-the-deactivated-users") %>';
+									}
+									else {
+										message = '<%= UnicodeLanguageUtil.get(pageContext, "the-selected-user-group-is-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-group-by-automatically-unassociating-the-deactivated-users") %>';
+									}
+								}
+
+								if (confirm(message)) {
+									if (className == '<%= Organization.class.getName() %>') {
+										<portlet:namespace />doDeleteOrganizations(ids);
+									}
+									else {
+										<portlet:namespace />doDeleteUserGroups(ids);
+									}
+								}
+							}
 						}
-						else {
-							<portlet:namespace />doDeleteUserGroups(ids);
-						}
-					}
+					);
 				}
 				else {
 					if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this") %>')) {
