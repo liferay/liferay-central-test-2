@@ -39,6 +39,7 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portlet.social.model.SocialEquitySetting;
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalService;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
+import com.liferay.portlet.social.service.SocialEquityGroupSettingLocalService;
 import com.liferay.portlet.social.service.SocialEquityHistoryLocalService;
 import com.liferay.portlet.social.service.SocialEquityLogLocalService;
 import com.liferay.portlet.social.service.SocialEquitySettingLocalService;
@@ -49,6 +50,7 @@ import com.liferay.portlet.social.service.SocialRequestLocalService;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 import com.liferay.portlet.social.service.persistence.SocialEquityAssetEntryPersistence;
+import com.liferay.portlet.social.service.persistence.SocialEquityGroupSettingPersistence;
 import com.liferay.portlet.social.service.persistence.SocialEquityHistoryPersistence;
 import com.liferay.portlet.social.service.persistence.SocialEquityLogPersistence;
 import com.liferay.portlet.social.service.persistence.SocialEquitySettingPersistence;
@@ -354,6 +356,44 @@ public abstract class SocialEquitySettingLocalServiceBaseImpl
 	public void setSocialEquityAssetEntryPersistence(
 		SocialEquityAssetEntryPersistence socialEquityAssetEntryPersistence) {
 		this.socialEquityAssetEntryPersistence = socialEquityAssetEntryPersistence;
+	}
+
+	/**
+	 * Gets the social equity group setting local service.
+	 *
+	 * @return the social equity group setting local service
+	 */
+	public SocialEquityGroupSettingLocalService getSocialEquityGroupSettingLocalService() {
+		return socialEquityGroupSettingLocalService;
+	}
+
+	/**
+	 * Sets the social equity group setting local service.
+	 *
+	 * @param socialEquityGroupSettingLocalService the social equity group setting local service
+	 */
+	public void setSocialEquityGroupSettingLocalService(
+		SocialEquityGroupSettingLocalService socialEquityGroupSettingLocalService) {
+		this.socialEquityGroupSettingLocalService = socialEquityGroupSettingLocalService;
+	}
+
+	/**
+	 * Gets the social equity group setting persistence.
+	 *
+	 * @return the social equity group setting persistence
+	 */
+	public SocialEquityGroupSettingPersistence getSocialEquityGroupSettingPersistence() {
+		return socialEquityGroupSettingPersistence;
+	}
+
+	/**
+	 * Sets the social equity group setting persistence.
+	 *
+	 * @param socialEquityGroupSettingPersistence the social equity group setting persistence
+	 */
+	public void setSocialEquityGroupSettingPersistence(
+		SocialEquityGroupSettingPersistence socialEquityGroupSettingPersistence) {
+		this.socialEquityGroupSettingPersistence = socialEquityGroupSettingPersistence;
 	}
 
 	/**
@@ -867,6 +907,10 @@ public abstract class SocialEquitySettingLocalServiceBaseImpl
 	protected SocialActivityInterpreterLocalService socialActivityInterpreterLocalService;
 	@BeanReference(type = SocialEquityAssetEntryPersistence.class)
 	protected SocialEquityAssetEntryPersistence socialEquityAssetEntryPersistence;
+	@BeanReference(type = SocialEquityGroupSettingLocalService.class)
+	protected SocialEquityGroupSettingLocalService socialEquityGroupSettingLocalService;
+	@BeanReference(type = SocialEquityGroupSettingPersistence.class)
+	protected SocialEquityGroupSettingPersistence socialEquityGroupSettingPersistence;
 	@BeanReference(type = SocialEquityHistoryLocalService.class)
 	protected SocialEquityHistoryLocalService socialEquityHistoryLocalService;
 	@BeanReference(type = SocialEquityHistoryPersistence.class)

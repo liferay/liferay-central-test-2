@@ -552,6 +552,8 @@ public class SocialEquityHistoryPersistenceImpl extends BasePersistenceImpl<Soci
 	protected SocialActivityPersistence socialActivityPersistence;
 	@BeanReference(type = SocialEquityAssetEntryPersistence.class)
 	protected SocialEquityAssetEntryPersistence socialEquityAssetEntryPersistence;
+	@BeanReference(type = SocialEquityGroupSettingPersistence.class)
+	protected SocialEquityGroupSettingPersistence socialEquityGroupSettingPersistence;
 	@BeanReference(type = SocialEquityHistoryPersistence.class)
 	protected SocialEquityHistoryPersistence socialEquityHistoryPersistence;
 	@BeanReference(type = SocialEquityLogPersistence.class)
