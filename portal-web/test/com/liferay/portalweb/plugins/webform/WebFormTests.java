@@ -31,6 +31,7 @@ public class WebFormTests extends BaseTests {
 		testSuite.addTestSuite(AddPortletTest.class);
 		testSuite.addTestSuite(EditFormTest.class);
 		testSuite.addTestSuite(ArchiveTest.class);
+		testSuite.addTestSuite(TearDownArchivedSetupTest.class);
 		testSuite.addTestSuite(DeletePageTest.class);
 
 		return testSuite;

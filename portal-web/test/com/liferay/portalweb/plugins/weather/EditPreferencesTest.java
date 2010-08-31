@@ -61,9 +61,7 @@ public class EditPreferencesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a");
 		Thread.sleep(5000);
 		selenium.type("_1_WAR_weatherportlet_zips",
 			RuntimeVariables.replace("Diamond Bar, CA"));
@@ -88,6 +86,9 @@ public class EditPreferencesTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace("link=Weather Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Return to Full Page",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Diamond Bar, CA"));
 	}

@@ -42,18 +42,51 @@ public class ArchiveTest extends BaseTestCase {
 
 		selenium.clickAt("link=Web Form Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Archived", RuntimeVariables.replace(""));
+		selenium.click("//strong/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//span[@class='taglib-text']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//span[@class='taglib-text']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_86_name", RuntimeVariables.replace("test archive"));
-		selenium.clickAt("//span[2]/span/input", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
-		selenium.selectWindow(
-			"name=p_p_id_1_WAR_webformportlet_INSTANCE_B7qT_configurationIframe");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
