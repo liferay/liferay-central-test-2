@@ -89,8 +89,8 @@ else {
 
 		assetEntryQuery.setClassNameIds(groupClassNameIds);
 
-		assetEntryQuery.setStart(0);
 		assetEntryQuery.setEnd(delta);
+		assetEntryQuery.setStart(0);
 
 		String groupClassName = PortalUtil.getClassName(classNameId);
 
