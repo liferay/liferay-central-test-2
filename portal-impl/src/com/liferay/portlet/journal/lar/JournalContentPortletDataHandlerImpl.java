@@ -342,6 +342,17 @@ public class JournalContentPortletDataHandlerImpl
 				context.getScopeGroupId(), layout.isPrivateLayout(),
 				layout.getLayoutId(), portletId, articleId, true);
 		}
+		
+		String templateId = preferences.getValue("template-id", 
+				StringPool.BLANK);
+		
+		if (Validator.isNotNull(templateId)) {
+			Map<String, String> templateIds =
+				(Map<String, String>)context.getNewPrimaryKeysMap(
+					JournalTemplate.class);
+			templateId = MapUtil.getString(templateIds, templateId, templateId);
+			preferences.setValue("template-id", templateId);
+		}
 
 		return preferences;
 	}
