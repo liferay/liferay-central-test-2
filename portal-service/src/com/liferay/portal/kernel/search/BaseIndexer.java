@@ -286,7 +286,7 @@ public abstract class BaseIndexer implements Indexer {
 			properties = expandoBridge.getAttributeProperties(key);
 
 			if (GetterUtil.getBoolean(
-					properties.getProperty(ExpandoBridgeIndexer.INDEXABLE))) {
+				properties.getProperty(ExpandoBridgeIndexer.INDEXABLE))) {
 
 				fieldName = ExpandoBridgeIndexerUtil.encodeFieldName(key);
 
