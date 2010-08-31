@@ -361,14 +361,6 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-sharding">
-			<param name="test.ant.script.command" value="db-sharding-google-gadget" />
-			<param name="test.ant.script.plugins" value="google-gadget-portlet" />
-			<param name="test.ant.script.plugins.type" value="portlet" />
-			<param name="test.ant.script.suite" value="PluginsGoogleGadgetTestSuite" />
-			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
-		</antcall>
-
-		<antcall target="build-test-ant-script-db-sharding">
 			<param name="test.ant.script.command" value="db-sharding-google-maps" />
 			<param name="test.ant.script.plugins" value="google-maps-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
@@ -559,13 +551,6 @@
 			<param name="test.ant.script.plugins" value="google-adsense-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsGoogleAdSenseTestSuite" />
-		</antcall>
-
-		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="plugins-google-gadget" />
-			<param name="test.ant.script.plugins" value="google-gadget-portlet" />
-			<param name="test.ant.script.plugins.type" value="portlet" />
-			<param name="test.ant.script.suite" value="PluginsGoogleGadgetTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">

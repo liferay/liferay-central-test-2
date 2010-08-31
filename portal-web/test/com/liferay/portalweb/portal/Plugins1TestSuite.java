@@ -21,7 +21,6 @@ import com.liferay.portalweb.plugins.biblegateway.BibleGatewayTests;
 import com.liferay.portalweb.plugins.chat.ChatTests;
 import com.liferay.portalweb.plugins.flash.FlashTests;
 import com.liferay.portalweb.plugins.googleadsense.GoogleAdSenseTests;
-import com.liferay.portalweb.plugins.googlegadget.GoogleGadgetTests;
 import com.liferay.portalweb.plugins.googlemaps.GoogleMapsTests;
 import com.liferay.portalweb.plugins.gospelforasia.GospelForAsiaTests;
 import com.liferay.portalweb.plugins.ipgeocoder.IPGeocoderTests;
@@ -71,7 +70,6 @@ public class Plugins1TestSuite extends BaseTests {
 		testSuite.addTest(ChatTests.suite());
 		testSuite.addTest(FlashTests.suite());
 		testSuite.addTest(GoogleAdSenseTests.suite());
-		testSuite.addTest(GoogleGadgetTests.suite());
 		testSuite.addTest(GoogleMapsTests.suite());
 		testSuite.addTest(GospelForAsiaTests.suite());
 		testSuite.addTest(IPGeocoderTests.suite());
