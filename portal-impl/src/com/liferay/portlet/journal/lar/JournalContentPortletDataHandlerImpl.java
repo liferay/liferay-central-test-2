@@ -343,7 +343,7 @@ public class JournalContentPortletDataHandlerImpl
 				layout.getLayoutId(), portletId, articleId, true);
 		}
 
-		String templateId = preferences.getValue("template-id", 
+		String templateId = preferences.getValue("template-id",
 			StringPool.BLANK);
 
 		if (Validator.isNotNull(templateId)) {
