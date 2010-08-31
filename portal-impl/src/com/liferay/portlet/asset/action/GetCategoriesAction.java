@@ -23,6 +23,7 @@ import com.liferay.portal.struts.JSONAction;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetCategoryConstants;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
+import com.liferay.portlet.asset.service.AssetCategoryServiceUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -77,7 +78,7 @@ public class GetCategoriesAction extends JSONAction {
 		List<AssetCategory> categories = Collections.EMPTY_LIST;
 
 		if (categoryId > 0) {
-			categories = AssetCategoryLocalServiceUtil.getChildCategories(
+			categories = AssetCategoryServiceUtil.getChildCategories(
 				categoryId, start, end, null);
 		}
 		else if (vocabularyId > 0) {
@@ -85,7 +86,7 @@ public class GetCategoriesAction extends JSONAction {
 				request, "parentCategoryId",
 				AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 
-			categories = AssetCategoryLocalServiceUtil.getVocabularyCategories(
+			categories = AssetCategoryServiceUtil.getVocabularyCategories(
 				parentCategoryId, vocabularyId, start, end, null);
 		}
 
