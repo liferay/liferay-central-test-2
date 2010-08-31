@@ -75,6 +75,16 @@ public class AssetCategoryServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyCategories(
+		long parentCategoryId, long vocabularyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getVocabularyCategories(parentCategoryId, vocabularyId,
+			start, end, obc);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getVocabularyCategories(
 		long vocabularyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.PortalException,
