@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetCategoryConstants;
-import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetCategoryServiceUtil;
 
 import java.util.Collections;
@@ -51,12 +50,12 @@ public class GetCategoriesAction extends JSONAction {
 		for (AssetCategory category : categories) {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-			int childCategoriesCount =
+			List<AssetCategory> childCategories =
 				AssetCategoryServiceUtil.getChildCategories(
-					category.getCategoryId()).size();
+					category.getCategoryId());
 
 			jsonObject.put("categoryId", category.getCategoryId());
-			jsonObject.put("hasChildren", childCategoriesCount > 0);
+			jsonObject.put("hasChildren", !childCategories.isEmpty());
 			jsonObject.put("name", category.getName());
 			jsonObject.put("parentCategoryId", category.getParentCategoryId());
 			jsonObject.put("title", category.getTitle());

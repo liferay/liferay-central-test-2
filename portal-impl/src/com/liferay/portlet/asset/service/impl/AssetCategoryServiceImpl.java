@@ -97,6 +97,15 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 	}
 
 	public List<AssetCategory> getVocabularyCategories(
+			long vocabularyId, int start, int end, OrderByComparator obc)
+		throws PortalException, SystemException {
+
+		return filterCategories(
+			assetCategoryLocalService.getVocabularyCategories(
+				vocabularyId, start, end, obc));
+	}
+
+	public List<AssetCategory> getVocabularyCategories(
 			long parentCategoryId, long vocabularyId, int start, int end,
 			OrderByComparator obc)
 		throws PortalException, SystemException {
@@ -104,15 +113,6 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 		return filterCategories(
 			assetCategoryLocalService.getVocabularyCategories(
 				parentCategoryId, vocabularyId, start, end, obc));
-	}
-
-	public List<AssetCategory> getVocabularyCategories(
-			long vocabularyId, int start, int end, OrderByComparator obc)
-		throws PortalException, SystemException {
-
-		return filterCategories(
-			assetCategoryLocalService.getVocabularyCategories(
-				vocabularyId, start, end, obc));
 	}
 
 	public List<AssetCategory> getVocabularyRootCategories(
