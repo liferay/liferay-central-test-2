@@ -236,6 +236,13 @@ public class AssetCategoryLocalServiceImpl
 		return getCategoryIds(getCategories(className, classPK));
 	}
 
+	public List<AssetCategory> getChildCategories(long parentCategoryId)
+		throws SystemException {
+
+		return assetCategoryPersistence.findByParentCategoryId(
+			parentCategoryId);
+	}
+
 	public List<AssetCategory> getChildCategories(
 			long parentCategoryId, int start, int end, OrderByComparator obc)
 		throws SystemException {

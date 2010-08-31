@@ -52,8 +52,8 @@ public class GetCategoriesAction extends JSONAction {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 			int childCategoriesCount =
-				AssetCategoryLocalServiceUtil.getChildCategoriesCount(
-					category.getCategoryId());
+				AssetCategoryServiceUtil.getChildCategories(
+					category.getCategoryId()).size();
 
 			jsonObject.put("categoryId", category.getCategoryId());
 			jsonObject.put("hasChildren", childCategoriesCount > 0);

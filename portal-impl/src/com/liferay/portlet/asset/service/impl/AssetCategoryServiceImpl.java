@@ -80,6 +80,13 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 		return assetCategoryLocalService.getCategory(categoryId);
 	}
 
+	public List<AssetCategory> getChildCategories(long parentCategoryId)
+		throws PortalException, SystemException {
+
+		return filterCategories(
+			assetCategoryLocalService.getChildCategories(parentCategoryId));
+	}
+
 	public List<AssetCategory> getChildCategories(
 			long parentCategoryId, int start, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
