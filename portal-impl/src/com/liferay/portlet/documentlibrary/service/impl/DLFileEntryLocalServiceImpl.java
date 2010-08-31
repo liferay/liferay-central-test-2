@@ -848,9 +848,10 @@ public class DLFileEntryLocalServiceImpl
 
 		boolean addDraftAssetEntry = false;
 
+		String version = fileVersion.getVersion();
+
 		if ((fileVersion != null) && !fileVersion.isApproved() &&
-			(fileVersion.getVersion() !=
-				DLFileEntryConstants.DEFAULT_VERSION)) {
+			!version.equals(DLFileEntryConstants.DEFAULT_VERSION)) {
 
 			int approvedArticlesCount =
 				dlFileVersionPersistence.countByG_F_N_S(
