@@ -143,7 +143,7 @@ boolean anyAssetType = GetterUtil.getBoolean(preferences.getValue("any-asset-typ
 
 long[] classNameIds = AssetPublisherUtil.getClassNameIds(preferences, availableClassNameIds);
 
-AssetEntryQuery	assetEntryQuery = new AssetEntryQuery();
+AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
 String[] allAssetTagNames = new String[0];
 

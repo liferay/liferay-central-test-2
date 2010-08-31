@@ -89,6 +89,9 @@ else {
 
 		assetEntryQuery.setClassNameIds(groupClassNameIds);
 
+		assetEntryQuery.setStart(0);
+		assetEntryQuery.setEnd(delta);
+
 		String groupClassName = PortalUtil.getClassName(classNameId);
 
 		AssetRendererFactory groupAssetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(groupClassName);
