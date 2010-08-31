@@ -322,7 +322,7 @@ public class JournalContentPortletDataHandlerImpl
 				context, articleElement);
 		}
 
-		String articleId = preferences.getValue("article-id", StringPool.BLANK);
+		String articleId = preferences.getValue("article-id", null);
 
 		if (Validator.isNotNull(articleId)) {
 			Map<String, String> articleIds =
@@ -343,8 +343,7 @@ public class JournalContentPortletDataHandlerImpl
 				layout.getLayoutId(), portletId, articleId, true);
 		}
 
-		String templateId = preferences.getValue("template-id",
-			StringPool.BLANK);
+		String templateId = preferences.getValue("template-id", null);
 
 		if (Validator.isNotNull(templateId)) {
 			Map<String, String> templateIds =

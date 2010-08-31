@@ -37,7 +37,6 @@ import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -274,21 +273,15 @@ public abstract class BaseIndexer implements Indexer {
 		Set<String> attributeNames = SetUtil.fromEnumeration(
 			expandoBridge.getAttributeNames());
 
-		Iterator iterator = attributeNames.iterator();
-
-		String fieldName;
-		String key;
-		UnicodeProperties properties;
-
-		while (iterator.hasNext()) {
-			key = iterator.next().toString();
-
-			properties = expandoBridge.getAttributeProperties(key);
+		for (String attributeName : attributeNames) {
+			UnicodeProperties properties = expandoBridge.getAttributeProperties(
+				attributeName);
 
 			if (GetterUtil.getBoolean(
-				properties.getProperty(ExpandoBridgeIndexer.INDEXABLE))) {
+					properties.getProperty(ExpandoBridgeIndexer.INDEXABLE))) {
 
-				fieldName = ExpandoBridgeIndexerUtil.encodeFieldName(key);
+				String fieldName = ExpandoBridgeIndexerUtil.encodeFieldName(
+					attributeName);
 
 				if (Validator.isNotNull(keywords)) {
 					if (searchContext.isAndSearch()) {

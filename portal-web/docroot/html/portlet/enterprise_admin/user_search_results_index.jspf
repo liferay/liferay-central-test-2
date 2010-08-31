@@ -20,8 +20,7 @@
 <%@ page import="com.liferay.portal.kernel.search.Sort" %>
 
 <%
-
-userParams.put("customField", searchTerms.getKeywords());
+userParams.put("expandoAttributes", searchTerms.getKeywords());
 
 Sort sort = _getSort(searchContainer.getOrderByCol(), searchContainer.getOrderByType());
 

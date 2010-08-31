@@ -18,10 +18,10 @@ import com.liferay.portal.NoSuchCountryException;
 import com.liferay.portal.NoSuchRegionException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
-import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
@@ -309,10 +309,10 @@ public class OrganizationIndexer extends BaseIndexer {
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
 
-		String customField = (String)params.get("customField");
+		String expandoAttributes = (String)params.get("expandoAttributes");
 
-		if (Validator.isNotNull(customField)) {
-			addSearchExpando(searchQuery, searchContext, customField);
+		if (Validator.isNotNull(expandoAttributes)) {
+			addSearchExpando(searchQuery, searchContext, expandoAttributes);
 		}
 
 		String parentOrganizationId = (String)searchContext.getAttribute(
