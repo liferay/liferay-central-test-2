@@ -235,7 +235,7 @@ public class StagingImpl implements Staging {
 					layouts.add(layout);
 				}
 
-				Iterator<Layout> itr2 = getMissingParents(
+				Iterator<Layout> itr2 = getMissingParentLayouts(
 					layout, sourceGroupId).iterator();
 
 				while (itr2.hasNext()) {
@@ -282,37 +282,37 @@ public class StagingImpl implements Staging {
 			importParameterMap, bytes);
 	}
 
-	public List<Layout> getMissingParents(
+	public List<Layout> getMissingParentLayouts(
 			Layout layout, long liveGroupId)
 		throws PortalException, SystemException {
 
-		List<Layout> missingParents = new ArrayList<Layout>();
+		List<Layout> missingParentLayouts = new ArrayList<Layout>();
 
 		long parentLayoutId = layout.getParentLayoutId();
 
-		Layout parent = null;
+		Layout parentLayout = null;
 
 		while (parentLayoutId > 0) {
-			parent = LayoutLocalServiceUtil.getLayout(
+			parentLayout = LayoutLocalServiceUtil.getLayout(
 				layout.getGroupId(), layout.isPrivateLayout(),
 				parentLayoutId);
 
 			try {
 				LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-					parent.getUuid(), liveGroupId);
+					parentLayout.getUuid(), liveGroupId);
 
 				// If one parent is found all others are assumed to exist
 
 				break;
 			}
 			catch (NoSuchLayoutException nsle) {
-				missingParents.add(parent);
+				missingParentLayouts.add(parentLayout);
 
-				parentLayoutId = parent.getParentLayoutId();
+				parentLayoutId = parentLayout.getParentLayoutId();
 			}
 		}
 
-		return missingParents;
+		return missingParentLayouts;
 	}
 
 	public String getSchedulerGroupName(
@@ -461,7 +461,7 @@ public class StagingImpl implements Staging {
 
 		layouts.add(layout);
 
-		layouts.addAll(getMissingParents(layout, liveGroupId));
+		layouts.addAll(getMissingParentLayouts(layout, liveGroupId));
 
 		if (includeChildren) {
 			layouts.addAll(layout.getAllChildren());
@@ -528,7 +528,7 @@ public class StagingImpl implements Staging {
 				layouts.add(layout);
 			}
 
-			Iterator<Layout> itr2 = getMissingParents(
+			Iterator<Layout> itr2 = getMissingParentLayouts(
 				layout, targetGroupId).iterator();
 
 			while (itr2.hasNext()) {

@@ -68,11 +68,11 @@ public class StagingUtil {
 			remotePrivateLayout, importParameterMap, startDate, endDate);
 	}
 
-	public static List<Layout> getMissingParents(
+	public static List<Layout> getMissingParentLayouts(
 			Layout layout, long liveGroupId)
 		throws Exception {
 
-		return getStaging().getMissingParents(layout, liveGroupId);
+		return getStaging().getMissingParentLayouts(layout, liveGroupId);
 	}
 
 	public static String getSchedulerGroupName(

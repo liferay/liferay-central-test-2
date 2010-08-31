@@ -49,7 +49,7 @@ public interface Staging {
 			Date endDate)
 		throws Exception;
 
-	public List<Layout> getMissingParents(Layout layout, long liveGroupId)
+	public List<Layout> getMissingParentLayouts(Layout layout, long liveGroupId)
 		throws Exception;
 
 	public String getSchedulerGroupName(String destinationName, long groupId);
