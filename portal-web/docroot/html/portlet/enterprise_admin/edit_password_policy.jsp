@@ -86,7 +86,7 @@ long resetTicketMaxAge = BeanParamUtil.getLong(passwordPolicy, request, "resetTi
 					</aui:select>
 				</div>
 
-				<aui:select helpMessage="reset-ticket-max-age-help" label="reset-ticket-max-age" name="resetTicketMaxAge">
+				<aui:select helpMessage="reset-ticket-max-age-help" name="resetTicketMaxAge">
 					<aui:option label="eternal" selected="<%= (resetTicketMaxAge == 0) %>" value="0" />
 
 					<%
