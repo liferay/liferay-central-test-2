@@ -61,6 +61,13 @@ public class AssetCategoryServiceWrapper implements AssetCategoryService {
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getChildCategories(
+		long parentCategoryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetCategoryService.getChildCategories(parentCategoryId);
+	}
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> getChildCategories(
 		long parentCategoryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.PortalException,
