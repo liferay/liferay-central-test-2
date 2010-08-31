@@ -521,6 +521,17 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 			deletePage(page);
 		}
+
+		// LPS-12338
+
+		itr = wikiPagePersistence.findByN_H_P(
+			nodeId, false, StringPool.BLANK).iterator();
+
+		while (itr.hasNext()) {
+			WikiPage page = itr.next();
+
+			deletePage(page);
+		}
 	}
 
 	public List<WikiPage> getChildren(
