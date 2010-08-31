@@ -1399,22 +1399,24 @@
 	</target>
 
 	<target name="prepare-portal-ext-properties">
-		<echo file="portal-impl/src/portal-ext.properties">jdbc.default.jndi.name=
+		<echo file="portal-impl/src/portal-ext.properties">axis.servlet.hosts.allowed=
+
+browser.launcher.url=
+
+captcha.max.challenges=0
+
+index.on.startup=true
+
+jdbc.default.jndi.name=
 
 jdbc.default.driverClassName=${db.driver}
 jdbc.default.url=${db.url}
 jdbc.default.username=${db.username}
 jdbc.default.password=${db.password}
 
-captcha.max.challenges=0
-
-browser.launcher.url=
-
-index.on.startup=true
-
 mail.session.jndi.name=
 
-axis.servlet.hosts.allowed=
+plugin.notifications.enabled=false
 
 tunnel.servlet.hosts.allowed=</echo>
 
