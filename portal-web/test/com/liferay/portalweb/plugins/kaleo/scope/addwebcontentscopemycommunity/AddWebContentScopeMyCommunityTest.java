@@ -43,7 +43,7 @@ public class AddWebContentScopeMyCommunityTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("My Community"),
-			selenium.getText("//div/span/a"));
+			selenium.getText("//div[1]/div/span/a"));
 		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//input[@value='Add Web Content']",

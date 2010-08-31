@@ -43,7 +43,7 @@ public class AddWebContentScopeOrganizationTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		selenium.clickAt("//div/span/a",
+		selenium.clickAt("//div[1]/div/span/a",
 			RuntimeVariables.replace("Scope Selector"));
 
 		for (int second = 0;; second++) {
@@ -83,8 +83,27 @@ public class AddWebContentScopeOrganizationTest extends BaseTestCase {
 		selenium.clickAt("//ul[3]/li[3]/a",
 			RuntimeVariables.replace("Organization Name"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Organization Name")
+										.equals(selenium.getText(
+								"//div[1]/div/span/a"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Organization Name"),
-			selenium.getText("//div/span/a"));
+			selenium.getText("//div[1]/div/span/a"));
 		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//input[@value='Add Web Content']",

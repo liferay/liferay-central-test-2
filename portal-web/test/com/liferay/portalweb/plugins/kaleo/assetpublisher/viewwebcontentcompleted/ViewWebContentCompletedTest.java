@@ -43,6 +43,9 @@ public class ViewWebContentCompletedTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("main-content", RuntimeVariables.replace(""));
+		selenium.clickAt("dockbar", RuntimeVariables.replace(""));
+		selenium.clickAt("navigation", RuntimeVariables.replace(""));
 		assertEquals(RuntimeVariables.replace("Web Content Name"),
 			selenium.getText("//h3/a"));
 		assertTrue(selenium.isPartialText("//div[2]/a", "Read More"));
@@ -79,10 +82,10 @@ public class ViewWebContentCompletedTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to you."),
-			selenium.getText("//div[2]/div/div[1]/div[2]/div[1]"));
+			selenium.getText("//div[@id='myTasksPanel']/div[2]/div[1]"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to your roles."),
-			selenium.getText("//div[2]/div/div[2]/div[2]/div[1]"));
+			selenium.getText("//div[@id='myRolesTasksPanel']/div[2]/div[1]"));
 		selenium.clickAt("link=Completed", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Review"),

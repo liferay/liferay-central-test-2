@@ -44,7 +44,7 @@ public class ViewWebContentScopeGlobalCompletedTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		selenium.clickAt("//div/span/a",
+		selenium.clickAt("//div[1]/div/span/a",
 			RuntimeVariables.replace("Scope Selector"));
 
 		for (int second = 0;; second++) {
@@ -53,7 +53,7 @@ public class ViewWebContentScopeGlobalCompletedTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//div[4]/div/div[3]/div[2]/ul/li[1]/a")) {
+				if (selenium.isVisible("//div[3]/div[2]/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -63,7 +63,7 @@ public class ViewWebContentScopeGlobalCompletedTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[4]/div/div[3]/div[2]/ul/li[1]/a",
+		selenium.clickAt("//div[3]/div[2]/ul/li[1]/a",
 			RuntimeVariables.replace("Global"));
 		selenium.waitForPageToLoad("30000");
 
@@ -74,7 +74,8 @@ public class ViewWebContentScopeGlobalCompletedTest extends BaseTestCase {
 
 			try {
 				if (RuntimeVariables.replace("Global")
-										.equals(selenium.getText("//div/span/a"))) {
+										.equals(selenium.getText(
+								"//div[1]/div/span/a"))) {
 					break;
 				}
 			}
@@ -85,17 +86,17 @@ public class ViewWebContentScopeGlobalCompletedTest extends BaseTestCase {
 		}
 
 		assertEquals(RuntimeVariables.replace("Global"),
-			selenium.getText("//div/span/a"));
+			selenium.getText("//div[1]/div/span/a"));
 		selenium.clickAt("link=My Workflow Tasks", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Pending", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to you."),
-			selenium.getText("//div[2]/div/div[1]/div[2]/div[1]"));
+			selenium.getText("//div[@id='myTasksPanel']/div[2]/div[1]"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to your roles."),
-			selenium.getText("//div[2]/div/div[2]/div[2]/div[1]"));
+			selenium.getText("//div[@id='myRolesTasksPanel']/div[2]/div[1]"));
 		selenium.clickAt("link=Completed", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Review"),

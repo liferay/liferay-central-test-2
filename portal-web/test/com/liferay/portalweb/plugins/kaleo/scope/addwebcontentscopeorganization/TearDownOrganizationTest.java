@@ -52,7 +52,7 @@ public class TearDownOrganizationTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.type("_126_keywords",
-					RuntimeVariables.replace("Organization"));
+					RuntimeVariables.replace("Organization Name"));
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");

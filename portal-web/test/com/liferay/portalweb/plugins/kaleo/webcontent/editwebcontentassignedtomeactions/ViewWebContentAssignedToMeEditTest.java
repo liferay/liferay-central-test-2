@@ -57,7 +57,7 @@ public class ViewWebContentAssignedToMeEditTest extends BaseTestCase {
 			selenium.getText("//td[5]/a"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to your roles."),
-			selenium.getText("//div[2]/div[2]/div[1]"));
+			selenium.getText("//div[@id='myRolesTasksPanel']/div[2]/div[1]"));
 		selenium.clickAt("link=Completed", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("There are no completed tasks."),

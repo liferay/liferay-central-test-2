@@ -45,7 +45,7 @@ public class ViewWebContentScopeCommunityAssignedToMyRolesTest
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		selenium.clickAt("//div/span/a",
+		selenium.clickAt("//div[1]/div/span/a",
 			RuntimeVariables.replace("Scope Selector"));
 
 		for (int second = 0;; second++) {
@@ -54,7 +54,7 @@ public class ViewWebContentScopeCommunityAssignedToMyRolesTest
 			}
 
 			try {
-				if (selenium.isVisible("//div[4]/div/div[1]/div[2]/ul/li[1]/a")) {
+				if (selenium.isVisible("//li[1]/a")) {
 					break;
 				}
 			}
@@ -64,8 +64,7 @@ public class ViewWebContentScopeCommunityAssignedToMyRolesTest
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[4]/div/div[1]/div[2]/ul/li[1]/a",
-			RuntimeVariables.replace("Community Name"));
+		selenium.clickAt("//li[1]/a", RuntimeVariables.replace("Community Name"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -75,7 +74,8 @@ public class ViewWebContentScopeCommunityAssignedToMyRolesTest
 
 			try {
 				if (RuntimeVariables.replace("Community Name")
-										.equals(selenium.getText("//div/span/a"))) {
+										.equals(selenium.getText(
+								"//div[1]/div/span/a"))) {
 					break;
 				}
 			}
@@ -86,14 +86,14 @@ public class ViewWebContentScopeCommunityAssignedToMyRolesTest
 		}
 
 		assertEquals(RuntimeVariables.replace("Community Name"),
-			selenium.getText("//div/span/a"));
+			selenium.getText("//div[1]/div/span/a"));
 		selenium.clickAt("link=My Workflow Tasks", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Pending", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to you."),
-			selenium.getText("//div[2]/div/div[1]/div[2]/div[1]"));
+			selenium.getText("//div[@id='myTasksPanel']/div[2]/div[1]"));
 		assertEquals(RuntimeVariables.replace("Review"),
 			selenium.getText("//td[1]/a"));
 		assertEquals(RuntimeVariables.replace("Web Content Name"),

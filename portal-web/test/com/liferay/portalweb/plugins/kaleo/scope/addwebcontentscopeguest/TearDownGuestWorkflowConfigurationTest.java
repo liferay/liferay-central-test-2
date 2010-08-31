@@ -44,7 +44,7 @@ public class TearDownGuestWorkflowConfigurationTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Liferay"),
-			selenium.getText("//div/span/a"));
+			selenium.getText("//div[1]/div/span/a"));
 		selenium.clickAt("link=Workflow", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Default Configuration",

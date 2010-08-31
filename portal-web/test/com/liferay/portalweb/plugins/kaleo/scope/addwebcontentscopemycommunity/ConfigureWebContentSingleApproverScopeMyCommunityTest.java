@@ -45,7 +45,7 @@ public class ConfigureWebContentSingleApproverScopeMyCommunityTest
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("My Community"),
-			selenium.getText("//div/span/a"));
+			selenium.getText("//div[1]/div/span/a"));
 		selenium.clickAt("link=Workflow Configuration",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

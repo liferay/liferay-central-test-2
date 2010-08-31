@@ -49,7 +49,7 @@ public class TearDownGlobalWebContentTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				Thread.sleep(5000);
-				selenium.clickAt("//div/span/a",
+				selenium.clickAt("//div[1]/div/span/a",
 					RuntimeVariables.replace("Scope Selector"));
 
 				for (int second = 0;; second++) {
@@ -58,8 +58,7 @@ public class TearDownGlobalWebContentTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible(
-									"//div[4]/div/div[3]/div[2]/ul/li[1]/a")) {
+						if (selenium.isVisible("//div[3]/div[2]/ul/li[1]/a")) {
 							break;
 						}
 					}
@@ -69,7 +68,7 @@ public class TearDownGlobalWebContentTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[4]/div/div[3]/div[2]/ul/li[1]/a",
+				selenium.clickAt("//div[3]/div[2]/ul/li[1]/a",
 					RuntimeVariables.replace("Global"));
 				selenium.waitForPageToLoad("30000");
 
@@ -81,7 +80,7 @@ public class TearDownGlobalWebContentTest extends BaseTestCase {
 					try {
 						if (RuntimeVariables.replace("Global")
 												.equals(selenium.getText(
-										"//div/span/a"))) {
+										"//div[1]/div/span/a"))) {
 							break;
 						}
 					}
@@ -92,7 +91,7 @@ public class TearDownGlobalWebContentTest extends BaseTestCase {
 				}
 
 				assertEquals(RuntimeVariables.replace("Global"),
-					selenium.getText("//div/span/a"));
+					selenium.getText("//div[1]/div/span/a"));
 				selenium.clickAt("link=Web Content",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");

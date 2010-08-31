@@ -49,7 +49,7 @@ public class TearDownMyCommunityWebContentTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				assertEquals(RuntimeVariables.replace("My Community"),
-					selenium.getText("//div/span/a"));
+					selenium.getText("//div[1]/div/span/a"));
 				selenium.clickAt("link=Web Content",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");

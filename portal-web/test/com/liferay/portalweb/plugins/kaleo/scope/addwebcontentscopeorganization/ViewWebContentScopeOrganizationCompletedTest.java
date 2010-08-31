@@ -44,7 +44,7 @@ public class ViewWebContentScopeOrganizationCompletedTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		selenium.clickAt("//div/span/a",
+		selenium.clickAt("//div[1]/div/span/a",
 			RuntimeVariables.replace("Scope Selector"));
 
 		for (int second = 0;; second++) {
@@ -84,18 +84,37 @@ public class ViewWebContentScopeOrganizationCompletedTest extends BaseTestCase {
 		selenium.clickAt("//ul[3]/li[3]/a",
 			RuntimeVariables.replace("Organization Name"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Organization Name")
+										.equals(selenium.getText(
+								"//div[1]/div/span/a"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Organization Name"),
-			selenium.getText("//div/span/a"));
+			selenium.getText("//div[1]/div/span/a"));
 		selenium.clickAt("link=My Workflow Tasks", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Pending", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to you."),
-			selenium.getText("//div[2]/div/div[1]/div[2]/div[1]"));
+			selenium.getText("//div[@id='myTasksPanel']/div[2]/div[1]"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to your roles."),
-			selenium.getText("//div[2]/div/div[2]/div[2]/div[1]"));
+			selenium.getText("//div[@id='myRolesTasksPanel']/div[2]/div[1]"));
 		selenium.clickAt("link=Completed", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Review"),

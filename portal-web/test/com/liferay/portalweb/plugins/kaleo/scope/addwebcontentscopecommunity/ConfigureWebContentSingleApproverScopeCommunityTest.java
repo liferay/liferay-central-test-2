@@ -45,7 +45,7 @@ public class ConfigureWebContentSingleApproverScopeCommunityTest
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		selenium.clickAt("//div/span/a",
+		selenium.clickAt("//div[1]/div/span/a",
 			RuntimeVariables.replace("Scope Selector"));
 
 		for (int second = 0;; second++) {
@@ -54,7 +54,7 @@ public class ConfigureWebContentSingleApproverScopeCommunityTest
 			}
 
 			try {
-				if (selenium.isVisible("//div[4]/div/div[1]/div[2]/ul/li[1]/a")) {
+				if (selenium.isVisible("//li[1]/a")) {
 					break;
 				}
 			}
@@ -64,8 +64,7 @@ public class ConfigureWebContentSingleApproverScopeCommunityTest
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[4]/div/div[1]/div[2]/ul/li[1]/a",
-			RuntimeVariables.replace("Community Name"));
+		selenium.clickAt("//li[1]/a", RuntimeVariables.replace("Community Name"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -75,7 +74,8 @@ public class ConfigureWebContentSingleApproverScopeCommunityTest
 
 			try {
 				if (RuntimeVariables.replace("Community Name")
-										.equals(selenium.getText("//div/span/a"))) {
+										.equals(selenium.getText(
+								"//div[1]/div/span/a"))) {
 					break;
 				}
 			}
@@ -86,7 +86,7 @@ public class ConfigureWebContentSingleApproverScopeCommunityTest
 		}
 
 		assertEquals(RuntimeVariables.replace("Community Name"),
-			selenium.getText("//div/span/a"));
+			selenium.getText("//div[1]/div/span/a"));
 		selenium.clickAt("link=Workflow Configuration",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

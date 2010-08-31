@@ -56,7 +56,7 @@ public class UpdateDueDateWebContentAssignedToMeActionsTest extends BaseTestCase
 			selenium.getText("//td[5]/a"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to your roles."),
-			selenium.getText("//div[2]/div[2]/div[1]"));
+			selenium.getText("//div[@id='myRolesTasksPanel']/div[2]/div[1]"));
 		Thread.sleep(5000);
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
 
@@ -100,12 +100,10 @@ public class UpdateDueDateWebContentAssignedToMeActionsTest extends BaseTestCase
 		selenium.select("_153_dueDateDay", RuntimeVariables.replace("label=31"));
 		selenium.select("_153_dueDateYear",
 			RuntimeVariables.replace("label=2015"));
-		selenium.select("//div[3]/select[1]",
-			RuntimeVariables.replace("label=12"));
-		selenium.select("//div[3]/select[2]",
+		selenium.select("_153_dueDateHour", RuntimeVariables.replace("label=12"));
+		selenium.select("_153_dueDateMinute",
 			RuntimeVariables.replace("label=:00"));
-		selenium.select("//div[3]/select[3]",
-			RuntimeVariables.replace("label=AM"));
+		selenium.select("_153_dueDateAmPm", RuntimeVariables.replace("label=AM"));
 		selenium.clickAt("//div[3]/div/button[1]",
 			RuntimeVariables.replace("OK"));
 		selenium.waitForPageToLoad("30000");
@@ -123,6 +121,6 @@ public class UpdateDueDateWebContentAssignedToMeActionsTest extends BaseTestCase
 			selenium.getText("//td[5]/a"));
 		assertEquals(RuntimeVariables.replace(
 				"There are no pending tasks assigned to your roles."),
-			selenium.getText("//div[2]/div[2]/div[1]"));
+			selenium.getText("//div[@id='myRolesTasksPanel']/div[2]/div[1]"));
 	}
 }
