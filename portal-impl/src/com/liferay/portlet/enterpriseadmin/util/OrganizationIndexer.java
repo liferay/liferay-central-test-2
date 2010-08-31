@@ -21,13 +21,12 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
-import com.liferay.portal.kernel.search.ExpandoIndexer;
+import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Country;
@@ -41,7 +40,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.ArrayList;
@@ -50,7 +48,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.portlet.PortletURL;
 
@@ -61,7 +58,7 @@ import javax.portlet.PortletURL;
  * @author Zsigmond Rab
  * @author Hugo Huijser
  */
-public class OrganizationIndexer extends ExpandoIndexer {
+public class OrganizationIndexer extends BaseIndexer {
 
 	public static final String[] CLASS_NAMES = {Organization.class.getName()};
 
@@ -312,22 +309,10 @@ public class OrganizationIndexer extends ExpandoIndexer {
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
 
-		if (params != null) {
-			ExpandoBridge expandoBridge =
-				ExpandoBridgeFactoryUtil.getExpandoBridge(
-					searchContext.getCompanyId(), Organization.class.getName());
+		String customField = (String)params.get("customField");
 
-			Set<String> attributeNames = SetUtil.fromEnumeration(
-				expandoBridge.getAttributeNames());
-
-			for (Map.Entry<String, Object> entry : params.entrySet()) {
-				String key = entry.getKey();
-				Object value = entry.getValue();
-
-				addSearchQueryParams(
-					searchQuery, searchContext, expandoBridge, attributeNames,
-					key, value);
-			}
+		if (Validator.isNotNull(customField)) {
+			addSearchExpando(searchQuery, searchContext, customField);
 		}
 
 		String parentOrganizationId = (String)searchContext.getAttribute(

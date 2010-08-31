@@ -21,7 +21,9 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -29,12 +31,19 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetCategoryServiceUtil;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
+import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
+import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Hugo Huijser
  */
 public abstract class BaseIndexer implements Indexer {
 
@@ -253,6 +262,46 @@ public abstract class BaseIndexer implements Indexer {
 		}
 	}
 
+	protected void addSearchExpando(
+			BooleanQuery searchQuery, SearchContext searchContext,
+			String keywords)
+		throws Exception {
+
+		ExpandoBridge expandoBridge =
+			ExpandoBridgeFactoryUtil.getExpandoBridge(
+				searchContext.getCompanyId(), getClassName(searchContext));
+
+		Set<String> attributeNames = SetUtil.fromEnumeration(
+			expandoBridge.getAttributeNames());
+
+		Iterator iterator = attributeNames.iterator();
+
+		String fieldName;
+		String key;
+		UnicodeProperties properties;
+
+		while (iterator.hasNext()) {
+			key = iterator.next().toString();
+
+			properties = expandoBridge.getAttributeProperties(key);
+
+			if (GetterUtil.getBoolean(
+					properties.getProperty(ExpandoBridgeIndexer.INDEXABLE))) {
+
+				fieldName = ExpandoBridgeIndexerUtil.encodeFieldName(key);
+
+				if (Validator.isNotNull(keywords)) {
+					if (searchContext.isAndSearch()) {
+						searchQuery.addRequiredTerm(fieldName, keywords, true);
+					}
+					else {
+						searchQuery.addTerm(fieldName, keywords, true);
+					}
+				}
+			}
+		}
+	}
+
 	protected void addSearchFolderIds(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
@@ -348,6 +397,8 @@ public abstract class BaseIndexer implements Indexer {
 		}
 
 		searchQuery.addTerms(_KEYWORDS_FIELDS, keywords);
+
+		addSearchExpando(searchQuery, searchContext, keywords);
 	}
 
 	protected void addSearchNodeIds(

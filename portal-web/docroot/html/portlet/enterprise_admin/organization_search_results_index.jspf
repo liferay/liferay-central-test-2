@@ -18,34 +18,10 @@
 <%@ page import="com.liferay.portal.kernel.search.Field" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
 <%@ page import="com.liferay.portal.kernel.search.Sort" %>
-<%@ page import="com.liferay.portlet.expando.model.ExpandoBridge" %>
-<%@ page import="com.liferay.portlet.expando.model.ExpandoColumnConstants" %>
-<%@ page import="com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil" %>
-<%@ page import="com.liferay.portlet.expando.util.ExpandoBridgeIndexer" %>
 
 <%
-ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.getCompanyId(), Organization.class.getName());
 
-Enumeration<String> enu = expandoBridge.getAttributeNames();
-
-while (enu.hasMoreElements()) {
-	String attributeName = enu.nextElement();
-
-	UnicodeProperties properties = expandoBridge.getAttributeProperties(attributeName);
-
-	if (GetterUtil.getBoolean(properties.getProperty(ExpandoBridgeIndexer.INDEXABLE))) {
-		int type = expandoBridge.getAttributeType(attributeName);
-
-		if (type == ExpandoColumnConstants.STRING) {
-			if (searchTerms.isAdvancedSearch()) {
-				organizationParams.put(attributeName, ParamUtil.getString(request, attributeName));
-			}
-			else {
-				organizationParams.put(attributeName, searchTerms.getKeywords());
-			}
-		}
-	}
-}
+organizationParams.put("customField", searchTerms.getKeywords());
 
 Sort sort = _getSort(searchContainer.getOrderByCol(), searchContainer.getOrderByType());
 
