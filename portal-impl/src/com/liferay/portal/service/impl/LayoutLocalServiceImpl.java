@@ -526,7 +526,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			groupId, privateLayout, friendlyURL);
 
 		if ((layout == null) &&
-			(friendlyURL.startsWith(StringPool.SLASH))) {
+			(friendlyURL.startsWith(StringPool.SLASH)) &&
+			(Validator.isNumber(friendlyURL.substring(1)))) {
 
 			long layoutId = GetterUtil.getLong(friendlyURL.substring(1));
 
