@@ -167,8 +167,8 @@ if (Validator.isNotNull(structureId)) {
 					</aui:select>
 
 					<aui:select label="" name="orderByType">
-						<aui:option label="ascending" selected='<%= orderByType.equals("asc") %>' />
-						<aui:option label="descending" selected='<%= orderByType.equals("desc") %>' />
+						<aui:option label="ascending" selected='<%= orderByType.equals("asc") %>' value="asc" />
+						<aui:option label="descending" selected='<%= orderByType.equals("desc") %>' value="desc" />
 					</aui:select>
 				</aui:field-wrapper>
 			</aui:fieldset>
