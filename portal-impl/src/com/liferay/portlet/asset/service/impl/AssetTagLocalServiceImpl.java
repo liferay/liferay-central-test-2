@@ -17,7 +17,6 @@ package com.liferay.portlet.asset.service.impl;
 import com.liferay.portal.kernel.cache.ThreadLocalCachable;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -39,7 +38,6 @@ import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.model.AssetTagProperty;
 import com.liferay.portlet.asset.service.base.AssetTagLocalServiceBaseImpl;
 import com.liferay.portlet.asset.util.AssetUtil;
-import com.liferay.util.Autocomplete;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -370,15 +368,13 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		deleteTag(fromTagId);
 	}
 
-	public JSONArray search(
+	public List<AssetTag> search(
 			long groupId, String name, String[] tagProperties, int start,
 			int end)
 		throws SystemException {
 
-		List<AssetTag> list = assetTagFinder.findByG_N_P(
+		return assetTagFinder.findByG_N_P(
 			groupId, name, tagProperties, start, end);
-
-		return Autocomplete.listToJson(list, "name", "name");
 	}
 
 	public AssetTag updateTag(

@@ -25,6 +25,7 @@ import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.service.base.AssetTagServiceBaseImpl;
 import com.liferay.portlet.asset.service.permission.AssetPermission;
 import com.liferay.portlet.asset.service.permission.AssetTagPermission;
+import com.liferay.util.Autocomplete;
 
 import java.util.Iterator;
 import java.util.List;
@@ -99,10 +100,13 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 	public JSONArray search(
 			long groupId, String name, String[] tagProperties, int start,
 			int end)
-		throws SystemException {
+		throws PortalException, SystemException {
 
-		return assetTagLocalService.search(
-			groupId, name, tagProperties, start, end);
+		List<AssetTag> list = filterTags(assetTagLocalService.search(
+			groupId, name, tagProperties, start, end));
+
+		return Autocomplete.listToJson(list, "name", "name");
+
 	}
 
 	public AssetTag updateTag(
