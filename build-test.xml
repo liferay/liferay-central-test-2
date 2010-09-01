@@ -1405,13 +1405,7 @@
 	</target>
 
 	<target name="prepare-portal-ext-properties">
-		<echo file="portal-impl/src/portal-ext.properties">axis.servlet.hosts.allowed=
-
-browser.launcher.url=
-
-captcha.max.challenges=0
-
-index.on.startup=true
+		<echo file="portal-impl/src/portal-ext.properties">plugin.notifications.enabled=false
 
 jdbc.default.jndi.name=
 
@@ -1420,9 +1414,15 @@ jdbc.default.url=${db.url}
 jdbc.default.username=${db.username}
 jdbc.default.password=${db.password}
 
+captcha.max.challenges=0
+
+browser.launcher.url=
+
+index.on.startup=true
+
 mail.session.jndi.name=
 
-plugin.notifications.enabled=false
+axis.servlet.hosts.allowed=
 
 tunnel.servlet.hosts.allowed=</echo>
 
