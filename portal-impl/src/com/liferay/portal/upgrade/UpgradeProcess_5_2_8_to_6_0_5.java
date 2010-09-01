@@ -38,7 +38,7 @@ import com.liferay.portal.upgrade.v6_0_5.UpgradeJournal;
 public class UpgradeProcess_5_2_8_to_6_0_5 extends UpgradeProcess {
 
 	public int getThreshold() {
-		return ReleaseInfo.RELEASE_6_0_3_BUILD_NUMBER;
+		return ReleaseInfo.RELEASE_6_0_5_BUILD_NUMBER;
 	}
 
 	protected void doUpgrade() throws Exception {
