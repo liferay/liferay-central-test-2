@@ -118,17 +118,17 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 	var select = A.one('#<portlet:namespace />displayStyle');
 
 	var toggleCustomFields = function() {
-		var customDisplayStyle = A.one('#<portlet:namespace />customDisplayStyle');
+		var customDisplayOptions = A.one('#<portlet:namespace />customDisplayOptions');
 		var displayStyle = select.val();
 
-		if (customDisplayStyle) {
+		if (customDisplayOptions) {
 			var action = 'hide';
 
 			if (displayStyle == '[custom]') {
 				action = 'show';
 			}
 
-			customDisplayStyle[action]();
+			customDisplayOptions[action]();
 		}
 	}
 
