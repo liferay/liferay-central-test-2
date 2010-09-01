@@ -34,7 +34,6 @@ public class SelectBookmarksEntryTests extends BaseTests {
 		testSuite.addTestSuite(AddFolderTest.class);
 		testSuite.addTestSuite(AddBookmarksEntryTest.class);
 		testSuite.addTestSuite(ConfigurePortletAssetSelectionManualTest.class);
-		testSuite.addTestSuite(RemoveBookmarksEntryTest.class);
 		testSuite.addTestSuite(SelectBookmarksEntryTest.class);
 		testSuite.addTestSuite(TearDownBookmarksFolderTest.class);
 		testSuite.addTestSuite(TearDownBookmarksEntryTest.class);

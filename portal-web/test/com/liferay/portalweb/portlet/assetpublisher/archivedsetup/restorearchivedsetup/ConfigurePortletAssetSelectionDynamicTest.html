@@ -24,9 +24,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Configuration</td>
-	<td></td>
+	<td>clickAt</td>
+	<td>//strong/a</td>
+	<td>Options</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_86_selectionStyle</td>
+	<td>Asset Selection</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -35,7 +50,7 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[1]/div[1]/div[1]/div/span</td>
+	<td>//form[@id='_86_fm']/div[1]/div[1]/div[1]/div/span</td>
 	<td>Source</td>
 </tr>
 <tr>
@@ -45,7 +60,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[3]/div/div/div/div/div</td>
+	<td>//div[@id='p_p_id_86_']/div/div[1]</td>
 	<td>You have successfully updated the setup.</td>
 </tr>
 <tr>
@@ -54,23 +69,28 @@
 	<td>Dynamic</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div[1]/div[1]/div[1]/div/span</td>
+	<td>waitForText</td>
+	<td>//form[@id='_86_fm']/div[1]/div[1]/div[1]/div/span</td>
 	<td>Source</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[1]/div[2]/div[1]/div/span</td>
+	<td>//form[@id='_86_fm']/div[1]/div[1]/div[1]/div/span</td>
+	<td>Source</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='_86_fm']/div[1]/div[2]/div[1]/div/span</td>
 	<td>Filter</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[1]/div[3]/div[1]/div/span</td>
+	<td>//form[@id='_86_fm']/div[1]/div[3]/div[1]/div/span</td>
 	<td>Ordering and Grouping</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[1]/div[4]/div[1]/div/span</td>
+	<td>//form[@id='_86_fm']/div[1]/div[4]/div[1]/div/span</td>
 	<td>Display Settings</td>
 </tr>
 

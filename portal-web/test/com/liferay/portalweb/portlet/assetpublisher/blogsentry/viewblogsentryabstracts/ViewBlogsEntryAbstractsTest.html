@@ -25,52 +25,52 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[1]/h3/a</td>
+	<td>//h3[@class='asset-title']/a</td>
 	<td>AP Blogs Entry Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div/div/div[1]/div[2]/div[1]</td>
+	<td>//div[@class='asset-summary']</td>
 	<td>AP Blogs Entry Content.</td>
 </tr>
 <tr>
 	<td>assertPartialText</td>
-	<td>//div[2]/a</td>
+	<td>//div[@class='asset-more']/a</td>
 	<td>Read More</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//div[2]/a</td>
-	<td></td>
+	<td>//div[@class='asset-more']/a</td>
+	<td>Read More</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div/h3</td>
+	<td>//h1[@class='header-title']</td>
 	<td>AP Blogs Entry Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//p</td>
+	<td>//div[@class='asset-content']/p</td>
 	<td>AP Blogs Entry Content.</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[2]/div/a</td>
+	<td>//div[@class='asset-more']/a</td>
 	<td>View in Context »</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//div[2]/div/a</td>
-	<td></td>
+	<td>//div[@class='asset-more']/a</td>
+	<td>View in Context »</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//form/div/div[1]/div[1]</td>
+	<td>//h1[@class='header-title']</td>
 	<td>AP Blogs Entry Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//p</td>
+	<td>//div[@class='entry-body']/p</td>
 	<td>AP Blogs Entry Content.</td>
 </tr>
 

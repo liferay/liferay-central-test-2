@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.assetpublisher.blogsentry.selectblogsentry;
+package com.liferay.portalweb.portlet.assetpublisher.blogsentry.removeblogsentry;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class RemoveBlogsEntryTest extends BaseTestCase {
-	public void testRemoveBlogsEntry() throws Exception {
+public class SelectBlogsEntryTest extends BaseTestCase {
+	public void testSelectBlogsEntry() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -43,7 +43,7 @@ public class RemoveBlogsEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -63,6 +63,7 @@ public class RemoveBlogsEntryTest extends BaseTestCase {
 		}
 
 		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -70,8 +71,7 @@ public class RemoveBlogsEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace("Blogs Entry")
-										.equals(selenium.getText("//td[1]/a"))) {
+				if (selenium.isVisible("//div[2]/ul/li/strong/a")) {
 					break;
 				}
 			}
@@ -81,39 +81,41 @@ public class RemoveBlogsEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("//div[2]/ul/li/strong/a",
+			RuntimeVariables.replace("Select Existing"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("AP Blogs Entry Title"),
+			selenium.getText("//td[1]/a"));
+		selenium.clickAt("//td[1]/a",
+			RuntimeVariables.replace("AP Blogs Entry Title"));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry"),
 			selenium.getText("//td[1]/a"));
 		assertEquals(RuntimeVariables.replace("AP Blogs Entry Title"),
 			selenium.getText("//td[2]/a"));
-		selenium.click(RuntimeVariables.replace("//img[@alt='Delete']"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace(
-							"You have successfully updated the setup.")
-										.equals(selenium.getText(
-								"//div[@id='p_p_id_86_']/div/div"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertEquals(RuntimeVariables.replace(
-				"You have successfully updated the setup."),
-			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
-		assertEquals(RuntimeVariables.replace("No assets selected."),
-			selenium.getText("//fieldset/div/div[3]"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -135,7 +137,9 @@ public class RemoveBlogsEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isTextPresent("AP Blogs Entry Title"));
-		assertFalse(selenium.isTextPresent("AP Blogs Entry Content."));
+		assertEquals(RuntimeVariables.replace("AP Blogs Entry Title"),
+			selenium.getText("//div[1]/h3/a"));
+		assertEquals(RuntimeVariables.replace("AP Blogs Entry Content."),
+			selenium.getText("//div/div/div[1]/div[2]/div[1]"));
 	}
 }

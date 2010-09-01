@@ -44,11 +44,11 @@ public class ViewBlogsEntryTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
-				"Joe wrote a new blog entry, Blogs Entry Title, in Guest."),
+				"Joe wrote a new blog entry, Blogs Entry Title, in Liferay."),
 			selenium.getText("//td[2]/div[1]"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
 			selenium.getText("//td[2]/div[1]/a[1]"));
-		assertEquals(RuntimeVariables.replace("Guest"),
+		assertEquals(RuntimeVariables.replace("Liferay"),
 			selenium.getText("//td[2]/div[1]/a[2]"));
 	}
 }

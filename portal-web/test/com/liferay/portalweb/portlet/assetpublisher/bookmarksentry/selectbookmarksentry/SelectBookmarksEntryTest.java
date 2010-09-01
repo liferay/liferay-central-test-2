@@ -43,7 +43,7 @@ public class SelectBookmarksEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -81,7 +81,8 @@ public class SelectBookmarksEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[2]/ul/li/strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li/strong/a",
+			RuntimeVariables.replace("Select Existing"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -90,7 +91,7 @@ public class SelectBookmarksEntryTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a")) {
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a")) {
 					break;
 				}
 			}
@@ -101,17 +102,20 @@ public class SelectBookmarksEntryTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a"));
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Bookmarks Entry Name"),
 			selenium.getText("//td[1]/a"));
-		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[1]/a",
+			RuntimeVariables.replace("AP Bookmarks Entry Name"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
-			selenium.getText("//div[3]/div/div/div/div/div"));
+			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("Bookmarks Entry"),
 			selenium.getText("//td[1]/a"));
+		assertEquals(RuntimeVariables.replace("AP Bookmarks Entry Name"),
+			selenium.getText("//td[2]/a"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

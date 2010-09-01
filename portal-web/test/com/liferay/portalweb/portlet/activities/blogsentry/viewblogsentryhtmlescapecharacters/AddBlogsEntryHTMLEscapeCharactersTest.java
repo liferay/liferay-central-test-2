@@ -46,7 +46,7 @@ public class AddBlogsEntryHTMLEscapeCharactersTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Blog Entry']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_33_title", RuntimeVariables.replace("&amp;"));
+		selenium.type("_33_title", RuntimeVariables.replace("&amp;amp;"));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -107,9 +107,9 @@ public class AddBlogsEntryHTMLEscapeCharactersTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));
-		assertEquals(RuntimeVariables.replace("&amp;"),
-			selenium.getText("//div[2]/div[1]/div[1]/a"));
+		assertEquals(RuntimeVariables.replace("&amp;amp;"),
+			selenium.getText("//div[@class='entry-title']/a"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Content"),
-			selenium.getText("//p"));
+			selenium.getText("//div[@class='entry-body']/p"));
 	}
 }

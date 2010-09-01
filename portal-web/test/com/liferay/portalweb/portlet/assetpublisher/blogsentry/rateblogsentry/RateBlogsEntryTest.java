@@ -45,7 +45,7 @@ public class RateBlogsEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 
 		String voteCount = selenium.getIncrementedText(
-				"//div[2]/div/div[2]/div/div");
+				"xPath=(//div[@class='aui-rating-label-element'])[2]");
 		RuntimeVariables.setValue("voteCount", voteCount);
 		selenium.clickAt("//a[5]", RuntimeVariables.replace(""));
 
@@ -55,7 +55,8 @@ public class RateBlogsEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isPartialText("//div[2]/div/div[2]/div/div",
+				if (selenium.isPartialText(
+							"xPath=(//div[@class='aui-rating-label-element'])[2]",
 							RuntimeVariables.getValue("voteCount"))) {
 					break;
 				}
@@ -66,7 +67,8 @@ public class RateBlogsEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isPartialText("//div[2]/div/div[2]/div/div",
+		assertTrue(selenium.isPartialText(
+				"xPath=(//div[@class='aui-rating-label-element'])[2]",
 				RuntimeVariables.getValue("voteCount")));
 	}
 }

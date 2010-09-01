@@ -44,7 +44,8 @@ public class ViewCountBlogsEntryTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
-		String viewCount = selenium.getIncrementedText("//div[3]/span");
+		String viewCount = selenium.getIncrementedText(
+				"//span[@class='metadata-entry metadata-view-count']");
 		RuntimeVariables.setValue("viewCount", viewCount);
 		selenium.open("/web/guest/home/");
 
@@ -67,10 +68,12 @@ public class ViewCountBlogsEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//div[3]/span",
+		assertTrue(selenium.isPartialText(
+				"//span[@class='metadata-entry metadata-view-count']",
 				RuntimeVariables.getValue("viewCount")));
 
-		String viewCount2 = selenium.getIncrementedText("//div[3]/span");
+		String viewCount2 = selenium.getIncrementedText(
+				"//span[@class='metadata-entry metadata-view-count']");
 		RuntimeVariables.setValue("viewCount2", viewCount2);
 		selenium.open("/web/guest/home/");
 
@@ -93,10 +96,13 @@ public class ViewCountBlogsEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Blogs Entry Title"),
-			selenium.getText("//div[2]/div[1]/div[1]/a"));
-		selenium.click(RuntimeVariables.replace("//div[2]/div[1]/div[1]/a"));
+			selenium.getText("//div[@class='entry-title']/a"));
+		assertEquals(RuntimeVariables.replace("AP Blogs Entry Content."),
+			selenium.getText("//div[@class='entry-body']/p"));
+		selenium.clickAt("//div[@class='entry-title']/a",
+			RuntimeVariables.replace("AP Blogs Entry Title"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//div[2]/span[1]",
+		assertTrue(selenium.isPartialText("//span[@class='view-count']",
 				RuntimeVariables.getValue("viewCount2")));
 	}
 }

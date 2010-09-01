@@ -43,7 +43,8 @@ public class AddBlogsEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//strong/a/img", RuntimeVariables.replace(""));
+		selenium.clickAt("//div/ul/li/strong/a",
+			RuntimeVariables.replace("Add New"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -125,7 +126,8 @@ public class AddBlogsEntryTest extends BaseTestCase {
 		selenium.type("//body",
 			RuntimeVariables.replace("AP Blogs Entry Content."));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Blogs Entry Title"),
 			selenium.getText("//div[1]/h3/a"));

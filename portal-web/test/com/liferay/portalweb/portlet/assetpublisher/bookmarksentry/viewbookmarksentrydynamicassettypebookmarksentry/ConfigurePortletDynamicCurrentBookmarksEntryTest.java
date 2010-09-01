@@ -45,8 +45,43 @@ public class ConfigurePortletDynamicCurrentBookmarksEntryTest
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_86_anyAssetType")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.select("_86_anyAssetType",
 			RuntimeVariables.replace("label=Filter..."));
 
@@ -66,12 +101,10 @@ public class ConfigurePortletDynamicCurrentBookmarksEntryTest
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace("Bookmarks Entry"),
-			selenium.getText("_86_availableClassNameIds"));
 		selenium.addSelection("_86_availableClassNameIds",
 			RuntimeVariables.replace("label=Bookmarks Entry"));
 		selenium.clickAt("//fieldset[2]/div/div/div/div/div/div/div[2]/div/span/span/button[2]",
-			RuntimeVariables.replace(""));
+			RuntimeVariables.replace("Left Arrow"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -96,7 +129,7 @@ public class ConfigurePortletDynamicCurrentBookmarksEntryTest
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
-			selenium.getText("//div[3]/div/div/div/div/div"));
+			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
 		assertTrue(selenium.isPartialText("_86_currentClassNameIds",
 				"Bookmarks Entry"));
 	}

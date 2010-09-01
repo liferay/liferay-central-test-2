@@ -107,8 +107,8 @@ public class AddBlogsEntryTest extends BaseTestCase {
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
-			selenium.getText("//div[2]/div[1]/div[1]/a"));
+			selenium.getText("//div[@class='entry-title']/a"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Content"),
-			selenium.getText("//p"));
+			selenium.getText("//div[@class='entry-body']/p"));
 	}
 }

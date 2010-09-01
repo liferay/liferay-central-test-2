@@ -44,11 +44,11 @@ public class ViewBlogsEntryXSSTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
-				"Joe wrote a new blog entry, <script>alert(hello)</script>, in Guest."),
+				"Joe wrote a new blog entry, <script>alert(hello)</script>, in Liferay."),
 			selenium.getText("//td[2]/div[1]"));
 		assertEquals(RuntimeVariables.replace("<script>alert(hello)</script>"),
 			selenium.getText("//td[2]/div[1]/a[1]"));
-		assertEquals(RuntimeVariables.replace("Guest"),
+		assertEquals(RuntimeVariables.replace("Liferay"),
 			selenium.getText("//td[2]/div[1]/a[2]"));
 	}
 }

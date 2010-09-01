@@ -55,12 +55,13 @@ public class AddEntryContentNullTest extends BaseTestCase {
 			RuntimeVariables.replace("Announcements Entry Title Null"));
 		selenium.type("_84_url",
 			RuntimeVariables.replace("http://www.liferay.com"));
+		selenium.type("_84_content", RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"You have entered invalid data. Please try again."),
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("Please enter valid content."),
-			selenium.getText("//form/div[1]"));
+			selenium.getText("//form/div[2]"));
 	}
 }

@@ -44,23 +44,26 @@ public class ViewBlogsEntryAbstractsTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Blogs Entry Title"),
-			selenium.getText("//div[1]/h3/a"));
+			selenium.getText("//h3[@class='asset-title']/a"));
 		assertEquals(RuntimeVariables.replace("AP Blogs Entry Content."),
-			selenium.getText("//div/div/div[1]/div[2]/div[1]"));
-		assertTrue(selenium.isPartialText("//div[2]/a", "Read More"));
-		selenium.clickAt("//div[2]/a", RuntimeVariables.replace(""));
+			selenium.getText("//div[@class='asset-summary']"));
+		assertTrue(selenium.isPartialText("//div[@class='asset-more']/a",
+				"Read More"));
+		selenium.clickAt("//div[@class='asset-more']/a",
+			RuntimeVariables.replace("Read More"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Blogs Entry Title"),
-			selenium.getText("//div/h3"));
+			selenium.getText("//h1[@class='header-title']"));
 		assertEquals(RuntimeVariables.replace("AP Blogs Entry Content."),
-			selenium.getText("//p"));
+			selenium.getText("//div[@class='asset-content']/p"));
 		assertEquals(RuntimeVariables.replace("View in Context \u00bb"),
-			selenium.getText("//div[2]/div/a"));
-		selenium.clickAt("//div[2]/div/a", RuntimeVariables.replace(""));
+			selenium.getText("//div[@class='asset-more']/a"));
+		selenium.clickAt("//div[@class='asset-more']/a",
+			RuntimeVariables.replace("View in Context \u00bb"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Blogs Entry Title"),
-			selenium.getText("//form/div/div[1]/div[1]"));
+			selenium.getText("//h1[@class='header-title']"));
 		assertEquals(RuntimeVariables.replace("AP Blogs Entry Content."),
-			selenium.getText("//p"));
+			selenium.getText("//div[@class='entry-body']/p"));
 	}
 }

@@ -24,13 +24,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div</td>
-	<td></td>
+	<td>waitForPartialText</td>
+	<td>//div[@class='aui-rating-label-element']</td>
+	<td>0 Votes</td>
 </tr>
 <tr>
 	<td>assertPartialText</td>
-	<td>//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div</td>
+	<td>//div[@class='aui-rating-label-element']</td>
 	<td>0 Votes</td>
 </tr>
 <tr>
@@ -40,12 +40,12 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div</td>
+	<td>//div[@class='aui-rating-label-element']</td>
 	<td>+1 (1 Vote)</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div</td>
+	<td>//div[@class='aui-rating-label-element']</td>
 	<td>+1 (1 Vote)</td>
 </tr>
 <tr>
@@ -55,17 +55,17 @@
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//td[1]/div/div/div/a[2]</td>
+	<td>//table[1]/tbody/tr/td[1]/div/div/div/a[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div</td>
+	<td>//div[@class='aui-rating-label-element']</td>
 	<td>-1 (1 Vote)</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div</td>
+	<td>//div[@class='aui-rating-label-element']</td>
 	<td>-1 (1 Vote)</td>
 </tr>
 <tr>
@@ -76,6 +76,16 @@
 <tr>
 	<td>clickAt</td>
 	<td>//td[1]/div/div/div/a[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-up aui-rating-element-on']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-down aui-rating-element-on']</td>
 	<td></td>
 </tr>
 

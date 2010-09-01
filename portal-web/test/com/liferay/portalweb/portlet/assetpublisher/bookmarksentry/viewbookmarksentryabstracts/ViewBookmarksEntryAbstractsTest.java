@@ -44,18 +44,19 @@ public class ViewBookmarksEntryAbstractsTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Bookmarks Entry Name"),
-			selenium.getText("//div[1]/h3/a"));
-		assertTrue(selenium.isPartialText("//div[2]/a", "Read More"));
-		selenium.clickAt("//div[2]/a", RuntimeVariables.replace(""));
+			selenium.getText("//h3[@class='asset-title']/a"));
+		selenium.clickAt("//h3[@class='asset-title']/a",
+			RuntimeVariables.replace("AP Bookmarks Entry Name"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Bookmarks Entry Name"),
-			selenium.getText("//div/h3"));
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace(
 				"AP Bookmarks Entry Name (http://www.liferay.com) (Opens New Window)"),
-			selenium.getText("//div[2]/a"));
+			selenium.getText("//div[@class='asset-content']/a"));
 		assertEquals(RuntimeVariables.replace("View in Context \u00bb"),
-			selenium.getText("//div[2]/div/a"));
-		selenium.clickAt("//div[2]/div/a", RuntimeVariables.replace(""));
+			selenium.getText("//div[@class='asset-more']/a"));
+		selenium.clickAt("//div[@class='asset-more']/a",
+			RuntimeVariables.replace("View in Context \u00bb"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Liferay.com"),
 			selenium.getText("logo"));

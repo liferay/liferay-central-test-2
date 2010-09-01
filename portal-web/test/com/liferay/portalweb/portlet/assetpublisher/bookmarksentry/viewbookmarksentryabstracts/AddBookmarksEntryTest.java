@@ -48,7 +48,8 @@ public class AddBookmarksEntryTest extends BaseTestCase {
 				selenium.clickAt("link=Asset Publisher Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//strong/a/img", RuntimeVariables.replace(""));
+				selenium.clickAt("//div/ul/li/strong/a",
+					RuntimeVariables.replace("Add New"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -143,6 +144,8 @@ public class AddBookmarksEntryTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				assertEquals(RuntimeVariables.replace("Folder Name"),
+					selenium.getText("_28_folderName"));
 				selenium.type("_28_name",
 					RuntimeVariables.replace("AP Bookmarks Entry Name"));
 				selenium.type("_28_url",

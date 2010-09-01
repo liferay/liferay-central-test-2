@@ -43,7 +43,7 @@ public class RemoveBlogsEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -70,8 +70,7 @@ public class RemoveBlogsEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace("Blogs Entry")
-										.equals(selenium.getText("//td[1]/a"))) {
+				if (selenium.isVisible("//td[1]/a")) {
 					break;
 				}
 			}

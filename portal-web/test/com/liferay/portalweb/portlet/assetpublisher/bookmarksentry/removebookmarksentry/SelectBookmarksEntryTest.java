@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.assetpublisher.blogsentrycomment.rateblogsentrycomment;
+package com.liferay.portalweb.portlet.assetpublisher.bookmarksentry.removebookmarksentry;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,10 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class ConfigurePortletDynamicEnableCommentRatingsTest
-	extends BaseTestCase {
-	public void testConfigurePortletDynamicEnableCommentRatings()
-		throws Exception {
+public class SelectBookmarksEntryTest extends BaseTestCase {
+	public void testSelectBookmarksEntry() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -65,6 +63,7 @@ public class ConfigurePortletDynamicEnableCommentRatingsTest
 		}
 
 		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -72,7 +71,7 @@ public class ConfigurePortletDynamicEnableCommentRatingsTest
 			}
 
 			try {
-				if (selenium.isVisible("_86_enableCommentRatingsCheckbox")) {
+				if (selenium.isVisible("//div[2]/ul/li/strong/a")) {
 					break;
 				}
 			}
@@ -82,14 +81,63 @@ public class ConfigurePortletDynamicEnableCommentRatingsTest
 			Thread.sleep(1000);
 		}
 
-		assertFalse(selenium.isChecked("_86_enableCommentRatingsCheckbox"));
-		selenium.clickAt("_86_enableCommentRatingsCheckbox",
-			RuntimeVariables.replace("Enable Comment Ratings"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li/strong/a",
+			RuntimeVariables.replace("Select Existing"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("AP Bookmarks Entry Name"),
+			selenium.getText("//td[1]/a"));
+		selenium.clickAt("//td[1]/a",
+			RuntimeVariables.replace("AP Bookmarks Entry Name"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
-		assertTrue(selenium.isChecked("_86_enableCommentRatingsCheckbox"));
+		assertEquals(RuntimeVariables.replace("Bookmarks Entry"),
+			selenium.getText("//td[1]/a"));
+		assertEquals(RuntimeVariables.replace("AP Bookmarks Entry Name"),
+			selenium.getText("//td[2]/a"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Asset Publisher Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Asset Publisher Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("AP Bookmarks Entry Name"),
+			selenium.getText("//div[1]/h3/a"));
 	}
 }

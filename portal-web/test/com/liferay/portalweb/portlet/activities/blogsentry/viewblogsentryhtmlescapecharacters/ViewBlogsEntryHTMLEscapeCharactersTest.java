@@ -45,11 +45,11 @@ public class ViewBlogsEntryHTMLEscapeCharactersTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
-				"Joe wrote a new blog entry, &amp;, in Guest."),
+				"Joe wrote a new blog entry, &amp;amp;, in Liferay."),
 			selenium.getText("//td[2]/div[1]"));
-		assertEquals(RuntimeVariables.replace("&amp;"),
+		assertEquals(RuntimeVariables.replace("&amp;amp;"),
 			selenium.getText("//td[2]/div[1]/a[1]"));
-		assertEquals(RuntimeVariables.replace("Guest"),
+		assertEquals(RuntimeVariables.replace("Liferay"),
 			selenium.getText("//td[2]/div[1]/a[2]"));
 	}
 }
