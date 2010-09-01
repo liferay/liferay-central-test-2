@@ -324,7 +324,8 @@ public class SocialEquityLogLocalServiceImpl
 		runSQL(sql);
 	}
 
-	@BufferedIncrement(incrementClass = SocialEquityIncrement.class)
+	@BufferedIncrement(incrementClass = SocialEquityIncrement.class,
+		isSerialIncrement=true)
 	public void incrementSocialEquityUser_CQ(
 			long groupId, long userId, SocialEquityValue socialEquityValue)
 		throws PortalException, SystemException {
@@ -359,7 +360,8 @@ public class SocialEquityLogLocalServiceImpl
 		runSQL(sql);
 	}
 
-	@BufferedIncrement(incrementClass = SocialEquityIncrement.class)
+	@BufferedIncrement(incrementClass = SocialEquityIncrement.class,
+		isSerialIncrement=true)
 	public void incrementSocialEquityUser_PQ(
 			long groupId, long userId, SocialEquityValue socialEquityValue)
 		throws PortalException, SystemException {
