@@ -17,8 +17,23 @@
 	<bean id="destination.blogs" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<property name="name" value="liferay/blogs" />
 	</bean>
-	<bean id="destination.buffered_increment" class="com.liferay.portal.kernel.messaging.SerialDestination">
-		<property name="name" value="liferay/buffered_increment" />
+	<bean id="destination.buffered_increment_parallel" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<property name="name" value="liferay/buffered_increment_parallel" />
+		<property name="maximumQueueSize">
+			<util:constant static-field="com.liferay.portal.util.PropsValues.BUFFERED_INCREMENT_QUEUE_SIZE" />
+		</property>
+		<property name="rejectedExecutionHandler">
+			<bean class="com.liferay.portal.increment.BufferedIncrementDiscardPolicy" />
+		</property>
+	</bean>
+	<bean id="destination.buffered_increment_serial" class="com.liferay.portal.kernel.messaging.SerialDestination">
+		<property name="name" value="liferay/buffered_increment_serial" />
+		<property name="maximumQueueSize">
+			<util:constant static-field="com.liferay.portal.util.PropsValues.BUFFERED_INCREMENT_QUEUE_SIZE" />
+		</property>
+		<property name="rejectedExecutionHandler">
+			<bean class="com.liferay.portal.increment.BufferedIncrementDiscardPolicy" />
+		</property>
 	</bean>
 	<bean id="destination.convert_process" class="com.liferay.portal.kernel.messaging.SerialDestination">
 		<property name="name" value="liferay/convert_process" />
@@ -85,7 +100,8 @@
 			<list>
 				<ref bean="destination.async_service" />
 				<ref bean="destination.blogs" />
-				<ref bean="destination.buffered_increment" />
+				<ref bean="destination.buffered_increment_parallel" />
+				<ref bean="destination.buffered_increment_serial" />
 				<ref bean="destination.convert_process" />
 				<ref bean="destination.flags" />
 				<ref bean="destination.journal" />
@@ -113,7 +129,12 @@
 						<ref bean="messageListener.blogs" />
 					</list>
 				</entry>
-				<entry key="liferay/buffered_increment">
+				<entry key="liferay/buffered_increment_parallel">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="messageListener.buffered_increment" />
+					</list>
+				</entry>
+				<entry key="liferay/buffered_increment_serial">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
 						<ref bean="messageListener.buffered_increment" />
 					</list>

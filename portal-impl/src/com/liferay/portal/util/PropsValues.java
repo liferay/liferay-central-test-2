@@ -146,6 +146,8 @@ public class PropsValues {
 
 	public static final String BROWSER_LAUNCHER_URL = PropsUtil.get(PropsKeys.BROWSER_LAUNCHER_URL);
 
+	public static final int BUFFERED_INCREMENT_QUEUE_SIZE = GetterUtil.getInteger(PropsUtil.get(PropsKeys.BUFFERED_INCREMENT_QUEUE_SIZE));
+
 	public static final int CALENDAR_EVENT_CHECK_INTERVAL = GetterUtil.getInteger(PropsUtil.get(PropsKeys.CALENDAR_EVENT_CHECK_INTERVAL));
 
 	public static final boolean CALENDAR_EVENT_COMMENTS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.CALENDAR_EVENT_COMMENTS_ENABLED));

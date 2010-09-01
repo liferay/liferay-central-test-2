@@ -71,11 +71,18 @@ public class BufferedIncrementAdvice
 			new BufferedIncreasableEntry(
 				nextMethodInterceptor, methodInvocation, batchKey, increment);
 
-		_batchablePipe.put(bufferedIncreasableEntry);
+		if (_batchablePipe.put(bufferedIncreasableEntry)) {
 
-		MessageBusUtil.sendMessage(
-			DestinationNames.BUFFERED_INCREMENT, _batchablePipe);
-
+			if (bufferedIncrement.isSerialIncrement()) {
+				MessageBusUtil.sendMessage(
+					DestinationNames.BUFFERED_INCREMENT_SERIAL, _batchablePipe);
+			}
+			else {
+				MessageBusUtil.sendMessage(
+					DestinationNames.BUFFERED_INCREMENT_PARALLEL,
+					_batchablePipe);
+			}
+		}
 		return nullResult;
 	}
 
@@ -96,6 +103,10 @@ public class BufferedIncrementAdvice
 
 			public Class<? extends Increment<?>> incrementClass() {
 				return null;
+			}
+
+			public boolean isSerialIncrement() {
+				return false;
 			}
 
 		};

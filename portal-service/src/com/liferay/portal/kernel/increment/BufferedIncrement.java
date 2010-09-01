@@ -30,4 +30,6 @@ public @interface BufferedIncrement {
 
 	Class<? extends Increment<?>> incrementClass();
 
+	boolean isSerialIncrement() default false;
+
 }

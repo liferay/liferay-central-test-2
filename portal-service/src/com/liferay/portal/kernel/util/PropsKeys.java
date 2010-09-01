@@ -215,6 +215,8 @@ public interface PropsKeys {
 
 	public static final String BROWSER_LAUNCHER_URL = "browser.launcher.url";
 
+	public static final String BUFFERED_INCREMENT_QUEUE_SIZE = "buffered.increment.queue.size";
+
 	public static final String CALENDAR_EMAIL_EVENT_REMINDER_BODY = "calendar.email.event.reminder.body";
 
 	public static final String CALENDAR_EMAIL_EVENT_REMINDER_ENABLED = "calendar.email.event.reminder.enabled";
