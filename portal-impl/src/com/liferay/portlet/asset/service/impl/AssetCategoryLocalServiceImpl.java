@@ -16,7 +16,6 @@ package com.liferay.portlet.asset.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -36,7 +35,6 @@ import com.liferay.portlet.asset.model.AssetCategoryConstants;
 import com.liferay.portlet.asset.model.AssetCategoryProperty;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.base.AssetCategoryLocalServiceBaseImpl;
-import com.liferay.util.Autocomplete;
 
 import java.util.Date;
 import java.util.List;
@@ -317,15 +315,13 @@ public class AssetCategoryLocalServiceImpl
 		deleteCategory(fromCategoryId);
 	}
 
-	public JSONArray search(
+	public List<AssetCategory> search(
 			long groupId, String name, String[] categoryProperties, int start,
 			int end)
 		throws SystemException {
 
-		List<AssetCategory> list = assetCategoryFinder.findByG_N_P(
+		return assetCategoryFinder.findByG_N_P(
 			groupId, name, categoryProperties, start, end);
-
-		return Autocomplete.listToJson(list, "name", "name");
 	}
 
 	public AssetCategory updateCategory(

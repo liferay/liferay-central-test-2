@@ -25,6 +25,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.service.base.AssetCategoryServiceBaseImpl;
 import com.liferay.portlet.asset.service.permission.AssetCategoryPermission;
+import com.liferay.util.Autocomplete;
 
 import java.util.Iterator;
 import java.util.List;
@@ -127,10 +128,14 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 	public JSONArray search(
 			long groupId, String name, String[] categoryProperties, int start,
 			int end)
-		throws SystemException {
+		throws PortalException, SystemException {
 
-		return assetCategoryLocalService.search(
-			groupId, name, categoryProperties, start, end);
+		List<AssetCategory> list = filterCategories(
+			assetCategoryLocalService.search(
+				groupId, name, categoryProperties, start, end));
+
+		return Autocomplete.listToJson(list, "name", "name");
+
 	}
 
 	public AssetCategory updateCategory(
