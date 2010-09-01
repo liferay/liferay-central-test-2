@@ -570,7 +570,8 @@ numberFormat.setMinimumIntegerDigits(2);
 
 				<%
 				String language = ParamUtil.getString(renderRequest, "language", "javascript");
-				String script = "// ### Javascript Sample ###\n\n// number = Packages.com.liferay.portal.service.UserLocalServiceUtil.getUsersCount();\n" + "// out.println(number);";
+
+				String script = "// ### Javascript Sample ###\n\n// number = Packages.com.liferay.portal.service.UserLocalServiceUtil.getUsersCount();\n// out.println(number);";
 
 				if (SessionMessages.contains(renderRequest, "script")) {
 					script = (String)SessionMessages.get(renderRequest, "script");

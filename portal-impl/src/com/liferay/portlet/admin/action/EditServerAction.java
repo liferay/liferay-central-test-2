@@ -322,7 +322,8 @@ public class EditServerAction extends PortletAction {
 
 			ScriptingUtil.exec(null, portletObjects, language, script);
 
-			SessionMessages.add(actionRequest, "script_output",
+			SessionMessages.add(
+				actionRequest, "script_output",
 				unsyncByteArrayOutputStream.toString());
 		}
 		catch (ScriptingException se) {
