@@ -373,9 +373,9 @@ public class AssetCategoryLocalServiceWrapper
 		_assetCategoryLocalService.mergeCategories(fromCategoryId, toCategoryId);
 	}
 
-	public com.liferay.portal.kernel.json.JSONArray search(long groupId,
-		java.lang.String name, java.lang.String[] categoryProperties,
-		int start, int end)
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> search(
+		long groupId, java.lang.String name,
+		java.lang.String[] categoryProperties, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetCategoryLocalService.search(groupId, name,
 			categoryProperties, start, end);

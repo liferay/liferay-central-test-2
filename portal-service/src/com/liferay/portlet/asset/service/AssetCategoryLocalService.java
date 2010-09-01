@@ -324,9 +324,9 @@ public interface AssetCategoryLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.kernel.json.JSONArray search(long groupId,
-		java.lang.String name, java.lang.String[] categoryProperties,
-		int start, int end)
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> search(
+		long groupId, java.lang.String name,
+		java.lang.String[] categoryProperties, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.asset.model.AssetCategory updateCategory(
