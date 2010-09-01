@@ -33,9 +33,6 @@ import java.util.List;
  */
 public class ClassLoaderProxy {
 
-	/**
-	 * @deprecated
-	 */
 	public ClassLoaderProxy(Object obj, ClassLoader classLoader) {
 		this(obj, obj.getClass().getName(), classLoader);
 	}
