@@ -402,9 +402,7 @@ public class Validator {
 		}
 
 		for (char c : name.trim().toCharArray()) {
-			if (((!isChar(c)) &&
-				(!Character.isWhitespace(c))) || (c == CharPool.COMMA)) {
-
+			if (!isChar(c) && !Character.isWhitespace(c)) {
 				return false;
 			}
 		}
