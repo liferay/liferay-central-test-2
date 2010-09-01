@@ -130,12 +130,12 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			int end)
 		throws PortalException, SystemException {
 
-		List<AssetCategory> list = filterCategories(
-			assetCategoryLocalService.search(
-				groupId, name, categoryProperties, start, end));
+		List<AssetCategory> categories = assetCategoryLocalService.search(
+			groupId, name, categoryProperties, start, end);
 
-		return Autocomplete.listToJson(list, "name", "name");
+		categories = filterCategories(categories);
 
+		return Autocomplete.listToJson(categories, "name", "name");
 	}
 
 	public AssetCategory updateCategory(
