@@ -210,6 +210,7 @@ public abstract class BaseDestination implements Destination {
 
 	public void setRejectedExecutionHandler(
 		RejectedExecutionHandler rejectedExecutionHandler) {
+
 		_rejectedExecutionHandler = rejectedExecutionHandler;
 	}
 
@@ -241,6 +242,28 @@ public abstract class BaseDestination implements Destination {
 		for (MessageListener messageListener : _messageListeners) {
 			unregisterMessageListener((InvokerMessageListener)messageListener);
 		}
+	}
+
+	protected RejectedExecutionHandler createRejectionExecutionHandler() {
+		return new RejectedExecutionHandler() {
+
+			public void rejectedExecution(
+				Runnable runnable, ThreadPoolExecutor threadPoolExecutor) {
+
+				if (!_log.isWarnEnabled()) {
+					return;
+				}
+
+				MessageRunnable messageRunnable =
+					(MessageRunnable)runnable;
+
+				_log.warn(
+					"Discarding message " + messageRunnable.getMessage() +
+						" because it exceeds the maximum queue size of " +
+							_maximumQueueSize);
+			}
+
+		};
 	}
 
 	protected abstract void dispatch(
@@ -277,20 +300,7 @@ public abstract class BaseDestination implements Destination {
 					getName(), Thread.NORM_PRIORITY, classLoader));
 
 			if (_rejectedExecutionHandler == null) {
-				_rejectedExecutionHandler = new RejectedExecutionHandler() {
-
-					public void rejectedExecution(
-						Runnable r, ThreadPoolExecutor executor) {
-						if (_log.isWarnEnabled()) {
-							MessageRunnable messageRunnable =
-								(MessageRunnable) r;
-							_log.warn("Discard message : " +
-								messageRunnable.getMessage() +
-								", exceeding the maximum queue size : " +
-								_maximumQueueSize);
-						}
-					}
-				};
+				_rejectedExecutionHandler = createRejectionExecutionHandler();
 			}
 
 			_threadPoolExecutor.setRejectedExecutionHandler(
