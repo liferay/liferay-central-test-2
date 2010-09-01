@@ -22,13 +22,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddPropertiesTest extends BaseTestCase {
 	public void testAddProperties() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isVisible("link=Tags")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -38,6 +40,8 @@ public class AddPropertiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Tags", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
@@ -82,6 +86,7 @@ public class AddPropertiesTest extends BaseTestCase {
 		Thread.sleep(500);
 		selenium.clickAt("//td[2]/div[2]/div[3]/input[1]",
 			RuntimeVariables.replace(""));
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -89,7 +94,7 @@ public class AddPropertiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Tags")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -99,6 +104,8 @@ public class AddPropertiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Tags", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 

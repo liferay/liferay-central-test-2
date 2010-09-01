@@ -22,6 +22,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class RemoveTagThroughSelectTagTest extends BaseTestCase {
 	public void testRemoveTagThroughSelectTag() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -86,7 +88,7 @@ public class RemoveTagThroughSelectTagTest extends BaseTestCase {
 		}
 
 		selenium.clickAt("//label[1]/input", RuntimeVariables.replace(""));
-		selenium.clickAt("close", RuntimeVariables.replace(""));
+		selenium.clickAt("closethick", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -109,7 +111,8 @@ public class RemoveTagThroughSelectTagTest extends BaseTestCase {
 		assertNotEquals(RuntimeVariables.replace("selenium1 liferay1"),
 			selenium.getText(
 				"//span[7]/span/span/div/div/ul/li[1]/span/span[1]"));
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

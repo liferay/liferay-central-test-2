@@ -226,7 +226,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_33_saveButton")) {
+				if (selenium.isElementPresent("//input[@value='Publish']")) {
 					break;
 				}
 			}
@@ -236,7 +236,8 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -340,7 +341,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_33_saveButton")) {
+				if (selenium.isElementPresent("//input[@value='Publish']")) {
 					break;
 				}
 			}
@@ -350,7 +351,8 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -454,7 +456,7 @@ public class SetupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_33_saveButton")) {
+				if (selenium.isElementPresent("//input[@value='Publish']")) {
 					break;
 				}
 			}
@@ -464,7 +466,8 @@ public class SetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

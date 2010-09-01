@@ -67,7 +67,8 @@ public class BlogsTests extends BaseTests {
 		testSuite.addTestSuite(AssertDeletedTagDoesNotPersistTest.class);
 		testSuite.addTestSuite(SuggestionTagTest.class);
 		testSuite.addTestSuite(AddUTFTagTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
+		testSuite.addTestSuite(TearDownBlogsEntryCPTest.class);
+		testSuite.addTestSuite(TearDownTagTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

@@ -62,8 +62,9 @@ public class AssertTagsInSelectTagsTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("selenium4 liferay4"),
 			selenium.getText("//label[4]"));
 		assertTrue(selenium.isElementPresent("//label[4]/input"));
-		selenium.clickAt("close", RuntimeVariables.replace(""));
-		selenium.clickAt("_33_cancelButton", RuntimeVariables.replace(""));
+		selenium.clickAt("closethick", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Cancel']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

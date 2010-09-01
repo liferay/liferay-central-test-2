@@ -22,6 +22,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddUTFTagTest extends BaseTestCase {
 	public void testAddUTFTag() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -66,7 +68,8 @@ public class AddUTFTagTest extends BaseTestCase {
 		Thread.sleep(5000);
 		selenium.type("//span[7]/span/span/div/div/ul/li/span/span/input",
 			RuntimeVariables.replace("s\u00e9l\u00e9nium1 lif\u00e9ray1"));
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

@@ -22,6 +22,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertAutoSuggestionDropDownTest extends BaseTestCase {
 	public void testAssertAutoSuggestionDropDown() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -63,6 +65,9 @@ public class AssertAutoSuggestionDropDownTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("main-content", RuntimeVariables.replace(""));
+		selenium.clickAt("navigation", RuntimeVariables.replace(""));
+		selenium.clickAt("dockbar", RuntimeVariables.replace(""));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {

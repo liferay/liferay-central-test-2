@@ -22,6 +22,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddTagThroughJavaScriptTest extends BaseTestCase {
 	public void testAddTagThroughJavaScript() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -106,7 +108,8 @@ public class AddTagThroughJavaScriptTest extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace("selenium2 liferay2"),
 			selenium.getText("//span/div/div/ul/li[2]/span/span[1]"));
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

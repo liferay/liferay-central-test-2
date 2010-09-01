@@ -22,6 +22,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddMultipleTagsTest extends BaseTestCase {
 	public void testAddMultipleTags() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -129,7 +131,8 @@ public class AddMultipleTagsTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("selenium4 liferay4"),
 			selenium.getText("//span/div/div/ul/li[2]/span/span[1]"));
 		Thread.sleep(5000);
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

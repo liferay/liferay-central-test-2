@@ -22,6 +22,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddNullTagTest extends BaseTestCase {
 	public void testAddNullTag() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -67,7 +69,8 @@ public class AddNullTagTest extends BaseTestCase {
 		assertFalse(selenium.isElementPresent("//li[2]/span/span[2]"));
 		selenium.type("//span[7]/span/span/div/div/ul/li/span/span/input",
 			RuntimeVariables.replace(""));
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

@@ -68,7 +68,8 @@ public class AddTagTest extends BaseTestCase {
 		Thread.sleep(5000);
 		selenium.type("//span[7]/span/span/div/div/ul/li/span/span/input",
 			RuntimeVariables.replace("selenium1 liferay1"));
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

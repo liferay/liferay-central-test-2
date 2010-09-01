@@ -50,10 +50,10 @@ public class TearDownTagTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("link=Tags", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				Thread.sleep(5000);
+				Thread.sleep(500);
 
 				boolean tag1Present = selenium.isElementPresent(
-						"//div[4]/ul/li[1]/span/a");
+						"//div[4]/ul/li/span/a");
 
 				if (!tag1Present) {
 					label = 2;
@@ -61,7 +61,7 @@ public class TearDownTagTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//div[4]/ul/li[1]/span/a",
+				selenium.clickAt("//div[4]/ul/li/span/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -80,13 +80,16 @@ public class TearDownTagTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("//input[@value='Delete']");
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace(""));
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
-				Thread.sleep(5000);
+
+			case 2:
+				Thread.sleep(500);
 
 				boolean tag2Present = selenium.isElementPresent(
-						"//div[4]/ul/li[1]/span/a");
+						"//div[4]/ul/li/span/a");
 
 				if (!tag2Present) {
 					label = 3;
@@ -94,7 +97,7 @@ public class TearDownTagTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//div[4]/ul/li[1]/span/a",
+				selenium.clickAt("//div[4]/ul/li/span/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -113,13 +116,16 @@ public class TearDownTagTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("//input[@value='Delete']");
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace(""));
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
-				Thread.sleep(5000);
+
+			case 3:
+				Thread.sleep(500);
 
 				boolean tag3Present = selenium.isElementPresent(
-						"//div[4]/ul/li[1]/span/a");
+						"//div[4]/ul/li/span/a");
 
 				if (!tag3Present) {
 					label = 4;
@@ -127,7 +133,7 @@ public class TearDownTagTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//div[4]/ul/li[1]/span/a",
+				selenium.clickAt("//div[4]/ul/li/span/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -146,13 +152,16 @@ public class TearDownTagTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("//input[@value='Delete']");
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace(""));
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
-				Thread.sleep(5000);
+
+			case 4:
+				Thread.sleep(500);
 
 				boolean tag4Present = selenium.isElementPresent(
-						"//div[4]/ul/li[1]/span/a");
+						"//div[4]/ul/li/span/a");
 
 				if (!tag4Present) {
 					label = 5;
@@ -160,7 +169,7 @@ public class TearDownTagTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//div[4]/ul/li[1]/span/a",
+				selenium.clickAt("//div[4]/ul/li/span/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -179,13 +188,16 @@ public class TearDownTagTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("//input[@value='Delete']");
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace(""));
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
-				Thread.sleep(5000);
+
+			case 5:
+				Thread.sleep(500);
 
 				boolean tag5Present = selenium.isElementPresent(
-						"//div[4]/ul/li[1]/span/a");
+						"//div[4]/ul/li/span/a");
 
 				if (!tag5Present) {
 					label = 6;
@@ -193,7 +205,7 @@ public class TearDownTagTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//div[4]/ul/li[1]/span/a",
+				selenium.clickAt("//div[4]/ul/li/span/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -212,14 +224,11 @@ public class TearDownTagTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click("//input[@value='Delete']");
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace(""));
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this tag[\\s\\S]$"));
 
-			case 2:
-			case 3:
-			case 4:
-			case 5:
 			case 6:
 			case 100:
 				label = -1;

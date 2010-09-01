@@ -22,6 +22,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SuggestionTagTest extends BaseTestCase {
 	public void testSuggestionTag() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -83,8 +85,9 @@ public class SuggestionTagTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent("//label[1]/input"));
-		selenium.clickAt("close", RuntimeVariables.replace(""));
-		selenium.clickAt("_33_cancelButton", RuntimeVariables.replace(""));
+		selenium.clickAt("closethick", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Cancel']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 	}
 }

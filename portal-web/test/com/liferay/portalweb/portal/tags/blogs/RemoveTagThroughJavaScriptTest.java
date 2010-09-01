@@ -22,6 +22,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class RemoveTagThroughJavaScriptTest extends BaseTestCase {
 	public void testRemoveTagThroughJavaScript() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -68,7 +70,8 @@ public class RemoveTagThroughJavaScriptTest extends BaseTestCase {
 		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent("selenium2 liferay2"));
 		assertFalse(selenium.isTextPresent("selenium3 liferay3"));
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
