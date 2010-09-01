@@ -642,7 +642,7 @@ public abstract class BaseIndexer implements Indexer {
 		PropsUtil.get(PropsKeys.INDEX_FILTER_SEARCH_LIMIT));
 
 	private static final String[] _KEYWORDS_FIELDS = {
-		Field.COMMENTS, Field.CONTENT, Field.DESCRIPTION,Field.PROPERTIES,
+		Field.COMMENTS, Field.CONTENT, Field.DESCRIPTION, Field.PROPERTIES,
 		Field.TITLE, Field.URL, Field.USER_NAME
 	};
 
