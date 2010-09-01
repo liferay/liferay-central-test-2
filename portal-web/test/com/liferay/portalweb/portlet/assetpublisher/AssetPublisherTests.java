@@ -19,6 +19,16 @@ import com.liferay.portalweb.portlet.assetpublisher.archivedsetup.ArchivedSetupT
 import com.liferay.portalweb.portlet.assetpublisher.blogsentry.BlogsEntryTests;
 import com.liferay.portalweb.portlet.assetpublisher.blogsentrycomment.BlogsEntryCommentTests;
 import com.liferay.portalweb.portlet.assetpublisher.bookmarksentry.BookmarksEntryTests;
+import com.liferay.portalweb.portlet.assetpublisher.dldocument.DLDocumentTests;
+import com.liferay.portalweb.portlet.assetpublisher.dldocumentcomment.DLDocumentCommentTests;
+import com.liferay.portalweb.portlet.assetpublisher.igimage.IGImageTests;
+import com.liferay.portalweb.portlet.assetpublisher.lar.LARTests;
+import com.liferay.portalweb.portlet.assetpublisher.mbmessage.MBMessageTests;
+import com.liferay.portalweb.portlet.assetpublisher.portlet.PortletTests;
+import com.liferay.portalweb.portlet.assetpublisher.webcontent.WebContentTests;
+import com.liferay.portalweb.portlet.assetpublisher.webcontentcomment.WebContentCommentTests;
+import com.liferay.portalweb.portlet.assetpublisher.wikipage.WikiPageTests;
+import com.liferay.portalweb.portlet.assetpublisher.wikipagecomment.WikiPageCommentTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -35,7 +45,7 @@ public class AssetPublisherTests extends BaseTests {
 		testSuite.addTest(BlogsEntryTests.suite());
 		testSuite.addTest(BlogsEntryCommentTests.suite());
 		testSuite.addTest(BookmarksEntryTests.suite());
-/*		testSuite.addTest(DLDocumentTests.suite());
+		testSuite.addTest(DLDocumentTests.suite());
 		testSuite.addTest(DLDocumentCommentTests.suite());
 		testSuite.addTest(IGImageTests.suite());
 		testSuite.addTest(LARTests.suite());
@@ -45,7 +55,7 @@ public class AssetPublisherTests extends BaseTests {
 		testSuite.addTest(WebContentCommentTests.suite());
 		testSuite.addTest(WikiPageTests.suite());
 		testSuite.addTest(WikiPageCommentTests.suite());
-*/
+
 		return testSuite;
 	}
 
