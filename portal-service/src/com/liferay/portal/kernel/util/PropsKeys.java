@@ -805,6 +805,8 @@ public interface PropsKeys {
 
 	public static final String JPA_PROVIDER_PROPERTY_PREFIX = "jpa.provider.property.";
 
+	public static final String JSON_SERVICE_INVALID_CLASS_NAMES = "json.service.invalid.class.names";
+
 	public static final String JSP_WRITER_BUFFER_SIZE = "jsp.writer.buffer.size";
 
 	public static final String LAYOUT_CLONE_IMPL = "layout.clone.impl";

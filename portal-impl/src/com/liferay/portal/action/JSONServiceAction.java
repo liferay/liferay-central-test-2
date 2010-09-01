@@ -14,9 +14,6 @@
 
 package com.liferay.portal.action;
 
-import com.liferay.documentlibrary.service.DLLocalServiceUtil;
-import com.liferay.documentlibrary.service.DLServiceUtil;
-import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -25,6 +22,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodKey;
@@ -33,10 +31,10 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.BaseModel;
-import com.liferay.portal.service.CompanyServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.struts.JSONAction;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.model.AssetEntryDisplay;
 import com.liferay.portlet.asset.model.AssetEntryType;
 
@@ -69,10 +67,14 @@ import org.apache.struts.action.ActionMapping;
 public class JSONServiceAction extends JSONAction {
 
 	public JSONServiceAction() {
-		_invalidClassNames.add(CompanyServiceUtil.class.getName());
-		_invalidClassNames.add(DLLocalServiceUtil.class.getName());
-		_invalidClassNames.add(DLServiceUtil.class.getName());
-		_invalidClassNames.add(MailServiceUtil.class.getName());
+		_invalidClassNames.addAll(
+			ListUtil.fromArray(PropsValues.JSON_SERVICE_INVALID_CLASS_NAMES));
+
+		if (_log.isDebugEnabled()) {
+			for (String invalidClassName : _invalidClassNames) {
+				_log.debug("Invalid class name " + invalidClassName);
+			}
+		}
 	}
 
 	public String getJSON(
