@@ -108,7 +108,6 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 		tags = filterTags(tags);
 
 		return Autocomplete.listToJson(tags, "name", "name");
-
 	}
 
 	public AssetTag updateTag(
