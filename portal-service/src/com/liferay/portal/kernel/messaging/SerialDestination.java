@@ -48,7 +48,7 @@ public class SerialDestination extends BaseDestination {
 
 		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
 
-		Runnable runnable = new Runnable() {
+		Runnable runnable = new MessageRunnable(message) {
 
 			public void run() {
 				try {

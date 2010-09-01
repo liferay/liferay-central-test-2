@@ -54,7 +54,7 @@ public class ParallelDestination extends BaseDestination {
 		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
 
 		for (final MessageListener messageListener : messageListeners) {
-			Runnable runnable = new Runnable() {
+			Runnable runnable = new MessageRunnable(message) {
 
 				public void run() {
 					try {

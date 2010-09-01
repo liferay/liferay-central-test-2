@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.Validator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -196,15 +197,6 @@ public abstract class BaseDestination implements Destination {
 					"receive more messages");
 		}
 
-		if ((_maximumQueueSize > -1) &&
-			(threadPoolExecutor.getQueue().size() > _maximumQueueSize)) {
-
-			throw new IllegalStateException(
-				threadPoolExecutor.getQueue().size() +
-					" messages exceeds the maximum queue size of " +
-						_maximumQueueSize);
-		}
-
 		dispatch(_messageListeners, message);
 	}
 
@@ -214,6 +206,11 @@ public abstract class BaseDestination implements Destination {
 
 	public void setName(String name) {
 		_name = name;
+	}
+
+	public void setRejectedExecutionHandler(
+		RejectedExecutionHandler rejectedExecutionHandler) {
+		_rejectedExecutionHandler = rejectedExecutionHandler;
 	}
 
 	public void setWorkersCoreSize(int workersCoreSize) {
@@ -275,9 +272,29 @@ public abstract class BaseDestination implements Destination {
 
 			_threadPoolExecutor = new ThreadPoolExecutor(
 				_workersCoreSize, _workersMaxSize, 0L, TimeUnit.MILLISECONDS,
-				new LinkedBlockingQueue<Runnable>(),
+				new LinkedBlockingQueue<Runnable>(_maximumQueueSize),
 				new NamedThreadFactory(
 					getName(), Thread.NORM_PRIORITY, classLoader));
+
+			if (_rejectedExecutionHandler == null) {
+				_rejectedExecutionHandler = new RejectedExecutionHandler() {
+
+					public void rejectedExecution(
+						Runnable r, ThreadPoolExecutor executor) {
+						if (_log.isWarnEnabled()) {
+							MessageRunnable messageRunnable =
+								(MessageRunnable) r;
+							_log.warn("Discard message : " +
+								messageRunnable.getMessage() +
+								", exceeding the maximum queue size : " +
+								_maximumQueueSize);
+						}
+					}
+				};
+			}
+
+			_threadPoolExecutor.setRejectedExecutionHandler(
+				_rejectedExecutionHandler);
 		}
 	}
 
@@ -338,10 +355,11 @@ public abstract class BaseDestination implements Destination {
 
 	private Set<DestinationEventListener> _destinationEventListeners =
 		new ConcurrentHashSet<DestinationEventListener>();
-	private int _maximumQueueSize = -1;
+	private int _maximumQueueSize = Integer.MAX_VALUE;
 	private Set<MessageListener> _messageListeners =
 		new ConcurrentHashSet<MessageListener>();
 	private String _name = StringPool.BLANK;
+	private RejectedExecutionHandler _rejectedExecutionHandler;
 	private ThreadPoolExecutor _threadPoolExecutor;
 	private int _workersCoreSize = _WORKERS_CORE_SIZE;
 	private int _workersMaxSize = _WORKERS_MAX_SIZE;
