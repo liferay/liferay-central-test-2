@@ -1065,9 +1065,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		boolean visible = page.isApproved();
 
-		if (!page.isApproved()) {
-			visible = true;
-		}
 		boolean addDraftAssetEntry = false;
 
 		if (!page.isApproved() &&
