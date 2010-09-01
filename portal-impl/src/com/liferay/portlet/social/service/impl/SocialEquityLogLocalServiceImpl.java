@@ -80,15 +80,14 @@ public class SocialEquityLogLocalServiceImpl
 		catch (NoSuchUserException nsue) {
 		}
 
-		long groupId = assetEntry.getGroupId();
-
 		List<SocialEquitySetting> equitySettings =
 			socialEquitySettingLocalService.getEquitySettings(
-				groupId, assetEntry.getClassNameId(), actionId);
+				assetEntry.getGroupId(), assetEntry.getClassNameId(), actionId);
 
 		for (SocialEquitySetting equitySetting : equitySettings) {
 			if (isSocialEquityEnabled(
-				groupId, assetEntry.getClassName(), equitySetting.getType())) {
+					assetEntry.getGroupId(), assetEntry.getClassName(),
+					equitySetting.getType())) {
 
 				addEquityLog(user, assetEntry, assetEntryUser, equitySetting);
 			}
@@ -208,8 +207,8 @@ public class SocialEquityLogLocalServiceImpl
 		// Information Equity
 
 		if (isSocialEquityEnabled(
-			assetEntry.getGroupId(), assetEntry.getClassName(),
-			SocialEquitySettingConstants.TYPE_INFORMATION)) {
+				assetEntry.getGroupId(), assetEntry.getClassName(),
+				SocialEquitySettingConstants.TYPE_INFORMATION)) {
 
 			List<SocialEquityLog> equityLogs =
 				socialEquityLogPersistence.findByAEI_AID_A_T(
@@ -241,8 +240,8 @@ public class SocialEquityLogLocalServiceImpl
 		// Participation Equity
 
 		if (isSocialEquityEnabled(
-			assetEntry.getGroupId(), assetEntry.getClassName(),
-			SocialEquitySettingConstants.TYPE_PARTICIPATION)) {
+				assetEntry.getGroupId(), assetEntry.getClassName(),
+				SocialEquitySettingConstants.TYPE_PARTICIPATION)) {
 
 			List<SocialEquityLog> equityLogs =
 				socialEquityLogPersistence.findByU_AID_A_T(
@@ -564,6 +563,16 @@ public class SocialEquityLogLocalServiceImpl
 		return ((double)value / lifespan) * -1;
 	}
 
+	protected int getEquityDate() {
+		return getEquityDate(new Date());
+	}
+
+	protected int getEquityDate(Date date) {
+		Calendar calendar = new GregorianCalendar(2010, Calendar.JANUARY, 1);
+
+		return calendar.fieldDifference(date, Calendar.DATE);
+	}
+
 	protected boolean isAddEquityLog(
 			long userId, long assetEntryId, SocialEquitySetting equitySetting)
 		throws SystemException {
@@ -633,23 +642,13 @@ public class SocialEquityLogLocalServiceImpl
 		throws SystemException {
 
 		if (!socialEquityGroupSettingLocalService.isEnabled(
-			groupId, Group.class.getName(), type)) {
+				groupId, Group.class.getName(), type)) {
 
 			return false;
 		}
 
 		return socialEquityGroupSettingLocalService.isEnabled(
 			groupId, className, type);
-	}
-
-	protected int getEquityDate() {
-		return getEquityDate(new Date());
-	}
-
-	protected int getEquityDate(Date date) {
-		Calendar calendar = new GregorianCalendar(2010, Calendar.JANUARY, 1);
-
-		return calendar.fieldDifference(date, Calendar.DATE);
 	}
 
 	protected void runCheckSQL(String sqlId, int validity)
