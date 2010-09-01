@@ -102,10 +102,12 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 			int end)
 		throws PortalException, SystemException {
 
-		List<AssetTag> list = filterTags(assetTagLocalService.search(
-			groupId, name, tagProperties, start, end));
+		List<AssetTag> tags = assetTagLocalService.search(
+			groupId, name, tagProperties, start, end);
 
-		return Autocomplete.listToJson(list, "name", "name");
+		tags = filterTags(tags);
+
+		return Autocomplete.listToJson(tags, "name", "name");
 
 	}
 
