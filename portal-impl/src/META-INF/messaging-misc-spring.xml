@@ -18,19 +18,19 @@
 		<property name="name" value="liferay/blogs" />
 	</bean>
 	<bean id="destination.buffered_increment_parallel" class="com.liferay.portal.kernel.messaging.ParallelDestination">
-		<property name="name" value="liferay/buffered_increment_parallel" />
 		<property name="maximumQueueSize">
-			<util:constant static-field="com.liferay.portal.util.PropsValues.BUFFERED_INCREMENT_QUEUE_SIZE" />
+			<util:constant static-field="com.liferay.portal.util.PropsValues.BUFFERED_INCREMENT_PARALLEL_QUEUE_SIZE" />
 		</property>
+		<property name="name" value="liferay/buffered_increment_parallel" />
 		<property name="rejectedExecutionHandler">
 			<bean class="com.liferay.portal.increment.BufferedIncrementDiscardPolicy" />
 		</property>
 	</bean>
 	<bean id="destination.buffered_increment_serial" class="com.liferay.portal.kernel.messaging.SerialDestination">
-		<property name="name" value="liferay/buffered_increment_serial" />
 		<property name="maximumQueueSize">
-			<util:constant static-field="com.liferay.portal.util.PropsValues.BUFFERED_INCREMENT_QUEUE_SIZE" />
+			<util:constant static-field="com.liferay.portal.util.PropsValues.BUFFERED_INCREMENT_SERIAL_QUEUE_SIZE" />
 		</property>
+		<property name="name" value="liferay/buffered_increment_serial" />
 		<property name="rejectedExecutionHandler">
 			<bean class="com.liferay.portal.increment.BufferedIncrementDiscardPolicy" />
 		</property>

@@ -29,14 +29,19 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class BufferedIncrementDiscardPolicy
 	implements RejectedExecutionHandler {
 
-	public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
-		MessageRunnable messageRunnable = (MessageRunnable) r;
+	@SuppressWarnings("rawtypes")
+	public void rejectedExecution(
+		Runnable runnable, ThreadPoolExecutor threadPoolExecutor) {
+
+		MessageRunnable messageRunnable = (MessageRunnable)runnable;
+
 		Message message = messageRunnable.getMessage();
+
 		BatchablePipe<String, BufferedIncreasableEntry> batchablePipe =
 			(BatchablePipe<String, BufferedIncreasableEntry>)
 				message.getPayload();
 
-		for(int i = 0; i < _discardNumber; i++) {
+		for (int i = 0; i < _discardNumber; i++) {
 			BufferedIncreasableEntry bufferedIncreasableEntry =
 				(BufferedIncreasableEntry)batchablePipe.take();
 
@@ -44,8 +49,9 @@ public class BufferedIncrementDiscardPolicy
 				break;
 			}
 			else if (_log.isInfoEnabled()) {
-				_log.info("Discarding BufferedIncreasableEntry : " +
-					bufferedIncreasableEntry);
+				_log.info(
+					"Discarding BufferedIncreasableEntry " +
+						bufferedIncreasableEntry);
 			}
 		}
 	}

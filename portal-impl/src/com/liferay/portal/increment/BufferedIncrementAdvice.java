@@ -72,7 +72,6 @@ public class BufferedIncrementAdvice
 				nextMethodInterceptor, methodInvocation, batchKey, increment);
 
 		if (_batchablePipe.put(bufferedIncreasableEntry)) {
-
 			if (bufferedIncrement.isSerialIncrement()) {
 				MessageBusUtil.sendMessage(
 					DestinationNames.BUFFERED_INCREMENT_SERIAL, _batchablePipe);
@@ -83,6 +82,7 @@ public class BufferedIncrementAdvice
 					_batchablePipe);
 			}
 		}
+
 		return nullResult;
 	}
 
