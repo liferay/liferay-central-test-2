@@ -51,7 +51,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.LayoutLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -673,8 +672,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Map<String, String[]> parameterMap, File file)
 		throws PortalException, SystemException {
 
-		BatchSessionUtil.setEnabled(true);
-
 		try {
 			LayoutImporter layoutImporter = new LayoutImporter();
 
@@ -689,9 +686,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
-		}
-		finally {
-			BatchSessionUtil.setEnabled(false);
 		}
 	}
 
@@ -717,17 +711,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Map<String, String[]> parameterMap, File file)
 		throws PortalException, SystemException {
 
-		BatchSessionUtil.setEnabled(true);
+		PortletImporter portletImporter = new PortletImporter();
 
-		try {
-			PortletImporter portletImporter = new PortletImporter();
-
-			portletImporter.importPortletInfo(
-				userId, plid, groupId, portletId, parameterMap, file);
-		}
-		finally {
-			BatchSessionUtil.setEnabled(false);
-		}
+		portletImporter.importPortletInfo(
+			userId, plid, groupId, portletId, parameterMap, file);
 	}
 
 	public void importPortletInfo(
@@ -779,8 +766,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Set<Long> layoutIdsSet = new LinkedHashSet<Long>();
 
-		for (int i = 0; i < layoutIds.length; i++) {
-			layoutIdsSet.add(layoutIds[i]);
+		for (long layoutId : layoutIds) {
+			layoutIdsSet.add(layoutId);
 		}
 
 		Set<Long> newLayoutIdsSet = new HashSet<Long>();
