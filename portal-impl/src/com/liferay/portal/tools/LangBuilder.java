@@ -240,7 +240,8 @@ public class LangBuilder {
 							translatedText = value + AUTOMATIC_COPY;
 						}
 						else {
-							translatedText = value + AUTOMATIC_TRANSLATION;
+							translatedText =
+								translatedText + AUTOMATIC_TRANSLATION;
 						}
 					}
 				}
@@ -409,10 +410,6 @@ public class LangBuilder {
 
 		if (toText == null) {
 			return _translate(translationId, key, fromText, ++limit);
-		}
-
-		if (Validator.isNotNull(toText)) {
-			toText += AUTOMATIC_TRANSLATION;
 		}
 
 		return toText;
