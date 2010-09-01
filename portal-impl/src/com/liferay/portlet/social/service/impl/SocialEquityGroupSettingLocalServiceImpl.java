@@ -30,10 +30,6 @@ public class SocialEquityGroupSettingLocalServiceImpl
 	public boolean isEnabled(long groupId, String className, int type)
 		throws SystemException {
 
-		if (className.equals(Group.class.getName())) {
-			return false;
-		}
-
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		SocialEquityGroupSetting equityGroupSetting =
@@ -42,6 +38,10 @@ public class SocialEquityGroupSettingLocalServiceImpl
 
 		if (equityGroupSetting != null) {
 			return equityGroupSetting.isEnabled();
+		}
+
+		if (className.equals(Group.class.getName())) {
+			return false;
 		}
 
 		return true;
@@ -54,7 +54,7 @@ public class SocialEquityGroupSettingLocalServiceImpl
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		SocialEquityGroupSetting equityGroupSetting =
-			socialEquityGroupSettingPersistence.findByG_C_T(
+			socialEquityGroupSettingPersistence.fetchByG_C_T(
 				groupId, classNameId, type);
 
 		if (equityGroupSetting == null) {
