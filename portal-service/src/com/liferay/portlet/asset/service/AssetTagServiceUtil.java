@@ -84,7 +84,8 @@ public class AssetTagServiceUtil {
 	public static com.liferay.portal.kernel.json.JSONArray search(
 		long groupId, java.lang.String name, java.lang.String[] tagProperties,
 		int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().search(groupId, name, tagProperties, start, end);
 	}
 

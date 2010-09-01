@@ -378,7 +378,7 @@ public class AssetTagLocalServiceUtil {
 		getService().mergeTags(fromTagId, toTagId);
 	}
 
-	public static com.liferay.portal.kernel.json.JSONArray search(
+	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> search(
 		long groupId, java.lang.String name, java.lang.String[] tagProperties,
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
