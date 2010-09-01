@@ -50,8 +50,8 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 
 	public long getClassPK() {
 		if (!_fileVersion.isApproved() &&
-			(_fileVersion.getVersion() !=
-				DLFileEntryConstants.DEFAULT_VERSION)) {
+			(!_fileVersion.getVersion().equals(
+				DLFileEntryConstants.DEFAULT_VERSION))) {
 
 			return _fileVersion.getFileVersionId();
 		}
