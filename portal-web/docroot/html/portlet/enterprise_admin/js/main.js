@@ -57,7 +57,7 @@ AUI().add(
 				instance._modifiedSections = A.all('[name=' + options.modifiedSections+ ']');
 
 				if (!instance._modifiedSections) {
-					instance._modifiedSections = A.Node.create('<input name="' + options.modifiedSections + '" type="hidden" />')
+					instance._modifiedSections = A.Node.create('<input name="' + options.modifiedSections + '" type="hidden" />');
 					instance._container.append(instance._modifiedSections);
 				}
 			}
@@ -72,13 +72,13 @@ AUI().add(
 				instance._modifiedSectionsArray = [];
 			}
 
-			instance._revealSection(location.hash);
+			instance._revealSection(location.href);
 
-		    A.on(
+			A.on(
 				'enterpriseAdmin:trackChanges',
 				function(element) {
-		        	instance._trackChanges(element);
-		    	}
+					instance._trackChanges(element);
+				}
 			);
 
 			var inputs = instance._container.all('input, select, textarea');
@@ -122,9 +122,7 @@ AUI().add(
 					id = id.replace(instance._hashKey, '');
 				}
 				else if (id.indexOf('historyKey=') > -1) {
-					var idRE = new RegExp(instance._hashKey + '([^&#]+)');
-
-					id = id.match(idRE);
+					id = id.match(/historyKey=([^&#]+)/);
 					id = id && id[1];
 				}
 				else {
