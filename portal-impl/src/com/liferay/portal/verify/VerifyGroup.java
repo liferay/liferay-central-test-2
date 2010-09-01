@@ -46,6 +46,7 @@ public class VerifyGroup extends VerifyProcess {
 			GroupLocalServiceUtil.checkCompanyGroup(company.getCompanyId());
 		}
 	}
+	
 	protected void verifyNullFriendlyURLGroups() throws Exception {
 		List<Group> groups = GroupLocalServiceUtil.getNullFriendlyURLGroups();
 
