@@ -1063,8 +1063,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			String[] assetTagNames)
 		throws PortalException, SystemException {
 
-		boolean visible = page.isApproved();
-
 		boolean addDraftAssetEntry = false;
 
 		if (!page.isApproved() &&
@@ -1091,7 +1089,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			assetEntryLocalService.updateEntry(
 				userId, page.getGroupId(), WikiPage.class.getName(),
 				page.getResourcePrimKey(), page.getUuid(), assetCategoryIds,
-				assetTagNames, visible, null, null, null, null,
+				assetTagNames, page.isApproved(), null, null, null, null,
 				ContentTypes.TEXT_HTML, page.getTitle(), null, null, null, 0, 0,
 				null, false);
 		}
