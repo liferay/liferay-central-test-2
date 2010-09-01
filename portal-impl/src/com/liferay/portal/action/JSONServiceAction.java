@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.service.CompanyServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.struts.JSONAction;
@@ -68,6 +69,7 @@ import org.apache.struts.action.ActionMapping;
 public class JSONServiceAction extends JSONAction {
 
 	public JSONServiceAction() {
+		_invalidClassNames.add(CompanyServiceUtil.class.getName());
 		_invalidClassNames.add(DLLocalServiceUtil.class.getName());
 		_invalidClassNames.add(DLServiceUtil.class.getName());
 		_invalidClassNames.add(MailServiceUtil.class.getName());
