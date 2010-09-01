@@ -318,10 +318,11 @@ public class EditServerAction extends PortletAction {
 		portletObjects.put("out", unsyncByteArrayOutputStream);
 
 		try {
+			SessionMessages.add(actionRequest, "script", script);
+
 			ScriptingUtil.exec(null, portletObjects, language, script);
 
-			SessionMessages.add(
-				actionRequest, "script_output",
+			SessionMessages.add(actionRequest, "script_output",
 				unsyncByteArrayOutputStream.toString());
 		}
 		catch (ScriptingException se) {
