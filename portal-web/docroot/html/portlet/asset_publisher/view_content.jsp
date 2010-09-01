@@ -54,7 +54,7 @@ try {
 
 		int rendererType = AssetRendererFactory.TYPE_LATEST_APPROVED;
 
-		if (portletName.equals(PortletKeys.MY_WORKFLOW_INSTANCES) || portletName.equals(PortletKeys.MY_WORKFLOW_TASKS) || portletName.equals(PortletKeys.WORKFLOW_INSTANCES) || portletName.equals(PortletKeys.WORKFLOW_TASKS)) {
+		if (portletName.equals(PortletKeys.MY_WORKFLOW_INSTANCES) || portletName.equals(PortletKeys.MY_WORKFLOW_TASKS) || portletName.equals(PortletKeys.WORKFLOW_DEFINITIONS || portletName.equals(PortletKeys.WORKFLOW_INSTANCES) || portletName.equals(PortletKeys.WORKFLOW_TASKS))) {
 			rendererType = AssetRendererFactory.TYPE_LATEST;
 		}
 
