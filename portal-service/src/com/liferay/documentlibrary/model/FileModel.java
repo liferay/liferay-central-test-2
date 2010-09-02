@@ -26,6 +26,11 @@ public class FileModel implements Serializable {
 		return _assetCategoryIds;
 	}
 
+	public String[] getAssetCategoryNames() {
+		return _assetCategoryNames;
+	}
+
+
 	public String[] getAssetTagNames() {
 		return _assetTagNames;
 	}
@@ -70,6 +75,10 @@ public class FileModel implements Serializable {
 		_assetCategoryIds = assetCategoryIds;
 	}
 
+	public void setAssetCategoryNames(String[] assetCategoryNames) {
+		_assetCategoryNames = assetCategoryNames;
+	}
+
 	public void setAssetTagNames(String[] assetTagNames) {
 		_assetTagNames = assetTagNames;
 	}
@@ -111,6 +120,7 @@ public class FileModel implements Serializable {
 	}
 
 	private long[] _assetCategoryIds;
+	private String[] _assetCategoryNames;
 	private String[] _assetTagNames;
 	private long _companyId;
 	private long _fileEntryId;

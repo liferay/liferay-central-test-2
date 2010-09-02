@@ -153,12 +153,16 @@ public class DLIndexer extends BaseIndexer {
 
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
 			DLFileEntry.class.getName(), fileEntryId);
+		String[] assetCategoryNames =
+			AssetCategoryLocalServiceUtil.getCategoryNames(
+				DLFileEntry.class.getName(), fileEntryId);
 		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 			DLFileEntry.class.getName(), fileEntryId);
 
 		FileModel fileModel = new FileModel();
 
 		fileModel.setAssetCategoryIds(assetCategoryIds);
+		fileModel.setAssetCategoryNames(assetCategoryNames);
 		fileModel.setAssetTagNames(assetTagNames);
 		fileModel.setCompanyId(companyId);
 		fileModel.setFileEntryId(fileEntryId);

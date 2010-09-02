@@ -92,6 +92,7 @@ public class DLIndexer extends BaseIndexer {
 		String properties = fileModel.getProperties();
 		Date modifiedDate = fileModel.getModifiedDate();
 		long[] assetCategoryIds = fileModel.getAssetCategoryIds();
+		String[] assetCategoryNames = fileModel.getAssetCategoryNames();
 		String[] assetTagNames = fileModel.getAssetTagNames();
 
 		DLFileEntry fileEntry = null;
@@ -209,6 +210,7 @@ public class DLIndexer extends BaseIndexer {
 
 		document.addText(Field.PROPERTIES, properties);
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
+		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
 		document.addKeyword(Field.FOLDER_ID, folderId);
