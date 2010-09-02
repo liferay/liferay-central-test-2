@@ -102,23 +102,7 @@ public class RoleFinderImpl
 		try {
 			session = openSession();
 
-			StringBundler sb = new StringBundler(13);
-
-			sb.append("(");
-			sb.append(CustomSQLUtil.get(COUNT_BY_COMMUNITY));
-			sb.append(") UNION (");
-			sb.append(CustomSQLUtil.get(COUNT_BY_ORGANIZATION));
-			sb.append(") UNION (");
-			sb.append(CustomSQLUtil.get(COUNT_BY_ORGANIZATION_COMMUNITY));
-			sb.append(") UNION (");
-			sb.append(CustomSQLUtil.get(COUNT_BY_USER));
-			sb.append(") UNION (");
-			sb.append(CustomSQLUtil.get(COUNT_BY_USER_GROUP));
-			sb.append(") UNION (");
-			sb.append(CustomSQLUtil.get(COUNT_BY_USER_GROUP_COMMUNITY));
-			sb.append(")");
-
-			SQLQuery q = session.createSQLQuery(sb.toString());
+			SQLQuery q = session.createSQLQuery(getCountByR_U_SQL());
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -678,5 +662,30 @@ public class RoleFinderImpl
 			}
 		}
 	}
+
+	private String getCountByR_U_SQL() {
+		if (_countByR_U_SQL == null) {
+			StringBundler sb = new StringBundler(13);
+
+			sb.append("(");
+			sb.append(CustomSQLUtil.get(COUNT_BY_COMMUNITY));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(COUNT_BY_ORGANIZATION));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(COUNT_BY_ORGANIZATION_COMMUNITY));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(COUNT_BY_USER));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(COUNT_BY_USER_GROUP));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(COUNT_BY_USER_GROUP_COMMUNITY));
+			sb.append(")");
+
+			_countByR_U_SQL = sb.toString();
+		}
+		return _countByR_U_SQL;
+	}
+
+	private String _countByR_U_SQL;
 
 }
