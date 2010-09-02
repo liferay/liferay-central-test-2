@@ -369,6 +369,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 		}
 
+		// Asset
+
+		updateAsset(
+			userId, message, serviceContext.getAssetCategoryIds(),
+			serviceContext.getAssetTagNames());
 
 		// Expando
 
@@ -382,12 +387,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			user.getCompanyId(), groupId, userId,
 			message.getWorkflowClassName(), message.getMessageId(), message,
 			serviceContext);
-
-		// Asset
-
-		updateAsset(
-			userId, message, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
 
 		// Testing roll back
 
@@ -1186,8 +1185,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		boolean visible = false;
 
-		if (message.getStatus() == WorkflowConstants.STATUS_APPROVED &&
-			!message.getBody().equals(String.valueOf(message.getClassPK()))) {
+		if (message.getStatus() == WorkflowConstants.STATUS_APPROVED) {
 			visible = true;
 		}
 
