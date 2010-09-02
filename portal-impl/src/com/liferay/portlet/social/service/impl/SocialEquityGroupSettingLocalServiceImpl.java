@@ -31,14 +31,18 @@ public class SocialEquityGroupSettingLocalServiceImpl
 	public boolean isEnabled(long groupId, String className)
 		throws SystemException {
 
-		boolean isInformationEquity = isEnabled(
-			groupId, className, SocialEquitySettingConstants.TYPE_INFORMATION);
+		if (isEnabled(
+				groupId, className,
+				SocialEquitySettingConstants.TYPE_INFORMATION) &&
+			isEnabled(
+				groupId, className,
+				SocialEquitySettingConstants.TYPE_PARTICIPATION)) {
 
-		boolean isParticipationEquity = isEnabled(
-			groupId, className,
-			SocialEquitySettingConstants.TYPE_PARTICIPATION);
-
-		return (isInformationEquity && isParticipationEquity);
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public boolean isEnabled(long groupId, String className, int type)
