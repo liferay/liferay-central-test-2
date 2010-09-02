@@ -112,6 +112,9 @@ public class BookmarksIndexer extends BaseIndexer {
 
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
 			BookmarksEntry.class.getName(), entryId);
+		String[] assetCategoryNames =
+			AssetCategoryLocalServiceUtil.getCategoryNames(
+				BookmarksEntry.class.getName(), entryId);
 		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 			BookmarksEntry.class.getName(), entryId);
 
@@ -131,6 +134,7 @@ public class BookmarksIndexer extends BaseIndexer {
 
 		document.addText(Field.TITLE, name);
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
+		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
 		document.addKeyword(Field.FOLDER_ID, folderId);

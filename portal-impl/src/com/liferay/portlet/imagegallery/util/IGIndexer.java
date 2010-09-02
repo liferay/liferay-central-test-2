@@ -117,6 +117,9 @@ public class IGIndexer extends BaseIndexer {
 
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
 			IGImage.class.getName(), imageId);
+		String[] assetCategoryNames =
+			AssetCategoryLocalServiceUtil.getCategoryNames(
+				IGImage.class.getName(), imageId);
 		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 			IGImage.class.getName(), imageId);
 
@@ -137,6 +140,7 @@ public class IGIndexer extends BaseIndexer {
 		document.addText(Field.TITLE, name);
 		document.addText(Field.DESCRIPTION, description);
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
+		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
 		document.addKeyword(Field.FOLDER_ID, folderId);

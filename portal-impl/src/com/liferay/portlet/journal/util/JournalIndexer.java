@@ -118,6 +118,9 @@ public class JournalIndexer extends BaseIndexer {
 
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
 			JournalArticle.class.getName(), resourcePrimKey);
+		String[] assetCategoryNames =
+			AssetCategoryLocalServiceUtil.getCategoryNames(
+				JournalArticle.class.getName(), resourcePrimKey);
 		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 			JournalArticle.class.getName(), resourcePrimKey);
 
@@ -139,6 +142,7 @@ public class JournalIndexer extends BaseIndexer {
 		document.addText(Field.CONTENT, processContent(document, content));
 		document.addText(Field.DESCRIPTION, description);
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
+		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
 		document.addKeyword(

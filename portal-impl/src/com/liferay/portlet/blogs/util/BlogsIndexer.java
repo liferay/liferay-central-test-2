@@ -104,6 +104,9 @@ public class BlogsIndexer extends BaseIndexer {
 
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
 			BlogsEntry.class.getName(), entryId);
+		String[] assetCategoryNames =
+			AssetCategoryLocalServiceUtil.getCategoryNames(
+				BlogsEntry.class.getName(), entryId);
 		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 			BlogsEntry.class.getName(), entryId);
 
@@ -125,6 +128,7 @@ public class BlogsIndexer extends BaseIndexer {
 		document.addText(Field.TITLE, title);
 		document.addText(Field.CONTENT, content);
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
+		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
 		document.addKeyword(Field.ENTRY_CLASS_NAME, BlogsEntry.class.getName());

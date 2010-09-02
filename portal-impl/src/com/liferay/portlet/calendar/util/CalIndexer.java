@@ -100,6 +100,9 @@ public class CalIndexer extends BaseIndexer {
 
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
 			CalEvent.class.getName(), eventId);
+		String[] assetCategoryNames =
+			AssetCategoryLocalServiceUtil.getCategoryNames(
+				CalEvent.class.getName(), eventId);
 		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 			CalEvent.class.getName(), eventId);
 
@@ -121,6 +124,7 @@ public class CalIndexer extends BaseIndexer {
 		document.addText(Field.TITLE, title);
 		document.addText(Field.DESCRIPTION, description);
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
+		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
 		document.addKeyword(Field.ENTRY_CLASS_NAME, CalEvent.class.getName());
