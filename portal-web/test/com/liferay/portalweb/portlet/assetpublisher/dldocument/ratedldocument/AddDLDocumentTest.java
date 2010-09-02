@@ -48,7 +48,8 @@ public class AddDLDocumentTest extends BaseTestCase {
 				selenium.clickAt("link=Asset Publisher Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//strong/a/img", RuntimeVariables.replace(""));
+				selenium.clickAt("//div/ul/li/strong/a",
+					RuntimeVariables.replace("Add New"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -124,13 +125,33 @@ public class AddDLDocumentTest extends BaseTestCase {
 
 			case 3:
 				selenium.selectWindow("null");
-				Thread.sleep(5000);
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (RuntimeVariables.replace("Folder Name")
+												.equals(selenium.getText(
+										"_20_folderName"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				assertEquals(RuntimeVariables.replace("Folder Name"),
+					selenium.getText("_20_folderName"));
 				selenium.type("_20_file",
 					RuntimeVariables.replace(
 						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\dldocument\\ratedldocument\\dependencies\\AP_test_document.txt"));
 				selenium.type("_20_title",
 					RuntimeVariables.replace("AP DL Document Title"));
-				selenium.clickAt("//input[@value='Save']",
+				selenium.clickAt("//input[@value='Publish']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 
@@ -142,7 +163,7 @@ public class AddDLDocumentTest extends BaseTestCase {
 					try {
 						if (RuntimeVariables.replace("AP DL Document Title")
 												.equals(selenium.getText(
-										"//div[1]/h3/a"))) {
+										"//h3[@class='asset-title']/a"))) {
 							break;
 						}
 					}
@@ -153,28 +174,9 @@ public class AddDLDocumentTest extends BaseTestCase {
 				}
 
 				assertEquals(RuntimeVariables.replace("AP DL Document Title"),
-					selenium.getText("//div[1]/h3/a"));
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (RuntimeVariables.replace("AP DL Document Title")
-												.equals(selenium.getText(
-										"//div[2]/div[1]/div/a"))) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
+					selenium.getText("//h3[@class='asset-title']/a"));
 				assertEquals(RuntimeVariables.replace("AP DL Document Title"),
-					selenium.getText("//div[2]/div[1]/div/a"));
+					selenium.getText("xPath=(//span[@class='taglib-text'])[2]"));
 
 			case 100:
 				label = -1;

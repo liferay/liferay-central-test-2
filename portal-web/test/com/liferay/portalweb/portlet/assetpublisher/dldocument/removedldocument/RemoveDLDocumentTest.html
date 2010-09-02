@@ -24,19 +24,34 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Configuration</td>
-	<td></td>
+	<td>clickAt</td>
+	<td>//strong/a</td>
+	<td>Options</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=Document Library Document</td>
-	<td></td>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>link=AP DL Document Title</td>
-	<td></td>
+	<td>click</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//td[1]/a</td>
+	<td>Document Library Document</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[1]/a</td>
+	<td>Document Library Document</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[2]/a</td>
+	<td>AP DL Document Title</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -49,14 +64,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div[3]/div/div/div/div/div</td>
+	<td>waitForText</td>
+	<td>//div[@id='p_p_id_86_']/div/div</td>
 	<td>You have successfully updated the setup.</td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>AP DL Document Title</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//div[@id='p_p_id_86_']/div/div</td>
+	<td>You have successfully updated the setup.</td>
 </tr>
 <tr>
 	<td>assertText</td>

@@ -44,10 +44,17 @@ public class ViewDLDocumentFullContentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
-			selenium.getText("//div/h3"));
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
-			selenium.getText("//div[2]/div[1]/a"));
+			selenium.getText("//div[@class='asset-resource-info']/a"));
 		assertEquals(RuntimeVariables.replace("View in Context \u00bb"),
-			selenium.getText("//div[2]/a"));
+			selenium.getText("//div[@class='asset-more']/a"));
+		selenium.clickAt("//div[@class='asset-more']/a",
+			RuntimeVariables.replace("View in Context \u00bb"));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+			selenium.getText("//h1[@class='header-title']/span"));
+		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+			selenium.getText("//div[@class='lfr-asset-name']/a"));
 	}
 }

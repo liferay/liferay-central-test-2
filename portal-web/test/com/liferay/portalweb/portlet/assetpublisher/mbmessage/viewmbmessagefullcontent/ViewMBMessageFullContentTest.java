@@ -44,18 +44,19 @@ public class ViewMBMessageFullContentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),
-			selenium.getText("//div[1]/h3"));
-		assertTrue(selenium.isPartialText("//div/div/div/div[1]/div[2]",
+			selenium.getText("//h1[@class='header-title']"));
+		assertTrue(selenium.isPartialText("//div[@class='asset-content']",
 				"AP MB Message Body."));
 		assertEquals(RuntimeVariables.replace("View in Context \u00bb"),
-			selenium.getText("//div[2]/div/a"));
-		selenium.clickAt("//div[2]/div/a", RuntimeVariables.replace(""));
+			selenium.getText("//div[@class='asset-more']/a"));
+		selenium.clickAt("//div[@class='asset-more']/a",
+			RuntimeVariables.replace("View in Context \u00bb"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),
-			selenium.getText("//form/div[2]"));
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),
-			selenium.getText("//a/strong"));
+			selenium.getText("//div[@class='subject']/a/strong"));
 		assertEquals(RuntimeVariables.replace("AP MB Message Body."),
-			selenium.getText("//td[2]/div[2]"));
+			selenium.getText("//div[@class='thread-body']"));
 	}
 }

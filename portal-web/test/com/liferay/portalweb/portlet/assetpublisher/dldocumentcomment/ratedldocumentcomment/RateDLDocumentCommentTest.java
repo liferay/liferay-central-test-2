@@ -50,8 +50,9 @@ public class RateDLDocumentCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div")) {
+				if (selenium.isPartialText(
+							"//div[@class='aui-rating-label-element']",
+							"0 Votes")) {
 					break;
 				}
 			}
@@ -62,7 +63,7 @@ public class RateDLDocumentCommentTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isPartialText(
-				"//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div", "0 Votes"));
+				"//div[@class='aui-rating-label-element']", "0 Votes"));
 		selenium.clickAt("//table[1]/tbody/tr/td[1]/div/div/div/a[1]",
 			RuntimeVariables.replace(""));
 
@@ -74,7 +75,7 @@ public class RateDLDocumentCommentTest extends BaseTestCase {
 			try {
 				if (RuntimeVariables.replace("+1 (1 Vote)")
 										.equals(selenium.getText(
-								"//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"))) {
+								"//div[@class='aui-rating-label-element']"))) {
 					break;
 				}
 			}
@@ -85,8 +86,10 @@ public class RateDLDocumentCommentTest extends BaseTestCase {
 		}
 
 		assertEquals(RuntimeVariables.replace("+1 (1 Vote)"),
-			selenium.getText("//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"));
-		selenium.clickAt("//td[1]/div/div/div/a[2]",
+			selenium.getText("//div[@class='aui-rating-label-element']"));
+		assertTrue(selenium.isElementPresent(
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-up aui-rating-element-on']"));
+		selenium.clickAt("//table[1]/tbody/tr/td[1]/div/div/div/a[2]",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -97,7 +100,7 @@ public class RateDLDocumentCommentTest extends BaseTestCase {
 			try {
 				if (RuntimeVariables.replace("-1 (1 Vote)")
 										.equals(selenium.getText(
-								"//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"))) {
+								"//div[@class='aui-rating-label-element']"))) {
 					break;
 				}
 			}
@@ -108,29 +111,14 @@ public class RateDLDocumentCommentTest extends BaseTestCase {
 		}
 
 		assertEquals(RuntimeVariables.replace("-1 (1 Vote)"),
-			selenium.getText("//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"));
+			selenium.getText("//div[@class='aui-rating-label-element']"));
+		assertTrue(selenium.isElementPresent(
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-down aui-rating-element-on']"));
 		selenium.clickAt("//td[1]/div/div/div/a[2]",
 			RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace("0 (0 Votes)")
-										.equals(selenium.getText(
-								"//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertEquals(RuntimeVariables.replace("0 (0 Votes)"),
-			selenium.getText("//td[2]/table[1]/tbody/tr/td[1]/div/div/div/div"));
+		assertFalse(selenium.isElementPresent(
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-up aui-rating-element-on']"));
+		assertFalse(selenium.isElementPresent(
+				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-down aui-rating-element-on']"));
 	}
 }

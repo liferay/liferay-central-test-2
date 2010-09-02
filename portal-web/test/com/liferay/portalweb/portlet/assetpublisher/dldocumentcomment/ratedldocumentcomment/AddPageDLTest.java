@@ -33,7 +33,7 @@ public class AddPageDLTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Welcome")) {
+				if (selenium.isVisible("addPage")) {
 					break;
 				}
 			}
@@ -43,8 +43,6 @@ public class AddPageDLTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Welcome", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("addPage", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

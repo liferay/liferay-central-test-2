@@ -43,7 +43,7 @@ public class SelectIGImageTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -81,7 +81,8 @@ public class SelectIGImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[2]/ul/li/strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li/strong/a",
+			RuntimeVariables.replace("Select Existing"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -90,7 +91,7 @@ public class SelectIGImageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a")) {
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -101,18 +102,19 @@ public class SelectIGImageTest extends BaseTestCase {
 		}
 
 		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP IG Image Name"),
 			selenium.getText("//td[1]/a"));
-		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[1]/a",
+			RuntimeVariables.replace("AP IG Image Name"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
-			selenium.getText("//div[3]/div/div/div/div/div"));
+			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("Image Gallery Image"),
 			selenium.getText("//td[1]/a"));
-		assertTrue(selenium.isElementPresent("//td[2]/a/img"));
+		assertTrue(selenium.isElementPresent("//img[@alt='AP IG Image Name']"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -135,7 +137,8 @@ public class SelectIGImageTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP IG Image Name"),
-			selenium.getText("//h3/a"));
-		assertTrue(selenium.isElementPresent("//div[1]/a/img"));
+			selenium.getText("//h3[@class='asset-title']/a"));
+		assertTrue(selenium.isElementPresent(
+				"//img[@class='asset-small-image']"));
 	}
 }

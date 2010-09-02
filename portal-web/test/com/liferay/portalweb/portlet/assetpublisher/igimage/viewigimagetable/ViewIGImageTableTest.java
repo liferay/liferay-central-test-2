@@ -47,17 +47,21 @@ public class ViewIGImageTableTest extends BaseTestCase {
 			selenium.getText("//th[1]"));
 		assertEquals(RuntimeVariables.replace("AP IG Image Name"),
 			selenium.getText("//td[1]/a"));
-		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[1]/a",
+			RuntimeVariables.replace("AP IG Image Name"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP IG Image Name"),
-			selenium.getText("//div/h3"));
-		assertTrue(selenium.isElementPresent("//div[2]/img"));
+			selenium.getText("//h1[@class='header-title']/span"));
+		assertTrue(selenium.isElementPresent(
+				"//div[@class='asset-content']/img"));
 		assertEquals(RuntimeVariables.replace("View Album \u00bb"),
-			selenium.getText("//div[2]/div/a"));
-		selenium.clickAt("//div[2]/div/a", RuntimeVariables.replace(""));
+			selenium.getText("//div[@class='asset-more']/a"));
+		selenium.clickAt("//div[@class='asset-more']/a",
+			RuntimeVariables.replace("View Album \u00bb"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("//div[2]/a/img"));
+		assertTrue(selenium.isElementPresent(
+				"//img[@alt='AP IG Image Name - ']"));
 		assertEquals(RuntimeVariables.replace("AP IG Image Name"),
-			selenium.getText("//div[2]/a/span"));
+			selenium.getText("//span[@class='image-title']"));
 	}
 }

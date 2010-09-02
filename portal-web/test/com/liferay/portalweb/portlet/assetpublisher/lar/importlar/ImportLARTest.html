@@ -24,9 +24,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Configuration</td>
-	<td></td>
+	<td>clickAt</td>
+	<td>//strong/a</td>
+	<td>Options</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_86_selectionStyle</td>
+	<td>Asset Selection</td>
 </tr>
 <tr>
 	<td>assertSelectedLabel</td>
@@ -35,12 +50,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[1]/div[1]/div[1]/div/span</td>
+	<td>//form[@id='_86_fm']/div[1]/div[1]/div[1]/div/span</td>
 	<td>Selection</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[1]/div[2]/div[1]/div/span</td>
+	<td>//form[@id='_86_fm']/div[1]/div[2]/div[1]/div/span</td>
 	<td>Display Settings</td>
 </tr>
 <tr>

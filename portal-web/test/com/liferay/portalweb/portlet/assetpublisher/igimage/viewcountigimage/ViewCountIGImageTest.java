@@ -44,7 +44,8 @@ public class ViewCountIGImageTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
-		String viewCount = selenium.getIncrementedText("//div[3]/span");
+		String viewCount = selenium.getIncrementedText(
+				"//span[@class='metadata-entry metadata-view-count']");
 		RuntimeVariables.setValue("viewCount", viewCount);
 		selenium.open("/web/guest/home/");
 
@@ -67,7 +68,8 @@ public class ViewCountIGImageTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//div[3]/span",
+		assertTrue(selenium.isPartialText(
+				"//span[@class='metadata-entry metadata-view-count']",
 				RuntimeVariables.getValue("viewCount")));
 	}
 }

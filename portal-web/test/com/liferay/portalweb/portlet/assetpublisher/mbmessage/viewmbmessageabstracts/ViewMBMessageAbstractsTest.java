@@ -44,25 +44,30 @@ public class ViewMBMessageAbstractsTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),
-			selenium.getText("//div[1]/h3/a"));
+			selenium.getText("//h3[@class='asset-title']/a"));
 		assertEquals(RuntimeVariables.replace("AP MB Message Body."),
-			selenium.getText("//div/div/div[1]/div[2]/div[1]"));
-		assertTrue(selenium.isPartialText("//div[2]/a", "Read More"));
-		selenium.clickAt("//div[2]/a", RuntimeVariables.replace(""));
+			selenium.getText("//div[@class='asset-summary']"));
+		assertEquals(RuntimeVariables.replace(
+				"Read More About AP MB Message Subject \u00bb"),
+			selenium.getText("//div[@class='asset-more']/a"));
+		selenium.clickAt("//div[@class='asset-more']/a",
+			RuntimeVariables.replace(
+				"Read More About AP MB Message Subject \u00bb"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),
-			selenium.getText("//div/h3"));
-		assertTrue(selenium.isPartialText("//div[2]/div/div[2]",
+			selenium.getText("//h1[@class='header-title']"));
+		assertTrue(selenium.isPartialText("//div[@class='asset-content']",
 				"AP MB Message Body."));
 		assertEquals(RuntimeVariables.replace("View in Context \u00bb"),
-			selenium.getText("//div[2]/div/a"));
-		selenium.clickAt("//div[2]/div/a", RuntimeVariables.replace(""));
+			selenium.getText("//div[@class='asset-more']/a"));
+		selenium.clickAt("//div[@class='asset-more']/a",
+			RuntimeVariables.replace("View in Context \u00bb"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),
-			selenium.getText("//form/div[2]"));
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),
-			selenium.getText("//a/strong"));
+			selenium.getText("//div[@class='subject']/a/strong"));
 		assertEquals(RuntimeVariables.replace("AP MB Message Body."),
-			selenium.getText("//td[2]/div[2]"));
+			selenium.getText("//div[@class='thread-body']"));
 	}
 }

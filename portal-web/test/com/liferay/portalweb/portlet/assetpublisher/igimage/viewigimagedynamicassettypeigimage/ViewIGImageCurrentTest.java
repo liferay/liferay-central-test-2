@@ -44,7 +44,8 @@ public class ViewIGImageCurrentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP IG Image Name"),
-			selenium.getText("//div[1]/h3/a"));
-		assertTrue(selenium.isElementPresent("//div[1]/a/img"));
+			selenium.getText("//h3[@class='asset-title']/a"));
+		assertTrue(selenium.isElementPresent(
+				"//img[@class='asset-small-image']"));
 	}
 }

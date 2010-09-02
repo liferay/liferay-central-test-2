@@ -24,9 +24,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Configuration</td>
-	<td></td>
+	<td>clickAt</td>
+	<td>//strong/a</td>
+	<td>Options</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_86_anyAssetType</td>
+	<td>Asset Type</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -36,7 +51,7 @@
 <tr>
 	<td>waitForVisible</td>
 	<td>_86_currentClassNameIds</td>
-	<td></td>
+	<td>Current</td>
 </tr>
 <tr>
 	<td>addSelection</td>
@@ -46,15 +61,15 @@
 <tr>
 	<td>clickAt</td>
 	<td>//fieldset[2]/div/div/div/div/div/div/div[2]/div/span/span/button[1]</td>
-	<td></td>
+	<td>Right Arrow</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>waitForPartialText</td>
 	<td>_86_availableClassNameIds</td>
 	<td>Message Boards Message</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertPartialText</td>
 	<td>_86_availableClassNameIds</td>
 	<td>Message Boards Message</td>
 </tr>
@@ -65,7 +80,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[3]/div/div/div/div/div</td>
+	<td>//div[@id='p_p_id_86_']/div/div[1]</td>
 	<td>You have successfully updated the setup.</td>
 </tr>
 <tr>

@@ -44,15 +44,22 @@ public class ViewDLDocumentTitleListTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
-			selenium.getText("//span/a/span"));
-		selenium.clickAt("//span/a/span", RuntimeVariables.replace(""));
+			selenium.getText("//span[@class='taglib-text']"));
+		selenium.clickAt("//span[@class='taglib-text']",
+			RuntimeVariables.replace("AP DL Document Title"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
-			selenium.getText("//div/h3"));
-		selenium.selectWindow("null");
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
-			selenium.getText("//div[2]/div[1]/a"));
+			selenium.getText("//div[@class='asset-resource-info']/a"));
 		assertEquals(RuntimeVariables.replace("View in Context \u00bb"),
-			selenium.getText("//div[2]/a"));
+			selenium.getText("//div[@class='asset-more']/a"));
+		selenium.clickAt("//div[@class='asset-more']/a",
+			RuntimeVariables.replace("View in Context \u00bb"));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+			selenium.getText("//h1[@class='header-title']/span"));
+		assertEquals(RuntimeVariables.replace("AP DL Document Title"),
+			selenium.getText("//div[@class='lfr-asset-name']/a"));
 	}
 }

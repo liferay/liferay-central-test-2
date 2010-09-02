@@ -24,13 +24,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//h1[@class='header-title']/span</td>
 	<td>AP MB Message Subject</td>
-	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='asset-content']</td>
+	<td>AP MB Message Body. View in Context »</td>
 </tr>
 <tr>
 	<td>storeIncrementedText</td>
-	<td>//div[3]/span</td>
+	<td>//span[@class='metadata-entry metadata-view-count']</td>
 	<td>viewCount</td>
 </tr>
 <tr>
@@ -50,7 +55,7 @@
 </tr>
 <tr>
 	<td>assertPartialText</td>
-	<td>//div[3]/span</td>
+	<td>//span[@class='metadata-entry metadata-view-count']</td>
 	<td>${viewCount}</td>
 </tr>
 

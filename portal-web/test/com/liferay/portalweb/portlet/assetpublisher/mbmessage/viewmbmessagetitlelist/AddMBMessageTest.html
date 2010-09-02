@@ -25,8 +25,8 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=AP Category Name</td>
-	<td></td>
+	<td>//a/strong</td>
+	<td>AP Category Name</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -61,21 +61,21 @@
 <tr>
 	<td>clickAtAndWait</td>
 	<td>//td[1]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//form/div[2]</td>
 	<td>AP MB Message Subject</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//a/strong</td>
+	<td>//h1[@class='header-title']/span</td>
 	<td>AP MB Message Subject</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//td[2]/div[2]</td>
+	<td>//div[@class='subject']/a/strong</td>
+	<td>AP MB Message Subject</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='thread-body']</td>
 	<td>AP MB Message Body.</td>
 </tr>
 

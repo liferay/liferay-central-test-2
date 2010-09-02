@@ -44,8 +44,8 @@ public class ViewMBMessageCurrentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP MB Message Subject"),
-			selenium.getText("//div[1]/h3/a"));
+			selenium.getText("//h3[@class='asset-title']/a"));
 		assertEquals(RuntimeVariables.replace("AP MB Message Body."),
-			selenium.getText("//div/div/div[1]/div[2]/div[1]"));
+			selenium.getText("//div[@class='asset-summary']"));
 	}
 }

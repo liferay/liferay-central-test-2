@@ -44,24 +44,8 @@ public class RateDLDocumentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//div[3]/div/div[2]/div/div")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		String voteCount = selenium.getIncrementedText(
-				"//div[3]/div/div[2]/div/div");
+				"xPath=(//div[@class='aui-rating-label-element'])[2]");
 		RuntimeVariables.setValue("voteCount", voteCount);
 		selenium.clickAt("//a[5]", RuntimeVariables.replace(""));
 
@@ -71,7 +55,8 @@ public class RateDLDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isPartialText("//div[3]/div/div[2]/div/div",
+				if (selenium.isPartialText(
+							"xPath=(//div[@class='aui-rating-label-element'])[2]",
 							RuntimeVariables.getValue("voteCount"))) {
 					break;
 				}
@@ -82,7 +67,8 @@ public class RateDLDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isPartialText("//div[3]/div/div[2]/div/div",
+		assertTrue(selenium.isPartialText(
+				"xPath=(//div[@class='aui-rating-label-element'])[2]",
 				RuntimeVariables.getValue("voteCount")));
 	}
 }

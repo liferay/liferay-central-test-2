@@ -44,6 +44,7 @@ public class ViewIGImageAvailableTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("AP IG Image Name"));
-		assertFalse(selenium.isElementPresent("//div[1]/a/img"));
+		assertFalse(selenium.isElementPresent(
+				"//img[@class='asset-small-image']"));
 	}
 }

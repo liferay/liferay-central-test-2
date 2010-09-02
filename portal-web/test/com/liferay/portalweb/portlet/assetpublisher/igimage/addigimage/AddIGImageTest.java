@@ -48,7 +48,8 @@ public class AddIGImageTest extends BaseTestCase {
 				selenium.clickAt("link=Asset Publisher Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//strong/a/img", RuntimeVariables.replace(""));
+				selenium.clickAt("//div/ul/li/strong/a",
+					RuntimeVariables.replace("Add New"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -124,7 +125,27 @@ public class AddIGImageTest extends BaseTestCase {
 
 			case 3:
 				selenium.selectWindow("null");
-				Thread.sleep(5000);
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (RuntimeVariables.replace("Folder Name")
+												.equals(selenium.getText(
+										"_31_folderName"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				assertEquals(RuntimeVariables.replace("Folder Name"),
+					selenium.getText("_31_folderName"));
 				selenium.type("_31_file",
 					RuntimeVariables.replace(
 						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\igimage\\addigimage\\dependencies\\AP_test_image.jpg"));
@@ -142,7 +163,7 @@ public class AddIGImageTest extends BaseTestCase {
 					try {
 						if (RuntimeVariables.replace("AP IG Image Name")
 												.equals(selenium.getText(
-										"//h3/a"))) {
+										"//h3[@class='asset-title']/a"))) {
 							break;
 						}
 					}
@@ -153,25 +174,9 @@ public class AddIGImageTest extends BaseTestCase {
 				}
 
 				assertEquals(RuntimeVariables.replace("AP IG Image Name"),
-					selenium.getText("//h3/a"));
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//div[1]/a/img")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				assertTrue(selenium.isElementPresent("//div[1]/a/img"));
+					selenium.getText("//h3[@class='asset-title']/a"));
+				assertTrue(selenium.isElementPresent(
+						"//img[@class='asset-small-image']"));
 
 			case 100:
 				label = -1;

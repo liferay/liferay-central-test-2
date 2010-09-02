@@ -36,41 +36,41 @@
 <tr>
 	<td>clickAtAndWait</td>
 	<td>//tr[2]/td[1]/a</td>
-	<td></td>
+	<td>AP MB Message Subject</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[1]/h3</td>
+	<td>//h1[@class='header-title']</td>
 	<td>AP MB Message Subject</td>
 </tr>
 <tr>
 	<td>assertPartialText</td>
-	<td>//div/div/div/div[1]/div[2]</td>
+	<td>//div[@class='asset-content']</td>
 	<td>AP MB Message Body.</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[2]/div/a</td>
+	<td>//div[@class='asset-more']/a</td>
 	<td>View in Context »</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//div[2]/div/a</td>
-	<td></td>
+	<td>//div[@class='asset-more']/a</td>
+	<td>View in Context »</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//form/div[2]</td>
+	<td>//h1[@class='header-title']/span</td>
 	<td>AP MB Message Subject</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//a/strong</td>
+	<td>//div[@class='subject']/a/strong</td>
 	<td>AP MB Message Subject</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//td[2]/div[2]</td>
+	<td>//div[@class='thread-body']</td>
 	<td>AP MB Message Body.</td>
 </tr>
 
