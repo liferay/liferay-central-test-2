@@ -391,6 +391,7 @@ public abstract class BaseIndexer implements Indexer {
 
 		searchQuery.addTerms(_KEYWORDS_FIELDS, keywords);
 
+		searchQuery.addExactTerm(Field.ASSET_CATEGORY_NAMES, keywords);
 		searchQuery.addExactTerm(Field.ASSET_TAG_NAMES, keywords);
 
 		addSearchExpando(searchQuery, searchContext, keywords);
