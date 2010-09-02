@@ -945,9 +945,27 @@ public interface ExpandoValueLocalService {
 		java.lang.String columnName, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* @deprecated {@link getValue(long, long, String, String, long)}
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.expando.model.ExpandoValue getValue(
+		long classNameId, java.lang.String tableName,
+		java.lang.String columnName, long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
+		java.lang.String columnName, long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @deprecated {@link getValue(long, String, String, String, long)}
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.expando.model.ExpandoValue getValue(
+		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

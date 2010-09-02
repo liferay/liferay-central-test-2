@@ -1784,6 +1784,18 @@ public class ExpandoValueLocalServiceImpl
 			table.getTableId(), column.getColumnId(), classPK);
 	}
 
+	/**
+	 * @deprecated {@link getValue(long, long, String, String, long)}
+	 */
+	public ExpandoValue getValue(
+			long classNameId, String tableName, String columnName, long classPK)
+		throws SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getValue(companyId, classNameId, tableName, columnName, classPK);
+	}
+
 	public ExpandoValue getValue(
 			long companyId, String className, String tableName,
 			String columnName, long classPK)
@@ -1792,6 +1804,18 @@ public class ExpandoValueLocalServiceImpl
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		return getValue(companyId, classNameId, tableName, columnName, classPK);
+	}
+
+	/**
+	 * @deprecated {@link getValue(long, String, String, String, long)}
+	 */
+	public ExpandoValue getValue(
+			String className, String tableName, String columnName, long classPK)
+		throws SystemException {
+
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		return getValue(companyId, className, tableName, columnName, classPK);
 	}
 
 }

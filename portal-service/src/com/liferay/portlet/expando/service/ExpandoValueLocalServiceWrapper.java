@@ -1196,12 +1196,34 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			tableName, columnName, classPK);
 	}
 
+	/**
+	* @deprecated {@link getValue(long, long, String, String, long)}
+	*/
+	public com.liferay.portlet.expando.model.ExpandoValue getValue(
+		long classNameId, java.lang.String tableName,
+		java.lang.String columnName, long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _expandoValueLocalService.getValue(classNameId, tableName,
+			columnName, classPK);
+	}
+
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
 		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _expandoValueLocalService.getValue(companyId, className,
 			tableName, columnName, classPK);
+	}
+
+	/**
+	* @deprecated {@link getValue(long, String, String, String, long)}
+	*/
+	public com.liferay.portlet.expando.model.ExpandoValue getValue(
+		java.lang.String className, java.lang.String tableName,
+		java.lang.String columnName, long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _expandoValueLocalService.getValue(className, tableName,
+			columnName, classPK);
 	}
 
 	public ExpandoValueLocalService getWrappedExpandoValueLocalService() {
