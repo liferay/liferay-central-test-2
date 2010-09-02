@@ -30,7 +30,6 @@ public class FileModel implements Serializable {
 		return _assetCategoryNames;
 	}
 
-
 	public String[] getAssetTagNames() {
 		return _assetTagNames;
 	}
