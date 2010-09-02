@@ -145,10 +145,10 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 		String userAgent = getUserAgent(request);
 
-		Matcher matcher = _firefoxPattern.matcher(userAgent);
-
-		if (matcher.find()) {
-			return true;
+		for(String alias : _firefoxAlias) {
+			if (userAgent.indexOf(alias) != -1) {
+				return true;
+			}
 		}
 
 		return false;
@@ -293,25 +293,26 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	public boolean isWebKit(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		Matcher matcher = _webKitPattern.matcher(userAgent);
-
-		if (matcher.find()) {
+		if ((userAgent.indexOf("khtml") != -1) ||
+			(userAgent.indexOf("applewebkit") != -1)) {
 			return true;
 		}
-
-		return false;
+		else {
+			return false;
+		}
 	}
 
 	public boolean isWindows(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		Matcher matcher = _windowsPattern.matcher(userAgent);
-
-		if (matcher.find()) {
+		if ((userAgent.indexOf("windows") != -1) ||
+			(userAgent.indexOf("win32") != -1) ||
+			(userAgent.indexOf("16bit") != -1)) {
 			return true;
 		}
-
-		return false;
+		else {
+			return false;
+		}
 	}
 
 	public boolean isWml(HttpServletRequest request) {
@@ -352,8 +353,10 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		return userAgent;
 	}
 
-	private static Pattern _firefoxPattern = Pattern.compile(
-		"(firefox|minefield|granparadiso|bonecho|firebird|phoenix|camino)");
+	private static String[] _firefoxAlias = {
+			"firefox", "minefield", "granparadiso", "bonecho", "firebird",
+			"phoenix", "camino"
+		};
 	private static Pattern _majorVersionPattern = Pattern.compile(
 		"(\\d+[.]\\d+)");
 	private static Pattern _revisionPattern = Pattern.compile(
@@ -364,9 +367,5 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		"(?:firefox|minefield)[\\/]([\\d.]+)");
 	private static Pattern _versionPattern = Pattern.compile(
 		"(?:version)[\\/]([\\d.]+)");
-	private static Pattern _webKitPattern = Pattern.compile(
-		"(khtml|applewebkit)");
-	private static Pattern _windowsPattern = Pattern.compile(
-		"(windows|win32|16bit)");
 
 }
