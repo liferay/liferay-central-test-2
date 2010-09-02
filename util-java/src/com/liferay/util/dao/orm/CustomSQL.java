@@ -343,6 +343,16 @@ public class CustomSQL {
 		return sql;
 	}
 
+	public String removeOrderBy(String sql) {
+		int pos = sql.indexOf(_ORDER_BY_CLAUSE);
+
+		if (pos != -1) {
+			sql = sql.substring(0, pos);
+		}
+
+		return sql;
+	}
+
 	public String replaceAndOperator(String sql, boolean andOperator) {
 		String andOrConnector = "OR";
 		String andOrNullCheck = "AND ? IS NOT NULL";
@@ -573,7 +583,7 @@ public class CustomSQL {
 
 		int pos = sql.indexOf(_ORDER_BY_CLAUSE);
 
-		if (pos != -1 && pos < sql.length()) {
+		if ((pos != -1) && (pos < sql.length())) {
 			sql = sql.substring(0, pos + _ORDER_BY_CLAUSE.length()).concat(
 				orderBy);
 		}
