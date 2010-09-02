@@ -81,7 +81,7 @@ public class DefineMemberRolesTest extends BaseTestCase {
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Member"),
-			selenium.getText("//h3[1]"));
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertTrue(selenium.isPartialText("//label", "Add Permissions"));
 	}
 }

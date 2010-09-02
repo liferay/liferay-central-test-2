@@ -47,6 +47,7 @@ public class AnnouncementsTests extends BaseTests {
 		testSuite.addTestSuite(Guest_AssertViewTest.class);
 		testSuite.addTestSuite(Guest_AssertActionsTest.class);
 		testSuite.addTestSuite(SA_TearDownTest.class);
+		testSuite.addTestSuite(SA_LogoutTest.class);
 
 		return testSuite;
 	}

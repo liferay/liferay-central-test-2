@@ -64,7 +64,7 @@ public class Portlet_EditCommentTest extends BaseTestCase {
 
 		selenium.type("_33_editReplyBody1",
 			RuntimeVariables.replace("This is a portlet comment! Edited!"));
-		selenium.clickAt("//input[@value='Update']",
+		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

@@ -45,10 +45,10 @@ public class Portlet_EditEntryTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Portlet1 Temporary1 Entry1"),
-			selenium.getText("//div/ul[1]/li[1]/span"));
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a temporary portlet permissions entry!"),
-			selenium.getText("//p"));
+			selenium.getText("//div[@class='entry-body']/p"));
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_33_title",
@@ -109,20 +109,21 @@ public class Portlet_EditEntryTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"This is an edited temporary portlet permissions entry!"));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertNotEquals(RuntimeVariables.replace("Portlet1 Temporary1 Entry1"),
-			selenium.getText("//div/ul[1]/li[1]/span"));
 		assertEquals(RuntimeVariables.replace(
 				"Edited1 Portlet1 Temporary1 Entry1"),
-			selenium.getText("//div/ul[1]/li[1]/span"));
-		assertNotEquals(RuntimeVariables.replace(
-				"This is a temporary portlet permissions entry!"),
-			selenium.getText("//p"));
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace(
 				"This is an edited temporary portlet permissions entry!"),
-			selenium.getText("//p"));
+			selenium.getText("//div[@class='entry-body']/p"));
+		assertNotEquals(RuntimeVariables.replace("Portlet1 Temporary1 Entry1"),
+			selenium.getText("//h1[@class='header-title']/span"));
+		assertNotEquals(RuntimeVariables.replace(
+				"This is a temporary portlet permissions entry!"),
+			selenium.getText("//div[@class='entry-body']/p"));
 	}
 }

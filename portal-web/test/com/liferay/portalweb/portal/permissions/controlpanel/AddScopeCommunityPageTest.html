@@ -9,8 +9,18 @@
 <tr><td rowspan="1" colspan="3">AddScopeCommunityPageTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>link=Communities</td>
+	<td>link=Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Control Panel</td>
 	<td></td>
 </tr>
 <tr>
@@ -34,19 +44,44 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
 	<td>//strong/a</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Manage Pages</td>
-	<td></td>
+	<td>clickAt</td>
+	<td>//strong/a</td>
+	<td>Actions</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Manage Pages</td>
-	<td></td>
+	<td>waitForElementPresent</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Manage Pages</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Manage Pages</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//li[1]/span/span/a</td>
+	<td>Public Pages</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//ul[2]/li[1]/span/span/a</td>
+	<td>Pages</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div/div[3]/a</td>
+	<td>Scope Community</td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
@@ -69,19 +104,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>store</td>
 	<td>eval(selenium.isElementPresent('//li/ul/li/div/div[3]/a'))</td>
-	<td>pageVisible</td>
+	<td>publicPagePresent</td>
 </tr>
 <tr>
 	<td>gotoIf</td>
-	<td>${pageVisible}</td>
-	<td>PageVisible</td>
+	<td>${publicPagePresent}</td>
+	<td>PublicPagePresent</td>
 </tr>
 <tr>
 	<td>clickAt</td>
@@ -90,13 +120,23 @@
 </tr>
 <tr>
 	<td>label</td>
-	<td>PageVisible</td>
+	<td>PublicPagePresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//li/div/div[1]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
 	<td>//li/ul/li/div/div[3]/a</td>
-	<td>Scope Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//li/ul/li/div/div[3]/a</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>

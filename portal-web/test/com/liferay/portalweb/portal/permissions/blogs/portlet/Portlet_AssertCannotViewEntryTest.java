@@ -41,12 +41,9 @@ public class Portlet_AssertCannotViewEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent("Portlet1 Temporary1 Entry1"));
 		assertFalse(selenium.isElementPresent("link=Portlet1 Temporary1 Entry1"));
-		selenium.type("_33_keywords",
-			RuntimeVariables.replace("Portlet1 Temporary1 Entry1"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=Portlet1 Temporary1 Entry1"));
+		assertFalse(selenium.isElementPresent("_33_keywords"));
+		assertFalse(selenium.isElementPresent("//input[@value='Search']"));
 	}
 }

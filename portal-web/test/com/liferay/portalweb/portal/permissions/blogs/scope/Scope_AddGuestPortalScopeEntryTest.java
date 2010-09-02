@@ -123,7 +123,8 @@ public class Scope_AddGuestPortalScopeEntryTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"This is a guest portal scope permissions blogs entry"));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

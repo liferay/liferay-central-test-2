@@ -22,7 +22,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Scope_AddScopePortalScopeEntryTest extends BaseTestCase {
 	public void testScope_AddScopePortalScopeEntry() throws Exception {
-		selenium.open("/web/guest/home/");
+		selenium.open("/web/scope-community/scope-test-page/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -30,7 +30,7 @@ public class Scope_AddScopePortalScopeEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[3]/a/span")) {
+				if (selenium.isVisible("link=Blogs Scope Permissions Page")) {
 					break;
 				}
 			}
@@ -40,8 +40,6 @@ public class Scope_AddScopePortalScopeEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//li[3]/a/span", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Blogs Scope Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -125,7 +123,8 @@ public class Scope_AddScopePortalScopeEntryTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"This is a scope portal scope permissions blogs entry"));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

@@ -25,12 +25,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div/ul[1]/li[1]/span</td>
+	<td>//h1[@class='header-title']/span</td>
 	<td>Portlet1 Temporary1 Entry1</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//p</td>
+	<td>//div[@class='entry-body']/p</td>
 	<td>This is a temporary portlet permissions entry!</td>
 </tr>
 <tr>
@@ -85,7 +85,7 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>_33_saveButton</td>
+	<td>//input[@value='Publish']</td>
 	<td></td>
 </tr>
 <tr>
@@ -94,24 +94,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertNotText</td>
-	<td>//div/ul[1]/li[1]/span</td>
-	<td>Portlet1 Temporary1 Entry1</td>
-</tr>
-<tr>
 	<td>assertText</td>
-	<td>//div/ul[1]/li[1]/span</td>
+	<td>//h1[@class='header-title']/span</td>
 	<td>Edited1 Portlet1 Temporary1 Entry1</td>
 </tr>
 <tr>
-	<td>assertNotText</td>
-	<td>//p</td>
-	<td>This is a temporary portlet permissions entry!</td>
+	<td>assertText</td>
+	<td>//div[@class='entry-body']/p</td>
+	<td>This is an edited temporary portlet permissions entry!</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//p</td>
-	<td>This is an edited temporary portlet permissions entry!</td>
+	<td>assertNotText</td>
+	<td>//h1[@class='header-title']/span</td>
+	<td>Portlet1 Temporary1 Entry1</td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>//div[@class='entry-body']/p</td>
+	<td>This is a temporary portlet permissions entry!</td>
 </tr>
 
 </tbody></table>

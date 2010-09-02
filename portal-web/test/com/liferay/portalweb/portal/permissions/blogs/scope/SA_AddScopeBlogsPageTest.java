@@ -22,7 +22,10 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SA_AddScopeBlogsPageTest extends BaseTestCase {
 	public void testSA_AddScopeBlogsPage() throws Exception {
-		selenium.open("/web/guest/home/");
+		selenium.open("/web/scope-community/scope-test-page/");
+		selenium.clickAt("main-content", RuntimeVariables.replace(""));
+		selenium.clickAt("dockbar", RuntimeVariables.replace(""));
+		selenium.clickAt("navigation", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -30,7 +33,7 @@ public class SA_AddScopeBlogsPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[6]/a/span")) {
+				if (selenium.isVisible("addPage")) {
 					break;
 				}
 			}
@@ -40,8 +43,6 @@ public class SA_AddScopeBlogsPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//li[6]/a/span", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("addPage", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

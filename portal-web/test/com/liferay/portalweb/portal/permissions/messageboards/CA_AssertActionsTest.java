@@ -123,9 +123,8 @@ public class CA_AssertActionsTest extends BaseTestCase {
 		selenium.clickAt("//td[5]/ul/li/strong/a", RuntimeVariables.replace(""));
 		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace(
-				"Edit Permissions for Message Boards Category: Permissions Test 1"),
-			selenium.getText("//form/div[1]"));
+		assertEquals(RuntimeVariables.replace("Permissions Test 1"),
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertTrue(selenium.isElementPresent("//input[@value='Save']"));
 		selenium.open("/web/guest/home/");
 

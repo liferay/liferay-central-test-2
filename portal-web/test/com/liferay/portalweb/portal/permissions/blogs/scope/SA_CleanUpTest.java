@@ -27,26 +27,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 		while (label >= 1) {
 			switch (label) {
 			case 1:
-				selenium.open("/web/guest/home/");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//li[6]/a/span")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("//li[6]/a/span", RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
+				selenium.open("/web/scope-community/scope-test-page/");
 
 				boolean ScopePagePresent = selenium.isElementPresent(
 						"link=Blogs Scope Permissions Page");
@@ -104,12 +85,37 @@ public class SA_CleanUpTest extends BaseTestCase {
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
 			case 4:
+			case 5:
 				selenium.clickAt("link=Scope Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("main-content", RuntimeVariables.replace(""));
+				selenium.clickAt("navigation", RuntimeVariables.replace(""));
+				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"//div/div[3]/div/ul/li[1]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Manage Pages"));
 				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("main-content", RuntimeVariables.replace(""));
+				selenium.clickAt("navigation", RuntimeVariables.replace(""));
+				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -129,6 +135,20 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				boolean welcomePresent = selenium.isElementPresent(
+						"//li/ul/li[1]/div/div[3]/a");
+
+				if (welcomePresent) {
+					label = 6;
+
+					continue;
+				}
+
+				selenium.clickAt("//li/div/div[1]",
+					RuntimeVariables.replace("Drop Down Arrow"));
+
+			case 6:
+
 				for (int second = 0;; second++) {
 					if (second >= 60) {
 						fail("timeout");
@@ -147,11 +167,19 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//li[2]/div/div[3]/a",
-					RuntimeVariables.replace(""));
+				boolean scopeBlogsPagePresent = selenium.isElementPresent(
+						"//li[2]/div/div[3]/a");
+
+				if (!scopeBlogsPagePresent) {
+					label = 7;
+
+					continue;
+				}
+
+				selenium.click(RuntimeVariables.replace("//li[2]/div/div[3]/a"));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//ul[2]/li[1]/span/span/a",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("//td[2]/ul/li[1]/span/span/a",
+					RuntimeVariables.replace("Page"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
@@ -159,7 +187,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
 
-			case 5:
+			case 7:
 				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {
@@ -187,7 +215,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 						"//span[3]/a/img");
 
 				if (!GuestPortletPresent) {
-					label = 7;
+					label = 9;
 
 					continue;
 				}
@@ -195,7 +223,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 				boolean EntryCPresent = selenium.isElementPresent("link=Delete");
 
 				if (!EntryCPresent) {
-					label = 6;
+					label = 8;
 
 					continue;
 				}
@@ -205,12 +233,12 @@ public class SA_CleanUpTest extends BaseTestCase {
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
-			case 6:
+			case 8:
 				selenium.click("//img[@alt='Remove']");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
-			case 7:
+			case 9:
 				selenium.clickAt("_145_addApplication",
 					RuntimeVariables.replace(""));
 				Thread.sleep(5000);

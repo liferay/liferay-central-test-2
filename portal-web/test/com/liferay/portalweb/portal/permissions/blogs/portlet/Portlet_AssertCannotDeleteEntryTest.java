@@ -41,10 +41,10 @@ public class Portlet_AssertCannotDeleteEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Permissions Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//form/div[2]/div[1]/div[1]/a",
+		assertTrue(selenium.isPartialText("//div[@class='entry-title']/a",
 				"Portlet1 Temporary1 Entry1"));
-		selenium.clickAt("//form/div[2]/div[1]/div[1]/a",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[@class='entry-title']/a",
+			RuntimeVariables.replace("Portlet1 Temporary1 Entry1"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Delete"));
 	}

@@ -30,13 +30,38 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//span/span/span</td>
+	<td>//h1[@class='header-title']/span</td>
 	<td>Portlet1 Temporary1 Entry1</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//p</td>
 	<td>This is a temporary portlet permissions entry!</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Blogs Permissions Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Blogs Permissions Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_33_keywords</td>
+	<td>Portlet1 Temporary1 Entry1</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td[2]/a</td>
+	<td>Portlet1 Temporary1 Entry1</td>
 </tr>
 
 </tbody></table>

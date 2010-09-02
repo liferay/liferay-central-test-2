@@ -46,9 +46,36 @@ public class Portlet_AssertViewEntryTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Portlet1 Temporary1 Entry1"),
-			selenium.getText("//span/span/span"));
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a temporary portlet permissions entry!"),
 			selenium.getText("//p"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Blogs Permissions Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Blogs Permissions Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_33_keywords",
+			RuntimeVariables.replace("Portlet1 Temporary1 Entry1"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Portlet1 Temporary1 Entry1"),
+			selenium.getText("//td[2]/a"));
 	}
 }

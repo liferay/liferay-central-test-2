@@ -102,7 +102,8 @@ public class SA_AddTemporaryEntryTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"This is a temporary portlet permissions entry!"));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

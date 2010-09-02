@@ -64,8 +64,8 @@ public class Portlet_AssertEditEntryPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isPartialText("//form/div[1]",
-				"Edit Permissions for Blogs Entry:"));
+		assertTrue(selenium.isPartialText("//h1[@class='header-title']/span",
+				"Portlet1 Temporary1 Entry1"));
 		assertTrue(selenium.isElementPresent("//input[@value='Save']"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

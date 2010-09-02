@@ -101,7 +101,8 @@ public class CA_AddEntryTest extends BaseTestCase {
 		selenium.type("//body",
 			RuntimeVariables.replace("This is a permissions blogs test entry"));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
