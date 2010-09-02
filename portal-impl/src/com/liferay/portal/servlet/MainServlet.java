@@ -428,8 +428,8 @@ public class MainServlet extends ActionServlet {
 		try {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-				"Authenticate user id " + userId + " and remote user " +
-					remoteUser);
+					"Authenticate user id " + userId + " and remote user " +
+						remoteUser);
 			}
 
 			userId = loginUser(request, response, userId, remoteUser);

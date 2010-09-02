@@ -14,29 +14,12 @@
 
 package com.liferay.portal.velocity;
 
-import com.liferay.portal.kernel.deploy.sandbox.SandboxDeployListener;
-
-import org.apache.velocity.exception.ParseErrorException;
-import org.apache.velocity.exception.ResourceNotFoundException;
-import org.apache.velocity.runtime.resource.Resource;
 import org.apache.velocity.runtime.resource.ResourceManagerImpl;
 
 /**
  * @author Brian Wing Shun Chan
  */
 public class LiferayResourceManager extends ResourceManagerImpl {
-
-	@Override
-	public Resource getResource(
-		String resourceName, int resourceType, String encoding)
-		throws ResourceNotFoundException, ParseErrorException, Exception {
-
-		if (resourceName.indexOf(SandboxDeployListener.SANDBOX_MARKER) != -1) {
-			return loadResource(resourceName, resourceType, encoding);
-		}
-
-		return super.getResource(resourceName, resourceType, encoding);
-	}
 
 	public String getLoaderNameForResource(String source) {
 
