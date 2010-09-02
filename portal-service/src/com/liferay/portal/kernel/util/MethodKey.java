@@ -47,10 +47,16 @@ public class MethodKey implements Serializable {
 
 		_parameterTypes = new Class[parameterTypeNames.length];
 
+		ClassLoader classLoader = null;
+		if (parameterTypeNames.length > 0) {
+			classLoader = Thread.currentThread().getContextClassLoader();
+		}
+
 		for (int i = 0; i < parameterTypeNames.length; i++) {
 			String parameterTypeName = parameterTypeNames[i];
 
-			_parameterTypes[i] = Class.forName(parameterTypeName);
+			_parameterTypes[i] = Class.forName(
+				parameterTypeName, true, classLoader);
 		}
 	}
 
