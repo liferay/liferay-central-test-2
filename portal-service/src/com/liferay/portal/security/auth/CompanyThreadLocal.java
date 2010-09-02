@@ -28,8 +28,8 @@ import com.liferay.portal.service.CompanyLocalServiceUtil;
  */
 public class CompanyThreadLocal {
 
-	public static long getCompanyId() {
-		long companyId = _companyId.get();
+	public static Long getCompanyId() {
+		Long companyId = _companyId.get();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("getCompanyId " + companyId);
@@ -38,7 +38,7 @@ public class CompanyThreadLocal {
 		return companyId;
 	}
 
-	public static void setCompanyId(long companyId) {
+	public static void setCompanyId(Long companyId) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("setCompanyId " + companyId);
 		}

@@ -996,7 +996,7 @@ public class HookHotDeployListener
 			simpleAction = new InvokerSimpleAction(
 				simpleAction, portletClassLoader);
 
-			long companyId = CompanyThreadLocal.getCompanyId();
+			Long companyId = CompanyThreadLocal.getCompanyId();
 
 			long[] companyIds = PortalInstances.getCompanyIds();
 

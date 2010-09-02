@@ -470,7 +470,7 @@ public class LanguageImpl implements Language {
 	}
 
 	private static LanguageImpl _getInstance() {
-		long companyId = CompanyThreadLocal.getCompanyId();
+		Long companyId = CompanyThreadLocal.getCompanyId();
 
 		LanguageImpl instance = _instances.get(companyId);
 

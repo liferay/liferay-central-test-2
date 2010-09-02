@@ -137,7 +137,7 @@ public class PropsUtil {
 			return _configuration;
 		}
 
-		long companyId = CompanyThreadLocal.getCompanyId();
+		Long companyId = CompanyThreadLocal.getCompanyId();
 
 		if (companyId > CompanyConstants.SYSTEM) {
 			Configuration configuration = _configurations.get(companyId);
