@@ -41,7 +41,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author Brian Wing Shun Chan
@@ -344,28 +343,6 @@ public class CustomSQL {
 		return sql;
 	}
 
-	public String removeOrderBy(String sql) {
-
-		// See LPS-8719
-
-		AtomicReference<String> sqlAtomicReference =
-			new AtomicReference<String>(sql);
-
-		int pos = sqlAtomicReference.get().indexOf(_ORDER_BY_CLAUSE);
-
-		if (pos != -1) {
-			sql = sqlAtomicReference.get().substring(0, pos);
-		}
-
-		/*int pos = sql.indexOf(_ORDER_BY_CLAUSE);
-
-		if (pos != -1) {
-			sql = sql.substring(0, pos);
-		}*/
-
-		return sql;
-	}
-
 	public String replaceAndOperator(String sql, boolean andOperator) {
 		String andOrConnector = "OR";
 		String andOrNullCheck = "AND ? IS NOT NULL";
@@ -592,8 +569,19 @@ public class CustomSQL {
 			return sql;
 		}
 
-		return removeOrderBy(sql).concat(_ORDER_BY_CLAUSE).concat(
-			obc.getOrderBy());
+		String orderBy = obc.getOrderBy();
+
+		int pos = sql.indexOf(_ORDER_BY_CLAUSE);
+
+		if (pos != -1 && pos < sql.length()) {
+			sql = sql.substring(0, pos + _ORDER_BY_CLAUSE.length()).concat(
+				orderBy);
+		}
+		else {
+			sql = sql.concat(_ORDER_BY_CLAUSE).concat(orderBy);
+		}
+
+		return sql;
 	}
 
 	protected String[] getConfigs() {

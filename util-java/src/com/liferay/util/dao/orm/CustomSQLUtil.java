@@ -74,10 +74,6 @@ public class CustomSQLUtil {
 		return _instance._customSQL.removeGroupBy(sql);
 	}
 
-	public static String removeOrderBy(String sql) {
-		return _instance._customSQL.removeOrderBy(sql);
-	}
-
 	public static String replaceAndOperator(String sql, boolean andOperator) {
 		return _instance._customSQL.replaceAndOperator(
 			sql, andOperator);
