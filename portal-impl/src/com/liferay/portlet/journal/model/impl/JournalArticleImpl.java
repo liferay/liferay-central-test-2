@@ -55,7 +55,7 @@ public class JournalArticleImpl
 			getResourcePrimKey());
 	}
 
-	public JournalArticleResource getArticleResourceUuid()
+	public String getArticleResourceUuid()
 		throws PortalException, SystemException {
 
 		JournalArticleResource articleResource = getArticleResource();
