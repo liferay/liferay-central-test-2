@@ -43,11 +43,10 @@ public class ViewEntryScopePageDefaultTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Blogs"),
-			selenium.getText("//h1/span[2]"));
+			selenium.getText("//h1[@class='portlet-title']/span[2]"));
 		assertFalse(selenium.isElementPresent(
 				"link=Blogs Entry Title Scope Page"));
 		assertFalse(selenium.isTextPresent("Blogs Entry Content Scope Page"));
-		Thread.sleep(5000);
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options Icon"));
 
 		for (int second = 0;; second++) {

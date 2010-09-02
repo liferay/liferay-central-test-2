@@ -25,8 +25,8 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Title</td>
-	<td></td>
+	<td>//div[@class='entry-title']/a</td>
+	<td>Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -36,7 +36,7 @@
 <tr>
 	<td>clickAt</td>
 	<td>//td[4]/span/a/span</td>
-	<td></td>
+	<td>Edit</td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
@@ -64,19 +64,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForText</td>
+	<td>//section/div/div/div/div</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//section/div/div/div/div</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//td[2]/div[1]</td>
 	<td>CommentEdit.</td>
+</tr>
+<tr>
+	<td>assertNotText</td>
+	<td>//td[2]/div[1]</td>
+	<td>Comment.</td>
 </tr>
 
 </tbody></table>

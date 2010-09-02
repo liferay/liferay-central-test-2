@@ -35,12 +35,22 @@
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//div[5]/div/div/div[2]/ul/li[2]/a</td>
+	<td>//div[@class='lfr-panel-content']/ul/li[1]/a</td>
+	<td>Default</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='lfr-panel-content']/ul/li[1]/a</td>
+	<td>Default</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-panel-content']/ul/li[2]/a</td>
 	<td>Blogs Page Scope Page</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//div[5]/div/div/div[2]/ul/li[2]/a</td>
+	<td>//div[@class='lfr-panel-content']/ul/li[2]/a</td>
 	<td>Blogs Page Scope Page</td>
 </tr>
 <tr>
@@ -64,23 +74,13 @@
 	<td>Blogs</td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>//div[2]/div[1]/div[1]/a</td>
+	<td>assertText</td>
+	<td>//div[@class='entry-title']/a</td>
 	<td>Blogs Entry Title Scope Page</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[2]/div[1]/div[1]/a</td>
-	<td>Blogs Entry Title Scope Page</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>//p</td>
-	<td>Blogs Entry Content Scope Page</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//p</td>
+	<td>//div[@class='entry-body']/p</td>
 	<td>Blogs Entry Content Scope Page</td>
 </tr>
 

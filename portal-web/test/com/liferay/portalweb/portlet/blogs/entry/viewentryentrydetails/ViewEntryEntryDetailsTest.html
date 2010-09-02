@@ -25,47 +25,57 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Title</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[1]/h1/span</td>
+	<td>//div[@class='entry-title']/a</td>
 	<td>Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//form/div/div[4]/div[1]</td>
-	<td>By Joe Bloggs</td>
+	<td>//h1[@class='header-title']/span</td>
+	<td>Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//p</td>
+	<td>//div[@class='entry-body']</td>
 	<td>Content.</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[4]/div[5]/div[1]/div/div</td>
+	<td>//div[@class='entry-author']</td>
+	<td>By Joe Bloggs</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//span[@class='comments']</td>
+	<td>0 Comments</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='aui-rating-label-element']</td>
 	<td>Your Rating</td>
 </tr>
 <tr>
 	<td>assertPartialText</td>
-	<td>//div[5]/div[2]/div/div</td>
+	<td>xPath=(//div[@class='aui-rating-label-element'])[2]</td>
+	<td>Average</td>
+</tr>
+<tr>
+	<td>assertPartialText</td>
+	<td>xPath=(//div[@class='aui-rating-label-element'])[2]</td>
 	<td>0 Votes</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div/div/div/div[2]/span[1]</td>
+	<td>//span[@class='previous']</td>
 	<td>Previous</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div/div/div/div[2]/span[2]</td>
+	<td>//span[@class='next']</td>
 	<td>Next</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[3]/div/div[1]/div/span</td>
+	<td>//div[@class='lfr-panel-title']/span</td>
 	<td>Comments</td>
 </tr>
 

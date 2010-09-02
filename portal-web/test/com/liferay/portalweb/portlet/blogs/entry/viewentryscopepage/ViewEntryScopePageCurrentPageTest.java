@@ -44,12 +44,11 @@ public class ViewEntryScopePageCurrentPageTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Blogs (Blogs Page Scope Page)"),
-			selenium.getText("//h1/span[2]"));
+			selenium.getText("//h1[@class='portlet-title']/span[2]"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title Scope Page"),
-			selenium.getText("//div[2]/div[1]/div[1]/a"));
+			selenium.getText("//div[@class='entry-title']/a"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Content Scope Page"),
-			selenium.getText("//p"));
-		Thread.sleep(5000);
+			selenium.getText("//div[@class='entry-body']/p"));
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options Icon"));
 
 		for (int second = 0;; second++) {

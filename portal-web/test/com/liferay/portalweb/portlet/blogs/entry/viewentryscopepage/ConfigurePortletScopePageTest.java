@@ -42,7 +42,8 @@ public class ConfigurePortletScopePageTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
+		assertEquals(RuntimeVariables.replace("Blogs"),
+			selenium.getText("//h1[@class='portlet-title']/span[2]"));
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options Icon"));
 
 		for (int second = 0;; second++) {
@@ -136,7 +137,7 @@ public class ConfigurePortletScopePageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Blogs Page Scope Page")) {
+				if (selenium.isVisible("link=Blogs Test Page")) {
 					break;
 				}
 			}
@@ -146,10 +147,9 @@ public class ConfigurePortletScopePageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Blogs Page Scope Page",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Blogs (Blogs Page Scope Page)"),
-			selenium.getText("//h1/span[2]"));
+			selenium.getText("//h1[@class='portlet-title']/span[2]"));
 	}
 }

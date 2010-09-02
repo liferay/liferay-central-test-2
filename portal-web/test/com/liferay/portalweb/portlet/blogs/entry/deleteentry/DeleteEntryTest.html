@@ -24,18 +24,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertText</td>
-	<td>//div[2]/div[1]/div[1]/a</td>
+	<td>//div[@class='entry-title']/a</td>
 	<td>Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//p</td>
+	<td>//div[@class='entry-body']/p</td>
 	<td>Content.</td>
 </tr>
 <tr>
@@ -49,14 +44,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForText</td>
+	<td>//section/div/div/div/div</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//section/div/div/div/div</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>

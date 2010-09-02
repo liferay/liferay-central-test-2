@@ -25,17 +25,17 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Title</td>
-	<td></td>
+	<td>//div[@class='entry-title']/a</td>
+	<td>Title</td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//div[5]/div[2]/div/div</td>
+	<td>xPath=(//div[@class='aui-rating-label-element'])[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>storeIncrementedText</td>
-	<td>//div[5]/div[2]/div/div</td>
+	<td>xPath=(//div[@class='aui-rating-label-element'])[2]</td>
 	<td>rateCount</td>
 </tr>
 <tr>
@@ -45,12 +45,12 @@
 </tr>
 <tr>
 	<td>waitForPartialText</td>
-	<td>//div[5]/div[2]/div/div</td>
+	<td>xPath=(//div[@class='aui-rating-label-element'])[2]</td>
 	<td>${rateCount}</td>
 </tr>
 <tr>
 	<td>assertPartialText</td>
-	<td>//div[5]/div[2]/div/div</td>
+	<td>xPath=(//div[@class='aui-rating-label-element'])[2]</td>
 	<td>${rateCount}</td>
 </tr>
 

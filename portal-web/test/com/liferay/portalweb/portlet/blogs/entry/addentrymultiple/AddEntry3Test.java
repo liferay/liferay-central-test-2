@@ -42,7 +42,8 @@ public class AddEntry3Test extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("_33_addEntryButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Add Blog Entry']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_33_title", RuntimeVariables.replace("Title3"));
 		Thread.sleep(5000);
@@ -99,7 +100,8 @@ public class AddEntry3Test extends BaseTestCase {
 		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body", RuntimeVariables.replace("Content3."));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("_33_publishButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -108,8 +110,10 @@ public class AddEntry3Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+				if (RuntimeVariables.replace(
+							"Your request processed successfully.")
+										.equals(selenium.getText(
+								"//section/div/div/div/div"))) {
 					break;
 				}
 			}
@@ -119,11 +123,20 @@ public class AddEntry3Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("Title3"),
-			selenium.getText("//div[2]/div[1]/div[1]/a"));
+			selenium.getText("//div[@class='entry-title']/a"));
 		assertEquals(RuntimeVariables.replace("Content3."),
-			selenium.getText("//p"));
+			selenium.getText("//div[@class='entry-body']/p"));
+		assertEquals(RuntimeVariables.replace("Title2"),
+			selenium.getText("xPath=(//div[@class='entry-title'])[2]/a"));
+		assertEquals(RuntimeVariables.replace("Content2."),
+			selenium.getText("xPath=(//div[@class='entry-body'])[2]/p"));
+		assertEquals(RuntimeVariables.replace("Title1"),
+			selenium.getText("xPath=(//div[@class='entry-title'])[3]/a"));
+		assertEquals(RuntimeVariables.replace("Content1."),
+			selenium.getText("xPath=(//div[@class='entry-body'])[3]/p"));
 	}
 }

@@ -30,7 +30,7 @@ public class AddEntryContentMultipleWordTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs Test Page")) {
+				if (selenium.isVisible("link=Blogs Test Page")) {
 					break;
 				}
 			}
@@ -42,7 +42,8 @@ public class AddEntryContentMultipleWordTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("_33_addEntryButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Add Blog Entry']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_33_title", RuntimeVariables.replace("Title"));
 		Thread.sleep(5000);
@@ -100,7 +101,8 @@ public class AddEntryContentMultipleWordTest extends BaseTestCase {
 		selenium.type("//body",
 			RuntimeVariables.replace("Multiple Word Content Blogs Entry."));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("_33_publishButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -109,8 +111,10 @@ public class AddEntryContentMultipleWordTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+				if (RuntimeVariables.replace(
+							"Your request processed successfully.")
+										.equals(selenium.getText(
+								"//section/div/div/div/div"))) {
 					break;
 				}
 			}
@@ -120,12 +124,13 @@ public class AddEntryContentMultipleWordTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		Thread.sleep(5000);
-		assertEquals(RuntimeVariables.replace("Title"),
-			selenium.getText("//div[2]/div[1]/div[1]/a"));
 		assertEquals(RuntimeVariables.replace(
-				"Multiple Word Content Blogs Entry."), selenium.getText("//p"));
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div"));
+		assertEquals(RuntimeVariables.replace("Title"),
+			selenium.getText("//div[@class='entry-title']/a"));
+		assertEquals(RuntimeVariables.replace(
+				"Multiple Word Content Blogs Entry."),
+			selenium.getText("//div[@class='entry-body']/p"));
 	}
 }

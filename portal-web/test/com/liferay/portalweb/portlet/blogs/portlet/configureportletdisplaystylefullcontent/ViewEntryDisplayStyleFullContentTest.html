@@ -24,43 +24,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>//div[2]/div[1]/div[1]/a</td>
+	<td>assertText</td>
+	<td>//div[@class='entry-title']/a</td>
 	<td>Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[2]/div[1]/div[1]/a</td>
-	<td>Title</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//p</td>
+	<td>//div[@class='entry-body']/p</td>
 	<td>Content.</td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>link=Read More About Title »</td>
+	<td>//div[@class='entry-body']/a</td>
+	<td>Read More About Title »</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Read More</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//div[2]/div[1]/div[1]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>//div[1]/h1/span</td>
+	<td>//div[@class='entry-title']/a</td>
 	<td>Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[1]/h1/span</td>
+	<td>//h1[@class='header-title']/span</td>
 	<td>Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//p</td>
+	<td>//div[@class='entry-body']/p</td>
 	<td>Content.</td>
 </tr>
 

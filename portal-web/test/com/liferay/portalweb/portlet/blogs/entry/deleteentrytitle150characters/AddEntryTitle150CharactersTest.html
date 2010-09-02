@@ -25,7 +25,7 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>_33_addEntryButton</td>
+	<td>//input[@value='Add Blog Entry']</td>
 	<td></td>
 </tr>
 <tr>
@@ -75,27 +75,27 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>_33_publishButton</td>
+	<td>//input[@value='Publish']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForText</td>
+	<td>//section/div/div/div/div</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertTextPresent</td>
-	<td>Your request processed successfully.</td>
-	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[2]/div[1]/div[1]/a</td>
+	<td>//section/div/div/div/div</td>
+	<td>Your request processed successfully.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='entry-title']/a</td>
 	<td>|||||||||1|||||||||2|||||||||3|||||||||4|||||||||5|||||||||6|||||||||7|||||||||8|||||||||9||||||||10||||||||11||||||||12||||||||13||||||||14||||||||15</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//p</td>
+	<td>//div[@class='entry-body']/p</td>
 	<td>Content.</td>
 </tr>
 

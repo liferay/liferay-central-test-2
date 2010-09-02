@@ -25,13 +25,13 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Title</td>
-	<td></td>
+	<td>//div[@class='entry-title']/a</td>
+	<td>Title</td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>link=Be the first.</td>
-	<td></td>
+	<td>//td/a</td>
+	<td>Be the first.</td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
@@ -59,14 +59,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
+	<td>waitForText</td>
+	<td>//section/div/div/div/div</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//section/div/div/div/div</td>
 	<td>Your request processed successfully.</td>
-	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>

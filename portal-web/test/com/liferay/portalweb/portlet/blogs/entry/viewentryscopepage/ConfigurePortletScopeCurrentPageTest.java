@@ -44,7 +44,6 @@ public class ConfigurePortletScopeCurrentPageTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Page Scope Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options Icon"));
 
 		for (int second = 0;; second++) {
@@ -153,12 +152,11 @@ public class ConfigurePortletScopeCurrentPageTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Blogs (Blogs Page Scope Page)"),
-			selenium.getText("//h1/span[2]"));
+			selenium.getText("//h1[@class='portlet-title']/span[2]"));
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Default"),
 			selenium.getText("//div[2]/span/a"));
-		Thread.sleep(5000);
 		selenium.clickAt("//div[2]/span/a", RuntimeVariables.replace("Default"));
 
 		for (int second = 0;; second++) {
@@ -167,7 +165,8 @@ public class ConfigurePortletScopeCurrentPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//div[5]/div/div/div[1]")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-panel-content']/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -178,8 +177,8 @@ public class ConfigurePortletScopeCurrentPageTest extends BaseTestCase {
 		}
 
 		assertEquals(RuntimeVariables.replace("Default"),
-			selenium.getText("//div[5]/div/div/div[2]/ul/li[1]/a"));
+			selenium.getText("//div[@class='lfr-panel-content']/ul/li[1]/a"));
 		assertEquals(RuntimeVariables.replace("Blogs Page Scope Page"),
-			selenium.getText("//div[5]/div/div/div[2]/ul/li[2]/a"));
+			selenium.getText("//div[@class='lfr-panel-content']/ul/li[2]/a"));
 	}
 }

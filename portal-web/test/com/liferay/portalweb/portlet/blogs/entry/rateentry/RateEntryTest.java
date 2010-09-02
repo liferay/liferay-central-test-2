@@ -49,7 +49,8 @@ public class RateEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//div[5]/div[2]/div/div")) {
+				if (selenium.isVisible(
+							"xPath=(//div[@class='aui-rating-label-element'])[2]")) {
 					break;
 				}
 			}
@@ -60,7 +61,7 @@ public class RateEntryTest extends BaseTestCase {
 		}
 
 		String rateCount = selenium.getIncrementedText(
-				"//div[5]/div[2]/div/div");
+				"xPath=(//div[@class='aui-rating-label-element'])[2]");
 		RuntimeVariables.setValue("rateCount", rateCount);
 		selenium.clickAt("//a[5]", RuntimeVariables.replace(""));
 
@@ -70,7 +71,8 @@ public class RateEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isPartialText("//div[5]/div[2]/div/div",
+				if (selenium.isPartialText(
+							"xPath=(//div[@class='aui-rating-label-element'])[2]",
 							RuntimeVariables.getValue("rateCount"))) {
 					break;
 				}
@@ -81,7 +83,8 @@ public class RateEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isPartialText("//div[5]/div[2]/div/div",
+		assertTrue(selenium.isPartialText(
+				"xPath=(//div[@class='aui-rating-label-element'])[2]",
 				RuntimeVariables.getValue("rateCount")));
 	}
 }

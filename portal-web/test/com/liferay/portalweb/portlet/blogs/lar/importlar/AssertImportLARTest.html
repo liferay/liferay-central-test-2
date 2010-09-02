@@ -24,43 +24,33 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>//div[2]/div[1]/div[1]/a</td>
-	<td>Blogs Entry Title</td>
-</tr>
-<tr>
 	<td>assertText</td>
-	<td>//div[2]/div[1]/div[1]/a</td>
+	<td>//div[@class='entry-title']/a</td>
 	<td>Blogs Entry Title</td>
 </tr>
 <tr>
 	<td>assertPartialText</td>
-	<td>//form/div[2]/div[3]</td>
+	<td>//div[@class='entry-body']</td>
 	<td>Blogs Entry Content</td>
 </tr>
 <tr>
 	<td>assertPartialText</td>
-	<td>//div[2]/div[3]/a</td>
+	<td>//div[@class='entry-body']/a</td>
 	<td>Read More</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//div[2]/div[3]/a</td>
-	<td>Read More »</td>
+	<td>//div[@class='entry-body']/a</td>
+	<td>Read More</td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>//div[1]/h1/span</td>
+	<td>assertText</td>
+	<td>//h1[@class='header-title']/span</td>
 	<td>Blogs Entry Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[1]/h1/span</td>
-	<td>Blogs Entry Title</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//p</td>
+	<td>//div[@class='entry-body']/p</td>
 	<td>Blogs Entry Content</td>
 </tr>
 <tr>

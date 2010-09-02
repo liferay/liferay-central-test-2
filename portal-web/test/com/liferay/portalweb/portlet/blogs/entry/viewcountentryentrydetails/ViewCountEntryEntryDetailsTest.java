@@ -42,8 +42,10 @@ public class ViewCountEntryEntryDetailsTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Title", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[@class='entry-title']/a",
+			RuntimeVariables.replace("Title"));
 		selenium.waitForPageToLoad("30000");
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -63,10 +65,12 @@ public class ViewCountEntryEntryDetailsTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Title", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[@class='entry-title']/a",
+			RuntimeVariables.replace("Title"));
 		selenium.waitForPageToLoad("30000");
 
-		String viewCount = selenium.getIncrementedText("//div[2]/span[1]");
+		String viewCount = selenium.getIncrementedText(
+				"//span[@class='view-count']");
 		RuntimeVariables.setValue("viewCount", viewCount);
 		selenium.open("/web/guest/home/");
 
@@ -88,9 +92,10 @@ public class ViewCountEntryEntryDetailsTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Title", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[@class='entry-title']/a",
+			RuntimeVariables.replace("Title"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//div[2]/span[1]",
+		assertTrue(selenium.isPartialText("//span[@class='view-count']",
 				RuntimeVariables.getValue("viewCount")));
 	}
 }

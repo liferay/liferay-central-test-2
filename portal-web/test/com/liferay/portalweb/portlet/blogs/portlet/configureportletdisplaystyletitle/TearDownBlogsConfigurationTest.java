@@ -48,7 +48,6 @@ public class TearDownBlogsConfigurationTest extends BaseTestCase {
 				selenium.clickAt("link=Blogs Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				Thread.sleep(5000);
 				selenium.clickAt("//strong/a",
 					RuntimeVariables.replace("Options"));
 

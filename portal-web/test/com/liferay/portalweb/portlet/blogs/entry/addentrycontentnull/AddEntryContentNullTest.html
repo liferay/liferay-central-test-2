@@ -25,7 +25,7 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>_33_addEntryButton</td>
+	<td>//input[@value='Add Blog Entry']</td>
 	<td></td>
 </tr>
 <tr>
@@ -40,13 +40,18 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>_33_publishButton</td>
+	<td>//input[@value='Publish']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForText</td>
+	<td>//section/div/div/div/div[1]</td>
 	<td>You have entered invalid data. Please try again.</td>
-	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//section/div/div/div/div[1]</td>
+	<td>You have entered invalid data. Please try again.</td>
 </tr>
 <tr>
 	<td>open</td>

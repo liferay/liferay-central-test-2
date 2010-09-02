@@ -42,7 +42,6 @@ public class ImportLARTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
 
 		for (int second = 0;; second++) {
@@ -87,28 +86,14 @@ public class ImportLARTest extends BaseTestCase {
 		selenium.type("_86_importFileName",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\blogs\\lar\\importlar\\dependencies\\Blogs-Selenium.portlet.lar"));
-		selenium.type("_86_importFileName",
-			RuntimeVariables.replace(
-				"L:\\trunk\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\blogs\\lar\\importlar\\dependencies\\Blogs-Selenium.portlet.lar"));
-		selenium.check("_86_DELETE_PORTLET_DATACheckbox");
-		selenium.check("_86_PORTLET_DATACheckbox");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Import']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertFalse(selenium.isChecked("_86_DELETE_PORTLET_DATACheckbox"));
+		selenium.clickAt("_86_DELETE_PORTLET_DATACheckbox",
+			RuntimeVariables.replace("Delete portlet data before importing."));
+		assertTrue(selenium.isChecked("_86_DELETE_PORTLET_DATACheckbox"));
+		assertFalse(selenium.isChecked("_86_PORTLET_DATACheckbox"));
+		selenium.clickAt("_86_PORTLET_DATACheckbox",
+			RuntimeVariables.replace("Data"));
+		assertTrue(selenium.isChecked("_86_PORTLET_DATACheckbox"));
 		selenium.clickAt("//input[@value='Import']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -119,8 +104,10 @@ public class ImportLARTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+				if (RuntimeVariables.replace(
+							"Your request processed successfully.")
+										.equals(selenium.getText(
+								"//section/div/div/div/div"))) {
 					break;
 				}
 			}
@@ -130,7 +117,8 @@ public class ImportLARTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div"));
 	}
 }

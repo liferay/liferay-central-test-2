@@ -42,12 +42,17 @@ public class EditEntryContentEntryDetailsTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Title", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("Title"),
+			selenium.getText("//div[@class='entry-title']/a"));
+		assertEquals(RuntimeVariables.replace("Content."),
+			selenium.getText("//div[@class='entry-body']/p"));
+		selenium.clickAt("//div[@class='entry-title']/a",
+			RuntimeVariables.replace("Title"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Title"),
-			selenium.getText("//div[1]/h1/span"));
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("Content."),
-			selenium.getText("//p"));
+			selenium.getText("//div[@class='entry-body']/p"));
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
@@ -104,7 +109,8 @@ public class EditEntryContentEntryDetailsTest extends BaseTestCase {
 		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body", RuntimeVariables.replace("ContentEdit."));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("_33_publishButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -113,8 +119,10 @@ public class EditEntryContentEntryDetailsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+				if (RuntimeVariables.replace(
+							"Your request processed successfully.")
+										.equals(selenium.getText(
+								"//section/div/div/div/div"))) {
 					break;
 				}
 			}
@@ -124,11 +132,14 @@ public class EditEntryContentEntryDetailsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("Title"),
-			selenium.getText("//div[2]/h1/span"));
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("ContentEdit."),
-			selenium.getText("//p"));
+			selenium.getText("//div[@class='entry-body']/p"));
+		assertNotEquals(RuntimeVariables.replace("Content."),
+			selenium.getText("//div[@class='entry-body']/p"));
 	}
 }

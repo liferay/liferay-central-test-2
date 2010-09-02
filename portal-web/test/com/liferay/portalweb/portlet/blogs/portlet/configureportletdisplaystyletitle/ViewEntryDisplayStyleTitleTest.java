@@ -42,54 +42,17 @@ public class ViewEntryDisplayStyleTitleTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace("Title")
-										.equals(selenium.getText(
-								"//div[2]/div[1]/div[1]/a"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertEquals(RuntimeVariables.replace("Title"),
-			selenium.getText("//div[2]/div[1]/div[1]/a"));
+			selenium.getText("//div[@class='entry-title']/a"));
 		assertEquals(RuntimeVariables.replace("Read More About Title \u00bb"),
-			selenium.getText("//div[2]/div[3]/a"));
+			selenium.getText("//div[@class='entry-body']/a"));
 		assertFalse(selenium.isTextPresent("Content."));
-		selenium.clickAt("//div[2]/div[3]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[@class='entry-body']/a",
+			RuntimeVariables.replace("Read More About Title \u00bb"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace("Title")
-										.equals(selenium.getText(
-								"//div[1]/h1/span"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertEquals(RuntimeVariables.replace("Title"),
-			selenium.getText("//div[1]/h1/span"));
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("Content."),
-			selenium.getText("//p"));
+			selenium.getText("//div[@class='entry-body']/p"));
 	}
 }

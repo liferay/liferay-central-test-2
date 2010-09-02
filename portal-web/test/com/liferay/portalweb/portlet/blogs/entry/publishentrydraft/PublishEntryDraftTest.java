@@ -42,10 +42,17 @@ public class PublishEntryDraftTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Draft"),
+			selenium.getText("//div[@class='entry-content']/h3"));
+		assertEquals(RuntimeVariables.replace("DraftTitle"),
+			selenium.getText("//div[@class='entry-title']/a"));
+		assertEquals(RuntimeVariables.replace("DraftContent."),
+			selenium.getText("//div[@class='entry-body']/p"));
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
-		selenium.clickAt("_33_publishButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -54,8 +61,10 @@ public class PublishEntryDraftTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+				if (RuntimeVariables.replace(
+							"Your request processed successfully.")
+										.equals(selenium.getText(
+								"//section/div/div/div/div"))) {
 					break;
 				}
 			}
@@ -65,12 +74,14 @@ public class PublishEntryDraftTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertFalse(selenium.isElementPresent("//div[1]/h3"));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("DraftTitle"),
-			selenium.getText("//div[2]/div[1]/div[1]/a"));
+			selenium.getText("//div[@class='entry-title']/a"));
 		assertEquals(RuntimeVariables.replace("DraftContent."),
-			selenium.getText("//p"));
+			selenium.getText("//div[@class='entry-body']/p"));
+		assertFalse(selenium.isElementPresent(
+				"//div[@class='entry-content']/h3"));
 	}
 }

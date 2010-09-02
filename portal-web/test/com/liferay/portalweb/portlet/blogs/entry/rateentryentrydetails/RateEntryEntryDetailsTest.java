@@ -42,7 +42,8 @@ public class RateEntryEntryDetailsTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Title", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[@class='entry-title']/a",
+			RuntimeVariables.replace("Title"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -51,7 +52,8 @@ public class RateEntryEntryDetailsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//div[5]/div[2]/div/div")) {
+				if (selenium.isVisible(
+							"xPath=(//div[@class='aui-rating-label-element'])[2]")) {
 					break;
 				}
 			}
@@ -62,7 +64,7 @@ public class RateEntryEntryDetailsTest extends BaseTestCase {
 		}
 
 		String rateCount = selenium.getIncrementedText(
-				"//div[5]/div[2]/div/div");
+				"xPath=(//div[@class='aui-rating-label-element'])[2]");
 		RuntimeVariables.setValue("rateCount", rateCount);
 		selenium.clickAt("//a[5]", RuntimeVariables.replace(""));
 
@@ -72,7 +74,8 @@ public class RateEntryEntryDetailsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isPartialText("//div[5]/div[2]/div/div",
+				if (selenium.isPartialText(
+							"xPath=(//div[@class='aui-rating-label-element'])[2]",
 							RuntimeVariables.getValue("rateCount"))) {
 					break;
 				}
@@ -83,7 +86,8 @@ public class RateEntryEntryDetailsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isPartialText("//div[5]/div[2]/div/div",
+		assertTrue(selenium.isPartialText(
+				"xPath=(//div[@class='aui-rating-label-element'])[2]",
 				RuntimeVariables.getValue("rateCount")));
 	}
 }

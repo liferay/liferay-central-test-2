@@ -42,11 +42,12 @@ public class EditEntryCommentTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Title", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[@class='entry-title']/a",
+			RuntimeVariables.replace("Title"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Comment."),
 			selenium.getText("//td[2]/div[1]"));
-		selenium.clickAt("//td[4]/span/a/span", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[4]/span/a/span", RuntimeVariables.replace("Edit"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -78,8 +79,10 @@ public class EditEntryCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
+				if (RuntimeVariables.replace(
+							"Your request processed successfully.")
+										.equals(selenium.getText(
+								"//section/div/div/div/div"))) {
 					break;
 				}
 			}
@@ -89,9 +92,12 @@ public class EditEntryCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("CommentEdit."),
+			selenium.getText("//td[2]/div[1]"));
+		assertNotEquals(RuntimeVariables.replace("Comment."),
 			selenium.getText("//td[2]/div[1]"));
 	}
 }

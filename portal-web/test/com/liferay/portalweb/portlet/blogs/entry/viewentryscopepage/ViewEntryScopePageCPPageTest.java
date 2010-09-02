@@ -52,7 +52,8 @@ public class ViewEntryScopePageCPPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//div[5]/div/div/div[2]/ul/li[2]/a")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-panel-content']/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -62,7 +63,27 @@ public class ViewEntryScopePageCPPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[5]/div/div/div[2]/ul/li[2]/a",
+		assertEquals(RuntimeVariables.replace("Default"),
+			selenium.getText("//div[@class='lfr-panel-content']/ul/li[1]/a"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@class='lfr-panel-content']/ul/li[2]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//div[@class='lfr-panel-content']/ul/li[2]/a",
 			RuntimeVariables.replace("Blogs Page Scope Page"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Scope Blogs Page Scope Page"),
@@ -90,46 +111,9 @@ public class ViewEntryScopePageCPPageTest extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace("Blogs"),
 			selenium.getText("//header/h1/span"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace("Blogs Entry Title Scope Page")
-										.equals(selenium.getText(
-								"//div[2]/div[1]/div[1]/a"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title Scope Page"),
-			selenium.getText("//div[2]/div[1]/div[1]/a"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace("Blogs Entry Content Scope Page")
-										.equals(selenium.getText("//p"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+			selenium.getText("//div[@class='entry-title']/a"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Content Scope Page"),
-			selenium.getText("//p"));
+			selenium.getText("//div[@class='entry-body']/p"));
 	}
 }

@@ -42,16 +42,21 @@ public class ViewEntryTest extends BaseTestCase {
 
 		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("Title"),
-			selenium.getText("//div[2]/div[1]/div[1]/a"));
+			selenium.getText("//div[@class='entry-title']/a"));
 		assertEquals(RuntimeVariables.replace("Content."),
-			selenium.getText("//p"));
+			selenium.getText("//div[@class='entry-body']/p"));
 		assertEquals(RuntimeVariables.replace("By Joe Bloggs"),
-			selenium.getText("//div[2]/div[4]/div[1]"));
+			selenium.getText("//div[@class='entry-author']"));
+		assertEquals(RuntimeVariables.replace("0 Comments"),
+			selenium.getText("//span[@class='comments']/a"));
 		assertEquals(RuntimeVariables.replace("Your Rating"),
-			selenium.getText("//div[4]/div[5]/div[1]/div/div"));
-		assertTrue(selenium.isPartialText("//div[5]/div[2]/div/div", "Average"));
+			selenium.getText("//div[@class='aui-rating-label-element']"));
+		assertTrue(selenium.isPartialText(
+				"xPath=(//div[@class='aui-rating-label-element'])[2]", "Average"));
+		assertTrue(selenium.isPartialText(
+				"xPath=(//div[@class='aui-rating-label-element'])[2]", "0 Votes"));
+		assertEquals(RuntimeVariables.replace("Showing 1 result."),
+			selenium.getText("//div[@class='search-results']"));
 	}
 }
