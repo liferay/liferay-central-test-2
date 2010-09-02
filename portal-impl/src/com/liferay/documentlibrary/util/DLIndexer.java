@@ -85,7 +85,7 @@ public class DLIndexer extends BaseIndexer {
 		long scopeGroupId = fileModel.getGroupId();
 		long userId = fileModel.getUserId();
 		long folderId = DLFileEntryImpl.getFolderId(
-			groupId, fileModel.getRepositoryId());
+			scopeGroupId, fileModel.getRepositoryId());
 		long repositoryId = fileModel.getRepositoryId();
 		String fileName = fileModel.getFileName();
 		long fileEntryId = fileModel.getFileEntryId();
@@ -103,7 +103,7 @@ public class DLIndexer extends BaseIndexer {
 			}
 			else {
 				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-					groupId, folderId, fileName);
+					scopeGroupId, folderId, fileName);
 			}
 		}
 		catch (NoSuchFileEntryException nsfe) {
