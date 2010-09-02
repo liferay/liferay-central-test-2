@@ -137,6 +137,8 @@ public class AutoLoginFilter extends BasePortalFilter {
 					}
 				}
 
+				session.setAttribute("j_remoteuser", jUsername);
+
 				if (PropsValues.PORTAL_JAAS_ENABLE) {
 					response.sendRedirect(
 						PortalUtil.getPathMain() + "/portal/touch_protected");
