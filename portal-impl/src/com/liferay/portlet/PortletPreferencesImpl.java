@@ -379,9 +379,7 @@ public class PortletPreferencesImpl
 
 	private String[] _getXmlSafeValues(String[] values) {
 		if (values == null) {
-			return new String[] {
-					_getXmlSafeValue(null)
-				};
+			return new String[] {_getXmlSafeValue(null)};
 		}
 
 		String[] xmlSafeValues = new String[values.length];

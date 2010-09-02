@@ -95,9 +95,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 	}
 
 	public String[] getParameterNames() {
-		return new String[] {
-			"generate-custom-roles=checkbox"
-		};
+		return new String[] {"generate-custom-roles=checkbox"};
 	}
 
 	public boolean isEnabled() {
