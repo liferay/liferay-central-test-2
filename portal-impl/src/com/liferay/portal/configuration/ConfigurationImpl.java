@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -88,7 +89,14 @@ public class ConfigurationImpl
 
 					Writer writer =	new FileWriter(fileName, true);
 
-					writer.write("\n\nbase.path=".concat(basePath));
+					StringBundler sb = new StringBundler(4);
+
+					sb.append(StringPool.OS_EOL);
+					sb.append(StringPool.OS_EOL);
+					sb.append("base.path=");
+					sb.append(basePath);
+
+					writer.write(sb.toString());
 
 					writer.close();
 				}

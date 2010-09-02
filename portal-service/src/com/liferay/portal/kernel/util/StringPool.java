@@ -125,6 +125,8 @@ public class StringPool {
 
 	public static final String OPEN_PARENTHESIS = "(";
 
+	public static final String OS_EOL = System.getProperty("line.separator");
+
 	public static final String PERCENT = "%";
 
 	public static final String PERIOD = ".";
