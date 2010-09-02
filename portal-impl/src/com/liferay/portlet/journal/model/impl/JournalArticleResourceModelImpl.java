@@ -53,11 +53,12 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 	implements JournalArticleResourceModel {
 	public static final String TABLE_NAME = "JournalArticleResource";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "uuid_", new Integer(Types.VARCHAR) },
 			{ "resourcePrimKey", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "articleId", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table JournalArticleResource (resourcePrimKey LONG not null primary key,groupId LONG,articleId VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table JournalArticleResource (uuid_ VARCHAR(75) null,resourcePrimKey LONG not null primary key,groupId LONG,articleId VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table JournalArticleResource";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -84,6 +85,27 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_resourcePrimKey);
+	}
+
+	public String getUuid() {
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
+
+		if (_originalUuid == null) {
+			_originalUuid = uuid;
+		}
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getResourcePrimKey() {
@@ -160,6 +182,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 	public Object clone() {
 		JournalArticleResourceImpl clone = new JournalArticleResourceImpl();
 
+		clone.setUuid(getUuid());
 		clone.setResourcePrimKey(getResourcePrimKey());
 		clone.setGroupId(getGroupId());
 		clone.setArticleId(getArticleId());
@@ -210,9 +233,11 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
-		sb.append("{resourcePrimKey=");
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", resourcePrimKey=");
 		sb.append(getResourcePrimKey());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
@@ -224,12 +249,16 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.journal.model.JournalArticleResource");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>resourcePrimKey</column-name><column-value><![CDATA[");
 		sb.append(getResourcePrimKey());
@@ -248,6 +277,8 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 		return sb.toString();
 	}
 
+	private String _uuid;
+	private String _originalUuid;
 	private long _resourcePrimKey;
 	private long _groupId;
 	private long _originalGroupId;

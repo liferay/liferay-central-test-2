@@ -1281,6 +1281,7 @@
 		<field name="tempImage" type="boolean" />
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalArticleResource">
+		<field name="uuid" type="String" />
 		<field name="resourcePrimKey" type="long" />
 		<field name="groupId" type="long" />
 		<field name="articleId" type="String" />

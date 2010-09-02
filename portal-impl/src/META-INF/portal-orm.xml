@@ -1677,6 +1677,9 @@
 	<mapped-superclass class="com.liferay.portlet.journal.model.impl.JournalArticleResourceModelImpl">
 		<attributes>
 			<id name="resourcePrimKey" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
 			<basic name="groupId" />
 			<basic name="articleId" />
 			<transient name="primaryKey" />

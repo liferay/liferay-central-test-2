@@ -209,6 +209,20 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 	}
 
 	/**
+	 * Gets the journal article resource with the UUID and group id.
+	 *
+	 * @param uuid the UUID of journal article resource to get
+	 * @param groupId the group id of the journal article resource to get
+	 * @return the journal article resource
+	 * @throws PortalException if a journal article resource with the UUID and group id could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public JournalArticleResource getJournalArticleResourceByUuidAndGroupId(
+		String uuid, long groupId) throws PortalException, SystemException {
+		return journalArticleResourcePersistence.findByUUID_G(uuid, groupId);
+	}
+
+	/**
 	 * Gets a range of all the journal article resources.
 	 *
 	 * <p>

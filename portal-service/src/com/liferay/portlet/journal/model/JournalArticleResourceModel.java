@@ -55,6 +55,21 @@ public interface JournalArticleResourceModel extends BaseModel<JournalArticleRes
 	public void setPrimaryKey(long pk);
 
 	/**
+	 * Gets the uuid of this journal article resource.
+	 *
+	 * @return the uuid of this journal article resource
+	 */
+	@AutoEscape
+	public String getUuid();
+
+	/**
+	 * Sets the uuid of this journal article resource.
+	 *
+	 * @param uuid the uuid of this journal article resource
+	 */
+	public void setUuid(String uuid);
+
+	/**
 	 * Gets the resource prim key of this journal article resource.
 	 *
 	 * @return the resource prim key of this journal article resource

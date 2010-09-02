@@ -37,6 +37,14 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 		_journalArticleResource.setPrimaryKey(pk);
 	}
 
+	public java.lang.String getUuid() {
+		return _journalArticleResource.getUuid();
+	}
+
+	public void setUuid(java.lang.String uuid) {
+		_journalArticleResource.setUuid(uuid);
+	}
+
 	public long getResourcePrimKey() {
 		return _journalArticleResource.getResourcePrimKey();
 	}

@@ -170,6 +170,23 @@ public class JournalArticleResourceLocalServiceUtil {
 	}
 
 	/**
+	* Gets the journal article resource with the UUID and group id.
+	*
+	* @param uuid the UUID of journal article resource to get
+	* @param groupId the group id of the journal article resource to get
+	* @return the journal article resource
+	* @throws PortalException if a journal article resource with the UUID and group id could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticleResource getJournalArticleResourceByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getJournalArticleResourceByUuidAndGroupId(uuid, groupId);
+	}
+
+	/**
 	* Gets a range of all the journal article resources.
 	*
 	* <p>
@@ -245,6 +262,12 @@ public class JournalArticleResourceLocalServiceUtil {
 		java.lang.String articleId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getArticleResourcePrimKey(groupId, articleId);
+	}
+
+	public static long getArticleResourcePrimKey(long groupId,
+		java.lang.String articleId, java.lang.String uuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getArticleResourcePrimKey(groupId, articleId, uuid);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> getArticleResources(

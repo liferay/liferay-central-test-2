@@ -1400,6 +1400,7 @@
 		<id name="resourcePrimKey" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="uuid" column="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="articleId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>

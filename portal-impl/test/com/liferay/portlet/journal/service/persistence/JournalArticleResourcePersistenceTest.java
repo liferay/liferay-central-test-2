@@ -65,6 +65,7 @@ public class JournalArticleResourcePersistenceTest
 
 		JournalArticleResource newJournalArticleResource = _persistence.create(pk);
 
+		newJournalArticleResource.setUuid(randomString());
 		newJournalArticleResource.setGroupId(nextLong());
 		newJournalArticleResource.setArticleId(randomString());
 
@@ -72,6 +73,8 @@ public class JournalArticleResourcePersistenceTest
 
 		JournalArticleResource existingJournalArticleResource = _persistence.findByPrimaryKey(newJournalArticleResource.getPrimaryKey());
 
+		assertEquals(existingJournalArticleResource.getUuid(),
+			newJournalArticleResource.getUuid());
 		assertEquals(existingJournalArticleResource.getResourcePrimKey(),
 			newJournalArticleResource.getResourcePrimKey());
 		assertEquals(existingJournalArticleResource.getGroupId(),
@@ -153,6 +156,7 @@ public class JournalArticleResourcePersistenceTest
 
 		JournalArticleResource journalArticleResource = _persistence.create(pk);
 
+		journalArticleResource.setUuid(randomString());
 		journalArticleResource.setGroupId(nextLong());
 		journalArticleResource.setArticleId(randomString());
 

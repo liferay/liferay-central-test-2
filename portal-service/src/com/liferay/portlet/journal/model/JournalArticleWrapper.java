@@ -372,6 +372,12 @@ public class JournalArticleWrapper implements JournalArticle {
 		return _journalArticle.toXmlString();
 	}
 
+	public com.liferay.portlet.journal.model.JournalArticleResource getArticleResource()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _journalArticle.getArticleResource();
+	}
+
 	public java.lang.String[] getAvailableLocales() {
 		return _journalArticle.getAvailableLocales();
 	}
