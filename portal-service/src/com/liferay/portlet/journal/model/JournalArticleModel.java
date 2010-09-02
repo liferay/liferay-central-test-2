@@ -517,6 +517,11 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 	public void setStatusDate(Date statusDate);
 
 	/**
+	 * @deprecated {@link #isApproved}
+	 */
+	public boolean getApproved();
+
+	/**
 	 * Determines whether this journal article is approved.
 	 *
 	 * @return true if this journal article is approved; false otherwise

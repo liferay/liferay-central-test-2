@@ -187,6 +187,11 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 
 	<#if entity.isWorkflowEnabled()>
 		/**
+		 * @deprecated {@link #isApproved}
+		 */
+		public boolean getApproved();
+
+		/**
 		 * Determines whether this ${entity.humanName} is approved.
 		 *
 		 * @return true if this ${entity.humanName} is approved; false otherwise

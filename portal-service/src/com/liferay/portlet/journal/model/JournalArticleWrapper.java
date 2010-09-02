@@ -294,6 +294,10 @@ public class JournalArticleWrapper implements JournalArticle {
 		_journalArticle.setStatusDate(statusDate);
 	}
 
+	public boolean getApproved() {
+		return _journalArticle.getApproved();
+	}
+
 	public boolean isApproved() {
 		return _journalArticle.isApproved();
 	}

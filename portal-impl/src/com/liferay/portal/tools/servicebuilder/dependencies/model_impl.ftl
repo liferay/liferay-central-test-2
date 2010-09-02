@@ -431,6 +431,13 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 	</#list>
 
 	<#if entity.isWorkflowEnabled()>
+		/**
+		 * @deprecated {@link #isApproved}
+		 */
+		public boolean getApproved() {
+			return isApproved();
+		}
+
 		public boolean isApproved() {
 			if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
 				return true;
