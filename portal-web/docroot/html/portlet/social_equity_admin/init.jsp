@@ -16,7 +16,5 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portal.kernel.util.StringUtil" %>
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
 <%@ page import="com.liferay.portlet.social.model.SocialEquityActionMapping" %>
-<%@ page import="com.liferay.portlet.social.service.SocialEquityGroupSettingLocalServiceUtil" %>
