@@ -36,7 +36,7 @@ public interface JournalArticle extends JournalArticleModel {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.journal.model.JournalArticleResource getArticleResourceUuid()
+	public java.lang.String getArticleResourceUuid()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
