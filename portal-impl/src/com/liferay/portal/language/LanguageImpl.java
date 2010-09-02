@@ -585,6 +585,10 @@ public class LanguageImpl implements Language {
 				catch (MissingResourceException mre) {
 				}
 			}
+
+			if (value != null) {
+				value = LanguageResources.fixValue(value);
+			}
 		}
 
 		if ((value == null) || value.equals(defaultValue)) {
