@@ -30,6 +30,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.upload.LiferayFileItemFactory;
 import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.PropsValues;
@@ -261,24 +262,31 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			groups.add(0, userGroup);
 		}
 
+		ThemeDisplay themeDisplay = argument.getThemeDisplay();
+
+		long scopeGroupId = themeDisplay.getScopeGroupId();
+
 		for (Group group : groups) {
 			Element folderEl = doc.createElement("Folder");
 
 			foldersEl.appendChild(folderEl);
 
-			long scopeGroupId = argument.getThemeDisplay().getScopeGroupId();
+			boolean setNameAttribute = false;
 
-			if (group.hasStagingGroup() &&
-				(group.getStagingGroup().getGroupId() == scopeGroupId)) {
-
+			if (group.hasStagingGroup()) {
 				Group stagingGroup = group.getStagingGroup();
 
-				folderEl.setAttribute(
-					"name",
-					stagingGroup.getGroupId() + " - " +
-						HtmlUtil.escape(stagingGroup.getDescriptiveName()));
+				if (stagingGroup.getGroupId() == scopeGroupId) {
+					folderEl.setAttribute(
+						"name",
+						stagingGroup.getGroupId() + " - " +
+							HtmlUtil.escape(stagingGroup.getDescriptiveName()));
+
+					setNameAttribute = true;
+				}
 			}
-			else {
+
+			if (!setNameAttribute) {
 				folderEl.setAttribute(
 					"name",
 					group.getGroupId() + " - " +
