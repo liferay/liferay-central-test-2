@@ -263,11 +263,11 @@ public class JournalArticleResourceLocalServiceWrapper
 			articleId);
 	}
 
-	public long getArticleResourcePrimKey(long groupId,
-		java.lang.String articleId, java.lang.String uuid)
+	public long getArticleResourcePrimKey(java.lang.String uuid, long groupId,
+		java.lang.String articleId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _journalArticleResourceLocalService.getArticleResourcePrimKey(groupId,
-			articleId, uuid);
+		return _journalArticleResourceLocalService.getArticleResourcePrimKey(uuid,
+			groupId, articleId);
 	}
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> getArticleResources(

@@ -264,10 +264,10 @@ public class JournalArticleResourceLocalServiceUtil {
 		return getService().getArticleResourcePrimKey(groupId, articleId);
 	}
 
-	public static long getArticleResourcePrimKey(long groupId,
-		java.lang.String articleId, java.lang.String uuid)
+	public static long getArticleResourcePrimKey(java.lang.String uuid,
+		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getArticleResourcePrimKey(groupId, articleId, uuid);
+		return getService().getArticleResourcePrimKey(uuid, groupId, articleId);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> getArticleResources(
