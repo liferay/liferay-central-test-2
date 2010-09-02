@@ -324,7 +324,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		String accept = StringPool.BLANK;
 
 		if (request != null) {
-			accept = (String) request.getAttribute(HttpHeaders.ACCEPT);
+			accept = (String)request.getAttribute(HttpHeaders.ACCEPT);
 
 			if (accept == null) {
 				String acceptHeader = request.getHeader(HttpHeaders.ACCEPT);
@@ -347,7 +347,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		String userAgent = StringPool.BLANK;
 
 		if (request != null) {
-			userAgent = (String) request.getAttribute(HttpHeaders.USER_AGENT);
+			userAgent = (String)request.getAttribute(HttpHeaders.USER_AGENT);
 
 			if (userAgent == null) {
 				String userAgentHeader = request.getHeader(
