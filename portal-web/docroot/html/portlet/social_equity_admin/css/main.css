@@ -20,3 +20,8 @@
 .portlet-social-equity-admin td.col-7 {
 	text-align: center;
 }
+
+.portlet-social-equity-admin h3 input[type=checkbox] {
+	margin-top: .3em;
+	margin-right: .7em;
+}
