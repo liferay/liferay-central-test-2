@@ -209,6 +209,10 @@ public interface SocialEquityGroupSettingLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isEnabled(long groupId, java.lang.String className)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean isEnabled(long groupId, java.lang.String className, int type)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

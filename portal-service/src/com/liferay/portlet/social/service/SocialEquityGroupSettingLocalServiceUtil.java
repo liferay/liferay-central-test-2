@@ -229,6 +229,11 @@ public class SocialEquityGroupSettingLocalServiceUtil {
 			merge);
 	}
 
+	public static boolean isEnabled(long groupId, java.lang.String className)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().isEnabled(groupId, className);
+	}
+
 	public static boolean isEnabled(long groupId, java.lang.String className,
 		int type) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().isEnabled(groupId, className, type);

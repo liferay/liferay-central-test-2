@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.social.model.SocialEquityGroupSetting;
+import com.liferay.portlet.social.model.SocialEquitySettingConstants;
 import com.liferay.portlet.social.service.base.SocialEquityGroupSettingLocalServiceBaseImpl;
 
 /**
@@ -26,6 +27,19 @@ import com.liferay.portlet.social.service.base.SocialEquityGroupSettingLocalServ
  */
 public class SocialEquityGroupSettingLocalServiceImpl
 	extends SocialEquityGroupSettingLocalServiceBaseImpl {
+
+	public boolean isEnabled(long groupId, String className)
+		throws SystemException {
+
+		boolean isInformationEquity = isEnabled(
+			groupId, className, SocialEquitySettingConstants.TYPE_INFORMATION);
+
+		boolean isParticipationEquity = isEnabled(
+			groupId, className,
+			SocialEquitySettingConstants.TYPE_PARTICIPATION);
+
+		return (isInformationEquity && isParticipationEquity);
+	}
 
 	public boolean isEnabled(long groupId, String className, int type)
 		throws SystemException {
