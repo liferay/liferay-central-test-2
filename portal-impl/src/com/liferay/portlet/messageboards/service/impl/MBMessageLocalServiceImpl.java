@@ -1186,7 +1186,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		boolean visible = false;
 
-		if (message.getStatus() == WorkflowConstants.STATUS_APPROVED) {
+		if (message.getStatus() == WorkflowConstants.STATUS_APPROVED &&
+			!message.getBody().equals(String.valueOf(message.getClassPK()))) {
 			visible = true;
 		}
 
