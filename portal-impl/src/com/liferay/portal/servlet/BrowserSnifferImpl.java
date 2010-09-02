@@ -329,10 +329,19 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		String accept = StringPool.BLANK;
 
 		if (request != null) {
-			String acceptHeader = request.getHeader(HttpHeaders.ACCEPT);
+			accept = (String) request.getAttribute(HttpHeaders.ACCEPT);
 
-			if (acceptHeader != null) {
-				accept = acceptHeader.toLowerCase();
+			if (accept == null) {
+				String acceptHeader = request.getHeader(HttpHeaders.ACCEPT);
+
+				if (acceptHeader != null) {
+					accept = acceptHeader.toLowerCase();
+				}
+				else {
+					accept = StringPool.BLANK;
+				}
+
+				request.setAttribute(HttpHeaders.ACCEPT, accept);
 			}
 		}
 
@@ -343,10 +352,20 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		String userAgent = StringPool.BLANK;
 
 		if (request != null) {
-			String userAgentHeader = request.getHeader(HttpHeaders.USER_AGENT);
+			userAgent = (String) request.getAttribute(HttpHeaders.USER_AGENT);
 
-			if (userAgentHeader != null) {
-				userAgent = userAgentHeader.toLowerCase();
+			if (userAgent == null) {
+				String userAgentHeader = request.getHeader(
+					HttpHeaders.USER_AGENT);
+
+				if (userAgentHeader != null) {
+					userAgent = userAgentHeader.toLowerCase();
+				}
+				else {
+					userAgent = StringPool.BLANK;
+				}
+
+				request.setAttribute(HttpHeaders.USER_AGENT, userAgent);
 			}
 		}
 
