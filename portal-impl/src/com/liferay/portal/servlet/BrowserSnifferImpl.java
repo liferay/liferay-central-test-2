@@ -35,9 +35,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	public boolean acceptsGzip(HttpServletRequest request) {
 		String acceptEncoding = request.getHeader(HttpHeaders.ACCEPT_ENCODING);
 
-		if ((acceptEncoding != null) &&
-			(acceptEncoding.indexOf("gzip") != -1)) {
-
+		if ((acceptEncoding != null) && acceptEncoding.contains("gzip")) {
 			return true;
 		}
 		else {
@@ -121,7 +119,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	public boolean isAir(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		if (userAgent.indexOf("adobeair") != -1) {
+		if (userAgent.contains("adobeair")) {
 			return true;
 		}
 
@@ -131,7 +129,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	public boolean isChrome(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		if (userAgent.indexOf("chrome") != -1) {
+		if (userAgent.contains("chrome")) {
 			return true;
 		}
 
@@ -145,8 +143,8 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 		String userAgent = getUserAgent(request);
 
-		for(String alias : _firefoxAlias) {
-			if (userAgent.indexOf(alias) != -1) {
+		for (String firefoxAlias : _FIREFOX_ALIASES) {
+			if (userAgent.contains(firefoxAlias)) {
 				return true;
 			}
 		}
@@ -157,7 +155,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	public boolean isGecko(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		if (userAgent.indexOf("gecko") != -1) {
+		if (userAgent.contains("gecko")) {
 			return true;
 		}
 
@@ -167,9 +165,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	public boolean isIe(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		if ((userAgent.indexOf("msie") != -1) &&
-			(userAgent.indexOf("opera") == -1)) {
-
+		if (userAgent.contains("msie") && !userAgent.contains("opera")) {
 			return true;
 		}
 
@@ -179,7 +175,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	public boolean isIphone(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		if (userAgent.indexOf("iphone") != -1) {
+		if (userAgent.contains("iphone")) {
 			return true;
 		}
 
@@ -189,7 +185,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	public boolean isLinux(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		if (userAgent.indexOf("linux") != -1) {
+		if (userAgent.contains("linux")) {
 			return true;
 		}
 
@@ -199,7 +195,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	public boolean isMac(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		if (userAgent.indexOf("mac") != -1) {
+		if (userAgent.contains("mac")) {
 			return true;
 		}
 
@@ -209,7 +205,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	public boolean isMobile(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		if (userAgent.indexOf("mobile") != -1) {
+		if (userAgent.contains("mobile")) {
 			return true;
 		}
 
@@ -219,8 +215,8 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	public boolean isMozilla(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		if ((userAgent.indexOf("mozilla") != -1) &&
-			(!userAgent.matches("compatible|webkit"))) {
+		if (userAgent.contains("mozilla") &&
+			!userAgent.matches("compatible|webkit")) {
 
 			return true;
 		}
@@ -231,7 +227,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	public boolean isOpera(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		if (userAgent.indexOf("opera") != -1) {
+		if (userAgent.contains("opera")) {
 			return true;
 		}
 
@@ -259,7 +255,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	public boolean isSafari(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		if (isWebKit(request) && (userAgent.indexOf("safari") != -1)) {
+		if (isWebKit(request) && userAgent.contains("safari")) {
 			return true;
 		}
 
@@ -269,7 +265,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	public boolean isSun(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		if (userAgent.indexOf("sunos") != -1) {
+		if (userAgent.contains("sunos")) {
 			return true;
 		}
 
@@ -283,7 +279,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	public boolean isWapXhtml(HttpServletRequest request) {
 		String accept = getAccept(request);
 
-		if (accept.indexOf("wap.xhtml") != -1) {
+		if (accept.contains("wap.xhtml")) {
 			return true;
 		}
 
@@ -293,32 +289,31 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	public boolean isWebKit(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		if ((userAgent.indexOf("khtml") != -1) ||
-			(userAgent.indexOf("applewebkit") != -1)) {
-			return true;
+		for (String webKitAlias : _WEBKIT_ALIASES) {
+			if (userAgent.contains(webKitAlias)) {
+				return true;
+			}
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 	public boolean isWindows(HttpServletRequest request) {
 		String userAgent = getUserAgent(request);
 
-		if ((userAgent.indexOf("windows") != -1) ||
-			(userAgent.indexOf("win32") != -1) ||
-			(userAgent.indexOf("16bit") != -1)) {
-			return true;
+		for (String windowsAlias : _WINDOWS_ALIASES) {
+			if (userAgent.contains(windowsAlias)) {
+				return true;
+			}
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 	public boolean isWml(HttpServletRequest request) {
 		String accept = getAccept(request);
 
-		if (accept.indexOf("wap.wml") != -1) {
+		if (accept.contains("wap.wml")) {
 			return true;
 		}
 
@@ -372,10 +367,17 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		return userAgent;
 	}
 
-	private static String[] _firefoxAlias = {
-			"firefox", "minefield", "granparadiso", "bonecho", "firebird",
-			"phoenix", "camino"
-		};
+	private static final String[] _FIREFOX_ALIASES = {
+		"firefox", "minefield", "granparadiso", "bonecho", "firebird",
+		"phoenix", "camino"
+	};
+
+	private static final String[] _WEBKIT_ALIASES = {"khtml", "applewebkit"};
+
+	private static final String[] _WINDOWS_ALIASES = {
+		"windows", "win32", "16bit"
+	};
+
 	private static Pattern _majorVersionPattern = Pattern.compile(
 		"(\\d+[.]\\d+)");
 	private static Pattern _revisionPattern = Pattern.compile(
