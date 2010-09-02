@@ -186,7 +186,7 @@ public class JournalArticleLocalServiceImpl
 
 		long resourcePrimKey =
 			journalArticleResourceLocalService.getArticleResourcePrimKey(
-				groupId, articleId, serviceContext.getUuid());
+				serviceContext.getUuid(), groupId, articleId);
 
 		JournalArticle article = journalArticlePersistence.create(id);
 

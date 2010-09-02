@@ -153,9 +153,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			articleElement = articlesElement.addElement("article");
 		}
 
-		articleElement.addAttribute(
-			"article-resource-uuid", article.getArticleResource().getUuid());
 		articleElement.addAttribute("path", path);
+		articleElement.addAttribute(
+			"article-resource-uuid", article.getArticleResourceUuid());
 
 		article.setUserUuid(article.getUserUuid());
 
@@ -830,7 +830,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/articles/");
-		sb.append(article.getArticleResource().getUuid());
+		sb.append(article.getArticleResourceUuid());
 		sb.append(StringPool.SLASH);
 		sb.append(article.getVersion());
 		sb.append(StringPool.SLASH);
@@ -847,7 +847,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/articles/");
-		sb.append(article.getArticleResource().getUuid());
+		sb.append(article.getArticleResourceUuid());
 		sb.append(StringPool.SLASH);
 		sb.append(article.getVersion());
 		sb.append(StringPool.SLASH);
@@ -874,7 +874,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/articles/");
-		sb.append(article.getArticleResource().getUuid());
+		sb.append(article.getArticleResourceUuid());
 		sb.append(StringPool.SLASH);
 		sb.append(article.getVersion());
 		sb.append(StringPool.SLASH);
@@ -891,7 +891,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/articles/");
-		sb.append(article.getArticleResource().getUuid());
+		sb.append(article.getArticleResourceUuid());
 		sb.append("/thumbnail");
 		sb.append(StringPool.PERIOD);
 		sb.append(article.getSmallImageType());
@@ -1281,9 +1281,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		if (context.isDataStrategyMirror()) {
 			long resourcePrimKey =
-				JournalArticleResourceLocalServiceUtil.getArticleResourcePrimKey(
-					context.getScopeGroupId(), newArticleId,
-					articleResourceUuid);
+				JournalArticleResourceLocalServiceUtil.
+					getArticleResourcePrimKey(
+						articleResourceUuid, context.getScopeGroupId(),
+						newArticleId);
 
 			serviceContext.setUuid(articleResourceUuid);
 
@@ -1318,18 +1319,18 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			else {
 				importedArticle = JournalArticleLocalServiceUtil.updateArticle(
 					userId, existingArticle.getGroupId(),
-					existingArticle.getArticleId(), existingArticle.getVersion(),
-					article.getTitle(), article.getDescription(),
-					article.getContent(), article.getType(), parentStructureId,
-					parentTemplateId, displayDateMonth, displayDateDay,
-					displayDateYear, displayDateHour, displayDateMinute,
-					expirationDateMonth, expirationDateDay, expirationDateYear,
-					expirationDateHour, expirationDateMinute, neverExpire,
-					reviewDateMonth, reviewDateDay, reviewDateYear,
-					reviewDateHour, reviewDateMinute, neverReview,
-					article.isIndexable(), article.isSmallImage(),
-					article.getSmallImageURL(), smallFile, images, articleURL,
-					serviceContext);
+					existingArticle.getArticleId(),
+					existingArticle.getVersion(), article.getTitle(),
+					article.getDescription(), article.getContent(),
+					article.getType(), parentStructureId, parentTemplateId,
+					displayDateMonth, displayDateDay, displayDateYear,
+					displayDateHour, displayDateMinute, expirationDateMonth,
+					expirationDateDay, expirationDateYear, expirationDateHour,
+					expirationDateMinute, neverExpire, reviewDateMonth,
+					reviewDateDay, reviewDateYear, reviewDateHour,
+					reviewDateMinute, neverReview, article.isIndexable(),
+					article.isSmallImage(), article.getSmallImageURL(),
+					smallFile, images, articleURL, serviceContext);
 			}
 		}
 		else {

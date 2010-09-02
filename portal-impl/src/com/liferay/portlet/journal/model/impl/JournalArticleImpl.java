@@ -55,6 +55,14 @@ public class JournalArticleImpl
 			getResourcePrimKey());
 	}
 
+	public JournalArticleResource getArticleResourceUuid()
+		throws PortalException, SystemException {
+
+		JournalArticleResource articleResource = getArticleResource();
+
+		return articleResource.getUuid();
+	}
+
 	public String[] getAvailableLocales() {
 		return LocalizationUtil.getAvailableLocales(getContent());
 	}

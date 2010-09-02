@@ -45,11 +45,11 @@ public class JournalArticleResourceLocalServiceImpl
 	public long getArticleResourcePrimKey(long groupId, String articleId)
 		throws SystemException {
 
-		return getArticleResourcePrimKey(groupId, articleId, null);
+		return getArticleResourcePrimKey(null, groupId, articleId);
 	}
 
 	public long getArticleResourcePrimKey(
-			long groupId, String articleId, String uuid)
+			String uuid, long groupId, String articleId)
 		throws SystemException {
 
 		JournalArticleResource articleResource = null;
