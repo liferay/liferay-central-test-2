@@ -288,7 +288,8 @@ public class SocialEquityLogLocalServiceImpl
 		deactivateEquityLogs(userId, assetEntry.getEntryId(), actionId);
 	}
 
-	@BufferedIncrement(incrementClass = SocialEquityIncrement.class)
+	@BufferedIncrement(
+		incrementClass = SocialEquityIncrement.class, parallel = false)
 	public void incrementSocialEquityAssetEntry_IQ(
 			long assetEntryId, SocialEquityValue socialEquityValue)
 		throws SystemException {
