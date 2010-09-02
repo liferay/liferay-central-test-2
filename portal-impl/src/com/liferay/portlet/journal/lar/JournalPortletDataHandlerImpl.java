@@ -60,15 +60,16 @@ import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalArticleImage;
+import com.liferay.portlet.journal.model.JournalArticleResource;
 import com.liferay.portlet.journal.model.JournalFeed;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.service.persistence.JournalArticleImageUtil;
+import com.liferay.portlet.journal.service.persistence.JournalArticleResourceUtil;
 import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.persistence.JournalFeedUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
@@ -1280,22 +1281,26 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			"article-resource-uuid");
 
 		if (context.isDataStrategyMirror()) {
-			long resourcePrimKey =
-				JournalArticleResourceLocalServiceUtil.
-					getArticleResourcePrimKey(
-						articleResourceUuid, context.getScopeGroupId(),
-						newArticleId);
+			JournalArticleResource articleResource =
+				JournalArticleResourceUtil.fetchByUUID_G(
+					articleResourceUuid, context.getScopeGroupId());
 
 			serviceContext.setUuid(articleResourceUuid);
 
 			JournalArticle existingArticle = null;
 
-			try {
-				existingArticle =
-					JournalArticleLocalServiceUtil.getLatestArticle(
-						resourcePrimKey);
+			if (articleResource != null) {
+				try {
+					existingArticle =
+						JournalArticleLocalServiceUtil.getLatestArticle(
+							articleResource.getResourcePrimKey(),
+							WorkflowConstants.STATUS_ANY, false);
+				}
+				catch (NoSuchArticleException nsae) {
+				}
 			}
-			catch (NoSuchArticleException nsae) {
+
+			if (existingArticle == null) {
 				existingArticle = JournalArticleUtil.fetchByG_A_V(
 					context.getScopeGroupId(), newArticleId,
 					article.getVersion());
