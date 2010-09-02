@@ -369,11 +369,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 		}
 
-		// Asset
-
-		updateAsset(
-			userId, message, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
 
 		// Expando
 
@@ -387,6 +382,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			user.getCompanyId(), groupId, userId,
 			message.getWorkflowClassName(), message.getMessageId(), message,
 			serviceContext);
+
+		// Asset
+
+		updateAsset(
+			userId, message, serviceContext.getAssetCategoryIds(),
+			serviceContext.getAssetTagNames());
 
 		// Testing roll back
 
