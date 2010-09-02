@@ -312,6 +312,12 @@ public interface UserLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public void clearOrganizationUsers(long organizationId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void clearUserGroupUsers(long userGroupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public com.liferay.portal.kernel.util.KeyValuePair decryptUserId(
 		long companyId, java.lang.String name, java.lang.String password)
 		throws com.liferay.portal.kernel.exception.PortalException,

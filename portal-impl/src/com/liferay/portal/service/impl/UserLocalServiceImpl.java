@@ -880,6 +880,20 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
+	public void clearOrganizationUsers(long organizationId)
+		throws SystemException {
+
+		organizationPersistence.clearUsers(organizationId);
+
+		PermissionCacheUtil.clearCache();
+	}
+
+	public void clearUserGroupUsers(long userGroupId) throws SystemException {
+		userGroupPersistence.clearUsers(userGroupId);
+
+		PermissionCacheUtil.clearCache();
+	}
+
 	public KeyValuePair decryptUserId(
 			long companyId, String name, String password)
 		throws PortalException, SystemException {

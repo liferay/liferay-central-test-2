@@ -379,6 +379,16 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		_userLocalService.checkPasswordExpired(user);
 	}
 
+	public void clearOrganizationUsers(long organizationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_userLocalService.clearOrganizationUsers(organizationId);
+	}
+
+	public void clearUserGroupUsers(long userGroupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_userLocalService.clearUserGroupUsers(userGroupId);
+	}
+
 	public com.liferay.portal.kernel.util.KeyValuePair decryptUserId(
 		long companyId, java.lang.String name, java.lang.String password)
 		throws com.liferay.portal.kernel.exception.PortalException,

@@ -393,6 +393,16 @@ public class UserLocalServiceUtil {
 		getService().checkPasswordExpired(user);
 	}
 
+	public static void clearOrganizationUsers(long organizationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().clearOrganizationUsers(organizationId);
+	}
+
+	public static void clearUserGroupUsers(long userGroupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().clearUserGroupUsers(userGroupId);
+	}
+
 	public static com.liferay.portal.kernel.util.KeyValuePair decryptUserId(
 		long companyId, java.lang.String name, java.lang.String password)
 		throws com.liferay.portal.kernel.exception.PortalException,
