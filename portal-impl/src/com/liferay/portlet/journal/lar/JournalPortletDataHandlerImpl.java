@@ -54,6 +54,7 @@ import com.liferay.portlet.imagegallery.lar.IGPortletDataHandlerImpl;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
+import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -63,6 +64,7 @@ import com.liferay.portlet.journal.model.JournalFeed;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
@@ -151,6 +153,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			articleElement = articlesElement.addElement("article");
 		}
 
+		articleElement.addAttribute(
+			"article-resource-uuid", article.getArticleResource().getUuid());
 		articleElement.addAttribute("path", path);
 
 		article.setUserUuid(article.getUserUuid());
@@ -819,13 +823,14 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static String getArticleImagePath(
-		PortletDataContext context, JournalArticle article) {
+			PortletDataContext context, JournalArticle article)
+		throws Exception {
 
 		StringBundler sb = new StringBundler(6);
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/articles/");
-		sb.append(article.getUuid());
+		sb.append(article.getArticleResource().getUuid());
 		sb.append(StringPool.SLASH);
 		sb.append(article.getVersion());
 		sb.append(StringPool.SLASH);
@@ -834,14 +839,15 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static String getArticleImagePath(
-		PortletDataContext context, JournalArticle article,
-		JournalArticleImage articleImage, Image image) {
+			PortletDataContext context, JournalArticle article,
+			JournalArticleImage articleImage, Image image)
+		throws Exception {
 
 		StringBundler sb = new StringBundler(13);
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/articles/");
-		sb.append(article.getUuid());
+		sb.append(article.getArticleResource().getUuid());
 		sb.append(StringPool.SLASH);
 		sb.append(article.getVersion());
 		sb.append(StringPool.SLASH);
@@ -861,13 +867,14 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static String getArticlePath(
-		PortletDataContext context, JournalArticle article) {
+			PortletDataContext context, JournalArticle article)
+		throws Exception {
 
 		StringBundler sb = new StringBundler(8);
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/articles/");
-		sb.append(article.getUuid());
+		sb.append(article.getArticleResource().getUuid());
 		sb.append(StringPool.SLASH);
 		sb.append(article.getVersion());
 		sb.append(StringPool.SLASH);
@@ -884,7 +891,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/articles/");
-		sb.append(article.getUuid());
+		sb.append(article.getArticleResource().getUuid());
 		sb.append("/thumbnail");
 		sb.append(StringPool.PERIOD);
 		sb.append(article.getSmallImageType());
@@ -1269,19 +1276,31 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		JournalArticle importedArticle = null;
 
-		if (context.isDataStrategyMirror()) {
-			JournalArticle existingArticle = JournalArticleUtil.fetchByUUID_G(
-				article.getUuid(), context.getScopeGroupId());
+		String articleResourceUuid = articleElement.attributeValue(
+			"article-resource-uuid");
 
-			if (existingArticle == null) {
+		if (context.isDataStrategyMirror()) {
+			long resourcePrimKey =
+				JournalArticleResourceLocalServiceUtil.getArticleResourcePrimKey(
+					context.getScopeGroupId(), newArticleId,
+					articleResourceUuid);
+
+			serviceContext.setUuid(articleResourceUuid);
+
+			JournalArticle existingArticle = null;
+
+			try {
+				existingArticle =
+					JournalArticleLocalServiceUtil.getLatestArticle(
+						resourcePrimKey);
+			}
+			catch (NoSuchArticleException nsae) {
 				existingArticle = JournalArticleUtil.fetchByG_A_V(
 					context.getScopeGroupId(), newArticleId,
 					article.getVersion());
 			}
 
 			if (existingArticle == null) {
-				serviceContext.setUuid(article.getUuid());
-
 				importedArticle = JournalArticleLocalServiceUtil.addArticle(
 					userId, context.getScopeGroupId(), articleId, autoArticleId,
 					article.getVersion(), article.getTitle(),
@@ -1299,7 +1318,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			else {
 				importedArticle = JournalArticleLocalServiceUtil.updateArticle(
 					userId, existingArticle.getGroupId(),
-					existingArticle.getArticleId(), article.getVersion(),
+					existingArticle.getArticleId(), existingArticle.getVersion(),
 					article.getTitle(), article.getDescription(),
 					article.getContent(), article.getType(), parentStructureId,
 					parentTemplateId, displayDateMonth, displayDateDay,

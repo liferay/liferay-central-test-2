@@ -186,14 +186,13 @@ public class JournalArticleLocalServiceImpl
 
 		long resourcePrimKey =
 			journalArticleResourceLocalService.getArticleResourcePrimKey(
-				groupId, articleId);
+				groupId, articleId, serviceContext.getUuid());
 
 		JournalArticle article = journalArticlePersistence.create(id);
 
 		content = format(
 			groupId, articleId, version, false, content, structureId, images);
 
-		article.setUuid(serviceContext.getUuid());
 		article.setResourcePrimKey(resourcePrimKey);
 		article.setGroupId(groupId);
 		article.setCompanyId(user.getCompanyId());
@@ -1664,6 +1663,7 @@ public class JournalArticleLocalServiceImpl
 		if (imported) {
 			oldArticle = getArticle(groupId, articleId, version);
 			oldVersion = version;
+			incrementVersion = true;
 		}
 		else {
 			oldArticle = getLatestArticle(

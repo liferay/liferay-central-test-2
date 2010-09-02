@@ -23,6 +23,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.JournalArticleResource;
+import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil;
 import com.liferay.portlet.journal.util.LocaleTransformerListener;
 
 /**
@@ -44,6 +46,13 @@ public class JournalArticleImpl
 	}
 
 	public JournalArticleImpl() {
+	}
+
+	public JournalArticleResource getArticleResource()
+		throws PortalException, SystemException {
+
+		return JournalArticleResourceLocalServiceUtil.getArticleResource(
+			getResourcePrimKey());
 	}
 
 	public String[] getAvailableLocales() {

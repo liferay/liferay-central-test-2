@@ -22,6 +22,7 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
@@ -111,6 +112,11 @@ public class VerifyUUID extends VerifyProcess {
 			JournalArticleLocalServiceUtil.class.getName(),
 			"JournalArticle",
 			"id_"
+		},
+		new String[] {
+			JournalArticleResourceLocalServiceUtil.class.getName(),
+			"JournalArticleResource",
+			"resourcePrimKey"
 		},
 		new String[] {
 			JournalFeedLocalServiceUtil.class.getName(),

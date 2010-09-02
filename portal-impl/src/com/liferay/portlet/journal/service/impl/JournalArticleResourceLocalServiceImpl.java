@@ -16,6 +16,7 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.journal.model.JournalArticleResource;
 import com.liferay.portlet.journal.service.base.JournalArticleResourceLocalServiceBaseImpl;
 
@@ -44,14 +45,34 @@ public class JournalArticleResourceLocalServiceImpl
 	public long getArticleResourcePrimKey(long groupId, String articleId)
 		throws SystemException {
 
-		JournalArticleResource articleResource =
-			journalArticleResourcePersistence.fetchByG_A(groupId, articleId);
+		return getArticleResourcePrimKey(groupId, articleId, null);
+	}
+
+	public long getArticleResourcePrimKey(
+			long groupId, String articleId, String uuid)
+		throws SystemException {
+
+		JournalArticleResource articleResource = null;
+
+		if (Validator.isNotNull(uuid)) {
+			articleResource = journalArticleResourcePersistence.fetchByUUID_G(
+				uuid, groupId);
+		}
+
+		if (articleResource == null) {
+			articleResource = journalArticleResourcePersistence.fetchByG_A(
+				groupId, articleId);
+		}
 
 		if (articleResource == null) {
 			long articleResourcePrimKey = counterLocalService.increment();
 
 			articleResource = journalArticleResourcePersistence.create(
 				articleResourcePrimKey);
+
+			if (Validator.isNotNull(uuid)) {
+				articleResource.setUuid(uuid);
+			}
 
 			articleResource.setGroupId(groupId);
 			articleResource.setArticleId(articleId);
