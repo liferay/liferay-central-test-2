@@ -109,6 +109,9 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				long resultGroupId = GetterUtil.getLong(
 					result.get(Field.GROUP_ID));
 
+				long resultScopeGroupId = GetterUtil.getLong(
+					result.get(Field.SCOPE_GROUP_ID));
+
 				PortletURL portletURL = getPortletURL(
 					request, portletId, resultGroupId);
 
@@ -117,7 +120,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
 				String title = summary.getTitle();
 				String url = getURL(
-					themeDisplay, resultGroupId, result, portletURL);
+					themeDisplay, resultScopeGroupId, result, portletURL);
 				Date modifedDate = result.getDate(Field.MODIFIED);
 				String content = summary.getContent();
 
@@ -148,8 +151,9 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				double score = results.score(i);
 
 				addSearchResult(
-					root, resultGroupId, entryClassName, entryClassPK, title,
-					url, modifedDate, content, tags, ratings, score, format);
+					root, resultGroupId, resultScopeGroupId, entryClassName,
+					entryClassPK, title, url, modifedDate, content, tags,
+					ratings, score, format);
 			}
 
 			if (_log.isDebugEnabled()) {

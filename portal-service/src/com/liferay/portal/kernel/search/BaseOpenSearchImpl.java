@@ -99,36 +99,37 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 	}
 
 	protected void addSearchResult(
-		Element root, long groupId, String entryClassName, long entryClassPK,
-		String title, String link, Date updated, String summary, double score,
-		String format) {
+		Element root, long groupId, long scopeGroupId, String entryClassName,
+		long entryClassPK, String title, String link, Date updated,
+		String summary, double score, String format) {
 
 		addSearchResult(
-			root, groupId, entryClassName, entryClassPK, title, link, updated,
-			summary, new String[0], 0, score, format);
+			root, groupId, scopeGroupId, entryClassName, entryClassPK, title,
+			link, updated, summary, new String[0], 0, score, format);
 	}
 
 	protected void addSearchResult(
-		Element root, long groupId, String entryClassName, long entryClassPK,
-		String title, String link, Date updated, String summary, String[] tags,
-		double ratings, double score, String format) {
+		Element root, long groupId, long scopeGroupId, String entryClassName,
+		long entryClassPK, String title, String link, Date updated,
+		String summary, String[] tags, double ratings, double score,
+		String format) {
 
 		if (format.equals("rss")) {
 			addSearchResultRSS(
-				root, groupId, entryClassName, entryClassPK, title, link,
-				updated, summary, tags, ratings, score);
+				root, groupId, scopeGroupId, entryClassName, entryClassPK,
+				title, link, updated, summary, tags, ratings, score);
 		}
 		else {
 			addSearchResultAtom(
-				root, groupId, entryClassName, entryClassPK, title, link,
-				updated, summary, tags, ratings, score);
+				root, groupId, scopeGroupId, entryClassName, entryClassPK,
+				title, link, updated, summary, tags, ratings, score);
 		}
 	}
 
 	protected void addSearchResultAtom(
-		Element root, long groupId, String entryClassName, long entryClassPK,
-		String title, String link, Date updated, String summary, String[] tags,
-		double ratings, double score) {
+		Element root, long groupId, long scopeGroupId, String entryClassName,
+		long entryClassPK, String title, String link, Date updated,
+		String summary, String[] tags, double ratings, double score) {
 
 		// entry
 
@@ -139,6 +140,12 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 
 		OpenSearchUtil.addElement(
 			entry, "groupId", OpenSearchUtil.LIFERAY_NAMESPACE, groupId);
+
+		// scopeGroupId
+
+		OpenSearchUtil.addElement(
+			entry, "scopeGroupId", OpenSearchUtil.LIFERAY_NAMESPACE,
+			scopeGroupId);
 
 		// entryClassName
 
@@ -198,9 +205,9 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 	}
 
 	protected void addSearchResultRSS(
-		Element root, long groupId, String entryClassName, long entryClassPK,
-		String title, String link, Date updated, String summary, String[] tags,
-		double ratings, double score) {
+		Element root, long groupId, long scopeGroupId, String entryClassName,
+		long entryClassPK, String title, String link, Date updated,
+		String summary, String[] tags, double ratings, double score) {
 
 		// item
 
@@ -210,6 +217,12 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 
 		OpenSearchUtil.addElement(
 			item, "groupId", OpenSearchUtil.LIFERAY_NAMESPACE, groupId);
+
+		// scopeGroupId
+
+		OpenSearchUtil.addElement(
+			item, "scopeGroupId", OpenSearchUtil.LIFERAY_NAMESPACE,
+			scopeGroupId);
 
 		// entryClassName
 

@@ -195,10 +195,10 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 
 				// Group id
 
-				long entryGroupId = GetterUtil.getLong(el.elementText(OpenSearchUtil.getQName("groupId", OpenSearchUtil.LIFERAY_NAMESPACE)));
+				long entryScopeGroupId = GetterUtil.getLong(el.elementText(OpenSearchUtil.getQName("scopeGroupId", OpenSearchUtil.LIFERAY_NAMESPACE)));
 
-				if (Validator.isNotNull(entryGroupId) && (inactiveGroupsCount > 0)) {
-					Group entryGroup = GroupServiceUtil.getGroup(entryGroupId);
+				if (Validator.isNotNull(entryScopeGroupId) && (inactiveGroupsCount > 0)) {
+					Group entryGroup = GroupServiceUtil.getGroup(entryScopeGroupId);
 
 					if (!entryGroup.isActive()) {
 						total--;
@@ -213,7 +213,7 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 					long folderId = GetterUtil.getLong(HttpUtil.getParameter(entryHref, "_20_folderId", false));
 					String name = GetterUtil.getString(HttpUtil.getParameter(entryHref, "_20_name", false));
 
-					DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(entryGroupId, folderId, name);
+					DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(entryScopeGroupId, folderId, name);
 
 					entryTitle = fileEntry.getTitle();
 
@@ -240,7 +240,7 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 				if (portletId.equals(PortletKeys.JOURNAL) || (portletId.equals(PortletKeys.SEARCH) && entryClassName.equals(JournalArticle.class.getName()))) {
 					String articleId = el.elementText(OpenSearchUtil.getQName(Field.ENTRY_CLASS_PK, OpenSearchUtil.LIFERAY_NAMESPACE));
 
-					JournalArticle article = JournalArticleLocalServiceUtil.getArticle(entryGroupId, articleId);
+					JournalArticle article = JournalArticleLocalServiceUtil.getArticle(entryScopeGroupId, articleId);
 
 					if (DateUtil.compareTo(article.getDisplayDate(), new Date()) > 0) {
 						total--;

@@ -102,6 +102,9 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 				long resultGroupId = GetterUtil.getLong(
 					result.get(Field.GROUP_ID));
 
+				long resultScopeGroupId = GetterUtil.getLong(
+					result.get(Field.SCOPE_GROUP_ID));
+
 				String entryClassName = GetterUtil.getString(
 					result.get(Field.ENTRY_CLASS_NAME));
 
@@ -141,7 +144,8 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 				double score = results.score(i);
 
 				addSearchResult(
-					root, resultGroupId, entryClassName, entryClassPK,
+					root, resultGroupId, resultScopeGroupId, entryClassName,
+					entryClassPK,
 					portletTitle + " " + CharPool.RAQUO + " " + title, url,
 					modifedDate, content, score, format);
 			}
