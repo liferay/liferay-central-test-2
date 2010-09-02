@@ -266,7 +266,11 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 
 			foldersEl.appendChild(folderEl);
 
-			if (group.hasStagingGroup()) {
+			long scopeGroupId = argument.getThemeDisplay().getScopeGroupId();
+
+			if (group.hasStagingGroup() &&
+				(group.getStagingGroup().getGroupId() == scopeGroupId)) {
+
 				Group stagingGroup = group.getStagingGroup();
 
 				folderEl.setAttribute(
