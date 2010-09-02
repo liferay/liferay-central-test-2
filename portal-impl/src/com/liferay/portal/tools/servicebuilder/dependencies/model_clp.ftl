@@ -245,6 +245,13 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 	</#list>
 
 	<#if entity.isWorkflowEnabled()>
+		/**
+		 * @deprecated {@link #isApproved}
+		 */
+		public boolean getApproved() {
+			return isApproved();
+		}
+
 		public boolean isApproved() {
 			if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
 				return true;
