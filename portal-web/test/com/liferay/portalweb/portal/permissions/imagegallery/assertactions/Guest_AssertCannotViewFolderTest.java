@@ -44,9 +44,7 @@ public class Guest_AssertCannotViewFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You do not have the required permissions."));
+		assertFalse(selenium.isElementPresent(
+				"link=Image Permissions Test Folder"));
 	}
 }

@@ -49,7 +49,8 @@ public class Portlet_AddImageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Add Image"),
 			selenium.getText("//div[2]/ul/li[1]/a"));
-		selenium.clickAt("//div[2]/ul/li[1]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[1]/a",
+			RuntimeVariables.replace("Add Image"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -89,6 +90,9 @@ public class Portlet_AddImageTest extends BaseTestCase {
 		selenium.type("_31_file",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\imagegallery\\portlet\\dependencies\\Portlet_TestImage.jpg"));
+		selenium.type("_31_file",
+			RuntimeVariables.replace(
+				"L:\\trunk\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\imagegallery\\portlet\\dependencies\\Portlet_TestImage.jpg"));
 		selenium.type("_31_name",
 			RuntimeVariables.replace("Portlet1 Permissions1 Image1"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

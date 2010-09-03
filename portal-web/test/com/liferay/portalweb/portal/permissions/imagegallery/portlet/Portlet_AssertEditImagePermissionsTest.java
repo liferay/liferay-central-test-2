@@ -71,8 +71,8 @@ public class Portlet_AssertEditImagePermissionsTest extends BaseTestCase {
 		selenium.clickAt("//img[@alt='Permissions']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//form/div[1]",
-				"Edit Permissions for Image Gallery Image:"));
+		assertEquals(RuntimeVariables.replace("Portlet2 Temporary2 Image2"),
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertTrue(selenium.isElementPresent("//input[@value='Save']"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

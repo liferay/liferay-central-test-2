@@ -86,9 +86,9 @@ public class CA_RestoreGuestViewImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isTextPresent(
-				"Edit Permissions for Image Gallery Image:"));
 		selenium.check("15_ACTION_VIEW");
+		assertEquals(RuntimeVariables.replace("Edited Permissions Image"),
+			selenium.getText("//h1[@class='header-title']/span"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

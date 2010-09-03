@@ -170,12 +170,12 @@ public class CA_MoveDocumentTest extends BaseTestCase {
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=folder");
 
-		String moveFolderURL = selenium.getLocation();
-		RuntimeVariables.setValue("moveFolderURL", moveFolderURL);
+		String moveFolder2URL = selenium.getLocation();
+		RuntimeVariables.setValue("moveFolder2URL", moveFolder2URL);
 		selenium.close();
 		selenium.selectWindow("null");
 		Thread.sleep(5000);
-		selenium.openWindow(RuntimeVariables.getValue("moveFolderURL"),
+		selenium.openWindow(RuntimeVariables.getValue("moveFolder2URL"),
 			RuntimeVariables.replace("moveFolder"));
 		selenium.waitForPopUp("moveFolder", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=moveFolder");

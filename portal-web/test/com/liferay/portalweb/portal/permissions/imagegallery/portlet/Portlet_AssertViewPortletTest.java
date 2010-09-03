@@ -46,6 +46,7 @@ public class Portlet_AssertViewPortletTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent(
 				"You do not have the roles required to access this portlet."));
-		assertTrue(selenium.isTextPresent("Showing 0 results."));
+		assertEquals(RuntimeVariables.replace("Images Home"),
+			selenium.getText("//div[1]/span[1]/span"));
 	}
 }

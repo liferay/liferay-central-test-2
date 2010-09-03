@@ -66,25 +66,8 @@ public class CA_RestoreGuestViewFolderTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Edit Permissions for Image Gallery Folder: Image Permissions Test Folder"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("15_ACTION_VIEW")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertEquals(RuntimeVariables.replace("Image Permissions Test Folder"),
+			selenium.getText("//h1[@class='header-title']/span"));
 		selenium.check("15_ACTION_VIEW");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

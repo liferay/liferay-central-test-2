@@ -71,6 +71,6 @@ public class CA_DeleteFolderTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertFalse(selenium.isTextPresent("Image Permissions Test Folder 2"));
+		assertFalse(selenium.isTextPresent("Image Permissions Folder 2"));
 	}
 }

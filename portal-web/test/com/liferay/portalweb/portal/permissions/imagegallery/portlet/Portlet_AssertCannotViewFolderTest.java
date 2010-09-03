@@ -44,10 +44,7 @@ public class Portlet_AssertCannotViewFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Portlet2 Temporary2 Folder2",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You do not have the required permissions."));
+		assertFalse(selenium.isElementPresent(
+				"link=Portlet2 Temporary2 Folder2"));
 	}
 }

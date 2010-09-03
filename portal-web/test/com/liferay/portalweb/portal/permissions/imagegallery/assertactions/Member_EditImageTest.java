@@ -46,7 +46,6 @@ public class Member_EditImageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//div[2]/a/img", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -89,6 +88,7 @@ public class Member_EditImageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
+		selenium.clickAt("//div[2]/a/img", RuntimeVariables.replace(""));
 		assertTrue(selenium.isTextPresent("Edited Third Permissions Image"));
 	}
 }

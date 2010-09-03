@@ -44,7 +44,8 @@ public class SA_RemoveViewFolderPermissionsTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//td[4]/ul/li/strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[4]/ul/li/strong/a",
+			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -85,7 +86,6 @@ public class SA_RemoveViewFolderPermissionsTest extends BaseTestCase {
 
 		selenium.uncheck("15_ACTION_VIEW");
 		selenium.uncheck("//tr[7]/td[8]/input");
-		selenium.uncheck("//tr[13]/td[8]/input");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
@@ -93,6 +93,5 @@ public class SA_RemoveViewFolderPermissionsTest extends BaseTestCase {
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertFalse(selenium.isChecked("15_ACTION_VIEW"));
 		assertFalse(selenium.isChecked("//tr[7]/td[8]/input"));
-		assertFalse(selenium.isChecked("//tr[13]/td[8]/input"));
 	}
 }

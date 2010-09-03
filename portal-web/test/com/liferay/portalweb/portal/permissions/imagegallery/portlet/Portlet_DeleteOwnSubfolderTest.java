@@ -47,7 +47,7 @@ public class Portlet_DeleteOwnSubfolderTest extends BaseTestCase {
 		selenium.clickAt("link=Portlet2 Temporary2 Folder2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

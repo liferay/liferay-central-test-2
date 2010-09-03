@@ -92,7 +92,16 @@ public class CA_MoveImageTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=folder");
+
+		String folderWindow = selenium.getLocation();
+		RuntimeVariables.setValue("folderWindow", folderWindow);
+		selenium.close();
+		selenium.selectWindow("null");
 		Thread.sleep(5000);
+		selenium.openWindow(RuntimeVariables.getValue("folderWindow"),
+			RuntimeVariables.replace("FolderWindow"));
+		selenium.waitForPopUp("FolderWindow", RuntimeVariables.replace("30000"));
+		selenium.selectWindow("name=FolderWindow");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -100,7 +109,7 @@ public class CA_MoveImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Image Home")) {
+				if (selenium.isElementPresent("link=Images Home")) {
 					break;
 				}
 			}
@@ -110,7 +119,7 @@ public class CA_MoveImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Image Home", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Images Home", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Image Permissions Test Folder 2",
 			RuntimeVariables.replace(""));

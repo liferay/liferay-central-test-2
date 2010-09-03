@@ -47,6 +47,7 @@ public class Portlet_AssertCannotViewImageTest extends BaseTestCase {
 		selenium.clickAt("link=Portlet2 Temporary2 Folder2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isTextPresent("Portlet2 Temporary2 Image2"));
 		assertFalse(selenium.isElementPresent(
 				"//img[@alt='Portlet2 Temporary2 Image2 - ']"));
 	}

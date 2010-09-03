@@ -55,7 +55,8 @@ public class Writer_AddArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_15_editor")) {
+				if (selenium.isElementPresent(
+							"_15_structure_el_TextAreaField_content")) {
 					break;
 				}
 			}
@@ -71,7 +72,7 @@ public class Writer_AddArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
+				if (selenium.isElementPresent("cke_contents_CKEditor1")) {
 					break;
 				}
 			}
@@ -97,14 +98,15 @@ public class Writer_AddArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe[@id=\"_15_editor\"]");
-		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
-		selenium.selectFrame("//iframe");
+		selenium.selectFrame(
+			"//iframe[@id='_15_structure_el_TextAreaField_content']");
+		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body",
 			RuntimeVariables.replace(
 				"This is a writer permissions web content article!"));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

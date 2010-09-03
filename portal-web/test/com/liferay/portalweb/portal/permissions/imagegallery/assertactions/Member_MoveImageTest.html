@@ -74,18 +74,53 @@
 	<td></td>
 </tr>
 <tr>
+	<td>storeLocation</td>
+	<td>folderWindow</td>
+	<td></td>
+</tr>
+<tr>
+	<td>close</td>
+	<td>name=folder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>openWindow</td>
+	<td>${folderWindow}</td>
+	<td>FolderWindow</td>
+</tr>
+<tr>
+	<td>waitForPopUp</td>
+	<td>FolderWindow</td>
+	<td>30000</td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>name=FolderWindow</td>
+	<td></td>
+</tr>
+<tr>
 	<td>pause</td>
 	<td>5000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Image Home</td>
+	<td>link=Images Home</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Image Home</td>
+	<td>link=Images Home</td>
 	<td></td>
 </tr>
 <tr>
@@ -116,6 +151,11 @@
 <tr>
 	<td>clickAtAndWait</td>
 	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>Your request processed successfully.</td>
 	<td></td>
 </tr>
 <tr>

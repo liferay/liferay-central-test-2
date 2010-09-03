@@ -46,7 +46,7 @@ public class Portlet_AssertEditFolderPermissionsTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Permissions"));
-		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -54,7 +54,7 @@ public class Portlet_AssertEditFolderPermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
+				if (selenium.isVisible(
 							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
 					break;
 				}
@@ -68,8 +68,8 @@ public class Portlet_AssertEditFolderPermissionsTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//form/div[1]",
-				"Edit Permissions for Image Gallery Folder:"));
+		assertEquals(RuntimeVariables.replace("Portlet2 Temporary2 Folder2"),
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertTrue(selenium.isElementPresent("//input[@value='Save']"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

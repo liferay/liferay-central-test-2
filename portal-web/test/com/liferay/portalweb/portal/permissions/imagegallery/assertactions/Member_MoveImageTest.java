@@ -93,6 +93,16 @@ public class Member_MoveImageTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=folder");
+
+		String folderWindow = selenium.getLocation();
+		RuntimeVariables.setValue("folderWindow", folderWindow);
+		selenium.close();
+		selenium.selectWindow("null");
+		Thread.sleep(5000);
+		selenium.openWindow(RuntimeVariables.getValue("folderWindow"),
+			RuntimeVariables.replace("FolderWindow"));
+		selenium.waitForPopUp("FolderWindow", RuntimeVariables.replace("30000"));
+		selenium.selectWindow("name=FolderWindow");
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -101,7 +111,7 @@ public class Member_MoveImageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Image Home")) {
+				if (selenium.isElementPresent("link=Images Home")) {
 					break;
 				}
 			}
@@ -111,7 +121,7 @@ public class Member_MoveImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Image Home", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Images Home", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
@@ -155,6 +165,25 @@ public class Member_MoveImageTest extends BaseTestCase {
 
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("")
+										.equals(selenium.getText(
+								"Your request processed successfully."))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		selenium.open("/web/guest/home/");
