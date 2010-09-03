@@ -21,6 +21,7 @@ public class ${entity.name}Wrapper implements ${entity.name} {
 
 	<#list methods as method>
 		<#if !method.isConstructor() && !method.isStatic() && method.isPublic() && !serviceBuilder.isDuplicateMethod(method, tempMap)>
+			${serviceBuilder.getJavadocComment(method)}
 			public ${serviceBuilder.getTypeGenericsName(method.returns)} ${method.name} (
 
 			<#assign parameters = method.parameters>
