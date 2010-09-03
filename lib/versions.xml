@@ -2770,7 +2770,8 @@
 			</license>
 		</licenses>
 		<comments>
-			This includes modifications to remove extraneous logging.
+			This includes modifications to remove extraneous logging. Do not
+			upgrade to 3.2.0 since it degrades total performance by 25-50%.
 		</comments>
 	</library>
 	<library>
