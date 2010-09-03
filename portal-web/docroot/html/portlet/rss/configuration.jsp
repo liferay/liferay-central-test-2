@@ -161,8 +161,9 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 
 						<aui:field-wrapper label="header-web-content">
 							<c:if test="<%= Validator.isNotNull(headerArticleId) %>">
+
 								<%
-								JournalArticle headerArticle = JournalArticleLocalServiceUtil.getArticle(headerGroupId, headerArticleId);
+								JournalArticle headerArticle = JournalArticleLocalServiceUtil.getArticle(headerArticleGroupId, headerArticleId);
 								%>
 
 								<%= HtmlUtil.escape(headerArticle.getTitle()) %>
@@ -175,8 +176,9 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 
 						<aui:field-wrapper label="footer-web-content">
 							<c:if test="<%= Validator.isNotNull(footerArticleId) %>">
+
 								<%
-								JournalArticle footerArticle = JournalArticleLocalServiceUtil.getArticle(footerGroupId, footerArticleId);
+								JournalArticle footerArticle = JournalArticleLocalServiceUtil.getArticle(footerArticleGroupId, footerArticleId);
 								%>
 
 								<%= HtmlUtil.escape(footerArticle.getTitle()) %>

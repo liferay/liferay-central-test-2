@@ -52,12 +52,12 @@ boolean showFeedItemAuthor = GetterUtil.getBoolean(preferences.getValue("show-fe
 
 String[] headerArticleValues = preferences.getValues("header-article-values", new String[] {"0", ""});
 
-long headerGroupId = GetterUtil.getLong(headerArticleValues[0]);
+long headerArticleGroupId = GetterUtil.getLong(headerArticleValues[0]);
 String headerArticleId = headerArticleValues[1];
 
 String[] footerArticleValues = preferences.getValues("footer-article-values", new String[] {"0", ""});
 
-long footerGroupId = GetterUtil.getLong(footerArticleValues[0]);
+long footerArticleGroupId = GetterUtil.getLong(footerArticleValues[0]);
 String footerArticleId = footerArticleValues[1];
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);

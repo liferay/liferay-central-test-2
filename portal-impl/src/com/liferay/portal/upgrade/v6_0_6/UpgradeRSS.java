@@ -26,8 +26,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
- * <a href="UpgradeRSS.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class UpgradeRSS extends BaseUpgradePortletPreferences {
@@ -100,8 +98,9 @@ public class UpgradeRSS extends BaseUpgradePortletPreferences {
 	}
 
 	protected String upgradePreferences(
-		long companyId, long ownerId, int ownerType, long plid,
-		String portletId, String xml) throws Exception {
+			long companyId, long ownerId, int ownerType, long plid,
+			String portletId, String xml)
+		throws Exception {
 
 		PortletPreferencesImpl preferences =
 			PortletPreferencesSerializer.fromXML(

@@ -97,40 +97,40 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		preferences.setValues(
-			"footer-article-values", new String[] {"0", ""});
+		preferences.setValues("footer-article-values", new String[] {"0", ""});
 	}
 
 	protected void removeHeaderArticle(
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		preferences.setValues(
-			"header-article-values", new String[] {"0", ""});
+		preferences.setValues("header-article-values", new String[] {"0", ""});
 	}
 
 	protected void setFooterArticle(
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		long groupId = ParamUtil.getLong(actionRequest, "articleGroupId");
+		long articleGroupId = ParamUtil.getLong(
+			actionRequest, "articleGroupId");
 		String articleId = ParamUtil.getString(actionRequest, "articleId");
 
 		preferences.setValues(
 			"footer-article-values",
-			new String[] {String.valueOf(groupId), articleId});
+			new String[] {String.valueOf(articleGroupId), articleId});
 	}
 
 	protected void setHeaderArticle(
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		long groupId = ParamUtil.getLong(actionRequest, "articleGroupId");
+		long articleGroupId = ParamUtil.getLong(
+			actionRequest, "articleGroupId");
 		String articleId = ParamUtil.getString(actionRequest, "articleId");
 
 		preferences.setValues(
 			"header-article-values",
-			new String[] {String.valueOf(groupId), articleId});
+			new String[] {String.valueOf(articleGroupId), articleId});
 	}
 
 	protected void updateConfiguration(
