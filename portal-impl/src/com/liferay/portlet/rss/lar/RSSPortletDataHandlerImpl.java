@@ -53,8 +53,6 @@ import java.util.Map;
 import javax.portlet.PortletPreferences;
 
 /**
- * <a href="RSSPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
@@ -122,10 +120,10 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 			return StringPool.BLANK;
 		}
 
-		long footerGroupId = GetterUtil.getLong(footerArticleValues[0]);
-		long headerGroupId = GetterUtil.getLong(headerArticleValues[0]);
+		long footerArticleGroupId = GetterUtil.getLong(footerArticleValues[0]);
+		long headerArticleGroupId = GetterUtil.getLong(headerArticleValues[0]);
 
-		if ((footerGroupId <= 0) && (headerGroupId <= 0)) {
+		if ((footerArticleGroupId <= 0) && (headerArticleGroupId <= 0)) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"No group ids found in preferences of portlet " +
@@ -141,7 +139,7 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 
 		try {
 			footerArticle = JournalArticleLocalServiceUtil.getLatestArticle(
-				footerGroupId, footerArticleId,
+				footerArticleGroupId, footerArticleId,
 				WorkflowConstants.STATUS_APPROVED);
 
 			articles.add(footerArticle);
@@ -150,7 +148,8 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"No approved article found with group id " +
-						footerGroupId + " and article id " + footerArticleId);
+						footerArticleGroupId + " and article id " +
+							footerArticleId);
 			}
 		}
 
@@ -158,7 +157,7 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 
 		try {
 			headerArticle = JournalArticleLocalServiceUtil.getLatestArticle(
-				headerGroupId, headerArticleId,
+				headerArticleGroupId, headerArticleId,
 				WorkflowConstants.STATUS_APPROVED);
 
 			articles.add(headerArticle);
@@ -167,7 +166,8 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"No approved article found with group id " +
-						headerGroupId + " and article id " + headerArticleId);
+						headerArticleGroupId + " and article id " +
+							headerArticleId);
 			}
 		}
 
@@ -405,6 +405,9 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 
 	private static final boolean _PUBLISH_TO_LIVE_BY_DEFAULT = true;
 
+	private static Log _log = LogFactoryUtil.getLog(
+		RSSPortletDataHandlerImpl.class);
+
 	private static PortletDataHandlerBoolean _comments =
 		new PortletDataHandlerBoolean(_NAMESPACE, "comments");
 
@@ -413,9 +416,6 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 
 	private static PortletDataHandlerBoolean _images =
 		new PortletDataHandlerBoolean(_NAMESPACE, "images");
-
-	private static Log _log = LogFactoryUtil.getLog(
-		RSSPortletDataHandlerImpl.class);
 
 	private static PortletDataHandlerBoolean _ratings =
 		new PortletDataHandlerBoolean(_NAMESPACE, "ratings");
