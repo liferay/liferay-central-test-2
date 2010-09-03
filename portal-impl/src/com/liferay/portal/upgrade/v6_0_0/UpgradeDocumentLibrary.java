@@ -14,8 +14,11 @@
 
 package com.liferay.portal.upgrade.v6_0_0;
 
+import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
@@ -125,9 +128,13 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 					name);
 
 				if (!newName.equals(name)) {
-					DLServiceUtil.updateFile(
-						companyId, portletId, groupId, repositoryId, name,
-						newName, false);
+					try {
+						DLServiceUtil.updateFile(
+							companyId, portletId, groupId, repositoryId, name,
+							newName, false);
+					} catch (NoSuchFileException nsfe) {
+						_log.error(nsfe);
+					}
 				}
 
 				addFileVersion(
@@ -188,5 +195,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 	}
+
+	private static Log _log =
+			LogFactoryUtil.getLog(UpgradeDocumentLibrary.class);
 
 }
