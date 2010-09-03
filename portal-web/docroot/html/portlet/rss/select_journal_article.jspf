@@ -37,17 +37,19 @@ ArticleSearch searchContainer = new ArticleSearch(renderRequest, portletURL);
 %>
 
 <liferay-ui:search-form
-	page="/html/portlet/asset_publisher/article_search.jsp"
+	page="/html/portlet/journal/article_search.jsp"
 	searchContainer="<%= searchContainer %>"
 />
 
 <%
+OrderByComparator orderByComparator = JournalUtil.getArticleOrderByComparator(searchContainer.getOrderByCol(), searchContainer.getOrderByType());
+
 ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
+
+searchTerms.setVersion(-1);
 %>
 
 <%@ include file="/html/portlet/journal/article_search_results.jspf" %>
-
-<div class="separator"><!-- --></div>
 
 <%
 List resultRows = searchContainer.getResultRows();
