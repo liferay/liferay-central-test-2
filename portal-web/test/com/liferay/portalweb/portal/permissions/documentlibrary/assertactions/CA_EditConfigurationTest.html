@@ -24,8 +24,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Configuration</td>
+	<td>clickAt</td>
+	<td>//strong/a</td>
+	<td>Options</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//input[@value='Select']</td>
 	<td></td>
 </tr>
 <tr>
@@ -34,24 +49,49 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Show Columns</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//div[@id='foldersListingPanel']/div[1]/div/span</td>
+	<td>Folders Listing</td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>assertText</td>
+	<td>//div[@id='documentsListingPanel']/div[1]/div/span</td>
 	<td>Documents Listing</td>
-	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='documentsRatingsPanel']/div[1]/div/span</td>
+	<td>Ratings</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>_86_showFoldersSearchCheckbox</td>
+	<td>Show Search</td>
 </tr>
 <tr>
 	<td>clickAt</td>
 	<td>_86_showFoldersSearchCheckbox</td>
-	<td></td>
+	<td>Show Search</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@id='p_p_id_86_']/div/div</td>
+	<td>You have successfully updated the setup.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='p_p_id_86_']/div/div</td>
+	<td>You have successfully updated the setup.</td>
+</tr>
+<tr>
+	<td>assertNotChecked</td>
+	<td>_86_showFoldersSearchCheckbox</td>
+	<td>Show Search</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -64,14 +104,34 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Configuration</td>
-	<td></td>
+	<td>clickAt</td>
+	<td>//strong/a</td>
+	<td>Options</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Configuration</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_86_showFoldersSearchCheckbox</td>
+	<td>Show Search</td>
+</tr>
+<tr>
+	<td>assertNotChecked</td>
+	<td>_86_showFoldersSearchCheckbox</td>
+	<td>Show Search</td>
 </tr>
 <tr>
 	<td>clickAt</td>
 	<td>_86_showFoldersSearchCheckbox</td>
-	<td></td>
+	<td>Show Search</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -79,9 +139,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
+	<td>waitForText</td>
+	<td>//div[@id='p_p_id_86_']/div/div</td>
 	<td>You have successfully updated the setup.</td>
-	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='p_p_id_86_']/div/div</td>
+	<td>You have successfully updated the setup.</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>_86_showFoldersSearchCheckbox</td>
+	<td>Show Search</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>

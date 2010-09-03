@@ -45,42 +45,8 @@ public class Member_AddCommentTest extends BaseTestCase {
 		selenium.clickAt("link=Permissions2 Test2 Subfolder2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=View")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=View", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/span/span",
+			RuntimeVariables.replace("Member Permissions Edited Test Document"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -89,7 +55,7 @@ public class Member_AddCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[6]/span/a")) {
+				if (selenium.isVisible("link=Be the first.")) {
 					break;
 				}
 			}
@@ -99,26 +65,7 @@ public class Member_AddCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Comments", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("link=Add Comment")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Add Comment", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Be the first.", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -136,18 +83,17 @@ public class Member_AddCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_20_postReplyBody0",
-			RuntimeVariables.replace(
-				"Hi! I am a member tping a comment on m uploaded document. Hopefull it works! Or else I'll be sad. I don't want to be sad."));
 		selenium.type("_20_postReplyBody0",
 			RuntimeVariables.replace(
 				"Hi! I am a member typing a comment on my uploaded document. Hopefully it works! Or else I'll be sad. I don't want to be sad."));
-		selenium.clickAt("_20_postReplyButton0", RuntimeVariables.replace(""));
+		selenium.keyPress("_20_postReplyBody0", RuntimeVariables.replace("\\48"));
+		selenium.keyPress("_20_postReplyBody0", RuntimeVariables.replace("\\8"));
+		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent(
-				"link=Member Permissions Edited Test Document.txt"));
+				"link=Member Permissions Edited Test Document"));
 		assertTrue(selenium.isTextPresent(
 				"Hi! I am a member typing a comment on my uploaded document. Hopefully it works! Or else I'll be sad. I don't want to be sad."));
 	}

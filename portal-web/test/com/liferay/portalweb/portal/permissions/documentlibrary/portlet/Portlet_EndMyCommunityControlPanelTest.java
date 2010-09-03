@@ -15,7 +15,6 @@
 package com.liferay.portalweb.portal.permissions.documentlibrary.portlet;
 
 import com.liferay.portalweb.portal.BaseTestCase;
-import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * @author Brian Wing Shun Chan
@@ -23,34 +22,6 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Portlet_EndMyCommunityControlPanelTest extends BaseTestCase {
 	public void testPortlet_EndMyCommunityControlPanel()
 		throws Exception {
-		int label = 1;
-
-		while (label >= 1) {
-			switch (label) {
-			case 1:
-
-				boolean InControlPanel = selenium.isElementPresent(
-						"link=Back to My Community");
-
-				if (!InControlPanel) {
-					label = 2;
-
-					continue;
-				}
-
-				selenium.clickAt("link=Back to My Community",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				Thread.sleep(5000);
-
-			case 2:
-				selenium.clickAt("link=Welcome - Liferay",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-
-			case 100:
-				label = -1;
-			}
-		}
+		selenium.open("/user/portlet/home/");
 	}
 }

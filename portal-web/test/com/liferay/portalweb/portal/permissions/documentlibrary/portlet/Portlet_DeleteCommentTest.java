@@ -22,6 +22,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Portlet_DeleteCommentTest extends BaseTestCase {
 	public void testPortlet_DeleteComment() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -45,67 +47,24 @@ public class Portlet_DeleteCommentTest extends BaseTestCase {
 		selenium.clickAt("link=SA1 Portlet1 Permissions1 Folder1",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=View")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=View", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Portlet1 Temporary1 Document1",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Comments", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Comments"),
+			selenium.getText("//div[4]/div/div[2]/div[1]/div/span"));
+		assertTrue(selenium.isPartialText("//td[2]/div[1]",
+				"This is a portlet permissions test comment."));
+		assertTrue(selenium.isElementPresent("link=Delete"));
 		selenium.click(RuntimeVariables.replace("link=Delete"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		assertTrue(selenium.isTextPresent("Your request processed successfully"));
-		assertFalse(selenium.isElementPresent("//td[2]/div[1]"));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
+		assertFalse(selenium.isTextPresent(
+				"This is a portlet permissions test comment."));
+		assertFalse(selenium.isTextPresent(
+				"This is a portlet permissions test comment. Edited."));
 	}
 }

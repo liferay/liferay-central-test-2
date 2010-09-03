@@ -74,7 +74,8 @@ public class CA_EditDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_20_title",
 			RuntimeVariables.replace("Admin Permissions Edited Test Document"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent(

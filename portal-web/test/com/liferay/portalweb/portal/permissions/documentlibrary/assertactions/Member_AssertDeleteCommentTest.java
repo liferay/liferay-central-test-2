@@ -45,42 +45,8 @@ public class Member_AssertDeleteCommentTest extends BaseTestCase {
 		selenium.clickAt("link=Permissions2 Test2 Subfolder2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=View")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=View", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/span/span",
+			RuntimeVariables.replace("Member Permissions Edited Test Document"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -89,26 +55,8 @@ public class Member_AssertDeleteCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[6]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Comments", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//td[2]/div[1]")) {
+				if (selenium.isVisible(
+							"//td[2]/table[1]/tbody/tr/td[5]/span/a/span")) {
 					break;
 				}
 			}
@@ -119,6 +67,6 @@ public class Member_AssertDeleteCommentTest extends BaseTestCase {
 		}
 
 		assertEquals(RuntimeVariables.replace("Delete"),
-			selenium.getText("//td[5]/span/a[2]"));
+			selenium.getText("//td[2]/table[1]/tbody/tr/td[5]/span/a/span"));
 	}
 }

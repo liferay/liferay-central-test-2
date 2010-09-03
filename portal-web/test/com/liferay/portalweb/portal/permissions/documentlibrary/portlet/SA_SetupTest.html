@@ -9,44 +9,24 @@
 <tr><td rowspan="1" colspan="3">SA_SetupTest</td></tr>
 </thead><tbody>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Document Library Permissions Test Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Document Library Permissions Test Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//input[@value='Permissions']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>15_ACTION_VIEW</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//input[@value='Submit']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Document Library Permissions Test Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//input[@value='Add Subfolder']</td>
+	<td>open</td>
+	<td>/web/guest/home/</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//li[4]/span/a</td>
+	<td>link=Document Library Permissions Test Page</td>
 	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Document Library Permissions Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[2]/a</td>
+	<td>Add Folder</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -60,18 +40,18 @@
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//td[4]/ul/li/strong/span</td>
-	<td></td>
+	<td>//td[4]/ul/li/strong/a</td>
+	<td>Actions</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Permissions</td>
-	<td></td>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Permissions</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Permissions</td>
-	<td></td>
+	<td>clickAndWait</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Permissions</td>
 </tr>
 <tr>
 	<td>check</td>
@@ -80,7 +60,12 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//input[@value='Submit']</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>15_ACTION_VIEW</td>
 	<td></td>
 </tr>
 

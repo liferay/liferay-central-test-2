@@ -46,24 +46,6 @@ public class Member_AssertCannotMoveUserDocumentsTest extends BaseTestCase {
 		selenium.clickAt("link=Permissions Test Subfolder",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertFalse(selenium.isElementPresent("link=Edit"));
-		assertFalse(selenium.isElementPresent("//input[@value='Select']"));
+		assertFalse(selenium.isElementPresent("link=Move"));
 	}
 }

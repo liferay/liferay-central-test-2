@@ -42,26 +42,12 @@ public class Member_AddFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Add Subfolder']",
+		selenium.clickAt("link=Permissions Test Subfolder",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[1]/a"));
+		selenium.waitForPageToLoad("30000");
 		selenium.type("_20_name",
 			RuntimeVariables.replace("Member1 Temporary1 Folder1"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
@@ -69,6 +55,6 @@ public class Member_AddFolderTest extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertEquals(RuntimeVariables.replace("Member1 Temporary1 Folder1"),
-			selenium.getText("//b"));
+			selenium.getText("//a/strong"));
 	}
 }

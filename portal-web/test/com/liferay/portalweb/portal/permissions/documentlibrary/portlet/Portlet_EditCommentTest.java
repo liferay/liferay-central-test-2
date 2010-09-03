@@ -22,6 +22,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Portlet_EditCommentTest extends BaseTestCase {
 	public void testPortlet_EditComment() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -45,44 +47,15 @@ public class Portlet_EditCommentTest extends BaseTestCase {
 		selenium.clickAt("link=SA1 Portlet1 Permissions1 Folder1",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=View", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Portlet1 Temporary1 Document1",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Comments", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Comments"),
+			selenium.getText("//div[4]/div/div[2]/div[1]/div/span"));
+		assertEquals(RuntimeVariables.replace(
+				"This is a portlet permissions test comment."),
+			selenium.getText("//td[2]/div[1]"));
+		assertTrue(selenium.isElementPresent("link=Edit"));
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -104,9 +77,14 @@ public class Portlet_EditCommentTest extends BaseTestCase {
 		selenium.type("_20_editReplyBody1",
 			RuntimeVariables.replace(
 				"This is a portlet permissions test comment. Edited."));
-		selenium.clickAt("_20_editReplyButton1", RuntimeVariables.replace(""));
+		selenium.keyPress("_20_editReplyBody1", RuntimeVariables.replace("\\48"));
+		selenium.keyPress("_20_editReplyBody1", RuntimeVariables.replace("\\8"));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Your request processed successfully"));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a portlet permissions test comment. Edited."),
 			selenium.getText("//td[2]/div[1]"));

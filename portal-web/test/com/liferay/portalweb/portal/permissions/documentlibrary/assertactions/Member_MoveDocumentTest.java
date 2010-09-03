@@ -45,6 +45,8 @@ public class Member_MoveDocumentTest extends BaseTestCase {
 		selenium.clickAt("link=Permissions2 Test2 Folder2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//td[5]/ul/li/strong/a",
+			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -52,7 +54,8 @@ public class Member_MoveDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a")) {
 					break;
 				}
 			}
@@ -62,56 +65,31 @@ public class Member_MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//td[5]/ul/li/strong/span",
-			RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Edit")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[6]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("//input[@value='Select']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("name=folder");
 
+		String moveFolderURL = selenium.getLocation();
+		RuntimeVariables.setValue("moveFolderURL", moveFolderURL);
+		selenium.close();
+		selenium.selectWindow("null");
+		Thread.sleep(5000);
+		selenium.openWindow(RuntimeVariables.getValue("moveFolderURL"),
+			RuntimeVariables.replace("moveFolder"));
+		selenium.waitForPopUp("moveFolder", RuntimeVariables.replace("30000"));
+		selenium.selectWindow("name=moveFolder");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Document Home")) {
+				if (selenium.isElementPresent("link=Documents Home")) {
 					break;
 				}
 			}
@@ -121,14 +99,35 @@ public class Member_MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Document Home", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Documents Home", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Permissions2 Test2 Folder2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Permissions2 Test2 Subfolder2")
+										.equals(selenium.getText(
+								"_20_folderName"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("Permissions2 Test2 Subfolder2"),
+			selenium.getText("_20_folderName"));
+		selenium.clickAt("//input[@value='Move']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
@@ -138,24 +137,7 @@ public class Member_MoveDocumentTest extends BaseTestCase {
 		selenium.clickAt("link=Permissions2 Test2 Subfolder2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertTrue(selenium.isElementPresent(
-				"link=Member Permissions Edited Test Document.txt"));
+				"link=Member Permissions Edited Test Document"));
 	}
 }

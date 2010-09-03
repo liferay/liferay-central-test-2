@@ -70,13 +70,16 @@ public class AssertActionsTests extends BaseTests {
 		testSuite.addTestSuite(Member_AssertCannotRemovePortletTest.class);
 		testSuite.addTestSuite(Member_LogoutTest.class);
 		testSuite.addTestSuite(SA_LoginTest.class);
+		testSuite.addTestSuite(SA_RemoveViewPermissionsTest.class);
+		testSuite.addTestSuite(SA_LogoutTest.class);
+		testSuite.addTestSuite(Guest_AssertCannotViewFolderTest.class);
+		testSuite.addTestSuite(Guest_AssertCannotViewDocumentTest.class);
+		testSuite.addTestSuite(SA_LoginTest.class);
 		testSuite.addTestSuite(SA_EditPermissionsTest.class);
 		testSuite.addTestSuite(SA_LogoutTest.class);
 		testSuite.addTestSuite(Guest_AssertNotSignedInTest.class);
 		testSuite.addTestSuite(Guest_AssertViewFoldersTest.class);
 		testSuite.addTestSuite(Guest_AssertViewDocumentsTest.class);
-		testSuite.addTestSuite(Guest_AssertCannotViewFolderTest.class);
-		testSuite.addTestSuite(Guest_AssertCannotViewDocumentTest.class);
 		testSuite.addTestSuite(Guest_SearchPortletTest.class);
 		testSuite.addTestSuite(Guest_AssertCannotAddFoldersTest.class);
 		testSuite.addTestSuite(Guest_AssertCannotEditFoldersTest.class);

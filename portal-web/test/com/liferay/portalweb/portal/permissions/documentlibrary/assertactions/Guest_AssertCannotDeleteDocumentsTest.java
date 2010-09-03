@@ -43,16 +43,13 @@ public class Guest_AssertCannotDeleteDocumentsTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Permissions Edited Test Folder",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Permissions Test Subfolder",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Delete"));
-		selenium.clickAt("link=Document Library Permissions Test Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Permissions2 Test2 Subfolder2",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -60,7 +57,8 @@ public class Guest_AssertCannotDeleteDocumentsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
+				if (selenium.isElementPresent(
+							"link=Document Library Permissions Test Page")) {
 					break;
 				}
 			}
@@ -70,6 +68,15 @@ public class Guest_AssertCannotDeleteDocumentsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Permissions2 Test2 Folder2",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Permissions2 Test2 Subfolder2",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Delete"));
 	}
 }

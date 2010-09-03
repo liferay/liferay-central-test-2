@@ -19,28 +19,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Permissions2 Test2 Folder2</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//li[4]/span/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>//input[@value='Add Document']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Document Library Permissions Test Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementNotPresent</td>
-	<td>//li[4]/span/a</td>
+	<td>assertTextNotPresent</td>
+	<td>Add Document</td>
 	<td></td>
 </tr>
 <tr>
@@ -49,8 +29,48 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
-	<td>//input[@value='Add Document']</td>
+	<td>assertTextNotPresent</td>
+	<td>Add Document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Permissions Test Subfolder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Add Document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Document Library Permissions Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Document Library Permissions Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Permissions2 Test2 Folder2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Add Document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Permissions2 Test2 Subfolder2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Add Document</td>
 	<td></td>
 </tr>
 

@@ -22,6 +22,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Portlet_EditFolderTest extends BaseTestCase {
 	public void testPortlet_EditFolder() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -43,8 +45,8 @@ public class Portlet_EditFolderTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Portlet2 Temporary2 Folder2"),
-			selenium.getText("//b"));
-		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+			selenium.getText("//a/strong"));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -52,7 +54,8 @@ public class Portlet_EditFolderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Edit")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -62,34 +65,23 @@ public class Portlet_EditFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("Edit"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_20_name",
 			RuntimeVariables.replace("Edited2 Portlet2 Temporary2 Folder2"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		assertNotEquals(RuntimeVariables.replace("Portlet2 Temporary2 Folder2"),
-			selenium.getText("//b"));
 		assertEquals(RuntimeVariables.replace(
-				"Edited2 Portlet2 Temporary2 Folder2"), selenium.getText("//b"));
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
+		assertNotEquals(RuntimeVariables.replace("Portlet2 Temporary2 Folder2"),
+			selenium.getText("//a/strong"));
+		assertEquals(RuntimeVariables.replace(
+				"Edited2 Portlet2 Temporary2 Folder2"),
+			selenium.getText("//a/strong"));
 	}
 }

@@ -22,6 +22,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Guest_AssertCannotViewDocumentTest extends BaseTestCase {
 	public void testGuest_AssertCannotViewDocument() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -42,17 +44,49 @@ public class Guest_AssertCannotViewDocumentTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=My Documents", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace(
+				"link=Permissions2 Test2 Subfolder2"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent(
-				"link=Admin Permissions Edited Test Document.txt"));
-		assertTrue(selenium.isTextPresent(
-				"Admin Permissions Edited Test Document.txt"));
+				"link=Member Permissions Edited Test Document"));
+		assertFalse(selenium.isTextPresent(
+				"Member Permissions Edited Test Document"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Document Library Permissions Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Recent Documents", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("There are no documents."),
+			selenium.getText("//div[2]/div/div[2]"));
 		assertFalse(selenium.isElementPresent(
-				"link=Admin Permissions Edited Test Document.txt"));
-		assertTrue(selenium.isTextPresent(
-				"Admin Permissions Edited Test Document.txt"));
+				"link=Member Permissions Edited Test Document"));
+		assertFalse(selenium.isTextPresent(
+				"Member Permissions Edited Test Document"));
+		assertFalse(selenium.isElementPresent(
+				"link=Admin Permissions Edited Test Document"));
+		assertFalse(selenium.isTextPresent(
+				"Admin Permissions Edited Test Document"));
 	}
 }

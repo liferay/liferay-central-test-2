@@ -23,6 +23,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Portlet_AssertCannotViewDocumentTest extends BaseTestCase {
 	public void testPortlet_AssertCannotViewDocument()
 		throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -47,16 +49,17 @@ public class Portlet_AssertCannotViewDocumentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent(
-				"link=Portlet1 Temporary1 Document1.txt"));
-		assertTrue(selenium.isTextPresent("Portlet1 Temporary1 Document1.txt"));
+				"link=Portlet1 Temporary1 Document1"));
+		assertFalse(selenium.isTextPresent("Portlet1 Temporary1 Document1"));
 		selenium.click(RuntimeVariables.replace("link=My Documents"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent(
-				"link=Portlet1 Temporary1 Document1.txt"));
+				"link=Portlet1 Temporary1 Document1"));
+		assertFalse(selenium.isTextPresent("Portlet1 Temporary1 Document1"));
 		selenium.click(RuntimeVariables.replace("link=Recent Documents"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent(
-				"link=Portlet1 Temporary1 Document1.txt"));
-		assertTrue(selenium.isTextPresent("Portlet1 Temporary1 Document1.txt"));
+				"link=Portlet1 Temporary1 Document1"));
+		assertFalse(selenium.isTextPresent("Portlet1 Temporary1 Document1"));
 	}
 }

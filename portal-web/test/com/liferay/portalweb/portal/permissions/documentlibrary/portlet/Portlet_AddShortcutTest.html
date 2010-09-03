@@ -9,6 +9,11 @@
 <tr><td rowspan="1" colspan="3">Portlet_AddShortcutTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Document Library Permissions Test Page</td>
 	<td></td>
@@ -24,19 +29,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//li[4]/span/a</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[1]/a</td>
+	<td>Add Shortcut</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//input[@value='Add Shortcut']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//li[5]/span/a</td>
-	<td></td>
+	<td>clickAndWait</td>
+	<td>//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[1]/a</td>
+	<td>Add Shortcut</td>
 </tr>
 <tr>
 	<td>clickAt</td>
@@ -139,16 +139,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Document Home</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
 	<td>store</td>
 	<td>eval(selenium.isElementPresent('link=My1 Community1 Folder1'))</td>
 	<td>FolderPresent1</td>
@@ -190,7 +180,7 @@
 </tr>
 <tr>
 	<td>store</td>
-	<td>eval(selenium.isElementPresent('link=My1 Community1 Document1.txt'))</td>
+	<td>eval(selenium.isElementPresent('link=My1 Community1 Document1'))</td>
 	<td>DocumentPresent1</td>
 </tr>
 <tr>
@@ -220,7 +210,7 @@
 </tr>
 <tr>
 	<td>store</td>
-	<td>eval(selenium.isElementPresent('link=My1 Community1 Document1.txt'))</td>
+	<td>eval(selenium.isElementPresent('link=My1 Community1 Document1'))</td>
 	<td>DocumentPresent2</td>
 </tr>
 <tr>
@@ -230,7 +220,7 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=My1 Community1 Document1.txt</td>
+	<td>link=My1 Community1 Document1</td>
 	<td></td>
 </tr>
 <tr>
@@ -256,7 +246,7 @@
 <tr>
 	<td>assertText</td>
 	<td>_20_toFileEntryTitle</td>
-	<td>My1 Community1 Document1.txt</td>
+	<td>My1 Community1 Document1</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -270,7 +260,7 @@
 </tr>
 <tr>
 	<td>assertElementPresent</td>
-	<td>link=My1 Community1 Document1.txt</td>
+	<td>link=My1 Community1 Document1</td>
 	<td></td>
 </tr>
 

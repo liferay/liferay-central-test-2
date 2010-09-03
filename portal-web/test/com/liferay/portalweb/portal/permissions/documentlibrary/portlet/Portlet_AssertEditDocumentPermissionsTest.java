@@ -23,6 +23,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Portlet_AssertEditDocumentPermissionsTest extends BaseTestCase {
 	public void testPortlet_AssertEditDocumentPermissions()
 		throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -46,6 +48,9 @@ public class Portlet_AssertEditDocumentPermissionsTest extends BaseTestCase {
 		selenium.clickAt("link=SA1 Portlet1 Permissions1 Folder1",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Permissions"));
+		selenium.clickAt("//td[5]/ul/li/strong/a",
+			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -53,7 +58,8 @@ public class Portlet_AssertEditDocumentPermissionsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
 					break;
 				}
 			}
@@ -63,50 +69,19 @@ public class Portlet_AssertEditDocumentPermissionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Permissions")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Permissions", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("Permissions"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertTrue(selenium.isPartialText("//form/div[1]",
-				"Edit Permissions for Document Library Document:"));
-		assertTrue(selenium.isElementPresent("//input[@value='Submit']"));
-		selenium.clickAt("//input[@value='Submit']",
-			RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("Portlet1 Temporary1 Document1"),
+			selenium.getText("//h1[@class='header-title']/span"));
+		assertTrue(selenium.isElementPresent("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
 	}
 }

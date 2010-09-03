@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.permissions.documentlibrary.portlet;
+package com.liferay.portalweb.portal.permissions.documentlibrary.assertactions;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class Portlet_EditDocumentTest extends BaseTestCase {
-	public void testPortlet_EditDocument() throws Exception {
+public class SA_RemoveViewPermissionsTest extends BaseTestCase {
+	public void testSA_RemoveViewPermissions() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -44,13 +44,8 @@ public class Portlet_EditDocumentTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=SA1 Portlet1 Permissions1 Folder1",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Edit"));
-		assertEquals(RuntimeVariables.replace("Portlet1 Temporary1 Document1"),
-			selenium.getText("//td[1]/a"));
-		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
+		selenium.clickAt("//td[4]/ul/li/strong/a",
+			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -69,17 +64,19 @@ public class Portlet_EditDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace("Edit"),
-			selenium.getText(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_20_title",
-			RuntimeVariables.replace("Edited1 Portlet1 Temporary1 Document1"));
-		selenium.clickAt("//input[@value='Publish']",
-			RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("Permissions Edited Test Folder"),
+			selenium.getText("//h1[@class='header-title']/span"));
+		selenium.uncheck("15_ACTION_VIEW");
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
+		assertFalse(selenium.isChecked("15_ACTION_VIEW"));
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -87,10 +84,8 @@ public class Portlet_EditDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace(
-							"Your request processed successfully.")
-										.equals(selenium.getText(
-								"//section/div/div/div/div[1]"))) {
+				if (selenium.isElementPresent(
+							"link=Document Library Permissions Test Page")) {
 					break;
 				}
 			}
@@ -100,13 +95,44 @@ public class Portlet_EditDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//tr[4]/td[1]/a[3]",
+			RuntimeVariables.replace("Permissions2 Test2 Subfolder2"));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//td[5]/ul/li/strong/a",
+			RuntimeVariables.replace("Actions"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace(
+				"Member Permissions Edited Test Document"),
+			selenium.getText("//h1[@class='header-title']/span"));
+		selenium.uncheck("15_ACTION_VIEW");
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
-		assertNotEquals(RuntimeVariables.replace(
-				"Portlet1 Temporary1 Document1"), selenium.getText("//td[1]/a"));
-		assertEquals(RuntimeVariables.replace(
-				"Edited1 Portlet1 Temporary1 Document1"),
-			selenium.getText("//td[1]/a"));
+		assertFalse(selenium.isChecked("15_ACTION_VIEW"));
 	}
 }

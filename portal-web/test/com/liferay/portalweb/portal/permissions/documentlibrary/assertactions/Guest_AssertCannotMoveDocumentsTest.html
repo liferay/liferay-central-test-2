@@ -20,17 +20,22 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
+	<td>link=Permissions Edited Test Folder</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
 	<td>link=Permissions Test Subfolder</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertElementNotPresent</td>
-	<td>link=Edit</td>
+	<td>link=Move</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementNotPresent</td>
-	<td>//strong/span</td>
+	<td>waitForElementPresent</td>
+	<td>link=Document Library Permissions Test Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -40,17 +45,17 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
+	<td>link=Permissions2 Test2 Folder2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
 	<td>link=Permissions2 Test2 Subfolder2</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//li[5]/span/a</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertElementNotPresent</td>
-	<td>link=Edit</td>
+	<td>link=Move</td>
 	<td></td>
 </tr>
 

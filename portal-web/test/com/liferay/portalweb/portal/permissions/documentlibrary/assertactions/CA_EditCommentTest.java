@@ -95,7 +95,7 @@ public class CA_EditCommentTest extends BaseTestCase {
 				"I am a Community Admin and I can write comments!\nThis is an edited comment."));
 		selenium.keyPress("_20_editReplyBody1", RuntimeVariables.replace("\\48"));
 		selenium.keyPress("_20_editReplyBody1", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("//input[@value='Update']",
+		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

@@ -94,7 +94,8 @@ public class CA_AddDocumentTest extends BaseTestCase {
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\documentlibrary\\assertactions\\dependencies\\CA_TestDocument.txt"));
 		selenium.type("_20_title",
 			RuntimeVariables.replace("Admin Permissions Test Document"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent(

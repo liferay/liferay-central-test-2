@@ -45,26 +45,8 @@ public class Member_AssertAddCommentNotOwnerTest extends BaseTestCase {
 		selenium.clickAt("link=Permissions Test Subfolder",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=View", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Comments", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/span/span",
+			RuntimeVariables.replace("Admin Permissions Edited Test Document"));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Post Reply", RuntimeVariables.replace(""));
 
@@ -84,13 +66,13 @@ public class Member_AssertAddCommentNotOwnerTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_20_postReplyBody1",
-			RuntimeVariables.replace(
-				"I am a Member and I can write a comment on a different user's uploaded document"));
 		selenium.type("_20_postReplyBody1",
 			RuntimeVariables.replace(
 				"I am a Member and I can write a comment on a different user's uploaded document!"));
-		selenium.clickAt("_20_postReplyButton1", RuntimeVariables.replace(""));
+		selenium.keyPress("_20_postReplyBody1", RuntimeVariables.replace("\\48"));
+		selenium.keyPress("_20_postReplyBody1", RuntimeVariables.replace("\\8"));
+		selenium.clickAt("//td[2]/table[2]/tbody/tr/td/input[1]",
+			RuntimeVariables.replace("Reply"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

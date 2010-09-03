@@ -42,26 +42,11 @@ public class Guest_AssertViewDocumentsTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=My Documents", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent(
-				"link=Member Permissions Edited Test Document.txt"));
-		assertFalse(selenium.isElementPresent(
-				"link=Admin Permissions Edited Test Document.txt"));
-		assertTrue(selenium.isTextPresent(
-				"Admin Permissions Edited Test Document.txt"));
 		selenium.clickAt("link=Recent Documents", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
-				"link=Member Permissions Edited Test Document.txt"));
-		assertFalse(selenium.isElementPresent(
-				"link=Admin Permissions Edited Test Document.txt"));
-		assertTrue(selenium.isTextPresent(
-				"Admin Permissions Edited Test Document.txt"));
-		selenium.clickAt("link=View", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=TXT"));
+				"link=Member Permissions Edited Test Document"));
 		assertTrue(selenium.isElementPresent(
-				"link=Member Permissions Edited Test Document.txt"));
+				"link=Admin Permissions Edited Test Document"));
 	}
 }

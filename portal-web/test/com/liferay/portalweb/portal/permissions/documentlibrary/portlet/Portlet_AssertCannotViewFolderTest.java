@@ -22,6 +22,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Portlet_AssertCannotViewFolderTest extends BaseTestCase {
 	public void testPortlet_AssertCannotViewFolder() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -42,10 +44,8 @@ public class Portlet_AssertCannotViewFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Portlet2 Temporary2 Folder2",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"You do not have the required permissions."));
+		assertFalse(selenium.isElementPresent(
+				"link=Portlet2 Temporary2 Folder2"));
+		assertFalse(selenium.isTextPresent("Portlet2 Temporary2 Folder2"));
 	}
 }

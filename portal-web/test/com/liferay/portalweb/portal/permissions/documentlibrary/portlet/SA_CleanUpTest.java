@@ -27,6 +27,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 		while (label >= 1) {
 			switch (label) {
 			case 1:
+				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -59,7 +60,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 				}
 
 				boolean Folder1Present = selenium.isElementPresent(
-						"//td[4]/ul/li/strong/span");
+						"//td[4]/ul/li/strong/a");
 
 				if (!Folder1Present) {
 					label = 2;
@@ -67,8 +68,8 @@ public class SA_CleanUpTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/ul/li/strong/span",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("//td[4]/ul/li/strong/a",
+					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -76,7 +77,8 @@ public class SA_CleanUpTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//div[5]/ul/li[4]/a")) {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a")) {
 							break;
 						}
 					}
@@ -86,7 +88,8 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[4]/a"));
+				selenium.click(RuntimeVariables.replace(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -94,7 +97,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 			case 2:
 
 				boolean Folder2Present = selenium.isElementPresent(
-						"//td[4]/ul/li/strong/span");
+						"//td[4]/ul/li/strong/a");
 
 				if (!Folder2Present) {
 					label = 3;
@@ -102,8 +105,8 @@ public class SA_CleanUpTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/ul/li/strong/span",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("//td[4]/ul/li/strong/a",
+					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -111,7 +114,8 @@ public class SA_CleanUpTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//div[5]/ul/li[4]/a")) {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a")) {
 							break;
 						}
 					}
@@ -121,7 +125,8 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("//div[5]/ul/li[4]/a"));
+				selenium.click(RuntimeVariables.replace(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -132,7 +137,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
 
 			case 4:
-				selenium.clickAt("link=Application",
+				selenium.clickAt("_145_addApplication",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -142,7 +147,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 
 					try {
 						if (selenium.isElementPresent(
-									"//div[@id='ContentManagement-DocumentLibrary']/p/a")) {
+									"//div[@title='Document Library']/p/a")) {
 							break;
 						}
 					}
@@ -152,7 +157,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[@id='ContentManagement-DocumentLibrary']/p/a",
+				selenium.clickAt("//div[@title='Document Library']/p/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -161,7 +166,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
+						if (selenium.isElementPresent("//section")) {
 							break;
 						}
 					}
@@ -171,7 +176,7 @@ public class SA_CleanUpTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				assertTrue(selenium.isElementPresent("//td[1]/div/div[1]/div"));
+				assertTrue(selenium.isElementPresent("//section"));
 
 			case 100:
 				label = -1;

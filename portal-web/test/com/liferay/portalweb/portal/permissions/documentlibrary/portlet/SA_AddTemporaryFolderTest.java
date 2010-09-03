@@ -22,6 +22,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SA_AddTemporaryFolderTest extends BaseTestCase {
 	public void testSA_AddTemporaryFolder() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -42,8 +44,8 @@ public class SA_AddTemporaryFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Add Subfolder']",
-			RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_20_name",
 			RuntimeVariables.replace("Portlet2 Temporary2 Folder2"));

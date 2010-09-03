@@ -45,42 +45,8 @@ public class Member_EditCommentTest extends BaseTestCase {
 		selenium.clickAt("link=Permissions2 Test2 Subfolder2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=View")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=View", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/span/span",
+			RuntimeVariables.replace("Member Permissions Edited Test Document"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -89,7 +55,8 @@ public class Member_EditCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[6]/span/a")) {
+				if (selenium.isVisible(
+							"//td[2]/table[1]/tbody/tr/td[4]/span/a/span")) {
 					break;
 				}
 			}
@@ -99,26 +66,8 @@ public class Member_EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Comments", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//td[4]/span/a[2]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//td[4]/span/a[2]", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[2]/table[1]/tbody/tr/td[4]/span/a/span",
+			RuntimeVariables.replace("Edit"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -139,7 +88,8 @@ public class Member_EditCommentTest extends BaseTestCase {
 		selenium.type("_20_editReplyBody1",
 			RuntimeVariables.replace(
 				"Hi! I am a member typing a comment on my uploaded document. Hopefully it works! Or else I'll be sad. I don't want to be sad.\nI'm now editing this comment."));
-		selenium.clickAt("_20_editReplyButton1", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

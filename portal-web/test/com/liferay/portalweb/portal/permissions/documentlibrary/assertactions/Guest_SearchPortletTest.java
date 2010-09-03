@@ -42,15 +42,46 @@ public class Guest_SearchPortletTest extends BaseTestCase {
 		selenium.clickAt("link=Document Library Permissions Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_20_keywords1", RuntimeVariables.replace("Member"));
 		selenium.type("_20_keywords1", RuntimeVariables.replace("Member"));
-		selenium.clickAt("//input[@value='Search Folders']",
+		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent(
 				"link=Member Permissions Edited Test Document"));
 		assertFalse(selenium.isElementPresent(
-				"link=Admin Permissions Upload Edited 1"));
-		assertFalse(selenium.isTextPresent("Admin Permissions Upload Edited 1"));
+				"link=Admin Permissions Edited Test Document"));
+		assertFalse(selenium.isTextPresent(
+				"Admin Permissions Edited Test Document"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Document Library Permissions Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_20_keywords1", RuntimeVariables.replace("Admin"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent(
+				"link=Admin Permissions Edited Test Document"));
+		assertFalse(selenium.isElementPresent(
+				"link=Member Permissions Edited Test Document"));
+		assertFalse(selenium.isTextPresent(
+				"Member Permissions Edited Test Document"));
 	}
 }

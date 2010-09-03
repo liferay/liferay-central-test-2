@@ -45,25 +45,8 @@ public class Member_AddDocumentTest extends BaseTestCase {
 		selenium.clickAt("link=Permissions2 Test2 Folder2",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//input[@value='Add Document']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[2]/a",
+			RuntimeVariables.replace("Add Document"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 
@@ -104,16 +87,15 @@ public class Member_AddDocumentTest extends BaseTestCase {
 		selenium.type("_20_file",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\documentlibrary\\assertactions\\dependencies\\Member_TestDocument.txt"));
-		selenium.typeKeys("_20_title",
-			RuntimeVariables.replace("Member Permissions Test Document"));
 		selenium.type("_20_title",
 			RuntimeVariables.replace("Member Permissions Test Document"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertTrue(selenium.isElementPresent(
-				"link=Member Permissions Test Document.txt"));
+				"link=Member Permissions Test Document"));
 	}
 }

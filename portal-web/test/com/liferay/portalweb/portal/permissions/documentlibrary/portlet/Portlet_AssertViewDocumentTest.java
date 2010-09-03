@@ -22,6 +22,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Portlet_AssertViewDocumentTest extends BaseTestCase {
 	public void testPortlet_AssertViewDocument() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -45,26 +47,20 @@ public class Portlet_AssertViewDocumentTest extends BaseTestCase {
 		selenium.clickAt("link=SA1 Portlet1 Permissions1 Folder1",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//li[4]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertTrue(selenium.isElementPresent("link=View"));
-		selenium.clickAt("link=View", RuntimeVariables.replace(""));
+		assertTrue(selenium.isElementPresent(
+				"link=Portlet1 Temporary1 Document1"));
+		selenium.clickAt("link=Portlet1 Temporary1 Document1",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Portlet1 Temporary1 Document1"),
+			selenium.getText("//h1[@class='header-title']/span"));
+		assertEquals(RuntimeVariables.replace("Version: 1.0"),
+			selenium.getText("//span[@class='workflow-version']"));
+		assertEquals(RuntimeVariables.replace("Status: Approved"),
+			selenium.getText("//span[@class='workflow-status']"));
+		assertEquals(RuntimeVariables.replace("Portlet1 Temporary1 Document1"),
+			selenium.getText("//div[@class='lfr-asset-name']/a"));
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -72,7 +68,8 @@ public class Portlet_AssertViewDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//li[5]/span/a")) {
+				if (selenium.isElementPresent(
+							"link=Document Library Permissions Test Page")) {
 					break;
 				}
 			}
@@ -82,8 +79,47 @@ public class Portlet_AssertViewDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace(
-				"Portlet1 Temporary1 Document1.txt"),
-			selenium.getText("//div/div[2]/div/div/div/a"));
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=My Documents"));
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent(
+				"link=Portlet1 Temporary1 Document1"));
+		assertFalse(selenium.isTextPresent("Portlet1 Temporary1 Document1"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=Document Library Permissions Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Document Library Permissions Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Recent Documents"));
+		selenium.waitForPageToLoad("30000");
+		assertEquals(RuntimeVariables.replace("Portlet1 Temporary1 Document1"),
+			selenium.getText("//td[1]/a/span/span"));
+		assertEquals(RuntimeVariables.replace("0.1k"),
+			selenium.getText("//td[2]/a"));
+		assertEquals(RuntimeVariables.replace("0"),
+			selenium.getText("//td[3]/a"));
+		assertEquals(RuntimeVariables.replace("No"),
+			selenium.getText("//td[4]/a"));
+		assertEquals(RuntimeVariables.replace("Download (0.1k)"),
+			selenium.getText("//td[5]/span/a"));
 	}
 }
