@@ -29,42 +29,92 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 		_journalArticleResource = journalArticleResource;
 	}
 
+	/**
+	* Gets the primary key of this journal article resource.
+	*
+	* @return the primary key of this journal article resource
+	*/
 	public long getPrimaryKey() {
 		return _journalArticleResource.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this journal article resource
+	*
+	* @param pk the primary key of this journal article resource
+	*/
 	public void setPrimaryKey(long pk) {
 		_journalArticleResource.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the uuid of this journal article resource.
+	*
+	* @return the uuid of this journal article resource
+	*/
 	public java.lang.String getUuid() {
 		return _journalArticleResource.getUuid();
 	}
 
+	/**
+	* Sets the uuid of this journal article resource.
+	*
+	* @param uuid the uuid of this journal article resource
+	*/
 	public void setUuid(java.lang.String uuid) {
 		_journalArticleResource.setUuid(uuid);
 	}
 
+	/**
+	* Gets the resource prim key of this journal article resource.
+	*
+	* @return the resource prim key of this journal article resource
+	*/
 	public long getResourcePrimKey() {
 		return _journalArticleResource.getResourcePrimKey();
 	}
 
+	/**
+	* Sets the resource prim key of this journal article resource.
+	*
+	* @param resourcePrimKey the resource prim key of this journal article resource
+	*/
 	public void setResourcePrimKey(long resourcePrimKey) {
 		_journalArticleResource.setResourcePrimKey(resourcePrimKey);
 	}
 
+	/**
+	* Gets the group id of this journal article resource.
+	*
+	* @return the group id of this journal article resource
+	*/
 	public long getGroupId() {
 		return _journalArticleResource.getGroupId();
 	}
 
+	/**
+	* Sets the group id of this journal article resource.
+	*
+	* @param groupId the group id of this journal article resource
+	*/
 	public void setGroupId(long groupId) {
 		_journalArticleResource.setGroupId(groupId);
 	}
 
+	/**
+	* Gets the article id of this journal article resource.
+	*
+	* @return the article id of this journal article resource
+	*/
 	public java.lang.String getArticleId() {
 		return _journalArticleResource.getArticleId();
 	}
 
+	/**
+	* Sets the article id of this journal article resource.
+	*
+	* @param articleId the article id of this journal article resource
+	*/
 	public void setArticleId(java.lang.String articleId) {
 		_journalArticleResource.setArticleId(articleId);
 	}

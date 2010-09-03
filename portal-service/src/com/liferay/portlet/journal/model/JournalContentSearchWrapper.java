@@ -29,70 +29,155 @@ public class JournalContentSearchWrapper implements JournalContentSearch {
 		_journalContentSearch = journalContentSearch;
 	}
 
+	/**
+	* Gets the primary key of this journal content search.
+	*
+	* @return the primary key of this journal content search
+	*/
 	public long getPrimaryKey() {
 		return _journalContentSearch.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this journal content search
+	*
+	* @param pk the primary key of this journal content search
+	*/
 	public void setPrimaryKey(long pk) {
 		_journalContentSearch.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the content search id of this journal content search.
+	*
+	* @return the content search id of this journal content search
+	*/
 	public long getContentSearchId() {
 		return _journalContentSearch.getContentSearchId();
 	}
 
+	/**
+	* Sets the content search id of this journal content search.
+	*
+	* @param contentSearchId the content search id of this journal content search
+	*/
 	public void setContentSearchId(long contentSearchId) {
 		_journalContentSearch.setContentSearchId(contentSearchId);
 	}
 
+	/**
+	* Gets the group id of this journal content search.
+	*
+	* @return the group id of this journal content search
+	*/
 	public long getGroupId() {
 		return _journalContentSearch.getGroupId();
 	}
 
+	/**
+	* Sets the group id of this journal content search.
+	*
+	* @param groupId the group id of this journal content search
+	*/
 	public void setGroupId(long groupId) {
 		_journalContentSearch.setGroupId(groupId);
 	}
 
+	/**
+	* Gets the company id of this journal content search.
+	*
+	* @return the company id of this journal content search
+	*/
 	public long getCompanyId() {
 		return _journalContentSearch.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this journal content search.
+	*
+	* @param companyId the company id of this journal content search
+	*/
 	public void setCompanyId(long companyId) {
 		_journalContentSearch.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the private layout of this journal content search.
+	*
+	* @return the private layout of this journal content search
+	*/
 	public boolean getPrivateLayout() {
 		return _journalContentSearch.getPrivateLayout();
 	}
 
+	/**
+	* Determines whether this journal content search is private layout.
+	*
+	* @return whether this journal content search is private layout
+	*/
 	public boolean isPrivateLayout() {
 		return _journalContentSearch.isPrivateLayout();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is private layout.
+	*
+	* @param privateLayout the private layout of this journal content search
+	*/
 	public void setPrivateLayout(boolean privateLayout) {
 		_journalContentSearch.setPrivateLayout(privateLayout);
 	}
 
+	/**
+	* Gets the layout id of this journal content search.
+	*
+	* @return the layout id of this journal content search
+	*/
 	public long getLayoutId() {
 		return _journalContentSearch.getLayoutId();
 	}
 
+	/**
+	* Sets the layout id of this journal content search.
+	*
+	* @param layoutId the layout id of this journal content search
+	*/
 	public void setLayoutId(long layoutId) {
 		_journalContentSearch.setLayoutId(layoutId);
 	}
 
+	/**
+	* Gets the portlet id of this journal content search.
+	*
+	* @return the portlet id of this journal content search
+	*/
 	public java.lang.String getPortletId() {
 		return _journalContentSearch.getPortletId();
 	}
 
+	/**
+	* Sets the portlet id of this journal content search.
+	*
+	* @param portletId the portlet id of this journal content search
+	*/
 	public void setPortletId(java.lang.String portletId) {
 		_journalContentSearch.setPortletId(portletId);
 	}
 
+	/**
+	* Gets the article id of this journal content search.
+	*
+	* @return the article id of this journal content search
+	*/
 	public java.lang.String getArticleId() {
 		return _journalContentSearch.getArticleId();
 	}
 
+	/**
+	* Sets the article id of this journal content search.
+	*
+	* @param articleId the article id of this journal content search
+	*/
 	public void setArticleId(java.lang.String articleId) {
 		_journalContentSearch.setArticleId(articleId);
 	}
