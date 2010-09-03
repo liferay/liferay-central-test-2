@@ -191,7 +191,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 			</liferay-ui:panel-container>
 
 			<aui:button-row>
-				<aui:button type="submit" onClick='<%= renderResponse.getNamespace() + "saveSettings();" %>' />
+				<aui:button onClick='<%= renderResponse.getNamespace() + "saveSettings();" type="submit" %>' />
 			</aui:button-row>
 
 			<aui:script use="aui-base">
@@ -242,7 +242,6 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 		document.<portlet:namespace />fm.<portlet:namespace />articleGroupId.value = articleGroupId;
 		document.<portlet:namespace />fm.<portlet:namespace />articleId.value = articleId;
 		document.<portlet:namespace />fm.<portlet:namespace />typeSelection.value = '';
-
 		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
 	}
 
