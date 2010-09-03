@@ -16,6 +16,7 @@ package com.liferay.portal.upgrade;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.upgrade.v6_0_6.UpgradeRSS;
 import com.liferay.portal.upgrade.v6_0_6.UpgradeSchema;
 
 /**
@@ -29,6 +30,7 @@ public class UpgradeProcess_6_0_6 extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 		upgrade(UpgradeSchema.class);
+		upgrade(UpgradeRSS.class);
 	}
 
 }

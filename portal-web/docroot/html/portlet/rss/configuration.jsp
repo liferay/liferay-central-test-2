@@ -48,8 +48,8 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= configurationURL.toString() %>" />
 	<aui:input name="typeSelection" type="hidden" />
-	<aui:input name="resourcePrimKey" type="hidden" />
-	<aui:input name="resourceTitle" type="hidden" />
+	<aui:input name="articleGroupId" type="hidden" />
+	<aui:input name="articleId" type="hidden" />
 	<aui:input name="assetOrder" type="hidden" />
 
 	<c:choose>
@@ -160,7 +160,13 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 						</aui:select>
 
 						<aui:field-wrapper label="header-web-content">
-							<%= headerArticleResouceTitle %>
+							<c:if test="<%= Validator.isNotNull(headerArticleId) %>">
+								<%
+								JournalArticle headerArticle = JournalArticleLocalServiceUtil.getArticle(headerGroupId, headerArticleId);
+								%>
+
+								<%= HtmlUtil.escape(headerArticle.getTitle()) %>
+							</c:if>
 
 							<aui:button name="selectButton" onClick='<%= renderResponse.getNamespace() + "selectionForHeader();" %>' type="button" value="select" />
 
@@ -168,7 +174,13 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 						</aui:field-wrapper>
 
 						<aui:field-wrapper label="footer-web-content">
-							<%= footerArticleResouceTitle %>
+							<c:if test="<%= Validator.isNotNull(footerArticleId) %>">
+								<%
+								JournalArticle footerArticle = JournalArticleLocalServiceUtil.getArticle(footerGroupId, footerArticleId);
+								%>
+
+								<%= HtmlUtil.escape(footerArticle.getTitle()) %>
+							</c:if>
 
 							<aui:button name="selectButton" onClick='<%= renderResponse.getNamespace() + "selectionForFooter();" %>' type="button" value="select" />
 
@@ -219,7 +231,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
 	}
 
-	function <portlet:namespace />selectAsset(resourcePrimKey, resourceTitle, assetOrder) {
+	function <portlet:namespace />selectAsset(articleGroupId, articleId, assetOrder) {
 		if (assetOrder == 1) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'set-footer-article';
 		}
@@ -227,8 +239,8 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'set-header-article';
 		}
 
-		document.<portlet:namespace />fm.<portlet:namespace />resourcePrimKey.value = resourcePrimKey;
-		document.<portlet:namespace />fm.<portlet:namespace />resourceTitle.value = resourceTitle;
+		document.<portlet:namespace />fm.<portlet:namespace />articleGroupId.value = articleGroupId;
+		document.<portlet:namespace />fm.<portlet:namespace />articleId.value = articleId;
 		document.<portlet:namespace />fm.<portlet:namespace />typeSelection.value = '';
 
 		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
@@ -243,13 +255,13 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 	function <portlet:namespace />selectionForHeader() {
 		document.<portlet:namespace />fm.<portlet:namespace />typeSelection.value = '<%= JournalArticle.class.getName() %>';
 		document.<portlet:namespace />fm.<portlet:namespace />assetOrder.value = 0;
-		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
+		submitForm(document.<portlet:namespace />fm);
 	}
 
 	function <portlet:namespace />selectionForFooter() {
 		document.<portlet:namespace />fm.<portlet:namespace />typeSelection.value = '<%= JournalArticle.class.getName() %>';
 		document.<portlet:namespace />fm.<portlet:namespace />assetOrder.value = 1;
-		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
+		submitForm(document.<portlet:namespace />fm);
 	}
 </aui:script>
 

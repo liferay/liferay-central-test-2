@@ -66,9 +66,9 @@ for (int i = 0; i < results.size(); i++) {
 	sb.append("javascript:");
 	sb.append(renderResponse.getNamespace());
 	sb.append("selectAsset('");
-	sb.append(article.getResourcePrimKey());
+	sb.append(article.getGroupId());
 	sb.append("', '");
-	sb.append(article.getTitle());
+	sb.append(article.getArticleId());
 	sb.append("', '");
 	sb.append(assetOrder);
 	sb.append("');");

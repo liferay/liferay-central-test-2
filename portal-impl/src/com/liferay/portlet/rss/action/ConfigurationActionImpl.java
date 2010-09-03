@@ -98,7 +98,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		throws Exception {
 
 		preferences.setValues(
-			"footer-article-resource-values", new String[] {"0", ""});
+			"footer-article-values", new String[] {"0", ""});
 	}
 
 	protected void removeHeaderArticle(
@@ -106,37 +106,31 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 		throws Exception {
 
 		preferences.setValues(
-			"header-article-resource-values", new String[] {"0", ""});
+			"header-article-values", new String[] {"0", ""});
 	}
 
 	protected void setFooterArticle(
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		String footerArticleResourcePrimKey = ParamUtil.getString(
-			actionRequest, "resourcePrimKey");
-		String footerArticleResouceTitle = ParamUtil.getString(
-			actionRequest, "resourceTitle");
+		long groupId = ParamUtil.getLong(actionRequest, "articleGroupId");
+		String articleId = ParamUtil.getString(actionRequest, "articleId");
 
 		preferences.setValues(
-			"footer-article-resource-values",
-			new String[] {
-				footerArticleResourcePrimKey, footerArticleResouceTitle
-			});
+			"footer-article-values",
+			new String[] {String.valueOf(groupId), articleId});
 	}
 
 	protected void setHeaderArticle(
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		String headerArticleResourcePrimKey = ParamUtil.getString(
-			actionRequest, "resourcePrimKey");
-		String headerArticleResouceTitle = ParamUtil.getString(
-			actionRequest, "resourceTitle");
+		long groupId = ParamUtil.getLong(actionRequest, "articleGroupId");
+		String articleId = ParamUtil.getString(actionRequest, "articleId");
 
 		preferences.setValues(
-			"header-article-resource-values",
-		new String[] {headerArticleResourcePrimKey, headerArticleResouceTitle});
+			"header-article-values",
+			new String[] {String.valueOf(groupId), articleId});
 	}
 
 	protected void updateConfiguration(
@@ -148,9 +142,7 @@ public class ConfigurationActionImpl extends BaseConfigurationAction {
 
 		Map<String, String> subscriptions = new HashMap<String, String>();
 
-		for (int i = 0; i < subscriptionIndexes.length; i++) {
-			int subscriptionIndex = subscriptionIndexes[i];
-
+		for (int subscriptionIndex : subscriptionIndexes) {
 			String url = ParamUtil.getString(
 				actionRequest, "url" + subscriptionIndex);
 			String title = ParamUtil.getString(

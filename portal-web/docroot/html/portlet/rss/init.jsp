@@ -50,15 +50,15 @@ boolean showFeedImage = GetterUtil.getBoolean(preferences.getValue("show-feed-im
 String feedImageAlignment = preferences.getValue("feed-image-alignment", "right");
 boolean showFeedItemAuthor = GetterUtil.getBoolean(preferences.getValue("show-feed-item-author", Boolean.TRUE.toString()));
 
-String[] headerArticleResouceValues = preferences.getValues("header-article-resource-values", new String[] {"0", ""});
+String[] headerArticleValues = preferences.getValues("header-article-values", new String[] {"0", ""});
 
-long headerArticleResourcePrimKey = GetterUtil.getLong(headerArticleResouceValues[0]);
-String headerArticleResouceTitle = headerArticleResouceValues[1];
+long headerGroupId = GetterUtil.getLong(headerArticleValues[0]);
+String headerArticleId = headerArticleValues[1];
 
-String[] footerArticleResouceValues = preferences.getValues("footer-article-resource-values", new String[] {"0", ""});
+String[] footerArticleValues = preferences.getValues("footer-article-values", new String[] {"0", ""});
 
-long footerArticleResourcePrimKey = GetterUtil.getLong(footerArticleResouceValues[0]);
-String footerArticleResouceTitle = footerArticleResouceValues[1];
+long footerGroupId = GetterUtil.getLong(footerArticleValues[0]);
+String footerArticleId = footerArticleValues[1];
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);

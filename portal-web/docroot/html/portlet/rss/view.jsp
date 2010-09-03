@@ -21,8 +21,8 @@ String url = ParamUtil.getString(request, "url");
 String title = StringPool.BLANK;
 %>
 
-<c:if test="<%= headerArticleResourcePrimKey > 0 %>">
-	<liferay-ui:journal-article articleResourcePrimKey="<%= headerArticleResourcePrimKey %>" />
+<c:if test="<%= Validator.isNotNull(headerArticleId) %>">
+	<liferay-ui:journal-article articleId="<%= headerArticleId %>" groupId="<%= headerGroupId %>" />
 </c:if>
 
 <%
@@ -49,8 +49,8 @@ for (int i = 0; i < urls.length; i++) {
 }
 %>
 
-<c:if test="<%= footerArticleResourcePrimKey > 0 %>">
-	<liferay-ui:journal-article articleResourcePrimKey="<%= footerArticleResourcePrimKey %>" />
+<c:if test="<%= Validator.isNotNull(footerArticleId) %>">
+	<liferay-ui:journal-article articleId="<%= footerArticleId %>" groupId="<%= footerGroupId %>" />
 </c:if>
 
 <aui:script use="aui-base">
