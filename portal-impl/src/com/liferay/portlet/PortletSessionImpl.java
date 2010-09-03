@@ -15,6 +15,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.portlet.LiferayPortletSession;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -24,7 +25,6 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import javax.portlet.PortletContext;
 import javax.portlet.PortletSession;
@@ -138,18 +138,17 @@ public class PortletSessionImpl implements LiferayPortletSession {
 
 			String portletScope = getPortletScope(_portletName, _plid);
 
+			int length = portletScope.length();
 			Enumeration<String> enu = getHttpSession().getAttributeNames();
 
 			while (enu.hasMoreElements()) {
 				String name = enu.nextElement();
 
-				StringTokenizer st = new StringTokenizer(
-					name, StringPool.QUESTION);
+				if ((name.length() > length + 1) &&
+					(name.charAt(length) == CharPool.QUESTION) &&
+					name.startsWith(portletScope)) {
 
-				if (st.countTokens() == 2) {
-					if (st.nextToken().equals(portletScope)) {
-						attributeNames.add(st.nextToken());
-					}
+					attributeNames.add(name.substring(length + 1));
 				}
 			}
 
