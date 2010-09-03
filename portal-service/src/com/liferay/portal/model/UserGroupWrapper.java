@@ -28,50 +28,110 @@ public class UserGroupWrapper implements UserGroup {
 		_userGroup = userGroup;
 	}
 
+	/**
+	* Gets the primary key of this user group.
+	*
+	* @return the primary key of this user group
+	*/
 	public long getPrimaryKey() {
 		return _userGroup.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this user group
+	*
+	* @param pk the primary key of this user group
+	*/
 	public void setPrimaryKey(long pk) {
 		_userGroup.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the user group id of this user group.
+	*
+	* @return the user group id of this user group
+	*/
 	public long getUserGroupId() {
 		return _userGroup.getUserGroupId();
 	}
 
+	/**
+	* Sets the user group id of this user group.
+	*
+	* @param userGroupId the user group id of this user group
+	*/
 	public void setUserGroupId(long userGroupId) {
 		_userGroup.setUserGroupId(userGroupId);
 	}
 
+	/**
+	* Gets the company id of this user group.
+	*
+	* @return the company id of this user group
+	*/
 	public long getCompanyId() {
 		return _userGroup.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this user group.
+	*
+	* @param companyId the company id of this user group
+	*/
 	public void setCompanyId(long companyId) {
 		_userGroup.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the parent user group id of this user group.
+	*
+	* @return the parent user group id of this user group
+	*/
 	public long getParentUserGroupId() {
 		return _userGroup.getParentUserGroupId();
 	}
 
+	/**
+	* Sets the parent user group id of this user group.
+	*
+	* @param parentUserGroupId the parent user group id of this user group
+	*/
 	public void setParentUserGroupId(long parentUserGroupId) {
 		_userGroup.setParentUserGroupId(parentUserGroupId);
 	}
 
+	/**
+	* Gets the name of this user group.
+	*
+	* @return the name of this user group
+	*/
 	public java.lang.String getName() {
 		return _userGroup.getName();
 	}
 
+	/**
+	* Sets the name of this user group.
+	*
+	* @param name the name of this user group
+	*/
 	public void setName(java.lang.String name) {
 		_userGroup.setName(name);
 	}
 
+	/**
+	* Gets the description of this user group.
+	*
+	* @return the description of this user group
+	*/
 	public java.lang.String getDescription() {
 		return _userGroup.getDescription();
 	}
 
+	/**
+	* Sets the description of this user group.
+	*
+	* @param description the description of this user group
+	*/
 	public void setDescription(java.lang.String description) {
 		_userGroup.setDescription(description);
 	}

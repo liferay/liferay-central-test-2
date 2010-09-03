@@ -28,46 +28,101 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel {
 		_passwordPolicyRel = passwordPolicyRel;
 	}
 
+	/**
+	* Gets the primary key of this password policy rel.
+	*
+	* @return the primary key of this password policy rel
+	*/
 	public long getPrimaryKey() {
 		return _passwordPolicyRel.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this password policy rel
+	*
+	* @param pk the primary key of this password policy rel
+	*/
 	public void setPrimaryKey(long pk) {
 		_passwordPolicyRel.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the password policy rel id of this password policy rel.
+	*
+	* @return the password policy rel id of this password policy rel
+	*/
 	public long getPasswordPolicyRelId() {
 		return _passwordPolicyRel.getPasswordPolicyRelId();
 	}
 
+	/**
+	* Sets the password policy rel id of this password policy rel.
+	*
+	* @param passwordPolicyRelId the password policy rel id of this password policy rel
+	*/
 	public void setPasswordPolicyRelId(long passwordPolicyRelId) {
 		_passwordPolicyRel.setPasswordPolicyRelId(passwordPolicyRelId);
 	}
 
+	/**
+	* Gets the password policy id of this password policy rel.
+	*
+	* @return the password policy id of this password policy rel
+	*/
 	public long getPasswordPolicyId() {
 		return _passwordPolicyRel.getPasswordPolicyId();
 	}
 
+	/**
+	* Sets the password policy id of this password policy rel.
+	*
+	* @param passwordPolicyId the password policy id of this password policy rel
+	*/
 	public void setPasswordPolicyId(long passwordPolicyId) {
 		_passwordPolicyRel.setPasswordPolicyId(passwordPolicyId);
 	}
 
+	/**
+	* Gets the class name of the model instance this password policy rel is polymorphically associated with.
+	*
+	* @return the class name of the model instance this password policy rel is polymorphically associated with
+	*/
 	public java.lang.String getClassName() {
 		return _passwordPolicyRel.getClassName();
 	}
 
+	/**
+	* Gets the class name id of this password policy rel.
+	*
+	* @return the class name id of this password policy rel
+	*/
 	public long getClassNameId() {
 		return _passwordPolicyRel.getClassNameId();
 	}
 
+	/**
+	* Sets the class name id of this password policy rel.
+	*
+	* @param classNameId the class name id of this password policy rel
+	*/
 	public void setClassNameId(long classNameId) {
 		_passwordPolicyRel.setClassNameId(classNameId);
 	}
 
+	/**
+	* Gets the class p k of this password policy rel.
+	*
+	* @return the class p k of this password policy rel
+	*/
 	public long getClassPK() {
 		return _passwordPolicyRel.getClassPK();
 	}
 
+	/**
+	* Sets the class p k of this password policy rel.
+	*
+	* @param classPK the class p k of this password policy rel
+	*/
 	public void setClassPK(long classPK) {
 		_passwordPolicyRel.setClassPK(classPK);
 	}

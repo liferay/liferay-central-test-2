@@ -28,214 +28,479 @@ public class LayoutWrapper implements Layout {
 		_layout = layout;
 	}
 
+	/**
+	* Gets the primary key of this layout.
+	*
+	* @return the primary key of this layout
+	*/
 	public long getPrimaryKey() {
 		return _layout.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this layout
+	*
+	* @param pk the primary key of this layout
+	*/
 	public void setPrimaryKey(long pk) {
 		_layout.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the uuid of this layout.
+	*
+	* @return the uuid of this layout
+	*/
 	public java.lang.String getUuid() {
 		return _layout.getUuid();
 	}
 
+	/**
+	* Sets the uuid of this layout.
+	*
+	* @param uuid the uuid of this layout
+	*/
 	public void setUuid(java.lang.String uuid) {
 		_layout.setUuid(uuid);
 	}
 
+	/**
+	* Gets the plid of this layout.
+	*
+	* @return the plid of this layout
+	*/
 	public long getPlid() {
 		return _layout.getPlid();
 	}
 
+	/**
+	* Sets the plid of this layout.
+	*
+	* @param plid the plid of this layout
+	*/
 	public void setPlid(long plid) {
 		_layout.setPlid(plid);
 	}
 
+	/**
+	* Gets the group id of this layout.
+	*
+	* @return the group id of this layout
+	*/
 	public long getGroupId() {
 		return _layout.getGroupId();
 	}
 
+	/**
+	* Sets the group id of this layout.
+	*
+	* @param groupId the group id of this layout
+	*/
 	public void setGroupId(long groupId) {
 		_layout.setGroupId(groupId);
 	}
 
+	/**
+	* Gets the company id of this layout.
+	*
+	* @return the company id of this layout
+	*/
 	public long getCompanyId() {
 		return _layout.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this layout.
+	*
+	* @param companyId the company id of this layout
+	*/
 	public void setCompanyId(long companyId) {
 		_layout.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the private layout of this layout.
+	*
+	* @return the private layout of this layout
+	*/
 	public boolean getPrivateLayout() {
 		return _layout.getPrivateLayout();
 	}
 
+	/**
+	* Determines whether this layout is private layout.
+	*
+	* @return whether this layout is private layout
+	*/
 	public boolean isPrivateLayout() {
 		return _layout.isPrivateLayout();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is private layout.
+	*
+	* @param privateLayout the private layout of this layout
+	*/
 	public void setPrivateLayout(boolean privateLayout) {
 		_layout.setPrivateLayout(privateLayout);
 	}
 
+	/**
+	* Gets the layout id of this layout.
+	*
+	* @return the layout id of this layout
+	*/
 	public long getLayoutId() {
 		return _layout.getLayoutId();
 	}
 
+	/**
+	* Sets the layout id of this layout.
+	*
+	* @param layoutId the layout id of this layout
+	*/
 	public void setLayoutId(long layoutId) {
 		_layout.setLayoutId(layoutId);
 	}
 
+	/**
+	* Gets the parent layout id of this layout.
+	*
+	* @return the parent layout id of this layout
+	*/
 	public long getParentLayoutId() {
 		return _layout.getParentLayoutId();
 	}
 
+	/**
+	* Sets the parent layout id of this layout.
+	*
+	* @param parentLayoutId the parent layout id of this layout
+	*/
 	public void setParentLayoutId(long parentLayoutId) {
 		_layout.setParentLayoutId(parentLayoutId);
 	}
 
+	/**
+	* Gets the name of this layout.
+	*
+	* @return the name of this layout
+	*/
 	public java.lang.String getName() {
 		return _layout.getName();
 	}
 
+	/**
+	* Sets the name of this layout.
+	*
+	* @param name the name of this layout
+	*/
 	public void setName(java.lang.String name) {
 		_layout.setName(name);
 	}
 
+	/**
+	* Gets the title of this layout.
+	*
+	* @return the title of this layout
+	*/
 	public java.lang.String getTitle() {
 		return _layout.getTitle();
 	}
 
+	/**
+	* Sets the title of this layout.
+	*
+	* @param title the title of this layout
+	*/
 	public void setTitle(java.lang.String title) {
 		_layout.setTitle(title);
 	}
 
+	/**
+	* Gets the description of this layout.
+	*
+	* @return the description of this layout
+	*/
 	public java.lang.String getDescription() {
 		return _layout.getDescription();
 	}
 
+	/**
+	* Sets the description of this layout.
+	*
+	* @param description the description of this layout
+	*/
 	public void setDescription(java.lang.String description) {
 		_layout.setDescription(description);
 	}
 
+	/**
+	* Gets the type of this layout.
+	*
+	* @return the type of this layout
+	*/
 	public java.lang.String getType() {
 		return _layout.getType();
 	}
 
+	/**
+	* Sets the type of this layout.
+	*
+	* @param type the type of this layout
+	*/
 	public void setType(java.lang.String type) {
 		_layout.setType(type);
 	}
 
+	/**
+	* Gets the type settings of this layout.
+	*
+	* @return the type settings of this layout
+	*/
 	public java.lang.String getTypeSettings() {
 		return _layout.getTypeSettings();
 	}
 
+	/**
+	* Sets the type settings of this layout.
+	*
+	* @param typeSettings the type settings of this layout
+	*/
 	public void setTypeSettings(java.lang.String typeSettings) {
 		_layout.setTypeSettings(typeSettings);
 	}
 
+	/**
+	* Gets the hidden of this layout.
+	*
+	* @return the hidden of this layout
+	*/
 	public boolean getHidden() {
 		return _layout.getHidden();
 	}
 
+	/**
+	* Determines whether this layout is hidden.
+	*
+	* @return whether this layout is hidden
+	*/
 	public boolean isHidden() {
 		return _layout.isHidden();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is hidden.
+	*
+	* @param hidden the hidden of this layout
+	*/
 	public void setHidden(boolean hidden) {
 		_layout.setHidden(hidden);
 	}
 
+	/**
+	* Gets the friendly u r l of this layout.
+	*
+	* @return the friendly u r l of this layout
+	*/
 	public java.lang.String getFriendlyURL() {
 		return _layout.getFriendlyURL();
 	}
 
+	/**
+	* Sets the friendly u r l of this layout.
+	*
+	* @param friendlyURL the friendly u r l of this layout
+	*/
 	public void setFriendlyURL(java.lang.String friendlyURL) {
 		_layout.setFriendlyURL(friendlyURL);
 	}
 
+	/**
+	* Gets the icon image of this layout.
+	*
+	* @return the icon image of this layout
+	*/
 	public boolean getIconImage() {
 		return _layout.getIconImage();
 	}
 
+	/**
+	* Determines whether this layout is icon image.
+	*
+	* @return whether this layout is icon image
+	*/
 	public boolean isIconImage() {
 		return _layout.isIconImage();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is icon image.
+	*
+	* @param iconImage the icon image of this layout
+	*/
 	public void setIconImage(boolean iconImage) {
 		_layout.setIconImage(iconImage);
 	}
 
+	/**
+	* Gets the icon image id of this layout.
+	*
+	* @return the icon image id of this layout
+	*/
 	public long getIconImageId() {
 		return _layout.getIconImageId();
 	}
 
+	/**
+	* Sets the icon image id of this layout.
+	*
+	* @param iconImageId the icon image id of this layout
+	*/
 	public void setIconImageId(long iconImageId) {
 		_layout.setIconImageId(iconImageId);
 	}
 
+	/**
+	* Gets the theme id of this layout.
+	*
+	* @return the theme id of this layout
+	*/
 	public java.lang.String getThemeId() {
 		return _layout.getThemeId();
 	}
 
+	/**
+	* Sets the theme id of this layout.
+	*
+	* @param themeId the theme id of this layout
+	*/
 	public void setThemeId(java.lang.String themeId) {
 		_layout.setThemeId(themeId);
 	}
 
+	/**
+	* Gets the color scheme id of this layout.
+	*
+	* @return the color scheme id of this layout
+	*/
 	public java.lang.String getColorSchemeId() {
 		return _layout.getColorSchemeId();
 	}
 
+	/**
+	* Sets the color scheme id of this layout.
+	*
+	* @param colorSchemeId the color scheme id of this layout
+	*/
 	public void setColorSchemeId(java.lang.String colorSchemeId) {
 		_layout.setColorSchemeId(colorSchemeId);
 	}
 
+	/**
+	* Gets the wap theme id of this layout.
+	*
+	* @return the wap theme id of this layout
+	*/
 	public java.lang.String getWapThemeId() {
 		return _layout.getWapThemeId();
 	}
 
+	/**
+	* Sets the wap theme id of this layout.
+	*
+	* @param wapThemeId the wap theme id of this layout
+	*/
 	public void setWapThemeId(java.lang.String wapThemeId) {
 		_layout.setWapThemeId(wapThemeId);
 	}
 
+	/**
+	* Gets the wap color scheme id of this layout.
+	*
+	* @return the wap color scheme id of this layout
+	*/
 	public java.lang.String getWapColorSchemeId() {
 		return _layout.getWapColorSchemeId();
 	}
 
+	/**
+	* Sets the wap color scheme id of this layout.
+	*
+	* @param wapColorSchemeId the wap color scheme id of this layout
+	*/
 	public void setWapColorSchemeId(java.lang.String wapColorSchemeId) {
 		_layout.setWapColorSchemeId(wapColorSchemeId);
 	}
 
+	/**
+	* Gets the css of this layout.
+	*
+	* @return the css of this layout
+	*/
 	public java.lang.String getCss() {
 		return _layout.getCss();
 	}
 
+	/**
+	* Sets the css of this layout.
+	*
+	* @param css the css of this layout
+	*/
 	public void setCss(java.lang.String css) {
 		_layout.setCss(css);
 	}
 
+	/**
+	* Gets the priority of this layout.
+	*
+	* @return the priority of this layout
+	*/
 	public int getPriority() {
 		return _layout.getPriority();
 	}
 
+	/**
+	* Sets the priority of this layout.
+	*
+	* @param priority the priority of this layout
+	*/
 	public void setPriority(int priority) {
 		_layout.setPriority(priority);
 	}
 
+	/**
+	* Gets the layout prototype id of this layout.
+	*
+	* @return the layout prototype id of this layout
+	*/
 	public long getLayoutPrototypeId() {
 		return _layout.getLayoutPrototypeId();
 	}
 
+	/**
+	* Sets the layout prototype id of this layout.
+	*
+	* @param layoutPrototypeId the layout prototype id of this layout
+	*/
 	public void setLayoutPrototypeId(long layoutPrototypeId) {
 		_layout.setLayoutPrototypeId(layoutPrototypeId);
 	}
 
+	/**
+	* Gets the dl folder id of this layout.
+	*
+	* @return the dl folder id of this layout
+	*/
 	public long getDlFolderId() {
 		return _layout.getDlFolderId();
 	}
 
+	/**
+	* Sets the dl folder id of this layout.
+	*
+	* @param dlFolderId the dl folder id of this layout
+	*/
 	public void setDlFolderId(long dlFolderId) {
 		_layout.setDlFolderId(dlFolderId);
 	}

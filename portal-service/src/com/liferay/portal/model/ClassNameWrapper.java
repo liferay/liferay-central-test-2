@@ -28,30 +28,65 @@ public class ClassNameWrapper implements ClassName {
 		_className = className;
 	}
 
+	/**
+	* Gets the primary key of this class name.
+	*
+	* @return the primary key of this class name
+	*/
 	public long getPrimaryKey() {
 		return _className.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this class name
+	*
+	* @param pk the primary key of this class name
+	*/
 	public void setPrimaryKey(long pk) {
 		_className.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the class name of the model instance this class name is polymorphically associated with.
+	*
+	* @return the class name of the model instance this class name is polymorphically associated with
+	*/
 	public java.lang.String getClassName() {
 		return _className.getClassName();
 	}
 
+	/**
+	* Gets the class name id of this class name.
+	*
+	* @return the class name id of this class name
+	*/
 	public long getClassNameId() {
 		return _className.getClassNameId();
 	}
 
+	/**
+	* Sets the class name id of this class name.
+	*
+	* @param classNameId the class name id of this class name
+	*/
 	public void setClassNameId(long classNameId) {
 		_className.setClassNameId(classNameId);
 	}
 
+	/**
+	* Gets the value of this class name.
+	*
+	* @return the value of this class name
+	*/
 	public java.lang.String getValue() {
 		return _className.getValue();
 	}
 
+	/**
+	* Sets the value of this class name.
+	*
+	* @param value the value of this class name
+	*/
 	public void setValue(java.lang.String value) {
 		_className.setValue(value);
 	}

@@ -28,44 +28,95 @@ public class UserGroupRoleWrapper implements UserGroupRole {
 		_userGroupRole = userGroupRole;
 	}
 
+	/**
+	* Gets the primary key of this user group role.
+	*
+	* @return the primary key of this user group role
+	*/
 	public com.liferay.portal.service.persistence.UserGroupRolePK getPrimaryKey() {
 		return _userGroupRole.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this user group role
+	*
+	* @param pk the primary key of this user group role
+	*/
 	public void setPrimaryKey(
 		com.liferay.portal.service.persistence.UserGroupRolePK pk) {
 		_userGroupRole.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the user id of this user group role.
+	*
+	* @return the user id of this user group role
+	*/
 	public long getUserId() {
 		return _userGroupRole.getUserId();
 	}
 
+	/**
+	* Sets the user id of this user group role.
+	*
+	* @param userId the user id of this user group role
+	*/
 	public void setUserId(long userId) {
 		_userGroupRole.setUserId(userId);
 	}
 
+	/**
+	* Gets the user uuid of this user group role.
+	*
+	* @return the user uuid of this user group role
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userGroupRole.getUserUuid();
 	}
 
+	/**
+	* Sets the user uuid of this user group role.
+	*
+	* @param userUuid the user uuid of this user group role
+	*/
 	public void setUserUuid(java.lang.String userUuid) {
 		_userGroupRole.setUserUuid(userUuid);
 	}
 
+	/**
+	* Gets the group id of this user group role.
+	*
+	* @return the group id of this user group role
+	*/
 	public long getGroupId() {
 		return _userGroupRole.getGroupId();
 	}
 
+	/**
+	* Sets the group id of this user group role.
+	*
+	* @param groupId the group id of this user group role
+	*/
 	public void setGroupId(long groupId) {
 		_userGroupRole.setGroupId(groupId);
 	}
 
+	/**
+	* Gets the role id of this user group role.
+	*
+	* @return the role id of this user group role
+	*/
 	public long getRoleId() {
 		return _userGroupRole.getRoleId();
 	}
 
+	/**
+	* Sets the role id of this user group role.
+	*
+	* @param roleId the role id of this user group role
+	*/
 	public void setRoleId(long roleId) {
 		_userGroupRole.setRoleId(roleId);
 	}

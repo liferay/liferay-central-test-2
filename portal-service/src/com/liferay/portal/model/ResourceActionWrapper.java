@@ -28,42 +28,92 @@ public class ResourceActionWrapper implements ResourceAction {
 		_resourceAction = resourceAction;
 	}
 
+	/**
+	* Gets the primary key of this resource action.
+	*
+	* @return the primary key of this resource action
+	*/
 	public long getPrimaryKey() {
 		return _resourceAction.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this resource action
+	*
+	* @param pk the primary key of this resource action
+	*/
 	public void setPrimaryKey(long pk) {
 		_resourceAction.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the resource action id of this resource action.
+	*
+	* @return the resource action id of this resource action
+	*/
 	public long getResourceActionId() {
 		return _resourceAction.getResourceActionId();
 	}
 
+	/**
+	* Sets the resource action id of this resource action.
+	*
+	* @param resourceActionId the resource action id of this resource action
+	*/
 	public void setResourceActionId(long resourceActionId) {
 		_resourceAction.setResourceActionId(resourceActionId);
 	}
 
+	/**
+	* Gets the name of this resource action.
+	*
+	* @return the name of this resource action
+	*/
 	public java.lang.String getName() {
 		return _resourceAction.getName();
 	}
 
+	/**
+	* Sets the name of this resource action.
+	*
+	* @param name the name of this resource action
+	*/
 	public void setName(java.lang.String name) {
 		_resourceAction.setName(name);
 	}
 
+	/**
+	* Gets the action id of this resource action.
+	*
+	* @return the action id of this resource action
+	*/
 	public java.lang.String getActionId() {
 		return _resourceAction.getActionId();
 	}
 
+	/**
+	* Sets the action id of this resource action.
+	*
+	* @param actionId the action id of this resource action
+	*/
 	public void setActionId(java.lang.String actionId) {
 		_resourceAction.setActionId(actionId);
 	}
 
+	/**
+	* Gets the bitwise value of this resource action.
+	*
+	* @return the bitwise value of this resource action
+	*/
 	public long getBitwiseValue() {
 		return _resourceAction.getBitwiseValue();
 	}
 
+	/**
+	* Sets the bitwise value of this resource action.
+	*
+	* @param bitwiseValue the bitwise value of this resource action
+	*/
 	public void setBitwiseValue(long bitwiseValue) {
 		_resourceAction.setBitwiseValue(bitwiseValue);
 	}

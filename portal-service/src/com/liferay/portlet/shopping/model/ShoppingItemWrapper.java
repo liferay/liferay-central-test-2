@@ -28,327 +28,733 @@ public class ShoppingItemWrapper implements ShoppingItem {
 		_shoppingItem = shoppingItem;
 	}
 
+	/**
+	* Gets the primary key of this shopping item.
+	*
+	* @return the primary key of this shopping item
+	*/
 	public long getPrimaryKey() {
 		return _shoppingItem.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this shopping item
+	*
+	* @param pk the primary key of this shopping item
+	*/
 	public void setPrimaryKey(long pk) {
 		_shoppingItem.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the item id of this shopping item.
+	*
+	* @return the item id of this shopping item
+	*/
 	public long getItemId() {
 		return _shoppingItem.getItemId();
 	}
 
+	/**
+	* Sets the item id of this shopping item.
+	*
+	* @param itemId the item id of this shopping item
+	*/
 	public void setItemId(long itemId) {
 		_shoppingItem.setItemId(itemId);
 	}
 
+	/**
+	* Gets the group id of this shopping item.
+	*
+	* @return the group id of this shopping item
+	*/
 	public long getGroupId() {
 		return _shoppingItem.getGroupId();
 	}
 
+	/**
+	* Sets the group id of this shopping item.
+	*
+	* @param groupId the group id of this shopping item
+	*/
 	public void setGroupId(long groupId) {
 		_shoppingItem.setGroupId(groupId);
 	}
 
+	/**
+	* Gets the company id of this shopping item.
+	*
+	* @return the company id of this shopping item
+	*/
 	public long getCompanyId() {
 		return _shoppingItem.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this shopping item.
+	*
+	* @param companyId the company id of this shopping item
+	*/
 	public void setCompanyId(long companyId) {
 		_shoppingItem.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the user id of this shopping item.
+	*
+	* @return the user id of this shopping item
+	*/
 	public long getUserId() {
 		return _shoppingItem.getUserId();
 	}
 
+	/**
+	* Sets the user id of this shopping item.
+	*
+	* @param userId the user id of this shopping item
+	*/
 	public void setUserId(long userId) {
 		_shoppingItem.setUserId(userId);
 	}
 
+	/**
+	* Gets the user uuid of this shopping item.
+	*
+	* @return the user uuid of this shopping item
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingItem.getUserUuid();
 	}
 
+	/**
+	* Sets the user uuid of this shopping item.
+	*
+	* @param userUuid the user uuid of this shopping item
+	*/
 	public void setUserUuid(java.lang.String userUuid) {
 		_shoppingItem.setUserUuid(userUuid);
 	}
 
+	/**
+	* Gets the user name of this shopping item.
+	*
+	* @return the user name of this shopping item
+	*/
 	public java.lang.String getUserName() {
 		return _shoppingItem.getUserName();
 	}
 
+	/**
+	* Sets the user name of this shopping item.
+	*
+	* @param userName the user name of this shopping item
+	*/
 	public void setUserName(java.lang.String userName) {
 		_shoppingItem.setUserName(userName);
 	}
 
+	/**
+	* Gets the create date of this shopping item.
+	*
+	* @return the create date of this shopping item
+	*/
 	public java.util.Date getCreateDate() {
 		return _shoppingItem.getCreateDate();
 	}
 
+	/**
+	* Sets the create date of this shopping item.
+	*
+	* @param createDate the create date of this shopping item
+	*/
 	public void setCreateDate(java.util.Date createDate) {
 		_shoppingItem.setCreateDate(createDate);
 	}
 
+	/**
+	* Gets the modified date of this shopping item.
+	*
+	* @return the modified date of this shopping item
+	*/
 	public java.util.Date getModifiedDate() {
 		return _shoppingItem.getModifiedDate();
 	}
 
+	/**
+	* Sets the modified date of this shopping item.
+	*
+	* @param modifiedDate the modified date of this shopping item
+	*/
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_shoppingItem.setModifiedDate(modifiedDate);
 	}
 
+	/**
+	* Gets the category id of this shopping item.
+	*
+	* @return the category id of this shopping item
+	*/
 	public long getCategoryId() {
 		return _shoppingItem.getCategoryId();
 	}
 
+	/**
+	* Sets the category id of this shopping item.
+	*
+	* @param categoryId the category id of this shopping item
+	*/
 	public void setCategoryId(long categoryId) {
 		_shoppingItem.setCategoryId(categoryId);
 	}
 
+	/**
+	* Gets the sku of this shopping item.
+	*
+	* @return the sku of this shopping item
+	*/
 	public java.lang.String getSku() {
 		return _shoppingItem.getSku();
 	}
 
+	/**
+	* Sets the sku of this shopping item.
+	*
+	* @param sku the sku of this shopping item
+	*/
 	public void setSku(java.lang.String sku) {
 		_shoppingItem.setSku(sku);
 	}
 
+	/**
+	* Gets the name of this shopping item.
+	*
+	* @return the name of this shopping item
+	*/
 	public java.lang.String getName() {
 		return _shoppingItem.getName();
 	}
 
+	/**
+	* Sets the name of this shopping item.
+	*
+	* @param name the name of this shopping item
+	*/
 	public void setName(java.lang.String name) {
 		_shoppingItem.setName(name);
 	}
 
+	/**
+	* Gets the description of this shopping item.
+	*
+	* @return the description of this shopping item
+	*/
 	public java.lang.String getDescription() {
 		return _shoppingItem.getDescription();
 	}
 
+	/**
+	* Sets the description of this shopping item.
+	*
+	* @param description the description of this shopping item
+	*/
 	public void setDescription(java.lang.String description) {
 		_shoppingItem.setDescription(description);
 	}
 
+	/**
+	* Gets the properties of this shopping item.
+	*
+	* @return the properties of this shopping item
+	*/
 	public java.lang.String getProperties() {
 		return _shoppingItem.getProperties();
 	}
 
+	/**
+	* Sets the properties of this shopping item.
+	*
+	* @param properties the properties of this shopping item
+	*/
 	public void setProperties(java.lang.String properties) {
 		_shoppingItem.setProperties(properties);
 	}
 
+	/**
+	* Gets the fields of this shopping item.
+	*
+	* @return the fields of this shopping item
+	*/
 	public boolean getFields() {
 		return _shoppingItem.getFields();
 	}
 
+	/**
+	* Determines whether this shopping item is fields.
+	*
+	* @return whether this shopping item is fields
+	*/
 	public boolean isFields() {
 		return _shoppingItem.isFields();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is fields.
+	*
+	* @param fields the fields of this shopping item
+	*/
 	public void setFields(boolean fields) {
 		_shoppingItem.setFields(fields);
 	}
 
+	/**
+	* Gets the fields quantities of this shopping item.
+	*
+	* @return the fields quantities of this shopping item
+	*/
 	public java.lang.String getFieldsQuantities() {
 		return _shoppingItem.getFieldsQuantities();
 	}
 
+	/**
+	* Sets the fields quantities of this shopping item.
+	*
+	* @param fieldsQuantities the fields quantities of this shopping item
+	*/
 	public void setFieldsQuantities(java.lang.String fieldsQuantities) {
 		_shoppingItem.setFieldsQuantities(fieldsQuantities);
 	}
 
+	/**
+	* Gets the min quantity of this shopping item.
+	*
+	* @return the min quantity of this shopping item
+	*/
 	public int getMinQuantity() {
 		return _shoppingItem.getMinQuantity();
 	}
 
+	/**
+	* Sets the min quantity of this shopping item.
+	*
+	* @param minQuantity the min quantity of this shopping item
+	*/
 	public void setMinQuantity(int minQuantity) {
 		_shoppingItem.setMinQuantity(minQuantity);
 	}
 
+	/**
+	* Gets the max quantity of this shopping item.
+	*
+	* @return the max quantity of this shopping item
+	*/
 	public int getMaxQuantity() {
 		return _shoppingItem.getMaxQuantity();
 	}
 
+	/**
+	* Sets the max quantity of this shopping item.
+	*
+	* @param maxQuantity the max quantity of this shopping item
+	*/
 	public void setMaxQuantity(int maxQuantity) {
 		_shoppingItem.setMaxQuantity(maxQuantity);
 	}
 
+	/**
+	* Gets the price of this shopping item.
+	*
+	* @return the price of this shopping item
+	*/
 	public double getPrice() {
 		return _shoppingItem.getPrice();
 	}
 
+	/**
+	* Sets the price of this shopping item.
+	*
+	* @param price the price of this shopping item
+	*/
 	public void setPrice(double price) {
 		_shoppingItem.setPrice(price);
 	}
 
+	/**
+	* Gets the discount of this shopping item.
+	*
+	* @return the discount of this shopping item
+	*/
 	public double getDiscount() {
 		return _shoppingItem.getDiscount();
 	}
 
+	/**
+	* Sets the discount of this shopping item.
+	*
+	* @param discount the discount of this shopping item
+	*/
 	public void setDiscount(double discount) {
 		_shoppingItem.setDiscount(discount);
 	}
 
+	/**
+	* Gets the taxable of this shopping item.
+	*
+	* @return the taxable of this shopping item
+	*/
 	public boolean getTaxable() {
 		return _shoppingItem.getTaxable();
 	}
 
+	/**
+	* Determines whether this shopping item is taxable.
+	*
+	* @return whether this shopping item is taxable
+	*/
 	public boolean isTaxable() {
 		return _shoppingItem.isTaxable();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is taxable.
+	*
+	* @param taxable the taxable of this shopping item
+	*/
 	public void setTaxable(boolean taxable) {
 		_shoppingItem.setTaxable(taxable);
 	}
 
+	/**
+	* Gets the shipping of this shopping item.
+	*
+	* @return the shipping of this shopping item
+	*/
 	public double getShipping() {
 		return _shoppingItem.getShipping();
 	}
 
+	/**
+	* Sets the shipping of this shopping item.
+	*
+	* @param shipping the shipping of this shopping item
+	*/
 	public void setShipping(double shipping) {
 		_shoppingItem.setShipping(shipping);
 	}
 
+	/**
+	* Gets the use shipping formula of this shopping item.
+	*
+	* @return the use shipping formula of this shopping item
+	*/
 	public boolean getUseShippingFormula() {
 		return _shoppingItem.getUseShippingFormula();
 	}
 
+	/**
+	* Determines whether this shopping item is use shipping formula.
+	*
+	* @return whether this shopping item is use shipping formula
+	*/
 	public boolean isUseShippingFormula() {
 		return _shoppingItem.isUseShippingFormula();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is use shipping formula.
+	*
+	* @param useShippingFormula the use shipping formula of this shopping item
+	*/
 	public void setUseShippingFormula(boolean useShippingFormula) {
 		_shoppingItem.setUseShippingFormula(useShippingFormula);
 	}
 
+	/**
+	* Gets the requires shipping of this shopping item.
+	*
+	* @return the requires shipping of this shopping item
+	*/
 	public boolean getRequiresShipping() {
 		return _shoppingItem.getRequiresShipping();
 	}
 
+	/**
+	* Determines whether this shopping item is requires shipping.
+	*
+	* @return whether this shopping item is requires shipping
+	*/
 	public boolean isRequiresShipping() {
 		return _shoppingItem.isRequiresShipping();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is requires shipping.
+	*
+	* @param requiresShipping the requires shipping of this shopping item
+	*/
 	public void setRequiresShipping(boolean requiresShipping) {
 		_shoppingItem.setRequiresShipping(requiresShipping);
 	}
 
+	/**
+	* Gets the stock quantity of this shopping item.
+	*
+	* @return the stock quantity of this shopping item
+	*/
 	public int getStockQuantity() {
 		return _shoppingItem.getStockQuantity();
 	}
 
+	/**
+	* Sets the stock quantity of this shopping item.
+	*
+	* @param stockQuantity the stock quantity of this shopping item
+	*/
 	public void setStockQuantity(int stockQuantity) {
 		_shoppingItem.setStockQuantity(stockQuantity);
 	}
 
+	/**
+	* Gets the featured of this shopping item.
+	*
+	* @return the featured of this shopping item
+	*/
 	public boolean getFeatured() {
 		return _shoppingItem.getFeatured();
 	}
 
+	/**
+	* Determines whether this shopping item is featured.
+	*
+	* @return whether this shopping item is featured
+	*/
 	public boolean isFeatured() {
 		return _shoppingItem.isFeatured();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is featured.
+	*
+	* @param featured the featured of this shopping item
+	*/
 	public void setFeatured(boolean featured) {
 		_shoppingItem.setFeatured(featured);
 	}
 
+	/**
+	* Gets the sale of this shopping item.
+	*
+	* @return the sale of this shopping item
+	*/
 	public boolean getSale() {
 		return _shoppingItem.getSale();
 	}
 
+	/**
+	* Determines whether this shopping item is sale.
+	*
+	* @return whether this shopping item is sale
+	*/
 	public boolean isSale() {
 		return _shoppingItem.isSale();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is sale.
+	*
+	* @param sale the sale of this shopping item
+	*/
 	public void setSale(boolean sale) {
 		_shoppingItem.setSale(sale);
 	}
 
+	/**
+	* Gets the small image of this shopping item.
+	*
+	* @return the small image of this shopping item
+	*/
 	public boolean getSmallImage() {
 		return _shoppingItem.getSmallImage();
 	}
 
+	/**
+	* Determines whether this shopping item is small image.
+	*
+	* @return whether this shopping item is small image
+	*/
 	public boolean isSmallImage() {
 		return _shoppingItem.isSmallImage();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is small image.
+	*
+	* @param smallImage the small image of this shopping item
+	*/
 	public void setSmallImage(boolean smallImage) {
 		_shoppingItem.setSmallImage(smallImage);
 	}
 
+	/**
+	* Gets the small image id of this shopping item.
+	*
+	* @return the small image id of this shopping item
+	*/
 	public long getSmallImageId() {
 		return _shoppingItem.getSmallImageId();
 	}
 
+	/**
+	* Sets the small image id of this shopping item.
+	*
+	* @param smallImageId the small image id of this shopping item
+	*/
 	public void setSmallImageId(long smallImageId) {
 		_shoppingItem.setSmallImageId(smallImageId);
 	}
 
+	/**
+	* Gets the small image u r l of this shopping item.
+	*
+	* @return the small image u r l of this shopping item
+	*/
 	public java.lang.String getSmallImageURL() {
 		return _shoppingItem.getSmallImageURL();
 	}
 
+	/**
+	* Sets the small image u r l of this shopping item.
+	*
+	* @param smallImageURL the small image u r l of this shopping item
+	*/
 	public void setSmallImageURL(java.lang.String smallImageURL) {
 		_shoppingItem.setSmallImageURL(smallImageURL);
 	}
 
+	/**
+	* Gets the medium image of this shopping item.
+	*
+	* @return the medium image of this shopping item
+	*/
 	public boolean getMediumImage() {
 		return _shoppingItem.getMediumImage();
 	}
 
+	/**
+	* Determines whether this shopping item is medium image.
+	*
+	* @return whether this shopping item is medium image
+	*/
 	public boolean isMediumImage() {
 		return _shoppingItem.isMediumImage();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is medium image.
+	*
+	* @param mediumImage the medium image of this shopping item
+	*/
 	public void setMediumImage(boolean mediumImage) {
 		_shoppingItem.setMediumImage(mediumImage);
 	}
 
+	/**
+	* Gets the medium image id of this shopping item.
+	*
+	* @return the medium image id of this shopping item
+	*/
 	public long getMediumImageId() {
 		return _shoppingItem.getMediumImageId();
 	}
 
+	/**
+	* Sets the medium image id of this shopping item.
+	*
+	* @param mediumImageId the medium image id of this shopping item
+	*/
 	public void setMediumImageId(long mediumImageId) {
 		_shoppingItem.setMediumImageId(mediumImageId);
 	}
 
+	/**
+	* Gets the medium image u r l of this shopping item.
+	*
+	* @return the medium image u r l of this shopping item
+	*/
 	public java.lang.String getMediumImageURL() {
 		return _shoppingItem.getMediumImageURL();
 	}
 
+	/**
+	* Sets the medium image u r l of this shopping item.
+	*
+	* @param mediumImageURL the medium image u r l of this shopping item
+	*/
 	public void setMediumImageURL(java.lang.String mediumImageURL) {
 		_shoppingItem.setMediumImageURL(mediumImageURL);
 	}
 
+	/**
+	* Gets the large image of this shopping item.
+	*
+	* @return the large image of this shopping item
+	*/
 	public boolean getLargeImage() {
 		return _shoppingItem.getLargeImage();
 	}
 
+	/**
+	* Determines whether this shopping item is large image.
+	*
+	* @return whether this shopping item is large image
+	*/
 	public boolean isLargeImage() {
 		return _shoppingItem.isLargeImage();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is large image.
+	*
+	* @param largeImage the large image of this shopping item
+	*/
 	public void setLargeImage(boolean largeImage) {
 		_shoppingItem.setLargeImage(largeImage);
 	}
 
+	/**
+	* Gets the large image id of this shopping item.
+	*
+	* @return the large image id of this shopping item
+	*/
 	public long getLargeImageId() {
 		return _shoppingItem.getLargeImageId();
 	}
 
+	/**
+	* Sets the large image id of this shopping item.
+	*
+	* @param largeImageId the large image id of this shopping item
+	*/
 	public void setLargeImageId(long largeImageId) {
 		_shoppingItem.setLargeImageId(largeImageId);
 	}
 
+	/**
+	* Gets the large image u r l of this shopping item.
+	*
+	* @return the large image u r l of this shopping item
+	*/
 	public java.lang.String getLargeImageURL() {
 		return _shoppingItem.getLargeImageURL();
 	}
 
+	/**
+	* Sets the large image u r l of this shopping item.
+	*
+	* @param largeImageURL the large image u r l of this shopping item
+	*/
 	public void setLargeImageURL(java.lang.String largeImageURL) {
 		_shoppingItem.setLargeImageURL(largeImageURL);
 	}

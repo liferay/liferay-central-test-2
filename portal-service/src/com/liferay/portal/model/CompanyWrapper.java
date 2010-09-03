@@ -28,94 +28,209 @@ public class CompanyWrapper implements Company {
 		_company = company;
 	}
 
+	/**
+	* Gets the primary key of this company.
+	*
+	* @return the primary key of this company
+	*/
 	public long getPrimaryKey() {
 		return _company.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this company
+	*
+	* @param pk the primary key of this company
+	*/
 	public void setPrimaryKey(long pk) {
 		_company.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the company id of this company.
+	*
+	* @return the company id of this company
+	*/
 	public long getCompanyId() {
 		return _company.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this company.
+	*
+	* @param companyId the company id of this company
+	*/
 	public void setCompanyId(long companyId) {
 		_company.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the account id of this company.
+	*
+	* @return the account id of this company
+	*/
 	public long getAccountId() {
 		return _company.getAccountId();
 	}
 
+	/**
+	* Sets the account id of this company.
+	*
+	* @param accountId the account id of this company
+	*/
 	public void setAccountId(long accountId) {
 		_company.setAccountId(accountId);
 	}
 
+	/**
+	* Gets the web id of this company.
+	*
+	* @return the web id of this company
+	*/
 	public java.lang.String getWebId() {
 		return _company.getWebId();
 	}
 
+	/**
+	* Sets the web id of this company.
+	*
+	* @param webId the web id of this company
+	*/
 	public void setWebId(java.lang.String webId) {
 		_company.setWebId(webId);
 	}
 
+	/**
+	* Gets the key of this company.
+	*
+	* @return the key of this company
+	*/
 	public java.lang.String getKey() {
 		return _company.getKey();
 	}
 
+	/**
+	* Sets the key of this company.
+	*
+	* @param key the key of this company
+	*/
 	public void setKey(java.lang.String key) {
 		_company.setKey(key);
 	}
 
+	/**
+	* Gets the virtual host of this company.
+	*
+	* @return the virtual host of this company
+	*/
 	public java.lang.String getVirtualHost() {
 		return _company.getVirtualHost();
 	}
 
+	/**
+	* Sets the virtual host of this company.
+	*
+	* @param virtualHost the virtual host of this company
+	*/
 	public void setVirtualHost(java.lang.String virtualHost) {
 		_company.setVirtualHost(virtualHost);
 	}
 
+	/**
+	* Gets the mx of this company.
+	*
+	* @return the mx of this company
+	*/
 	public java.lang.String getMx() {
 		return _company.getMx();
 	}
 
+	/**
+	* Sets the mx of this company.
+	*
+	* @param mx the mx of this company
+	*/
 	public void setMx(java.lang.String mx) {
 		_company.setMx(mx);
 	}
 
+	/**
+	* Gets the home u r l of this company.
+	*
+	* @return the home u r l of this company
+	*/
 	public java.lang.String getHomeURL() {
 		return _company.getHomeURL();
 	}
 
+	/**
+	* Sets the home u r l of this company.
+	*
+	* @param homeURL the home u r l of this company
+	*/
 	public void setHomeURL(java.lang.String homeURL) {
 		_company.setHomeURL(homeURL);
 	}
 
+	/**
+	* Gets the logo id of this company.
+	*
+	* @return the logo id of this company
+	*/
 	public long getLogoId() {
 		return _company.getLogoId();
 	}
 
+	/**
+	* Sets the logo id of this company.
+	*
+	* @param logoId the logo id of this company
+	*/
 	public void setLogoId(long logoId) {
 		_company.setLogoId(logoId);
 	}
 
+	/**
+	* Gets the system of this company.
+	*
+	* @return the system of this company
+	*/
 	public boolean getSystem() {
 		return _company.getSystem();
 	}
 
+	/**
+	* Determines whether this company is system.
+	*
+	* @return whether this company is system
+	*/
 	public boolean isSystem() {
 		return _company.isSystem();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is system.
+	*
+	* @param system the system of this company
+	*/
 	public void setSystem(boolean system) {
 		_company.setSystem(system);
 	}
 
+	/**
+	* Gets the max users of this company.
+	*
+	* @return the max users of this company
+	*/
 	public int getMaxUsers() {
 		return _company.getMaxUsers();
 	}
 
+	/**
+	* Sets the max users of this company.
+	*
+	* @param maxUsers the max users of this company
+	*/
 	public void setMaxUsers(int maxUsers) {
 		_company.setMaxUsers(maxUsers);
 	}

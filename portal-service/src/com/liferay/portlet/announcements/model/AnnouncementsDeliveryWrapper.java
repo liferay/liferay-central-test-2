@@ -29,87 +29,193 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 		_announcementsDelivery = announcementsDelivery;
 	}
 
+	/**
+	* Gets the primary key of this announcements delivery.
+	*
+	* @return the primary key of this announcements delivery
+	*/
 	public long getPrimaryKey() {
 		return _announcementsDelivery.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this announcements delivery
+	*
+	* @param pk the primary key of this announcements delivery
+	*/
 	public void setPrimaryKey(long pk) {
 		_announcementsDelivery.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the delivery id of this announcements delivery.
+	*
+	* @return the delivery id of this announcements delivery
+	*/
 	public long getDeliveryId() {
 		return _announcementsDelivery.getDeliveryId();
 	}
 
+	/**
+	* Sets the delivery id of this announcements delivery.
+	*
+	* @param deliveryId the delivery id of this announcements delivery
+	*/
 	public void setDeliveryId(long deliveryId) {
 		_announcementsDelivery.setDeliveryId(deliveryId);
 	}
 
+	/**
+	* Gets the company id of this announcements delivery.
+	*
+	* @return the company id of this announcements delivery
+	*/
 	public long getCompanyId() {
 		return _announcementsDelivery.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this announcements delivery.
+	*
+	* @param companyId the company id of this announcements delivery
+	*/
 	public void setCompanyId(long companyId) {
 		_announcementsDelivery.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the user id of this announcements delivery.
+	*
+	* @return the user id of this announcements delivery
+	*/
 	public long getUserId() {
 		return _announcementsDelivery.getUserId();
 	}
 
+	/**
+	* Sets the user id of this announcements delivery.
+	*
+	* @param userId the user id of this announcements delivery
+	*/
 	public void setUserId(long userId) {
 		_announcementsDelivery.setUserId(userId);
 	}
 
+	/**
+	* Gets the user uuid of this announcements delivery.
+	*
+	* @return the user uuid of this announcements delivery
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _announcementsDelivery.getUserUuid();
 	}
 
+	/**
+	* Sets the user uuid of this announcements delivery.
+	*
+	* @param userUuid the user uuid of this announcements delivery
+	*/
 	public void setUserUuid(java.lang.String userUuid) {
 		_announcementsDelivery.setUserUuid(userUuid);
 	}
 
+	/**
+	* Gets the type of this announcements delivery.
+	*
+	* @return the type of this announcements delivery
+	*/
 	public java.lang.String getType() {
 		return _announcementsDelivery.getType();
 	}
 
+	/**
+	* Sets the type of this announcements delivery.
+	*
+	* @param type the type of this announcements delivery
+	*/
 	public void setType(java.lang.String type) {
 		_announcementsDelivery.setType(type);
 	}
 
+	/**
+	* Gets the email of this announcements delivery.
+	*
+	* @return the email of this announcements delivery
+	*/
 	public boolean getEmail() {
 		return _announcementsDelivery.getEmail();
 	}
 
+	/**
+	* Determines whether this announcements delivery is email.
+	*
+	* @return whether this announcements delivery is email
+	*/
 	public boolean isEmail() {
 		return _announcementsDelivery.isEmail();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is email.
+	*
+	* @param email the email of this announcements delivery
+	*/
 	public void setEmail(boolean email) {
 		_announcementsDelivery.setEmail(email);
 	}
 
+	/**
+	* Gets the sms of this announcements delivery.
+	*
+	* @return the sms of this announcements delivery
+	*/
 	public boolean getSms() {
 		return _announcementsDelivery.getSms();
 	}
 
+	/**
+	* Determines whether this announcements delivery is sms.
+	*
+	* @return whether this announcements delivery is sms
+	*/
 	public boolean isSms() {
 		return _announcementsDelivery.isSms();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is sms.
+	*
+	* @param sms the sms of this announcements delivery
+	*/
 	public void setSms(boolean sms) {
 		_announcementsDelivery.setSms(sms);
 	}
 
+	/**
+	* Gets the website of this announcements delivery.
+	*
+	* @return the website of this announcements delivery
+	*/
 	public boolean getWebsite() {
 		return _announcementsDelivery.getWebsite();
 	}
 
+	/**
+	* Determines whether this announcements delivery is website.
+	*
+	* @return whether this announcements delivery is website
+	*/
 	public boolean isWebsite() {
 		return _announcementsDelivery.isWebsite();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is website.
+	*
+	* @param website the website of this announcements delivery
+	*/
 	public void setWebsite(boolean website) {
 		_announcementsDelivery.setWebsite(website);
 	}

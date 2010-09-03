@@ -28,42 +28,92 @@ public class WikiPageResourceWrapper implements WikiPageResource {
 		_wikiPageResource = wikiPageResource;
 	}
 
+	/**
+	* Gets the primary key of this wiki page resource.
+	*
+	* @return the primary key of this wiki page resource
+	*/
 	public long getPrimaryKey() {
 		return _wikiPageResource.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this wiki page resource
+	*
+	* @param pk the primary key of this wiki page resource
+	*/
 	public void setPrimaryKey(long pk) {
 		_wikiPageResource.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the uuid of this wiki page resource.
+	*
+	* @return the uuid of this wiki page resource
+	*/
 	public java.lang.String getUuid() {
 		return _wikiPageResource.getUuid();
 	}
 
+	/**
+	* Sets the uuid of this wiki page resource.
+	*
+	* @param uuid the uuid of this wiki page resource
+	*/
 	public void setUuid(java.lang.String uuid) {
 		_wikiPageResource.setUuid(uuid);
 	}
 
+	/**
+	* Gets the resource prim key of this wiki page resource.
+	*
+	* @return the resource prim key of this wiki page resource
+	*/
 	public long getResourcePrimKey() {
 		return _wikiPageResource.getResourcePrimKey();
 	}
 
+	/**
+	* Sets the resource prim key of this wiki page resource.
+	*
+	* @param resourcePrimKey the resource prim key of this wiki page resource
+	*/
 	public void setResourcePrimKey(long resourcePrimKey) {
 		_wikiPageResource.setResourcePrimKey(resourcePrimKey);
 	}
 
+	/**
+	* Gets the node id of this wiki page resource.
+	*
+	* @return the node id of this wiki page resource
+	*/
 	public long getNodeId() {
 		return _wikiPageResource.getNodeId();
 	}
 
+	/**
+	* Sets the node id of this wiki page resource.
+	*
+	* @param nodeId the node id of this wiki page resource
+	*/
 	public void setNodeId(long nodeId) {
 		_wikiPageResource.setNodeId(nodeId);
 	}
 
+	/**
+	* Gets the title of this wiki page resource.
+	*
+	* @return the title of this wiki page resource
+	*/
 	public java.lang.String getTitle() {
 		return _wikiPageResource.getTitle();
 	}
 
+	/**
+	* Sets the title of this wiki page resource.
+	*
+	* @param title the title of this wiki page resource
+	*/
 	public void setTitle(java.lang.String title) {
 		_wikiPageResource.setTitle(title);
 	}

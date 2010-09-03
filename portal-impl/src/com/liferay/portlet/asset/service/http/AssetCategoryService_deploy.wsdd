@@ -21,6 +21,16 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://util.kernel.portal.liferay.com" qname="obc" type="tns:OrderByComparator"></parameter>
 		</operation>
+		<operation xmlns:operNS="urn:http.service.asset.portlet.liferay.com" xmlns:rtns="urn:http.service.asset.portlet.liferay.com" xmlns:tns2="http://model.asset.portlet.liferay.com" name="getChildCategories" qname="operNS:getChildCategories" returnQName="getChildCategoriesReturn" returnType="rtns:ArrayOf_tns2_AssetCategorySoap" returnItemType="tns2:AssetCategorySoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="parentCategoryId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.asset.portlet.liferay.com" xmlns:rtns="urn:http.service.asset.portlet.liferay.com" xmlns:tns2="http://model.asset.portlet.liferay.com" name="getVocabularyCategories" qname="operNS:getVocabularyCategories" returnQName="getVocabularyCategoriesReturn" returnType="rtns:ArrayOf_tns2_AssetCategorySoap" returnItemType="tns2:AssetCategorySoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="parentCategoryId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="vocabularyId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="start" type="tns:int"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
+			<parameter xmlns:tns="http://util.kernel.portal.liferay.com" qname="obc" type="tns:OrderByComparator"></parameter>
+		</operation>
 		<operation xmlns:operNS="urn:http.service.asset.portlet.liferay.com" xmlns:rtns="urn:http.service.asset.portlet.liferay.com" xmlns:tns2="http://model.asset.portlet.liferay.com" name="getVocabularyCategories" qname="operNS:getVocabularyCategories" returnQName="getVocabularyCategoriesReturn" returnType="rtns:ArrayOf_tns2_AssetCategorySoap" returnItemType="tns2:AssetCategorySoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="vocabularyId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="start" type="tns:int"></parameter>

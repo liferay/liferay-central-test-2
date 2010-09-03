@@ -28,78 +28,173 @@ public class ExpandoValueWrapper implements ExpandoValue {
 		_expandoValue = expandoValue;
 	}
 
+	/**
+	* Gets the primary key of this expando value.
+	*
+	* @return the primary key of this expando value
+	*/
 	public long getPrimaryKey() {
 		return _expandoValue.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this expando value
+	*
+	* @param pk the primary key of this expando value
+	*/
 	public void setPrimaryKey(long pk) {
 		_expandoValue.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the value id of this expando value.
+	*
+	* @return the value id of this expando value
+	*/
 	public long getValueId() {
 		return _expandoValue.getValueId();
 	}
 
+	/**
+	* Sets the value id of this expando value.
+	*
+	* @param valueId the value id of this expando value
+	*/
 	public void setValueId(long valueId) {
 		_expandoValue.setValueId(valueId);
 	}
 
+	/**
+	* Gets the company id of this expando value.
+	*
+	* @return the company id of this expando value
+	*/
 	public long getCompanyId() {
 		return _expandoValue.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this expando value.
+	*
+	* @param companyId the company id of this expando value
+	*/
 	public void setCompanyId(long companyId) {
 		_expandoValue.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the table id of this expando value.
+	*
+	* @return the table id of this expando value
+	*/
 	public long getTableId() {
 		return _expandoValue.getTableId();
 	}
 
+	/**
+	* Sets the table id of this expando value.
+	*
+	* @param tableId the table id of this expando value
+	*/
 	public void setTableId(long tableId) {
 		_expandoValue.setTableId(tableId);
 	}
 
+	/**
+	* Gets the column id of this expando value.
+	*
+	* @return the column id of this expando value
+	*/
 	public long getColumnId() {
 		return _expandoValue.getColumnId();
 	}
 
+	/**
+	* Sets the column id of this expando value.
+	*
+	* @param columnId the column id of this expando value
+	*/
 	public void setColumnId(long columnId) {
 		_expandoValue.setColumnId(columnId);
 	}
 
+	/**
+	* Gets the row id of this expando value.
+	*
+	* @return the row id of this expando value
+	*/
 	public long getRowId() {
 		return _expandoValue.getRowId();
 	}
 
+	/**
+	* Sets the row id of this expando value.
+	*
+	* @param rowId the row id of this expando value
+	*/
 	public void setRowId(long rowId) {
 		_expandoValue.setRowId(rowId);
 	}
 
+	/**
+	* Gets the class name of the model instance this expando value is polymorphically associated with.
+	*
+	* @return the class name of the model instance this expando value is polymorphically associated with
+	*/
 	public java.lang.String getClassName() {
 		return _expandoValue.getClassName();
 	}
 
+	/**
+	* Gets the class name id of this expando value.
+	*
+	* @return the class name id of this expando value
+	*/
 	public long getClassNameId() {
 		return _expandoValue.getClassNameId();
 	}
 
+	/**
+	* Sets the class name id of this expando value.
+	*
+	* @param classNameId the class name id of this expando value
+	*/
 	public void setClassNameId(long classNameId) {
 		_expandoValue.setClassNameId(classNameId);
 	}
 
+	/**
+	* Gets the class p k of this expando value.
+	*
+	* @return the class p k of this expando value
+	*/
 	public long getClassPK() {
 		return _expandoValue.getClassPK();
 	}
 
+	/**
+	* Sets the class p k of this expando value.
+	*
+	* @param classPK the class p k of this expando value
+	*/
 	public void setClassPK(long classPK) {
 		_expandoValue.setClassPK(classPK);
 	}
 
+	/**
+	* Gets the data of this expando value.
+	*
+	* @return the data of this expando value
+	*/
 	public java.lang.String getData() {
 		return _expandoValue.getData();
 	}
 
+	/**
+	* Sets the data of this expando value.
+	*
+	* @param data the data of this expando value
+	*/
 	public void setData(java.lang.String data) {
 		_expandoValue.setData(data);
 	}

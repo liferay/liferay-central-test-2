@@ -28,147 +28,328 @@ public class SCProductEntryWrapper implements SCProductEntry {
 		_scProductEntry = scProductEntry;
 	}
 
+	/**
+	* Gets the primary key of this s c product entry.
+	*
+	* @return the primary key of this s c product entry
+	*/
 	public long getPrimaryKey() {
 		return _scProductEntry.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this s c product entry
+	*
+	* @param pk the primary key of this s c product entry
+	*/
 	public void setPrimaryKey(long pk) {
 		_scProductEntry.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the product entry id of this s c product entry.
+	*
+	* @return the product entry id of this s c product entry
+	*/
 	public long getProductEntryId() {
 		return _scProductEntry.getProductEntryId();
 	}
 
+	/**
+	* Sets the product entry id of this s c product entry.
+	*
+	* @param productEntryId the product entry id of this s c product entry
+	*/
 	public void setProductEntryId(long productEntryId) {
 		_scProductEntry.setProductEntryId(productEntryId);
 	}
 
+	/**
+	* Gets the group id of this s c product entry.
+	*
+	* @return the group id of this s c product entry
+	*/
 	public long getGroupId() {
 		return _scProductEntry.getGroupId();
 	}
 
+	/**
+	* Sets the group id of this s c product entry.
+	*
+	* @param groupId the group id of this s c product entry
+	*/
 	public void setGroupId(long groupId) {
 		_scProductEntry.setGroupId(groupId);
 	}
 
+	/**
+	* Gets the company id of this s c product entry.
+	*
+	* @return the company id of this s c product entry
+	*/
 	public long getCompanyId() {
 		return _scProductEntry.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this s c product entry.
+	*
+	* @param companyId the company id of this s c product entry
+	*/
 	public void setCompanyId(long companyId) {
 		_scProductEntry.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the user id of this s c product entry.
+	*
+	* @return the user id of this s c product entry
+	*/
 	public long getUserId() {
 		return _scProductEntry.getUserId();
 	}
 
+	/**
+	* Sets the user id of this s c product entry.
+	*
+	* @param userId the user id of this s c product entry
+	*/
 	public void setUserId(long userId) {
 		_scProductEntry.setUserId(userId);
 	}
 
+	/**
+	* Gets the user uuid of this s c product entry.
+	*
+	* @return the user uuid of this s c product entry
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scProductEntry.getUserUuid();
 	}
 
+	/**
+	* Sets the user uuid of this s c product entry.
+	*
+	* @param userUuid the user uuid of this s c product entry
+	*/
 	public void setUserUuid(java.lang.String userUuid) {
 		_scProductEntry.setUserUuid(userUuid);
 	}
 
+	/**
+	* Gets the user name of this s c product entry.
+	*
+	* @return the user name of this s c product entry
+	*/
 	public java.lang.String getUserName() {
 		return _scProductEntry.getUserName();
 	}
 
+	/**
+	* Sets the user name of this s c product entry.
+	*
+	* @param userName the user name of this s c product entry
+	*/
 	public void setUserName(java.lang.String userName) {
 		_scProductEntry.setUserName(userName);
 	}
 
+	/**
+	* Gets the create date of this s c product entry.
+	*
+	* @return the create date of this s c product entry
+	*/
 	public java.util.Date getCreateDate() {
 		return _scProductEntry.getCreateDate();
 	}
 
+	/**
+	* Sets the create date of this s c product entry.
+	*
+	* @param createDate the create date of this s c product entry
+	*/
 	public void setCreateDate(java.util.Date createDate) {
 		_scProductEntry.setCreateDate(createDate);
 	}
 
+	/**
+	* Gets the modified date of this s c product entry.
+	*
+	* @return the modified date of this s c product entry
+	*/
 	public java.util.Date getModifiedDate() {
 		return _scProductEntry.getModifiedDate();
 	}
 
+	/**
+	* Sets the modified date of this s c product entry.
+	*
+	* @param modifiedDate the modified date of this s c product entry
+	*/
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_scProductEntry.setModifiedDate(modifiedDate);
 	}
 
+	/**
+	* Gets the name of this s c product entry.
+	*
+	* @return the name of this s c product entry
+	*/
 	public java.lang.String getName() {
 		return _scProductEntry.getName();
 	}
 
+	/**
+	* Sets the name of this s c product entry.
+	*
+	* @param name the name of this s c product entry
+	*/
 	public void setName(java.lang.String name) {
 		_scProductEntry.setName(name);
 	}
 
+	/**
+	* Gets the type of this s c product entry.
+	*
+	* @return the type of this s c product entry
+	*/
 	public java.lang.String getType() {
 		return _scProductEntry.getType();
 	}
 
+	/**
+	* Sets the type of this s c product entry.
+	*
+	* @param type the type of this s c product entry
+	*/
 	public void setType(java.lang.String type) {
 		_scProductEntry.setType(type);
 	}
 
+	/**
+	* Gets the tags of this s c product entry.
+	*
+	* @return the tags of this s c product entry
+	*/
 	public java.lang.String getTags() {
 		return _scProductEntry.getTags();
 	}
 
+	/**
+	* Sets the tags of this s c product entry.
+	*
+	* @param tags the tags of this s c product entry
+	*/
 	public void setTags(java.lang.String tags) {
 		_scProductEntry.setTags(tags);
 	}
 
+	/**
+	* Gets the short description of this s c product entry.
+	*
+	* @return the short description of this s c product entry
+	*/
 	public java.lang.String getShortDescription() {
 		return _scProductEntry.getShortDescription();
 	}
 
+	/**
+	* Sets the short description of this s c product entry.
+	*
+	* @param shortDescription the short description of this s c product entry
+	*/
 	public void setShortDescription(java.lang.String shortDescription) {
 		_scProductEntry.setShortDescription(shortDescription);
 	}
 
+	/**
+	* Gets the long description of this s c product entry.
+	*
+	* @return the long description of this s c product entry
+	*/
 	public java.lang.String getLongDescription() {
 		return _scProductEntry.getLongDescription();
 	}
 
+	/**
+	* Sets the long description of this s c product entry.
+	*
+	* @param longDescription the long description of this s c product entry
+	*/
 	public void setLongDescription(java.lang.String longDescription) {
 		_scProductEntry.setLongDescription(longDescription);
 	}
 
+	/**
+	* Gets the page u r l of this s c product entry.
+	*
+	* @return the page u r l of this s c product entry
+	*/
 	public java.lang.String getPageURL() {
 		return _scProductEntry.getPageURL();
 	}
 
+	/**
+	* Sets the page u r l of this s c product entry.
+	*
+	* @param pageURL the page u r l of this s c product entry
+	*/
 	public void setPageURL(java.lang.String pageURL) {
 		_scProductEntry.setPageURL(pageURL);
 	}
 
+	/**
+	* Gets the author of this s c product entry.
+	*
+	* @return the author of this s c product entry
+	*/
 	public java.lang.String getAuthor() {
 		return _scProductEntry.getAuthor();
 	}
 
+	/**
+	* Sets the author of this s c product entry.
+	*
+	* @param author the author of this s c product entry
+	*/
 	public void setAuthor(java.lang.String author) {
 		_scProductEntry.setAuthor(author);
 	}
 
+	/**
+	* Gets the repo group id of this s c product entry.
+	*
+	* @return the repo group id of this s c product entry
+	*/
 	public java.lang.String getRepoGroupId() {
 		return _scProductEntry.getRepoGroupId();
 	}
 
+	/**
+	* Sets the repo group id of this s c product entry.
+	*
+	* @param repoGroupId the repo group id of this s c product entry
+	*/
 	public void setRepoGroupId(java.lang.String repoGroupId) {
 		_scProductEntry.setRepoGroupId(repoGroupId);
 	}
 
+	/**
+	* Gets the repo artifact id of this s c product entry.
+	*
+	* @return the repo artifact id of this s c product entry
+	*/
 	public java.lang.String getRepoArtifactId() {
 		return _scProductEntry.getRepoArtifactId();
 	}
 
+	/**
+	* Sets the repo artifact id of this s c product entry.
+	*
+	* @param repoArtifactId the repo artifact id of this s c product entry
+	*/
 	public void setRepoArtifactId(java.lang.String repoArtifactId) {
 		_scProductEntry.setRepoArtifactId(repoArtifactId);
 	}

@@ -28,62 +28,137 @@ public class RatingsStatsWrapper implements RatingsStats {
 		_ratingsStats = ratingsStats;
 	}
 
+	/**
+	* Gets the primary key of this ratings stats.
+	*
+	* @return the primary key of this ratings stats
+	*/
 	public long getPrimaryKey() {
 		return _ratingsStats.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this ratings stats
+	*
+	* @param pk the primary key of this ratings stats
+	*/
 	public void setPrimaryKey(long pk) {
 		_ratingsStats.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the stats id of this ratings stats.
+	*
+	* @return the stats id of this ratings stats
+	*/
 	public long getStatsId() {
 		return _ratingsStats.getStatsId();
 	}
 
+	/**
+	* Sets the stats id of this ratings stats.
+	*
+	* @param statsId the stats id of this ratings stats
+	*/
 	public void setStatsId(long statsId) {
 		_ratingsStats.setStatsId(statsId);
 	}
 
+	/**
+	* Gets the class name of the model instance this ratings stats is polymorphically associated with.
+	*
+	* @return the class name of the model instance this ratings stats is polymorphically associated with
+	*/
 	public java.lang.String getClassName() {
 		return _ratingsStats.getClassName();
 	}
 
+	/**
+	* Gets the class name id of this ratings stats.
+	*
+	* @return the class name id of this ratings stats
+	*/
 	public long getClassNameId() {
 		return _ratingsStats.getClassNameId();
 	}
 
+	/**
+	* Sets the class name id of this ratings stats.
+	*
+	* @param classNameId the class name id of this ratings stats
+	*/
 	public void setClassNameId(long classNameId) {
 		_ratingsStats.setClassNameId(classNameId);
 	}
 
+	/**
+	* Gets the class p k of this ratings stats.
+	*
+	* @return the class p k of this ratings stats
+	*/
 	public long getClassPK() {
 		return _ratingsStats.getClassPK();
 	}
 
+	/**
+	* Sets the class p k of this ratings stats.
+	*
+	* @param classPK the class p k of this ratings stats
+	*/
 	public void setClassPK(long classPK) {
 		_ratingsStats.setClassPK(classPK);
 	}
 
+	/**
+	* Gets the total entries of this ratings stats.
+	*
+	* @return the total entries of this ratings stats
+	*/
 	public int getTotalEntries() {
 		return _ratingsStats.getTotalEntries();
 	}
 
+	/**
+	* Sets the total entries of this ratings stats.
+	*
+	* @param totalEntries the total entries of this ratings stats
+	*/
 	public void setTotalEntries(int totalEntries) {
 		_ratingsStats.setTotalEntries(totalEntries);
 	}
 
+	/**
+	* Gets the total score of this ratings stats.
+	*
+	* @return the total score of this ratings stats
+	*/
 	public double getTotalScore() {
 		return _ratingsStats.getTotalScore();
 	}
 
+	/**
+	* Sets the total score of this ratings stats.
+	*
+	* @param totalScore the total score of this ratings stats
+	*/
 	public void setTotalScore(double totalScore) {
 		_ratingsStats.setTotalScore(totalScore);
 	}
 
+	/**
+	* Gets the average score of this ratings stats.
+	*
+	* @return the average score of this ratings stats
+	*/
 	public double getAverageScore() {
 		return _ratingsStats.getAverageScore();
 	}
 
+	/**
+	* Sets the average score of this ratings stats.
+	*
+	* @param averageScore the average score of this ratings stats
+	*/
 	public void setAverageScore(double averageScore) {
 		_ratingsStats.setAverageScore(averageScore);
 	}

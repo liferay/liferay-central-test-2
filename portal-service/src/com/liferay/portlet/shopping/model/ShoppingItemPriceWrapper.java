@@ -28,98 +28,218 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 		_shoppingItemPrice = shoppingItemPrice;
 	}
 
+	/**
+	* Gets the primary key of this shopping item price.
+	*
+	* @return the primary key of this shopping item price
+	*/
 	public long getPrimaryKey() {
 		return _shoppingItemPrice.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this shopping item price
+	*
+	* @param pk the primary key of this shopping item price
+	*/
 	public void setPrimaryKey(long pk) {
 		_shoppingItemPrice.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the item price id of this shopping item price.
+	*
+	* @return the item price id of this shopping item price
+	*/
 	public long getItemPriceId() {
 		return _shoppingItemPrice.getItemPriceId();
 	}
 
+	/**
+	* Sets the item price id of this shopping item price.
+	*
+	* @param itemPriceId the item price id of this shopping item price
+	*/
 	public void setItemPriceId(long itemPriceId) {
 		_shoppingItemPrice.setItemPriceId(itemPriceId);
 	}
 
+	/**
+	* Gets the item id of this shopping item price.
+	*
+	* @return the item id of this shopping item price
+	*/
 	public long getItemId() {
 		return _shoppingItemPrice.getItemId();
 	}
 
+	/**
+	* Sets the item id of this shopping item price.
+	*
+	* @param itemId the item id of this shopping item price
+	*/
 	public void setItemId(long itemId) {
 		_shoppingItemPrice.setItemId(itemId);
 	}
 
+	/**
+	* Gets the min quantity of this shopping item price.
+	*
+	* @return the min quantity of this shopping item price
+	*/
 	public int getMinQuantity() {
 		return _shoppingItemPrice.getMinQuantity();
 	}
 
+	/**
+	* Sets the min quantity of this shopping item price.
+	*
+	* @param minQuantity the min quantity of this shopping item price
+	*/
 	public void setMinQuantity(int minQuantity) {
 		_shoppingItemPrice.setMinQuantity(minQuantity);
 	}
 
+	/**
+	* Gets the max quantity of this shopping item price.
+	*
+	* @return the max quantity of this shopping item price
+	*/
 	public int getMaxQuantity() {
 		return _shoppingItemPrice.getMaxQuantity();
 	}
 
+	/**
+	* Sets the max quantity of this shopping item price.
+	*
+	* @param maxQuantity the max quantity of this shopping item price
+	*/
 	public void setMaxQuantity(int maxQuantity) {
 		_shoppingItemPrice.setMaxQuantity(maxQuantity);
 	}
 
+	/**
+	* Gets the price of this shopping item price.
+	*
+	* @return the price of this shopping item price
+	*/
 	public double getPrice() {
 		return _shoppingItemPrice.getPrice();
 	}
 
+	/**
+	* Sets the price of this shopping item price.
+	*
+	* @param price the price of this shopping item price
+	*/
 	public void setPrice(double price) {
 		_shoppingItemPrice.setPrice(price);
 	}
 
+	/**
+	* Gets the discount of this shopping item price.
+	*
+	* @return the discount of this shopping item price
+	*/
 	public double getDiscount() {
 		return _shoppingItemPrice.getDiscount();
 	}
 
+	/**
+	* Sets the discount of this shopping item price.
+	*
+	* @param discount the discount of this shopping item price
+	*/
 	public void setDiscount(double discount) {
 		_shoppingItemPrice.setDiscount(discount);
 	}
 
+	/**
+	* Gets the taxable of this shopping item price.
+	*
+	* @return the taxable of this shopping item price
+	*/
 	public boolean getTaxable() {
 		return _shoppingItemPrice.getTaxable();
 	}
 
+	/**
+	* Determines whether this shopping item price is taxable.
+	*
+	* @return whether this shopping item price is taxable
+	*/
 	public boolean isTaxable() {
 		return _shoppingItemPrice.isTaxable();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is taxable.
+	*
+	* @param taxable the taxable of this shopping item price
+	*/
 	public void setTaxable(boolean taxable) {
 		_shoppingItemPrice.setTaxable(taxable);
 	}
 
+	/**
+	* Gets the shipping of this shopping item price.
+	*
+	* @return the shipping of this shopping item price
+	*/
 	public double getShipping() {
 		return _shoppingItemPrice.getShipping();
 	}
 
+	/**
+	* Sets the shipping of this shopping item price.
+	*
+	* @param shipping the shipping of this shopping item price
+	*/
 	public void setShipping(double shipping) {
 		_shoppingItemPrice.setShipping(shipping);
 	}
 
+	/**
+	* Gets the use shipping formula of this shopping item price.
+	*
+	* @return the use shipping formula of this shopping item price
+	*/
 	public boolean getUseShippingFormula() {
 		return _shoppingItemPrice.getUseShippingFormula();
 	}
 
+	/**
+	* Determines whether this shopping item price is use shipping formula.
+	*
+	* @return whether this shopping item price is use shipping formula
+	*/
 	public boolean isUseShippingFormula() {
 		return _shoppingItemPrice.isUseShippingFormula();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is use shipping formula.
+	*
+	* @param useShippingFormula the use shipping formula of this shopping item price
+	*/
 	public void setUseShippingFormula(boolean useShippingFormula) {
 		_shoppingItemPrice.setUseShippingFormula(useShippingFormula);
 	}
 
+	/**
+	* Gets the status of this shopping item price.
+	*
+	* @return the status of this shopping item price
+	*/
 	public int getStatus() {
 		return _shoppingItemPrice.getStatus();
 	}
 
+	/**
+	* Sets the status of this shopping item price.
+	*
+	* @param status the status of this shopping item price
+	*/
 	public void setStatus(int status) {
 		_shoppingItemPrice.setStatus(status);
 	}

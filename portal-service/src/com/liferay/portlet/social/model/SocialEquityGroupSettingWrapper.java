@@ -29,66 +29,146 @@ public class SocialEquityGroupSettingWrapper implements SocialEquityGroupSetting
 		_socialEquityGroupSetting = socialEquityGroupSetting;
 	}
 
+	/**
+	* Gets the primary key of this social equity group setting.
+	*
+	* @return the primary key of this social equity group setting
+	*/
 	public long getPrimaryKey() {
 		return _socialEquityGroupSetting.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this social equity group setting
+	*
+	* @param pk the primary key of this social equity group setting
+	*/
 	public void setPrimaryKey(long pk) {
 		_socialEquityGroupSetting.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the equity group setting id of this social equity group setting.
+	*
+	* @return the equity group setting id of this social equity group setting
+	*/
 	public long getEquityGroupSettingId() {
 		return _socialEquityGroupSetting.getEquityGroupSettingId();
 	}
 
+	/**
+	* Sets the equity group setting id of this social equity group setting.
+	*
+	* @param equityGroupSettingId the equity group setting id of this social equity group setting
+	*/
 	public void setEquityGroupSettingId(long equityGroupSettingId) {
 		_socialEquityGroupSetting.setEquityGroupSettingId(equityGroupSettingId);
 	}
 
+	/**
+	* Gets the group id of this social equity group setting.
+	*
+	* @return the group id of this social equity group setting
+	*/
 	public long getGroupId() {
 		return _socialEquityGroupSetting.getGroupId();
 	}
 
+	/**
+	* Sets the group id of this social equity group setting.
+	*
+	* @param groupId the group id of this social equity group setting
+	*/
 	public void setGroupId(long groupId) {
 		_socialEquityGroupSetting.setGroupId(groupId);
 	}
 
+	/**
+	* Gets the company id of this social equity group setting.
+	*
+	* @return the company id of this social equity group setting
+	*/
 	public long getCompanyId() {
 		return _socialEquityGroupSetting.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this social equity group setting.
+	*
+	* @param companyId the company id of this social equity group setting
+	*/
 	public void setCompanyId(long companyId) {
 		_socialEquityGroupSetting.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the class name of the model instance this social equity group setting is polymorphically associated with.
+	*
+	* @return the class name of the model instance this social equity group setting is polymorphically associated with
+	*/
 	public java.lang.String getClassName() {
 		return _socialEquityGroupSetting.getClassName();
 	}
 
+	/**
+	* Gets the class name id of this social equity group setting.
+	*
+	* @return the class name id of this social equity group setting
+	*/
 	public long getClassNameId() {
 		return _socialEquityGroupSetting.getClassNameId();
 	}
 
+	/**
+	* Sets the class name id of this social equity group setting.
+	*
+	* @param classNameId the class name id of this social equity group setting
+	*/
 	public void setClassNameId(long classNameId) {
 		_socialEquityGroupSetting.setClassNameId(classNameId);
 	}
 
+	/**
+	* Gets the type of this social equity group setting.
+	*
+	* @return the type of this social equity group setting
+	*/
 	public int getType() {
 		return _socialEquityGroupSetting.getType();
 	}
 
+	/**
+	* Sets the type of this social equity group setting.
+	*
+	* @param type the type of this social equity group setting
+	*/
 	public void setType(int type) {
 		_socialEquityGroupSetting.setType(type);
 	}
 
+	/**
+	* Gets the enabled of this social equity group setting.
+	*
+	* @return the enabled of this social equity group setting
+	*/
 	public boolean getEnabled() {
 		return _socialEquityGroupSetting.getEnabled();
 	}
 
+	/**
+	* Determines whether this social equity group setting is enabled.
+	*
+	* @return whether this social equity group setting is enabled
+	*/
 	public boolean isEnabled() {
 		return _socialEquityGroupSetting.isEnabled();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is enabled.
+	*
+	* @param enabled the enabled of this social equity group setting
+	*/
 	public void setEnabled(boolean enabled) {
 		_socialEquityGroupSetting.setEnabled(enabled);
 	}

@@ -28,42 +28,92 @@ public class ExpandoRowWrapper implements ExpandoRow {
 		_expandoRow = expandoRow;
 	}
 
+	/**
+	* Gets the primary key of this expando row.
+	*
+	* @return the primary key of this expando row
+	*/
 	public long getPrimaryKey() {
 		return _expandoRow.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this expando row
+	*
+	* @param pk the primary key of this expando row
+	*/
 	public void setPrimaryKey(long pk) {
 		_expandoRow.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the row id of this expando row.
+	*
+	* @return the row id of this expando row
+	*/
 	public long getRowId() {
 		return _expandoRow.getRowId();
 	}
 
+	/**
+	* Sets the row id of this expando row.
+	*
+	* @param rowId the row id of this expando row
+	*/
 	public void setRowId(long rowId) {
 		_expandoRow.setRowId(rowId);
 	}
 
+	/**
+	* Gets the company id of this expando row.
+	*
+	* @return the company id of this expando row
+	*/
 	public long getCompanyId() {
 		return _expandoRow.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this expando row.
+	*
+	* @param companyId the company id of this expando row
+	*/
 	public void setCompanyId(long companyId) {
 		_expandoRow.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the table id of this expando row.
+	*
+	* @return the table id of this expando row
+	*/
 	public long getTableId() {
 		return _expandoRow.getTableId();
 	}
 
+	/**
+	* Sets the table id of this expando row.
+	*
+	* @param tableId the table id of this expando row
+	*/
 	public void setTableId(long tableId) {
 		_expandoRow.setTableId(tableId);
 	}
 
+	/**
+	* Gets the class p k of this expando row.
+	*
+	* @return the class p k of this expando row
+	*/
 	public long getClassPK() {
 		return _expandoRow.getClassPK();
 	}
 
+	/**
+	* Sets the class p k of this expando row.
+	*
+	* @param classPK the class p k of this expando row
+	*/
 	public void setClassPK(long classPK) {
 		_expandoRow.setClassPK(classPK);
 	}

@@ -28,46 +28,101 @@ public class ClusterGroupWrapper implements ClusterGroup {
 		_clusterGroup = clusterGroup;
 	}
 
+	/**
+	* Gets the primary key of this cluster group.
+	*
+	* @return the primary key of this cluster group
+	*/
 	public long getPrimaryKey() {
 		return _clusterGroup.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this cluster group
+	*
+	* @param pk the primary key of this cluster group
+	*/
 	public void setPrimaryKey(long pk) {
 		_clusterGroup.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the cluster group id of this cluster group.
+	*
+	* @return the cluster group id of this cluster group
+	*/
 	public long getClusterGroupId() {
 		return _clusterGroup.getClusterGroupId();
 	}
 
+	/**
+	* Sets the cluster group id of this cluster group.
+	*
+	* @param clusterGroupId the cluster group id of this cluster group
+	*/
 	public void setClusterGroupId(long clusterGroupId) {
 		_clusterGroup.setClusterGroupId(clusterGroupId);
 	}
 
+	/**
+	* Gets the name of this cluster group.
+	*
+	* @return the name of this cluster group
+	*/
 	public java.lang.String getName() {
 		return _clusterGroup.getName();
 	}
 
+	/**
+	* Sets the name of this cluster group.
+	*
+	* @param name the name of this cluster group
+	*/
 	public void setName(java.lang.String name) {
 		_clusterGroup.setName(name);
 	}
 
+	/**
+	* Gets the cluster node ids of this cluster group.
+	*
+	* @return the cluster node ids of this cluster group
+	*/
 	public java.lang.String getClusterNodeIds() {
 		return _clusterGroup.getClusterNodeIds();
 	}
 
+	/**
+	* Sets the cluster node ids of this cluster group.
+	*
+	* @param clusterNodeIds the cluster node ids of this cluster group
+	*/
 	public void setClusterNodeIds(java.lang.String clusterNodeIds) {
 		_clusterGroup.setClusterNodeIds(clusterNodeIds);
 	}
 
+	/**
+	* Gets the whole cluster of this cluster group.
+	*
+	* @return the whole cluster of this cluster group
+	*/
 	public boolean getWholeCluster() {
 		return _clusterGroup.getWholeCluster();
 	}
 
+	/**
+	* Determines whether this cluster group is whole cluster.
+	*
+	* @return whether this cluster group is whole cluster
+	*/
 	public boolean isWholeCluster() {
 		return _clusterGroup.isWholeCluster();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is whole cluster.
+	*
+	* @param wholeCluster the whole cluster of this cluster group
+	*/
 	public void setWholeCluster(boolean wholeCluster) {
 		_clusterGroup.setWholeCluster(wholeCluster);
 	}

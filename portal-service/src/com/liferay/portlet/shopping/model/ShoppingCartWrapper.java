@@ -28,111 +28,247 @@ public class ShoppingCartWrapper implements ShoppingCart {
 		_shoppingCart = shoppingCart;
 	}
 
+	/**
+	* Gets the primary key of this shopping cart.
+	*
+	* @return the primary key of this shopping cart
+	*/
 	public long getPrimaryKey() {
 		return _shoppingCart.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this shopping cart
+	*
+	* @param pk the primary key of this shopping cart
+	*/
 	public void setPrimaryKey(long pk) {
 		_shoppingCart.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the cart id of this shopping cart.
+	*
+	* @return the cart id of this shopping cart
+	*/
 	public long getCartId() {
 		return _shoppingCart.getCartId();
 	}
 
+	/**
+	* Sets the cart id of this shopping cart.
+	*
+	* @param cartId the cart id of this shopping cart
+	*/
 	public void setCartId(long cartId) {
 		_shoppingCart.setCartId(cartId);
 	}
 
+	/**
+	* Gets the group id of this shopping cart.
+	*
+	* @return the group id of this shopping cart
+	*/
 	public long getGroupId() {
 		return _shoppingCart.getGroupId();
 	}
 
+	/**
+	* Sets the group id of this shopping cart.
+	*
+	* @param groupId the group id of this shopping cart
+	*/
 	public void setGroupId(long groupId) {
 		_shoppingCart.setGroupId(groupId);
 	}
 
+	/**
+	* Gets the company id of this shopping cart.
+	*
+	* @return the company id of this shopping cart
+	*/
 	public long getCompanyId() {
 		return _shoppingCart.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this shopping cart.
+	*
+	* @param companyId the company id of this shopping cart
+	*/
 	public void setCompanyId(long companyId) {
 		_shoppingCart.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the user id of this shopping cart.
+	*
+	* @return the user id of this shopping cart
+	*/
 	public long getUserId() {
 		return _shoppingCart.getUserId();
 	}
 
+	/**
+	* Sets the user id of this shopping cart.
+	*
+	* @param userId the user id of this shopping cart
+	*/
 	public void setUserId(long userId) {
 		_shoppingCart.setUserId(userId);
 	}
 
+	/**
+	* Gets the user uuid of this shopping cart.
+	*
+	* @return the user uuid of this shopping cart
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingCart.getUserUuid();
 	}
 
+	/**
+	* Sets the user uuid of this shopping cart.
+	*
+	* @param userUuid the user uuid of this shopping cart
+	*/
 	public void setUserUuid(java.lang.String userUuid) {
 		_shoppingCart.setUserUuid(userUuid);
 	}
 
+	/**
+	* Gets the user name of this shopping cart.
+	*
+	* @return the user name of this shopping cart
+	*/
 	public java.lang.String getUserName() {
 		return _shoppingCart.getUserName();
 	}
 
+	/**
+	* Sets the user name of this shopping cart.
+	*
+	* @param userName the user name of this shopping cart
+	*/
 	public void setUserName(java.lang.String userName) {
 		_shoppingCart.setUserName(userName);
 	}
 
+	/**
+	* Gets the create date of this shopping cart.
+	*
+	* @return the create date of this shopping cart
+	*/
 	public java.util.Date getCreateDate() {
 		return _shoppingCart.getCreateDate();
 	}
 
+	/**
+	* Sets the create date of this shopping cart.
+	*
+	* @param createDate the create date of this shopping cart
+	*/
 	public void setCreateDate(java.util.Date createDate) {
 		_shoppingCart.setCreateDate(createDate);
 	}
 
+	/**
+	* Gets the modified date of this shopping cart.
+	*
+	* @return the modified date of this shopping cart
+	*/
 	public java.util.Date getModifiedDate() {
 		return _shoppingCart.getModifiedDate();
 	}
 
+	/**
+	* Sets the modified date of this shopping cart.
+	*
+	* @param modifiedDate the modified date of this shopping cart
+	*/
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_shoppingCart.setModifiedDate(modifiedDate);
 	}
 
+	/**
+	* Gets the item ids of this shopping cart.
+	*
+	* @return the item ids of this shopping cart
+	*/
 	public java.lang.String getItemIds() {
 		return _shoppingCart.getItemIds();
 	}
 
+	/**
+	* Sets the item ids of this shopping cart.
+	*
+	* @param itemIds the item ids of this shopping cart
+	*/
 	public void setItemIds(java.lang.String itemIds) {
 		_shoppingCart.setItemIds(itemIds);
 	}
 
+	/**
+	* Gets the coupon codes of this shopping cart.
+	*
+	* @return the coupon codes of this shopping cart
+	*/
 	public java.lang.String getCouponCodes() {
 		return _shoppingCart.getCouponCodes();
 	}
 
+	/**
+	* Sets the coupon codes of this shopping cart.
+	*
+	* @param couponCodes the coupon codes of this shopping cart
+	*/
 	public void setCouponCodes(java.lang.String couponCodes) {
 		_shoppingCart.setCouponCodes(couponCodes);
 	}
 
+	/**
+	* Gets the alt shipping of this shopping cart.
+	*
+	* @return the alt shipping of this shopping cart
+	*/
 	public int getAltShipping() {
 		return _shoppingCart.getAltShipping();
 	}
 
+	/**
+	* Sets the alt shipping of this shopping cart.
+	*
+	* @param altShipping the alt shipping of this shopping cart
+	*/
 	public void setAltShipping(int altShipping) {
 		_shoppingCart.setAltShipping(altShipping);
 	}
 
+	/**
+	* Gets the insure of this shopping cart.
+	*
+	* @return the insure of this shopping cart
+	*/
 	public boolean getInsure() {
 		return _shoppingCart.getInsure();
 	}
 
+	/**
+	* Determines whether this shopping cart is insure.
+	*
+	* @return whether this shopping cart is insure
+	*/
 	public boolean isInsure() {
 		return _shoppingCart.isInsure();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is insure.
+	*
+	* @param insure the insure of this shopping cart
+	*/
 	public void setInsure(boolean insure) {
 		_shoppingCart.setInsure(insure);
 	}

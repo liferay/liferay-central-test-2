@@ -28,146 +28,326 @@ public class OrgLaborWrapper implements OrgLabor {
 		_orgLabor = orgLabor;
 	}
 
+	/**
+	* Gets the primary key of this org labor.
+	*
+	* @return the primary key of this org labor
+	*/
 	public long getPrimaryKey() {
 		return _orgLabor.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this org labor
+	*
+	* @param pk the primary key of this org labor
+	*/
 	public void setPrimaryKey(long pk) {
 		_orgLabor.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the org labor id of this org labor.
+	*
+	* @return the org labor id of this org labor
+	*/
 	public long getOrgLaborId() {
 		return _orgLabor.getOrgLaborId();
 	}
 
+	/**
+	* Sets the org labor id of this org labor.
+	*
+	* @param orgLaborId the org labor id of this org labor
+	*/
 	public void setOrgLaborId(long orgLaborId) {
 		_orgLabor.setOrgLaborId(orgLaborId);
 	}
 
+	/**
+	* Gets the organization id of this org labor.
+	*
+	* @return the organization id of this org labor
+	*/
 	public long getOrganizationId() {
 		return _orgLabor.getOrganizationId();
 	}
 
+	/**
+	* Sets the organization id of this org labor.
+	*
+	* @param organizationId the organization id of this org labor
+	*/
 	public void setOrganizationId(long organizationId) {
 		_orgLabor.setOrganizationId(organizationId);
 	}
 
+	/**
+	* Gets the type id of this org labor.
+	*
+	* @return the type id of this org labor
+	*/
 	public int getTypeId() {
 		return _orgLabor.getTypeId();
 	}
 
+	/**
+	* Sets the type id of this org labor.
+	*
+	* @param typeId the type id of this org labor
+	*/
 	public void setTypeId(int typeId) {
 		_orgLabor.setTypeId(typeId);
 	}
 
+	/**
+	* Gets the sun open of this org labor.
+	*
+	* @return the sun open of this org labor
+	*/
 	public int getSunOpen() {
 		return _orgLabor.getSunOpen();
 	}
 
+	/**
+	* Sets the sun open of this org labor.
+	*
+	* @param sunOpen the sun open of this org labor
+	*/
 	public void setSunOpen(int sunOpen) {
 		_orgLabor.setSunOpen(sunOpen);
 	}
 
+	/**
+	* Gets the sun close of this org labor.
+	*
+	* @return the sun close of this org labor
+	*/
 	public int getSunClose() {
 		return _orgLabor.getSunClose();
 	}
 
+	/**
+	* Sets the sun close of this org labor.
+	*
+	* @param sunClose the sun close of this org labor
+	*/
 	public void setSunClose(int sunClose) {
 		_orgLabor.setSunClose(sunClose);
 	}
 
+	/**
+	* Gets the mon open of this org labor.
+	*
+	* @return the mon open of this org labor
+	*/
 	public int getMonOpen() {
 		return _orgLabor.getMonOpen();
 	}
 
+	/**
+	* Sets the mon open of this org labor.
+	*
+	* @param monOpen the mon open of this org labor
+	*/
 	public void setMonOpen(int monOpen) {
 		_orgLabor.setMonOpen(monOpen);
 	}
 
+	/**
+	* Gets the mon close of this org labor.
+	*
+	* @return the mon close of this org labor
+	*/
 	public int getMonClose() {
 		return _orgLabor.getMonClose();
 	}
 
+	/**
+	* Sets the mon close of this org labor.
+	*
+	* @param monClose the mon close of this org labor
+	*/
 	public void setMonClose(int monClose) {
 		_orgLabor.setMonClose(monClose);
 	}
 
+	/**
+	* Gets the tue open of this org labor.
+	*
+	* @return the tue open of this org labor
+	*/
 	public int getTueOpen() {
 		return _orgLabor.getTueOpen();
 	}
 
+	/**
+	* Sets the tue open of this org labor.
+	*
+	* @param tueOpen the tue open of this org labor
+	*/
 	public void setTueOpen(int tueOpen) {
 		_orgLabor.setTueOpen(tueOpen);
 	}
 
+	/**
+	* Gets the tue close of this org labor.
+	*
+	* @return the tue close of this org labor
+	*/
 	public int getTueClose() {
 		return _orgLabor.getTueClose();
 	}
 
+	/**
+	* Sets the tue close of this org labor.
+	*
+	* @param tueClose the tue close of this org labor
+	*/
 	public void setTueClose(int tueClose) {
 		_orgLabor.setTueClose(tueClose);
 	}
 
+	/**
+	* Gets the wed open of this org labor.
+	*
+	* @return the wed open of this org labor
+	*/
 	public int getWedOpen() {
 		return _orgLabor.getWedOpen();
 	}
 
+	/**
+	* Sets the wed open of this org labor.
+	*
+	* @param wedOpen the wed open of this org labor
+	*/
 	public void setWedOpen(int wedOpen) {
 		_orgLabor.setWedOpen(wedOpen);
 	}
 
+	/**
+	* Gets the wed close of this org labor.
+	*
+	* @return the wed close of this org labor
+	*/
 	public int getWedClose() {
 		return _orgLabor.getWedClose();
 	}
 
+	/**
+	* Sets the wed close of this org labor.
+	*
+	* @param wedClose the wed close of this org labor
+	*/
 	public void setWedClose(int wedClose) {
 		_orgLabor.setWedClose(wedClose);
 	}
 
+	/**
+	* Gets the thu open of this org labor.
+	*
+	* @return the thu open of this org labor
+	*/
 	public int getThuOpen() {
 		return _orgLabor.getThuOpen();
 	}
 
+	/**
+	* Sets the thu open of this org labor.
+	*
+	* @param thuOpen the thu open of this org labor
+	*/
 	public void setThuOpen(int thuOpen) {
 		_orgLabor.setThuOpen(thuOpen);
 	}
 
+	/**
+	* Gets the thu close of this org labor.
+	*
+	* @return the thu close of this org labor
+	*/
 	public int getThuClose() {
 		return _orgLabor.getThuClose();
 	}
 
+	/**
+	* Sets the thu close of this org labor.
+	*
+	* @param thuClose the thu close of this org labor
+	*/
 	public void setThuClose(int thuClose) {
 		_orgLabor.setThuClose(thuClose);
 	}
 
+	/**
+	* Gets the fri open of this org labor.
+	*
+	* @return the fri open of this org labor
+	*/
 	public int getFriOpen() {
 		return _orgLabor.getFriOpen();
 	}
 
+	/**
+	* Sets the fri open of this org labor.
+	*
+	* @param friOpen the fri open of this org labor
+	*/
 	public void setFriOpen(int friOpen) {
 		_orgLabor.setFriOpen(friOpen);
 	}
 
+	/**
+	* Gets the fri close of this org labor.
+	*
+	* @return the fri close of this org labor
+	*/
 	public int getFriClose() {
 		return _orgLabor.getFriClose();
 	}
 
+	/**
+	* Sets the fri close of this org labor.
+	*
+	* @param friClose the fri close of this org labor
+	*/
 	public void setFriClose(int friClose) {
 		_orgLabor.setFriClose(friClose);
 	}
 
+	/**
+	* Gets the sat open of this org labor.
+	*
+	* @return the sat open of this org labor
+	*/
 	public int getSatOpen() {
 		return _orgLabor.getSatOpen();
 	}
 
+	/**
+	* Sets the sat open of this org labor.
+	*
+	* @param satOpen the sat open of this org labor
+	*/
 	public void setSatOpen(int satOpen) {
 		_orgLabor.setSatOpen(satOpen);
 	}
 
+	/**
+	* Gets the sat close of this org labor.
+	*
+	* @return the sat close of this org labor
+	*/
 	public int getSatClose() {
 		return _orgLabor.getSatClose();
 	}
 
+	/**
+	* Sets the sat close of this org labor.
+	*
+	* @param satClose the sat close of this org labor
+	*/
 	public void setSatClose(int satClose) {
 		_orgLabor.setSatClose(satClose);
 	}

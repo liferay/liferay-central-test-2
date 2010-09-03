@@ -28,50 +28,110 @@ public class ServiceComponentWrapper implements ServiceComponent {
 		_serviceComponent = serviceComponent;
 	}
 
+	/**
+	* Gets the primary key of this service component.
+	*
+	* @return the primary key of this service component
+	*/
 	public long getPrimaryKey() {
 		return _serviceComponent.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this service component
+	*
+	* @param pk the primary key of this service component
+	*/
 	public void setPrimaryKey(long pk) {
 		_serviceComponent.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the service component id of this service component.
+	*
+	* @return the service component id of this service component
+	*/
 	public long getServiceComponentId() {
 		return _serviceComponent.getServiceComponentId();
 	}
 
+	/**
+	* Sets the service component id of this service component.
+	*
+	* @param serviceComponentId the service component id of this service component
+	*/
 	public void setServiceComponentId(long serviceComponentId) {
 		_serviceComponent.setServiceComponentId(serviceComponentId);
 	}
 
+	/**
+	* Gets the build namespace of this service component.
+	*
+	* @return the build namespace of this service component
+	*/
 	public java.lang.String getBuildNamespace() {
 		return _serviceComponent.getBuildNamespace();
 	}
 
+	/**
+	* Sets the build namespace of this service component.
+	*
+	* @param buildNamespace the build namespace of this service component
+	*/
 	public void setBuildNamespace(java.lang.String buildNamespace) {
 		_serviceComponent.setBuildNamespace(buildNamespace);
 	}
 
+	/**
+	* Gets the build number of this service component.
+	*
+	* @return the build number of this service component
+	*/
 	public long getBuildNumber() {
 		return _serviceComponent.getBuildNumber();
 	}
 
+	/**
+	* Sets the build number of this service component.
+	*
+	* @param buildNumber the build number of this service component
+	*/
 	public void setBuildNumber(long buildNumber) {
 		_serviceComponent.setBuildNumber(buildNumber);
 	}
 
+	/**
+	* Gets the build date of this service component.
+	*
+	* @return the build date of this service component
+	*/
 	public long getBuildDate() {
 		return _serviceComponent.getBuildDate();
 	}
 
+	/**
+	* Sets the build date of this service component.
+	*
+	* @param buildDate the build date of this service component
+	*/
 	public void setBuildDate(long buildDate) {
 		_serviceComponent.setBuildDate(buildDate);
 	}
 
+	/**
+	* Gets the data of this service component.
+	*
+	* @return the data of this service component
+	*/
 	public java.lang.String getData() {
 		return _serviceComponent.getData();
 	}
 
+	/**
+	* Sets the data of this service component.
+	*
+	* @param data the data of this service component
+	*/
 	public void setData(java.lang.String data) {
 		_serviceComponent.setData(data);
 	}

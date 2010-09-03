@@ -28,110 +28,245 @@ public class OrganizationWrapper implements Organization {
 		_organization = organization;
 	}
 
+	/**
+	* Gets the primary key of this organization.
+	*
+	* @return the primary key of this organization
+	*/
 	public long getPrimaryKey() {
 		return _organization.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this organization
+	*
+	* @param pk the primary key of this organization
+	*/
 	public void setPrimaryKey(long pk) {
 		_organization.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the organization id of this organization.
+	*
+	* @return the organization id of this organization
+	*/
 	public long getOrganizationId() {
 		return _organization.getOrganizationId();
 	}
 
+	/**
+	* Sets the organization id of this organization.
+	*
+	* @param organizationId the organization id of this organization
+	*/
 	public void setOrganizationId(long organizationId) {
 		_organization.setOrganizationId(organizationId);
 	}
 
+	/**
+	* Gets the company id of this organization.
+	*
+	* @return the company id of this organization
+	*/
 	public long getCompanyId() {
 		return _organization.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this organization.
+	*
+	* @param companyId the company id of this organization
+	*/
 	public void setCompanyId(long companyId) {
 		_organization.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the parent organization id of this organization.
+	*
+	* @return the parent organization id of this organization
+	*/
 	public long getParentOrganizationId() {
 		return _organization.getParentOrganizationId();
 	}
 
+	/**
+	* Sets the parent organization id of this organization.
+	*
+	* @param parentOrganizationId the parent organization id of this organization
+	*/
 	public void setParentOrganizationId(long parentOrganizationId) {
 		_organization.setParentOrganizationId(parentOrganizationId);
 	}
 
+	/**
+	* Gets the left organization id of this organization.
+	*
+	* @return the left organization id of this organization
+	*/
 	public long getLeftOrganizationId() {
 		return _organization.getLeftOrganizationId();
 	}
 
+	/**
+	* Sets the left organization id of this organization.
+	*
+	* @param leftOrganizationId the left organization id of this organization
+	*/
 	public void setLeftOrganizationId(long leftOrganizationId) {
 		_organization.setLeftOrganizationId(leftOrganizationId);
 	}
 
+	/**
+	* Gets the right organization id of this organization.
+	*
+	* @return the right organization id of this organization
+	*/
 	public long getRightOrganizationId() {
 		return _organization.getRightOrganizationId();
 	}
 
+	/**
+	* Sets the right organization id of this organization.
+	*
+	* @param rightOrganizationId the right organization id of this organization
+	*/
 	public void setRightOrganizationId(long rightOrganizationId) {
 		_organization.setRightOrganizationId(rightOrganizationId);
 	}
 
+	/**
+	* Gets the name of this organization.
+	*
+	* @return the name of this organization
+	*/
 	public java.lang.String getName() {
 		return _organization.getName();
 	}
 
+	/**
+	* Sets the name of this organization.
+	*
+	* @param name the name of this organization
+	*/
 	public void setName(java.lang.String name) {
 		_organization.setName(name);
 	}
 
+	/**
+	* Gets the type of this organization.
+	*
+	* @return the type of this organization
+	*/
 	public java.lang.String getType() {
 		return _organization.getType();
 	}
 
+	/**
+	* Sets the type of this organization.
+	*
+	* @param type the type of this organization
+	*/
 	public void setType(java.lang.String type) {
 		_organization.setType(type);
 	}
 
+	/**
+	* Gets the recursable of this organization.
+	*
+	* @return the recursable of this organization
+	*/
 	public boolean getRecursable() {
 		return _organization.getRecursable();
 	}
 
+	/**
+	* Determines whether this organization is recursable.
+	*
+	* @return whether this organization is recursable
+	*/
 	public boolean isRecursable() {
 		return _organization.isRecursable();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is recursable.
+	*
+	* @param recursable the recursable of this organization
+	*/
 	public void setRecursable(boolean recursable) {
 		_organization.setRecursable(recursable);
 	}
 
+	/**
+	* Gets the region id of this organization.
+	*
+	* @return the region id of this organization
+	*/
 	public long getRegionId() {
 		return _organization.getRegionId();
 	}
 
+	/**
+	* Sets the region id of this organization.
+	*
+	* @param regionId the region id of this organization
+	*/
 	public void setRegionId(long regionId) {
 		_organization.setRegionId(regionId);
 	}
 
+	/**
+	* Gets the country id of this organization.
+	*
+	* @return the country id of this organization
+	*/
 	public long getCountryId() {
 		return _organization.getCountryId();
 	}
 
+	/**
+	* Sets the country id of this organization.
+	*
+	* @param countryId the country id of this organization
+	*/
 	public void setCountryId(long countryId) {
 		_organization.setCountryId(countryId);
 	}
 
+	/**
+	* Gets the status id of this organization.
+	*
+	* @return the status id of this organization
+	*/
 	public int getStatusId() {
 		return _organization.getStatusId();
 	}
 
+	/**
+	* Sets the status id of this organization.
+	*
+	* @param statusId the status id of this organization
+	*/
 	public void setStatusId(int statusId) {
 		_organization.setStatusId(statusId);
 	}
 
+	/**
+	* Gets the comments of this organization.
+	*
+	* @return the comments of this organization
+	*/
 	public java.lang.String getComments() {
 		return _organization.getComments();
 	}
 
+	/**
+	* Sets the comments of this organization.
+	*
+	* @param comments the comments of this organization
+	*/
 	public void setComments(java.lang.String comments) {
 		_organization.setComments(comments);
 	}

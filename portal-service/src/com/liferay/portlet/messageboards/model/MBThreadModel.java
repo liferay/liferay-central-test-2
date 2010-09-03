@@ -271,6 +271,11 @@ public interface MBThreadModel extends BaseModel<MBThread> {
 	public void setStatusDate(Date statusDate);
 
 	/**
+	 * @deprecated {@link #isApproved}
+	 */
+	public boolean getApproved();
+
+	/**
 	 * Determines whether this message boards thread is approved.
 	 *
 	 * @return true if this message boards thread is approved; false otherwise

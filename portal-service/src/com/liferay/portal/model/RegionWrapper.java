@@ -28,54 +28,119 @@ public class RegionWrapper implements Region {
 		_region = region;
 	}
 
+	/**
+	* Gets the primary key of this region.
+	*
+	* @return the primary key of this region
+	*/
 	public long getPrimaryKey() {
 		return _region.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this region
+	*
+	* @param pk the primary key of this region
+	*/
 	public void setPrimaryKey(long pk) {
 		_region.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the region id of this region.
+	*
+	* @return the region id of this region
+	*/
 	public long getRegionId() {
 		return _region.getRegionId();
 	}
 
+	/**
+	* Sets the region id of this region.
+	*
+	* @param regionId the region id of this region
+	*/
 	public void setRegionId(long regionId) {
 		_region.setRegionId(regionId);
 	}
 
+	/**
+	* Gets the country id of this region.
+	*
+	* @return the country id of this region
+	*/
 	public long getCountryId() {
 		return _region.getCountryId();
 	}
 
+	/**
+	* Sets the country id of this region.
+	*
+	* @param countryId the country id of this region
+	*/
 	public void setCountryId(long countryId) {
 		_region.setCountryId(countryId);
 	}
 
+	/**
+	* Gets the region code of this region.
+	*
+	* @return the region code of this region
+	*/
 	public java.lang.String getRegionCode() {
 		return _region.getRegionCode();
 	}
 
+	/**
+	* Sets the region code of this region.
+	*
+	* @param regionCode the region code of this region
+	*/
 	public void setRegionCode(java.lang.String regionCode) {
 		_region.setRegionCode(regionCode);
 	}
 
+	/**
+	* Gets the name of this region.
+	*
+	* @return the name of this region
+	*/
 	public java.lang.String getName() {
 		return _region.getName();
 	}
 
+	/**
+	* Sets the name of this region.
+	*
+	* @param name the name of this region
+	*/
 	public void setName(java.lang.String name) {
 		_region.setName(name);
 	}
 
+	/**
+	* Gets the active of this region.
+	*
+	* @return the active of this region
+	*/
 	public boolean getActive() {
 		return _region.getActive();
 	}
 
+	/**
+	* Determines whether this region is active.
+	*
+	* @return whether this region is active
+	*/
 	public boolean isActive() {
 		return _region.isActive();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is active.
+	*
+	* @param active the active of this region
+	*/
 	public void setActive(boolean active) {
 		_region.setActive(active);
 	}

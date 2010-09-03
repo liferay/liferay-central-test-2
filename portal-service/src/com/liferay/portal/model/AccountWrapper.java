@@ -28,147 +28,328 @@ public class AccountWrapper implements Account {
 		_account = account;
 	}
 
+	/**
+	* Gets the primary key of this account.
+	*
+	* @return the primary key of this account
+	*/
 	public long getPrimaryKey() {
 		return _account.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this account
+	*
+	* @param pk the primary key of this account
+	*/
 	public void setPrimaryKey(long pk) {
 		_account.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the account id of this account.
+	*
+	* @return the account id of this account
+	*/
 	public long getAccountId() {
 		return _account.getAccountId();
 	}
 
+	/**
+	* Sets the account id of this account.
+	*
+	* @param accountId the account id of this account
+	*/
 	public void setAccountId(long accountId) {
 		_account.setAccountId(accountId);
 	}
 
+	/**
+	* Gets the company id of this account.
+	*
+	* @return the company id of this account
+	*/
 	public long getCompanyId() {
 		return _account.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this account.
+	*
+	* @param companyId the company id of this account
+	*/
 	public void setCompanyId(long companyId) {
 		_account.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the user id of this account.
+	*
+	* @return the user id of this account
+	*/
 	public long getUserId() {
 		return _account.getUserId();
 	}
 
+	/**
+	* Sets the user id of this account.
+	*
+	* @param userId the user id of this account
+	*/
 	public void setUserId(long userId) {
 		_account.setUserId(userId);
 	}
 
+	/**
+	* Gets the user uuid of this account.
+	*
+	* @return the user uuid of this account
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _account.getUserUuid();
 	}
 
+	/**
+	* Sets the user uuid of this account.
+	*
+	* @param userUuid the user uuid of this account
+	*/
 	public void setUserUuid(java.lang.String userUuid) {
 		_account.setUserUuid(userUuid);
 	}
 
+	/**
+	* Gets the user name of this account.
+	*
+	* @return the user name of this account
+	*/
 	public java.lang.String getUserName() {
 		return _account.getUserName();
 	}
 
+	/**
+	* Sets the user name of this account.
+	*
+	* @param userName the user name of this account
+	*/
 	public void setUserName(java.lang.String userName) {
 		_account.setUserName(userName);
 	}
 
+	/**
+	* Gets the create date of this account.
+	*
+	* @return the create date of this account
+	*/
 	public java.util.Date getCreateDate() {
 		return _account.getCreateDate();
 	}
 
+	/**
+	* Sets the create date of this account.
+	*
+	* @param createDate the create date of this account
+	*/
 	public void setCreateDate(java.util.Date createDate) {
 		_account.setCreateDate(createDate);
 	}
 
+	/**
+	* Gets the modified date of this account.
+	*
+	* @return the modified date of this account
+	*/
 	public java.util.Date getModifiedDate() {
 		return _account.getModifiedDate();
 	}
 
+	/**
+	* Sets the modified date of this account.
+	*
+	* @param modifiedDate the modified date of this account
+	*/
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_account.setModifiedDate(modifiedDate);
 	}
 
+	/**
+	* Gets the parent account id of this account.
+	*
+	* @return the parent account id of this account
+	*/
 	public long getParentAccountId() {
 		return _account.getParentAccountId();
 	}
 
+	/**
+	* Sets the parent account id of this account.
+	*
+	* @param parentAccountId the parent account id of this account
+	*/
 	public void setParentAccountId(long parentAccountId) {
 		_account.setParentAccountId(parentAccountId);
 	}
 
+	/**
+	* Gets the name of this account.
+	*
+	* @return the name of this account
+	*/
 	public java.lang.String getName() {
 		return _account.getName();
 	}
 
+	/**
+	* Sets the name of this account.
+	*
+	* @param name the name of this account
+	*/
 	public void setName(java.lang.String name) {
 		_account.setName(name);
 	}
 
+	/**
+	* Gets the legal name of this account.
+	*
+	* @return the legal name of this account
+	*/
 	public java.lang.String getLegalName() {
 		return _account.getLegalName();
 	}
 
+	/**
+	* Sets the legal name of this account.
+	*
+	* @param legalName the legal name of this account
+	*/
 	public void setLegalName(java.lang.String legalName) {
 		_account.setLegalName(legalName);
 	}
 
+	/**
+	* Gets the legal id of this account.
+	*
+	* @return the legal id of this account
+	*/
 	public java.lang.String getLegalId() {
 		return _account.getLegalId();
 	}
 
+	/**
+	* Sets the legal id of this account.
+	*
+	* @param legalId the legal id of this account
+	*/
 	public void setLegalId(java.lang.String legalId) {
 		_account.setLegalId(legalId);
 	}
 
+	/**
+	* Gets the legal type of this account.
+	*
+	* @return the legal type of this account
+	*/
 	public java.lang.String getLegalType() {
 		return _account.getLegalType();
 	}
 
+	/**
+	* Sets the legal type of this account.
+	*
+	* @param legalType the legal type of this account
+	*/
 	public void setLegalType(java.lang.String legalType) {
 		_account.setLegalType(legalType);
 	}
 
+	/**
+	* Gets the sic code of this account.
+	*
+	* @return the sic code of this account
+	*/
 	public java.lang.String getSicCode() {
 		return _account.getSicCode();
 	}
 
+	/**
+	* Sets the sic code of this account.
+	*
+	* @param sicCode the sic code of this account
+	*/
 	public void setSicCode(java.lang.String sicCode) {
 		_account.setSicCode(sicCode);
 	}
 
+	/**
+	* Gets the ticker symbol of this account.
+	*
+	* @return the ticker symbol of this account
+	*/
 	public java.lang.String getTickerSymbol() {
 		return _account.getTickerSymbol();
 	}
 
+	/**
+	* Sets the ticker symbol of this account.
+	*
+	* @param tickerSymbol the ticker symbol of this account
+	*/
 	public void setTickerSymbol(java.lang.String tickerSymbol) {
 		_account.setTickerSymbol(tickerSymbol);
 	}
 
+	/**
+	* Gets the industry of this account.
+	*
+	* @return the industry of this account
+	*/
 	public java.lang.String getIndustry() {
 		return _account.getIndustry();
 	}
 
+	/**
+	* Sets the industry of this account.
+	*
+	* @param industry the industry of this account
+	*/
 	public void setIndustry(java.lang.String industry) {
 		_account.setIndustry(industry);
 	}
 
+	/**
+	* Gets the type of this account.
+	*
+	* @return the type of this account
+	*/
 	public java.lang.String getType() {
 		return _account.getType();
 	}
 
+	/**
+	* Sets the type of this account.
+	*
+	* @param type the type of this account
+	*/
 	public void setType(java.lang.String type) {
 		_account.setType(type);
 	}
 
+	/**
+	* Gets the size of this account.
+	*
+	* @return the size of this account
+	*/
 	public java.lang.String getSize() {
 		return _account.getSize();
 	}
 
+	/**
+	* Sets the size of this account.
+	*
+	* @param size the size of this account
+	*/
 	public void setSize(java.lang.String size) {
 		_account.setSize(size);
 	}

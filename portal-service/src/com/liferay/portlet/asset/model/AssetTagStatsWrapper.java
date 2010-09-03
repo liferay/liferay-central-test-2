@@ -28,46 +28,101 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 		_assetTagStats = assetTagStats;
 	}
 
+	/**
+	* Gets the primary key of this asset tag stats.
+	*
+	* @return the primary key of this asset tag stats
+	*/
 	public long getPrimaryKey() {
 		return _assetTagStats.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this asset tag stats
+	*
+	* @param pk the primary key of this asset tag stats
+	*/
 	public void setPrimaryKey(long pk) {
 		_assetTagStats.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the tag stats id of this asset tag stats.
+	*
+	* @return the tag stats id of this asset tag stats
+	*/
 	public long getTagStatsId() {
 		return _assetTagStats.getTagStatsId();
 	}
 
+	/**
+	* Sets the tag stats id of this asset tag stats.
+	*
+	* @param tagStatsId the tag stats id of this asset tag stats
+	*/
 	public void setTagStatsId(long tagStatsId) {
 		_assetTagStats.setTagStatsId(tagStatsId);
 	}
 
+	/**
+	* Gets the tag id of this asset tag stats.
+	*
+	* @return the tag id of this asset tag stats
+	*/
 	public long getTagId() {
 		return _assetTagStats.getTagId();
 	}
 
+	/**
+	* Sets the tag id of this asset tag stats.
+	*
+	* @param tagId the tag id of this asset tag stats
+	*/
 	public void setTagId(long tagId) {
 		_assetTagStats.setTagId(tagId);
 	}
 
+	/**
+	* Gets the class name of the model instance this asset tag stats is polymorphically associated with.
+	*
+	* @return the class name of the model instance this asset tag stats is polymorphically associated with
+	*/
 	public java.lang.String getClassName() {
 		return _assetTagStats.getClassName();
 	}
 
+	/**
+	* Gets the class name id of this asset tag stats.
+	*
+	* @return the class name id of this asset tag stats
+	*/
 	public long getClassNameId() {
 		return _assetTagStats.getClassNameId();
 	}
 
+	/**
+	* Sets the class name id of this asset tag stats.
+	*
+	* @param classNameId the class name id of this asset tag stats
+	*/
 	public void setClassNameId(long classNameId) {
 		_assetTagStats.setClassNameId(classNameId);
 	}
 
+	/**
+	* Gets the asset count of this asset tag stats.
+	*
+	* @return the asset count of this asset tag stats
+	*/
 	public int getAssetCount() {
 		return _assetTagStats.getAssetCount();
 	}
 
+	/**
+	* Sets the asset count of this asset tag stats.
+	*
+	* @param assetCount the asset count of this asset tag stats
+	*/
 	public void setAssetCount(int assetCount) {
 		_assetTagStats.setAssetCount(assetCount);
 	}

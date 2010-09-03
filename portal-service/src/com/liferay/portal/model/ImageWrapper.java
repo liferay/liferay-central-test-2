@@ -28,66 +28,146 @@ public class ImageWrapper implements Image {
 		_image = image;
 	}
 
+	/**
+	* Gets the primary key of this image.
+	*
+	* @return the primary key of this image
+	*/
 	public long getPrimaryKey() {
 		return _image.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this image
+	*
+	* @param pk the primary key of this image
+	*/
 	public void setPrimaryKey(long pk) {
 		_image.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the image id of this image.
+	*
+	* @return the image id of this image
+	*/
 	public long getImageId() {
 		return _image.getImageId();
 	}
 
+	/**
+	* Sets the image id of this image.
+	*
+	* @param imageId the image id of this image
+	*/
 	public void setImageId(long imageId) {
 		_image.setImageId(imageId);
 	}
 
+	/**
+	* Gets the modified date of this image.
+	*
+	* @return the modified date of this image
+	*/
 	public java.util.Date getModifiedDate() {
 		return _image.getModifiedDate();
 	}
 
+	/**
+	* Sets the modified date of this image.
+	*
+	* @param modifiedDate the modified date of this image
+	*/
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_image.setModifiedDate(modifiedDate);
 	}
 
+	/**
+	* Gets the text of this image.
+	*
+	* @return the text of this image
+	*/
 	public java.lang.String getText() {
 		return _image.getText();
 	}
 
+	/**
+	* Sets the text of this image.
+	*
+	* @param text the text of this image
+	*/
 	public void setText(java.lang.String text) {
 		_image.setText(text);
 	}
 
+	/**
+	* Gets the type of this image.
+	*
+	* @return the type of this image
+	*/
 	public java.lang.String getType() {
 		return _image.getType();
 	}
 
+	/**
+	* Sets the type of this image.
+	*
+	* @param type the type of this image
+	*/
 	public void setType(java.lang.String type) {
 		_image.setType(type);
 	}
 
+	/**
+	* Gets the height of this image.
+	*
+	* @return the height of this image
+	*/
 	public int getHeight() {
 		return _image.getHeight();
 	}
 
+	/**
+	* Sets the height of this image.
+	*
+	* @param height the height of this image
+	*/
 	public void setHeight(int height) {
 		_image.setHeight(height);
 	}
 
+	/**
+	* Gets the width of this image.
+	*
+	* @return the width of this image
+	*/
 	public int getWidth() {
 		return _image.getWidth();
 	}
 
+	/**
+	* Sets the width of this image.
+	*
+	* @param width the width of this image
+	*/
 	public void setWidth(int width) {
 		_image.setWidth(width);
 	}
 
+	/**
+	* Gets the size of this image.
+	*
+	* @return the size of this image
+	*/
 	public int getSize() {
 		return _image.getSize();
 	}
 
+	/**
+	* Sets the size of this image.
+	*
+	* @param size the size of this image
+	*/
 	public void setSize(int size) {
 		_image.setSize(size);
 	}

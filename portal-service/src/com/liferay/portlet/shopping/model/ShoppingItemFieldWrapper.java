@@ -28,50 +28,110 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField {
 		_shoppingItemField = shoppingItemField;
 	}
 
+	/**
+	* Gets the primary key of this shopping item field.
+	*
+	* @return the primary key of this shopping item field
+	*/
 	public long getPrimaryKey() {
 		return _shoppingItemField.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this shopping item field
+	*
+	* @param pk the primary key of this shopping item field
+	*/
 	public void setPrimaryKey(long pk) {
 		_shoppingItemField.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the item field id of this shopping item field.
+	*
+	* @return the item field id of this shopping item field
+	*/
 	public long getItemFieldId() {
 		return _shoppingItemField.getItemFieldId();
 	}
 
+	/**
+	* Sets the item field id of this shopping item field.
+	*
+	* @param itemFieldId the item field id of this shopping item field
+	*/
 	public void setItemFieldId(long itemFieldId) {
 		_shoppingItemField.setItemFieldId(itemFieldId);
 	}
 
+	/**
+	* Gets the item id of this shopping item field.
+	*
+	* @return the item id of this shopping item field
+	*/
 	public long getItemId() {
 		return _shoppingItemField.getItemId();
 	}
 
+	/**
+	* Sets the item id of this shopping item field.
+	*
+	* @param itemId the item id of this shopping item field
+	*/
 	public void setItemId(long itemId) {
 		_shoppingItemField.setItemId(itemId);
 	}
 
+	/**
+	* Gets the name of this shopping item field.
+	*
+	* @return the name of this shopping item field
+	*/
 	public java.lang.String getName() {
 		return _shoppingItemField.getName();
 	}
 
+	/**
+	* Sets the name of this shopping item field.
+	*
+	* @param name the name of this shopping item field
+	*/
 	public void setName(java.lang.String name) {
 		_shoppingItemField.setName(name);
 	}
 
+	/**
+	* Gets the values of this shopping item field.
+	*
+	* @return the values of this shopping item field
+	*/
 	public java.lang.String getValues() {
 		return _shoppingItemField.getValues();
 	}
 
+	/**
+	* Sets the values of this shopping item field.
+	*
+	* @param values the values of this shopping item field
+	*/
 	public void setValues(java.lang.String values) {
 		_shoppingItemField.setValues(values);
 	}
 
+	/**
+	* Gets the description of this shopping item field.
+	*
+	* @return the description of this shopping item field
+	*/
 	public java.lang.String getDescription() {
 		return _shoppingItemField.getDescription();
 	}
 
+	/**
+	* Sets the description of this shopping item field.
+	*
+	* @param description the description of this shopping item field
+	*/
 	public void setDescription(java.lang.String description) {
 		_shoppingItemField.setDescription(description);
 	}

@@ -28,59 +28,130 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 		_announcementsFlag = announcementsFlag;
 	}
 
+	/**
+	* Gets the primary key of this announcements flag.
+	*
+	* @return the primary key of this announcements flag
+	*/
 	public long getPrimaryKey() {
 		return _announcementsFlag.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this announcements flag
+	*
+	* @param pk the primary key of this announcements flag
+	*/
 	public void setPrimaryKey(long pk) {
 		_announcementsFlag.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the flag id of this announcements flag.
+	*
+	* @return the flag id of this announcements flag
+	*/
 	public long getFlagId() {
 		return _announcementsFlag.getFlagId();
 	}
 
+	/**
+	* Sets the flag id of this announcements flag.
+	*
+	* @param flagId the flag id of this announcements flag
+	*/
 	public void setFlagId(long flagId) {
 		_announcementsFlag.setFlagId(flagId);
 	}
 
+	/**
+	* Gets the user id of this announcements flag.
+	*
+	* @return the user id of this announcements flag
+	*/
 	public long getUserId() {
 		return _announcementsFlag.getUserId();
 	}
 
+	/**
+	* Sets the user id of this announcements flag.
+	*
+	* @param userId the user id of this announcements flag
+	*/
 	public void setUserId(long userId) {
 		_announcementsFlag.setUserId(userId);
 	}
 
+	/**
+	* Gets the user uuid of this announcements flag.
+	*
+	* @return the user uuid of this announcements flag
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _announcementsFlag.getUserUuid();
 	}
 
+	/**
+	* Sets the user uuid of this announcements flag.
+	*
+	* @param userUuid the user uuid of this announcements flag
+	*/
 	public void setUserUuid(java.lang.String userUuid) {
 		_announcementsFlag.setUserUuid(userUuid);
 	}
 
+	/**
+	* Gets the create date of this announcements flag.
+	*
+	* @return the create date of this announcements flag
+	*/
 	public java.util.Date getCreateDate() {
 		return _announcementsFlag.getCreateDate();
 	}
 
+	/**
+	* Sets the create date of this announcements flag.
+	*
+	* @param createDate the create date of this announcements flag
+	*/
 	public void setCreateDate(java.util.Date createDate) {
 		_announcementsFlag.setCreateDate(createDate);
 	}
 
+	/**
+	* Gets the entry id of this announcements flag.
+	*
+	* @return the entry id of this announcements flag
+	*/
 	public long getEntryId() {
 		return _announcementsFlag.getEntryId();
 	}
 
+	/**
+	* Sets the entry id of this announcements flag.
+	*
+	* @param entryId the entry id of this announcements flag
+	*/
 	public void setEntryId(long entryId) {
 		_announcementsFlag.setEntryId(entryId);
 	}
 
+	/**
+	* Gets the value of this announcements flag.
+	*
+	* @return the value of this announcements flag
+	*/
 	public int getValue() {
 		return _announcementsFlag.getValue();
 	}
 
+	/**
+	* Sets the value of this announcements flag.
+	*
+	* @param value the value of this announcements flag
+	*/
 	public void setValue(int value) {
 		_announcementsFlag.setValue(value);
 	}

@@ -28,35 +28,75 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole {
 		_userGroupGroupRole = userGroupGroupRole;
 	}
 
+	/**
+	* Gets the primary key of this user group group role.
+	*
+	* @return the primary key of this user group group role
+	*/
 	public com.liferay.portal.service.persistence.UserGroupGroupRolePK getPrimaryKey() {
 		return _userGroupGroupRole.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this user group group role
+	*
+	* @param pk the primary key of this user group group role
+	*/
 	public void setPrimaryKey(
 		com.liferay.portal.service.persistence.UserGroupGroupRolePK pk) {
 		_userGroupGroupRole.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the user group id of this user group group role.
+	*
+	* @return the user group id of this user group group role
+	*/
 	public long getUserGroupId() {
 		return _userGroupGroupRole.getUserGroupId();
 	}
 
+	/**
+	* Sets the user group id of this user group group role.
+	*
+	* @param userGroupId the user group id of this user group group role
+	*/
 	public void setUserGroupId(long userGroupId) {
 		_userGroupGroupRole.setUserGroupId(userGroupId);
 	}
 
+	/**
+	* Gets the group id of this user group group role.
+	*
+	* @return the group id of this user group group role
+	*/
 	public long getGroupId() {
 		return _userGroupGroupRole.getGroupId();
 	}
 
+	/**
+	* Sets the group id of this user group group role.
+	*
+	* @param groupId the group id of this user group group role
+	*/
 	public void setGroupId(long groupId) {
 		_userGroupGroupRole.setGroupId(groupId);
 	}
 
+	/**
+	* Gets the role id of this user group group role.
+	*
+	* @return the role id of this user group group role
+	*/
 	public long getRoleId() {
 		return _userGroupGroupRole.getRoleId();
 	}
 
+	/**
+	* Sets the role id of this user group group role.
+	*
+	* @param roleId the role id of this user group group role
+	*/
 	public void setRoleId(long roleId) {
 		_userGroupGroupRole.setRoleId(roleId);
 	}

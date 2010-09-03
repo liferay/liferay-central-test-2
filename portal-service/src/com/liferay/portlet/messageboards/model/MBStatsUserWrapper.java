@@ -28,68 +28,150 @@ public class MBStatsUserWrapper implements MBStatsUser {
 		_mbStatsUser = mbStatsUser;
 	}
 
+	/**
+	* Gets the primary key of this message boards stats user.
+	*
+	* @return the primary key of this message boards stats user
+	*/
 	public long getPrimaryKey() {
 		return _mbStatsUser.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this message boards stats user
+	*
+	* @param pk the primary key of this message boards stats user
+	*/
 	public void setPrimaryKey(long pk) {
 		_mbStatsUser.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the stats user id of this message boards stats user.
+	*
+	* @return the stats user id of this message boards stats user
+	*/
 	public long getStatsUserId() {
 		return _mbStatsUser.getStatsUserId();
 	}
 
+	/**
+	* Sets the stats user id of this message boards stats user.
+	*
+	* @param statsUserId the stats user id of this message boards stats user
+	*/
 	public void setStatsUserId(long statsUserId) {
 		_mbStatsUser.setStatsUserId(statsUserId);
 	}
 
+	/**
+	* Gets the stats user uuid of this message boards stats user.
+	*
+	* @return the stats user uuid of this message boards stats user
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.lang.String getStatsUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbStatsUser.getStatsUserUuid();
 	}
 
+	/**
+	* Sets the stats user uuid of this message boards stats user.
+	*
+	* @param statsUserUuid the stats user uuid of this message boards stats user
+	*/
 	public void setStatsUserUuid(java.lang.String statsUserUuid) {
 		_mbStatsUser.setStatsUserUuid(statsUserUuid);
 	}
 
+	/**
+	* Gets the group id of this message boards stats user.
+	*
+	* @return the group id of this message boards stats user
+	*/
 	public long getGroupId() {
 		return _mbStatsUser.getGroupId();
 	}
 
+	/**
+	* Sets the group id of this message boards stats user.
+	*
+	* @param groupId the group id of this message boards stats user
+	*/
 	public void setGroupId(long groupId) {
 		_mbStatsUser.setGroupId(groupId);
 	}
 
+	/**
+	* Gets the user id of this message boards stats user.
+	*
+	* @return the user id of this message boards stats user
+	*/
 	public long getUserId() {
 		return _mbStatsUser.getUserId();
 	}
 
+	/**
+	* Sets the user id of this message boards stats user.
+	*
+	* @param userId the user id of this message boards stats user
+	*/
 	public void setUserId(long userId) {
 		_mbStatsUser.setUserId(userId);
 	}
 
+	/**
+	* Gets the user uuid of this message boards stats user.
+	*
+	* @return the user uuid of this message boards stats user
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbStatsUser.getUserUuid();
 	}
 
+	/**
+	* Sets the user uuid of this message boards stats user.
+	*
+	* @param userUuid the user uuid of this message boards stats user
+	*/
 	public void setUserUuid(java.lang.String userUuid) {
 		_mbStatsUser.setUserUuid(userUuid);
 	}
 
+	/**
+	* Gets the message count of this message boards stats user.
+	*
+	* @return the message count of this message boards stats user
+	*/
 	public int getMessageCount() {
 		return _mbStatsUser.getMessageCount();
 	}
 
+	/**
+	* Sets the message count of this message boards stats user.
+	*
+	* @param messageCount the message count of this message boards stats user
+	*/
 	public void setMessageCount(int messageCount) {
 		_mbStatsUser.setMessageCount(messageCount);
 	}
 
+	/**
+	* Gets the last post date of this message boards stats user.
+	*
+	* @return the last post date of this message boards stats user
+	*/
 	public java.util.Date getLastPostDate() {
 		return _mbStatsUser.getLastPostDate();
 	}
 
+	/**
+	* Sets the last post date of this message boards stats user.
+	*
+	* @param lastPostDate the last post date of this message boards stats user
+	*/
 	public void setLastPostDate(java.util.Date lastPostDate) {
 		_mbStatsUser.setLastPostDate(lastPostDate);
 	}

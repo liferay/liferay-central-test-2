@@ -28,34 +28,74 @@ public class ResourceWrapper implements Resource {
 		_resource = resource;
 	}
 
+	/**
+	* Gets the primary key of this resource.
+	*
+	* @return the primary key of this resource
+	*/
 	public long getPrimaryKey() {
 		return _resource.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this resource
+	*
+	* @param pk the primary key of this resource
+	*/
 	public void setPrimaryKey(long pk) {
 		_resource.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the resource id of this resource.
+	*
+	* @return the resource id of this resource
+	*/
 	public long getResourceId() {
 		return _resource.getResourceId();
 	}
 
+	/**
+	* Sets the resource id of this resource.
+	*
+	* @param resourceId the resource id of this resource
+	*/
 	public void setResourceId(long resourceId) {
 		_resource.setResourceId(resourceId);
 	}
 
+	/**
+	* Gets the code id of this resource.
+	*
+	* @return the code id of this resource
+	*/
 	public long getCodeId() {
 		return _resource.getCodeId();
 	}
 
+	/**
+	* Sets the code id of this resource.
+	*
+	* @param codeId the code id of this resource
+	*/
 	public void setCodeId(long codeId) {
 		_resource.setCodeId(codeId);
 	}
 
+	/**
+	* Gets the prim key of this resource.
+	*
+	* @return the prim key of this resource
+	*/
 	public java.lang.String getPrimKey() {
 		return _resource.getPrimKey();
 	}
 
+	/**
+	* Sets the prim key of this resource.
+	*
+	* @param primKey the prim key of this resource
+	*/
 	public void setPrimKey(java.lang.String primKey) {
 		_resource.setPrimKey(primKey);
 	}

@@ -28,42 +28,92 @@ public class PermissionWrapper implements Permission {
 		_permission = permission;
 	}
 
+	/**
+	* Gets the primary key of this permission.
+	*
+	* @return the primary key of this permission
+	*/
 	public long getPrimaryKey() {
 		return _permission.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this permission
+	*
+	* @param pk the primary key of this permission
+	*/
 	public void setPrimaryKey(long pk) {
 		_permission.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the permission id of this permission.
+	*
+	* @return the permission id of this permission
+	*/
 	public long getPermissionId() {
 		return _permission.getPermissionId();
 	}
 
+	/**
+	* Sets the permission id of this permission.
+	*
+	* @param permissionId the permission id of this permission
+	*/
 	public void setPermissionId(long permissionId) {
 		_permission.setPermissionId(permissionId);
 	}
 
+	/**
+	* Gets the company id of this permission.
+	*
+	* @return the company id of this permission
+	*/
 	public long getCompanyId() {
 		return _permission.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this permission.
+	*
+	* @param companyId the company id of this permission
+	*/
 	public void setCompanyId(long companyId) {
 		_permission.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the action id of this permission.
+	*
+	* @return the action id of this permission
+	*/
 	public java.lang.String getActionId() {
 		return _permission.getActionId();
 	}
 
+	/**
+	* Sets the action id of this permission.
+	*
+	* @param actionId the action id of this permission
+	*/
 	public void setActionId(java.lang.String actionId) {
 		_permission.setActionId(actionId);
 	}
 
+	/**
+	* Gets the resource id of this permission.
+	*
+	* @return the resource id of this permission
+	*/
 	public long getResourceId() {
 		return _permission.getResourceId();
 	}
 
+	/**
+	* Sets the resource id of this permission.
+	*
+	* @param resourceId the resource id of this permission
+	*/
 	public void setResourceId(long resourceId) {
 		_permission.setResourceId(resourceId);
 	}

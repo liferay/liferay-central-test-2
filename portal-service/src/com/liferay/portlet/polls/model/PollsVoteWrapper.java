@@ -28,59 +28,130 @@ public class PollsVoteWrapper implements PollsVote {
 		_pollsVote = pollsVote;
 	}
 
+	/**
+	* Gets the primary key of this polls vote.
+	*
+	* @return the primary key of this polls vote
+	*/
 	public long getPrimaryKey() {
 		return _pollsVote.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this polls vote
+	*
+	* @param pk the primary key of this polls vote
+	*/
 	public void setPrimaryKey(long pk) {
 		_pollsVote.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the vote id of this polls vote.
+	*
+	* @return the vote id of this polls vote
+	*/
 	public long getVoteId() {
 		return _pollsVote.getVoteId();
 	}
 
+	/**
+	* Sets the vote id of this polls vote.
+	*
+	* @param voteId the vote id of this polls vote
+	*/
 	public void setVoteId(long voteId) {
 		_pollsVote.setVoteId(voteId);
 	}
 
+	/**
+	* Gets the user id of this polls vote.
+	*
+	* @return the user id of this polls vote
+	*/
 	public long getUserId() {
 		return _pollsVote.getUserId();
 	}
 
+	/**
+	* Sets the user id of this polls vote.
+	*
+	* @param userId the user id of this polls vote
+	*/
 	public void setUserId(long userId) {
 		_pollsVote.setUserId(userId);
 	}
 
+	/**
+	* Gets the user uuid of this polls vote.
+	*
+	* @return the user uuid of this polls vote
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _pollsVote.getUserUuid();
 	}
 
+	/**
+	* Sets the user uuid of this polls vote.
+	*
+	* @param userUuid the user uuid of this polls vote
+	*/
 	public void setUserUuid(java.lang.String userUuid) {
 		_pollsVote.setUserUuid(userUuid);
 	}
 
+	/**
+	* Gets the question id of this polls vote.
+	*
+	* @return the question id of this polls vote
+	*/
 	public long getQuestionId() {
 		return _pollsVote.getQuestionId();
 	}
 
+	/**
+	* Sets the question id of this polls vote.
+	*
+	* @param questionId the question id of this polls vote
+	*/
 	public void setQuestionId(long questionId) {
 		_pollsVote.setQuestionId(questionId);
 	}
 
+	/**
+	* Gets the choice id of this polls vote.
+	*
+	* @return the choice id of this polls vote
+	*/
 	public long getChoiceId() {
 		return _pollsVote.getChoiceId();
 	}
 
+	/**
+	* Sets the choice id of this polls vote.
+	*
+	* @param choiceId the choice id of this polls vote
+	*/
 	public void setChoiceId(long choiceId) {
 		_pollsVote.setChoiceId(choiceId);
 	}
 
+	/**
+	* Gets the vote date of this polls vote.
+	*
+	* @return the vote date of this polls vote
+	*/
 	public java.util.Date getVoteDate() {
 		return _pollsVote.getVoteDate();
 	}
 
+	/**
+	* Sets the vote date of this polls vote.
+	*
+	* @param voteDate the vote date of this polls vote
+	*/
 	public void setVoteDate(java.util.Date voteDate) {
 		_pollsVote.setVoteDate(voteDate);
 	}

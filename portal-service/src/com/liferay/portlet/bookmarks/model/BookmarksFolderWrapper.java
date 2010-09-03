@@ -28,99 +28,220 @@ public class BookmarksFolderWrapper implements BookmarksFolder {
 		_bookmarksFolder = bookmarksFolder;
 	}
 
+	/**
+	* Gets the primary key of this bookmarks folder.
+	*
+	* @return the primary key of this bookmarks folder
+	*/
 	public long getPrimaryKey() {
 		return _bookmarksFolder.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this bookmarks folder
+	*
+	* @param pk the primary key of this bookmarks folder
+	*/
 	public void setPrimaryKey(long pk) {
 		_bookmarksFolder.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the uuid of this bookmarks folder.
+	*
+	* @return the uuid of this bookmarks folder
+	*/
 	public java.lang.String getUuid() {
 		return _bookmarksFolder.getUuid();
 	}
 
+	/**
+	* Sets the uuid of this bookmarks folder.
+	*
+	* @param uuid the uuid of this bookmarks folder
+	*/
 	public void setUuid(java.lang.String uuid) {
 		_bookmarksFolder.setUuid(uuid);
 	}
 
+	/**
+	* Gets the folder id of this bookmarks folder.
+	*
+	* @return the folder id of this bookmarks folder
+	*/
 	public long getFolderId() {
 		return _bookmarksFolder.getFolderId();
 	}
 
+	/**
+	* Sets the folder id of this bookmarks folder.
+	*
+	* @param folderId the folder id of this bookmarks folder
+	*/
 	public void setFolderId(long folderId) {
 		_bookmarksFolder.setFolderId(folderId);
 	}
 
+	/**
+	* Gets the group id of this bookmarks folder.
+	*
+	* @return the group id of this bookmarks folder
+	*/
 	public long getGroupId() {
 		return _bookmarksFolder.getGroupId();
 	}
 
+	/**
+	* Sets the group id of this bookmarks folder.
+	*
+	* @param groupId the group id of this bookmarks folder
+	*/
 	public void setGroupId(long groupId) {
 		_bookmarksFolder.setGroupId(groupId);
 	}
 
+	/**
+	* Gets the company id of this bookmarks folder.
+	*
+	* @return the company id of this bookmarks folder
+	*/
 	public long getCompanyId() {
 		return _bookmarksFolder.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this bookmarks folder.
+	*
+	* @param companyId the company id of this bookmarks folder
+	*/
 	public void setCompanyId(long companyId) {
 		_bookmarksFolder.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the user id of this bookmarks folder.
+	*
+	* @return the user id of this bookmarks folder
+	*/
 	public long getUserId() {
 		return _bookmarksFolder.getUserId();
 	}
 
+	/**
+	* Sets the user id of this bookmarks folder.
+	*
+	* @param userId the user id of this bookmarks folder
+	*/
 	public void setUserId(long userId) {
 		_bookmarksFolder.setUserId(userId);
 	}
 
+	/**
+	* Gets the user uuid of this bookmarks folder.
+	*
+	* @return the user uuid of this bookmarks folder
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _bookmarksFolder.getUserUuid();
 	}
 
+	/**
+	* Sets the user uuid of this bookmarks folder.
+	*
+	* @param userUuid the user uuid of this bookmarks folder
+	*/
 	public void setUserUuid(java.lang.String userUuid) {
 		_bookmarksFolder.setUserUuid(userUuid);
 	}
 
+	/**
+	* Gets the create date of this bookmarks folder.
+	*
+	* @return the create date of this bookmarks folder
+	*/
 	public java.util.Date getCreateDate() {
 		return _bookmarksFolder.getCreateDate();
 	}
 
+	/**
+	* Sets the create date of this bookmarks folder.
+	*
+	* @param createDate the create date of this bookmarks folder
+	*/
 	public void setCreateDate(java.util.Date createDate) {
 		_bookmarksFolder.setCreateDate(createDate);
 	}
 
+	/**
+	* Gets the modified date of this bookmarks folder.
+	*
+	* @return the modified date of this bookmarks folder
+	*/
 	public java.util.Date getModifiedDate() {
 		return _bookmarksFolder.getModifiedDate();
 	}
 
+	/**
+	* Sets the modified date of this bookmarks folder.
+	*
+	* @param modifiedDate the modified date of this bookmarks folder
+	*/
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_bookmarksFolder.setModifiedDate(modifiedDate);
 	}
 
+	/**
+	* Gets the parent folder id of this bookmarks folder.
+	*
+	* @return the parent folder id of this bookmarks folder
+	*/
 	public long getParentFolderId() {
 		return _bookmarksFolder.getParentFolderId();
 	}
 
+	/**
+	* Sets the parent folder id of this bookmarks folder.
+	*
+	* @param parentFolderId the parent folder id of this bookmarks folder
+	*/
 	public void setParentFolderId(long parentFolderId) {
 		_bookmarksFolder.setParentFolderId(parentFolderId);
 	}
 
+	/**
+	* Gets the name of this bookmarks folder.
+	*
+	* @return the name of this bookmarks folder
+	*/
 	public java.lang.String getName() {
 		return _bookmarksFolder.getName();
 	}
 
+	/**
+	* Sets the name of this bookmarks folder.
+	*
+	* @param name the name of this bookmarks folder
+	*/
 	public void setName(java.lang.String name) {
 		_bookmarksFolder.setName(name);
 	}
 
+	/**
+	* Gets the description of this bookmarks folder.
+	*
+	* @return the description of this bookmarks folder
+	*/
 	public java.lang.String getDescription() {
 		return _bookmarksFolder.getDescription();
 	}
 
+	/**
+	* Sets the description of this bookmarks folder.
+	*
+	* @param description the description of this bookmarks folder
+	*/
 	public void setDescription(java.lang.String description) {
 		_bookmarksFolder.setDescription(description);
 	}

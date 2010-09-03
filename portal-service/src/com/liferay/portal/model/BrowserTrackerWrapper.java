@@ -28,43 +28,94 @@ public class BrowserTrackerWrapper implements BrowserTracker {
 		_browserTracker = browserTracker;
 	}
 
+	/**
+	* Gets the primary key of this browser tracker.
+	*
+	* @return the primary key of this browser tracker
+	*/
 	public long getPrimaryKey() {
 		return _browserTracker.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this browser tracker
+	*
+	* @param pk the primary key of this browser tracker
+	*/
 	public void setPrimaryKey(long pk) {
 		_browserTracker.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the browser tracker id of this browser tracker.
+	*
+	* @return the browser tracker id of this browser tracker
+	*/
 	public long getBrowserTrackerId() {
 		return _browserTracker.getBrowserTrackerId();
 	}
 
+	/**
+	* Sets the browser tracker id of this browser tracker.
+	*
+	* @param browserTrackerId the browser tracker id of this browser tracker
+	*/
 	public void setBrowserTrackerId(long browserTrackerId) {
 		_browserTracker.setBrowserTrackerId(browserTrackerId);
 	}
 
+	/**
+	* Gets the user id of this browser tracker.
+	*
+	* @return the user id of this browser tracker
+	*/
 	public long getUserId() {
 		return _browserTracker.getUserId();
 	}
 
+	/**
+	* Sets the user id of this browser tracker.
+	*
+	* @param userId the user id of this browser tracker
+	*/
 	public void setUserId(long userId) {
 		_browserTracker.setUserId(userId);
 	}
 
+	/**
+	* Gets the user uuid of this browser tracker.
+	*
+	* @return the user uuid of this browser tracker
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _browserTracker.getUserUuid();
 	}
 
+	/**
+	* Sets the user uuid of this browser tracker.
+	*
+	* @param userUuid the user uuid of this browser tracker
+	*/
 	public void setUserUuid(java.lang.String userUuid) {
 		_browserTracker.setUserUuid(userUuid);
 	}
 
+	/**
+	* Gets the browser key of this browser tracker.
+	*
+	* @return the browser key of this browser tracker
+	*/
 	public long getBrowserKey() {
 		return _browserTracker.getBrowserKey();
 	}
 
+	/**
+	* Sets the browser key of this browser tracker.
+	*
+	* @param browserKey the browser key of this browser tracker
+	*/
 	public void setBrowserKey(long browserKey) {
 		_browserTracker.setBrowserKey(browserKey);
 	}

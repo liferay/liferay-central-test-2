@@ -28,42 +28,92 @@ public class UserTrackerPathWrapper implements UserTrackerPath {
 		_userTrackerPath = userTrackerPath;
 	}
 
+	/**
+	* Gets the primary key of this user tracker path.
+	*
+	* @return the primary key of this user tracker path
+	*/
 	public long getPrimaryKey() {
 		return _userTrackerPath.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this user tracker path
+	*
+	* @param pk the primary key of this user tracker path
+	*/
 	public void setPrimaryKey(long pk) {
 		_userTrackerPath.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the user tracker path id of this user tracker path.
+	*
+	* @return the user tracker path id of this user tracker path
+	*/
 	public long getUserTrackerPathId() {
 		return _userTrackerPath.getUserTrackerPathId();
 	}
 
+	/**
+	* Sets the user tracker path id of this user tracker path.
+	*
+	* @param userTrackerPathId the user tracker path id of this user tracker path
+	*/
 	public void setUserTrackerPathId(long userTrackerPathId) {
 		_userTrackerPath.setUserTrackerPathId(userTrackerPathId);
 	}
 
+	/**
+	* Gets the user tracker id of this user tracker path.
+	*
+	* @return the user tracker id of this user tracker path
+	*/
 	public long getUserTrackerId() {
 		return _userTrackerPath.getUserTrackerId();
 	}
 
+	/**
+	* Sets the user tracker id of this user tracker path.
+	*
+	* @param userTrackerId the user tracker id of this user tracker path
+	*/
 	public void setUserTrackerId(long userTrackerId) {
 		_userTrackerPath.setUserTrackerId(userTrackerId);
 	}
 
+	/**
+	* Gets the path of this user tracker path.
+	*
+	* @return the path of this user tracker path
+	*/
 	public java.lang.String getPath() {
 		return _userTrackerPath.getPath();
 	}
 
+	/**
+	* Sets the path of this user tracker path.
+	*
+	* @param path the path of this user tracker path
+	*/
 	public void setPath(java.lang.String path) {
 		_userTrackerPath.setPath(path);
 	}
 
+	/**
+	* Gets the path date of this user tracker path.
+	*
+	* @return the path date of this user tracker path
+	*/
 	public java.util.Date getPathDate() {
 		return _userTrackerPath.getPathDate();
 	}
 
+	/**
+	* Sets the path date of this user tracker path.
+	*
+	* @param pathDate the path date of this user tracker path
+	*/
 	public void setPathDate(java.util.Date pathDate) {
 		_userTrackerPath.setPathDate(pathDate);
 	}

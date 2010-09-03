@@ -28,83 +28,184 @@ public class UserTrackerWrapper implements UserTracker {
 		_userTracker = userTracker;
 	}
 
+	/**
+	* Gets the primary key of this user tracker.
+	*
+	* @return the primary key of this user tracker
+	*/
 	public long getPrimaryKey() {
 		return _userTracker.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this user tracker
+	*
+	* @param pk the primary key of this user tracker
+	*/
 	public void setPrimaryKey(long pk) {
 		_userTracker.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the user tracker id of this user tracker.
+	*
+	* @return the user tracker id of this user tracker
+	*/
 	public long getUserTrackerId() {
 		return _userTracker.getUserTrackerId();
 	}
 
+	/**
+	* Sets the user tracker id of this user tracker.
+	*
+	* @param userTrackerId the user tracker id of this user tracker
+	*/
 	public void setUserTrackerId(long userTrackerId) {
 		_userTracker.setUserTrackerId(userTrackerId);
 	}
 
+	/**
+	* Gets the company id of this user tracker.
+	*
+	* @return the company id of this user tracker
+	*/
 	public long getCompanyId() {
 		return _userTracker.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this user tracker.
+	*
+	* @param companyId the company id of this user tracker
+	*/
 	public void setCompanyId(long companyId) {
 		_userTracker.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the user id of this user tracker.
+	*
+	* @return the user id of this user tracker
+	*/
 	public long getUserId() {
 		return _userTracker.getUserId();
 	}
 
+	/**
+	* Sets the user id of this user tracker.
+	*
+	* @param userId the user id of this user tracker
+	*/
 	public void setUserId(long userId) {
 		_userTracker.setUserId(userId);
 	}
 
+	/**
+	* Gets the user uuid of this user tracker.
+	*
+	* @return the user uuid of this user tracker
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _userTracker.getUserUuid();
 	}
 
+	/**
+	* Sets the user uuid of this user tracker.
+	*
+	* @param userUuid the user uuid of this user tracker
+	*/
 	public void setUserUuid(java.lang.String userUuid) {
 		_userTracker.setUserUuid(userUuid);
 	}
 
+	/**
+	* Gets the modified date of this user tracker.
+	*
+	* @return the modified date of this user tracker
+	*/
 	public java.util.Date getModifiedDate() {
 		return _userTracker.getModifiedDate();
 	}
 
+	/**
+	* Sets the modified date of this user tracker.
+	*
+	* @param modifiedDate the modified date of this user tracker
+	*/
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_userTracker.setModifiedDate(modifiedDate);
 	}
 
+	/**
+	* Gets the session id of this user tracker.
+	*
+	* @return the session id of this user tracker
+	*/
 	public java.lang.String getSessionId() {
 		return _userTracker.getSessionId();
 	}
 
+	/**
+	* Sets the session id of this user tracker.
+	*
+	* @param sessionId the session id of this user tracker
+	*/
 	public void setSessionId(java.lang.String sessionId) {
 		_userTracker.setSessionId(sessionId);
 	}
 
+	/**
+	* Gets the remote addr of this user tracker.
+	*
+	* @return the remote addr of this user tracker
+	*/
 	public java.lang.String getRemoteAddr() {
 		return _userTracker.getRemoteAddr();
 	}
 
+	/**
+	* Sets the remote addr of this user tracker.
+	*
+	* @param remoteAddr the remote addr of this user tracker
+	*/
 	public void setRemoteAddr(java.lang.String remoteAddr) {
 		_userTracker.setRemoteAddr(remoteAddr);
 	}
 
+	/**
+	* Gets the remote host of this user tracker.
+	*
+	* @return the remote host of this user tracker
+	*/
 	public java.lang.String getRemoteHost() {
 		return _userTracker.getRemoteHost();
 	}
 
+	/**
+	* Sets the remote host of this user tracker.
+	*
+	* @param remoteHost the remote host of this user tracker
+	*/
 	public void setRemoteHost(java.lang.String remoteHost) {
 		_userTracker.setRemoteHost(remoteHost);
 	}
 
+	/**
+	* Gets the user agent of this user tracker.
+	*
+	* @return the user agent of this user tracker
+	*/
 	public java.lang.String getUserAgent() {
 		return _userTracker.getUserAgent();
 	}
 
+	/**
+	* Sets the user agent of this user tracker.
+	*
+	* @param userAgent the user agent of this user tracker
+	*/
 	public void setUserAgent(java.lang.String userAgent) {
 		_userTracker.setUserAgent(userAgent);
 	}

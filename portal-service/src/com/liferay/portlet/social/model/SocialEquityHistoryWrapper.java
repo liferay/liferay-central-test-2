@@ -28,67 +28,148 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 		_socialEquityHistory = socialEquityHistory;
 	}
 
+	/**
+	* Gets the primary key of this social equity history.
+	*
+	* @return the primary key of this social equity history
+	*/
 	public long getPrimaryKey() {
 		return _socialEquityHistory.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this social equity history
+	*
+	* @param pk the primary key of this social equity history
+	*/
 	public void setPrimaryKey(long pk) {
 		_socialEquityHistory.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the equity history id of this social equity history.
+	*
+	* @return the equity history id of this social equity history
+	*/
 	public long getEquityHistoryId() {
 		return _socialEquityHistory.getEquityHistoryId();
 	}
 
+	/**
+	* Sets the equity history id of this social equity history.
+	*
+	* @param equityHistoryId the equity history id of this social equity history
+	*/
 	public void setEquityHistoryId(long equityHistoryId) {
 		_socialEquityHistory.setEquityHistoryId(equityHistoryId);
 	}
 
+	/**
+	* Gets the group id of this social equity history.
+	*
+	* @return the group id of this social equity history
+	*/
 	public long getGroupId() {
 		return _socialEquityHistory.getGroupId();
 	}
 
+	/**
+	* Sets the group id of this social equity history.
+	*
+	* @param groupId the group id of this social equity history
+	*/
 	public void setGroupId(long groupId) {
 		_socialEquityHistory.setGroupId(groupId);
 	}
 
+	/**
+	* Gets the company id of this social equity history.
+	*
+	* @return the company id of this social equity history
+	*/
 	public long getCompanyId() {
 		return _socialEquityHistory.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this social equity history.
+	*
+	* @param companyId the company id of this social equity history
+	*/
 	public void setCompanyId(long companyId) {
 		_socialEquityHistory.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the user id of this social equity history.
+	*
+	* @return the user id of this social equity history
+	*/
 	public long getUserId() {
 		return _socialEquityHistory.getUserId();
 	}
 
+	/**
+	* Sets the user id of this social equity history.
+	*
+	* @param userId the user id of this social equity history
+	*/
 	public void setUserId(long userId) {
 		_socialEquityHistory.setUserId(userId);
 	}
 
+	/**
+	* Gets the user uuid of this social equity history.
+	*
+	* @return the user uuid of this social equity history
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialEquityHistory.getUserUuid();
 	}
 
+	/**
+	* Sets the user uuid of this social equity history.
+	*
+	* @param userUuid the user uuid of this social equity history
+	*/
 	public void setUserUuid(java.lang.String userUuid) {
 		_socialEquityHistory.setUserUuid(userUuid);
 	}
 
+	/**
+	* Gets the create date of this social equity history.
+	*
+	* @return the create date of this social equity history
+	*/
 	public java.util.Date getCreateDate() {
 		return _socialEquityHistory.getCreateDate();
 	}
 
+	/**
+	* Sets the create date of this social equity history.
+	*
+	* @param createDate the create date of this social equity history
+	*/
 	public void setCreateDate(java.util.Date createDate) {
 		_socialEquityHistory.setCreateDate(createDate);
 	}
 
+	/**
+	* Gets the personal equity of this social equity history.
+	*
+	* @return the personal equity of this social equity history
+	*/
 	public int getPersonalEquity() {
 		return _socialEquityHistory.getPersonalEquity();
 	}
 
+	/**
+	* Sets the personal equity of this social equity history.
+	*
+	* @param personalEquity the personal equity of this social equity history
+	*/
 	public void setPersonalEquity(int personalEquity) {
 		_socialEquityHistory.setPersonalEquity(personalEquity);
 	}

@@ -28,46 +28,101 @@ public class ExpandoTableWrapper implements ExpandoTable {
 		_expandoTable = expandoTable;
 	}
 
+	/**
+	* Gets the primary key of this expando table.
+	*
+	* @return the primary key of this expando table
+	*/
 	public long getPrimaryKey() {
 		return _expandoTable.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this expando table
+	*
+	* @param pk the primary key of this expando table
+	*/
 	public void setPrimaryKey(long pk) {
 		_expandoTable.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the table id of this expando table.
+	*
+	* @return the table id of this expando table
+	*/
 	public long getTableId() {
 		return _expandoTable.getTableId();
 	}
 
+	/**
+	* Sets the table id of this expando table.
+	*
+	* @param tableId the table id of this expando table
+	*/
 	public void setTableId(long tableId) {
 		_expandoTable.setTableId(tableId);
 	}
 
+	/**
+	* Gets the company id of this expando table.
+	*
+	* @return the company id of this expando table
+	*/
 	public long getCompanyId() {
 		return _expandoTable.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this expando table.
+	*
+	* @param companyId the company id of this expando table
+	*/
 	public void setCompanyId(long companyId) {
 		_expandoTable.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the class name of the model instance this expando table is polymorphically associated with.
+	*
+	* @return the class name of the model instance this expando table is polymorphically associated with
+	*/
 	public java.lang.String getClassName() {
 		return _expandoTable.getClassName();
 	}
 
+	/**
+	* Gets the class name id of this expando table.
+	*
+	* @return the class name id of this expando table
+	*/
 	public long getClassNameId() {
 		return _expandoTable.getClassNameId();
 	}
 
+	/**
+	* Sets the class name id of this expando table.
+	*
+	* @param classNameId the class name id of this expando table
+	*/
 	public void setClassNameId(long classNameId) {
 		_expandoTable.setClassNameId(classNameId);
 	}
 
+	/**
+	* Gets the name of this expando table.
+	*
+	* @return the name of this expando table
+	*/
 	public java.lang.String getName() {
 		return _expandoTable.getName();
 	}
 
+	/**
+	* Sets the name of this expando table.
+	*
+	* @param name the name of this expando table
+	*/
 	public void setName(java.lang.String name) {
 		_expandoTable.setName(name);
 	}

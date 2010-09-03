@@ -28,51 +28,112 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 		_passwordTracker = passwordTracker;
 	}
 
+	/**
+	* Gets the primary key of this password tracker.
+	*
+	* @return the primary key of this password tracker
+	*/
 	public long getPrimaryKey() {
 		return _passwordTracker.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this password tracker
+	*
+	* @param pk the primary key of this password tracker
+	*/
 	public void setPrimaryKey(long pk) {
 		_passwordTracker.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the password tracker id of this password tracker.
+	*
+	* @return the password tracker id of this password tracker
+	*/
 	public long getPasswordTrackerId() {
 		return _passwordTracker.getPasswordTrackerId();
 	}
 
+	/**
+	* Sets the password tracker id of this password tracker.
+	*
+	* @param passwordTrackerId the password tracker id of this password tracker
+	*/
 	public void setPasswordTrackerId(long passwordTrackerId) {
 		_passwordTracker.setPasswordTrackerId(passwordTrackerId);
 	}
 
+	/**
+	* Gets the user id of this password tracker.
+	*
+	* @return the user id of this password tracker
+	*/
 	public long getUserId() {
 		return _passwordTracker.getUserId();
 	}
 
+	/**
+	* Sets the user id of this password tracker.
+	*
+	* @param userId the user id of this password tracker
+	*/
 	public void setUserId(long userId) {
 		_passwordTracker.setUserId(userId);
 	}
 
+	/**
+	* Gets the user uuid of this password tracker.
+	*
+	* @return the user uuid of this password tracker
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _passwordTracker.getUserUuid();
 	}
 
+	/**
+	* Sets the user uuid of this password tracker.
+	*
+	* @param userUuid the user uuid of this password tracker
+	*/
 	public void setUserUuid(java.lang.String userUuid) {
 		_passwordTracker.setUserUuid(userUuid);
 	}
 
+	/**
+	* Gets the create date of this password tracker.
+	*
+	* @return the create date of this password tracker
+	*/
 	public java.util.Date getCreateDate() {
 		return _passwordTracker.getCreateDate();
 	}
 
+	/**
+	* Sets the create date of this password tracker.
+	*
+	* @param createDate the create date of this password tracker
+	*/
 	public void setCreateDate(java.util.Date createDate) {
 		_passwordTracker.setCreateDate(createDate);
 	}
 
+	/**
+	* Gets the password of this password tracker.
+	*
+	* @return the password of this password tracker
+	*/
 	public java.lang.String getPassword() {
 		return _passwordTracker.getPassword();
 	}
 
+	/**
+	* Sets the password of this password tracker.
+	*
+	* @param password the password of this password tracker
+	*/
 	public void setPassword(java.lang.String password) {
 		_passwordTracker.setPassword(password);
 	}

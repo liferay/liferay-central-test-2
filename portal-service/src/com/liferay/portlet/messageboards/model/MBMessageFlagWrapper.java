@@ -28,67 +28,148 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 		_mbMessageFlag = mbMessageFlag;
 	}
 
+	/**
+	* Gets the primary key of this message boards message flag.
+	*
+	* @return the primary key of this message boards message flag
+	*/
 	public long getPrimaryKey() {
 		return _mbMessageFlag.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this message boards message flag
+	*
+	* @param pk the primary key of this message boards message flag
+	*/
 	public void setPrimaryKey(long pk) {
 		_mbMessageFlag.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the message flag id of this message boards message flag.
+	*
+	* @return the message flag id of this message boards message flag
+	*/
 	public long getMessageFlagId() {
 		return _mbMessageFlag.getMessageFlagId();
 	}
 
+	/**
+	* Sets the message flag id of this message boards message flag.
+	*
+	* @param messageFlagId the message flag id of this message boards message flag
+	*/
 	public void setMessageFlagId(long messageFlagId) {
 		_mbMessageFlag.setMessageFlagId(messageFlagId);
 	}
 
+	/**
+	* Gets the user id of this message boards message flag.
+	*
+	* @return the user id of this message boards message flag
+	*/
 	public long getUserId() {
 		return _mbMessageFlag.getUserId();
 	}
 
+	/**
+	* Sets the user id of this message boards message flag.
+	*
+	* @param userId the user id of this message boards message flag
+	*/
 	public void setUserId(long userId) {
 		_mbMessageFlag.setUserId(userId);
 	}
 
+	/**
+	* Gets the user uuid of this message boards message flag.
+	*
+	* @return the user uuid of this message boards message flag
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageFlag.getUserUuid();
 	}
 
+	/**
+	* Sets the user uuid of this message boards message flag.
+	*
+	* @param userUuid the user uuid of this message boards message flag
+	*/
 	public void setUserUuid(java.lang.String userUuid) {
 		_mbMessageFlag.setUserUuid(userUuid);
 	}
 
+	/**
+	* Gets the modified date of this message boards message flag.
+	*
+	* @return the modified date of this message boards message flag
+	*/
 	public java.util.Date getModifiedDate() {
 		return _mbMessageFlag.getModifiedDate();
 	}
 
+	/**
+	* Sets the modified date of this message boards message flag.
+	*
+	* @param modifiedDate the modified date of this message boards message flag
+	*/
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_mbMessageFlag.setModifiedDate(modifiedDate);
 	}
 
+	/**
+	* Gets the thread id of this message boards message flag.
+	*
+	* @return the thread id of this message boards message flag
+	*/
 	public long getThreadId() {
 		return _mbMessageFlag.getThreadId();
 	}
 
+	/**
+	* Sets the thread id of this message boards message flag.
+	*
+	* @param threadId the thread id of this message boards message flag
+	*/
 	public void setThreadId(long threadId) {
 		_mbMessageFlag.setThreadId(threadId);
 	}
 
+	/**
+	* Gets the message id of this message boards message flag.
+	*
+	* @return the message id of this message boards message flag
+	*/
 	public long getMessageId() {
 		return _mbMessageFlag.getMessageId();
 	}
 
+	/**
+	* Sets the message id of this message boards message flag.
+	*
+	* @param messageId the message id of this message boards message flag
+	*/
 	public void setMessageId(long messageId) {
 		_mbMessageFlag.setMessageId(messageId);
 	}
 
+	/**
+	* Gets the flag of this message boards message flag.
+	*
+	* @return the flag of this message boards message flag
+	*/
 	public int getFlag() {
 		return _mbMessageFlag.getFlag();
 	}
 
+	/**
+	* Sets the flag of this message boards message flag.
+	*
+	* @param flag the flag of this message boards message flag
+	*/
 	public void setFlag(int flag) {
 		_mbMessageFlag.setFlag(flag);
 	}

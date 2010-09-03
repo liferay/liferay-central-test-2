@@ -302,6 +302,11 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut> {
 	public void setStatusDate(Date statusDate);
 
 	/**
+	 * @deprecated {@link #isApproved}
+	 */
+	public boolean getApproved();
+
+	/**
 	 * Determines whether this d l file shortcut is approved.
 	 *
 	 * @return true if this d l file shortcut is approved; false otherwise

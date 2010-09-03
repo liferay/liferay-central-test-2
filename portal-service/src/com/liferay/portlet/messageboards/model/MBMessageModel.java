@@ -457,6 +457,11 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 	public void setStatusDate(Date statusDate);
 
 	/**
+	 * @deprecated {@link #isApproved}
+	 */
+	public boolean getApproved();
+
+	/**
 	 * Determines whether this message-boards message is approved.
 	 *
 	 * @return true if this message-boards message is approved; false otherwise

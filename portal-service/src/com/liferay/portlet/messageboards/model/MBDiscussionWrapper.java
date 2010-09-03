@@ -28,46 +28,101 @@ public class MBDiscussionWrapper implements MBDiscussion {
 		_mbDiscussion = mbDiscussion;
 	}
 
+	/**
+	* Gets the primary key of this message boards discussion.
+	*
+	* @return the primary key of this message boards discussion
+	*/
 	public long getPrimaryKey() {
 		return _mbDiscussion.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this message boards discussion
+	*
+	* @param pk the primary key of this message boards discussion
+	*/
 	public void setPrimaryKey(long pk) {
 		_mbDiscussion.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the discussion id of this message boards discussion.
+	*
+	* @return the discussion id of this message boards discussion
+	*/
 	public long getDiscussionId() {
 		return _mbDiscussion.getDiscussionId();
 	}
 
+	/**
+	* Sets the discussion id of this message boards discussion.
+	*
+	* @param discussionId the discussion id of this message boards discussion
+	*/
 	public void setDiscussionId(long discussionId) {
 		_mbDiscussion.setDiscussionId(discussionId);
 	}
 
+	/**
+	* Gets the class name of the model instance this message boards discussion is polymorphically associated with.
+	*
+	* @return the class name of the model instance this message boards discussion is polymorphically associated with
+	*/
 	public java.lang.String getClassName() {
 		return _mbDiscussion.getClassName();
 	}
 
+	/**
+	* Gets the class name id of this message boards discussion.
+	*
+	* @return the class name id of this message boards discussion
+	*/
 	public long getClassNameId() {
 		return _mbDiscussion.getClassNameId();
 	}
 
+	/**
+	* Sets the class name id of this message boards discussion.
+	*
+	* @param classNameId the class name id of this message boards discussion
+	*/
 	public void setClassNameId(long classNameId) {
 		_mbDiscussion.setClassNameId(classNameId);
 	}
 
+	/**
+	* Gets the class p k of this message boards discussion.
+	*
+	* @return the class p k of this message boards discussion
+	*/
 	public long getClassPK() {
 		return _mbDiscussion.getClassPK();
 	}
 
+	/**
+	* Sets the class p k of this message boards discussion.
+	*
+	* @param classPK the class p k of this message boards discussion
+	*/
 	public void setClassPK(long classPK) {
 		_mbDiscussion.setClassPK(classPK);
 	}
 
+	/**
+	* Gets the thread id of this message boards discussion.
+	*
+	* @return the thread id of this message boards discussion
+	*/
 	public long getThreadId() {
 		return _mbDiscussion.getThreadId();
 	}
 
+	/**
+	* Sets the thread id of this message boards discussion.
+	*
+	* @param threadId the thread id of this message boards discussion
+	*/
 	public void setThreadId(long threadId) {
 		_mbDiscussion.setThreadId(threadId);
 	}

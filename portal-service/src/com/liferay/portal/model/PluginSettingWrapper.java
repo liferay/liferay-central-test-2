@@ -28,62 +28,137 @@ public class PluginSettingWrapper implements PluginSetting {
 		_pluginSetting = pluginSetting;
 	}
 
+	/**
+	* Gets the primary key of this plugin setting.
+	*
+	* @return the primary key of this plugin setting
+	*/
 	public long getPrimaryKey() {
 		return _pluginSetting.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this plugin setting
+	*
+	* @param pk the primary key of this plugin setting
+	*/
 	public void setPrimaryKey(long pk) {
 		_pluginSetting.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the plugin setting id of this plugin setting.
+	*
+	* @return the plugin setting id of this plugin setting
+	*/
 	public long getPluginSettingId() {
 		return _pluginSetting.getPluginSettingId();
 	}
 
+	/**
+	* Sets the plugin setting id of this plugin setting.
+	*
+	* @param pluginSettingId the plugin setting id of this plugin setting
+	*/
 	public void setPluginSettingId(long pluginSettingId) {
 		_pluginSetting.setPluginSettingId(pluginSettingId);
 	}
 
+	/**
+	* Gets the company id of this plugin setting.
+	*
+	* @return the company id of this plugin setting
+	*/
 	public long getCompanyId() {
 		return _pluginSetting.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this plugin setting.
+	*
+	* @param companyId the company id of this plugin setting
+	*/
 	public void setCompanyId(long companyId) {
 		_pluginSetting.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the plugin id of this plugin setting.
+	*
+	* @return the plugin id of this plugin setting
+	*/
 	public java.lang.String getPluginId() {
 		return _pluginSetting.getPluginId();
 	}
 
+	/**
+	* Sets the plugin id of this plugin setting.
+	*
+	* @param pluginId the plugin id of this plugin setting
+	*/
 	public void setPluginId(java.lang.String pluginId) {
 		_pluginSetting.setPluginId(pluginId);
 	}
 
+	/**
+	* Gets the plugin type of this plugin setting.
+	*
+	* @return the plugin type of this plugin setting
+	*/
 	public java.lang.String getPluginType() {
 		return _pluginSetting.getPluginType();
 	}
 
+	/**
+	* Sets the plugin type of this plugin setting.
+	*
+	* @param pluginType the plugin type of this plugin setting
+	*/
 	public void setPluginType(java.lang.String pluginType) {
 		_pluginSetting.setPluginType(pluginType);
 	}
 
+	/**
+	* Gets the roles of this plugin setting.
+	*
+	* @return the roles of this plugin setting
+	*/
 	public java.lang.String getRoles() {
 		return _pluginSetting.getRoles();
 	}
 
+	/**
+	* Sets the roles of this plugin setting.
+	*
+	* @param roles the roles of this plugin setting
+	*/
 	public void setRoles(java.lang.String roles) {
 		_pluginSetting.setRoles(roles);
 	}
 
+	/**
+	* Gets the active of this plugin setting.
+	*
+	* @return the active of this plugin setting
+	*/
 	public boolean getActive() {
 		return _pluginSetting.getActive();
 	}
 
+	/**
+	* Determines whether this plugin setting is active.
+	*
+	* @return whether this plugin setting is active
+	*/
 	public boolean isActive() {
 		return _pluginSetting.isActive();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is active.
+	*
+	* @param active the active of this plugin setting
+	*/
 	public void setActive(boolean active) {
 		_pluginSetting.setActive(active);
 	}
@@ -149,22 +224,45 @@ public class PluginSettingWrapper implements PluginSetting {
 		return _pluginSetting.toXmlString();
 	}
 
+	/**
+	* Adds a role to the list of roles.
+	*/
 	public void addRole(java.lang.String role) {
 		_pluginSetting.addRole(role);
 	}
 
+	/**
+	* Gets an array of required roles of the plugin.
+	*
+	* @return an array of required roles of the plugin
+	*/
 	public java.lang.String[] getRolesArray() {
 		return _pluginSetting.getRolesArray();
 	}
 
+	/**
+	* Sets an array of required roles of the plugin.
+	*/
 	public void setRolesArray(java.lang.String[] rolesArray) {
 		_pluginSetting.setRolesArray(rolesArray);
 	}
 
+	/**
+	* Returns <code>true</code> if the plugin has a role with the specified
+	* name.
+	*
+	* @return <code>true</code> if the plugin has a role with the specified
+	name
+	*/
 	public boolean hasRoleWithName(java.lang.String roleName) {
 		return _pluginSetting.hasRoleWithName(roleName);
 	}
 
+	/**
+	* Returns <code>true</code> if the user has permission to use this plugin
+	*
+	* @return <code>true</code> if the user has permission to use this plugin
+	*/
 	public boolean hasPermission(long userId) {
 		return _pluginSetting.hasPermission(userId);
 	}

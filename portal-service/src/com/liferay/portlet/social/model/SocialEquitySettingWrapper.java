@@ -28,98 +28,218 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 		_socialEquitySetting = socialEquitySetting;
 	}
 
+	/**
+	* Gets the primary key of this social equity setting.
+	*
+	* @return the primary key of this social equity setting
+	*/
 	public long getPrimaryKey() {
 		return _socialEquitySetting.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this social equity setting
+	*
+	* @param pk the primary key of this social equity setting
+	*/
 	public void setPrimaryKey(long pk) {
 		_socialEquitySetting.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the equity setting id of this social equity setting.
+	*
+	* @return the equity setting id of this social equity setting
+	*/
 	public long getEquitySettingId() {
 		return _socialEquitySetting.getEquitySettingId();
 	}
 
+	/**
+	* Sets the equity setting id of this social equity setting.
+	*
+	* @param equitySettingId the equity setting id of this social equity setting
+	*/
 	public void setEquitySettingId(long equitySettingId) {
 		_socialEquitySetting.setEquitySettingId(equitySettingId);
 	}
 
+	/**
+	* Gets the group id of this social equity setting.
+	*
+	* @return the group id of this social equity setting
+	*/
 	public long getGroupId() {
 		return _socialEquitySetting.getGroupId();
 	}
 
+	/**
+	* Sets the group id of this social equity setting.
+	*
+	* @param groupId the group id of this social equity setting
+	*/
 	public void setGroupId(long groupId) {
 		_socialEquitySetting.setGroupId(groupId);
 	}
 
+	/**
+	* Gets the company id of this social equity setting.
+	*
+	* @return the company id of this social equity setting
+	*/
 	public long getCompanyId() {
 		return _socialEquitySetting.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this social equity setting.
+	*
+	* @param companyId the company id of this social equity setting
+	*/
 	public void setCompanyId(long companyId) {
 		_socialEquitySetting.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the class name of the model instance this social equity setting is polymorphically associated with.
+	*
+	* @return the class name of the model instance this social equity setting is polymorphically associated with
+	*/
 	public java.lang.String getClassName() {
 		return _socialEquitySetting.getClassName();
 	}
 
+	/**
+	* Gets the class name id of this social equity setting.
+	*
+	* @return the class name id of this social equity setting
+	*/
 	public long getClassNameId() {
 		return _socialEquitySetting.getClassNameId();
 	}
 
+	/**
+	* Sets the class name id of this social equity setting.
+	*
+	* @param classNameId the class name id of this social equity setting
+	*/
 	public void setClassNameId(long classNameId) {
 		_socialEquitySetting.setClassNameId(classNameId);
 	}
 
+	/**
+	* Gets the action id of this social equity setting.
+	*
+	* @return the action id of this social equity setting
+	*/
 	public java.lang.String getActionId() {
 		return _socialEquitySetting.getActionId();
 	}
 
+	/**
+	* Sets the action id of this social equity setting.
+	*
+	* @param actionId the action id of this social equity setting
+	*/
 	public void setActionId(java.lang.String actionId) {
 		_socialEquitySetting.setActionId(actionId);
 	}
 
+	/**
+	* Gets the daily limit of this social equity setting.
+	*
+	* @return the daily limit of this social equity setting
+	*/
 	public int getDailyLimit() {
 		return _socialEquitySetting.getDailyLimit();
 	}
 
+	/**
+	* Sets the daily limit of this social equity setting.
+	*
+	* @param dailyLimit the daily limit of this social equity setting
+	*/
 	public void setDailyLimit(int dailyLimit) {
 		_socialEquitySetting.setDailyLimit(dailyLimit);
 	}
 
+	/**
+	* Gets the lifespan of this social equity setting.
+	*
+	* @return the lifespan of this social equity setting
+	*/
 	public int getLifespan() {
 		return _socialEquitySetting.getLifespan();
 	}
 
+	/**
+	* Sets the lifespan of this social equity setting.
+	*
+	* @param lifespan the lifespan of this social equity setting
+	*/
 	public void setLifespan(int lifespan) {
 		_socialEquitySetting.setLifespan(lifespan);
 	}
 
+	/**
+	* Gets the type of this social equity setting.
+	*
+	* @return the type of this social equity setting
+	*/
 	public int getType() {
 		return _socialEquitySetting.getType();
 	}
 
+	/**
+	* Sets the type of this social equity setting.
+	*
+	* @param type the type of this social equity setting
+	*/
 	public void setType(int type) {
 		_socialEquitySetting.setType(type);
 	}
 
+	/**
+	* Gets the unique entry of this social equity setting.
+	*
+	* @return the unique entry of this social equity setting
+	*/
 	public boolean getUniqueEntry() {
 		return _socialEquitySetting.getUniqueEntry();
 	}
 
+	/**
+	* Determines whether this social equity setting is unique entry.
+	*
+	* @return whether this social equity setting is unique entry
+	*/
 	public boolean isUniqueEntry() {
 		return _socialEquitySetting.isUniqueEntry();
 	}
 
+	/**
+	* Sets whether this {$entity.humanName} is unique entry.
+	*
+	* @param uniqueEntry the unique entry of this social equity setting
+	*/
 	public void setUniqueEntry(boolean uniqueEntry) {
 		_socialEquitySetting.setUniqueEntry(uniqueEntry);
 	}
 
+	/**
+	* Gets the value of this social equity setting.
+	*
+	* @return the value of this social equity setting
+	*/
 	public int getValue() {
 		return _socialEquitySetting.getValue();
 	}
 
+	/**
+	* Sets the value of this social equity setting.
+	*
+	* @param value the value of this social equity setting
+	*/
 	public void setValue(int value) {
 		_socialEquitySetting.setValue(value);
 	}

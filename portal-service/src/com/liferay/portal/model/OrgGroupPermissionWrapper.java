@@ -28,35 +28,75 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 		_orgGroupPermission = orgGroupPermission;
 	}
 
+	/**
+	* Gets the primary key of this org group permission.
+	*
+	* @return the primary key of this org group permission
+	*/
 	public com.liferay.portal.service.persistence.OrgGroupPermissionPK getPrimaryKey() {
 		return _orgGroupPermission.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this org group permission
+	*
+	* @param pk the primary key of this org group permission
+	*/
 	public void setPrimaryKey(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK pk) {
 		_orgGroupPermission.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the organization id of this org group permission.
+	*
+	* @return the organization id of this org group permission
+	*/
 	public long getOrganizationId() {
 		return _orgGroupPermission.getOrganizationId();
 	}
 
+	/**
+	* Sets the organization id of this org group permission.
+	*
+	* @param organizationId the organization id of this org group permission
+	*/
 	public void setOrganizationId(long organizationId) {
 		_orgGroupPermission.setOrganizationId(organizationId);
 	}
 
+	/**
+	* Gets the group id of this org group permission.
+	*
+	* @return the group id of this org group permission
+	*/
 	public long getGroupId() {
 		return _orgGroupPermission.getGroupId();
 	}
 
+	/**
+	* Sets the group id of this org group permission.
+	*
+	* @param groupId the group id of this org group permission
+	*/
 	public void setGroupId(long groupId) {
 		_orgGroupPermission.setGroupId(groupId);
 	}
 
+	/**
+	* Gets the permission id of this org group permission.
+	*
+	* @return the permission id of this org group permission
+	*/
 	public long getPermissionId() {
 		return _orgGroupPermission.getPermissionId();
 	}
 
+	/**
+	* Sets the permission id of this org group permission.
+	*
+	* @param permissionId the permission id of this org group permission
+	*/
 	public void setPermissionId(long permissionId) {
 		_orgGroupPermission.setPermissionId(permissionId);
 	}

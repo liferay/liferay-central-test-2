@@ -28,66 +28,146 @@ public class SocialRelationWrapper implements SocialRelation {
 		_socialRelation = socialRelation;
 	}
 
+	/**
+	* Gets the primary key of this social relation.
+	*
+	* @return the primary key of this social relation
+	*/
 	public long getPrimaryKey() {
 		return _socialRelation.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this social relation
+	*
+	* @param pk the primary key of this social relation
+	*/
 	public void setPrimaryKey(long pk) {
 		_socialRelation.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the uuid of this social relation.
+	*
+	* @return the uuid of this social relation
+	*/
 	public java.lang.String getUuid() {
 		return _socialRelation.getUuid();
 	}
 
+	/**
+	* Sets the uuid of this social relation.
+	*
+	* @param uuid the uuid of this social relation
+	*/
 	public void setUuid(java.lang.String uuid) {
 		_socialRelation.setUuid(uuid);
 	}
 
+	/**
+	* Gets the relation id of this social relation.
+	*
+	* @return the relation id of this social relation
+	*/
 	public long getRelationId() {
 		return _socialRelation.getRelationId();
 	}
 
+	/**
+	* Sets the relation id of this social relation.
+	*
+	* @param relationId the relation id of this social relation
+	*/
 	public void setRelationId(long relationId) {
 		_socialRelation.setRelationId(relationId);
 	}
 
+	/**
+	* Gets the company id of this social relation.
+	*
+	* @return the company id of this social relation
+	*/
 	public long getCompanyId() {
 		return _socialRelation.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this social relation.
+	*
+	* @param companyId the company id of this social relation
+	*/
 	public void setCompanyId(long companyId) {
 		_socialRelation.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the create date of this social relation.
+	*
+	* @return the create date of this social relation
+	*/
 	public long getCreateDate() {
 		return _socialRelation.getCreateDate();
 	}
 
+	/**
+	* Sets the create date of this social relation.
+	*
+	* @param createDate the create date of this social relation
+	*/
 	public void setCreateDate(long createDate) {
 		_socialRelation.setCreateDate(createDate);
 	}
 
+	/**
+	* Gets the user id1 of this social relation.
+	*
+	* @return the user id1 of this social relation
+	*/
 	public long getUserId1() {
 		return _socialRelation.getUserId1();
 	}
 
+	/**
+	* Sets the user id1 of this social relation.
+	*
+	* @param userId1 the user id1 of this social relation
+	*/
 	public void setUserId1(long userId1) {
 		_socialRelation.setUserId1(userId1);
 	}
 
+	/**
+	* Gets the user id2 of this social relation.
+	*
+	* @return the user id2 of this social relation
+	*/
 	public long getUserId2() {
 		return _socialRelation.getUserId2();
 	}
 
+	/**
+	* Sets the user id2 of this social relation.
+	*
+	* @param userId2 the user id2 of this social relation
+	*/
 	public void setUserId2(long userId2) {
 		_socialRelation.setUserId2(userId2);
 	}
 
+	/**
+	* Gets the type of this social relation.
+	*
+	* @return the type of this social relation
+	*/
 	public int getType() {
 		return _socialRelation.getType();
 	}
 
+	/**
+	* Sets the type of this social relation.
+	*
+	* @param type the type of this social relation
+	*/
 	public void setType(int type) {
 		_socialRelation.setType(type);
 	}

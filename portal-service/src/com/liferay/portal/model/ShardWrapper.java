@@ -28,46 +28,101 @@ public class ShardWrapper implements Shard {
 		_shard = shard;
 	}
 
+	/**
+	* Gets the primary key of this shard.
+	*
+	* @return the primary key of this shard
+	*/
 	public long getPrimaryKey() {
 		return _shard.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this shard
+	*
+	* @param pk the primary key of this shard
+	*/
 	public void setPrimaryKey(long pk) {
 		_shard.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the shard id of this shard.
+	*
+	* @return the shard id of this shard
+	*/
 	public long getShardId() {
 		return _shard.getShardId();
 	}
 
+	/**
+	* Sets the shard id of this shard.
+	*
+	* @param shardId the shard id of this shard
+	*/
 	public void setShardId(long shardId) {
 		_shard.setShardId(shardId);
 	}
 
+	/**
+	* Gets the class name of the model instance this shard is polymorphically associated with.
+	*
+	* @return the class name of the model instance this shard is polymorphically associated with
+	*/
 	public java.lang.String getClassName() {
 		return _shard.getClassName();
 	}
 
+	/**
+	* Gets the class name id of this shard.
+	*
+	* @return the class name id of this shard
+	*/
 	public long getClassNameId() {
 		return _shard.getClassNameId();
 	}
 
+	/**
+	* Sets the class name id of this shard.
+	*
+	* @param classNameId the class name id of this shard
+	*/
 	public void setClassNameId(long classNameId) {
 		_shard.setClassNameId(classNameId);
 	}
 
+	/**
+	* Gets the class p k of this shard.
+	*
+	* @return the class p k of this shard
+	*/
 	public long getClassPK() {
 		return _shard.getClassPK();
 	}
 
+	/**
+	* Sets the class p k of this shard.
+	*
+	* @param classPK the class p k of this shard
+	*/
 	public void setClassPK(long classPK) {
 		_shard.setClassPK(classPK);
 	}
 
+	/**
+	* Gets the name of this shard.
+	*
+	* @return the name of this shard
+	*/
 	public java.lang.String getName() {
 		return _shard.getName();
 	}
 
+	/**
+	* Sets the name of this shard.
+	*
+	* @param name the name of this shard
+	*/
 	public void setName(java.lang.String name) {
 		_shard.setName(name);
 	}

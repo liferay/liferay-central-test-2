@@ -375,6 +375,11 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 	public void setStatusDate(Date statusDate);
 
 	/**
+	 * @deprecated {@link #isApproved}
+	 */
+	public boolean getApproved();
+
+	/**
 	 * Determines whether this blogs entry is approved.
 	 *
 	 * @return true if this blogs entry is approved; false otherwise

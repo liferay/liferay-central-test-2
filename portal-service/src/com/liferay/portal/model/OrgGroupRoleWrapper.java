@@ -28,35 +28,75 @@ public class OrgGroupRoleWrapper implements OrgGroupRole {
 		_orgGroupRole = orgGroupRole;
 	}
 
+	/**
+	* Gets the primary key of this org group role.
+	*
+	* @return the primary key of this org group role
+	*/
 	public com.liferay.portal.service.persistence.OrgGroupRolePK getPrimaryKey() {
 		return _orgGroupRole.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this org group role
+	*
+	* @param pk the primary key of this org group role
+	*/
 	public void setPrimaryKey(
 		com.liferay.portal.service.persistence.OrgGroupRolePK pk) {
 		_orgGroupRole.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the organization id of this org group role.
+	*
+	* @return the organization id of this org group role
+	*/
 	public long getOrganizationId() {
 		return _orgGroupRole.getOrganizationId();
 	}
 
+	/**
+	* Sets the organization id of this org group role.
+	*
+	* @param organizationId the organization id of this org group role
+	*/
 	public void setOrganizationId(long organizationId) {
 		_orgGroupRole.setOrganizationId(organizationId);
 	}
 
+	/**
+	* Gets the group id of this org group role.
+	*
+	* @return the group id of this org group role
+	*/
 	public long getGroupId() {
 		return _orgGroupRole.getGroupId();
 	}
 
+	/**
+	* Sets the group id of this org group role.
+	*
+	* @param groupId the group id of this org group role
+	*/
 	public void setGroupId(long groupId) {
 		_orgGroupRole.setGroupId(groupId);
 	}
 
+	/**
+	* Gets the role id of this org group role.
+	*
+	* @return the role id of this org group role
+	*/
 	public long getRoleId() {
 		return _orgGroupRole.getRoleId();
 	}
 
+	/**
+	* Sets the role id of this org group role.
+	*
+	* @param roleId the role id of this org group role
+	*/
 	public void setRoleId(long roleId) {
 		_orgGroupRole.setRoleId(roleId);
 	}

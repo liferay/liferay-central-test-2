@@ -28,42 +28,92 @@ public class ResourceCodeWrapper implements ResourceCode {
 		_resourceCode = resourceCode;
 	}
 
+	/**
+	* Gets the primary key of this resource code.
+	*
+	* @return the primary key of this resource code
+	*/
 	public long getPrimaryKey() {
 		return _resourceCode.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this resource code
+	*
+	* @param pk the primary key of this resource code
+	*/
 	public void setPrimaryKey(long pk) {
 		_resourceCode.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the code id of this resource code.
+	*
+	* @return the code id of this resource code
+	*/
 	public long getCodeId() {
 		return _resourceCode.getCodeId();
 	}
 
+	/**
+	* Sets the code id of this resource code.
+	*
+	* @param codeId the code id of this resource code
+	*/
 	public void setCodeId(long codeId) {
 		_resourceCode.setCodeId(codeId);
 	}
 
+	/**
+	* Gets the company id of this resource code.
+	*
+	* @return the company id of this resource code
+	*/
 	public long getCompanyId() {
 		return _resourceCode.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this resource code.
+	*
+	* @param companyId the company id of this resource code
+	*/
 	public void setCompanyId(long companyId) {
 		_resourceCode.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the name of this resource code.
+	*
+	* @return the name of this resource code
+	*/
 	public java.lang.String getName() {
 		return _resourceCode.getName();
 	}
 
+	/**
+	* Sets the name of this resource code.
+	*
+	* @param name the name of this resource code
+	*/
 	public void setName(java.lang.String name) {
 		_resourceCode.setName(name);
 	}
 
+	/**
+	* Gets the scope of this resource code.
+	*
+	* @return the scope of this resource code
+	*/
 	public int getScope() {
 		return _resourceCode.getScope();
 	}
 
+	/**
+	* Sets the scope of this resource code.
+	*
+	* @param scope the scope of this resource code
+	*/
 	public void setScope(int scope) {
 		_resourceCode.setScope(scope);
 	}

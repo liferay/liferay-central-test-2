@@ -28,127 +28,283 @@ public class TasksProposalWrapper implements TasksProposal {
 		_tasksProposal = tasksProposal;
 	}
 
+	/**
+	* Gets the primary key of this tasks proposal.
+	*
+	* @return the primary key of this tasks proposal
+	*/
 	public long getPrimaryKey() {
 		return _tasksProposal.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this tasks proposal
+	*
+	* @param pk the primary key of this tasks proposal
+	*/
 	public void setPrimaryKey(long pk) {
 		_tasksProposal.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the proposal id of this tasks proposal.
+	*
+	* @return the proposal id of this tasks proposal
+	*/
 	public long getProposalId() {
 		return _tasksProposal.getProposalId();
 	}
 
+	/**
+	* Sets the proposal id of this tasks proposal.
+	*
+	* @param proposalId the proposal id of this tasks proposal
+	*/
 	public void setProposalId(long proposalId) {
 		_tasksProposal.setProposalId(proposalId);
 	}
 
+	/**
+	* Gets the group id of this tasks proposal.
+	*
+	* @return the group id of this tasks proposal
+	*/
 	public long getGroupId() {
 		return _tasksProposal.getGroupId();
 	}
 
+	/**
+	* Sets the group id of this tasks proposal.
+	*
+	* @param groupId the group id of this tasks proposal
+	*/
 	public void setGroupId(long groupId) {
 		_tasksProposal.setGroupId(groupId);
 	}
 
+	/**
+	* Gets the company id of this tasks proposal.
+	*
+	* @return the company id of this tasks proposal
+	*/
 	public long getCompanyId() {
 		return _tasksProposal.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this tasks proposal.
+	*
+	* @param companyId the company id of this tasks proposal
+	*/
 	public void setCompanyId(long companyId) {
 		_tasksProposal.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the user id of this tasks proposal.
+	*
+	* @return the user id of this tasks proposal
+	*/
 	public long getUserId() {
 		return _tasksProposal.getUserId();
 	}
 
+	/**
+	* Sets the user id of this tasks proposal.
+	*
+	* @param userId the user id of this tasks proposal
+	*/
 	public void setUserId(long userId) {
 		_tasksProposal.setUserId(userId);
 	}
 
+	/**
+	* Gets the user uuid of this tasks proposal.
+	*
+	* @return the user uuid of this tasks proposal
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _tasksProposal.getUserUuid();
 	}
 
+	/**
+	* Sets the user uuid of this tasks proposal.
+	*
+	* @param userUuid the user uuid of this tasks proposal
+	*/
 	public void setUserUuid(java.lang.String userUuid) {
 		_tasksProposal.setUserUuid(userUuid);
 	}
 
+	/**
+	* Gets the user name of this tasks proposal.
+	*
+	* @return the user name of this tasks proposal
+	*/
 	public java.lang.String getUserName() {
 		return _tasksProposal.getUserName();
 	}
 
+	/**
+	* Sets the user name of this tasks proposal.
+	*
+	* @param userName the user name of this tasks proposal
+	*/
 	public void setUserName(java.lang.String userName) {
 		_tasksProposal.setUserName(userName);
 	}
 
+	/**
+	* Gets the create date of this tasks proposal.
+	*
+	* @return the create date of this tasks proposal
+	*/
 	public java.util.Date getCreateDate() {
 		return _tasksProposal.getCreateDate();
 	}
 
+	/**
+	* Sets the create date of this tasks proposal.
+	*
+	* @param createDate the create date of this tasks proposal
+	*/
 	public void setCreateDate(java.util.Date createDate) {
 		_tasksProposal.setCreateDate(createDate);
 	}
 
+	/**
+	* Gets the modified date of this tasks proposal.
+	*
+	* @return the modified date of this tasks proposal
+	*/
 	public java.util.Date getModifiedDate() {
 		return _tasksProposal.getModifiedDate();
 	}
 
+	/**
+	* Sets the modified date of this tasks proposal.
+	*
+	* @param modifiedDate the modified date of this tasks proposal
+	*/
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_tasksProposal.setModifiedDate(modifiedDate);
 	}
 
+	/**
+	* Gets the class name of the model instance this tasks proposal is polymorphically associated with.
+	*
+	* @return the class name of the model instance this tasks proposal is polymorphically associated with
+	*/
 	public java.lang.String getClassName() {
 		return _tasksProposal.getClassName();
 	}
 
+	/**
+	* Gets the class name id of this tasks proposal.
+	*
+	* @return the class name id of this tasks proposal
+	*/
 	public long getClassNameId() {
 		return _tasksProposal.getClassNameId();
 	}
 
+	/**
+	* Sets the class name id of this tasks proposal.
+	*
+	* @param classNameId the class name id of this tasks proposal
+	*/
 	public void setClassNameId(long classNameId) {
 		_tasksProposal.setClassNameId(classNameId);
 	}
 
+	/**
+	* Gets the class p k of this tasks proposal.
+	*
+	* @return the class p k of this tasks proposal
+	*/
 	public java.lang.String getClassPK() {
 		return _tasksProposal.getClassPK();
 	}
 
+	/**
+	* Sets the class p k of this tasks proposal.
+	*
+	* @param classPK the class p k of this tasks proposal
+	*/
 	public void setClassPK(java.lang.String classPK) {
 		_tasksProposal.setClassPK(classPK);
 	}
 
+	/**
+	* Gets the name of this tasks proposal.
+	*
+	* @return the name of this tasks proposal
+	*/
 	public java.lang.String getName() {
 		return _tasksProposal.getName();
 	}
 
+	/**
+	* Sets the name of this tasks proposal.
+	*
+	* @param name the name of this tasks proposal
+	*/
 	public void setName(java.lang.String name) {
 		_tasksProposal.setName(name);
 	}
 
+	/**
+	* Gets the description of this tasks proposal.
+	*
+	* @return the description of this tasks proposal
+	*/
 	public java.lang.String getDescription() {
 		return _tasksProposal.getDescription();
 	}
 
+	/**
+	* Sets the description of this tasks proposal.
+	*
+	* @param description the description of this tasks proposal
+	*/
 	public void setDescription(java.lang.String description) {
 		_tasksProposal.setDescription(description);
 	}
 
+	/**
+	* Gets the publish date of this tasks proposal.
+	*
+	* @return the publish date of this tasks proposal
+	*/
 	public java.util.Date getPublishDate() {
 		return _tasksProposal.getPublishDate();
 	}
 
+	/**
+	* Sets the publish date of this tasks proposal.
+	*
+	* @param publishDate the publish date of this tasks proposal
+	*/
 	public void setPublishDate(java.util.Date publishDate) {
 		_tasksProposal.setPublishDate(publishDate);
 	}
 
+	/**
+	* Gets the due date of this tasks proposal.
+	*
+	* @return the due date of this tasks proposal
+	*/
 	public java.util.Date getDueDate() {
 		return _tasksProposal.getDueDate();
 	}
 
+	/**
+	* Sets the due date of this tasks proposal.
+	*
+	* @param dueDate the due date of this tasks proposal
+	*/
 	public void setDueDate(java.util.Date dueDate) {
 		_tasksProposal.setDueDate(dueDate);
 	}

@@ -28,75 +28,166 @@ public class DLFileRankWrapper implements DLFileRank {
 		_dlFileRank = dlFileRank;
 	}
 
+	/**
+	* Gets the primary key of this d l file rank.
+	*
+	* @return the primary key of this d l file rank
+	*/
 	public long getPrimaryKey() {
 		return _dlFileRank.getPrimaryKey();
 	}
 
+	/**
+	* Sets the primary key of this d l file rank
+	*
+	* @param pk the primary key of this d l file rank
+	*/
 	public void setPrimaryKey(long pk) {
 		_dlFileRank.setPrimaryKey(pk);
 	}
 
+	/**
+	* Gets the file rank id of this d l file rank.
+	*
+	* @return the file rank id of this d l file rank
+	*/
 	public long getFileRankId() {
 		return _dlFileRank.getFileRankId();
 	}
 
+	/**
+	* Sets the file rank id of this d l file rank.
+	*
+	* @param fileRankId the file rank id of this d l file rank
+	*/
 	public void setFileRankId(long fileRankId) {
 		_dlFileRank.setFileRankId(fileRankId);
 	}
 
+	/**
+	* Gets the group id of this d l file rank.
+	*
+	* @return the group id of this d l file rank
+	*/
 	public long getGroupId() {
 		return _dlFileRank.getGroupId();
 	}
 
+	/**
+	* Sets the group id of this d l file rank.
+	*
+	* @param groupId the group id of this d l file rank
+	*/
 	public void setGroupId(long groupId) {
 		_dlFileRank.setGroupId(groupId);
 	}
 
+	/**
+	* Gets the company id of this d l file rank.
+	*
+	* @return the company id of this d l file rank
+	*/
 	public long getCompanyId() {
 		return _dlFileRank.getCompanyId();
 	}
 
+	/**
+	* Sets the company id of this d l file rank.
+	*
+	* @param companyId the company id of this d l file rank
+	*/
 	public void setCompanyId(long companyId) {
 		_dlFileRank.setCompanyId(companyId);
 	}
 
+	/**
+	* Gets the user id of this d l file rank.
+	*
+	* @return the user id of this d l file rank
+	*/
 	public long getUserId() {
 		return _dlFileRank.getUserId();
 	}
 
+	/**
+	* Sets the user id of this d l file rank.
+	*
+	* @param userId the user id of this d l file rank
+	*/
 	public void setUserId(long userId) {
 		_dlFileRank.setUserId(userId);
 	}
 
+	/**
+	* Gets the user uuid of this d l file rank.
+	*
+	* @return the user uuid of this d l file rank
+	* @throws SystemException if a system exception occurred
+	*/
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileRank.getUserUuid();
 	}
 
+	/**
+	* Sets the user uuid of this d l file rank.
+	*
+	* @param userUuid the user uuid of this d l file rank
+	*/
 	public void setUserUuid(java.lang.String userUuid) {
 		_dlFileRank.setUserUuid(userUuid);
 	}
 
+	/**
+	* Gets the create date of this d l file rank.
+	*
+	* @return the create date of this d l file rank
+	*/
 	public java.util.Date getCreateDate() {
 		return _dlFileRank.getCreateDate();
 	}
 
+	/**
+	* Sets the create date of this d l file rank.
+	*
+	* @param createDate the create date of this d l file rank
+	*/
 	public void setCreateDate(java.util.Date createDate) {
 		_dlFileRank.setCreateDate(createDate);
 	}
 
+	/**
+	* Gets the folder id of this d l file rank.
+	*
+	* @return the folder id of this d l file rank
+	*/
 	public long getFolderId() {
 		return _dlFileRank.getFolderId();
 	}
 
+	/**
+	* Sets the folder id of this d l file rank.
+	*
+	* @param folderId the folder id of this d l file rank
+	*/
 	public void setFolderId(long folderId) {
 		_dlFileRank.setFolderId(folderId);
 	}
 
+	/**
+	* Gets the name of this d l file rank.
+	*
+	* @return the name of this d l file rank
+	*/
 	public java.lang.String getName() {
 		return _dlFileRank.getName();
 	}
 
+	/**
+	* Sets the name of this d l file rank.
+	*
+	* @param name the name of this d l file rank
+	*/
 	public void setName(java.lang.String name) {
 		_dlFileRank.setName(name);
 	}

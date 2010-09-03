@@ -433,6 +433,11 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 	public void setStatusDate(Date statusDate);
 
 	/**
+	 * @deprecated {@link #isApproved}
+	 */
+	public boolean getApproved();
+
+	/**
 	 * Determines whether this wiki page is approved.
 	 *
 	 * @return true if this wiki page is approved; false otherwise

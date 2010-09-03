@@ -363,6 +363,11 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 	public void setStatusDate(Date statusDate);
 
 	/**
+	 * @deprecated {@link #isApproved}
+	 */
+	public boolean getApproved();
+
+	/**
 	 * Determines whether this d l file version is approved.
 	 *
 	 * @return true if this d l file version is approved; false otherwise
