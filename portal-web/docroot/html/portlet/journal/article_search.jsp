@@ -35,7 +35,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 		</aui:column>
 
 		<aui:column>
-			<aui:input name="<%= displayTerms.VERSION %>" size="20" type="text" value="<%= displayTerms.getVersionString() %>" />
+			<aui:input label="name" name="<%= displayTerms.TITLE %>" size="20" type="text" value="<%= displayTerms.getTitle() %>" />
 
 			<aui:select name="<%= displayTerms.TYPE %>">
 				<aui:option value=""></aui:option>
@@ -54,7 +54,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 		</aui:column>
 
 		<aui:column>
-			<aui:input label="name" name="<%= displayTerms.TITLE %>" size="20" type="text" value="<%= displayTerms.getTitle() %>" />
+			<aui:input name="<%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>" />
 
 			<c:choose>
 				<c:when test="<%= portletName.equals(PortletKeys.JOURNAL) %>">
@@ -94,10 +94,6 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 					</aui:select>
 				</c:otherwise>
 			</c:choose>
-		</aui:column>
-
-		<aui:column>
-			<aui:input name="<%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>" />
 		</aui:column>
 	</aui:fieldset>
 </liferay-ui:search-toggle>
