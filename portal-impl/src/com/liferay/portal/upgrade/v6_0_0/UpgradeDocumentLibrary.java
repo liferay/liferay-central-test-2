@@ -132,7 +132,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 						DLServiceUtil.updateFile(
 							companyId, portletId, groupId, repositoryId, name,
 							newName, false);
-					} catch (NoSuchFileException nsfe) {
+					}
+					catch (NoSuchFileException nsfe) {
 						_log.error(nsfe);
 					}
 				}
@@ -196,7 +197,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		upgradeTable.updateTable();
 	}
 
-	private static Log _log =
-			LogFactoryUtil.getLog(UpgradeDocumentLibrary.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		UpgradeDocumentLibrary.class);
 
 }
