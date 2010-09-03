@@ -22,6 +22,10 @@ import java.io.File;
  */
 public interface SandboxDeployListener {
 
+	public static final String SANDBOX_MARKER = "$ANDBOX";
+
+	public static final String THEME_SUFFIX = "-theme";
+
 	public void deploy(File dir) throws SandboxDeployException;
 
 	public void undeploy(File dir) throws SandboxDeployException;
