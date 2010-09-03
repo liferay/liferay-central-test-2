@@ -24,27 +24,29 @@ String redirect = ParamUtil.getString(request, "redirect");
 String typeSelection = ParamUtil.getString(request, "typeSelection");
 
 int assetOrder = ParamUtil.getInteger(request, "assetOrder", -1);
+%>
 
+<liferay-portlet:renderURL portletConfiguration="true" var="configurationURL" />
+
+<%
 PortletURL configurationActionURL = renderResponse.createActionURL();
 
 configurationActionURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
-configurationActionURL.setParameter("redirect", currentURL);
+configurationActionURL.setParameter("redirect", configurationURL.toString());
 configurationActionURL.setParameter("backURL", redirect);
 configurationActionURL.setParameter("portletResource", portletResource);
 
 PortletURL configurationRenderURL = renderResponse.createRenderURL();
 
 configurationRenderURL.setParameter("struts_action", "/portlet_configuration/edit_configuration");
-configurationRenderURL.setParameter("redirect", redirect);
+configurationRenderURL.setParameter("redirect", configurationURL.toString());
 configurationRenderURL.setParameter("backURL", redirect);
 configurationRenderURL.setParameter("portletResource", portletResource);
 %>
 
-<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
-
 <aui:form action="<%= configurationURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="redirect" type="hidden" value="<%= configurationURL.toString() %>" />
 	<aui:input name="typeSelection" type="hidden" />
 	<aui:input name="resourcePrimKey" type="hidden" />
 	<aui:input name="resourceTitle" type="hidden" />
@@ -177,7 +179,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 			</liferay-ui:panel-container>
 
 			<aui:button-row>
-				<aui:button type="submit" />
+				<aui:button type="submit" onClick='<%= renderResponse.getNamespace() + "saveSettings();" %>' />
 			</aui:button-row>
 
 			<aui:script use="aui-base">
@@ -227,19 +229,27 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 
 		document.<portlet:namespace />fm.<portlet:namespace />resourcePrimKey.value = resourcePrimKey;
 		document.<portlet:namespace />fm.<portlet:namespace />resourceTitle.value = resourceTitle;
-		submitForm(document.<portlet:namespace />fm);
+		document.<portlet:namespace />fm.<portlet:namespace />typeSelection.value = '';
+
+		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
+	}
+
+	function <portlet:namespace />saveSettings() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.UPDATE %>';
+		document.<portlet:namespace />fm.<portlet:namespace />typeSelection.value = '';
+		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
 	}
 
 	function <portlet:namespace />selectionForHeader() {
 		document.<portlet:namespace />fm.<portlet:namespace />typeSelection.value = '<%= JournalArticle.class.getName() %>';
 		document.<portlet:namespace />fm.<portlet:namespace />assetOrder.value = 0;
-		submitForm(document.<portlet:namespace />fm, '<%= configurationRenderURL.toString() %>');
+		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
 	}
 
 	function <portlet:namespace />selectionForFooter() {
 		document.<portlet:namespace />fm.<portlet:namespace />typeSelection.value = '<%= JournalArticle.class.getName() %>';
 		document.<portlet:namespace />fm.<portlet:namespace />assetOrder.value = 1;
-		submitForm(document.<portlet:namespace />fm, '<%= configurationRenderURL.toString() %>');
+		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
 	}
 </aui:script>
 
