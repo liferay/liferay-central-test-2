@@ -86,7 +86,8 @@ public class ThemeSandboxDeployListener extends ThemeDeployer implements
 			copyJars(dir, pp);
 			copyXmls(dir, displayName, pp);
 
-			updateWebXml(new File(dir, "WEB-INF/web.xml"), dir, displayName, pp);
+			updateWebXml(
+					new File(dir, "WEB-INF/web.xml"), dir, displayName, pp);
 
 			processPluginPackageProperties(dir, displayName, pp);
 
