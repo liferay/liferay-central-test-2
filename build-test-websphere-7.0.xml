@@ -5,7 +5,7 @@
 
 	<target name="run-selenium-websphere-7.0">
 		<antcall target="prepare-vm-server">
-			<param name="vm.vmdk.suffix" value="websphere-7.0.0.0" />
+			<param name="vm.vmdk.suffix" value="websphere-7.0.0.7" />
 		</antcall>
 
 		<tstamp>
