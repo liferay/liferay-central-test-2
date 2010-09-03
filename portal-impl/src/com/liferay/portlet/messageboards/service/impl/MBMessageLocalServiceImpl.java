@@ -1669,6 +1669,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				ServiceContextUtil.getLocale(serviceContext), "anonymous");
 		}
 
+		String categoryName = category.getName();
+
+		if (category.getCategoryId() ==
+			MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+
+			categoryName = LanguageUtil.get(
+				ServiceContextUtil.getLocale(serviceContext),
+				"message-boards-home") + StringPool.SPACE + StringPool.DASH +
+				StringPool.SPACE + group.getName();
+		}
+
 		List<Long> categoryIds = new ArrayList<Long>();
 
 		categoryIds.add(message.getCategoryId());
@@ -1791,7 +1802,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				"[$PORTLET_NAME$]"
 			},
 			new String[] {
-				category.getName(),
+				categoryName,
 				String.valueOf(company.getCompanyId()),
 				company.getMx(),
 				company.getName(),
@@ -1829,7 +1840,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				"[$PORTLET_NAME$]"
 			},
 			new String[] {
-				category.getName(),
+				categoryName,
 				String.valueOf(company.getCompanyId()),
 				company.getMx(),
 				company.getName(),

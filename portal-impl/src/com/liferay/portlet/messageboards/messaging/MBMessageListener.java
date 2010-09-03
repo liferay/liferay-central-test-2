@@ -30,6 +30,7 @@ import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.messageboards.NoSuchMailingListException;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMailingList;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBMailingListLocalServiceUtil;
@@ -103,6 +104,10 @@ public class MBMessageListener implements MessageListener {
 		long[] categoryIdsArray = StringUtil.split(categoryIds, 0L);
 
 		for (long categoryId : categoryIdsArray) {
+			if (categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+				categoryId = groupId;
+			}
+
 			subscriptions = SubscriptionLocalServiceUtil.getSubscriptions(
 				companyId, MBCategory.class.getName(), categoryId);
 
