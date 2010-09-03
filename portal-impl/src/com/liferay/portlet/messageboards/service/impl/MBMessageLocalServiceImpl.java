@@ -1672,7 +1672,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		String categoryName = category.getName();
 
 		if (category.getCategoryId() ==
-			MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
 
 			categoryName = LanguageUtil.get(
 				ServiceContextUtil.getLocale(serviceContext),
