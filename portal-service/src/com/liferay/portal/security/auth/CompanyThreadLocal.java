@@ -38,6 +38,10 @@ public class CompanyThreadLocal {
 		return companyId;
 	}
 
+	public static void setCompanyId(int companyId) {
+		setCompanyId(Long.valueOf(companyId));
+	}
+
 	public static void setCompanyId(Long companyId) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("setCompanyId " + companyId);
