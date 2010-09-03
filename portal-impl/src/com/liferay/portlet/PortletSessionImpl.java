@@ -138,17 +138,21 @@ public class PortletSessionImpl implements LiferayPortletSession {
 
 			String portletScope = getPortletScope(_portletName, _plid);
 
-			int length = portletScope.length();
+			int portletScopeLength = portletScope.length();
+
 			Enumeration<String> enu = getHttpSession().getAttributeNames();
 
 			while (enu.hasMoreElements()) {
 				String name = enu.nextElement();
 
-				if ((name.length() > length + 1) &&
-					(name.charAt(length) == CharPool.QUESTION) &&
+				if ((name.length() > (portletScopeLength + 1)) &&
+					(name.charAt(portletScopeLength) == CharPool.QUESTION) &&
 					name.startsWith(portletScope)) {
 
-					attributeNames.add(name.substring(length + 1));
+					String attributeName = name.substring(
+						portletScopeLength + 1);
+
+					attributeNames.add(attributeName);
 				}
 			}
 
