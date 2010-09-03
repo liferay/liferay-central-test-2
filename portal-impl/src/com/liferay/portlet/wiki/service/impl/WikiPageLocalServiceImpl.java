@@ -486,7 +486,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Cache
 
 		clearPageCache(page);
-		clearReferralsCache(page);
 	}
 
 	public void deletePageAttachment(long nodeId, String title, String fileName)
@@ -1317,7 +1316,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			// Cache
 
 			clearPageCache(page);
-			clearReferralsCache(page);
 
 			// Head
 
@@ -1382,22 +1380,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			return;
 		}
 
-		WikiCacheUtil.clearCache(page.getNodeId(), page.getTitle());
-	}
-
-	protected void clearReferralsCache(WikiPage page)
-		throws PortalException, SystemException {
-
-		if (!WikiCacheThreadLocal.isClearCache()) {
-			return;
-		}
-
-		List<WikiPage> links = getIncomingLinks(
-			page.getNodeId(), page.getTitle());
-
-		for (WikiPage curPage : links) {
-			WikiCacheUtil.clearCache(curPage.getNodeId(), curPage.getTitle());
-		}
+		WikiCacheUtil.clearCache(page.getNodeId());
 	}
 
 	protected String getParentPageTitle(WikiPage page) {
