@@ -193,7 +193,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 			</liferay-ui:panel-container>
 
 			<aui:button-row>
-				<aui:button onClick='<%= renderResponse.getNamespace() + "saveSettings();" type="submit" %>' />
+				<aui:button onClick='<%= renderResponse.getNamespace() + "saveSettings();" %>' type="submit" />
 			</aui:button-row>
 
 			<aui:script use="aui-base">
