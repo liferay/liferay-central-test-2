@@ -34,7 +34,6 @@ public class AdvancedSearchWebContentTests extends BaseTests {
 		testSuite.addTestSuite(AdvancedSearchWebContentNameTest.class);
 		testSuite.addTestSuite(AdvancedSearchWebContentStatusTest.class);
 		testSuite.addTestSuite(AdvancedSearchWebContentTypeTest.class);
-		testSuite.addTestSuite(AdvancedSearchWebContentVersionTest.class);
 		testSuite.addTestSuite(TearDownWebContentTest.class);
 
 		return testSuite;
