@@ -26,6 +26,8 @@ int[] addressesIndexes = null;
 
 String addressesIndexesParam = ParamUtil.getString(request, "addressesIndexes");
 
+ArrayList<String> addressesIndexesValue = new ArrayList<String>();
+
 if (Validator.isNotNull(addressesIndexesParam)) {
 	addresses = new ArrayList<Address>();
 
@@ -81,6 +83,8 @@ else {
 
 		long countryId = ParamUtil.getLong(request, "addressCountryId" + addressesIndex, address.getCountryId());
 		long regionId = ParamUtil.getLong(request, "addressRegionId" + addressesIndex, address.getRegionId());
+
+		addressesIndexesValue.add(String.valueOf(addressesIndex));
 	%>
 
 		<aui:model-context bean="<%= address %>" model="<%= Address.class %>" />
@@ -139,6 +143,8 @@ else {
 	<%
 	}
 	%>
+
+<aui:input name="addressesIndexes" type="hidden" value="<%= StringUtil.merge(addressesIndexesValue) %>" />
 
 </aui:fieldset>
 
