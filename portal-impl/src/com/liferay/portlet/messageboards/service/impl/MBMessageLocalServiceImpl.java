@@ -585,10 +585,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			// Category
 
-			if ((message.getCategoryId() !=
-					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
-				(message.getCategoryId() !=
-					MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+			if (!MBUtil.isDefaultParentCategoryId(message.getCategoryId()) &&
+				!MBUtil.isDiscussionCategoryId(message.getCategoryId())) {
 
 				MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 					message.getCategoryId());
@@ -660,10 +658,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			// Category
 
-			if ((message.getCategoryId() !=
-					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
-				(message.getCategoryId() !=
-					MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+			if (!MBUtil.isDefaultParentCategoryId(message.getCategoryId()) &&
+				!MBUtil.isDiscussionCategoryId(message.getCategoryId())) {
 
 				MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 					message.getCategoryId());
@@ -1018,10 +1014,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBCategory category = null;
 
-		if ((message.getCategoryId() !=
-				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
-			(message.getCategoryId() !=
-				MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+		if (!MBUtil.isDefaultParentCategoryId(message.getCategoryId()) &&
+			!MBUtil.isDiscussionCategoryId(message.getCategoryId())) {
 
 			category = mbCategoryPersistence.findByPrimaryKey(
 				message.getCategoryId());
@@ -1377,10 +1371,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBCategory category = null;
 
-		if ((thread.getCategoryId() !=
-				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
-			(thread.getCategoryId() !=
-				MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+		if (!MBUtil.isDefaultParentCategoryId(thread.getCategoryId()) &&
+			!MBUtil.isDiscussionCategoryId(thread.getCategoryId())) {
 
 			category = mbCategoryPersistence.findByPrimaryKey(
 				thread.getCategoryId());
@@ -1684,10 +1676,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		categoryIds.add(message.getCategoryId());
 
-		if ((message.getCategoryId() !=
-				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
-			(message.getCategoryId() !=
-				MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+		if (!MBUtil.isDefaultParentCategoryId(message.getCategoryId()) &&
+			!MBUtil.isDiscussionCategoryId(message.getCategoryId())) {
 
 			categoryIds.addAll(category.getAncestorCategoryIds());
 		}

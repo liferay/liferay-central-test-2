@@ -19,9 +19,9 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListTree;
 import com.liferay.portal.kernel.util.TreeNode;
 import com.liferay.portlet.messageboards.model.MBCategory;
-import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBCategoryDisplay;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
+import com.liferay.portlet.messageboards.util.MBUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -157,9 +157,7 @@ public class MBCategoryDisplayImpl implements MBCategoryDisplay {
 
 		MBCategory category = node.getValue();
 
-		if (category.getCategoryId() ==
-				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
-
+		if (MBUtil.isDefaultParentCategoryId(category.getCategoryId())) {
 			_categoryNodesMap.put(category.getCategoryId(), node);
 		}
 

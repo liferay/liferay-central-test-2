@@ -17,8 +17,8 @@ package com.liferay.portlet.messageboards.model.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portlet.messageboards.model.MBCategory;
-import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
+import com.liferay.portlet.messageboards.util.MBUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,9 +76,7 @@ public class MBCategoryImpl extends MBCategoryModelImpl implements MBCategory {
 	}
 
 	public boolean isRoot() {
-		if (getParentCategoryId() ==
-				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
-
+		if (MBUtil.isDefaultParentCategoryId(getParentCategoryId())) {
 			return true;
 		}
 		else {

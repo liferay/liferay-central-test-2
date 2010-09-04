@@ -86,8 +86,8 @@ public class MBUtil {
 			RenderResponse renderResponse)
 		throws Exception {
 
-		if ((categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) ||
-			(categoryId == MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+		if (MBUtil.isDefaultParentCategoryId(categoryId) ||
+			MBUtil.isDiscussionCategoryId(categoryId)) {
 
 			return;
 		}
@@ -153,10 +153,8 @@ public class MBUtil {
 			RenderResponse renderResponse)
 		throws Exception {
 
-		if ((message.getCategoryId() ==
-				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) ||
-			(message.getCategoryId() ==
-				MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+		if (MBUtil.isDefaultParentCategoryId(message.getCategoryId()) ||
+			MBUtil.isDiscussionCategoryId(message.getCategoryId())) {
 
 			return;
 		}
@@ -707,6 +705,22 @@ public class MBUtil {
 		else {
 			return PropsValues.MESSAGE_BOARDS_ANONYMOUS_POSTING_ENABLED;
 		}
+	}
+
+	public static boolean isDefaultParentCategoryId(long categoryId) {
+		if (categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public static boolean isDiscussionCategoryId(long categoryId) {
+		if (categoryId == MBCategoryConstants.DISCUSSION_CATEGORY_ID) {
+			return true;
+		}
+
+		return false;
 	}
 
 	private static String[] _findThreadPriority(

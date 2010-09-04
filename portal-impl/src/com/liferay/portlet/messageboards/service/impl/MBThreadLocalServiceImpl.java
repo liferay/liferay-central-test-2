@@ -36,6 +36,7 @@ import com.liferay.portlet.messageboards.model.MBMessageFlagConstants;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.MBThreadConstants;
 import com.liferay.portlet.messageboards.service.base.MBThreadLocalServiceBaseImpl;
+import com.liferay.portlet.messageboards.util.MBUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,10 +134,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Category
 
-		if ((rootMessage.getCategoryId() !=
-				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
-			(rootMessage.getCategoryId() !=
-				MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+		if (!MBUtil.isDefaultParentCategoryId(rootMessage.getCategoryId()) &&
+			!MBUtil.isDiscussionCategoryId(rootMessage.getCategoryId())) {
 
 			MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 				thread.getCategoryId());
@@ -334,8 +333,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		List<MBThread> threads = new ArrayList<MBThread>();
 
-		while ((categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
-			   (categoryId != MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+		while (!MBUtil.isDefaultParentCategoryId(categoryId) &&
+			   !MBUtil.isDiscussionCategoryId(categoryId)) {
 
 			threads.addAll(
 				0, mbThreadPersistence.findByC_P(categoryId, priority));
@@ -391,14 +390,14 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		MBCategory oldCategory = null;
 
-		if (oldCategoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+		if (!MBUtil.isDefaultParentCategoryId(oldCategoryId)) {
 			oldCategory = mbCategoryPersistence.findByPrimaryKey(
 				oldCategoryId);
 		}
 
 		MBCategory category = null;
 
-		if (categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+		if (!MBUtil.isDefaultParentCategoryId(categoryId)) {
 			category = mbCategoryPersistence.findByPrimaryKey(
 				categoryId);
 		}
@@ -529,10 +528,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Category
 
-		if ((message.getCategoryId() !=
-				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
-			(message.getCategoryId() !=
-				MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+		if (!MBUtil.isDefaultParentCategoryId(message.getCategoryId()) &&
+			!MBUtil.isDiscussionCategoryId(message.getCategoryId())) {
 
 			category.setThreadCount(category.getThreadCount() + 1);
 

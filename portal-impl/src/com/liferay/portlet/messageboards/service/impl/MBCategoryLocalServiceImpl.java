@@ -32,6 +32,7 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.service.base.MBCategoryLocalServiceBaseImpl;
+import com.liferay.portlet.messageboards.util.MBUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -117,8 +118,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		if ((categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) ||
-			(categoryId == MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+		if (MBUtil.isDefaultParentCategoryId(categoryId) ||
+			MBUtil.isDiscussionCategoryId(categoryId)) {
 
 			return;
 		}
@@ -135,8 +136,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		if ((categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) ||
-			(categoryId == MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+		if (MBUtil.isDefaultParentCategoryId(categoryId) ||
+			MBUtil.isDiscussionCategoryId(categoryId)) {
 
 			return;
 		}
@@ -285,8 +286,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		MBCategory category = null;
 
-		if ((categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
-			(categoryId != MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+		if (!MBUtil.isDefaultParentCategoryId(categoryId) &&
+			!MBUtil.isDiscussionCategoryId(categoryId)) {
 
 			category = mbCategoryPersistence.findByPrimaryKey(categoryId);
 		}
@@ -347,7 +348,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	public void subscribeCategory(long userId, long groupId, long categoryId)
 		throws PortalException, SystemException {
 
-		if (categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+		if (MBUtil.isDefaultParentCategoryId(categoryId)) {
 			categoryId = groupId;
 		}
 
@@ -358,7 +359,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	public void unsubscribeCategory(long userId, long groupId, long categoryId)
 		throws PortalException, SystemException {
 
-		if (categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+		if (MBUtil.isDefaultParentCategoryId(categoryId)) {
 			categoryId = groupId;
 		}
 
@@ -379,8 +380,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		// Merge categories
 
-		if ((categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) ||
-			(categoryId == MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+		if (MBUtil.isDefaultParentCategoryId(categoryId) ||
+			MBUtil.isDiscussionCategoryId(categoryId)) {
 
 			return null;
 		}
@@ -392,9 +393,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		if (mergeWithParentCategory &&
 			(categoryId != parentCategoryId) &&
-			(parentCategoryId !=
-				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
-			(parentCategoryId != MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+			!MBUtil.isDefaultParentCategoryId(parentCategoryId) &&
+			!MBUtil.isDiscussionCategoryId(parentCategoryId)) {
 
 			mergeCategories(category, parentCategoryId);
 
@@ -447,9 +447,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	protected long getParentCategoryId(long groupId, long parentCategoryId)
 		throws SystemException {
 
-		if ((parentCategoryId !=
-				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
-			(parentCategoryId != MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+		if (!MBUtil.isDefaultParentCategoryId(parentCategoryId) &&
+			!MBUtil.isDiscussionCategoryId(parentCategoryId)) {
 
 			MBCategory parentCategory = mbCategoryPersistence.fetchByPrimaryKey(
 				parentCategoryId);
@@ -469,9 +468,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			MBCategory category, long parentCategoryId)
 		throws SystemException {
 
-		if ((parentCategoryId ==
-				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) ||
-			(parentCategoryId == MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+		if (MBUtil.isDefaultParentCategoryId(parentCategoryId) ||
+			MBUtil.isDiscussionCategoryId(parentCategoryId)) {
 
 			return parentCategoryId;
 		}
@@ -506,8 +504,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	protected void mergeCategories(MBCategory fromCategory, long toCategoryId)
 		throws PortalException, SystemException {
 
-		if ((toCategoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) ||
-			(toCategoryId == MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+		if (MBUtil.isDefaultParentCategoryId(toCategoryId) ||
+			MBUtil.isDiscussionCategoryId(toCategoryId)) {
 
 			return;
 		}
