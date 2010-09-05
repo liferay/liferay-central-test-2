@@ -218,6 +218,14 @@ public interface SocialEquityLogLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public void addSocialEquityAssetEntry(
+		com.liferay.portlet.asset.model.AssetEntry assetEntry)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void addSocialEquityUser(long groupId,
+		com.liferay.portal.model.User user)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void checkEquityLogs()
 		throws com.liferay.portal.kernel.exception.SystemException;
 

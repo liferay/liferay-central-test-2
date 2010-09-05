@@ -240,6 +240,18 @@ public class SocialEquityLogLocalServiceWrapper
 			actionId);
 	}
 
+	public void addSocialEquityAssetEntry(
+		com.liferay.portlet.asset.model.AssetEntry assetEntry)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_socialEquityLogLocalService.addSocialEquityAssetEntry(assetEntry);
+	}
+
+	public void addSocialEquityUser(long groupId,
+		com.liferay.portal.model.User user)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_socialEquityLogLocalService.addSocialEquityUser(groupId, user);
+	}
+
 	public void checkEquityLogs()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_socialEquityLogLocalService.checkEquityLogs();

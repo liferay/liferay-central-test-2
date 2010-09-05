@@ -17,6 +17,8 @@ package com.liferay.portlet.social.service.impl;
 import com.liferay.ibm.icu.util.Calendar;
 import com.liferay.ibm.icu.util.GregorianCalendar;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.annotation.Propagation;
+import com.liferay.portal.kernel.annotation.Transactional;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.increment.BufferedIncrement;
@@ -113,6 +115,56 @@ public class SocialEquityLogLocalServiceImpl
 		}
 
 		addEquityLogs(userId, assetEntry.getEntryId(), actionId);
+	}
+
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	public void addSocialEquityAssetEntry(AssetEntry assetEntry)
+		throws SystemException {
+
+		String sql = CustomSQLUtil.get(_ADD_SOCIAL_EQUITY_ASSET_ENTRY);
+
+		sql = StringUtil.replace(
+			sql,
+			new String[] {
+				"[$ASSET_ENTRY_ID$]",
+				"[$COMPANY_ID$]",
+				"[$EQUITY_ASSET_ENTRY_ID$]",
+				"[$GROUP_ID$]",
+				"[$USER_ID$]"
+			},
+			new String[] {
+				String.valueOf(assetEntry.getEntryId()),
+				String.valueOf(assetEntry.getCompanyId()),
+				String.valueOf(counterLocalService.increment()),
+				String.valueOf(assetEntry.getGroupId()),
+				String.valueOf(assetEntry.getUserId())
+			});
+
+		runSQL(sql);
+	}
+
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	public void addSocialEquityUser(long groupId, User user)
+		throws SystemException {
+
+		String sql = CustomSQLUtil.get(_ADD_SOCIAL_EQUITY_USER);
+
+		sql = StringUtil.replace(
+			sql,
+			new String[] {
+				"[$COMPANY_ID$]",
+				"[$EQUITY_USER_ID$]",
+				"[$GROUP_ID$]",
+				"[$USER_ID$]"
+			},
+			new String[] {
+				String.valueOf(user.getCompanyId()),
+				String.valueOf(counterLocalService.increment()),
+				String.valueOf(groupId),
+				String.valueOf(user.getUserId())
+			});
+
+		runSQL(sql);
 	}
 
 	public void checkEquityLogs() throws SystemException {
@@ -289,7 +341,7 @@ public class SocialEquityLogLocalServiceImpl
 	}
 
 	@BufferedIncrement(
-		incrementClass = SocialEquityIncrement.class, parallel = false)
+		incrementClass = SocialEquityIncrement.class)
 	public void incrementSocialEquityAssetEntry_IQ(
 			long assetEntryId, SocialEquityValue socialEquityValue)
 		throws SystemException {
@@ -303,7 +355,12 @@ public class SocialEquityLogLocalServiceImpl
 			assetEntryId);
 
 		if (count == 0) {
-			addSocialEquityAssetEntry(assetEntry);
+			try {
+				socialEquityLogLocalService.addSocialEquityAssetEntry(
+					assetEntry);
+			}
+			catch (SystemException se) {
+			}
 		}
 
 		String sql = CustomSQLUtil.get(_UPDATE_SOCIAL_EQUITY_ASSET_ENTRY_IQ);
@@ -325,7 +382,7 @@ public class SocialEquityLogLocalServiceImpl
 	}
 
 	@BufferedIncrement(
-		incrementClass = SocialEquityIncrement.class, parallel = false)
+		incrementClass = SocialEquityIncrement.class)
 	public void incrementSocialEquityUser_CQ(
 			long groupId, long userId, SocialEquityValue socialEquityValue)
 		throws PortalException, SystemException {
@@ -335,7 +392,11 @@ public class SocialEquityLogLocalServiceImpl
 		int count = socialEquityUserPersistence.countByG_U(groupId, userId);
 
 		if (count == 0) {
-			addSocialEquityUser(groupId, user);
+			try {
+				socialEquityLogLocalService.addSocialEquityUser(groupId, user);
+			}
+			catch (SystemException se) {
+			}
 		}
 
 		user.updateSocialContributionEquity(socialEquityValue.getValue());
@@ -361,7 +422,7 @@ public class SocialEquityLogLocalServiceImpl
 	}
 
 	@BufferedIncrement(
-		incrementClass = SocialEquityIncrement.class, parallel = false)
+		incrementClass = SocialEquityIncrement.class)
 	public void incrementSocialEquityUser_PQ(
 			long groupId, long userId, SocialEquityValue socialEquityValue)
 		throws PortalException, SystemException {
@@ -371,7 +432,11 @@ public class SocialEquityLogLocalServiceImpl
 		int count = socialEquityUserPersistence.countByG_U(groupId, userId);
 
 		if (count == 0) {
-			addSocialEquityUser(groupId, user);
+			try {
+				socialEquityLogLocalService.addSocialEquityUser(groupId, user);
+			}
+			catch (SystemException se) {
+			}
 		}
 
 		user.updateSocialParticipationEquity(socialEquityValue.getValue());
@@ -498,54 +563,6 @@ public class SocialEquityLogLocalServiceImpl
 		equityLog.setActive(true);
 
 		socialEquityLogPersistence.update(equityLog, false);
-	}
-
-	protected void addSocialEquityAssetEntry(AssetEntry assetEntry)
-		throws SystemException {
-
-		String sql = CustomSQLUtil.get(_ADD_SOCIAL_EQUITY_ASSET_ENTRY);
-
-		sql = StringUtil.replace(
-			sql,
-			new String[] {
-				"[$ASSET_ENTRY_ID$]",
-				"[$COMPANY_ID$]",
-				"[$EQUITY_ASSET_ENTRY_ID$]",
-				"[$GROUP_ID$]",
-				"[$USER_ID$]"
-			},
-			new String[] {
-				String.valueOf(assetEntry.getEntryId()),
-				String.valueOf(assetEntry.getCompanyId()),
-				String.valueOf(counterLocalService.increment()),
-				String.valueOf(assetEntry.getGroupId()),
-				String.valueOf(assetEntry.getUserId())
-			});
-
-		runSQL(sql);
-	}
-
-	protected void addSocialEquityUser(long groupId, User user)
-		throws SystemException {
-
-		String sql = CustomSQLUtil.get(_ADD_SOCIAL_EQUITY_USER);
-
-		sql = StringUtil.replace(
-			sql,
-			new String[] {
-				"[$COMPANY_ID$]",
-				"[$EQUITY_USER_ID$]",
-				"[$GROUP_ID$]",
-				"[$USER_ID$]"
-			},
-			new String[] {
-				String.valueOf(user.getCompanyId()),
-				String.valueOf(counterLocalService.increment()),
-				String.valueOf(groupId),
-				String.valueOf(user.getUserId())
-			});
-
-		runSQL(sql);
 	}
 
 	protected double calculateB(int actionDate, int value, int lifespan) {
