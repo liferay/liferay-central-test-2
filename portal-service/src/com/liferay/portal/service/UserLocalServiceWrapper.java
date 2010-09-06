@@ -292,31 +292,34 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	public int authenticateByEmailAddress(long companyId,
 		java.lang.String emailAddress, java.lang.String password,
 		java.util.Map<java.lang.String, java.lang.String[]> headerMap,
-		java.util.Map<java.lang.String, java.lang.String[]> parameterMap)
+		java.util.Map<java.lang.String, java.lang.String[]> parameterMap,
+		java.util.Map<java.lang.String, java.lang.Object> resultsMap)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _userLocalService.authenticateByEmailAddress(companyId,
-			emailAddress, password, headerMap, parameterMap);
+			emailAddress, password, headerMap, parameterMap, resultsMap);
 	}
 
 	public int authenticateByScreenName(long companyId,
 		java.lang.String screenName, java.lang.String password,
 		java.util.Map<java.lang.String, java.lang.String[]> headerMap,
-		java.util.Map<java.lang.String, java.lang.String[]> parameterMap)
+		java.util.Map<java.lang.String, java.lang.String[]> parameterMap,
+		java.util.Map<java.lang.String, java.lang.Object> resultsMap)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _userLocalService.authenticateByScreenName(companyId,
-			screenName, password, headerMap, parameterMap);
+			screenName, password, headerMap, parameterMap, resultsMap);
 	}
 
 	public int authenticateByUserId(long companyId, long userId,
 		java.lang.String password,
 		java.util.Map<java.lang.String, java.lang.String[]> headerMap,
-		java.util.Map<java.lang.String, java.lang.String[]> parameterMap)
+		java.util.Map<java.lang.String, java.lang.String[]> parameterMap,
+		java.util.Map<java.lang.String, java.lang.Object> resultsMap)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _userLocalService.authenticateByUserId(companyId, userId,
-			password, headerMap, parameterMap);
+			password, headerMap, parameterMap, resultsMap);
 	}
 
 	public long authenticateForBasic(long companyId, java.lang.String authType,

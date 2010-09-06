@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -138,6 +139,7 @@ public class LoginUtil {
 		}
 
 		Map<String, String[]> parameterMap = request.getParameterMap();
+		Map<String, Object> resultsMap = new HashMap<String, Object>();
 
 		if (Validator.isNull(authType)) {
 			authType = company.getAuthType();
@@ -146,23 +148,21 @@ public class LoginUtil {
 		if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 			authResult = UserLocalServiceUtil.authenticateByEmailAddress(
 				company.getCompanyId(), login, password, headerMap,
-				parameterMap);
+				parameterMap, resultsMap);
 
-			userId = UserLocalServiceUtil.getUserIdByEmailAddress(
-				company.getCompanyId(), login);
+			userId = MapUtil.getLong(resultsMap, "userId", userId);
 		}
 		else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 			authResult = UserLocalServiceUtil.authenticateByScreenName(
 				company.getCompanyId(), login, password, headerMap,
-				parameterMap);
+				parameterMap, resultsMap);
 
-			userId = UserLocalServiceUtil.getUserIdByScreenName(
-				company.getCompanyId(), login);
+			userId = MapUtil.getLong(resultsMap, "userId", userId);
 		}
 		else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
 			authResult = UserLocalServiceUtil.authenticateByUserId(
 				company.getCompanyId(), userId, password, headerMap,
-				parameterMap);
+				parameterMap, resultsMap);
 		}
 
 		if (authResult == Authenticator.SUCCESS) {

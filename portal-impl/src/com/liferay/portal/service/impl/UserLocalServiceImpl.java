@@ -556,32 +556,35 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	public int authenticateByEmailAddress(
 			long companyId, String emailAddress, String password,
-			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap,
+			Map<String, Object> resultsMap)
 		throws PortalException, SystemException {
 
 		return authenticate(
 			companyId, emailAddress, password, CompanyConstants.AUTH_TYPE_EA,
-			headerMap, parameterMap);
+			headerMap, parameterMap, resultsMap);
 	}
 
 	public int authenticateByScreenName(
 			long companyId, String screenName, String password,
-			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap,
+			Map<String, Object> resultsMap)
 		throws PortalException, SystemException {
 
 		return authenticate(
 			companyId, screenName, password, CompanyConstants.AUTH_TYPE_SN,
-			headerMap, parameterMap);
+			headerMap, parameterMap, resultsMap);
 	}
 
 	public int authenticateByUserId(
 			long companyId, long userId, String password,
-			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap,
+			Map<String, Object> resultsMap)
 		throws PortalException, SystemException {
 
 		return authenticate(
 			companyId, String.valueOf(userId), password,
-			CompanyConstants.AUTH_TYPE_ID, headerMap, parameterMap);
+			CompanyConstants.AUTH_TYPE_ID, headerMap, parameterMap, resultsMap);
 	}
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -2502,7 +2505,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	protected int authenticate(
 			long companyId, String login, String password, String authType,
-			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap,
+			Map<String, Object> resultsMap)
 		throws PortalException, SystemException {
 
 		login = login.trim().toLowerCase();
@@ -2629,9 +2633,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		// Update digest
-
 		if (authResult == Authenticator.SUCCESS) {
+			if (resultsMap != null) {
+				resultsMap.put("userId", user.getUserId());
+			}
+
+			// Update digest
+
 			boolean updateDigest = true;
 
 			if (PropsValues.AUTH_PIPELINE_ENABLE_LIFERAY_CHECK) {

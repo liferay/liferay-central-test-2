@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
@@ -123,29 +124,30 @@ public class SharepointFilter extends BasePortalFilter {
 
 		Map<String, String[]> headerMap = new HashMap<String, String[]>();
 		Map<String, String[]> parameterMap = new HashMap<String, String[]>();
+		Map<String, Object> resultsMap = new HashMap<String, Object>();
 
 		int authResult = Authenticator.FAILURE;
 
-		if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_EA)) {
+		String authType = company.getAuthType();
+
+		if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 			authResult = UserLocalServiceUtil.authenticateByEmailAddress(
 				company.getCompanyId(), login, password, headerMap,
-				parameterMap);
+				parameterMap, resultsMap);
 
-			userId = UserLocalServiceUtil.getUserIdByEmailAddress(
-				company.getCompanyId(), login);
+			userId = MapUtil.getLong(resultsMap, "userId", userId);
 		}
-		else if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_SN)) {
+		else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 			authResult = UserLocalServiceUtil.authenticateByScreenName(
 				company.getCompanyId(), login, password, headerMap,
-				parameterMap);
+				parameterMap, resultsMap);
 
-			userId = UserLocalServiceUtil.getUserIdByScreenName(
-				company.getCompanyId(), login);
+			userId = MapUtil.getLong(resultsMap, "userId", userId);
 		}
-		else if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_ID)) {
+		else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
 			authResult = UserLocalServiceUtil.authenticateByUserId(
 				company.getCompanyId(), userId, password, headerMap,
-				parameterMap);
+				parameterMap, resultsMap);
 		}
 
 		if (authResult == Authenticator.SUCCESS) {
