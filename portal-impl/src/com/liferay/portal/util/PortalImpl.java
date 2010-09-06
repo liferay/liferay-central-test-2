@@ -1763,13 +1763,24 @@ public class PortalImpl implements Portal {
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-		Company company = CompanyLocalServiceUtil.getCompany(
-			layout.getCompanyId());
-
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
+		String virtualHost = null;
+
+		LayoutSet layoutSet = layout.getLayoutSet();
+
+		if (Validator.isNotNull(layoutSet.getVirtualHost())) {
+			virtualHost = layoutSet.getVirtualHost();
+		}
+		else {
+			Company company = CompanyLocalServiceUtil.getCompany(
+				layout.getCompanyId());
+
+			virtualHost = company.getVirtualHost();
+		}
+
 		String portalURL = getPortalURL(
-			company.getVirtualHost(), getPortalPort(), false);
+			virtualHost, getPortalPort(), false);
 
 		sb.append(portalURL);
 
