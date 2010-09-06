@@ -44,9 +44,14 @@ String redirect = ParamUtil.getString(request, "redirect");
 		List<KeyValuePair> typesLeftList = new ArrayList<KeyValuePair>();
 
 		for (long vocabularyId : assetVocabularyIds) {
-			AssetVocabulary vocabulary = AssetVocabularyLocalServiceUtil.getVocabulary(vocabularyId);
+			try {
+				AssetVocabulary vocabulary = AssetVocabularyLocalServiceUtil.getVocabulary(vocabularyId);
 
-			typesLeftList.add(new KeyValuePair(String.valueOf(vocabularyId), _getName(vocabulary, themeDisplay)));
+				typesLeftList.add(new KeyValuePair(String.valueOf(vocabularyId), _getName(vocabulary, themeDisplay)));
+			}
+			catch (NoSuchVocabularyException nsve) {
+
+			}
 		}
 
 		// Right list

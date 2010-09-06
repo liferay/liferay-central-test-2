@@ -16,6 +16,7 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.portlet.asset.NoSuchVocabularyException" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetVocabulary" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetVocabularyServiceUtil" %>
