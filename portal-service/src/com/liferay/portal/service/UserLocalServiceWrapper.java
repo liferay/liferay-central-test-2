@@ -292,23 +292,21 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	public int authenticateByEmailAddress(long companyId,
 		java.lang.String emailAddress, java.lang.String password,
 		java.util.Map<java.lang.String, java.lang.String[]> headerMap,
-		java.util.Map<java.lang.String, java.lang.String[]> parameterMap,
-		long[] userIdHolder)
+		java.util.Map<java.lang.String, java.lang.String[]> parameterMap)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _userLocalService.authenticateByEmailAddress(companyId,
-			emailAddress, password, headerMap, parameterMap, userIdHolder);
+			emailAddress, password, headerMap, parameterMap);
 	}
 
 	public int authenticateByScreenName(long companyId,
 		java.lang.String screenName, java.lang.String password,
 		java.util.Map<java.lang.String, java.lang.String[]> headerMap,
-		java.util.Map<java.lang.String, java.lang.String[]> parameterMap,
-		long[] userIdHolder)
+		java.util.Map<java.lang.String, java.lang.String[]> parameterMap)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _userLocalService.authenticateByScreenName(companyId,
-			screenName, password, headerMap, parameterMap, userIdHolder);
+			screenName, password, headerMap, parameterMap);
 	}
 
 	public int authenticateByUserId(long companyId, long userId,

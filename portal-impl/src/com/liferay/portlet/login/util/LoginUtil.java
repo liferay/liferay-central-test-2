@@ -111,7 +111,7 @@ public class LoginUtil {
 
 		HttpSession session = request.getSession();
 
-		long[] userIdHolder = {GetterUtil.getLong(login)};
+		long userId = GetterUtil.getLong(login);
 
 		int authResult = Authenticator.FAILURE;
 
@@ -146,16 +146,22 @@ public class LoginUtil {
 		if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 			authResult = UserLocalServiceUtil.authenticateByEmailAddress(
 				company.getCompanyId(), login, password, headerMap,
-				parameterMap, userIdHolder);
+				parameterMap);
+
+			userId = UserLocalServiceUtil.getUserIdByEmailAddress(
+				company.getCompanyId(), login);
 		}
 		else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 			authResult = UserLocalServiceUtil.authenticateByScreenName(
 				company.getCompanyId(), login, password, headerMap,
-				parameterMap, userIdHolder);
+				parameterMap);
+
+			userId = UserLocalServiceUtil.getUserIdByScreenName(
+				company.getCompanyId(), login);
 		}
 		else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
 			authResult = UserLocalServiceUtil.authenticateByUserId(
-				company.getCompanyId(), userIdHolder[0], password, headerMap,
+				company.getCompanyId(), userId, password, headerMap,
 				parameterMap);
 		}
 
@@ -213,9 +219,9 @@ public class LoginUtil {
 
 			String domain = CookieKeys.getDomain(request);
 
-			User user = UserLocalServiceUtil.getUserById(userIdHolder[0]);
+			User user = UserLocalServiceUtil.getUserById(userId);
 
-			String userIdString = String.valueOf(userIdHolder[0]);
+			String userIdString = String.valueOf(userId);
 
 			session.setAttribute("j_username", userIdString);
 			session.setAttribute("j_password", user.getPassword());

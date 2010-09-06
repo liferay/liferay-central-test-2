@@ -255,16 +255,14 @@ public interface UserLocalService {
 	public int authenticateByEmailAddress(long companyId,
 		java.lang.String emailAddress, java.lang.String password,
 		java.util.Map<java.lang.String, java.lang.String[]> headerMap,
-		java.util.Map<java.lang.String, java.lang.String[]> parameterMap,
-		long[] userIdHolder)
+		java.util.Map<java.lang.String, java.lang.String[]> parameterMap)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public int authenticateByScreenName(long companyId,
 		java.lang.String screenName, java.lang.String password,
 		java.util.Map<java.lang.String, java.lang.String[]> headerMap,
-		java.util.Map<java.lang.String, java.lang.String[]> parameterMap,
-		long[] userIdHolder)
+		java.util.Map<java.lang.String, java.lang.String[]> parameterMap)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
