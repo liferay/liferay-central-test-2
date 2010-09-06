@@ -255,7 +255,14 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 					>
 
 						<%
-						MBMessage message = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
+						MBMessage message = null;
+						
+						try {
+							message = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
+						}
+						catch (NoSuchMessageException nsme) {
+							_log.error("Thread requires missing root message id " + thread.getRootMessageId());
+						}
 
 						message = message.toEscapedModel();
 
@@ -492,7 +499,14 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 			>
 
 				<%
-				MBMessage message = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
+				MBMessage message = null;
+				
+				try {
+					message = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
+				}
+				catch (NoSuchMessageException nsme) {
+					_log.error("Thread requires missing root message id " + thread.getRootMessageId());
+				}
 
 				message = message.toEscapedModel();
 
@@ -741,3 +755,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 	</c:when>
 </c:choose>
+
+<%!
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.message_boards.view.jsp");
+%>
