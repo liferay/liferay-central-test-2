@@ -26,8 +26,6 @@ int[] emailAddressesIndexes = null;
 
 String emailAddressesIndexesParam = ParamUtil.getString(request, "emailAddressesIndexes");
 
-ArrayList<String> emailAddressesIndexesValue = new ArrayList<String>();
-
 if (Validator.isNotNull(emailAddressesIndexesParam)) {
 	emailAddresses = new ArrayList<EmailAddress>();
 
@@ -76,8 +74,6 @@ else {
 		int emailAddressesIndex = emailAddressesIndexes[i];
 
 		EmailAddress emailAddress = emailAddresses.get(i);
-
-		emailAddressesIndexesValue.add(String.valueOf(emailAddressesIndex));
 	%>
 
 		<aui:model-context bean="<%= emailAddress %>" model="<%= EmailAddress.class %>" />
@@ -97,8 +93,6 @@ else {
 	<%
 	}
 	%>
-
-<aui:input name="emailAddressesIndexes" type="hidden" value="<%= StringUtil.merge(emailAddressesIndexesValue) %>" />
 
 </aui:fieldset>
 

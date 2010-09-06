@@ -27,8 +27,6 @@ int[] orgLaborsIndexes = null;
 
 String orgLaborsIndexesParam = ParamUtil.getString(request, "orgLaborsIndexes");
 
-ArrayList<String> orgLaborsIndexesValue = new ArrayList<String>();
-
 if (Validator.isNotNull(orgLaborsIndexesParam)) {
 	orgLabors = new ArrayList<OrgLabor>();
 
@@ -116,8 +114,6 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", local
 		int orgLaborsIndex = orgLaborsIndexes[i];
 
 		OrgLabor orgLabor = orgLabors.get(i);
-
-		orgLaborsIndexesValue.add(String.valueOf(orgLaborsIndex));
 
 		int[] openArray = new int[paramPrefixes.length];
 
@@ -252,8 +248,6 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", local
 	<%
 	}
 	%>
-
-<aui:input name="orgLaborsIndexes" type="hidden" value="<%= StringUtil.merge(orgLaborsIndexesValue) %>" />
 
 </aui:fieldset>
 

@@ -26,8 +26,6 @@ int[] websitesIndexes = null;
 
 String websitesIndexesParam = ParamUtil.getString(request, "websitesIndexes");
 
-ArrayList<String> websitesIndexesValue = new ArrayList<String>();
-
 if (Validator.isNotNull(websitesIndexesParam)) {
 	websites = new ArrayList<Website>();
 
@@ -76,8 +74,6 @@ else {
 		int websitesIndex = websitesIndexes[i];
 
 		Website website = websites.get(i);
-
-		websitesIndexesValue.add(String.valueOf(websitesIndex));
 	%>
 
 		<aui:model-context bean="<%= website %>" model="<%= Website.class %>" />
@@ -98,8 +94,6 @@ else {
 	<%
 	}
 	%>
-
-<aui:input name="websitesIndex" type="hidden" value="<%= StringUtil.merge(websitesIndexesValue) %>" />
 
 </aui:fieldset>
 

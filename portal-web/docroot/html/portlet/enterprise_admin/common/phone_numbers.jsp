@@ -26,8 +26,6 @@ int[] phonesIndexes = null;
 
 String phonesIndexesParam = ParamUtil.getString(request, "phonesIndexes");
 
-ArrayList<String> phonesIndexesValue = new ArrayList<String>();
-
 if (Validator.isNotNull(phonesIndexesParam)) {
 	phones = new ArrayList<Phone>();
 
@@ -78,8 +76,6 @@ else {
 		int phonesIndex = phonesIndexes[i];
 
 		Phone phone = phones.get(i);
-
-		phonesIndexesValue.add(String.valueOf(phonesIndex));
 	%>
 
 		<aui:model-context bean="<%= phone %>" model="<%= Phone.class %>" />
@@ -101,8 +97,6 @@ else {
 	<%
 	}
 	%>
-
-<aui:input name="phonesIndexes" type="hidden" value="<%= StringUtil.merge(phonesIndexesValue) %>" />
 
 </aui:fieldset>
 
