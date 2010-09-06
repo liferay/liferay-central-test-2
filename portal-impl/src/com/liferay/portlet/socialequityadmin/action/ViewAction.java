@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.security.permission.comparator.ModelResourceComparator;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -30,7 +31,9 @@ import com.liferay.portlet.social.service.SocialEquityLogLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialEquitySettingLocalServiceUtil;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,8 +64,8 @@ public class ViewAction extends PortletAction {
 		if (cmd.equals("updateRanks")) {
 			updateRanks(actionRequest);
 		}
-		else {
-			updateSocialEquitySettings(actionRequest);
+		else if (cmd.equals("updateSettings")) {
+			updateSettings(actionRequest);
 		}
 
 		sendRedirect(actionRequest, actionResponse);
@@ -77,9 +80,14 @@ public class ViewAction extends PortletAction {
 			WebKeys.THEME_DISPLAY);
 
 		Map<String, List<SocialEquityActionMapping>> equityActionMappingsMap =
-			new HashMap<String, List<SocialEquityActionMapping>>();
+			new LinkedHashMap<String, List<SocialEquityActionMapping>>();
 
 		String[] classNames = PortalUtil.getSocialEquityClassNames();
+
+		Comparator<String> comparator = new ModelResourceComparator(
+			themeDisplay.getLocale());
+
+		Arrays.sort(classNames, comparator);
 
 		for (String className : classNames) {
 			List<SocialEquityActionMapping> mergedEquityActionMappings =
@@ -218,23 +226,20 @@ public class ViewAction extends PortletAction {
 			themeDisplay.getScopeGroupId());
 	}
 
-	protected void updateSocialEquitySettings(ActionRequest actionRequest)
+	protected void updateSettings(ActionRequest actionRequest)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long scopeGroupId = themeDisplay.getScopeGroupId();
-
-		boolean enabled = ParamUtil.getBoolean(
-			actionRequest, "socialEquityEnabled", false);
+		boolean enabled = ParamUtil.getBoolean(actionRequest, "enabled");
 
 		SocialEquityGroupSettingLocalServiceUtil.updateEquityGroupSetting(
-			scopeGroupId, Group.class.getName(),
+			themeDisplay.getScopeGroupId(), Group.class.getName(),
 			SocialEquitySettingConstants.TYPE_INFORMATION, enabled);
 
 		SocialEquityGroupSettingLocalServiceUtil.updateEquityGroupSetting(
-			scopeGroupId, Group.class.getName(),
+			themeDisplay.getScopeGroupId(), Group.class.getName(),
 			SocialEquitySettingConstants.TYPE_PARTICIPATION, enabled);
 
 		String[] classNames = PortalUtil.getSocialEquityClassNames();
@@ -244,21 +249,21 @@ public class ViewAction extends PortletAction {
 				getMergedEquityActionMappings(actionRequest, className);
 
 			SocialEquitySettingLocalServiceUtil.updateEquitySettings(
-				scopeGroupId, className, mergedEquityActionMappings);
+				themeDisplay.getScopeGroupId(), className,
+				mergedEquityActionMappings);
 
-			boolean socialEquityEnabled = ParamUtil.getBoolean(
-				actionRequest, className + ".socialEquityEnabled",
-				false);
+			enabled = ParamUtil.getBoolean(
+				actionRequest, className + ".enabled");
 
 			SocialEquityGroupSettingLocalServiceUtil.updateEquityGroupSetting(
-				scopeGroupId, className,
+				themeDisplay.getScopeGroupId(), className,
 				SocialEquitySettingConstants.TYPE_INFORMATION,
-				socialEquityEnabled);
+				enabled);
 
 			SocialEquityGroupSettingLocalServiceUtil.updateEquityGroupSetting(
-				scopeGroupId, className,
+				themeDisplay.getScopeGroupId(), className,
 				SocialEquitySettingConstants.TYPE_PARTICIPATION,
-				socialEquityEnabled);
+				enabled);
 		}
 	}
 
