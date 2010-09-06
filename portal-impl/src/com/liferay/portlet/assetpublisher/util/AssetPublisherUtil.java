@@ -145,7 +145,7 @@ public class AssetPublisherUtil {
 	}
 
 	public static AssetEntryQuery getAssetEntryQuery(
-			PortletPreferences preferences, long scopeGroupId)
+			PortletPreferences preferences, long[] scopeGroupIds)
 		throws Exception {
 
 		AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
@@ -207,14 +207,14 @@ public class AssetPublisherUtil {
 			}
 		}
 
-		long[] allAssetTagIds = AssetTagLocalServiceUtil.getTagIds(
-			scopeGroupId, allAssetTagNames);
-		long[] anyAssetTagIds = AssetTagLocalServiceUtil.getTagIds(
-			scopeGroupId, anyAssetTagNames);
-		long[] notAllAssetTagIds = AssetTagLocalServiceUtil.getTagIds(
-			scopeGroupId, notAllAssetTagNames);
-		long[] notAnyAssetTagIds = AssetTagLocalServiceUtil.getTagIds(
-			scopeGroupId, notAnyAssetTagNames);
+		long[] allAssetTagIds = AssetTagLocalServiceUtil.getTagsIds(
+			scopeGroupIds, allAssetTagNames);
+		long[] anyAssetTagIds = AssetTagLocalServiceUtil.getTagsIds(
+			scopeGroupIds, anyAssetTagNames);
+		long[] notAllAssetTagIds = AssetTagLocalServiceUtil.getTagsIds(
+			scopeGroupIds, notAllAssetTagNames);
+		long[] notAnyAssetTagIds = AssetTagLocalServiceUtil.getTagsIds(
+			scopeGroupIds, notAnyAssetTagNames);
 
 		assetEntryQuery.setAllCategoryIds(allAssetCategoryIds);
 		assetEntryQuery.setAllTagIds(allAssetTagIds);

@@ -148,7 +148,7 @@ AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 String[] allAssetTagNames = new String[0];
 
 if (selectionStyle.equals("dynamic")) {
-	assetEntryQuery = AssetPublisherUtil.getAssetEntryQuery(preferences, scopeGroupId);
+	assetEntryQuery = AssetPublisherUtil.getAssetEntryQuery(preferences, groupIds);
 
 	allAssetTagNames = AssetPublisherUtil.getAssetTagNames(preferences, scopeGroupId);
 }
