@@ -240,10 +240,10 @@ public class SocialEquityGroupSettingLocalServiceUtil {
 	}
 
 	public static void updateEquityGroupSetting(long groupId,
-		java.lang.String className, int type, boolean value)
+		java.lang.String className, int type, boolean enabled)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updateEquityGroupSetting(groupId, className, type, value);
+		getService().updateEquityGroupSetting(groupId, className, type, enabled);
 	}
 
 	public static SocialEquityGroupSettingLocalService getService() {

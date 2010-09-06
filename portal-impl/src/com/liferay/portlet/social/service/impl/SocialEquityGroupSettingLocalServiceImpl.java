@@ -66,7 +66,7 @@ public class SocialEquityGroupSettingLocalServiceImpl
 	}
 
 	public void updateEquityGroupSetting(
-			long groupId, String className, int type, boolean value)
+			long groupId, String className, int type, boolean enabled)
 		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
@@ -89,7 +89,7 @@ public class SocialEquityGroupSettingLocalServiceImpl
 			equityGroupSetting.setType(type);
 		}
 
-		equityGroupSetting.setEnabled(value);
+		equityGroupSetting.setEnabled(enabled);
 
 		socialEquityGroupSettingPersistence.update(equityGroupSetting, false);
 	}

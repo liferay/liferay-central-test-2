@@ -238,11 +238,11 @@ public class SocialEquityGroupSettingLocalServiceWrapper
 	}
 
 	public void updateEquityGroupSetting(long groupId,
-		java.lang.String className, int type, boolean value)
+		java.lang.String className, int type, boolean enabled)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_socialEquityGroupSettingLocalService.updateEquityGroupSetting(groupId,
-			className, type, value);
+			className, type, enabled);
 	}
 
 	public SocialEquityGroupSettingLocalService getWrappedSocialEquityGroupSettingLocalService() {

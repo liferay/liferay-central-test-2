@@ -217,7 +217,7 @@ public interface SocialEquityGroupSettingLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void updateEquityGroupSetting(long groupId,
-		java.lang.String className, int type, boolean value)
+		java.lang.String className, int type, boolean enabled)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 }
