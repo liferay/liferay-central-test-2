@@ -98,6 +98,7 @@ else {
 	}
 	%>
 
+	<aui:input name="phonesIndexes" type="hidden" value="<%= StringUtil.merge(phonesIndexes) %>" />
 </aui:fieldset>
 
 <aui:script use="liferay-auto-fields">

@@ -95,6 +95,7 @@ else {
 	}
 	%>
 
+	<aui:input name="websitesIndex" type="hidden" value="<%= StringUtil.merge(websitesIndexes) %>" />
 </aui:fieldset>
 
 <aui:script use="liferay-auto-fields">

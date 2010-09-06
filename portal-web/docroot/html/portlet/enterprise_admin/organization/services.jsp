@@ -249,6 +249,7 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", local
 	}
 	%>
 
+	<aui:input name="orgLaborsIndexes" type="hidden" value="<%= StringUtil.merge(orgLaborsIndexes) %>" />
 </aui:fieldset>
 
 <aui:script use="liferay-auto-fields">
