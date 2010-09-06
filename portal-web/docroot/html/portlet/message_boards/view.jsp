@@ -256,12 +256,14 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 						<%
 						MBMessage message = null;
-						
+
 						try {
 							message = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
 						}
 						catch (NoSuchMessageException nsme) {
 							_log.error("Thread requires missing root message id " + thread.getRootMessageId());
+
+							continue;
 						}
 
 						message = message.toEscapedModel();
@@ -500,12 +502,14 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 
 				<%
 				MBMessage message = null;
-				
+
 				try {
 					message = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
 				}
 				catch (NoSuchMessageException nsme) {
 					_log.error("Thread requires missing root message id " + thread.getRootMessageId());
+
+					continue;
 				}
 
 				message = message.toEscapedModel();
