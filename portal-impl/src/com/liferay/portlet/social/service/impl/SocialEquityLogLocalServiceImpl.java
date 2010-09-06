@@ -117,7 +117,7 @@ public class SocialEquityLogLocalServiceImpl
 		addEquityLogs(userId, assetEntry.getEntryId(), actionId);
 	}
 
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void addSocialEquityAssetEntry(AssetEntry assetEntry)
 		throws SystemException {
 
@@ -143,7 +143,7 @@ public class SocialEquityLogLocalServiceImpl
 		runSQL(sql);
 	}
 
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void addSocialEquityUser(long groupId, User user)
 		throws SystemException {
 
@@ -340,8 +340,7 @@ public class SocialEquityLogLocalServiceImpl
 		deactivateEquityLogs(userId, assetEntry.getEntryId(), actionId);
 	}
 
-	@BufferedIncrement(
-		incrementClass = SocialEquityIncrement.class)
+	@BufferedIncrement(incrementClass = SocialEquityIncrement.class)
 	public void incrementSocialEquityAssetEntry_IQ(
 			long assetEntryId, SocialEquityValue socialEquityValue)
 		throws SystemException {
@@ -381,8 +380,7 @@ public class SocialEquityLogLocalServiceImpl
 		runSQL(sql);
 	}
 
-	@BufferedIncrement(
-		incrementClass = SocialEquityIncrement.class)
+	@BufferedIncrement(incrementClass = SocialEquityIncrement.class)
 	public void incrementSocialEquityUser_CQ(
 			long groupId, long userId, SocialEquityValue socialEquityValue)
 		throws PortalException, SystemException {
@@ -421,8 +419,7 @@ public class SocialEquityLogLocalServiceImpl
 		runSQL(sql);
 	}
 
-	@BufferedIncrement(
-		incrementClass = SocialEquityIncrement.class)
+	@BufferedIncrement(incrementClass = SocialEquityIncrement.class)
 	public void incrementSocialEquityUser_PQ(
 			long groupId, long userId, SocialEquityValue socialEquityValue)
 		throws PortalException, SystemException {
