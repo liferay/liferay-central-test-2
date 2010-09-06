@@ -84,7 +84,7 @@
 					</div>
 
 					<div class="journal-component journal-component-list" dataType="list">
-						<liferay-ui:message key="selectbox" />
+						<liferay-ui:message key="selection-list" />
 					</div>
 
 					<div class="journal-component journal-component-multilist" dataType="multi-list">
