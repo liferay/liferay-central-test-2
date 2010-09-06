@@ -824,10 +824,10 @@ public class PortletURLImpl
 		String outerPortletId = PortalUtil.getOuterPortletId(_request);
 
 		if (outerPortletId != null) {
-			sb.append(StringPool.AMPERSAND);
 			sb.append("p_o_p_id");
 			sb.append(StringPool.EQUAL);
 			sb.append(processValue(key, outerPortletId));
+			sb.append(StringPool.AMPERSAND);
 		}
 
 		if (_doAsUserId > 0) {
