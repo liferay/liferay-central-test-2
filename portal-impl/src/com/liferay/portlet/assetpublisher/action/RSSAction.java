@@ -125,7 +125,7 @@ public class RSSAction extends PortletAction {
 
 		AssetEntryQuery assetEntryQuery =
 			AssetPublisherUtil.getAssetEntryQuery(
-				preferences, themeDisplay.getScopeGroupId());
+				preferences, new long[] {themeDisplay.getScopeGroupId()});
 
 		assetEntryQuery.setEnd(rssDelta);
 		assetEntryQuery.setExcludeZeroViewCount(excludeZeroViewCount);
