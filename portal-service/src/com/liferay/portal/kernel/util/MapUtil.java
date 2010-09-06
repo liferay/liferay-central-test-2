@@ -117,6 +117,10 @@ public class MapUtil {
 			else if (value instanceof String) {
 				return GetterUtil.getString((String)value, defaultValue);
 			}
+			else {
+				return GetterUtil.getString(
+					String.valueOf(value), defaultValue);
+			}
 		}
 
 		return defaultValue;
