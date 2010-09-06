@@ -512,6 +512,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return groupPersistence.findByC_F(companyId, friendlyURL);
 	}
 
+	@ThreadLocalCachable
 	public Group getGroup(long groupId)
 		throws PortalException, SystemException {
 
