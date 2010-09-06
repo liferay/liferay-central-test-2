@@ -300,10 +300,10 @@ public class AssetTagLocalServiceWrapper implements AssetTagLocalService {
 		return _assetTagLocalService.getTagIds(groupId, names);
 	}
 
-	public long[] getTagsIds(long[] groupIds, java.lang.String[] names)
+	public long[] getTagIds(long[] groupIds, java.lang.String[] names)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _assetTagLocalService.getTagsIds(groupIds, names);
+		return _assetTagLocalService.getTagIds(groupIds, names);
 	}
 
 	public java.lang.String[] getTagNames()

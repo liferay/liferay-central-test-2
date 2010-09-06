@@ -260,7 +260,7 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		return ArrayUtil.toArray(tagIds.toArray(new Long[tagIds.size()]));
 	}
 
-	public long[] getTagsIds(long[] groupIds, String[] names)
+	public long[] getTagIds(long[] groupIds, String[] names)
 		throws PortalException, SystemException {
 
 		long[] tagsIds = new long[0];

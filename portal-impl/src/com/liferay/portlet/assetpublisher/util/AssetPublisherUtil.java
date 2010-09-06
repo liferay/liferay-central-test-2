@@ -207,13 +207,13 @@ public class AssetPublisherUtil {
 			}
 		}
 
-		long[] allAssetTagIds = AssetTagLocalServiceUtil.getTagsIds(
+		long[] allAssetTagIds = AssetTagLocalServiceUtil.getTagIds(
 			scopeGroupIds, allAssetTagNames);
-		long[] anyAssetTagIds = AssetTagLocalServiceUtil.getTagsIds(
+		long[] anyAssetTagIds = AssetTagLocalServiceUtil.getTagIds(
 			scopeGroupIds, anyAssetTagNames);
-		long[] notAllAssetTagIds = AssetTagLocalServiceUtil.getTagsIds(
+		long[] notAllAssetTagIds = AssetTagLocalServiceUtil.getTagIds(
 			scopeGroupIds, notAllAssetTagNames);
-		long[] notAnyAssetTagIds = AssetTagLocalServiceUtil.getTagsIds(
+		long[] notAnyAssetTagIds = AssetTagLocalServiceUtil.getTagIds(
 			scopeGroupIds, notAnyAssetTagNames);
 
 		assetEntryQuery.setAllCategoryIds(allAssetCategoryIds);
