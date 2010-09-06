@@ -118,7 +118,7 @@ public class SharepointFilter extends BasePortalFilter {
 
 		String login = GetterUtil.getString(
 			decodedCredentials.substring(0, pos));
-		long userId = GetterUtil.getLong(login);
+		long[] userIdHolder = {GetterUtil.getLong(login)};
 		String password = decodedCredentials.substring(pos + 1);
 
 		Map<String, String[]> headerMap = new HashMap<String, String[]>();
@@ -129,27 +129,21 @@ public class SharepointFilter extends BasePortalFilter {
 		if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_EA)) {
 			authResult = UserLocalServiceUtil.authenticateByEmailAddress(
 				company.getCompanyId(), login, password, headerMap,
-				parameterMap);
-
-			userId = UserLocalServiceUtil.getUserIdByEmailAddress(
-				company.getCompanyId(), login);
+				parameterMap, userIdHolder);
 		}
 		else if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_SN)) {
 			authResult = UserLocalServiceUtil.authenticateByScreenName(
 				company.getCompanyId(), login, password, headerMap,
-				parameterMap);
-
-			userId = UserLocalServiceUtil.getUserIdByScreenName(
-				company.getCompanyId(), login);
+				parameterMap, userIdHolder);
 		}
 		else if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_ID)) {
 			authResult = UserLocalServiceUtil.authenticateByUserId(
-				company.getCompanyId(), userId, password, headerMap,
+				company.getCompanyId(), userIdHolder[0], password, headerMap,
 				parameterMap);
 		}
 
 		if (authResult == Authenticator.SUCCESS) {
-			user = UserLocalServiceUtil.getUser(userId);
+			user = UserLocalServiceUtil.getUser(userIdHolder[0]);
 		}
 
 		return user;

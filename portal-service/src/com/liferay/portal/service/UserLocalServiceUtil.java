@@ -301,23 +301,25 @@ public class UserLocalServiceUtil {
 	public static int authenticateByEmailAddress(long companyId,
 		java.lang.String emailAddress, java.lang.String password,
 		java.util.Map<java.lang.String, java.lang.String[]> headerMap,
-		java.util.Map<java.lang.String, java.lang.String[]> parameterMap)
+		java.util.Map<java.lang.String, java.lang.String[]> parameterMap,
+		long[] userIdHolder)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .authenticateByEmailAddress(companyId, emailAddress,
-			password, headerMap, parameterMap);
+			password, headerMap, parameterMap, userIdHolder);
 	}
 
 	public static int authenticateByScreenName(long companyId,
 		java.lang.String screenName, java.lang.String password,
 		java.util.Map<java.lang.String, java.lang.String[]> headerMap,
-		java.util.Map<java.lang.String, java.lang.String[]> parameterMap)
+		java.util.Map<java.lang.String, java.lang.String[]> parameterMap,
+		long[] userIdHolder)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .authenticateByScreenName(companyId, screenName, password,
-			headerMap, parameterMap);
+			headerMap, parameterMap, userIdHolder);
 	}
 
 	public static int authenticateByUserId(long companyId, long userId,

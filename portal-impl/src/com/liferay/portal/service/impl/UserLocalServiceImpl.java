@@ -556,22 +556,24 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	public int authenticateByEmailAddress(
 			long companyId, String emailAddress, String password,
-			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap,
+			long[] userIdHolder)
 		throws PortalException, SystemException {
 
 		return authenticate(
 			companyId, emailAddress, password, CompanyConstants.AUTH_TYPE_EA,
-			headerMap, parameterMap);
+			headerMap, parameterMap, userIdHolder);
 	}
 
 	public int authenticateByScreenName(
 			long companyId, String screenName, String password,
-			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap,
+			long[] userIdHolder)
 		throws PortalException, SystemException {
 
 		return authenticate(
 			companyId, screenName, password, CompanyConstants.AUTH_TYPE_SN,
-			headerMap, parameterMap);
+			headerMap, parameterMap, userIdHolder);
 	}
 
 	public int authenticateByUserId(
@@ -581,7 +583,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		return authenticate(
 			companyId, String.valueOf(userId), password,
-			CompanyConstants.AUTH_TYPE_ID, headerMap, parameterMap);
+			CompanyConstants.AUTH_TYPE_ID, headerMap, parameterMap,
+			new long[1]);
 	}
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -2502,7 +2505,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	protected int authenticate(
 			long companyId, String login, String password, String authType,
-			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap,
+			long[] userIdHolder)
 		throws PortalException, SystemException {
 
 		login = login.trim().toLowerCase();
@@ -2647,6 +2651,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 				userPersistence.update(user, false);
 			}
+
+			userIdHolder[0] = user.getUserId();
 		}
 
 		// Execute code triggered by authentication failure
