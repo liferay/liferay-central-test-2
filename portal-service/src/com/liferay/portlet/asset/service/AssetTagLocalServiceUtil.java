@@ -308,6 +308,12 @@ public class AssetTagLocalServiceUtil {
 		return getService().getTagIds(groupId, names);
 	}
 
+	public static long[] getTagsIds(long[] groupIds, java.lang.String[] names)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getTagsIds(groupIds, names);
+	}
+
 	public static java.lang.String[] getTagNames()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getTagNames();
