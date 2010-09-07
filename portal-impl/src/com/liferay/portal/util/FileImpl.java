@@ -413,7 +413,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 		for (int i = 0; i < includedFiles.length; i++) {
 			includedFiles[i] =
-				directory.concat(CharPool.SLASH).concat(
+				directory.concat(StringPool.SLASH).concat(
 					replaceSeparator(includedFiles[i]));
 		}
 
