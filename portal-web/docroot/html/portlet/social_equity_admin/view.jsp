@@ -49,9 +49,23 @@ portletURL.setParameter("tabs1", tabs1);
 	</c:choose>
 </aui:form>
 
-<aui:script position="inline">
+<aui:script>
 	function <portlet:namespace />saveEquitySettings(cmd) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
+
 		submitForm(document.<portlet:namespace />fm);
 	}
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />toggleEquitySection',
+		function(selector) {
+			var section = AUI().one(selector);
+
+			if (section) {
+				section.toggle();
+			}
+		},
+		['aui-base']
+	);
 </aui:script>

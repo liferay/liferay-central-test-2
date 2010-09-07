@@ -1514,7 +1514,7 @@
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<!--<header-portlet-css>/html/portlet/social_equity_admin/css/main.css</header-portlet-css>-->
+		<header-portlet-css>/html/portlet/social_equity_admin/css/main.css</header-portlet-css>
 		<css-class-wrapper>portlet-social-equity-admin</css-class-wrapper>
 	</portlet>
 	<portlet>

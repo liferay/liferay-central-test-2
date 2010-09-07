@@ -15,7 +15,7 @@
 %>
 
 <%
-String taglibEnable = "AUI().one('#" + renderResponse.getNamespace() + "settings').toggle();";
+String taglibEnable = renderResponse.getNamespace() + "toggleEquitySection('#" + renderResponse.getNamespace() + "settings');";
 
 boolean enabled = SocialEquityGroupSettingLocalServiceUtil.isEnabled(themeDisplay.getScopeGroupId(), Group.class.getName());
 %>
@@ -32,7 +32,7 @@ boolean enabled = SocialEquityGroupSettingLocalServiceUtil.isEnabled(themeDispla
 	for (String className : equityActionMappingsMap.keySet()) {
 		List<SocialEquityActionMapping> equityActionMappings = equityActionMappingsMap.get(className);
 
-		taglibEnable = "AUI().one('#" + renderResponse.getNamespace() + StringUtil.replace(className, ".", "_") + "').toggle();";
+		taglibEnable = renderResponse.getNamespace() + "toggleEquitySection('#" + renderResponse.getNamespace() + StringUtil.replace(className, ".", "_") + "');";
 
 		enabled = SocialEquityGroupSettingLocalServiceUtil.isEnabled(themeDisplay.getScopeGroupId(), className);
 	%>
@@ -64,27 +64,27 @@ boolean enabled = SocialEquityGroupSettingLocalServiceUtil.isEnabled(themeDispla
 						value="<%= ResourceActionsUtil.getAction(locale, equityActionMapping.getActionId()) %>"
 					/>
 
-					<liferay-ui:search-container-column-text align="center" name="information-value">
+					<liferay-ui:search-container-column-text name="information-value">
 						<aui:input label="" name='<%= className + "." + equityActionMapping.getActionId() + ".informationValue" %>' size="4" type="text" value="<%= equityActionMapping.getInformationValue() %>" />
 					</liferay-ui:search-container-column-text>
 
-					<liferay-ui:search-container-column-text align="center" name="information-lifespan">
+					<liferay-ui:search-container-column-text name="information-lifespan">
 						<aui:input label="" name='<%= className + "." + equityActionMapping.getActionId() + ".informationLifespan" %>' size="4" type="text" value="<%= equityActionMapping.getInformationLifespan() %>" />
 					</liferay-ui:search-container-column-text>
 
-					<liferay-ui:search-container-column-text align="center" name="daily-limit">
+					<liferay-ui:search-container-column-text name="daily-limit">
 						<aui:input label="" name='<%= className + "." + equityActionMapping.getActionId() + ".informationDailyLimit" %>' size="4" type="text" value="<%= equityActionMapping.getInformationDailyLimit() %>" />
 					</liferay-ui:search-container-column-text>
 
-					<liferay-ui:search-container-column-text align="center" name="participation-value">
+					<liferay-ui:search-container-column-text name="participation-value">
 						<aui:input label="" name='<%= className + "." + equityActionMapping.getActionId() + ".participationValue" %>' size="4" type="text" value="<%= equityActionMapping.getParticipationValue() %>" />
 					</liferay-ui:search-container-column-text>
 
-					<liferay-ui:search-container-column-text align="center" name="participation-lifespan">
+					<liferay-ui:search-container-column-text name="participation-lifespan">
 						<aui:input label="" name='<%= className + "." + equityActionMapping.getActionId() + ".participationLifespan" %>' size="4" type="text" value="<%= equityActionMapping.getParticipationLifespan() %>" />
 					</liferay-ui:search-container-column-text>
 
-					<liferay-ui:search-container-column-text align="center" name="daily-limit">
+					<liferay-ui:search-container-column-text name="daily-limit">
 						<aui:input label="" name='<%= className + "." + equityActionMapping.getActionId() + ".participationDailyLimit" %>' size="4" type="text" value="<%= equityActionMapping.getParticipationDailyLimit() %>" />
 					</liferay-ui:search-container-column-text>
 				</liferay-ui:search-container-row>
