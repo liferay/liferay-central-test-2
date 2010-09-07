@@ -399,6 +399,8 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		directoryScanner.setExcludes(StringUtil.split(excludes));
 		directoryScanner.setIncludes(StringUtil.split(includes));
 
+		directoryScanner.scan();
+
 		return directoryScanner.getIncludedFiles();
 	}
 
