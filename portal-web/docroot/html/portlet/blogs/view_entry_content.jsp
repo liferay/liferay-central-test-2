@@ -218,7 +218,7 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 					/>
 				</span>
 
-				<c:if test="<%= pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT) %>">
+				<c:if test="<%= pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT) || strutsAction.equals("/blogs/view_entry") %>">
 					<liferay-ui:social-bookmarks
 						url="<%= bookmarkURL.toString() %>"
 						title="<%= entry.getTitle() %>"
