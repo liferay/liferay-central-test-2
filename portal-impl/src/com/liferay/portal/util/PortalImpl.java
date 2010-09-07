@@ -548,11 +548,7 @@ public class PortalImpl implements Portal {
 				WebKeys.PORTLET_BREADCRUMB_MAP, portletBreadcrumbList);
 		}
 
-		KeyValuePair keyValuePair = new KeyValuePair(title, url);
-
-		if (!portletBreadcrumbList.contains(keyValuePair)) {
-			portletBreadcrumbList.add(keyValuePair);
-		}
+		portletBreadcrumbList.add(new KeyValuePair(title, url));
 	}
 
 	public void addPortletDefaultResource(
