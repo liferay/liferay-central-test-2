@@ -211,8 +211,10 @@ public class ThemeSandboxDeployListener
 	}
 
 	private File _getEngineHostDir() {
+		String catalinaBaseConf = System.getenv("CATALINA_BASE") + "/conf";
+
 		String[] fileNames = FileUtil.find(
-			System.getenv("CATALINA_BASE") + "/conf", "**/ROOT.xml", null);
+				catalinaBaseConf, "**/ROOT.xml", null);
 
 		if (fileNames.length == 0) {
 			_log.error("Unable to locate ROOT.xml under CATALINA_BASE/conf");
@@ -220,7 +222,7 @@ public class ThemeSandboxDeployListener
 			return null;
 		}
 
-		File file = new File(fileNames[0]);
+		File file = new File(catalinaBaseConf, fileNames[0]);
 
 		return file.getParentFile();
 	}
