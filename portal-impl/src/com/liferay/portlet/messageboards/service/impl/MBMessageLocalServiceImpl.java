@@ -1179,9 +1179,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		boolean visible = false;
 
-		if (message.getStatus() == WorkflowConstants.STATUS_APPROVED &&
-			(message.getClassNameId() == 0 ||
-			 message.getParentMessageId() != 0)) {
+		if ((message.getStatus() == WorkflowConstants.STATUS_APPROVED) &&
+			((message.getClassNameId() == 0) ||
+			 (message.getParentMessageId() != 0))) {
+
 			visible = true;
 		}
 
@@ -1428,11 +1429,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 				// Asset
 
-				if (message.getClassNameId() == 0 ||
-					 message.getParentMessageId() != 0) {
-						assetEntryLocalService.updateVisible(
-							message.getWorkflowClassName(),
-							message.getMessageId(), true);
+				if ((message.getClassNameId() == 0) ||
+					(message.getParentMessageId() != 0)) {
+
+					assetEntryLocalService.updateVisible(
+						message.getWorkflowClassName(), message.getMessageId(),
+						true);
 				}
 
 				if (!message.isDiscussion()) {
@@ -1468,7 +1470,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					}
 				}
 				else {
-					String className = (String)serviceContext.getAttribute("className");
+					String className = (String)serviceContext.getAttribute(
+						"className");
 					long classPK = GetterUtil.getLong(
 						(String)serviceContext.getAttribute("classPK"));
 
@@ -1476,7 +1479,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 					if (!message.isRoot()) {
 						socialEquityLogLocalService.addEquityLogs(
-							userId, className, classPK, ActionKeys.ADD_DISCUSSION);
+							userId, className, classPK,
+							ActionKeys.ADD_DISCUSSION);
 					}
 
 					long parentMessageId = message.getParentMessageId();
@@ -1487,17 +1491,19 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 						// Social
 
-						BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(
-							classPK);
+						BlogsEntry entry =
+							blogsEntryPersistence.findByPrimaryKey(classPK);
 
-						JSONObject extraData = JSONFactoryUtil.createJSONObject();
+						JSONObject extraData =
+							JSONFactoryUtil.createJSONObject();
 
 						extraData.put("messageId", message.getMessageId());
 
 						socialActivityLocalService.addActivity(
-							userId, entry.getGroupId(), BlogsEntry.class.getName(),
-							classPK, BlogsActivityKeys.ADD_COMMENT,
-							extraData.toString(), entry.getUserId());
+							userId, entry.getGroupId(),
+							BlogsEntry.class.getName(), classPK,
+							BlogsActivityKeys.ADD_COMMENT, extraData.toString(),
+							entry.getUserId());
 
 						// Email
 
@@ -1509,7 +1515,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 							_log.error(e, e);
 						}
 					}
-					
 				}
 
 				// Subscriptions
@@ -1555,14 +1560,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			assetEntryLocalService.updateVisible(
 				message.getWorkflowClassName(), message.getMessageId(), false);
 
-
 			if (!message.isDiscussion()) {
 
 				// Indexer
 
 				indexer.delete(message);
 			}
-
 		}
 
 		if (status != oldStatus) {
