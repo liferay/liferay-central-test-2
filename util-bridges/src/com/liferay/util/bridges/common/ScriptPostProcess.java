@@ -24,8 +24,6 @@ import javax.portlet.PortletURL;
  */
 public class ScriptPostProcess {
 
-	protected StringBuffer internalPage;
-
 	public String getFinalizedPage() {
 		if (internalPage != null) {
 			return internalPage.toString();
@@ -166,6 +164,8 @@ public class ScriptPostProcess {
 		internalPage = finalPage;
 
 	}
-
+	
+	private StringBuffer internalPage;
+	
 	private static Log _log = LogFactoryUtil.getLog(ScriptPostProcess.class);
 }
