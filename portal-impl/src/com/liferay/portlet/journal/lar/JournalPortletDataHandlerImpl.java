@@ -383,9 +383,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				DLFileEntry fileEntry = null;
 
-				if (map.containsKey("uuid")) {
-					String uuid = map.get("uuid");
-
+				String uuid = map.get("uuid");
+				if (uuid != null) {
 					String groupIdString = map.get("groupId");
 
 					long groupId = GetterUtil.getLong(groupIdString);
@@ -397,20 +396,24 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					fileEntry = DLFileEntryLocalServiceUtil.
 						getFileEntryByUuidAndGroupId(uuid, groupId);
 				}
-				else if (map.containsKey("folderId")) {
-					long folderId = GetterUtil.getLong(map.get("folderId"));
-					String name = map.get("name");
+				else {
+					String folderIdString = map.get("folderId");
+					if (folderIdString != null) {
+						long folderId = GetterUtil.getLong(folderIdString);
+						String name = map.get("name");
 
-					String groupIdString = map.get("groupId");
+						String groupIdString = map.get("groupId");
 
-					long groupId = GetterUtil.getLong(groupIdString);
+						long groupId = GetterUtil.getLong(groupIdString);
 
-					if (groupIdString.equals("@group_id@")) {
-						groupId = context.getScopeGroupId();
+						if (groupIdString.equals("@group_id@")) {
+							groupId = context.getScopeGroupId();
+						}
+
+						fileEntry =
+							DLFileEntryLocalServiceUtil.getFileEntryByTitle(
+								groupId, folderId, name);
 					}
-
-					fileEntry = DLFileEntryLocalServiceUtil.getFileEntryByTitle(
-						groupId, folderId, name);
 				}
 
 				if (fileEntry == null) {

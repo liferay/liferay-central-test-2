@@ -489,15 +489,19 @@ public class PortletURLImpl
 			}
 		}
 
-		if (append && _params.containsKey(name)) {
-			String[] oldValues = _params.get(name);
-
-			String[] newValues = ArrayUtil.append(oldValues, values);
-
-			_params.put(name, newValues);
+		if (!append) {
+			_params.put(name, values);
 		}
 		else {
-			_params.put(name, values);
+			String[] oldValues = _params.get(name);
+			if (oldValues == null) {
+				_params.put(name, values);
+			}
+			else {
+				String[] newValues = ArrayUtil.append(oldValues, values);
+
+				_params.put(name, newValues);
+			}
 		}
 
 		clearCache();

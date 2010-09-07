@@ -286,12 +286,11 @@ public class CacheFilter extends BasePortalFilter {
 				}
 			}
 
-			if (properties.containsKey(
-					LayoutTypePortletConstants.NESTED_COLUMN_IDS)) {
+			String columnIdsString = properties.get(
+				LayoutTypePortletConstants.NESTED_COLUMN_IDS);
 
-				String[] columnIds = StringUtil.split(
-					properties.get(
-						LayoutTypePortletConstants.NESTED_COLUMN_IDS));
+			if (columnIdsString != null) {
+				String[] columnIds = StringUtil.split(columnIdsString);
 
 				for (String columnId : columnIds) {
 					String settings = properties.getProperty(

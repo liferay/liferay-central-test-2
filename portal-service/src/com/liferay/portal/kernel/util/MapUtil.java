@@ -66,13 +66,14 @@ public class MapUtil {
 	public static long getLong(
 		Map<Long, Long> map, long key, long defaultValue) {
 
-		Long keyObj = new Long(key);
+		Long value = map.get(new Long(key));
 
-		if (map.containsKey(keyObj)) {
-			return map.get(keyObj);
+		if (value == null) {
+			return defaultValue;
 		}
-
-		return defaultValue;
+		else {
+			return value;
+		}
 	}
 
 	public static long getLong(Map<String, ?> map, String key) {
@@ -104,9 +105,8 @@ public class MapUtil {
 	public static String getString(
 		Map<String, ?> map, String key, String defaultValue) {
 
-		if (map.containsKey(key)) {
-			Object value = map.get(key);
-
+		Object value = map.get(key);
+		if (value != null) {
 			if (value instanceof String[]) {
 				String[] array = (String[])value;
 

@@ -116,15 +116,14 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 			throw new IllegalArgumentException();
 		}
 
-		if (_headers.containsKey(name)) {
-			Long[] values = (Long[])_headers.get(name);
+		Long[] values = (Long[])_headers.get(name);
 
-			values = ArrayUtil.append(values, new Long(date));
-
-			_headers.put(name, values);
+		if (values == null) {
+			setDateHeader(name, date);
 		}
 		else {
-			setDateHeader(name, date);
+			values = ArrayUtil.append(values, new Long(date));
+			_headers.put(name, values);
 		}
 	}
 
@@ -133,15 +132,14 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 			throw new IllegalArgumentException();
 		}
 
-		if (_headers.containsKey(name)) {
-			String[] values = (String[])_headers.get(name);
+		String[] values = (String[])_headers.get(name);
 
-			values = ArrayUtil.append(values, value);
-
-			_headers.put(name, values);
+		if (values == null) {
+			setHeader(name, value);
 		}
 		else {
-			setHeader(name, value);
+			values = ArrayUtil.append(values, value);
+			_headers.put(name, values);
 		}
 	}
 
@@ -150,15 +148,14 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 			throw new IllegalArgumentException();
 		}
 
-		if (_headers.containsKey(name)) {
-			Integer[] values = (Integer[])_headers.get(name);
+		Integer[] values = (Integer[])_headers.get(name);
 
-			values = ArrayUtil.append(values, new Integer(value));
-
-			_headers.put(name, values);
+		if (values == null) {
+			setIntHeader(name, value);
 		}
 		else {
-			setIntHeader(name, value);
+			values = ArrayUtil.append(values, new Integer(value));
+			_headers.put(name, values);
 		}
 	}
 
@@ -167,16 +164,13 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 			throw new IllegalArgumentException();
 		}
 
-		if (_headers.containsKey("cookies")) {
-			Cookie[] cookies = (Cookie[])_headers.get("cookies");
+		Cookie[] cookies = (Cookie[])_headers.get("cookies");
 
-			cookies = ArrayUtil.append(cookies, cookie);
-
-			_headers.put("cookies", cookies);
+		if (cookies == null) {
+			_headers.put("cookies", new Cookie[] {cookie});
 		}
 		else {
-			Cookie[] cookies = new Cookie[] {cookie};
-
+			cookies = ArrayUtil.append(cookies, cookie);
 			_headers.put("cookies", cookies);
 		}
 	}

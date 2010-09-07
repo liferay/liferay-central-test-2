@@ -76,11 +76,12 @@ public class UnicodeProperties extends HashMap<String, String> {
 	}
 
 	public String getProperty(String key, String defaultValue) {
-		if (containsKey(key)) {
-			return getProperty(key);
+		String value = getProperty(key);
+		if (value == null) {
+			return defaultValue;
 		}
 		else {
-			return defaultValue;
+			return value;
 		}
 	}
 
