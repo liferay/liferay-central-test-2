@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.servlet.PortletServletObjectsFactory;
 import com.liferay.portal.kernel.servlet.ServletObjectsFactory;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.util.bridges.common.ScriptPostProcess;
 import com.liferay.util.servlet.DynamicServletConfig;
 
 import java.io.IOException;
@@ -43,6 +42,8 @@ import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.portals.bridges.common.ScriptPostProcess;
 
 /**
  * @author Jorge Ferrer
