@@ -383,20 +383,22 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		}
 
 		if (inherited) {
-			ThreadLocalCache<Integer> countByR_UThreadLocalCache =
+			ThreadLocalCache<Integer> threadLocalCache =
 				ThreadLocalCacheManager.getThreadLocalCache(
-					Lifecycle.REQUEST, _countByR_UCacheName);
+					Lifecycle.REQUEST, _COUNT_BY_R_U_CACHE_NAME);
 
-			String cacheKey = String.valueOf(role.getRoleId()).concat(
+			String key = String.valueOf(role.getRoleId()).concat(
 				String.valueOf(userId));
 
-			Integer countByR_U = countByR_UThreadLocalCache.get(cacheKey);
+			Integer value = threadLocalCache.get(key);
 
-			if (countByR_U == null) {
-				countByR_U = roleFinder.countByR_U(role.getRoleId(), userId);
-				countByR_UThreadLocalCache.put(cacheKey, countByR_U);
+			if (value == null) {
+				value = roleFinder.countByR_U(role.getRoleId(), userId);
+
+				threadLocalCache.put(key, value);
 			}
-			if (countByR_U > 0) {
+
+			if (value > 0) {
 				return true;
 			}
 			else {
@@ -565,7 +567,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		}
 	}
 
-	private static final String _countByR_UCacheName = "COUNT_BY_R_U";
+	private static final String _COUNT_BY_R_U_CACHE_NAME = "COUNT_BY_R_U";
 
 	private Map<String, Role> _systemRolesMap = new HashMap<String, Role>();
 
