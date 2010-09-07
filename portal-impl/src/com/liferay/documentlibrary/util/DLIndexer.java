@@ -221,7 +221,8 @@ public class DLIndexer extends BaseIndexer {
 		document.addKeyword(Field.ENTRY_CLASS_PK, fileEntry.getFileEntryId());
 
 		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
-			companyId, DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+			companyId, DLFileEntry.class.getName(),
+			fileEntry.getFileVersion().getFileVersionId());
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
