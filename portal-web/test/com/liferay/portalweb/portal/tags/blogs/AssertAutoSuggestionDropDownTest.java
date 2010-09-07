@@ -99,7 +99,7 @@ public class AssertAutoSuggestionDropDownTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("selenium4 liferay4"),
 			selenium.getText("//div[7]/div/div/ul/li[4]"));
 		selenium.typeKeys("//li[2]/span/span/input",
-			RuntimeVariables.replace("2 "));
+			RuntimeVariables.replace("2*"));
 		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("selenium2 liferay2"),
 			selenium.getText("//div[7]/div/div/ul/li[1]"));

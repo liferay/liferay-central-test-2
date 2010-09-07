@@ -71,7 +71,7 @@ public class SelectTagThroughAutoSuggestionTest extends BaseTestCase {
 		Thread.sleep(5000);
 		selenium.type("//li[2]/span/span/input", RuntimeVariables.replace(""));
 		selenium.typeKeys("//li[2]/span/span/input",
-			RuntimeVariables.replace("selenium3 "));
+			RuntimeVariables.replace("selenium3*"));
 		Thread.sleep(5000);
 		selenium.clickAt("//div[7]/div/div/ul/li[1]",
 			RuntimeVariables.replace(""));
