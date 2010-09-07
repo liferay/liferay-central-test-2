@@ -52,7 +52,7 @@ public class ActionUtil {
 
 		MBCategory category = null;
 
-		if ((categoryId > 0) && !MBUtil.isDefaultParentCategoryId(categoryId)) {
+		if (MBUtil.isRegularCategoryId(categoryId)) {
 			category = MBCategoryServiceUtil.getCategory(categoryId);
 		}
 

@@ -89,9 +89,7 @@ public class MBMessagePermission {
 
 		long categoryId = message.getCategoryId();
 
-		if (!MBUtil.isDefaultParentCategoryId(categoryId) &&
-			!MBUtil.isDiscussionCategoryId(categoryId)) {
-
+		if (MBUtil.isRegularCategoryId(categoryId)) {
 			MBCategory category = MBCategoryLocalServiceUtil.getCategory(
 				categoryId);
 

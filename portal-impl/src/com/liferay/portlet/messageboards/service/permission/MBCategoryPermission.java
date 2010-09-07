@@ -55,9 +55,7 @@ public class MBCategoryPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (MBUtil.isDefaultParentCategoryId(categoryId) ||
-			MBUtil.isDiscussionCategoryId(categoryId)) {
-
+		if (!MBUtil.isRegularCategoryId(categoryId)) {
 			return MBPermission.contains(permissionChecker, groupId, actionId);
 		}
 		else {
@@ -86,7 +84,7 @@ public class MBCategoryPermission {
 		long categoryId = category.getCategoryId();
 
 		if (actionId.equals(ActionKeys.VIEW)) {
-			while (!MBUtil.isDefaultParentCategoryId(categoryId)) {
+			while (MBUtil.isRegularCategoryId(categoryId)) {
 				category = MBCategoryLocalServiceUtil.getCategory(categoryId);
 
 				categoryId = category.getParentCategoryId();
@@ -110,7 +108,7 @@ public class MBCategoryPermission {
 			return true;
 		}
 		else {
-			while (!MBUtil.isDefaultParentCategoryId(categoryId)) {
+			while (MBUtil.isRegularCategoryId(categoryId)) {
 				if (permissionChecker.hasOwnerPermission(
 						category.getCompanyId(), MBCategory.class.getName(),
 						category.getCategoryId(), category.getUserId(),

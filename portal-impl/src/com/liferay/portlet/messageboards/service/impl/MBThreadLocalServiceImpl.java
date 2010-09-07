@@ -134,9 +134,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Category
 
-		if (!MBUtil.isDefaultParentCategoryId(rootMessage.getCategoryId()) &&
-			!MBUtil.isDiscussionCategoryId(rootMessage.getCategoryId())) {
-
+		if (MBUtil.isRegularCategoryId(rootMessage.getCategoryId())) {
 			MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 				thread.getCategoryId());
 
@@ -333,9 +331,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		List<MBThread> threads = new ArrayList<MBThread>();
 
-		while (!MBUtil.isDefaultParentCategoryId(categoryId) &&
-			   !MBUtil.isDiscussionCategoryId(categoryId)) {
-
+		while (MBUtil.isRegularCategoryId(categoryId)) {
 			threads.addAll(
 				0, mbThreadPersistence.findByC_P(categoryId, priority));
 
@@ -383,23 +379,20 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	public MBThread moveThread(long groupId, long categoryId, long threadId)
 		throws PortalException, SystemException {
 
-		MBThread thread = mbThreadPersistence.findByPrimaryKey(
-			threadId);
+		MBThread thread = mbThreadPersistence.findByPrimaryKey(threadId);
 
 		long oldCategoryId = thread.getCategoryId();
 
 		MBCategory oldCategory = null;
 
-		if (!MBUtil.isDefaultParentCategoryId(oldCategoryId)) {
-			oldCategory = mbCategoryPersistence.findByPrimaryKey(
-				oldCategoryId);
+		if (MBUtil.isRegularCategoryId(oldCategoryId)) {
+			oldCategory = mbCategoryPersistence.findByPrimaryKey(oldCategoryId);
 		}
 
 		MBCategory category = null;
 
-		if (!MBUtil.isDefaultParentCategoryId(categoryId)) {
-			category = mbCategoryPersistence.findByPrimaryKey(
-				categoryId);
+		if (MBUtil.isRegularCategoryId(categoryId)) {
+			category = mbCategoryPersistence.findByPrimaryKey(categoryId);
 		}
 
 		// Messages
@@ -528,9 +521,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Category
 
-		if (!MBUtil.isDefaultParentCategoryId(message.getCategoryId()) &&
-			!MBUtil.isDiscussionCategoryId(message.getCategoryId())) {
-
+		if (MBUtil.isRegularCategoryId(message.getCategoryId())) {
 			category.setThreadCount(category.getThreadCount() + 1);
 
 			mbCategoryPersistence.update(category, false);

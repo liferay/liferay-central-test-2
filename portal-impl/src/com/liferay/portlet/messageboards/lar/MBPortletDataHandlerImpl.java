@@ -401,8 +401,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws Exception {
 
 		if ((!context.hasDateRange()) ||
-			MBUtil.isDefaultParentCategoryId(categoryId) ||
-			MBUtil.isDiscussionCategoryId(categoryId)) {
+			!MBUtil.isRegularCategoryId(categoryId)) {
 
 			return;
 		}
@@ -569,8 +568,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setModifiedDate(category.getModifiedDate());
 		serviceContext.setScopeGroupId(context.getScopeGroupId());
 
-		if (!MBUtil.isDefaultParentCategoryId(parentCategoryId) &&
-			!MBUtil.isDiscussionCategoryId(parentCategoryId) &&
+		if (MBUtil.isRegularCategoryId(parentCategoryId) &&
 			(parentCategoryId == category.getParentCategoryId())) {
 
 			String path = getImportCategoryPath(context, parentCategoryId);
@@ -705,8 +703,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				WorkflowConstants.ACTION_SAVE_DRAFT);
 		}
 
-		if (!MBUtil.isDefaultParentCategoryId(categoryId) &&
-			!MBUtil.isDiscussionCategoryId(categoryId) &&
+		if (MBUtil.isRegularCategoryId(categoryId) &&
 			(categoryId == message.getCategoryId())) {
 
 			String path = getImportCategoryPath(context, categoryId);

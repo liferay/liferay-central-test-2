@@ -86,9 +86,7 @@ public class MBUtil {
 			RenderResponse renderResponse)
 		throws Exception {
 
-		if (MBUtil.isDefaultParentCategoryId(categoryId) ||
-			MBUtil.isDiscussionCategoryId(categoryId)) {
-
+		if (!isRegularCategoryId(categoryId)) {
 			return;
 		}
 
@@ -153,9 +151,7 @@ public class MBUtil {
 			RenderResponse renderResponse)
 		throws Exception {
 
-		if (MBUtil.isDefaultParentCategoryId(message.getCategoryId()) ||
-			MBUtil.isDiscussionCategoryId(message.getCategoryId())) {
-
+		if (!isRegularCategoryId(message.getCategoryId())) {
 			return;
 		}
 
@@ -717,6 +713,14 @@ public class MBUtil {
 
 	public static boolean isDiscussionCategoryId(long categoryId) {
 		if (categoryId == MBCategoryConstants.DISCUSSION_CATEGORY_ID) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public static boolean isRegularCategoryId(long categoryId) {
+		if (categoryId > 0) {
 			return true;
 		}
 

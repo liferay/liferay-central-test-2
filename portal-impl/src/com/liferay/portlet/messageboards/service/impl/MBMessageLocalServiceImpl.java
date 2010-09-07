@@ -585,9 +585,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			// Category
 
-			if (!MBUtil.isDefaultParentCategoryId(message.getCategoryId()) &&
-				!MBUtil.isDiscussionCategoryId(message.getCategoryId())) {
-
+			if (MBUtil.isRegularCategoryId(message.getCategoryId())) {
 				MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 					message.getCategoryId());
 
@@ -658,9 +656,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			// Category
 
-			if (!MBUtil.isDefaultParentCategoryId(message.getCategoryId()) &&
-				!MBUtil.isDiscussionCategoryId(message.getCategoryId())) {
-
+			if (MBUtil.isRegularCategoryId(message.getCategoryId())) {
 				MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 					message.getCategoryId());
 
@@ -1014,9 +1010,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBCategory category = null;
 
-		if (!MBUtil.isDefaultParentCategoryId(message.getCategoryId()) &&
-			!MBUtil.isDiscussionCategoryId(message.getCategoryId())) {
-
+		if (MBUtil.isRegularCategoryId(message.getCategoryId())) {
 			category = mbCategoryPersistence.findByPrimaryKey(
 				message.getCategoryId());
 		}
@@ -1374,9 +1368,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBCategory category = null;
 
-		if (!MBUtil.isDefaultParentCategoryId(thread.getCategoryId()) &&
-			!MBUtil.isDiscussionCategoryId(thread.getCategoryId())) {
-
+		if (MBUtil.isRegularCategoryId(thread.getCategoryId())) {
 			category = mbCategoryPersistence.findByPrimaryKey(
 				thread.getCategoryId());
 		}
@@ -1722,9 +1714,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		categoryIds.add(message.getCategoryId());
 
-		if (!MBUtil.isDefaultParentCategoryId(message.getCategoryId()) &&
-			!MBUtil.isDiscussionCategoryId(message.getCategoryId())) {
-
+		if (MBUtil.isRegularCategoryId(message.getCategoryId())) {
 			categoryIds.addAll(category.getAncestorCategoryIds());
 		}
 
