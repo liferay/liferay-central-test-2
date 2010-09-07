@@ -1467,6 +1467,50 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 							actionId);
 					}
 				}
+				else {
+					String className = (String)serviceContext.getAttribute("className");
+					long classPK = GetterUtil.getLong(
+						(String)serviceContext.getAttribute("classPK"));
+
+					// Social
+
+					if (!message.isRoot()) {
+						socialEquityLogLocalService.addEquityLogs(
+							userId, className, classPK, ActionKeys.ADD_DISCUSSION);
+					}
+
+					long parentMessageId = message.getParentMessageId();
+
+					if (className.equals(BlogsEntry.class.getName()) &&
+						(parentMessageId !=
+							MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID)) {
+
+						// Social
+
+						BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(
+							classPK);
+
+						JSONObject extraData = JSONFactoryUtil.createJSONObject();
+
+						extraData.put("messageId", message.getMessageId());
+
+						socialActivityLocalService.addActivity(
+							userId, entry.getGroupId(), BlogsEntry.class.getName(),
+							classPK, BlogsActivityKeys.ADD_COMMENT,
+							extraData.toString(), entry.getUserId());
+
+						// Email
+
+						try {
+							sendBlogsCommentsEmail(
+								userId, entry, message, serviceContext);
+						}
+						catch (Exception e) {
+							_log.error(e, e);
+						}
+					}
+					
+				}
 
 				// Subscriptions
 
@@ -1482,13 +1526,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			// Ping
 
 			pingPingback(message, serviceContext);
-
-			// Workflow
-
-			if (message.isDiscussion()) {
-				updateDiscussionMessageStatus(
-					userId, messageId, status, oldStatus, serviceContext);
-			}
 		}
 		else if ((oldStatus == WorkflowConstants.STATUS_APPROVED) &&
 				 (status != WorkflowConstants.STATUS_APPROVED)) {
@@ -2075,60 +2112,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				from, to, curSubject, curBody, true);
 
 			mailService.sendEmail(mailMessage);
-		}
-	}
-
-	protected void updateDiscussionMessageStatus(
-			long userId, long messageId, int status, int oldStatus,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		String className = (String)serviceContext.getAttribute("className");
-		long classPK = GetterUtil.getLong(
-			(String)serviceContext.getAttribute("classPK"));
-
-		MBMessage message = getMessage(messageId);
-
-		if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
-			(status == WorkflowConstants.STATUS_APPROVED)) {
-
-			// Social
-
-			if (!message.isRoot()) {
-				socialEquityLogLocalService.addEquityLogs(
-					userId, className, classPK, ActionKeys.ADD_DISCUSSION);
-			}
-
-			long parentMessageId = message.getParentMessageId();
-
-			if (className.equals(BlogsEntry.class.getName()) &&
-				(parentMessageId !=
-					MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID)) {
-
-				// Social
-
-				BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(
-					classPK);
-
-				JSONObject extraData = JSONFactoryUtil.createJSONObject();
-
-				extraData.put("messageId", message.getMessageId());
-
-				socialActivityLocalService.addActivity(
-					userId, entry.getGroupId(), BlogsEntry.class.getName(),
-					classPK, BlogsActivityKeys.ADD_COMMENT,
-					extraData.toString(), entry.getUserId());
-
-				// Email
-
-				try {
-					sendBlogsCommentsEmail(
-						userId, entry, message, serviceContext);
-				}
-				catch (Exception e) {
-					_log.error(e, e);
-				}
-			}
 		}
 	}
 
