@@ -392,10 +392,10 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		return text;
 	}
 
-	public String[] find(String dir, String includes, String excludes) {
+	public String[] find(String directory, String includes, String excludes) {
 		DirectoryScanner directoryScanner = new DirectoryScanner();
 
-		directoryScanner.setBasedir(dir);
+		directoryScanner.setBasedir(directory);
 		directoryScanner.setExcludes(StringUtil.split(excludes));
 		directoryScanner.setIncludes(StringUtil.split(includes));
 
