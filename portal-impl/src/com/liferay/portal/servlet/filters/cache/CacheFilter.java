@@ -369,6 +369,8 @@ public class CacheFilter extends BasePortalFilter {
 
 			request.setAttribute(SKIP_FILTER, Boolean.TRUE);
 
+			response.setHeader(HttpHeaders.VARY, HttpHeaders.ACCEPT_ENCODING);
+
 			String key = getCacheKey(request);
 
 			long companyId = PortalInstances.getCompanyId(request);

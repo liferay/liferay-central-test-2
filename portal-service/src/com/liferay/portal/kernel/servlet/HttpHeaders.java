@@ -67,6 +67,8 @@ public interface HttpHeaders {
 
 	public static final String USER_AGENT = "User-Agent";
 
+	public static final String VARY = "Vary";
+
 	public static final String WWW_AUTHENTICATE = "WWW-Authenticate";
 
 	// Values
