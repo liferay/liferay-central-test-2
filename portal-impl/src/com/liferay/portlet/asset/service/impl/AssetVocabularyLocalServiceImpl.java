@@ -45,6 +45,20 @@ import java.util.Map;
 public class AssetVocabularyLocalServiceImpl
 	extends AssetVocabularyLocalServiceBaseImpl {
 
+	/**
+	 * @deprecated
+	 */
+	public AssetVocabulary addVocabulary(
+			long userId, Map<Locale, String> titleMap,
+			Map<Locale, String> descriptionMap, String settings,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return addVocabulary(
+			userId, StringPool.BLANK, titleMap, descriptionMap, settings,
+			serviceContext);
+	}
+
 	public AssetVocabulary addVocabulary(
 			long userId, String title, Map<Locale, String> titleMap,
 			Map<Locale, String> descriptionMap, String settings,
@@ -219,6 +233,20 @@ public class AssetVocabularyLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return assetVocabularyPersistence.findByPrimaryKey(vocabularyId);
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public AssetVocabulary updateVocabulary(
+			long vocabularyId, Map<Locale, String> titleMap,
+			Map<Locale, String> descriptionMap, String settings,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return updateVocabulary(
+			vocabularyId, StringPool.BLANK, titleMap, descriptionMap, settings,
+			serviceContext);
 	}
 
 	public AssetVocabulary updateVocabulary(

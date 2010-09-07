@@ -242,6 +242,22 @@ public class AssetVocabularyLocalServiceUtil {
 		return getService().updateAssetVocabulary(assetVocabulary, merge);
 	}
 
+	/**
+	* @deprecated
+	*/
+	public static com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
+		long userId,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.lang.String settings,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addVocabulary(userId, titleMap, descriptionMap, settings,
+			serviceContext);
+	}
+
 	public static com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
 		long userId, java.lang.String title,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
@@ -321,6 +337,22 @@ public class AssetVocabularyLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getVocabulary(vocabularyId);
+	}
+
+	/**
+	* @deprecated
+	*/
+	public static com.liferay.portlet.asset.model.AssetVocabulary updateVocabulary(
+		long vocabularyId,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.lang.String settings,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateVocabulary(vocabularyId, titleMap, descriptionMap,
+			settings, serviceContext);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetVocabulary updateVocabulary(

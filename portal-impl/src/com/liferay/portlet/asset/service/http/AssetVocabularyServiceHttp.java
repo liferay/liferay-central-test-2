@@ -55,7 +55,7 @@ import com.liferay.portlet.asset.service.AssetVocabularyServiceUtil;
  */
 public class AssetVocabularyServiceHttp {
 	public static com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
-		HttpPrincipal httpPrincipal, java.lang.String title,
+		HttpPrincipal httpPrincipal,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String settings,
@@ -65,6 +65,47 @@ public class AssetVocabularyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
 					"addVocabulary", _addVocabularyParameterTypes0);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					titleMap, descriptionMap, settings, serviceContext);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.portlet.asset.model.AssetVocabulary)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
+		HttpPrincipal httpPrincipal, java.lang.String title,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.lang.String settings,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
+					"addVocabulary", _addVocabularyParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, title,
 					titleMap, descriptionMap, settings, serviceContext);
@@ -101,7 +142,7 @@ public class AssetVocabularyServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
-					"deleteVocabulary", _deleteVocabularyParameterTypes1);
+					"deleteVocabulary", _deleteVocabularyParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					vocabularyId);
@@ -135,7 +176,7 @@ public class AssetVocabularyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
 					"getCompanyVocabularies",
-					_getCompanyVocabulariesParameterTypes2);
+					_getCompanyVocabulariesParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
 
@@ -172,7 +213,7 @@ public class AssetVocabularyServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
 					"getGroupsVocabularies",
-					_getGroupsVocabulariesParameterTypes3);
+					_getGroupsVocabulariesParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupIds);
 
@@ -208,7 +249,7 @@ public class AssetVocabularyServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
-					"getGroupVocabularies", _getGroupVocabulariesParameterTypes4);
+					"getGroupVocabularies", _getGroupVocabulariesParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
@@ -244,10 +285,52 @@ public class AssetVocabularyServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
-					"getVocabulary", _getVocabularyParameterTypes5);
+					"getVocabulary", _getVocabularyParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					vocabularyId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.portlet.asset.model.AssetVocabulary)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.asset.model.AssetVocabulary updateVocabulary(
+		HttpPrincipal httpPrincipal, long vocabularyId,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.lang.String settings,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
+					"updateVocabulary", _updateVocabularyParameterTypes7);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					vocabularyId, titleMap, descriptionMap, settings,
+					serviceContext);
 
 			Object returnObj = null;
 
@@ -285,7 +368,7 @@ public class AssetVocabularyServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetVocabularyServiceUtil.class.getName(),
-					"updateVocabulary", _updateVocabularyParameterTypes6);
+					"updateVocabulary", _updateVocabularyParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					vocabularyId, title, titleMap, descriptionMap, settings,
@@ -319,26 +402,35 @@ public class AssetVocabularyServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(AssetVocabularyServiceHttp.class);
 	private static final Class<?>[] _addVocabularyParameterTypes0 = new Class[] {
+			java.util.Map.class, java.util.Map.class, java.lang.String.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _addVocabularyParameterTypes1 = new Class[] {
 			java.lang.String.class, java.util.Map.class, java.util.Map.class,
 			java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
-	private static final Class<?>[] _deleteVocabularyParameterTypes1 = new Class[] {
+	private static final Class<?>[] _deleteVocabularyParameterTypes2 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getCompanyVocabulariesParameterTypes2 = new Class[] {
+	private static final Class<?>[] _getCompanyVocabulariesParameterTypes3 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getGroupsVocabulariesParameterTypes3 = new Class[] {
+	private static final Class<?>[] _getGroupsVocabulariesParameterTypes4 = new Class[] {
 			long[].class
 		};
-	private static final Class<?>[] _getGroupVocabulariesParameterTypes4 = new Class[] {
+	private static final Class<?>[] _getGroupVocabulariesParameterTypes5 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getVocabularyParameterTypes5 = new Class[] {
+	private static final Class<?>[] _getVocabularyParameterTypes6 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _updateVocabularyParameterTypes6 = new Class[] {
+	private static final Class<?>[] _updateVocabularyParameterTypes7 = new Class[] {
+			long.class, java.util.Map.class, java.util.Map.class,
+			java.lang.String.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _updateVocabularyParameterTypes8 = new Class[] {
 			long.class, java.lang.String.class, java.util.Map.class,
 			java.util.Map.class, java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class

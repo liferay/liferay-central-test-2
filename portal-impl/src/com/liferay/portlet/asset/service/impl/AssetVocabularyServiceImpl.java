@@ -17,6 +17,7 @@ package com.liferay.portlet.asset.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
@@ -37,6 +38,19 @@ import java.util.Map;
  */
 public class AssetVocabularyServiceImpl
 	extends AssetVocabularyServiceBaseImpl {
+
+	/**
+	 * @deprecated
+	 */
+	public AssetVocabulary addVocabulary(
+			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
+			String settings, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return addVocabulary(
+			StringPool.BLANK, titleMap, descriptionMap, settings,
+			serviceContext);
+	}
 
 	public AssetVocabulary addVocabulary(
 			String title, Map<Locale, String> titleMap,
@@ -90,6 +104,20 @@ public class AssetVocabularyServiceImpl
 			getPermissionChecker(), vocabularyId, ActionKeys.VIEW);
 
 		return assetVocabularyLocalService.getVocabulary(vocabularyId);
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public AssetVocabulary updateVocabulary(
+			long vocabularyId, Map<Locale, String> titleMap,
+			Map<Locale, String> descriptionMap, String settings,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return updateVocabulary(
+			vocabularyId, StringPool.BLANK, titleMap, descriptionMap, settings,
+			serviceContext);
 	}
 
 	public AssetVocabulary updateVocabulary(
