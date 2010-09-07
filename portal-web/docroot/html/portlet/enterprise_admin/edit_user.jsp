@@ -307,9 +307,7 @@ if (selUser != null) {
 
 		var redirect = "<portlet:renderURL><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /><portlet:param name="backURL" value="<%= backURL %>"></portlet:param></portlet:renderURL>";
 
-		if (location.hash) {
-			redirect += location.hash.replace('#_LFR_FN_', '&<portlet:namespace />historyKey=');
-		}
+		redirect += Liferay.Util.getHistoryParam('<portlet:namespace />');
 
 		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
 
