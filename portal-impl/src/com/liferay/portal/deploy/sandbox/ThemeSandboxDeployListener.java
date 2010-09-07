@@ -221,7 +221,7 @@ public class ThemeSandboxDeployListener
 			return null;
 		}
 
-		File file = new File(dirName, fileNames[0]);
+		File file = new File(fileNames[0]);
 
 		return file.getParentFile();
 	}

@@ -393,6 +393,15 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	public String[] find(String directory, String includes, String excludes) {
+
+		if (!directory.isEmpty()) {
+			directory = replaceSeparator(directory);
+
+			if (directory.charAt(directory.length() - 1) == CharPool.SLASH) {
+				directory = directory.substring(0, directory.length() - 1);
+			}
+		}
+
 		DirectoryScanner directoryScanner = new DirectoryScanner();
 
 		directoryScanner.setBasedir(directory);
@@ -401,7 +410,14 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 		directoryScanner.scan();
 
-		return directoryScanner.getIncludedFiles();
+		String[] includedFiles = directoryScanner.getIncludedFiles();
+
+		for (int i = 0; i < includedFiles.length; i++) {
+			includedFiles[i] = directory + CharPool.SLASH +
+					replaceSeparator(includedFiles[i]);
+		}
+
+		return includedFiles;
 	}
 
 	public String getAbsolutePath(File file) {
