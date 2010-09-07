@@ -30,6 +30,7 @@ import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -220,9 +221,11 @@ public class DLIndexer extends BaseIndexer {
 			Field.ENTRY_CLASS_NAME, DLFileEntry.class.getName());
 		document.addKeyword(Field.ENTRY_CLASS_PK, fileEntry.getFileEntryId());
 
+		DLFileVersion fileVersion = fileEntry.getFileVersion();
+
 		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
 			companyId, DLFileEntry.class.getName(),
-			fileEntry.getFileVersion().getFileVersionId());
+			fileVersion.getFileVersionId());
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
