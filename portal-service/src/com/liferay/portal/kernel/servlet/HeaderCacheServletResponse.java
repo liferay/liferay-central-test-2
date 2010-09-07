@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -106,6 +107,11 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 
 	public Map<String, List<Header>> getHeaders() {
 		return _headers;
+	}
+
+	public void sendRedirect(String location) throws IOException {
+		super.sendRedirect(location);
+		super.setStatus(SC_MOVED_TEMPORARILY);
 	}
 
 	public void setDateHeader(String name, long value) {
