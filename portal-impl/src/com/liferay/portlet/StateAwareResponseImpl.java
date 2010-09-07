@@ -300,8 +300,8 @@ public abstract class StateAwareResponseImpl
 			publicRenderParameter.getQName();
 
 		String[] oldValues = _publicRenderParameters.get(name);
-		if (oldValues != null) {
 
+		if (oldValues != null) {
 			values = ArrayUtil.append(oldValues, values);
 		}
 

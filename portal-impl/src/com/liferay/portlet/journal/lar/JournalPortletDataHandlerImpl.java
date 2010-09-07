@@ -384,6 +384,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				DLFileEntry fileEntry = null;
 
 				String uuid = map.get("uuid");
+
 				if (uuid != null) {
 					String groupIdString = map.get("groupId");
 
@@ -398,6 +399,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 				else {
 					String folderIdString = map.get("folderId");
+
 					if (folderIdString != null) {
 						long folderId = GetterUtil.getLong(folderIdString);
 						String name = map.get("name");

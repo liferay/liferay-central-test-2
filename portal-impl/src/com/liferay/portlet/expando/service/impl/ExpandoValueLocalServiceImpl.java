@@ -799,8 +799,9 @@ public class ExpandoValueLocalServiceImpl
 		}
 
 		for (ExpandoColumn column : columns) {
-			String dataValue = data.get(column.getName());
-			if (dataValue != null) {
+			String dataString = data.get(column.getName());
+
+			if (dataString != null) {
 				ExpandoValue value = expandoValuePersistence.fetchByC_R(
 					column.getColumnId(), row.getRowId());
 
@@ -817,7 +818,7 @@ public class ExpandoValueLocalServiceImpl
 					value.setClassPK(classPK);
 				}
 
-				value.setData(dataValue);
+				value.setData(dataString);
 
 				expandoValuePersistence.update(value, false);
 			}

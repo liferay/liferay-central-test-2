@@ -77,6 +77,7 @@ public class UnicodeProperties extends HashMap<String, String> {
 
 	public String getProperty(String key, String defaultValue) {
 		String value = getProperty(key);
+
 		if (value == null) {
 			return defaultValue;
 		}

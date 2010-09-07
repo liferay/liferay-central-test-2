@@ -494,6 +494,7 @@ public class PortletURLImpl
 		}
 		else {
 			String[] oldValues = _params.get(name);
+
 			if (oldValues == null) {
 				_params.put(name, values);
 			}

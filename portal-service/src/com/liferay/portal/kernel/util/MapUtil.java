@@ -106,6 +106,7 @@ public class MapUtil {
 		Map<String, ?> map, String key, String defaultValue) {
 
 		Object value = map.get(key);
+
 		if (value != null) {
 			if (value instanceof String[]) {
 				String[] array = (String[])value;

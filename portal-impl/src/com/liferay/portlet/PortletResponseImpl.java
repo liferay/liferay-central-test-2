@@ -123,6 +123,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		}
 		else {
 			values = ArrayUtil.append(values, new Long(date));
+
 			_headers.put(name, values);
 		}
 	}
@@ -139,6 +140,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		}
 		else {
 			values = ArrayUtil.append(values, value);
+
 			_headers.put(name, values);
 		}
 	}
@@ -155,6 +157,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		}
 		else {
 			values = ArrayUtil.append(values, new Integer(value));
+
 			_headers.put(name, values);
 		}
 	}
@@ -171,6 +174,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		}
 		else {
 			cookies = ArrayUtil.append(cookies, cookie);
+
 			_headers.put("cookies", cookies);
 		}
 	}
