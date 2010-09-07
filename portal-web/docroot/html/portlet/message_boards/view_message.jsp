@@ -38,6 +38,7 @@ MBThread thread = messageDisplay.getThread();
 	/>
 
 	<c:if test="<%= !MBMessagePermission.contains(permissionChecker, message.getRootMessageId(), ActionKeys.UPDATE) %>">
+
 		<%
 		String taglibHREF = "javascript:" + renderResponse.getNamespace() + "deleteAnswerFlag('@MESSAGE_ID@');";
 		%>
