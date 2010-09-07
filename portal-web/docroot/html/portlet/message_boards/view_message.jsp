@@ -37,11 +37,13 @@ MBThread thread = messageDisplay.getThread();
 		message="answer"
 	/>
 
-	<%
-	String taglibHREF = "javascript:" + renderResponse.getNamespace() + "deleteAnswerFlag('@MESSAGE_ID@');";
-	%>
+	<c:if test="<%= !MBMessagePermission.contains(permissionChecker, message.getRootMessageId(), ActionKeys.UPDATE) %>">
+		<%
+		String taglibHREF = "javascript:" + renderResponse.getNamespace() + "deleteAnswerFlag('@MESSAGE_ID@');";
+		%>
 
-	(<aui:a href="<%= taglibHREF %>"><liferay-ui:message key="unmark" /></aui:a>)
+		(<aui:a href="<%= taglibHREF %>"><liferay-ui:message key="unmark" /></aui:a>)
+	</c:if>
 </div>
 
 <div id="<portlet:namespace />deleteAnswerFlagDiv" style="display: none;">

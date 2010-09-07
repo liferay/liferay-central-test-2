@@ -129,7 +129,9 @@
 							message="answer"
 						/>
 
-						(<a href="javascript:<portlet:namespace />deleteAnswerFlag('<%= message.getMessageId() %>');"><liferay-ui:message key="unmark" /></a>)
+						<c:if test="<%= MBMessagePermission.contains(permissionChecker, message.getRootMessageId(), ActionKeys.UPDATE) %>">
+							(<a href="javascript:<portlet:namespace />deleteAnswerFlag('<%= message.getMessageId() %>');"><liferay-ui:message key="unmark" /></a>)
+						</c:if>
 					</div>
 
 					<%= dateFormatDateTime.format(message.getModifiedDate()) %>
