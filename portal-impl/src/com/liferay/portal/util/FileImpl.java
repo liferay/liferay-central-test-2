@@ -393,7 +393,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	public String[] find(String directory, String includes, String excludes) {
-		if (!directory.isEmpty()) {
+		if (directory.length() > 0) {
 			directory = replaceSeparator(directory);
 
 			if (directory.charAt(directory.length() - 1) == CharPool.SLASH) {
