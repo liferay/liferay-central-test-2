@@ -393,7 +393,6 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	public String[] find(String directory, String includes, String excludes) {
-
 		if (!directory.isEmpty()) {
 			directory = replaceSeparator(directory);
 
@@ -413,8 +412,9 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		String[] includedFiles = directoryScanner.getIncludedFiles();
 
 		for (int i = 0; i < includedFiles.length; i++) {
-			includedFiles[i] = directory + CharPool.SLASH +
-					replaceSeparator(includedFiles[i]);
+			includedFiles[i] =
+				directory.concat(CharPool.SLASH).concat(
+					replaceSeparator(includedFiles[i]));
 		}
 
 		return includedFiles;
