@@ -118,6 +118,10 @@ public class FileUtil {
 		return getFile().extractText(is, fileName);
 	}
 
+	public static String[] find(String dir, String includes, String excludes) {
+		return getFile().find(dir, includes, excludes);
+	}
+
 	public static String getAbsolutePath(File file) {
 		return getFile().getAbsolutePath(file);
 	}

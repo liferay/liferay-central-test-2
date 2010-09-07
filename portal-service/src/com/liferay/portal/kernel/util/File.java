@@ -66,6 +66,8 @@ public interface File {
 
 	public String extractText(InputStream is, String fileName);
 
+	public String[] find(String dir, String includes, String excludes);
+
 	public String getAbsolutePath(java.io.File file);
 
 	public byte[] getBytes(java.io.File file) throws IOException;

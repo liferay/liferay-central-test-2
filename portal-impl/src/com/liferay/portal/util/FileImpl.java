@@ -65,6 +65,7 @@ import org.apache.jackrabbit.extractor.TextExtractor;
 import org.apache.jackrabbit.extractor.XMLTextExtractor;
 import org.apache.poi.POITextExtractor;
 import org.apache.poi.extractor.ExtractorFactory;
+import org.apache.tools.ant.DirectoryScanner;
 
 import org.mozilla.intl.chardet.nsDetector;
 import org.mozilla.intl.chardet.nsPSMDetector;
@@ -389,6 +390,16 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		}
 
 		return text;
+	}
+
+	public String[] find(String dir, String includes, String excludes) {
+		DirectoryScanner directoryScanner = new DirectoryScanner();
+
+		directoryScanner.setBasedir(dir);
+		directoryScanner.setExcludes(StringUtil.split(excludes));
+		directoryScanner.setIncludes(StringUtil.split(includes));
+
+		return directoryScanner.getIncludedFiles();
 	}
 
 	public String getAbsolutePath(File file) {
