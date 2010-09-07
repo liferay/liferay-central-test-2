@@ -51,7 +51,6 @@ import com.liferay.portlet.messageboards.service.persistence.MBBanUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
-import com.liferay.portlet.messageboards.util.MBUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -401,7 +400,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		throws Exception {
 
 		if ((!context.hasDateRange()) ||
-			!MBUtil.isRegularCategoryId(categoryId)) {
+			(categoryId == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) ||
+			(categoryId == MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
 
 			return;
 		}
@@ -568,7 +568,9 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setModifiedDate(category.getModifiedDate());
 		serviceContext.setScopeGroupId(context.getScopeGroupId());
 
-		if (MBUtil.isRegularCategoryId(parentCategoryId) &&
+		if ((parentCategoryId !=
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+			(parentCategoryId != MBCategoryConstants.DISCUSSION_CATEGORY_ID) &&
 			(parentCategoryId == category.getParentCategoryId())) {
 
 			String path = getImportCategoryPath(context, parentCategoryId);
@@ -703,7 +705,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				WorkflowConstants.ACTION_SAVE_DRAFT);
 		}
 
-		if (MBUtil.isRegularCategoryId(categoryId) &&
+		if ((categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+			(categoryId != MBCategoryConstants.DISCUSSION_CATEGORY_ID) &&
 			(categoryId == message.getCategoryId())) {
 
 			String path = getImportCategoryPath(context, categoryId);

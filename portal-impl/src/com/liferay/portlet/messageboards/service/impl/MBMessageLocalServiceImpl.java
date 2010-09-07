@@ -585,7 +585,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			// Category
 
-			if (MBUtil.isRegularCategoryId(message.getCategoryId())) {
+			if ((message.getCategoryId() !=
+					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+				(message.getCategoryId() !=
+					MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
 				MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 					message.getCategoryId());
 
@@ -656,7 +660,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			// Category
 
-			if (MBUtil.isRegularCategoryId(message.getCategoryId())) {
+			if ((message.getCategoryId() !=
+					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+				(message.getCategoryId() !=
+					MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
 				MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 					message.getCategoryId());
 
@@ -1010,7 +1018,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBCategory category = null;
 
-		if (MBUtil.isRegularCategoryId(message.getCategoryId())) {
+		if ((message.getCategoryId() !=
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+			(message.getCategoryId() !=
+				MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
 			category = mbCategoryPersistence.findByPrimaryKey(
 				message.getCategoryId());
 		}
@@ -1368,7 +1380,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBCategory category = null;
 
-		if (MBUtil.isRegularCategoryId(thread.getCategoryId())) {
+		if ((thread.getCategoryId() !=
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+			(thread.getCategoryId() !=
+				MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
 			category = mbCategoryPersistence.findByPrimaryKey(
 				thread.getCategoryId());
 		}
@@ -1714,7 +1730,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		categoryIds.add(message.getCategoryId());
 
-		if (MBUtil.isRegularCategoryId(message.getCategoryId())) {
+		if ((message.getCategoryId() !=
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+			(message.getCategoryId() !=
+				MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
 			categoryIds.addAll(category.getAncestorCategoryIds());
 		}
 

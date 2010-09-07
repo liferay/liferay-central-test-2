@@ -22,11 +22,11 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
-import com.liferay.portlet.messageboards.util.MBUtil;
 
 /**
  * @author Brian Wing Shun Chan
@@ -89,7 +89,9 @@ public class MBMessagePermission {
 
 		long categoryId = message.getCategoryId();
 
-		if (MBUtil.isRegularCategoryId(categoryId)) {
+		if ((categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+			(categoryId != MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
 			MBCategory category = MBCategoryLocalServiceUtil.getCategory(
 				categoryId);
 

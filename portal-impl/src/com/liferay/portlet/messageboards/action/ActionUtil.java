@@ -19,13 +19,13 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
-import com.liferay.portlet.messageboards.util.MBUtil;
 
 import javax.portlet.PortletRequest;
 
@@ -52,7 +52,9 @@ public class ActionUtil {
 
 		MBCategory category = null;
 
-		if (MBUtil.isRegularCategoryId(categoryId)) {
+		if ((categoryId > 0) &&
+			(categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)) {
+
 			category = MBCategoryServiceUtil.getCategory(categoryId);
 		}
 

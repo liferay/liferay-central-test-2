@@ -36,7 +36,6 @@ import com.liferay.portlet.messageboards.model.MBMessageFlagConstants;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.MBThreadConstants;
 import com.liferay.portlet.messageboards.service.base.MBThreadLocalServiceBaseImpl;
-import com.liferay.portlet.messageboards.util.MBUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,7 +133,11 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Category
 
-		if (MBUtil.isRegularCategoryId(rootMessage.getCategoryId())) {
+		if ((rootMessage.getCategoryId() !=
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+			(rootMessage.getCategoryId() !=
+				MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
 			MBCategory category = mbCategoryPersistence.findByPrimaryKey(
 				thread.getCategoryId());
 
@@ -331,7 +334,9 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		List<MBThread> threads = new ArrayList<MBThread>();
 
-		while (MBUtil.isRegularCategoryId(categoryId)) {
+		while ((categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+			   (categoryId != MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
 			threads.addAll(
 				0, mbThreadPersistence.findByC_P(categoryId, priority));
 
@@ -379,20 +384,23 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	public MBThread moveThread(long groupId, long categoryId, long threadId)
 		throws PortalException, SystemException {
 
-		MBThread thread = mbThreadPersistence.findByPrimaryKey(threadId);
+		MBThread thread = mbThreadPersistence.findByPrimaryKey(
+			threadId);
 
 		long oldCategoryId = thread.getCategoryId();
 
 		MBCategory oldCategory = null;
 
-		if (MBUtil.isRegularCategoryId(oldCategoryId)) {
-			oldCategory = mbCategoryPersistence.findByPrimaryKey(oldCategoryId);
+		if (oldCategoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+			oldCategory = mbCategoryPersistence.findByPrimaryKey(
+				oldCategoryId);
 		}
 
 		MBCategory category = null;
 
-		if (MBUtil.isRegularCategoryId(categoryId)) {
-			category = mbCategoryPersistence.findByPrimaryKey(categoryId);
+		if (categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+			category = mbCategoryPersistence.findByPrimaryKey(
+				categoryId);
 		}
 
 		// Messages
@@ -521,7 +529,11 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Category
 
-		if (MBUtil.isRegularCategoryId(message.getCategoryId())) {
+		if ((message.getCategoryId() !=
+				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
+			(message.getCategoryId() !=
+				MBCategoryConstants.DISCUSSION_CATEGORY_ID)) {
+
 			category.setThreadCount(category.getThreadCount() + 1);
 
 			mbCategoryPersistence.update(category, false);
