@@ -41,7 +41,7 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 			String resourceName, int resourceType, String encoding)
 		throws Exception {
 
-		if (resourceName.indexOf(SandboxDeployListener.SANDBOX_MARKER) != -1) {
+		if (resourceName.contains(SandboxDeployListener.SANDBOX_MARKER)) {
 			return loadResource(resourceName, resourceType, encoding);
 		}
 		else {
