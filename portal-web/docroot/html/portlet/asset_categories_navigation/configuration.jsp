@@ -50,7 +50,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 				typesLeftList.add(new KeyValuePair(String.valueOf(vocabularyId), _getName(vocabulary, themeDisplay)));
 			}
 			catch (NoSuchVocabularyException nsve) {
-
 			}
 		}
 
