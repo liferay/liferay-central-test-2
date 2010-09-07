@@ -1179,7 +1179,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		boolean visible = false;
 
-		if (message.getStatus() == WorkflowConstants.STATUS_APPROVED) {
+		if (message.getStatus() == WorkflowConstants.STATUS_APPROVED &&
+			(message.getClassNameId() == 0 ||
+			 message.getParentMessageId() != 0)) {
 			visible = true;
 		}
 
@@ -1424,13 +1426,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 				}
 
+				// Asset
+
+				if (message.getClassNameId() == 0 ||
+					 message.getParentMessageId() != 0) {
+						assetEntryLocalService.updateVisible(
+							message.getWorkflowClassName(),
+							message.getMessageId(), true);
+				}
+
 				if (!message.isDiscussion()) {
-
-					// Asset
-
-					assetEntryLocalService.updateVisible(
-						MBMessage.class.getName(), message.getMessageId(),
-						true);
 
 					// Social
 
@@ -1508,12 +1513,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				mbCategoryPersistence.update(category, false);
 			}
 
+			// Asset
+
+			assetEntryLocalService.updateVisible(
+				message.getWorkflowClassName(), message.getMessageId(), false);
+
+
 			if (!message.isDiscussion()) {
-
-				// Asset
-
-				assetEntryLocalService.updateVisible(
-					MBMessage.class.getName(), message.getMessageId(), false);
 
 				// Indexer
 
