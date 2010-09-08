@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
+import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -1073,6 +1074,12 @@ public class PortletURLImpl
 			result = HtmlUtil.escape(result);
 		}
 
+		if (BrowserSnifferUtil.isIe(_request) &&
+			result.length() > _IE_MAXIMUM_LENGTH_OF_URL) {
+
+			result = shortenURL(result, 2);
+		}
+
 		return result;
 	}
 
@@ -1289,6 +1296,59 @@ public class PortletURLImpl
 			}
 		}
 	}
+
+	protected String shortenURL(String url, int num) {
+		StringBuilder shortUrl = new StringBuilder();
+
+		String[] params = url.split(StringPool.AMPERSAND);
+
+		if (num == 0) {
+			return null;
+		}
+
+		for (int i=0; i < params.length; i++) {
+			String param = params[i];
+
+			int redirectIdx = param.indexOf("_redirect=");
+
+			int returnFullIdx = param.indexOf("_returnToFullPageURL=");
+
+			int backUrlIdx = param.indexOf("_backURL=");
+
+			if (redirectIdx > -1 || returnFullIdx > -1 || backUrlIdx > -1) {
+				int urlIdx = param.indexOf(StringPool.EQUAL);
+
+				String qName = param.substring(0, urlIdx);
+				String redirectUrl = param.substring(urlIdx + 1);
+
+				redirectUrl = HttpUtil.decodeURL(redirectUrl);
+
+				String newUrl = shortenURL(redirectUrl, --num);
+
+				if (newUrl != null) {
+					newUrl = HttpUtil.encodeURL(newUrl);
+					shortUrl.append(qName);
+					shortUrl.append(StringPool.EQUAL);
+					shortUrl.append(newUrl);
+
+					if (i < params.length - 1) {
+						shortUrl.append(StringPool.AMPERSAND);
+					}
+				}
+			}
+			else {
+				shortUrl.append(param);
+
+				if (i < params.length - 1) {
+					shortUrl.append(StringPool.AMPERSAND);
+				}
+			}
+		}
+
+		return shortUrl.toString();
+	}
+
+	private static final long _IE_MAXIMUM_LENGTH_OF_URL = 2083;
 
 	private static Log _log = LogFactoryUtil.getLog(PortletURLImpl.class);
 
