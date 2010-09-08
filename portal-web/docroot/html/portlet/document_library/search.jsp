@@ -32,7 +32,7 @@ if (searchFolderId > 0) {
 else {
 	List folderIds = new ArrayList();
 
-	long folderId = DLFileEntryImpl.getFolderId(themeDisplay.getParentGroupId(), DLFileEntryImpl.getRepositoryId(scopeGroupId, searchFolderIds));
+	long folderId = DLFileEntryImpl.getFolderId(scopeGroupId, DLFileEntryImpl.getRepositoryId(scopeGroupId, searchFolderIds));
 
 	folderIds.add(new Long(folderId));
 
