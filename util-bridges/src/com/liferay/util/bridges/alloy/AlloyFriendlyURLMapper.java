@@ -68,7 +68,12 @@ public class AlloyFriendlyURLMapper extends DefaultFriendlyURLMapper {
 
 		int pos = friendlyURLPath.indexOf(CharPool.SLASH);
 
-		friendlyURLPath = friendlyURLPath.substring(pos);
+		if (pos != -1) {
+			friendlyURLPath = friendlyURLPath.substring(pos);
+		}
+		else {
+			friendlyURLPath = StringPool.BLANK;
+		}
 
 		// Add mapping
 
