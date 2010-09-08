@@ -83,8 +83,8 @@ public interface LiferayPortletURL
 	public String getResourceID();
 
 	/**
-	 * Determines whether this URL is an anchor pointing to the specified
-	 * portlet on the page.
+	 * Determines if this URL is an anchor pointing to the specified portlet on
+	 * the page.
 	 *
 	 * @return whether this URL is an anchor pointing to the specified portlet
 	 *		   on the page
@@ -93,7 +93,7 @@ public interface LiferayPortletURL
 	public boolean isAnchor();
 
 	/**
-	 * Determines whether the render parameters in the current request should be
+	 * Determines if the render parameters in the current request should be
 	 * copied to this URL.
 	 *
 	 * @return whether the render parameters in the current request should be
@@ -103,7 +103,7 @@ public interface LiferayPortletURL
 	public boolean isCopyCurrentRenderParameters();
 
 	/**
-	 * Determines whether this URL should be encrypted.
+	 * Determines if this URL should be encrypted.
 	 *
 	 * @return true if this URL should be encrypted; false otherwise
 	 * @see	   #setEncrypt(boolean)
@@ -111,7 +111,7 @@ public interface LiferayPortletURL
 	public boolean isEncrypt();
 
 	/**
-	 * Determines whether this URL should be XML escaped.
+	 * Determines if this URL should be XML escaped.
 	 *
 	 * @return true if this URL should be XML escaped; false otherwise
 	 * @see	   #setEscapeXml(boolean)
@@ -119,7 +119,7 @@ public interface LiferayPortletURL
 	public boolean isEscapeXml();
 
 	/**
-	 * Determines whether the parameter is included in the friendly URL path.
+	 * Determines if the parameter is included in the friendly URL path.
 	 *
 	 * @param  name the name of the parameter to check for inclusion in the path
 	 * @return whether the parameter is included in the friendly URL path
@@ -128,7 +128,7 @@ public interface LiferayPortletURL
 	public boolean isParameterIncludedInPath(String name);
 
 	/**
-	 * Determines whether this URL is secure (https).
+	 * Determines if this URL is secure (https).
 	 *
 	 * @return true if this URL is secure; false otherwise
 	 */
