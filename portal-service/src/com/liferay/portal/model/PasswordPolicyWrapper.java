@@ -184,9 +184,9 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	/**
-	* Determines whether this password policy is default policy.
+	* Determines if this password policy is default policy.
 	*
-	* @return whether this password policy is default policy
+	* @return <code>true</code> if this password policy is default policy; <code>false</code> otherwise
 	*/
 	public boolean isDefaultPolicy() {
 		return _passwordPolicy.isDefaultPolicy();
@@ -247,9 +247,9 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	/**
-	* Determines whether this password policy is changeable.
+	* Determines if this password policy is changeable.
 	*
-	* @return whether this password policy is changeable
+	* @return <code>true</code> if this password policy is changeable; <code>false</code> otherwise
 	*/
 	public boolean isChangeable() {
 		return _passwordPolicy.isChangeable();
@@ -274,9 +274,9 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	/**
-	* Determines whether this password policy is change required.
+	* Determines if this password policy is change required.
 	*
-	* @return whether this password policy is change required
+	* @return <code>true</code> if this password policy is change required; <code>false</code> otherwise
 	*/
 	public boolean isChangeRequired() {
 		return _passwordPolicy.isChangeRequired();
@@ -319,9 +319,9 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	/**
-	* Determines whether this password policy is check syntax.
+	* Determines if this password policy is check syntax.
 	*
-	* @return whether this password policy is check syntax
+	* @return <code>true</code> if this password policy is check syntax; <code>false</code> otherwise
 	*/
 	public boolean isCheckSyntax() {
 		return _passwordPolicy.isCheckSyntax();
@@ -346,9 +346,9 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	/**
-	* Determines whether this password policy is allow dictionary words.
+	* Determines if this password policy is allow dictionary words.
 	*
-	* @return whether this password policy is allow dictionary words
+	* @return <code>true</code> if this password policy is allow dictionary words; <code>false</code> otherwise
 	*/
 	public boolean isAllowDictionaryWords() {
 		return _passwordPolicy.isAllowDictionaryWords();
@@ -481,9 +481,9 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	/**
-	* Determines whether this password policy is history.
+	* Determines if this password policy is history.
 	*
-	* @return whether this password policy is history
+	* @return <code>true</code> if this password policy is history; <code>false</code> otherwise
 	*/
 	public boolean isHistory() {
 		return _passwordPolicy.isHistory();
@@ -526,9 +526,9 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	/**
-	* Determines whether this password policy is expireable.
+	* Determines if this password policy is expireable.
 	*
-	* @return whether this password policy is expireable
+	* @return <code>true</code> if this password policy is expireable; <code>false</code> otherwise
 	*/
 	public boolean isExpireable() {
 		return _passwordPolicy.isExpireable();
@@ -607,9 +607,9 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	/**
-	* Determines whether this password policy is lockout.
+	* Determines if this password policy is lockout.
 	*
-	* @return whether this password policy is lockout
+	* @return <code>true</code> if this password policy is lockout; <code>false</code> otherwise
 	*/
 	public boolean isLockout() {
 		return _passwordPolicy.isLockout();
@@ -670,9 +670,9 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	/**
-	* Determines whether this password policy is require unlock.
+	* Determines if this password policy is require unlock.
 	*
-	* @return whether this password policy is require unlock
+	* @return <code>true</code> if this password policy is require unlock; <code>false</code> otherwise
 	*/
 	public boolean isRequireUnlock() {
 		return _passwordPolicy.isRequireUnlock();

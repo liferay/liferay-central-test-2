@@ -364,36 +364,36 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
-	* Determines whether this d l file shortcut is approved.
+	* Determines if this d l file shortcut is approved.
 	*
-	* @return true if this d l file shortcut is approved; false otherwise
+	* @return <code>true</code> if this d l file shortcut is approved; <code>false</code> otherwise
 	*/
 	public boolean isApproved() {
 		return _dlFileShortcut.isApproved();
 	}
 
 	/**
-	* Determines whether this d l file shortcut is a draft.
+	* Determines if this d l file shortcut is a draft.
 	*
-	* @return true if this d l file shortcut is a draft; false otherwise
+	* @return <code>true</code> if this d l file shortcut is a draft; <code>false</code> otherwise
 	*/
 	public boolean isDraft() {
 		return _dlFileShortcut.isDraft();
 	}
 
 	/**
-	* Determines whether this d l file shortcut is expired.
+	* Determines if this d l file shortcut is expired.
 	*
-	* @return true if this d l file shortcut is expired; false otherwise
+	* @return <code>true</code> if this d l file shortcut is expired; <code>false</code> otherwise
 	*/
 	public boolean isExpired() {
 		return _dlFileShortcut.isExpired();
 	}
 
 	/**
-	* Determines whether this d l file shortcut is pending.
+	* Determines if this d l file shortcut is pending.
 	*
-	* @return true if this d l file shortcut is pending; false otherwise
+	* @return <code>true</code> if this d l file shortcut is pending; <code>false</code> otherwise
 	*/
 	public boolean isPending() {
 		return _dlFileShortcut.isPending();

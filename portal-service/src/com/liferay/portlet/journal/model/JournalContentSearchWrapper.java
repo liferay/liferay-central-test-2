@@ -111,9 +111,9 @@ public class JournalContentSearchWrapper implements JournalContentSearch {
 	}
 
 	/**
-	* Determines whether this journal content search is private layout.
+	* Determines if this journal content search is private layout.
 	*
-	* @return whether this journal content search is private layout
+	* @return <code>true</code> if this journal content search is private layout; <code>false</code> otherwise
 	*/
 	public boolean isPrivateLayout() {
 		return _journalContentSearch.isPrivateLayout();

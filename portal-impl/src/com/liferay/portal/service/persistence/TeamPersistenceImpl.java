@@ -1609,11 +1609,11 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	/**
-	 * Determines whether the user is associated with the team.
+	 * Determines if the user is associated with the team.
 	 *
 	 * @param pk the primary key of the team
 	 * @param userPK the primary key of the user
-	 * @return whether the user is associated with the team
+	 * @return <code>true</code> if the user is associated with the team; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
 	public boolean containsUser(long pk, long userPK) throws SystemException {
@@ -1643,10 +1643,10 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	}
 
 	/**
-	 * Determines whether the team has any users associated with it.
+	 * Determines if the team has any users associated with it.
 	 *
 	 * @param pk the primary key of the team to check for associations with users
-	 * @return whether the team has any users associated with it
+	 * @return <code>true</code> if the team has any users associated with it; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
 	public boolean containsUsers(long pk) throws SystemException {

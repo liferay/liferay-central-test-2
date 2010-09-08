@@ -210,9 +210,9 @@ public interface LockModel extends BaseModel<Lock> {
 	public boolean getInheritable();
 
 	/**
-	 * Determines whether this lock is inheritable.
+	 * Determines if this lock is inheritable.
 	 *
-	 * @return whether this lock is inheritable
+	 * @return <code>true</code> if this lock is inheritable; <code>false</code> otherwise
 	 */
 	public boolean isInheritable();
 

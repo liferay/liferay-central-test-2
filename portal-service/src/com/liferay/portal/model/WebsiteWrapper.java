@@ -265,9 +265,9 @@ public class WebsiteWrapper implements Website {
 	}
 
 	/**
-	* Determines whether this website is primary.
+	* Determines if this website is primary.
 	*
-	* @return whether this website is primary
+	* @return <code>true</code> if this website is primary; <code>false</code> otherwise
 	*/
 	public boolean isPrimary() {
 		return _website.isPrimary();

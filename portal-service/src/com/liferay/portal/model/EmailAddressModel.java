@@ -228,9 +228,9 @@ public interface EmailAddressModel extends BaseModel<EmailAddress> {
 	public boolean getPrimary();
 
 	/**
-	 * Determines whether this email address is primary.
+	 * Determines if this email address is primary.
 	 *
-	 * @return whether this email address is primary
+	 * @return <code>true</code> if this email address is primary; <code>false</code> otherwise
 	 */
 	public boolean isPrimary();
 

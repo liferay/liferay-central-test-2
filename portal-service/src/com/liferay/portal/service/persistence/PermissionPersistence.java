@@ -397,21 +397,21 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Determines whether the group is associated with the permission.
+	* Determines if the group is associated with the permission.
 	*
 	* @param pk the primary key of the permission
 	* @param groupPK the primary key of the group
-	* @return whether the group is associated with the permission
+	* @return <code>true</code> if the group is associated with the permission; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public boolean containsGroup(long pk, long groupPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Determines whether the permission has any groups associated with it.
+	* Determines if the permission has any groups associated with it.
 	*
 	* @param pk the primary key of the permission to check for associations with groups
-	* @return whether the permission has any groups associated with it
+	* @return <code>true</code> if the permission has any groups associated with it; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public boolean containsGroups(long pk)
@@ -586,21 +586,21 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Determines whether the role is associated with the permission.
+	* Determines if the role is associated with the permission.
 	*
 	* @param pk the primary key of the permission
 	* @param rolePK the primary key of the role
-	* @return whether the role is associated with the permission
+	* @return <code>true</code> if the role is associated with the permission; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public boolean containsRole(long pk, long rolePK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Determines whether the permission has any roles associated with it.
+	* Determines if the permission has any roles associated with it.
 	*
 	* @param pk the primary key of the permission to check for associations with roles
-	* @return whether the permission has any roles associated with it
+	* @return <code>true</code> if the permission has any roles associated with it; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public boolean containsRoles(long pk)
@@ -775,21 +775,21 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Determines whether the user is associated with the permission.
+	* Determines if the user is associated with the permission.
 	*
 	* @param pk the primary key of the permission
 	* @param userPK the primary key of the user
-	* @return whether the user is associated with the permission
+	* @return <code>true</code> if the user is associated with the permission; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public boolean containsUser(long pk, long userPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Determines whether the permission has any users associated with it.
+	* Determines if the permission has any users associated with it.
 	*
 	* @param pk the primary key of the permission to check for associations with users
-	* @return whether the permission has any users associated with it
+	* @return <code>true</code> if the permission has any users associated with it; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public boolean containsUsers(long pk)

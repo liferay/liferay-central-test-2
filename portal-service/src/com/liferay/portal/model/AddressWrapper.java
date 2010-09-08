@@ -373,9 +373,9 @@ public class AddressWrapper implements Address {
 	}
 
 	/**
-	* Determines whether this address is mailing.
+	* Determines if this address is mailing.
 	*
-	* @return whether this address is mailing
+	* @return <code>true</code> if this address is mailing; <code>false</code> otherwise
 	*/
 	public boolean isMailing() {
 		return _address.isMailing();
@@ -400,9 +400,9 @@ public class AddressWrapper implements Address {
 	}
 
 	/**
-	* Determines whether this address is primary.
+	* Determines if this address is primary.
 	*
-	* @return whether this address is primary
+	* @return <code>true</code> if this address is primary; <code>false</code> otherwise
 	*/
 	public boolean isPrimary() {
 		return _address.isPrimary();

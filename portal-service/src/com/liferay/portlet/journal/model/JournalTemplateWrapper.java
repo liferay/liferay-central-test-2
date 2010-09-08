@@ -328,9 +328,9 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Determines whether this journal template is cacheable.
+	* Determines if this journal template is cacheable.
 	*
-	* @return whether this journal template is cacheable
+	* @return <code>true</code> if this journal template is cacheable; <code>false</code> otherwise
 	*/
 	public boolean isCacheable() {
 		return _journalTemplate.isCacheable();
@@ -355,9 +355,9 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	}
 
 	/**
-	* Determines whether this journal template is small image.
+	* Determines if this journal template is small image.
 	*
-	* @return whether this journal template is small image
+	* @return <code>true</code> if this journal template is small image; <code>false</code> otherwise
 	*/
 	public boolean isSmallImage() {
 		return _journalTemplate.isSmallImage();

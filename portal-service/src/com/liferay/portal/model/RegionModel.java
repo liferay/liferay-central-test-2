@@ -119,9 +119,9 @@ public interface RegionModel extends BaseModel<Region> {
 	public boolean getActive();
 
 	/**
-	 * Determines whether this region is active.
+	 * Determines if this region is active.
 	 *
-	 * @return whether this region is active
+	 * @return <code>true</code> if this region is active; <code>false</code> otherwise
 	 */
 	public boolean isActive();
 

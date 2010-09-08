@@ -368,30 +368,30 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 	public boolean getApproved();
 
 	/**
-	 * Determines whether this d l file version is approved.
+	 * Determines if this d l file version is approved.
 	 *
-	 * @return true if this d l file version is approved; false otherwise
+	 * @return <code>true</code> if this d l file version is approved; <code>false</code> otherwise
 	 */
 	public boolean isApproved();
 
 	/**
-	 * Determines whether this d l file version is a draft.
+	 * Determines if this d l file version is a draft.
 	 *
-	 * @return true if this d l file version is a draft; false otherwise
+	 * @return <code>true</code> if this d l file version is a draft; <code>false</code> otherwise
 	 */
 	public boolean isDraft();
 
 	/**
-	 * Determines whether this d l file version is expired.
+	 * Determines if this d l file version is expired.
 	 *
-	 * @return true if this d l file version is expired; false otherwise
+	 * @return <code>true</code> if this d l file version is expired; <code>false</code> otherwise
 	 */
 	public boolean isExpired();
 
 	/**
-	 * Determines whether this d l file version is pending.
+	 * Determines if this d l file version is pending.
 	 *
-	 * @return true if this d l file version is pending; false otherwise
+	 * @return <code>true</code> if this d l file version is pending; <code>false</code> otherwise
 	 */
 	public boolean isPending();
 

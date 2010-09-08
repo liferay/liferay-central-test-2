@@ -119,9 +119,9 @@ public interface PortletModel extends BaseModel<Portlet> {
 	public boolean getActive();
 
 	/**
-	 * Determines whether this portlet is active.
+	 * Determines if this portlet is active.
 	 *
-	 * @return whether this portlet is active
+	 * @return <code>true</code> if this portlet is active; <code>false</code> otherwise
 	 */
 	public boolean isActive();
 

@@ -310,9 +310,9 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Determines whether this message boards mailing list is in use s s l.
+	* Determines if this message boards mailing list is in use s s l.
 	*
-	* @return whether this message boards mailing list is in use s s l
+	* @return <code>true</code> if this message boards mailing list is in use s s l; <code>false</code> otherwise
 	*/
 	public boolean isInUseSSL() {
 		return _mbMailingList.isInUseSSL();
@@ -409,9 +409,9 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Determines whether this message boards mailing list is out custom.
+	* Determines if this message boards mailing list is out custom.
 	*
-	* @return whether this message boards mailing list is out custom
+	* @return <code>true</code> if this message boards mailing list is out custom; <code>false</code> otherwise
 	*/
 	public boolean isOutCustom() {
 		return _mbMailingList.isOutCustom();
@@ -472,9 +472,9 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Determines whether this message boards mailing list is out use s s l.
+	* Determines if this message boards mailing list is out use s s l.
 	*
-	* @return whether this message boards mailing list is out use s s l
+	* @return <code>true</code> if this message boards mailing list is out use s s l; <code>false</code> otherwise
 	*/
 	public boolean isOutUseSSL() {
 		return _mbMailingList.isOutUseSSL();
@@ -535,9 +535,9 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
-	* Determines whether this message boards mailing list is active.
+	* Determines if this message boards mailing list is active.
 	*
-	* @return whether this message boards mailing list is active
+	* @return <code>true</code> if this message boards mailing list is active; <code>false</code> otherwise
 	*/
 	public boolean isActive() {
 		return _mbMailingList.isActive();

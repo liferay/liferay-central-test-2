@@ -274,9 +274,9 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	/**
-	* Determines whether this s c product version is repo store artifact.
+	* Determines if this s c product version is repo store artifact.
 	*
-	* @return whether this s c product version is repo store artifact
+	* @return <code>true</code> if this s c product version is repo store artifact; <code>false</code> otherwise
 	*/
 	public boolean isRepoStoreArtifact() {
 		return _scProductVersion.isRepoStoreArtifact();

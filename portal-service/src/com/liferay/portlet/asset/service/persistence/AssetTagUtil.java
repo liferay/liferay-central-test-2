@@ -535,11 +535,11 @@ public class AssetTagUtil {
 	}
 
 	/**
-	* Determines whether the asset entry is associated with the asset tag.
+	* Determines if the asset entry is associated with the asset tag.
 	*
 	* @param pk the primary key of the asset tag
 	* @param assetEntryPK the primary key of the asset entry
-	* @return whether the asset entry is associated with the asset tag
+	* @return <code>true</code> if the asset entry is associated with the asset tag; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsAssetEntry(long pk, long assetEntryPK)
@@ -548,10 +548,10 @@ public class AssetTagUtil {
 	}
 
 	/**
-	* Determines whether the asset tag has any asset entries associated with it.
+	* Determines if the asset tag has any asset entries associated with it.
 	*
 	* @param pk the primary key of the asset tag to check for associations with asset entries
-	* @return whether the asset tag has any asset entries associated with it
+	* @return <code>true</code> if the asset tag has any asset entries associated with it; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsAssetEntries(long pk)

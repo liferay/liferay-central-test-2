@@ -202,9 +202,9 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	/**
-	* Determines whether this social equity log is active.
+	* Determines if this social equity log is active.
 	*
-	* @return whether this social equity log is active
+	* @return <code>true</code> if this social equity log is active; <code>false</code> otherwise
 	*/
 	public boolean isActive() {
 		return _socialEquityLog.isActive();

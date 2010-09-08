@@ -128,9 +128,9 @@ public class RegionWrapper implements Region {
 	}
 
 	/**
-	* Determines whether this region is active.
+	* Determines if this region is active.
 	*
-	* @return whether this region is active
+	* @return <code>true</code> if this region is active; <code>false</code> otherwise
 	*/
 	public boolean isActive() {
 		return _region.isActive();

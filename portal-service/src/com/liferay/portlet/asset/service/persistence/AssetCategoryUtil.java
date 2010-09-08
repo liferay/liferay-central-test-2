@@ -1593,11 +1593,11 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Determines whether the asset entry is associated with the asset category.
+	* Determines if the asset entry is associated with the asset category.
 	*
 	* @param pk the primary key of the asset category
 	* @param assetEntryPK the primary key of the asset entry
-	* @return whether the asset entry is associated with the asset category
+	* @return <code>true</code> if the asset entry is associated with the asset category; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsAssetEntry(long pk, long assetEntryPK)
@@ -1606,10 +1606,10 @@ public class AssetCategoryUtil {
 	}
 
 	/**
-	* Determines whether the asset category has any asset entries associated with it.
+	* Determines if the asset category has any asset entries associated with it.
 	*
 	* @param pk the primary key of the asset category to check for associations with asset entries
-	* @return whether the asset category has any asset entries associated with it
+	* @return <code>true</code> if the asset category has any asset entries associated with it; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsAssetEntries(long pk)

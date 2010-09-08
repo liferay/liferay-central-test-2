@@ -912,11 +912,11 @@ public class SCFrameworkVersionUtil {
 	}
 
 	/**
-	* Determines whether the s c product version is associated with the s c framework version.
+	* Determines if the s c product version is associated with the s c framework version.
 	*
 	* @param pk the primary key of the s c framework version
 	* @param scProductVersionPK the primary key of the s c product version
-	* @return whether the s c product version is associated with the s c framework version
+	* @return <code>true</code> if the s c product version is associated with the s c framework version; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsSCProductVersion(long pk,
@@ -926,10 +926,10 @@ public class SCFrameworkVersionUtil {
 	}
 
 	/**
-	* Determines whether the s c framework version has any s c product versions associated with it.
+	* Determines if the s c framework version has any s c product versions associated with it.
 	*
 	* @param pk the primary key of the s c framework version to check for associations with s c product versions
-	* @return whether the s c framework version has any s c product versions associated with it
+	* @return <code>true</code> if the s c framework version has any s c product versions associated with it; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsSCProductVersions(long pk)

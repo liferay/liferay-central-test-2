@@ -253,9 +253,9 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 	public boolean getFields();
 
 	/**
-	 * Determines whether this shopping item is fields.
+	 * Determines if this shopping item is fields.
 	 *
-	 * @return whether this shopping item is fields
+	 * @return <code>true</code> if this shopping item is fields; <code>false</code> otherwise
 	 */
 	public boolean isFields();
 
@@ -345,9 +345,9 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 	public boolean getTaxable();
 
 	/**
-	 * Determines whether this shopping item is taxable.
+	 * Determines if this shopping item is taxable.
 	 *
-	 * @return whether this shopping item is taxable
+	 * @return <code>true</code> if this shopping item is taxable; <code>false</code> otherwise
 	 */
 	public boolean isTaxable();
 
@@ -380,9 +380,9 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 	public boolean getUseShippingFormula();
 
 	/**
-	 * Determines whether this shopping item is use shipping formula.
+	 * Determines if this shopping item is use shipping formula.
 	 *
-	 * @return whether this shopping item is use shipping formula
+	 * @return <code>true</code> if this shopping item is use shipping formula; <code>false</code> otherwise
 	 */
 	public boolean isUseShippingFormula();
 
@@ -401,9 +401,9 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 	public boolean getRequiresShipping();
 
 	/**
-	 * Determines whether this shopping item is requires shipping.
+	 * Determines if this shopping item is requires shipping.
 	 *
-	 * @return whether this shopping item is requires shipping
+	 * @return <code>true</code> if this shopping item is requires shipping; <code>false</code> otherwise
 	 */
 	public boolean isRequiresShipping();
 
@@ -436,9 +436,9 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 	public boolean getFeatured();
 
 	/**
-	 * Determines whether this shopping item is featured.
+	 * Determines if this shopping item is featured.
 	 *
-	 * @return whether this shopping item is featured
+	 * @return <code>true</code> if this shopping item is featured; <code>false</code> otherwise
 	 */
 	public boolean isFeatured();
 
@@ -457,9 +457,9 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 	public boolean getSale();
 
 	/**
-	 * Determines whether this shopping item is sale.
+	 * Determines if this shopping item is sale.
 	 *
-	 * @return whether this shopping item is sale
+	 * @return <code>true</code> if this shopping item is sale; <code>false</code> otherwise
 	 */
 	public boolean isSale();
 
@@ -478,9 +478,9 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 	public boolean getSmallImage();
 
 	/**
-	 * Determines whether this shopping item is small image.
+	 * Determines if this shopping item is small image.
 	 *
-	 * @return whether this shopping item is small image
+	 * @return <code>true</code> if this shopping item is small image; <code>false</code> otherwise
 	 */
 	public boolean isSmallImage();
 
@@ -528,9 +528,9 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 	public boolean getMediumImage();
 
 	/**
-	 * Determines whether this shopping item is medium image.
+	 * Determines if this shopping item is medium image.
 	 *
-	 * @return whether this shopping item is medium image
+	 * @return <code>true</code> if this shopping item is medium image; <code>false</code> otherwise
 	 */
 	public boolean isMediumImage();
 
@@ -578,9 +578,9 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 	public boolean getLargeImage();
 
 	/**
-	 * Determines whether this shopping item is large image.
+	 * Determines if this shopping item is large image.
 	 *
-	 * @return whether this shopping item is large image
+	 * @return <code>true</code> if this shopping item is large image; <code>false</code> otherwise
 	 */
 	public boolean isLargeImage();
 

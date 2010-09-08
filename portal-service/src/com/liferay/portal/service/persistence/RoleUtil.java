@@ -909,11 +909,11 @@ public class RoleUtil {
 	}
 
 	/**
-	* Determines whether the group is associated with the role.
+	* Determines if the group is associated with the role.
 	*
 	* @param pk the primary key of the role
 	* @param groupPK the primary key of the group
-	* @return whether the group is associated with the role
+	* @return <code>true</code> if the group is associated with the role; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsGroup(long pk, long groupPK)
@@ -922,10 +922,10 @@ public class RoleUtil {
 	}
 
 	/**
-	* Determines whether the role has any groups associated with it.
+	* Determines if the role has any groups associated with it.
 	*
 	* @param pk the primary key of the role to check for associations with groups
-	* @return whether the role has any groups associated with it
+	* @return <code>true</code> if the role has any groups associated with it; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsGroups(long pk)
@@ -1132,11 +1132,11 @@ public class RoleUtil {
 	}
 
 	/**
-	* Determines whether the permission is associated with the role.
+	* Determines if the permission is associated with the role.
 	*
 	* @param pk the primary key of the role
 	* @param permissionPK the primary key of the permission
-	* @return whether the permission is associated with the role
+	* @return <code>true</code> if the permission is associated with the role; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsPermission(long pk, long permissionPK)
@@ -1145,10 +1145,10 @@ public class RoleUtil {
 	}
 
 	/**
-	* Determines whether the role has any permissions associated with it.
+	* Determines if the role has any permissions associated with it.
 	*
 	* @param pk the primary key of the role to check for associations with permissions
-	* @return whether the role has any permissions associated with it
+	* @return <code>true</code> if the role has any permissions associated with it; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsPermissions(long pk)
@@ -1357,11 +1357,11 @@ public class RoleUtil {
 	}
 
 	/**
-	* Determines whether the user is associated with the role.
+	* Determines if the user is associated with the role.
 	*
 	* @param pk the primary key of the role
 	* @param userPK the primary key of the user
-	* @return whether the user is associated with the role
+	* @return <code>true</code> if the user is associated with the role; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsUser(long pk, long userPK)
@@ -1370,10 +1370,10 @@ public class RoleUtil {
 	}
 
 	/**
-	* Determines whether the role has any users associated with it.
+	* Determines if the role has any users associated with it.
 	*
 	* @param pk the primary key of the role to check for associations with users
-	* @return whether the role has any users associated with it
+	* @return <code>true</code> if the role has any users associated with it; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsUsers(long pk)

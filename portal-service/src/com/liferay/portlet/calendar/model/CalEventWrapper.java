@@ -328,9 +328,9 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Determines whether this cal event is all day.
+	* Determines if this cal event is all day.
 	*
-	* @return whether this cal event is all day
+	* @return <code>true</code> if this cal event is all day; <code>false</code> otherwise
 	*/
 	public boolean isAllDay() {
 		return _calEvent.isAllDay();
@@ -355,9 +355,9 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Determines whether this cal event is time zone sensitive.
+	* Determines if this cal event is time zone sensitive.
 	*
-	* @return whether this cal event is time zone sensitive
+	* @return <code>true</code> if this cal event is time zone sensitive; <code>false</code> otherwise
 	*/
 	public boolean isTimeZoneSensitive() {
 		return _calEvent.isTimeZoneSensitive();
@@ -400,9 +400,9 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
-	* Determines whether this cal event is repeating.
+	* Determines if this cal event is repeating.
 	*
-	* @return whether this cal event is repeating
+	* @return <code>true</code> if this cal event is repeating; <code>false</code> otherwise
 	*/
 	public boolean isRepeating() {
 		return _calEvent.isRepeating();

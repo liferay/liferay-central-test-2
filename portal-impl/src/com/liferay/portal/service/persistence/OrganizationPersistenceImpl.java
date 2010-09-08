@@ -2310,11 +2310,11 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	/**
-	 * Determines whether the group is associated with the organization.
+	 * Determines if the group is associated with the organization.
 	 *
 	 * @param pk the primary key of the organization
 	 * @param groupPK the primary key of the group
-	 * @return whether the group is associated with the organization
+	 * @return <code>true</code> if the group is associated with the organization; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
 	public boolean containsGroup(long pk, long groupPK)
@@ -2345,10 +2345,10 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	}
 
 	/**
-	 * Determines whether the organization has any groups associated with it.
+	 * Determines if the organization has any groups associated with it.
 	 *
 	 * @param pk the primary key of the organization to check for associations with groups
-	 * @return whether the organization has any groups associated with it
+	 * @return <code>true</code> if the organization has any groups associated with it; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
 	public boolean containsGroups(long pk) throws SystemException {
@@ -2772,11 +2772,11 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	/**
-	 * Determines whether the user is associated with the organization.
+	 * Determines if the user is associated with the organization.
 	 *
 	 * @param pk the primary key of the organization
 	 * @param userPK the primary key of the user
-	 * @return whether the user is associated with the organization
+	 * @return <code>true</code> if the user is associated with the organization; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
 	public boolean containsUser(long pk, long userPK) throws SystemException {
@@ -2806,10 +2806,10 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	}
 
 	/**
-	 * Determines whether the organization has any users associated with it.
+	 * Determines if the organization has any users associated with it.
 	 *
 	 * @param pk the primary key of the organization to check for associations with users
-	 * @return whether the organization has any users associated with it
+	 * @return <code>true</code> if the organization has any users associated with it; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
 	public boolean containsUsers(long pk) throws SystemException {

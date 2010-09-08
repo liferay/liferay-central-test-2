@@ -780,21 +780,21 @@ public interface SCProductEntryPersistence extends BasePersistence<SCProductEntr
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Determines whether the s c license is associated with the s c product entry.
+	* Determines if the s c license is associated with the s c product entry.
 	*
 	* @param pk the primary key of the s c product entry
 	* @param scLicensePK the primary key of the s c license
-	* @return whether the s c license is associated with the s c product entry
+	* @return <code>true</code> if the s c license is associated with the s c product entry; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public boolean containsSCLicense(long pk, long scLicensePK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Determines whether the s c product entry has any s c licenses associated with it.
+	* Determines if the s c product entry has any s c licenses associated with it.
 	*
 	* @param pk the primary key of the s c product entry to check for associations with s c licenses
-	* @return whether the s c product entry has any s c licenses associated with it
+	* @return <code>true</code> if the s c product entry has any s c licenses associated with it; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public boolean containsSCLicenses(long pk)

@@ -292,9 +292,9 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Determines whether this blogs entry is allow pingbacks.
+	* Determines if this blogs entry is allow pingbacks.
 	*
-	* @return whether this blogs entry is allow pingbacks
+	* @return <code>true</code> if this blogs entry is allow pingbacks; <code>false</code> otherwise
 	*/
 	public boolean isAllowPingbacks() {
 		return _blogsEntry.isAllowPingbacks();
@@ -319,9 +319,9 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Determines whether this blogs entry is allow trackbacks.
+	* Determines if this blogs entry is allow trackbacks.
 	*
-	* @return whether this blogs entry is allow trackbacks
+	* @return <code>true</code> if this blogs entry is allow trackbacks; <code>false</code> otherwise
 	*/
 	public boolean isAllowTrackbacks() {
 		return _blogsEntry.isAllowTrackbacks();
@@ -454,36 +454,36 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	}
 
 	/**
-	* Determines whether this blogs entry is approved.
+	* Determines if this blogs entry is approved.
 	*
-	* @return true if this blogs entry is approved; false otherwise
+	* @return <code>true</code> if this blogs entry is approved; <code>false</code> otherwise
 	*/
 	public boolean isApproved() {
 		return _blogsEntry.isApproved();
 	}
 
 	/**
-	* Determines whether this blogs entry is a draft.
+	* Determines if this blogs entry is a draft.
 	*
-	* @return true if this blogs entry is a draft; false otherwise
+	* @return <code>true</code> if this blogs entry is a draft; <code>false</code> otherwise
 	*/
 	public boolean isDraft() {
 		return _blogsEntry.isDraft();
 	}
 
 	/**
-	* Determines whether this blogs entry is expired.
+	* Determines if this blogs entry is expired.
 	*
-	* @return true if this blogs entry is expired; false otherwise
+	* @return <code>true</code> if this blogs entry is expired; <code>false</code> otherwise
 	*/
 	public boolean isExpired() {
 		return _blogsEntry.isExpired();
 	}
 
 	/**
-	* Determines whether this blogs entry is pending.
+	* Determines if this blogs entry is pending.
 	*
-	* @return true if this blogs entry is pending; false otherwise
+	* @return <code>true</code> if this blogs entry is pending; <code>false</code> otherwise
 	*/
 	public boolean isPending() {
 		return _blogsEntry.isPending();

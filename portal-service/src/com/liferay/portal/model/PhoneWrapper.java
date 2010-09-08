@@ -283,9 +283,9 @@ public class PhoneWrapper implements Phone {
 	}
 
 	/**
-	* Determines whether this phone is primary.
+	* Determines if this phone is primary.
 	*
-	* @return whether this phone is primary
+	* @return <code>true</code> if this phone is primary; <code>false</code> otherwise
 	*/
 	public boolean isPrimary() {
 		return _phone.isPrimary();

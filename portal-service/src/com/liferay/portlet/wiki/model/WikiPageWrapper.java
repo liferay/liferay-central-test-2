@@ -292,9 +292,9 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Determines whether this wiki page is minor edit.
+	* Determines if this wiki page is minor edit.
 	*
-	* @return whether this wiki page is minor edit
+	* @return <code>true</code> if this wiki page is minor edit; <code>false</code> otherwise
 	*/
 	public boolean isMinorEdit() {
 		return _wikiPage.isMinorEdit();
@@ -373,9 +373,9 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Determines whether this wiki page is head.
+	* Determines if this wiki page is head.
 	*
-	* @return whether this wiki page is head
+	* @return <code>true</code> if this wiki page is head; <code>false</code> otherwise
 	*/
 	public boolean isHead() {
 		return _wikiPage.isHead();
@@ -526,36 +526,36 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Determines whether this wiki page is approved.
+	* Determines if this wiki page is approved.
 	*
-	* @return true if this wiki page is approved; false otherwise
+	* @return <code>true</code> if this wiki page is approved; <code>false</code> otherwise
 	*/
 	public boolean isApproved() {
 		return _wikiPage.isApproved();
 	}
 
 	/**
-	* Determines whether this wiki page is a draft.
+	* Determines if this wiki page is a draft.
 	*
-	* @return true if this wiki page is a draft; false otherwise
+	* @return <code>true</code> if this wiki page is a draft; <code>false</code> otherwise
 	*/
 	public boolean isDraft() {
 		return _wikiPage.isDraft();
 	}
 
 	/**
-	* Determines whether this wiki page is expired.
+	* Determines if this wiki page is expired.
 	*
-	* @return true if this wiki page is expired; false otherwise
+	* @return <code>true</code> if this wiki page is expired; <code>false</code> otherwise
 	*/
 	public boolean isExpired() {
 		return _wikiPage.isExpired();
 	}
 
 	/**
-	* Determines whether this wiki page is pending.
+	* Determines if this wiki page is pending.
 	*
-	* @return true if this wiki page is pending; false otherwise
+	* @return <code>true</code> if this wiki page is pending; <code>false</code> otherwise
 	*/
 	public boolean isPending() {
 		return _wikiPage.isPending();

@@ -166,9 +166,9 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Determines whether this user is default user.
+	* Determines if this user is default user.
 	*
-	* @return whether this user is default user
+	* @return <code>true</code> if this user is default user; <code>false</code> otherwise
 	*/
 	public boolean isDefaultUser() {
 		return _user.isDefaultUser();
@@ -229,9 +229,9 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Determines whether this user is password encrypted.
+	* Determines if this user is password encrypted.
 	*
-	* @return whether this user is password encrypted
+	* @return <code>true</code> if this user is password encrypted; <code>false</code> otherwise
 	*/
 	public boolean isPasswordEncrypted() {
 		return _user.isPasswordEncrypted();
@@ -256,9 +256,9 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Determines whether this user is password reset.
+	* Determines if this user is password reset.
 	*
-	* @return whether this user is password reset
+	* @return <code>true</code> if this user is password reset; <code>false</code> otherwise
 	*/
 	public boolean isPasswordReset() {
 		return _user.isPasswordReset();
@@ -715,9 +715,9 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Determines whether this user is lockout.
+	* Determines if this user is lockout.
 	*
-	* @return whether this user is lockout
+	* @return <code>true</code> if this user is lockout; <code>false</code> otherwise
 	*/
 	public boolean isLockout() {
 		return _user.isLockout();
@@ -760,9 +760,9 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Determines whether this user is agreed to terms of use.
+	* Determines if this user is agreed to terms of use.
 	*
-	* @return whether this user is agreed to terms of use
+	* @return <code>true</code> if this user is agreed to terms of use; <code>false</code> otherwise
 	*/
 	public boolean isAgreedToTermsOfUse() {
 		return _user.isAgreedToTermsOfUse();
@@ -787,9 +787,9 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Determines whether this user is active.
+	* Determines if this user is active.
 	*
-	* @return whether this user is active
+	* @return <code>true</code> if this user is active; <code>false</code> otherwise
 	*/
 	public boolean isActive() {
 		return _user.isActive();

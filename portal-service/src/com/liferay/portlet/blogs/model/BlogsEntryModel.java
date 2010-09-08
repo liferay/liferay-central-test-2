@@ -253,9 +253,9 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 	public boolean getAllowPingbacks();
 
 	/**
-	 * Determines whether this blogs entry is allow pingbacks.
+	 * Determines if this blogs entry is allow pingbacks.
 	 *
-	 * @return whether this blogs entry is allow pingbacks
+	 * @return <code>true</code> if this blogs entry is allow pingbacks; <code>false</code> otherwise
 	 */
 	public boolean isAllowPingbacks();
 
@@ -274,9 +274,9 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 	public boolean getAllowTrackbacks();
 
 	/**
-	 * Determines whether this blogs entry is allow trackbacks.
+	 * Determines if this blogs entry is allow trackbacks.
 	 *
-	 * @return whether this blogs entry is allow trackbacks
+	 * @return <code>true</code> if this blogs entry is allow trackbacks; <code>false</code> otherwise
 	 */
 	public boolean isAllowTrackbacks();
 
@@ -380,30 +380,30 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 	public boolean getApproved();
 
 	/**
-	 * Determines whether this blogs entry is approved.
+	 * Determines if this blogs entry is approved.
 	 *
-	 * @return true if this blogs entry is approved; false otherwise
+	 * @return <code>true</code> if this blogs entry is approved; <code>false</code> otherwise
 	 */
 	public boolean isApproved();
 
 	/**
-	 * Determines whether this blogs entry is a draft.
+	 * Determines if this blogs entry is a draft.
 	 *
-	 * @return true if this blogs entry is a draft; false otherwise
+	 * @return <code>true</code> if this blogs entry is a draft; <code>false</code> otherwise
 	 */
 	public boolean isDraft();
 
 	/**
-	 * Determines whether this blogs entry is expired.
+	 * Determines if this blogs entry is expired.
 	 *
-	 * @return true if this blogs entry is expired; false otherwise
+	 * @return <code>true</code> if this blogs entry is expired; <code>false</code> otherwise
 	 */
 	public boolean isExpired();
 
 	/**
-	 * Determines whether this blogs entry is pending.
+	 * Determines if this blogs entry is pending.
 	 *
-	 * @return true if this blogs entry is pending; false otherwise
+	 * @return <code>true</code> if this blogs entry is pending; <code>false</code> otherwise
 	 */
 	public boolean isPending();
 

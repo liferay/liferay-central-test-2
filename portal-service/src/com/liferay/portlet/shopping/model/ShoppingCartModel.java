@@ -223,9 +223,9 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart> {
 	public boolean getInsure();
 
 	/**
-	 * Determines whether this shopping cart is insure.
+	 * Determines if this shopping cart is insure.
 	 *
-	 * @return whether this shopping cart is insure
+	 * @return <code>true</code> if this shopping cart is insure; <code>false</code> otherwise
 	 */
 	public boolean isInsure();
 

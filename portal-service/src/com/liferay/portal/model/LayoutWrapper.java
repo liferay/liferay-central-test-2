@@ -128,9 +128,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Determines whether this layout is private layout.
+	* Determines if this layout is private layout.
 	*
-	* @return whether this layout is private layout
+	* @return <code>true</code> if this layout is private layout; <code>false</code> otherwise
 	*/
 	public boolean isPrivateLayout() {
 		return _layout.isPrivateLayout();
@@ -281,9 +281,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Determines whether this layout is hidden.
+	* Determines if this layout is hidden.
 	*
-	* @return whether this layout is hidden
+	* @return <code>true</code> if this layout is hidden; <code>false</code> otherwise
 	*/
 	public boolean isHidden() {
 		return _layout.isHidden();
@@ -326,9 +326,9 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
-	* Determines whether this layout is icon image.
+	* Determines if this layout is icon image.
 	*
-	* @return whether this layout is icon image
+	* @return <code>true</code> if this layout is icon image; <code>false</code> otherwise
 	*/
 	public boolean isIconImage() {
 		return _layout.isIconImage();

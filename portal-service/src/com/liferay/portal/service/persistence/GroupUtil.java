@@ -1073,11 +1073,11 @@ public class GroupUtil {
 	}
 
 	/**
-	* Determines whether the organization is associated with the group.
+	* Determines if the organization is associated with the group.
 	*
 	* @param pk the primary key of the group
 	* @param organizationPK the primary key of the organization
-	* @return whether the organization is associated with the group
+	* @return <code>true</code> if the organization is associated with the group; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsOrganization(long pk, long organizationPK)
@@ -1086,10 +1086,10 @@ public class GroupUtil {
 	}
 
 	/**
-	* Determines whether the group has any organizations associated with it.
+	* Determines if the group has any organizations associated with it.
 	*
 	* @param pk the primary key of the group to check for associations with organizations
-	* @return whether the group has any organizations associated with it
+	* @return <code>true</code> if the group has any organizations associated with it; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsOrganizations(long pk)
@@ -1298,11 +1298,11 @@ public class GroupUtil {
 	}
 
 	/**
-	* Determines whether the permission is associated with the group.
+	* Determines if the permission is associated with the group.
 	*
 	* @param pk the primary key of the group
 	* @param permissionPK the primary key of the permission
-	* @return whether the permission is associated with the group
+	* @return <code>true</code> if the permission is associated with the group; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsPermission(long pk, long permissionPK)
@@ -1311,10 +1311,10 @@ public class GroupUtil {
 	}
 
 	/**
-	* Determines whether the group has any permissions associated with it.
+	* Determines if the group has any permissions associated with it.
 	*
 	* @param pk the primary key of the group to check for associations with permissions
-	* @return whether the group has any permissions associated with it
+	* @return <code>true</code> if the group has any permissions associated with it; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsPermissions(long pk)
@@ -1523,11 +1523,11 @@ public class GroupUtil {
 	}
 
 	/**
-	* Determines whether the role is associated with the group.
+	* Determines if the role is associated with the group.
 	*
 	* @param pk the primary key of the group
 	* @param rolePK the primary key of the role
-	* @return whether the role is associated with the group
+	* @return <code>true</code> if the role is associated with the group; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsRole(long pk, long rolePK)
@@ -1536,10 +1536,10 @@ public class GroupUtil {
 	}
 
 	/**
-	* Determines whether the group has any roles associated with it.
+	* Determines if the group has any roles associated with it.
 	*
 	* @param pk the primary key of the group to check for associations with roles
-	* @return whether the group has any roles associated with it
+	* @return <code>true</code> if the group has any roles associated with it; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsRoles(long pk)
@@ -1746,11 +1746,11 @@ public class GroupUtil {
 	}
 
 	/**
-	* Determines whether the user group is associated with the group.
+	* Determines if the user group is associated with the group.
 	*
 	* @param pk the primary key of the group
 	* @param userGroupPK the primary key of the user group
-	* @return whether the user group is associated with the group
+	* @return <code>true</code> if the user group is associated with the group; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsUserGroup(long pk, long userGroupPK)
@@ -1759,10 +1759,10 @@ public class GroupUtil {
 	}
 
 	/**
-	* Determines whether the group has any user groups associated with it.
+	* Determines if the group has any user groups associated with it.
 	*
 	* @param pk the primary key of the group to check for associations with user groups
-	* @return whether the group has any user groups associated with it
+	* @return <code>true</code> if the group has any user groups associated with it; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsUserGroups(long pk)
@@ -1971,11 +1971,11 @@ public class GroupUtil {
 	}
 
 	/**
-	* Determines whether the user is associated with the group.
+	* Determines if the user is associated with the group.
 	*
 	* @param pk the primary key of the group
 	* @param userPK the primary key of the user
-	* @return whether the user is associated with the group
+	* @return <code>true</code> if the user is associated with the group; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsUser(long pk, long userPK)
@@ -1984,10 +1984,10 @@ public class GroupUtil {
 	}
 
 	/**
-	* Determines whether the group has any users associated with it.
+	* Determines if the group has any users associated with it.
 	*
 	* @param pk the primary key of the group to check for associations with users
-	* @return whether the group has any users associated with it
+	* @return <code>true</code> if the group has any users associated with it; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsUsers(long pk)

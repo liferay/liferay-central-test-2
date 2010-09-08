@@ -381,9 +381,9 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 	public boolean getIndexable();
 
 	/**
-	 * Determines whether this journal article is indexable.
+	 * Determines if this journal article is indexable.
 	 *
-	 * @return whether this journal article is indexable
+	 * @return <code>true</code> if this journal article is indexable; <code>false</code> otherwise
 	 */
 	public boolean isIndexable();
 
@@ -402,9 +402,9 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 	public boolean getSmallImage();
 
 	/**
-	 * Determines whether this journal article is small image.
+	 * Determines if this journal article is small image.
 	 *
-	 * @return whether this journal article is small image
+	 * @return <code>true</code> if this journal article is small image; <code>false</code> otherwise
 	 */
 	public boolean isSmallImage();
 
@@ -522,30 +522,30 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 	public boolean getApproved();
 
 	/**
-	 * Determines whether this journal article is approved.
+	 * Determines if this journal article is approved.
 	 *
-	 * @return true if this journal article is approved; false otherwise
+	 * @return <code>true</code> if this journal article is approved; <code>false</code> otherwise
 	 */
 	public boolean isApproved();
 
 	/**
-	 * Determines whether this journal article is a draft.
+	 * Determines if this journal article is a draft.
 	 *
-	 * @return true if this journal article is a draft; false otherwise
+	 * @return <code>true</code> if this journal article is a draft; <code>false</code> otherwise
 	 */
 	public boolean isDraft();
 
 	/**
-	 * Determines whether this journal article is expired.
+	 * Determines if this journal article is expired.
 	 *
-	 * @return true if this journal article is expired; false otherwise
+	 * @return <code>true</code> if this journal article is expired; <code>false</code> otherwise
 	 */
 	public boolean isExpired();
 
 	/**
-	 * Determines whether this journal article is pending.
+	 * Determines if this journal article is pending.
 	 *
-	 * @return true if this journal article is pending; false otherwise
+	 * @return <code>true</code> if this journal article is pending; <code>false</code> otherwise
 	 */
 	public boolean isPending();
 

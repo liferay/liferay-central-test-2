@@ -192,9 +192,9 @@ public interface LayoutSetPrototypeModel extends BaseModel<LayoutSetPrototype> {
 	public boolean getActive();
 
 	/**
-	 * Determines whether this layout set prototype is active.
+	 * Determines if this layout set prototype is active.
 	 *
-	 * @return whether this layout set prototype is active
+	 * @return <code>true</code> if this layout set prototype is active; <code>false</code> otherwise
 	 */
 	public boolean isActive();
 

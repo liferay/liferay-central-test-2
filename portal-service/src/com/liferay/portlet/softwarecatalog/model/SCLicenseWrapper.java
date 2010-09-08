@@ -110,9 +110,9 @@ public class SCLicenseWrapper implements SCLicense {
 	}
 
 	/**
-	* Determines whether this s c license is open source.
+	* Determines if this s c license is open source.
 	*
-	* @return whether this s c license is open source
+	* @return <code>true</code> if this s c license is open source; <code>false</code> otherwise
 	*/
 	public boolean isOpenSource() {
 		return _scLicense.isOpenSource();
@@ -137,9 +137,9 @@ public class SCLicenseWrapper implements SCLicense {
 	}
 
 	/**
-	* Determines whether this s c license is active.
+	* Determines if this s c license is active.
 	*
-	* @return whether this s c license is active
+	* @return <code>true</code> if this s c license is active; <code>false</code> otherwise
 	*/
 	public boolean isActive() {
 		return _scLicense.isActive();
@@ -164,9 +164,9 @@ public class SCLicenseWrapper implements SCLicense {
 	}
 
 	/**
-	* Determines whether this s c license is recommended.
+	* Determines if this s c license is recommended.
 	*
-	* @return whether this s c license is recommended
+	* @return <code>true</code> if this s c license is recommended; <code>false</code> otherwise
 	*/
 	public boolean isRecommended() {
 		return _scLicense.isRecommended();

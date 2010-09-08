@@ -238,9 +238,9 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 	}
 
 	/**
-	* Determines whether this s c framework version is active.
+	* Determines if this s c framework version is active.
 	*
-	* @return whether this s c framework version is active
+	* @return <code>true</code> if this s c framework version is active; <code>false</code> otherwise
 	*/
 	public boolean isActive() {
 		return _scFrameworkVersion.isActive();

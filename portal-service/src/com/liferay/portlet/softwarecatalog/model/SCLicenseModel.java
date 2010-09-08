@@ -106,9 +106,9 @@ public interface SCLicenseModel extends BaseModel<SCLicense> {
 	public boolean getOpenSource();
 
 	/**
-	 * Determines whether this s c license is open source.
+	 * Determines if this s c license is open source.
 	 *
-	 * @return whether this s c license is open source
+	 * @return <code>true</code> if this s c license is open source; <code>false</code> otherwise
 	 */
 	public boolean isOpenSource();
 
@@ -127,9 +127,9 @@ public interface SCLicenseModel extends BaseModel<SCLicense> {
 	public boolean getActive();
 
 	/**
-	 * Determines whether this s c license is active.
+	 * Determines if this s c license is active.
 	 *
-	 * @return whether this s c license is active
+	 * @return <code>true</code> if this s c license is active; <code>false</code> otherwise
 	 */
 	public boolean isActive();
 
@@ -148,9 +148,9 @@ public interface SCLicenseModel extends BaseModel<SCLicense> {
 	public boolean getRecommended();
 
 	/**
-	 * Determines whether this s c license is recommended.
+	 * Determines if this s c license is recommended.
 	 *
-	 * @return whether this s c license is recommended
+	 * @return <code>true</code> if this s c license is recommended; <code>false</code> otherwise
 	 */
 	public boolean isRecommended();
 

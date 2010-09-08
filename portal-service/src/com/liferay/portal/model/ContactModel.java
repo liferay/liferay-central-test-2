@@ -265,9 +265,9 @@ public interface ContactModel extends BaseModel<Contact> {
 	public boolean getMale();
 
 	/**
-	 * Determines whether this contact is male.
+	 * Determines if this contact is male.
 	 *
-	 * @return whether this contact is male
+	 * @return <code>true</code> if this contact is male; <code>false</code> otherwise
 	 */
 	public boolean isMale();
 

@@ -146,9 +146,9 @@ public class PluginSettingWrapper implements PluginSetting {
 	}
 
 	/**
-	* Determines whether this plugin setting is active.
+	* Determines if this plugin setting is active.
 	*
-	* @return whether this plugin setting is active
+	* @return <code>true</code> if this plugin setting is active; <code>false</code> otherwise
 	*/
 	public boolean isActive() {
 		return _pluginSetting.isActive();

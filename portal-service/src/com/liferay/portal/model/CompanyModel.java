@@ -178,9 +178,9 @@ public interface CompanyModel extends BaseModel<Company> {
 	public boolean getSystem();
 
 	/**
-	 * Determines whether this company is system.
+	 * Determines if this company is system.
 	 *
-	 * @return whether this company is system
+	 * @return <code>true</code> if this company is system; <code>false</code> otherwise
 	 */
 	public boolean isSystem();
 

@@ -265,9 +265,9 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Determines whether this asset entry is visible.
+	* Determines if this asset entry is visible.
 	*
-	* @return whether this asset entry is visible
+	* @return <code>true</code> if this asset entry is visible; <code>false</code> otherwise
 	*/
 	public boolean isVisible() {
 		return _assetEntry.isVisible();

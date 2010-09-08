@@ -274,9 +274,9 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Determines whether this shopping order is requires shipping.
+	* Determines if this shopping order is requires shipping.
 	*
-	* @return whether this shopping order is requires shipping
+	* @return <code>true</code> if this shopping order is requires shipping; <code>false</code> otherwise
 	*/
 	public boolean isRequiresShipping() {
 		return _shoppingOrder.isRequiresShipping();
@@ -301,9 +301,9 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Determines whether this shopping order is insure.
+	* Determines if this shopping order is insure.
 	*
-	* @return whether this shopping order is insure
+	* @return <code>true</code> if this shopping order is insure; <code>false</code> otherwise
 	*/
 	public boolean isInsure() {
 		return _shoppingOrder.isInsure();
@@ -562,9 +562,9 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Determines whether this shopping order is ship to billing.
+	* Determines if this shopping order is ship to billing.
 	*
-	* @return whether this shopping order is ship to billing
+	* @return <code>true</code> if this shopping order is ship to billing; <code>false</code> otherwise
 	*/
 	public boolean isShipToBilling() {
 		return _shoppingOrder.isShipToBilling();
@@ -985,9 +985,9 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Determines whether this shopping order is send order email.
+	* Determines if this shopping order is send order email.
 	*
-	* @return whether this shopping order is send order email
+	* @return <code>true</code> if this shopping order is send order email; <code>false</code> otherwise
 	*/
 	public boolean isSendOrderEmail() {
 		return _shoppingOrder.isSendOrderEmail();
@@ -1012,9 +1012,9 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Determines whether this shopping order is send shipping email.
+	* Determines if this shopping order is send shipping email.
 	*
-	* @return whether this shopping order is send shipping email
+	* @return <code>true</code> if this shopping order is send shipping email; <code>false</code> otherwise
 	*/
 	public boolean isSendShippingEmail() {
 		return _shoppingOrder.isSendShippingEmail();

@@ -164,9 +164,9 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 	}
 
 	/**
-	* Determines whether this shopping item price is taxable.
+	* Determines if this shopping item price is taxable.
 	*
-	* @return whether this shopping item price is taxable
+	* @return <code>true</code> if this shopping item price is taxable; <code>false</code> otherwise
 	*/
 	public boolean isTaxable() {
 		return _shoppingItemPrice.isTaxable();
@@ -209,9 +209,9 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 	}
 
 	/**
-	* Determines whether this shopping item price is use shipping formula.
+	* Determines if this shopping item price is use shipping formula.
 	*
-	* @return whether this shopping item price is use shipping formula
+	* @return <code>true</code> if this shopping item price is use shipping formula; <code>false</code> otherwise
 	*/
 	public boolean isUseShippingFormula() {
 		return _shoppingItemPrice.isUseShippingFormula();

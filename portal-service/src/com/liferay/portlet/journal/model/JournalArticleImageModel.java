@@ -164,9 +164,9 @@ public interface JournalArticleImageModel extends BaseModel<JournalArticleImage>
 	public boolean getTempImage();
 
 	/**
-	 * Determines whether this journal article image is temp image.
+	 * Determines if this journal article image is temp image.
 	 *
-	 * @return whether this journal article image is temp image
+	 * @return <code>true</code> if this journal article image is temp image; <code>false</code> otherwise
 	 */
 	public boolean isTempImage();
 

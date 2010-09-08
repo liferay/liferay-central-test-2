@@ -209,9 +209,9 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 	}
 
 	/**
-	* Determines whether this social equity setting is unique entry.
+	* Determines if this social equity setting is unique entry.
 	*
-	* @return whether this social equity setting is unique entry
+	* @return <code>true</code> if this social equity setting is unique entry; <code>false</code> otherwise
 	*/
 	public boolean isUniqueEntry() {
 		return _socialEquitySetting.isUniqueEntry();

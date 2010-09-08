@@ -228,9 +228,9 @@ public interface WebsiteModel extends BaseModel<Website> {
 	public boolean getPrimary();
 
 	/**
-	 * Determines whether this website is primary.
+	 * Determines if this website is primary.
 	 *
-	 * @return whether this website is primary
+	 * @return <code>true</code> if this website is primary; <code>false</code> otherwise
 	 */
 	public boolean isPrimary();
 

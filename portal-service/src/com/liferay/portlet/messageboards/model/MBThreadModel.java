@@ -276,30 +276,30 @@ public interface MBThreadModel extends BaseModel<MBThread> {
 	public boolean getApproved();
 
 	/**
-	 * Determines whether this message boards thread is approved.
+	 * Determines if this message boards thread is approved.
 	 *
-	 * @return true if this message boards thread is approved; false otherwise
+	 * @return <code>true</code> if this message boards thread is approved; <code>false</code> otherwise
 	 */
 	public boolean isApproved();
 
 	/**
-	 * Determines whether this message boards thread is a draft.
+	 * Determines if this message boards thread is a draft.
 	 *
-	 * @return true if this message boards thread is a draft; false otherwise
+	 * @return <code>true</code> if this message boards thread is a draft; <code>false</code> otherwise
 	 */
 	public boolean isDraft();
 
 	/**
-	 * Determines whether this message boards thread is expired.
+	 * Determines if this message boards thread is expired.
 	 *
-	 * @return true if this message boards thread is expired; false otherwise
+	 * @return <code>true</code> if this message boards thread is expired; <code>false</code> otherwise
 	 */
 	public boolean isExpired();
 
 	/**
-	 * Determines whether this message boards thread is pending.
+	 * Determines if this message boards thread is pending.
 	 *
-	 * @return true if this message boards thread is pending; false otherwise
+	 * @return <code>true</code> if this message boards thread is pending; <code>false</code> otherwise
 	 */
 	public boolean isPending();
 

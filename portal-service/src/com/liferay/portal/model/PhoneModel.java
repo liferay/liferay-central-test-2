@@ -243,9 +243,9 @@ public interface PhoneModel extends BaseModel<Phone> {
 	public boolean getPrimary();
 
 	/**
-	 * Determines whether this phone is primary.
+	 * Determines if this phone is primary.
 	 *
-	 * @return whether this phone is primary
+	 * @return <code>true</code> if this phone is primary; <code>false</code> otherwise
 	 */
 	public boolean isPrimary();
 

@@ -150,9 +150,9 @@ public interface CountryModel extends BaseModel<Country> {
 	public boolean getActive();
 
 	/**
-	 * Determines whether this country is active.
+	 * Determines if this country is active.
 	 *
-	 * @return whether this country is active
+	 * @return <code>true</code> if this country is active; <code>false</code> otherwise
 	 */
 	public boolean isActive();
 

@@ -292,9 +292,9 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Determines whether this shopping item is fields.
+	* Determines if this shopping item is fields.
 	*
-	* @return whether this shopping item is fields
+	* @return <code>true</code> if this shopping item is fields; <code>false</code> otherwise
 	*/
 	public boolean isFields() {
 		return _shoppingItem.isFields();
@@ -409,9 +409,9 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Determines whether this shopping item is taxable.
+	* Determines if this shopping item is taxable.
 	*
-	* @return whether this shopping item is taxable
+	* @return <code>true</code> if this shopping item is taxable; <code>false</code> otherwise
 	*/
 	public boolean isTaxable() {
 		return _shoppingItem.isTaxable();
@@ -454,9 +454,9 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Determines whether this shopping item is use shipping formula.
+	* Determines if this shopping item is use shipping formula.
 	*
-	* @return whether this shopping item is use shipping formula
+	* @return <code>true</code> if this shopping item is use shipping formula; <code>false</code> otherwise
 	*/
 	public boolean isUseShippingFormula() {
 		return _shoppingItem.isUseShippingFormula();
@@ -481,9 +481,9 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Determines whether this shopping item is requires shipping.
+	* Determines if this shopping item is requires shipping.
 	*
-	* @return whether this shopping item is requires shipping
+	* @return <code>true</code> if this shopping item is requires shipping; <code>false</code> otherwise
 	*/
 	public boolean isRequiresShipping() {
 		return _shoppingItem.isRequiresShipping();
@@ -526,9 +526,9 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Determines whether this shopping item is featured.
+	* Determines if this shopping item is featured.
 	*
-	* @return whether this shopping item is featured
+	* @return <code>true</code> if this shopping item is featured; <code>false</code> otherwise
 	*/
 	public boolean isFeatured() {
 		return _shoppingItem.isFeatured();
@@ -553,9 +553,9 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Determines whether this shopping item is sale.
+	* Determines if this shopping item is sale.
 	*
-	* @return whether this shopping item is sale
+	* @return <code>true</code> if this shopping item is sale; <code>false</code> otherwise
 	*/
 	public boolean isSale() {
 		return _shoppingItem.isSale();
@@ -580,9 +580,9 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Determines whether this shopping item is small image.
+	* Determines if this shopping item is small image.
 	*
-	* @return whether this shopping item is small image
+	* @return <code>true</code> if this shopping item is small image; <code>false</code> otherwise
 	*/
 	public boolean isSmallImage() {
 		return _shoppingItem.isSmallImage();
@@ -643,9 +643,9 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Determines whether this shopping item is medium image.
+	* Determines if this shopping item is medium image.
 	*
-	* @return whether this shopping item is medium image
+	* @return <code>true</code> if this shopping item is medium image; <code>false</code> otherwise
 	*/
 	public boolean isMediumImage() {
 		return _shoppingItem.isMediumImage();
@@ -706,9 +706,9 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	}
 
 	/**
-	* Determines whether this shopping item is large image.
+	* Determines if this shopping item is large image.
 	*
-	* @return whether this shopping item is large image
+	* @return <code>true</code> if this shopping item is large image; <code>false</code> otherwise
 	*/
 	public boolean isLargeImage() {
 		return _shoppingItem.isLargeImage();

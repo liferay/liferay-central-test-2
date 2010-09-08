@@ -628,11 +628,11 @@ public class SCLicenseUtil {
 	}
 
 	/**
-	* Determines whether the s c product entry is associated with the s c license.
+	* Determines if the s c product entry is associated with the s c license.
 	*
 	* @param pk the primary key of the s c license
 	* @param scProductEntryPK the primary key of the s c product entry
-	* @return whether the s c product entry is associated with the s c license
+	* @return <code>true</code> if the s c product entry is associated with the s c license; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsSCProductEntry(long pk, long scProductEntryPK)
@@ -641,10 +641,10 @@ public class SCLicenseUtil {
 	}
 
 	/**
-	* Determines whether the s c license has any s c product entries associated with it.
+	* Determines if the s c license has any s c product entries associated with it.
 	*
 	* @param pk the primary key of the s c license to check for associations with s c product entries
-	* @return whether the s c license has any s c product entries associated with it
+	* @return <code>true</code> if the s c license has any s c product entries associated with it; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsSCProductEntries(long pk)

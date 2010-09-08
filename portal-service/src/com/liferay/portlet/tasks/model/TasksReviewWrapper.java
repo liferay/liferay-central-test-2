@@ -294,9 +294,9 @@ public class TasksReviewWrapper implements TasksReview {
 	}
 
 	/**
-	* Determines whether this tasks review is completed.
+	* Determines if this tasks review is completed.
 	*
-	* @return whether this tasks review is completed
+	* @return <code>true</code> if this tasks review is completed; <code>false</code> otherwise
 	*/
 	public boolean isCompleted() {
 		return _tasksReview.isCompleted();
@@ -321,9 +321,9 @@ public class TasksReviewWrapper implements TasksReview {
 	}
 
 	/**
-	* Determines whether this tasks review is rejected.
+	* Determines if this tasks review is rejected.
 	*
-	* @return whether this tasks review is rejected
+	* @return <code>true</code> if this tasks review is rejected; <code>false</code> otherwise
 	*/
 	public boolean isRejected() {
 		return _tasksReview.isRejected();

@@ -164,9 +164,9 @@ public interface PasswordPolicyModel extends BaseModel<PasswordPolicy> {
 	public boolean getDefaultPolicy();
 
 	/**
-	 * Determines whether this password policy is default policy.
+	 * Determines if this password policy is default policy.
 	 *
-	 * @return whether this password policy is default policy
+	 * @return <code>true</code> if this password policy is default policy; <code>false</code> otherwise
 	 */
 	public boolean isDefaultPolicy();
 
@@ -215,9 +215,9 @@ public interface PasswordPolicyModel extends BaseModel<PasswordPolicy> {
 	public boolean getChangeable();
 
 	/**
-	 * Determines whether this password policy is changeable.
+	 * Determines if this password policy is changeable.
 	 *
-	 * @return whether this password policy is changeable
+	 * @return <code>true</code> if this password policy is changeable; <code>false</code> otherwise
 	 */
 	public boolean isChangeable();
 
@@ -236,9 +236,9 @@ public interface PasswordPolicyModel extends BaseModel<PasswordPolicy> {
 	public boolean getChangeRequired();
 
 	/**
-	 * Determines whether this password policy is change required.
+	 * Determines if this password policy is change required.
 	 *
-	 * @return whether this password policy is change required
+	 * @return <code>true</code> if this password policy is change required; <code>false</code> otherwise
 	 */
 	public boolean isChangeRequired();
 
@@ -271,9 +271,9 @@ public interface PasswordPolicyModel extends BaseModel<PasswordPolicy> {
 	public boolean getCheckSyntax();
 
 	/**
-	 * Determines whether this password policy is check syntax.
+	 * Determines if this password policy is check syntax.
 	 *
-	 * @return whether this password policy is check syntax
+	 * @return <code>true</code> if this password policy is check syntax; <code>false</code> otherwise
 	 */
 	public boolean isCheckSyntax();
 
@@ -292,9 +292,9 @@ public interface PasswordPolicyModel extends BaseModel<PasswordPolicy> {
 	public boolean getAllowDictionaryWords();
 
 	/**
-	 * Determines whether this password policy is allow dictionary words.
+	 * Determines if this password policy is allow dictionary words.
 	 *
-	 * @return whether this password policy is allow dictionary words
+	 * @return <code>true</code> if this password policy is allow dictionary words; <code>false</code> otherwise
 	 */
 	public boolean isAllowDictionaryWords();
 
@@ -397,9 +397,9 @@ public interface PasswordPolicyModel extends BaseModel<PasswordPolicy> {
 	public boolean getHistory();
 
 	/**
-	 * Determines whether this password policy is history.
+	 * Determines if this password policy is history.
 	 *
-	 * @return whether this password policy is history
+	 * @return <code>true</code> if this password policy is history; <code>false</code> otherwise
 	 */
 	public boolean isHistory();
 
@@ -432,9 +432,9 @@ public interface PasswordPolicyModel extends BaseModel<PasswordPolicy> {
 	public boolean getExpireable();
 
 	/**
-	 * Determines whether this password policy is expireable.
+	 * Determines if this password policy is expireable.
 	 *
-	 * @return whether this password policy is expireable
+	 * @return <code>true</code> if this password policy is expireable; <code>false</code> otherwise
 	 */
 	public boolean isExpireable();
 
@@ -495,9 +495,9 @@ public interface PasswordPolicyModel extends BaseModel<PasswordPolicy> {
 	public boolean getLockout();
 
 	/**
-	 * Determines whether this password policy is lockout.
+	 * Determines if this password policy is lockout.
 	 *
-	 * @return whether this password policy is lockout
+	 * @return <code>true</code> if this password policy is lockout; <code>false</code> otherwise
 	 */
 	public boolean isLockout();
 
@@ -544,9 +544,9 @@ public interface PasswordPolicyModel extends BaseModel<PasswordPolicy> {
 	public boolean getRequireUnlock();
 
 	/**
-	 * Determines whether this password policy is require unlock.
+	 * Determines if this password policy is require unlock.
 	 *
-	 * @return whether this password policy is require unlock
+	 * @return <code>true</code> if this password policy is require unlock; <code>false</code> otherwise
 	 */
 	public boolean isRequireUnlock();
 

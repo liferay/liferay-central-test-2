@@ -256,9 +256,9 @@ public interface GroupModel extends BaseModel<Group> {
 	public boolean getActive();
 
 	/**
-	 * Determines whether this group is active.
+	 * Determines if this group is active.
 	 *
-	 * @return whether this group is active
+	 * @return <code>true</code> if this group is active; <code>false</code> otherwise
 	 */
 	public boolean isActive();
 

@@ -110,9 +110,9 @@ public class ClusterGroupWrapper implements ClusterGroup {
 	}
 
 	/**
-	* Determines whether this cluster group is whole cluster.
+	* Determines if this cluster group is whole cluster.
 	*
-	* @return whether this cluster group is whole cluster
+	* @return <code>true</code> if this cluster group is whole cluster; <code>false</code> otherwise
 	*/
 	public boolean isWholeCluster() {
 		return _clusterGroup.isWholeCluster();

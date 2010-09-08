@@ -823,11 +823,11 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Determines whether the shopping item price is associated with the shopping item.
+	* Determines if the shopping item price is associated with the shopping item.
 	*
 	* @param pk the primary key of the shopping item
 	* @param shoppingItemPricePK the primary key of the shopping item price
-	* @return whether the shopping item price is associated with the shopping item
+	* @return <code>true</code> if the shopping item price is associated with the shopping item; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsShoppingItemPrice(long pk,
@@ -838,10 +838,10 @@ public class ShoppingItemUtil {
 	}
 
 	/**
-	* Determines whether the shopping item has any shopping item prices associated with it.
+	* Determines if the shopping item has any shopping item prices associated with it.
 	*
 	* @param pk the primary key of the shopping item to check for associations with shopping item prices
-	* @return whether the shopping item has any shopping item prices associated with it
+	* @return <code>true</code> if the shopping item has any shopping item prices associated with it; <code>false</code> otherwise
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean containsShoppingItemPrices(long pk)

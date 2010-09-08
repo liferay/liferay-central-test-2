@@ -209,9 +209,9 @@ public interface SCFrameworkVersionModel extends BaseModel<SCFrameworkVersion> {
 	public boolean getActive();
 
 	/**
-	 * Determines whether this s c framework version is active.
+	 * Determines if this s c framework version is active.
 	 *
-	 * @return whether this s c framework version is active
+	 * @return <code>true</code> if this s c framework version is active; <code>false</code> otherwise
 	 */
 	public boolean isActive();
 

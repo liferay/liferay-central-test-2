@@ -118,9 +118,9 @@ public interface LayoutModel extends BaseModel<Layout> {
 	public boolean getPrivateLayout();
 
 	/**
-	 * Determines whether this layout is private layout.
+	 * Determines if this layout is private layout.
 	 *
-	 * @return whether this layout is private layout
+	 * @return <code>true</code> if this layout is private layout; <code>false</code> otherwise
 	 */
 	public boolean isPrivateLayout();
 
@@ -242,9 +242,9 @@ public interface LayoutModel extends BaseModel<Layout> {
 	public boolean getHidden();
 
 	/**
-	 * Determines whether this layout is hidden.
+	 * Determines if this layout is hidden.
 	 *
-	 * @return whether this layout is hidden
+	 * @return <code>true</code> if this layout is hidden; <code>false</code> otherwise
 	 */
 	public boolean isHidden();
 
@@ -278,9 +278,9 @@ public interface LayoutModel extends BaseModel<Layout> {
 	public boolean getIconImage();
 
 	/**
-	 * Determines whether this layout is icon image.
+	 * Determines if this layout is icon image.
 	 *
-	 * @return whether this layout is icon image
+	 * @return <code>true</code> if this layout is icon image; <code>false</code> otherwise
 	 */
 	public boolean isIconImage();
 

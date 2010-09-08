@@ -251,9 +251,9 @@ public interface TasksReviewModel extends BaseModel<TasksReview> {
 	public boolean getCompleted();
 
 	/**
-	 * Determines whether this tasks review is completed.
+	 * Determines if this tasks review is completed.
 	 *
-	 * @return whether this tasks review is completed
+	 * @return <code>true</code> if this tasks review is completed; <code>false</code> otherwise
 	 */
 	public boolean isCompleted();
 
@@ -272,9 +272,9 @@ public interface TasksReviewModel extends BaseModel<TasksReview> {
 	public boolean getRejected();
 
 	/**
-	 * Determines whether this tasks review is rejected.
+	 * Determines if this tasks review is rejected.
 	 *
-	 * @return whether this tasks review is rejected
+	 * @return <code>true</code> if this tasks review is rejected; <code>false</code> otherwise
 	 */
 	public boolean isRejected();
 

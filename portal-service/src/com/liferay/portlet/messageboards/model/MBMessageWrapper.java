@@ -373,9 +373,9 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	/**
-	* Determines whether this message-boards message is attachments.
+	* Determines if this message-boards message is attachments.
 	*
-	* @return whether this message-boards message is attachments
+	* @return <code>true</code> if this message-boards message is attachments; <code>false</code> otherwise
 	*/
 	public boolean isAttachments() {
 		return _mbMessage.isAttachments();
@@ -400,9 +400,9 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	/**
-	* Determines whether this message-boards message is anonymous.
+	* Determines if this message-boards message is anonymous.
 	*
-	* @return whether this message-boards message is anonymous
+	* @return <code>true</code> if this message-boards message is anonymous; <code>false</code> otherwise
 	*/
 	public boolean isAnonymous() {
 		return _mbMessage.isAnonymous();
@@ -445,9 +445,9 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	/**
-	* Determines whether this message-boards message is allow pingbacks.
+	* Determines if this message-boards message is allow pingbacks.
 	*
-	* @return whether this message-boards message is allow pingbacks
+	* @return <code>true</code> if this message-boards message is allow pingbacks; <code>false</code> otherwise
 	*/
 	public boolean isAllowPingbacks() {
 		return _mbMessage.isAllowPingbacks();
@@ -562,36 +562,36 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	/**
-	* Determines whether this message-boards message is approved.
+	* Determines if this message-boards message is approved.
 	*
-	* @return true if this message-boards message is approved; false otherwise
+	* @return <code>true</code> if this message-boards message is approved; <code>false</code> otherwise
 	*/
 	public boolean isApproved() {
 		return _mbMessage.isApproved();
 	}
 
 	/**
-	* Determines whether this message-boards message is a draft.
+	* Determines if this message-boards message is a draft.
 	*
-	* @return true if this message-boards message is a draft; false otherwise
+	* @return <code>true</code> if this message-boards message is a draft; <code>false</code> otherwise
 	*/
 	public boolean isDraft() {
 		return _mbMessage.isDraft();
 	}
 
 	/**
-	* Determines whether this message-boards message is expired.
+	* Determines if this message-boards message is expired.
 	*
-	* @return true if this message-boards message is expired; false otherwise
+	* @return <code>true</code> if this message-boards message is expired; <code>false</code> otherwise
 	*/
 	public boolean isExpired() {
 		return _mbMessage.isExpired();
 	}
 
 	/**
-	* Determines whether this message-boards message is pending.
+	* Determines if this message-boards message is pending.
 	*
-	* @return true if this message-boards message is pending; false otherwise
+	* @return <code>true</code> if this message-boards message is pending; <code>false</code> otherwise
 	*/
 	public boolean isPending() {
 		return _mbMessage.isPending();

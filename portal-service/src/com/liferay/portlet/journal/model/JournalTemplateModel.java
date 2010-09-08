@@ -282,9 +282,9 @@ public interface JournalTemplateModel extends BaseModel<JournalTemplate> {
 	public boolean getCacheable();
 
 	/**
-	 * Determines whether this journal template is cacheable.
+	 * Determines if this journal template is cacheable.
 	 *
-	 * @return whether this journal template is cacheable
+	 * @return <code>true</code> if this journal template is cacheable; <code>false</code> otherwise
 	 */
 	public boolean isCacheable();
 
@@ -303,9 +303,9 @@ public interface JournalTemplateModel extends BaseModel<JournalTemplate> {
 	public boolean getSmallImage();
 
 	/**
-	 * Determines whether this journal template is small image.
+	 * Determines if this journal template is small image.
 	 *
-	 * @return whether this journal template is small image
+	 * @return <code>true</code> if this journal template is small image; <code>false</code> otherwise
 	 */
 	public boolean isSmallImage();
 

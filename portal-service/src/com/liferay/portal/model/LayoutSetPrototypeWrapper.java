@@ -218,9 +218,9 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	/**
-	* Determines whether this layout set prototype is active.
+	* Determines if this layout set prototype is active.
 	*
-	* @return whether this layout set prototype is active
+	* @return <code>true</code> if this layout set prototype is active; <code>false</code> otherwise
 	*/
 	public boolean isActive() {
 		return _layoutSetPrototype.isActive();

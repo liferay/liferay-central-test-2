@@ -1860,11 +1860,11 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	/**
-	 * Determines whether the group is associated with the user group.
+	 * Determines if the group is associated with the user group.
 	 *
 	 * @param pk the primary key of the user group
 	 * @param groupPK the primary key of the group
-	 * @return whether the group is associated with the user group
+	 * @return <code>true</code> if the group is associated with the user group; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
 	public boolean containsGroup(long pk, long groupPK)
@@ -1895,10 +1895,10 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	}
 
 	/**
-	 * Determines whether the user group has any groups associated with it.
+	 * Determines if the user group has any groups associated with it.
 	 *
 	 * @param pk the primary key of the user group to check for associations with groups
-	 * @return whether the user group has any groups associated with it
+	 * @return <code>true</code> if the user group has any groups associated with it; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
 	public boolean containsGroups(long pk) throws SystemException {
@@ -2322,11 +2322,11 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			new String[] { Long.class.getName(), Long.class.getName() });
 
 	/**
-	 * Determines whether the user is associated with the user group.
+	 * Determines if the user is associated with the user group.
 	 *
 	 * @param pk the primary key of the user group
 	 * @param userPK the primary key of the user
-	 * @return whether the user is associated with the user group
+	 * @return <code>true</code> if the user is associated with the user group; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
 	public boolean containsUser(long pk, long userPK) throws SystemException {
@@ -2356,10 +2356,10 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	}
 
 	/**
-	 * Determines whether the user group has any users associated with it.
+	 * Determines if the user group has any users associated with it.
 	 *
 	 * @param pk the primary key of the user group to check for associations with users
-	 * @return whether the user group has any users associated with it
+	 * @return <code>true</code> if the user group has any users associated with it; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
 	public boolean containsUsers(long pk) throws SystemException {

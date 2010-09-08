@@ -148,9 +148,9 @@ public interface ReleaseModel extends BaseModel<Release> {
 	public boolean getVerified();
 
 	/**
-	 * Determines whether this release is verified.
+	 * Determines if this release is verified.
 	 *
-	 * @return whether this release is verified
+	 * @return <code>true</code> if this release is verified; <code>false</code> otherwise
 	 */
 	public boolean isVerified();
 

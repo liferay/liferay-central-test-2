@@ -182,9 +182,9 @@ public class OrganizationWrapper implements Organization {
 	}
 
 	/**
-	* Determines whether this organization is recursable.
+	* Determines if this organization is recursable.
 	*
-	* @return whether this organization is recursable
+	* @return <code>true</code> if this organization is recursable; <code>false</code> otherwise
 	*/
 	public boolean isRecursable() {
 		return _organization.isRecursable();

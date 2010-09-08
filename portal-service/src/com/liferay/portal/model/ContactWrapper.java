@@ -310,9 +310,9 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Determines whether this contact is male.
+	* Determines if this contact is male.
 	*
-	* @return whether this contact is male
+	* @return <code>true</code> if this contact is male; <code>false</code> otherwise
 	*/
 	public boolean isMale() {
 		return _contact.isMale();

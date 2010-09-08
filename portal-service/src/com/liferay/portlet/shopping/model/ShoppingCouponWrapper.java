@@ -292,9 +292,9 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Determines whether this shopping coupon is active.
+	* Determines if this shopping coupon is active.
 	*
-	* @return whether this shopping coupon is active
+	* @return <code>true</code> if this shopping coupon is active; <code>false</code> otherwise
 	*/
 	public boolean isActive() {
 		return _shoppingCoupon.isActive();
