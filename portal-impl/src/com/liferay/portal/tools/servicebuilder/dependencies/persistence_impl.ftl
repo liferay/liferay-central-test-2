@@ -2668,11 +2668,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				});
 
 			/**
-			 * Determines whether the ${tempEntity.humanName} is associated with the ${entity.humanName}.
+			 * Determines if the ${tempEntity.humanName} is associated with the ${entity.humanName}.
 			 *
 			 * @param pk the primary key of the ${entity.humanName}
 			 * @param ${tempEntity.varName}PK the primary key of the ${tempEntity.humanName}
-			 * @return whether the ${tempEntity.humanName} is associated with the ${entity.humanName}
+			 * @return <code>true</code> if the ${tempEntity.humanName} is associated with the ${entity.humanName}; <code>false</code> otherwise
 			 * @throws SystemException if a system exception occurred
 			 */
 			public boolean contains${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.PKClassName} ${tempEntity.varName}PK) throws SystemException {
@@ -2700,10 +2700,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			}
 
 			/**
-			 * Determines whether the ${entity.humanName} has any ${tempEntity.humanNames} associated with it.
+			 * Determines if the ${entity.humanName} has any ${tempEntity.humanNames} associated with it.
 			 *
 			 * @param pk the primary key of the ${entity.humanName} to check for associations with ${tempEntity.humanNames}
-			 * @return whether the ${entity.humanName} has any ${tempEntity.humanNames} associated with it
+			 * @return <code>true</code> if the ${entity.humanName} has any ${tempEntity.humanNames} associated with it; <code>false</code> otherwise
 			 * @throws SystemException if a system exception occurred
 			 */
 			public boolean contains${tempEntity.names}(${entity.PKClassName} pk) throws SystemException {

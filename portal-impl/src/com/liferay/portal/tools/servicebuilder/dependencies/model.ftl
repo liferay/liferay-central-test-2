@@ -132,9 +132,9 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 
 		<#if column.type == "boolean">
 			/**
-			 * Determines whether this ${entity.humanName} is ${column.humanName}.
+			 * Determines if this ${entity.humanName} is ${column.humanName}.
 			 *
-			 * @return whether this ${entity.humanName} is ${column.humanName}
+			 * @return <code>true</code> if this ${entity.humanName} is ${column.humanName}; <code>false</code> otherwise
 			 */
 			public boolean is${column.methodName}();
 		</#if>
@@ -192,30 +192,30 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 		public boolean getApproved();
 
 		/**
-		 * Determines whether this ${entity.humanName} is approved.
+		 * Determines if this ${entity.humanName} is approved.
 		 *
-		 * @return true if this ${entity.humanName} is approved; false otherwise
+		 * @return <code>true</code> if this ${entity.humanName} is approved; <code>false</code> otherwise
 		 */
 		public boolean isApproved();
 
 		/**
-		 * Determines whether this ${entity.humanName} is a draft.
+		 * Determines if this ${entity.humanName} is a draft.
 		 *
-		 * @return true if this ${entity.humanName} is a draft; false otherwise
+		 * @return <code>true</code> if this ${entity.humanName} is a draft; <code>false</code> otherwise
 		 */
 		public boolean isDraft();
 
 		/**
-		 * Determines whether this ${entity.humanName} is expired.
+		 * Determines if this ${entity.humanName} is expired.
 		 *
-		 * @return true if this ${entity.humanName} is expired; false otherwise
+		 * @return <code>true</code> if this ${entity.humanName} is expired; <code>false</code> otherwise
 		 */
 		public boolean isExpired();
 
 		/**
-		 * Determines whether this ${entity.humanName} is pending.
+		 * Determines if this ${entity.humanName} is pending.
 		 *
-		 * @return true if this ${entity.humanName} is pending; false otherwise
+		 * @return <code>true</code> if this ${entity.humanName} is pending; <code>false</code> otherwise
 		 */
 		public boolean isPending();
 	</#if>
