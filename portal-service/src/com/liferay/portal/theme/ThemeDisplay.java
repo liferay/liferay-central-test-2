@@ -235,8 +235,16 @@ public class ThemeDisplay implements Serializable {
 		_layout = layout;
 	}
 
+	public List<Layout> getAllLayouts() {
+		return _allLayouts;
+	}
+
 	public List<Layout> getLayouts() {
 		return _layouts;
+	}
+
+	public void setAllLayouts(List<Layout> allLayouts) {
+		_allLayouts = allLayouts;
 	}
 
 	public void setLayouts(List<Layout> layouts) {
@@ -1070,6 +1078,7 @@ public class ThemeDisplay implements Serializable {
 		_refererPlid = 0;
 		_layoutSetLogo = StringPool.BLANK;
 		_layout = null;
+		_allLayouts = null;
 		_layouts = null;
 		_plid = 0;
 		_layoutTypePortlet = null;
@@ -1176,6 +1185,7 @@ public class ThemeDisplay implements Serializable {
 	private Contact _contact;
 	private String _layoutSetLogo = StringPool.BLANK;
 	private Layout _layout;
+	private List<Layout> _allLayouts;
 	private List<Layout> _layouts;
 	private long _plid;
 	private LayoutTypePortlet _layoutTypePortlet;

@@ -1133,6 +1133,7 @@ public class ServicePreAction extends Action {
 		}
 
 		Layout layout = null;
+		List<Layout> allLayouts = null;
 		List<Layout> layouts = null;
 
 		long plid = ParamUtil.getLong(request, "p_l_id");
@@ -1205,6 +1206,8 @@ public class ServicePreAction extends Action {
 			catch (NoSuchLayoutException nsle) {
 			}
 		}
+
+		allLayouts = layouts;
 
 		if (layout == null) {
 			Object[] defaultLayout = getDefaultLayout(request, user, signedIn);
@@ -1461,6 +1464,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setRefererPlid(refererPlid);
 		themeDisplay.setLayoutSetLogo(layoutSetLogo);
 		themeDisplay.setLayout(layout);
+		themeDisplay.setAllLayouts(allLayouts);
 		themeDisplay.setLayouts(layouts);
 		themeDisplay.setPlid(plid);
 		themeDisplay.setLayoutTypePortlet(layoutTypePortlet);
