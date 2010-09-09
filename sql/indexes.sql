@@ -545,6 +545,8 @@ create unique index IX_E4F84168 on SocialEquityGroupSetting (groupId, classNameI
 create index IX_DB6958D2 on SocialEquityLog (assetEntryId, actionId, actionDate, active_, type_);
 create index IX_FEB4055A on SocialEquityLog (assetEntryId, actionId, active_, type_);
 create index IX_E8DA181D on SocialEquityLog (assetEntryId, type_, active_);
+create index IX_4165DA90 on SocialEquityLog (groupId, userId, actionDate, active_, type_);
+create index IX_BC06B418 on SocialEquityLog (groupId, userId, active_, type_);
 create index IX_15A017B on SocialEquityLog (userId, actionId, actionDate, active_, type_);
 create index IX_3525A383 on SocialEquityLog (userId, actionId, active_, type_);
 create unique index IX_55B2F00C on SocialEquityLog (userId, assetEntryId, actionId, actionDate, active_, type_);

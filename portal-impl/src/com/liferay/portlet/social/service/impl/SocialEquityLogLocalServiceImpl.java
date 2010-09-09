@@ -19,23 +19,30 @@ import com.liferay.ibm.icu.util.GregorianCalendar;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.annotation.Propagation;
 import com.liferay.portal.kernel.annotation.Transactional;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.increment.BufferedIncrement;
 import com.liferay.portal.kernel.increment.SocialEquityIncrement;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.social.NoSuchEquityAssetEntryException;
+import com.liferay.portlet.social.SocialEquityDataSet;
 import com.liferay.portlet.social.model.SocialEquityAssetEntry;
+import com.liferay.portlet.social.model.SocialEquityFeedEntry;
 import com.liferay.portlet.social.model.SocialEquityLog;
 import com.liferay.portlet.social.model.SocialEquitySetting;
 import com.liferay.portlet.social.model.SocialEquitySettingConstants;
 import com.liferay.portlet.social.model.SocialEquityValue;
 import com.liferay.portlet.social.service.base.SocialEquityLogLocalServiceBaseImpl;
+import com.liferay.portlet.social.util.SocialEquityActionInterpreter;
+import com.liferay.portlet.social.util.comparator.SocialEquityLogPrimaryKeyComparator;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.sql.PreparedStatement;
@@ -44,7 +51,9 @@ import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -340,6 +349,70 @@ public class SocialEquityLogLocalServiceImpl
 		deactivateEquityLogs(userId, assetEntry.getEntryId(), actionId);
 	}
 
+	public SocialEquityDataSet getContributionEquityDataSet(
+			long groupId, long userId)
+		throws SystemException {
+
+		List<SocialEquityLog> equityLogs =
+			socialEquityLogFinder.findContributionEquityLogsByUser(
+				groupId, userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		return createDataSet(equityLogs,
+			SocialEquitySettingConstants.TYPE_INFORMATION);
+	}
+
+	public List<SocialEquityLog> getContributionEquityLogs(
+			long groupId, long userId, int actionDate)
+		throws SystemException {
+
+		List<SocialEquityLog> equityLogs =
+			socialEquityLogFinder.findContributionEquityLogsByActionDate(
+				groupId, userId, actionDate, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS);
+
+		return equityLogs;
+	}
+
+	public List<SocialEquityDataSet> getEquityDataSets(
+			long groupId, long userId)
+		throws SystemException {
+
+		List<SocialEquityDataSet> dataSets =
+			new ArrayList<SocialEquityDataSet>();
+
+		dataSets.add(getContributionEquityDataSet(groupId, userId));
+		dataSets.add(getParticipationEquityDataSet(groupId, userId));
+
+		return dataSets;
+ 	}
+
+	public SocialEquityDataSet getParticipationEquityDataSet(
+			long groupId, long userId)
+		throws SystemException {
+
+		List<SocialEquityLog> equityLogs =
+			socialEquityLogPersistence.findByG_U_A_T(
+				groupId, userId, true,
+				SocialEquitySettingConstants.TYPE_PARTICIPATION);
+
+		return createDataSet(
+			equityLogs, SocialEquitySettingConstants.TYPE_PARTICIPATION);
+	}
+
+	public List<SocialEquityLog> getParticipationEquityLogs(
+			long groupId, long userId, int actionDate)
+		throws SystemException {
+
+		List<SocialEquityLog> equityLogs =
+			socialEquityLogPersistence.findByG_U_AD_A_T(
+				groupId, userId, actionDate, true,
+				SocialEquitySettingConstants.TYPE_PARTICIPATION,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				new SocialEquityLogPrimaryKeyComparator());
+
+		return equityLogs;
+	}
+
 	@BufferedIncrement(incrementClass = SocialEquityIncrement.class)
 	public void incrementSocialEquityAssetEntry_IQ(
 			long assetEntryId, SocialEquityValue socialEquityValue)
@@ -456,6 +529,26 @@ public class SocialEquityLogLocalServiceImpl
 			});
 
 		runSQL(sql);
+	}
+
+	public SocialEquityFeedEntry interpretEquityAction(
+			SocialEquityLog equityLog, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		SocialEquityActionInterpreter equityActionInterpreter =
+			new SocialEquityActionInterpreter();
+
+		return equityActionInterpreter.interpret(equityLog, themeDisplay);
+	}
+
+	public List<SocialEquityFeedEntry> interpretEquityActions(
+			List<SocialEquityLog> equityLogs, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		SocialEquityActionInterpreter equityActionInterpreter =
+			new SocialEquityActionInterpreter();
+
+		return equityActionInterpreter.interpret(equityLogs, themeDisplay);
 	}
 
 	public void updateRanks() {
@@ -578,6 +671,39 @@ public class SocialEquityLogLocalServiceImpl
 		return ((double)value / lifespan) * -1;
 	}
 
+	protected SocialEquityDataSet createDataSet(
+			List<SocialEquityLog> equityLogs, int type) {
+
+		Map<Integer, SocialEquityValue> values =
+			new LinkedHashMap<Integer, SocialEquityValue>();
+
+		SocialEquityValue runningEquityValue = new SocialEquityValue(0,0);
+
+		for (SocialEquityLog equityLog : equityLogs) {
+			if (!values.containsKey(equityLog.getActionDate())) {
+				runningEquityValue = runningEquityValue.clone();
+
+				values.put(equityLog.getActionDate(), runningEquityValue);
+			}
+
+			runningEquityValue.add(equityLog.getActionDate(),
+				equityLog.getValue(), equityLog.getLifespan());
+		}
+
+		SocialEquityDataSet dataSet = new SocialEquityDataSet(type);
+
+		for (Map.Entry<Integer, SocialEquityValue> entry : values.entrySet()) {
+			String dateString = DateUtil.getDate(
+				getNormalDate(entry.getKey()), "yyyy-MM-dd", null);
+
+			dataSet.addValue(
+				entry.getKey(), dateString,
+				Math.round(entry.getValue().getValue(entry.getKey())));
+		}
+
+		return dataSet;
+	}
+
 	protected int getEquityDate() {
 		return getEquityDate(new Date());
 	}
@@ -586,6 +712,14 @@ public class SocialEquityLogLocalServiceImpl
 		Calendar calendar = new GregorianCalendar(2010, Calendar.JANUARY, 1);
 
 		return calendar.fieldDifference(date, Calendar.DATE);
+	}
+
+	protected Date getNormalDate(int equityDate) {
+		Calendar calendar = new GregorianCalendar(2010, Calendar.JANUARY, 1);
+
+		calendar.add(Calendar.DATE, equityDate);
+
+		return calendar.getTime();
 	}
 
 	protected boolean isAddEquityLog(

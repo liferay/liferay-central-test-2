@@ -29,9 +29,27 @@ public class SocialEquityValue {
 		_b = b;
 	}
 
+	public SocialEquityValue(int actionDate, int value, int lifespan) {
+		_k = calculateK(value, lifespan);
+		_b = calculateB(actionDate, value, lifespan);
+	}
+
 	public void add(SocialEquityValue socialEquityValue) {
-		_k = _k + socialEquityValue._k;
-		_b = _b + socialEquityValue._b;
+		add(socialEquityValue._k, socialEquityValue._b);
+	}
+
+	public void add(double k, double b) {
+		_k = _k + k;
+		_b = _b + b;
+	}
+
+	public void add(int actionDate, int value, int lifespan) {
+		add(calculateK(value, lifespan),
+			calculateB(actionDate, value, lifespan));
+	}
+
+	public SocialEquityValue clone() {
+		return new SocialEquityValue(_k, _b);
 	}
 
 	public double getB() {
@@ -53,6 +71,18 @@ public class SocialEquityValue {
 	public void subtract(SocialEquityValue socialEquityValue) {
 		_k = _k - socialEquityValue._k;
 		_b = _b - socialEquityValue._b;
+	}
+
+	protected double calculateB(int actionDate, int value, int lifespan) {
+		return calculateK(value, lifespan) * (actionDate + lifespan) * -1;
+	}
+
+	protected double calculateK(int value, int lifespan) {
+		if (lifespan == 0) {
+			return 0;
+		}
+
+		return ((double)value / lifespan) * -1;
 	}
 
 	protected int getEquityDate() {
