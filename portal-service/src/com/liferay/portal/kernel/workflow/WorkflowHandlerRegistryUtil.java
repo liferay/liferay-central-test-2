@@ -60,23 +60,23 @@ public class WorkflowHandlerRegistryUtil {
 			long classPK, Object model, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		Map<String, Serializable> additionalContextInformation =
+		Map<String, Serializable> workflowContext =
 			(Map<String, Serializable>)serviceContext.removeAttribute(
-				WorkflowConstants.CONTEXT_ADDITIONAL_INFO);
+				"workflowContext");
 
-		if (additionalContextInformation == null) {
-			additionalContextInformation = Collections.EMPTY_MAP;
+		if (workflowContext == null) {
+			workflowContext = Collections.EMPTY_MAP;
 		}
-		
+
 		startWorkflowInstance(
-			companyId, groupId, userId, className, classPK,
-			model, serviceContext, additionalContextInformation);
+			companyId, groupId, userId, className, classPK, model,
+			serviceContext, workflowContext);
 	}
 
 	public static void startWorkflowInstance(
 			long companyId, long groupId, long userId, String className,
 			long classPK, Object model, ServiceContext serviceContext,
-			Map<String, Serializable> workflowContextParameters)
+			Map<String, Serializable> workflowContext)
 		throws PortalException, SystemException {
 
 		if (serviceContext.getWorkflowAction() !=
@@ -100,8 +100,7 @@ public class WorkflowHandlerRegistryUtil {
 			status = WorkflowConstants.STATUS_APPROVED;
 		}
 
-		Map<String, Serializable> workflowContext =
-			new HashMap<String, Serializable>(workflowContextParameters);
+		workflowContext = new HashMap<String, Serializable>(workflowContext);
 
 		workflowContext.put(
 			WorkflowConstants.CONTEXT_COMPANY_ID, String.valueOf(companyId));
