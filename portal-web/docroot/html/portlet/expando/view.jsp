@@ -25,6 +25,8 @@ headerNames.add("resource");
 headerNames.add("custom-fields");
 
 List<CustomAttributesDisplay> customAttributesDisplays = PortletLocalServiceUtil.getCustomAttributesDisplays();
+
+Collections.sort(customAttributesDisplays, new CustomAttributesDisplayComparator(locale));
 %>
 
 <liferay-ui:search-container

@@ -41,6 +41,7 @@
 <%@ page import="com.liferay.portlet.expando.service.permission.ExpandoColumnPermission" %>
 <%@ page import="com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil" %>
 <%@ page import="com.liferay.portlet.expando.util.ExpandoBridgeIndexer" %>
+<%@ page import="com.liferay.portlet.expando.util.comparator.CustomAttributesDisplayComparator" %>
 <%@ page import="com.liferay.portlet.imagegallery.model.IGFolder" %>
 <%@ page import="com.liferay.portlet.imagegallery.model.IGImage" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
