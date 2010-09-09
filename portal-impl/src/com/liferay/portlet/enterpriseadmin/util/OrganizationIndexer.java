@@ -294,7 +294,11 @@ public class OrganizationIndexer extends BaseIndexer {
 					if (entry.getKey().equals("organizationsTree")) {
 						Long[][] leftAndRightOrganizationIds = (Long[][])value;
 
-						if (leftAndRightOrganizationIds.length > 0) {
+						if (leftAndRightOrganizationIds.length == 0) {
+							searchQuery.addRequiredTerm(
+								Field.ORGANIZATION_ID, -1);
+						}
+						else if (leftAndRightOrganizationIds.length > 0) {
 							for (int i = 0;
 								i < leftAndRightOrganizationIds.length;
 								i++) {

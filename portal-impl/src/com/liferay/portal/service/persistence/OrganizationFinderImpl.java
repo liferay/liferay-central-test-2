@@ -1044,7 +1044,10 @@ public class OrganizationFinderImpl
 		else if (key.equals("organizationsTree")) {
 			Long[][] leftAndRightOrganizationIds = (Long[][])value;
 
-			if (leftAndRightOrganizationIds.length > 0) {
+			if (leftAndRightOrganizationIds.length == 0) {
+				join = "WHERE ((Organization_.organizationId = -1) )";
+			}
+			else if (leftAndRightOrganizationIds.length > 0) {
 				StringBundler sb = new StringBundler(
 					leftAndRightOrganizationIds.length * 2 + 1);
 
