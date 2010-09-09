@@ -80,6 +80,9 @@
 				<information-lifespan>365</information-lifespan>
 				<participation-value>2</participation-value>
 				<participation-lifespan>365</participation-lifespan>
+				<social-activity-mapping class="com.liferay.portlet.blogs.social.BlogsActivityKeys">
+					ADD_COMMENT
+				</social-activity-mapping>
 			</social-equity-mapping>
 			<social-equity-mapping>
 				<action-key>ADD_ENTRY</action-key>
@@ -87,6 +90,9 @@
 				<information-lifespan>365</information-lifespan>
 				<participation-value>5</participation-value>
 				<participation-lifespan>365</participation-lifespan>
+				<social-activity-mapping class="com.liferay.portlet.blogs.social.BlogsActivityKeys">
+					ADD_ENTRY
+				</social-activity-mapping>
 			</social-equity-mapping>
 			<social-equity-mapping>
 				<action-key>VIEW</action-key>

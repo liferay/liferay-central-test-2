@@ -134,6 +134,9 @@
 				<information-lifespan>365</information-lifespan>
 				<participation-value>5</participation-value>
 				<participation-lifespan>365</participation-lifespan>
+				<social-activity-mapping class="com.liferay.portlet.wiki.social.WikiActivityKeys">
+					ADD_PAGE
+				</social-activity-mapping>
 			</social-equity-mapping>
 			<social-equity-mapping>
 				<action-key>VIEW</action-key>
