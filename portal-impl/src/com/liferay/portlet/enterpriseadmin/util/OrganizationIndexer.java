@@ -273,6 +273,30 @@ public class OrganizationIndexer extends BaseIndexer {
 		return PORTLET_ID;
 	}
 
+	protected void postProcessContextQuery(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		LinkedHashMap<String, Object> params =
+			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
+
+		Long[][] leftAndRightOrganizationIds = (Long[][])params.get(
+			"organizationsTree");
+
+		if (leftAndRightOrganizationIds != null) {
+			if (leftAndRightOrganizationIds.length == 0) {
+				contextQuery.addRequiredTerm(Field.ORGANIZATION_ID, -1);
+			}
+			else if (leftAndRightOrganizationIds.length > 0) {
+				for (int i = 0; i < leftAndRightOrganizationIds.length; i++) {
+					contextQuery.addRangeTerm(
+						"leftOrganizationId", leftAndRightOrganizationIds[i][0],
+						leftAndRightOrganizationIds[i][1]);
+				}
+			}
+		}
+	}
+
 	protected void postProcessSearchQuery(
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
@@ -317,22 +341,6 @@ public class OrganizationIndexer extends BaseIndexer {
 
 		if (Validator.isNotNull(expandoAttributes)) {
 			addSearchExpando(searchQuery, searchContext, expandoAttributes);
-		}
-
-		Long[][] leftAndRightOrganizationIds = (Long[][])params.get(
-			"organizationsTree");
-
-		if (leftAndRightOrganizationIds != null) {
-			if (leftAndRightOrganizationIds.length == 0) {
-				searchQuery.addRequiredTerm(Field.ORGANIZATION_ID, -1);
-			}
-			else if (leftAndRightOrganizationIds.length > 0) {
-				for (int i = 0; i < leftAndRightOrganizationIds.length; i++) {
-					searchQuery.addRangeTerm(
-						"leftOrganizationId", leftAndRightOrganizationIds[i][0],
-						leftAndRightOrganizationIds[i][1]);
-				}
-			}
 		}
 
 		String parentOrganizationId = (String)searchContext.getAttribute(
