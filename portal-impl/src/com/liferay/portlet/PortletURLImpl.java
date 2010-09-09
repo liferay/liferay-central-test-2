@@ -1075,7 +1075,7 @@ public class PortletURLImpl
 		}
 
 		if (BrowserSnifferUtil.isIe(_request) &&
-			result.length() > _IE_MAXIMUM_LENGTH_OF_URL) {
+			(result.length() > _URL_IE_MAXIMUM_LENGTH)) {
 
 			result = shortenURL(result, 2);
 		}
@@ -1297,58 +1297,56 @@ public class PortletURLImpl
 		}
 	}
 
-	protected String shortenURL(String url, int num) {
-		StringBuilder shortUrl = new StringBuilder();
-
-		String[] params = url.split(StringPool.AMPERSAND);
-
-		if (num == 0) {
+	protected String shortenURL(String url, int count) {
+		if (count == 0) {
 			return null;
 		}
 
-		for (int i=0; i < params.length; i++) {
+		StringBundler sb = new StringBundler();
+
+		String[] params = url.split(StringPool.AMPERSAND);
+
+		for (int i = 0; i < params.length; i++) {
 			String param = params[i];
 
-			int redirectIdx = param.indexOf("_redirect=");
+			if (param.contains("_backURL=") || param.contains("_redirect=") ||
+				param.contains("_returnToFullPageURL=")) {
 
-			int returnFullIdx = param.indexOf("_returnToFullPageURL=");
+				int pos = param.indexOf(StringPool.EQUAL);
 
-			int backUrlIdx = param.indexOf("_backURL=");
+				String qName = param.substring(0, pos);
 
-			if (redirectIdx > -1 || returnFullIdx > -1 || backUrlIdx > -1) {
-				int urlIdx = param.indexOf(StringPool.EQUAL);
+				String redirect = param.substring(pos + 1);
 
-				String qName = param.substring(0, urlIdx);
-				String redirectUrl = param.substring(urlIdx + 1);
+				redirect = HttpUtil.decodeURL(redirect);
 
-				redirectUrl = HttpUtil.decodeURL(redirectUrl);
+				String newURL = shortenURL(redirect, --count);
 
-				String newUrl = shortenURL(redirectUrl, --num);
+				if (newURL != null) {
+					newURL = HttpUtil.encodeURL(newURL);
 
-				if (newUrl != null) {
-					newUrl = HttpUtil.encodeURL(newUrl);
-					shortUrl.append(qName);
-					shortUrl.append(StringPool.EQUAL);
-					shortUrl.append(newUrl);
+					sb.append(qName);
+					sb.append(StringPool.EQUAL);
+					sb.append(newURL);
 
 					if (i < params.length - 1) {
-						shortUrl.append(StringPool.AMPERSAND);
+						sb.append(StringPool.AMPERSAND);
 					}
 				}
 			}
 			else {
-				shortUrl.append(param);
+				sb.append(param);
 
 				if (i < params.length - 1) {
-					shortUrl.append(StringPool.AMPERSAND);
+					sb.append(StringPool.AMPERSAND);
 				}
 			}
 		}
 
-		return shortUrl.toString();
+		return sb.toString();
 	}
 
-	private static final long _IE_MAXIMUM_LENGTH_OF_URL = 2083;
+	private static final long _URL_IE_MAXIMUM_LENGTH = 2083;
 
 	private static Log _log = LogFactoryUtil.getLog(PortletURLImpl.class);
 
