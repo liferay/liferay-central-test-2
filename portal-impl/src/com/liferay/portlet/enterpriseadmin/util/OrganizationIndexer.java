@@ -300,7 +300,9 @@ public class OrganizationIndexer extends BaseIndexer {
 			}
 		}
 
-		contextQuery.add(permissionQuery, BooleanClauseOccur.MUST);
+		if (!permissionQuery.clauses().isEmpty()) {
+			contextQuery.add(permissionQuery, BooleanClauseOccur.MUST);
+		}
 	}
 
 	protected void postProcessSearchQuery(
