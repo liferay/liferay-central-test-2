@@ -277,6 +277,38 @@ public class SocialEquityLogLocalServiceUtil {
 		getService().deactivateEquityLogs(userId, className, classPK, actionId);
 	}
 
+	public static com.liferay.portlet.social.SocialEquityDataSet getContributionEquityDataSet(
+		long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getContributionEquityDataSet(groupId, userId);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> getContributionEquityLogs(
+		long groupId, long userId, int actionDate)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getContributionEquityLogs(groupId, userId, actionDate);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.SocialEquityDataSet> getEquityDataSets(
+		long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getEquityDataSets(groupId, userId);
+	}
+
+	public static com.liferay.portlet.social.SocialEquityDataSet getParticipationEquityDataSet(
+		long groupId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getParticipationEquityDataSet(groupId, userId);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialEquityLog> getParticipationEquityLogs(
+		long groupId, long userId, int actionDate)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getParticipationEquityLogs(groupId, userId, actionDate);
+	}
+
 	public static void incrementSocialEquityAssetEntry_IQ(long assetEntryId,
 		com.liferay.portlet.social.model.SocialEquityValue socialEquityValue)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -298,6 +330,22 @@ public class SocialEquityLogLocalServiceUtil {
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.incrementSocialEquityUser_PQ(groupId, userId, socialEquityValue);
+	}
+
+	public static com.liferay.portlet.social.model.SocialEquityFeedEntry interpretEquityAction(
+		com.liferay.portlet.social.model.SocialEquityLog equityLog,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().interpretEquityAction(equityLog, themeDisplay);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialEquityFeedEntry> interpretEquityActions(
+		java.util.List<com.liferay.portlet.social.model.SocialEquityLog> equityLogs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().interpretEquityActions(equityLogs, themeDisplay);
 	}
 
 	public static void updateRanks() {
