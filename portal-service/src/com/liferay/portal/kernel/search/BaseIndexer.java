@@ -504,14 +504,6 @@ public abstract class BaseIndexer implements Indexer {
 			fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 		}
 
-		BooleanQuery permissionsQuery = BooleanQueryFactoryUtil.create();
-
-		postPermissionsSearchQuery(permissionsQuery, searchContext);
-
-		if (!permissionsQuery.clauses().isEmpty()) {
-			fullQuery.add(permissionsQuery, BooleanClauseOccur.MUST);
-		}
-
 		BooleanClause[] booleanClauses = searchContext.getBooleanClauses();
 
 		if (booleanClauses != null) {
@@ -641,11 +633,6 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	protected void postProcessSearchQuery(
-			BooleanQuery searchQuery, SearchContext searchContext)
-		throws Exception {
-	}
-
-	protected void postPermissionsSearchQuery(
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 	}

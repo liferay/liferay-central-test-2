@@ -48,7 +48,18 @@ public interface BooleanQuery extends Query {
 
 	public void addExactTerm(String field, String value);
 
+	public void addRangeTerm(String field, int startValue, int endValue);
+
+	public void addRangeTerm(
+		String field, Integer startValue, Integer endValue);
+
+	public void addRangeTerm(String field, long startValue, long endValue);
+
 	public void addRangeTerm(String field, Long startValue, Long endValue);
+
+	public void addRangeTerm(String field, short startValue, short endValue);
+
+	public void addRangeTerm(String field, Short startValue, Short endValue);
 
 	public void addRequiredTerm(String field, boolean value);
 

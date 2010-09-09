@@ -436,14 +436,14 @@ public class OrganizationLocalServiceWrapper implements OrganizationLocalService
 		long parentOrganizationId, java.lang.String name,
 		java.lang.String type, java.lang.String street, java.lang.String city,
 		java.lang.String zip, java.lang.String region,
-		java.lang.String country, java.lang.String expandoAttributes,
+		java.lang.String country,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andSearch, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _organizationLocalService.search(companyId,
 			parentOrganizationId, name, type, street, city, zip, region,
-			country, expandoAttributes, params, andSearch, start, end, sort);
+			country, params, andSearch, start, end, sort);
 	}
 
 	public int searchCount(long companyId, long parentOrganizationId,

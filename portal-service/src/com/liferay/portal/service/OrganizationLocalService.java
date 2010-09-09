@@ -371,7 +371,7 @@ public interface OrganizationLocalService {
 		long parentOrganizationId, java.lang.String name,
 		java.lang.String type, java.lang.String street, java.lang.String city,
 		java.lang.String zip, java.lang.String region,
-		java.lang.String country, java.lang.String expandoAttributes,
+		java.lang.String country,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andSearch, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort)

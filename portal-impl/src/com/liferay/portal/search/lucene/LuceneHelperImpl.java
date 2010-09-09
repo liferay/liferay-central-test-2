@@ -84,8 +84,8 @@ public class LuceneHelperImpl implements LuceneHelper {
 		BooleanQuery booleanQuery, String field, String startValue,
 		String endValue) {
 
-		TermRangeQuery termRangeQuery =
-			new TermRangeQuery(field, startValue, endValue, true, true);
+		TermRangeQuery termRangeQuery = new TermRangeQuery(
+			field, startValue, endValue, true, true);
 
 		booleanQuery.add(termRangeQuery, BooleanClause.Occur.SHOULD);
 	}

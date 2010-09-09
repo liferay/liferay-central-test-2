@@ -534,7 +534,6 @@ public class OrganizationLocalServiceImpl
 		String zip = null;
 		String region = null;
 		String country = null;
-		String expandoAttributes = null;
 		boolean andOperator = false;
 
 		if (Validator.isNotNull(keywords)) {
@@ -545,7 +544,6 @@ public class OrganizationLocalServiceImpl
 			zip = keywords;
 			region = keywords;
 			country = keywords;
-			expandoAttributes = keywords;
 		}
 		else {
 			andOperator = true;
@@ -553,8 +551,7 @@ public class OrganizationLocalServiceImpl
 
 		return search(
 			companyId, parentOrganizationId, name, type, street, city, zip,
-			region, country, expandoAttributes, params, andOperator, start, end,
-			sort);
+			region, country, params, andOperator, start, end, sort);
 	}
 
 	public List<Organization> search(
@@ -629,9 +626,8 @@ public class OrganizationLocalServiceImpl
 	public Hits search(
 			long companyId, long parentOrganizationId, String name, String type,
 			String street, String city, String zip, String region,
-			String country, String expandoAttributes,
-			LinkedHashMap<String, Object> params, boolean andSearch, int start,
-			int end, Sort sort)
+			String country, LinkedHashMap<String, Object> params,
+			boolean andSearch, int start, int end, Sort sort)
 		throws SystemException {
 
 		try {
@@ -640,7 +636,6 @@ public class OrganizationLocalServiceImpl
 
 			attributes.put("city", city);
 			attributes.put("country", country);
-			attributes.put("expandoAttributes", expandoAttributes);
 			attributes.put("name", name);
 			attributes.put("params", params);
 

@@ -82,8 +82,52 @@ public class LuceneHelperUtil {
 	}
 
 	public static void addRangeTerm(
+		BooleanQuery booleanQuery, String field, int startValue, int endValue) {
+
+		getLuceneHelper().addRangeTerm(
+			booleanQuery, field, String.valueOf(startValue),
+			String.valueOf(endValue));
+	}
+
+	public static void addRangeTerm(
+		BooleanQuery booleanQuery, String field, Integer startValue,
+		Integer endValue) {
+
+		getLuceneHelper().addRangeTerm(
+			booleanQuery, field, String.valueOf(startValue),
+			String.valueOf(endValue));
+	}
+
+	public static void addRangeTerm(
+		BooleanQuery booleanQuery, String field, long startValue,
+		long endValue) {
+
+		getLuceneHelper().addRangeTerm(
+			booleanQuery, field, String.valueOf(startValue),
+			String.valueOf(endValue));
+	}
+
+	public static void addRangeTerm(
 		BooleanQuery booleanQuery, String field, Long startValue,
 		Long endValue) {
+
+		getLuceneHelper().addRangeTerm(
+			booleanQuery, field, String.valueOf(startValue),
+			String.valueOf(endValue));
+	}
+
+	public static void addRangeTerm(
+		BooleanQuery booleanQuery, String field, short startValue,
+		short endValue) {
+
+		getLuceneHelper().addRangeTerm(
+			booleanQuery, field, String.valueOf(startValue),
+			String.valueOf(endValue));
+	}
+
+	public static void addRangeTerm(
+		BooleanQuery booleanQuery, String field, Short startValue,
+		Short endValue) {
 
 		getLuceneHelper().addRangeTerm(
 			booleanQuery, field, String.valueOf(startValue),

@@ -87,10 +87,36 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 		add(termQuery, BooleanClauseOccur.SHOULD);
 	}
 
-	public void addRangeTerm(String field, Long startValue, Long endValue) {
-		for (int i = startValue.intValue(); i <= endValue.intValue(); i++) {
-			addTerm(field, String.valueOf(i));
+	public void addRangeTerm(String field, int startValue, int endValue) {
+		for (int i = startValue; i <= endValue; i++) {
+			addTerm(field, i);
 		}
+	}
+
+	public void addRangeTerm(
+		String field, Integer startValue, Integer endValue) {
+
+		addRangeTerm(field, startValue.intValue(), endValue.intValue());
+	}
+
+	public void addRangeTerm(String field, long startValue, long endValue) {
+		for (long i = startValue; i <= endValue; i++) {
+			addTerm(field, i);
+		}
+	}
+
+	public void addRangeTerm(String field, Long startValue, Long endValue) {
+		addRangeTerm(field, startValue.longValue(), endValue.longValue());
+	}
+
+	public void addRangeTerm(String field, short startValue, short endValue) {
+		for (short i = startValue; i <= endValue; i++) {
+			addTerm(field, i);
+		}
+	}
+
+	public void addRangeTerm(String field, Short startValue, Short endValue) {
+		addRangeTerm(field, startValue.shortValue(), endValue.shortValue());
 	}
 
 	public void addRequiredTerm(String field, boolean value) {
