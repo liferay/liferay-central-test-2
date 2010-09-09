@@ -87,6 +87,12 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 		add(termQuery, BooleanClauseOccur.SHOULD);
 	}
 
+	public void addRangeTerm(String field, Long startValue, Long endValue) {
+		for (int i = startValue.intValue(); i <= endValue.intValue(); i++) {
+			addTerm(field, String.valueOf(i));
+		}
+	}
+
 	public void addRequiredTerm(String field, boolean value) {
 		addRequiredTerm(field, String.valueOf(value), false);
 	}

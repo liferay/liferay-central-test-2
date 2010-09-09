@@ -81,6 +81,15 @@ public class LuceneHelperUtil {
 		getLuceneHelper().addExactTerm(booleanQuery, field, value);
 	}
 
+	public static void addRangeTerm(
+		BooleanQuery booleanQuery, String field, Long startValue,
+		Long endValue) {
+
+		getLuceneHelper().addRangeTerm(
+			booleanQuery, field, String.valueOf(startValue),
+			String.valueOf(endValue));
+	}
+
 	public static void addRequiredTerm(
 		BooleanQuery booleanQuery, String field, boolean value) {
 

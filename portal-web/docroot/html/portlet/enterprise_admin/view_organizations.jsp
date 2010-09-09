@@ -52,7 +52,7 @@ if (Validator.isNotNull(viewOrganizationsRedirect)) {
 
 	LinkedHashMap organizationParams = new LinkedHashMap();
 
-	if (filterManageableOrganizations && !PropsValues.ORGANIZATIONS_SEARCH_WITH_INDEX) {
+	if (filterManageableOrganizations) {
 		Long[][] leftAndRightOrganizationIds = EnterpriseAdminUtil.getLeftAndRightOrganizationIds(user.getOrganizations());
 
 		organizationParams.put("organizationsTree", leftAndRightOrganizationIds);

@@ -35,6 +35,10 @@ public interface LuceneHelper {
 	public void addExactTerm(
 		BooleanQuery booleanQuery, String field, String value);
 
+	public void addRangeTerm(
+		BooleanQuery booleanQuery, String field, String startValue,
+		String endValue);
+
 	public void addRequiredTerm(
 		BooleanQuery booleanQuery, String field, String value, boolean like);
 

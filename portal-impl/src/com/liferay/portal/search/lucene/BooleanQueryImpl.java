@@ -97,6 +97,11 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 		LuceneHelperUtil.addExactTerm(_booleanQuery, field, value);
 	}
 
+	public void addRangeTerm(String field, Long startValue, Long endValue) {
+		LuceneHelperUtil.addRangeTerm(_booleanQuery, field, startValue,
+		endValue);
+	}
+
 	public void addRequiredTerm(String field, boolean value) {
 		LuceneHelperUtil.addRequiredTerm(_booleanQuery, field, value);
 	}

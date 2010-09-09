@@ -45,6 +45,7 @@ import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TermQuery;
+import org.apache.lucene.search.TermRangeQuery;
 import org.apache.lucene.search.WildcardQuery;
 import org.apache.lucene.search.highlight.Highlighter;
 import org.apache.lucene.search.highlight.InvalidTokenOffsetsException;
@@ -77,6 +78,16 @@ public class LuceneHelperImpl implements LuceneHelper {
 		Query query = new TermQuery(new Term(field, value));
 
 		booleanQuery.add(query, BooleanClause.Occur.SHOULD);
+	}
+
+	public void addRangeTerm(
+		BooleanQuery booleanQuery, String field, String startValue,
+		String endValue) {
+
+		TermRangeQuery termRangeQuery =
+			new TermRangeQuery(field, startValue, endValue, true, true);
+
+		booleanQuery.add(termRangeQuery, BooleanClause.Occur.SHOULD);
 	}
 
 	public void addRequiredTerm(

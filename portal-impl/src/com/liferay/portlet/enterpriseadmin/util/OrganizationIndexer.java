@@ -45,6 +45,7 @@ import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,6 +107,8 @@ public class OrganizationIndexer extends BaseIndexer {
 		String type = organization.getType();
 		long regionId = organization.getRegionId();
 		long countryId = organization.getCountryId();
+		long leftOrganizationId = organization.getLeftOrganizationId();
+		long rightOrganizationId = organization.getRightOrganizationId();
 
 		List<Address> addresses = organization.getAddresses();
 
@@ -166,6 +169,8 @@ public class OrganizationIndexer extends BaseIndexer {
 		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		document.addKeyword(Field.ORGANIZATION_ID, organizationId);
 		document.addKeyword("parentOrganizationId", parentOrganizationId);
+		document.addKeyword("leftOrganizationId", leftOrganizationId);
+		document.addKeyword("rightOrganizationId", rightOrganizationId);
 		document.addKeyword("name", name, true);
 		document.addKeyword("type", type);
 		document.addKeyword(
@@ -269,6 +274,43 @@ public class OrganizationIndexer extends BaseIndexer {
 		return PORTLET_ID;
 	}
 
+	protected void postPermissionsSearchQuery(
+			BooleanQuery searchQuery, SearchContext searchContext)
+		throws Exception {
+
+		LinkedHashMap<String, Object> params =
+			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
+
+		if (!(params == null || params.isEmpty())) {
+			Iterator<Map.Entry<String, Object>> itr =
+				params.entrySet().iterator();
+
+			while (itr.hasNext()) {
+				Map.Entry<String, Object> entry = itr.next();
+
+				Object value = entry.getValue();
+
+				if (Validator.isNotNull(value)) {
+					if (entry.getKey().equals("organizationsTree")) {
+						Long[][] leftAndRightOrganizationIds = (Long[][])value;
+
+						if (leftAndRightOrganizationIds.length > 0) {
+							for (int i = 0;
+								i < leftAndRightOrganizationIds.length;
+								i++) {
+
+								searchQuery.addRangeTerm(
+									"leftOrganizationId",
+									leftAndRightOrganizationIds[i][0],
+									leftAndRightOrganizationIds[i][1]);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
 	protected void postProcessSearchQuery(
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
@@ -306,10 +348,8 @@ public class OrganizationIndexer extends BaseIndexer {
 			}
 		}
 
-		LinkedHashMap<String, Object> params =
-			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
-
-		String expandoAttributes = (String)params.get("expandoAttributes");
+		String expandoAttributes =
+			(String)searchContext.getAttribute("expandoAttributes");
 
 		if (Validator.isNotNull(expandoAttributes)) {
 			addSearchExpando(searchQuery, searchContext, expandoAttributes);
