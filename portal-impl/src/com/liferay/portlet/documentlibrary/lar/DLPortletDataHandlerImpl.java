@@ -267,12 +267,44 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				fileEntry.getUuid(), context.getScopeGroupId());
 
 			if (existingFileEntry == null) {
+				String fileEntryTitle = fileEntry.getTitle();
+
+				DLFileEntry existingTitleFileEntry =
+					DLFileEntryUtil.fetchByG_F_T(
+						context.getScopeGroupId(), folderId,
+						fileEntry.getTitle());
+
+				if (existingTitleFileEntry != null) {
+					if (context.isDataStrategyMirrorWithOverwritting()) {
+						DLFileEntryLocalServiceUtil.deleteDLFileEntry(
+							existingTitleFileEntry);
+					}
+					else {
+						String originalTitle = 	fileEntryTitle;
+
+						for (int i = 1;; i++) {
+							fileEntryTitle =
+								originalTitle + StringPool.SPACE + i;
+
+							existingTitleFileEntry =
+								DLFileEntryUtil.findByG_F_T(
+									context.getScopeGroupId(), folderId,
+									fileEntry.getTitle());
+
+							if (existingTitleFileEntry == null) {
+								break;
+							}
+
+						}
+					}
+				}
+
 				serviceContext.setUuid(fileEntry.getUuid());
 
 				importedFileEntry =
 					DLFileEntryLocalServiceUtil.addFileEntry(
 						userId, context.getScopeGroupId(), folderId,
-						nameWithExtension, fileEntry.getTitle(),
+						nameWithExtension, fileEntryTitle,
 						fileEntry.getDescription(), null,
 						fileEntry.getExtraSettings(), is, fileEntry.getSize(),
 						serviceContext);

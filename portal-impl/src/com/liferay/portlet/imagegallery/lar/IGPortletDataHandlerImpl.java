@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.imagegallery.lar;
 
+import com.liferay.portal.kernel.image.ImageProcessor;
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
@@ -320,11 +321,39 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 				image.getUuid(), context.getScopeGroupId());
 
 			if (existingImage == null) {
+				String imageName = image.getName();
+
+				IGImage existingNameImage = getImage(
+					context.getScopeGroupId(), image.getFolderId(), imageName,
+					image.getImageType());
+
+				if (existingNameImage != null) {
+					if (context.isDataStrategyMirrorWithOverwritting()) {
+						IGImageLocalServiceUtil.deleteIGImage(
+							existingNameImage);
+					}
+					else {
+						String originalName = imageName;
+
+						for (int i = 1;; i++) {
+							imageName = originalName + StringPool.SPACE + i;
+
+							existingNameImage = getImage(
+								context.getScopeGroupId(), image.getFolderId(),
+								imageName, image.getImageType());
+
+							if (existingNameImage == null) {
+								break;
+							}
+						}
+					}
+				}
+
 				serviceContext.setUuid(image.getUuid());
 
 				importedImage = IGImageLocalServiceUtil.addImage(
 					userId, context.getScopeGroupId(), folderId,
-					image.getName(), image.getDescription(), imageFile,
+					imageName, image.getDescription(), imageFile,
 					image.getImageType(), serviceContext);
 			}
 			else {
@@ -475,6 +504,29 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		sb.append(".xml");
 
 		return sb.toString();
+	}
+
+	protected static IGImage getImage(
+			long groupId, long folderId, String name, String imageType)
+		throws Exception{
+
+		List<IGImage> images = IGImageUtil.findByG_F_N(
+			groupId, folderId, name);
+
+		if (imageType.equals("jpeg")) {
+			imageType = ImageProcessor.TYPE_JPEG;
+		}
+		else if (imageType.equals("tif")) {
+			imageType = ImageProcessor.TYPE_TIFF;
+		}
+
+		for (IGImage image : images) {
+			if (imageType.equals(image.getImageType())) {
+				return image;
+			}
+		}
+
+		return null;
 	}
 
 	protected static String getImageBinPath(

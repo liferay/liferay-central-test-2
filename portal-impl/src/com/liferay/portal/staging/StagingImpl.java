@@ -331,7 +331,8 @@ public class StagingImpl implements Staging {
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.DATA_STRATEGY,
-			new String[] {PortletDataHandlerKeys.DATA_STRATEGY_MIRROR});
+			new String[] {
+				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR_WITH_OVERWRITTING});
 		parameterMap.put(
 			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
 			new String[] {Boolean.TRUE.toString()});
@@ -379,7 +380,9 @@ public class StagingImpl implements Staging {
 		if (!parameterMap.containsKey(PortletDataHandlerKeys.DATA_STRATEGY)) {
 			parameterMap.put(
 				PortletDataHandlerKeys.DATA_STRATEGY,
-				new String[] {PortletDataHandlerKeys.DATA_STRATEGY_MIRROR});
+				new String[] {
+					PortletDataHandlerKeys.
+						DATA_STRATEGY_MIRROR_WITH_OVERWRITTING});
 		}
 
 		if (!parameterMap.containsKey(

@@ -28,6 +28,9 @@ public class PortletDataHandlerKeys {
 
 	public static final String DATA_STRATEGY_MIRROR = "DATA_STRATEGY_MIRROR";
 
+	public static final String DATA_STRATEGY_MIRROR_WITH_OVERWRITTING =
+		"DATA_STRATEGY_MIRROR_WITH_OVERWRITTING";
+
 	public static final String DELETE_MISSING_LAYOUTS =
 		"DELETE_MISSING_LAYOUTS";
 

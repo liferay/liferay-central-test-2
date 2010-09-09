@@ -95,6 +95,9 @@
 										<aui:input checked="<%= true %>" helpMessage="import-data-strategy-mirror-help" id="mirror" inlineLabel="right" label="mirror" name="<%= PortletDataHandlerKeys.DATA_STRATEGY %>" type="radio" value="<%= PortletDataHandlerKeys.DATA_STRATEGY_MIRROR %>" />
 									</li>
 									<li>
+										<aui:input helpMessage="import-data-strategy-mirror-with-overwritting-help" id="mirror_with_overwritting" inlineLabel="right" label="mirror-with-overwritting" name="<%= PortletDataHandlerKeys.DATA_STRATEGY %>" type="radio" value="<%= PortletDataHandlerKeys.DATA_STRATEGY_MIRROR_WITH_OVERWRITTING %>" />
+									</li>
+									<li>
 										<aui:input helpMessage="import-data-strategy-copy-as-new-help" id="copy_as_new" inlineLabel="right" label="copy-as-new" name="<%= PortletDataHandlerKeys.DATA_STRATEGY %>" type="radio" value="<%= PortletDataHandlerKeys.DATA_STRATEGY_COPY_AS_NEW %>" />
 									</li>
 								</ul>
