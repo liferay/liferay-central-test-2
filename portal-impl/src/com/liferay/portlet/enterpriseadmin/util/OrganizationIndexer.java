@@ -19,7 +19,9 @@ import com.liferay.portal.NoSuchRegionException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BaseIndexer;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
@@ -277,6 +279,8 @@ public class OrganizationIndexer extends BaseIndexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
+		BooleanQuery permissionQuery = BooleanQueryFactoryUtil.create();
+
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
 
@@ -285,16 +289,18 @@ public class OrganizationIndexer extends BaseIndexer {
 
 		if (leftAndRightOrganizationIds != null) {
 			if (leftAndRightOrganizationIds.length == 0) {
-				contextQuery.addRequiredTerm(Field.ORGANIZATION_ID, -1);
+				permissionQuery.addRequiredTerm(Field.ORGANIZATION_ID, -1);
 			}
 			else if (leftAndRightOrganizationIds.length > 0) {
 				for (int i = 0; i < leftAndRightOrganizationIds.length; i++) {
-					contextQuery.addRangeTerm(
+					permissionQuery.addRangeTerm(
 						"leftOrganizationId", leftAndRightOrganizationIds[i][0],
 						leftAndRightOrganizationIds[i][1]);
 				}
 			}
 		}
+
+		contextQuery.add(permissionQuery, BooleanClauseOccur.MUST);
 	}
 
 	protected void postProcessSearchQuery(
