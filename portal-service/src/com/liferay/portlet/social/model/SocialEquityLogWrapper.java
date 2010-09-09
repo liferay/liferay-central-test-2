@@ -273,6 +273,24 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 		_socialEquityLog.setValue(value);
 	}
 
+	/**
+	* Gets the extra data of this social equity log.
+	*
+	* @return the extra data of this social equity log
+	*/
+	public java.lang.String getExtraData() {
+		return _socialEquityLog.getExtraData();
+	}
+
+	/**
+	* Sets the extra data of this social equity log.
+	*
+	* @param extraData the extra data of this social equity log
+	*/
+	public void setExtraData(java.lang.String extraData) {
+		_socialEquityLog.setExtraData(extraData);
+	}
+
 	public boolean isNew() {
 		return _socialEquityLog.isNew();
 	}

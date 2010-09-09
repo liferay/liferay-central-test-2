@@ -107,39 +107,24 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 				Long.class.getName(), Long.class.getName(),
 				Boolean.class.getName(), Integer.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FIND_BY_U_AID_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_AEI_AID_A_T_E = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByU_AID_A_T",
+			FINDER_CLASS_NAME_LIST, "findByAEI_AID_A_T_E",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
 				Boolean.class.getName(), Integer.class.getName(),
+				String.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_U_AID_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_AEI_AID_A_T_E = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByU_AID_A_T",
-			new String[] {
-				Long.class.getName(), String.class.getName(),
-				Boolean.class.getName(), Integer.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_FIND_BY_AEI_AID_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
-			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByAEI_AID_A_T",
+			FINDER_CLASS_NAME_LIST, "countByAEI_AID_A_T_E",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
 				Boolean.class.getName(), Integer.class.getName(),
-				
-			"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_AEI_AID_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
-			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByAEI_AID_A_T",
-			new String[] {
-				Long.class.getName(), String.class.getName(),
-				Boolean.class.getName(), Integer.class.getName()
+				String.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_FIND_BY_G_U_AD_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
@@ -160,59 +145,80 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 				Integer.class.getName(), Boolean.class.getName(),
 				Integer.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FIND_BY_U_AID_AD_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_U_AID_A_T_E = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByU_AID_AD_A_T",
+			FINDER_CLASS_NAME_LIST, "findByU_AID_A_T_E",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
-				Integer.class.getName(), Boolean.class.getName(),
-				Integer.class.getName(),
+				Boolean.class.getName(), Integer.class.getName(),
+				String.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_U_AID_AD_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_U_AID_A_T_E = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByU_AID_AD_A_T",
+			FINDER_CLASS_NAME_LIST, "countByU_AID_A_T_E",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
-				Integer.class.getName(), Boolean.class.getName(),
-				Integer.class.getName()
+				Boolean.class.getName(), Integer.class.getName(),
+				String.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FIND_BY_AEI_AID_AD_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_AEI_AID_AD_A_T_E = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByAEI_AID_AD_A_T",
+			FINDER_CLASS_NAME_LIST, "findByAEI_AID_AD_A_T_E",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
 				Integer.class.getName(), Boolean.class.getName(),
-				Integer.class.getName(),
+				Integer.class.getName(), String.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_AEI_AID_AD_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_AEI_AID_AD_A_T_E = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByAEI_AID_AD_A_T",
+			FINDER_CLASS_NAME_LIST, "countByAEI_AID_AD_A_T_E",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
 				Integer.class.getName(), Boolean.class.getName(),
-				Integer.class.getName()
+				Integer.class.getName(), String.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_U_AID_AD_A_T_E = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_ENTITY, "fetchByU_AEI_AID_AD_A_T",
+			FINDER_CLASS_NAME_LIST, "findByU_AID_AD_A_T_E",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				Integer.class.getName(), Boolean.class.getName(),
+				Integer.class.getName(), String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_U_AID_AD_A_T_E = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByU_AID_AD_A_T_E",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				Integer.class.getName(), Boolean.class.getName(),
+				Integer.class.getName(), String.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T_E = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByU_AEI_AID_AD_A_T_E",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				String.class.getName(), Integer.class.getName(),
-				Boolean.class.getName(), Integer.class.getName()
+				Boolean.class.getName(), Integer.class.getName(),
+				String.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_U_AEI_AID_AD_A_T = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_U_AEI_AID_AD_A_T_E = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByU_AEI_AID_AD_A_T",
+			FINDER_CLASS_NAME_LIST, "countByU_AEI_AID_AD_A_T_E",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				String.class.getName(), Integer.class.getName(),
-				Boolean.class.getName(), Integer.class.getName()
+				Boolean.class.getName(), Integer.class.getName(),
+				String.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogModelImpl.FINDER_CACHE_ENABLED,
@@ -231,7 +237,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			SocialEquityLogImpl.class, socialEquityLog.getPrimaryKey(),
 			socialEquityLog);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T,
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T_E,
 			new Object[] {
 				new Long(socialEquityLog.getUserId()),
 				new Long(socialEquityLog.getAssetEntryId()),
@@ -239,7 +245,9 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			socialEquityLog.getActionId(),
 				new Integer(socialEquityLog.getActionDate()),
 				Boolean.valueOf(socialEquityLog.getActive()),
-				new Integer(socialEquityLog.getType())
+				new Integer(socialEquityLog.getType()),
+				
+			socialEquityLog.getExtraData()
 			}, socialEquityLog);
 	}
 
@@ -284,7 +292,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		EntityCacheUtil.removeResult(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogImpl.class, socialEquityLog.getPrimaryKey());
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T,
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T_E,
 			new Object[] {
 				new Long(socialEquityLog.getUserId()),
 				new Long(socialEquityLog.getAssetEntryId()),
@@ -292,7 +300,9 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			socialEquityLog.getActionId(),
 				new Integer(socialEquityLog.getActionDate()),
 				Boolean.valueOf(socialEquityLog.getActive()),
-				new Integer(socialEquityLog.getType())
+				new Integer(socialEquityLog.getType()),
+				
+			socialEquityLog.getExtraData()
 			});
 	}
 
@@ -386,7 +396,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 		SocialEquityLogModelImpl socialEquityLogModelImpl = (SocialEquityLogModelImpl)socialEquityLog;
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T,
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T_E,
 			new Object[] {
 				new Long(socialEquityLogModelImpl.getOriginalUserId()),
 				new Long(socialEquityLogModelImpl.getOriginalAssetEntryId()),
@@ -394,7 +404,9 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			socialEquityLogModelImpl.getOriginalActionId(),
 				new Integer(socialEquityLogModelImpl.getOriginalActionDate()),
 				Boolean.valueOf(socialEquityLogModelImpl.getOriginalActive()),
-				new Integer(socialEquityLogModelImpl.getOriginalType())
+				new Integer(socialEquityLogModelImpl.getOriginalType()),
+				
+			socialEquityLogModelImpl.getOriginalExtraData()
 			});
 
 		EntityCacheUtil.removeResult(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
@@ -441,8 +453,10 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 					socialEquityLogModelImpl.getOriginalActionId()) ||
 				(socialEquityLog.getActionDate() != socialEquityLogModelImpl.getOriginalActionDate()) ||
 				(socialEquityLog.getActive() != socialEquityLogModelImpl.getOriginalActive()) ||
-				(socialEquityLog.getType() != socialEquityLogModelImpl.getOriginalType()))) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T,
+				(socialEquityLog.getType() != socialEquityLogModelImpl.getOriginalType()) ||
+				!Validator.equals(socialEquityLog.getExtraData(),
+					socialEquityLogModelImpl.getOriginalExtraData()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T_E,
 				new Object[] {
 					new Long(socialEquityLogModelImpl.getOriginalUserId()),
 					new Long(socialEquityLogModelImpl.getOriginalAssetEntryId()),
@@ -451,7 +465,9 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 					new Integer(socialEquityLogModelImpl.getOriginalActionDate()),
 					Boolean.valueOf(
 						socialEquityLogModelImpl.getOriginalActive()),
-					new Integer(socialEquityLogModelImpl.getOriginalType())
+					new Integer(socialEquityLogModelImpl.getOriginalType()),
+					
+				socialEquityLogModelImpl.getOriginalExtraData()
 				});
 		}
 
@@ -462,8 +478,10 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 					socialEquityLogModelImpl.getOriginalActionId()) ||
 				(socialEquityLog.getActionDate() != socialEquityLogModelImpl.getOriginalActionDate()) ||
 				(socialEquityLog.getActive() != socialEquityLogModelImpl.getOriginalActive()) ||
-				(socialEquityLog.getType() != socialEquityLogModelImpl.getOriginalType()))) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T,
+				(socialEquityLog.getType() != socialEquityLogModelImpl.getOriginalType()) ||
+				!Validator.equals(socialEquityLog.getExtraData(),
+					socialEquityLogModelImpl.getOriginalExtraData()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T_E,
 				new Object[] {
 					new Long(socialEquityLog.getUserId()),
 					new Long(socialEquityLog.getAssetEntryId()),
@@ -471,7 +489,9 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 				socialEquityLog.getActionId(),
 					new Integer(socialEquityLog.getActionDate()),
 					Boolean.valueOf(socialEquityLog.getActive()),
-					new Integer(socialEquityLog.getType())
+					new Integer(socialEquityLog.getType()),
+					
+				socialEquityLog.getExtraData()
 				}, socialEquityLog);
 		}
 
@@ -499,6 +519,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		socialEquityLogImpl.setExpiration(socialEquityLog.getExpiration());
 		socialEquityLogImpl.setType(socialEquityLog.getType());
 		socialEquityLogImpl.setValue(socialEquityLog.getValue());
+		socialEquityLogImpl.setExtraData(socialEquityLog.getExtraData());
 
 		return socialEquityLogImpl;
 	}
@@ -1356,464 +1377,25 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	}
 
 	/**
-	 * Finds all the social equity logs where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
-	 *
-	 * @param userId the user id to search with
-	 * @param actionId the action id to search with
-	 * @param active the active to search with
-	 * @param type the type to search with
-	 * @return the matching social equity logs
-	 * @throws SystemException if a system exception occurred
-	 */
-	public List<SocialEquityLog> findByU_AID_A_T(long userId, String actionId,
-		boolean active, int type) throws SystemException {
-		return findByU_AID_A_T(userId, actionId, active, type,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	/**
-	 * Finds a range of all the social equity logs where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param userId the user id to search with
-	 * @param actionId the action id to search with
-	 * @param active the active to search with
-	 * @param type the type to search with
-	 * @param start the lower bound of the range of social equity logs to return
-	 * @param end the upper bound of the range of social equity logs to return (not inclusive)
-	 * @return the range of matching social equity logs
-	 * @throws SystemException if a system exception occurred
-	 */
-	public List<SocialEquityLog> findByU_AID_A_T(long userId, String actionId,
-		boolean active, int type, int start, int end) throws SystemException {
-		return findByU_AID_A_T(userId, actionId, active, type, start, end, null);
-	}
-
-	/**
-	 * Finds an ordered range of all the social equity logs where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param userId the user id to search with
-	 * @param actionId the action id to search with
-	 * @param active the active to search with
-	 * @param type the type to search with
-	 * @param start the lower bound of the range of social equity logs to return
-	 * @param end the upper bound of the range of social equity logs to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
-	 * @return the ordered range of matching social equity logs
-	 * @throws SystemException if a system exception occurred
-	 */
-	public List<SocialEquityLog> findByU_AID_A_T(long userId, String actionId,
-		boolean active, int type, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				userId, actionId, active, type,
-				
-				String.valueOf(start), String.valueOf(end),
-				String.valueOf(orderByComparator)
-			};
-
-		List<SocialEquityLog> list = (List<SocialEquityLog>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_U_AID_A_T,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(6 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(5);
-				}
-
-				query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
-
-				query.append(_FINDER_COLUMN_U_AID_A_T_USERID_2);
-
-				if (actionId == null) {
-					query.append(_FINDER_COLUMN_U_AID_A_T_ACTIONID_1);
-				}
-				else {
-					if (actionId.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_U_AID_A_T_ACTIONID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_U_AID_A_T_ACTIONID_2);
-					}
-				}
-
-				query.append(_FINDER_COLUMN_U_AID_A_T_ACTIVE_2);
-
-				query.append(_FINDER_COLUMN_U_AID_A_T_TYPE_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(userId);
-
-				if (actionId != null) {
-					qPos.add(actionId);
-				}
-
-				qPos.add(active);
-
-				qPos.add(type);
-
-				list = (List<SocialEquityLog>)QueryUtil.list(q, getDialect(),
-						start, end);
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					list = new ArrayList<SocialEquityLog>();
-				}
-
-				cacheResult(list);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_AID_A_T,
-					finderArgs, list);
-
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Finds the first social equity log in the ordered set where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param userId the user id to search with
-	 * @param actionId the action id to search with
-	 * @param active the active to search with
-	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
-	 * @return the first matching social equity log
-	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public SocialEquityLog findByU_AID_A_T_First(long userId, String actionId,
-		boolean active, int type, OrderByComparator orderByComparator)
-		throws NoSuchEquityLogException, SystemException {
-		List<SocialEquityLog> list = findByU_AID_A_T(userId, actionId, active,
-				type, 0, 1, orderByComparator);
-
-		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(10);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("userId=");
-			msg.append(userId);
-
-			msg.append(", actionId=");
-			msg.append(actionId);
-
-			msg.append(", active=");
-			msg.append(active);
-
-			msg.append(", type=");
-			msg.append(type);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchEquityLogException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	/**
-	 * Finds the last social equity log in the ordered set where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param userId the user id to search with
-	 * @param actionId the action id to search with
-	 * @param active the active to search with
-	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
-	 * @return the last matching social equity log
-	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public SocialEquityLog findByU_AID_A_T_Last(long userId, String actionId,
-		boolean active, int type, OrderByComparator orderByComparator)
-		throws NoSuchEquityLogException, SystemException {
-		int count = countByU_AID_A_T(userId, actionId, active, type);
-
-		List<SocialEquityLog> list = findByU_AID_A_T(userId, actionId, active,
-				type, count - 1, count, orderByComparator);
-
-		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(10);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("userId=");
-			msg.append(userId);
-
-			msg.append(", actionId=");
-			msg.append(actionId);
-
-			msg.append(", active=");
-			msg.append(active);
-
-			msg.append(", type=");
-			msg.append(type);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchEquityLogException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	/**
-	 * Finds the social equity logs before and after the current social equity log in the ordered set where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param equityLogId the primary key of the current social equity log
-	 * @param userId the user id to search with
-	 * @param actionId the action id to search with
-	 * @param active the active to search with
-	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
-	 * @return the previous, current, and next social equity log
-	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a social equity log with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public SocialEquityLog[] findByU_AID_A_T_PrevAndNext(long equityLogId,
-		long userId, String actionId, boolean active, int type,
-		OrderByComparator orderByComparator)
-		throws NoSuchEquityLogException, SystemException {
-		SocialEquityLog socialEquityLog = findByPrimaryKey(equityLogId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			SocialEquityLog[] array = new SocialEquityLogImpl[3];
-
-			array[0] = getByU_AID_A_T_PrevAndNext(session, socialEquityLog,
-					userId, actionId, active, type, orderByComparator, true);
-
-			array[1] = socialEquityLog;
-
-			array[2] = getByU_AID_A_T_PrevAndNext(session, socialEquityLog,
-					userId, actionId, active, type, orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected SocialEquityLog getByU_AID_A_T_PrevAndNext(Session session,
-		SocialEquityLog socialEquityLog, long userId, String actionId,
-		boolean active, int type, OrderByComparator orderByComparator,
-		boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(6 +
-					(orderByComparator.getOrderByFields().length * 6));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
-
-		query.append(_FINDER_COLUMN_U_AID_A_T_USERID_2);
-
-		if (actionId == null) {
-			query.append(_FINDER_COLUMN_U_AID_A_T_ACTIONID_1);
-		}
-		else {
-			if (actionId.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_U_AID_A_T_ACTIONID_3);
-			}
-			else {
-				query.append(_FINDER_COLUMN_U_AID_A_T_ACTIONID_2);
-			}
-		}
-
-		query.append(_FINDER_COLUMN_U_AID_A_T_ACTIVE_2);
-
-		query.append(_FINDER_COLUMN_U_AID_A_T_TYPE_2);
-
-		if (orderByComparator != null) {
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			if (orderByFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(userId);
-
-		if (actionId != null) {
-			qPos.add(actionId);
-		}
-
-		qPos.add(active);
-
-		qPos.add(type);
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByValues(socialEquityLog);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<SocialEquityLog> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Finds all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
+	 * Finds all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	 *
 	 * @param assetEntryId the asset entry id to search with
 	 * @param actionId the action id to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @return the matching social equity logs
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<SocialEquityLog> findByAEI_AID_A_T(long assetEntryId,
-		String actionId, boolean active, int type) throws SystemException {
-		return findByAEI_AID_A_T(assetEntryId, actionId, active, type,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	/**
-	 * Finds a range of all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param assetEntryId the asset entry id to search with
-	 * @param actionId the action id to search with
-	 * @param active the active to search with
-	 * @param type the type to search with
-	 * @param start the lower bound of the range of social equity logs to return
-	 * @param end the upper bound of the range of social equity logs to return (not inclusive)
-	 * @return the range of matching social equity logs
-	 * @throws SystemException if a system exception occurred
-	 */
-	public List<SocialEquityLog> findByAEI_AID_A_T(long assetEntryId,
-		String actionId, boolean active, int type, int start, int end)
+	public List<SocialEquityLog> findByAEI_AID_A_T_E(long assetEntryId,
+		String actionId, boolean active, int type, String extraData)
 		throws SystemException {
-		return findByAEI_AID_A_T(assetEntryId, actionId, active, type, start,
-			end, null);
+		return findByAEI_AID_A_T_E(assetEntryId, actionId, active, type,
+			extraData, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
+	 * Finds a range of all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1823,23 +1405,48 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param actionId the action id to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
+	 * @param start the lower bound of the range of social equity logs to return
+	 * @param end the upper bound of the range of social equity logs to return (not inclusive)
+	 * @return the range of matching social equity logs
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<SocialEquityLog> findByAEI_AID_A_T_E(long assetEntryId,
+		String actionId, boolean active, int type, String extraData, int start,
+		int end) throws SystemException {
+		return findByAEI_AID_A_T_E(assetEntryId, actionId, active, type,
+			extraData, start, end, null);
+	}
+
+	/**
+	 * Finds an ordered range of all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param assetEntryId the asset entry id to search with
+	 * @param actionId the action id to search with
+	 * @param active the active to search with
+	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @param start the lower bound of the range of social equity logs to return
 	 * @param end the upper bound of the range of social equity logs to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
 	 * @return the ordered range of matching social equity logs
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<SocialEquityLog> findByAEI_AID_A_T(long assetEntryId,
-		String actionId, boolean active, int type, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+	public List<SocialEquityLog> findByAEI_AID_A_T_E(long assetEntryId,
+		String actionId, boolean active, int type, String extraData, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				assetEntryId, actionId, active, type,
+				assetEntryId, actionId, active, type, extraData,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
-		List<SocialEquityLog> list = (List<SocialEquityLog>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_AEI_AID_A_T,
+		List<SocialEquityLog> list = (List<SocialEquityLog>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_AEI_AID_A_T_E,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1851,32 +1458,44 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 				StringBundler query = null;
 
 				if (orderByComparator != null) {
-					query = new StringBundler(6 +
+					query = new StringBundler(7 +
 							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
-					query = new StringBundler(5);
+					query = new StringBundler(6);
 				}
 
 				query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
 
-				query.append(_FINDER_COLUMN_AEI_AID_A_T_ASSETENTRYID_2);
+				query.append(_FINDER_COLUMN_AEI_AID_A_T_E_ASSETENTRYID_2);
 
 				if (actionId == null) {
-					query.append(_FINDER_COLUMN_AEI_AID_A_T_ACTIONID_1);
+					query.append(_FINDER_COLUMN_AEI_AID_A_T_E_ACTIONID_1);
 				}
 				else {
 					if (actionId.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_AEI_AID_A_T_ACTIONID_3);
+						query.append(_FINDER_COLUMN_AEI_AID_A_T_E_ACTIONID_3);
 					}
 					else {
-						query.append(_FINDER_COLUMN_AEI_AID_A_T_ACTIONID_2);
+						query.append(_FINDER_COLUMN_AEI_AID_A_T_E_ACTIONID_2);
 					}
 				}
 
-				query.append(_FINDER_COLUMN_AEI_AID_A_T_ACTIVE_2);
+				query.append(_FINDER_COLUMN_AEI_AID_A_T_E_ACTIVE_2);
 
-				query.append(_FINDER_COLUMN_AEI_AID_A_T_TYPE_2);
+				query.append(_FINDER_COLUMN_AEI_AID_A_T_E_TYPE_2);
+
+				if (extraData == null) {
+					query.append(_FINDER_COLUMN_AEI_AID_A_T_E_EXTRADATA_1);
+				}
+				else {
+					if (extraData.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_AEI_AID_A_T_E_EXTRADATA_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_AEI_AID_A_T_E_EXTRADATA_2);
+					}
+				}
 
 				if (orderByComparator != null) {
 					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1899,6 +1518,10 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 				qPos.add(type);
 
+				if (extraData != null) {
+					qPos.add(extraData);
+				}
+
 				list = (List<SocialEquityLog>)QueryUtil.list(q, getDialect(),
 						start, end);
 			}
@@ -1912,7 +1535,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_AEI_AID_A_T,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_AEI_AID_A_T_E,
 					finderArgs, list);
 
 				closeSession(session);
@@ -1923,7 +1546,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	}
 
 	/**
-	 * Finds the first social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
+	 * Finds the first social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1933,20 +1556,21 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param actionId the action id to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public SocialEquityLog findByAEI_AID_A_T_First(long assetEntryId,
-		String actionId, boolean active, int type,
+	public SocialEquityLog findByAEI_AID_A_T_E_First(long assetEntryId,
+		String actionId, boolean active, int type, String extraData,
 		OrderByComparator orderByComparator)
 		throws NoSuchEquityLogException, SystemException {
-		List<SocialEquityLog> list = findByAEI_AID_A_T(assetEntryId, actionId,
-				active, type, 0, 1, orderByComparator);
+		List<SocialEquityLog> list = findByAEI_AID_A_T_E(assetEntryId,
+				actionId, active, type, extraData, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(10);
+			StringBundler msg = new StringBundler(12);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
@@ -1962,6 +1586,9 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			msg.append(", type=");
 			msg.append(type);
 
+			msg.append(", extraData=");
+			msg.append(extraData);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			throw new NoSuchEquityLogException(msg.toString());
@@ -1972,7 +1599,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	}
 
 	/**
-	 * Finds the last social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
+	 * Finds the last social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1982,22 +1609,25 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param actionId the action id to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public SocialEquityLog findByAEI_AID_A_T_Last(long assetEntryId,
-		String actionId, boolean active, int type,
+	public SocialEquityLog findByAEI_AID_A_T_E_Last(long assetEntryId,
+		String actionId, boolean active, int type, String extraData,
 		OrderByComparator orderByComparator)
 		throws NoSuchEquityLogException, SystemException {
-		int count = countByAEI_AID_A_T(assetEntryId, actionId, active, type);
+		int count = countByAEI_AID_A_T_E(assetEntryId, actionId, active, type,
+				extraData);
 
-		List<SocialEquityLog> list = findByAEI_AID_A_T(assetEntryId, actionId,
-				active, type, count - 1, count, orderByComparator);
+		List<SocialEquityLog> list = findByAEI_AID_A_T_E(assetEntryId,
+				actionId, active, type, extraData, count - 1, count,
+				orderByComparator);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(10);
+			StringBundler msg = new StringBundler(12);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
@@ -2013,6 +1643,9 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			msg.append(", type=");
 			msg.append(type);
 
+			msg.append(", extraData=");
+			msg.append(extraData);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			throw new NoSuchEquityLogException(msg.toString());
@@ -2023,7 +1656,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	}
 
 	/**
-	 * Finds the social equity logs before and after the current social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
+	 * Finds the social equity logs before and after the current social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -2034,14 +1667,15 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param actionId the action id to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a social equity log with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public SocialEquityLog[] findByAEI_AID_A_T_PrevAndNext(long equityLogId,
+	public SocialEquityLog[] findByAEI_AID_A_T_E_PrevAndNext(long equityLogId,
 		long assetEntryId, String actionId, boolean active, int type,
-		OrderByComparator orderByComparator)
+		String extraData, OrderByComparator orderByComparator)
 		throws NoSuchEquityLogException, SystemException {
 		SocialEquityLog socialEquityLog = findByPrimaryKey(equityLogId);
 
@@ -2052,15 +1686,15 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 			SocialEquityLog[] array = new SocialEquityLogImpl[3];
 
-			array[0] = getByAEI_AID_A_T_PrevAndNext(session, socialEquityLog,
-					assetEntryId, actionId, active, type, orderByComparator,
-					true);
+			array[0] = getByAEI_AID_A_T_E_PrevAndNext(session, socialEquityLog,
+					assetEntryId, actionId, active, type, extraData,
+					orderByComparator, true);
 
 			array[1] = socialEquityLog;
 
-			array[2] = getByAEI_AID_A_T_PrevAndNext(session, socialEquityLog,
-					assetEntryId, actionId, active, type, orderByComparator,
-					false);
+			array[2] = getByAEI_AID_A_T_E_PrevAndNext(session, socialEquityLog,
+					assetEntryId, actionId, active, type, extraData,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -2072,10 +1706,10 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		}
 	}
 
-	protected SocialEquityLog getByAEI_AID_A_T_PrevAndNext(Session session,
+	protected SocialEquityLog getByAEI_AID_A_T_E_PrevAndNext(Session session,
 		SocialEquityLog socialEquityLog, long assetEntryId, String actionId,
-		boolean active, int type, OrderByComparator orderByComparator,
-		boolean previous) {
+		boolean active, int type, String extraData,
+		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -2088,23 +1722,35 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 		query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
 
-		query.append(_FINDER_COLUMN_AEI_AID_A_T_ASSETENTRYID_2);
+		query.append(_FINDER_COLUMN_AEI_AID_A_T_E_ASSETENTRYID_2);
 
 		if (actionId == null) {
-			query.append(_FINDER_COLUMN_AEI_AID_A_T_ACTIONID_1);
+			query.append(_FINDER_COLUMN_AEI_AID_A_T_E_ACTIONID_1);
 		}
 		else {
 			if (actionId.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_AEI_AID_A_T_ACTIONID_3);
+				query.append(_FINDER_COLUMN_AEI_AID_A_T_E_ACTIONID_3);
 			}
 			else {
-				query.append(_FINDER_COLUMN_AEI_AID_A_T_ACTIONID_2);
+				query.append(_FINDER_COLUMN_AEI_AID_A_T_E_ACTIONID_2);
 			}
 		}
 
-		query.append(_FINDER_COLUMN_AEI_AID_A_T_ACTIVE_2);
+		query.append(_FINDER_COLUMN_AEI_AID_A_T_E_ACTIVE_2);
 
-		query.append(_FINDER_COLUMN_AEI_AID_A_T_TYPE_2);
+		query.append(_FINDER_COLUMN_AEI_AID_A_T_E_TYPE_2);
+
+		if (extraData == null) {
+			query.append(_FINDER_COLUMN_AEI_AID_A_T_E_EXTRADATA_1);
+		}
+		else {
+			if (extraData.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_AEI_AID_A_T_E_EXTRADATA_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_AEI_AID_A_T_E_EXTRADATA_2);
+			}
+		}
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -2178,6 +1824,10 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		qPos.add(active);
 
 		qPos.add(type);
+
+		if (extraData != null) {
+			qPos.add(extraData);
+		}
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByValues(socialEquityLog);
@@ -2618,25 +2268,25 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	}
 
 	/**
-	 * Finds all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	 * Finds all the social equity logs where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	 *
 	 * @param userId the user id to search with
 	 * @param actionId the action id to search with
-	 * @param actionDate the action date to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @return the matching social equity logs
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<SocialEquityLog> findByU_AID_AD_A_T(long userId,
-		String actionId, int actionDate, boolean active, int type)
+	public List<SocialEquityLog> findByU_AID_A_T_E(long userId,
+		String actionId, boolean active, int type, String extraData)
 		throws SystemException {
-		return findByU_AID_AD_A_T(userId, actionId, actionDate, active, type,
+		return findByU_AID_A_T_E(userId, actionId, active, type, extraData,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Finds a range of all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	 * Finds a range of all the social equity logs where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -2644,23 +2294,23 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 *
 	 * @param userId the user id to search with
 	 * @param actionId the action id to search with
-	 * @param actionDate the action date to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @param start the lower bound of the range of social equity logs to return
 	 * @param end the upper bound of the range of social equity logs to return (not inclusive)
 	 * @return the range of matching social equity logs
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<SocialEquityLog> findByU_AID_AD_A_T(long userId,
-		String actionId, int actionDate, boolean active, int type, int start,
+	public List<SocialEquityLog> findByU_AID_A_T_E(long userId,
+		String actionId, boolean active, int type, String extraData, int start,
 		int end) throws SystemException {
-		return findByU_AID_AD_A_T(userId, actionId, actionDate, active, type,
+		return findByU_AID_A_T_E(userId, actionId, active, type, extraData,
 			start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	 * Finds an ordered range of all the social equity logs where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -2668,26 +2318,26 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 *
 	 * @param userId the user id to search with
 	 * @param actionId the action id to search with
-	 * @param actionDate the action date to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @param start the lower bound of the range of social equity logs to return
 	 * @param end the upper bound of the range of social equity logs to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
 	 * @return the ordered range of matching social equity logs
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<SocialEquityLog> findByU_AID_AD_A_T(long userId,
-		String actionId, int actionDate, boolean active, int type, int start,
+	public List<SocialEquityLog> findByU_AID_A_T_E(long userId,
+		String actionId, boolean active, int type, String extraData, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				userId, actionId, actionDate, active, type,
+				userId, actionId, active, type, extraData,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
-		List<SocialEquityLog> list = (List<SocialEquityLog>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_U_AID_AD_A_T,
+		List<SocialEquityLog> list = (List<SocialEquityLog>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_U_AID_A_T_E,
 				finderArgs, this);
 
 		if (list == null) {
@@ -2708,25 +2358,35 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 				query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
 
-				query.append(_FINDER_COLUMN_U_AID_AD_A_T_USERID_2);
+				query.append(_FINDER_COLUMN_U_AID_A_T_E_USERID_2);
 
 				if (actionId == null) {
-					query.append(_FINDER_COLUMN_U_AID_AD_A_T_ACTIONID_1);
+					query.append(_FINDER_COLUMN_U_AID_A_T_E_ACTIONID_1);
 				}
 				else {
 					if (actionId.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_U_AID_AD_A_T_ACTIONID_3);
+						query.append(_FINDER_COLUMN_U_AID_A_T_E_ACTIONID_3);
 					}
 					else {
-						query.append(_FINDER_COLUMN_U_AID_AD_A_T_ACTIONID_2);
+						query.append(_FINDER_COLUMN_U_AID_A_T_E_ACTIONID_2);
 					}
 				}
 
-				query.append(_FINDER_COLUMN_U_AID_AD_A_T_ACTIONDATE_2);
+				query.append(_FINDER_COLUMN_U_AID_A_T_E_ACTIVE_2);
 
-				query.append(_FINDER_COLUMN_U_AID_AD_A_T_ACTIVE_2);
+				query.append(_FINDER_COLUMN_U_AID_A_T_E_TYPE_2);
 
-				query.append(_FINDER_COLUMN_U_AID_AD_A_T_TYPE_2);
+				if (extraData == null) {
+					query.append(_FINDER_COLUMN_U_AID_A_T_E_EXTRADATA_1);
+				}
+				else {
+					if (extraData.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_U_AID_A_T_E_EXTRADATA_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_U_AID_A_T_E_EXTRADATA_2);
+					}
+				}
 
 				if (orderByComparator != null) {
 					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -2745,11 +2405,13 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 					qPos.add(actionId);
 				}
 
-				qPos.add(actionDate);
-
 				qPos.add(active);
 
 				qPos.add(type);
+
+				if (extraData != null) {
+					qPos.add(extraData);
+				}
 
 				list = (List<SocialEquityLog>)QueryUtil.list(q, getDialect(),
 						start, end);
@@ -2764,7 +2426,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_AID_AD_A_T,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_AID_A_T_E,
 					finderArgs, list);
 
 				closeSession(session);
@@ -2775,7 +2437,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	}
 
 	/**
-	 * Finds the first social equity log in the ordered set where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	 * Finds the first social equity log in the ordered set where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -2783,20 +2445,20 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 *
 	 * @param userId the user id to search with
 	 * @param actionId the action id to search with
-	 * @param actionDate the action date to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public SocialEquityLog findByU_AID_AD_A_T_First(long userId,
-		String actionId, int actionDate, boolean active, int type,
+	public SocialEquityLog findByU_AID_A_T_E_First(long userId,
+		String actionId, boolean active, int type, String extraData,
 		OrderByComparator orderByComparator)
 		throws NoSuchEquityLogException, SystemException {
-		List<SocialEquityLog> list = findByU_AID_AD_A_T(userId, actionId,
-				actionDate, active, type, 0, 1, orderByComparator);
+		List<SocialEquityLog> list = findByU_AID_A_T_E(userId, actionId,
+				active, type, extraData, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(12);
@@ -2809,14 +2471,14 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			msg.append(", actionId=");
 			msg.append(actionId);
 
-			msg.append(", actionDate=");
-			msg.append(actionDate);
-
 			msg.append(", active=");
 			msg.append(active);
 
 			msg.append(", type=");
 			msg.append(type);
+
+			msg.append(", extraData=");
+			msg.append(extraData);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -2828,7 +2490,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	}
 
 	/**
-	 * Finds the last social equity log in the ordered set where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	 * Finds the last social equity log in the ordered set where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -2836,23 +2498,22 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 *
 	 * @param userId the user id to search with
 	 * @param actionId the action id to search with
-	 * @param actionDate the action date to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public SocialEquityLog findByU_AID_AD_A_T_Last(long userId,
-		String actionId, int actionDate, boolean active, int type,
+	public SocialEquityLog findByU_AID_A_T_E_Last(long userId, String actionId,
+		boolean active, int type, String extraData,
 		OrderByComparator orderByComparator)
 		throws NoSuchEquityLogException, SystemException {
-		int count = countByU_AID_AD_A_T(userId, actionId, actionDate, active,
-				type);
+		int count = countByU_AID_A_T_E(userId, actionId, active, type, extraData);
 
-		List<SocialEquityLog> list = findByU_AID_AD_A_T(userId, actionId,
-				actionDate, active, type, count - 1, count, orderByComparator);
+		List<SocialEquityLog> list = findByU_AID_A_T_E(userId, actionId,
+				active, type, extraData, count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(12);
@@ -2865,14 +2526,14 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			msg.append(", actionId=");
 			msg.append(actionId);
 
-			msg.append(", actionDate=");
-			msg.append(actionDate);
-
 			msg.append(", active=");
 			msg.append(active);
 
 			msg.append(", type=");
 			msg.append(type);
+
+			msg.append(", extraData=");
+			msg.append(extraData);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -2884,7 +2545,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	}
 
 	/**
-	 * Finds the social equity logs before and after the current social equity log in the ordered set where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	 * Finds the social equity logs before and after the current social equity log in the ordered set where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -2893,17 +2554,17 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param equityLogId the primary key of the current social equity log
 	 * @param userId the user id to search with
 	 * @param actionId the action id to search with
-	 * @param actionDate the action date to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a social equity log with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public SocialEquityLog[] findByU_AID_AD_A_T_PrevAndNext(long equityLogId,
-		long userId, String actionId, int actionDate, boolean active, int type,
-		OrderByComparator orderByComparator)
+	public SocialEquityLog[] findByU_AID_A_T_E_PrevAndNext(long equityLogId,
+		long userId, String actionId, boolean active, int type,
+		String extraData, OrderByComparator orderByComparator)
 		throws NoSuchEquityLogException, SystemException {
 		SocialEquityLog socialEquityLog = findByPrimaryKey(equityLogId);
 
@@ -2914,14 +2575,14 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 			SocialEquityLog[] array = new SocialEquityLogImpl[3];
 
-			array[0] = getByU_AID_AD_A_T_PrevAndNext(session, socialEquityLog,
-					userId, actionId, actionDate, active, type,
+			array[0] = getByU_AID_A_T_E_PrevAndNext(session, socialEquityLog,
+					userId, actionId, active, type, extraData,
 					orderByComparator, true);
 
 			array[1] = socialEquityLog;
 
-			array[2] = getByU_AID_AD_A_T_PrevAndNext(session, socialEquityLog,
-					userId, actionId, actionDate, active, type,
+			array[2] = getByU_AID_A_T_E_PrevAndNext(session, socialEquityLog,
+					userId, actionId, active, type, extraData,
 					orderByComparator, false);
 
 			return array;
@@ -2934,9 +2595,9 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		}
 	}
 
-	protected SocialEquityLog getByU_AID_AD_A_T_PrevAndNext(Session session,
+	protected SocialEquityLog getByU_AID_A_T_E_PrevAndNext(Session session,
 		SocialEquityLog socialEquityLog, long userId, String actionId,
-		int actionDate, boolean active, int type,
+		boolean active, int type, String extraData,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -2950,25 +2611,35 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 		query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
 
-		query.append(_FINDER_COLUMN_U_AID_AD_A_T_USERID_2);
+		query.append(_FINDER_COLUMN_U_AID_A_T_E_USERID_2);
 
 		if (actionId == null) {
-			query.append(_FINDER_COLUMN_U_AID_AD_A_T_ACTIONID_1);
+			query.append(_FINDER_COLUMN_U_AID_A_T_E_ACTIONID_1);
 		}
 		else {
 			if (actionId.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_U_AID_AD_A_T_ACTIONID_3);
+				query.append(_FINDER_COLUMN_U_AID_A_T_E_ACTIONID_3);
 			}
 			else {
-				query.append(_FINDER_COLUMN_U_AID_AD_A_T_ACTIONID_2);
+				query.append(_FINDER_COLUMN_U_AID_A_T_E_ACTIONID_2);
 			}
 		}
 
-		query.append(_FINDER_COLUMN_U_AID_AD_A_T_ACTIONDATE_2);
+		query.append(_FINDER_COLUMN_U_AID_A_T_E_ACTIVE_2);
 
-		query.append(_FINDER_COLUMN_U_AID_AD_A_T_ACTIVE_2);
+		query.append(_FINDER_COLUMN_U_AID_A_T_E_TYPE_2);
 
-		query.append(_FINDER_COLUMN_U_AID_AD_A_T_TYPE_2);
+		if (extraData == null) {
+			query.append(_FINDER_COLUMN_U_AID_A_T_E_EXTRADATA_1);
+		}
+		else {
+			if (extraData.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_U_AID_A_T_E_EXTRADATA_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_U_AID_A_T_E_EXTRADATA_2);
+			}
+		}
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -3039,11 +2710,13 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			qPos.add(actionId);
 		}
 
-		qPos.add(actionDate);
-
 		qPos.add(active);
 
 		qPos.add(type);
+
+		if (extraData != null) {
+			qPos.add(extraData);
+		}
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByValues(socialEquityLog);
@@ -3064,25 +2737,26 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	}
 
 	/**
-	 * Finds all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	 * Finds all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	 *
 	 * @param assetEntryId the asset entry id to search with
 	 * @param actionId the action id to search with
 	 * @param actionDate the action date to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @return the matching social equity logs
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<SocialEquityLog> findByAEI_AID_AD_A_T(long assetEntryId,
-		String actionId, int actionDate, boolean active, int type)
-		throws SystemException {
-		return findByAEI_AID_AD_A_T(assetEntryId, actionId, actionDate, active,
-			type, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<SocialEquityLog> findByAEI_AID_AD_A_T_E(long assetEntryId,
+		String actionId, int actionDate, boolean active, int type,
+		String extraData) throws SystemException {
+		return findByAEI_AID_AD_A_T_E(assetEntryId, actionId, actionDate,
+			active, type, extraData, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Finds a range of all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	 * Finds a range of all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -3093,20 +2767,21 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param actionDate the action date to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @param start the lower bound of the range of social equity logs to return
 	 * @param end the upper bound of the range of social equity logs to return (not inclusive)
 	 * @return the range of matching social equity logs
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<SocialEquityLog> findByAEI_AID_AD_A_T(long assetEntryId,
-		String actionId, int actionDate, boolean active, int type, int start,
-		int end) throws SystemException {
-		return findByAEI_AID_AD_A_T(assetEntryId, actionId, actionDate, active,
-			type, start, end, null);
+	public List<SocialEquityLog> findByAEI_AID_AD_A_T_E(long assetEntryId,
+		String actionId, int actionDate, boolean active, int type,
+		String extraData, int start, int end) throws SystemException {
+		return findByAEI_AID_AD_A_T_E(assetEntryId, actionId, actionDate,
+			active, type, extraData, start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	 * Finds an ordered range of all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -3117,23 +2792,25 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param actionDate the action date to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @param start the lower bound of the range of social equity logs to return
 	 * @param end the upper bound of the range of social equity logs to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
 	 * @return the ordered range of matching social equity logs
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<SocialEquityLog> findByAEI_AID_AD_A_T(long assetEntryId,
-		String actionId, int actionDate, boolean active, int type, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<SocialEquityLog> findByAEI_AID_AD_A_T_E(long assetEntryId,
+		String actionId, int actionDate, boolean active, int type,
+		String extraData, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				assetEntryId, actionId, actionDate, active, type,
+				assetEntryId, actionId, actionDate, active, type, extraData,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
-		List<SocialEquityLog> list = (List<SocialEquityLog>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_AEI_AID_AD_A_T,
+		List<SocialEquityLog> list = (List<SocialEquityLog>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_AEI_AID_AD_A_T_E,
 				finderArgs, this);
 
 		if (list == null) {
@@ -3145,34 +2822,46 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 				StringBundler query = null;
 
 				if (orderByComparator != null) {
-					query = new StringBundler(7 +
+					query = new StringBundler(8 +
 							(orderByComparator.getOrderByFields().length * 3));
 				}
 				else {
-					query = new StringBundler(6);
+					query = new StringBundler(7);
 				}
 
 				query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
 
-				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_ASSETENTRYID_2);
+				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_ASSETENTRYID_2);
 
 				if (actionId == null) {
-					query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_ACTIONID_1);
+					query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_ACTIONID_1);
 				}
 				else {
 					if (actionId.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_ACTIONID_3);
+						query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_ACTIONID_3);
 					}
 					else {
-						query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_ACTIONID_2);
+						query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_ACTIONID_2);
 					}
 				}
 
-				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_ACTIONDATE_2);
+				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_ACTIONDATE_2);
 
-				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_ACTIVE_2);
+				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_ACTIVE_2);
 
-				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_TYPE_2);
+				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_TYPE_2);
+
+				if (extraData == null) {
+					query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_EXTRADATA_1);
+				}
+				else {
+					if (extraData.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_EXTRADATA_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_EXTRADATA_2);
+					}
+				}
 
 				if (orderByComparator != null) {
 					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -3197,6 +2886,10 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 				qPos.add(type);
 
+				if (extraData != null) {
+					qPos.add(extraData);
+				}
+
 				list = (List<SocialEquityLog>)QueryUtil.list(q, getDialect(),
 						start, end);
 			}
@@ -3210,7 +2903,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 				cacheResult(list);
 
-				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_AEI_AID_AD_A_T,
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_AEI_AID_AD_A_T_E,
 					finderArgs, list);
 
 				closeSession(session);
@@ -3221,7 +2914,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	}
 
 	/**
-	 * Finds the first social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	 * Finds the first social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -3232,20 +2925,22 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param actionDate the action date to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public SocialEquityLog findByAEI_AID_AD_A_T_First(long assetEntryId,
+	public SocialEquityLog findByAEI_AID_AD_A_T_E_First(long assetEntryId,
 		String actionId, int actionDate, boolean active, int type,
-		OrderByComparator orderByComparator)
+		String extraData, OrderByComparator orderByComparator)
 		throws NoSuchEquityLogException, SystemException {
-		List<SocialEquityLog> list = findByAEI_AID_AD_A_T(assetEntryId,
-				actionId, actionDate, active, type, 0, 1, orderByComparator);
+		List<SocialEquityLog> list = findByAEI_AID_AD_A_T_E(assetEntryId,
+				actionId, actionDate, active, type, extraData, 0, 1,
+				orderByComparator);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(12);
+			StringBundler msg = new StringBundler(14);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
@@ -3264,6 +2959,9 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			msg.append(", type=");
 			msg.append(type);
 
+			msg.append(", extraData=");
+			msg.append(extraData);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			throw new NoSuchEquityLogException(msg.toString());
@@ -3274,7 +2972,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	}
 
 	/**
-	 * Finds the last social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	 * Finds the last social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -3285,24 +2983,25 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param actionDate the action date to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public SocialEquityLog findByAEI_AID_AD_A_T_Last(long assetEntryId,
+	public SocialEquityLog findByAEI_AID_AD_A_T_E_Last(long assetEntryId,
 		String actionId, int actionDate, boolean active, int type,
-		OrderByComparator orderByComparator)
+		String extraData, OrderByComparator orderByComparator)
 		throws NoSuchEquityLogException, SystemException {
-		int count = countByAEI_AID_AD_A_T(assetEntryId, actionId, actionDate,
-				active, type);
+		int count = countByAEI_AID_AD_A_T_E(assetEntryId, actionId, actionDate,
+				active, type, extraData);
 
-		List<SocialEquityLog> list = findByAEI_AID_AD_A_T(assetEntryId,
-				actionId, actionDate, active, type, count - 1, count,
-				orderByComparator);
+		List<SocialEquityLog> list = findByAEI_AID_AD_A_T_E(assetEntryId,
+				actionId, actionDate, active, type, extraData, count - 1,
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(12);
+			StringBundler msg = new StringBundler(14);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
@@ -3321,6 +3020,9 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			msg.append(", type=");
 			msg.append(type);
 
+			msg.append(", extraData=");
+			msg.append(extraData);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			throw new NoSuchEquityLogException(msg.toString());
@@ -3331,7 +3033,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	}
 
 	/**
-	 * Finds the social equity logs before and after the current social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	 * Finds the social equity logs before and after the current social equity log in the ordered set where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -3343,14 +3045,16 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param actionDate the action date to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a social equity log with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public SocialEquityLog[] findByAEI_AID_AD_A_T_PrevAndNext(
+	public SocialEquityLog[] findByAEI_AID_AD_A_T_E_PrevAndNext(
 		long equityLogId, long assetEntryId, String actionId, int actionDate,
-		boolean active, int type, OrderByComparator orderByComparator)
+		boolean active, int type, String extraData,
+		OrderByComparator orderByComparator)
 		throws NoSuchEquityLogException, SystemException {
 		SocialEquityLog socialEquityLog = findByPrimaryKey(equityLogId);
 
@@ -3361,15 +3065,15 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 			SocialEquityLog[] array = new SocialEquityLogImpl[3];
 
-			array[0] = getByAEI_AID_AD_A_T_PrevAndNext(session,
+			array[0] = getByAEI_AID_AD_A_T_E_PrevAndNext(session,
 					socialEquityLog, assetEntryId, actionId, actionDate,
-					active, type, orderByComparator, true);
+					active, type, extraData, orderByComparator, true);
 
 			array[1] = socialEquityLog;
 
-			array[2] = getByAEI_AID_AD_A_T_PrevAndNext(session,
+			array[2] = getByAEI_AID_AD_A_T_E_PrevAndNext(session,
 					socialEquityLog, assetEntryId, actionId, actionDate,
-					active, type, orderByComparator, false);
+					active, type, extraData, orderByComparator, false);
 
 			return array;
 		}
@@ -3381,10 +3085,10 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		}
 	}
 
-	protected SocialEquityLog getByAEI_AID_AD_A_T_PrevAndNext(Session session,
-		SocialEquityLog socialEquityLog, long assetEntryId, String actionId,
-		int actionDate, boolean active, int type,
-		OrderByComparator orderByComparator, boolean previous) {
+	protected SocialEquityLog getByAEI_AID_AD_A_T_E_PrevAndNext(
+		Session session, SocialEquityLog socialEquityLog, long assetEntryId,
+		String actionId, int actionDate, boolean active, int type,
+		String extraData, OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -3397,25 +3101,37 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 		query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
 
-		query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_ASSETENTRYID_2);
+		query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_ASSETENTRYID_2);
 
 		if (actionId == null) {
-			query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_ACTIONID_1);
+			query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_ACTIONID_1);
 		}
 		else {
 			if (actionId.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_ACTIONID_3);
+				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_ACTIONID_3);
 			}
 			else {
-				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_ACTIONID_2);
+				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_ACTIONID_2);
 			}
 		}
 
-		query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_ACTIONDATE_2);
+		query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_ACTIONDATE_2);
 
-		query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_ACTIVE_2);
+		query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_ACTIVE_2);
 
-		query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_TYPE_2);
+		query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_TYPE_2);
+
+		if (extraData == null) {
+			query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_EXTRADATA_1);
+		}
+		else {
+			if (extraData.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_EXTRADATA_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_EXTRADATA_2);
+			}
+		}
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -3492,6 +3208,10 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 		qPos.add(type);
 
+		if (extraData != null) {
+			qPos.add(extraData);
+		}
+
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByValues(socialEquityLog);
 
@@ -3511,7 +3231,500 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	}
 
 	/**
-	 * Finds the social equity log where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; or throws a {@link com.liferay.portlet.social.NoSuchEquityLogException} if it could not be found.
+	 * Finds all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @param actionId the action id to search with
+	 * @param actionDate the action date to search with
+	 * @param active the active to search with
+	 * @param type the type to search with
+	 * @param extraData the extra data to search with
+	 * @return the matching social equity logs
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<SocialEquityLog> findByU_AID_AD_A_T_E(long userId,
+		String actionId, int actionDate, boolean active, int type,
+		String extraData) throws SystemException {
+		return findByU_AID_AD_A_T_E(userId, actionId, actionDate, active, type,
+			extraData, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Finds a range of all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param actionId the action id to search with
+	 * @param actionDate the action date to search with
+	 * @param active the active to search with
+	 * @param type the type to search with
+	 * @param extraData the extra data to search with
+	 * @param start the lower bound of the range of social equity logs to return
+	 * @param end the upper bound of the range of social equity logs to return (not inclusive)
+	 * @return the range of matching social equity logs
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<SocialEquityLog> findByU_AID_AD_A_T_E(long userId,
+		String actionId, int actionDate, boolean active, int type,
+		String extraData, int start, int end) throws SystemException {
+		return findByU_AID_AD_A_T_E(userId, actionId, actionDate, active, type,
+			extraData, start, end, null);
+	}
+
+	/**
+	 * Finds an ordered range of all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param actionId the action id to search with
+	 * @param actionDate the action date to search with
+	 * @param active the active to search with
+	 * @param type the type to search with
+	 * @param extraData the extra data to search with
+	 * @param start the lower bound of the range of social equity logs to return
+	 * @param end the upper bound of the range of social equity logs to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching social equity logs
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<SocialEquityLog> findByU_AID_AD_A_T_E(long userId,
+		String actionId, int actionDate, boolean active, int type,
+		String extraData, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				userId, actionId, actionDate, active, type, extraData,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<SocialEquityLog> list = (List<SocialEquityLog>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_U_AID_AD_A_T_E,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = null;
+
+				if (orderByComparator != null) {
+					query = new StringBundler(8 +
+							(orderByComparator.getOrderByFields().length * 3));
+				}
+				else {
+					query = new StringBundler(7);
+				}
+
+				query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
+
+				query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_USERID_2);
+
+				if (actionId == null) {
+					query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_ACTIONID_1);
+				}
+				else {
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_ACTIONID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_ACTIONID_2);
+					}
+				}
+
+				query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_ACTIONDATE_2);
+
+				query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_ACTIVE_2);
+
+				query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_TYPE_2);
+
+				if (extraData == null) {
+					query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_EXTRADATA_1);
+				}
+				else {
+					if (extraData.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_EXTRADATA_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_EXTRADATA_2);
+					}
+				}
+
+				if (orderByComparator != null) {
+					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+						orderByComparator);
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				if (actionId != null) {
+					qPos.add(actionId);
+				}
+
+				qPos.add(actionDate);
+
+				qPos.add(active);
+
+				qPos.add(type);
+
+				if (extraData != null) {
+					qPos.add(extraData);
+				}
+
+				list = (List<SocialEquityLog>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<SocialEquityLog>();
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_AID_AD_A_T_E,
+					finderArgs, list);
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Finds the first social equity log in the ordered set where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param actionId the action id to search with
+	 * @param actionDate the action date to search with
+	 * @param active the active to search with
+	 * @param type the type to search with
+	 * @param extraData the extra data to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching social equity log
+	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public SocialEquityLog findByU_AID_AD_A_T_E_First(long userId,
+		String actionId, int actionDate, boolean active, int type,
+		String extraData, OrderByComparator orderByComparator)
+		throws NoSuchEquityLogException, SystemException {
+		List<SocialEquityLog> list = findByU_AID_AD_A_T_E(userId, actionId,
+				actionDate, active, type, extraData, 0, 1, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(14);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("userId=");
+			msg.append(userId);
+
+			msg.append(", actionId=");
+			msg.append(actionId);
+
+			msg.append(", actionDate=");
+			msg.append(actionDate);
+
+			msg.append(", active=");
+			msg.append(active);
+
+			msg.append(", type=");
+			msg.append(type);
+
+			msg.append(", extraData=");
+			msg.append(extraData);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEquityLogException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the last social equity log in the ordered set where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user id to search with
+	 * @param actionId the action id to search with
+	 * @param actionDate the action date to search with
+	 * @param active the active to search with
+	 * @param type the type to search with
+	 * @param extraData the extra data to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching social equity log
+	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public SocialEquityLog findByU_AID_AD_A_T_E_Last(long userId,
+		String actionId, int actionDate, boolean active, int type,
+		String extraData, OrderByComparator orderByComparator)
+		throws NoSuchEquityLogException, SystemException {
+		int count = countByU_AID_AD_A_T_E(userId, actionId, actionDate, active,
+				type, extraData);
+
+		List<SocialEquityLog> list = findByU_AID_AD_A_T_E(userId, actionId,
+				actionDate, active, type, extraData, count - 1, count,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(14);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("userId=");
+			msg.append(userId);
+
+			msg.append(", actionId=");
+			msg.append(actionId);
+
+			msg.append(", actionDate=");
+			msg.append(actionDate);
+
+			msg.append(", active=");
+			msg.append(active);
+
+			msg.append(", type=");
+			msg.append(type);
+
+			msg.append(", extraData=");
+			msg.append(extraData);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEquityLogException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the social equity logs before and after the current social equity log in the ordered set where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param equityLogId the primary key of the current social equity log
+	 * @param userId the user id to search with
+	 * @param actionId the action id to search with
+	 * @param actionDate the action date to search with
+	 * @param active the active to search with
+	 * @param type the type to search with
+	 * @param extraData the extra data to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next social equity log
+	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a social equity log with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public SocialEquityLog[] findByU_AID_AD_A_T_E_PrevAndNext(
+		long equityLogId, long userId, String actionId, int actionDate,
+		boolean active, int type, String extraData,
+		OrderByComparator orderByComparator)
+		throws NoSuchEquityLogException, SystemException {
+		SocialEquityLog socialEquityLog = findByPrimaryKey(equityLogId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SocialEquityLog[] array = new SocialEquityLogImpl[3];
+
+			array[0] = getByU_AID_AD_A_T_E_PrevAndNext(session,
+					socialEquityLog, userId, actionId, actionDate, active,
+					type, extraData, orderByComparator, true);
+
+			array[1] = socialEquityLog;
+
+			array[2] = getByU_AID_AD_A_T_E_PrevAndNext(session,
+					socialEquityLog, userId, actionId, actionDate, active,
+					type, extraData, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected SocialEquityLog getByU_AID_AD_A_T_E_PrevAndNext(Session session,
+		SocialEquityLog socialEquityLog, long userId, String actionId,
+		int actionDate, boolean active, int type, String extraData,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
+
+		query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_USERID_2);
+
+		if (actionId == null) {
+			query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_ACTIONID_1);
+		}
+		else {
+			if (actionId.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_ACTIONID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_ACTIONID_2);
+			}
+		}
+
+		query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_ACTIONDATE_2);
+
+		query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_ACTIVE_2);
+
+		query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_TYPE_2);
+
+		if (extraData == null) {
+			query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_EXTRADATA_1);
+		}
+		else {
+			if (extraData.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_EXTRADATA_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_EXTRADATA_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(userId);
+
+		if (actionId != null) {
+			qPos.add(actionId);
+		}
+
+		qPos.add(actionDate);
+
+		qPos.add(active);
+
+		qPos.add(type);
+
+		if (extraData != null) {
+			qPos.add(extraData);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(socialEquityLog);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<SocialEquityLog> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Finds the social equity log where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63; or throws a {@link com.liferay.portlet.social.NoSuchEquityLogException} if it could not be found.
 	 *
 	 * @param userId the user id to search with
 	 * @param assetEntryId the asset entry id to search with
@@ -3519,18 +3732,20 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param actionDate the action date to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @return the matching social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public SocialEquityLog findByU_AEI_AID_AD_A_T(long userId,
+	public SocialEquityLog findByU_AEI_AID_AD_A_T_E(long userId,
 		long assetEntryId, String actionId, int actionDate, boolean active,
-		int type) throws NoSuchEquityLogException, SystemException {
-		SocialEquityLog socialEquityLog = fetchByU_AEI_AID_AD_A_T(userId,
-				assetEntryId, actionId, actionDate, active, type);
+		int type, String extraData)
+		throws NoSuchEquityLogException, SystemException {
+		SocialEquityLog socialEquityLog = fetchByU_AEI_AID_AD_A_T_E(userId,
+				assetEntryId, actionId, actionDate, active, type, extraData);
 
 		if (socialEquityLog == null) {
-			StringBundler msg = new StringBundler(14);
+			StringBundler msg = new StringBundler(16);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
@@ -3552,6 +3767,9 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			msg.append(", type=");
 			msg.append(type);
 
+			msg.append(", extraData=");
+			msg.append(extraData);
+
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
@@ -3565,7 +3783,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	}
 
 	/**
-	 * Finds the social equity log where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Finds the social equity log where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param userId the user id to search with
 	 * @param assetEntryId the asset entry id to search with
@@ -3573,18 +3791,19 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param actionDate the action date to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @return the matching social equity log, or <code>null</code> if a matching social equity log could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public SocialEquityLog fetchByU_AEI_AID_AD_A_T(long userId,
+	public SocialEquityLog fetchByU_AEI_AID_AD_A_T_E(long userId,
 		long assetEntryId, String actionId, int actionDate, boolean active,
-		int type) throws SystemException {
-		return fetchByU_AEI_AID_AD_A_T(userId, assetEntryId, actionId,
-			actionDate, active, type, true);
+		int type, String extraData) throws SystemException {
+		return fetchByU_AEI_AID_AD_A_T_E(userId, assetEntryId, actionId,
+			actionDate, active, type, extraData, true);
 	}
 
 	/**
-	 * Finds the social equity log where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Finds the social equity log where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param userId the user id to search with
 	 * @param assetEntryId the asset entry id to search with
@@ -3592,20 +3811,23 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param actionDate the action date to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @return the matching social equity log, or <code>null</code> if a matching social equity log could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public SocialEquityLog fetchByU_AEI_AID_AD_A_T(long userId,
+	public SocialEquityLog fetchByU_AEI_AID_AD_A_T_E(long userId,
 		long assetEntryId, String actionId, int actionDate, boolean active,
-		int type, boolean retrieveFromCache) throws SystemException {
+		int type, String extraData, boolean retrieveFromCache)
+		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				userId, assetEntryId, actionId, actionDate, active, type
+				userId, assetEntryId, actionId, actionDate, active, type,
+				extraData
 			};
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T,
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T_E,
 					finderArgs, this);
 		}
 
@@ -3615,31 +3837,43 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(7);
+				StringBundler query = new StringBundler(8);
 
 				query.append(_SQL_SELECT_SOCIALEQUITYLOG_WHERE);
 
-				query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_USERID_2);
+				query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_USERID_2);
 
-				query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_ASSETENTRYID_2);
+				query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_ASSETENTRYID_2);
 
 				if (actionId == null) {
-					query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_ACTIONID_1);
+					query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_ACTIONID_1);
 				}
 				else {
 					if (actionId.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_ACTIONID_3);
+						query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_ACTIONID_3);
 					}
 					else {
-						query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_ACTIONID_2);
+						query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_ACTIONID_2);
 					}
 				}
 
-				query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_ACTIONDATE_2);
+				query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_ACTIONDATE_2);
 
-				query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_ACTIVE_2);
+				query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_ACTIVE_2);
 
-				query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_TYPE_2);
+				query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_TYPE_2);
+
+				if (extraData == null) {
+					query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_EXTRADATA_1);
+				}
+				else {
+					if (extraData.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_EXTRADATA_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_EXTRADATA_2);
+					}
+				}
 
 				String sql = query.toString();
 
@@ -3661,6 +3895,10 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 				qPos.add(type);
 
+				if (extraData != null) {
+					qPos.add(extraData);
+				}
+
 				List<SocialEquityLog> list = q.list();
 
 				result = list;
@@ -3668,7 +3906,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 				SocialEquityLog socialEquityLog = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T,
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T_E,
 						finderArgs, list);
 				}
 				else {
@@ -3682,8 +3920,10 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 							!socialEquityLog.getActionId().equals(actionId) ||
 							(socialEquityLog.getActionDate() != actionDate) ||
 							(socialEquityLog.getActive() != active) ||
-							(socialEquityLog.getType() != type)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T,
+							(socialEquityLog.getType() != type) ||
+							(socialEquityLog.getExtraData() == null) ||
+							!socialEquityLog.getExtraData().equals(extraData)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T_E,
 							finderArgs, socialEquityLog);
 					}
 				}
@@ -3695,7 +3935,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T,
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T_E,
 						finderArgs, new ArrayList<SocialEquityLog>());
 				}
 
@@ -3852,35 +4092,19 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	}
 
 	/**
-	 * Removes all the social equity logs where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63; from the database.
-	 *
-	 * @param userId the user id to search with
-	 * @param actionId the action id to search with
-	 * @param active the active to search with
-	 * @param type the type to search with
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void removeByU_AID_A_T(long userId, String actionId, boolean active,
-		int type) throws SystemException {
-		for (SocialEquityLog socialEquityLog : findByU_AID_A_T(userId,
-				actionId, active, type)) {
-			remove(socialEquityLog);
-		}
-	}
-
-	/**
-	 * Removes all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63; from the database.
+	 * Removes all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63; from the database.
 	 *
 	 * @param assetEntryId the asset entry id to search with
 	 * @param actionId the action id to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByAEI_AID_A_T(long assetEntryId, String actionId,
-		boolean active, int type) throws SystemException {
-		for (SocialEquityLog socialEquityLog : findByAEI_AID_A_T(assetEntryId,
-				actionId, active, type)) {
+	public void removeByAEI_AID_A_T_E(long assetEntryId, String actionId,
+		boolean active, int type, String extraData) throws SystemException {
+		for (SocialEquityLog socialEquityLog : findByAEI_AID_A_T_E(
+				assetEntryId, actionId, active, type, extraData)) {
 			remove(socialEquityLog);
 		}
 	}
@@ -3904,43 +4128,65 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	}
 
 	/**
-	 * Removes all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; from the database.
+	 * Removes all the social equity logs where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63; from the database.
 	 *
 	 * @param userId the user id to search with
 	 * @param actionId the action id to search with
-	 * @param actionDate the action date to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByU_AID_AD_A_T(long userId, String actionId,
-		int actionDate, boolean active, int type) throws SystemException {
-		for (SocialEquityLog socialEquityLog : findByU_AID_AD_A_T(userId,
-				actionId, actionDate, active, type)) {
+	public void removeByU_AID_A_T_E(long userId, String actionId,
+		boolean active, int type, String extraData) throws SystemException {
+		for (SocialEquityLog socialEquityLog : findByU_AID_A_T_E(userId,
+				actionId, active, type, extraData)) {
 			remove(socialEquityLog);
 		}
 	}
 
 	/**
-	 * Removes all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; from the database.
+	 * Removes all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63; from the database.
 	 *
 	 * @param assetEntryId the asset entry id to search with
 	 * @param actionId the action id to search with
 	 * @param actionDate the action date to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByAEI_AID_AD_A_T(long assetEntryId, String actionId,
-		int actionDate, boolean active, int type) throws SystemException {
-		for (SocialEquityLog socialEquityLog : findByAEI_AID_AD_A_T(
-				assetEntryId, actionId, actionDate, active, type)) {
+	public void removeByAEI_AID_AD_A_T_E(long assetEntryId, String actionId,
+		int actionDate, boolean active, int type, String extraData)
+		throws SystemException {
+		for (SocialEquityLog socialEquityLog : findByAEI_AID_AD_A_T_E(
+				assetEntryId, actionId, actionDate, active, type, extraData)) {
 			remove(socialEquityLog);
 		}
 	}
 
 	/**
-	 * Removes the social equity log where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; from the database.
+	 * Removes all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63; from the database.
+	 *
+	 * @param userId the user id to search with
+	 * @param actionId the action id to search with
+	 * @param actionDate the action date to search with
+	 * @param active the active to search with
+	 * @param type the type to search with
+	 * @param extraData the extra data to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByU_AID_AD_A_T_E(long userId, String actionId,
+		int actionDate, boolean active, int type, String extraData)
+		throws SystemException {
+		for (SocialEquityLog socialEquityLog : findByU_AID_AD_A_T_E(userId,
+				actionId, actionDate, active, type, extraData)) {
+			remove(socialEquityLog);
+		}
+	}
+
+	/**
+	 * Removes the social equity log where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63; from the database.
 	 *
 	 * @param userId the user id to search with
 	 * @param assetEntryId the asset entry id to search with
@@ -3948,13 +4194,14 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param actionDate the action date to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByU_AEI_AID_AD_A_T(long userId, long assetEntryId,
-		String actionId, int actionDate, boolean active, int type)
-		throws NoSuchEquityLogException, SystemException {
-		SocialEquityLog socialEquityLog = findByU_AEI_AID_AD_A_T(userId,
-				assetEntryId, actionId, actionDate, active, type);
+	public void removeByU_AEI_AID_AD_A_T_E(long userId, long assetEntryId,
+		String actionId, int actionDate, boolean active, int type,
+		String extraData) throws NoSuchEquityLogException, SystemException {
+		SocialEquityLog socialEquityLog = findByU_AEI_AID_AD_A_T_E(userId,
+				assetEntryId, actionId, actionDate, active, type, extraData);
 
 		remove(socialEquityLog);
 	}
@@ -4104,101 +4351,23 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	}
 
 	/**
-	 * Counts all the social equity logs where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
-	 *
-	 * @param userId the user id to search with
-	 * @param actionId the action id to search with
-	 * @param active the active to search with
-	 * @param type the type to search with
-	 * @return the number of matching social equity logs
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int countByU_AID_A_T(long userId, String actionId, boolean active,
-		int type) throws SystemException {
-		Object[] finderArgs = new Object[] { userId, actionId, active, type };
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_AID_A_T,
-				finderArgs, this);
-
-		if (count == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(5);
-
-				query.append(_SQL_COUNT_SOCIALEQUITYLOG_WHERE);
-
-				query.append(_FINDER_COLUMN_U_AID_A_T_USERID_2);
-
-				if (actionId == null) {
-					query.append(_FINDER_COLUMN_U_AID_A_T_ACTIONID_1);
-				}
-				else {
-					if (actionId.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_U_AID_A_T_ACTIONID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_U_AID_A_T_ACTIONID_2);
-					}
-				}
-
-				query.append(_FINDER_COLUMN_U_AID_A_T_ACTIVE_2);
-
-				query.append(_FINDER_COLUMN_U_AID_A_T_TYPE_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(userId);
-
-				if (actionId != null) {
-					qPos.add(actionId);
-				}
-
-				qPos.add(active);
-
-				qPos.add(type);
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_AID_A_T,
-					finderArgs, count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	/**
-	 * Counts all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63;.
+	 * Counts all the social equity logs where assetEntryId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	 *
 	 * @param assetEntryId the asset entry id to search with
 	 * @param actionId the action id to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @return the number of matching social equity logs
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByAEI_AID_A_T(long assetEntryId, String actionId,
-		boolean active, int type) throws SystemException {
-		Object[] finderArgs = new Object[] { assetEntryId, actionId, active, type };
+	public int countByAEI_AID_A_T_E(long assetEntryId, String actionId,
+		boolean active, int type, String extraData) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				assetEntryId, actionId, active, type, extraData
+			};
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_AEI_AID_A_T,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_AEI_AID_A_T_E,
 				finderArgs, this);
 
 		if (count == null) {
@@ -4207,27 +4376,39 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			try {
 				session = openSession();
 
-				StringBundler query = new StringBundler(5);
+				StringBundler query = new StringBundler(6);
 
 				query.append(_SQL_COUNT_SOCIALEQUITYLOG_WHERE);
 
-				query.append(_FINDER_COLUMN_AEI_AID_A_T_ASSETENTRYID_2);
+				query.append(_FINDER_COLUMN_AEI_AID_A_T_E_ASSETENTRYID_2);
 
 				if (actionId == null) {
-					query.append(_FINDER_COLUMN_AEI_AID_A_T_ACTIONID_1);
+					query.append(_FINDER_COLUMN_AEI_AID_A_T_E_ACTIONID_1);
 				}
 				else {
 					if (actionId.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_AEI_AID_A_T_ACTIONID_3);
+						query.append(_FINDER_COLUMN_AEI_AID_A_T_E_ACTIONID_3);
 					}
 					else {
-						query.append(_FINDER_COLUMN_AEI_AID_A_T_ACTIONID_2);
+						query.append(_FINDER_COLUMN_AEI_AID_A_T_E_ACTIONID_2);
 					}
 				}
 
-				query.append(_FINDER_COLUMN_AEI_AID_A_T_ACTIVE_2);
+				query.append(_FINDER_COLUMN_AEI_AID_A_T_E_ACTIVE_2);
 
-				query.append(_FINDER_COLUMN_AEI_AID_A_T_TYPE_2);
+				query.append(_FINDER_COLUMN_AEI_AID_A_T_E_TYPE_2);
+
+				if (extraData == null) {
+					query.append(_FINDER_COLUMN_AEI_AID_A_T_E_EXTRADATA_1);
+				}
+				else {
+					if (extraData.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_AEI_AID_A_T_E_EXTRADATA_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_AEI_AID_A_T_E_EXTRADATA_2);
+					}
+				}
 
 				String sql = query.toString();
 
@@ -4245,6 +4426,10 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 				qPos.add(type);
 
+				if (extraData != null) {
+					qPos.add(extraData);
+				}
+
 				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
@@ -4255,7 +4440,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_AEI_AID_A_T,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_AEI_AID_A_T_E,
 					finderArgs, count);
 
 				closeSession(session);
@@ -4342,23 +4527,23 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	}
 
 	/**
-	 * Counts all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	 * Counts all the social equity logs where userId = &#63; and actionId = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	 *
 	 * @param userId the user id to search with
 	 * @param actionId the action id to search with
-	 * @param actionDate the action date to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @return the number of matching social equity logs
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByU_AID_AD_A_T(long userId, String actionId,
-		int actionDate, boolean active, int type) throws SystemException {
+	public int countByU_AID_A_T_E(long userId, String actionId, boolean active,
+		int type, String extraData) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				userId, actionId, actionDate, active, type
+				userId, actionId, active, type, extraData
 			};
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_AID_AD_A_T,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_AID_A_T_E,
 				finderArgs, this);
 
 		if (count == null) {
@@ -4371,25 +4556,35 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 				query.append(_SQL_COUNT_SOCIALEQUITYLOG_WHERE);
 
-				query.append(_FINDER_COLUMN_U_AID_AD_A_T_USERID_2);
+				query.append(_FINDER_COLUMN_U_AID_A_T_E_USERID_2);
 
 				if (actionId == null) {
-					query.append(_FINDER_COLUMN_U_AID_AD_A_T_ACTIONID_1);
+					query.append(_FINDER_COLUMN_U_AID_A_T_E_ACTIONID_1);
 				}
 				else {
 					if (actionId.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_U_AID_AD_A_T_ACTIONID_3);
+						query.append(_FINDER_COLUMN_U_AID_A_T_E_ACTIONID_3);
 					}
 					else {
-						query.append(_FINDER_COLUMN_U_AID_AD_A_T_ACTIONID_2);
+						query.append(_FINDER_COLUMN_U_AID_A_T_E_ACTIONID_2);
 					}
 				}
 
-				query.append(_FINDER_COLUMN_U_AID_AD_A_T_ACTIONDATE_2);
+				query.append(_FINDER_COLUMN_U_AID_A_T_E_ACTIVE_2);
 
-				query.append(_FINDER_COLUMN_U_AID_AD_A_T_ACTIVE_2);
+				query.append(_FINDER_COLUMN_U_AID_A_T_E_TYPE_2);
 
-				query.append(_FINDER_COLUMN_U_AID_AD_A_T_TYPE_2);
+				if (extraData == null) {
+					query.append(_FINDER_COLUMN_U_AID_A_T_E_EXTRADATA_1);
+				}
+				else {
+					if (extraData.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_U_AID_A_T_E_EXTRADATA_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_U_AID_A_T_E_EXTRADATA_2);
+					}
+				}
 
 				String sql = query.toString();
 
@@ -4403,11 +4598,13 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 					qPos.add(actionId);
 				}
 
-				qPos.add(actionDate);
-
 				qPos.add(active);
 
 				qPos.add(type);
+
+				if (extraData != null) {
+					qPos.add(extraData);
+				}
 
 				count = (Long)q.uniqueResult();
 			}
@@ -4419,7 +4616,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_AID_AD_A_T,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_AID_A_T_E,
 					finderArgs, count);
 
 				closeSession(session);
@@ -4430,113 +4627,25 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	}
 
 	/**
-	 * Counts all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
+	 * Counts all the social equity logs where assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
 	 *
 	 * @param assetEntryId the asset entry id to search with
 	 * @param actionId the action id to search with
 	 * @param actionDate the action date to search with
 	 * @param active the active to search with
 	 * @param type the type to search with
+	 * @param extraData the extra data to search with
 	 * @return the number of matching social equity logs
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByAEI_AID_AD_A_T(long assetEntryId, String actionId,
-		int actionDate, boolean active, int type) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				assetEntryId, actionId, actionDate, active, type
-			};
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_AEI_AID_AD_A_T,
-				finderArgs, this);
-
-		if (count == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBundler query = new StringBundler(6);
-
-				query.append(_SQL_COUNT_SOCIALEQUITYLOG_WHERE);
-
-				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_ASSETENTRYID_2);
-
-				if (actionId == null) {
-					query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_ACTIONID_1);
-				}
-				else {
-					if (actionId.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_ACTIONID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_ACTIONID_2);
-					}
-				}
-
-				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_ACTIONDATE_2);
-
-				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_ACTIVE_2);
-
-				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_TYPE_2);
-
-				String sql = query.toString();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(assetEntryId);
-
-				if (actionId != null) {
-					qPos.add(actionId);
-				}
-
-				qPos.add(actionDate);
-
-				qPos.add(active);
-
-				qPos.add(type);
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_AEI_AID_AD_A_T,
-					finderArgs, count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	/**
-	 * Counts all the social equity logs where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63;.
-	 *
-	 * @param userId the user id to search with
-	 * @param assetEntryId the asset entry id to search with
-	 * @param actionId the action id to search with
-	 * @param actionDate the action date to search with
-	 * @param active the active to search with
-	 * @param type the type to search with
-	 * @return the number of matching social equity logs
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int countByU_AEI_AID_AD_A_T(long userId, long assetEntryId,
-		String actionId, int actionDate, boolean active, int type)
+	public int countByAEI_AID_AD_A_T_E(long assetEntryId, String actionId,
+		int actionDate, boolean active, int type, String extraData)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				userId, assetEntryId, actionId, actionDate, active, type
+				assetEntryId, actionId, actionDate, active, type, extraData
 			};
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_AEI_AID_AD_A_T,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_AEI_AID_AD_A_T_E,
 				finderArgs, this);
 
 		if (count == null) {
@@ -4549,27 +4658,253 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 				query.append(_SQL_COUNT_SOCIALEQUITYLOG_WHERE);
 
-				query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_USERID_2);
-
-				query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_ASSETENTRYID_2);
+				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_ASSETENTRYID_2);
 
 				if (actionId == null) {
-					query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_ACTIONID_1);
+					query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_ACTIONID_1);
 				}
 				else {
 					if (actionId.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_ACTIONID_3);
+						query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_ACTIONID_3);
 					}
 					else {
-						query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_ACTIONID_2);
+						query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_ACTIONID_2);
 					}
 				}
 
-				query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_ACTIONDATE_2);
+				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_ACTIONDATE_2);
 
-				query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_ACTIVE_2);
+				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_ACTIVE_2);
 
-				query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_TYPE_2);
+				query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_TYPE_2);
+
+				if (extraData == null) {
+					query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_EXTRADATA_1);
+				}
+				else {
+					if (extraData.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_EXTRADATA_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_AEI_AID_AD_A_T_E_EXTRADATA_2);
+					}
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(assetEntryId);
+
+				if (actionId != null) {
+					qPos.add(actionId);
+				}
+
+				qPos.add(actionDate);
+
+				qPos.add(active);
+
+				qPos.add(type);
+
+				if (extraData != null) {
+					qPos.add(extraData);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_AEI_AID_AD_A_T_E,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Counts all the social equity logs where userId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @param actionId the action id to search with
+	 * @param actionDate the action date to search with
+	 * @param active the active to search with
+	 * @param type the type to search with
+	 * @param extraData the extra data to search with
+	 * @return the number of matching social equity logs
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByU_AID_AD_A_T_E(long userId, String actionId,
+		int actionDate, boolean active, int type, String extraData)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				userId, actionId, actionDate, active, type, extraData
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_AID_AD_A_T_E,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(7);
+
+				query.append(_SQL_COUNT_SOCIALEQUITYLOG_WHERE);
+
+				query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_USERID_2);
+
+				if (actionId == null) {
+					query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_ACTIONID_1);
+				}
+				else {
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_ACTIONID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_ACTIONID_2);
+					}
+				}
+
+				query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_ACTIONDATE_2);
+
+				query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_ACTIVE_2);
+
+				query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_TYPE_2);
+
+				if (extraData == null) {
+					query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_EXTRADATA_1);
+				}
+				else {
+					if (extraData.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_EXTRADATA_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_U_AID_AD_A_T_E_EXTRADATA_2);
+					}
+				}
+
+				String sql = query.toString();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				if (actionId != null) {
+					qPos.add(actionId);
+				}
+
+				qPos.add(actionDate);
+
+				qPos.add(active);
+
+				qPos.add(type);
+
+				if (extraData != null) {
+					qPos.add(extraData);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_AID_AD_A_T_E,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Counts all the social equity logs where userId = &#63; and assetEntryId = &#63; and actionId = &#63; and actionDate = &#63; and active = &#63; and type = &#63; and extraData = &#63;.
+	 *
+	 * @param userId the user id to search with
+	 * @param assetEntryId the asset entry id to search with
+	 * @param actionId the action id to search with
+	 * @param actionDate the action date to search with
+	 * @param active the active to search with
+	 * @param type the type to search with
+	 * @param extraData the extra data to search with
+	 * @return the number of matching social equity logs
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByU_AEI_AID_AD_A_T_E(long userId, long assetEntryId,
+		String actionId, int actionDate, boolean active, int type,
+		String extraData) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				userId, assetEntryId, actionId, actionDate, active, type,
+				extraData
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_AEI_AID_AD_A_T_E,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBundler query = new StringBundler(8);
+
+				query.append(_SQL_COUNT_SOCIALEQUITYLOG_WHERE);
+
+				query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_USERID_2);
+
+				query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_ASSETENTRYID_2);
+
+				if (actionId == null) {
+					query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_ACTIONID_1);
+				}
+				else {
+					if (actionId.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_ACTIONID_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_ACTIONID_2);
+					}
+				}
+
+				query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_ACTIONDATE_2);
+
+				query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_ACTIVE_2);
+
+				query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_TYPE_2);
+
+				if (extraData == null) {
+					query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_EXTRADATA_1);
+				}
+				else {
+					if (extraData.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_EXTRADATA_3);
+					}
+					else {
+						query.append(_FINDER_COLUMN_U_AEI_AID_AD_A_T_E_EXTRADATA_2);
+					}
+				}
 
 				String sql = query.toString();
 
@@ -4591,6 +4926,10 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 				qPos.add(type);
 
+				if (extraData != null) {
+					qPos.add(extraData);
+				}
+
 				count = (Long)q.uniqueResult();
 			}
 			catch (Exception e) {
@@ -4601,7 +4940,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_AEI_AID_AD_A_T,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_AEI_AID_AD_A_T_E,
 					finderArgs, count);
 
 				closeSession(session);
@@ -4717,45 +5056,61 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	private static final String _FINDER_COLUMN_G_U_A_T_USERID_2 = "socialEquityLog.userId = ? AND ";
 	private static final String _FINDER_COLUMN_G_U_A_T_ACTIVE_2 = "socialEquityLog.active = ? AND ";
 	private static final String _FINDER_COLUMN_G_U_A_T_TYPE_2 = "socialEquityLog.type = ?";
-	private static final String _FINDER_COLUMN_U_AID_A_T_USERID_2 = "socialEquityLog.userId = ? AND ";
-	private static final String _FINDER_COLUMN_U_AID_A_T_ACTIONID_1 = "socialEquityLog.actionId IS NULL AND ";
-	private static final String _FINDER_COLUMN_U_AID_A_T_ACTIONID_2 = "socialEquityLog.actionId = ? AND ";
-	private static final String _FINDER_COLUMN_U_AID_A_T_ACTIONID_3 = "(socialEquityLog.actionId IS NULL OR socialEquityLog.actionId = ?) AND ";
-	private static final String _FINDER_COLUMN_U_AID_A_T_ACTIVE_2 = "socialEquityLog.active = ? AND ";
-	private static final String _FINDER_COLUMN_U_AID_A_T_TYPE_2 = "socialEquityLog.type = ?";
-	private static final String _FINDER_COLUMN_AEI_AID_A_T_ASSETENTRYID_2 = "socialEquityLog.assetEntryId = ? AND ";
-	private static final String _FINDER_COLUMN_AEI_AID_A_T_ACTIONID_1 = "socialEquityLog.actionId IS NULL AND ";
-	private static final String _FINDER_COLUMN_AEI_AID_A_T_ACTIONID_2 = "socialEquityLog.actionId = ? AND ";
-	private static final String _FINDER_COLUMN_AEI_AID_A_T_ACTIONID_3 = "(socialEquityLog.actionId IS NULL OR socialEquityLog.actionId = ?) AND ";
-	private static final String _FINDER_COLUMN_AEI_AID_A_T_ACTIVE_2 = "socialEquityLog.active = ? AND ";
-	private static final String _FINDER_COLUMN_AEI_AID_A_T_TYPE_2 = "socialEquityLog.type = ?";
+	private static final String _FINDER_COLUMN_AEI_AID_A_T_E_ASSETENTRYID_2 = "socialEquityLog.assetEntryId = ? AND ";
+	private static final String _FINDER_COLUMN_AEI_AID_A_T_E_ACTIONID_1 = "socialEquityLog.actionId IS NULL AND ";
+	private static final String _FINDER_COLUMN_AEI_AID_A_T_E_ACTIONID_2 = "socialEquityLog.actionId = ? AND ";
+	private static final String _FINDER_COLUMN_AEI_AID_A_T_E_ACTIONID_3 = "(socialEquityLog.actionId IS NULL OR socialEquityLog.actionId = ?) AND ";
+	private static final String _FINDER_COLUMN_AEI_AID_A_T_E_ACTIVE_2 = "socialEquityLog.active = ? AND ";
+	private static final String _FINDER_COLUMN_AEI_AID_A_T_E_TYPE_2 = "socialEquityLog.type = ? AND ";
+	private static final String _FINDER_COLUMN_AEI_AID_A_T_E_EXTRADATA_1 = "socialEquityLog.extraData IS NULL";
+	private static final String _FINDER_COLUMN_AEI_AID_A_T_E_EXTRADATA_2 = "socialEquityLog.extraData = ?";
+	private static final String _FINDER_COLUMN_AEI_AID_A_T_E_EXTRADATA_3 = "(socialEquityLog.extraData IS NULL OR socialEquityLog.extraData = ?)";
 	private static final String _FINDER_COLUMN_G_U_AD_A_T_GROUPID_2 = "socialEquityLog.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_U_AD_A_T_USERID_2 = "socialEquityLog.userId = ? AND ";
 	private static final String _FINDER_COLUMN_G_U_AD_A_T_ACTIONDATE_2 = "socialEquityLog.actionDate = ? AND ";
 	private static final String _FINDER_COLUMN_G_U_AD_A_T_ACTIVE_2 = "socialEquityLog.active = ? AND ";
 	private static final String _FINDER_COLUMN_G_U_AD_A_T_TYPE_2 = "socialEquityLog.type = ?";
-	private static final String _FINDER_COLUMN_U_AID_AD_A_T_USERID_2 = "socialEquityLog.userId = ? AND ";
-	private static final String _FINDER_COLUMN_U_AID_AD_A_T_ACTIONID_1 = "socialEquityLog.actionId IS NULL AND ";
-	private static final String _FINDER_COLUMN_U_AID_AD_A_T_ACTIONID_2 = "socialEquityLog.actionId = ? AND ";
-	private static final String _FINDER_COLUMN_U_AID_AD_A_T_ACTIONID_3 = "(socialEquityLog.actionId IS NULL OR socialEquityLog.actionId = ?) AND ";
-	private static final String _FINDER_COLUMN_U_AID_AD_A_T_ACTIONDATE_2 = "socialEquityLog.actionDate = ? AND ";
-	private static final String _FINDER_COLUMN_U_AID_AD_A_T_ACTIVE_2 = "socialEquityLog.active = ? AND ";
-	private static final String _FINDER_COLUMN_U_AID_AD_A_T_TYPE_2 = "socialEquityLog.type = ?";
-	private static final String _FINDER_COLUMN_AEI_AID_AD_A_T_ASSETENTRYID_2 = "socialEquityLog.assetEntryId = ? AND ";
-	private static final String _FINDER_COLUMN_AEI_AID_AD_A_T_ACTIONID_1 = "socialEquityLog.actionId IS NULL AND ";
-	private static final String _FINDER_COLUMN_AEI_AID_AD_A_T_ACTIONID_2 = "socialEquityLog.actionId = ? AND ";
-	private static final String _FINDER_COLUMN_AEI_AID_AD_A_T_ACTIONID_3 = "(socialEquityLog.actionId IS NULL OR socialEquityLog.actionId = ?) AND ";
-	private static final String _FINDER_COLUMN_AEI_AID_AD_A_T_ACTIONDATE_2 = "socialEquityLog.actionDate = ? AND ";
-	private static final String _FINDER_COLUMN_AEI_AID_AD_A_T_ACTIVE_2 = "socialEquityLog.active = ? AND ";
-	private static final String _FINDER_COLUMN_AEI_AID_AD_A_T_TYPE_2 = "socialEquityLog.type = ?";
-	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_USERID_2 = "socialEquityLog.userId = ? AND ";
-	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_ASSETENTRYID_2 = "socialEquityLog.assetEntryId = ? AND ";
-	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_ACTIONID_1 = "socialEquityLog.actionId IS NULL AND ";
-	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_ACTIONID_2 = "socialEquityLog.actionId = ? AND ";
-	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_ACTIONID_3 = "(socialEquityLog.actionId IS NULL OR socialEquityLog.actionId = ?) AND ";
-	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_ACTIONDATE_2 = "socialEquityLog.actionDate = ? AND ";
-	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_ACTIVE_2 = "socialEquityLog.active = ? AND ";
-	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_TYPE_2 = "socialEquityLog.type = ?";
+	private static final String _FINDER_COLUMN_U_AID_A_T_E_USERID_2 = "socialEquityLog.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_AID_A_T_E_ACTIONID_1 = "socialEquityLog.actionId IS NULL AND ";
+	private static final String _FINDER_COLUMN_U_AID_A_T_E_ACTIONID_2 = "socialEquityLog.actionId = ? AND ";
+	private static final String _FINDER_COLUMN_U_AID_A_T_E_ACTIONID_3 = "(socialEquityLog.actionId IS NULL OR socialEquityLog.actionId = ?) AND ";
+	private static final String _FINDER_COLUMN_U_AID_A_T_E_ACTIVE_2 = "socialEquityLog.active = ? AND ";
+	private static final String _FINDER_COLUMN_U_AID_A_T_E_TYPE_2 = "socialEquityLog.type = ? AND ";
+	private static final String _FINDER_COLUMN_U_AID_A_T_E_EXTRADATA_1 = "socialEquityLog.extraData IS NULL";
+	private static final String _FINDER_COLUMN_U_AID_A_T_E_EXTRADATA_2 = "socialEquityLog.extraData = ?";
+	private static final String _FINDER_COLUMN_U_AID_A_T_E_EXTRADATA_3 = "(socialEquityLog.extraData IS NULL OR socialEquityLog.extraData = ?)";
+	private static final String _FINDER_COLUMN_AEI_AID_AD_A_T_E_ASSETENTRYID_2 = "socialEquityLog.assetEntryId = ? AND ";
+	private static final String _FINDER_COLUMN_AEI_AID_AD_A_T_E_ACTIONID_1 = "socialEquityLog.actionId IS NULL AND ";
+	private static final String _FINDER_COLUMN_AEI_AID_AD_A_T_E_ACTIONID_2 = "socialEquityLog.actionId = ? AND ";
+	private static final String _FINDER_COLUMN_AEI_AID_AD_A_T_E_ACTIONID_3 = "(socialEquityLog.actionId IS NULL OR socialEquityLog.actionId = ?) AND ";
+	private static final String _FINDER_COLUMN_AEI_AID_AD_A_T_E_ACTIONDATE_2 = "socialEquityLog.actionDate = ? AND ";
+	private static final String _FINDER_COLUMN_AEI_AID_AD_A_T_E_ACTIVE_2 = "socialEquityLog.active = ? AND ";
+	private static final String _FINDER_COLUMN_AEI_AID_AD_A_T_E_TYPE_2 = "socialEquityLog.type = ? AND ";
+	private static final String _FINDER_COLUMN_AEI_AID_AD_A_T_E_EXTRADATA_1 = "socialEquityLog.extraData IS NULL";
+	private static final String _FINDER_COLUMN_AEI_AID_AD_A_T_E_EXTRADATA_2 = "socialEquityLog.extraData = ?";
+	private static final String _FINDER_COLUMN_AEI_AID_AD_A_T_E_EXTRADATA_3 = "(socialEquityLog.extraData IS NULL OR socialEquityLog.extraData = ?)";
+	private static final String _FINDER_COLUMN_U_AID_AD_A_T_E_USERID_2 = "socialEquityLog.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_AID_AD_A_T_E_ACTIONID_1 = "socialEquityLog.actionId IS NULL AND ";
+	private static final String _FINDER_COLUMN_U_AID_AD_A_T_E_ACTIONID_2 = "socialEquityLog.actionId = ? AND ";
+	private static final String _FINDER_COLUMN_U_AID_AD_A_T_E_ACTIONID_3 = "(socialEquityLog.actionId IS NULL OR socialEquityLog.actionId = ?) AND ";
+	private static final String _FINDER_COLUMN_U_AID_AD_A_T_E_ACTIONDATE_2 = "socialEquityLog.actionDate = ? AND ";
+	private static final String _FINDER_COLUMN_U_AID_AD_A_T_E_ACTIVE_2 = "socialEquityLog.active = ? AND ";
+	private static final String _FINDER_COLUMN_U_AID_AD_A_T_E_TYPE_2 = "socialEquityLog.type = ? AND ";
+	private static final String _FINDER_COLUMN_U_AID_AD_A_T_E_EXTRADATA_1 = "socialEquityLog.extraData IS NULL";
+	private static final String _FINDER_COLUMN_U_AID_AD_A_T_E_EXTRADATA_2 = "socialEquityLog.extraData = ?";
+	private static final String _FINDER_COLUMN_U_AID_AD_A_T_E_EXTRADATA_3 = "(socialEquityLog.extraData IS NULL OR socialEquityLog.extraData = ?)";
+	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_E_USERID_2 = "socialEquityLog.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_E_ASSETENTRYID_2 =
+		"socialEquityLog.assetEntryId = ? AND ";
+	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_E_ACTIONID_1 = "socialEquityLog.actionId IS NULL AND ";
+	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_E_ACTIONID_2 = "socialEquityLog.actionId = ? AND ";
+	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_E_ACTIONID_3 = "(socialEquityLog.actionId IS NULL OR socialEquityLog.actionId = ?) AND ";
+	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_E_ACTIONDATE_2 = "socialEquityLog.actionDate = ? AND ";
+	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_E_ACTIVE_2 = "socialEquityLog.active = ? AND ";
+	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_E_TYPE_2 = "socialEquityLog.type = ? AND ";
+	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_E_EXTRADATA_1 = "socialEquityLog.extraData IS NULL";
+	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_E_EXTRADATA_2 = "socialEquityLog.extraData = ?";
+	private static final String _FINDER_COLUMN_U_AEI_AID_AD_A_T_E_EXTRADATA_3 = "(socialEquityLog.extraData IS NULL OR socialEquityLog.extraData = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "socialEquityLog.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SocialEquityLog exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SocialEquityLog exists with the key {";
