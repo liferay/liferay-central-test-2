@@ -164,10 +164,17 @@ public class EditPageAttachmentAction extends PortletAction {
 
 		WikiPage page = WikiPageServiceUtil.getPage(nodeId, title);
 
+		String dirName = page.getAttachmentsDir();
+
 		for (int i = 0; i < files.size(); i++) {
+			ObjectValuePair<String, byte[]> ovp = files.get(i);
+
+			String fileName = ovp.getKey();
+
 			SocialEquityLogLocalServiceUtil.addEquityLogs(
 				PortalUtil.getUserId(actionRequest), WikiPage.class.getName(),
-				page.getResourcePrimKey(), ActionKeys.ADD_ATTACHMENT);
+				page.getResourcePrimKey(), ActionKeys.ADD_ATTACHMENT,
+				dirName + "/" + fileName);
 		}
 	}
 
@@ -186,7 +193,8 @@ public class EditPageAttachmentAction extends PortletAction {
 
 		SocialEquityLogLocalServiceUtil.deactivateEquityLogs(
 			PortalUtil.getUserId(actionRequest), WikiPage.class.getName(),
-			page.getResourcePrimKey(), ActionKeys.ADD_ATTACHMENT);
+			page.getResourcePrimKey(), ActionKeys.ADD_ATTACHMENT,
+			attachment.substring(1));
 	}
 
 }
