@@ -347,6 +347,10 @@ public interface BlogsEntryLocalService {
 	public int getOrganizationEntriesCount(long organizationId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void subscribe(long userId, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void updateAsset(long userId,
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames)

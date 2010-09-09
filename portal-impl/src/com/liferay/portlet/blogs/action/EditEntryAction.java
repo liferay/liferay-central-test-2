@@ -48,6 +48,7 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.portlet.blogs.service.permission.BlogsPermission;
+import com.liferay.portlet.social.service.SocialEquityLogLocalServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.InputStream;
@@ -71,6 +72,7 @@ import org.apache.struts.action.ActionMapping;
  * @author Brian Wing Shun Chan
  * @author Wilson S. Man
  * @author Thiago Moreira
+ * @author Zsolt Berentey
  */
 public class EditEntryAction extends PortletAction {
 
@@ -261,9 +263,8 @@ public class EditEntryAction extends PortletAction {
 				permissionChecker, themeDisplay.getScopeGroupId(),
 				ActionKeys.SUBSCRIBE)) {
 
-			SubscriptionLocalServiceUtil.addSubscription(
-				themeDisplay.getUserId(), BlogsEntry.class.getName(),
-				themeDisplay.getScopeGroupId());
+			BlogsEntryLocalServiceUtil.subscribe(
+				themeDisplay.getUserId(), themeDisplay.getScopeGroupId());
 		}
 	}
 
@@ -281,6 +282,12 @@ public class EditEntryAction extends PortletAction {
 			SubscriptionLocalServiceUtil.deleteSubscription(
 				themeDisplay.getUserId(), BlogsEntry.class.getName(),
 				themeDisplay.getScopeGroupId());
+
+			// Social
+
+			SocialEquityLogLocalServiceUtil.deactivateEquityLogs(
+				themeDisplay.getUserId(), BlogsEntry.class.getName(),
+				themeDisplay.getScopeGroupId(), ActionKeys.SUBSCRIBE);
 		}
 	}
 
