@@ -183,6 +183,10 @@ public class ServiceContext implements Serializable {
 		}
 	}
 
+	public Serializable removeAttribute(String name) {
+		return _attributes.remove(name);
+	}
+
 	public void setAddCommunityPermissions(boolean addCommunityPermissions) {
 		_addCommunityPermissions = addCommunityPermissions;
 	}

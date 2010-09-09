@@ -22,6 +22,7 @@ import com.liferay.portal.service.ServiceContext;
 
 import java.io.Serializable;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,6 +60,25 @@ public class WorkflowHandlerRegistryUtil {
 			long classPK, Object model, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		Map<String, Serializable> additionalContextInformation =
+			(Map<String, Serializable>)serviceContext.removeAttribute(
+				WorkflowConstants.CONTEXT_ADDITIONAL_INFO);
+
+		if (additionalContextInformation == null) {
+			additionalContextInformation = Collections.EMPTY_MAP;
+		}
+		
+		startWorkflowInstance(
+			companyId, groupId, userId, className, classPK,
+			model, serviceContext, additionalContextInformation);
+	}
+
+	public static void startWorkflowInstance(
+			long companyId, long groupId, long userId, String className,
+			long classPK, Object model, ServiceContext serviceContext,
+			Map<String, Serializable> workflowContextParameters)
+		throws PortalException, SystemException {
+
 		if (serviceContext.getWorkflowAction() !=
 				WorkflowConstants.ACTION_PUBLISH) {
 
@@ -81,7 +101,7 @@ public class WorkflowHandlerRegistryUtil {
 		}
 
 		Map<String, Serializable> workflowContext =
-			new HashMap<String, Serializable>();
+			new HashMap<String, Serializable>(workflowContextParameters);
 
 		workflowContext.put(
 			WorkflowConstants.CONTEXT_COMPANY_ID, String.valueOf(companyId));
