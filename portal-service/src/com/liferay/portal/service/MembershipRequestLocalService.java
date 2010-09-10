@@ -219,6 +219,9 @@ public interface MembershipRequestLocalService {
 	public void deleteMembershipRequests(long groupId, int statusId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void deleteMembershipRequestsByUserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.MembershipRequest> search(
 		long groupId, int status, int start, int end)

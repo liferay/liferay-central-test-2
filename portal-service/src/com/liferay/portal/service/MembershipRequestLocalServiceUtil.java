@@ -243,6 +243,11 @@ public class MembershipRequestLocalServiceUtil {
 		getService().deleteMembershipRequests(groupId, statusId);
 	}
 
+	public static void deleteMembershipRequestsByUserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteMembershipRequestsByUserId(userId);
+	}
+
 	public static java.util.List<com.liferay.portal.model.MembershipRequest> search(
 		long groupId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

@@ -98,6 +98,12 @@ public class MembershipRequestLocalServiceImpl
 		membershipRequestPersistence.removeByG_S(groupId, statusId);
 	}
 
+	public void deleteMembershipRequestsByUserId(long userId)
+		throws SystemException {
+
+		membershipRequestPersistence.removeByUserId(userId);
+	}
+
 	public List<MembershipRequest> search(
 			long groupId, int status, int start, int end)
 		throws SystemException {

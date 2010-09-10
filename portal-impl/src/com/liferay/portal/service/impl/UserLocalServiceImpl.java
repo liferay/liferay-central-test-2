@@ -1039,6 +1039,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		mbMessageFlagLocalService.deleteFlags(userId);
 		mbStatsUserLocalService.deleteStatsUsersByUserId(userId);
 
+		// Membership requests
+
+		membershipRequestLocalService.deleteMembershipRequestsByUserId(userId);
+
 		// Shopping cart
 
 		shoppingCartLocalService.deleteUserCarts(userId);
