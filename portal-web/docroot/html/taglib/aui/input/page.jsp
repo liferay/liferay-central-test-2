@@ -238,11 +238,11 @@ String labelTag = _buildLabel(inlineLabel, showForLabel, forLabel);
 		}
 
 		if (Validator.isNotNull(valueString)) {
-			if (type.equals("hidden") || type.equals("text")) {
-				valueString = HtmlUtil.escapeAttribute(valueString);
-			}
-			else if (type.equals("textarea")) {
+			if (type.equals("textarea")) {
 				valueString = HtmlUtil.escape(valueString);
+			}
+			else {
+				valueString = HtmlUtil.escapeAttribute(valueString);
 			}
 		}
 		%>
