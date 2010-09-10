@@ -171,7 +171,7 @@ public class PluginsEnvironmentBuilder {
 
 		// .classpath
 
-		File classpathFile = null;
+		File classpathFile = new File(projectDirName + "/.classpath");
 
 		if (javaProject) {
 			List<String> portalJars = ListUtil.toList(dependencyJars);
@@ -253,8 +253,6 @@ public class PluginsEnvironmentBuilder {
 			sb.append("\t<classpathentry kind=\"output\" path=\"bin\" />\n");
 			sb.append("</classpath>");
 
-			classpathFile = new File(projectDirName + "/.classpath");
-
 			System.out.println("Updating " + classpathFile);
 
 			String content = sb.toString();
@@ -263,6 +261,9 @@ public class PluginsEnvironmentBuilder {
 				content, "\"/portal", "\"/portal-trunk");
 
 			FileUtil.write(classpathFile, content);
+		}
+		else {
+			classpathFile.delete();
 		}
 
 		// SVN
