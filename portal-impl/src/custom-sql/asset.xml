@@ -67,12 +67,8 @@
 			INNER JOIN
 				AssetEntries_AssetCategories ON
 					(AssetEntries_AssetCategories.categoryId = AssetCategory.categoryId)
-			INNER JOIN
-				AssetEntry ON
-					(AssetEntry.entryId = AssetEntries_AssetCategories.entryId)
 			WHERE
-				(AssetEntry.classNameId = ?) AND
-				(AssetEntry.classPK = ?)
+				(AssetEntries_AssetCategories.entryId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.findByG_N_P">
@@ -218,12 +214,8 @@
 			INNER JOIN
 				AssetEntries_AssetTags ON
 					(AssetEntries_AssetTags.tagId = AssetTag.tagId)
-			INNER JOIN
-				AssetEntry ON
-					(AssetEntry.entryId = AssetEntries_AssetTags.entryId)
 			WHERE
-				(AssetEntry.classNameId = ?) AND
-				(AssetEntry.classPK = ?)
+				(AssetEntries_AssetTags.entryId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetTagFinder.findByG_C_N">

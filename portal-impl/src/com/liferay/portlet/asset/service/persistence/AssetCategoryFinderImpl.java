@@ -27,9 +27,11 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.asset.NoSuchCategoryException;
 import com.liferay.portlet.asset.model.AssetCategory;
+import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.impl.AssetCategoryImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -227,6 +229,12 @@ public class AssetCategoryFinderImpl
 		Session session = null;
 
 		try {
+			AssetEntry assetEntry =
+				AssetEntryUtil.fetchByC_C(classNameId, classPK);
+			if (assetEntry == null) {
+				return Collections.emptyList();
+			}
+
 			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_C);
@@ -237,8 +245,7 @@ public class AssetCategoryFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(classNameId);
-			qPos.add(classPK);
+			qPos.add(assetEntry.getEntryId());
 
 			return (List<AssetCategory>)QueryUtil.list(
 				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
