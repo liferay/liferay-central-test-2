@@ -279,8 +279,6 @@ public class OrganizationIndexer extends BaseIndexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		BooleanQuery permissionQuery = BooleanQueryFactoryUtil.create();
-
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
 
@@ -288,20 +286,22 @@ public class OrganizationIndexer extends BaseIndexer {
 			"organizationsTree");
 
 		if (leftAndRightOrganizationIds != null) {
+			BooleanQuery organizationsTreeQuery =
+				BooleanQueryFactoryUtil.create();
+
 			if (leftAndRightOrganizationIds.length == 0) {
-				permissionQuery.addRequiredTerm(Field.ORGANIZATION_ID, -1);
+				organizationsTreeQuery.addRequiredTerm(
+					Field.ORGANIZATION_ID, -1);
 			}
 			else if (leftAndRightOrganizationIds.length > 0) {
 				for (int i = 0; i < leftAndRightOrganizationIds.length; i++) {
-					permissionQuery.addRangeTerm(
+					organizationsTreeQuery.addRangeTerm(
 						"leftOrganizationId", leftAndRightOrganizationIds[i][0],
 						leftAndRightOrganizationIds[i][1]);
 				}
 			}
-		}
 
-		if (!permissionQuery.clauses().isEmpty()) {
-			contextQuery.add(permissionQuery, BooleanClauseOccur.MUST);
+			contextQuery.add(organizationsTreeQuery, BooleanClauseOccur.MUST);
 		}
 	}
 
