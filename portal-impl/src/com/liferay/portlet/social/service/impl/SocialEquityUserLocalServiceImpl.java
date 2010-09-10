@@ -55,6 +55,17 @@ public class SocialEquityUserLocalServiceImpl
 		return getEquityValue(userId, projectionList);
 	}
 
+	public int getRank(long groupId, long userId) throws SystemException {
+		SocialEquityUser equityUser = socialEquityUserPersistence.fetchByG_U(
+			groupId, userId);
+
+		if (equityUser == null) {
+			return 0;
+		}
+
+		return equityUser.getRank();
+	}
+
 	public List<SocialEquityUser> getRankedEquityUsers(
 			long groupId, int start, int end,
 			OrderByComparator orderByComparator)
