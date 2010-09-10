@@ -507,9 +507,7 @@ public class SocialEquityLogLocalServiceImpl
 			SocialEquitySetting equitySetting)
 		throws PortalException, SystemException {
 
-		if (!isAddEquityLog(
-				user.getUserId(), assetEntry.getEntryId(), equitySetting)) {
-
+		if (!isAddEquityLog(user, assetEntry, equitySetting)) {
 			return;
 		}
 
@@ -589,7 +587,7 @@ public class SocialEquityLogLocalServiceImpl
 	}
 
 	protected boolean isAddEquityLog(
-			long userId, long assetEntryId, SocialEquitySetting equitySetting)
+			User user, AssetEntry assetEntry, SocialEquitySetting equitySetting)
 		throws SystemException {
 
 		if (equitySetting.getDailyLimit() < 0) {
@@ -600,26 +598,34 @@ public class SocialEquityLogLocalServiceImpl
 		int actionDate = getEquityDate();
 		int type = equitySetting.getType();
 
+		// Invisible
+
+		if (!assetEntry.isVisible() &&
+			(type == SocialEquitySettingConstants.TYPE_INFORMATION)) {
+
+			return false;
+		}
+
 		// Duplicate
 
-		if (socialEquityLogPersistence.countByU_AEI_AID_AD_A_T(
-				userId, assetEntryId, actionId, actionDate, true, type) > 0) {
+		int count = socialEquityLogPersistence.countByU_AEI_AID_AD_A_T(
+			user.getUserId(), assetEntry.getEntryId(), actionId, actionDate,
+			true, type);
 
+		if (count > 0) {
 			return false;
 		}
 
 		// Unique
 
 		if (equitySetting.isUniqueEntry()) {
-			int count = 0;
-
 			if (type == SocialEquitySettingConstants.TYPE_INFORMATION) {
 				count = socialEquityLogPersistence.countByAEI_AID_A_T(
-					assetEntryId, actionId, true, type);
+					assetEntry.getEntryId(), actionId, true, type);
 			}
 			else {
 				count = socialEquityLogPersistence.countByU_AID_A_T(
-					userId, actionId, true, type);
+					user.getUserId(), actionId, true, type);
 			}
 
 			if (count > 0) {
@@ -633,15 +639,13 @@ public class SocialEquityLogLocalServiceImpl
 			return true;
 		}
 
-		int count = 0;
-
 		if (type == SocialEquitySettingConstants.TYPE_INFORMATION) {
 			count = socialEquityLogPersistence.countByAEI_AID_AD_A_T(
-				assetEntryId, actionId, actionDate, true, type);
+				assetEntry.getEntryId(), actionId, actionDate, true, type);
 		}
 		else {
 			count = socialEquityLogPersistence.countByU_AID_AD_A_T(
-				userId, actionId, actionDate, true, type);
+				user.getUserId(), actionId, actionDate, true, type);
 		}
 
 		if (count < equitySetting.getDailyLimit()) {
