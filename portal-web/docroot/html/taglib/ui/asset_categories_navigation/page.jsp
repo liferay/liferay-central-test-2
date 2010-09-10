@@ -83,13 +83,23 @@ if (hidePortletWhenEmpty) {
 
 	treeViews.each(
 		function(treeEl) {
-			new A.TreeView(
+			var treeView = new A.TreeView(
 				{
 					boundingBox: treeEl,
 					contentBox: treeEl.one('.lfr-asset-category-list'),
 					type: 'normal'
 				}
 			).render();
+
+			var selectedChild = treeView.getNodeByChild(A.one('.lfr-asset-category-list .aui-tree-node strong'));
+
+			selectedChild.eachParent(
+				function(node) {
+					if (node instanceof A.TreeNode) {
+						node.expand();
+					}
+				}
+			);
 		}
 	);
 </aui:script>
