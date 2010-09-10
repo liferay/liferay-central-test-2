@@ -581,7 +581,9 @@ public class SeleneseToJavaBuilder {
 				sb.append("\"));");
 				sb.append("selenium.waitForPageToLoad(\"30000\");");
 			}
-			else if (param1.equals("close") || param1.equals("refresh")) {
+			else if (param1.equals("close") || param1.equals("refresh") ||
+					 param1.equals("windowMaximize")) {
+
 				sb.append("selenium.");
 				sb.append(param1);
 				sb.append("();");
@@ -624,8 +626,14 @@ public class SeleneseToJavaBuilder {
 				sb.append(param2);
 				sb.append(");");
 			}
-			else if (param1.equals("refreshAndWait")) {
-				sb.append("selenium.refresh();");
+			else if (param1.equals("refreshAndWait") ||
+					 param1.equals("windowMaximizeAndWait")) {
+
+				String text = param1.substring(0, param1.length() - 7);
+
+				sb.append("selenium.");
+				sb.append(text);
+				sb.append("();");
 				sb.append("selenium.waitForPageToLoad(\"30000\");");
 			}
 			else if (param1.equals("store")) {
