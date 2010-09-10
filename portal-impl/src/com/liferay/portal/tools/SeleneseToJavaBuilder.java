@@ -582,6 +582,7 @@ public class SeleneseToJavaBuilder {
 				sb.append("selenium.waitForPageToLoad(\"30000\");");
 			}
 			else if (param1.equals("close") || param1.equals("refresh") ||
+					 param1.equals("windowFocus") ||
 					 param1.equals("windowMaximize")) {
 
 				sb.append("selenium.");
