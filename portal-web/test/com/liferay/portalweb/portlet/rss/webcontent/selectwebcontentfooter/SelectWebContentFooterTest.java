@@ -42,6 +42,7 @@ public class SelectWebContentFooterTest extends BaseTestCase {
 
 		selenium.clickAt("link=RSS Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -49,7 +50,8 @@ public class SelectWebContentFooterTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Configuration")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a")) {
 					break;
 				}
 			}
@@ -59,8 +61,25 @@ public class SelectWebContentFooterTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//input[@onclick='_86_selectionForFooter();']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("//input[@onclick='_86_selectionForFooter();']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -68,10 +87,10 @@ public class SelectWebContentFooterTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
-			selenium.getText("//div[3]/div/div/div/div/div"));
+			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
 		assertEquals(RuntimeVariables.replace(
 				"Footer Web Content Footer Web Content"),
-			selenium.getText("//div[2]/fieldset/div/div[2]/div"));
+			selenium.getText("//div[2]/div[2]/fieldset/div/div[2]/div"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

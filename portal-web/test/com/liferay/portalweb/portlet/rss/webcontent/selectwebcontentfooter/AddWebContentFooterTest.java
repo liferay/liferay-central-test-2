@@ -106,13 +106,11 @@ public class AddWebContentFooterTest extends BaseTestCase {
 		selenium.type("//body",
 			RuntimeVariables.replace("This is footer web content."));
 		selenium.selectFrame("relative=top");
-		selenium.clickAt("//input[@value='Save and Approve']",
+		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.clickAt("//span/span/a", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Footer Web Content"));
 	}
 }

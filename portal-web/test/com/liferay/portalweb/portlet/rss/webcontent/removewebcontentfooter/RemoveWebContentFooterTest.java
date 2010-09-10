@@ -61,14 +61,50 @@ public class RemoveWebContentFooterTest extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace("This is footer web content."),
 			selenium.getText("//section/div/div/div/p"));
-		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//input[@id='_86_removeButton' and @value='Remove' and @type='button' and @onclick='_86_removeSelectionForFooter();']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("//input[@id='_86_removeButton' and @value='Remove' and @type='button' and @onclick='_86_removeSelectionForFooter();']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
-			selenium.getText("//div[3]/div/div/div/div/div"));
+			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

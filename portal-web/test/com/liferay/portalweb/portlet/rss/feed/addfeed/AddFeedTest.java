@@ -42,26 +42,7 @@ public class AddFeedTest extends BaseTestCase {
 
 		selenium.clickAt("link=RSS Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Configuration")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.click("add");
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -70,7 +51,7 @@ public class AddFeedTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[2]/div/div/span[2]/span/span/input")) {
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a")) {
 					break;
 				}
 			}
@@ -80,7 +61,43 @@ public class AddFeedTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("//div[2]/div/div/span[2]/span/span/input",
+		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//div[2]/span/span/button[1]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//div[2]/span/span/button[1]");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_86_url3")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_86_url3",
 			RuntimeVariables.replace("http://feeds.digg.com/digg/popular.rss"));
 		selenium.select("_86_entriesPerFeed",
 			RuntimeVariables.replace("label=4"));
@@ -116,7 +133,7 @@ public class AddFeedTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("digg.com: Stories / Popular")) {
+				if (selenium.isTextPresent("digg.com: Stories")) {
 					break;
 				}
 			}
@@ -126,6 +143,6 @@ public class AddFeedTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isTextPresent("digg.com: Stories / Popular"));
+		assertTrue(selenium.isTextPresent("digg.com: Stories"));
 	}
 }
