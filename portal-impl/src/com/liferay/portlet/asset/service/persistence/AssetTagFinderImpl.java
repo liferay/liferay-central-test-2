@@ -230,10 +230,11 @@ public class AssetTagFinderImpl
 		Session session = null;
 
 		try {
-			AssetEntry assetEntry =
-				AssetEntryUtil.fetchByC_C(classNameId, classPK);
-			if (assetEntry == null) {
-				return Collections.emptyList();
+			AssetEntry entry = AssetEntryUtil.fetchByC_C(
+				classNameId, classPK);
+
+			if (entry == null) {
+				return Collections.EMPTY_LIST;
 			}
 
 			session = openSession();
@@ -246,7 +247,7 @@ public class AssetTagFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(assetEntry.getEntryId());
+			qPos.add(entry.getEntryId());
 
 			return (List<AssetTag>) QueryUtil.list(
 				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
