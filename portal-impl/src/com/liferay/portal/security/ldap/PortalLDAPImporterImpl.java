@@ -473,6 +473,39 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		}
 	}
 
+	protected List<Long> importGroup(
+			long ldapServerId, long companyId, LdapContext ldapContext,
+			String fullGroupDN, User user, Properties groupMappings,
+			List<Long> newUserGroupIds)
+		throws Exception {
+
+		Attributes groupAttributes = null;
+
+		try {
+			groupAttributes = PortalLDAPUtil.getGroupAttributes(
+				ldapServerId, companyId, ldapContext, fullGroupDN);
+		}
+		catch (NameNotFoundException nnfe) {
+			_log.error(
+				"LDAP group not found with fullGroupDN " + fullGroupDN,
+				nnfe);
+		}
+
+		UserGroup userGroup = importUserGroup(
+			companyId, groupAttributes, groupMappings);
+
+		if (userGroup != null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Adding " + user.getUserId() + " to group " +
+						userGroup.getUserGroupId());
+			}
+
+			newUserGroupIds.add(userGroup.getUserGroupId());
+		}
+		return newUserGroupIds;
+	}
+
 	protected void importGroups(
 			long ldapServerId, long companyId, LdapContext ldapContext,
 			Attributes attributes, User user, Properties userMappings,
@@ -481,82 +514,75 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 		String userMappingsGroup = userMappings.getProperty("group");
 
+		Attribute userGroupAttribute = attributes.get(userMappingsGroup);
+
 		if (Validator.isNotNull(userMappingsGroup) &&
-			(attributes.get(userMappingsGroup) == null)) {
+			(userGroupAttribute == null)) {
 
 			return;
 		}
 
-		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
-
-		String baseDN = PrefsPropsUtil.getString(
-			companyId, PropsKeys.LDAP_BASE_DN + postfix);
-
-		Binding binding = PortalLDAPUtil.getUser(
-			ldapServerId, companyId, user.getScreenName());
-
-		String fullUserDN = PortalLDAPUtil.getNameInNamespace(
-			ldapServerId, companyId, binding);
-
-		StringBundler sb = new StringBundler(9);
-
-		sb.append(StringPool.OPEN_PARENTHESIS);
-		sb.append(StringPool.AMPERSAND);
-		sb.append(
-			PrefsPropsUtil.getString(
-				companyId,
-				PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER + postfix));
-		sb.append(StringPool.OPEN_PARENTHESIS);
-		sb.append(groupMappings.getProperty("user"));
-		sb.append(StringPool.EQUAL);
-		sb.append(fullUserDN);
-		sb.append(StringPool.CLOSE_PARENTHESIS);
-		sb.append(StringPool.CLOSE_PARENTHESIS);
-
-		byte[] cookie = new byte[0];
-
 		List<Long> newUserGroupIds = new ArrayList<Long>();
 
-		while (cookie != null) {
-			List<SearchResult> searchResults = new ArrayList<SearchResult>();
+		if (PrefsPropsUtil.getBoolean(
+			companyId, PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER_ENABLED)) {
 
-			String groupMappingsGroupName = GetterUtil.getString(
-				groupMappings.getProperty("groupName")).toLowerCase();
+			String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
-			cookie = PortalLDAPUtil.searchLDAP(
-				companyId, ldapContext, cookie, 0, baseDN, sb.toString(),
-				new String[] {groupMappingsGroupName}, searchResults);
+			String baseDN = PrefsPropsUtil.getString(
+				companyId, PropsKeys.LDAP_BASE_DN + postfix);
 
-			for (SearchResult searchResult : searchResults) {
-				String fullGroupDN = PortalLDAPUtil.getNameInNamespace(
-					ldapServerId, companyId, searchResult);
+			Binding binding = PortalLDAPUtil.getUser(
+				ldapServerId, companyId, user.getScreenName());
 
-				Attributes groupAttributes = null;
+			String fullUserDN = PortalLDAPUtil.getNameInNamespace(
+				ldapServerId, companyId, binding);
 
-				try {
-					groupAttributes = PortalLDAPUtil.getGroupAttributes(
-						ldapServerId, companyId, ldapContext, fullGroupDN);
+			StringBundler sb = new StringBundler(9);
+
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(StringPool.AMPERSAND);
+			sb.append(
+				PrefsPropsUtil.getString(
+					companyId,
+					PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER + postfix));
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(groupMappings.getProperty("user"));
+			sb.append(StringPool.EQUAL);
+			sb.append(fullUserDN);
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+
+			byte[] cookie = new byte[0];
+
+			while (cookie != null) {
+				List<SearchResult> searchResults =
+					new ArrayList<SearchResult>();
+
+				String groupMappingsGroupName = GetterUtil.getString(
+					groupMappings.getProperty("groupName")).toLowerCase();
+
+				cookie = PortalLDAPUtil.searchLDAP(
+					companyId, ldapContext, cookie, 0, baseDN, sb.toString(),
+					new String[] {groupMappingsGroupName}, searchResults);
+
+				for (SearchResult searchResult : searchResults) {
+					String fullGroupDN = PortalLDAPUtil.getNameInNamespace(
+						ldapServerId, companyId, searchResult);
+
+					newUserGroupIds = importGroup(
+						ldapServerId, companyId, ldapContext, fullGroupDN, user,
+						groupMappings, newUserGroupIds);
 				}
-				catch (NameNotFoundException nnfe) {
-					_log.error(
-						"LDAP group not found with fullGroupDN " + fullGroupDN,
-						nnfe);
+			}
+		}
+		else {
+			for (int i=0; i < userGroupAttribute.size(); i++) {
+				String fullGroupDN = (String)userGroupAttribute.get(i);
 
-					continue;
-				}
-
-				UserGroup userGroup = importUserGroup(
-					companyId, groupAttributes, groupMappings);
-
-				if (userGroup != null) {
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"Adding " + user.getUserId() + " to group " +
-								userGroup.getUserGroupId());
-					}
-
-					newUserGroupIds.add(userGroup.getUserGroupId());
-				}
+				newUserGroupIds = importGroup(
+					ldapServerId, companyId, ldapContext, fullGroupDN, user,
+					groupMappings, newUserGroupIds);
 			}
 		}
 
