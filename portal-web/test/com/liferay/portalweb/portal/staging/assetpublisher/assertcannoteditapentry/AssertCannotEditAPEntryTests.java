@@ -12,13 +12,9 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.staging.assetpublisher;
+package com.liferay.portalweb.portal.staging.assetpublisher.assertcannoteditapentry;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portal.staging.assetpublisher.activatestaging.ActivateStagingTests;
-import com.liferay.portalweb.portal.staging.assetpublisher.assertcannoteditapentry.AssertCannotEditAPEntryTests;
-import com.liferay.portalweb.portal.staging.assetpublisher.asserteditapentry.AssertEditAPEntryTests;
-import com.liferay.portalweb.portal.staging.assetpublisher.deactivatestaging.DeactivateStagingTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -26,15 +22,22 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AssetPublisherTests extends BaseTests {
+public class AssertCannotEditAPEntryTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(ActivateStagingTests.suite());
-		testSuite.addTest(AssertCannotEditAPEntryTests.suite());
-		testSuite.addTest(AssertEditAPEntryTests.suite());
-		testSuite.addTest(DeactivateStagingTests.suite());
+		testSuite.addTestSuite(AddCommunitiesTest.class);
+		testSuite.addTestSuite(AddPageAPTest.class);
+		testSuite.addTestSuite(AddPortletAPTest.class);
+		testSuite.addTestSuite(AddPageBlogsTest.class);
+		testSuite.addTestSuite(AddPortletBlogsTest.class);
+		testSuite.addTestSuite(AddBlogsEntryTest.class);
+		testSuite.addTestSuite(AssertEditAPEntryTest.class);
+		testSuite.addTestSuite(ActivateStagingTest.class);
+		testSuite.addTestSuite(AssertCannotEditAPEntryTest.class);
+		testSuite.addTestSuite(DeactivateStagingTest.class);
+		testSuite.addTestSuite(TearDownCommunityTest.class);
 
 		return testSuite;
 	}

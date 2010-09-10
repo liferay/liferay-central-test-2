@@ -15,6 +15,10 @@
 package com.liferay.portalweb.portal.staging.webcontentdisplay;
 
 import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.staging.webcontentdisplay.activatestaging.ActivateStagingTests;
+import com.liferay.portalweb.portal.staging.webcontentdisplay.assertcannoteditwcdarticle.AssertCannotEditWCDArticleTests;
+import com.liferay.portalweb.portal.staging.webcontentdisplay.asserteditwcdarticle.AssertEditWCDArticleTests;
+import com.liferay.portalweb.portal.staging.webcontentdisplay.deactivatestaging.DeactivateStagingTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -27,25 +31,10 @@ public class WebContentDisplayTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(LoginTest.class);
-		testSuite.addTestSuite(AddWebContentDisplayPageTest.class);
-		testSuite.addTestSuite(AddWebContentDisplayPortletTest.class);
-		testSuite.addTestSuite(ControlPanelTest.class);
-		testSuite.addTestSuite(AddWebContentArticleTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
-		testSuite.addTestSuite(SelectArticleTest.class);
-		testSuite.addTestSuite(AssertEditWebContentDisplayArticleTest.class);
-		testSuite.addTestSuite(ControlPanelTest.class);
-		testSuite.addTestSuite(ActivateStagingTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
-		testSuite.addTestSuite(
-			AssertCannotEditWebContentDisplayArticleTest.class);
-		testSuite.addTestSuite(ControlPanelTest.class);
-		testSuite.addTestSuite(DeactivateStagingTest.class);
-		testSuite.addTestSuite(EndControlPanelTest.class);
-		testSuite.addTestSuite(AssertEditWebContentDisplayArticleTest.class);
-		testSuite.addTestSuite(TearDownTest.class);
-		testSuite.addTestSuite(LogoutTest.class);
+		testSuite.addTest(ActivateStagingTests.suite());
+		testSuite.addTest(AssertCannotEditWCDArticleTests.suite());
+		testSuite.addTest(AssertEditWCDArticleTests.suite());
+		testSuite.addTest(DeactivateStagingTests.suite());
 
 		return testSuite;
 	}
