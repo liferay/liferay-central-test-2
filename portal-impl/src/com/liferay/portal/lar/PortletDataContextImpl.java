@@ -701,7 +701,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 						PortletDataHandlerKeys.DATA_STRATEGY_MIRROR) ||
 					_dataStrategy.equals(
 						PortletDataHandlerKeys.
-							DATA_STRATEGY_MIRROR_WITH_OVERWRITTING)) {
+							DATA_STRATEGY_MIRROR_OVERWRITE)) {
 
 					MBMessage existingMessage = MBMessageUtil.fetchByUUID_G(
 						message.getUuid(), groupId);
@@ -869,7 +869,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 	public boolean isDataStrategyMirror() {
 		if (_dataStrategy.equals(PortletDataHandlerKeys.DATA_STRATEGY_MIRROR) ||
 			_dataStrategy.equals(
-				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR_WITH_OVERWRITTING)) {
+				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR_OVERWRITE)) {
+
 			return true;
 		}
 		else {
@@ -879,7 +880,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public boolean isDataStrategyMirrorWithOverwritting() {
 		if (_dataStrategy.equals(
-				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR_WITH_OVERWRITTING)) {
+				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR_OVERWRITE)) {
+
 			return true;
 		}
 		else {

@@ -581,8 +581,7 @@ public class LayoutImporter {
 			if (context.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR) ||
 				context.getDataStrategy().equals(
-					PortletDataHandlerKeys.
-						DATA_STRATEGY_MIRROR_WITH_OVERWRITTING)) {
+					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR_OVERWRITE)) {
 
 				AssetVocabulary existingAssetVocabulary =
 					AssetVocabularyUtil.fetchByUUID_G(

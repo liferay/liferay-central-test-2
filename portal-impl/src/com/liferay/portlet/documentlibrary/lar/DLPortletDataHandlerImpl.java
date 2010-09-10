@@ -294,7 +294,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 							if (existingTitleFileEntry == null) {
 								break;
 							}
-
 						}
 					}
 				}
