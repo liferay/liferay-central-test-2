@@ -2378,7 +2378,6 @@
 				<column name="TYPE_" />
 			</basic>
 			<basic name="value" />
-			<basic name="extraData" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 		</attributes>

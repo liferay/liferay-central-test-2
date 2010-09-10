@@ -213,18 +213,8 @@ public interface SocialEquityLogLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void addEquityLogs(long userId, long assetEntryId,
-		java.lang.String actionId, java.lang.String extraData)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
 	public void addEquityLogs(long userId, java.lang.String className,
 		long classPK, java.lang.String actionId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public void addEquityLogs(long userId, java.lang.String className,
-		long classPK, java.lang.String actionId, java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -248,45 +238,10 @@ public interface SocialEquityLogLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deactivateEquityLogs(long userId, long assetEntryId,
-		java.lang.String actionId, java.lang.String extraData)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
 	public void deactivateEquityLogs(long userId, java.lang.String className,
 		long classPK, java.lang.String actionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
-
-	public void deactivateEquityLogs(long userId, java.lang.String className,
-		long classPK, java.lang.String actionId, java.lang.String extraData)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.social.SocialEquityDataSet getContributionEquityDataSet(
-		long groupId, long userId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.social.model.SocialEquityLog> getContributionEquityLogs(
-		long groupId, long userId, int actionDate)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.social.SocialEquityDataSet> getEquityDataSets(
-		long groupId, long userId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.social.SocialEquityDataSet getParticipationEquityDataSet(
-		long groupId, long userId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.social.model.SocialEquityLog> getParticipationEquityLogs(
-		long groupId, long userId, int actionDate)
-		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void incrementSocialEquityAssetEntry_IQ(long assetEntryId,
 		com.liferay.portlet.social.model.SocialEquityValue socialEquityValue)
@@ -299,18 +254,6 @@ public interface SocialEquityLogLocalService {
 
 	public void incrementSocialEquityUser_PQ(long groupId, long userId,
 		com.liferay.portlet.social.model.SocialEquityValue socialEquityValue)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portlet.social.model.SocialEquityFeedEntry interpretEquityAction(
-		com.liferay.portlet.social.model.SocialEquityLog equityLog,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<com.liferay.portlet.social.model.SocialEquityFeedEntry> interpretEquityActions(
-		java.util.List<com.liferay.portlet.social.model.SocialEquityLog> equityLogs,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

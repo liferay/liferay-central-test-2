@@ -411,12 +411,6 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 			status);
 	}
 
-	public void subscribe(long userId, long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_blogsEntryLocalService.subscribe(userId, groupId);
-	}
-
 	public void updateAsset(long userId,
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames)

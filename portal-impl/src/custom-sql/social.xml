@@ -234,43 +234,6 @@
 				equityValue DESC
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.social.service.persistence.SocialEquityLogFinder.findContributionEquityLogsByActionDate">
-		<![CDATA[
-			SELECT
-				{SocialEquityLog.*}
-			FROM
-				SocialEquityLog
-			INNER JOIN 
-				SocialEquityAssetEntry ON
-					(SocialEquityAssetEntry.assetEntryId = SocialEquityLog.assetEntryId)
-			WHERE
-				(SocialEquityLog.type_ = 1) AND
-				(SocialEquityLog.active_ = true) AND
-				(SocialEquityAssetEntry.groupId = ?) AND
-				(SocialEquityAssetEntry.userId = ?) AND
-				(actionDate = ?)
-			ORDER BY
-				SocialEquityLog.equityLogId ASC
-		]]>
-	</sql>	
-	<sql id="com.liferay.portlet.social.service.persistence.SocialEquityLogFinder.findContributionEquityLogsByUser">
-		<![CDATA[
-			SELECT
-				{SocialEquityLog.*}
-			FROM
-				SocialEquityLog
-			INNER JOIN 
-				SocialEquityAssetEntry ON
-					(SocialEquityAssetEntry.assetEntryId = SocialEquityLog.assetEntryId)
-			WHERE
-				(SocialEquityLog.type_ = 1) AND
-				(SocialEquityLog.active_ = true) AND
-				(SocialEquityAssetEntry.groupId = ?) AND
-				(SocialEquityAssetEntry.userId = ?)
-			ORDER BY
-				SocialEquityLog.actionDate ASC, SocialEquityLog.equityLogId ASC
-		]]>
-	</sql>
 	<sql id="com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl.updateSocialEquityUserRank">
 		<![CDATA[
 			UPDATE

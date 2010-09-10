@@ -234,11 +234,6 @@ public class SocialEquityUserLocalServiceWrapper
 		return _socialEquityUserLocalService.getParticipationEquity(userId);
 	}
 
-	public int getRank(long groupId, long userId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _socialEquityUserLocalService.getRank(groupId, userId);
-	}
-
 	public java.util.List<com.liferay.portlet.social.model.SocialEquityUser> getRankedEquityUsers(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)

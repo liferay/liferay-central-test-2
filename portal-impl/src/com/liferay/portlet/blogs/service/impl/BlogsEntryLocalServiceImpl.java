@@ -77,7 +77,6 @@ import net.htmlparser.jericho.StartTag;
  * @author Wilson S. Man
  * @author Raymond Augé
  * @author Thiago Moreira
- * @author Zsolt Berentey
  */
 public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
@@ -460,29 +459,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			organizationId, new Date(), status);
 	}
 
-	public void subscribe(long userId, long groupId)
-		throws PortalException, SystemException {
-
-		subscriptionLocalService.addSubscription(
-			userId, BlogsEntry.class.getName(), groupId);
-
-		// social
-
-		try {
-			assetEntryLocalService.getEntry(
-				BlogsEntry.class.getName(), groupId);
-		}
-		catch (Exception e) {
-			assetEntryLocalService.updateEntry(
-				userId, groupId, BlogsEntry.class.getName(), groupId, null,
-				null, null, false, null, null, null, null, null,
-				String.valueOf(groupId), null, null, null, 0, 0, null, false);
-		}
-
-		socialEquityLogLocalService.addEquityLogs(
-			userId, BlogsEntry.class.getName(), groupId, ActionKeys.SUBSCRIBE);
-	}
-
 	public void updateAsset(
 			long userId, BlogsEntry entry, long[] assetCategoryIds,
 			String[] assetTagNames)
@@ -578,12 +554,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			user.getCompanyId(), entry.getGroupId(), userId,
 			BlogsEntry.class.getName(), entry.getEntryId(), entry,
 			serviceContext);
-
-		// Social
-
-		socialEquityLogLocalService.addEquityLogs(
-			userId, BlogsEntry.class.getName(), entry.getEntryId(),
-			ActionKeys.UPDATE);
 
 		return entry;
 	}

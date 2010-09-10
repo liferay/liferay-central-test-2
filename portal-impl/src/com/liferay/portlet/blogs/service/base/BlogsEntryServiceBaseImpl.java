@@ -30,7 +30,6 @@ import com.liferay.portal.service.PortletPreferencesLocalService;
 import com.liferay.portal.service.PortletPreferencesService;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
-import com.liferay.portal.service.SubscriptionLocalService;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.WorkflowInstanceLinkLocalService;
@@ -44,7 +43,6 @@ import com.liferay.portal.service.persistence.PortletPreferencesFinder;
 import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePersistence;
-import com.liferay.portal.service.persistence.SubscriptionPersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
@@ -78,7 +76,6 @@ import com.liferay.portlet.social.service.SocialActivityLocalService;
 import com.liferay.portlet.social.service.SocialEquityLogLocalService;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
-import com.liferay.portlet.social.service.persistence.SocialEquityLogFinder;
 import com.liferay.portlet.social.service.persistence.SocialEquityLogPersistence;
 
 import javax.sql.DataSource;
@@ -597,44 +594,6 @@ public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
 	 */
 	public void setResourceFinder(ResourceFinder resourceFinder) {
 		this.resourceFinder = resourceFinder;
-	}
-
-	/**
-	 * Gets the subscription local service.
-	 *
-	 * @return the subscription local service
-	 */
-	public SubscriptionLocalService getSubscriptionLocalService() {
-		return subscriptionLocalService;
-	}
-
-	/**
-	 * Sets the subscription local service.
-	 *
-	 * @param subscriptionLocalService the subscription local service
-	 */
-	public void setSubscriptionLocalService(
-		SubscriptionLocalService subscriptionLocalService) {
-		this.subscriptionLocalService = subscriptionLocalService;
-	}
-
-	/**
-	 * Gets the subscription persistence.
-	 *
-	 * @return the subscription persistence
-	 */
-	public SubscriptionPersistence getSubscriptionPersistence() {
-		return subscriptionPersistence;
-	}
-
-	/**
-	 * Sets the subscription persistence.
-	 *
-	 * @param subscriptionPersistence the subscription persistence
-	 */
-	public void setSubscriptionPersistence(
-		SubscriptionPersistence subscriptionPersistence) {
-		this.subscriptionPersistence = subscriptionPersistence;
 	}
 
 	/**
@@ -1176,25 +1135,6 @@ public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
 	}
 
 	/**
-	 * Gets the social equity log finder.
-	 *
-	 * @return the social equity log finder
-	 */
-	public SocialEquityLogFinder getSocialEquityLogFinder() {
-		return socialEquityLogFinder;
-	}
-
-	/**
-	 * Sets the social equity log finder.
-	 *
-	 * @param socialEquityLogFinder the social equity log finder
-	 */
-	public void setSocialEquityLogFinder(
-		SocialEquityLogFinder socialEquityLogFinder) {
-		this.socialEquityLogFinder = socialEquityLogFinder;
-	}
-
-	/**
 	 * Performs an SQL query.
 	 *
 	 * @param sql the sql query to perform
@@ -1267,10 +1207,6 @@ public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
 	protected ResourcePersistence resourcePersistence;
 	@BeanReference(type = ResourceFinder.class)
 	protected ResourceFinder resourceFinder;
-	@BeanReference(type = SubscriptionLocalService.class)
-	protected SubscriptionLocalService subscriptionLocalService;
-	@BeanReference(type = SubscriptionPersistence.class)
-	protected SubscriptionPersistence subscriptionPersistence;
 	@BeanReference(type = UserLocalService.class)
 	protected UserLocalService userLocalService;
 	@BeanReference(type = UserService.class)
@@ -1329,6 +1265,4 @@ public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
 	protected SocialEquityLogLocalService socialEquityLogLocalService;
 	@BeanReference(type = SocialEquityLogPersistence.class)
 	protected SocialEquityLogPersistence socialEquityLogPersistence;
-	@BeanReference(type = SocialEquityLogFinder.class)
-	protected SocialEquityLogFinder socialEquityLogFinder;
 }

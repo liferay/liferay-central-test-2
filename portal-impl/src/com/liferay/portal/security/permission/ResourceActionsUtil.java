@@ -48,7 +48,6 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.social.model.SocialEquityActionMapping;
-import com.liferay.portlet.social.util.SocialActivityToEquityActionMapper;
 import com.liferay.util.UniqueList;
 
 import java.io.InputStream;
@@ -155,7 +154,6 @@ public class ResourceActionsUtil {
 		return list;
 	}
 
-	@SuppressWarnings("unchecked")
 	public static List<String> getActionsNames(
 		PageContext pageContext, String name, long actionIds) {
 
@@ -795,7 +793,6 @@ public class ResourceActionsUtil {
 		return socialEquityActionMappings.get(actionId);
 	}
 
-	@SuppressWarnings("unchecked")
 	private List<SocialEquityActionMapping> _getSocialEquityActionMappings(
 		String name) {
 
@@ -1138,26 +1135,6 @@ public class ResourceActionsUtil {
 
 		if (Validator.isNull(actionKey)) {
 			return;
-		}
-
-		Element socialActivityMappingElement =
-			socialEquityMappingElement.element("social-activity-mapping");
-
-		if (socialActivityMappingElement != null) {
-			String socialActivity =
-				socialActivityMappingElement.getTextTrim();
-
-			String socialActivityKeyClass =
-				socialActivityMappingElement.attributeValue("class");
-
-			if (Validator.isNull(socialActivityKeyClass)) {
-				SocialActivityToEquityActionMapper.addMapping(
-					GetterUtil.getInteger(socialActivity), actionKey);
-			}
-			else {
-				SocialActivityToEquityActionMapper.addMapping(
-					socialActivityKeyClass, socialActivity, actionKey);
-			}
 		}
 
 		int informationDailyLimit = GetterUtil.getInteger(

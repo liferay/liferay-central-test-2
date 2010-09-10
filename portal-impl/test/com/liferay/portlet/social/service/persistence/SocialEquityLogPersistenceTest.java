@@ -74,7 +74,6 @@ public class SocialEquityLogPersistenceTest extends BasePersistenceTestCase {
 		newSocialEquityLog.setExpiration(nextInt());
 		newSocialEquityLog.setType(nextInt());
 		newSocialEquityLog.setValue(nextInt());
-		newSocialEquityLog.setExtraData(randomString());
 
 		_persistence.update(newSocialEquityLog, false);
 
@@ -102,8 +101,6 @@ public class SocialEquityLogPersistenceTest extends BasePersistenceTestCase {
 			newSocialEquityLog.getType());
 		assertEquals(existingSocialEquityLog.getValue(),
 			newSocialEquityLog.getValue());
-		assertEquals(existingSocialEquityLog.getExtraData(),
-			newSocialEquityLog.getExtraData());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -187,7 +184,6 @@ public class SocialEquityLogPersistenceTest extends BasePersistenceTestCase {
 		socialEquityLog.setExpiration(nextInt());
 		socialEquityLog.setType(nextInt());
 		socialEquityLog.setValue(nextInt());
-		socialEquityLog.setExtraData(randomString());
 
 		_persistence.update(socialEquityLog, false);
 

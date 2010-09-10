@@ -48,7 +48,6 @@ import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 import com.liferay.portlet.social.service.persistence.SocialEquityAssetEntryPersistence;
 import com.liferay.portlet.social.service.persistence.SocialEquityGroupSettingPersistence;
 import com.liferay.portlet.social.service.persistence.SocialEquityHistoryPersistence;
-import com.liferay.portlet.social.service.persistence.SocialEquityLogFinder;
 import com.liferay.portlet.social.service.persistence.SocialEquityLogPersistence;
 import com.liferay.portlet.social.service.persistence.SocialEquitySettingPersistence;
 import com.liferay.portlet.social.service.persistence.SocialEquityUserPersistence;
@@ -470,25 +469,6 @@ public abstract class SocialEquityUserLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the social equity log finder.
-	 *
-	 * @return the social equity log finder
-	 */
-	public SocialEquityLogFinder getSocialEquityLogFinder() {
-		return socialEquityLogFinder;
-	}
-
-	/**
-	 * Sets the social equity log finder.
-	 *
-	 * @param socialEquityLogFinder the social equity log finder
-	 */
-	public void setSocialEquityLogFinder(
-		SocialEquityLogFinder socialEquityLogFinder) {
-		this.socialEquityLogFinder = socialEquityLogFinder;
-	}
-
-	/**
 	 * Gets the social equity setting local service.
 	 *
 	 * @return the social equity setting local service
@@ -863,8 +843,6 @@ public abstract class SocialEquityUserLocalServiceBaseImpl
 	protected SocialEquityLogLocalService socialEquityLogLocalService;
 	@BeanReference(type = SocialEquityLogPersistence.class)
 	protected SocialEquityLogPersistence socialEquityLogPersistence;
-	@BeanReference(type = SocialEquityLogFinder.class)
-	protected SocialEquityLogFinder socialEquityLogFinder;
 	@BeanReference(type = SocialEquitySettingLocalService.class)
 	protected SocialEquitySettingLocalService socialEquitySettingLocalService;
 	@BeanReference(type = SocialEquitySettingPersistence.class)

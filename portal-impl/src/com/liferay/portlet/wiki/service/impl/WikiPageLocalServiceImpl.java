@@ -1046,12 +1046,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		subscriptionLocalService.addSubscription(
 			userId, WikiPage.class.getName(), page.getResourcePrimKey());
-
-		// social
-
-		socialEquityLogLocalService.addEquityLogs(
-			userId, WikiPage.class.getName(), page.getResourcePrimKey(),
-			ActionKeys.SUBSCRIBE);
 	}
 
 	public void unsubscribePage(long userId, long nodeId, String title)
@@ -1061,12 +1055,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		subscriptionLocalService.deleteSubscription(
 			userId, WikiPage.class.getName(), page.getResourcePrimKey());
-
-		// social
-
-		socialEquityLogLocalService.deactivateEquityLogs(
-			userId, WikiPage.class.getName(), page.getResourcePrimKey(),
-			ActionKeys.SUBSCRIBE);
 	}
 
 	public void updateAsset(
