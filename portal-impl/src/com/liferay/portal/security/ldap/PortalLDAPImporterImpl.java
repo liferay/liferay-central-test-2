@@ -503,6 +503,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 			newUserGroupIds.add(userGroup.getUserGroupId());
 		}
+
 		return newUserGroupIds;
 	}
 
@@ -525,7 +526,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		List<Long> newUserGroupIds = new ArrayList<Long>();
 
 		if (PrefsPropsUtil.getBoolean(
-			companyId, PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER_ENABLED)) {
+				companyId, PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER_ENABLED)) {
 
 			String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
@@ -577,7 +578,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			}
 		}
 		else {
-			for (int i=0; i < userGroupAttribute.size(); i++) {
+			for (int i = 0; i < userGroupAttribute.size(); i++) {
 				String fullGroupDN = (String)userGroupAttribute.get(i);
 
 				newUserGroupIds = importGroup(
