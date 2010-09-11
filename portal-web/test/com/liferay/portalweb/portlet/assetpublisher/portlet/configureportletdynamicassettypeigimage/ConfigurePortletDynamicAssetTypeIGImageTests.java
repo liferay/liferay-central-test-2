@@ -30,7 +30,9 @@ public class ConfigurePortletDynamicAssetTypeIGImageTests extends BaseTests {
 		testSuite.addTestSuite(AddPageAPTest.class);
 		testSuite.addTestSuite(AddPortletAPTest.class);
 		testSuite.addTestSuite(
-			ConfigurePortletDynamicAssetTypeIGImageTest.class);
+			ConfigurePortletDynamicAvailableIGImageTest.class);
+		testSuite.addTestSuite(
+			ConfigurePortletDynamicCurrentIGImageTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

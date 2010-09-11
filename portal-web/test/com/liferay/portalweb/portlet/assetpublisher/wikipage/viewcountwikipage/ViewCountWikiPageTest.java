@@ -44,7 +44,8 @@ public class ViewCountWikiPageTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 
-		String viewCount = selenium.getIncrementedText("//div[3]/span");
+		String viewCount = selenium.getIncrementedText(
+				"//span[@class='metadata-entry metadata-view-count']");
 		RuntimeVariables.setValue("viewCount", viewCount);
 		selenium.open("/web/guest/home/");
 
@@ -67,31 +68,12 @@ public class ViewCountWikiPageTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//div[3]/span",
+		assertTrue(selenium.isPartialText(
+				"//span[@class='metadata-entry metadata-view-count']",
 				RuntimeVariables.getValue("viewCount")));
-		selenium.open("/web/guest/home/");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("link=Wiki Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 
 		String viewCount2 = selenium.getIncrementedText(
-				"//section/div/div/div/div[4]/div[2]");
+				"//span[@class='metadata-entry metadata-view-count']");
 		RuntimeVariables.setValue("viewCount2", viewCount2);
 		selenium.open("/web/guest/home/");
 
@@ -113,6 +95,11 @@ public class ViewCountWikiPageTest extends BaseTestCase {
 
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isPartialText("//div[@class='stats']",
+				RuntimeVariables.getValue("viewCount2")));
+
+		String viewCount3 = selenium.getIncrementedText("//div[@class='stats']");
+		RuntimeVariables.setValue("viewCount3", viewCount3);
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -134,7 +121,8 @@ public class ViewCountWikiPageTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//div[3]/span",
-				RuntimeVariables.getValue("viewCount2")));
+		assertTrue(selenium.isPartialText(
+				"//span[@class='metadata-entry metadata-view-count']",
+				RuntimeVariables.getValue("viewCount3")));
 	}
 }

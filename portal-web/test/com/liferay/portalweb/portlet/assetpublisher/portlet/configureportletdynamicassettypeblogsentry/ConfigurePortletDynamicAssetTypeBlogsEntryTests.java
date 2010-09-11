@@ -30,7 +30,9 @@ public class ConfigurePortletDynamicAssetTypeBlogsEntryTests extends BaseTests {
 		testSuite.addTestSuite(AddPageAPTest.class);
 		testSuite.addTestSuite(AddPortletAPTest.class);
 		testSuite.addTestSuite(
-			ConfigurePortletDynamicAssetTypeBlogsEntryTest.class);
+			ConfigurePortletDynamicAvailableBlogsEntryTest.class);
+		testSuite.addTestSuite(
+			ConfigurePortletDynamicCurrentBlogsEntryTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

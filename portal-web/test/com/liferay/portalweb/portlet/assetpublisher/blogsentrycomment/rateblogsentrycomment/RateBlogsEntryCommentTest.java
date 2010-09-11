@@ -64,8 +64,8 @@ public class RateBlogsEntryCommentTest extends BaseTestCase {
 
 		assertTrue(selenium.isPartialText(
 				"//div[@class='aui-rating-label-element']", "0 Votes"));
-		selenium.clickAt("//table[1]/tbody/tr/td[1]/div/div/div/a[1]",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//td[2]/table[1]/tbody/tr/td[1]/div/div/div/a[1]",
+			RuntimeVariables.replace("Rate this as good."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -89,8 +89,8 @@ public class RateBlogsEntryCommentTest extends BaseTestCase {
 			selenium.getText("//div[@class='aui-rating-label-element']"));
 		assertTrue(selenium.isElementPresent(
 				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-up aui-rating-element-on']"));
-		selenium.clickAt("//table[1]/tbody/tr/td[1]/div/div/div/a[2]",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//td[2]/table[1]/tbody/tr/td[1]/div/div/div/a[2]",
+			RuntimeVariables.replace("Rate this as bad."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -114,8 +114,8 @@ public class RateBlogsEntryCommentTest extends BaseTestCase {
 			selenium.getText("//div[@class='aui-rating-label-element']"));
 		assertTrue(selenium.isElementPresent(
 				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-down aui-rating-element-on']"));
-		selenium.clickAt("//td[1]/div/div/div/a[2]",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//td[2]/table[1]/tbody/tr/td[1]/div/div/div/a[2]",
+			RuntimeVariables.replace("Rate this as bad."));
 		assertFalse(selenium.isElementPresent(
 				"//a[@class='aui-rating-element aui-rating-element-off aui-rating-thumb-up aui-rating-element-on']"));
 		assertFalse(selenium.isElementPresent(

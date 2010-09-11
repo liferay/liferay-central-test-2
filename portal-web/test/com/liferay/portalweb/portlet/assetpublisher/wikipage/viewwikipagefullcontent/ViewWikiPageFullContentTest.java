@@ -44,15 +44,17 @@ public class ViewWikiPageFullContentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("FrontPage"),
-			selenium.getText("//div/h3"));
-		assertTrue(selenium.isPartialText("//div/div/div/div[1]/div[2]",
+			selenium.getText("//h1[@class='header-title']"));
+		assertTrue(selenium.isPartialText("//div[@class='asset-content']",
 				"AP Wiki Page Body"));
 		assertEquals(RuntimeVariables.replace("View in Context \u00bb"),
-			selenium.getText("//div[2]/div/a"));
-		selenium.clickAt("//div[2]/div/a", RuntimeVariables.replace(""));
+			selenium.getText("//div[@class='asset-more']/a"));
+		selenium.clickAt("//div[@class='asset-more']/a",
+			RuntimeVariables.replace("View in Context \u00bb"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//div/h1", "FrontPage"));
+		assertTrue(selenium.isPartialText("//h1[@class='header-title']/span",
+				"FrontPage"));
 		assertEquals(RuntimeVariables.replace("AP Wiki Page Body"),
-			selenium.getText("//div/div/div/div[3]/div"));
+			selenium.getText("//div[@class='wiki-body']"));
 	}
 }

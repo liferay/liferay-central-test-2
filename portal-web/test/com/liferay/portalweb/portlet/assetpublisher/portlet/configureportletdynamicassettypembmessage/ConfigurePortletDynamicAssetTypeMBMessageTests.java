@@ -30,7 +30,9 @@ public class ConfigurePortletDynamicAssetTypeMBMessageTests extends BaseTests {
 		testSuite.addTestSuite(AddPageAPTest.class);
 		testSuite.addTestSuite(AddPortletAPTest.class);
 		testSuite.addTestSuite(
-			ConfigurePortletDynamicAssetTypeMBMessageTest.class);
+			ConfigurePortletDynamicAvailableMBMessageTest.class);
+		testSuite.addTestSuite(
+			ConfigurePortletDynamicCurrentMBMessageTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

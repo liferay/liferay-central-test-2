@@ -105,6 +105,26 @@ public class ConfigurePortletAssetSelectionManualTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals("Manual", selenium.getSelectedLabel("_86_selectionStyle"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace(
+							"You have successfully updated the setup.")
+										.equals(selenium.getText(
+								"//div[@id='p_p_id_86_']/div/div[1]"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));

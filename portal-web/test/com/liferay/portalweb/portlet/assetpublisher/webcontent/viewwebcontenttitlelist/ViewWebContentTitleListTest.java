@@ -44,11 +44,13 @@ public class ViewWebContentTitleListTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Web Content Name"),
-			selenium.getText("//span/a/span"));
-		selenium.clickAt("//span/a/span", RuntimeVariables.replace(""));
+			selenium.getText("//span[@class='taglib-text']"));
+		selenium.clickAt("//span[@class='taglib-text']",
+			RuntimeVariables.replace("AP Web Content Name"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//div[1]/h3", "AP Web Content Name"));
+		assertEquals(RuntimeVariables.replace("AP Web Content Name"),
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("AP Web Content Body"),
-			selenium.getText("//p"));
+			selenium.getText("//div[@class='journal-content-article']/p"));
 	}
 }

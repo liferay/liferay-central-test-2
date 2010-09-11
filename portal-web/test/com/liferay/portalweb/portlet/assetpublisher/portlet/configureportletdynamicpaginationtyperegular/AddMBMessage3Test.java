@@ -43,7 +43,8 @@ public class AddMBMessage3Test extends BaseTestCase {
 		selenium.clickAt("link=Message Boards Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
+		selenium.clickAt("//a/strong",
+			RuntimeVariables.replace("AP Category Name"));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//input[@value='Post New Thread']",
 			RuntimeVariables.replace(""));
@@ -63,10 +64,10 @@ public class AddMBMessage3Test extends BaseTestCase {
 		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP3 MB3 Message3 Subject3"),
-			selenium.getText("//form/div[2]"));
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("AP3 MB3 Message3 Subject3"),
-			selenium.getText("//a/strong"));
+			selenium.getText("//div[@class='subject']/a/strong"));
 		assertEquals(RuntimeVariables.replace("AP3 MB3 Message3 Body3."),
-			selenium.getText("//td[2]/div[2]"));
+			selenium.getText("//div[@class='thread-body']"));
 	}
 }

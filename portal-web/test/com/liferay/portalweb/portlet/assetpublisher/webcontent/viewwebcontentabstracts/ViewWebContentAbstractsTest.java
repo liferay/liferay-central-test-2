@@ -44,13 +44,17 @@ public class ViewWebContentAbstractsTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Web Content Name"),
-			selenium.getText("//div[1]/h3/a"));
-		assertTrue(selenium.isPartialText("//div[2]/a", "Read More"));
-		selenium.clickAt("//div[2]/a", RuntimeVariables.replace(""));
+			selenium.getText("//h3[@class='asset-title']/a"));
+		assertEquals(RuntimeVariables.replace(
+				"Read More About AP Web Content Name \u00bb"),
+			selenium.getText("//div[@class='asset-more']/a"));
+		selenium.clickAt("//div[@class='asset-more']/a",
+			RuntimeVariables.replace(
+				"Read More About AP Web Content Name \u00bb"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Web Content Name"),
-			selenium.getText("//div/h3"));
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("AP Web Content Body"),
-			selenium.getText("//p"));
+			selenium.getText("//div[@class='journal-content-article']/p"));
 	}
 }

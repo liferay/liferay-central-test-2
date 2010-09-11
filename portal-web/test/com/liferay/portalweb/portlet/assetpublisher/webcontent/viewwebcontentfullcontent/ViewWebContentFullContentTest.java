@@ -43,8 +43,9 @@ public class ViewWebContentFullContentTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//div[1]/h3", "AP Web Content Name"));
+		assertEquals(RuntimeVariables.replace("AP Web Content Name"),
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("AP Web Content Body"),
-			selenium.getText("//p"));
+			selenium.getText("//div[@class='journal-content-article']/p"));
 	}
 }

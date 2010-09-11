@@ -30,7 +30,9 @@ public class ConfigurePortletDynamicAssetTypeWikiPageTests extends BaseTests {
 		testSuite.addTestSuite(AddPageAPTest.class);
 		testSuite.addTestSuite(AddPortletAPTest.class);
 		testSuite.addTestSuite(
-			ConfigurePortletDynamicAssetTypeWikiPageTest.class);
+			ConfigurePortletDynamicAvailableWikiPageTest.class);
+		testSuite.addTestSuite(
+			ConfigurePortletDynamicCurrentWikiPageTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

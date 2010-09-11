@@ -47,11 +47,12 @@ public class ViewWebContentTableTest extends BaseTestCase {
 			selenium.getText("//th[1]"));
 		assertEquals(RuntimeVariables.replace("AP Web Content Name"),
 			selenium.getText("//td[1]/a"));
-		selenium.clickAt("//td[1]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[1]/a",
+			RuntimeVariables.replace("AP Web Content Name"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Web Content Name"),
-			selenium.getText("//div[1]/h3"));
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("AP Web Content Body"),
-			selenium.getText("//p"));
+			selenium.getText("//div[@class='journal-content-article']/p"));
 	}
 }

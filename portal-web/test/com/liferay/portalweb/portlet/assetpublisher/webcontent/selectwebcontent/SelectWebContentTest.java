@@ -43,7 +43,7 @@ public class SelectWebContentTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -81,7 +81,8 @@ public class SelectWebContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[2]/ul/li/strong/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li/strong/a",
+			RuntimeVariables.replace("Select Existing"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -90,7 +91,7 @@ public class SelectWebContentTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a")) {
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a")) {
 					break;
 				}
 			}
@@ -100,8 +101,11 @@ public class SelectWebContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		assertEquals(RuntimeVariables.replace("Web Content"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
 		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a"));
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Web Content Name"),
 			selenium.getText("//td[1]/a"));
@@ -109,7 +113,7 @@ public class SelectWebContentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
-			selenium.getText("//div[3]/div/div/div/div/div"));
+			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("Web Content"),
 			selenium.getText("//td[1]/a"));
 		assertEquals(RuntimeVariables.replace("AP Web Content Name"),

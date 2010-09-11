@@ -44,6 +44,6 @@ public class ViewWebContentCurrentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("AP Web Content Name"),
-			selenium.getText("//div/h3"));
+			selenium.getText("//h3[@class='asset-title']/a"));
 	}
 }

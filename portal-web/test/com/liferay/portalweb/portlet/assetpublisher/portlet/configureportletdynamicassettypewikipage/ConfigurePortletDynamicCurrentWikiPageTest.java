@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.assetpublisher.portlet.configureportletdynamicassettypeblogsentry;
+package com.liferay.portalweb.portlet.assetpublisher.portlet.configureportletdynamicassettypewikipage;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class ConfigurePortletDynamicAssetTypeBlogsEntryTest extends BaseTestCase {
-	public void testConfigurePortletDynamicAssetTypeBlogsEntry()
+public class ConfigurePortletDynamicCurrentWikiPageTest extends BaseTestCase {
+	public void testConfigurePortletDynamicCurrentWikiPage()
 		throws Exception {
 		selenium.open("/web/guest/home/");
 
@@ -44,8 +44,43 @@ public class ConfigurePortletDynamicAssetTypeBlogsEntryTest extends BaseTestCase
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_86_anyAssetType")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.select("_86_anyAssetType",
 			RuntimeVariables.replace("label=Filter..."));
 
@@ -55,7 +90,7 @@ public class ConfigurePortletDynamicAssetTypeBlogsEntryTest extends BaseTestCase
 			}
 
 			try {
-				if (selenium.isVisible("_86_currentClassNameIds")) {
+				if (selenium.isVisible("_86_availableClassNameIds")) {
 					break;
 				}
 			}
@@ -65,10 +100,10 @@ public class ConfigurePortletDynamicAssetTypeBlogsEntryTest extends BaseTestCase
 			Thread.sleep(1000);
 		}
 
-		selenium.addSelection("_86_currentClassNameIds",
-			RuntimeVariables.replace("label=Blogs Entry"));
-		selenium.clickAt("//fieldset[2]/div/div/div/div/div/div/div[2]/div/span/span/button[1]",
-			RuntimeVariables.replace(""));
+		selenium.addSelection("_86_availableClassNameIds",
+			RuntimeVariables.replace("label=Wiki Page"));
+		selenium.clickAt("//fieldset[2]/div/div/div/div/div/div/div[2]/div/span/span/button[2]",
+			RuntimeVariables.replace("Left Arrow"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -76,9 +111,8 @@ public class ConfigurePortletDynamicAssetTypeBlogsEntryTest extends BaseTestCase
 			}
 
 			try {
-				if (RuntimeVariables.replace("Blogs Entry")
-										.equals(selenium.getText(
-								"_86_availableClassNameIds"))) {
+				if (selenium.isPartialText("_86_currentClassNameIds",
+							"Wiki Page")) {
 					break;
 				}
 			}
@@ -88,14 +122,12 @@ public class ConfigurePortletDynamicAssetTypeBlogsEntryTest extends BaseTestCase
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace("Blogs Entry"),
-			selenium.getText("_86_availableClassNameIds"));
+		assertTrue(selenium.isPartialText("_86_currentClassNameIds", "Wiki Page"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
-			selenium.getText("//div[3]/div/div/div/div/div"));
-		assertEquals(RuntimeVariables.replace("Blogs Entry"),
-			selenium.getText("_86_availableClassNameIds"));
+			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
+		assertTrue(selenium.isPartialText("_86_currentClassNameIds", "Wiki Page"));
 	}
 }

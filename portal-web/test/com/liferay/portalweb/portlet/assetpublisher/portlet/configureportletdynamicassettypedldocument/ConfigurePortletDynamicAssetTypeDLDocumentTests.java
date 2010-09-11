@@ -30,7 +30,9 @@ public class ConfigurePortletDynamicAssetTypeDLDocumentTests extends BaseTests {
 		testSuite.addTestSuite(AddPageAPTest.class);
 		testSuite.addTestSuite(AddPortletAPTest.class);
 		testSuite.addTestSuite(
-			ConfigurePortletDynamicAssetTypeDLDocumentTest.class);
+			ConfigurePortletDynamicAvailableDLDocumentTest.class);
+		testSuite.addTestSuite(
+			ConfigurePortletDynamicCurrentDLDocumentTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
