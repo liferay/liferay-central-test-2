@@ -76,11 +76,10 @@ public class CreateRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_128_name",
-			RuntimeVariables.replace("Content Creator"));
 		selenium.type("_128_name", RuntimeVariables.replace("Content Creator"));
 		selenium.type("_128_description",
 			RuntimeVariables.replace("This is the Content Creator Role."));
+		selenium.select("_128_type", RuntimeVariables.replace("label=Community"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
@@ -123,12 +122,11 @@ public class CreateRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_128_name",
-			RuntimeVariables.replace("Content Administrator"));
 		selenium.type("_128_name",
 			RuntimeVariables.replace("Content Administrator"));
 		selenium.type("_128_description",
 			RuntimeVariables.replace("This is the Content Administrator Role."));
+		selenium.select("_128_type", RuntimeVariables.replace("label=Community"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
@@ -171,11 +169,10 @@ public class CreateRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_128_name",
-			RuntimeVariables.replace("Content Publisher"));
 		selenium.type("_128_name", RuntimeVariables.replace("Content Publisher"));
 		selenium.type("_128_description",
 			RuntimeVariables.replace("This is the Content Publisher Role."));
+		selenium.select("_128_type", RuntimeVariables.replace("label=Community"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

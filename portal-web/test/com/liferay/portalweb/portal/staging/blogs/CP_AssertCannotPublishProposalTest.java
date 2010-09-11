@@ -22,6 +22,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CP_AssertCannotPublishProposalTest extends BaseTestCase {
 	public void testCP_AssertCannotPublishProposal() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -43,6 +45,7 @@ public class CP_AssertCannotPublishProposalTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=View Proposals", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -50,7 +53,8 @@ public class CP_AssertCannotPublishProposalTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//strong/span")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -60,27 +64,10 @@ public class CP_AssertCannotPublishProposalTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Edit")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent(
-				"//input[@value='Publish To Live']"));
+				"//input[@value='Publish to Live']"));
 	}
 }

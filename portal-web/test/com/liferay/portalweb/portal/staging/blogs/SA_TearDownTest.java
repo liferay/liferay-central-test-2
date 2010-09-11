@@ -27,6 +27,7 @@ public class SA_TearDownTest extends BaseTestCase {
 		while (label >= 1) {
 			switch (label) {
 			case 1:
+				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -34,8 +35,7 @@ public class SA_TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]")) {
+						if (selenium.isElementPresent("link=Control Panel")) {
 							break;
 						}
 					}
@@ -45,70 +45,14 @@ public class SA_TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[@id='_145_myPlacesContainer']/ul/li[2]/a/span[1]",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("link=Communities")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
 				selenium.clickAt("link=Communities",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("//strong/span")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isElementPresent("link=Manage Pages")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.clickAt("link=Manage Pages",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//strong/a",
+					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -117,7 +61,7 @@ public class SA_TearDownTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//li[@id='_134_tabs1settingsTabsId']/span/a")) {
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
 							break;
 						}
 					}
@@ -127,28 +71,22 @@ public class SA_TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//li[@id='_134_tabs1settingsTabsId']/span/a",
-					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 				selenium.waitForPageToLoad("30000");
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isVisible("link=Staging")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
+				selenium.clickAt("//li[@id='_134_tabs1settingsTabsId']/span/span/a",
+					RuntimeVariables.replace("Settings"));
+				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("link=Staging", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
+				selenium.select("_134_stagingType",
+					RuntimeVariables.replace("label=None"));
+				selenium.clickAt("//input[@value='Save']",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to deactivate staging for Liferay[\\s\\S]$"));
+				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -156,7 +94,7 @@ public class SA_TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("_134_stagingEnabled")) {
+						if (selenium.isVisible("link=Blogs Staging Test Page")) {
 							break;
 						}
 					}
@@ -166,23 +104,14 @@ public class SA_TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.click(RuntimeVariables.replace("_134_stagingEnabled"));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete the staging public and private pages[\\s\\S]$"));
-				selenium.clickAt("link=Back to My Community",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("link=Guest", RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
 				selenium.clickAt("link=Blogs Staging Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				Thread.sleep(5000);
 
-				boolean BlogsPresent = selenium.isElementPresent("link=Delete");
+				boolean blogsEntry1Present = selenium.isElementPresent(
+						"link=Delete");
 
-				if (!BlogsPresent) {
+				if (!blogsEntry1Present) {
 					label = 2;
 
 					continue;
@@ -194,14 +123,74 @@ public class SA_TearDownTest extends BaseTestCase {
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 			case 2:
-				selenium.click("//img[@alt='Remove']");
+
+				boolean blogsEntry2Present = selenium.isElementPresent(
+						"link=Delete");
+
+				if (!blogsEntry2Present) {
+					label = 3;
+
+					continue;
+				}
+
+				selenium.click(RuntimeVariables.replace("link=Delete"));
+				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-				selenium.clickAt("link=Welcome", RuntimeVariables.replace(""));
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+
+			case 3:
+
+				boolean blogsEntry3Present = selenium.isElementPresent(
+						"link=Delete");
+
+				if (!blogsEntry3Present) {
+					label = 4;
+
+					continue;
+				}
+
+				selenium.click(RuntimeVariables.replace("link=Delete"));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("link=Manage Pages",
-					RuntimeVariables.replace(""));
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+
+			case 4:
+
+				boolean blogsEntry4Present = selenium.isElementPresent(
+						"link=Delete");
+
+				if (!blogsEntry4Present) {
+					label = 5;
+
+					continue;
+				}
+
+				selenium.click(RuntimeVariables.replace("link=Delete"));
 				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+
+			case 5:
+
+				boolean blogsEntry5Present = selenium.isElementPresent(
+						"link=Delete");
+
+				if (!blogsEntry5Present) {
+					label = 6;
+
+					continue;
+				}
+
+				selenium.click(RuntimeVariables.replace("link=Delete"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+
+			case 6:
+				selenium.open("/web/guest/home/");
+				selenium.clickAt("main-content", RuntimeVariables.replace(""));
+				selenium.clickAt("navigation", RuntimeVariables.replace(""));
+				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -209,8 +198,8 @@ public class SA_TearDownTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible(
-									"//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li[2]/a/span")) {
+						if (selenium.isElementPresent(
+									"//div/div[3]/div/ul/li[1]/a")) {
 							break;
 						}
 					}
@@ -220,21 +209,172 @@ public class SA_TearDownTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/ul/li[2]/a/span",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
+					RuntimeVariables.replace("Manage Pages"));
 				selenium.waitForPageToLoad("30000");
-				selenium.clickAt("//li[@id='_88_tabs3pageTabsId']/span/a",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("main-content", RuntimeVariables.replace(""));
+				selenium.clickAt("navigation", RuntimeVariables.replace(""));
+				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (RuntimeVariables.replace("Liferay")
+												.equals(selenium.getText(
+										"//div/div[3]/a"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				boolean welcomePresent = selenium.isElementPresent(
+						"//li/ul/li[1]/div/div[3]/a");
+
+				if (welcomePresent) {
+					label = 7;
+
+					continue;
+				}
+
+				selenium.clickAt("//li/div/div[1]",
+					RuntimeVariables.replace("Drop Down Arrow"));
+
+			case 7:
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (RuntimeVariables.replace("Welcome")
+												.equals(selenium.getText(
+										"//li/ul/li[1]/div/div[3]/a"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				boolean page1Present = selenium.isElementPresent(
+						"//li[2]/div/div[3]/a");
+
+				if (!page1Present) {
+					label = 8;
+
+					continue;
+				}
+
+				selenium.click(RuntimeVariables.replace("//li[2]/div/div[3]/a"));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//td[2]/ul/li[1]/span/span/a",
+					RuntimeVariables.replace("Page"));
 				selenium.waitForPageToLoad("30000");
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
-				selenium.clickAt("link=Return to Full Page",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
 
+			case 8:
+
+				boolean page2Present = selenium.isElementPresent(
+						"//li[2]/div/div[3]/a");
+
+				if (!page2Present) {
+					label = 9;
+
+					continue;
+				}
+
+				selenium.click(RuntimeVariables.replace("//li[2]/div/div[3]/a"));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//td[2]/ul/li[1]/span/span/a",
+					RuntimeVariables.replace("Page"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Delete']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
+
+			case 9:
+
+				boolean page3Present = selenium.isElementPresent(
+						"//li[2]/div/div[3]/a");
+
+				if (!page3Present) {
+					label = 10;
+
+					continue;
+				}
+
+				selenium.click(RuntimeVariables.replace("//li[2]/div/div[3]/a"));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//td[2]/ul/li[1]/span/span/a",
+					RuntimeVariables.replace("Page"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Delete']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
+
+			case 10:
+
+				boolean page4Present = selenium.isElementPresent(
+						"//li[2]/div/div[3]/a");
+
+				if (!page4Present) {
+					label = 11;
+
+					continue;
+				}
+
+				selenium.click(RuntimeVariables.replace("//li[2]/div/div[3]/a"));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//td[2]/ul/li[1]/span/span/a",
+					RuntimeVariables.replace("Page"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Delete']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
+
+			case 11:
+
+				boolean page5Present = selenium.isElementPresent(
+						"//li[2]/div/div[3]/a");
+
+				if (!page5Present) {
+					label = 12;
+
+					continue;
+				}
+
+				selenium.click(RuntimeVariables.replace("//li[2]/div/div[3]/a"));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//td[2]/ul/li[1]/span/span/a",
+					RuntimeVariables.replace("Page"));
+				selenium.waitForPageToLoad("30000");
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Delete']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
+
+			case 12:
 			case 100:
 				label = -1;
 			}

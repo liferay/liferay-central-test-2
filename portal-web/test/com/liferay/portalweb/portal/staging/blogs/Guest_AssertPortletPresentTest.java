@@ -22,6 +22,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class Guest_AssertPortletPresentTest extends BaseTestCase {
 	public void testGuest_AssertPortletPresent() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -41,7 +43,7 @@ public class Guest_AssertPortletPresentTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Staging Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Subscribe to this blog."));
+		assertTrue(selenium.isElementPresent("link=RSS (Opens New Window)"));
 		assertTrue(selenium.isTextPresent("Showing 0 results."));
 	}
 }

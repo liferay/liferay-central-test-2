@@ -27,7 +27,8 @@ public class CC_BlogsRolesTest extends BaseTestCase {
 		selenium.select("_128_add-permissions",
 			RuntimeVariables.replace("label=Blogs"));
 		selenium.waitForPageToLoad("30000");
-		selenium.check("_128_rowIds");
+		selenium.check(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.blogsADD_ENTRY']");
 		selenium.uncheck(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.blogs.model.BlogsEntryADD_DISCUSSION']");
 		selenium.uncheck(

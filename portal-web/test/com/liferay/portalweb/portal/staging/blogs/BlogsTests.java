@@ -44,7 +44,7 @@ public class BlogsTests extends BaseTests {
 		testSuite.addTestSuite(CA_LogoutTest.class);
 		testSuite.addTestSuite(Guest_AssertNoPortletPrePublishTest.class);
 		testSuite.addTestSuite(CP_LoginTest.class);
-		testSuite.addTestSuite(CP_PublishPortletToLiveTest.class);
+		/*testSuite.addTestSuite(CP_PublishPortletToLiveTest.class);
 		testSuite.addTestSuite(CP_LogoutTest.class);
 		testSuite.addTestSuite(Guest_AssertPortletPresentTest.class);
 		testSuite.addTestSuite(CC_LoginTest.class);
@@ -58,7 +58,7 @@ public class BlogsTests extends BaseTests {
 		testSuite.addTestSuite(CA_LogoutTest.class);
 		testSuite.addTestSuite(Guest_AssertNoContentPrePublishTest.class);
 		testSuite.addTestSuite(CP_LoginTest.class);
-		testSuite.addTestSuite(CP_PublishContentToLiveTest.class);
+		testSuite.addTestSuite(CP_PublishContentToLiveTest.class);*/
 		testSuite.addTestSuite(CP_LogoutTest.class);
 		testSuite.addTestSuite(Guest_AssertContentPresentTest.class);
 		testSuite.addTestSuite(SA_LoginTest.class);

@@ -22,13 +22,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CC_AddStagedPortletTest extends BaseTestCase {
 	public void testCC_AddStagedPortlet() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs Staging Test Page")) {
+				if (selenium.isVisible("link=Blogs Staging Test Page")) {
 					break;
 				}
 			}
@@ -43,25 +45,8 @@ public class CC_AddStagedPortletTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=View Staged Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[3]/ul/li[3]/span/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		Thread.sleep(5000);
-		selenium.clickAt("link=Application", RuntimeVariables.replace(""));
+		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -69,8 +54,7 @@ public class CC_AddStagedPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='Collaboration-Blogs']/p/a")) {
+				if (selenium.isElementPresent("//div[@title='Blogs']/p/a")) {
 					break;
 				}
 			}
@@ -80,7 +64,7 @@ public class CC_AddStagedPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//div[@id='Collaboration-Blogs']/p/a",
+		selenium.clickAt("//div[@title='Blogs']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -89,7 +73,7 @@ public class CC_AddStagedPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//td[1]/div/div[1]/div")) {
+				if (selenium.isVisible("//section")) {
 					break;
 				}
 			}
@@ -99,6 +83,6 @@ public class CC_AddStagedPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isElementPresent("//td[1]/div/div[1]/div"));
+		assertTrue(selenium.isVisible("//section"));
 	}
 }

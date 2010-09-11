@@ -22,6 +22,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CC_AddStagedContentTest extends BaseTestCase {
 	public void testCC_AddStagedContent() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -46,8 +48,6 @@ public class CC_AddStagedContentTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Blog Entry']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_33_title",
-			RuntimeVariables.replace("Staging Blogs Test Entr"));
 		selenium.type("_33_title",
 			RuntimeVariables.replace("Staging Blogs Test Entry"));
 		Thread.sleep(5000);
@@ -74,7 +74,7 @@ public class CC_AddStagedContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("FCKeditor1___Frame")) {
+				if (selenium.isElementPresent("cke_contents_CKEditor1")) {
 					break;
 				}
 			}
@@ -100,32 +100,13 @@ public class CC_AddStagedContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
-		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
-		selenium.selectFrame("//iframe");
-		selenium.typeKeys("//body",
-			RuntimeVariables.replace("This is a staged blogs entr."));
+		selenium.selectFrame("//iframe[@id='_33_editor']");
+		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
 		selenium.type("//body",
 			RuntimeVariables.replace("This is a staged blogs entry."));
 		selenium.selectFrame("relative=top");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_33_saveButton")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("_33_saveButton", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));

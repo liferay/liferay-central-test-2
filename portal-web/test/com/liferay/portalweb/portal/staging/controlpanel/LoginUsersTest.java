@@ -22,13 +22,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class LoginUsersTest extends BaseTestCase {
 	public void testLoginUsers() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Back to Guest")) {
+				if (selenium.isElementPresent("link=Sign Out")) {
 					break;
 				}
 			}
@@ -38,8 +40,6 @@ public class LoginUsersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Back to Guest", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Sign Out", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_58_login", RuntimeVariables.replace("CC@liferay.com"));

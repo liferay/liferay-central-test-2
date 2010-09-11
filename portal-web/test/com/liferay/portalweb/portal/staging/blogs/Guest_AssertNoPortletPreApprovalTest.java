@@ -23,6 +23,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Guest_AssertNoPortletPreApprovalTest extends BaseTestCase {
 	public void testGuest_AssertNoPortletPreApproval()
 		throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -42,7 +44,7 @@ public class Guest_AssertNoPortletPreApprovalTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Staging Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertFalse(selenium.isElementPresent("link=Subscribe to this blog."));
+		assertFalse(selenium.isElementPresent("link=RSS (Opens New Window)"));
 		assertFalse(selenium.isTextPresent("Showing 0 results."));
 	}
 }

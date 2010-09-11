@@ -25,9 +25,10 @@ public class CC_PortalRolesTest extends BaseTestCase {
 		selenium.clickAt("link=Define Permissions", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_128_add-permissions",
-			RuntimeVariables.replace("label=Communities"));
+			RuntimeVariables.replace("label=Community administration"));
 		selenium.waitForPageToLoad("30000");
-		selenium.uncheck("_128_rowIds");
+		selenium.uncheck(
+			"//input[@name='_128_rowIds' and @value='com.liferay.portal.model.GroupAPPROVE_PROPOSAL']");
 		selenium.uncheck(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portal.model.GroupASSIGN_MEMBERS']");
 		selenium.uncheck(

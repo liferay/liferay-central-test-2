@@ -40,7 +40,8 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 
 		selenium.clickAt("link=Roles", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
+		selenium.clickAt("//tr[7]/td[4]/ul/li/strong/a",
+			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -48,7 +49,8 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//tr[7]/td[4]/ul/li/strong/span")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a")) {
 					break;
 				}
 			}
@@ -58,28 +60,13 @@ public class DefineContentAdministratorRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//tr[7]/td[4]/ul/li/strong/span",
-			RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[5]/ul/li[3]/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//div[5]/ul/li[3]/a", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent("Content Administrator"));
-		assertTrue(selenium.isTextPresent("Add Permissions"));
+		assertEquals(RuntimeVariables.replace("Content Administrator"),
+			selenium.getText("//h1[@class='header-title']/span"));
+		assertEquals(RuntimeVariables.replace(
+				"Add Permissions (Changing the value of this field will reload the page.)"),
+			selenium.getText("//label[@for='_128_add-permissions']"));
 	}
 }

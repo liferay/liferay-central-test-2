@@ -22,125 +22,122 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CP_PublishContentToLiveTest extends BaseTestCase {
 	public void testCP_PublishContentToLive() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent("link=Blogs Staging Test Page")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+				selenium.open("/web/guest/home/");
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"link=Blogs Staging Test Page")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("link=Blogs Staging Test Page",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("link=View Proposals",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//strong/a",
+					RuntimeVariables.replace("Actions"));
 
-		selenium.clickAt("link=Blogs Staging Test Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=View Proposals", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isElementPresent("//strong/span")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.click(RuntimeVariables.replace(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//input[@value='Publish to Live']",
+					RuntimeVariables.replace(""));
+				Thread.sleep(5000);
 
-		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isVisible("//div[2]/div[1]/div/span")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isElementPresent("link=Edit")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				boolean optionsVisible = selenium.isVisible(
+						"_88_PORTLET_DATA_33Checkbox");
 
-		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//input[@value='Publish to Live']",
-			RuntimeVariables.replace(""));
+				if (optionsVisible) {
+					label = 2;
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Options")) {
-					break;
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("//div[2]/div[1]/div/span",
+					RuntimeVariables.replace("Options"));
 
-		selenium.clickAt("link=Options", RuntimeVariables.replace(""));
+			case 2:
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-			try {
-				if (selenium.isElementPresent("_88_PORTLET_DATA_33")) {
-					break;
+					try {
+						if (selenium.isVisible("_88_PORTLET_DATA_33Checkbox")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.clickAt("_88_PORTLET_DATA_33Checkbox",
+					RuntimeVariables.replace(""));
+				selenium.click(RuntimeVariables.replace(
+						"//input[@value='Publish']"));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to publish these pages[\\s\\S]$"));
+				assertTrue(selenium.isTextPresent(
+						"Your request processed successfully."));
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.clickAt("_88_PORTLET_DATA_33", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Pages")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Pages", RuntimeVariables.replace(""));
-		selenium.click(RuntimeVariables.replace("publishBtn"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to publish these pages[\\s\\S]$"));
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
 	}
 }

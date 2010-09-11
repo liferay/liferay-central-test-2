@@ -22,13 +22,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CC_SendPortletProposalTest extends BaseTestCase {
 	public void testCC_SendPortletProposal() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs Staging Test Page")) {
+				if (selenium.isVisible("link=Blogs Staging Test Page")) {
 					break;
 				}
 			}
@@ -41,6 +43,8 @@ public class CC_SendPortletProposalTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Staging Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=View Staged Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Propose Publication",
 			RuntimeVariables.replace(""));
 
@@ -50,7 +54,7 @@ public class CC_SendPortletProposalTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_88_description")) {
+				if (selenium.isVisible("_88_description")) {
 					break;
 				}
 			}
@@ -60,8 +64,6 @@ public class CC_SendPortletProposalTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_88_description",
-			RuntimeVariables.replace("This is a portlet proposal test."));
 		selenium.type("_88_description",
 			RuntimeVariables.replace("This is a portlet proposal test."));
 		selenium.select("_88_reviewUserId",

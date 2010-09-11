@@ -22,204 +22,191 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SA_SetupTest extends BaseTestCase {
 	public void testSA_Setup() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		int label = 1;
 
-			try {
-				if (selenium.isElementPresent("link=Guest")) {
-					break;
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+				selenium.open("/web/guest/home/");
+				selenium.clickAt("main-content", RuntimeVariables.replace(""));
+				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
+				selenium.clickAt("navigation", RuntimeVariables.replace(""));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("addPage")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("addPage", RuntimeVariables.replace(""));
 
-		selenium.clickAt("link=Guest", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Welcome", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isVisible("//input")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isVisible(
-							"//div[@id='_88_layoutsTreeOutput']/ul/li/a/span")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.type("//input",
+					RuntimeVariables.replace("Blogs Staging Test Page"));
+				selenium.clickAt("save", RuntimeVariables.replace(""));
 
-		selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/a/span",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isVisible("link=Blogs Staging Test Page")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isVisible("_88_name_en_US")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("link=Blogs Staging Test Page",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.open("/web/guest/home/");
 
-		selenium.type("_88_name_en_US",
-			RuntimeVariables.replace("Blogs Staging Test Page"));
-		selenium.clickAt("//input[@value='Add Page']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Blogs Staging Test Page",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isElementPresent("link=Control Panel")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isVisible("link=Communities")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("link=Control Panel",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("link=Communities",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//strong/a",
+					RuntimeVariables.replace("Actions"));
 
-		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isVisible("//strong/span")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.click(RuntimeVariables.replace(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//li[@id='_134_tabs1settingsTabsId']/span/span/a",
+					RuntimeVariables.replace("Settings"));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("link=Staging", RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.select("_134_stagingType",
+					RuntimeVariables.replace("label=Local Live"));
 
-		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isVisible("_134_staged-portlet_33Checkbox")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isElementPresent("link=Manage Pages")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				boolean blogsChecked = selenium.isChecked(
+						"_134_staged-portlet_33Checkbox");
 
-		selenium.clickAt("link=Manage Pages", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+				if (blogsChecked) {
+					label = 2;
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//li[@id='_134_tabs1settingsTabsId']/span/a")) {
-					break;
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("_134_staged-portlet_33Checkbox",
+					RuntimeVariables.replace("Blogs"));
 
-		selenium.clickAt("//li[@id='_134_tabs1settingsTabsId']/span/a",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+			case 2:
+				selenium.select("_134_workflowStages",
+					RuntimeVariables.replace("label=3"));
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-			try {
-				if (selenium.isElementPresent("_134_stagingEnabled")) {
-					break;
+					try {
+						if (selenium.isVisible("_134_workflowRoleName_1")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.select("_134_workflowRoleName_1",
+					RuntimeVariables.replace("label=Content Administrator"));
+				selenium.select("_134_workflowRoleName_Last",
+					RuntimeVariables.replace("label=Content Publisher"));
+				selenium.clickAt("//input[@value='Save']",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to activate local staging for Liferay[\\s\\S]$"));
+				assertTrue(selenium.isTextPresent(
+						"Your request processed successfully."));
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.clickAt("_134_stagingEnabled", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_134_workflowEnabled")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("_134_workflowEnabled", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		selenium.select("_134_workflowRoleName_1",
-			RuntimeVariables.replace("label=Community Member"));
-		selenium.select("_134_workflowRoleName_2",
-			RuntimeVariables.replace("label=Community Member"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		selenium.clickAt("link=Back to Guest", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
 	}
 }

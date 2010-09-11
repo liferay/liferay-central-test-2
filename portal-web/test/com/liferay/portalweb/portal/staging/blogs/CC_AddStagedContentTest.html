@@ -9,6 +9,11 @@
 <tr><td rowspan="1" colspan="3">CC_AddStagedContentTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Blogs Staging Test Page</td>
 	<td></td>
@@ -29,11 +34,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
-	<td>_33_title</td>
-	<td>Staging Blogs Test Entr</td>
-</tr>
-<tr>
 	<td>type</td>
 	<td>_33_title</td>
 	<td>Staging Blogs Test Entry</td>
@@ -50,7 +50,7 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>FCKeditor1___Frame</td>
+	<td>cke_contents_CKEditor1</td>
 	<td></td>
 </tr>
 <tr>
@@ -60,23 +60,13 @@
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//iframe[@id="_33_editor"]</td>
+	<td>//iframe[@id='_33_editor']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//iframe[@id="FCKeditor1___Frame"]</td>
+	<td>//td[@id='cke_contents_CKEditor1']/iframe</td>
 	<td></td>
-</tr>
-<tr>
-	<td>selectFrame</td>
-	<td>//iframe</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>//body</td>
-	<td>This is a staged blogs entr.</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -89,13 +79,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>_33_saveButton</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAtAndWait</td>
-	<td>_33_saveButton</td>
+	<td>//input[@value='Publish']</td>
 	<td></td>
 </tr>
 <tr>

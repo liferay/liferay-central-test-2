@@ -22,6 +22,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CA_AssignContentPublicationTest extends BaseTestCase {
 	public void testCA_AssignContentPublication() throws Exception {
+		selenium.open("/web/guest/home/");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -61,7 +63,7 @@ public class CA_AssignContentPublicationTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent("link=Stage 3 Review Unassigned"));
-		selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -69,7 +71,8 @@ public class CA_AssignContentPublicationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Edit")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -79,12 +82,33 @@ public class CA_AssignContentPublicationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.addSelection("_88_available_reviewers_2",
 			RuntimeVariables.replace("label=Publisher Liferay"));
-		selenium.clickAt("//a[2]/img", RuntimeVariables.replace(""));
-		Thread.sleep(5000);
+		selenium.clickAt("//button[2]", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Publisher Liferay")
+										.equals(selenium.getText(
+								"_88_current_reviewers_2"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("Publisher Liferay"),
+			selenium.getText("_88_current_reviewers_2"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
