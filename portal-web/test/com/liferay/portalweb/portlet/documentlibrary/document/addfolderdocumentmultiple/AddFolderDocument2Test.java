@@ -48,6 +48,8 @@ public class AddFolderDocument2Test extends BaseTestCase {
 		selenium.clickAt("//div[2]/ul/li[5]/a",
 			RuntimeVariables.replace("Add Document"));
 		selenium.waitForPageToLoad("30000");
+		selenium.selectWindow("null");
+		selenium.windowFocus();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -55,7 +57,7 @@ public class AddFolderDocument2Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Use the classic uploader.")) {
+				if (selenium.isVisible("link=Use the classic uploader.")) {
 					break;
 				}
 			}

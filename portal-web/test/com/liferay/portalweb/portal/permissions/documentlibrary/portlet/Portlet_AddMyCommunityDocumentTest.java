@@ -50,6 +50,25 @@ public class Portlet_AddMyCommunityDocumentTest extends BaseTestCase {
 				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded right ']/ul/li[5]/a"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
+		selenium.selectWindow("null");
+		selenium.windowFocus();
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Use the classic uploader.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Use the classic uploader.");
 
 		for (int second = 0;; second++) {

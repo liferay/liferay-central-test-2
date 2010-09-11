@@ -52,6 +52,8 @@ public class Portlet_AddImageTest extends BaseTestCase {
 		selenium.clickAt("//div[2]/ul/li[1]/a",
 			RuntimeVariables.replace("Add Image"));
 		selenium.waitForPageToLoad("30000");
+		selenium.selectWindow("null");
+		selenium.windowFocus();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

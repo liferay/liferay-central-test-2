@@ -50,6 +50,8 @@ public class AddFrontPageAttachmentTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Attachments']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.selectWindow("null");
+		selenium.windowFocus();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

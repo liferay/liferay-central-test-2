@@ -54,6 +54,8 @@ public class CA_AddDocumentTest extends BaseTestCase {
 			RuntimeVariables.replace("Add Document"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(5000);
+		selenium.selectWindow("null");
+		selenium.windowFocus();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -61,7 +63,7 @@ public class CA_AddDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Use the classic uploader.")) {
+				if (selenium.isVisible("link=Use the classic uploader.")) {
 					break;
 				}
 			}

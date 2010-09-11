@@ -47,6 +47,8 @@ public class AddFolderImageNameNullTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//div[2]/ul/li[5]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.selectWindow("null");
+		selenium.windowFocus();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
