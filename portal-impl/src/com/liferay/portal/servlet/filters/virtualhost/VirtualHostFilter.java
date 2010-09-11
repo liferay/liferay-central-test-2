@@ -27,7 +27,6 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.servlet.AbsoluteRedirectsResponse;
 import com.liferay.portal.servlet.I18nServlet;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalInstances;
@@ -43,15 +42,10 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * <p>
- * This filter is used to provide virtual host functionality. However, this
- * filter is still required even if you do not use virtual hosting because it
- * sets the company id in the request so that subsequent calls in the thread
- * have the company id properly set. This filter must also always be the first
- * filter in the list of filters.
+ * This filter is used to provide virtual host functionality.
  * </p>
  *
  * @author Joel Kozikowski
@@ -134,46 +128,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		request.setCharacterEncoding(StringPool.UTF8);
-		//response.setContentType(ContentTypes.TEXT_HTML_UTF8);
-
-		// Make sure all redirects issued by the portal are absolute
-
-		response = new AbsoluteRedirectsResponse(request, response);
-
-		// Company id needs to always be called here so that it's properly set
-		// in subsequent calls
-
 		long companyId = PortalInstances.getCompanyId(request);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Company id " + companyId);
-		}
-
-		PortalUtil.getCurrentCompleteURL(request);
-		PortalUtil.getCurrentURL(request);
-
-		HttpSession session = request.getSession();
-
-		Boolean httpsInitial = (Boolean)session.getAttribute(
-			WebKeys.HTTPS_INITIAL);
-
-		if (httpsInitial == null) {
-			httpsInitial = Boolean.valueOf(request.isSecure());
-
-			session.setAttribute(WebKeys.HTTPS_INITIAL, httpsInitial);
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Setting httpsInitial to " + httpsInitial);
-			}
-		}
-
-		if (!isFilterEnabled()) {
-			processFilter(
-				VirtualHostFilter.class, request, response, filterChain);
-
-			return;
-		}
 
 		StringBuffer requestURL = request.getRequestURL();
 
