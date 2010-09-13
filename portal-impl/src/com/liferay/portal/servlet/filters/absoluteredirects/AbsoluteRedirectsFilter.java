@@ -12,12 +12,11 @@
  * details.
  */
 
-package com.liferay.portal.servlet.filters.redirect;
+package com.liferay.portal.servlet.filters.absoluteredirects;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.servlet.AbsoluteRedirectsResponse;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
@@ -30,10 +29,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  * <p>
- * This filter is used to ensure that all redirects are absolute.  It cannot
+ * This filter is used to ensure that all redirects are absolute. It should not
  * be disabled because it also sets the company id in the request so that
  * subsequent calls in the thread have the company id properly set. This filter
- * must also always be the first filter in the list of filters.
+ * should also always be the first filter in the list of filters.
  * </p>
  *
  * @author Minhchau Dang
