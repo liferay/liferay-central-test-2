@@ -82,24 +82,30 @@ if (hidePortletWhenEmpty) {
 	var treeViews = A.all('#<%= namespace %>taglibAssetCategoriesNavigationPanel .lfr-asset-category-list-container');
 
 	treeViews.each(
-		function(treeEl) {
+		function(item, index, collection) {
+			var assetCategoryList = item.one('.lfr-asset-category-list');
+
 			var treeView = new A.TreeView(
 				{
-					boundingBox: treeEl,
-					contentBox: treeEl.one('.lfr-asset-category-list'),
+					boundingBox: item,
+					contentBox: assetCategoryList,
 					type: 'normal'
 				}
 			).render();
 
-			var selectedChild = treeView.getNodeByChild(A.one('.lfr-asset-category-list .aui-tree-node strong'));
+			var selected = assetCategoryList.one('.aui-tree-node strong');
 
-			selectedChild.eachParent(
-				function(node) {
-					if (node instanceof A.TreeNode) {
-						node.expand();
+			if (selected) {
+				var selectedChild = treeView.getNodeByChild(selected);
+
+				selectedChild.eachParent(
+					function(node) {
+						if (node instanceof A.TreeNode) {
+							node.expand();
+						}
 					}
-				}
-			);
+				);
+			}
 		}
 	);
 </aui:script>
