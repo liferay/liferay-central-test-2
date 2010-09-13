@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -85,9 +86,9 @@ public class LuceneHelperImpl implements LuceneHelper {
 		BooleanQuery booleanQuery, String field, String startValue,
 		String endValue) {
 
-		NumericRangeQuery numericRangeQuery = NumericRangeQuery.newIntRange(
-				field, Integer.valueOf(startValue), Integer.valueOf(endValue),
-				true, true);
+		NumericRangeQuery numericRangeQuery = NumericRangeQuery.newLongRange(
+			field, GetterUtil.getLong(startValue), GetterUtil.getLong(endValue),
+			true, true);
 
 		booleanQuery.add(numericRangeQuery, BooleanClause.Occur.SHOULD);
 	}

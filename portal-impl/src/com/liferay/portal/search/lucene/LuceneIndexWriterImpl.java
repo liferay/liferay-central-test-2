@@ -140,23 +140,23 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 					continue;
 				}
 
-				org.apache.lucene.document.Field luceneField = null;
+				org.apache.lucene.document.Fieldable luceneFieldable = null;
 
 				if (numeric) {
-					luceneDocument.add(LuceneFields.getNumber(name, value));
+					luceneFieldable = LuceneFields.getNumber(name, value);
 				}
 				else {
 					if (tokenized) {
-						luceneField = LuceneFields.getText(name, value);
+						luceneFieldable = LuceneFields.getText(name, value);
 					}
 					else {
-						luceneField = LuceneFields.getKeyword(name, value);
+						luceneFieldable = LuceneFields.getKeyword(name, value);
 					}
-
-					luceneField.setBoost(boost);
-
-					luceneDocument.add(luceneField);
 				}
+
+				luceneFieldable.setBoost(boost);
+
+				luceneDocument.add(luceneFieldable);
 			}
 		}
 

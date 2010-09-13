@@ -145,12 +145,12 @@ public class LuceneFields {
 	}
 
 	public static NumericField getNumber(String field, String number) {
-		NumericField fieldObj = new NumericField(
+		NumericField numericField = new NumericField(
 			field, Field.Store.YES, true);
 
-		fieldObj.setIntValue(GetterUtil.getInteger(number));
+		numericField.setLongValue(GetterUtil.getLong(number));
 
-		return fieldObj;
+		return numericField;
 	}
 
 	public static Field getText(String field, String text) {

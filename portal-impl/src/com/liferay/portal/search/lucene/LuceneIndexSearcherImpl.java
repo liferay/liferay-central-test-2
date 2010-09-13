@@ -34,6 +34,7 @@ import java.io.IOException;
 
 import java.util.List;
 
+import org.apache.lucene.document.NumericField;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.SortField;
@@ -139,31 +140,35 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 	}
 
 	protected DocumentImpl getDocument(
-		org.apache.lucene.document.Document oldDoc) {
+		org.apache.lucene.document.Document oldDocument) {
 
-		DocumentImpl newDoc = new DocumentImpl();
+		DocumentImpl newDocument = new DocumentImpl();
 
-		List<org.apache.lucene.document.Field> oldFields = oldDoc.getFields();
+		List<org.apache.lucene.document.Fieldable> oldFieldables =
+			oldDocument.getFields();
 
-		for (org.apache.lucene.document.Field oldField : oldFields) {
-			String[] values = oldDoc.getValues(oldField.name());
+		for (org.apache.lucene.document.Fieldable oldFieldable :
+				oldFieldables) {
+
+			Field newField = null;
+
+			String[] values = oldDocument.getValues(oldFieldable.name());
 
 			if ((values != null) && (values.length > 1)) {
-				Field newField = new Field(
-					oldField.name(), values, oldField.isTokenized(), false);
-
-				newDoc.add(newField);
+				newField = new Field(oldFieldable.name(), values);
 			}
 			else {
-				Field newField = new Field(
-					oldField.name(), oldField.stringValue(),
-					oldField.isTokenized(), false);
-
-				newDoc.add(newField);
+				newField = new Field(
+					oldFieldable.name(), oldFieldable.stringValue());
 			}
+
+			newField.setNumeric(oldFieldable instanceof NumericField);
+			newField.setTokenized(oldFieldable.isTokenized());
+
+			newDocument.add(newField);
 		}
 
-		return newDoc;
+		return newDocument;
 	}
 
 	protected String[] getQueryTerms(Query query) {
@@ -235,10 +240,11 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			int j = 0;
 
 			for (int i = start; i < end; i++, j++) {
-				org.apache.lucene.document.Document doc = luceneHits.doc(i);
+				org.apache.lucene.document.Document document = luceneHits.doc(
+					i);
 
-				subsetDocs[j] = getDocument(doc);
-				subsetSnippets[j] = getSnippet(doc, query, Field.CONTENT);
+				subsetDocs[j] = getDocument(document);
+				subsetSnippets[j] = getSnippet(document, query, Field.CONTENT);
 				subsetScores[j] = luceneHits.score(i);
 			}
 

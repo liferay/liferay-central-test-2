@@ -226,7 +226,9 @@ public class DocumentImpl implements Document {
 			value = value.toLowerCase();
 		}
 
-		_fields.put(name, new Field(name, value, false, false));
+		Field field = new Field(name, value);
+
+		_fields.put(name, field);
 	}
 
 	public void addKeyword(String name, String[] values) {
@@ -234,7 +236,9 @@ public class DocumentImpl implements Document {
 			return;
 		}
 
-		_fields.put(name, new Field(name, values, false, false));
+		Field field = new Field(name, values);
+
+		_fields.put(name, field);
 	}
 
 	public void addModifiedDate() {
@@ -311,7 +315,11 @@ public class DocumentImpl implements Document {
 
 	public void addNumber(String name, String value) {
 		if (Validator.isNotNull(value)) {
-			_fields.put(name, new Field(name, value, true, false));
+			Field field = new Field(name, value);
+
+			field.setNumeric(true);
+
+			_fields.put(name, field);
 		}
 	}
 
@@ -320,12 +328,20 @@ public class DocumentImpl implements Document {
 			return;
 		}
 
-		_fields.put(name, new Field(name, values, true, false));
+		Field field = new Field(name, values);
+
+		field.setNumeric(true);
+
+		_fields.put(name, field);
 	}
 
 	public void addText(String name, String value) {
 		if (Validator.isNotNull(value)) {
-			_fields.put(name, new Field(name, value, false, true));
+			Field field = new Field(name, value);
+
+			field.setTokenized(true);
+
+			_fields.put(name, field);
 		}
 	}
 
