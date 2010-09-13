@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.Validator;
  * @author Micha Kiener
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
+ * @author Igor Spasic
  */
 public class ProxyMessageListener implements MessageListener {
 
