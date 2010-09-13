@@ -49,7 +49,22 @@ TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDis
 						<aui:option label="global" selected="<%= displayTerms.getGroupId() == themeDisplay.getCompanyGroupId() %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
 					</c:if>
 
-					<aui:option label="<%= themeDisplay.getScopeGroupName() %>" selected="<%= displayTerms.getGroupId() == scopeGroupId %>" value="<%= scopeGroupId %>" />
+					<aui:option label="<%= themeDisplay.getParentGroupName() %>" selected="<%= displayTerms.getGroupId() == themeDisplay.getParentGroupId() %>" value="<%= themeDisplay.getParentGroupId() %>" />
+
+					<%
+					Layout scopeLayout = null;
+
+					if (layout.hasScopeGroup()) {
+						scopeLayout = layout;
+					}
+					else if (themeDisplay.getScopeGroup().isLayout()) {
+						scopeLayout = LayoutLocalServiceUtil.getLayout(themeDisplay.getScopeGroup().getClassPK());
+					}
+					%>
+
+					<c:if test="<%= scopeLayout != null %>">
+						<aui:option label='<%= LanguageUtil.get(pageContext,"current-page") + " (" + HtmlUtil.escape(scopeLayout.getName(locale)) + ")" %>' selected="<%= displayTerms.getGroupId() == scopeLayout.getScopeGroup().getGroupId() %>" value="<%= scopeLayout.getScopeGroup().getGroupId() %>" />
+					</c:if>
 				</aui:select>
 			</aui:column>
 		</c:if>
