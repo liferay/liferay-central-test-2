@@ -32,7 +32,7 @@ plugins.includes=${plugins.includes}</echo>
 		<copy todir="${app.server.parent.dir}/${ee.deploy.dir}">
 			<fileset
 				dir="${hudson.plugin.dependencies.dir}/${lp.version}"
-				includes="**portlet**.war"
+				includes="web-form-portlet**.war"
 			/>
 		</copy>
 	</target>
