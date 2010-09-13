@@ -477,7 +477,7 @@ public class DLFolderFinderImpl
 
 			StringBundler sb = new StringBundler(5);
 
-			sb.append("SELECT * FROM ((");
+			sb.append("SELECT * FROM (");
 
 			String sql = CustomSQLUtil.get(FIND_FE_BY_G_F_S);
 
@@ -488,7 +488,7 @@ public class DLFolderFinderImpl
 			}
 
 			sb.append(sql);
-			sb.append(") UNION ALL (");
+			sb.append(" UNION ALL ");
 
 			sql = CustomSQLUtil.get(FIND_FS_BY_G_F_S);
 
@@ -500,7 +500,7 @@ public class DLFolderFinderImpl
 			}
 
 			sb.append(sql);
-			sb.append(")) TEMP_TABLE ORDER BY modelFolder DESC, title ASC");
+			sb.append(") TEMP_TABLE ORDER BY modelFolder DESC, title ASC");
 
 			sql = sb.toString();
 
