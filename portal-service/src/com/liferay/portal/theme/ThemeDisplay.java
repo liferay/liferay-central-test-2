@@ -33,6 +33,7 @@ import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 
 import java.io.Serializable;
 
@@ -233,6 +234,18 @@ public class ThemeDisplay implements Serializable {
 
 	public void setLayout(Layout layout) {
 		_layout = layout;
+	}
+
+	public Layout getScopeLayout() throws PortalException, SystemException {
+		if (_layout.hasScopeGroup()) {
+			return _layout;
+		}
+		else if (_scopeGroup.isLayout()) {
+			return LayoutLocalServiceUtil.getLayout(_scopeGroup.getClassPK());
+		}
+		else {
+			return null;
+		}
 	}
 
 	public List<Layout> getLayouts() {

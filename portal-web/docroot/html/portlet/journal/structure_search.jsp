@@ -52,18 +52,16 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 					<aui:option label="<%= themeDisplay.getParentGroupName() %>" selected="<%= displayTerms.getGroupId() == themeDisplay.getParentGroupId() %>" value="<%= themeDisplay.getParentGroupId() %>" />
 
 					<%
-					Layout scopeLayout = null;
-
-					if (layout.hasScopeGroup()) {
-						scopeLayout = layout;
-					}
-					else if (themeDisplay.getScopeGroup().isLayout()) {
-						scopeLayout = LayoutLocalServiceUtil.getLayout(themeDisplay.getScopeGroup().getClassPK());
-					}
+					Layout scopeLayout = themeDisplay.getScopeLayout();
 					%>
 
 					<c:if test="<%= scopeLayout != null %>">
-						<aui:option label='<%= LanguageUtil.get(pageContext,"current-page") + " (" + HtmlUtil.escape(scopeLayout.getName(locale)) + ")" %>' selected="<%= displayTerms.getGroupId() == scopeLayout.getScopeGroup().getGroupId() %>" value="<%= scopeLayout.getScopeGroup().getGroupId() %>" />
+
+						<%
+						Group scopeGroup = scopeLayout.getScopeGroup();
+						%>
+
+						<aui:option label='<%= LanguageUtil.get(pageContext, "current-page") + " (" + HtmlUtil.escape(scopeLayout.getName(locale)) + ")" %>' selected="<%= displayTerms.getGroupId() == scopeGroup.getGroupId() %>" value="<%= scopeGroup.getGroupId() %>" />
 					</c:if>
 				</aui:select>
 			</aui:column>
