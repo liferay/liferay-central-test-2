@@ -64,7 +64,7 @@
 											<aui:input helpMessage="import-data-strategy-mirror-with-overwritting-help" id="mirrorWithOverwriting" inlineLabel="right" label="mirror-with-overwritting" name="<%= PortletDataHandlerKeys.DATA_STRATEGY %>" type="radio" value="<%= PortletDataHandlerKeys.DATA_STRATEGY_MIRROR_OVERWRITE %>" />
 										</li>
 										<li>
-											<aui:input helpMessage="import-data-strategy-copy-as-new-help"  id="copyAsNew" inlineLabel="right" label="copy-as-new" name="<%= PortletDataHandlerKeys.DATA_STRATEGY %>" type="radio" value="<%= PortletDataHandlerKeys.DATA_STRATEGY_COPY_AS_NEW %>" />
+											<aui:input helpMessage="import-data-strategy-copy-as-new-help" id="copyAsNew" inlineLabel="right" label="copy-as-new" name="<%= PortletDataHandlerKeys.DATA_STRATEGY %>" type="radio" value="<%= PortletDataHandlerKeys.DATA_STRATEGY_COPY_AS_NEW %>" />
 										</li>
 									</ul>
 								</aui:field-wrapper>
