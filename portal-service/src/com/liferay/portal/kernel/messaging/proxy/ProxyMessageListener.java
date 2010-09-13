@@ -52,24 +52,31 @@ public class ProxyMessageListener implements MessageListener {
 			}
 		}
 		catch (Exception e) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(e, e);
-			}
-
 			proxyResponse.setException(e);
 		}
 		finally {
 			String responseDestinationName =
 				message.getResponseDestinationName();
 
+			Exception proxyResponseException = proxyResponse.getException();
+
 			if (Validator.isNotNull(responseDestinationName)) {
 				Message responseMessage = MessageBusUtil.createResponseMessage(
 					message);
 
 				responseMessage.setPayload(proxyResponse);
+				
+				if (_log.isDebugEnabled() && (proxyResponseException != null)) {
+					_log.debug(proxyResponseException, proxyResponseException);
+				}
 
 				_messageBus.sendMessage(
 					responseDestinationName, responseMessage);
+			}
+			else {
+				if (proxyResponseException != null) {
+					_log.error(proxyResponseException, proxyResponseException);
+				}
 			}
 		}
 	}
