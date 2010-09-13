@@ -103,6 +103,10 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 		Map<MethodTargetClassKey, Annotation[]> annotationsMap =
 			_beanFactoryAnnotations.get(_beanFactory);
 
+		if (annotationsMap == null) {
+			return _nullAnnotation;
+		}
+
 		Annotation[] annotations = annotationsMap.get(methodTargetClassKey);
 
 		if (annotations != null) {
@@ -131,7 +135,7 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 	}
 
 	protected T getAnnotation(Annotation[] annotations) {
-		for(Annotation annotation : annotations) {
+		for (Annotation annotation : annotations) {
 			if (annotation.annotationType() == _annotationType) {
 				return (T)annotation;
 			}
