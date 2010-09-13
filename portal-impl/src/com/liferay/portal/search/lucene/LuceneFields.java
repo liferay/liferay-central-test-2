@@ -14,6 +14,7 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.util.PropsValues;
 
@@ -25,6 +26,7 @@ import java.util.Date;
 
 import org.apache.lucene.document.DateTools;
 import org.apache.lucene.document.Field;
+import org.apache.lucene.document.NumericField;
 
 /**
  * @author Brian Wing Shun Chan
@@ -138,6 +140,15 @@ public class LuceneFields {
 			field, keyword, Field.Store.YES, Field.Index.NOT_ANALYZED);
 
 		//fieldObj.setBoost(0);
+
+		return fieldObj;
+	}
+
+	public static NumericField getNumber(String field, String number) {
+		NumericField fieldObj = new NumericField(
+			field, Field.Store.YES, true);
+
+		fieldObj.setIntValue(GetterUtil.getInteger(number));
 
 		return fieldObj;
 	}

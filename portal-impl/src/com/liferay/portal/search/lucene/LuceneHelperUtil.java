@@ -81,6 +81,59 @@ public class LuceneHelperUtil {
 		getLuceneHelper().addExactTerm(booleanQuery, field, value);
 	}
 
+	public static void addNumericRangeTerm(
+		BooleanQuery booleanQuery, String field, int startValue, int endValue) {
+
+		getLuceneHelper().addNumericRangeTerm(
+			booleanQuery, field, String.valueOf(startValue),
+			String.valueOf(endValue));
+	}
+
+	public static void addNumericRangeTerm(
+		BooleanQuery booleanQuery, String field, Integer startValue,
+		Integer endValue) {
+
+		getLuceneHelper().addNumericRangeTerm(
+			booleanQuery, field, String.valueOf(startValue),
+			String.valueOf(endValue));
+	}
+
+	public static void addNumericRangeTerm(
+		BooleanQuery booleanQuery, String field, long startValue,
+		long endValue) {
+
+		getLuceneHelper().addNumericRangeTerm(
+			booleanQuery, field, String.valueOf(startValue),
+			String.valueOf(endValue));
+	}
+
+	public static void addNumericRangeTerm(
+		BooleanQuery booleanQuery, String field, Long startValue,
+		Long endValue) {
+
+		getLuceneHelper().addNumericRangeTerm(
+			booleanQuery, field, String.valueOf(startValue),
+			String.valueOf(endValue));
+	}
+
+	public static void addNumericRangeTerm(
+		BooleanQuery booleanQuery, String field, short startValue,
+		short endValue) {
+
+		getLuceneHelper().addNumericRangeTerm(
+			booleanQuery, field, String.valueOf(startValue),
+			String.valueOf(endValue));
+	}
+
+	public static void addNumericRangeTerm(
+		BooleanQuery booleanQuery, String field, Short startValue,
+		Short endValue) {
+
+		getLuceneHelper().addNumericRangeTerm(
+			booleanQuery, field, String.valueOf(startValue),
+			String.valueOf(endValue));
+	}
+
 	public static void addRangeTerm(
 		BooleanQuery booleanQuery, String field, int startValue, int endValue) {
 

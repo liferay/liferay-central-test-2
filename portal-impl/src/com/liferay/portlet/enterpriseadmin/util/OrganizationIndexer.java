@@ -170,8 +170,8 @@ public class OrganizationIndexer extends BaseIndexer {
 		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		document.addKeyword(Field.ORGANIZATION_ID, organizationId);
 		document.addKeyword("parentOrganizationId", parentOrganizationId);
-		document.addKeyword("leftOrganizationId", leftOrganizationId);
-		document.addKeyword("rightOrganizationId", rightOrganizationId);
+		document.addNumber("leftOrganizationId", leftOrganizationId);
+		document.addNumber("rightOrganizationId", rightOrganizationId);
 		document.addKeyword("name", name, true);
 		document.addKeyword("type", type);
 		document.addKeyword(
@@ -295,7 +295,7 @@ public class OrganizationIndexer extends BaseIndexer {
 			}
 			else if (leftAndRightOrganizationIds.length > 0) {
 				for (int i = 0; i < leftAndRightOrganizationIds.length; i++) {
-					organizationsTreeQuery.addRangeTerm(
+					organizationsTreeQuery.addNumericRangeTerm(
 						"leftOrganizationId", leftAndRightOrganizationIds[i][0],
 						leftAndRightOrganizationIds[i][1]);
 				}

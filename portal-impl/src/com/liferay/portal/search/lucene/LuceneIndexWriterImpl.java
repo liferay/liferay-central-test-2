@@ -131,6 +131,7 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 
 		for (Field field : fields) {
 			String name = field.getName();
+			boolean numeric = field.isNumeric();
 			boolean tokenized = field.isTokenized();
 			float boost = field.getBoost();
 
@@ -141,16 +142,21 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 
 				org.apache.lucene.document.Field luceneField = null;
 
-				if (tokenized) {
-					luceneField = LuceneFields.getText(name, value);
+				if (numeric) {
+					luceneDocument.add(LuceneFields.getNumber(name, value));
 				}
 				else {
-					luceneField = LuceneFields.getKeyword(name, value);
+					if (tokenized) {
+						luceneField = LuceneFields.getText(name, value);
+					}
+					else {
+						luceneField = LuceneFields.getKeyword(name, value);
+					}
+
+					luceneField.setBoost(boost);
+
+					luceneDocument.add(luceneField);
 				}
-
-				luceneField.setBoost(boost);
-
-				luceneDocument.add(luceneField);
 			}
 		}
 

@@ -150,14 +150,14 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 			if ((values != null) && (values.length > 1)) {
 				Field newField = new Field(
-					oldField.name(), values, oldField.isTokenized());
+					oldField.name(), values, oldField.isTokenized(), false);
 
 				newDoc.add(newField);
 			}
 			else {
 				Field newField = new Field(
 					oldField.name(), oldField.stringValue(),
-					oldField.isTokenized());
+					oldField.isTokenized(), false);
 
 				newDoc.add(newField);
 			}

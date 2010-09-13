@@ -226,7 +226,7 @@ public class DocumentImpl implements Document {
 			value = value.toLowerCase();
 		}
 
-		_fields.put(name, new Field(name, value, false));
+		_fields.put(name, new Field(name, value, false, false));
 	}
 
 	public void addKeyword(String name, String[] values) {
@@ -234,7 +234,7 @@ public class DocumentImpl implements Document {
 			return;
 		}
 
-		_fields.put(name, new Field(name, values, false));
+		_fields.put(name, new Field(name, values, false, false));
 	}
 
 	public void addModifiedDate() {
@@ -245,9 +245,87 @@ public class DocumentImpl implements Document {
 		addDate(Field.MODIFIED, modifiedDate);
 	}
 
+	public void addNumber(String name, double value) {
+		addNumber(name, String.valueOf(value));
+	}
+
+	public void addNumber(String name, Double value) {
+		addNumber(name, String.valueOf(value));
+	}
+
+	public void addNumber(String name, double[] values) {
+		addNumber(name, ArrayUtil.toStringArray(values));
+	}
+
+	public void addNumber(String name, Double[] values) {
+		addNumber(name, String.valueOf(ArrayUtil.toStringArray(values)));
+	}
+
+	public void addNumber(String name, float value) {
+		addNumber(name, String.valueOf(value));
+	}
+
+	public void addNumber(String name, Float value) {
+		addNumber(name, String.valueOf(value));
+	}
+
+	public void addNumber(String name, float[] values) {
+		addNumber(name, ArrayUtil.toStringArray(values));
+	}
+
+	public void addNumber(String name, Float[] values) {
+		addNumber(name, ArrayUtil.toStringArray(values));
+	}
+
+	public void addNumber(String name, int value) {
+		addNumber(name, String.valueOf(value));
+	}
+
+	public void addNumber(String name, Integer value) {
+		addNumber(name, String.valueOf(value));
+	}
+
+	public void addNumber(String name, int[] values) {
+		addNumber(name, ArrayUtil.toStringArray(values));
+	}
+
+	public void addNumber(String name, Integer[] values) {
+		addNumber(name, ArrayUtil.toStringArray(values));
+	}
+
+	public void addNumber(String name, long value) {
+		addNumber(name, String.valueOf(value));
+	}
+
+	public void addNumber(String name, Long value) {
+		addNumber(name, String.valueOf(value));
+	}
+
+	public void addNumber(String name, long[] values) {
+		addNumber(name, ArrayUtil.toStringArray(values));
+	}
+
+	public void addNumber(String name, Long[] values) {
+		addNumber(name, ArrayUtil.toStringArray(values));
+	}
+
+	public void addNumber(String name, String value) {
+		if (Validator.isNotNull(value)) {
+			_fields.put(name, new Field(name, value, true, false));
+		}
+	}
+
+	public void addNumber(String name, String[] values) {
+		if (values == null) {
+			return;
+		}
+
+		_fields.put(name, new Field(name, values, true, false));
+	}
+
 	public void addText(String name, String value) {
 		if (Validator.isNotNull(value)) {
-			_fields.put(name, new Field(name, value, true));
+			_fields.put(name, new Field(name, value, false, true));
 		}
 	}
 

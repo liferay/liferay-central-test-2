@@ -43,6 +43,7 @@ import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.NumericRangeQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TermRangeQuery;
@@ -78,6 +79,17 @@ public class LuceneHelperImpl implements LuceneHelper {
 		Query query = new TermQuery(new Term(field, value));
 
 		booleanQuery.add(query, BooleanClause.Occur.SHOULD);
+	}
+
+	public void addNumericRangeTerm(
+		BooleanQuery booleanQuery, String field, String startValue,
+		String endValue) {
+
+		NumericRangeQuery numericRangeQuery = NumericRangeQuery.newIntRange(
+				field, Integer.valueOf(startValue), Integer.valueOf(endValue),
+				true, true);
+
+		booleanQuery.add(numericRangeQuery, BooleanClause.Occur.SHOULD);
 	}
 
 	public void addRangeTerm(

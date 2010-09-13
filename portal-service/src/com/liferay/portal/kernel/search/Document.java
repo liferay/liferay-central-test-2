@@ -101,6 +101,42 @@ public interface Document extends Serializable {
 
 	public void addModifiedDate(Date modifiedDate);
 
+	public void addNumber(String name, double value);
+
+	public void addNumber(String name, Double value);
+
+	public void addNumber(String name, double[] values);
+
+	public void addNumber(String name, Double[] values);
+
+	public void addNumber(String name, float value);
+
+	public void addNumber(String name, Float value);
+
+	public void addNumber(String name, float[] values);
+
+	public void addNumber(String name, Float[] values);
+
+	public void addNumber(String name, int value);
+
+	public void addNumber(String name, Integer value);
+
+	public void addNumber(String name, int[] values);
+
+	public void addNumber(String name, Integer[] values);
+
+	public void addNumber(String name, long value);
+
+	public void addNumber(String name, Long value);
+
+	public void addNumber(String name, long[] values);
+
+	public void addNumber(String name, Long[] values);
+
+	public void addNumber(String name, String value);
+
+	public void addNumber(String name, String[] values);
+
 	public void addText(String name, String value);
 
 	public void addUID(String portletId, long field1);

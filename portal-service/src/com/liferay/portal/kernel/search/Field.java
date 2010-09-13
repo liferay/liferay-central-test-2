@@ -82,17 +82,18 @@ public class Field implements Serializable {
 
 	public static final String VERSION = "version";
 
-	public Field(String name, String value, boolean tokenized) {
-		this(name, new String[] {value}, tokenized);
+	public Field(String name, String value, boolean numeric, boolean tokenized) {
+		this(name, new String[] {value},  numeric,tokenized);
 	}
 
-	public Field(String name, String[] values, boolean tokenized) {
-		this(name, values, tokenized, 1);
+	public Field(String name, String[] values,  boolean numeric, boolean tokenized) {
+		this(name, values,  numeric, tokenized, 1);
 	}
 
-	public Field(String name, String[] values, boolean tokenized, float boost) {
+	public Field(String name, String[] values,  boolean numeric, boolean tokenized, float boost) {
 		_name = name;
 		_values = values;
+		_numeric = numeric;
 		_tokenized = tokenized;
 		_boost = boost;
 	}
@@ -118,6 +119,10 @@ public class Field implements Serializable {
 		return _values;
 	}
 
+	public boolean isNumeric() {
+		return _numeric;
+	}
+
 	public boolean isTokenized() {
 		return _tokenized;
 	}
@@ -128,6 +133,10 @@ public class Field implements Serializable {
 
 	public void setName(String name) {
 		_name = name;
+	}
+
+	public void setNumeric(boolean numeric) {
+		_numeric = numeric;
 	}
 
 	public void setTokenized(boolean type) {
@@ -144,6 +153,7 @@ public class Field implements Serializable {
 
 	private float _boost;
 	private String _name;
+	private boolean _numeric;
 	private boolean _tokenized;
 	private String[] _values;
 
