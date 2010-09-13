@@ -953,7 +953,13 @@ public class PortalImpl implements Portal {
 			return null;
 		}
 
-		for (Layout layout : themeDisplay.getUnfilteredLayouts()) {
+		List<Layout> layouts = themeDisplay.getUnfilteredLayouts();
+
+		if (layouts == null) {
+			return null;
+		}
+
+		for (Layout layout : layouts) {
 			if (layout.getFriendlyURL().equals(
 					PropsValues.AUTH_LOGIN_COMMUNITY_URL)) {
 
