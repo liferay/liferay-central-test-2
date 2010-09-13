@@ -163,7 +163,7 @@ public class OrganizationLocalServiceImpl
 		Indexer indexer = IndexerRegistryUtil.getIndexer(Organization.class);
 
 		indexer.reindex(
-			new String[]{String.valueOf(organization.getCompanyId())});
+			new String[] {String.valueOf(organization.getCompanyId())});
 
 		return organization;
 	}
@@ -812,7 +812,8 @@ public class OrganizationLocalServiceImpl
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(Organization.class);
 
-		indexer.reindex(organization);
+		indexer.reindex(
+			new String[] {String.valueOf(organization.getCompanyId())});
 
 		return organization;
 	}
