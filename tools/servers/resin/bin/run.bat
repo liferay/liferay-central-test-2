@@ -1,1 +1,1 @@
-..\httpd.exe
+..\win32\resin.exe
