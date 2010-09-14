@@ -8,6 +8,19 @@ public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name
 
 	public ${entity.name}${sessionTypeName}ServiceClp(ClassLoaderProxy classLoaderProxy) {
 		_classLoaderProxy = classLoaderProxy;
+		<#list methods as method>
+			<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method)>
+				<#assign parameters = method.parameters>
+
+				_${method.name}MethodKey${method_index} = new MethodKey(_classLoaderProxy.getClassName(), "${method.name}"
+
+				<#list parameters as parameter>
+					, ${serviceBuilder.getLiteralClass(parameter.type)}
+				</#list>
+
+				);
+			</#if>
+		</#list>
 	}
 
 	<#list methods as method>
@@ -109,13 +122,7 @@ public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name
 		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method)>
 			<#assign parameters = method.parameters>
 
-			private MethodKey _${method.name}MethodKey${method_index} = new MethodKey(_classLoaderProxy.getClassName(), "${method.name}"
-
-			<#list parameters as parameter>
-				, ${serviceBuilder.getLiteralClass(parameter.type)}
-			</#list>
-
-			);
+			private MethodKey _${method.name}MethodKey${method_index};
 		</#if>
 	</#list>
 
