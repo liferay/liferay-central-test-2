@@ -276,8 +276,6 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 <aui:script>
 	function <portlet:namespace />getDescription() {
-		var description = '';
-
 		return window.<portlet:namespace />editor.getHTML();		
 	}
 
