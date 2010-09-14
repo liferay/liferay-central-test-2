@@ -184,6 +184,12 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 			<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
 		</liferay-portlet:renderURL>
 
+		<%
+		if (!UserPermissionUtil.contains(permissionChecker, user2.getUserId(), ActionKeys.UPDATE)) {
+			rowURL = null;
+		}
+		%>
+
 		<%@ include file="/html/portlet/enterprise_admin/user/search_columns.jspf" %>
 
 		<liferay-ui:search-container-column-jsp
