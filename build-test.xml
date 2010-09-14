@@ -383,10 +383,42 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-sharding">
-			<param name="test.ant.script.command" value="db-sharding-knowledge-base" />
+			<param name="test.ant.script.command" value="db-sharding-knowledge-base-admin" />
 			<param name="test.ant.script.plugins" value="knowledge-base-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
-			<param name="test.ant.script.suite" value="PluginsKnowledgeBaseTestSuite" />
+			<param name="test.ant.script.suite" value="PluginsKnowledgeAdminBaseTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-knowledge-base-aggregator" />
+			<param name="test.ant.script.plugins" value="knowledge-base-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsKnowledgeAggregatorBaseTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-knowledge-base-display" />
+			<param name="test.ant.script.plugins" value="knowledge-base-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsKnowledgeBaseDisplayTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-knowledge-base-list" />
+			<param name="test.ant.script.plugins" value="knowledge-base-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsKnowledgeBaseListTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-knowledge-base-search" />
+			<param name="test.ant.script.plugins" value="knowledge-base-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsKnowledgeBaseSearchTestSuite" />
 			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
 		</antcall>
 
@@ -592,6 +624,41 @@
 			<param name="test.ant.script.plugins" value="kaleo-web" />
 			<param name="test.ant.script.plugins.type" value="webs" />
 			<param name="test.ant.script.suite" value="PluginsKaleoTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="plugins-knowledge-base-admin" />
+			<param name="test.ant.script.plugins" value="knowledge-base-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsKnowledgeBaseAdminTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="plugins-knowledge-base-aggregator" />
+			<param name="test.ant.script.plugins" value="knowledge-base-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsKnowledgeBaseAggregatorTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="plugins-knowledge-base-display" />
+			<param name="test.ant.script.plugins" value="knowledge-base-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsKnowledgeBaseDisplayTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="plugins-knowledge-base-list" />
+			<param name="test.ant.script.plugins" value="knowledge-base-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsKnowledgeBaseListTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="plugins-knowledge-base-search" />
+			<param name="test.ant.script.plugins" value="knowledge-base-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsKnowledgeBaseSearchTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
