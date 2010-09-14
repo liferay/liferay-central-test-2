@@ -21,8 +21,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 CalEvent event = (CalEvent)request.getAttribute(WebKeys.CALENDAR_EVENT);
 
-event = event.toEscapedModel();
-
 Recurrence recurrence = null;
 
 int recurrenceType = ParamUtil.getInteger(request, "recurrenceType", Recurrence.NO_RECURRENCE);
@@ -46,7 +44,7 @@ request.setAttribute("view_event.jsp-event", event);
 
 <liferay-ui:header
 	backURL="<%= redirect %>"
-	escapeXml="<%= false %>"
+	escapeXml="<%= true %>"
 	title="<%= event.getTitle() %>"
 />
 
@@ -205,7 +203,7 @@ request.setAttribute("view_event.jsp-event", event);
 			/>
 
 			<div class="event-name">
-				<h4><%= event.getTitle() %></h4>
+				<h4><%= HtmlUtil.escape(event.getTitle()) %></h4>
 			</div>
 		</div>
 

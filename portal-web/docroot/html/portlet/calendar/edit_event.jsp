@@ -23,11 +23,15 @@ String referringPortletResource = ParamUtil.getString(request, "referringPortlet
 
 CalEvent event = (CalEvent)request.getAttribute(WebKeys.CALENDAR_EVENT);
 
+String description = StringPool.BLANK;
+
 long eventId = BeanParamUtil.getLong(event, request, "eventId");
 
 Calendar startDate = CalendarUtil.roundByMinutes((Calendar)selCal.clone(), 15);
 
 if (event != null) {
+	description = event.getDescription();
+
 	if (!event.isTimeZoneSensitive()) {
 		startDate = CalendarFactoryUtil.getCalendar();
 	}
@@ -104,6 +108,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 	<aui:input name="eventId" type="hidden" value="<%= eventId %>" />
+	<aui:input name="description" type="hidden" />
 
 	<liferay-ui:header
 		backURL="<%= redirect %>"
@@ -154,7 +159,9 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 		<aui:input name="title" />
 
-		<aui:input name="description" />
+		<aui:field-wrapper label="description">
+			<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="email"/>
+		</aui:field-wrapper>
 
 		<aui:select name="type">
 
@@ -268,6 +275,12 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 </aui:form>
 
 <aui:script>
+	function <portlet:namespace />getDescription() {
+		var description = '';
+
+		return window.<portlet:namespace />editor.getHTML();		
+	}
+
 	function <portlet:namespace />init() {
 		<c:choose>
 			<c:when test="<%= recurrenceType == Recurrence.NO_RECURRENCE %>">
@@ -288,6 +301,10 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		</c:choose>
 	}
 
+	function <portlet:namespace />initEditor() {
+		return "<%= UnicodeFormatter.toString(description) %>";
+	}
+
 	function <portlet:namespace />showTable(id) {
 		document.getElementById("<portlet:namespace />neverTable").style.display = "none";
 		document.getElementById("<portlet:namespace />dailyTable").style.display = "none";
@@ -300,6 +317,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 	function <portlet:namespace />saveEvent() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= (event == null) ? Constants.ADD : Constants.UPDATE %>";
+		document.<portlet:namespace />fm.<portlet:namespace />description.value = <portlet:namespace />getDescription();
 		submitForm(document.<portlet:namespace />fm);
 	}
 
@@ -342,4 +360,8 @@ if (event != null) {
 else {
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-event"), currentURL);
 }
+%>
+
+<%!
+public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.calendar.edit_event.jsp";
 %>
