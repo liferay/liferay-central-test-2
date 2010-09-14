@@ -135,7 +135,13 @@ public class UnsyncStringWriter extends Writer {
 
 	public void write(int c) {
 		if (stringBundler != null) {
-			stringBundler.append(String.valueOf((char)c));
+			char ch = (char)c;
+			if (ch <= 127) {
+				stringBundler.append(ASCII_TABLE[ch]);
+			}
+			else {
+				stringBundler.append(String.valueOf(ch));
+			}
 		}
 		else {
 			stringBuilder.append((char)c);
@@ -157,6 +163,14 @@ public class UnsyncStringWriter extends Writer {
 		}
 		else {
 			stringBuilder.append(string.substring(offset, offset + length));
+		}
+	}
+
+	public static String[] ASCII_TABLE = new String[128];
+
+	static {
+		for(int i = 0; i < 128; i++) {
+			ASCII_TABLE[i] = String.valueOf((char)i);
 		}
 	}
 
