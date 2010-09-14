@@ -8,6 +8,7 @@ public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name
 
 	public ${entity.name}${sessionTypeName}ServiceClp(ClassLoaderProxy classLoaderProxy) {
 		_classLoaderProxy = classLoaderProxy;
+
 		<#list methods as method>
 			<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method)>
 				<#assign parameters = method.parameters>
