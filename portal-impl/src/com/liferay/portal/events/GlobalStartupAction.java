@@ -237,8 +237,8 @@ public class GlobalStartupAction extends SimpleAction {
 
 			Environment.setValue(Environment.PROP_BASE_FILE_DIR, tmpDir);
 		}
-		catch (Throwable e) {
-			_log.error(e);
+		catch (Throwable t) {
+			_log.error(t);
 		}
 
 		// JCR
