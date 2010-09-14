@@ -131,7 +131,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 			categoryUrl.setParameter("redirect", currentURL);
 			categoryUrl.setParameter("mbCategoryId", String.valueOf(categoryId));
 
-			row.addText(category.getName(), categoryUrl);
+			row.addText(HtmlUtil.escape(category.getName()), categoryUrl);
 
 			// Thread and message
 
@@ -170,7 +170,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 			rowURL.setParameter("redirect", currentURL);
 			rowURL.setParameter("messageId", String.valueOf(messageId));
 
-			row.addText(message.getSubject(), rowURL);
+			row.addText(HtmlUtil.escape(message.getSubject()), rowURL);
 			row.addText(String.valueOf(thread.getMessageCount()), rowURL);
 			row.addText(String.valueOf(thread.getViewCount()), rowURL);
 
