@@ -700,6 +700,13 @@ public class PortletURLImpl
 			return;
 		}
 
+		Set<String> portletAddDefaultResourceCheckWhiteList =
+			PortalUtil.getPortletAddDefaultResourceCheckWhitelist();
+
+		if (portletAddDefaultResourceCheckWhiteList.contains(_portletId)) {
+			return;
+		}
+
 		sb.append("p_p_auth");
 		sb.append(StringPool.EQUAL);
 		sb.append(processValue(key, actualPortletAuthenticationToken));

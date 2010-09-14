@@ -44,6 +44,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.TimeZone;
 
 import javax.portlet.ActionRequest;
@@ -721,6 +722,10 @@ public class PortalUtil {
 
 	public static String getPortalWebDir() {
 		return getPortal().getPortalWebDir();
+	}
+
+	public static Set<String> getPortletAddDefaultResourceCheckWhitelist() {
+		return getPortal().getPortletAddDefaultResourceCheckWhitelist();
 	}
 
 	public static List<KeyValuePair> getPortletBreadcrumbList(

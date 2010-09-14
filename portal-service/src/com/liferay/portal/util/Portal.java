@@ -40,6 +40,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.TimeZone;
 
 import javax.portlet.ActionRequest;
@@ -402,6 +403,8 @@ public interface Portal {
 		throws PortalException, SystemException;
 
 	public String getPortalWebDir();
+
+	public Set<String> getPortletAddDefaultResourceCheckWhitelist();
 
 	public List<KeyValuePair> getPortletBreadcrumbList(
 		HttpServletRequest request);

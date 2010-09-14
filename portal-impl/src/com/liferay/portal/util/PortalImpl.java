@@ -2317,6 +2317,10 @@ public class PortalImpl implements Portal {
 		return _portalWebDir;
 	}
 
+	public Set<String> getPortletAddDefaultResourceCheckWhitelist() {
+		return _portletAddDefaultResourceCheckWhitelist;
+	}
+
 	public List<KeyValuePair> getPortletBreadcrumbList(
 		HttpServletRequest request) {
 
