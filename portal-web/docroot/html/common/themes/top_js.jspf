@@ -197,19 +197,22 @@
 		<%
 		long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/html/js/", true);
 
-		String alloyBaseURL = themeDisplay.getPathJavaScript() + "/aui/";
-		String alloyComboURL = PortalUtil.getStaticResourceURL(request, themeDisplay.getPathContext() + "/combo/", javaScriptLastModified);
+		String alloyRootPath = themeDisplay.getPathJavaScript() + "/aui/";
+
+		String alloyBaseURL = PortalUtil.getPortalURL(request) + themeDisplay.getPathContext() + alloyRootPath;
+
+		String alloyComboPath = PortalUtil.getStaticResourceURL(request, themeDisplay.getPathContext() + "/combo/", javaScriptLastModified);
 		%>
 
 		Liferay.AUI = {
-			getBasePath: function() {
+			getBaseURL: function() {
 				return '<%= alloyBaseURL %>';
 			},
 			getCombine: function() {
 				return <%= themeDisplay.isThemeJsFastLoad() %>;
 			},
 			getComboPath: function() {
-				return '<%= alloyComboURL %>&p=<%= themeDisplay.getPathJavaScript() %>&';
+				return '<%= alloyComboPath %>&p=<%= themeDisplay.getPathJavaScript() %>&';
 			},
 			getFilter: function() {
 				<c:choose>
@@ -225,14 +228,18 @@
 						return 'raw';
 					</c:otherwise>
 				</c:choose>
+			},
+			getRootPath: function() {
+				return '<%= alloyRootPath %>';
 			}
 		};
 
 		window.YUI_config = {
+			base: Liferay.AUI.getBaseURL(),
 			comboBase: Liferay.AUI.getComboPath(),
 			fetchCSS: false,
 			filter: Liferay.AUI.getFilter(),
-			root: Liferay.AUI.getBasePath()
+			root: Liferay.AUI.getRootPath()
 		};
 
 		<%
