@@ -72,7 +72,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 
 		<c:choose>
 			<c:when test="<%= editable && ExpandoColumnPermission.contains(permissionChecker, company.getCompanyId(), className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name, ActionKeys.UPDATE) %>">
-				<aui:field-wrapper label='<%= (label ? localizedName : StringPool.BLANK) %>'>
+				<aui:field-wrapper label="<%= label ? localizedName : StringPool.BLANK %>">
 					<input type="hidden" name="<portlet:namespace />ExpandoAttributeName--<%= escapedName %>--" value="<%= escapedName %>" />
 
 					<c:choose>
@@ -454,7 +454,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 				%>
 
 				<c:if test="<%= editable || Validator.isNotNull(sb.toString()) %>">
-					<aui:field-wrapper label='<%= (label ? localizedName : StringPool.BLANK) %>'>
+					<aui:field-wrapper label="<%= label ? localizedName : StringPool.BLANK %>">
 						<span id="<%= randomNamespace %><%= escapedName %>"><%= HtmlUtil.escape(sb.toString()) %></span>
 					</aui:field-wrapper>
 				</c:if>
