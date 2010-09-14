@@ -23,15 +23,13 @@ String referringPortletResource = ParamUtil.getString(request, "referringPortlet
 
 CalEvent event = (CalEvent)request.getAttribute(WebKeys.CALENDAR_EVENT);
 
-String description = StringPool.BLANK;
-
 long eventId = BeanParamUtil.getLong(event, request, "eventId");
+
+String description = BeanParamUtil.getString(event, request, "description");
 
 Calendar startDate = CalendarUtil.roundByMinutes((Calendar)selCal.clone(), 15);
 
 if (event != null) {
-	description = event.getDescription();
-
 	if (!event.isTimeZoneSensitive()) {
 		startDate = CalendarFactoryUtil.getCalendar();
 	}
