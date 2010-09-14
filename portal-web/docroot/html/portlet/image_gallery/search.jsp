@@ -34,7 +34,7 @@ else {
 
 	folderIds.add(new Long(searchFolderIds));
 
-	IGFolderLocalServiceUtil.getSubfolderIds(folderIds, scopeGroupId, searchFolderIds);
+	IGFolderServiceUtil.getSubfolderIds(folderIds, scopeGroupId, searchFolderIds);
 
 	folderIdsArray = StringUtil.split(StringUtil.merge(folderIds), 0L);
 }

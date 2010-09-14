@@ -117,10 +117,10 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
 		subfolderIds.add(new Long(curFolder.getFolderId()));
 
-		IGFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
+		IGFolderServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
 
 		int subFoldersCount = subfolderIds.size() - 1;
-		int subEntriesCount = IGImageLocalServiceUtil.getFoldersImagesCount(scopeGroupId, subfolderIds);
+		int subEntriesCount = IGImageServiceUtil.getFoldersImagesCount(scopeGroupId, subfolderIds);
 		%>
 
 		<liferay-ui:search-container-column-text

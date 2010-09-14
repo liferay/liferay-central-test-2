@@ -16,6 +16,7 @@ package com.liferay.portlet.imagegallery.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
@@ -66,6 +67,14 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 				groupId, folderId, nameWithExtension);
 
 		deleteImage(image.getImageId());
+	}
+
+	public int getFoldersImagesCount(long groupId, List<Long> folderIds)
+		throws SystemException {
+
+		return igImagePersistence.filterCountByG_F(
+			groupId,
+			ArrayUtil.toArray(folderIds.toArray(new Long[folderIds.size()])));
 	}
 
 	public List<IGImage> getGroupImages(

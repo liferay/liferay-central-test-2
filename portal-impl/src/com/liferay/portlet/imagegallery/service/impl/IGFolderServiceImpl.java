@@ -121,6 +121,21 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 		return igFolderPersistence.filterCountByG_P(groupId, parentFolderId);
 	}
 
+	public void getSubfolderIds(
+			List<Long> folderIds, long groupId, long folderId)
+		throws SystemException {
+
+		List<IGFolder> folders = igFolderPersistence.filterFindByG_P(
+			groupId, folderId);
+
+		for (IGFolder folder : folders) {
+			folderIds.add(folder.getFolderId());
+
+			getSubfolderIds(
+				folderIds, folder.getGroupId(), folder.getFolderId());
+		}
+	}
+
 	public IGFolder updateFolder(
 			long folderId, long parentFolderId, String name, String description,
 			boolean mergeWithParentFolder, ServiceContext serviceContext)
