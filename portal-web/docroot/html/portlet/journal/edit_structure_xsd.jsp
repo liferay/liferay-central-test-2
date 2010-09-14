@@ -112,9 +112,16 @@ boolean useEditorCodepress = editorType.equals("codepress");
 			var xsdContent = A.one('input[name=<portlet:namespace />xsd]');
 			var content = '';
 
-			content = document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent.value;
+			<c:choose>
+				<c:when test="<%= useEditorCodepress %>">
+					content = <portlet:namespace />xsdContent.getCode();
+				</c:when>
+				<c:otherwise>
+					content = document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent.value;
+				</c:otherwise>
+			</c:choose>
 
-			xsdContent.attr('value', content);
+			xsdContent.attr('value', encodeURIComponent(content));
 
 			A.DialogManager.closeByChild(document.<portlet:namespace />editorForm);
 

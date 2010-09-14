@@ -124,9 +124,16 @@ String defaultContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE
 			var xslContent = A.one('input[name=<portlet:namespace />xslContent]');
 			var content = '';
 
-			content = encodeURIComponent(document.<portlet:namespace />editorForm.<portlet:namespace />xslContent.value);
+			<c:choose>
+				<c:when test="<%= useEditorCodepress %>">
+					content = <portlet:namespace />xslContent.getCode();
+				</c:when>
+				<c:otherwise>
+					content = document.<portlet:namespace />editorForm.<portlet:namespace />xslContent.value;
+				</c:otherwise>
+			</c:choose>
 
-			xslContent.attr('value', content);
+			xslContent.attr('value', encodeURIComponent(content));
 
 			A.DialogManager.closeByChild(document.<portlet:namespace />editorForm);
 		},
