@@ -70,9 +70,9 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 		String escapedName = HtmlUtil.escape(name);
 		%>
 
-		<aui:field-wrapper label='<%= (label ? localizedName : StringPool.BLANK) %>'>
-			<c:choose>
-				<c:when test="<%= editable && ExpandoColumnPermission.contains(permissionChecker, company.getCompanyId(), className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name, ActionKeys.UPDATE) %>">
+		<c:choose>
+			<c:when test="<%= editable && ExpandoColumnPermission.contains(permissionChecker, company.getCompanyId(), className, ExpandoTableConstants.DEFAULT_TABLE_NAME, name, ActionKeys.UPDATE) %>">
+				<aui:field-wrapper label='<%= (label ? localizedName : StringPool.BLANK) %>'>
 					<input type="hidden" name="<portlet:namespace />ExpandoAttributeName--<%= escapedName %>--" value="<%= escapedName %>" />
 
 					<c:choose>
@@ -370,91 +370,95 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 							</c:choose>
 						</c:otherwise>
 					</c:choose>
-				</c:when>
-				<c:otherwise>
+				</aui:field-wrapper>
+			</c:when>
+			<c:otherwise>
 
-					<%
-					StringBundler sb = new StringBundler();
+				<%
+				StringBundler sb = new StringBundler();
 
-					if (type == ExpandoColumnConstants.BOOLEAN) {
-						sb.append((Boolean)value);
+				if (type == ExpandoColumnConstants.BOOLEAN) {
+					sb.append((Boolean)value);
+				}
+				else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
+					if (!Arrays.equals((boolean[])value, (boolean[])defaultValue)) {
+						sb.append(StringUtil.merge((boolean[])value));
 					}
-					else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
-						if (!Arrays.equals((boolean[])value, (boolean[])defaultValue)) {
-							sb.append(StringUtil.merge((boolean[])value));
-						}
-					}
-					else if (type == ExpandoColumnConstants.DATE) {
-						sb.append(dateFormatDateTime.format((Date)value));
-					}
-					else if (type == ExpandoColumnConstants.DATE_ARRAY) {
-						if (!Arrays.deepEquals((Date[])value, (Date[])defaultValue)) {
-							Date[] dates = (Date[])value;
+				}
+				else if (type == ExpandoColumnConstants.DATE) {
+					sb.append(dateFormatDateTime.format((Date)value));
+				}
+				else if (type == ExpandoColumnConstants.DATE_ARRAY) {
+					if (!Arrays.deepEquals((Date[])value, (Date[])defaultValue)) {
+						Date[] dates = (Date[])value;
 
-							for (int i = 0; i < dates.length; i++) {
-								if (i != 0) {
-									sb.append(StringPool.COMMA_AND_SPACE);
-								}
-
-								sb.append(dateFormatDateTime.format(dates[i]));
+						for (int i = 0; i < dates.length; i++) {
+							if (i != 0) {
+								sb.append(StringPool.COMMA_AND_SPACE);
 							}
-						}
-					}
-					else if (type == ExpandoColumnConstants.DOUBLE) {
-						sb.append((Double)value);
-					}
-					else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
-						if (!Arrays.equals((double[])value, (double[])defaultValue)) {
-							sb.append(StringUtil.merge((double[])value));
-						}
-					}
-					else if (type == ExpandoColumnConstants.FLOAT) {
-						sb.append((Float)value);
-					}
-					else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
-						if (!Arrays.equals((float[])value, (float[])defaultValue)) {
-							sb.append(StringUtil.merge((float[])value));
-						}
-					}
-					else if (type == ExpandoColumnConstants.INTEGER) {
-						sb.append((Integer)value);
-					}
-					else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
-						if (!Arrays.equals((int[])value, (int[])defaultValue)) {
-							sb.append(StringUtil.merge((int[])value));
-						}
-					}
-					else if (type == ExpandoColumnConstants.LONG) {
-						sb.append((Long)value);
-					}
-					else if (type == ExpandoColumnConstants.LONG_ARRAY) {
-						if (!Arrays.equals((long[])value, (long[])defaultValue)) {
-							sb.append(StringUtil.merge((long[])value));
-						}
-					}
-					else if (type == ExpandoColumnConstants.SHORT) {
-						sb.append((Short)value);
-					}
-					else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
-						if (!Arrays.equals((short[])value, (short[])defaultValue)) {
-							sb.append(StringUtil.merge((short[])value));
-						}
-					}
-					else if (type == ExpandoColumnConstants.STRING_ARRAY) {
-						if (!Arrays.deepEquals(
-							(String[])value, (String[])defaultValue)) {
 
-							sb.append(StringUtil.merge((String[])value));
+							sb.append(dateFormatDateTime.format(dates[i]));
 						}
 					}
-					else {
-						sb.append((String)value);
+				}
+				else if (type == ExpandoColumnConstants.DOUBLE) {
+					sb.append((Double)value);
+				}
+				else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
+					if (!Arrays.equals((double[])value, (double[])defaultValue)) {
+						sb.append(StringUtil.merge((double[])value));
 					}
-					%>
+				}
+				else if (type == ExpandoColumnConstants.FLOAT) {
+					sb.append((Float)value);
+				}
+				else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
+					if (!Arrays.equals((float[])value, (float[])defaultValue)) {
+						sb.append(StringUtil.merge((float[])value));
+					}
+				}
+				else if (type == ExpandoColumnConstants.INTEGER) {
+					sb.append((Integer)value);
+				}
+				else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
+					if (!Arrays.equals((int[])value, (int[])defaultValue)) {
+						sb.append(StringUtil.merge((int[])value));
+					}
+				}
+				else if (type == ExpandoColumnConstants.LONG) {
+					sb.append((Long)value);
+				}
+				else if (type == ExpandoColumnConstants.LONG_ARRAY) {
+					if (!Arrays.equals((long[])value, (long[])defaultValue)) {
+						sb.append(StringUtil.merge((long[])value));
+					}
+				}
+				else if (type == ExpandoColumnConstants.SHORT) {
+					sb.append((Short)value);
+				}
+				else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
+					if (!Arrays.equals((short[])value, (short[])defaultValue)) {
+						sb.append(StringUtil.merge((short[])value));
+					}
+				}
+				else if (type == ExpandoColumnConstants.STRING_ARRAY) {
+					if (!Arrays.deepEquals(
+						(String[])value, (String[])defaultValue)) {
 
-					<span id="<%= randomNamespace %><%= escapedName %>"><%= HtmlUtil.escape(sb.toString()) %></span>
-				</c:otherwise>
-			</c:choose>
-		</aui:field-wrapper>
+						sb.append(StringUtil.merge((String[])value));
+					}
+				}
+				else {
+					sb.append((String)value);
+				}
+				%>
+
+				<c:if test="<%= editable || Validator.isNotNull(sb.toString()) %>">
+					<aui:field-wrapper label='<%= (label ? localizedName : StringPool.BLANK) %>'>
+						<span id="<%= randomNamespace %><%= escapedName %>"><%= HtmlUtil.escape(sb.toString()) %></span>
+					</aui:field-wrapper>
+				</c:if>
+			</c:otherwise>
+		</c:choose>
 	</c:if>
 </c:if>
