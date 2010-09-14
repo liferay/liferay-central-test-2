@@ -578,6 +578,13 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="plugins-digg" />
+			<param name="test.ant.script.plugins" value="digg-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsDiggTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-flash" />
 			<param name="test.ant.script.plugins" value="flash-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
