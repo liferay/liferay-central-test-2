@@ -187,9 +187,7 @@ if (choiceName > 0) {
 			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Minute"].disabled = checked;
 			document.<portlet:namespace />fm["<portlet:namespace />" + date + "AmPm"].disabled = checked;
 
-			var calendarWidgetId = document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"].getAttribute('data-auiComponentID');
-
-			var calendarWidget = A.Component.getById(calendarWidgetId);
+			var calendarWidget = A.Widget.getByNode(document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"]);
 
 			if (calendarWidget) {
 				calendarWidget.set('disabled', checked);
