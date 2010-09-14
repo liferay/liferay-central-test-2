@@ -25,6 +25,8 @@ public class StringPool {
 
 	public static final String APOSTROPHE = "'";
 
+	public static String[] ASCII_TABLE = new String[128];
+
 	public static final String AT = "@";
 
 	public static final String BACK_SLASH = "\\";
@@ -164,5 +166,11 @@ public class StringPool {
 	public static final String UTC = "UTC";
 
 	public static final String UTF8 = "UTF-8";
+
+	static {
+		for (int i = 0; i < 128; i++) {
+			ASCII_TABLE[i] = String.valueOf((char)i);
+		}
+	}
 
 }
