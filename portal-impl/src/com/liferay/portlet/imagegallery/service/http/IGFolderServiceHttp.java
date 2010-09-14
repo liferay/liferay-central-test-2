@@ -335,6 +335,34 @@ public class IGFolderServiceHttp {
 		}
 	}
 
+	public static void getSubfolderIds(HttpPrincipal httpPrincipal,
+		java.util.List<java.lang.Long> folderIds, long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(IGFolderServiceUtil.class.getName(),
+					"getSubfolderIds", _getSubfolderIdsParameterTypes8);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					folderIds, groupId, folderId);
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGFolder updateFolder(
 		HttpPrincipal httpPrincipal, long folderId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
@@ -344,7 +372,7 @@ public class IGFolderServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(IGFolderServiceUtil.class.getName(),
-					"updateFolder", _updateFolderParameterTypes8);
+					"updateFolder", _updateFolderParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					folderId, parentFolderId, name, description,
@@ -404,7 +432,10 @@ public class IGFolderServiceHttp {
 	private static final Class<?>[] _getFoldersCountParameterTypes7 = new Class[] {
 			long.class, long.class
 		};
-	private static final Class<?>[] _updateFolderParameterTypes8 = new Class[] {
+	private static final Class<?>[] _getSubfolderIdsParameterTypes8 = new Class[] {
+			java.util.List.class, long.class, long.class
+		};
+	private static final Class<?>[] _updateFolderParameterTypes9 = new Class[] {
 			long.class, long.class, java.lang.String.class,
 			java.lang.String.class, boolean.class,
 			com.liferay.portal.service.ServiceContext.class

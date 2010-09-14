@@ -85,6 +85,12 @@ public class IGFolderServiceWrapper implements IGFolderService {
 		return _igFolderService.getFoldersCount(groupId, parentFolderId);
 	}
 
+	public void getSubfolderIds(java.util.List<java.lang.Long> folderIds,
+		long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_igFolderService.getSubfolderIds(folderIds, groupId, folderId);
+	}
+
 	public com.liferay.portlet.imagegallery.model.IGFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean mergeWithParentFolder,

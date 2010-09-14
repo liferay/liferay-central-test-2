@@ -16,6 +16,7 @@ package com.liferay.portlet.imagegallery.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 
 import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
 
@@ -82,6 +83,21 @@ public class IGImageServiceSoap {
 		try {
 			IGImageServiceUtil.deleteImageByFolderIdAndNameWithExtension(groupId,
 				folderId, nameWithExtension);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getFoldersImagesCount(long groupId, Long[] folderIds)
+		throws RemoteException {
+		try {
+			int returnValue = IGImageServiceUtil.getFoldersImagesCount(groupId,
+					ListUtil.toList(folderIds));
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);

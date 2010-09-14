@@ -61,6 +61,12 @@ public class IGImageServiceUtil {
 			nameWithExtension);
 	}
 
+	public static int getFoldersImagesCount(long groupId,
+		java.util.List<java.lang.Long> folderIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFoldersImagesCount(groupId, folderIds);
+	}
+
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getGroupImages(
 		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
