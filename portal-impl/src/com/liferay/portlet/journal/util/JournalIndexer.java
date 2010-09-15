@@ -204,6 +204,7 @@ public class JournalIndexer extends BaseIndexer {
 
 			if (elType.equals("text") || elType.equals("text_box") ||
 				elType.equals("text_area")) {
+
 				indexField(document, element, elType, elIndexType);
 			}
 			else if (element.getName().equals("static-content")) {
