@@ -60,7 +60,6 @@ public class BlogsTests extends BaseTests {
 		testSuite.addTestSuite(AssertAutoSuggestionDropDownTest.class);
 		testSuite.addTestSuite(SelectTagThroughAutoSuggestionTest.class);
 		testSuite.addTestSuite(SearchTagsTest.class);
-		testSuite.addTestSuite(SearchPartialTagsTest.class);
 		testSuite.addTestSuite(RemoveTagThroughJavaScriptTest.class);
 		testSuite.addTestSuite(SearchRemovedTagTest.class);
 		testSuite.addTestSuite(DeleteTagTest.class);
