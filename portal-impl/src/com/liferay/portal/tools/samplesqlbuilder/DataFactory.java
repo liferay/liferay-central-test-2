@@ -250,8 +250,8 @@ public class DataFactory {
 
 	public MBMessage addMBMessage(
 			long messageId, long groupId, long userId, long classNameId,
-			long classPK, long categoryId, long threadId, long parentMessageId,
-			String subject, String body)
+			long classPK, long categoryId, long threadId, long rootMessageId,
+			long parentMessageId, String subject, String body)
 		throws Exception {
 
 		MBMessage mbMessage = new MBMessageImpl();
@@ -263,6 +263,7 @@ public class DataFactory {
 		mbMessage.setClassPK(classPK);
 		mbMessage.setCategoryId(categoryId);
 		mbMessage.setThreadId(threadId);
+		mbMessage.setRootMessageId(rootMessageId);
 		mbMessage.setParentMessageId(parentMessageId);
 		mbMessage.setSubject(subject);
 		mbMessage.setBody(body);

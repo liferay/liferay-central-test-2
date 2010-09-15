@@ -19,19 +19,22 @@
 
 				<#assign threadId = threadCounterOffset + mbThreadCount>
 				<#assign parentMessageId = 0>
+				<#assign rootMessageId = 0>
 
 				<#list 1..maxMBMessageCount as mbMessageCount>
 					<#assign mbMessageCounterIncrement = mbMessageCounter.increment()>
 
 					<#assign messageId = messageCounterOffset + mbMessageCount>
+					<#if (mbMessageCount = 1)>
+						<#assign rootMessageId = messageId>
+					</#if>
 
-					<#assign mbMessage = dataFactory.addMBMessage(messageId, mbCategory.groupId, firstUserId, 0, 0, categoryId, threadId, parentMessageId, "Test Message " + mbMessageCount, "This is a test message " + mbMessageCount + ".")>
+					<#assign mbMessage = dataFactory.addMBMessage(messageId, mbCategory.groupId, firstUserId, 0, 0, categoryId, threadId, rootMessageId, parentMessageId, "Test Message " + mbMessageCount, "This is a test message " + mbMessageCount + ".")>
 
 					${sampleSQLBuilder.insertMBMessage(mbMessage)}
 
 					<#if (mbMessageCount_index = 0)>
 						<#assign parentMessageId = mbMessage.messageId>
-						<#assign rootMessageId = mbMessage.messageId>
 					</#if>
 				</#list>
 
