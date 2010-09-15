@@ -1,5 +1,5 @@
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
-<%
+<%--
 /**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
@@ -13,7 +13,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-%>
+--%>
 
 <div class="portlet-msg-info">
 	<liferay-ui:message key="update-rankings-help" />
