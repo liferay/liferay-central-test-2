@@ -158,7 +158,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		<aui:input name="title" />
 
 		<aui:field-wrapper label="description">
-			<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="email"/>
+			<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="email" />
 		</aui:field-wrapper>
 
 		<aui:select name="type">
@@ -274,7 +274,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 <aui:script>
 	function <portlet:namespace />getDescription() {
-		return window.<portlet:namespace />editor.getHTML();		
+		return window.<portlet:namespace />editor.getHTML();
 	}
 
 	function <portlet:namespace />init() {
