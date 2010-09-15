@@ -14,9 +14,9 @@
 
 package com.liferay.portalweb.plugins.digg.portlet;
 
-import com.liferay.portalweb.plugins.digg.portlet.addportlet.AddPortletTests;
-import com.liferay.portalweb.plugins.digg.portlet.addportletmultiple.AddPortletMultipleTests;
-import com.liferay.portalweb.plugins.digg.portlet.removeportlet.RemovePortletTests;
+import com.liferay.portalweb.plugins.digg.portlet.addportletdigg.AddPortletDiggTests;
+import com.liferay.portalweb.plugins.digg.portlet.addportletdiggmultiple.AddPortletDiggMultipleTests;
+import com.liferay.portalweb.plugins.digg.portlet.removeportletdigg.RemovePortletDiggTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
@@ -30,9 +30,9 @@ public class PortletTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AddPortletTests.suite());
-		testSuite.addTest(AddPortletMultipleTests.suite());
-		testSuite.addTest(RemovePortletTests.suite());
+		testSuite.addTest(AddPortletDiggTests.suite());
+		testSuite.addTest(AddPortletDiggMultipleTests.suite());
+		testSuite.addTest(RemovePortletDiggTests.suite());
 
 		return testSuite;
 	}
