@@ -202,19 +202,9 @@ public class JournalIndexer extends BaseIndexer {
 			String elIndexType = element.attributeValue(
 				"index-type", StringPool.BLANK);
 
-			indexField(document, element, elType, elIndexType);
-
 			if (elType.equals("text") || elType.equals("text_box") ||
 				elType.equals("text_area")) {
-
-				for (Element dynamicContentElement :
-						element.elements("dynamic-content")) {
-
-					String text = dynamicContentElement.getText();
-
-					sb.append(text);
-					sb.append(StringPool.SPACE);
-				}
+				indexField(document, element, elType, elIndexType);
 			}
 			else if (element.getName().equals("static-content")) {
 				String text = element.getText();
@@ -273,11 +263,11 @@ public class JournalIndexer extends BaseIndexer {
 		}
 
 		if (elIndexType.equals("keyword")) {
-			document.addKeyword(fieldName, value);
+			document.addKeyword(Field.CONTENT, value);
 		}
 		else if (elIndexType.equals("text")) {
 			document.addText(
-				fieldName, StringUtil.merge(value, StringPool.SPACE));
+				Field.CONTENT, StringUtil.merge(value, StringPool.SPACE));
 		}
 	}
 
