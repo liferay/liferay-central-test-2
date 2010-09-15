@@ -995,6 +995,11 @@ public class SourceFormatter {
 					_sourceFormatterHelper.printError(
 						files[i], "(c): " + files[i]);
 				}
+				else {
+					newContent = StringUtil.replace(
+						content, "<%\n" + copyright + "\n%>",
+						"<%--\n" + copyright + "\n--%>");
+				}
 			}
 
 			if (newContent.indexOf("alert('<%= LanguageUtil.") != -1) {
@@ -1032,6 +1037,7 @@ public class SourceFormatter {
 
 			if ((newContent != null) && !content.equals(newContent)) {
 				_fileUtil.write(file, newContent);
+
 				_sourceFormatterHelper.printError(files[i], file);
 			}
 		}
