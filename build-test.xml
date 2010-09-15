@@ -383,6 +383,14 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-kaleo" />
+			<param name="test.ant.script.plugins" value="kaleo-web" />
+			<param name="test.ant.script.plugins.type" value="web" />
+			<param name="test.ant.script.suite" value="PluginsKaleoTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
 			<param name="test.ant.script.command" value="db-sharding-knowledge-base-admin" />
 			<param name="test.ant.script.plugins" value="knowledge-base-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
@@ -427,6 +435,14 @@
 			<param name="test.ant.script.plugins" value="mail-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsMailTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-sharding">
+			<param name="test.ant.script.command" value="db-sharding-netvibes-widget" />
+			<param name="test.ant.script.plugins" value="netvibes-widget-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsNetvibesWidgetTestSuite" />
 			<param name="test.ant.script.template" value="ant-script-db-sharding-plugins.xml" />
 		</antcall>
 
@@ -673,6 +689,13 @@
 			<param name="test.ant.script.plugins" value="mail-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsMailTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="plugins-netvibes-widget" />
+			<param name="test.ant.script.plugins" value="netvibes-widget-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsNetvibesWidgetTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
@@ -1040,6 +1063,14 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="plugins-vimeo" />
+			<param name="test.ant.script.plugins" value="vimeo-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsVimeoTestSuite" />
+		</antcall>
+
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-weather" />
 			<param name="test.ant.script.plugins" value="weather-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
@@ -1086,6 +1117,13 @@
 			<param name="test.ant.script.plugins" value="wysiwyg-portlet" />
 			<param name="test.ant.script.plugins.type" value="portlet" />
 			<param name="test.ant.script.suite" value="PluginsWysiwygTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="plugins-youtube" />
+			<param name="test.ant.script.plugins" value="youtube-portlet" />
+			<param name="test.ant.script.plugins.type" value="portlet" />
+			<param name="test.ant.script.suite" value="PluginsYoutubeTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
