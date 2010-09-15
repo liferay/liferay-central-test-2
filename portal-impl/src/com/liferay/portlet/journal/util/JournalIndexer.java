@@ -248,8 +248,6 @@ public class JournalIndexer extends BaseIndexer {
 
 		Element dynamicContentElement = element.element("dynamic-content");
 
-		String fieldName = encodeFieldName(
-			element.attributeValue("name", StringPool.BLANK));
 		String[] value = new String[] {dynamicContentElement.getText()};
 
 		if (elType.equals("multi-list")) {
