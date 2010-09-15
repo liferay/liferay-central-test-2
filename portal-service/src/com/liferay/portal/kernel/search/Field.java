@@ -91,6 +91,34 @@ public class Field implements Serializable {
 		_values = values;
 	}
 
+	/**
+	 * @deprecated
+	 */
+	public Field(String name, String value, boolean tokenized) {
+		this(name, value);
+
+		setTokenized(tokenized);
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public Field(String name, String[] values, boolean tokenized) {
+		this(name, values);
+	
+		setTokenized(tokenized);
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public Field(String name, String[] values, boolean tokenized, float boost) {
+		this(name, values);
+	
+		setBoost(boost);
+		setTokenized(tokenized);
+	}
+
 	public float getBoost() {
 		return _boost;
 	}
