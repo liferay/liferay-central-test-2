@@ -998,26 +998,26 @@ public class SourceFormatter {
 			}
 
 			if (newContent.indexOf("alert('<%= LanguageUtil.") != -1) {
-				newContent = StringUtil.replace(newContent,
-					"alert('<%= LanguageUtil.",
+				newContent = StringUtil.replace(
+					newContent, "alert('<%= LanguageUtil.",
 					"alert('<%= UnicodeLanguageUtil.");
 			}
 
 			if (newContent.indexOf("alert(\"<%= LanguageUtil.") != -1) {
-				newContent = StringUtil.replace(newContent,
-					"alert(\"<%= LanguageUtil.",
+				newContent = StringUtil.replace(
+					newContent, "alert(\"<%= LanguageUtil.",
 					"alert(\"<%= UnicodeLanguageUtil.");
 			}
 
 			if (newContent.indexOf("confirm('<%= LanguageUtil.") != -1) {
-				newContent = StringUtil.replace(newContent,
-					"confirm('<%= LanguageUtil.",
+				newContent = StringUtil.replace(
+					newContent, "confirm('<%= LanguageUtil.",
 					"confirm('<%= UnicodeLanguageUtil.");
 			}
 
 			if (newContent.indexOf("confirm(\"<%= LanguageUtil.") != -1) {
-				newContent = StringUtil.replace(newContent,
-					"confirm(\"<%= LanguageUtil.",
+				newContent = StringUtil.replace(
+					newContent, "confirm(\"<%= LanguageUtil.",
 					"confirm(\"<%= UnicodeLanguageUtil.");
 			}
 
