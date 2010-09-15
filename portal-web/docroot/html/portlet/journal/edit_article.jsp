@@ -411,7 +411,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 											<div class="journal-article-move-handler"></div>
 
 											<label class="journal-article-field-label" for="">
-												<span><%= LanguageUtil.get(pageContext, "content") %></span>
+												<span><liferay-ui:message key="content" /></span>
 											</label>
 
 											<div class="journal-article-component-container">
