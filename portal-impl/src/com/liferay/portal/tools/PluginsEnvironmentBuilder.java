@@ -132,6 +132,11 @@ public class PluginsEnvironmentBuilder {
 		if (FileUtil.exists(projectDirName + "/docroot/WEB-INF/src")) {
 			javaProject = true;
 		}
+		else {
+			System.out.println(
+				"If you wish to setup a java project, please create a src " +
+				"folder inside docroot/WEB-INF");
+		}
 
 		// .project
 
