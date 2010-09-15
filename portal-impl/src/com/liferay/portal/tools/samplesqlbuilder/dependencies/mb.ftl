@@ -18,13 +18,14 @@
 				<#assign messageCounterOffset = categoryCounterOffset + maxMBCategoryCount + totalMBThreadCount + ((mbCategoryCount - 1) * maxMBThreadCount * maxMBMessageCount) + ((mbThreadCount - 1) * maxMBMessageCount)>
 
 				<#assign threadId = threadCounterOffset + mbThreadCount>
-				<#assign parentMessageId = 0>
 				<#assign rootMessageId = 0>
+				<#assign parentMessageId = 0>
 
 				<#list 1..maxMBMessageCount as mbMessageCount>
 					<#assign mbMessageCounterIncrement = mbMessageCounter.increment()>
 
 					<#assign messageId = messageCounterOffset + mbMessageCount>
+
 					<#if (mbMessageCount = 1)>
 						<#assign rootMessageId = messageId>
 					</#if>
