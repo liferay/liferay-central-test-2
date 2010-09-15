@@ -12,9 +12,8 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.knowledgebaseadmin.portlet;
+package com.liferay.portalweb.plugins.knowledgebaseadmin.article.addarticle;
 
-import com.liferay.portalweb.plugins.knowledgebaseadmin.portlet.addarticle.AddArticleTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
@@ -23,12 +22,13 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class PortletTests extends BaseTests {
+public class AddArticleTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AddArticleTests.suite());
+		testSuite.addTestSuite(AddArticleTest.class);
+		testSuite.addTestSuite(TearDownArticleTest.class);
 
 		return testSuite;
 	}

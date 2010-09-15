@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.knowledgebaseadmin.portlet.addarticle;
+package com.liferay.portalweb.plugins.knowledgebaseadmin.article.addarticle;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;

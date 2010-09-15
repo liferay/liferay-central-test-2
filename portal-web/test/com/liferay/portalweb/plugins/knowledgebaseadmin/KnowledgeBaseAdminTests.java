@@ -14,7 +14,7 @@
 
 package com.liferay.portalweb.plugins.knowledgebaseadmin;
 
-import com.liferay.portalweb.plugins.knowledgebaseadmin.portlet.PortletTests;
+import com.liferay.portalweb.plugins.knowledgebaseadmin.article.ArticleTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
@@ -28,7 +28,7 @@ public class KnowledgeBaseAdminTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTest(ArticleTests.suite());
 
 		return testSuite;
 	}
