@@ -134,7 +134,7 @@ public class PluginsEnvironmentBuilder {
 		}
 		else {
 			System.out.println(
-				"Eclipse Java project will not be created because " +
+				"Eclipse Java project will not be used because " +
 					projectDirName + "/docroot/WEB-INF/src does not exist");
 		}
 
