@@ -383,27 +383,22 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		}
 
 		if (inherited) {
-			ThreadLocalCache<Integer> threadLocalCache =
+			ThreadLocalCache<Boolean> threadLocalCache =
 				ThreadLocalCacheManager.getThreadLocalCache(
 					Lifecycle.REQUEST, _COUNT_BY_R_U_CACHE_NAME);
 
 			String key = String.valueOf(role.getRoleId()).concat(
 				String.valueOf(userId));
 
-			Integer value = threadLocalCache.get(key);
+			Boolean value = threadLocalCache.get(key);
 
 			if (value == null) {
-				value = roleFinder.countByR_U(role.getRoleId(), userId);
+				value = roleFinder.checkByR_U(role.getRoleId(), userId);
 
 				threadLocalCache.put(key, value);
 			}
 
-			if (value > 0) {
-				return true;
-			}
-			else {
-				return false;
-			}
+			return value;
 		}
 		else {
 			return userPersistence.containsRole(userId, role.getRoleId());

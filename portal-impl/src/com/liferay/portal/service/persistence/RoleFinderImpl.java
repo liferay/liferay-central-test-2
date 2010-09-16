@@ -28,7 +28,11 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.impl.RoleImpl;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
+import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
@@ -53,9 +57,6 @@ public class RoleFinderImpl
 
 	public static String COUNT_BY_ORGANIZATION_COMMUNITY =
 		RoleFinder.class.getName() + ".countByOrganizationCommunity";
-
-	public static String COUNT_BY_USER =
-		RoleFinder.class.getName() + ".countByUser";
 
 	public static String COUNT_BY_USER_GROUP =
 		RoleFinder.class.getName() + ".countByUserGroup";
@@ -96,7 +97,32 @@ public class RoleFinderImpl
 	public static String JOIN_BY_USERS_ROLES =
 		RoleFinder.class.getName() + ".joinByUsersRoles";
 
-	public int countByR_U(long roleId, long userId) throws SystemException {
+	public boolean checkByR_U(long roleId, long userId) throws SystemException {
+
+		try {
+			long companyId = CompanyThreadLocal.getCompanyId();
+			long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
+				companyId);
+			Role guestRole = RoleLocalServiceUtil.getRole(
+				companyId, RoleConstants.GUEST);
+
+			if (defaultUserId == userId) {
+				if (roleId == guestRole.getRoleId()) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+		}
+		catch(Exception e) {
+			throw new SystemException(e);
+		}
+
+		if (UserUtil.containsRole(userId, roleId)) {
+			return true;
+		}
+
 		Session session = null;
 
 		try {
@@ -106,12 +132,19 @@ public class RoleFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			for (int i = 0; i < 6; i++) {
+			for (int i = 0; i < 5; i++) {
 				qPos.add(roleId);
 				qPos.add(userId);
 			}
 
-			return q.list().size();
+			int size = q.list().size();
+
+			if (size > 0) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -513,8 +546,6 @@ public class RoleFinderImpl
 			sb.append(CustomSQLUtil.get(COUNT_BY_ORGANIZATION));
 			sb.append(") UNION (");
 			sb.append(CustomSQLUtil.get(COUNT_BY_ORGANIZATION_COMMUNITY));
-			sb.append(") UNION (");
-			sb.append(CustomSQLUtil.get(COUNT_BY_USER));
 			sb.append(") UNION (");
 			sb.append(CustomSQLUtil.get(COUNT_BY_USER_GROUP));
 			sb.append(") UNION (");

@@ -20,9 +20,9 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  * @author Brian Wing Shun Chan
  */
 public class RoleFinderUtil {
-	public static int countByR_U(long roleId, long userId)
+	public static boolean checkByR_U(long roleId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().countByR_U(roleId, userId);
+		return getFinder().checkByR_U(roleId, userId);
 	}
 
 	public static int countByU_G_R(long userId, long groupId, long roleId)
