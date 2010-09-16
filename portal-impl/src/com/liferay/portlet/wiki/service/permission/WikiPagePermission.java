@@ -142,8 +142,8 @@ public class WikiPagePermission {
 		}
 
 		if (permissionChecker.hasOwnerPermission(
-				page.getCompanyId(), WikiPage.class.getName(), page.getPageId(),
-				page.getUserId(), actionId)) {
+				page.getCompanyId(), WikiPage.class.getName(), 
+				page.getResourcePrimKey(), page.getUserId(), actionId)) {
 
 			return true;
 		}
