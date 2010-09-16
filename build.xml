@@ -542,16 +542,14 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 					<equals arg1="${resin.xml.content.index}" arg2="-1" />
 					<then>
 						<replace file="${app.server.dir}/conf/resin.xml">
-							<replacetoken><![CDATA[-Xmx512m</jvm-arg>]]></replacetoken>
-							<replacevalue><![CDATA[-->
+							<replacetoken><![CDATA[</http>]]></replacetoken>
+							<replacevalue><![CDATA[</http>
 
 	<jvm-arg>-Dfile.encoding=UTF-8</jvm-arg>
 	<jvm-arg>-Djava.net.preferIPv4Stack=true</jvm-arg>
 	<jvm-arg>-Duser.timezone=GMT</jvm-arg>
 	<jvm-arg>-Xmx1024m</jvm-arg>
-	<jvm-arg>-XX:MaxPermSize=256m</jvm-arg>
-	<!--
-	]]></replacevalue>
+	<jvm-arg>-XX:MaxPermSize=256m</jvm-arg>]]></replacevalue>
 						</replace>
 					</then>
 				</if>
@@ -562,7 +560,6 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 						includes="saxpath.jar"
 					/>
 				</copy>
-
 			</then>
 		</if>
 

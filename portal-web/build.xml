@@ -741,6 +741,8 @@
 		<replace file="docroot/WEB-INF/web.xml">
 			<replacefilter token="&lt;resource-ref&gt;" value="" />
 			<replacefilter token="&lt;/resource-ref&gt;" value="" />
+			<replacefilter token="&lt;session-config&gt;" value="&lt;!--session-config&gt;" />
+			<replacefilter token="&lt;/session-config&gt;" value="&lt;/session-config--&gt;" />
 		</replace>
 
 		<delete dir="${jspc.classes.dir}" />
