@@ -57,21 +57,8 @@ public class CompareVersionEditFrontPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Comparing Versions 1.1 and 1.2 (Last Version)"));
-		assertTrue(selenium.isTextPresent("Test Wiki Article Edited"));
-		assertEquals(RuntimeVariables.replace("Test Wiki Article Edited"),
-			selenium.getText("//div[@class='taglib-diff-html']/h2"));
-		assertEquals(RuntimeVariables.replace("this is italics. edited."),
-			selenium.getText("//i"));
-		assertEquals(RuntimeVariables.replace("bold edited"),
-			selenium.getText("//b"));
-		assertTrue(selenium.isElementPresent("link=Link to website. Edited."));
-		assertEquals(RuntimeVariables.replace(
-				"this is a list item. edited. this is a sub list item. edited."),
-			selenium.getText("//div[@class='taglib-diff-html']/ul/li"));
-		assertEquals(RuntimeVariables.replace("Test Wiki Article"),
-			selenium.getText("//span[@id='changed-diff-0']"));
-		assertEquals(RuntimeVariables.replace("Edited"),
-			selenium.getText("//span[@id='added-diff-0']"));
+		assertTrue(selenium.isTextPresent(
+				"This is a wiki edited frontpage test. "));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -97,10 +84,8 @@ public class CompareVersionEditFrontPageTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("FrontPage 1.2"),
 			selenium.getText(
 				"//table[@id='taglib-diff-results']/tbody/tr[1]/td[2]"));
-		assertEquals(RuntimeVariables.replace("==Test Wiki Article=="),
-			selenium.getText(
-				"//table[@id='taglib-diff-results']/tbody/tr[3]/td[1]/table/tbody/tr/td"));
-		assertEquals(RuntimeVariables.replace("==Test Wiki Article Edited=="),
+		assertEquals(RuntimeVariables.replace(
+				"This is a wiki edited frontpage test."),
 			selenium.getText(
 				"//table[@id='taglib-diff-results']/tbody/tr[3]/td[2]/table/tbody/tr/td"));
 	}

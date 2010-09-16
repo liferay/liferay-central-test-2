@@ -80,14 +80,7 @@ public class CopyFrontPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isPartialText("//div[2]/h1/span",
 				"Copy Front Page Test"));
-		assertEquals(RuntimeVariables.replace("Test Wiki Article"),
-			selenium.getText("//div/div[5]/div/h2"));
-		assertEquals(RuntimeVariables.replace("this is italics"),
-			selenium.getText("//i"));
-		assertEquals(RuntimeVariables.replace("bold"), selenium.getText("//b"));
-		assertTrue(selenium.isElementPresent("link=Link to website"));
-		assertEquals(RuntimeVariables.replace(
-				"this is a list item this is a sub list item"),
-			selenium.getText("//div/div[5]/div/ul/li"));
+		assertEquals(RuntimeVariables.replace("This is a wiki frontpage test."),
+			selenium.getText("//div[5]/div"));
 	}
 }

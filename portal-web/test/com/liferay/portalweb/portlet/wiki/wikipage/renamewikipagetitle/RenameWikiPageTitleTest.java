@@ -59,12 +59,12 @@ public class RenameWikiPageTitleTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Rename']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//div[2]/h1/span",
-				"Wiki Page Test Renamed"));
+		assertEquals(RuntimeVariables.replace("Wiki Page Test Renamed"),
+			selenium.getText("//div[3]/h1/span"));
 		assertEquals(RuntimeVariables.replace(
 				"(Redirected from Wiki Page Test)"),
 			selenium.getText("//div[@class='page-redirect']"));
 		assertNotEquals(RuntimeVariables.replace("Wiki Page Test"),
-			selenium.getText("//div[2]/h1/span"));
+			selenium.getText("//div[3]/h1/span"));
 	}
 }

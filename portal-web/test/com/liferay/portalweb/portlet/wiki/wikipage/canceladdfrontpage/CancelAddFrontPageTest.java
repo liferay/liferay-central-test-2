@@ -46,8 +46,7 @@ public class CancelAddFrontPageTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_36_content",
-			RuntimeVariables.replace(
-				"==Test Wiki Article==\n\n//this is italics//\n\n**bold**\n\n[[http://www.liferay.com|Link to website]]\n\n*this is a list item\n**this is a sub list item"));
+			RuntimeVariables.replace("This is a wiki frontpage test."));
 		selenium.clickAt("//input[@value='Cancel']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -55,11 +54,6 @@ public class CancelAddFrontPageTest extends BaseTestCase {
 				"link=This page is empty. Edit it to add some text."));
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertFalse(selenium.isTextPresent("Test Wiki Article"));
-		assertFalse(selenium.isTextPresent("this is italics"));
-		assertFalse(selenium.isTextPresent("bold"));
-		assertFalse(selenium.isElementPresent("link=Link to website"));
-		assertFalse(selenium.isTextPresent(
-				"this is a list item this is a sub list item"));
+		assertFalse(selenium.isTextPresent("//div[6]/div"));
 	}
 }

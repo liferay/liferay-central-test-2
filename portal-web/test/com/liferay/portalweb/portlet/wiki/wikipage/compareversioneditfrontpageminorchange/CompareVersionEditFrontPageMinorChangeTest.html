@@ -1,6 +1,9 @@
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
 <title>CompareVersionEditFrontPageMinorChangeTest</title>
 </head>
 <body>
@@ -70,33 +73,8 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='taglib-diff-html']/h2</td>
-	<td>Test Wiki Article</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//i</td>
-	<td>this is italics</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//b</td>
-	<td>bold</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=Link to website</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='taglib-diff-html']/ul/li</td>
-	<td>this is a list item this is a sub list item</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//span[@id='added-diff-0']</td>
-	<td>Minor Edit.</td>
+	<td>//div/div[4]</td>
+	<td>This is a wiki frontpage test.Minor Edit</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -120,13 +98,8 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//table[@id='taglib-diff-results']/tbody/tr[3]/td[1]/table/tbody/tr[4]/td</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//table[@id='taglib-diff-results']/tbody/tr[3]/td[2]/table/tbody/tr[4]/td/ins</td>
-	<td>Minor Edit.</td>
+	<td>//table[@class='taglib-diff-table']/tbody/tr/td/ins</td>
+	<td>Minor Edit</td>
 </tr>
 
 </tbody></table>

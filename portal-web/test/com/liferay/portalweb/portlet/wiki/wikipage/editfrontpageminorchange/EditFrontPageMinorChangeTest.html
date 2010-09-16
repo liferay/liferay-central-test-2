@@ -1,6 +1,9 @@
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="" />
 <title>EditFrontPageMinorChangeTest</title>
 </head>
 <body>
@@ -25,28 +28,8 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div/div[5]/div/h2</td>
-	<td>Test Wiki Article</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//i</td>
-	<td>this is italics</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//b</td>
-	<td>bold</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=Link to website</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div/div[5]/div/ul/li</td>
-	<td>this is a list item this is a sub list item</td>
+	<td>//div[5]/div</td>
+	<td>This is a wiki frontpage test.</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -56,7 +39,7 @@
 <tr>
 	<td>type</td>
 	<td>_36_content</td>
-	<td>==Test Wiki Article==<br /><br />//this is italics//<br /><br />**bold**<br /><br />[[http://www.liferay.com|Link to website]]<br /><br />*this is a list item<br />**this is a sub list item<br /><br />Minor Edit.</td>
+	<td>This is a wiki edited frontpage test. Minor Edit</td>
 </tr>
 <tr>
 	<td>store</td>
@@ -85,33 +68,8 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div/div[5]/div/h2</td>
-	<td>Test Wiki Article</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//i</td>
-	<td>this is italics</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//b</td>
-	<td>bold</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=Link to website</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div/div[5]/div/ul/li</td>
-	<td>this is a list item this is a sub list item</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div/div[5]/div/p[4]</td>
-	<td>Minor Edit.</td>
+	<td>//div[6]/div</td>
+	<td>This is a wiki edited frontpage test. Minor Edit</td>
 </tr>
 <tr>
 	<td>open</td>

@@ -56,8 +56,8 @@ public class AddWikiPage3Test extends BaseTestCase {
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
 		assertEquals(RuntimeVariables.replace("Wiki3 Page3 Test3"),
-			selenium.getText("//tr[4]/td[1]/a"));
-		selenium.clickAt("//tr[4]/td[1]/a", RuntimeVariables.replace(""));
+			selenium.getText("//tr[6]/td[1]/a"));
+		selenium.clickAt("//tr[6]/td[1]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isPartialText("//div[2]/h1/span",
 				"Wiki3 Page3 Test3"));

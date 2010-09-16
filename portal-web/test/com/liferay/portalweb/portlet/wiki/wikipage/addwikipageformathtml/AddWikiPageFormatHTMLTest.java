@@ -91,7 +91,9 @@ public class AddWikiPageFormatHTMLTest extends BaseTestCase {
 		selenium.type("//td[@id='cke_contents_CKEditor1']/textarea",
 			RuntimeVariables.replace(
 				"<a herf=http://www.liferay.com>Welcome to LIFERAY</a>"));
-		selenium.selectFrame("relative=top");
+		selenium.selectWindow("null");
+		selenium.click("//span[9]/span[2]/span/a/span[2]");
+		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

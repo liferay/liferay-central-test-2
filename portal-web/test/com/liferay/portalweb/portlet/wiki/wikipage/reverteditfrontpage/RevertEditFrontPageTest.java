@@ -42,22 +42,16 @@ public class RevertEditFrontPageTest extends BaseTestCase {
 
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Test Wiki Article Edited"),
-			selenium.getText("//div/div[5]/div/h2"));
-		assertEquals(RuntimeVariables.replace("this is italics. edited."),
-			selenium.getText("//i"));
-		assertEquals(RuntimeVariables.replace("bold edited"),
-			selenium.getText("//b"));
-		assertTrue(selenium.isElementPresent("link=Link to website. Edited."));
 		assertEquals(RuntimeVariables.replace(
-				"this is a list item. edited. this is a sub list item. edited."),
-			selenium.getText("//div/div[5]/div/ul/li"));
+				"This is a wiki edited frontpage test."),
+			selenium.getText("//div[5]/div"));
 		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=History", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=1.3"));
-		selenium.clickAt("link=Revert", RuntimeVariables.replace(""));
+		selenium.clickAt("//td[8]/span/a/span",
+			RuntimeVariables.replace("Revert"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=1.3"));
 		assertEquals(RuntimeVariables.replace("Reverted to 1.1"),
@@ -83,24 +77,8 @@ public class RevertEditFrontPageTest extends BaseTestCase {
 
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Test Wiki Article"),
-			selenium.getText("//div/div[5]/div/h2"));
-		assertEquals(RuntimeVariables.replace("this is italics"),
-			selenium.getText("//i"));
-		assertEquals(RuntimeVariables.replace("bold"), selenium.getText("//b"));
-		assertTrue(selenium.isElementPresent("link=Link to website"));
-		assertEquals(RuntimeVariables.replace(
-				"this is a list item this is a sub list item"),
-			selenium.getText("//div/div[5]/div/ul/li"));
-		assertNotEquals(RuntimeVariables.replace("Test Wiki Article Edited"),
-			selenium.getText("//div/div[5]/div/h2"));
-		assertNotEquals(RuntimeVariables.replace("this is italics. edited."),
-			selenium.getText("//i"));
-		assertNotEquals(RuntimeVariables.replace("bold edited"),
-			selenium.getText("//b"));
-		assertFalse(selenium.isElementPresent("link=Link to website. Edited."));
-		assertNotEquals(RuntimeVariables.replace(
-				"this is a list item. edited. this is a sub list item. edited."),
-			selenium.getText("//div/div[5]/div/ul/li"));
+		assertEquals(RuntimeVariables.replace("This is a wiki frontpage test."),
+			selenium.getText("//div[5]/div"));
+		assertFalse(selenium.isTextPresent("//div[5]/div"));
 	}
 }

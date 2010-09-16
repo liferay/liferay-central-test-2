@@ -43,12 +43,11 @@ public class RenameFrontPageChildPageTest extends BaseTestCase {
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Front Page Child Page Test"),
-			selenium.getText("//div[4]/ul/li/a"));
-		selenium.clickAt("//div[4]/ul/li/a",
+			selenium.getText("//div[6]/ul/li/a"));
+		selenium.clickAt("//div[6]/ul/li/a",
 			RuntimeVariables.replace("Front Page Child Page Test"));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//h1/div/span[2]/a/span",
-			RuntimeVariables.replace("Details"));
+		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("//tr[9]/td/ul/li[3]/a/span",
 			RuntimeVariables.replace("Move"));
@@ -65,10 +64,10 @@ public class RenameFrontPageChildPageTest extends BaseTestCase {
 				"Front Page Child Page Rename"));
 		assertEquals(RuntimeVariables.replace(
 				"(Redirected from Front Page Child Page Test)"),
-			selenium.getText("//section/div/div/div/div[3]"));
+			selenium.getText("//div[5]"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a front page child page test."),
-			selenium.getText("//div[5]/div"));
+			selenium.getText("//div[7]/div"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -90,7 +89,7 @@ public class RenameFrontPageChildPageTest extends BaseTestCase {
 		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Front Page Child Page Rename"),
-			selenium.getText("//div[4]/ul/li/a"));
+			selenium.getText("//div[6]/ul/li/a"));
 		assertFalse(selenium.isElementPresent("link=Front Page Child Page Test"));
 		selenium.open("/web/guest/home/");
 

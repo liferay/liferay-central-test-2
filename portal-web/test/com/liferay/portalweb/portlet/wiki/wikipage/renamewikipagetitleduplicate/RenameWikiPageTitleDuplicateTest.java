@@ -61,12 +61,12 @@ public class RenameWikiPageTitleDuplicateTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isPartialText("//div[2]/h1/span",
+		assertTrue(selenium.isPartialText("//div[3]/h1/span",
 				"Wiki2 Page2 Test2"));
 		assertEquals(RuntimeVariables.replace(
 				"(Redirected from Wiki1 Page1 Test1)"),
 			selenium.getText("//div[@class='page-redirect']"));
-		assertFalse(selenium.isPartialText("//div[2]/h1/span",
+		assertFalse(selenium.isPartialText("//div[3]/h1/span",
 				"Wiki1 Page1 Test1"));
 	}
 }

@@ -68,7 +68,7 @@ public class RemoveRedirectWikiPageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"Your request processed successfully. ")) {
+							"Your request processed successfully.")) {
 					break;
 				}
 			}
@@ -79,7 +79,7 @@ public class RemoveRedirectWikiPageTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully. "));
+				"Your request processed successfully."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -105,9 +105,10 @@ public class RemoveRedirectWikiPageTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace("This is a remove redirect test.")
+				if (RuntimeVariables.replace(
+							"Your request processed successfully.")
 										.equals(selenium.getText(
-								"//section/div/div/div/div[4]/div"))) {
+								"//section/div/div/div/div[1]"))) {
 					break;
 				}
 			}
@@ -117,8 +118,11 @@ public class RemoveRedirectWikiPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("This is a remove redirect test."),
-			selenium.getText("//section/div/div/div/div[4]/div"));
+			selenium.getText("//div[6]/div"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

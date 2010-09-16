@@ -48,21 +48,14 @@ public class EditFrontPageMinorChangeTest extends BaseTestCase {
 				selenium.clickAt("link=Wiki Test Page",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				assertEquals(RuntimeVariables.replace("Test Wiki Article"),
-					selenium.getText("//div/div[5]/div/h2"));
-				assertEquals(RuntimeVariables.replace("this is italics"),
-					selenium.getText("//i"));
-				assertEquals(RuntimeVariables.replace("bold"),
-					selenium.getText("//b"));
-				assertTrue(selenium.isElementPresent("link=Link to website"));
 				assertEquals(RuntimeVariables.replace(
-						"this is a list item this is a sub list item"),
-					selenium.getText("//div/div[5]/div/ul/li"));
+						"This is a wiki frontpage test."),
+					selenium.getText("//div[5]/div"));
 				selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.type("_36_content",
 					RuntimeVariables.replace(
-						"==Test Wiki Article==\n\n//this is italics//\n\n**bold**\n\n[[http://www.liferay.com|Link to website]]\n\n*this is a list item\n**this is a sub list item\n\nMinor Edit."));
+						"This is a wiki edited frontpage test. Minor Edit"));
 
 				boolean minorEditChecked = selenium.isChecked(
 						"_36_minorEditCheckbox");
@@ -80,18 +73,9 @@ public class EditFrontPageMinorChangeTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Publish']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				assertEquals(RuntimeVariables.replace("Test Wiki Article"),
-					selenium.getText("//div/div[5]/div/h2"));
-				assertEquals(RuntimeVariables.replace("this is italics"),
-					selenium.getText("//i"));
-				assertEquals(RuntimeVariables.replace("bold"),
-					selenium.getText("//b"));
-				assertTrue(selenium.isElementPresent("link=Link to website"));
 				assertEquals(RuntimeVariables.replace(
-						"this is a list item this is a sub list item"),
-					selenium.getText("//div/div[5]/div/ul/li"));
-				assertEquals(RuntimeVariables.replace("Minor Edit."),
-					selenium.getText("//div/div[5]/div/p[4]"));
+						"This is a wiki edited frontpage test. Minor Edit"),
+					selenium.getText("//div[6]/div"));
 				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {
