@@ -18,7 +18,7 @@ package com.liferay.portal.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public interface RoleFinder {
-	public boolean checkByR_U(long roleId, long userId)
+	public int countByR_U(long roleId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByU_G_R(long userId, long groupId, long roleId)

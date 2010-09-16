@@ -945,6 +945,17 @@
 				(Users_Orgs.userId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByUser">
+		<![CDATA[
+			SELECT
+				DISTINCT Users_Roles.roleId
+			FROM
+				Users_Roles
+			WHERE
+				(Users_Roles.roleId = ?) AND
+				(Users_Roles.userId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByUserGroup">
 		<![CDATA[
 			SELECT
