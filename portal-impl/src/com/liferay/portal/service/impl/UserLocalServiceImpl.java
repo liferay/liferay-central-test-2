@@ -605,6 +605,25 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				user = getUserById(companyId, GetterUtil.getLong(login));
 			}
 
+			if (user.isDefaultUser()) {
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Basic authentication is disabled for the default " +
+							"user");
+				}
+
+				return 0;
+			}
+			else if (!user.isActive()) {
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Basic authentication is disabled for inactive user " +
+							user.getUserId());
+				}
+
+				return 0;
+			}
+
 			if (!PropsValues.BASIC_AUTH_PASSWORD_REQUIRED) {
 				return user.getUserId();
 			}
@@ -635,8 +654,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String method, String uri, String response)
 		throws PortalException, SystemException {
 
-		long userId = 0;
-
 		// Get User
 
 		User user = null;
@@ -650,12 +667,30 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 			catch (NoSuchUserException nsue2) {
 				try {
-					user = getUserById(Long.parseLong(username));
+					user = getUserById(GetterUtil.getLong(username));
 				}
 				catch (NoSuchUserException nsue3) {
-					return userId;
+					return 0;
 				}
 			}
+		}
+
+		if (user.isDefaultUser()) {
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Digest authentication is disabled for the default user");
+			}
+
+			return 0;
+		}
+		else if (!user.isActive()) {
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Digest authentication is disabled for inactive user " +
+						user.getUserId());
+			}
+
+			return 0;
 		}
 
 		// Verify digest
@@ -666,24 +701,23 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			_log.error(
 				"User must first login through the portal " + user.getUserId());
 
-			return userId;
+			return 0;
 		}
 
 		String[] digestArray = StringUtil.split(user.getDigest());
 
 		for (String ha1 : digestArray) {
 			String ha2 = DigesterUtil.digestHex(Digester.MD5, method, uri);
-			String myresponse = DigesterUtil.digestHex(
+
+			String curResponse = DigesterUtil.digestHex(
 				Digester.MD5, ha1, nonce, ha2);
 
-			if (myresponse.equals(response)) {
-				userId = user.getUserId();
-
-				break;
+			if (response.equals(curResponse)) {
+				return user.getUserId();
 			}
 		}
 
-		return userId;
+		return 0;
 	}
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -692,8 +726,19 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			User user = userPersistence.findByPrimaryKey(userId);
 
 			if (user.isDefaultUser()) {
-				_log.error(
-					"The default user should never be allowed to authenticate");
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"JAAS authentication is disabled for the default user");
+				}
+
+				return false;
+			}
+			else if (!user.isActive()) {
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"JAAS authentication is disabled for inactive user " +
+							userId);
+				}
 
 				return false;
 			}
@@ -2581,10 +2626,20 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		if (user.isDefaultUser()) {
-			_log.error(
-				"The default user should never be allowed to authenticate");
+			if (_log.isInfoEnabled()) {
+				_log.info("Authentication is disabled for the default user");
+			}
 
 			return Authenticator.DNE;
+		}
+		else if (!user.isActive()) {
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Authentication is disabled for inactive user " +
+						user.getUserId());
+			}
+
+			return Authenticator.FAILURE;
 		}
 
 		if (!user.isPasswordEncrypted()) {
