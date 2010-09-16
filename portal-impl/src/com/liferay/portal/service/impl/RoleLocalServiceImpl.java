@@ -382,7 +382,22 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			throw new IllegalArgumentException(name + " is not a regular role");
 		}
 
+		long defaultUserId = userLocalService.getDefaultUserId(companyId);
+
+		if (userId == defaultUserId) {
+			if (name.equals(RoleConstants.GUEST)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
 		if (inherited) {
+			if (userPersistence.containsRole(userId, role.getRoleId())) {
+				return true;
+			}
+
 			ThreadLocalCache<Integer> threadLocalCache =
 				ThreadLocalCacheManager.getThreadLocalCache(
 					Lifecycle.REQUEST, _COUNT_BY_R_U_CACHE_NAME);
