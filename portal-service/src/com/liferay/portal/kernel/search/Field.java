@@ -105,7 +105,7 @@ public class Field implements Serializable {
 	 */
 	public Field(String name, String[] values, boolean tokenized) {
 		this(name, values);
-	
+
 		setTokenized(tokenized);
 	}
 
@@ -114,7 +114,7 @@ public class Field implements Serializable {
 	 */
 	public Field(String name, String[] values, boolean tokenized, float boost) {
 		this(name, values);
-	
+
 		setBoost(boost);
 		setTokenized(tokenized);
 	}
