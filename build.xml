@@ -532,22 +532,26 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 					</then>
 				</if>
 
-				<loadfile property="resin.conf.content" srcFile="${app.server.dir}/conf/resin.conf" />
+				<loadfile property="resin.xml.content" srcFile="${app.server.dir}/conf/resin.xml" />
 
-				<antelope:stringutil string="${resin.conf.content}" property="resin.conf.content.index">
+				<antelope:stringutil string="${resin.xml.content}" property="resin.xml.content.index">
 					<indexof string="-Dfile.encoding=UTF-8" fromindex="0" />
 				</antelope:stringutil>
 
 				<if>
-					<equals arg1="${resin.conf.content.index}" arg2="-1" />
+					<equals arg1="${resin.xml.content.index}" arg2="-1" />
 					<then>
-						<replace file="${app.server.dir}/conf/resin.conf">
-							<replacetoken><![CDATA[<jvm-arg>-Xmx256m</jvm-arg>]]></replacetoken>
-							<replacevalue><![CDATA[<jvm-arg>-Dfile.encoding=UTF-8</jvm-arg>
+						<replace file="${app.server.dir}/conf/resin.xml">
+							<replacetoken><![CDATA[-Xmx512m</jvm-arg>]]></replacetoken>
+							<replacevalue><![CDATA[-->
+
+	<jvm-arg>-Dfile.encoding=UTF-8</jvm-arg>
 	<jvm-arg>-Djava.net.preferIPv4Stack=true</jvm-arg>
 	<jvm-arg>-Duser.timezone=GMT</jvm-arg>
 	<jvm-arg>-Xmx1024m</jvm-arg>
-	<jvm-arg>-XX:MaxPermSize=256m</jvm-arg>]]></replacevalue>
+	<jvm-arg>-XX:MaxPermSize=256m</jvm-arg>
+	<!--
+	]]></replacevalue>
 						</replace>
 					</then>
 				</if>
@@ -559,12 +563,6 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 					/>
 				</copy>
 
-				<delete>
-					<fileset
-						dir="${app.server.dir}/lib"
-						includes="portlet-10.jar"
-					/>
-				</delete>
 			</then>
 		</if>
 

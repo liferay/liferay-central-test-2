@@ -1,3 +1,3 @@
 #!/bin/sh
 
-./httpd.sh
+./resin.sh

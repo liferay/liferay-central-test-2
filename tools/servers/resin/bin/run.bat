@@ -1,1 +1,1 @@
-..\win32\resin.exe
+..\resin.exe console
