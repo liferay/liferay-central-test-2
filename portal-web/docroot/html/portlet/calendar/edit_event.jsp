@@ -158,7 +158,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		<aui:input name="title" />
 
 		<aui:field-wrapper label="description">
-			<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="email" />
+			<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 		</aui:field-wrapper>
 
 		<aui:select name="type">
