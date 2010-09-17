@@ -181,8 +181,14 @@ if (Validator.isNull(redirect)) {
 		<aui:input name="subject" value="<%= subject %>" />
 
 		<aui:field-wrapper label="body">
-			<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
-
+			<c:choose>
+				<c:when test='<%= (messageId != 0 && Validator.equals(message.getMessageFormat(), "bbcode")) || (messageId == 0 && Validator.equals(messageFormat, "bbcode")) %>'>
+					<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
+				</c:when>
+				<c:otherwise>
+					<%@ include file="/html/portlet/message_boards/html_editor.jspf" %>
+				</c:otherwise>
+			</c:choose>
 			<aui:input name="body" type="hidden" />
 		</aui:field-wrapper>
 

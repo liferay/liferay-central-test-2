@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -42,6 +43,7 @@ import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadServiceUtil;
@@ -54,6 +56,7 @@ import java.util.List;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -226,7 +229,6 @@ public class EditMessageAction extends PortletAction {
 			WebKeys.THEME_DISPLAY);
 
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
-
 		long groupId = themeDisplay.getScopeGroupId();
 		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 		long threadId = ParamUtil.getLong(actionRequest, "threadId");
@@ -236,6 +238,12 @@ public class EditMessageAction extends PortletAction {
 		String body = ParamUtil.getString(actionRequest, "body");
 		boolean attachments = ParamUtil.getBoolean(
 			actionRequest, "attachments");
+
+		PortletPreferences preferences = actionRequest.getPreferences();
+
+		String messageFormat = GetterUtil.getString(
+			preferences.getValue("messageFormat", null),
+			MBMessageConstants.DEFAULT_MESSAGE_FORMAT);
 
 		List<ObjectValuePair<String, byte[]>> files =
 			new ArrayList<ObjectValuePair<String, byte[]>>();
@@ -279,7 +287,7 @@ public class EditMessageAction extends PortletAction {
 				// Post new thread
 
 				message = MBMessageServiceUtil.addMessage(
-					groupId, categoryId, subject, body, files, anonymous,
+					groupId, categoryId, subject, body, messageFormat, files, anonymous,
 					priority, allowPingbacks, serviceContext);
 
 				if (question) {
@@ -293,7 +301,7 @@ public class EditMessageAction extends PortletAction {
 
 				message = MBMessageServiceUtil.addMessage(
 					groupId, categoryId, threadId, parentMessageId, subject,
-					body, files, anonymous, priority, allowPingbacks,
+					body, messageFormat, files, anonymous, priority, allowPingbacks,
 					serviceContext);
 			}
 		}

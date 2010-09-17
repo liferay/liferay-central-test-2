@@ -196,6 +196,7 @@
 		<column name="parentMessageId" type="long" />
 		<column name="subject" type="String" />
 		<column name="body" type="String" />
+		<column name="messageFormat" type="String" />
 		<column name="attachments" type="boolean" />
 		<column name="anonymous" type="boolean" />
 		<column name="priority" type="double" />

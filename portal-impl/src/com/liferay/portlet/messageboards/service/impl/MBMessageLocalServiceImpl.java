@@ -194,6 +194,21 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		String messageFormat = MBMessageConstants.DEFAULT_MESSAGE_FORMAT;
+
+		return addMessage(userId, userName, groupId, categoryId, threadId,
+			parentMessageId, subject, body, messageFormat, files, anonymous,
+			priority, allowPingbacks, serviceContext);
+	}
+
+	public MBMessage addMessage(
+			long userId, String userName, long groupId, long categoryId,
+			long threadId, long parentMessageId, String subject, String body,
+			String messageFormat, List<ObjectValuePair<String, byte[]>> files,
+			boolean anonymous, double priority, boolean allowPingbacks,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
 		// Message
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -286,6 +301,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setParentMessageId(parentMessageId);
 		message.setSubject(subject);
 		message.setBody(body);
+		message.setMessageFormat(messageFormat);
 		message.setAttachments(!files.isEmpty());
 		message.setAnonymous(anonymous);
 
@@ -407,10 +423,28 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		long threadId = 0;
 		long parentMessageId = 0;
+		String messageFormat = MBMessageConstants.DEFAULT_MESSAGE_FORMAT;
 
 		return addMessage(
 			userId, userName, groupId, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, allowPingbacks,
+			subject, body, messageFormat, files, anonymous, priority, allowPingbacks,
+			serviceContext);
+	}
+
+	public MBMessage addMessage(
+			long userId, String userName, long groupId, long categoryId,
+			String subject, String body, String messageFormat,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
+			double priority, boolean allowPingbacks,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		long threadId = 0;
+		long parentMessageId = 0;
+
+		return addMessage(
+			userId, userName, groupId, categoryId, threadId, parentMessageId,
+			subject, body, messageFormat, files, anonymous, priority, allowPingbacks,
 			serviceContext);
 	}
 

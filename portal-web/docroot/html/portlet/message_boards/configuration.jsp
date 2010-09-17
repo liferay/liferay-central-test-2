@@ -86,6 +86,20 @@ else if (tabs2.equals("message-updated-email")) {
 				<aui:input inlineLabel="left" name="enableFlags" type="checkbox" value="<%= enableFlags %>" />
 
 				<aui:input inlineLabel="left" name="enableRatings" type="checkbox" value="<%= enableRatings %>" />
+
+				<aui:select name="messageFormat">
+
+					<%
+					for (int i = 0; i < MBMessageConstants.MESSAGE_FORMATS.length; i++) {
+					%>
+
+						<aui:option label='<%= LanguageUtil.get(pageContext, "message-boards.message-formats." + MBMessageConstants.MESSAGE_FORMATS[i]) %>' selected="<%= messageFormat.equals(MBMessageConstants.MESSAGE_FORMATS[i]) %>" value="<%= MBMessageConstants.MESSAGE_FORMATS[i] %>" />
+
+					<%
+					}
+					%>
+
+				</aui:select>
 			</aui:fieldset>
 		</c:when>
 		<c:when test='<%= tabs2.equals("email-from") %>'>

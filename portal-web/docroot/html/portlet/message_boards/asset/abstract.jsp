@@ -23,8 +23,10 @@ MBMessage message = (MBMessage)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSA
 
 String summary = StringUtil.shorten(message.getBody(), abstractLength);
 
-summary = BBCodeUtil.getHTML(summary);
-summary = StringUtil.replace(summary, "@theme_images_path@/emoticons", themeDisplay.getPathThemeImages() + "/emoticons");
+if (Validator.equals(message.getMessageFormat(), "bbcode")) {
+	summary = BBCodeUtil.getHTML(summary);
+	summary = StringUtil.replace(summary, "@theme_images_path@/emoticons", themeDisplay.getPathThemeImages() + "/emoticons");
+}
 %>
 
 <%= summary %>

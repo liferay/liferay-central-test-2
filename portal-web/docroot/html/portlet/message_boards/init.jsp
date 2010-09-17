@@ -107,6 +107,7 @@ String rssFormat = preferences.getValue("rss-format", "atom10");
 boolean allowAnonymousPosting = MBUtil.isAllowAnonymousPosting(preferences);
 boolean enableFlags = GetterUtil.getBoolean(preferences.getValue("enable-flags", null), true);
 boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enable-message-ratings", null), true);
+String messageFormat = GetterUtil.getString(preferences.getValue("messageFormat", MBMessageConstants.DEFAULT_MESSAGE_FORMAT));
 
 String rssFormatType = RSSUtil.getFormatType(rssFormat);
 double rssFormatVersion = RSSUtil.getFormatVersion(rssFormat);

@@ -19,9 +19,15 @@
 <%
 MBMessage message = (MBMessage)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE);
 
-String body = BBCodeUtil.getHTML(message);
+String body = StringPool.BLANK;
 
-body = StringUtil.replace(body, "@theme_images_path@/emoticons", themeDisplay.getPathThemeImages() + "/emoticons");
+if (Validator.equals(message.getMessageFormat(), "bbcode")) {
+	body = BBCodeUtil.getHTML(message);
+	body = StringUtil.replace(body, "@theme_images_path@/emoticons", themeDisplay.getPathThemeImages() + "/emoticons");
+}
+else{
+	body = message.getBody();
+}
 %>
 
 <%= body %>
