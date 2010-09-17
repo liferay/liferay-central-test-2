@@ -87,6 +87,10 @@ public class LanguageImpl implements Language {
 		Locale locale, String pattern, Object[] arguments,
 		boolean translateArguments) {
 
+		if (PropsValues.TRANSLATIONS_DISABLED) {
+			return pattern;
+		}
+
 		String value = null;
 
 		try {
@@ -145,6 +149,10 @@ public class LanguageImpl implements Language {
 	public String format(
 		PageContext pageContext, String pattern, Object[] arguments,
 		boolean translateArguments) {
+
+		if (PropsValues.TRANSLATIONS_DISABLED) {
+			return pattern;
+		}
 
 		String value = null;
 
@@ -206,6 +214,10 @@ public class LanguageImpl implements Language {
 	public String format(
 		PageContext pageContext, String pattern, LanguageWrapper[] arguments,
 		boolean translateArguments) {
+
+		if (PropsValues.TRANSLATIONS_DISABLED) {
+			return pattern;
+		}
 
 		String value = null;
 
@@ -274,6 +286,10 @@ public class LanguageImpl implements Language {
 	public String format(
 		PortletConfig portletConfig, Locale locale, String pattern,
 		Object[] arguments, boolean translateArguments) {
+
+		if (PropsValues.TRANSLATIONS_DISABLED) {
+			return pattern;
+		}
 
 		String value = null;
 
@@ -543,6 +559,10 @@ public class LanguageImpl implements Language {
 			String key, String defaultValue)
 		throws Exception {
 
+		if (PropsValues.TRANSLATIONS_DISABLED) {
+			return key;
+		}
+
 		if (key == null) {
 			return null;
 		}
@@ -626,6 +646,10 @@ public class LanguageImpl implements Language {
 	private String _getPortletConfigurationValue(
 			PageContext pageContext, Locale locale, String key)
 		throws Exception {
+
+		if (PropsValues.TRANSLATIONS_DISABLED) {
+			return key;
+		}
 
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
