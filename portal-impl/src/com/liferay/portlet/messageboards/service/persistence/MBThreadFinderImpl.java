@@ -205,23 +205,30 @@ public class MBThreadFinderImpl
 			long groupId, long categoryId, int status, boolean inlineSQLHelper)
 		throws SystemException {
 
+		if (!inlineSQLHelper || !InlineSQLHelperUtil.isEnabled(groupId)) {
+			if (status != WorkflowConstants.STATUS_ANY) {
+				return MBThreadUtil.countByG_C_S(groupId, categoryId, status);
+			}
+			else {
+				return MBThreadUtil.countByG_C(groupId, categoryId);
+			}
+		}
+
+		String sql = CustomSQLUtil.get(COUNT_BY_G_C_S);
+
+		if (status != WorkflowConstants.STATUS_ANY) {
+			sql = CustomSQLUtil.appendCriteria(
+				sql, "AND (MBThread.status = ?)");
+		}
+
+		sql = InlineSQLHelperUtil.replacePermissionCheck(
+			sql, MBMessage.class.getName(), "MBMessage.messageId",
+			"MBMessage.userId", groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_G_C_S);
-
-			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.appendCriteria(
-					sql, "AND (MBThread.status = ?)");
-			}
-
-			if (inlineSQLHelper) {
-				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, MBMessage.class.getName(), "MBMessage.messageId",
-					"MBMessage.userId", groupId);
-			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -330,23 +337,31 @@ public class MBThreadFinderImpl
 			boolean inlineSQLHelper)
 		throws SystemException {
 
+		if (!inlineSQLHelper || !InlineSQLHelperUtil.isEnabled(groupId)) {
+			if (status != WorkflowConstants.STATUS_ANY) {
+				return MBThreadUtil.findByG_C_S(
+					groupId, categoryId, status, start, end);
+			}
+			else {
+				return MBThreadUtil.findByG_C(groupId, categoryId, start, end);
+			}
+		}
+
+		String sql = CustomSQLUtil.get(FIND_BY_G_C_S);
+
+		if (status != WorkflowConstants.STATUS_ANY) {
+			sql = CustomSQLUtil.appendCriteria(
+				sql, "AND (MBThread.status = ?)");
+		}
+
+		sql = InlineSQLHelperUtil.replacePermissionCheck(
+			sql, MBMessage.class.getName(), "MBMessage.messageId",
+			"MBMessage.userId", groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_G_C_S);
-
-			if (status != WorkflowConstants.STATUS_ANY) {
-				sql = CustomSQLUtil.appendCriteria(
-					sql, "AND (MBThread.status = ?)");
-			}
-
-			if (inlineSQLHelper) {
-				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, MBMessage.class.getName(), "MBMessage.messageId",
-					"MBMessage.userId", groupId);
-			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 
