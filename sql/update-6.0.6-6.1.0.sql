@@ -1,5 +1,5 @@
-alter table MBMessage add messageFormat VARCHAR(75) null;
+alter table MBMessage add format VARCHAR(75) null;
 
 COMMIT_TRANSACTION;
 
-update MBMessage set messageFormat = 'bbcode';
+update MBMessage set format = 'bbcode';

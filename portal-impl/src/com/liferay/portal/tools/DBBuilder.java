@@ -76,6 +76,7 @@ public class DBBuilder {
 			_buildSQLFile(sqlDir, "update-6.0.2-6.0.3");
 			_buildSQLFile(sqlDir, "update-6.0.4-6.0.5");
 			_buildSQLFile(sqlDir, "update-6.0.5-6.0.6");
+			_buildSQLFile(sqlDir, "update-6.0.6-6.1.0");
 
 			_buildCreateFile(sqlDir);
 		}
