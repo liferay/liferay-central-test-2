@@ -64,7 +64,7 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 				label="<%= true %>"
 				message="<%= HtmlUtil.escape(title) %>"
 				src="<%= assetRendererFactory.getIconPath(renderRequest) %>"
-				url="<%= viewURL.toString() %>"
+				url="<%= viewURL %>"
 			/>
 
 			<liferay-util:include page="/html/portlet/asset_publisher/asset_actions.jsp" />
