@@ -15,6 +15,7 @@
 package com.liferay.portlet.messageboards.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -45,6 +46,7 @@ import java.util.ArrayList;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -116,6 +118,8 @@ public class SplitThreadAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
+		PortletPreferences preferences = actionRequest.getPreferences();
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -139,6 +143,10 @@ public class SplitThreadAction extends PortletAction {
 			String subject = ParamUtil.getString(actionRequest, "subject");
 			String body = ParamUtil.getString(actionRequest, "body");
 
+			String format = GetterUtil.getString(
+				preferences.getValue("message-format", null),
+				MBMessageConstants.DEFAULT_FORMAT);
+
 			String layoutFullURL = PortalUtil.getLayoutFullURL(themeDisplay);
 
 			String newThreadURL =
@@ -159,8 +167,7 @@ public class SplitThreadAction extends PortletAction {
 
 			MBMessageServiceUtil.addMessage(
 				message.getGroupId(), message.getCategoryId(), oldThreadId,
-				oldParentMessageId, subject, body,
-				MBMessageConstants.DEFAULT_FORMAT,
+				oldParentMessageId, subject, body, format,
 				new ArrayList<ObjectValuePair<String, byte[]>>(), false,
 				MBThreadConstants.PRIORITY_NOT_GIVEN,
 				message.getAllowPingbacks(), serviceContext);
