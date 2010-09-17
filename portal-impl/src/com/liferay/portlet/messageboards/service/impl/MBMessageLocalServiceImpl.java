@@ -166,8 +166,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBMessage message = addMessage(
 			userId, userName, groupId, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, allowPingbacks,
-			serviceContext);
+			subject, body, MBMessageConstants.DEFAULT_FORMAT, files, anonymous,
+			priority, allowPingbacks, serviceContext);
 
 		// Discussion
 
@@ -189,22 +189,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public MBMessage addMessage(
 			long userId, String userName, long groupId, long categoryId,
 			long threadId, long parentMessageId, String subject, String body,
-			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, boolean allowPingbacks,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		String messageFormat = MBMessageConstants.DEFAULT_MESSAGE_FORMAT;
-
-		return addMessage(userId, userName, groupId, categoryId, threadId,
-			parentMessageId, subject, body, messageFormat, files, anonymous,
-			priority, allowPingbacks, serviceContext);
-	}
-
-	public MBMessage addMessage(
-			long userId, String userName, long groupId, long categoryId,
-			long threadId, long parentMessageId, String subject, String body,
-			String messageFormat, List<ObjectValuePair<String, byte[]>> files,
+			String format, List<ObjectValuePair<String, byte[]>> files,
 			boolean anonymous, double priority, boolean allowPingbacks,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -301,7 +286,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setParentMessageId(parentMessageId);
 		message.setSubject(subject);
 		message.setBody(body);
-		message.setMessageFormat(messageFormat);
+		message.setFormat(format);
 		message.setAttachments(!files.isEmpty());
 		message.setAnonymous(anonymous);
 
@@ -415,25 +400,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	public MBMessage addMessage(
 			long userId, String userName, long groupId, long categoryId,
-			String subject, String body,
-			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, boolean allowPingbacks,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		long threadId = 0;
-		long parentMessageId = 0;
-		String messageFormat = MBMessageConstants.DEFAULT_MESSAGE_FORMAT;
-
-		return addMessage(
-			userId, userName, groupId, categoryId, threadId, parentMessageId,
-			subject, body, messageFormat, files, anonymous, priority, allowPingbacks,
-			serviceContext);
-	}
-
-	public MBMessage addMessage(
-			long userId, String userName, long groupId, long categoryId,
-			String subject, String body, String messageFormat,
+			String subject, String body, String format,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
 			double priority, boolean allowPingbacks,
 			ServiceContext serviceContext)
@@ -444,7 +411,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		return addMessage(
 			userId, userName, groupId, categoryId, threadId, parentMessageId,
-			subject, body, messageFormat, files, anonymous, priority, allowPingbacks,
+			subject, body, format, files, anonymous, priority, allowPingbacks,
 			serviceContext);
 	}
 

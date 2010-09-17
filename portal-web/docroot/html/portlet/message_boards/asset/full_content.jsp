@@ -21,7 +21,7 @@ MBMessage message = (MBMessage)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSA
 
 String body = StringPool.BLANK;
 
-if (Validator.equals(message.getMessageFormat(), "bbcode")) {
+if (message.isFormatBBCode()) {
 	body = BBCodeUtil.getHTML(message);
 	body = StringUtil.replace(body, "@theme_images_path@/emoticons", themeDisplay.getPathThemeImages() + "/emoticons");
 }

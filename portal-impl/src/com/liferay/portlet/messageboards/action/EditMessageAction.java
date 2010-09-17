@@ -225,10 +225,13 @@ public class EditMessageAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
+		PortletPreferences preferences = actionRequest.getPreferences();
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
+
 		long groupId = themeDisplay.getScopeGroupId();
 		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
 		long threadId = ParamUtil.getLong(actionRequest, "threadId");
@@ -236,14 +239,13 @@ public class EditMessageAction extends PortletAction {
 			actionRequest, "parentMessageId");
 		String subject = ParamUtil.getString(actionRequest, "subject");
 		String body = ParamUtil.getString(actionRequest, "body");
+
+		String format = GetterUtil.getString(
+			preferences.getValue("message-format", null),
+			MBMessageConstants.DEFAULT_FORMAT);
+
 		boolean attachments = ParamUtil.getBoolean(
 			actionRequest, "attachments");
-
-		PortletPreferences preferences = actionRequest.getPreferences();
-
-		String messageFormat = GetterUtil.getString(
-			preferences.getValue("messageFormat", null),
-			MBMessageConstants.DEFAULT_MESSAGE_FORMAT);
 
 		List<ObjectValuePair<String, byte[]>> files =
 			new ArrayList<ObjectValuePair<String, byte[]>>();
@@ -287,8 +289,8 @@ public class EditMessageAction extends PortletAction {
 				// Post new thread
 
 				message = MBMessageServiceUtil.addMessage(
-					groupId, categoryId, subject, body, messageFormat, files, anonymous,
-					priority, allowPingbacks, serviceContext);
+					groupId, categoryId, subject, body, format, files,
+					anonymous, priority, allowPingbacks, serviceContext);
 
 				if (question) {
 					MBMessageFlagLocalServiceUtil.addQuestionFlag(
@@ -301,7 +303,7 @@ public class EditMessageAction extends PortletAction {
 
 				message = MBMessageServiceUtil.addMessage(
 					groupId, categoryId, threadId, parentMessageId, subject,
-					body, messageFormat, files, anonymous, priority, allowPingbacks,
+					body, format, files, anonymous, priority, allowPingbacks,
 					serviceContext);
 			}
 		}

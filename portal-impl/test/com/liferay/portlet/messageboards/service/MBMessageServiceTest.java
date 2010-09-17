@@ -26,6 +26,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
+import com.liferay.portlet.messageboards.model.MBMessageConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -150,8 +151,8 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 
 			MBMessageServiceUtil.addMessage(
 				_category.getGroupId(), _category.getCategoryId(), _subject,
-				body, files, anonymous, priority, allowPingbacks,
-				serviceContext);
+				body, MBMessageConstants.DEFAULT_FORMAT, files, anonymous,
+				priority, allowPingbacks, serviceContext);
 		}
 
 		private String _subject;

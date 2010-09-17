@@ -36,6 +36,7 @@ import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
@@ -181,13 +182,15 @@ public class MessageListenerImpl implements MessageListener {
 			if (parentMessage == null) {
 				MBMessageServiceUtil.addMessage(
 					groupId, categoryId, subject, collector.getBody(),
-					collector.getFiles(), false, 0.0, true, serviceContext);
+					MBMessageConstants.DEFAULT_FORMAT, collector.getFiles(),
+					false, 0.0, true, serviceContext);
 			}
 			else {
 				MBMessageServiceUtil.addMessage(
 					groupId, categoryId, parentMessage.getThreadId(),
 					parentMessage.getMessageId(), subject, collector.getBody(),
-					collector.getFiles(), false, 0.0, true, serviceContext);
+					MBMessageConstants.DEFAULT_FORMAT, collector.getFiles(),
+					false, 0.0, true, serviceContext);
 			}
 
 			if (_log.isDebugEnabled()) {

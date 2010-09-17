@@ -731,9 +731,9 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				importedMessage = MBMessageLocalServiceUtil.addMessage(
 					userId, userName, context.getScopeGroupId(), categoryId,
 					threadId, parentMessageId, message.getSubject(),
-					message.getBody(), files, message.getAnonymous(),
-					message.getPriority(), message.getAllowPingbacks(),
-					serviceContext);
+					message.getBody(), message.getFormat(), files,
+					message.getAnonymous(), message.getPriority(),
+					message.getAllowPingbacks(), serviceContext);
 			}
 			else {
 				importedMessage = MBMessageLocalServiceUtil.updateMessage(
@@ -747,9 +747,9 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			importedMessage = MBMessageLocalServiceUtil.addMessage(
 				userId, userName, context.getScopeGroupId(), categoryId,
 				threadId, parentMessageId, message.getSubject(),
-				message.getBody(), files, message.getAnonymous(),
-				message.getPriority(), message.getAllowPingbacks(),
-				serviceContext);
+				message.getBody(), message.getFormat(), files,
+				message.getAnonymous(), message.getPriority(),
+				message.getAllowPingbacks(), serviceContext);
 		}
 
 		threadPKs.put(message.getThreadId(), importedMessage.getThreadId());

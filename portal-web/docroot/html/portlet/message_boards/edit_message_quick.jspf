@@ -76,7 +76,7 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 	<aui:fieldset>
 		<aui:field-wrapper label="quick-reply">
 			<c:choose>
-				<c:when test='<%= Validator.equals(messageFormat, "bbcode") %>'>
+				<c:when test='<%= messageFormat.equals("bbcode") %>'>
 					<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
 				</c:when>
 				<c:otherwise>

@@ -182,7 +182,7 @@ if (Validator.isNull(redirect)) {
 
 		<aui:field-wrapper label="body">
 			<c:choose>
-				<c:when test='<%= (messageId != 0 && Validator.equals(message.getMessageFormat(), "bbcode")) || (messageId == 0 && Validator.equals(messageFormat, "bbcode")) %>'>
+				<c:when test='<%= ((messageId != 0) && message.isFormatBBCode()) || ((messageId == 0) && messageFormat.equals("bbcode")) %>'>
 					<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
 				</c:when>
 				<c:otherwise>

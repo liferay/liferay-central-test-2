@@ -28,6 +28,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.portlet.messageboards.util.MBMailMessage;
@@ -227,13 +228,15 @@ public class MailingListMessageListener implements MessageListener {
 		if (parentMessage == null) {
 			MBMessageServiceUtil.addMessage(
 				groupId, categoryId, subject, collector.getBody(),
-				collector.getFiles(), anonymous, 0.0, true, serviceContext);
+				MBMessageConstants.DEFAULT_FORMAT, collector.getFiles(),
+				anonymous, 0.0, true, serviceContext);
 		}
 		else {
 			MBMessageServiceUtil.addMessage(
 				groupId, categoryId, parentMessage.getThreadId(),
 				parentMessage.getMessageId(), subject, collector.getBody(),
-				collector.getFiles(), anonymous, 0.0, true, serviceContext);
+				MBMessageConstants.DEFAULT_FORMAT, collector.getFiles(),
+				anonymous, 0.0, true, serviceContext);
 		}
 	}
 

@@ -83,23 +83,23 @@ else if (tabs2.equals("message-updated-email")) {
 			<aui:fieldset>
 				<aui:input inlineLabel="left" name="allowAnonymousPosting" type="checkbox" value="<%= MBUtil.isAllowAnonymousPosting(preferences) %>" />
 
-				<aui:input inlineLabel="left" name="enableFlags" type="checkbox" value="<%= enableFlags %>" />
-
-				<aui:input inlineLabel="left" name="enableRatings" type="checkbox" value="<%= enableRatings %>" />
-
-				<aui:select name="messageFormat">
+				<aui:select name="message-format">
 
 					<%
-					for (int i = 0; i < MBMessageConstants.MESSAGE_FORMATS.length; i++) {
+					for (int i = 0; i < MBMessageConstants.FORMATS.length; i++) {
 					%>
 
-						<aui:option label='<%= LanguageUtil.get(pageContext, "message-boards.message-formats." + MBMessageConstants.MESSAGE_FORMATS[i]) %>' selected="<%= messageFormat.equals(MBMessageConstants.MESSAGE_FORMATS[i]) %>" value="<%= MBMessageConstants.MESSAGE_FORMATS[i] %>" />
+						<aui:option label='<%= LanguageUtil.get(pageContext, "message-boards.message-formats." + MBMessageConstants.FORMATS[i]) %>' selected="<%= messageFormat.equals(MBMessageConstants.FORMATS[i]) %>" value="<%= MBMessageConstants.FORMATS[i] %>" />
 
 					<%
 					}
 					%>
 
 				</aui:select>
+
+				<aui:input inlineLabel="left" name="enableFlags" type="checkbox" value="<%= enableFlags %>" />
+
+				<aui:input inlineLabel="left" name="enableRatings" type="checkbox" value="<%= enableRatings %>" />
 			</aui:fieldset>
 		</c:when>
 		<c:when test='<%= tabs2.equals("email-from") %>'>

@@ -30,6 +30,7 @@ import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.NoSuchThreadException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.MBThreadConstants;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
@@ -134,9 +135,9 @@ public class MoveThreadAction extends PortletAction {
 
 			MBMessageServiceUtil.addMessage(
 				groupId, categoryId, threadId, thread.getRootMessageId(),
-				subject, body, new ArrayList<ObjectValuePair<String, byte[]>>(),
-				false, MBThreadConstants.PRIORITY_NOT_GIVEN, false,
-				serviceContext);
+				subject, body, MBMessageConstants.DEFAULT_FORMAT,
+				new ArrayList<ObjectValuePair<String, byte[]>>(), false,
+				MBThreadConstants.PRIORITY_NOT_GIVEN, false, serviceContext);
 		}
 
 		PortletURL portletURL =

@@ -126,6 +126,17 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		}
 	}
 
+	public boolean isFormatBBCode() {
+		String format = getFormat();
+
+		if (format.equals("bbcode")) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean isReply() {
 		return !isRoot();
 	}

@@ -37,7 +37,6 @@ import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.MBThreadConstants;
@@ -88,20 +87,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public MBMessage addMessage(
 			long groupId, long categoryId, long threadId, long parentMessageId,
-			String subject, String body,
-			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			double priority, boolean allowPingbacks,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addMessage(groupId, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority,
-			allowPingbacks, serviceContext);
-	}
-
-	public MBMessage addMessage(
-			long groupId, long categoryId, long threadId, long parentMessageId,
-			String subject, String body, String messageFormat,
+			String subject, String body, String format,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
 			double priority, boolean allowPingbacks,
 			ServiceContext serviceContext)
@@ -131,24 +117,13 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), null, groupId, categoryId, threadId,
-			parentMessageId, subject, body, messageFormat, files, anonymous, priority,
+			parentMessageId, subject, body, format, files, anonymous, priority,
 			allowPingbacks, serviceContext);
 	}
 
 	public MBMessage addMessage(
 			long groupId, long categoryId, String subject, String body,
-			List<ObjectValuePair<String, byte[]>> files,
-			boolean anonymous, double priority, boolean allowPingbacks,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return addMessage(groupId, categoryId, subject, body, files,
-			anonymous, priority, allowPingbacks, serviceContext);
-	}
-
-	public MBMessage addMessage(
-			long groupId, long categoryId, String subject, String body,
-			String messageFormat, List<ObjectValuePair<String, byte[]>> files,
+			String format, List<ObjectValuePair<String, byte[]>> files,
 			boolean anonymous, double priority, boolean allowPingbacks,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -173,7 +148,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), null, groupId, categoryId, subject, body,
-			messageFormat, files, anonymous, priority, allowPingbacks, serviceContext);
+			format, files, anonymous, priority, allowPingbacks, serviceContext);
 	}
 
 	public void deleteDiscussionMessage(
