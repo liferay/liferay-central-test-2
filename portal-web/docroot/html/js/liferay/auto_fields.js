@@ -132,7 +132,7 @@ AUI().add(
 							function(event) {
 								var form = event.form;
 
-								form.all('.lfr-form-row:hidden').each(instance._clearHiddenRows);
+								form.all('.lfr-form-row').each(instance._clearHiddenRows, instance);
 
 								var fieldOrder = instance.serialize();
 
@@ -143,7 +143,7 @@ AUI().add(
 						instance._undoManager.on(
 							'clearList',
 							function(event) {
-								contentBox.all('.lfr-form-row:hidden').each(instance._clearHiddenRows);
+								contentBox.all('.lfr-form-row').each(instance._clearHiddenRows, instance);
 							}
 						);
 					},
@@ -267,7 +267,11 @@ AUI().add(
 					},
 
 					_clearHiddenRows: function(item, index, collection) {
-						item.remove(true);
+						var instance = this;
+
+						if (instance._isHiddenRow(item)) {
+							item.remove(true);
+						}
 					},
 
 					_createClone: function(node) {
@@ -356,6 +360,12 @@ AUI().add(
 						return node;
 					},
 
+					_isHiddenRow: function(row) {
+						var instance = this;
+
+						return row.hasClass(row._hideClass);
+					},
+
 					_makeSortable: function(sortableHandle) {
 						var instance = this;
 
@@ -375,9 +385,11 @@ AUI().add(
 						instance._undoManager.on(
 							'clearList',
 							function(event) {
-								rows.all('.lfr-form-row:hidden').each(
+								rows.all('.lfr-form-row').each(
 									function(item, index, collection) {
-										A.DD.DDM.getDrag(item).destroy();
+										if (instance._isHiddenRow(item)) {
+											A.DD.DDM.getDrag(item).destroy();
+										}
 									}
 								);
 							}
