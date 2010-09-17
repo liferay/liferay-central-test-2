@@ -180,7 +180,7 @@ if (!partDayResults.isEmpty()) {
 
 <div class="day-grid" style="position: relative;">
 	<div class="hour all-day">
-		<span><liferay-ui:message key="all-day" /></span>
+		<span class="hour-content"><liferay-ui:message key="all-day" /></span>
 
 		<%
 		for (int i = 0; i < allDayResults.size(); i++) {
@@ -228,7 +228,7 @@ if (!partDayResults.isEmpty()) {
 	%>
 
 		<div class="hour <%= businessHours %>">
-			<span><%= displayTime %></span>
+			<span class="hour-content"><%= displayTime %></span>
 		</div>
 
 		<div class="half-hour <%= businessHours %>"><!-- --></div>

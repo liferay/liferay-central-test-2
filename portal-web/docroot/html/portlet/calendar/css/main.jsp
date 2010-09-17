@@ -176,7 +176,7 @@
 	height: 24px;
 }
 
-.portlet-calendar .day-grid .hour span {
+.portlet-calendar .day-grid .hour-content {
 	color: #777;
 	display: block;
 	font-size: 0.8em;
