@@ -192,6 +192,28 @@ String tabs1 = (String)objArray[1];
 		</c:otherwise>
 	</c:choose>
 
+	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.UPDATE) %>">
+		<portlet:actionURL var="activateURL">
+			<portlet:param name="struts_action" value="/communities/edit_community" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= group.isActive() ? Constants.DEACTIVATE : Constants.RESTORE %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+		</portlet:actionURL>
+
+		<c:choose>
+			<c:when test="<%= group.isActive() %>">
+				<liferay-ui:icon-deactivate url="<%= activateURL %>" />
+			</c:when>
+			<c:otherwise>
+				<liferay-ui:icon
+					image="activate"
+					url="<%= activateURL %>"
+				/>
+			</c:otherwise>
+		</c:choose>
+	</c:if>
+
+
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.DELETE) %>">
 		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/communities/edit_community" />

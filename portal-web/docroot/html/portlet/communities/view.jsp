@@ -137,10 +137,10 @@ pageContext.setAttribute("portletURL", portletURL);
 
 		<c:choose>
 			<c:when test="<%= PortalUtil.isSystemGroup(group.getName()) %>">
-				<liferay-ui:message key="the-group-cannot-be-deleted-because-it-is-a-required-system-group" />
+				<liferay-ui:message key="the-group-cannot-be-deleted-or-deactivated-because-it-is-a-required-system-group" />
 			</c:when>
 			<c:otherwise>
-				<liferay-ui:message key="the-group-cannot-be-deleted-because-you-are-accessing-the-group" />
+				<liferay-ui:message key="the-group-cannot-be-deleted-or-deactivated-because-you-are-accessing-the-group" />
 			</c:otherwise>
 		</c:choose>
 	</liferay-ui:error>
