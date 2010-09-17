@@ -68,11 +68,10 @@ public class EditGroupAction extends PortletAction {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
 				updateGroup(actionRequest);
 			}
-			else if (
-				cmd.equals(Constants.DEACTIVATE) ||
-				cmd.equals(Constants.RESTORE)) {
+			else if (cmd.equals(Constants.DEACTIVATE) ||
+					 cmd.equals(Constants.RESTORE)) {
 
-				updateGroupStatus(actionRequest, cmd);
+				updateActive(actionRequest, cmd);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteGroup(actionRequest);
@@ -95,8 +94,8 @@ public class EditGroupAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 
-				if (cmd.equals(Constants.DELETE) ||
-					cmd.equals(Constants.DEACTIVATE) ||
+				if (cmd.equals(Constants.DEACTIVATE) ||
+					cmd.equals(Constants.DELETE) ||
 					cmd.equals(Constants.RESTORE)) {
 
 					actionResponse.sendRedirect(
@@ -220,14 +219,11 @@ public class EditGroupAction extends PortletAction {
 			group, publicLayoutSetPrototypeId, privateLayoutSetPrototypeId);
 	}
 
-	protected void updateGroupStatus(ActionRequest actionRequest, String cmd)
+	protected void updateActive(ActionRequest actionRequest, String cmd)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			Group.class.getName(), actionRequest);
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
@@ -238,11 +234,15 @@ public class EditGroupAction extends PortletAction {
 		}
 
 		Group group = GroupServiceUtil.getGroup(groupId);
+
 		boolean active = false;
 
 		if (cmd.equals(Constants.RESTORE)) {
 			active = true;
 		}
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			Group.class.getName(), actionRequest);
 
 		GroupServiceUtil.updateGroup(
 			groupId, group.getName(), group.getDescription(), group.getType(),
