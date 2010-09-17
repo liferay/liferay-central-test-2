@@ -1471,7 +1471,7 @@
 		<field name="body" type="String">
 			<hint-collection name="CLOB" />
 		</field>
-		<field name="messageFormat" type="String" />
+		<field name="format" type="String" />
 		<field name="attachments" type="boolean" />
 		<field name="anonymous" type="boolean" />
 		<field name="priority" type="double" />

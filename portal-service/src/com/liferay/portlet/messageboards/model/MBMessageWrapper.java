@@ -364,21 +364,21 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	/**
-	* Gets the message format of this message-boards message.
+	* Gets the format of this message-boards message.
 	*
-	* @return the message format of this message-boards message
+	* @return the format of this message-boards message
 	*/
-	public java.lang.String getMessageFormat() {
-		return _mbMessage.getMessageFormat();
+	public java.lang.String getFormat() {
+		return _mbMessage.getFormat();
 	}
 
 	/**
-	* Sets the message format of this message-boards message.
+	* Sets the format of this message-boards message.
 	*
-	* @param messageFormat the message format of this message-boards message
+	* @param format the format of this message-boards message
 	*/
-	public void setMessageFormat(java.lang.String messageFormat) {
-		_mbMessage.setMessageFormat(messageFormat);
+	public void setFormat(java.lang.String format) {
+		_mbMessage.setFormat(format);
 	}
 
 	/**
@@ -716,6 +716,10 @@ public class MBMessageWrapper implements MBMessage {
 
 	public boolean isDiscussion() {
 		return _mbMessage.isDiscussion();
+	}
+
+	public boolean isFormatBBCode() {
+		return _mbMessage.isFormatBBCode();
 	}
 
 	public boolean isReply() {

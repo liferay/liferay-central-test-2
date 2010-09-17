@@ -66,7 +66,7 @@ public class MBMessageJSONSerializer {
 		jsonObj.put("parentMessageId", model.getParentMessageId());
 		jsonObj.put("subject", model.getSubject());
 		jsonObj.put("body", model.getBody());
-		jsonObj.put("messageFormat", model.getMessageFormat());
+		jsonObj.put("format", model.getFormat());
 		jsonObj.put("attachments", model.getAttachments());
 		jsonObj.put("anonymous", model.getAnonymous());
 		jsonObj.put("priority", model.getPriority());

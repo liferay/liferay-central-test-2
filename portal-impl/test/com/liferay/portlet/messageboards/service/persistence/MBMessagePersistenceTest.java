@@ -80,7 +80,7 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		newMBMessage.setParentMessageId(nextLong());
 		newMBMessage.setSubject(randomString());
 		newMBMessage.setBody(randomString());
-		newMBMessage.setMessageFormat(randomString());
+		newMBMessage.setFormat(randomString());
 		newMBMessage.setAttachments(randomBoolean());
 		newMBMessage.setAnonymous(randomBoolean());
 		newMBMessage.setPriority(nextDouble());
@@ -118,8 +118,7 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 			newMBMessage.getParentMessageId());
 		assertEquals(existingMBMessage.getSubject(), newMBMessage.getSubject());
 		assertEquals(existingMBMessage.getBody(), newMBMessage.getBody());
-		assertEquals(existingMBMessage.getMessageFormat(),
-			newMBMessage.getMessageFormat());
+		assertEquals(existingMBMessage.getFormat(), newMBMessage.getFormat());
 		assertEquals(existingMBMessage.getAttachments(),
 			newMBMessage.getAttachments());
 		assertEquals(existingMBMessage.getAnonymous(),
@@ -222,7 +221,7 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		mbMessage.setParentMessageId(nextLong());
 		mbMessage.setSubject(randomString());
 		mbMessage.setBody(randomString());
-		mbMessage.setMessageFormat(randomString());
+		mbMessage.setFormat(randomString());
 		mbMessage.setAttachments(randomBoolean());
 		mbMessage.setAnonymous(randomBoolean());
 		mbMessage.setPriority(nextDouble());

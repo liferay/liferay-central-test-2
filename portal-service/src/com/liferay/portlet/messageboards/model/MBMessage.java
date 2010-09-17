@@ -55,6 +55,8 @@ public interface MBMessage extends MBMessageModel {
 
 	public boolean isDiscussion();
 
+	public boolean isFormatBBCode();
+
 	public boolean isReply();
 
 	public boolean isRoot();

@@ -612,7 +612,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		mbMessageImpl.setParentMessageId(mbMessage.getParentMessageId());
 		mbMessageImpl.setSubject(mbMessage.getSubject());
 		mbMessageImpl.setBody(mbMessage.getBody());
-		mbMessageImpl.setMessageFormat(mbMessage.getMessageFormat());
+		mbMessageImpl.setFormat(mbMessage.getFormat());
 		mbMessageImpl.setAttachments(mbMessage.isAttachments());
 		mbMessageImpl.setAnonymous(mbMessage.isAnonymous());
 		mbMessageImpl.setPriority(mbMessage.getPriority());

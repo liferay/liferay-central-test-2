@@ -51,6 +51,7 @@ public class MBMessageServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long groupId, long categoryId, long threadId, long parentMessageId,
 		java.lang.String subject, java.lang.String body,
+		java.lang.String format,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files,
 		boolean anonymous, double priority, boolean allowPingbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -58,50 +59,21 @@ public class MBMessageServiceUtil {
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addMessage(groupId, categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, allowPingbacks,
+			subject, body, format, files, anonymous, priority, allowPingbacks,
 			serviceContext);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		long groupId, long categoryId, long threadId, long parentMessageId,
-		java.lang.String subject, java.lang.String body,
-		java.lang.String messageFormat,
-		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files,
-		boolean anonymous, double priority, boolean allowPingbacks,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .addMessage(groupId, categoryId, threadId, parentMessageId,
-			subject, body, messageFormat, files, anonymous, priority,
-			allowPingbacks, serviceContext);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long groupId, long categoryId, java.lang.String subject,
-		java.lang.String body,
+		java.lang.String body, java.lang.String format,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files,
 		boolean anonymous, double priority, boolean allowPingbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addMessage(groupId, categoryId, subject, body, files,
-			anonymous, priority, allowPingbacks, serviceContext);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		long groupId, long categoryId, java.lang.String subject,
-		java.lang.String body, java.lang.String messageFormat,
-		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files,
-		boolean anonymous, double priority, boolean allowPingbacks,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .addMessage(groupId, categoryId, subject, body,
-			messageFormat, files, anonymous, priority, allowPingbacks,
-			serviceContext);
+				   .addMessage(groupId, categoryId, subject, body, format,
+			files, anonymous, priority, allowPingbacks, serviceContext);
 	}
 
 	public static void deleteDiscussionMessage(long groupId,

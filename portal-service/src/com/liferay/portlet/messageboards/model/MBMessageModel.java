@@ -308,19 +308,19 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 	public void setBody(String body);
 
 	/**
-	 * Gets the message format of this message-boards message.
+	 * Gets the format of this message-boards message.
 	 *
-	 * @return the message format of this message-boards message
+	 * @return the format of this message-boards message
 	 */
 	@AutoEscape
-	public String getMessageFormat();
+	public String getFormat();
 
 	/**
-	 * Sets the message format of this message-boards message.
+	 * Sets the format of this message-boards message.
 	 *
-	 * @param messageFormat the message format of this message-boards message
+	 * @param format the format of this message-boards message
 	 */
-	public void setMessageFormat(String messageFormat);
+	public void setFormat(String format);
 
 	/**
 	 * Gets the attachments of this message-boards message.
