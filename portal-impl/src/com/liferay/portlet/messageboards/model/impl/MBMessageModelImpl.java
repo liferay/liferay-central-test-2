@@ -78,6 +78,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 			{ "parentMessageId", new Integer(Types.BIGINT) },
 			{ "subject", new Integer(Types.VARCHAR) },
 			{ "body", new Integer(Types.CLOB) },
+			{ "messageFormat", new Integer(Types.VARCHAR) },
 			{ "attachments", new Integer(Types.BOOLEAN) },
 			{ "anonymous", new Integer(Types.BOOLEAN) },
 			{ "priority", new Integer(Types.DOUBLE) },
@@ -87,7 +88,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 			{ "statusByUserName", new Integer(Types.VARCHAR) },
 			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,categoryId LONG,threadId LONG,rootMessageId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN,priority DOUBLE,allowPingbacks BOOLEAN,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,categoryId LONG,threadId LONG,rootMessageId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,messageFormat VARCHAR(75) null,attachments BOOLEAN,anonymous BOOLEAN,priority DOUBLE,allowPingbacks BOOLEAN,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table MBMessage";
 	public static final String ORDER_BY_JPQL = " ORDER BY mbMessage.createDate ASC, mbMessage.messageId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY MBMessage.createDate ASC, MBMessage.messageId ASC";
@@ -126,6 +127,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		model.setParentMessageId(soapModel.getParentMessageId());
 		model.setSubject(soapModel.getSubject());
 		model.setBody(soapModel.getBody());
+		model.setMessageFormat(soapModel.getMessageFormat());
 		model.setAttachments(soapModel.getAttachments());
 		model.setAnonymous(soapModel.getAnonymous());
 		model.setPriority(soapModel.getPriority());
@@ -354,6 +356,19 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_body = body;
 	}
 
+	public String getMessageFormat() {
+		if (_messageFormat == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _messageFormat;
+		}
+	}
+
+	public void setMessageFormat(String messageFormat) {
+		_messageFormat = messageFormat;
+	}
+
 	public boolean getAttachments() {
 		return _attachments;
 	}
@@ -529,6 +544,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		clone.setParentMessageId(getParentMessageId());
 		clone.setSubject(getSubject());
 		clone.setBody(getBody());
+		clone.setMessageFormat(getMessageFormat());
 		clone.setAttachments(getAttachments());
 		clone.setAnonymous(getAnonymous());
 		clone.setPriority(getPriority());
@@ -596,7 +612,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(51);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -630,6 +646,8 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		sb.append(getSubject());
 		sb.append(", body=");
 		sb.append(getBody());
+		sb.append(", messageFormat=");
+		sb.append(getMessageFormat());
 		sb.append(", attachments=");
 		sb.append(getAttachments());
 		sb.append(", anonymous=");
@@ -652,7 +670,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(76);
+		StringBundler sb = new StringBundler(79);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.messageboards.model.MBMessage");
@@ -723,6 +741,10 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		sb.append(getBody());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>messageFormat</column-name><column-value><![CDATA[");
+		sb.append(getMessageFormat());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>attachments</column-name><column-value><![CDATA[");
 		sb.append(getAttachments());
 		sb.append("]]></column-value></column>");
@@ -780,6 +802,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	private long _parentMessageId;
 	private String _subject;
 	private String _body;
+	private String _messageFormat;
 	private boolean _attachments;
 	private boolean _anonymous;
 	private double _priority;

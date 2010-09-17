@@ -364,6 +364,24 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	/**
+	* Gets the message format of this message-boards message.
+	*
+	* @return the message format of this message-boards message
+	*/
+	public java.lang.String getMessageFormat() {
+		return _mbMessage.getMessageFormat();
+	}
+
+	/**
+	* Sets the message format of this message-boards message.
+	*
+	* @param messageFormat the message format of this message-boards message
+	*/
+	public void setMessageFormat(java.lang.String messageFormat) {
+		_mbMessage.setMessageFormat(messageFormat);
+	}
+
+	/**
 	* Gets the attachments of this message-boards message.
 	*
 	* @return the attachments of this message-boards message

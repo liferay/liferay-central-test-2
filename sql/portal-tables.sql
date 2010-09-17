@@ -881,6 +881,7 @@ create table MBMessage (
 	parentMessageId LONG,
 	subject VARCHAR(75) null,
 	body TEXT null,
+	messageFormat VARCHAR(75) null,
 	attachments BOOLEAN,
 	anonymous BOOLEAN,
 	priority DOUBLE,

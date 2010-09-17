@@ -1914,6 +1914,7 @@
 			<basic name="parentMessageId" />
 			<basic name="subject" />
 			<basic name="body" />
+			<basic name="messageFormat" />
 			<basic name="attachments" />
 			<basic name="anonymous" />
 			<basic name="priority" />

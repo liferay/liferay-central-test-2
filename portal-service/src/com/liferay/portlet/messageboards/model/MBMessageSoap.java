@@ -50,6 +50,7 @@ public class MBMessageSoap implements Serializable {
 		soapModel.setParentMessageId(model.getParentMessageId());
 		soapModel.setSubject(model.getSubject());
 		soapModel.setBody(model.getBody());
+		soapModel.setMessageFormat(model.getMessageFormat());
 		soapModel.setAttachments(model.getAttachments());
 		soapModel.setAnonymous(model.getAnonymous());
 		soapModel.setPriority(model.getPriority());
@@ -238,6 +239,14 @@ public class MBMessageSoap implements Serializable {
 		_body = body;
 	}
 
+	public String getMessageFormat() {
+		return _messageFormat;
+	}
+
+	public void setMessageFormat(String messageFormat) {
+		_messageFormat = messageFormat;
+	}
+
 	public boolean getAttachments() {
 		return _attachments;
 	}
@@ -330,6 +339,7 @@ public class MBMessageSoap implements Serializable {
 	private long _parentMessageId;
 	private String _subject;
 	private String _body;
+	private String _messageFormat;
 	private boolean _attachments;
 	private boolean _anonymous;
 	private double _priority;
