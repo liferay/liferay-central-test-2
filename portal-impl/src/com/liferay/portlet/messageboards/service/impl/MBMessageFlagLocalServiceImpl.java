@@ -61,8 +61,6 @@ public class MBMessageFlagLocalServiceImpl
 			messageFlag.setMessageId(messageId);
 			messageFlag.setFlag(flag);
 
-			mbMessageFlagPersistence.update(messageFlag, false);
-
 			try {
 				mbMessageFlagPersistence.update(messageFlag, false);
 			}
