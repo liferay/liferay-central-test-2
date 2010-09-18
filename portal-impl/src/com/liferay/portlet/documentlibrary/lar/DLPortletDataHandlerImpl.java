@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -618,11 +619,24 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			int count)
 		throws Exception {
 
+		return getFolderName(
+			companyId, groupId, parentFolderId, name, count, null);
+	}
+
+	protected static String getFolderName(
+			long companyId, long groupId, long parentFolderId, String name,
+			int count, String uuid)
+		throws Exception {
+
 		DLFolder folder = DLFolderUtil.fetchByG_P_N(
 			groupId, parentFolderId, name);
 
 		if (folder == null) {
 			return name;
+		}
+
+		if (Validator.isNotNull(uuid) && folder.getUuid().equals(uuid)) {
+			return folder.getName();
 		}
 
 		if (Pattern.matches(".* \\(\\d+\\)", name)) {
@@ -641,7 +655,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		name = sb.toString();
 
-		return getFolderName(companyId, groupId, parentFolderId, name, ++count);
+		return getFolderName(
+			companyId, groupId, parentFolderId, name, ++count, uuid);
 	}
 
 	protected static String getFolderPath(
@@ -875,9 +890,13 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					folder.getDescription(), serviceContext);
 			}
 			else {
+				String name = getFolderName(
+					context.getCompanyId(), context.getScopeGroupId(),
+					parentFolderId, folder.getName(), 2, folder.getUuid());
+
 				importedFolder = DLFolderLocalServiceUtil.updateFolder(
-					existingFolder.getFolderId(), parentFolderId,
-					folder.getName(), folder.getDescription(), serviceContext);
+					existingFolder.getFolderId(), parentFolderId, name,
+					folder.getDescription(), serviceContext);
 			}
 		}
 		else {
