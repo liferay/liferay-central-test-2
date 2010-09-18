@@ -636,7 +636,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		if (Validator.isNotNull(uuid) && folder.getUuid().equals(uuid)) {
-			return folder.getName();
+			return name;
 		}
 
 		if (Pattern.matches(".* \\(\\d+\\)", name)) {
