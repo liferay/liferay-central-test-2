@@ -159,18 +159,19 @@ public class JSPWikiEngine implements WikiEngine {
 				engine = _engines.get(nodeId);
 
 				if (engine == null) {
-					Properties nodeProps = new Properties(_props);
+					Properties nodeProperties = new Properties(_properties);
 
-					nodeProps.setProperty("nodeId", String.valueOf(nodeId));
+					nodeProperties.setProperty(
+						"nodeId", String.valueOf(nodeId));
 
-					String appName = nodeProps.getProperty(
+					String appName = nodeProperties.getProperty(
 						"jspwiki.applicationName");
 
-					nodeProps.setProperty(
-						"jspwiki.applicationName", appName + " for node " +
-						nodeId);
+					nodeProperties.setProperty(
+						"jspwiki.applicationName",
+						appName + " for node " + nodeId);
 
-					engine = new LiferayJSPWikiEngine(nodeProps);
+					engine = new LiferayJSPWikiEngine(nodeProperties);
 
 					_engines.put(nodeId, engine);
 				}
@@ -181,13 +182,13 @@ public class JSPWikiEngine implements WikiEngine {
 	}
 
 	protected synchronized void setProperties(String configuration) {
-		_props = new Properties();
+		_properties = new Properties();
 
 		InputStream is = new UnsyncByteArrayInputStream(
 			configuration.getBytes());
 
 		try {
-			_props.load(is);
+			_properties.load(is);
 		}
 		catch (IOException ioe) {
 			_log.error(ioe, ioe);
@@ -196,8 +197,8 @@ public class JSPWikiEngine implements WikiEngine {
 
 	private static Log _log = LogFactoryUtil.getLog(JSPWikiEngine.class);
 
-	private Properties _props;
-	private final Map<Long, LiferayJSPWikiEngine> _engines =
+	private Map<Long, LiferayJSPWikiEngine> _engines =
 		new ConcurrentHashMap<Long, LiferayJSPWikiEngine>();
+	private Properties _properties;
 
 }
