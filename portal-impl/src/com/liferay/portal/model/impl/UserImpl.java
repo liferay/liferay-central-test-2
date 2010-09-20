@@ -14,6 +14,9 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.cache.Lifecycle;
+import com.liferay.portal.kernel.cache.ThreadLocalCache;
+import com.liferay.portal.kernel.cache.ThreadLocalCacheManager;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -25,6 +28,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
@@ -253,6 +257,17 @@ public class UserImpl extends UserModelImpl implements User {
 			return myPlaces;
 		}
 
+		String cacheKey = StringUtil.toHexString(max);
+		ThreadLocalCache<List<Group>> myPlacesThreadLocalCache =
+			ThreadLocalCacheManager.getThreadLocalCache(
+				Lifecycle.REQUEST, _GET_MY_PLACES_CACHE_NAME);
+
+		List<Group> cachedMyPlaces = myPlacesThreadLocalCache.get(cacheKey);
+
+		if (cachedMyPlaces != null) {
+			return cachedMyPlaces;
+		}
+
 		int start = QueryUtil.ALL_POS;
 		int end = QueryUtil.ALL_POS;
 
@@ -303,6 +318,8 @@ public class UserImpl extends UserModelImpl implements User {
 		if ((max != QueryUtil.ALL_POS) && (myPlaces.size() > max)) {
 			myPlaces = ListUtil.subList(myPlaces, start, end);
 		}
+
+		myPlacesThreadLocalCache.put(cacheKey, myPlaces);
 
 		return myPlaces;
 	}
@@ -516,38 +533,18 @@ public class UserImpl extends UserModelImpl implements User {
 		return company.hasCompanyMx(emailAddress);
 	}
 
-	public boolean hasMyPlaces() throws SystemException {
+	public boolean hasMyPlaces() throws PortalException, SystemException {
 		if (isDefaultUser()) {
 			return false;
 		}
 
-		LinkedHashMap<String, Object> groupParams =
-			new LinkedHashMap<String, Object>();
-
-		groupParams.put("usersGroups", new Long(getUserId()));
-		//groupParams.put("pageCount", StringPool.BLANK);
-
-		int count = GroupLocalServiceUtil.searchCount(
-			getCompanyId(), null, null, groupParams);
-
-		if (count > 0) {
+		List<Group> groups = getMyPlaces(PropsValues.MY_PLACES_MAX_ELEMENTS);
+		if (groups.size() > 0) {
 			return true;
 		}
-
-		count = OrganizationLocalServiceUtil.getUserOrganizationsCount(
-			getUserId());
-
-		if (count > 0) {
-			return true;
+		else {
+			return false;
 		}
-
-		if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED ||
-			PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED) {
-
-			return true;
-		}
-
-		return false;
 	}
 
 	public boolean hasOrganization() throws PortalException, SystemException {
@@ -653,6 +650,8 @@ public class UserImpl extends UserModelImpl implements User {
 						currentValue, newValue));
 		}
 	}
+
+	private static final String _GET_MY_PLACES_CACHE_NAME = "GET_MY_PLACES";
 
 	private Locale _locale;
 	private boolean _passwordModified;

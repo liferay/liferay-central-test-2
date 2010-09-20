@@ -1064,7 +1064,8 @@ public class UserWrapper implements User {
 	}
 
 	public boolean hasMyPlaces()
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _user.hasMyPlaces();
 	}
 
