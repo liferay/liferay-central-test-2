@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
@@ -257,7 +256,7 @@ public class UserImpl extends UserModelImpl implements User {
 			return myPlaces;
 		}
 
-		String cacheKey = StringUtil.toHexString(max);
+		String cacheKey = String.valueOf(max);
 		ThreadLocalCache<List<Group>> myPlacesThreadLocalCache =
 			ThreadLocalCacheManager.getThreadLocalCache(
 				Lifecycle.REQUEST, _GET_MY_PLACES_CACHE_NAME);
