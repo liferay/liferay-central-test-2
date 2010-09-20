@@ -83,7 +83,7 @@ else if (tabs2.equals("message-updated-email")) {
 			<aui:fieldset>
 				<aui:input inlineLabel="left" name="allowAnonymousPosting" type="checkbox" value="<%= MBUtil.isAllowAnonymousPosting(preferences) %>" />
 
-				<aui:select name="message-format">
+				<aui:select name="messageFormat">
 
 					<%
 					for (int i = 0; i < MBMessageConstants.FORMATS.length; i++) {
