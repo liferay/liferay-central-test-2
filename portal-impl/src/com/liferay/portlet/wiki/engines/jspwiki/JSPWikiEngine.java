@@ -37,6 +37,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.PortletURL;
 
@@ -154,18 +155,26 @@ public class JSPWikiEngine implements WikiEngine {
 		LiferayJSPWikiEngine engine = _engines.get(nodeId);
 
 		if (engine == null) {
-			Properties nodeProps = new Properties(_props);
+			synchronized(_engines) {
+				engine = _engines.get(nodeId);
 
-			nodeProps.setProperty("nodeId", String.valueOf(nodeId));
+				if (engine == null) {
+					Properties nodeProps = new Properties(_props);
 
-			String appName = nodeProps.getProperty("jspwiki.applicationName");
+					nodeProps.setProperty("nodeId", String.valueOf(nodeId));
 
-			nodeProps.setProperty(
-				"jspwiki.applicationName", appName + " for node " + nodeId);
+					String appName = nodeProps.getProperty(
+						"jspwiki.applicationName");
 
-			engine = new LiferayJSPWikiEngine(nodeProps);
+					nodeProps.setProperty(
+						"jspwiki.applicationName", appName + " for node " +
+						nodeId);
 
-			_engines.put(nodeId, engine);
+					engine = new LiferayJSPWikiEngine(nodeProps);
+
+					_engines.put(nodeId, engine);
+				}
+			}
 		}
 
 		return engine;
@@ -188,7 +197,7 @@ public class JSPWikiEngine implements WikiEngine {
 	private static Log _log = LogFactoryUtil.getLog(JSPWikiEngine.class);
 
 	private Properties _props;
-	private Map<Long, LiferayJSPWikiEngine> _engines =
-		new HashMap<Long, LiferayJSPWikiEngine>();
+	private final Map<Long, LiferayJSPWikiEngine> _engines =
+		new ConcurrentHashMap<Long, LiferayJSPWikiEngine>();
 
 }
