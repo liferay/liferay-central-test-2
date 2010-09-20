@@ -615,17 +615,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static String getFolderName(
-			long companyId, long groupId, long parentFolderId, String name,
-			int count)
-		throws Exception {
-
-		return getFolderName(
-			companyId, groupId, parentFolderId, name, count, null);
-	}
-
-	protected static String getFolderName(
-			long companyId, long groupId, long parentFolderId, String name,
-			int count, String uuid)
+			String uuid, long companyId, long groupId, long parentFolderId,
+			String name, int count)
 		throws Exception {
 
 		DLFolder folder = DLFolderUtil.fetchByG_P_N(
@@ -635,7 +626,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			return name;
 		}
 
-		if (Validator.isNotNull(uuid) && folder.getUuid().equals(uuid)) {
+		if (Validator.isNotNull(uuid) && uuid.equals(folder.getUuid())) {
 			return name;
 		}
 
@@ -656,7 +647,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		name = sb.toString();
 
 		return getFolderName(
-			companyId, groupId, parentFolderId, name, ++count, uuid);
+			uuid, companyId, groupId, parentFolderId, name, ++count);
 	}
 
 	protected static String getFolderPath(
@@ -880,7 +871,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			if (existingFolder == null) {
 				String name = getFolderName(
-					context.getCompanyId(), context.getScopeGroupId(),
+					null, context.getCompanyId(), context.getScopeGroupId(),
 					parentFolderId, folder.getName(), 2);
 
 				serviceContext.setUuid(folder.getUuid());
@@ -891,8 +882,9 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 			else {
 				String name = getFolderName(
-					context.getCompanyId(), context.getScopeGroupId(),
-					parentFolderId, folder.getName(), 2, folder.getUuid());
+					folder.getUuid(), context.getCompanyId(),
+					context.getScopeGroupId(), parentFolderId, folder.getName(),
+					2);
 
 				importedFolder = DLFolderLocalServiceUtil.updateFolder(
 					existingFolder.getFolderId(), parentFolderId, name,
@@ -901,7 +893,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 		else {
 			String name = getFolderName(
-				context.getCompanyId(), context.getScopeGroupId(),
+				null, context.getCompanyId(), context.getScopeGroupId(),
 				parentFolderId, folder.getName(), 2);
 
 			importedFolder = DLFolderLocalServiceUtil.addFolder(
