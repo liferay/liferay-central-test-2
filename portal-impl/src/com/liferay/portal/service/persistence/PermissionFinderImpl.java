@@ -441,7 +441,7 @@ public class PermissionFinderImpl
 			List<Permission> permissions, List<Role> roles)
 		throws SystemException {
 
-		Object finderArgs[] = new Object[] {
+		Object[] finderArgs = new Object[] {
 			ListUtil.toString(permissions, "permissionId"),
 			ListUtil.toString(roles, "roleId")
 		};
@@ -696,7 +696,7 @@ public class PermissionFinderImpl
 	public List<Permission> findByA_R(String actionId, long[] resourceIds)
 		throws SystemException {
 
-		Object finderArgs[] = new Object[] {
+		Object[] finderArgs = new Object[] {
 			actionId, StringUtil.merge(ArrayUtil.toArray(resourceIds))
 		};
 
