@@ -245,7 +245,7 @@ public class UserImpl extends UserModelImpl implements User {
 	}
 
 	public List<Group> getMyPlaces() throws PortalException, SystemException {
-		return getMyPlaces(PropsValues.MY_PLACES_MAX_ELEMENTS);
+		return getMyPlaces(QueryUtil.ALL_POS);
 	}
 
 	public List<Group> getMyPlaces(int max)
