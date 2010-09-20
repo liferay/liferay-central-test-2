@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.ratings.service.persistence;
 
+import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
@@ -24,6 +25,8 @@ import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.impl.RatingsEntryImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -39,6 +42,29 @@ public class RatingsEntryFinderImpl extends BasePersistenceImpl<RatingsEntry>
 			long userId, long classNameId, List<Long> classPKs)
 		throws SystemException {
 
+		List<RatingsEntry> ratingsEntries = new ArrayList<RatingsEntry>();
+
+		List<Long> missedClassPKs = new ArrayList<Long>();
+
+		Object[] finderArgs = new Object[] { userId, classNameId, 0 };
+
+		for(Long classPk : classPKs) {
+			finderArgs[2] = classPk;
+			Object result = FinderCacheUtil.getResult(
+				RatingsEntryPersistenceImpl.FINDER_PATH_FETCH_BY_U_C_C,
+					finderArgs, this);
+			if (result == null) {
+				missedClassPKs.add(classPk);
+			}
+			else if (result instanceof RatingsEntry) {
+				ratingsEntries.add((RatingsEntry) result);
+			}
+		}
+
+		if (missedClassPKs.isEmpty()) {
+			return ratingsEntries;
+		}
+
 		Session session = null;
 
 		try {
@@ -47,7 +73,7 @@ public class RatingsEntryFinderImpl extends BasePersistenceImpl<RatingsEntry>
 			String sql = CustomSQLUtil.get(FIND_BY_U_C_C);
 
 			sql = StringUtil.replace(
-				sql, "[$CLASS_PKS$]", StringUtil.merge(classPKs));
+				sql, "[$CLASS_PKS$]", StringUtil.merge(missedClassPKs));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -58,7 +84,27 @@ public class RatingsEntryFinderImpl extends BasePersistenceImpl<RatingsEntry>
 			qPos.add(userId);
 			qPos.add(classNameId);
 
-			return q.list();
+			List<RatingsEntry> list = q.list();
+
+			if (list.isEmpty()) {
+				return ratingsEntries;
+			}
+
+			for(RatingsEntry ratingsEntry : list) {
+				RatingsEntryUtil.cacheResult(ratingsEntry);
+				missedClassPKs.remove(ratingsEntry.getClassPK());
+			}
+
+			for(Long missedClassPk : missedClassPKs) {
+				finderArgs[2] = missedClassPk;
+				FinderCacheUtil.putResult(
+					RatingsEntryPersistenceImpl.FINDER_PATH_FETCH_BY_U_C_C,
+						finderArgs, Collections.EMPTY_LIST);
+			}
+
+			ratingsEntries.addAll(list);
+
+			return ratingsEntries;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
