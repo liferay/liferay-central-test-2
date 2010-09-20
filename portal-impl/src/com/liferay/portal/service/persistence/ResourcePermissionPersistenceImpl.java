@@ -573,31 +573,31 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
+
+			query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
+
+			query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(2);
-				}
-
-				query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
-
-				query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -909,33 +909,33 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
+
+			query.append(_FINDER_COLUMN_R_S_ROLEID_2);
+
+			query.append(_FINDER_COLUMN_R_S_SCOPE_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(4 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(3);
-				}
-
-				query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
-
-				query.append(_FINDER_COLUMN_R_S_ROLEID_2);
-
-				query.append(_FINDER_COLUMN_R_S_SCOPE_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1265,45 +1265,45 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
+
+			query.append(_FINDER_COLUMN_C_N_S_COMPANYID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_C_N_S_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_N_S_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_N_S_NAME_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_C_N_S_SCOPE_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(5 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(4);
-				}
-
-				query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
-
-				query.append(_FINDER_COLUMN_C_N_S_COMPANYID_2);
-
-				if (name == null) {
-					query.append(_FINDER_COLUMN_C_N_S_NAME_1);
-				}
-				else {
-					if (name.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_N_S_NAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_N_S_NAME_2);
-					}
-				}
-
-				query.append(_FINDER_COLUMN_C_N_S_SCOPE_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1666,57 +1666,57 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(6 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
+
+			query.append(_FINDER_COLUMN_C_N_S_P_COMPANYID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_C_N_S_P_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_N_S_P_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_N_S_P_NAME_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_C_N_S_P_SCOPE_2);
+
+			if (primKey == null) {
+				query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_1);
+			}
+			else {
+				if (primKey.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_2);
+				}
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(6 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(5);
-				}
-
-				query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
-
-				query.append(_FINDER_COLUMN_C_N_S_P_COMPANYID_2);
-
-				if (name == null) {
-					query.append(_FINDER_COLUMN_C_N_S_P_NAME_1);
-				}
-				else {
-					if (name.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_N_S_P_NAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_N_S_P_NAME_2);
-					}
-				}
-
-				query.append(_FINDER_COLUMN_C_N_S_P_SCOPE_2);
-
-				if (primKey == null) {
-					query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_1);
-				}
-				else {
-					if (primKey.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_2);
-					}
-				}
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2132,46 +2132,46 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(6);
+
+			query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
+
+			query.append(_FINDER_COLUMN_C_N_S_P_R_COMPANYID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_C_N_S_P_R_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_N_S_P_R_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_N_S_P_R_NAME_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_C_N_S_P_R_SCOPE_2);
+
+			if (primKey == null) {
+				query.append(_FINDER_COLUMN_C_N_S_P_R_PRIMKEY_1);
+			}
+			else {
+				if (primKey.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_N_S_P_R_PRIMKEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_N_S_P_R_PRIMKEY_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_C_N_S_P_R_ROLEID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(6);
-
-				query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
-
-				query.append(_FINDER_COLUMN_C_N_S_P_R_COMPANYID_2);
-
-				if (name == null) {
-					query.append(_FINDER_COLUMN_C_N_S_P_R_NAME_1);
-				}
-				else {
-					if (name.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_N_S_P_R_NAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_N_S_P_R_NAME_2);
-					}
-				}
-
-				query.append(_FINDER_COLUMN_C_N_S_P_R_SCOPE_2);
-
-				if (primKey == null) {
-					query.append(_FINDER_COLUMN_C_N_S_P_R_PRIMKEY_1);
-				}
-				else {
-					if (primKey.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_N_S_P_R_PRIMKEY_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_N_S_P_R_PRIMKEY_2);
-					}
-				}
-
-				query.append(_FINDER_COLUMN_C_N_S_P_R_ROLEID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2293,28 +2293,28 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_RESOURCEPERMISSION);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_RESOURCEPERMISSION;
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_RESOURCEPERMISSION);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_RESOURCEPERMISSION;
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -2450,18 +2450,18 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_RESOURCEPERMISSION_WHERE);
+
+			query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_RESOURCEPERMISSION_WHERE);
-
-				query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2504,20 +2504,20 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_RESOURCEPERMISSION_WHERE);
+
+			query.append(_FINDER_COLUMN_R_S_ROLEID_2);
+
+			query.append(_FINDER_COLUMN_R_S_SCOPE_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_RESOURCEPERMISSION_WHERE);
-
-				query.append(_FINDER_COLUMN_R_S_ROLEID_2);
-
-				query.append(_FINDER_COLUMN_R_S_SCOPE_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2564,32 +2564,32 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_RESOURCEPERMISSION_WHERE);
+
+			query.append(_FINDER_COLUMN_C_N_S_COMPANYID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_C_N_S_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_N_S_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_N_S_NAME_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_C_N_S_SCOPE_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_COUNT_RESOURCEPERMISSION_WHERE);
-
-				query.append(_FINDER_COLUMN_C_N_S_COMPANYID_2);
-
-				if (name == null) {
-					query.append(_FINDER_COLUMN_C_N_S_NAME_1);
-				}
-				else {
-					if (name.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_N_S_NAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_N_S_NAME_2);
-					}
-				}
-
-				query.append(_FINDER_COLUMN_C_N_S_SCOPE_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2641,44 +2641,44 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(5);
+
+			query.append(_SQL_COUNT_RESOURCEPERMISSION_WHERE);
+
+			query.append(_FINDER_COLUMN_C_N_S_P_COMPANYID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_C_N_S_P_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_N_S_P_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_N_S_P_NAME_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_C_N_S_P_SCOPE_2);
+
+			if (primKey == null) {
+				query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_1);
+			}
+			else {
+				if (primKey.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(5);
-
-				query.append(_SQL_COUNT_RESOURCEPERMISSION_WHERE);
-
-				query.append(_FINDER_COLUMN_C_N_S_P_COMPANYID_2);
-
-				if (name == null) {
-					query.append(_FINDER_COLUMN_C_N_S_P_NAME_1);
-				}
-				else {
-					if (name.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_N_S_P_NAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_N_S_P_NAME_2);
-					}
-				}
-
-				query.append(_FINDER_COLUMN_C_N_S_P_SCOPE_2);
-
-				if (primKey == null) {
-					query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_1);
-				}
-				else {
-					if (primKey.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_N_S_P_PRIMKEY_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2737,46 +2737,46 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(6);
+
+			query.append(_SQL_COUNT_RESOURCEPERMISSION_WHERE);
+
+			query.append(_FINDER_COLUMN_C_N_S_P_R_COMPANYID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_C_N_S_P_R_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_N_S_P_R_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_N_S_P_R_NAME_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_C_N_S_P_R_SCOPE_2);
+
+			if (primKey == null) {
+				query.append(_FINDER_COLUMN_C_N_S_P_R_PRIMKEY_1);
+			}
+			else {
+				if (primKey.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_N_S_P_R_PRIMKEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_N_S_P_R_PRIMKEY_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_C_N_S_P_R_ROLEID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(6);
-
-				query.append(_SQL_COUNT_RESOURCEPERMISSION_WHERE);
-
-				query.append(_FINDER_COLUMN_C_N_S_P_R_COMPANYID_2);
-
-				if (name == null) {
-					query.append(_FINDER_COLUMN_C_N_S_P_R_NAME_1);
-				}
-				else {
-					if (name.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_N_S_P_R_NAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_N_S_P_R_NAME_2);
-					}
-				}
-
-				query.append(_FINDER_COLUMN_C_N_S_P_R_SCOPE_2);
-
-				if (primKey == null) {
-					query.append(_FINDER_COLUMN_C_N_S_P_R_PRIMKEY_1);
-				}
-				else {
-					if (primKey.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_N_S_P_R_PRIMKEY_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_N_S_P_R_PRIMKEY_2);
-					}
-				}
-
-				query.append(_FINDER_COLUMN_C_N_S_P_R_ROLEID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 

@@ -482,35 +482,35 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_WEBSITE_WHERE);
+
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(WebsiteModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(3);
-				}
-
-				query.append(_SQL_SELECT_WEBSITE_WHERE);
-
-				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(WebsiteModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -817,35 +817,35 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_WEBSITE_WHERE);
+
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(WebsiteModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(3);
-				}
-
-				query.append(_SQL_SELECT_WEBSITE_WHERE);
-
-				query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(WebsiteModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1156,37 +1156,37 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_WEBSITE_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(WebsiteModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(4 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(4);
-				}
-
-				query.append(_SQL_SELECT_WEBSITE_WHERE);
-
-				query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(WebsiteModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1518,39 +1518,39 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_SQL_SELECT_WEBSITE_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(WebsiteModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(5 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(5);
-				}
-
-				query.append(_SQL_SELECT_WEBSITE_WHERE);
-
-				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(WebsiteModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1902,41 +1902,41 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(6 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(6);
+			}
+
+			query.append(_SQL_SELECT_WEBSITE_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
+
+			query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(WebsiteModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(6 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(6);
-				}
-
-				query.append(_SQL_SELECT_WEBSITE_WHERE);
-
-				query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
-
-				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(WebsiteModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2284,28 +2284,28 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_WEBSITE);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_WEBSITE.concat(WebsiteModelImpl.ORDER_BY_JPQL);
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_WEBSITE);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_WEBSITE.concat(WebsiteModelImpl.ORDER_BY_JPQL);
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -2434,18 +2434,18 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_WEBSITE_WHERE);
+
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_WEBSITE_WHERE);
-
-				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2487,18 +2487,18 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_WEBSITE_WHERE);
+
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_WEBSITE_WHERE);
-
-				query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2542,20 +2542,20 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_WEBSITE_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_WEBSITE_WHERE);
-
-				query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2602,22 +2602,22 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_WEBSITE_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_COUNT_WEBSITE_WHERE);
-
-				query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2669,24 +2669,24 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(5);
+
+			query.append(_SQL_COUNT_WEBSITE_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
+
+			query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(5);
-
-				query.append(_SQL_COUNT_WEBSITE_WHERE);
-
-				query.append(_FINDER_COLUMN_C_C_C_P_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_C_C_C_P_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_C_C_C_P_CLASSPK_2);
-
-				query.append(_FINDER_COLUMN_C_C_C_P_PRIMARY_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 

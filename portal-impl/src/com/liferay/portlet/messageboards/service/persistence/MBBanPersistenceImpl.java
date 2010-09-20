@@ -494,31 +494,31 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
+
+			query.append(_SQL_SELECT_MBBAN_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(2);
-				}
-
-				query.append(_SQL_SELECT_MBBAN_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -820,31 +820,31 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
+
+			query.append(_SQL_SELECT_MBBAN_WHERE);
+
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(2);
-				}
-
-				query.append(_SQL_SELECT_MBBAN_WHERE);
-
-				query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1148,31 +1148,31 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
+
+			query.append(_SQL_SELECT_MBBAN_WHERE);
+
+			query.append(_FINDER_COLUMN_BANUSERID_BANUSERID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(2);
-				}
-
-				query.append(_SQL_SELECT_MBBAN_WHERE);
-
-				query.append(_FINDER_COLUMN_BANUSERID_BANUSERID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1487,20 +1487,20 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_MBBAN_WHERE);
+
+			query.append(_FINDER_COLUMN_G_B_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_B_BANUSERID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_MBBAN_WHERE);
-
-				query.append(_FINDER_COLUMN_G_B_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_B_BANUSERID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1606,28 +1606,28 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_MBBAN);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_MBBAN;
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_MBBAN);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_MBBAN;
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -1736,18 +1736,18 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_MBBAN_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_MBBAN_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1789,18 +1789,18 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_MBBAN_WHERE);
+
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_MBBAN_WHERE);
-
-				query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1842,18 +1842,18 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_MBBAN_WHERE);
+
+			query.append(_FINDER_COLUMN_BANUSERID_BANUSERID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_MBBAN_WHERE);
-
-				query.append(_FINDER_COLUMN_BANUSERID_BANUSERID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1897,20 +1897,20 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_MBBAN_WHERE);
+
+			query.append(_FINDER_COLUMN_G_B_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_B_BANUSERID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_MBBAN_WHERE);
-
-				query.append(_FINDER_COLUMN_G_B_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_B_BANUSERID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 

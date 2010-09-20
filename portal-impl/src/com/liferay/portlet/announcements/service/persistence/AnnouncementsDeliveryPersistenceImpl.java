@@ -494,31 +494,31 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
+
+			query.append(_SQL_SELECT_ANNOUNCEMENTSDELIVERY_WHERE);
+
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(2);
-				}
-
-				query.append(_SQL_SELECT_ANNOUNCEMENTSDELIVERY_WHERE);
-
-				query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -836,30 +836,30 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_ANNOUNCEMENTSDELIVERY_WHERE);
+
+			query.append(_FINDER_COLUMN_U_T_USERID_2);
+
+			if (type == null) {
+				query.append(_FINDER_COLUMN_U_T_TYPE_1);
+			}
+			else {
+				if (type.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_U_T_TYPE_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_U_T_TYPE_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_ANNOUNCEMENTSDELIVERY_WHERE);
-
-				query.append(_FINDER_COLUMN_U_T_USERID_2);
-
-				if (type == null) {
-					query.append(_FINDER_COLUMN_U_T_TYPE_1);
-				}
-				else {
-					if (type.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_U_T_TYPE_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_U_T_TYPE_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -969,28 +969,28 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_ANNOUNCEMENTSDELIVERY);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_ANNOUNCEMENTSDELIVERY;
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_ANNOUNCEMENTSDELIVERY);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_ANNOUNCEMENTSDELIVERY;
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -1075,18 +1075,18 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_ANNOUNCEMENTSDELIVERY_WHERE);
+
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_ANNOUNCEMENTSDELIVERY_WHERE);
-
-				query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1129,30 +1129,30 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_ANNOUNCEMENTSDELIVERY_WHERE);
+
+			query.append(_FINDER_COLUMN_U_T_USERID_2);
+
+			if (type == null) {
+				query.append(_FINDER_COLUMN_U_T_TYPE_1);
+			}
+			else {
+				if (type.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_U_T_TYPE_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_U_T_TYPE_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_ANNOUNCEMENTSDELIVERY_WHERE);
-
-				query.append(_FINDER_COLUMN_U_T_USERID_2);
-
-				if (type == null) {
-					query.append(_FINDER_COLUMN_U_T_TYPE_1);
-				}
-				else {
-					if (type.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_U_T_TYPE_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_U_T_TYPE_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 

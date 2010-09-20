@@ -630,20 +630,20 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
+
+			query.append(_FINDER_COLUMN_SMALLIMAGEID_SMALLIMAGEID_2);
+
+			query.append(ShoppingItemModelImpl.ORDER_BY_JPQL);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
-
-				query.append(_FINDER_COLUMN_SMALLIMAGEID_SMALLIMAGEID_2);
-
-				query.append(ShoppingItemModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -759,20 +759,20 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
+
+			query.append(_FINDER_COLUMN_MEDIUMIMAGEID_MEDIUMIMAGEID_2);
+
+			query.append(ShoppingItemModelImpl.ORDER_BY_JPQL);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
-
-				query.append(_FINDER_COLUMN_MEDIUMIMAGEID_MEDIUMIMAGEID_2);
-
-				query.append(ShoppingItemModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -888,20 +888,20 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
+
+			query.append(_FINDER_COLUMN_LARGEIMAGEID_LARGEIMAGEID_2);
+
+			query.append(ShoppingItemModelImpl.ORDER_BY_JPQL);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
-
-				query.append(_FINDER_COLUMN_LARGEIMAGEID_LARGEIMAGEID_2);
-
-				query.append(ShoppingItemModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1016,37 +1016,37 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(ShoppingItemModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(4 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(4);
-				}
-
-				query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
-
-				query.append(_FINDER_COLUMN_G_C_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(ShoppingItemModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1369,44 +1369,44 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			return findByG_C(groupId, categoryId, start, end, orderByComparator);
 		}
 
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_SHOPPINGITEM_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_SHOPPINGITEM_NO_INLINE_DISTINCT_WHERE);
+		}
+
+		query.append(_FINDER_COLUMN_G_C_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
+
+		if (orderByComparator != null) {
+			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+				orderByComparator);
+		}
+
+		else {
+			query.append(ShoppingItemModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				ShoppingItem.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
-
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			if (getDB().isSupportsInlineDistinct()) {
-				query.append(_FILTER_SQL_SELECT_SHOPPINGITEM_WHERE);
-			}
-			else {
-				query.append(_FILTER_SQL_SELECT_SHOPPINGITEM_NO_INLINE_DISTINCT_WHERE);
-			}
-
-			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(ShoppingItemModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					ShoppingItem.class.getName(), _FILTER_COLUMN_PK,
-					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -1498,32 +1498,32 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
+
+			query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
+
+			if (sku == null) {
+				query.append(_FINDER_COLUMN_C_S_SKU_1);
+			}
+			else {
+				if (sku.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_S_SKU_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_S_SKU_2);
+				}
+			}
+
+			query.append(ShoppingItemModelImpl.ORDER_BY_JPQL);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_SHOPPINGITEM_WHERE);
-
-				query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
-
-				if (sku == null) {
-					query.append(_FINDER_COLUMN_C_S_SKU_1);
-				}
-				else {
-					if (sku.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_S_SKU_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_S_SKU_2);
-					}
-				}
-
-				query.append(ShoppingItemModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1633,28 +1633,28 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_SHOPPINGITEM);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_SHOPPINGITEM.concat(ShoppingItemModelImpl.ORDER_BY_JPQL);
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_SHOPPINGITEM);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_SHOPPINGITEM.concat(ShoppingItemModelImpl.ORDER_BY_JPQL);
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -1780,18 +1780,18 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_SHOPPINGITEM_WHERE);
+
+			query.append(_FINDER_COLUMN_SMALLIMAGEID_SMALLIMAGEID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_SHOPPINGITEM_WHERE);
-
-				query.append(_FINDER_COLUMN_SMALLIMAGEID_SMALLIMAGEID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1834,18 +1834,18 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_SHOPPINGITEM_WHERE);
+
+			query.append(_FINDER_COLUMN_MEDIUMIMAGEID_MEDIUMIMAGEID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_SHOPPINGITEM_WHERE);
-
-				query.append(_FINDER_COLUMN_MEDIUMIMAGEID_MEDIUMIMAGEID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1887,18 +1887,18 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_SHOPPINGITEM_WHERE);
+
+			query.append(_FINDER_COLUMN_LARGEIMAGEID_LARGEIMAGEID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_SHOPPINGITEM_WHERE);
-
-				query.append(_FINDER_COLUMN_LARGEIMAGEID_LARGEIMAGEID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1942,20 +1942,20 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_SHOPPINGITEM_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_SHOPPINGITEM_WHERE);
-
-				query.append(_FINDER_COLUMN_G_C_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1999,22 +1999,22 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 			return countByG_C(groupId, categoryId);
 		}
 
+		StringBundler query = new StringBundler(3);
+
+		query.append(_FILTER_SQL_COUNT_SHOPPINGITEM_WHERE);
+
+		query.append(_FINDER_COLUMN_G_C_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				ShoppingItem.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
-
-			StringBundler query = new StringBundler(3);
-
-			query.append(_FILTER_SQL_COUNT_SHOPPINGITEM_WHERE);
-
-			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
-
-			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					ShoppingItem.class.getName(), _FILTER_COLUMN_PK,
-					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -2054,30 +2054,30 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_SHOPPINGITEM_WHERE);
+
+			query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
+
+			if (sku == null) {
+				query.append(_FINDER_COLUMN_C_S_SKU_1);
+			}
+			else {
+				if (sku.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_S_SKU_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_S_SKU_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_SHOPPINGITEM_WHERE);
-
-				query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
-
-				if (sku == null) {
-					query.append(_FINDER_COLUMN_C_S_SKU_1);
-				}
-				else {
-					if (sku.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_S_SKU_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_S_SKU_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 

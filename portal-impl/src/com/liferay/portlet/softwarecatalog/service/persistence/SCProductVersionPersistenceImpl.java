@@ -502,35 +502,35 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_SCPRODUCTVERSION_WHERE);
+
+			query.append(_FINDER_COLUMN_PRODUCTENTRYID_PRODUCTENTRYID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(SCProductVersionModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(3);
-				}
-
-				query.append(_SQL_SELECT_SCPRODUCTVERSION_WHERE);
-
-				query.append(_FINDER_COLUMN_PRODUCTENTRYID_PRODUCTENTRYID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(SCProductVersionModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -848,30 +848,30 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_SCPRODUCTVERSION_WHERE);
+
+			if (directDownloadURL == null) {
+				query.append(_FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_1);
+			}
+			else {
+				if (directDownloadURL.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_2);
+				}
+			}
+
+			query.append(SCProductVersionModelImpl.ORDER_BY_JPQL);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_SCPRODUCTVERSION_WHERE);
-
-				if (directDownloadURL == null) {
-					query.append(_FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_1);
-				}
-				else {
-					if (directDownloadURL.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_2);
-					}
-				}
-
-				query.append(SCProductVersionModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -979,28 +979,28 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_SCPRODUCTVERSION);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_SCPRODUCTVERSION.concat(SCProductVersionModelImpl.ORDER_BY_JPQL);
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_SCPRODUCTVERSION);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_SCPRODUCTVERSION.concat(SCProductVersionModelImpl.ORDER_BY_JPQL);
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -1087,18 +1087,18 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_SCPRODUCTVERSION_WHERE);
+
+			query.append(_FINDER_COLUMN_PRODUCTENTRYID_PRODUCTENTRYID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_SCPRODUCTVERSION_WHERE);
-
-				query.append(_FINDER_COLUMN_PRODUCTENTRYID_PRODUCTENTRYID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1141,28 +1141,28 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_SCPRODUCTVERSION_WHERE);
+
+			if (directDownloadURL == null) {
+				query.append(_FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_1);
+			}
+			else {
+				if (directDownloadURL.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_SCPRODUCTVERSION_WHERE);
-
-				if (directDownloadURL == null) {
-					query.append(_FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_1);
-				}
-				else {
-					if (directDownloadURL.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_DIRECTDOWNLOADURL_DIRECTDOWNLOADURL_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 

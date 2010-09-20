@@ -445,35 +445,35 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_ASSETTAG_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(AssetTagModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(3);
-				}
-
-				query.append(_SQL_SELECT_ASSETTAG_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(AssetTagModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -776,42 +776,42 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 			return findByGroupId(groupId, start, end, orderByComparator);
 		}
 
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(3 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_ASSETTAG_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_ASSETTAG_NO_INLINE_DISTINCT_WHERE);
+		}
+
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+		if (orderByComparator != null) {
+			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+				orderByComparator);
+		}
+
+		else {
+			query.append(AssetTagModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				AssetTag.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
-
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			if (getDB().isSupportsInlineDistinct()) {
-				query.append(_FILTER_SQL_SELECT_ASSETTAG_WHERE);
-			}
-			else {
-				query.append(_FILTER_SQL_SELECT_ASSETTAG_NO_INLINE_DISTINCT_WHERE);
-			}
-
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(AssetTagModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					AssetTag.class.getName(), _FILTER_COLUMN_PK,
-					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -881,28 +881,28 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_ASSETTAG);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_ASSETTAG.concat(AssetTagModelImpl.ORDER_BY_JPQL);
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_ASSETTAG);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_ASSETTAG.concat(AssetTagModelImpl.ORDER_BY_JPQL);
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -973,18 +973,18 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_ASSETTAG_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_ASSETTAG_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1024,20 +1024,20 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 			return countByGroupId(groupId);
 		}
 
+		StringBundler query = new StringBundler(2);
+
+		query.append(_FILTER_SQL_COUNT_ASSETTAG_WHERE);
+
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				AssetTag.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
-
-			StringBundler query = new StringBundler(2);
-
-			query.append(_FILTER_SQL_COUNT_ASSETTAG_WHERE);
-
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					AssetTag.class.getName(), _FILTER_COLUMN_PK,
-					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 

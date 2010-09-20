@@ -526,35 +526,35 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY_WHERE);
+
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(AssetCategoryPropertyModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(3);
-				}
-
-				query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY_WHERE);
-
-				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(AssetCategoryPropertyModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -867,35 +867,35 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY_WHERE);
+
+			query.append(_FINDER_COLUMN_CATEGORYID_CATEGORYID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(AssetCategoryPropertyModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(3);
-				}
-
-				query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY_WHERE);
-
-				query.append(_FINDER_COLUMN_CATEGORYID_CATEGORYID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(AssetCategoryPropertyModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1211,47 +1211,47 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY_WHERE);
+
+			query.append(_FINDER_COLUMN_C_K_COMPANYID_2);
+
+			if (key == null) {
+				query.append(_FINDER_COLUMN_C_K_KEY_1);
+			}
+			else {
+				if (key.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_K_KEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_K_KEY_2);
+				}
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(AssetCategoryPropertyModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(4 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(4);
-				}
-
-				query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY_WHERE);
-
-				query.append(_FINDER_COLUMN_C_K_COMPANYID_2);
-
-				if (key == null) {
-					query.append(_FINDER_COLUMN_C_K_KEY_1);
-				}
-				else {
-					if (key.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_K_KEY_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_K_KEY_2);
-					}
-				}
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(AssetCategoryPropertyModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1604,32 +1604,32 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY_WHERE);
+
+			query.append(_FINDER_COLUMN_CA_K_CATEGORYID_2);
+
+			if (key == null) {
+				query.append(_FINDER_COLUMN_CA_K_KEY_1);
+			}
+			else {
+				if (key.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_CA_K_KEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_CA_K_KEY_2);
+				}
+			}
+
+			query.append(AssetCategoryPropertyModelImpl.ORDER_BY_JPQL);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY_WHERE);
-
-				query.append(_FINDER_COLUMN_CA_K_CATEGORYID_2);
-
-				if (key == null) {
-					query.append(_FINDER_COLUMN_CA_K_KEY_1);
-				}
-				else {
-					if (key.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_CA_K_KEY_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_CA_K_KEY_2);
-					}
-				}
-
-				query.append(AssetCategoryPropertyModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1739,28 +1739,28 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_ASSETCATEGORYPROPERTY.concat(AssetCategoryPropertyModelImpl.ORDER_BY_JPQL);
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_ASSETCATEGORYPROPERTY);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_ASSETCATEGORYPROPERTY.concat(AssetCategoryPropertyModelImpl.ORDER_BY_JPQL);
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -1874,18 +1874,18 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_ASSETCATEGORYPROPERTY_WHERE);
+
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_ASSETCATEGORYPROPERTY_WHERE);
-
-				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1927,18 +1927,18 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_ASSETCATEGORYPROPERTY_WHERE);
+
+			query.append(_FINDER_COLUMN_CATEGORYID_CATEGORYID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_ASSETCATEGORYPROPERTY_WHERE);
-
-				query.append(_FINDER_COLUMN_CATEGORYID_CATEGORYID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1981,30 +1981,30 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_ASSETCATEGORYPROPERTY_WHERE);
+
+			query.append(_FINDER_COLUMN_C_K_COMPANYID_2);
+
+			if (key == null) {
+				query.append(_FINDER_COLUMN_C_K_KEY_1);
+			}
+			else {
+				if (key.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_K_KEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_K_KEY_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_ASSETCATEGORYPROPERTY_WHERE);
-
-				query.append(_FINDER_COLUMN_C_K_COMPANYID_2);
-
-				if (key == null) {
-					query.append(_FINDER_COLUMN_C_K_KEY_1);
-				}
-				else {
-					if (key.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_K_KEY_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_K_KEY_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2052,30 +2052,30 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_ASSETCATEGORYPROPERTY_WHERE);
+
+			query.append(_FINDER_COLUMN_CA_K_CATEGORYID_2);
+
+			if (key == null) {
+				query.append(_FINDER_COLUMN_CA_K_KEY_1);
+			}
+			else {
+				if (key.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_CA_K_KEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_CA_K_KEY_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_ASSETCATEGORYPROPERTY_WHERE);
-
-				query.append(_FINDER_COLUMN_CA_K_CATEGORYID_2);
-
-				if (key == null) {
-					query.append(_FINDER_COLUMN_CA_K_KEY_1);
-				}
-				else {
-					if (key.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_CA_K_KEY_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_CA_K_KEY_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 

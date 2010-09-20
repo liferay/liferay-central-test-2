@@ -492,41 +492,41 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
+
+			query.append(_SQL_SELECT_LOCK_WHERE);
+
+			if (uuid == null) {
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
+			}
+			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
+				}
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(2);
-				}
-
-				query.append(_SQL_SELECT_LOCK_WHERE);
-
-				if (uuid == null) {
-					query.append(_FINDER_COLUMN_UUID_UUID_1);
-				}
-				else {
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_UUID_UUID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_UUID_UUID_2);
-					}
-				}
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -842,36 +842,36 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
+
+			query.append(_SQL_SELECT_LOCK_WHERE);
+
+			if (expirationDate == null) {
+				query.append(_FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_1);
+			}
+			else {
+				query.append(_FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_2);
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(2);
-				}
-
-				query.append(_SQL_SELECT_LOCK_WHERE);
-
-				if (expirationDate == null) {
-					query.append(_FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_1);
-				}
-				else {
-					query.append(_FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_2);
-				}
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1197,40 +1197,40 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_LOCK_WHERE);
+
+			if (className == null) {
+				query.append(_FINDER_COLUMN_C_K_CLASSNAME_1);
+			}
+			else {
+				if (className.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_K_CLASSNAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_K_CLASSNAME_2);
+				}
+			}
+
+			if (key == null) {
+				query.append(_FINDER_COLUMN_C_K_KEY_1);
+			}
+			else {
+				if (key.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_K_KEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_K_KEY_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_LOCK_WHERE);
-
-				if (className == null) {
-					query.append(_FINDER_COLUMN_C_K_CLASSNAME_1);
-				}
-				else {
-					if (className.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_K_CLASSNAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_K_CLASSNAME_2);
-					}
-				}
-
-				if (key == null) {
-					query.append(_FINDER_COLUMN_C_K_KEY_1);
-				}
-				else {
-					if (key.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_K_KEY_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_K_KEY_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1342,28 +1342,28 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_LOCK);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_LOCK;
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_LOCK);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_LOCK;
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -1461,28 +1461,28 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_LOCK_WHERE);
+
+			if (uuid == null) {
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
+			}
+			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_LOCK_WHERE);
-
-				if (uuid == null) {
-					query.append(_FINDER_COLUMN_UUID_UUID_1);
-				}
-				else {
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_UUID_UUID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_UUID_UUID_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1527,23 +1527,23 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_LOCK_WHERE);
+
+			if (expirationDate == null) {
+				query.append(_FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_1);
+			}
+			else {
+				query.append(_FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_2);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_LOCK_WHERE);
-
-				if (expirationDate == null) {
-					query.append(_FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_1);
-				}
-				else {
-					query.append(_FINDER_COLUMN_LTEXPIRATIONDATE_EXPIRATIONDATE_2);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1589,40 +1589,40 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_LOCK_WHERE);
+
+			if (className == null) {
+				query.append(_FINDER_COLUMN_C_K_CLASSNAME_1);
+			}
+			else {
+				if (className.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_K_CLASSNAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_K_CLASSNAME_2);
+				}
+			}
+
+			if (key == null) {
+				query.append(_FINDER_COLUMN_C_K_KEY_1);
+			}
+			else {
+				if (key.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_K_KEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_K_KEY_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_LOCK_WHERE);
-
-				if (className == null) {
-					query.append(_FINDER_COLUMN_C_K_CLASSNAME_1);
-				}
-				else {
-					if (className.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_K_CLASSNAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_K_CLASSNAME_2);
-					}
-				}
-
-				if (key == null) {
-					query.append(_FINDER_COLUMN_C_K_KEY_1);
-				}
-				else {
-					if (key.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_K_KEY_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_K_KEY_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 

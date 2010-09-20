@@ -481,31 +481,31 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
+
+			query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
+
+			query.append(_FINDER_COLUMN_USERGROUPID_USERGROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(2);
-				}
-
-				query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
-
-				query.append(_FINDER_COLUMN_USERGROUPID_USERGROUPID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -812,31 +812,31 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
+
+			query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(2);
-				}
-
-				query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1143,31 +1143,31 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
+
+			query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
+
+			query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(2);
-				}
-
-				query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
-
-				query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1479,33 +1479,33 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
+
+			query.append(_FINDER_COLUMN_U_G_USERGROUPID_2);
+
+			query.append(_FINDER_COLUMN_U_G_GROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(4 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(3);
-				}
-
-				query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
-
-				query.append(_FINDER_COLUMN_U_G_USERGROUPID_2);
-
-				query.append(_FINDER_COLUMN_U_G_GROUPID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1832,33 +1832,33 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_R_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_R_ROLEID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(4 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(3);
-				}
-
-				query.append(_SQL_SELECT_USERGROUPGROUPROLE_WHERE);
-
-				query.append(_FINDER_COLUMN_G_R_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_R_ROLEID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2174,28 +2174,28 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_USERGROUPGROUPROLE);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_USERGROUPGROUPROLE;
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_USERGROUPGROUPROLE);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_USERGROUPGROUPROLE;
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -2320,18 +2320,18 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_USERGROUPGROUPROLE_WHERE);
+
+			query.append(_FINDER_COLUMN_USERGROUPID_USERGROUPID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_USERGROUPGROUPROLE_WHERE);
-
-				query.append(_FINDER_COLUMN_USERGROUPID_USERGROUPID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2373,18 +2373,18 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_USERGROUPGROUPROLE_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_USERGROUPGROUPROLE_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2426,18 +2426,18 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_USERGROUPGROUPROLE_WHERE);
+
+			query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_USERGROUPGROUPROLE_WHERE);
-
-				query.append(_FINDER_COLUMN_ROLEID_ROLEID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2481,20 +2481,20 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_USERGROUPGROUPROLE_WHERE);
+
+			query.append(_FINDER_COLUMN_U_G_USERGROUPID_2);
+
+			query.append(_FINDER_COLUMN_U_G_GROUPID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_USERGROUPGROUPROLE_WHERE);
-
-				query.append(_FINDER_COLUMN_U_G_USERGROUPID_2);
-
-				query.append(_FINDER_COLUMN_U_G_GROUPID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2539,20 +2539,20 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_USERGROUPGROUPROLE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_R_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_R_ROLEID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_USERGROUPGROUPROLE_WHERE);
-
-				query.append(_FINDER_COLUMN_G_R_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_R_ROLEID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 

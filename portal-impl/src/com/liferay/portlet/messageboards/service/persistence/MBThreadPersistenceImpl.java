@@ -538,35 +538,35 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(3);
-				}
-
-				query.append(_SQL_SELECT_MBTHREAD_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(MBThreadModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -879,37 +879,37 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(4 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(4);
-				}
-
-				query.append(_SQL_SELECT_MBTHREAD_WHERE);
-
-				query.append(_FINDER_COLUMN_G_C_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(MBThreadModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1243,55 +1243,55 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (list == null) {
-			Session session = null;
+			StringBundler query = new StringBundler();
 
-			try {
-				session = openSession();
+			query.append(_SQL_SELECT_MBTHREAD_WHERE);
 
-				StringBundler query = new StringBundler();
+			boolean conjunctionable = false;
 
-				query.append(_SQL_SELECT_MBTHREAD_WHERE);
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
 
-				boolean conjunctionable = false;
+			query.append(_FINDER_COLUMN_G_C_GROUPID_5);
 
+			conjunctionable = true;
+
+			if ((categoryIds == null) || (categoryIds.length > 0)) {
 				if (conjunctionable) {
 					query.append(WHERE_AND);
 				}
 
-				query.append(_FINDER_COLUMN_G_C_GROUPID_5);
+				query.append(StringPool.OPEN_PARENTHESIS);
+
+				for (int i = 0; i < categoryIds.length; i++) {
+					query.append(_FINDER_COLUMN_G_C_CATEGORYID_5);
+
+					if ((i + 1) < categoryIds.length) {
+						query.append(WHERE_OR);
+					}
+				}
+
+				query.append(StringPool.CLOSE_PARENTHESIS);
 
 				conjunctionable = true;
+			}
 
-				if ((categoryIds == null) || (categoryIds.length > 0)) {
-					if (conjunctionable) {
-						query.append(WHERE_AND);
-					}
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
 
-					query.append(StringPool.OPEN_PARENTHESIS);
+			else {
+				query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+			}
 
-					for (int i = 0; i < categoryIds.length; i++) {
-						query.append(_FINDER_COLUMN_G_C_CATEGORYID_5);
+			String sql = query.toString();
 
-						if ((i + 1) < categoryIds.length) {
-							query.append(WHERE_OR);
-						}
-					}
+			Session session = null;
 
-					query.append(StringPool.CLOSE_PARENTHESIS);
-
-					conjunctionable = true;
-				}
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(MBThreadModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
+			try {
+				session = openSession();
 
 				Query q = session.createQuery(sql);
 
@@ -1388,37 +1388,37 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+			query.append(_FINDER_COLUMN_G_NOTC_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_NOTC_CATEGORYID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(4 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(4);
-				}
-
-				query.append(_SQL_SELECT_MBTHREAD_WHERE);
-
-				query.append(_FINDER_COLUMN_G_NOTC_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_NOTC_CATEGORYID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(MBThreadModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1747,37 +1747,37 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_S_STATUS_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(4 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(4);
-				}
-
-				query.append(_SQL_SELECT_MBTHREAD_WHERE);
-
-				query.append(_FINDER_COLUMN_G_S_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_S_STATUS_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(MBThreadModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2106,37 +2106,37 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+			query.append(_FINDER_COLUMN_C_P_CATEGORYID_2);
+
+			query.append(_FINDER_COLUMN_C_P_PRIORITY_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(4 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(4);
-				}
-
-				query.append(_SQL_SELECT_MBTHREAD_WHERE);
-
-				query.append(_FINDER_COLUMN_C_P_CATEGORYID_2);
-
-				query.append(_FINDER_COLUMN_C_P_PRIORITY_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(MBThreadModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2469,44 +2469,44 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_L_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_L_CATEGORYID_2);
+
+			if (lastPostDate == null) {
+				query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_1);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_2);
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(5 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(5);
-				}
-
-				query.append(_SQL_SELECT_MBTHREAD_WHERE);
-
-				query.append(_FINDER_COLUMN_G_C_L_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_C_L_CATEGORYID_2);
-
-				if (lastPostDate == null) {
-					query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_1);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_2);
-				}
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(MBThreadModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2863,39 +2863,39 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_S_CATEGORYID_2);
+
+			query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(5 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(5);
-				}
-
-				query.append(_SQL_SELECT_MBTHREAD_WHERE);
-
-				query.append(_FINDER_COLUMN_G_C_S_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_C_S_CATEGORYID_2);
-
-				query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(MBThreadModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -3247,63 +3247,63 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = new StringBundler();
+
+			query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+			boolean conjunctionable = false;
+
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
+
+			query.append(_FINDER_COLUMN_G_C_S_GROUPID_5);
+
+			conjunctionable = true;
+
+			if ((categoryIds == null) || (categoryIds.length > 0)) {
+				if (conjunctionable) {
+					query.append(WHERE_AND);
+				}
+
+				query.append(StringPool.OPEN_PARENTHESIS);
+
+				for (int i = 0; i < categoryIds.length; i++) {
+					query.append(_FINDER_COLUMN_G_C_S_CATEGORYID_5);
+
+					if ((i + 1) < categoryIds.length) {
+						query.append(WHERE_OR);
+					}
+				}
+
+				query.append(StringPool.CLOSE_PARENTHESIS);
+
+				conjunctionable = true;
+			}
+
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
+
+			query.append(_FINDER_COLUMN_G_C_S_STATUS_5);
+
+			conjunctionable = true;
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_SELECT_MBTHREAD_WHERE);
-
-				boolean conjunctionable = false;
-
-				if (conjunctionable) {
-					query.append(WHERE_AND);
-				}
-
-				query.append(_FINDER_COLUMN_G_C_S_GROUPID_5);
-
-				conjunctionable = true;
-
-				if ((categoryIds == null) || (categoryIds.length > 0)) {
-					if (conjunctionable) {
-						query.append(WHERE_AND);
-					}
-
-					query.append(StringPool.OPEN_PARENTHESIS);
-
-					for (int i = 0; i < categoryIds.length; i++) {
-						query.append(_FINDER_COLUMN_G_C_S_CATEGORYID_5);
-
-						if ((i + 1) < categoryIds.length) {
-							query.append(WHERE_OR);
-						}
-					}
-
-					query.append(StringPool.CLOSE_PARENTHESIS);
-
-					conjunctionable = true;
-				}
-
-				if (conjunctionable) {
-					query.append(WHERE_AND);
-				}
-
-				query.append(_FINDER_COLUMN_G_C_S_STATUS_5);
-
-				conjunctionable = true;
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(MBThreadModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -3405,39 +3405,39 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_SQL_SELECT_MBTHREAD_WHERE);
+
+			query.append(_FINDER_COLUMN_G_NOTC_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_NOTC_S_CATEGORYID_2);
+
+			query.append(_FINDER_COLUMN_G_NOTC_S_STATUS_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBThreadModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(5 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(5);
-				}
-
-				query.append(_SQL_SELECT_MBTHREAD_WHERE);
-
-				query.append(_FINDER_COLUMN_G_NOTC_S_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_NOTC_S_CATEGORYID_2);
-
-				query.append(_FINDER_COLUMN_G_NOTC_S_STATUS_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(MBThreadModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -3770,28 +3770,28 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_MBTHREAD);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_MBTHREAD.concat(MBThreadModelImpl.ORDER_BY_JPQL);
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_MBTHREAD);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_MBTHREAD.concat(MBThreadModelImpl.ORDER_BY_JPQL);
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -3962,18 +3962,18 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_MBTHREAD_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_MBTHREAD_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -4017,20 +4017,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_MBTHREAD_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_MBTHREAD_WHERE);
-
-				query.append(_FINDER_COLUMN_G_C_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_C_CATEGORYID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -4078,46 +4078,46 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (count == null) {
-			Session session = null;
+			StringBundler query = new StringBundler();
 
-			try {
-				session = openSession();
+			query.append(_SQL_COUNT_MBTHREAD_WHERE);
 
-				StringBundler query = new StringBundler();
+			boolean conjunctionable = false;
 
-				query.append(_SQL_COUNT_MBTHREAD_WHERE);
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
 
-				boolean conjunctionable = false;
+			query.append(_FINDER_COLUMN_G_C_GROUPID_5);
 
+			conjunctionable = true;
+
+			if ((categoryIds == null) || (categoryIds.length > 0)) {
 				if (conjunctionable) {
 					query.append(WHERE_AND);
 				}
 
-				query.append(_FINDER_COLUMN_G_C_GROUPID_5);
+				query.append(StringPool.OPEN_PARENTHESIS);
 
-				conjunctionable = true;
+				for (int i = 0; i < categoryIds.length; i++) {
+					query.append(_FINDER_COLUMN_G_C_CATEGORYID_5);
 
-				if ((categoryIds == null) || (categoryIds.length > 0)) {
-					if (conjunctionable) {
-						query.append(WHERE_AND);
+					if ((i + 1) < categoryIds.length) {
+						query.append(WHERE_OR);
 					}
-
-					query.append(StringPool.OPEN_PARENTHESIS);
-
-					for (int i = 0; i < categoryIds.length; i++) {
-						query.append(_FINDER_COLUMN_G_C_CATEGORYID_5);
-
-						if ((i + 1) < categoryIds.length) {
-							query.append(WHERE_OR);
-						}
-					}
-
-					query.append(StringPool.CLOSE_PARENTHESIS);
-
-					conjunctionable = true;
 				}
 
-				String sql = query.toString();
+				query.append(StringPool.CLOSE_PARENTHESIS);
+
+				conjunctionable = true;
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
 
 				Query q = session.createQuery(sql);
 
@@ -4165,20 +4165,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_MBTHREAD_WHERE);
+
+			query.append(_FINDER_COLUMN_G_NOTC_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_NOTC_CATEGORYID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_MBTHREAD_WHERE);
-
-				query.append(_FINDER_COLUMN_G_NOTC_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_NOTC_CATEGORYID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -4223,20 +4223,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_MBTHREAD_WHERE);
+
+			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_S_STATUS_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_MBTHREAD_WHERE);
-
-				query.append(_FINDER_COLUMN_G_S_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_S_STATUS_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -4282,20 +4282,20 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_MBTHREAD_WHERE);
+
+			query.append(_FINDER_COLUMN_C_P_CATEGORYID_2);
+
+			query.append(_FINDER_COLUMN_C_P_PRIORITY_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_MBTHREAD_WHERE);
-
-				query.append(_FINDER_COLUMN_C_P_CATEGORYID_2);
-
-				query.append(_FINDER_COLUMN_C_P_PRIORITY_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -4342,27 +4342,27 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_MBTHREAD_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_L_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_L_CATEGORYID_2);
+
+			if (lastPostDate == null) {
+				query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_1);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_2);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_COUNT_MBTHREAD_WHERE);
-
-				query.append(_FINDER_COLUMN_G_C_L_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_C_L_CATEGORYID_2);
-
-				if (lastPostDate == null) {
-					query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_1);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_C_L_LASTPOSTDATE_2);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -4413,22 +4413,22 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_MBTHREAD_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_S_CATEGORYID_2);
+
+			query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_COUNT_MBTHREAD_WHERE);
-
-				query.append(_FINDER_COLUMN_G_C_S_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_C_S_CATEGORYID_2);
-
-				query.append(_FINDER_COLUMN_G_C_S_STATUS_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -4479,54 +4479,54 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler();
+
+			query.append(_SQL_COUNT_MBTHREAD_WHERE);
+
+			boolean conjunctionable = false;
+
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
+
+			query.append(_FINDER_COLUMN_G_C_S_GROUPID_5);
+
+			conjunctionable = true;
+
+			if ((categoryIds == null) || (categoryIds.length > 0)) {
+				if (conjunctionable) {
+					query.append(WHERE_AND);
+				}
+
+				query.append(StringPool.OPEN_PARENTHESIS);
+
+				for (int i = 0; i < categoryIds.length; i++) {
+					query.append(_FINDER_COLUMN_G_C_S_CATEGORYID_5);
+
+					if ((i + 1) < categoryIds.length) {
+						query.append(WHERE_OR);
+					}
+				}
+
+				query.append(StringPool.CLOSE_PARENTHESIS);
+
+				conjunctionable = true;
+			}
+
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
+
+			query.append(_FINDER_COLUMN_G_C_S_STATUS_5);
+
+			conjunctionable = true;
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler();
-
-				query.append(_SQL_COUNT_MBTHREAD_WHERE);
-
-				boolean conjunctionable = false;
-
-				if (conjunctionable) {
-					query.append(WHERE_AND);
-				}
-
-				query.append(_FINDER_COLUMN_G_C_S_GROUPID_5);
-
-				conjunctionable = true;
-
-				if ((categoryIds == null) || (categoryIds.length > 0)) {
-					if (conjunctionable) {
-						query.append(WHERE_AND);
-					}
-
-					query.append(StringPool.OPEN_PARENTHESIS);
-
-					for (int i = 0; i < categoryIds.length; i++) {
-						query.append(_FINDER_COLUMN_G_C_S_CATEGORYID_5);
-
-						if ((i + 1) < categoryIds.length) {
-							query.append(WHERE_OR);
-						}
-					}
-
-					query.append(StringPool.CLOSE_PARENTHESIS);
-
-					conjunctionable = true;
-				}
-
-				if (conjunctionable) {
-					query.append(WHERE_AND);
-				}
-
-				query.append(_FINDER_COLUMN_G_C_S_STATUS_5);
-
-				conjunctionable = true;
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -4577,22 +4577,22 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_MBTHREAD_WHERE);
+
+			query.append(_FINDER_COLUMN_G_NOTC_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_NOTC_S_CATEGORYID_2);
+
+			query.append(_FINDER_COLUMN_G_NOTC_S_STATUS_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_COUNT_MBTHREAD_WHERE);
-
-				query.append(_FINDER_COLUMN_G_NOTC_S_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_NOTC_S_CATEGORYID_2);
-
-				query.append(_FINDER_COLUMN_G_NOTC_S_STATUS_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 

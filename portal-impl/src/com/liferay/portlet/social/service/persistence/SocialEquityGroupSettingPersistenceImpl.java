@@ -510,22 +510,22 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_SOCIALEQUITYGROUPSETTING_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_T_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_T_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_G_C_T_TYPE_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_SOCIALEQUITYGROUPSETTING_WHERE);
-
-				query.append(_FINDER_COLUMN_G_C_T_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_C_T_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_G_C_T_TYPE_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -635,28 +635,28 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_SOCIALEQUITYGROUPSETTING);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_SOCIALEQUITYGROUPSETTING;
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_SOCIALEQUITYGROUPSETTING);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_SOCIALEQUITYGROUPSETTING;
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -734,22 +734,22 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_SOCIALEQUITYGROUPSETTING_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_T_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_T_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_G_C_T_TYPE_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_COUNT_SOCIALEQUITYGROUPSETTING_WHERE);
-
-				query.append(_FINDER_COLUMN_G_C_T_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_C_T_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_G_C_T_TYPE_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 

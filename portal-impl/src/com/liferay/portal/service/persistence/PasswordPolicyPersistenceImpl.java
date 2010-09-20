@@ -560,20 +560,20 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_PASSWORDPOLICY_WHERE);
+
+			query.append(_FINDER_COLUMN_C_DP_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_DP_DEFAULTPOLICY_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_PASSWORDPOLICY_WHERE);
-
-				query.append(_FINDER_COLUMN_C_DP_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_C_DP_DEFAULTPOLICY_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -698,30 +698,30 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_PASSWORDPOLICY_WHERE);
+
+			query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_C_N_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_N_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_N_NAME_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_PASSWORDPOLICY_WHERE);
-
-				query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
-
-				if (name == null) {
-					query.append(_FINDER_COLUMN_C_N_NAME_1);
-				}
-				else {
-					if (name.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_N_NAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_N_NAME_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -831,28 +831,28 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_PASSWORDPOLICY);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_PASSWORDPOLICY;
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_PASSWORDPOLICY);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_PASSWORDPOLICY;
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -941,20 +941,20 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_PASSWORDPOLICY_WHERE);
+
+			query.append(_FINDER_COLUMN_C_DP_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_DP_DEFAULTPOLICY_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_PASSWORDPOLICY_WHERE);
-
-				query.append(_FINDER_COLUMN_C_DP_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_C_DP_DEFAULTPOLICY_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1000,30 +1000,30 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_PASSWORDPOLICY_WHERE);
+
+			query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_C_N_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_N_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_N_NAME_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_PASSWORDPOLICY_WHERE);
-
-				query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
-
-				if (name == null) {
-					query.append(_FINDER_COLUMN_C_N_NAME_1);
-				}
-				else {
-					if (name.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_N_NAME_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_N_NAME_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 

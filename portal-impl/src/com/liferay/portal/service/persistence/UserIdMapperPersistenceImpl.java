@@ -538,31 +538,31 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
+
+			query.append(_SQL_SELECT_USERIDMAPPER_WHERE);
+
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(2);
-				}
-
-				query.append(_SQL_SELECT_USERIDMAPPER_WHERE);
-
-				query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -879,30 +879,30 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_USERIDMAPPER_WHERE);
+
+			query.append(_FINDER_COLUMN_U_T_USERID_2);
+
+			if (type == null) {
+				query.append(_FINDER_COLUMN_U_T_TYPE_1);
+			}
+			else {
+				if (type.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_U_T_TYPE_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_U_T_TYPE_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_USERIDMAPPER_WHERE);
-
-				query.append(_FINDER_COLUMN_U_T_USERID_2);
-
-				if (type == null) {
-					query.append(_FINDER_COLUMN_U_T_TYPE_1);
-				}
-				else {
-					if (type.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_U_T_TYPE_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_U_T_TYPE_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1030,40 +1030,40 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_USERIDMAPPER_WHERE);
+
+			if (type == null) {
+				query.append(_FINDER_COLUMN_T_E_TYPE_1);
+			}
+			else {
+				if (type.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_T_E_TYPE_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_T_E_TYPE_2);
+				}
+			}
+
+			if (externalUserId == null) {
+				query.append(_FINDER_COLUMN_T_E_EXTERNALUSERID_1);
+			}
+			else {
+				if (externalUserId.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_T_E_EXTERNALUSERID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_T_E_EXTERNALUSERID_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_USERIDMAPPER_WHERE);
-
-				if (type == null) {
-					query.append(_FINDER_COLUMN_T_E_TYPE_1);
-				}
-				else {
-					if (type.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_T_E_TYPE_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_T_E_TYPE_2);
-					}
-				}
-
-				if (externalUserId == null) {
-					query.append(_FINDER_COLUMN_T_E_EXTERNALUSERID_1);
-				}
-				else {
-					if (externalUserId.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_T_E_EXTERNALUSERID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_T_E_EXTERNALUSERID_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1177,28 +1177,28 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_USERIDMAPPER);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_USERIDMAPPER;
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_USERIDMAPPER);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_USERIDMAPPER;
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -1297,18 +1297,18 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_USERIDMAPPER_WHERE);
+
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_USERIDMAPPER_WHERE);
-
-				query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1351,30 +1351,30 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_USERIDMAPPER_WHERE);
+
+			query.append(_FINDER_COLUMN_U_T_USERID_2);
+
+			if (type == null) {
+				query.append(_FINDER_COLUMN_U_T_TYPE_1);
+			}
+			else {
+				if (type.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_U_T_TYPE_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_U_T_TYPE_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_USERIDMAPPER_WHERE);
-
-				query.append(_FINDER_COLUMN_U_T_USERID_2);
-
-				if (type == null) {
-					query.append(_FINDER_COLUMN_U_T_TYPE_1);
-				}
-				else {
-					if (type.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_U_T_TYPE_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_U_T_TYPE_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1422,40 +1422,40 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_USERIDMAPPER_WHERE);
+
+			if (type == null) {
+				query.append(_FINDER_COLUMN_T_E_TYPE_1);
+			}
+			else {
+				if (type.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_T_E_TYPE_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_T_E_TYPE_2);
+				}
+			}
+
+			if (externalUserId == null) {
+				query.append(_FINDER_COLUMN_T_E_EXTERNALUSERID_1);
+			}
+			else {
+				if (externalUserId.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_T_E_EXTERNALUSERID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_T_E_EXTERNALUSERID_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_USERIDMAPPER_WHERE);
-
-				if (type == null) {
-					query.append(_FINDER_COLUMN_T_E_TYPE_1);
-				}
-				else {
-					if (type.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_T_E_TYPE_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_T_E_TYPE_2);
-					}
-				}
-
-				if (externalUserId == null) {
-					query.append(_FINDER_COLUMN_T_E_EXTERNALUSERID_1);
-				}
-				else {
-					if (externalUserId.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_T_E_EXTERNALUSERID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_T_E_EXTERNALUSERID_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 

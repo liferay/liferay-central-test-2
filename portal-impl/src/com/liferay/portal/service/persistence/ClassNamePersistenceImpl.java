@@ -446,28 +446,28 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_SELECT_CLASSNAME_WHERE);
+
+			if (value == null) {
+				query.append(_FINDER_COLUMN_VALUE_VALUE_1);
+			}
+			else {
+				if (value.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_VALUE_VALUE_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_VALUE_VALUE_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_CLASSNAME_WHERE);
-
-				if (value == null) {
-					query.append(_FINDER_COLUMN_VALUE_VALUE_1);
-				}
-				else {
-					if (value.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_VALUE_VALUE_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_VALUE_VALUE_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -574,28 +574,28 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_CLASSNAME);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_CLASSNAME;
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_CLASSNAME);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_CLASSNAME;
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -667,28 +667,28 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_CLASSNAME_WHERE);
+
+			if (value == null) {
+				query.append(_FINDER_COLUMN_VALUE_VALUE_1);
+			}
+			else {
+				if (value.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_VALUE_VALUE_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_VALUE_VALUE_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_CLASSNAME_WHERE);
-
-				if (value == null) {
-					query.append(_FINDER_COLUMN_VALUE_VALUE_1);
-				}
-				else {
-					if (value.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_VALUE_VALUE_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_VALUE_VALUE_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 

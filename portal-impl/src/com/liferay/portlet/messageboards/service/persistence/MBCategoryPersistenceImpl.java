@@ -537,45 +537,45 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_MBCATEGORY_WHERE);
+
+			if (uuid == null) {
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
+			}
+			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
+				}
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(3);
-				}
-
-				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
-
-				if (uuid == null) {
-					query.append(_FINDER_COLUMN_UUID_UUID_1);
-				}
-				else {
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_UUID_UUID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_UUID_UUID_2);
-					}
-				}
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -910,32 +910,32 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_MBCATEGORY_WHERE);
+
+			if (uuid == null) {
+				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
+			}
+			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
+
+			query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
-
-				if (uuid == null) {
-					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
-				}
-				else {
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
-					}
-				}
-
-				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
-
-				query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1051,35 +1051,35 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_MBCATEGORY_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(3);
-				}
-
-				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1382,42 +1382,42 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			return findByGroupId(groupId, start, end, orderByComparator);
 		}
 
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(3 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_MBCATEGORY_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_MBCATEGORY_NO_INLINE_DISTINCT_WHERE);
+		}
+
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+		if (orderByComparator != null) {
+			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+				orderByComparator);
+		}
+
+		else {
+			query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				MBCategory.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
-
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(3 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			if (getDB().isSupportsInlineDistinct()) {
-				query.append(_FILTER_SQL_SELECT_MBCATEGORY_WHERE);
-			}
-			else {
-				query.append(_FILTER_SQL_SELECT_MBCATEGORY_NO_INLINE_DISTINCT_WHERE);
-			}
-
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBCategory.class.getName(), _FILTER_COLUMN_PK,
-					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -1495,35 +1495,35 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_MBCATEGORY_WHERE);
+
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(3);
-				}
-
-				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
-
-				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1838,37 +1838,37 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_MBCATEGORY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(4 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(4);
-				}
-
-				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
-
-				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2202,56 +2202,55 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				finderArgs, this);
 
 		if (list == null) {
-			Session session = null;
+			StringBundler query = new StringBundler();
 
-			try {
-				session = openSession();
+			query.append(_SQL_SELECT_MBCATEGORY_WHERE);
 
-				StringBundler query = new StringBundler();
+			boolean conjunctionable = false;
 
-				query.append(_SQL_SELECT_MBCATEGORY_WHERE);
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
 
-				boolean conjunctionable = false;
+			query.append(_FINDER_COLUMN_G_P_GROUPID_5);
 
+			conjunctionable = true;
+
+			if ((parentCategoryIds == null) || (parentCategoryIds.length > 0)) {
 				if (conjunctionable) {
 					query.append(WHERE_AND);
 				}
 
-				query.append(_FINDER_COLUMN_G_P_GROUPID_5);
+				query.append(StringPool.OPEN_PARENTHESIS);
+
+				for (int i = 0; i < parentCategoryIds.length; i++) {
+					query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_5);
+
+					if ((i + 1) < parentCategoryIds.length) {
+						query.append(WHERE_OR);
+					}
+				}
+
+				query.append(StringPool.CLOSE_PARENTHESIS);
 
 				conjunctionable = true;
+			}
 
-				if ((parentCategoryIds == null) ||
-						(parentCategoryIds.length > 0)) {
-					if (conjunctionable) {
-						query.append(WHERE_AND);
-					}
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
 
-					query.append(StringPool.OPEN_PARENTHESIS);
+			else {
+				query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
+			}
 
-					for (int i = 0; i < parentCategoryIds.length; i++) {
-						query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_5);
+			String sql = query.toString();
 
-						if ((i + 1) < parentCategoryIds.length) {
-							query.append(WHERE_OR);
-						}
-					}
+			Session session = null;
 
-					query.append(StringPool.CLOSE_PARENTHESIS);
-
-					conjunctionable = true;
-				}
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
+			try {
+				session = openSession();
 
 				Query q = session.createQuery(sql);
 
@@ -2342,44 +2341,44 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				orderByComparator);
 		}
 
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_MBCATEGORY_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_MBCATEGORY_NO_INLINE_DISTINCT_WHERE);
+		}
+
+		query.append(_FINDER_COLUMN_G_P_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
+
+		if (orderByComparator != null) {
+			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+				orderByComparator);
+		}
+
+		else {
+			query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				MBCategory.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
-
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(4);
-			}
-
-			if (getDB().isSupportsInlineDistinct()) {
-				query.append(_FILTER_SQL_SELECT_MBCATEGORY_WHERE);
-			}
-			else {
-				query.append(_FILTER_SQL_SELECT_MBCATEGORY_NO_INLINE_DISTINCT_WHERE);
-			}
-
-			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBCategory.class.getName(), _FILTER_COLUMN_PK,
-					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -2461,57 +2460,57 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				orderByComparator);
 		}
 
-		Session session = null;
+		StringBundler query = new StringBundler();
 
-		try {
-			session = openSession();
+		query.append(_FILTER_SQL_SELECT_MBCATEGORY_WHERE);
 
-			StringBundler query = new StringBundler();
+		boolean conjunctionable = false;
 
-			query.append(_FILTER_SQL_SELECT_MBCATEGORY_WHERE);
+		if (conjunctionable) {
+			query.append(WHERE_AND);
+		}
 
-			boolean conjunctionable = false;
+		query.append(_FINDER_COLUMN_G_P_GROUPID_5);
 
+		conjunctionable = true;
+
+		if ((parentCategoryIds == null) || (parentCategoryIds.length > 0)) {
 			if (conjunctionable) {
 				query.append(WHERE_AND);
 			}
 
-			query.append(_FINDER_COLUMN_G_P_GROUPID_5);
+			query.append(StringPool.OPEN_PARENTHESIS);
+
+			for (int i = 0; i < parentCategoryIds.length; i++) {
+				query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_5);
+
+				if ((i + 1) < parentCategoryIds.length) {
+					query.append(WHERE_OR);
+				}
+			}
+
+			query.append(StringPool.CLOSE_PARENTHESIS);
 
 			conjunctionable = true;
+		}
 
-			if ((parentCategoryIds == null) || (parentCategoryIds.length > 0)) {
-				if (conjunctionable) {
-					query.append(WHERE_AND);
-				}
+		if (orderByComparator != null) {
+			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+				orderByComparator);
+		}
 
-				query.append(StringPool.OPEN_PARENTHESIS);
+		else {
+			query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
+		}
 
-				for (int i = 0; i < parentCategoryIds.length; i++) {
-					query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_5);
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				MBCategory.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
 
-					if ((i + 1) < parentCategoryIds.length) {
-						query.append(WHERE_OR);
-					}
-				}
+		Session session = null;
 
-				query.append(StringPool.CLOSE_PARENTHESIS);
-
-				conjunctionable = true;
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			else {
-				query.append(MBCategoryModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBCategory.class.getName(), _FILTER_COLUMN_PK,
-					_FILTER_COLUMN_USERID, groupId);
+		try {
+			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -2586,28 +2585,28 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_MBCATEGORY);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_MBCATEGORY.concat(MBCategoryModelImpl.ORDER_BY_JPQL);
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_MBCATEGORY);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_MBCATEGORY.concat(MBCategoryModelImpl.ORDER_BY_JPQL);
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -2730,28 +2729,28 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_MBCATEGORY_WHERE);
+
+			if (uuid == null) {
+				query.append(_FINDER_COLUMN_UUID_UUID_1);
+			}
+			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_UUID_UUID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_UUID_UUID_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
-
-				if (uuid == null) {
-					query.append(_FINDER_COLUMN_UUID_UUID_1);
-				}
-				else {
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_UUID_UUID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_UUID_UUID_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2797,30 +2796,30 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_MBCATEGORY_WHERE);
+
+			if (uuid == null) {
+				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
+			}
+			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
-
-				if (uuid == null) {
-					query.append(_FINDER_COLUMN_UUID_G_UUID_1);
-				}
-				else {
-					if (uuid.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_UUID_G_UUID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_UUID_G_UUID_2);
-					}
-				}
-
-				query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2866,18 +2865,18 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_MBCATEGORY_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2917,20 +2916,20 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			return countByGroupId(groupId);
 		}
 
+		StringBundler query = new StringBundler(2);
+
+		query.append(_FILTER_SQL_COUNT_MBCATEGORY_WHERE);
+
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				MBCategory.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
-
-			StringBundler query = new StringBundler(2);
-
-			query.append(_FILTER_SQL_COUNT_MBCATEGORY_WHERE);
-
-			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBCategory.class.getName(), _FILTER_COLUMN_PK,
-					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -2967,18 +2966,18 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_MBCATEGORY_WHERE);
+
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
-
-				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -3022,20 +3021,20 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_MBCATEGORY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
-
-				query.append(_FINDER_COLUMN_G_P_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -3083,47 +3082,46 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				finderArgs, this);
 
 		if (count == null) {
-			Session session = null;
+			StringBundler query = new StringBundler();
 
-			try {
-				session = openSession();
+			query.append(_SQL_COUNT_MBCATEGORY_WHERE);
 
-				StringBundler query = new StringBundler();
+			boolean conjunctionable = false;
 
-				query.append(_SQL_COUNT_MBCATEGORY_WHERE);
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
 
-				boolean conjunctionable = false;
+			query.append(_FINDER_COLUMN_G_P_GROUPID_5);
 
+			conjunctionable = true;
+
+			if ((parentCategoryIds == null) || (parentCategoryIds.length > 0)) {
 				if (conjunctionable) {
 					query.append(WHERE_AND);
 				}
 
-				query.append(_FINDER_COLUMN_G_P_GROUPID_5);
+				query.append(StringPool.OPEN_PARENTHESIS);
 
-				conjunctionable = true;
+				for (int i = 0; i < parentCategoryIds.length; i++) {
+					query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_5);
 
-				if ((parentCategoryIds == null) ||
-						(parentCategoryIds.length > 0)) {
-					if (conjunctionable) {
-						query.append(WHERE_AND);
+					if ((i + 1) < parentCategoryIds.length) {
+						query.append(WHERE_OR);
 					}
-
-					query.append(StringPool.OPEN_PARENTHESIS);
-
-					for (int i = 0; i < parentCategoryIds.length; i++) {
-						query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_5);
-
-						if ((i + 1) < parentCategoryIds.length) {
-							query.append(WHERE_OR);
-						}
-					}
-
-					query.append(StringPool.CLOSE_PARENTHESIS);
-
-					conjunctionable = true;
 				}
 
-				String sql = query.toString();
+				query.append(StringPool.CLOSE_PARENTHESIS);
+
+				conjunctionable = true;
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
 
 				Query q = session.createQuery(sql);
 
@@ -3169,22 +3167,22 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			return countByG_P(groupId, parentCategoryId);
 		}
 
+		StringBundler query = new StringBundler(3);
+
+		query.append(_FILTER_SQL_COUNT_MBCATEGORY_WHERE);
+
+		query.append(_FINDER_COLUMN_G_P_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				MBCategory.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
 		Session session = null;
 
 		try {
 			session = openSession();
-
-			StringBundler query = new StringBundler(3);
-
-			query.append(_FILTER_SQL_COUNT_MBCATEGORY_WHERE);
-
-			query.append(_FINDER_COLUMN_G_P_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_2);
-
-			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBCategory.class.getName(), _FILTER_COLUMN_PK,
-					_FILTER_COLUMN_USERID, groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -3223,48 +3221,48 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			return countByG_P(groupId, parentCategoryIds);
 		}
 
-		Session session = null;
+		StringBundler query = new StringBundler();
 
-		try {
-			session = openSession();
+		query.append(_FILTER_SQL_COUNT_MBCATEGORY_WHERE);
 
-			StringBundler query = new StringBundler();
+		boolean conjunctionable = false;
 
-			query.append(_FILTER_SQL_COUNT_MBCATEGORY_WHERE);
+		if (conjunctionable) {
+			query.append(WHERE_AND);
+		}
 
-			boolean conjunctionable = false;
+		query.append(_FINDER_COLUMN_G_P_GROUPID_5);
 
+		conjunctionable = true;
+
+		if ((parentCategoryIds == null) || (parentCategoryIds.length > 0)) {
 			if (conjunctionable) {
 				query.append(WHERE_AND);
 			}
 
-			query.append(_FINDER_COLUMN_G_P_GROUPID_5);
+			query.append(StringPool.OPEN_PARENTHESIS);
 
-			conjunctionable = true;
+			for (int i = 0; i < parentCategoryIds.length; i++) {
+				query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_5);
 
-			if ((parentCategoryIds == null) || (parentCategoryIds.length > 0)) {
-				if (conjunctionable) {
-					query.append(WHERE_AND);
+				if ((i + 1) < parentCategoryIds.length) {
+					query.append(WHERE_OR);
 				}
-
-				query.append(StringPool.OPEN_PARENTHESIS);
-
-				for (int i = 0; i < parentCategoryIds.length; i++) {
-					query.append(_FINDER_COLUMN_G_P_PARENTCATEGORYID_5);
-
-					if ((i + 1) < parentCategoryIds.length) {
-						query.append(WHERE_OR);
-					}
-				}
-
-				query.append(StringPool.CLOSE_PARENTHESIS);
-
-				conjunctionable = true;
 			}
 
-			String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-					MBCategory.class.getName(), _FILTER_COLUMN_PK,
-					_FILTER_COLUMN_USERID, groupId);
+			query.append(StringPool.CLOSE_PARENTHESIS);
+
+			conjunctionable = true;
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				MBCategory.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
 
 			SQLQuery q = session.createSQLQuery(sql);
 

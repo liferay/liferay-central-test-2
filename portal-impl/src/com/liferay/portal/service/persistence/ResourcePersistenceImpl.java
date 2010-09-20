@@ -469,31 +469,31 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
+
+			query.append(_SQL_SELECT_RESOURCE_WHERE);
+
+			query.append(_FINDER_COLUMN_CODEID_CODEID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(2);
-				}
-
-				query.append(_SQL_SELECT_RESOURCE_WHERE);
-
-				query.append(_FINDER_COLUMN_CODEID_CODEID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -810,30 +810,30 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_RESOURCE_WHERE);
+
+			query.append(_FINDER_COLUMN_C_P_CODEID_2);
+
+			if (primKey == null) {
+				query.append(_FINDER_COLUMN_C_P_PRIMKEY_1);
+			}
+			else {
+				if (primKey.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_P_PRIMKEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_P_PRIMKEY_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_RESOURCE_WHERE);
-
-				query.append(_FINDER_COLUMN_C_P_CODEID_2);
-
-				if (primKey == null) {
-					query.append(_FINDER_COLUMN_C_P_PRIMKEY_1);
-				}
-				else {
-					if (primKey.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_P_PRIMKEY_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_P_PRIMKEY_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -942,28 +942,28 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_RESOURCE);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_RESOURCE;
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_RESOURCE);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_RESOURCE;
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -1048,18 +1048,18 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_RESOURCE_WHERE);
+
+			query.append(_FINDER_COLUMN_CODEID_CODEID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_RESOURCE_WHERE);
-
-				query.append(_FINDER_COLUMN_CODEID_CODEID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1103,30 +1103,30 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_RESOURCE_WHERE);
+
+			query.append(_FINDER_COLUMN_C_P_CODEID_2);
+
+			if (primKey == null) {
+				query.append(_FINDER_COLUMN_C_P_PRIMKEY_1);
+			}
+			else {
+				if (primKey.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_P_PRIMKEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_P_PRIMKEY_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_RESOURCE_WHERE);
-
-				query.append(_FINDER_COLUMN_C_P_CODEID_2);
-
-				if (primKey == null) {
-					query.append(_FINDER_COLUMN_C_P_PRIMKEY_1);
-				}
-				else {
-					if (primKey.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_C_P_PRIMKEY_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_C_P_PRIMKEY_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 

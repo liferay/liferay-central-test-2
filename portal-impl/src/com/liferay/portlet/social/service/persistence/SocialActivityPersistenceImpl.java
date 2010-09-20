@@ -647,35 +647,35 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(SocialActivityModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(3);
-				}
-
-				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(SocialActivityModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -986,35 +986,35 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
+
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(SocialActivityModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(3);
-				}
-
-				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
-
-				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(SocialActivityModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1324,35 +1324,35 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
+
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(SocialActivityModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(3);
-				}
-
-				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
-
-				query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(SocialActivityModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1667,20 +1667,20 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
+
+			query.append(_FINDER_COLUMN_MIRRORACTIVITYID_MIRRORACTIVITYID_2);
+
+			query.append(SocialActivityModelImpl.ORDER_BY_JPQL);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
-
-				query.append(_FINDER_COLUMN_MIRRORACTIVITYID_MIRRORACTIVITYID_2);
-
-				query.append(SocialActivityModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1791,35 +1791,35 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
+
+			query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(SocialActivityModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(3);
-				}
-
-				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
-
-				query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(SocialActivityModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2131,35 +2131,35 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
+
+			query.append(_FINDER_COLUMN_RECEIVERUSERID_RECEIVERUSERID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(SocialActivityModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(3);
-				}
-
-				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
-
-				query.append(_FINDER_COLUMN_RECEIVERUSERID_RECEIVERUSERID_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(SocialActivityModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2474,37 +2474,37 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(SocialActivityModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(4 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(4);
-				}
-
-				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
-
-				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(SocialActivityModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -2839,39 +2839,39 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
+
+			query.append(_FINDER_COLUMN_M_C_C_MIRRORACTIVITYID_2);
+
+			query.append(_FINDER_COLUMN_M_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_M_C_C_CLASSPK_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(SocialActivityModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(5 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(5);
-				}
-
-				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
-
-				query.append(_FINDER_COLUMN_M_C_C_MIRRORACTIVITYID_2);
-
-				query.append(_FINDER_COLUMN_M_C_C_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_M_C_C_CLASSPK_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(SocialActivityModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -3265,32 +3265,32 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(9);
+
+			query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_USERID_2);
+
+			query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_CREATEDATE_2);
+
+			query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_CLASSPK_2);
+
+			query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_TYPE_2);
+
+			query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_RECEIVERUSERID_2);
+
+			query.append(SocialActivityModelImpl.ORDER_BY_JPQL);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(9);
-
-				query.append(_SQL_SELECT_SOCIALACTIVITY_WHERE);
-
-				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_USERID_2);
-
-				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_CREATEDATE_2);
-
-				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_CLASSPK_2);
-
-				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_TYPE_2);
-
-				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_RECEIVERUSERID_2);
-
-				query.append(SocialActivityModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -3412,28 +3412,28 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_SOCIALACTIVITY);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_SOCIALACTIVITY.concat(SocialActivityModelImpl.ORDER_BY_JPQL);
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_SOCIALACTIVITY);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_SOCIALACTIVITY.concat(SocialActivityModelImpl.ORDER_BY_JPQL);
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -3618,18 +3618,18 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
-
-				query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -3671,18 +3671,18 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
+
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
-
-				query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -3724,18 +3724,18 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
+
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
-
-				query.append(_FINDER_COLUMN_USERID_USERID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -3778,18 +3778,18 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
+
+			query.append(_FINDER_COLUMN_MIRRORACTIVITYID_MIRRORACTIVITYID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
-
-				query.append(_FINDER_COLUMN_MIRRORACTIVITYID_MIRRORACTIVITYID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -3831,18 +3831,18 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
+
+			query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
-
-				query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -3885,18 +3885,18 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
+
+			query.append(_FINDER_COLUMN_RECEIVERUSERID_RECEIVERUSERID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
-
-				query.append(_FINDER_COLUMN_RECEIVERUSERID_RECEIVERUSERID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -3940,20 +3940,20 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
-
-				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -4002,22 +4002,22 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
+
+			query.append(_FINDER_COLUMN_M_C_C_MIRRORACTIVITYID_2);
+
+			query.append(_FINDER_COLUMN_M_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_M_C_C_CLASSPK_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(4);
-
-				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
-
-				query.append(_FINDER_COLUMN_M_C_C_MIRRORACTIVITYID_2);
-
-				query.append(_FINDER_COLUMN_M_C_C_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_M_C_C_CLASSPK_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -4074,30 +4074,30 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(8);
+
+			query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_USERID_2);
+
+			query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_CREATEDATE_2);
+
+			query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_CLASSPK_2);
+
+			query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_TYPE_2);
+
+			query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_RECEIVERUSERID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(8);
-
-				query.append(_SQL_COUNT_SOCIALACTIVITY_WHERE);
-
-				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_USERID_2);
-
-				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_CREATEDATE_2);
-
-				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_CLASSPK_2);
-
-				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_TYPE_2);
-
-				query.append(_FINDER_COLUMN_G_U_CD_C_C_T_R_RECEIVERUSERID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 

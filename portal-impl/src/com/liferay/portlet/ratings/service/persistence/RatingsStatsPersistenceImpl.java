@@ -479,20 +479,20 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_RATINGSSTATS_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_RATINGSSTATS_WHERE);
-
-				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -599,28 +599,28 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_RATINGSSTATS);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_RATINGSSTATS;
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_RATINGSSTATS);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_RATINGSSTATS;
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -695,20 +695,20 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_RATINGSSTATS_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_COUNT_RATINGSSTATS_WHERE);
-
-				query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 

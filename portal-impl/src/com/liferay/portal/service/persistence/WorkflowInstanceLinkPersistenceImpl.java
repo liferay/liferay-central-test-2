@@ -451,41 +451,41 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(6 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(6);
+			}
+
+			query.append(_SQL_SELECT_WORKFLOWINSTANCELINK_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_C_C_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_C_C_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_G_C_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_G_C_C_C_CLASSPK_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(WorkflowInstanceLinkModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(6 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(6);
-				}
-
-				query.append(_SQL_SELECT_WORKFLOWINSTANCELINK_WHERE);
-
-				query.append(_FINDER_COLUMN_G_C_C_C_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_C_C_C_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_G_C_C_C_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_G_C_C_C_CLASSPK_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				else {
-					query.append(WorkflowInstanceLinkModelImpl.ORDER_BY_JPQL);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -840,28 +840,28 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_WORKFLOWINSTANCELINK);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_WORKFLOWINSTANCELINK.concat(WorkflowInstanceLinkModelImpl.ORDER_BY_JPQL);
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_WORKFLOWINSTANCELINK);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_WORKFLOWINSTANCELINK.concat(WorkflowInstanceLinkModelImpl.ORDER_BY_JPQL);
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -943,24 +943,24 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(5);
+
+			query.append(_SQL_COUNT_WORKFLOWINSTANCELINK_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_C_C_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_C_C_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_G_C_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_G_C_C_C_CLASSPK_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(5);
-
-				query.append(_SQL_COUNT_WORKFLOWINSTANCELINK_WHERE);
-
-				query.append(_FINDER_COLUMN_G_C_C_C_GROUPID_2);
-
-				query.append(_FINDER_COLUMN_G_C_C_C_COMPANYID_2);
-
-				query.append(_FINDER_COLUMN_G_C_C_C_CLASSNAMEID_2);
-
-				query.append(_FINDER_COLUMN_G_C_C_C_CLASSPK_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 

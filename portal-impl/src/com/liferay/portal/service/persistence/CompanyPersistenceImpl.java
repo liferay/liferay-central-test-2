@@ -549,28 +549,28 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_SELECT_COMPANY_WHERE);
+
+			if (webId == null) {
+				query.append(_FINDER_COLUMN_WEBID_WEBID_1);
+			}
+			else {
+				if (webId.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_WEBID_WEBID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_WEBID_WEBID_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_COMPANY_WHERE);
-
-				if (webId == null) {
-					query.append(_FINDER_COLUMN_WEBID_WEBID_1);
-				}
-				else {
-					if (webId.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_WEBID_WEBID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_WEBID_WEBID_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -689,28 +689,28 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_SELECT_COMPANY_WHERE);
+
+			if (virtualHost == null) {
+				query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_1);
+			}
+			else {
+				if (virtualHost.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_COMPANY_WHERE);
-
-				if (virtualHost == null) {
-					query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_1);
-				}
-				else {
-					if (virtualHost.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -828,28 +828,28 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_SELECT_COMPANY_WHERE);
+
+			if (mx == null) {
+				query.append(_FINDER_COLUMN_MX_MX_1);
+			}
+			else {
+				if (mx.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_MX_MX_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_MX_MX_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_COMPANY_WHERE);
-
-				if (mx == null) {
-					query.append(_FINDER_COLUMN_MX_MX_1);
-				}
-				else {
-					if (mx.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_MX_MX_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_MX_MX_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -967,18 +967,18 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_SELECT_COMPANY_WHERE);
+
+			query.append(_FINDER_COLUMN_LOGOID_LOGOID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_SELECT_COMPANY_WHERE);
-
-				query.append(_FINDER_COLUMN_LOGOID_LOGOID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1087,31 +1087,31 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
+
+			query.append(_SQL_SELECT_COMPANY_WHERE);
+
+			query.append(_FINDER_COLUMN_SYSTEM_SYSTEM_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(3 +
-							(orderByComparator.getOrderByFields().length * 3));
-				}
-				else {
-					query = new StringBundler(2);
-				}
-
-				query.append(_SQL_SELECT_COMPANY_WHERE);
-
-				query.append(_FINDER_COLUMN_SYSTEM_SYSTEM_2);
-
-				if (orderByComparator != null) {
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1407,28 +1407,28 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_COMPANY);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_COMPANY;
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_COMPANY);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_COMPANY;
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -1551,28 +1551,28 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_COMPANY_WHERE);
+
+			if (webId == null) {
+				query.append(_FINDER_COLUMN_WEBID_WEBID_1);
+			}
+			else {
+				if (webId.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_WEBID_WEBID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_WEBID_WEBID_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_COMPANY_WHERE);
-
-				if (webId == null) {
-					query.append(_FINDER_COLUMN_WEBID_WEBID_1);
-				}
-				else {
-					if (webId.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_WEBID_WEBID_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_WEBID_WEBID_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1616,28 +1616,28 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_COMPANY_WHERE);
+
+			if (virtualHost == null) {
+				query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_1);
+			}
+			else {
+				if (virtualHost.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_COMPANY_WHERE);
-
-				if (virtualHost == null) {
-					query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_1);
-				}
-				else {
-					if (virtualHost.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_VIRTUALHOST_VIRTUALHOST_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1681,28 +1681,28 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_COMPANY_WHERE);
+
+			if (mx == null) {
+				query.append(_FINDER_COLUMN_MX_MX_1);
+			}
+			else {
+				if (mx.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_MX_MX_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_MX_MX_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_COMPANY_WHERE);
-
-				if (mx == null) {
-					query.append(_FINDER_COLUMN_MX_MX_1);
-				}
-				else {
-					if (mx.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_MX_MX_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_MX_MX_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1746,18 +1746,18 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_COMPANY_WHERE);
+
+			query.append(_FINDER_COLUMN_LOGOID_LOGOID_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_COMPANY_WHERE);
-
-				query.append(_FINDER_COLUMN_LOGOID_LOGOID_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -1799,18 +1799,18 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_COMPANY_WHERE);
+
+			query.append(_FINDER_COLUMN_SYSTEM_SYSTEM_2);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_COMPANY_WHERE);
-
-				query.append(_FINDER_COLUMN_SYSTEM_SYSTEM_2);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 

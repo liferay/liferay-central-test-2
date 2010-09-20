@@ -449,30 +449,30 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 		}
 
 		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_TICKET_WHERE);
+
+			if (key == null) {
+				query.append(_FINDER_COLUMN_KEY_KEY_1);
+			}
+			else {
+				if (key.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_KEY_KEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_KEY_KEY_2);
+				}
+			}
+
+			query.append(TicketModelImpl.ORDER_BY_JPQL);
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(3);
-
-				query.append(_SQL_SELECT_TICKET_WHERE);
-
-				if (key == null) {
-					query.append(_FINDER_COLUMN_KEY_KEY_1);
-				}
-				else {
-					if (key.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_KEY_KEY_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_KEY_KEY_2);
-					}
-				}
-
-				query.append(TicketModelImpl.ORDER_BY_JPQL);
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
@@ -578,28 +578,28 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 				finderArgs, this);
 
 		if (list == null) {
+			StringBundler query = null;
+			String sql = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(2 +
+						(orderByComparator.getOrderByFields().length * 3));
+
+				query.append(_SQL_SELECT_TICKET);
+
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+
+				sql = query.toString();
+			}
+			else {
+				sql = _SQL_SELECT_TICKET.concat(TicketModelImpl.ORDER_BY_JPQL);
+			}
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = null;
-				String sql = null;
-
-				if (orderByComparator != null) {
-					query = new StringBundler(2 +
-							(orderByComparator.getOrderByFields().length * 3));
-
-					query.append(_SQL_SELECT_TICKET);
-
-					appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-						orderByComparator);
-
-					sql = query.toString();
-				}
-				else {
-					sql = _SQL_SELECT_TICKET.concat(TicketModelImpl.ORDER_BY_JPQL);
-				}
 
 				Query q = session.createQuery(sql);
 
@@ -671,28 +671,28 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 				finderArgs, this);
 
 		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_TICKET_WHERE);
+
+			if (key == null) {
+				query.append(_FINDER_COLUMN_KEY_KEY_1);
+			}
+			else {
+				if (key.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_KEY_KEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_KEY_KEY_2);
+				}
+			}
+
+			String sql = query.toString();
+
 			Session session = null;
 
 			try {
 				session = openSession();
-
-				StringBundler query = new StringBundler(2);
-
-				query.append(_SQL_COUNT_TICKET_WHERE);
-
-				if (key == null) {
-					query.append(_FINDER_COLUMN_KEY_KEY_1);
-				}
-				else {
-					if (key.equals(StringPool.BLANK)) {
-						query.append(_FINDER_COLUMN_KEY_KEY_3);
-					}
-					else {
-						query.append(_FINDER_COLUMN_KEY_KEY_2);
-					}
-				}
-
-				String sql = query.toString();
 
 				Query q = session.createQuery(sql);
 
