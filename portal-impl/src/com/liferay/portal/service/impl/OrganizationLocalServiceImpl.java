@@ -239,12 +239,6 @@ public class OrganizationLocalServiceImpl
 			throw new RequiredOrganizationException();
 		}
 
-		// Indexer
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(Organization.class);
-
-		indexer.delete(organization);
-
 		// Asset
 
 		assetEntryLocalService.deleteEntry(
@@ -306,6 +300,14 @@ public class OrganizationLocalServiceImpl
 		// Permission cache
 
 		PermissionCacheUtil.clearCache();
+
+		// Indexer
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(Organization.class);
+
+		indexer.delete(organization);
+		indexer.reindex(
+			new String[] {String.valueOf(organization.getCompanyId())});
 	}
 
 	public List<Organization> getGroupOrganizations(long groupId)
