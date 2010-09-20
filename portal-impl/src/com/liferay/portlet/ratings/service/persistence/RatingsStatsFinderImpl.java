@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.ratings.service.persistence;
 
+import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
@@ -22,48 +24,76 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.model.impl.RatingsStatsImpl;
+import com.liferay.portlet.ratings.model.impl.RatingsStatsModelImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Shuyang Zhou
+ * @author Brian Wing Shun Chan
  */
-public class RatingsStatsFinderImpl extends BasePersistenceImpl<RatingsStats>
-	implements RatingsStatsFinder{
+public class RatingsStatsFinderImpl
+	extends BasePersistenceImpl<RatingsStats> implements RatingsStatsFinder {
 
 	public static String FIND_BY_C_C =
 		RatingsStatsFinder.class.getName() + ".findByC_C";
 
+	public static final FinderPath FINDER_PATH_FIND_BY_C_C = new FinderPath(
+		RatingsStatsModelImpl.ENTITY_CACHE_ENABLED,
+		RatingsStatsModelImpl.FINDER_CACHE_ENABLED,
+		RatingsStatsPersistenceImpl.FINDER_CLASS_NAME_LIST, "findByC_C",
+		new String[] {Long.class.getName(), List.class.getName()});
+
 	public List<RatingsStats> findByC_C(long classNameId, List<Long> classPKs)
 		throws SystemException {
 
-		Session session = null;
+		Object[] finderArgs = new Object[] {
+			classNameId,
+			StringUtil.merge(classPKs.toArray(new Long[classPKs.size()]))
+		};
 
-		try {
-			session = openSession();
+		List<RatingsStats> list = (List<RatingsStats>)FinderCacheUtil.getResult(
+			FINDER_PATH_FIND_BY_C_C, finderArgs, this);
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_C);
+		if (list == null) {
+			Session session = null;
 
-			sql = StringUtil.replace(
-				sql, "[$CLASS_PKS$]", StringUtil.merge(classPKs));
+			try {
+				session = openSession();
 
-			SQLQuery q = session.createSQLQuery(sql);
+				String sql = CustomSQLUtil.get(FIND_BY_C_C);
 
-			q.addEntity("RatingsStats", RatingsStatsImpl.class);
+				sql = StringUtil.replace(
+					sql, "[$CLASS_PKS$]", StringUtil.merge(classPKs));
 
-			QueryPos qPos = QueryPos.getInstance(q);
+				SQLQuery q = session.createSQLQuery(sql);
 
-			qPos.add(classNameId);
+				q.addEntity("RatingsStats", RatingsStatsImpl.class);
 
-			return q.list();
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(classNameId);
+
+				list = q.list();
+			}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+			finally {
+				if (list == null) {
+					list = new ArrayList<RatingsStats>();
+				}
+
+				FinderCacheUtil.putResult(
+					FINDER_PATH_FIND_BY_C_C, finderArgs, list);
+
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
+
+		return list;
 	}
 
 }
