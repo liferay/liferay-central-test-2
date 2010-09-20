@@ -61,6 +61,7 @@ import com.liferay.portlet.social.model.SocialEquityValue;
 import com.liferay.portlet.social.service.SocialEquityUserLocalServiceUtil;
 import com.liferay.util.UniqueList;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -244,28 +245,29 @@ public class UserImpl extends UserModelImpl implements User {
 	}
 
 	public List<Group> getMyPlaces() throws PortalException, SystemException {
-		return getMyPlaces(QueryUtil.ALL_POS);
+		return getMyPlaces(PropsValues.MY_PLACES_MAX_ELEMENTS);
 	}
 
 	public List<Group> getMyPlaces(int max)
 		throws PortalException, SystemException {
 
-		List<Group> myPlaces = new UniqueList<Group>();
-
 		if (isDefaultUser()) {
-			return myPlaces;
+			return Collections.EMPTY_LIST;
 		}
 
-		String cacheKey = String.valueOf(max);
-		ThreadLocalCache<List<Group>> myPlacesThreadLocalCache =
+		ThreadLocalCache<List<Group>> threadLocalCache =
 			ThreadLocalCacheManager.getThreadLocalCache(
 				Lifecycle.REQUEST, _GET_MY_PLACES_CACHE_NAME);
 
-		List<Group> cachedMyPlaces = myPlacesThreadLocalCache.get(cacheKey);
+		String key = String.valueOf(max);
 
-		if (cachedMyPlaces != null) {
-			return cachedMyPlaces;
+		List<Group> myPlaces = threadLocalCache.get(key);
+
+		if (myPlaces != null) {
+			return myPlaces;
 		}
+
+		myPlaces = new UniqueList<Group>();
 
 		int start = QueryUtil.ALL_POS;
 		int end = QueryUtil.ALL_POS;
@@ -318,7 +320,7 @@ public class UserImpl extends UserModelImpl implements User {
 			myPlaces = ListUtil.subList(myPlaces, start, end);
 		}
 
-		myPlacesThreadLocalCache.put(cacheKey, myPlaces);
+		threadLocalCache.put(key, myPlaces);
 
 		return myPlaces;
 	}
@@ -538,6 +540,7 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 
 		List<Group> groups = getMyPlaces(PropsValues.MY_PLACES_MAX_ELEMENTS);
+
 		if (groups.size() > 0) {
 			return true;
 		}
