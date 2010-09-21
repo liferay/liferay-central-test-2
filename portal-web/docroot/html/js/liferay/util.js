@@ -431,6 +431,7 @@ Liferay.Util = {
 	_defaultSubmitFormFn: function(event) {
 		var instance = this;
 
+		var A = AUI();
 		var form = event.form;
 		var action = event.action;
 		var singleSubmit = event.singleSubmit;
