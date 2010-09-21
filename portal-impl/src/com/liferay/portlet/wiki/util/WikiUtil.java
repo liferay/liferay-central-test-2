@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.DiffHtmlUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -41,6 +42,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.WikiFormatException;
 import com.liferay.portlet.wiki.engines.WikiEngine;
+import com.liferay.portlet.wiki.engines.jspwiki.JSPWikiEngine;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
@@ -162,6 +164,19 @@ public class WikiUtil {
 		return preferences.getValue("email-from-name", emailFromName);
 	}
 
+	public static String getEmailPageAddedBody(PortletPreferences preferences) {
+		String emailPageAddedBody = preferences.getValue(
+			"email-page-added-body", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailPageAddedBody)) {
+			return emailPageAddedBody;
+		}
+		else {
+			return ContentUtil.get(PropsUtil.get(
+				PropsKeys.WIKI_EMAIL_PAGE_ADDED_BODY));
+		}
+	}
+
 	public static boolean getEmailPageAddedEnabled(
 		PortletPreferences preferences) {
 
@@ -174,19 +189,6 @@ public class WikiUtil {
 		else {
 			return GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.WIKI_EMAIL_PAGE_ADDED_ENABLED));
-		}
-	}
-
-	public static String getEmailPageAddedBody(PortletPreferences preferences) {
-		String emailPageAddedBody = preferences.getValue(
-			"email-page-added-body", StringPool.BLANK);
-
-		if (Validator.isNotNull(emailPageAddedBody)) {
-			return emailPageAddedBody;
-		}
-		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.WIKI_EMAIL_PAGE_ADDED_BODY));
 		}
 	}
 
@@ -220,21 +222,6 @@ public class WikiUtil {
 		}
 	}
 
-	public static boolean getEmailPageUpdatedEnabled(
-		PortletPreferences preferences) {
-
-		String emailPageUpdatedEnabled = preferences.getValue(
-			"email-page-updated-enabled", StringPool.BLANK);
-
-		if (Validator.isNotNull(emailPageUpdatedEnabled)) {
-			return GetterUtil.getBoolean(emailPageUpdatedEnabled);
-		}
-		else {
-			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsKeys.WIKI_EMAIL_PAGE_UPDATED_ENABLED));
-		}
-	}
-
 	public static String getEmailPageUpdatedBody(
 		PortletPreferences preferences) {
 
@@ -247,6 +234,21 @@ public class WikiUtil {
 		else {
 			return ContentUtil.get(PropsUtil.get(
 				PropsKeys.WIKI_EMAIL_PAGE_UPDATED_BODY));
+		}
+	}
+
+	public static boolean getEmailPageUpdatedEnabled(
+		PortletPreferences preferences) {
+
+		String emailPageUpdatedEnabled = preferences.getValue(
+			"email-page-updated-enabled", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailPageUpdatedEnabled)) {
+			return GetterUtil.getBoolean(emailPageUpdatedEnabled);
+		}
+		else {
+			return GetterUtil.getBoolean(PropsUtil.get(
+				PropsKeys.WIKI_EMAIL_PAGE_UPDATED_ENABLED));
 		}
 	}
 
@@ -341,6 +343,31 @@ public class WikiUtil {
 		return sb.toString();
 	}
 
+	public static Long getNodeIdFromUri(String uri) {
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(StringPool.DASH);
+		sb.append(StringPool.SLASH);
+		sb.append("wiki");
+		sb.append(StringPool.SLASH);
+
+		String wikiMappingString = sb.toString();
+
+		Long nodeId = null;
+
+		if (uri != null && uri.contains(wikiMappingString)) {
+			int start =
+					uri.indexOf(wikiMappingString) + wikiMappingString.length();
+
+			int end = start + uri.substring(start).indexOf('/');
+
+			nodeId = Long.valueOf(uri.substring(start, end));
+		}
+
+		return nodeId;
+	}
+
 	public static List<String> getNodeNames(List<WikiNode> nodes) {
 		List<String> nodeNames = new ArrayList<String>(nodes.size());
 
@@ -433,6 +460,11 @@ public class WikiUtil {
 		content = content.replaceAll("</div>", "</div>\n");
 
 		return content;
+	}
+
+	public static String stripFormat(WikiPage wikiPage)
+			throws WikiFormatException {
+		return _instance._stripFormat(wikiPage);
 	}
 
 	public static boolean validate(
@@ -614,6 +646,24 @@ public class WikiUtil {
 		return content;
 	}
 
+	private String _stripFormat(WikiPage page) throws WikiFormatException {
+
+		JSPWikiEngine engine = (JSPWikiEngine)_getEngine(page.getFormat());
+
+		String content = null;
+
+		try {
+			content = engine.convert(page, null, null, null);
+
+			content = HtmlUtil.stripHtml(content);
+		}
+		catch (Exception e) {
+			content = null;
+		}
+
+		return content;
+	}
+
 	private boolean _validate(long nodeId, String content, String format)
 		throws WikiFormatException {
 
@@ -632,13 +682,15 @@ public class WikiUtil {
 		"__GRA__", "__QUE__", "__SLA__", "__STA__"
 	};
 
-	private static WikiUtil _instance = new WikiUtil();
-
 	private static Pattern _editPageURLPattern = Pattern.compile(
 		"\\[\\$BEGIN_PAGE_TITLE_EDIT\\$\\](.*?)" +
 			"\\[\\$END_PAGE_TITLE_EDIT\\$\\]");
+
+	private static WikiUtil _instance = new WikiUtil();
+
 	private static Pattern _viewPageURLPattern = Pattern.compile(
 		"\\[\\$BEGIN_PAGE_TITLE\\$\\](.*?)\\[\\$END_PAGE_TITLE\\$\\]");
+
 	private static Pattern _wikiLinkPattern = Pattern.compile(
 		"[\\[]{2,2}(.+?)[\\]]{2,2}");
 
