@@ -41,6 +41,7 @@ public class DBBuilder {
 		else {
 			throw new IllegalArgumentException();
 		}
+
 		System.exit(0);
 	}
 
