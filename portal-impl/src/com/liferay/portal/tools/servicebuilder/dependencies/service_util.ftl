@@ -3,6 +3,7 @@ package ${packagePath}.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ClassLoaderProxy;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 <#if sessionTypeName == "Local">
 /**
@@ -115,6 +116,8 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 			<#else>
 				_service = (${entity.name}${sessionTypeName}Service)PortalBeanLocatorUtil.locate(${entity.name}${sessionTypeName}Service.class.getName());
 			</#if>
+
+			ReferenceRegistry.registerReference(${entity.name}${sessionTypeName}ServiceUtil.class, "_service");
 		}
 
 		return _service;
@@ -122,6 +125,8 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 
 	public void setService(${entity.name}${sessionTypeName}Service service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(${entity.name}${sessionTypeName}ServiceUtil.class, "_service");
 	}
 
 	private static ${entity.name}${sessionTypeName}Service _service;

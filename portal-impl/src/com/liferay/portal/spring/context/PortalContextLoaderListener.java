@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.ClearThreadLocalUtil;
 import com.liferay.portal.kernel.util.ClearTimerThreadUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.util.InitUtil;
 
@@ -85,6 +86,8 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		HotDeployUtil.reset();
 		InstancePool.reset();
 		PortletBagPool.reset();
+
+		ReferenceRegistry.releaseReferences();
 
 		ThreadLocalCacheManager.destroy();
 
