@@ -162,6 +162,19 @@ public class WikiUtil {
 		return preferences.getValue("email-from-name", emailFromName);
 	}
 
+	public static String getEmailPageAddedBody(PortletPreferences preferences) {
+		String emailPageAddedBody = preferences.getValue(
+			"email-page-added-body", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailPageAddedBody)) {
+			return emailPageAddedBody;
+		}
+		else {
+			return ContentUtil.get(PropsUtil.get(
+				PropsKeys.WIKI_EMAIL_PAGE_ADDED_BODY));
+		}
+	}
+
 	public static boolean getEmailPageAddedEnabled(
 		PortletPreferences preferences) {
 
@@ -174,19 +187,6 @@ public class WikiUtil {
 		else {
 			return GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.WIKI_EMAIL_PAGE_ADDED_ENABLED));
-		}
-	}
-
-	public static String getEmailPageAddedBody(PortletPreferences preferences) {
-		String emailPageAddedBody = preferences.getValue(
-			"email-page-added-body", StringPool.BLANK);
-
-		if (Validator.isNotNull(emailPageAddedBody)) {
-			return emailPageAddedBody;
-		}
-		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.WIKI_EMAIL_PAGE_ADDED_BODY));
 		}
 	}
 
@@ -220,21 +220,6 @@ public class WikiUtil {
 		}
 	}
 
-	public static boolean getEmailPageUpdatedEnabled(
-		PortletPreferences preferences) {
-
-		String emailPageUpdatedEnabled = preferences.getValue(
-			"email-page-updated-enabled", StringPool.BLANK);
-
-		if (Validator.isNotNull(emailPageUpdatedEnabled)) {
-			return GetterUtil.getBoolean(emailPageUpdatedEnabled);
-		}
-		else {
-			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsKeys.WIKI_EMAIL_PAGE_UPDATED_ENABLED));
-		}
-	}
-
 	public static String getEmailPageUpdatedBody(
 		PortletPreferences preferences) {
 
@@ -247,6 +232,21 @@ public class WikiUtil {
 		else {
 			return ContentUtil.get(PropsUtil.get(
 				PropsKeys.WIKI_EMAIL_PAGE_UPDATED_BODY));
+		}
+	}
+
+	public static boolean getEmailPageUpdatedEnabled(
+		PortletPreferences preferences) {
+
+		String emailPageUpdatedEnabled = preferences.getValue(
+			"email-page-updated-enabled", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailPageUpdatedEnabled)) {
+			return GetterUtil.getBoolean(emailPageUpdatedEnabled);
+		}
+		else {
+			return GetterUtil.getBoolean(PropsUtil.get(
+				PropsKeys.WIKI_EMAIL_PAGE_UPDATED_ENABLED));
 		}
 	}
 
