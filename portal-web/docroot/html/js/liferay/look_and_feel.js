@@ -1110,15 +1110,18 @@ AUI().add(
 						if (checked) {
 							customTitleInput.set('disabled', false);
 							language.set('disabled', false);
+
 							title = Lang.trim(customTitleInput.val());
 
 							if (title == '') {
 								title = (portletTitle && portletTitle.text()) || '';
 								title = Lang.trim(title);
+
 								customTitleInput.val(title);
 							}
 
 							portletData.title = title;
+
 							instance._portletTitles(false, title);
 						}
 						else {
