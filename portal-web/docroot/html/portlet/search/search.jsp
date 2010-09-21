@@ -193,22 +193,6 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 				String entryHref = el.element("link").attributeValue("href");
 				String summary = el.elementText("summary");
 
-				Long nodeId = WikiUtil.getNodeIdFromUri(entryHref);
-
-				if (nodeId != null) {
-					try {
-						WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(nodeId, entryTitle);
-
-						String newSummary = WikiUtil.stripFormat(wikiPage);
-
-						if (newSummary != null) {
-							summary = newSummary;
-						}
-					} catch(Exception e) {
-					}
-				}
-
-
 				// Group id
 
 				long entryScopeGroupId = GetterUtil.getLong(el.elementText(OpenSearchUtil.getQName("scopeGroupId", OpenSearchUtil.LIFERAY_NAMESPACE)));
