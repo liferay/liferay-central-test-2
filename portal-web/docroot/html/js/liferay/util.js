@@ -428,6 +428,36 @@ Liferay.Util = {
 		);
 	},
 
+	_defaultSubmitFormFn: function(event) {
+		var instance = this;
+
+		var form = event.form;
+		var action = event.action;
+		var singleSubmit = event.singleSubmit;
+
+		var inputs = form.all('input[type=button], input[type=reset], input[type=submit]');
+
+		Liferay.Util.disableFormButtons(inputs, form);
+
+		if (singleSubmit === false) {
+			Liferay.Util._submitLocked = A.later(
+				10000,
+				Liferay.Util,
+				Liferay.Util.enableFormButtons,
+				[inputs, form]
+			);
+		}
+		else {
+			Liferay.Util._submitLocked = true;
+		}
+
+		if (action != null) {
+			form.attr('action', action);
+		}
+
+		form.submit();
+	},
+
 	_getEditableInstance: function(title) {
 		var instance = this;
 
@@ -1380,39 +1410,24 @@ Liferay.provide(
 		var A = AUI();
 
 		if (!Liferay.Util._submitLocked) {
-			form = A.one(form);
-
-			var inputs = form.all('input[type=button], input[type=reset], input[type=submit]');
-
-			Liferay.Util.disableFormButtons(inputs, form);
-
-			if (singleSubmit === false) {
-				Liferay.Util._submitLocked = A.later(
-					10000,
-					Liferay.Util,
-					Liferay.Util.enableFormButtons,
-					[inputs, form]
-				);
-			}
-			else {
-				Liferay.Util._submitLocked = true;
-			}
-
-			if (action != null) {
-				form.attr('action', action);
-			}
-
 			Liferay.fire(
 				'submitForm',
 				{
-					form: form
+					form: A.one(form),
+					action: action,
+					singleSubmit: singleSubmit
 				}
 			);
-
-			form.submit();
 		}
 	},
 	['aui-base']
+);
+
+Liferay.publish(
+	'submitForm',
+	{
+		defaultFn: Liferay.Util._defaultSubmitFormFn
+	}
 );
 
 // 0-200: Theme Developer

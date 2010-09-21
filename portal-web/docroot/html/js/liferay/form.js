@@ -47,6 +47,14 @@ AUI().add(
 						formNode.delegate('focus', instance._onFieldFocusChange, 'button,input,select,textarea', instance);
 					},
 
+					_defaultSubmitFn: function(event) {
+						var instance = this;
+
+						if (!event.stopped) {
+							submitForm(instance.form);
+						}
+					},
+
 					_onFieldFocusChange: function(event) {
 						var instance = this;
 
@@ -62,7 +70,12 @@ AUI().add(
 
 						event.preventDefault();
 
-						submitForm(instance.form);
+						setTimeout(
+							function() {
+								instance._defaultSubmitFn.call(instance, event);
+							},
+							0
+						);
 					}
 				},
 
