@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.DiffHtmlUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -341,6 +342,19 @@ public class WikiUtil {
 		return sb.toString();
 	}
 
+	public static long getNodeIdFromUri(String uri) {
+		if ((uri == null) || !uri.contains(_WIKI_FRIENDLY_URL_MAPPING)) {
+			return 0;
+		}
+
+		int x =
+			uri.indexOf(_WIKI_FRIENDLY_URL_MAPPING) +
+				_WIKI_FRIENDLY_URL_MAPPING.length();
+		int y = x + uri.substring(x).indexOf(CharPool.SLASH);
+
+		return GetterUtil.getLong(uri.substring(x, y));
+	}
+
 	public static List<String> getNodeNames(List<WikiNode> nodes) {
 		List<String> nodeNames = new ArrayList<String>(nodes.size());
 
@@ -397,6 +411,10 @@ public class WikiUtil {
 		}
 
 		return orderByComparator;
+	}
+
+	public static String getSummary(WikiPage page) throws WikiFormatException {
+		return _instance._getSummary(page);
 	}
 
 	public static List<WikiNode> orderNodes(
@@ -586,6 +604,23 @@ public class WikiUtil {
 		}
 	}
 
+	private String _getSummary(WikiPage page) throws WikiFormatException {
+		WikiEngine engine = _getEngine(page.getFormat());
+
+		String content = null;
+
+		try {
+			content = engine.convert(page, null, null, null);
+
+			content = HtmlUtil.stripHtml(content);
+		}
+		catch (Exception e) {
+			content = null;
+		}
+
+		return content;
+	}
+
 	private String _readConfigurationFile(String propertyName, String format)
 		throws IOException {
 
@@ -631,6 +666,8 @@ public class WikiUtil {
 		"__APO__", "__AT__", "__CAR__", "__EXM__", "__INE__", "__INQ__",
 		"__GRA__", "__QUE__", "__SLA__", "__STA__"
 	};
+
+	private static final String _WIKI_FRIENDLY_URL_MAPPING = "-/wiki/";
 
 	private static WikiUtil _instance = new WikiUtil();
 
