@@ -15,6 +15,7 @@
 package com.liferay.portlet.messageboards.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the message boards ban local service. This utility wraps {@link com.liferay.portlet.messageboards.service.impl.MBBanLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -279,6 +280,9 @@ public class MBBanLocalServiceUtil {
 	public static MBBanLocalService getService() {
 		if (_service == null) {
 			_service = (MBBanLocalService)PortalBeanLocatorUtil.locate(MBBanLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(MBBanLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -286,6 +290,9 @@ public class MBBanLocalServiceUtil {
 
 	public void setService(MBBanLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(MBBanLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static MBBanLocalService _service;

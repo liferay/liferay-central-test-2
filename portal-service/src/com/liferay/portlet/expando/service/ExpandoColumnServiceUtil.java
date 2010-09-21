@@ -15,6 +15,7 @@
 package com.liferay.portlet.expando.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the expando column remote service. This utility wraps {@link com.liferay.portlet.expando.service.impl.ExpandoColumnServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -80,6 +81,9 @@ public class ExpandoColumnServiceUtil {
 	public static ExpandoColumnService getService() {
 		if (_service == null) {
 			_service = (ExpandoColumnService)PortalBeanLocatorUtil.locate(ExpandoColumnService.class.getName());
+
+			ReferenceRegistry.registerReference(ExpandoColumnServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -87,6 +91,9 @@ public class ExpandoColumnServiceUtil {
 
 	public void setService(ExpandoColumnService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(ExpandoColumnServiceUtil.class,
+			"_service");
 	}
 
 	private static ExpandoColumnService _service;

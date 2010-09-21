@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
@@ -801,6 +802,9 @@ public class DLFileRankUtil {
 	public static DLFileRankPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (DLFileRankPersistence)PortalBeanLocatorUtil.locate(DLFileRankPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(DLFileRankUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -808,6 +812,8 @@ public class DLFileRankUtil {
 
 	public void setPersistence(DLFileRankPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(DLFileRankUtil.class, "_persistence");
 	}
 
 	private static DLFileRankPersistence _persistence;

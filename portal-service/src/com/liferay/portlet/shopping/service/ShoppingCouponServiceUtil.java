@@ -15,6 +15,7 @@
 package com.liferay.portlet.shopping.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the shopping coupon remote service. This utility wraps {@link com.liferay.portlet.shopping.service.impl.ShoppingCouponServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -98,6 +99,9 @@ public class ShoppingCouponServiceUtil {
 	public static ShoppingCouponService getService() {
 		if (_service == null) {
 			_service = (ShoppingCouponService)PortalBeanLocatorUtil.locate(ShoppingCouponService.class.getName());
+
+			ReferenceRegistry.registerReference(ShoppingCouponServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -105,6 +109,9 @@ public class ShoppingCouponServiceUtil {
 
 	public void setService(ShoppingCouponService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(ShoppingCouponServiceUtil.class,
+			"_service");
 	}
 
 	private static ShoppingCouponService _service;

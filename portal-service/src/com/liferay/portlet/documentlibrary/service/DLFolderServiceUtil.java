@@ -15,6 +15,7 @@
 package com.liferay.portlet.documentlibrary.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the d l folder remote service. This utility wraps {@link com.liferay.portlet.documentlibrary.service.impl.DLFolderServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -261,6 +262,9 @@ public class DLFolderServiceUtil {
 	public static DLFolderService getService() {
 		if (_service == null) {
 			_service = (DLFolderService)PortalBeanLocatorUtil.locate(DLFolderService.class.getName());
+
+			ReferenceRegistry.registerReference(DLFolderServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -268,6 +272,9 @@ public class DLFolderServiceUtil {
 
 	public void setService(DLFolderService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(DLFolderServiceUtil.class,
+			"_service");
 	}
 
 	private static DLFolderService _service;

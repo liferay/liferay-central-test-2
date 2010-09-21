@@ -15,6 +15,7 @@
 package com.liferay.portlet.announcements.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the announcements flag local service. This utility wraps {@link com.liferay.portlet.announcements.service.impl.AnnouncementsFlagLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -253,6 +254,9 @@ public class AnnouncementsFlagLocalServiceUtil {
 	public static AnnouncementsFlagLocalService getService() {
 		if (_service == null) {
 			_service = (AnnouncementsFlagLocalService)PortalBeanLocatorUtil.locate(AnnouncementsFlagLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(AnnouncementsFlagLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -260,6 +264,9 @@ public class AnnouncementsFlagLocalServiceUtil {
 
 	public void setService(AnnouncementsFlagLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(AnnouncementsFlagLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static AnnouncementsFlagLocalService _service;

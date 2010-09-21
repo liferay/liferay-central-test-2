@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.service.ServiceContext;
 
@@ -628,6 +629,9 @@ public class ResourceCodeUtil {
 	public static ResourceCodePersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (ResourceCodePersistence)PortalBeanLocatorUtil.locate(ResourceCodePersistence.class.getName());
+
+			ReferenceRegistry.registerReference(ResourceCodeUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -635,6 +639,9 @@ public class ResourceCodeUtil {
 
 	public void setPersistence(ResourceCodePersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(ResourceCodeUtil.class,
+			"_persistence");
 	}
 
 	private static ResourceCodePersistence _persistence;

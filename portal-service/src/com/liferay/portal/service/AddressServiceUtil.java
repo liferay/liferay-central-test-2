@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the address remote service. This utility wraps {@link com.liferay.portal.service.impl.AddressServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -80,6 +81,9 @@ public class AddressServiceUtil {
 	public static AddressService getService() {
 		if (_service == null) {
 			_service = (AddressService)PortalBeanLocatorUtil.locate(AddressService.class.getName());
+
+			ReferenceRegistry.registerReference(AddressServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -87,6 +91,8 @@ public class AddressServiceUtil {
 
 	public void setService(AddressService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(AddressServiceUtil.class, "_service");
 	}
 
 	private static AddressService _service;

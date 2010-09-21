@@ -15,6 +15,7 @@
 package com.liferay.counter.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the counter local service. This utility wraps {@link com.liferay.counter.service.impl.CounterLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -262,6 +263,9 @@ public class CounterLocalServiceUtil {
 	public static CounterLocalService getService() {
 		if (_service == null) {
 			_service = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(CounterLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -269,6 +273,9 @@ public class CounterLocalServiceUtil {
 
 	public void setService(CounterLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(CounterLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static CounterLocalService _service;

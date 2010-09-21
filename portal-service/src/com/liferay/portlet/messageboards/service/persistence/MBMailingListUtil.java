@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.messageboards.model.MBMailingList;
@@ -695,6 +696,9 @@ public class MBMailingListUtil {
 	public static MBMailingListPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (MBMailingListPersistence)PortalBeanLocatorUtil.locate(MBMailingListPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(MBMailingListUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -702,6 +706,9 @@ public class MBMailingListUtil {
 
 	public void setPersistence(MBMailingListPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(MBMailingListUtil.class,
+			"_persistence");
 	}
 
 	private static MBMailingListPersistence _persistence;

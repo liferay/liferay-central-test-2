@@ -15,6 +15,7 @@
 package com.liferay.portlet.documentlibrary.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the d l file rank local service. This utility wraps {@link com.liferay.portlet.documentlibrary.service.impl.DLFileRankLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -271,6 +272,9 @@ public class DLFileRankLocalServiceUtil {
 	public static DLFileRankLocalService getService() {
 		if (_service == null) {
 			_service = (DLFileRankLocalService)PortalBeanLocatorUtil.locate(DLFileRankLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(DLFileRankLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -278,6 +282,9 @@ public class DLFileRankLocalServiceUtil {
 
 	public void setService(DLFileRankLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(DLFileRankLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static DLFileRankLocalService _service;

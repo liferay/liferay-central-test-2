@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.announcements.model.AnnouncementsFlag;
@@ -488,6 +489,9 @@ public class AnnouncementsFlagUtil {
 	public static AnnouncementsFlagPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (AnnouncementsFlagPersistence)PortalBeanLocatorUtil.locate(AnnouncementsFlagPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(AnnouncementsFlagUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -495,6 +499,9 @@ public class AnnouncementsFlagUtil {
 
 	public void setPersistence(AnnouncementsFlagPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(AnnouncementsFlagUtil.class,
+			"_persistence");
 	}
 
 	private static AnnouncementsFlagPersistence _persistence;

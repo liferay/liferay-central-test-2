@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoRow;
@@ -479,6 +480,9 @@ public class ExpandoRowUtil {
 	public static ExpandoRowPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (ExpandoRowPersistence)PortalBeanLocatorUtil.locate(ExpandoRowPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(ExpandoRowUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -486,6 +490,8 @@ public class ExpandoRowUtil {
 
 	public void setPersistence(ExpandoRowPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(ExpandoRowUtil.class, "_persistence");
 	}
 
 	private static ExpandoRowPersistence _persistence;

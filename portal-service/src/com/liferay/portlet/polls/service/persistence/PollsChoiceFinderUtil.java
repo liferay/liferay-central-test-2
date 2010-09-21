@@ -15,6 +15,7 @@
 package com.liferay.portlet.polls.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -36,6 +37,9 @@ public class PollsChoiceFinderUtil {
 	public static PollsChoiceFinder getFinder() {
 		if (_finder == null) {
 			_finder = (PollsChoiceFinder)PortalBeanLocatorUtil.locate(PollsChoiceFinder.class.getName());
+
+			ReferenceRegistry.registerReference(PollsChoiceFinderUtil.class,
+				"_finder");
 		}
 
 		return _finder;
@@ -43,6 +47,9 @@ public class PollsChoiceFinderUtil {
 
 	public void setFinder(PollsChoiceFinder finder) {
 		_finder = finder;
+
+		ReferenceRegistry.registerReference(PollsChoiceFinderUtil.class,
+			"_finder");
 	}
 
 	private static PollsChoiceFinder _finder;

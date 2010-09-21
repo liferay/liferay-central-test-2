@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the account remote service. This utility wraps {@link com.liferay.portal.service.impl.AccountServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -37,6 +38,9 @@ public class AccountServiceUtil {
 	public static AccountService getService() {
 		if (_service == null) {
 			_service = (AccountService)PortalBeanLocatorUtil.locate(AccountService.class.getName());
+
+			ReferenceRegistry.registerReference(AccountServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -44,6 +48,8 @@ public class AccountServiceUtil {
 
 	public void setService(AccountService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(AccountServiceUtil.class, "_service");
 	}
 
 	private static AccountService _service;

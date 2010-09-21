@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.OrgGroupRole;
 import com.liferay.portal.service.ServiceContext;
 
@@ -554,6 +555,9 @@ public class OrgGroupRoleUtil {
 	public static OrgGroupRolePersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (OrgGroupRolePersistence)PortalBeanLocatorUtil.locate(OrgGroupRolePersistence.class.getName());
+
+			ReferenceRegistry.registerReference(OrgGroupRoleUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -561,6 +565,9 @@ public class OrgGroupRoleUtil {
 
 	public void setPersistence(OrgGroupRolePersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(OrgGroupRoleUtil.class,
+			"_persistence");
 	}
 
 	private static OrgGroupRolePersistence _persistence;

@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.social.model.SocialActivity;
@@ -1493,6 +1494,9 @@ public class SocialActivityUtil {
 	public static SocialActivityPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (SocialActivityPersistence)PortalBeanLocatorUtil.locate(SocialActivityPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(SocialActivityUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -1500,6 +1504,9 @@ public class SocialActivityUtil {
 
 	public void setPersistence(SocialActivityPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(SocialActivityUtil.class,
+			"_persistence");
 	}
 
 	private static SocialActivityPersistence _persistence;

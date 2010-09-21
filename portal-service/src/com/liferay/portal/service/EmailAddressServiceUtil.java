@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the email address remote service. This utility wraps {@link com.liferay.portal.service.impl.EmailAddressServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -75,6 +76,9 @@ public class EmailAddressServiceUtil {
 	public static EmailAddressService getService() {
 		if (_service == null) {
 			_service = (EmailAddressService)PortalBeanLocatorUtil.locate(EmailAddressService.class.getName());
+
+			ReferenceRegistry.registerReference(EmailAddressServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -82,6 +86,9 @@ public class EmailAddressServiceUtil {
 
 	public void setService(EmailAddressService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(EmailAddressServiceUtil.class,
+			"_service");
 	}
 
 	private static EmailAddressService _service;

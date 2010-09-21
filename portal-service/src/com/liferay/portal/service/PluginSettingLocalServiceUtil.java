@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the plugin setting local service. This utility wraps {@link com.liferay.portal.service.impl.PluginSettingLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -258,6 +259,9 @@ public class PluginSettingLocalServiceUtil {
 	public static PluginSettingLocalService getService() {
 		if (_service == null) {
 			_service = (PluginSettingLocalService)PortalBeanLocatorUtil.locate(PluginSettingLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(PluginSettingLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -265,6 +269,9 @@ public class PluginSettingLocalServiceUtil {
 
 	public void setService(PluginSettingLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(PluginSettingLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static PluginSettingLocalService _service;

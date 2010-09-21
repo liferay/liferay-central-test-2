@@ -15,6 +15,7 @@
 package com.liferay.portlet.ratings.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -29,6 +30,9 @@ public class RatingsEntryFinderUtil {
 	public static RatingsEntryFinder getFinder() {
 		if (_finder == null) {
 			_finder = (RatingsEntryFinder)PortalBeanLocatorUtil.locate(RatingsEntryFinder.class.getName());
+
+			ReferenceRegistry.registerReference(RatingsEntryFinderUtil.class,
+				"_finder");
 		}
 
 		return _finder;
@@ -36,6 +40,9 @@ public class RatingsEntryFinderUtil {
 
 	public void setFinder(RatingsEntryFinder finder) {
 		_finder = finder;
+
+		ReferenceRegistry.registerReference(RatingsEntryFinderUtil.class,
+			"_finder");
 	}
 
 	private static RatingsEntryFinder _finder;

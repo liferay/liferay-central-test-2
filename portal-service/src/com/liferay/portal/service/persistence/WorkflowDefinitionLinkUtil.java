@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.WorkflowDefinitionLink;
 import com.liferay.portal.service.ServiceContext;
 
@@ -678,6 +679,9 @@ public class WorkflowDefinitionLinkUtil {
 	public static WorkflowDefinitionLinkPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (WorkflowDefinitionLinkPersistence)PortalBeanLocatorUtil.locate(WorkflowDefinitionLinkPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(WorkflowDefinitionLinkUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -685,6 +689,9 @@ public class WorkflowDefinitionLinkUtil {
 
 	public void setPersistence(WorkflowDefinitionLinkPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(WorkflowDefinitionLinkUtil.class,
+			"_persistence");
 	}
 
 	private static WorkflowDefinitionLinkPersistence _persistence;

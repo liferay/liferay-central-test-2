@@ -15,6 +15,7 @@
 package com.liferay.portlet.asset.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the asset category property remote service. This utility wraps {@link com.liferay.portlet.asset.service.impl.AssetCategoryPropertyServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -70,6 +71,9 @@ public class AssetCategoryPropertyServiceUtil {
 	public static AssetCategoryPropertyService getService() {
 		if (_service == null) {
 			_service = (AssetCategoryPropertyService)PortalBeanLocatorUtil.locate(AssetCategoryPropertyService.class.getName());
+
+			ReferenceRegistry.registerReference(AssetCategoryPropertyServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -77,6 +81,9 @@ public class AssetCategoryPropertyServiceUtil {
 
 	public void setService(AssetCategoryPropertyService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(AssetCategoryPropertyServiceUtil.class,
+			"_service");
 	}
 
 	private static AssetCategoryPropertyService _service;

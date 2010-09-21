@@ -15,6 +15,7 @@
 package com.liferay.portlet.imagegallery.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the i g image remote service. This utility wraps {@link com.liferay.portlet.imagegallery.service.impl.IGImageServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -140,6 +141,9 @@ public class IGImageServiceUtil {
 	public static IGImageService getService() {
 		if (_service == null) {
 			_service = (IGImageService)PortalBeanLocatorUtil.locate(IGImageService.class.getName());
+
+			ReferenceRegistry.registerReference(IGImageServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -147,6 +151,8 @@ public class IGImageServiceUtil {
 
 	public void setService(IGImageService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(IGImageServiceUtil.class, "_service");
 	}
 
 	private static IGImageService _service;

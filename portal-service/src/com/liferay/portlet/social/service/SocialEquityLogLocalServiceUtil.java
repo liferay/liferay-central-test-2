@@ -15,6 +15,7 @@
 package com.liferay.portlet.social.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the social equity log local service. This utility wraps {@link com.liferay.portlet.social.service.impl.SocialEquityLogLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -311,6 +312,9 @@ public class SocialEquityLogLocalServiceUtil {
 	public static SocialEquityLogLocalService getService() {
 		if (_service == null) {
 			_service = (SocialEquityLogLocalService)PortalBeanLocatorUtil.locate(SocialEquityLogLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(SocialEquityLogLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -318,6 +322,9 @@ public class SocialEquityLogLocalServiceUtil {
 
 	public void setService(SocialEquityLogLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(SocialEquityLogLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static SocialEquityLogLocalService _service;

@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
@@ -1286,6 +1287,9 @@ public class BookmarksEntryUtil {
 	public static BookmarksEntryPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (BookmarksEntryPersistence)PortalBeanLocatorUtil.locate(BookmarksEntryPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(BookmarksEntryUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -1293,6 +1297,9 @@ public class BookmarksEntryUtil {
 
 	public void setPersistence(BookmarksEntryPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(BookmarksEntryUtil.class,
+			"_persistence");
 	}
 
 	private static BookmarksEntryPersistence _persistence;

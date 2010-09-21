@@ -15,6 +15,7 @@
 package com.liferay.portlet.imagegallery.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -41,6 +42,9 @@ public class IGImageFinderUtil {
 	public static IGImageFinder getFinder() {
 		if (_finder == null) {
 			_finder = (IGImageFinder)PortalBeanLocatorUtil.locate(IGImageFinder.class.getName());
+
+			ReferenceRegistry.registerReference(IGImageFinderUtil.class,
+				"_finder");
 		}
 
 		return _finder;
@@ -48,6 +52,8 @@ public class IGImageFinderUtil {
 
 	public void setFinder(IGImageFinder finder) {
 		_finder = finder;
+
+		ReferenceRegistry.registerReference(IGImageFinderUtil.class, "_finder");
 	}
 
 	private static IGImageFinder _finder;

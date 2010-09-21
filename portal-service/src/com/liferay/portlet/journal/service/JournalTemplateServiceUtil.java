@@ -15,6 +15,7 @@
 package com.liferay.portlet.journal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the journal template remote service. This utility wraps {@link com.liferay.portlet.journal.service.impl.JournalTemplateServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -124,6 +125,9 @@ public class JournalTemplateServiceUtil {
 	public static JournalTemplateService getService() {
 		if (_service == null) {
 			_service = (JournalTemplateService)PortalBeanLocatorUtil.locate(JournalTemplateService.class.getName());
+
+			ReferenceRegistry.registerReference(JournalTemplateServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -131,6 +135,9 @@ public class JournalTemplateServiceUtil {
 
 	public void setService(JournalTemplateService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(JournalTemplateServiceUtil.class,
+			"_service");
 	}
 
 	private static JournalTemplateService _service;

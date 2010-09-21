@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the team local service. This utility wraps {@link com.liferay.portal.service.impl.TeamLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -283,6 +284,9 @@ public class TeamLocalServiceUtil {
 	public static TeamLocalService getService() {
 		if (_service == null) {
 			_service = (TeamLocalService)PortalBeanLocatorUtil.locate(TeamLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(TeamLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -290,6 +294,9 @@ public class TeamLocalServiceUtil {
 
 	public void setService(TeamLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(TeamLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static TeamLocalService _service;

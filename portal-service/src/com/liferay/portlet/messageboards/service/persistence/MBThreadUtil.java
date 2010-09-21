@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.messageboards.model.MBThread;
@@ -1678,6 +1679,9 @@ public class MBThreadUtil {
 	public static MBThreadPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (MBThreadPersistence)PortalBeanLocatorUtil.locate(MBThreadPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(MBThreadUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -1685,6 +1689,8 @@ public class MBThreadUtil {
 
 	public void setPersistence(MBThreadPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(MBThreadUtil.class, "_persistence");
 	}
 
 	private static MBThreadPersistence _persistence;

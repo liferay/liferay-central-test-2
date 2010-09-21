@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the user tracker path local service. This utility wraps {@link com.liferay.portal.service.impl.UserTrackerPathLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -234,6 +235,9 @@ public class UserTrackerPathLocalServiceUtil {
 	public static UserTrackerPathLocalService getService() {
 		if (_service == null) {
 			_service = (UserTrackerPathLocalService)PortalBeanLocatorUtil.locate(UserTrackerPathLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(UserTrackerPathLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -241,6 +245,9 @@ public class UserTrackerPathLocalServiceUtil {
 
 	public void setService(UserTrackerPathLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(UserTrackerPathLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static UserTrackerPathLocalService _service;

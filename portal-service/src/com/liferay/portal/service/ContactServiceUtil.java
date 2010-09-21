@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the contact remote service. This utility wraps {@link com.liferay.portal.service.impl.ContactServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -37,6 +38,9 @@ public class ContactServiceUtil {
 	public static ContactService getService() {
 		if (_service == null) {
 			_service = (ContactService)PortalBeanLocatorUtil.locate(ContactService.class.getName());
+
+			ReferenceRegistry.registerReference(ContactServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -44,6 +48,8 @@ public class ContactServiceUtil {
 
 	public void setService(ContactService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(ContactServiceUtil.class, "_service");
 	}
 
 	private static ContactService _service;

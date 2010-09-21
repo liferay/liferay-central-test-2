@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the user local service. This utility wraps {@link com.liferay.portal.service.impl.UserLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -1074,6 +1075,9 @@ public class UserLocalServiceUtil {
 	public static UserLocalService getService() {
 		if (_service == null) {
 			_service = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(UserLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -1081,6 +1085,9 @@ public class UserLocalServiceUtil {
 
 	public void setService(UserLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(UserLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static UserLocalService _service;

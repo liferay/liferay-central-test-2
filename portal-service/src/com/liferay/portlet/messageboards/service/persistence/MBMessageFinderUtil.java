@@ -15,6 +15,7 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -96,6 +97,9 @@ public class MBMessageFinderUtil {
 	public static MBMessageFinder getFinder() {
 		if (_finder == null) {
 			_finder = (MBMessageFinder)PortalBeanLocatorUtil.locate(MBMessageFinder.class.getName());
+
+			ReferenceRegistry.registerReference(MBMessageFinderUtil.class,
+				"_finder");
 		}
 
 		return _finder;
@@ -103,6 +107,8 @@ public class MBMessageFinderUtil {
 
 	public void setFinder(MBMessageFinder finder) {
 		_finder = finder;
+
+		ReferenceRegistry.registerReference(MBMessageFinderUtil.class, "_finder");
 	}
 
 	private static MBMessageFinder _finder;

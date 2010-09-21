@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.tasks.model.TasksReview;
@@ -1124,6 +1125,9 @@ public class TasksReviewUtil {
 	public static TasksReviewPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (TasksReviewPersistence)PortalBeanLocatorUtil.locate(TasksReviewPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(TasksReviewUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -1131,6 +1135,9 @@ public class TasksReviewUtil {
 
 	public void setPersistence(TasksReviewPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(TasksReviewUtil.class,
+			"_persistence");
 	}
 
 	private static TasksReviewPersistence _persistence;

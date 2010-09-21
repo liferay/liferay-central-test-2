@@ -15,6 +15,7 @@
 package com.liferay.portlet.tasks.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the tasks review remote service. This utility wraps {@link com.liferay.portlet.tasks.service.impl.TasksReviewServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -57,6 +58,9 @@ public class TasksReviewServiceUtil {
 	public static TasksReviewService getService() {
 		if (_service == null) {
 			_service = (TasksReviewService)PortalBeanLocatorUtil.locate(TasksReviewService.class.getName());
+
+			ReferenceRegistry.registerReference(TasksReviewServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -64,6 +68,9 @@ public class TasksReviewServiceUtil {
 
 	public void setService(TasksReviewService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(TasksReviewServiceUtil.class,
+			"_service");
 	}
 
 	private static TasksReviewService _service;

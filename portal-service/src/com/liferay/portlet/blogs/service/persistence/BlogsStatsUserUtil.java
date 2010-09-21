@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
@@ -1086,6 +1087,9 @@ public class BlogsStatsUserUtil {
 	public static BlogsStatsUserPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (BlogsStatsUserPersistence)PortalBeanLocatorUtil.locate(BlogsStatsUserPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(BlogsStatsUserUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -1093,6 +1097,9 @@ public class BlogsStatsUserUtil {
 
 	public void setPersistence(BlogsStatsUserPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(BlogsStatsUserUtil.class,
+			"_persistence");
 	}
 
 	private static BlogsStatsUserPersistence _persistence;

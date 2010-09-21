@@ -15,6 +15,7 @@
 package com.liferay.portlet.calendar.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the cal event remote service. This utility wraps {@link com.liferay.portlet.calendar.service.impl.CalEventServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -109,6 +110,9 @@ public class CalEventServiceUtil {
 	public static CalEventService getService() {
 		if (_service == null) {
 			_service = (CalEventService)PortalBeanLocatorUtil.locate(CalEventService.class.getName());
+
+			ReferenceRegistry.registerReference(CalEventServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -116,6 +120,9 @@ public class CalEventServiceUtil {
 
 	public void setService(CalEventService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(CalEventServiceUtil.class,
+			"_service");
 	}
 
 	private static CalEventService _service;

@@ -15,6 +15,7 @@
 package com.liferay.portlet.wiki.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -61,6 +62,9 @@ public class WikiPageFinderUtil {
 	public static WikiPageFinder getFinder() {
 		if (_finder == null) {
 			_finder = (WikiPageFinder)PortalBeanLocatorUtil.locate(WikiPageFinder.class.getName());
+
+			ReferenceRegistry.registerReference(WikiPageFinderUtil.class,
+				"_finder");
 		}
 
 		return _finder;
@@ -68,6 +72,8 @@ public class WikiPageFinderUtil {
 
 	public void setFinder(WikiPageFinder finder) {
 		_finder = finder;
+
+		ReferenceRegistry.registerReference(WikiPageFinderUtil.class, "_finder");
 	}
 
 	private static WikiPageFinder _finder;

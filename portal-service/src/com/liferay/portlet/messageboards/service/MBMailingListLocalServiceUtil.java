@@ -15,6 +15,7 @@
 package com.liferay.portlet.messageboards.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the message boards mailing list local service. This utility wraps {@link com.liferay.portlet.messageboards.service.impl.MBMailingListLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -310,6 +311,9 @@ public class MBMailingListLocalServiceUtil {
 	public static MBMailingListLocalService getService() {
 		if (_service == null) {
 			_service = (MBMailingListLocalService)PortalBeanLocatorUtil.locate(MBMailingListLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(MBMailingListLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -317,6 +321,9 @@ public class MBMailingListLocalServiceUtil {
 
 	public void setService(MBMailingListLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(MBMailingListLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static MBMailingListLocalService _service;

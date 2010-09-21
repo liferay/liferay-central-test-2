@@ -15,6 +15,7 @@
 package com.liferay.portlet.messageboards.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the message boards stats user local service. This utility wraps {@link com.liferay.portlet.messageboards.service.impl.MBStatsUserLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -284,6 +285,9 @@ public class MBStatsUserLocalServiceUtil {
 	public static MBStatsUserLocalService getService() {
 		if (_service == null) {
 			_service = (MBStatsUserLocalService)PortalBeanLocatorUtil.locate(MBStatsUserLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(MBStatsUserLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -291,6 +295,9 @@ public class MBStatsUserLocalServiceUtil {
 
 	public void setService(MBStatsUserLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(MBStatsUserLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static MBStatsUserLocalService _service;

@@ -15,6 +15,7 @@
 package com.liferay.portlet.softwarecatalog.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the s c license remote service. This utility wraps {@link com.liferay.portlet.softwarecatalog.service.impl.SCLicenseServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -69,6 +70,9 @@ public class SCLicenseServiceUtil {
 	public static SCLicenseService getService() {
 		if (_service == null) {
 			_service = (SCLicenseService)PortalBeanLocatorUtil.locate(SCLicenseService.class.getName());
+
+			ReferenceRegistry.registerReference(SCLicenseServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -76,6 +80,9 @@ public class SCLicenseServiceUtil {
 
 	public void setService(SCLicenseService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(SCLicenseServiceUtil.class,
+			"_service");
 	}
 
 	private static SCLicenseService _service;

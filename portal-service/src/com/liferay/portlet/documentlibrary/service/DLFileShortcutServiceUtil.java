@@ -15,6 +15,7 @@
 package com.liferay.portlet.documentlibrary.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the d l file shortcut remote service. This utility wraps {@link com.liferay.portlet.documentlibrary.service.impl.DLFileShortcutServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -71,6 +72,9 @@ public class DLFileShortcutServiceUtil {
 	public static DLFileShortcutService getService() {
 		if (_service == null) {
 			_service = (DLFileShortcutService)PortalBeanLocatorUtil.locate(DLFileShortcutService.class.getName());
+
+			ReferenceRegistry.registerReference(DLFileShortcutServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -78,6 +82,9 @@ public class DLFileShortcutServiceUtil {
 
 	public void setService(DLFileShortcutService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(DLFileShortcutServiceUtil.class,
+			"_service");
 	}
 
 	private static DLFileShortcutService _service;

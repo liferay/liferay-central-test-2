@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the contact local service. This utility wraps {@link com.liferay.portal.service.impl.ContactLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -225,6 +226,9 @@ public class ContactLocalServiceUtil {
 	public static ContactLocalService getService() {
 		if (_service == null) {
 			_service = (ContactLocalService)PortalBeanLocatorUtil.locate(ContactLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(ContactLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -232,6 +236,9 @@ public class ContactLocalServiceUtil {
 
 	public void setService(ContactLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(ContactLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static ContactLocalService _service;

@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.calendar.model.CalEvent;
@@ -1422,6 +1423,9 @@ public class CalEventUtil {
 	public static CalEventPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (CalEventPersistence)PortalBeanLocatorUtil.locate(CalEventPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(CalEventUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -1429,6 +1433,8 @@ public class CalEventUtil {
 
 	public void setPersistence(CalEventPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(CalEventUtil.class, "_persistence");
 	}
 
 	private static CalEventPersistence _persistence;

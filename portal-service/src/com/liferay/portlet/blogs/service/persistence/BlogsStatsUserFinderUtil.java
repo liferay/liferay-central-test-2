@@ -15,6 +15,7 @@
 package com.liferay.portlet.blogs.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -55,6 +56,9 @@ public class BlogsStatsUserFinderUtil {
 	public static BlogsStatsUserFinder getFinder() {
 		if (_finder == null) {
 			_finder = (BlogsStatsUserFinder)PortalBeanLocatorUtil.locate(BlogsStatsUserFinder.class.getName());
+
+			ReferenceRegistry.registerReference(BlogsStatsUserFinderUtil.class,
+				"_finder");
 		}
 
 		return _finder;
@@ -62,6 +66,9 @@ public class BlogsStatsUserFinderUtil {
 
 	public void setFinder(BlogsStatsUserFinder finder) {
 		_finder = finder;
+
+		ReferenceRegistry.registerReference(BlogsStatsUserFinderUtil.class,
+			"_finder");
 	}
 
 	private static BlogsStatsUserFinder _finder;

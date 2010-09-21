@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.BrowserTracker;
 import com.liferay.portal.service.ServiceContext;
 
@@ -331,6 +332,9 @@ public class BrowserTrackerUtil {
 	public static BrowserTrackerPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (BrowserTrackerPersistence)PortalBeanLocatorUtil.locate(BrowserTrackerPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(BrowserTrackerUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -338,6 +342,9 @@ public class BrowserTrackerUtil {
 
 	public void setPersistence(BrowserTrackerPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(BrowserTrackerUtil.class,
+			"_persistence");
 	}
 
 	private static BrowserTrackerPersistence _persistence;

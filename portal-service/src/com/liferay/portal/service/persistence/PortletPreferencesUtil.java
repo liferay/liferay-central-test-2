@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.service.ServiceContext;
 
@@ -815,6 +816,9 @@ public class PortletPreferencesUtil {
 	public static PortletPreferencesPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (PortletPreferencesPersistence)PortalBeanLocatorUtil.locate(PortletPreferencesPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(PortletPreferencesUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -822,6 +826,9 @@ public class PortletPreferencesUtil {
 
 	public void setPersistence(PortletPreferencesPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(PortletPreferencesUtil.class,
+			"_persistence");
 	}
 
 	private static PortletPreferencesPersistence _persistence;

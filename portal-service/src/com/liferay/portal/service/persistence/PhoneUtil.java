@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.service.ServiceContext;
 
@@ -1049,6 +1050,8 @@ public class PhoneUtil {
 	public static PhonePersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (PhonePersistence)PortalBeanLocatorUtil.locate(PhonePersistence.class.getName());
+
+			ReferenceRegistry.registerReference(PhoneUtil.class, "_persistence");
 		}
 
 		return _persistence;
@@ -1056,6 +1059,8 @@ public class PhoneUtil {
 
 	public void setPersistence(PhonePersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(PhoneUtil.class, "_persistence");
 	}
 
 	private static PhonePersistence _persistence;

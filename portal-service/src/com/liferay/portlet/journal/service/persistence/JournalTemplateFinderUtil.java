@@ -15,6 +15,7 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -88,6 +89,9 @@ public class JournalTemplateFinderUtil {
 	public static JournalTemplateFinder getFinder() {
 		if (_finder == null) {
 			_finder = (JournalTemplateFinder)PortalBeanLocatorUtil.locate(JournalTemplateFinder.class.getName());
+
+			ReferenceRegistry.registerReference(JournalTemplateFinderUtil.class,
+				"_finder");
 		}
 
 		return _finder;
@@ -95,6 +99,9 @@ public class JournalTemplateFinderUtil {
 
 	public void setFinder(JournalTemplateFinder finder) {
 		_finder = finder;
+
+		ReferenceRegistry.registerReference(JournalTemplateFinderUtil.class,
+			"_finder");
 	}
 
 	private static JournalTemplateFinder _finder;

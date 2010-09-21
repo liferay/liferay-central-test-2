@@ -15,6 +15,7 @@
 package com.liferay.portlet.documentlibrary.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the d l folder local service. This utility wraps {@link com.liferay.portlet.documentlibrary.service.impl.DLFolderLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -444,6 +445,9 @@ public class DLFolderLocalServiceUtil {
 	public static DLFolderLocalService getService() {
 		if (_service == null) {
 			_service = (DLFolderLocalService)PortalBeanLocatorUtil.locate(DLFolderLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(DLFolderLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -451,6 +455,9 @@ public class DLFolderLocalServiceUtil {
 
 	public void setService(DLFolderLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(DLFolderLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static DLFolderLocalService _service;

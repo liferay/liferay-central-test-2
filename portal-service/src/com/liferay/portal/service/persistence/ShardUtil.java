@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.Shard;
 import com.liferay.portal.service.ServiceContext;
 
@@ -396,6 +397,8 @@ public class ShardUtil {
 	public static ShardPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (ShardPersistence)PortalBeanLocatorUtil.locate(ShardPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(ShardUtil.class, "_persistence");
 		}
 
 		return _persistence;
@@ -403,6 +406,8 @@ public class ShardUtil {
 
 	public void setPersistence(ShardPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(ShardUtil.class, "_persistence");
 	}
 
 	private static ShardPersistence _persistence;

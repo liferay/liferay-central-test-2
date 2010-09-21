@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the layout set prototype local service. This utility wraps {@link com.liferay.portal.service.impl.LayoutSetPrototypeLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -263,6 +264,9 @@ public class LayoutSetPrototypeLocalServiceUtil {
 	public static LayoutSetPrototypeLocalService getService() {
 		if (_service == null) {
 			_service = (LayoutSetPrototypeLocalService)PortalBeanLocatorUtil.locate(LayoutSetPrototypeLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(LayoutSetPrototypeLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -270,6 +274,9 @@ public class LayoutSetPrototypeLocalServiceUtil {
 
 	public void setService(LayoutSetPrototypeLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(LayoutSetPrototypeLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static LayoutSetPrototypeLocalService _service;

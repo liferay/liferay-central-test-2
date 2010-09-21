@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the workflow definition link local service. This utility wraps {@link com.liferay.portal.service.impl.WorkflowDefinitionLinkLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -300,6 +301,9 @@ public class WorkflowDefinitionLinkLocalServiceUtil {
 	public static WorkflowDefinitionLinkLocalService getService() {
 		if (_service == null) {
 			_service = (WorkflowDefinitionLinkLocalService)PortalBeanLocatorUtil.locate(WorkflowDefinitionLinkLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(WorkflowDefinitionLinkLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -307,6 +311,9 @@ public class WorkflowDefinitionLinkLocalServiceUtil {
 
 	public void setService(WorkflowDefinitionLinkLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(WorkflowDefinitionLinkLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static WorkflowDefinitionLinkLocalService _service;

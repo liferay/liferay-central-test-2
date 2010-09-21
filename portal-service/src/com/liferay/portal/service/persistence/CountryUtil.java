@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.Country;
 import com.liferay.portal.service.ServiceContext;
 
@@ -599,6 +600,9 @@ public class CountryUtil {
 	public static CountryPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (CountryPersistence)PortalBeanLocatorUtil.locate(CountryPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(CountryUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -606,6 +610,8 @@ public class CountryUtil {
 
 	public void setPersistence(CountryPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(CountryUtil.class, "_persistence");
 	}
 
 	private static CountryPersistence _persistence;

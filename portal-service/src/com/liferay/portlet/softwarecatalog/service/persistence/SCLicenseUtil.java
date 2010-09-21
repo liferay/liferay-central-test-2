@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
@@ -791,6 +792,9 @@ public class SCLicenseUtil {
 	public static SCLicensePersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (SCLicensePersistence)PortalBeanLocatorUtil.locate(SCLicensePersistence.class.getName());
+
+			ReferenceRegistry.registerReference(SCLicenseUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -798,6 +802,8 @@ public class SCLicenseUtil {
 
 	public void setPersistence(SCLicensePersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(SCLicenseUtil.class, "_persistence");
 	}
 
 	private static SCLicensePersistence _persistence;

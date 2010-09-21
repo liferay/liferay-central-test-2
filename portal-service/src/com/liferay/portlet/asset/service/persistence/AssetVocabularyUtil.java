@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.asset.model.AssetVocabulary;
@@ -917,6 +918,9 @@ public class AssetVocabularyUtil {
 	public static AssetVocabularyPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (AssetVocabularyPersistence)PortalBeanLocatorUtil.locate(AssetVocabularyPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(AssetVocabularyUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -924,6 +928,9 @@ public class AssetVocabularyUtil {
 
 	public void setPersistence(AssetVocabularyPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(AssetVocabularyUtil.class,
+			"_persistence");
 	}
 
 	private static AssetVocabularyPersistence _persistence;

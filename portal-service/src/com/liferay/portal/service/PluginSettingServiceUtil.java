@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the plugin setting remote service. This utility wraps {@link com.liferay.portal.service.impl.PluginSettingServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -47,6 +48,9 @@ public class PluginSettingServiceUtil {
 	public static PluginSettingService getService() {
 		if (_service == null) {
 			_service = (PluginSettingService)PortalBeanLocatorUtil.locate(PluginSettingService.class.getName());
+
+			ReferenceRegistry.registerReference(PluginSettingServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -54,6 +58,9 @@ public class PluginSettingServiceUtil {
 
 	public void setService(PluginSettingService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(PluginSettingServiceUtil.class,
+			"_service");
 	}
 
 	private static PluginSettingService _service;

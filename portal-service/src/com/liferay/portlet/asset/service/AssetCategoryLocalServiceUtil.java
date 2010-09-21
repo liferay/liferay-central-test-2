@@ -15,6 +15,7 @@
 package com.liferay.portlet.asset.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the asset category local service. This utility wraps {@link com.liferay.portlet.asset.service.impl.AssetCategoryLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -417,6 +418,9 @@ public class AssetCategoryLocalServiceUtil {
 	public static AssetCategoryLocalService getService() {
 		if (_service == null) {
 			_service = (AssetCategoryLocalService)PortalBeanLocatorUtil.locate(AssetCategoryLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(AssetCategoryLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -424,6 +428,9 @@ public class AssetCategoryLocalServiceUtil {
 
 	public void setService(AssetCategoryLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(AssetCategoryLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static AssetCategoryLocalService _service;

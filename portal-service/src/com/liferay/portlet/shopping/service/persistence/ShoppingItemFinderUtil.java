@@ -15,6 +15,7 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -64,6 +65,9 @@ public class ShoppingItemFinderUtil {
 	public static ShoppingItemFinder getFinder() {
 		if (_finder == null) {
 			_finder = (ShoppingItemFinder)PortalBeanLocatorUtil.locate(ShoppingItemFinder.class.getName());
+
+			ReferenceRegistry.registerReference(ShoppingItemFinderUtil.class,
+				"_finder");
 		}
 
 		return _finder;
@@ -71,6 +75,9 @@ public class ShoppingItemFinderUtil {
 
 	public void setFinder(ShoppingItemFinder finder) {
 		_finder = finder;
+
+		ReferenceRegistry.registerReference(ShoppingItemFinderUtil.class,
+			"_finder");
 	}
 
 	private static ShoppingItemFinder _finder;

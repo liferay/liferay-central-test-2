@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the shard local service. This utility wraps {@link com.liferay.portal.service.impl.ShardLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -238,6 +239,9 @@ public class ShardLocalServiceUtil {
 	public static ShardLocalService getService() {
 		if (_service == null) {
 			_service = (ShardLocalService)PortalBeanLocatorUtil.locate(ShardLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(ShardLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -245,6 +249,9 @@ public class ShardLocalServiceUtil {
 
 	public void setService(ShardLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(ShardLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static ShardLocalService _service;

@@ -15,6 +15,7 @@
 package com.liferay.portlet.journal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the journal content search local service. This utility wraps {@link com.liferay.portlet.journal.service.impl.JournalContentSearchLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -329,6 +330,9 @@ public class JournalContentSearchLocalServiceUtil {
 	public static JournalContentSearchLocalService getService() {
 		if (_service == null) {
 			_service = (JournalContentSearchLocalService)PortalBeanLocatorUtil.locate(JournalContentSearchLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(JournalContentSearchLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -336,6 +340,9 @@ public class JournalContentSearchLocalServiceUtil {
 
 	public void setService(JournalContentSearchLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(JournalContentSearchLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static JournalContentSearchLocalService _service;

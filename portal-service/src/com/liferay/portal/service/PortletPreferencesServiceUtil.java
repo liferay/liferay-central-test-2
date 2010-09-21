@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the portlet preferences remote service. This utility wraps {@link com.liferay.portal.service.impl.PortletPreferencesServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -62,6 +63,9 @@ public class PortletPreferencesServiceUtil {
 	public static PortletPreferencesService getService() {
 		if (_service == null) {
 			_service = (PortletPreferencesService)PortalBeanLocatorUtil.locate(PortletPreferencesService.class.getName());
+
+			ReferenceRegistry.registerReference(PortletPreferencesServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -69,6 +73,9 @@ public class PortletPreferencesServiceUtil {
 
 	public void setService(PortletPreferencesService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(PortletPreferencesServiceUtil.class,
+			"_service");
 	}
 
 	private static PortletPreferencesService _service;

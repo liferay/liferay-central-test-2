@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the layout remote service. This utility wraps {@link com.liferay.portal.service.impl.LayoutServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -347,6 +348,9 @@ public class LayoutServiceUtil {
 	public static LayoutService getService() {
 		if (_service == null) {
 			_service = (LayoutService)PortalBeanLocatorUtil.locate(LayoutService.class.getName());
+
+			ReferenceRegistry.registerReference(LayoutServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -354,6 +358,8 @@ public class LayoutServiceUtil {
 
 	public void setService(LayoutService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(LayoutServiceUtil.class, "_service");
 	}
 
 	private static LayoutService _service;

@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the company remote service. This utility wraps {@link com.liferay.portal.service.impl.CompanyServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -171,6 +172,9 @@ public class CompanyServiceUtil {
 	public static CompanyService getService() {
 		if (_service == null) {
 			_service = (CompanyService)PortalBeanLocatorUtil.locate(CompanyService.class.getName());
+
+			ReferenceRegistry.registerReference(CompanyServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -178,6 +182,8 @@ public class CompanyServiceUtil {
 
 	public void setService(CompanyService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(CompanyServiceUtil.class, "_service");
 	}
 
 	private static CompanyService _service;

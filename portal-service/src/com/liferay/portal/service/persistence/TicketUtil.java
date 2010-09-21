@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.Ticket;
 import com.liferay.portal.service.ServiceContext;
 
@@ -327,6 +328,8 @@ public class TicketUtil {
 	public static TicketPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (TicketPersistence)PortalBeanLocatorUtil.locate(TicketPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(TicketUtil.class, "_persistence");
 		}
 
 		return _persistence;
@@ -334,6 +337,8 @@ public class TicketUtil {
 
 	public void setPersistence(TicketPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(TicketUtil.class, "_persistence");
 	}
 
 	private static TicketPersistence _persistence;

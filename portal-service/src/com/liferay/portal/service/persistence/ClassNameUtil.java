@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.service.ServiceContext;
 
@@ -329,6 +330,9 @@ public class ClassNameUtil {
 	public static ClassNamePersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (ClassNamePersistence)PortalBeanLocatorUtil.locate(ClassNamePersistence.class.getName());
+
+			ReferenceRegistry.registerReference(ClassNameUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -336,6 +340,8 @@ public class ClassNameUtil {
 
 	public void setPersistence(ClassNamePersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(ClassNameUtil.class, "_persistence");
 	}
 
 	private static ClassNamePersistence _persistence;

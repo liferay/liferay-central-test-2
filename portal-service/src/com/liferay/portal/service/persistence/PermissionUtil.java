@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.service.ServiceContext;
 
@@ -1150,6 +1151,9 @@ public class PermissionUtil {
 	public static PermissionPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (PermissionPersistence)PortalBeanLocatorUtil.locate(PermissionPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(PermissionUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -1157,6 +1161,8 @@ public class PermissionUtil {
 
 	public void setPersistence(PermissionPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(PermissionUtil.class, "_persistence");
 	}
 
 	private static PermissionPersistence _persistence;

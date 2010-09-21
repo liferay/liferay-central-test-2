@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the user id mapper local service. This utility wraps {@link com.liferay.portal.service.impl.UserIdMapperLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -260,6 +261,9 @@ public class UserIdMapperLocalServiceUtil {
 	public static UserIdMapperLocalService getService() {
 		if (_service == null) {
 			_service = (UserIdMapperLocalService)PortalBeanLocatorUtil.locate(UserIdMapperLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(UserIdMapperLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -267,6 +271,9 @@ public class UserIdMapperLocalServiceUtil {
 
 	public void setService(UserIdMapperLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(UserIdMapperLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static UserIdMapperLocalService _service;

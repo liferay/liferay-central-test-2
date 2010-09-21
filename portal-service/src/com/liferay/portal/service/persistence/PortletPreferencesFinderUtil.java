@@ -15,6 +15,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -29,6 +30,9 @@ public class PortletPreferencesFinderUtil {
 	public static PortletPreferencesFinder getFinder() {
 		if (_finder == null) {
 			_finder = (PortletPreferencesFinder)PortalBeanLocatorUtil.locate(PortletPreferencesFinder.class.getName());
+
+			ReferenceRegistry.registerReference(PortletPreferencesFinderUtil.class,
+				"_finder");
 		}
 
 		return _finder;
@@ -36,6 +40,9 @@ public class PortletPreferencesFinderUtil {
 
 	public void setFinder(PortletPreferencesFinder finder) {
 		_finder = finder;
+
+		ReferenceRegistry.registerReference(PortletPreferencesFinderUtil.class,
+			"_finder");
 	}
 
 	private static PortletPreferencesFinder _finder;

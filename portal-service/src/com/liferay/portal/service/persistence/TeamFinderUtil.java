@@ -15,6 +15,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -40,6 +41,8 @@ public class TeamFinderUtil {
 	public static TeamFinder getFinder() {
 		if (_finder == null) {
 			_finder = (TeamFinder)PortalBeanLocatorUtil.locate(TeamFinder.class.getName());
+
+			ReferenceRegistry.registerReference(TeamFinderUtil.class, "_finder");
 		}
 
 		return _finder;
@@ -47,6 +50,8 @@ public class TeamFinderUtil {
 
 	public void setFinder(TeamFinder finder) {
 		_finder = finder;
+
+		ReferenceRegistry.registerReference(TeamFinderUtil.class, "_finder");
 	}
 
 	private static TeamFinder _finder;

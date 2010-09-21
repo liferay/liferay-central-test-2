@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
@@ -1077,6 +1078,9 @@ public class SCFrameworkVersionUtil {
 	public static SCFrameworkVersionPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (SCFrameworkVersionPersistence)PortalBeanLocatorUtil.locate(SCFrameworkVersionPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(SCFrameworkVersionUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -1084,6 +1088,9 @@ public class SCFrameworkVersionUtil {
 
 	public void setPersistence(SCFrameworkVersionPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(SCFrameworkVersionUtil.class,
+			"_persistence");
 	}
 
 	private static SCFrameworkVersionPersistence _persistence;

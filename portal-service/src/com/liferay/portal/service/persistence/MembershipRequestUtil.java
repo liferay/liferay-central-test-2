@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.service.ServiceContext;
 
@@ -708,6 +709,9 @@ public class MembershipRequestUtil {
 	public static MembershipRequestPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (MembershipRequestPersistence)PortalBeanLocatorUtil.locate(MembershipRequestPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(MembershipRequestUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -715,6 +719,9 @@ public class MembershipRequestUtil {
 
 	public void setPersistence(MembershipRequestPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(MembershipRequestUtil.class,
+			"_persistence");
 	}
 
 	private static MembershipRequestPersistence _persistence;

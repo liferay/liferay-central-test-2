@@ -15,6 +15,7 @@
 package com.liferay.portlet.polls.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the polls vote local service. This utility wraps {@link com.liferay.portlet.polls.service.impl.PollsVoteLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -265,6 +266,9 @@ public class PollsVoteLocalServiceUtil {
 	public static PollsVoteLocalService getService() {
 		if (_service == null) {
 			_service = (PollsVoteLocalService)PortalBeanLocatorUtil.locate(PollsVoteLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(PollsVoteLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -272,6 +276,9 @@ public class PollsVoteLocalServiceUtil {
 
 	public void setService(PollsVoteLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(PollsVoteLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static PollsVoteLocalService _service;

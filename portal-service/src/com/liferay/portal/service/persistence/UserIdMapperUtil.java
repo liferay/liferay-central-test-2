@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.UserIdMapper;
 import com.liferay.portal.service.ServiceContext;
 
@@ -553,6 +554,9 @@ public class UserIdMapperUtil {
 	public static UserIdMapperPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (UserIdMapperPersistence)PortalBeanLocatorUtil.locate(UserIdMapperPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(UserIdMapperUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -560,6 +564,9 @@ public class UserIdMapperUtil {
 
 	public void setPersistence(UserIdMapperPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(UserIdMapperUtil.class,
+			"_persistence");
 	}
 
 	private static UserIdMapperPersistence _persistence;

@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.documentlibrary.model.DLFolder;
@@ -1308,6 +1309,9 @@ public class DLFolderUtil {
 	public static DLFolderPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (DLFolderPersistence)PortalBeanLocatorUtil.locate(DLFolderPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(DLFolderUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -1315,6 +1319,8 @@ public class DLFolderUtil {
 
 	public void setPersistence(DLFolderPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(DLFolderUtil.class, "_persistence");
 	}
 
 	private static DLFolderPersistence _persistence;

@@ -15,6 +15,7 @@
 package com.liferay.portlet.social.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -122,6 +123,9 @@ public class SocialActivityFinderUtil {
 	public static SocialActivityFinder getFinder() {
 		if (_finder == null) {
 			_finder = (SocialActivityFinder)PortalBeanLocatorUtil.locate(SocialActivityFinder.class.getName());
+
+			ReferenceRegistry.registerReference(SocialActivityFinderUtil.class,
+				"_finder");
 		}
 
 		return _finder;
@@ -129,6 +133,9 @@ public class SocialActivityFinderUtil {
 
 	public void setFinder(SocialActivityFinder finder) {
 		_finder = finder;
+
+		ReferenceRegistry.registerReference(SocialActivityFinderUtil.class,
+			"_finder");
 	}
 
 	private static SocialActivityFinder _finder;

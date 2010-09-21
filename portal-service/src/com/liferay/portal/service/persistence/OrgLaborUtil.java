@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.service.ServiceContext;
 
@@ -409,6 +410,9 @@ public class OrgLaborUtil {
 	public static OrgLaborPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (OrgLaborPersistence)PortalBeanLocatorUtil.locate(OrgLaborPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(OrgLaborUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -416,6 +420,8 @@ public class OrgLaborUtil {
 
 	public void setPersistence(OrgLaborPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(OrgLaborUtil.class, "_persistence");
 	}
 
 	private static OrgLaborPersistence _persistence;

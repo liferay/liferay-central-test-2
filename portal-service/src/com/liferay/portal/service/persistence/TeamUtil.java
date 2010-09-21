@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.Team;
 import com.liferay.portal.service.ServiceContext;
 
@@ -774,6 +775,8 @@ public class TeamUtil {
 	public static TeamPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (TeamPersistence)PortalBeanLocatorUtil.locate(TeamPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(TeamUtil.class, "_persistence");
 		}
 
 		return _persistence;
@@ -781,6 +784,8 @@ public class TeamUtil {
 
 	public void setPersistence(TeamPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(TeamUtil.class, "_persistence");
 	}
 
 	private static TeamPersistence _persistence;

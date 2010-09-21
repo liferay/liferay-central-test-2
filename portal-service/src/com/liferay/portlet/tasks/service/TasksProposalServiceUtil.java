@@ -15,6 +15,7 @@
 package com.liferay.portlet.tasks.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the tasks proposal remote service. This utility wraps {@link com.liferay.portlet.tasks.service.impl.TasksProposalServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -76,6 +77,9 @@ public class TasksProposalServiceUtil {
 	public static TasksProposalService getService() {
 		if (_service == null) {
 			_service = (TasksProposalService)PortalBeanLocatorUtil.locate(TasksProposalService.class.getName());
+
+			ReferenceRegistry.registerReference(TasksProposalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -83,6 +87,9 @@ public class TasksProposalServiceUtil {
 
 	public void setService(TasksProposalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(TasksProposalServiceUtil.class,
+			"_service");
 	}
 
 	private static TasksProposalService _service;

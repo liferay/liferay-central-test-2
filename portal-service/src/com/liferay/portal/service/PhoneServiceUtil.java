@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the phone remote service. This utility wraps {@link com.liferay.portal.service.impl.PhoneServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -75,6 +76,9 @@ public class PhoneServiceUtil {
 	public static PhoneService getService() {
 		if (_service == null) {
 			_service = (PhoneService)PortalBeanLocatorUtil.locate(PhoneService.class.getName());
+
+			ReferenceRegistry.registerReference(PhoneServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -82,6 +86,8 @@ public class PhoneServiceUtil {
 
 	public void setService(PhoneService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(PhoneServiceUtil.class, "_service");
 	}
 
 	private static PhoneService _service;

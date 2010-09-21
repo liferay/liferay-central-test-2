@@ -15,6 +15,7 @@
 package com.liferay.portlet.shopping.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the shopping order local service. This utility wraps {@link com.liferay.portlet.shopping.service.impl.ShoppingOrderLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -411,6 +412,9 @@ public class ShoppingOrderLocalServiceUtil {
 	public static ShoppingOrderLocalService getService() {
 		if (_service == null) {
 			_service = (ShoppingOrderLocalService)PortalBeanLocatorUtil.locate(ShoppingOrderLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(ShoppingOrderLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -418,6 +422,9 @@ public class ShoppingOrderLocalServiceUtil {
 
 	public void setService(ShoppingOrderLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(ShoppingOrderLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static ShoppingOrderLocalService _service;

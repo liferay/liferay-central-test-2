@@ -15,6 +15,7 @@
 package com.liferay.portlet.shopping.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the shopping item price local service. This utility wraps {@link com.liferay.portlet.shopping.service.impl.ShoppingItemPriceLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -236,6 +237,9 @@ public class ShoppingItemPriceLocalServiceUtil {
 	public static ShoppingItemPriceLocalService getService() {
 		if (_service == null) {
 			_service = (ShoppingItemPriceLocalService)PortalBeanLocatorUtil.locate(ShoppingItemPriceLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(ShoppingItemPriceLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -243,6 +247,9 @@ public class ShoppingItemPriceLocalServiceUtil {
 
 	public void setService(ShoppingItemPriceLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(ShoppingItemPriceLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static ShoppingItemPriceLocalService _service;

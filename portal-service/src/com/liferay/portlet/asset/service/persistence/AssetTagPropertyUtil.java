@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.asset.model.AssetTagProperty;
@@ -777,6 +778,9 @@ public class AssetTagPropertyUtil {
 	public static AssetTagPropertyPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (AssetTagPropertyPersistence)PortalBeanLocatorUtil.locate(AssetTagPropertyPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(AssetTagPropertyUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -784,6 +788,9 @@ public class AssetTagPropertyUtil {
 
 	public void setPersistence(AssetTagPropertyPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(AssetTagPropertyUtil.class,
+			"_persistence");
 	}
 
 	private static AssetTagPropertyPersistence _persistence;

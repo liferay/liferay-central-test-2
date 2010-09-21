@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.journal.model.JournalArticleResource;
@@ -698,6 +699,9 @@ public class JournalArticleResourceUtil {
 	public static JournalArticleResourcePersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (JournalArticleResourcePersistence)PortalBeanLocatorUtil.locate(JournalArticleResourcePersistence.class.getName());
+
+			ReferenceRegistry.registerReference(JournalArticleResourceUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -705,6 +709,9 @@ public class JournalArticleResourceUtil {
 
 	public void setPersistence(JournalArticleResourcePersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(JournalArticleResourceUtil.class,
+			"_persistence");
 	}
 
 	private static JournalArticleResourcePersistence _persistence;

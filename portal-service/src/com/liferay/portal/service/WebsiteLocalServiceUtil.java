@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the website local service. This utility wraps {@link com.liferay.portal.service.impl.WebsiteLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -258,6 +259,9 @@ public class WebsiteLocalServiceUtil {
 	public static WebsiteLocalService getService() {
 		if (_service == null) {
 			_service = (WebsiteLocalService)PortalBeanLocatorUtil.locate(WebsiteLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(WebsiteLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -265,6 +269,9 @@ public class WebsiteLocalServiceUtil {
 
 	public void setService(WebsiteLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(WebsiteLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static WebsiteLocalService _service;

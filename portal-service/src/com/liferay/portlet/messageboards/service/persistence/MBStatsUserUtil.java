@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.messageboards.model.MBStatsUser;
@@ -778,6 +779,9 @@ public class MBStatsUserUtil {
 	public static MBStatsUserPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (MBStatsUserPersistence)PortalBeanLocatorUtil.locate(MBStatsUserPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(MBStatsUserUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -785,6 +789,9 @@ public class MBStatsUserUtil {
 
 	public void setPersistence(MBStatsUserPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(MBStatsUserUtil.class,
+			"_persistence");
 	}
 
 	private static MBStatsUserPersistence _persistence;

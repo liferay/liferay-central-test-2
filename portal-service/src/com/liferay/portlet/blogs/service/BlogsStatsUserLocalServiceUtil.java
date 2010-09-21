@@ -15,6 +15,7 @@
 package com.liferay.portlet.blogs.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the blogs stats user local service. This utility wraps {@link com.liferay.portlet.blogs.service.impl.BlogsStatsUserLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -320,6 +321,9 @@ public class BlogsStatsUserLocalServiceUtil {
 	public static BlogsStatsUserLocalService getService() {
 		if (_service == null) {
 			_service = (BlogsStatsUserLocalService)PortalBeanLocatorUtil.locate(BlogsStatsUserLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(BlogsStatsUserLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -327,6 +331,9 @@ public class BlogsStatsUserLocalServiceUtil {
 
 	public void setService(BlogsStatsUserLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(BlogsStatsUserLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static BlogsStatsUserLocalService _service;

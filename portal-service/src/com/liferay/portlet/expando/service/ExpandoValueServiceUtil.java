@@ -15,6 +15,7 @@
 package com.liferay.portlet.expando.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the expando value remote service. This utility wraps {@link com.liferay.portlet.expando.service.impl.ExpandoValueServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -76,6 +77,9 @@ public class ExpandoValueServiceUtil {
 	public static ExpandoValueService getService() {
 		if (_service == null) {
 			_service = (ExpandoValueService)PortalBeanLocatorUtil.locate(ExpandoValueService.class.getName());
+
+			ReferenceRegistry.registerReference(ExpandoValueServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -83,6 +87,9 @@ public class ExpandoValueServiceUtil {
 
 	public void setService(ExpandoValueService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(ExpandoValueServiceUtil.class,
+			"_service");
 	}
 
 	private static ExpandoValueService _service;

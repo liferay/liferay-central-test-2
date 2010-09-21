@@ -15,6 +15,7 @@
 package com.liferay.portlet.asset.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the asset tag property remote service. This utility wraps {@link com.liferay.portlet.asset.service.impl.AssetTagPropertyServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -68,6 +69,9 @@ public class AssetTagPropertyServiceUtil {
 	public static AssetTagPropertyService getService() {
 		if (_service == null) {
 			_service = (AssetTagPropertyService)PortalBeanLocatorUtil.locate(AssetTagPropertyService.class.getName());
+
+			ReferenceRegistry.registerReference(AssetTagPropertyServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -75,6 +79,9 @@ public class AssetTagPropertyServiceUtil {
 
 	public void setService(AssetTagPropertyService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(AssetTagPropertyServiceUtil.class,
+			"_service");
 	}
 
 	private static AssetTagPropertyService _service;

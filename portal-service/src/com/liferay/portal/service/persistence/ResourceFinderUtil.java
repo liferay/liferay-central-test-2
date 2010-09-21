@@ -15,6 +15,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -35,6 +36,9 @@ public class ResourceFinderUtil {
 	public static ResourceFinder getFinder() {
 		if (_finder == null) {
 			_finder = (ResourceFinder)PortalBeanLocatorUtil.locate(ResourceFinder.class.getName());
+
+			ReferenceRegistry.registerReference(ResourceFinderUtil.class,
+				"_finder");
 		}
 
 		return _finder;
@@ -42,6 +46,8 @@ public class ResourceFinderUtil {
 
 	public void setFinder(ResourceFinder finder) {
 		_finder = finder;
+
+		ReferenceRegistry.registerReference(ResourceFinderUtil.class, "_finder");
 	}
 
 	private static ResourceFinder _finder;

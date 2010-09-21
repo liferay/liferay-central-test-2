@@ -15,6 +15,7 @@
 package com.liferay.portlet.social.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the social activity interpreter local service. This utility wraps {@link com.liferay.portlet.social.service.impl.SocialActivityInterpreterLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -53,6 +54,9 @@ public class SocialActivityInterpreterLocalServiceUtil {
 	public static SocialActivityInterpreterLocalService getService() {
 		if (_service == null) {
 			_service = (SocialActivityInterpreterLocalService)PortalBeanLocatorUtil.locate(SocialActivityInterpreterLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(SocialActivityInterpreterLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -60,6 +64,9 @@ public class SocialActivityInterpreterLocalServiceUtil {
 
 	public void setService(SocialActivityInterpreterLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(SocialActivityInterpreterLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static SocialActivityInterpreterLocalService _service;

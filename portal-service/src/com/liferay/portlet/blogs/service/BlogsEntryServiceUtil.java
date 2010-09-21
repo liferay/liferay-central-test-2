@@ -15,6 +15,7 @@
 package com.liferay.portlet.blogs.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the blogs entry remote service. This utility wraps {@link com.liferay.portlet.blogs.service.impl.BlogsEntryServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -160,6 +161,9 @@ public class BlogsEntryServiceUtil {
 	public static BlogsEntryService getService() {
 		if (_service == null) {
 			_service = (BlogsEntryService)PortalBeanLocatorUtil.locate(BlogsEntryService.class.getName());
+
+			ReferenceRegistry.registerReference(BlogsEntryServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -167,6 +171,9 @@ public class BlogsEntryServiceUtil {
 
 	public void setService(BlogsEntryService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(BlogsEntryServiceUtil.class,
+			"_service");
 	}
 
 	private static BlogsEntryService _service;

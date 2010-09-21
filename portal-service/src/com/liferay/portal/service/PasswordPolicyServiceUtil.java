@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the password policy remote service. This utility wraps {@link com.liferay.portal.service.impl.PasswordPolicyServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -83,6 +84,9 @@ public class PasswordPolicyServiceUtil {
 	public static PasswordPolicyService getService() {
 		if (_service == null) {
 			_service = (PasswordPolicyService)PortalBeanLocatorUtil.locate(PasswordPolicyService.class.getName());
+
+			ReferenceRegistry.registerReference(PasswordPolicyServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -90,6 +94,9 @@ public class PasswordPolicyServiceUtil {
 
 	public void setService(PasswordPolicyService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(PasswordPolicyServiceUtil.class,
+			"_service");
 	}
 
 	private static PasswordPolicyService _service;

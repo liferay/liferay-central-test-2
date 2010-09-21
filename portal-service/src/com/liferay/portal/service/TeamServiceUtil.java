@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the team remote service. This utility wraps {@link com.liferay.portal.service.impl.TeamServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -57,6 +58,9 @@ public class TeamServiceUtil {
 	public static TeamService getService() {
 		if (_service == null) {
 			_service = (TeamService)PortalBeanLocatorUtil.locate(TeamService.class.getName());
+
+			ReferenceRegistry.registerReference(TeamServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -64,6 +68,8 @@ public class TeamServiceUtil {
 
 	public void setService(TeamService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(TeamServiceUtil.class, "_service");
 	}
 
 	private static TeamService _service;

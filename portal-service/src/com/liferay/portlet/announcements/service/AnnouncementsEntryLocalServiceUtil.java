@@ -15,6 +15,7 @@
 package com.liferay.portlet.announcements.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the announcements entry local service. This utility wraps {@link com.liferay.portlet.announcements.service.impl.AnnouncementsEntryLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -395,6 +396,9 @@ public class AnnouncementsEntryLocalServiceUtil {
 	public static AnnouncementsEntryLocalService getService() {
 		if (_service == null) {
 			_service = (AnnouncementsEntryLocalService)PortalBeanLocatorUtil.locate(AnnouncementsEntryLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(AnnouncementsEntryLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -402,6 +406,9 @@ public class AnnouncementsEntryLocalServiceUtil {
 
 	public void setService(AnnouncementsEntryLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(AnnouncementsEntryLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static AnnouncementsEntryLocalService _service;

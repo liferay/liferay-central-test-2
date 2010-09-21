@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.social.model.SocialEquitySetting;
@@ -529,6 +530,9 @@ public class SocialEquitySettingUtil {
 	public static SocialEquitySettingPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (SocialEquitySettingPersistence)PortalBeanLocatorUtil.locate(SocialEquitySettingPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(SocialEquitySettingUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -536,6 +540,9 @@ public class SocialEquitySettingUtil {
 
 	public void setPersistence(SocialEquitySettingPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(SocialEquitySettingUtil.class,
+			"_persistence");
 	}
 
 	private static SocialEquitySettingPersistence _persistence;

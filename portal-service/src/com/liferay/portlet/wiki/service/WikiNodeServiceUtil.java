@@ -15,6 +15,7 @@
 package com.liferay.portlet.wiki.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the wiki node remote service. This utility wraps {@link com.liferay.portlet.wiki.service.impl.WikiNodeServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -92,6 +93,9 @@ public class WikiNodeServiceUtil {
 	public static WikiNodeService getService() {
 		if (_service == null) {
 			_service = (WikiNodeService)PortalBeanLocatorUtil.locate(WikiNodeService.class.getName());
+
+			ReferenceRegistry.registerReference(WikiNodeServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -99,6 +103,9 @@ public class WikiNodeServiceUtil {
 
 	public void setService(WikiNodeService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(WikiNodeServiceUtil.class,
+			"_service");
 	}
 
 	private static WikiNodeService _service;

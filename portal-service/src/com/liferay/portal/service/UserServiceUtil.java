@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the user remote service. This utility wraps {@link com.liferay.portal.service.impl.UserServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -407,6 +408,9 @@ public class UserServiceUtil {
 	public static UserService getService() {
 		if (_service == null) {
 			_service = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName());
+
+			ReferenceRegistry.registerReference(UserServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -414,6 +418,8 @@ public class UserServiceUtil {
 
 	public void setService(UserService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(UserServiceUtil.class, "_service");
 	}
 
 	private static UserService _service;

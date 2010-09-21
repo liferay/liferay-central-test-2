@@ -15,6 +15,7 @@
 package com.liferay.portlet.ratings.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the ratings entry local service. This utility wraps {@link com.liferay.portlet.ratings.service.impl.RatingsEntryLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -266,6 +267,9 @@ public class RatingsEntryLocalServiceUtil {
 	public static RatingsEntryLocalService getService() {
 		if (_service == null) {
 			_service = (RatingsEntryLocalService)PortalBeanLocatorUtil.locate(RatingsEntryLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(RatingsEntryLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -273,6 +277,9 @@ public class RatingsEntryLocalServiceUtil {
 
 	public void setService(RatingsEntryLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(RatingsEntryLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static RatingsEntryLocalService _service;

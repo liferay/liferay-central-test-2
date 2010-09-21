@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.service.ServiceContext;
 
@@ -1057,6 +1058,9 @@ public class EmailAddressUtil {
 	public static EmailAddressPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (EmailAddressPersistence)PortalBeanLocatorUtil.locate(EmailAddressPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(EmailAddressUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -1064,6 +1068,9 @@ public class EmailAddressUtil {
 
 	public void setPersistence(EmailAddressPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(EmailAddressUtil.class,
+			"_persistence");
 	}
 
 	private static EmailAddressPersistence _persistence;

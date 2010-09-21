@@ -15,6 +15,7 @@
 package com.liferay.portlet.polls.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the polls question remote service. This utility wraps {@link com.liferay.portlet.polls.service.impl.PollsQuestionServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -82,6 +83,9 @@ public class PollsQuestionServiceUtil {
 	public static PollsQuestionService getService() {
 		if (_service == null) {
 			_service = (PollsQuestionService)PortalBeanLocatorUtil.locate(PollsQuestionService.class.getName());
+
+			ReferenceRegistry.registerReference(PollsQuestionServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -89,6 +93,9 @@ public class PollsQuestionServiceUtil {
 
 	public void setService(PollsQuestionService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(PollsQuestionServiceUtil.class,
+			"_service");
 	}
 
 	private static PollsQuestionService _service;

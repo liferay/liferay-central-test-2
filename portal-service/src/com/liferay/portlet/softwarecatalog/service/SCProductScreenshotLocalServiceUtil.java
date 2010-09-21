@@ -15,6 +15,7 @@
 package com.liferay.portlet.softwarecatalog.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the s c product screenshot local service. This utility wraps {@link com.liferay.portlet.softwarecatalog.service.impl.SCProductScreenshotLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -269,6 +270,9 @@ public class SCProductScreenshotLocalServiceUtil {
 	public static SCProductScreenshotLocalService getService() {
 		if (_service == null) {
 			_service = (SCProductScreenshotLocalService)PortalBeanLocatorUtil.locate(SCProductScreenshotLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(SCProductScreenshotLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -276,6 +280,9 @@ public class SCProductScreenshotLocalServiceUtil {
 
 	public void setService(SCProductScreenshotLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(SCProductScreenshotLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static SCProductScreenshotLocalService _service;

@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.service.ServiceContext;
 
@@ -408,6 +409,9 @@ public class PasswordPolicyUtil {
 	public static PasswordPolicyPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (PasswordPolicyPersistence)PortalBeanLocatorUtil.locate(PasswordPolicyPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(PasswordPolicyUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -415,6 +419,9 @@ public class PasswordPolicyUtil {
 
 	public void setPersistence(PasswordPolicyPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(PasswordPolicyUtil.class,
+			"_persistence");
 	}
 
 	private static PasswordPolicyPersistence _persistence;

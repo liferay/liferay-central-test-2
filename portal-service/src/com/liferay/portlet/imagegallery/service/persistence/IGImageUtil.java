@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -1789,6 +1790,9 @@ public class IGImageUtil {
 	public static IGImagePersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (IGImagePersistence)PortalBeanLocatorUtil.locate(IGImagePersistence.class.getName());
+
+			ReferenceRegistry.registerReference(IGImageUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -1796,6 +1800,8 @@ public class IGImageUtil {
 
 	public void setPersistence(IGImagePersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(IGImageUtil.class, "_persistence");
 	}
 
 	private static IGImagePersistence _persistence;

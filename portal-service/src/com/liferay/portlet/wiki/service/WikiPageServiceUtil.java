@@ -15,6 +15,7 @@
 package com.liferay.portlet.wiki.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the wiki page remote service. This utility wraps {@link com.liferay.portlet.wiki.service.impl.WikiPageServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -192,6 +193,9 @@ public class WikiPageServiceUtil {
 	public static WikiPageService getService() {
 		if (_service == null) {
 			_service = (WikiPageService)PortalBeanLocatorUtil.locate(WikiPageService.class.getName());
+
+			ReferenceRegistry.registerReference(WikiPageServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -199,6 +203,9 @@ public class WikiPageServiceUtil {
 
 	public void setService(WikiPageService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(WikiPageServiceUtil.class,
+			"_service");
 	}
 
 	private static WikiPageService _service;

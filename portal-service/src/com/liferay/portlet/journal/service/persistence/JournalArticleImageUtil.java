@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.journal.model.JournalArticleImage;
@@ -841,6 +842,9 @@ public class JournalArticleImageUtil {
 	public static JournalArticleImagePersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (JournalArticleImagePersistence)PortalBeanLocatorUtil.locate(JournalArticleImagePersistence.class.getName());
+
+			ReferenceRegistry.registerReference(JournalArticleImageUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -848,6 +852,9 @@ public class JournalArticleImageUtil {
 
 	public void setPersistence(JournalArticleImagePersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(JournalArticleImageUtil.class,
+			"_persistence");
 	}
 
 	private static JournalArticleImagePersistence _persistence;

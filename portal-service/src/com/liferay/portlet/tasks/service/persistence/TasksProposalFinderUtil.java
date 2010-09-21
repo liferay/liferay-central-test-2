@@ -15,6 +15,7 @@
 package com.liferay.portlet.tasks.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -34,6 +35,9 @@ public class TasksProposalFinderUtil {
 	public static TasksProposalFinder getFinder() {
 		if (_finder == null) {
 			_finder = (TasksProposalFinder)PortalBeanLocatorUtil.locate(TasksProposalFinder.class.getName());
+
+			ReferenceRegistry.registerReference(TasksProposalFinderUtil.class,
+				"_finder");
 		}
 
 		return _finder;
@@ -41,6 +45,9 @@ public class TasksProposalFinderUtil {
 
 	public void setFinder(TasksProposalFinder finder) {
 		_finder = finder;
+
+		ReferenceRegistry.registerReference(TasksProposalFinderUtil.class,
+			"_finder");
 	}
 
 	private static TasksProposalFinder _finder;

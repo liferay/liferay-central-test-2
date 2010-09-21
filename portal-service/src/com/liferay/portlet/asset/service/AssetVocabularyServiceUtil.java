@@ -15,6 +15,7 @@
 package com.liferay.portlet.asset.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the asset vocabulary remote service. This utility wraps {@link com.liferay.portlet.asset.service.impl.AssetVocabularyServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -128,6 +129,9 @@ public class AssetVocabularyServiceUtil {
 	public static AssetVocabularyService getService() {
 		if (_service == null) {
 			_service = (AssetVocabularyService)PortalBeanLocatorUtil.locate(AssetVocabularyService.class.getName());
+
+			ReferenceRegistry.registerReference(AssetVocabularyServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -135,6 +139,9 @@ public class AssetVocabularyServiceUtil {
 
 	public void setService(AssetVocabularyService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(AssetVocabularyServiceUtil.class,
+			"_service");
 	}
 
 	private static AssetVocabularyService _service;

@@ -15,6 +15,7 @@
 package com.liferay.portlet.softwarecatalog.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the s c product entry remote service. This utility wraps {@link com.liferay.portlet.softwarecatalog.service.impl.SCProductEntryServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -81,6 +82,9 @@ public class SCProductEntryServiceUtil {
 	public static SCProductEntryService getService() {
 		if (_service == null) {
 			_service = (SCProductEntryService)PortalBeanLocatorUtil.locate(SCProductEntryService.class.getName());
+
+			ReferenceRegistry.registerReference(SCProductEntryServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -88,6 +92,9 @@ public class SCProductEntryServiceUtil {
 
 	public void setService(SCProductEntryService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(SCProductEntryServiceUtil.class,
+			"_service");
 	}
 
 	private static SCProductEntryService _service;

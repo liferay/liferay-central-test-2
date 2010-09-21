@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the organization local service. This utility wraps {@link com.liferay.portal.service.impl.OrganizationLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -521,6 +522,9 @@ public class OrganizationLocalServiceUtil {
 	public static OrganizationLocalService getService() {
 		if (_service == null) {
 			_service = (OrganizationLocalService)PortalBeanLocatorUtil.locate(OrganizationLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(OrganizationLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -528,6 +532,9 @@ public class OrganizationLocalServiceUtil {
 
 	public void setService(OrganizationLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(OrganizationLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static OrganizationLocalService _service;

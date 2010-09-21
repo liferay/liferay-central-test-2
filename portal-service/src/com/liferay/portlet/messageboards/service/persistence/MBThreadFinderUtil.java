@@ -15,6 +15,7 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -86,6 +87,9 @@ public class MBThreadFinderUtil {
 	public static MBThreadFinder getFinder() {
 		if (_finder == null) {
 			_finder = (MBThreadFinder)PortalBeanLocatorUtil.locate(MBThreadFinder.class.getName());
+
+			ReferenceRegistry.registerReference(MBThreadFinderUtil.class,
+				"_finder");
 		}
 
 		return _finder;
@@ -93,6 +97,8 @@ public class MBThreadFinderUtil {
 
 	public void setFinder(MBThreadFinder finder) {
 		_finder = finder;
+
+		ReferenceRegistry.registerReference(MBThreadFinderUtil.class, "_finder");
 	}
 
 	private static MBThreadFinder _finder;

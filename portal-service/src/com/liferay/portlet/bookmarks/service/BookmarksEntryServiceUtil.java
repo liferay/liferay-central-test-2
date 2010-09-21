@@ -15,6 +15,7 @@
 package com.liferay.portlet.bookmarks.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the bookmarks entry remote service. This utility wraps {@link com.liferay.portlet.bookmarks.service.impl.BookmarksEntryServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -79,6 +80,9 @@ public class BookmarksEntryServiceUtil {
 	public static BookmarksEntryService getService() {
 		if (_service == null) {
 			_service = (BookmarksEntryService)PortalBeanLocatorUtil.locate(BookmarksEntryService.class.getName());
+
+			ReferenceRegistry.registerReference(BookmarksEntryServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -86,6 +90,9 @@ public class BookmarksEntryServiceUtil {
 
 	public void setService(BookmarksEntryService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(BookmarksEntryServiceUtil.class,
+			"_service");
 	}
 
 	private static BookmarksEntryService _service;

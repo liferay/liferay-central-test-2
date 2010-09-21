@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.ratings.model.RatingsStats;
@@ -340,6 +341,9 @@ public class RatingsStatsUtil {
 	public static RatingsStatsPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (RatingsStatsPersistence)PortalBeanLocatorUtil.locate(RatingsStatsPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(RatingsStatsUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -347,6 +351,9 @@ public class RatingsStatsUtil {
 
 	public void setPersistence(RatingsStatsPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(RatingsStatsUtil.class,
+			"_persistence");
 	}
 
 	private static RatingsStatsPersistence _persistence;

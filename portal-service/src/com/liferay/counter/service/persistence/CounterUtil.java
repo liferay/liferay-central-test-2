@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import java.util.List;
@@ -266,6 +267,9 @@ public class CounterUtil {
 	public static CounterPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (CounterPersistence)PortalBeanLocatorUtil.locate(CounterPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(CounterUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -273,6 +277,8 @@ public class CounterUtil {
 
 	public void setPersistence(CounterPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(CounterUtil.class, "_persistence");
 	}
 
 	private static CounterPersistence _persistence;

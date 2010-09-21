@@ -15,6 +15,7 @@
 package com.liferay.portlet.shopping.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the shopping order remote service. This utility wraps {@link com.liferay.portlet.shopping.service.impl.ShoppingOrderServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -107,6 +108,9 @@ public class ShoppingOrderServiceUtil {
 	public static ShoppingOrderService getService() {
 		if (_service == null) {
 			_service = (ShoppingOrderService)PortalBeanLocatorUtil.locate(ShoppingOrderService.class.getName());
+
+			ReferenceRegistry.registerReference(ShoppingOrderServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -114,6 +118,9 @@ public class ShoppingOrderServiceUtil {
 
 	public void setService(ShoppingOrderService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(ShoppingOrderServiceUtil.class,
+			"_service");
 	}
 
 	private static ShoppingOrderService _service;

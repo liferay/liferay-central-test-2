@@ -15,6 +15,7 @@
 package com.liferay.portlet.asset.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -79,6 +80,9 @@ public class AssetTagFinderUtil {
 	public static AssetTagFinder getFinder() {
 		if (_finder == null) {
 			_finder = (AssetTagFinder)PortalBeanLocatorUtil.locate(AssetTagFinder.class.getName());
+
+			ReferenceRegistry.registerReference(AssetTagFinderUtil.class,
+				"_finder");
 		}
 
 		return _finder;
@@ -86,6 +90,8 @@ public class AssetTagFinderUtil {
 
 	public void setFinder(AssetTagFinder finder) {
 		_finder = finder;
+
+		ReferenceRegistry.registerReference(AssetTagFinderUtil.class, "_finder");
 	}
 
 	private static AssetTagFinder _finder;

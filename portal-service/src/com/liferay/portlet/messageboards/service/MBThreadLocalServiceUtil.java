@@ -15,6 +15,7 @@
 package com.liferay.portlet.messageboards.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the message boards thread local service. This utility wraps {@link com.liferay.portlet.messageboards.service.impl.MBThreadLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -363,6 +364,9 @@ public class MBThreadLocalServiceUtil {
 	public static MBThreadLocalService getService() {
 		if (_service == null) {
 			_service = (MBThreadLocalService)PortalBeanLocatorUtil.locate(MBThreadLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(MBThreadLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -370,6 +374,9 @@ public class MBThreadLocalServiceUtil {
 
 	public void setService(MBThreadLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(MBThreadLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static MBThreadLocalService _service;

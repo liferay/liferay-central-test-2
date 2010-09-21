@@ -15,6 +15,7 @@
 package com.liferay.portlet.calendar.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -37,6 +38,9 @@ public class CalEventFinderUtil {
 	public static CalEventFinder getFinder() {
 		if (_finder == null) {
 			_finder = (CalEventFinder)PortalBeanLocatorUtil.locate(CalEventFinder.class.getName());
+
+			ReferenceRegistry.registerReference(CalEventFinderUtil.class,
+				"_finder");
 		}
 
 		return _finder;
@@ -44,6 +48,8 @@ public class CalEventFinderUtil {
 
 	public void setFinder(CalEventFinder finder) {
 		_finder = finder;
+
+		ReferenceRegistry.registerReference(CalEventFinderUtil.class, "_finder");
 	}
 
 	private static CalEventFinder _finder;

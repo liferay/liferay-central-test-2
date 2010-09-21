@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.wiki.model.WikiNode;
@@ -911,6 +912,9 @@ public class WikiNodeUtil {
 	public static WikiNodePersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (WikiNodePersistence)PortalBeanLocatorUtil.locate(WikiNodePersistence.class.getName());
+
+			ReferenceRegistry.registerReference(WikiNodeUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -918,6 +922,8 @@ public class WikiNodeUtil {
 
 	public void setPersistence(WikiNodePersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(WikiNodeUtil.class, "_persistence");
 	}
 
 	private static WikiNodePersistence _persistence;

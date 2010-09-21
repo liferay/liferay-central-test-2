@@ -15,6 +15,7 @@
 package com.liferay.portlet.asset.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the asset entry remote service. This utility wraps {@link com.liferay.portlet.asset.service.impl.AssetEntryServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -148,6 +149,9 @@ public class AssetEntryServiceUtil {
 	public static AssetEntryService getService() {
 		if (_service == null) {
 			_service = (AssetEntryService)PortalBeanLocatorUtil.locate(AssetEntryService.class.getName());
+
+			ReferenceRegistry.registerReference(AssetEntryServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -155,6 +159,9 @@ public class AssetEntryServiceUtil {
 
 	public void setService(AssetEntryService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(AssetEntryServiceUtil.class,
+			"_service");
 	}
 
 	private static AssetEntryService _service;

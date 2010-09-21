@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.ServiceContext;
 
@@ -1541,6 +1542,8 @@ public class LayoutUtil {
 	public static LayoutPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (LayoutPersistence)PortalBeanLocatorUtil.locate(LayoutPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(LayoutUtil.class, "_persistence");
 		}
 
 		return _persistence;
@@ -1548,6 +1551,8 @@ public class LayoutUtil {
 
 	public void setPersistence(LayoutPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(LayoutUtil.class, "_persistence");
 	}
 
 	private static LayoutPersistence _persistence;

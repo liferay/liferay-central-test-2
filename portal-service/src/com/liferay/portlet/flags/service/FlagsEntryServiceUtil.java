@@ -15,6 +15,7 @@
 package com.liferay.portlet.flags.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the flags entry remote service. This utility wraps {@link com.liferay.portlet.flags.service.impl.FlagsEntryServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -47,6 +48,9 @@ public class FlagsEntryServiceUtil {
 	public static FlagsEntryService getService() {
 		if (_service == null) {
 			_service = (FlagsEntryService)PortalBeanLocatorUtil.locate(FlagsEntryService.class.getName());
+
+			ReferenceRegistry.registerReference(FlagsEntryServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -54,6 +58,9 @@ public class FlagsEntryServiceUtil {
 
 	public void setService(FlagsEntryService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(FlagsEntryServiceUtil.class,
+			"_service");
 	}
 
 	private static FlagsEntryService _service;

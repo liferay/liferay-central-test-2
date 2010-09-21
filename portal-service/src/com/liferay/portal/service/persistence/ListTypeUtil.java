@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.ListType;
 import com.liferay.portal.service.ServiceContext;
 
@@ -404,6 +405,9 @@ public class ListTypeUtil {
 	public static ListTypePersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (ListTypePersistence)PortalBeanLocatorUtil.locate(ListTypePersistence.class.getName());
+
+			ReferenceRegistry.registerReference(ListTypeUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -411,6 +415,8 @@ public class ListTypeUtil {
 
 	public void setPersistence(ListTypePersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(ListTypeUtil.class, "_persistence");
 	}
 
 	private static ListTypePersistence _persistence;

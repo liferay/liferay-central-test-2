@@ -15,6 +15,7 @@
 package com.liferay.portlet.announcements.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the announcements flag remote service. This utility wraps {@link com.liferay.portlet.announcements.service.impl.AnnouncementsFlagServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -56,6 +57,9 @@ public class AnnouncementsFlagServiceUtil {
 	public static AnnouncementsFlagService getService() {
 		if (_service == null) {
 			_service = (AnnouncementsFlagService)PortalBeanLocatorUtil.locate(AnnouncementsFlagService.class.getName());
+
+			ReferenceRegistry.registerReference(AnnouncementsFlagServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -63,6 +67,9 @@ public class AnnouncementsFlagServiceUtil {
 
 	public void setService(AnnouncementsFlagService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(AnnouncementsFlagServiceUtil.class,
+			"_service");
 	}
 
 	private static AnnouncementsFlagService _service;

@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the image local service. This utility wraps {@link com.liferay.portal.service.impl.ImageLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -315,6 +316,9 @@ public class ImageLocalServiceUtil {
 	public static ImageLocalService getService() {
 		if (_service == null) {
 			_service = (ImageLocalService)PortalBeanLocatorUtil.locate(ImageLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(ImageLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -322,6 +326,9 @@ public class ImageLocalServiceUtil {
 
 	public void setService(ImageLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(ImageLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static ImageLocalService _service;

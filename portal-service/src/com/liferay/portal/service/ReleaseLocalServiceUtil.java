@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the release local service. This utility wraps {@link com.liferay.portal.service.impl.ReleaseLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -258,6 +259,9 @@ public class ReleaseLocalServiceUtil {
 	public static ReleaseLocalService getService() {
 		if (_service == null) {
 			_service = (ReleaseLocalService)PortalBeanLocatorUtil.locate(ReleaseLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(ReleaseLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -265,6 +269,9 @@ public class ReleaseLocalServiceUtil {
 
 	public void setService(ReleaseLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(ReleaseLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static ReleaseLocalService _service;

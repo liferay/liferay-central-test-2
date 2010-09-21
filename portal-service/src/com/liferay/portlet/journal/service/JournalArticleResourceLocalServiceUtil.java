@@ -15,6 +15,7 @@
 package com.liferay.portlet.journal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the journal article resource local service. This utility wraps {@link com.liferay.portlet.journal.service.impl.JournalArticleResourceLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -279,6 +280,9 @@ public class JournalArticleResourceLocalServiceUtil {
 	public static JournalArticleResourceLocalService getService() {
 		if (_service == null) {
 			_service = (JournalArticleResourceLocalService)PortalBeanLocatorUtil.locate(JournalArticleResourceLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(JournalArticleResourceLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -286,6 +290,9 @@ public class JournalArticleResourceLocalServiceUtil {
 
 	public void setService(JournalArticleResourceLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(JournalArticleResourceLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static JournalArticleResourceLocalService _service;

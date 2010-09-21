@@ -15,6 +15,7 @@
 package com.liferay.portlet.journal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the journal feed remote service. This utility wraps {@link com.liferay.portlet.journal.service.impl.JournalFeedServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -101,6 +102,9 @@ public class JournalFeedServiceUtil {
 	public static JournalFeedService getService() {
 		if (_service == null) {
 			_service = (JournalFeedService)PortalBeanLocatorUtil.locate(JournalFeedService.class.getName());
+
+			ReferenceRegistry.registerReference(JournalFeedServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -108,6 +112,9 @@ public class JournalFeedServiceUtil {
 
 	public void setService(JournalFeedService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(JournalFeedServiceUtil.class,
+			"_service");
 	}
 
 	private static JournalFeedService _service;

@@ -15,6 +15,7 @@
 package com.liferay.portlet.social.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the social relation local service. This utility wraps {@link com.liferay.portlet.social.service.impl.SocialRelationLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -295,6 +296,9 @@ public class SocialRelationLocalServiceUtil {
 	public static SocialRelationLocalService getService() {
 		if (_service == null) {
 			_service = (SocialRelationLocalService)PortalBeanLocatorUtil.locate(SocialRelationLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(SocialRelationLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -302,6 +306,9 @@ public class SocialRelationLocalServiceUtil {
 
 	public void setService(SocialRelationLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(SocialRelationLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static SocialRelationLocalService _service;

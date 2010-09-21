@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.service.ServiceContext;
 
@@ -408,6 +409,9 @@ public class ContactUtil {
 	public static ContactPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (ContactPersistence)PortalBeanLocatorUtil.locate(ContactPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(ContactUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -415,6 +419,8 @@ public class ContactUtil {
 
 	public void setPersistence(ContactPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(ContactUtil.class, "_persistence");
 	}
 
 	private static ContactPersistence _persistence;

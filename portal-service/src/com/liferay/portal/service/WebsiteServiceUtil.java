@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the website remote service. This utility wraps {@link com.liferay.portal.service.impl.WebsiteServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -71,6 +72,9 @@ public class WebsiteServiceUtil {
 	public static WebsiteService getService() {
 		if (_service == null) {
 			_service = (WebsiteService)PortalBeanLocatorUtil.locate(WebsiteService.class.getName());
+
+			ReferenceRegistry.registerReference(WebsiteServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -78,6 +82,8 @@ public class WebsiteServiceUtil {
 
 	public void setService(WebsiteService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(WebsiteServiceUtil.class, "_service");
 	}
 
 	private static WebsiteService _service;

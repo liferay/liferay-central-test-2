@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the membership request remote service. This utility wraps {@link com.liferay.portal.service.impl.MembershipRequestServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -64,6 +65,9 @@ public class MembershipRequestServiceUtil {
 	public static MembershipRequestService getService() {
 		if (_service == null) {
 			_service = (MembershipRequestService)PortalBeanLocatorUtil.locate(MembershipRequestService.class.getName());
+
+			ReferenceRegistry.registerReference(MembershipRequestServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -71,6 +75,9 @@ public class MembershipRequestServiceUtil {
 
 	public void setService(MembershipRequestService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(MembershipRequestServiceUtil.class,
+			"_service");
 	}
 
 	private static MembershipRequestService _service;

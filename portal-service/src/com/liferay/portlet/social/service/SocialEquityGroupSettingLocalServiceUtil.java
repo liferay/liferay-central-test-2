@@ -15,6 +15,7 @@
 package com.liferay.portlet.social.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the social equity group setting local service. This utility wraps {@link com.liferay.portlet.social.service.impl.SocialEquityGroupSettingLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -249,6 +250,9 @@ public class SocialEquityGroupSettingLocalServiceUtil {
 	public static SocialEquityGroupSettingLocalService getService() {
 		if (_service == null) {
 			_service = (SocialEquityGroupSettingLocalService)PortalBeanLocatorUtil.locate(SocialEquityGroupSettingLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(SocialEquityGroupSettingLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -256,6 +260,9 @@ public class SocialEquityGroupSettingLocalServiceUtil {
 
 	public void setService(SocialEquityGroupSettingLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(SocialEquityGroupSettingLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static SocialEquityGroupSettingLocalService _service;

@@ -15,6 +15,7 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -40,6 +41,9 @@ public class DLFileEntryFinderUtil {
 	public static DLFileEntryFinder getFinder() {
 		if (_finder == null) {
 			_finder = (DLFileEntryFinder)PortalBeanLocatorUtil.locate(DLFileEntryFinder.class.getName());
+
+			ReferenceRegistry.registerReference(DLFileEntryFinderUtil.class,
+				"_finder");
 		}
 
 		return _finder;
@@ -47,6 +51,9 @@ public class DLFileEntryFinderUtil {
 
 	public void setFinder(DLFileEntryFinder finder) {
 		_finder = finder;
+
+		ReferenceRegistry.registerReference(DLFileEntryFinderUtil.class,
+			"_finder");
 	}
 
 	private static DLFileEntryFinder _finder;

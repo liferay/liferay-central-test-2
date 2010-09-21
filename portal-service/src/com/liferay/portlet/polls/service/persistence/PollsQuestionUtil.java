@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.polls.model.PollsQuestion;
@@ -689,6 +690,9 @@ public class PollsQuestionUtil {
 	public static PollsQuestionPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (PollsQuestionPersistence)PortalBeanLocatorUtil.locate(PollsQuestionPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(PollsQuestionUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -696,6 +700,9 @@ public class PollsQuestionUtil {
 
 	public void setPersistence(PollsQuestionPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(PollsQuestionUtil.class,
+			"_persistence");
 	}
 
 	private static PollsQuestionPersistence _persistence;

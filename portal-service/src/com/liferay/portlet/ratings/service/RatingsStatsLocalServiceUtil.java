@@ -15,6 +15,7 @@
 package com.liferay.portlet.ratings.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the ratings stats local service. This utility wraps {@link com.liferay.portlet.ratings.service.impl.RatingsStatsLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -259,6 +260,9 @@ public class RatingsStatsLocalServiceUtil {
 	public static RatingsStatsLocalService getService() {
 		if (_service == null) {
 			_service = (RatingsStatsLocalService)PortalBeanLocatorUtil.locate(RatingsStatsLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(RatingsStatsLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -266,6 +270,9 @@ public class RatingsStatsLocalServiceUtil {
 
 	public void setService(RatingsStatsLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(RatingsStatsLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static RatingsStatsLocalService _service;

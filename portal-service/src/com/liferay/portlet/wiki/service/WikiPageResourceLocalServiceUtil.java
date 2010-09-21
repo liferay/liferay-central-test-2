@@ -15,6 +15,7 @@
 package com.liferay.portlet.wiki.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the wiki page resource local service. This utility wraps {@link com.liferay.portlet.wiki.service.impl.WikiPageResourceLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -261,6 +262,9 @@ public class WikiPageResourceLocalServiceUtil {
 	public static WikiPageResourceLocalService getService() {
 		if (_service == null) {
 			_service = (WikiPageResourceLocalService)PortalBeanLocatorUtil.locate(WikiPageResourceLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(WikiPageResourceLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -268,6 +272,9 @@ public class WikiPageResourceLocalServiceUtil {
 
 	public void setService(WikiPageResourceLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(WikiPageResourceLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static WikiPageResourceLocalService _service;

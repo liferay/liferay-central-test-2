@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.shopping.model.ShoppingCategory;
@@ -704,6 +705,9 @@ public class ShoppingCategoryUtil {
 	public static ShoppingCategoryPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (ShoppingCategoryPersistence)PortalBeanLocatorUtil.locate(ShoppingCategoryPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(ShoppingCategoryUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -711,6 +715,9 @@ public class ShoppingCategoryUtil {
 
 	public void setPersistence(ShoppingCategoryPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(ShoppingCategoryUtil.class,
+			"_persistence");
 	}
 
 	private static ShoppingCategoryPersistence _persistence;

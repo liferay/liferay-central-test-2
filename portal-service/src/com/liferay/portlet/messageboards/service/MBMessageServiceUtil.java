@@ -15,6 +15,7 @@
 package com.liferay.portlet.messageboards.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the message-boards message remote service. This utility wraps {@link com.liferay.portlet.messageboards.service.impl.MBMessageServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -239,6 +240,9 @@ public class MBMessageServiceUtil {
 	public static MBMessageService getService() {
 		if (_service == null) {
 			_service = (MBMessageService)PortalBeanLocatorUtil.locate(MBMessageService.class.getName());
+
+			ReferenceRegistry.registerReference(MBMessageServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -246,6 +250,9 @@ public class MBMessageServiceUtil {
 
 	public void setService(MBMessageService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(MBMessageServiceUtil.class,
+			"_service");
 	}
 
 	private static MBMessageService _service;

@@ -15,6 +15,7 @@
 package com.liferay.portlet.expando.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the expando table local service. This utility wraps {@link com.liferay.portlet.expando.service.impl.ExpandoTableLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -387,6 +388,9 @@ public class ExpandoTableLocalServiceUtil {
 	public static ExpandoTableLocalService getService() {
 		if (_service == null) {
 			_service = (ExpandoTableLocalService)PortalBeanLocatorUtil.locate(ExpandoTableLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(ExpandoTableLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -394,6 +398,9 @@ public class ExpandoTableLocalServiceUtil {
 
 	public void setService(ExpandoTableLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(ExpandoTableLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static ExpandoTableLocalService _service;

@@ -15,6 +15,7 @@
 package com.liferay.portlet.softwarecatalog.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the s c product version remote service. This utility wraps {@link com.liferay.portlet.softwarecatalog.service.impl.SCProductVersionServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -90,6 +91,9 @@ public class SCProductVersionServiceUtil {
 	public static SCProductVersionService getService() {
 		if (_service == null) {
 			_service = (SCProductVersionService)PortalBeanLocatorUtil.locate(SCProductVersionService.class.getName());
+
+			ReferenceRegistry.registerReference(SCProductVersionServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -97,6 +101,9 @@ public class SCProductVersionServiceUtil {
 
 	public void setService(SCProductVersionService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(SCProductVersionServiceUtil.class,
+			"_service");
 	}
 
 	private static SCProductVersionService _service;

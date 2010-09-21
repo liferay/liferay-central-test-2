@@ -15,6 +15,7 @@
 package com.liferay.portlet.bookmarks.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -28,6 +29,9 @@ public class BookmarksEntryFinderUtil {
 	public static BookmarksEntryFinder getFinder() {
 		if (_finder == null) {
 			_finder = (BookmarksEntryFinder)PortalBeanLocatorUtil.locate(BookmarksEntryFinder.class.getName());
+
+			ReferenceRegistry.registerReference(BookmarksEntryFinderUtil.class,
+				"_finder");
 		}
 
 		return _finder;
@@ -35,6 +39,9 @@ public class BookmarksEntryFinderUtil {
 
 	public void setFinder(BookmarksEntryFinder finder) {
 		_finder = finder;
+
+		ReferenceRegistry.registerReference(BookmarksEntryFinderUtil.class,
+			"_finder");
 	}
 
 	private static BookmarksEntryFinder _finder;

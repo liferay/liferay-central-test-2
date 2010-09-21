@@ -15,6 +15,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * @author Brian Wing Shun Chan
@@ -144,6 +145,9 @@ public class PermissionFinderUtil {
 	public static PermissionFinder getFinder() {
 		if (_finder == null) {
 			_finder = (PermissionFinder)PortalBeanLocatorUtil.locate(PermissionFinder.class.getName());
+
+			ReferenceRegistry.registerReference(PermissionFinderUtil.class,
+				"_finder");
 		}
 
 		return _finder;
@@ -151,6 +155,9 @@ public class PermissionFinderUtil {
 
 	public void setFinder(PermissionFinder finder) {
 		_finder = finder;
+
+		ReferenceRegistry.registerReference(PermissionFinderUtil.class,
+			"_finder");
 	}
 
 	private static PermissionFinder _finder;

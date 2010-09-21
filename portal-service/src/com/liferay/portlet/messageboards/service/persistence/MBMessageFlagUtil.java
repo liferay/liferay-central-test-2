@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
@@ -1242,6 +1243,9 @@ public class MBMessageFlagUtil {
 	public static MBMessageFlagPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (MBMessageFlagPersistence)PortalBeanLocatorUtil.locate(MBMessageFlagPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(MBMessageFlagUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -1249,6 +1253,9 @@ public class MBMessageFlagUtil {
 
 	public void setPersistence(MBMessageFlagPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(MBMessageFlagUtil.class,
+			"_persistence");
 	}
 
 	private static MBMessageFlagPersistence _persistence;

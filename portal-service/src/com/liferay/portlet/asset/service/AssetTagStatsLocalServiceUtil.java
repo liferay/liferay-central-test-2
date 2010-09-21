@@ -15,6 +15,7 @@
 package com.liferay.portlet.asset.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the asset tag stats local service. This utility wraps {@link com.liferay.portlet.asset.service.impl.AssetTagStatsLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -258,6 +259,9 @@ public class AssetTagStatsLocalServiceUtil {
 	public static AssetTagStatsLocalService getService() {
 		if (_service == null) {
 			_service = (AssetTagStatsLocalService)PortalBeanLocatorUtil.locate(AssetTagStatsLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(AssetTagStatsLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -265,6 +269,9 @@ public class AssetTagStatsLocalServiceUtil {
 
 	public void setService(AssetTagStatsLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(AssetTagStatsLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static AssetTagStatsLocalService _service;

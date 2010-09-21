@@ -15,6 +15,7 @@
 package com.liferay.portlet.softwarecatalog.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the s c framework version local service. This utility wraps {@link com.liferay.portlet.softwarecatalog.service.impl.SCFrameworkVersionLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -348,6 +349,9 @@ public class SCFrameworkVersionLocalServiceUtil {
 	public static SCFrameworkVersionLocalService getService() {
 		if (_service == null) {
 			_service = (SCFrameworkVersionLocalService)PortalBeanLocatorUtil.locate(SCFrameworkVersionLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(SCFrameworkVersionLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -355,6 +359,9 @@ public class SCFrameworkVersionLocalServiceUtil {
 
 	public void setService(SCFrameworkVersionLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(SCFrameworkVersionLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static SCFrameworkVersionLocalService _service;

@@ -15,6 +15,7 @@
 package com.liferay.portlet.asset.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the asset vocabulary local service. This utility wraps {@link com.liferay.portlet.asset.service.impl.AssetVocabularyLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -371,6 +372,9 @@ public class AssetVocabularyLocalServiceUtil {
 	public static AssetVocabularyLocalService getService() {
 		if (_service == null) {
 			_service = (AssetVocabularyLocalService)PortalBeanLocatorUtil.locate(AssetVocabularyLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(AssetVocabularyLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -378,6 +382,9 @@ public class AssetVocabularyLocalServiceUtil {
 
 	public void setService(AssetVocabularyLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(AssetVocabularyLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static AssetVocabularyLocalService _service;

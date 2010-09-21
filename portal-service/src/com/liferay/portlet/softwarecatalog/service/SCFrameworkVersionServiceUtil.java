@@ -15,6 +15,7 @@
 package com.liferay.portlet.softwarecatalog.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the s c framework version remote service. This utility wraps {@link com.liferay.portlet.softwarecatalog.service.impl.SCFrameworkVersionServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -82,6 +83,9 @@ public class SCFrameworkVersionServiceUtil {
 	public static SCFrameworkVersionService getService() {
 		if (_service == null) {
 			_service = (SCFrameworkVersionService)PortalBeanLocatorUtil.locate(SCFrameworkVersionService.class.getName());
+
+			ReferenceRegistry.registerReference(SCFrameworkVersionServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -89,6 +93,9 @@ public class SCFrameworkVersionServiceUtil {
 
 	public void setService(SCFrameworkVersionService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(SCFrameworkVersionServiceUtil.class,
+			"_service");
 	}
 
 	private static SCFrameworkVersionService _service;

@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the password tracker local service. This utility wraps {@link com.liferay.portal.service.impl.PasswordTrackerLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -253,6 +254,9 @@ public class PasswordTrackerLocalServiceUtil {
 	public static PasswordTrackerLocalService getService() {
 		if (_service == null) {
 			_service = (PasswordTrackerLocalService)PortalBeanLocatorUtil.locate(PasswordTrackerLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(PasswordTrackerLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -260,6 +264,9 @@ public class PasswordTrackerLocalServiceUtil {
 
 	public void setService(PasswordTrackerLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(PasswordTrackerLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static PasswordTrackerLocalService _service;

@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the resource permission local service. This utility wraps {@link com.liferay.portal.service.impl.ResourcePermissionLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -343,6 +344,9 @@ public class ResourcePermissionLocalServiceUtil {
 	public static ResourcePermissionLocalService getService() {
 		if (_service == null) {
 			_service = (ResourcePermissionLocalService)PortalBeanLocatorUtil.locate(ResourcePermissionLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(ResourcePermissionLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -350,6 +354,9 @@ public class ResourcePermissionLocalServiceUtil {
 
 	public void setService(ResourcePermissionLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(ResourcePermissionLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static ResourcePermissionLocalService _service;

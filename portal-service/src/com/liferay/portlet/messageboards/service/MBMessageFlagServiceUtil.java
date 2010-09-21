@@ -15,6 +15,7 @@
 package com.liferay.portlet.messageboards.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the message boards message flag remote service. This utility wraps {@link com.liferay.portlet.messageboards.service.impl.MBMessageFlagServiceImpl} and is the primary access point for service operations in application layer code running on a remote server.
@@ -49,6 +50,9 @@ public class MBMessageFlagServiceUtil {
 	public static MBMessageFlagService getService() {
 		if (_service == null) {
 			_service = (MBMessageFlagService)PortalBeanLocatorUtil.locate(MBMessageFlagService.class.getName());
+
+			ReferenceRegistry.registerReference(MBMessageFlagServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -56,6 +60,9 @@ public class MBMessageFlagServiceUtil {
 
 	public void setService(MBMessageFlagService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(MBMessageFlagServiceUtil.class,
+			"_service");
 	}
 
 	private static MBMessageFlagService _service;

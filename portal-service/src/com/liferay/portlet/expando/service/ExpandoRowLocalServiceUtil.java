@@ -15,6 +15,7 @@
 package com.liferay.portlet.expando.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
  * The utility for the expando row local service. This utility wraps {@link com.liferay.portlet.expando.service.impl.ExpandoRowLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
@@ -369,6 +370,9 @@ public class ExpandoRowLocalServiceUtil {
 	public static ExpandoRowLocalService getService() {
 		if (_service == null) {
 			_service = (ExpandoRowLocalService)PortalBeanLocatorUtil.locate(ExpandoRowLocalService.class.getName());
+
+			ReferenceRegistry.registerReference(ExpandoRowLocalServiceUtil.class,
+				"_service");
 		}
 
 		return _service;
@@ -376,6 +380,9 @@ public class ExpandoRowLocalServiceUtil {
 
 	public void setService(ExpandoRowLocalService service) {
 		_service = service;
+
+		ReferenceRegistry.registerReference(ExpandoRowLocalServiceUtil.class,
+			"_service");
 	}
 
 	private static ExpandoRowLocalService _service;

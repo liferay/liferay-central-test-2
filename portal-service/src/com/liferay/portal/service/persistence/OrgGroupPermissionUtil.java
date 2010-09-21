@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.model.OrgGroupPermission;
 import com.liferay.portal.service.ServiceContext;
 
@@ -561,6 +562,9 @@ public class OrgGroupPermissionUtil {
 	public static OrgGroupPermissionPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (OrgGroupPermissionPersistence)PortalBeanLocatorUtil.locate(OrgGroupPermissionPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(OrgGroupPermissionUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -568,6 +572,9 @@ public class OrgGroupPermissionUtil {
 
 	public void setPersistence(OrgGroupPermissionPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(OrgGroupPermissionUtil.class,
+			"_persistence");
 	}
 
 	private static OrgGroupPermissionPersistence _persistence;

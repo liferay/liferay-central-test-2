@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
@@ -1146,6 +1147,9 @@ public class SCProductEntryUtil {
 	public static SCProductEntryPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (SCProductEntryPersistence)PortalBeanLocatorUtil.locate(SCProductEntryPersistence.class.getName());
+
+			ReferenceRegistry.registerReference(SCProductEntryUtil.class,
+				"_persistence");
 		}
 
 		return _persistence;
@@ -1153,6 +1157,9 @@ public class SCProductEntryUtil {
 
 	public void setPersistence(SCProductEntryPersistence persistence) {
 		_persistence = persistence;
+
+		ReferenceRegistry.registerReference(SCProductEntryUtil.class,
+			"_persistence");
 	}
 
 	private static SCProductEntryPersistence _persistence;
