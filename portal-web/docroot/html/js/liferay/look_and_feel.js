@@ -1138,7 +1138,7 @@ AUI().add(
 				customTitleInput.on(
 					'keyup',
 					function(event) {
-						if (!portletData.useCustomTitle || instance._portletLanguage.val() != instance._currentLanguage) {
+						if (!portletData.useCustomTitle) {
 							return;
 						}
 
@@ -1156,10 +1156,14 @@ AUI().add(
 
 							var value = event.currentTarget.val();
 
-							portletTitle.html(cruft + value);
+							var portletLanguage = instance._portletLanguage.val();
+
+							if (portletLanguage == instance._currentLanguage) {
+								portletTitle.html(cruft + value);
+							}
 
 							portletData.title = value;
-							instance._portletTitles(false, value);
+							instance._portletTitles(portletLanguage, value);
 						}
 					}
 				);
@@ -1201,8 +1205,6 @@ AUI().add(
 
 			_portletTitles: function(key, value) {
 				var instance = this;
-
-				var portletLanguage = instance._portletLanguage;
 
 				if (!instance._objData.portletData.titles) {
 					instance._objData.portletData.titles = {};
