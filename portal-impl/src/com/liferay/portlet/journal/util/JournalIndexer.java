@@ -17,6 +17,7 @@ package com.liferay.portlet.journal.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BaseIndexer;
+import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
@@ -44,6 +45,7 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -54,6 +56,7 @@ import javax.portlet.PortletURL;
  * @author Harry Mark
  * @author Bruno Farache
  * @author Raymond Augé
+ * @author Marcellus Tavares
  */
 public class JournalIndexer extends BaseIndexer {
 
@@ -113,8 +116,10 @@ public class JournalIndexer extends BaseIndexer {
 		String title = article.getTitle();
 		String description = article.getDescription();
 		String content = article.getContent();
+		int status = article.getStatus();
 		String type = article.getType();
 		Date displayDate = article.getDisplayDate();
+		Date modifiedDate = article.getModifiedDate();
 
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
 			JournalArticle.class.getName(), resourcePrimKey);
@@ -130,7 +135,7 @@ public class JournalIndexer extends BaseIndexer {
 
 		document.addUID(PORTLET_ID, groupId, articleId);
 
-		document.addModifiedDate(displayDate);
+		document.addModifiedDate(modifiedDate);
 
 		document.addKeyword(Field.COMPANY_ID, companyId);
 		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
@@ -151,6 +156,9 @@ public class JournalIndexer extends BaseIndexer {
 		document.addKeyword(Field.ROOT_ENTRY_CLASS_PK, resourcePrimKey);
 		document.addKeyword(Field.VERSION, version);
 		document.addKeyword(Field.TYPE, type);
+
+		document.addDate("displayDate", displayDate);
+		document.addKeyword("status", status);
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
@@ -267,6 +275,105 @@ public class JournalIndexer extends BaseIndexer {
 		else if (elIndexType.equals("text")) {
 			document.addText(
 				Field.CONTENT, StringUtil.merge(value, StringPool.SPACE));
+		}
+	}
+
+	protected void postProcessContextQuery(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		Integer status = (Integer)searchContext.getAttribute("status");
+
+		if ((Validator.isNotNull(status)) &&
+				(status != WorkflowConstants.STATUS_ANY)) {
+
+			contextQuery.addRequiredTerm("status", status);
+		}
+	}
+
+	protected void postProcessSearchQuery(
+			BooleanQuery searchQuery, SearchContext searchContext)
+		throws Exception {
+
+		String articleId = (String)searchContext.getAttribute("articleId");
+
+		if (Validator.isNotNull(articleId)) {
+			if (searchContext.isAndSearch()) {
+				searchQuery.addRequiredTerm("entryClassPK", articleId, true);
+			}
+			else {
+				searchQuery.addTerm("entryClassPK", articleId, true);
+			}
+		}
+
+		String title = (String)searchContext.getAttribute("title");
+
+		if (Validator.isNotNull(title)) {
+			if (searchContext.isAndSearch()) {
+				searchQuery.addRequiredTerm("title", title, true);
+			}
+			else {
+				searchQuery.addTerm("title", title, true);
+			}
+		}
+
+		String content = (String)searchContext.getAttribute("content");
+
+		if (Validator.isNotNull(content)) {
+			if (searchContext.isAndSearch()) {
+				searchQuery.addRequiredTerm("content", content, true);
+			}
+			else {
+				searchQuery.addTerm("content", content, true);
+			}
+		}
+
+		String description = (String)searchContext.getAttribute("description");
+
+		if (Validator.isNotNull(description)) {
+			if (searchContext.isAndSearch()) {
+				searchQuery.addRequiredTerm("description", description, true);
+			}
+			else {
+				searchQuery.addTerm("description", description, true);
+			}
+		}
+
+		String type = (String)searchContext.getAttribute("type");
+
+		if (Validator.isNotNull(type)) {
+			if (searchContext.isAndSearch()) {
+				searchQuery.addRequiredTerm("type", type, true);
+			}
+			else {
+				searchQuery.addTerm("type", type, true);
+			}
+		}
+
+		LinkedHashMap<String, Object> params =
+			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
+
+		if (Validator.isNotNull(params)) {
+			String assetCategoryNames =
+				(String)params.get("assetCategoryNames");
+
+			if (Validator.isNotNull(assetCategoryNames)) {
+				searchQuery.addExactTerm(
+					Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
+			}
+
+			String assetTagNames = (String)params.get("assetTagNames");
+
+			if (Validator.isNotNull(assetTagNames)) {
+				searchQuery.addExactTerm(
+					Field.ASSET_TAG_NAMES, assetTagNames);
+			}
+
+			String expandoAttributes = (String)params.get("expandoAttributes");
+
+			if (Validator.isNotNull(expandoAttributes)) {
+				addSearchExpando(searchQuery, searchContext, expandoAttributes);
+			}
 		}
 	}
 

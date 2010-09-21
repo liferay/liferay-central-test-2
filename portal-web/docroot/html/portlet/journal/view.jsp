@@ -59,9 +59,20 @@ portletURL.setParameter("tabs1", tabs1);
 			ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
 
 			searchTerms.setVersion(-1);
+
+			int total = 0;
+
+			List results = null;
 			%>
 
-			<%@ include file="/html/portlet/journal/article_search_results.jspf" %>
+			<c:choose>
+				<c:when test="<%= PropsValues.JOURNAL_SEARCH_WITH_INDEX %>">
+					<%@ include file="/html/portlet/journal/article_search_results_index.jspf" %>
+				</c:when>
+				<c:otherwise>
+					<%@ include file="/html/portlet/journal/article_search_results_database.jspf" %>
+				</c:otherwise>
+			</c:choose>
 
 			<div class="separator article-separator"><!-- --></div>
 
