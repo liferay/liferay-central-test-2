@@ -49,7 +49,7 @@ public class AddUserGmailTest extends BaseTestCase {
 		Thread.sleep(5000);
 		selenium.type("_125_screenName", RuntimeVariables.replace("usersn"));
 		selenium.type("_125_emailAddress",
-			RuntimeVariables.replace("liferay.qa.testing@gmail.com"));
+			RuntimeVariables.replace("liferay.qa.testing.trunk@gmail.com"));
 		selenium.type("_125_firstName", RuntimeVariables.replace("userfn"));
 		selenium.type("_125_lastName", RuntimeVariables.replace("userln"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
@@ -58,7 +58,7 @@ public class AddUserGmailTest extends BaseTestCase {
 				"Your request processed successfully."),
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals("usersn", selenium.getValue("_125_screenName"));
-		assertEquals("liferay.qa.testing@gmail.com",
+		assertEquals("liferay.qa.testing.trunk@gmail.com",
 			selenium.getValue("_125_emailAddress"));
 		assertEquals("userfn", selenium.getValue("_125_firstName"));
 		assertEquals("userln", selenium.getValue("_125_lastName"));
@@ -109,7 +109,7 @@ public class AddUserGmailTest extends BaseTestCase {
 		selenium.clickAt("link=Sign Out", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_58_login",
-			RuntimeVariables.replace("liferay.qa.testing@gmail.com"));
+			RuntimeVariables.replace("liferay.qa.testing.trunk@gmail.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
 		selenium.check("_58_rememberMeCheckbox");
 		selenium.clickAt("//input[@value='Sign In']",

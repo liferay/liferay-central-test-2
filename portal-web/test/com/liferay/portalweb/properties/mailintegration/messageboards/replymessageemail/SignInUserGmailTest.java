@@ -41,7 +41,7 @@ public class SignInUserGmailTest extends BaseTestCase {
 		}
 
 		selenium.type("_58_login",
-			RuntimeVariables.replace("liferay.qa.testing@gmail.com"));
+			RuntimeVariables.replace("liferay.qa.testing.trunk@gmail.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
 		selenium.clickAt("_58_rememberMeCheckbox", RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Sign In']",

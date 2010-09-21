@@ -104,14 +104,14 @@ public class ConfigurePortletMessageBoardsEmailFromTest extends BaseTestCase {
 		selenium.type("_86_emailFromName",
 			RuntimeVariables.replace("Administrator"));
 		selenium.type("_86_emailFromAddress",
-			RuntimeVariables.replace("liferay.qa.server@gmail.com"));
+			RuntimeVariables.replace("liferay.qa.server.trunk@gmail.com"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
 		assertEquals("Administrator", selenium.getValue("_86_emailFromName"));
-		assertEquals("liferay.qa.server@gmail.com",
+		assertEquals("liferay.qa.server.trunk@gmail.com",
 			selenium.getValue("_86_emailFromAddress"));
 	}
 }

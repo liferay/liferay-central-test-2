@@ -54,7 +54,7 @@ public class ConfigureServerAdministrationMailTest extends BaseTestCase {
 		selenium.clickAt("_137_pop3SecureCheckbox", RuntimeVariables.replace(""));
 		assertTrue(selenium.isChecked("_137_pop3SecureCheckbox"));
 		selenium.type("_137_pop3User",
-			RuntimeVariables.replace("liferay.qa.server@gmail.com"));
+			RuntimeVariables.replace("liferay.qa.server.trunk@gmail.com"));
 		selenium.type("_137_pop3Password",
 			RuntimeVariables.replace("loveispatient"));
 		selenium.type("_137_smtpHost",
@@ -64,7 +64,7 @@ public class ConfigureServerAdministrationMailTest extends BaseTestCase {
 		selenium.click("_137_smtpSecureCheckbox");
 		assertTrue(selenium.isChecked("_137_smtpSecureCheckbox"));
 		selenium.type("_137_smtpUser",
-			RuntimeVariables.replace("liferay.qa.server@gmail.com"));
+			RuntimeVariables.replace("liferay.qa.server.trunk@gmail.com"));
 		selenium.type("_137_smtpPassword",
 			RuntimeVariables.replace("loveispatient"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
@@ -75,13 +75,13 @@ public class ConfigureServerAdministrationMailTest extends BaseTestCase {
 		assertEquals("pop.gmail.com", selenium.getValue("_137_pop3Host"));
 		assertEquals("995", selenium.getValue("_137_pop3Port"));
 		assertTrue(selenium.isChecked("_137_pop3SecureCheckbox"));
-		assertEquals("liferay.qa.server@gmail.com",
+		assertEquals("liferay.qa.server.trunk@gmail.com",
 			selenium.getValue("_137_pop3User"));
 		assertEquals("loveispatient", selenium.getValue("_137_pop3Password"));
 		assertEquals("smtp.gmail.com", selenium.getValue("_137_smtpHost"));
 		assertEquals("465", selenium.getValue("_137_smtpPort"));
 		assertTrue(selenium.isChecked("_137_smtpSecureCheckbox"));
-		assertEquals("liferay.qa.server@gmail.com",
+		assertEquals("liferay.qa.server.trunk@gmail.com",
 			selenium.getValue("_137_smtpUser"));
 		assertEquals("loveispatient", selenium.getValue("_137_smtpPassword"));
 	}

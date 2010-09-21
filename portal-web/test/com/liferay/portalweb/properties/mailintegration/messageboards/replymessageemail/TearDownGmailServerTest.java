@@ -65,7 +65,7 @@ public class TearDownGmailServerTest extends BaseTestCase {
 				}
 
 				selenium.type("Email",
-					RuntimeVariables.replace("liferay.qa.server"));
+					RuntimeVariables.replace("liferay.qa.server.trunk"));
 				selenium.type("Passwd",
 					RuntimeVariables.replace("loveispatient"));
 

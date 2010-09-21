@@ -31,8 +31,7 @@ public class ReplyMessageEmailTest extends BaseTestCase {
 					RuntimeVariables.replace("gmail"));
 				selenium.waitForPopUp("gmail", RuntimeVariables.replace(""));
 				selenium.selectWindow("gmail");
-				Thread.sleep(5000);
-				Thread.sleep(5000);
+				Thread.sleep(60000);
 
 				boolean signedIn = selenium.isElementPresent(
 						"//div[4]/div/nobr/a[2]");
@@ -65,7 +64,7 @@ public class ReplyMessageEmailTest extends BaseTestCase {
 				}
 
 				selenium.type("Email",
-					RuntimeVariables.replace("liferay.qa.testing"));
+					RuntimeVariables.replace("liferay.qa.testing.trunk"));
 				selenium.type("Passwd",
 					RuntimeVariables.replace("loveispatient"));
 
