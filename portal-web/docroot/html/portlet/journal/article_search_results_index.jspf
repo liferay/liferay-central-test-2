@@ -39,8 +39,8 @@ else {
 results = _getResults(hits);
 total = hits.getLength();
 
-searchContainer.setTotal(total);
 searchContainer.setResults(results);
+searchContainer.setTotal(total);
 %>
 
 <%!

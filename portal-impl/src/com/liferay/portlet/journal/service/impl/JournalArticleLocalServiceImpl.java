@@ -1424,33 +1424,6 @@ public class JournalArticleLocalServiceImpl
 			end, obc);
 	}
 
-	public Hits search(
-			long companyId, long groupId, String keywords, String type,
-			int status, LinkedHashMap<String, Object> params, int start,
-			int end, Sort sort)
-		throws SystemException {
-
-		String articleId = null;
-		String title = null;
-		String description = null;
-		String content = null;
-		boolean andOperator = false;
-
-		if (Validator.isNotNull(keywords)) {
-			articleId = keywords;
-			title = keywords;
-			description = keywords;
-			content = keywords;
-		}
-		else {
-			andOperator = true;
-		}
-
-		return search(
-			companyId, groupId, articleId, title, description, content,
-			type, status, params, andOperator, start, end, sort);
-	}
-
 	public List<JournalArticle> search(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
@@ -1480,6 +1453,33 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public Hits search(
+			long companyId, long groupId, String keywords, String type,
+			int status, LinkedHashMap<String, Object> params, int start,
+			int end, Sort sort)
+		throws SystemException {
+
+		String articleId = null;
+		String title = null;
+		String description = null;
+		String content = null;
+		boolean andOperator = false;
+
+		if (Validator.isNotNull(keywords)) {
+			articleId = keywords;
+			title = keywords;
+			description = keywords;
+			content = keywords;
+		}
+		else {
+			andOperator = true;
+		}
+
+		return search(
+			companyId, groupId, articleId, title, description, content,
+			type, status, params, andOperator, start, end, sort);
+	}
+
+	public Hits search(
 			long companyId, long groupId, String articleId, String title,
 			String description, String content, String type, int status,
 			LinkedHashMap<String, Object> params, boolean andSearch, int start,
@@ -1491,12 +1491,12 @@ public class JournalArticleLocalServiceImpl
 				new HashMap<String, Serializable>();
 
 			attributes.put("articleId", articleId);
-			attributes.put("title", title);
-			attributes.put("description", description);
 			attributes.put("content", content);
-			attributes.put("status", status);
-			attributes.put("type", type);
+			attributes.put("description", description);
 			attributes.put("params", params);
+			attributes.put("status", status);
+			attributes.put("title", title);
+			attributes.put("type", type);
 
 			SearchContext searchContext = new SearchContext();
 
@@ -3070,10 +3070,10 @@ public class JournalArticleLocalServiceImpl
 	private static final String _TOKEN_PAGE_BREAK = PropsUtil.get(
 		PropsKeys.JOURNAL_ARTICLE_TOKEN_PAGE_BREAK);
 
-	private long _journalArticleCheckInterval =
-		PropsValues.JOURNAL_ARTICLE_CHECK_INTERVAL * Time.MINUTE;
-
 	private static Log _log = LogFactoryUtil.getLog(
 		JournalArticleLocalServiceImpl.class);
+
+	private long _journalArticleCheckInterval =
+		PropsValues.JOURNAL_ARTICLE_CHECK_INTERVAL * Time.MINUTE;
 
 }

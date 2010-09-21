@@ -116,8 +116,8 @@ public class JournalIndexer extends BaseIndexer {
 		String title = article.getTitle();
 		String description = article.getDescription();
 		String content = article.getContent();
-		int status = article.getStatus();
 		String type = article.getType();
+		int status = article.getStatus();
 		Date displayDate = article.getDisplayDate();
 		Date modifiedDate = article.getModifiedDate();
 
@@ -156,9 +156,8 @@ public class JournalIndexer extends BaseIndexer {
 		document.addKeyword(Field.ROOT_ENTRY_CLASS_PK, resourcePrimKey);
 		document.addKeyword(Field.VERSION, version);
 		document.addKeyword(Field.TYPE, type);
-
-		document.addDate("displayDate", displayDate);
 		document.addKeyword("status", status);
+		document.addDate("displayDate", displayDate);
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
@@ -284,9 +283,7 @@ public class JournalIndexer extends BaseIndexer {
 
 		Integer status = (Integer)searchContext.getAttribute("status");
 
-		if ((Validator.isNotNull(status)) &&
-				(status != WorkflowConstants.STATUS_ANY)) {
-
+		if ((status != null) && (status != WorkflowConstants.STATUS_ANY)) {
 			contextQuery.addRequiredTerm("status", status);
 		}
 	}
@@ -303,17 +300,6 @@ public class JournalIndexer extends BaseIndexer {
 			}
 			else {
 				searchQuery.addTerm("entryClassPK", articleId, true);
-			}
-		}
-
-		String title = (String)searchContext.getAttribute("title");
-
-		if (Validator.isNotNull(title)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("title", title, true);
-			}
-			else {
-				searchQuery.addTerm("title", title, true);
 			}
 		}
 
@@ -339,6 +325,17 @@ public class JournalIndexer extends BaseIndexer {
 			}
 		}
 
+		String title = (String)searchContext.getAttribute("title");
+
+		if (Validator.isNotNull(title)) {
+			if (searchContext.isAndSearch()) {
+				searchQuery.addRequiredTerm("title", title, true);
+			}
+			else {
+				searchQuery.addTerm("title", title, true);
+			}
+		}
+
 		String type = (String)searchContext.getAttribute("type");
 
 		if (Validator.isNotNull(type)) {
@@ -354,8 +351,8 @@ public class JournalIndexer extends BaseIndexer {
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
 
 		if (Validator.isNotNull(params)) {
-			String assetCategoryNames =
-				(String)params.get("assetCategoryNames");
+			String assetCategoryNames = (String)params.get(
+				"assetCategoryNames");
 
 			if (Validator.isNotNull(assetCategoryNames)) {
 				searchQuery.addExactTerm(
@@ -434,7 +431,7 @@ public class JournalIndexer extends BaseIndexer {
 		SearchEngineUtil.updateDocuments(companyId, documents);
 	}
 
-	protected static final String _FIELD_NAMESPACE = "web_content";
+	private static final String _FIELD_NAMESPACE = "web_content";
 
 	private static Log _log = LogFactoryUtil.getLog(JournalIndexer.class);
 

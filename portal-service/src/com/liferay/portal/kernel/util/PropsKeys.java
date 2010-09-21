@@ -711,6 +711,8 @@ public interface PropsKeys {
 
 	public static final String JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID = "journal.article.force.autogenerate.id";
 
+	public static final String JOURNAL_ARTICLE_SEARCH_WITH_INDEX = "journal.article.search.with.index";
+
 	public static final String JOURNAL_ARTICLE_TOKEN_PAGE_BREAK = "journal.article.token.page.break";
 
 	public static final String JOURNAL_ARTICLE_TYPES = "journal.article.types";
@@ -776,8 +778,6 @@ public interface PropsKeys {
 	public static final String JOURNAL_LAR_CREATION_STRATEGY = "journal.lar.creation.strategy";
 
 	public static final String JOURNAL_PUBLISH_TO_LIVE_BY_DEFAULT = "journal.publish.to.live.by.default";
-
-	public static final String JOURNAL_SEARCH_WITH_INDEX = "journal.search.with.index";
 
 	public static final String JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID = "journal.structure.force.autogenerate.id";
 
