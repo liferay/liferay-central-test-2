@@ -62,12 +62,12 @@ public class MethodCache {
 		return _instance._get(null, null, methodKey);
 	}
 
-	public static void init() {
-		_instance = new MethodCache();
-	}
-
 	public static Method put(MethodKey methodKey, Method method) {
 		return _instance._put(methodKey, method);
+	}
+
+	public static void reset() {
+		_instance._reset();
 	}
 
 	private MethodCache() {
@@ -120,7 +120,12 @@ public class MethodCache {
 		return _methodsMap.put(methodKey, method);
 	}
 
-	private static MethodCache _instance;
+	private void _reset() {
+		_classesMap.clear();
+		_methodsMap.clear();
+	}
+
+	private static MethodCache _instance = new MethodCache();
 
 	private Map<String, Class<?>> _classesMap;
 	private Map<MethodKey, Method> _methodsMap;

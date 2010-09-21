@@ -53,6 +53,13 @@ import org.springframework.web.context.ContextLoaderListener;
 public class PortalContextLoaderListener extends ContextLoaderListener {
 
 	public void contextInitialized(ServletContextEvent event) {
+		HotDeployUtil.reset();
+		InstancePool.reset();
+		MethodCache.reset();
+		PortletBagPool.reset();
+
+		ReferenceRegistry.releaseReferences();
+
 		InitUtil.init();
 
 		super.contextInitialized(event);
@@ -79,18 +86,10 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 			applicationContext.getAutowireCapableBeanFactory();
 
 		clearFilteredPropertyDescriptorsCache(autowireCapableBeanFactory);
-
-		MethodCache.init();
 	}
 
 	public void contextDestroyed(ServletContextEvent event) {
 		super.contextDestroyed(event);
-
-		HotDeployUtil.reset();
-		InstancePool.reset();
-		PortletBagPool.reset();
-
-		ReferenceRegistry.releaseReferences();
 
 		ThreadLocalCacheManager.destroy();
 

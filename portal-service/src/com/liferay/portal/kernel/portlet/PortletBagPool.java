@@ -35,7 +35,7 @@ public class PortletBagPool {
 	}
 
 	public static void reset() {
-		_instance = new PortletBagPool();
+		_instance._reset();
 	}
 
 	private PortletBagPool() {
@@ -54,8 +54,12 @@ public class PortletBagPool {
 		return _portletBagPool.remove(portletId);
 	}
 
+	private void _reset() {
+		_portletBagPool.clear();
+	}
+
 	private static PortletBagPool _instance = new PortletBagPool();
 
-	private Map<String, PortletBag>_portletBagPool;
+	private Map<String, PortletBag> _portletBagPool;
 
 }

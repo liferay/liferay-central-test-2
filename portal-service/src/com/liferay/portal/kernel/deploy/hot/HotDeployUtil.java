@@ -47,7 +47,7 @@ public class HotDeployUtil {
 	}
 
 	public static void reset() {
-		_instance = new HotDeployUtil();
+		_instance._reset();
 	}
 
 	public static void setCapturePrematureEvents(
@@ -219,6 +219,13 @@ public class HotDeployUtil {
 		_listeners.add(listener);
 	}
 
+	private void _reset() {
+		_capturePrematureEvents = true;
+		_dependentEvents.clear();
+		_deployedServletContextNames.clear();
+		_listeners.clear();
+	}
+
 	private void _setCapturePrematureEvents(boolean capturePrematureEvents) {
 		_capturePrematureEvents = capturePrematureEvents;
 	}
@@ -235,9 +242,9 @@ public class HotDeployUtil {
 
 	private static HotDeployUtil _instance = new HotDeployUtil();
 
+	private boolean _capturePrematureEvents = true;
 	private List<HotDeployEvent> _dependentEvents;
 	private Set<String> _deployedServletContextNames;
 	private List<HotDeployListener> _listeners;
-	private boolean _capturePrematureEvents = true;
 
 }

@@ -42,7 +42,7 @@ public class InstancePool {
 	}
 
 	public static void reset() {
-		_instance = new InstancePool();
+		_instance._reset();
 	}
 
 	private InstancePool() {
@@ -114,6 +114,10 @@ public class InstancePool {
 		className = className.trim();
 
 		_classPool.put(className, obj);
+	}
+
+	private void _reset() {
+		_classPool.clear();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(InstancePool.class);
