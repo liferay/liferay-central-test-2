@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -217,7 +218,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			if (existingFolder == null) {
 				String name = getFolderName(
-					context.getCompanyId(), context.getScopeGroupId(),
+					null, context.getCompanyId(), context.getScopeGroupId(),
 					parentFolderId, folder.getName(), 2);
 
 				serviceContext.setUuid(folder.getUuid());
@@ -227,15 +228,20 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 					serviceContext);
 			}
 			else {
+				String name = getFolderName(
+					folder.getUuid(), context.getCompanyId(),
+					context.getScopeGroupId(), parentFolderId, folder.getName(),
+					2);
+
 				importedFolder = IGFolderLocalServiceUtil.updateFolder(
-					existingFolder.getFolderId(), parentFolderId,
-					folder.getName(), folder.getDescription(), false,
+					existingFolder.getFolderId(), parentFolderId, name,
+					folder.getDescription(), false,
 					serviceContext);
 			}
 		}
 		else {
 			String name = getFolderName(
-				context.getCompanyId(), context.getScopeGroupId(),
+				null, context.getCompanyId(), context.getScopeGroupId(),
 				parentFolderId, folder.getName(), 2);
 
 			importedFolder = IGFolderLocalServiceUtil.addFolder(
@@ -463,14 +469,18 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static String getFolderName(
-			long companyId, long groupId, long parentFolderId, String name,
-			int count)
+			String uuid, long companyId, long groupId, long parentFolderId,
+			String name, int count)
 		throws Exception {
 
 		IGFolder folder = IGFolderUtil.fetchByG_P_N(
 			groupId, parentFolderId, name);
 
 		if (folder == null) {
+			return name;
+		}
+
+		if (Validator.isNotNull(uuid) && uuid.equals(folder.getUuid())) {
 			return name;
 		}
 
@@ -490,7 +500,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		name = sb.toString();
 
-		return getFolderName(companyId, groupId, parentFolderId, name, ++count);
+		return getFolderName(
+			uuid, companyId, groupId, parentFolderId, name, ++count);
 	}
 
 	protected static String getFolderPath(
