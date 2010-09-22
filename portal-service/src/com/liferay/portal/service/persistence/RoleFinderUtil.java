@@ -41,6 +41,16 @@ public class RoleFinderUtil {
 			andOperator);
 	}
 
+	public static int countByC_N_D_T(long companyId, java.lang.String[] names,
+		java.lang.String[] descriptions, java.lang.Integer[] types,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		boolean andOperator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .countByC_N_D_T(companyId, names, descriptions, types,
+			params, andOperator);
+	}
+
 	public static int countByKeywords(long companyId,
 		java.lang.String keywords, java.lang.Integer[] types)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -100,6 +110,18 @@ public class RoleFinderUtil {
 		return getFinder()
 				   .findByC_N_D_T(companyId, name, description, types, params,
 			andOperator, start, end, obc);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Role> findByC_N_D_T(
+		long companyId, java.lang.String[] names,
+		java.lang.String[] descriptions, java.lang.Integer[] types,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		boolean andOperator, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .findByC_N_D_T(companyId, names, descriptions, types,
+			params, andOperator, start, end, obc);
 	}
 
 	public static java.util.Map<java.lang.String, java.util.List<java.lang.String>> findByC_N_S_P(

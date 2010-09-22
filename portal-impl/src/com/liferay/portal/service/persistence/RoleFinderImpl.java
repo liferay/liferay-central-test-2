@@ -671,7 +671,7 @@ public class RoleFinderImpl
 
 		StringBundler sb = new StringBundler(types.length * 2);
 
-		sb.append(" AND ( ");
+		sb.append(" AND (");
 
 		for (int i = 0; i < types.length; i++) {
 			sb.append("Role_.type_ = ?");
@@ -681,7 +681,7 @@ public class RoleFinderImpl
 			}
 		}
 
-		sb.append(" ) ");
+		sb.append(")");
 
 		return sb.toString();
 	}

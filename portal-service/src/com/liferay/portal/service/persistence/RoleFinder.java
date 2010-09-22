@@ -30,6 +30,12 @@ public interface RoleFinder {
 		boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int countByC_N_D_T(long companyId, java.lang.String[] names,
+		java.lang.String[] descriptions, java.lang.Integer[] types,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		boolean andOperator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByKeywords(long companyId, java.lang.String keywords,
 		java.lang.Integer[] types)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -66,6 +72,14 @@ public interface RoleFinder {
 	public java.util.List<com.liferay.portal.model.Role> findByC_N_D_T(
 		long companyId, java.lang.String name, java.lang.String description,
 		java.lang.Integer[] types,
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		boolean andOperator, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Role> findByC_N_D_T(
+		long companyId, java.lang.String[] names,
+		java.lang.String[] descriptions, java.lang.Integer[] types,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)

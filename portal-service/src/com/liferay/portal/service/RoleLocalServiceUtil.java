@@ -285,6 +285,12 @@ public class RoleLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Role> getRoles(
+		int type, java.lang.String subtype)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRoles(type, subtype);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Role> getRoles(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getRoles(companyId);
@@ -295,12 +301,6 @@ public class RoleLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getRoles(roleIds);
-	}
-
-	public static java.util.List<com.liferay.portal.model.Role> getRoles(
-		int type, java.lang.String subtype)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getRoles(type, subtype);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Role> getSubtypeRoles(
@@ -334,6 +334,12 @@ public class RoleLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Role> getUserRelatedRoles(
+		long userId, java.util.List<com.liferay.portal.model.Group> groups)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getUserRelatedRoles(userId, groups);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Role> getUserRelatedRoles(
 		long userId, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getUserRelatedRoles(userId, groupId);
@@ -343,12 +349,6 @@ public class RoleLocalServiceUtil {
 		long userId, long[] groupIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getUserRelatedRoles(userId, groupIds);
-	}
-
-	public static java.util.List<com.liferay.portal.model.Role> getUserRelatedRoles(
-		long userId, java.util.List<com.liferay.portal.model.Group> groups)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getUserRelatedRoles(userId, groups);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Role> getUserRoles(

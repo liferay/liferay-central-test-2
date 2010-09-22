@@ -275,6 +275,12 @@ public class RoleLocalServiceWrapper implements RoleLocalService {
 		return _roleLocalService.getRole(companyId, name);
 	}
 
+	public java.util.List<com.liferay.portal.model.Role> getRoles(int type,
+		java.lang.String subtype)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _roleLocalService.getRoles(type, subtype);
+	}
+
 	public java.util.List<com.liferay.portal.model.Role> getRoles(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -286,12 +292,6 @@ public class RoleLocalServiceWrapper implements RoleLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _roleLocalService.getRoles(roleIds);
-	}
-
-	public java.util.List<com.liferay.portal.model.Role> getRoles(int type,
-		java.lang.String subtype)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _roleLocalService.getRoles(type, subtype);
 	}
 
 	public java.util.List<com.liferay.portal.model.Role> getSubtypeRoles(
@@ -324,6 +324,12 @@ public class RoleLocalServiceWrapper implements RoleLocalService {
 	}
 
 	public java.util.List<com.liferay.portal.model.Role> getUserRelatedRoles(
+		long userId, java.util.List<com.liferay.portal.model.Group> groups)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _roleLocalService.getUserRelatedRoles(userId, groups);
+	}
+
+	public java.util.List<com.liferay.portal.model.Role> getUserRelatedRoles(
 		long userId, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _roleLocalService.getUserRelatedRoles(userId, groupId);
@@ -333,12 +339,6 @@ public class RoleLocalServiceWrapper implements RoleLocalService {
 		long userId, long[] groupIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _roleLocalService.getUserRelatedRoles(userId, groupIds);
-	}
-
-	public java.util.List<com.liferay.portal.model.Role> getUserRelatedRoles(
-		long userId, java.util.List<com.liferay.portal.model.Group> groups)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _roleLocalService.getUserRelatedRoles(userId, groups);
 	}
 
 	public java.util.List<com.liferay.portal.model.Role> getUserRoles(

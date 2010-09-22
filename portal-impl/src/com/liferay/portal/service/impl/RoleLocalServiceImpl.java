@@ -283,6 +283,12 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return rolePersistence.findByC_N(companyId, name);
 	}
 
+	public List<Role> getRoles(int type, String subtype)
+		throws SystemException {
+
+		return rolePersistence.findByT_S(type, subtype);
+	}
+
 	public List<Role> getRoles(long companyId) throws SystemException {
 		return rolePersistence.findByCompanyId(companyId);
 	}
@@ -299,12 +305,6 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		}
 
 		return roles;
-	}
-
-	public List<Role> getRoles(int type, String subtype)
-		throws SystemException {
-
-		return rolePersistence.findByT_S(type, subtype);
 	}
 
 	public List<Role> getSubtypeRoles(String subtype) throws SystemException {
@@ -335,6 +335,16 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return roleFinder.findByUserGroupRole(userId, groupId);
 	}
 
+	public List<Role> getUserRelatedRoles(long userId, List<Group> groups)
+		throws SystemException {
+
+		if ((groups == null) || groups.isEmpty()) {
+			return Collections.EMPTY_LIST;
+		}
+
+		return roleFinder.findByU_G(userId, groups);
+	}
+
 	public List<Role> getUserRelatedRoles(long userId, long groupId)
 		throws SystemException {
 
@@ -345,16 +355,6 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		throws SystemException {
 
 		return roleFinder.findByU_G(userId, groupIds);
-	}
-
-	public List<Role> getUserRelatedRoles(long userId, List<Group> groups)
-		throws SystemException {
-
-		if ((groups == null) || groups.isEmpty()) {
-			return Collections.EMPTY_LIST;
-		}
-
-		return roleFinder.findByU_G(userId, groups);
 	}
 
 	public List<Role> getUserRoles(long userId) throws SystemException {

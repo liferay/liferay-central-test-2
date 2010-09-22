@@ -249,6 +249,11 @@ public interface RoleLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.Role> getRoles(int type,
+		java.lang.String subtype)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Role> getRoles(
 		long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -258,11 +263,6 @@ public interface RoleLocalService {
 		long[] roleIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portal.model.Role> getRoles(int type,
-		java.lang.String subtype)
-		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Role> getSubtypeRoles(
@@ -290,17 +290,17 @@ public interface RoleLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Role> getUserRelatedRoles(
+		long userId, java.util.List<com.liferay.portal.model.Group> groups)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.Role> getUserRelatedRoles(
 		long userId, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Role> getUserRelatedRoles(
 		long userId, long[] groupIds)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portal.model.Role> getUserRelatedRoles(
-		long userId, java.util.List<com.liferay.portal.model.Group> groups)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
