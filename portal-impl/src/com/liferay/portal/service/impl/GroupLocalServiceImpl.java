@@ -116,7 +116,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		User user = userPersistence.findByPrimaryKey(userId);
 		className = GetterUtil.getString(className);
 		long classNameId = PortalUtil.getClassNameId(className);
-
 		String friendlyName = name;
 
 		long groupId = 0;
@@ -142,7 +141,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			className = Group.class.getName();
 			classNameId = groupClassNameId;
 			classPK = groupId;
-		} else {
+		}
+		else {
 			name = String.valueOf(classPK);
 		}
 
