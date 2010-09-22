@@ -119,14 +119,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		String friendlyName = name;
 
-		if (className.equals(Organization.class.getName())) {
-			Organization organization =
-				organizationPersistence.findByPrimaryKey(classPK);
-
-			friendlyName = organization.getName();
-			name = String.valueOf(classPK);
-		}
-
 		long groupId = 0;
 
 		while (true) {
@@ -151,12 +143,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			className = Group.class.getName();
 			classNameId = groupClassNameId;
 			classPK = groupId;
-		}
-		else if (className.equals(Organization.class.getName()) && staging) {
-			classPK = liveGroupId;
-		}
-		else {
+		} else {
 			name = String.valueOf(classPK);
+		}
+
+		if (className.equals(Organization.class.getName()) && staging) {
+			classPK = liveGroupId;
 		}
 
 		long parentGroupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;

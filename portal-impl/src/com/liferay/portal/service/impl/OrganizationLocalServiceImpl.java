@@ -122,7 +122,7 @@ public class OrganizationLocalServiceImpl
 		// Group
 
 		Group group = groupLocalService.addGroup(
-			userId, Organization.class.getName(), organizationId, null, null, 0,
+			userId, Organization.class.getName(), organizationId, name, null, 0,
 			null, true, null);
 
 		if (PropsValues.ORGANIZATIONS_ASSIGNMENT_AUTO) {
