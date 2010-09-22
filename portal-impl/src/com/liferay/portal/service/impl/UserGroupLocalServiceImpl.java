@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
@@ -81,8 +80,8 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		// Group
 
 		groupLocalService.addGroup(
-			userId, UserGroup.class.getName(), userGroup.getUserGroupId(), name,
-			null, 0, null, true, null);
+			userId, UserGroup.class.getName(), userGroup.getUserGroupId(),
+			String.valueOf(userGroupId), null, 0, null, true, null);
 
 		// Resources
 
@@ -298,15 +297,6 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		userGroup.setDescription(description);
 
 		userGroupPersistence.update(userGroup, false);
-
-		// Group
-
-		Group group = groupLocalService.getUserGroupGroup(
-			companyId, userGroupId);
-
-		group.setFriendlyURL(StringPool.SLASH + name);
-
-		groupPersistence.update(group, false);
 
 		return userGroup;
 	}
