@@ -1611,6 +1611,8 @@ public interface PropsKeys {
 
 	public static final String UPLOAD_SERVLET_REQUEST_IMPL_TEMP_DIR = "com.liferay.portal.upload.UploadServletRequestImpl.temp.dir";
 
+	public static final String USERGROUP_NAME_ALLOW_NUMERIC = "usergroup.name.allow.numeric";
+
 	public static final String USERS_DELETE = "users.delete";
 
 	public static final String USERS_EMAIL_ADDRESS_AUTO_SUFFIX = "users.email.address.auto.suffix";

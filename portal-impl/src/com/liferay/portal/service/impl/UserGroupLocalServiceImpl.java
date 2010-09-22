@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
@@ -34,6 +35,7 @@ import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.UserGroupConstants;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.UserGroupLocalServiceBaseImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
 
@@ -397,11 +399,26 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	protected void validate(long userGroupId, long companyId, String name)
 		throws PortalException, SystemException {
 
-		if ((Validator.isNull(name)) || (Validator.isNumber(name)) ||
+		if ((Validator.isNull(name)) ||
 			(name.indexOf(CharPool.COMMA) != -1) ||
 			(name.indexOf(CharPool.STAR) != -1)) {
 
 			throw new UserGroupNameException();
+		}
+
+		if ((Validator.isNumber(name)) &&
+			(!name.equals(String.valueOf(userGroupId)))) {
+
+			if (!PropsValues.USERGROUP_NAME_ALLOW_NUMERIC) {
+				throw new UserGroupNameException();
+			}
+
+			Group group = groupPersistence.fetchByPrimaryKey(
+				GetterUtil.getLong(name));
+
+			if (group != null) {
+				throw new UserGroupNameException();
+			}
 		}
 
 		try {

@@ -135,7 +135,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			User userScreenName = userPersistence.fetchByC_SN(
 				user.getCompanyId(), String.valueOf(groupId));
 
-			if (userScreenName == null) {
+			UserGroup userGroup = userGroupPersistence.fetchByC_N(
+				user.getCompanyId(), String.valueOf(groupId));
+
+			if (userScreenName == null && userGroup == null) {
 				break;
 			}
 		}
