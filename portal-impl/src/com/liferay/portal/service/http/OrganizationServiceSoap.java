@@ -213,6 +213,52 @@ public class OrganizationServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.OrganizationSoap[] getOrganizations(
+		long companyId, long parentOrganizationId) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portal.model.Organization> returnValue = OrganizationServiceUtil.getOrganizations(companyId,
+					parentOrganizationId);
+
+			return com.liferay.portal.model.OrganizationSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.OrganizationSoap[] getOrganizations(
+		long companyId, long parentOrganizationId, int start, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portal.model.Organization> returnValue = OrganizationServiceUtil.getOrganizations(companyId,
+					parentOrganizationId, start, end);
+
+			return com.liferay.portal.model.OrganizationSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getOrganizationsCount(long companyId,
+		long parentOrganizationId) throws RemoteException {
+		try {
+			int returnValue = OrganizationServiceUtil.getOrganizationsCount(companyId,
+					parentOrganizationId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.OrganizationSoap[] getUserOrganizations(
 		long userId) throws RemoteException {
 		try {
