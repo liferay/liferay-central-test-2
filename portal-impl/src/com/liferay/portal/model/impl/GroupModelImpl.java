@@ -23,6 +23,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupModel;
 import com.liferay.portal.model.GroupSoap;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -357,7 +358,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	}
 
 	public void setFriendlyURL(String friendlyURL) {
-		_friendlyURL = friendlyURL;
+		_friendlyURL = FriendlyURLNormalizer.normalize(friendlyURL);
 
 		if (_originalFriendlyURL == null) {
 			_originalFriendlyURL = friendlyURL;
