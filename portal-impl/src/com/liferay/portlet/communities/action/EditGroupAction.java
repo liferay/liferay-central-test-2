@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.liveusers.LiveUsers;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
@@ -182,6 +183,8 @@ public class EditGroupAction extends PortletAction {
 		else {
 
 			// Update group
+
+			friendlyURL = StringPool.SLASH + name;
 
 			group = GroupServiceUtil.updateGroup(
 				groupId, name, description, type, friendlyURL, active,
