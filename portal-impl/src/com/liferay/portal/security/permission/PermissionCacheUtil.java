@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
 import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.Map;
@@ -134,8 +133,8 @@ public class PermissionCacheUtil {
 			CacheKeyGeneratorUtil.getCacheKeyGenerator(
 				PERMISSION_CHECKER_BAG_CACHE_NAME);
 
-		cacheKeyGenerator.append(StringUtil.toHexString(userId));
-		cacheKeyGenerator.append(StringUtil.toHexString(groupId));
+		cacheKeyGenerator.append(String.valueOf(userId));
+		cacheKeyGenerator.append(String.valueOf(groupId));
 
 		return cacheKeyGenerator.finish();
 	}
@@ -148,8 +147,8 @@ public class PermissionCacheUtil {
 			CacheKeyGeneratorUtil.getCacheKeyGenerator(
 				PERMISSION_CHECKER_BAG_CACHE_NAME);
 
-		cacheKeyGenerator.append(StringUtil.toHexString(userId));
-		cacheKeyGenerator.append(StringUtil.toHexString(groupId));
+		cacheKeyGenerator.append(String.valueOf(userId));
+		cacheKeyGenerator.append(String.valueOf(groupId));
 		cacheKeyGenerator.append(name);
 		cacheKeyGenerator.append(primKey);
 		cacheKeyGenerator.append(actionId);
