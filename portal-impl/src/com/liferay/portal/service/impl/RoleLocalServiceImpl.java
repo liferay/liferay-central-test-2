@@ -56,6 +56,7 @@ import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Marcellus Tavares
  */
 public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
@@ -445,6 +446,15 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	}
 
 	public List<Role> search(
+			long companyId, String keywords, Integer[] types, int start,
+			int end, OrderByComparator obc)
+		throws SystemException {
+
+		return roleFinder.findByKeywords(
+			companyId, keywords, types, start, end, obc);
+	}
+
+	public List<Role> search(
 			long companyId, String name, String description, Integer[] types,
 			int start, int end, OrderByComparator obc)
 		throws SystemException {
@@ -461,7 +471,14 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		throws SystemException {
 
 		return roleFinder.findByC_N_D_T(
-			companyId, name, description, types, params, start, end, obc);
+			companyId, name, description, types, params, true, start, end, obc);
+	}
+
+	public int searchCount(
+			long companyId, String keywords, Integer[] types)
+		throws SystemException {
+
+		return roleFinder.countByKeywords(companyId, keywords, types);
 	}
 
 	public int searchCount(
@@ -479,7 +496,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		throws SystemException {
 
 		return roleFinder.countByC_N_D_T(
-			companyId, name, description, types, params);
+			companyId, name, description, types, params, true);
 	}
 
 	public void setUserRoles(long userId, long[] roleIds)

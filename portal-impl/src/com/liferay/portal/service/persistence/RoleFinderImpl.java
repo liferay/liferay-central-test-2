@@ -41,6 +41,7 @@ import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Marcellus Tavares
  */
 public class RoleFinderImpl
 	extends BasePersistenceImpl<Role> implements RoleFinder {
@@ -163,11 +164,22 @@ public class RoleFinderImpl
 
 	public int countByC_N_D_T(
 			long companyId, String name, String description, Integer[] types,
-			LinkedHashMap<String, Object> params)
+			LinkedHashMap<String, Object> params, boolean andOperator)
 		throws SystemException {
 
-		name = StringUtil.lowerCase(name);
-		description = StringUtil.lowerCase(description);
+		return countByC_N_D_T(
+			companyId, new String[] {name}, new String[] {description}, types,
+			params, andOperator);
+	}
+
+	public int countByC_N_D_T(
+			long companyId, String[] names, String[] descriptions,
+			Integer[] types, LinkedHashMap<String, Object> params,
+			boolean andOperator)
+		throws SystemException {
+
+		names = CustomSQLUtil.keywords(names, true);
+		descriptions = CustomSQLUtil.keywords(descriptions, true);
 
 		if (types == null) {
 			types = new Integer[0];
@@ -180,9 +192,15 @@ public class RoleFinderImpl
 
 			String sql = CustomSQLUtil.get(COUNT_BY_C_N_D_T);
 
-			sql = StringUtil.replace(sql, " AND ([$TYPE$])", getTypes(types));
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(Role_.name)", StringPool.LIKE, false, names);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(Role_.description)", StringPool.LIKE, true,
+				descriptions);
+			sql = StringUtil.replace(sql, "[$TYPE$]", getTypes(types));
 			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
 			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
+			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -192,10 +210,8 @@ public class RoleFinderImpl
 
 			setJoin(qPos, params);
 			qPos.add(companyId);
-			qPos.add(name);
-			qPos.add(name);
-			qPos.add(description);
-			qPos.add(description);
+			qPos.add(names, 2);
+			qPos.add(descriptions, 2);
 			qPos.add(types);
 
 			Iterator<Long> itr = q.list().iterator();
@@ -216,6 +232,27 @@ public class RoleFinderImpl
 		finally {
 			closeSession(session);
 		}
+	}
+
+	public int countByKeywords(
+			long companyId, String keywords, Integer[] types)
+		throws SystemException {
+
+		String[] names = null;
+		String[] descriptions = null;
+		boolean andOperator = false;
+
+		if (Validator.isNotNull(keywords)) {
+			names = CustomSQLUtil.keywords(keywords);
+			descriptions = CustomSQLUtil.keywords(keywords);
+		}
+		else {
+			andOperator = true;
+		}
+
+		return countByC_N_D_T(
+			companyId, names, descriptions, types,
+			new LinkedHashMap<String, Object>(), andOperator);
 	}
 
 	public List<Role> findBySystem(long companyId) throws SystemException {
@@ -401,12 +438,23 @@ public class RoleFinderImpl
 
 	public List<Role> findByC_N_D_T(
 			long companyId, String name, String description, Integer[] types,
-			LinkedHashMap<String, Object> params, int start, int end,
-			OrderByComparator obc)
+			LinkedHashMap<String, Object> params, boolean andOperator,
+			int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		name = StringUtil.lowerCase(name);
-		description = StringUtil.lowerCase(description);
+		return findByC_N_D_T(
+			companyId, new String[] {name}, new String[] {description}, types,
+			params, andOperator, start, end, obc);
+	}
+
+	public List<Role> findByC_N_D_T(
+			long companyId, String[] names, String[] descriptions,
+			Integer[] types, LinkedHashMap<String, Object> params,
+			boolean andOperator, int start, int end, OrderByComparator obc)
+		throws SystemException {
+
+		names = CustomSQLUtil.keywords(names, true);
+		descriptions = CustomSQLUtil.keywords(descriptions, true);
 
 		if (types == null) {
 			types = new Integer[0];
@@ -419,9 +467,15 @@ public class RoleFinderImpl
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_N_D_T);
 
-			sql = StringUtil.replace(sql, " AND ([$TYPE$])", getTypes(types));
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(Role_.name)", StringPool.LIKE, false, names);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(Role_.description)", StringPool.LIKE, true,
+				descriptions);
+			sql = StringUtil.replace(sql, "[$TYPE$]", getTypes(types));
 			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
 			sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
+			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -432,10 +486,8 @@ public class RoleFinderImpl
 
 			setJoin(qPos, params);
 			qPos.add(companyId);
-			qPos.add(name);
-			qPos.add(name);
-			qPos.add(description);
-			qPos.add(description);
+			qPos.add(names, 2);
+			qPos.add(descriptions, 2);
 			qPos.add(types);
 
 			return (List<Role>)QueryUtil.list(q, getDialect(), start, end);
@@ -501,6 +553,28 @@ public class RoleFinderImpl
 		finally {
 			closeSession(session);
 		}
+	}
+
+	public List<Role> findByKeywords(
+			long companyId, String keywords, Integer[] types, int start,
+			int end, OrderByComparator obc)
+		throws SystemException {
+
+		String[] names = null;
+		String[] descriptions = null;
+		boolean andOperator = false;
+
+		if (Validator.isNotNull(keywords)) {
+			names = CustomSQLUtil.keywords(keywords);
+			descriptions = CustomSQLUtil.keywords(keywords);
+		}
+		else {
+			andOperator = true;
+		}
+
+		return findByC_N_D_T(
+			companyId, names, descriptions, types,
+			new LinkedHashMap<String, Object>(), andOperator, start, end, obc);
 	}
 
 	protected String getCountByR_U_SQL() {
@@ -597,7 +671,7 @@ public class RoleFinderImpl
 
 		StringBundler sb = new StringBundler(types.length * 2);
 
-		sb.append(" AND ");
+		sb.append(" AND ( ");
 
 		for (int i = 0; i < types.length; i++) {
 			sb.append("Role_.type_ = ?");
@@ -606,6 +680,8 @@ public class RoleFinderImpl
 				sb.append(" OR ");
 			}
 		}
+
+		sb.append(" ) ");
 
 		return sb.toString();
 	}

@@ -387,6 +387,13 @@ public class RoleLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Role> search(
+		long companyId, java.lang.String keywords, java.lang.Integer[] types,
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().search(companyId, keywords, types, start, end, obc);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Role> search(
 		long companyId, java.lang.String name, java.lang.String description,
 		java.lang.Integer[] types, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
@@ -404,6 +411,12 @@ public class RoleLocalServiceUtil {
 		return getService()
 				   .search(companyId, name, description, types, params, start,
 			end, obc);
+	}
+
+	public static int searchCount(long companyId, java.lang.String keywords,
+		java.lang.Integer[] types)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().searchCount(companyId, keywords, types);
 	}
 
 	public static int searchCount(long companyId, java.lang.String name,

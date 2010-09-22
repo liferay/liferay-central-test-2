@@ -33,10 +33,18 @@ public class RoleFinderUtil {
 
 	public static int countByC_N_D_T(long companyId, java.lang.String name,
 		java.lang.String description, java.lang.Integer[] types,
-		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params)
+		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
+		boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .countByC_N_D_T(companyId, name, description, types, params);
+				   .countByC_N_D_T(companyId, name, description, types, params,
+			andOperator);
+	}
+
+	public static int countByKeywords(long companyId,
+		java.lang.String keywords, java.lang.Integer[] types)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().countByKeywords(companyId, keywords, types);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Role> findBySystem(
@@ -86,11 +94,12 @@ public class RoleFinderUtil {
 		long companyId, java.lang.String name, java.lang.String description,
 		java.lang.Integer[] types,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		boolean andOperator, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .findByC_N_D_T(companyId, name, description, types, params,
-			start, end, obc);
+			andOperator, start, end, obc);
 	}
 
 	public static java.util.Map<java.lang.String, java.util.List<java.lang.String>> findByC_N_S_P(
@@ -98,6 +107,14 @@ public class RoleFinderUtil {
 		java.lang.String primKey)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByC_N_S_P(companyId, name, scope, primKey);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Role> findByKeywords(
+		long companyId, java.lang.String keywords, java.lang.Integer[] types,
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .findByKeywords(companyId, keywords, types, start, end, obc);
 	}
 
 	public static RoleFinder getFinder() {

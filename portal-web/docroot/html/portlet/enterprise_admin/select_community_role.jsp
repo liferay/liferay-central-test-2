@@ -171,7 +171,7 @@ if (step == 1) {
 
 					<%
 					if (filterManageableRoles) {
-						List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer[] {RoleConstants.TYPE_COMMUNITY}, QueryUtil.ALL_POS, QueryUtil.ALL_POS, searchContainer.getOrderByComparator());
+						List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), new Integer[] {RoleConstants.TYPE_COMMUNITY}, QueryUtil.ALL_POS, QueryUtil.ALL_POS, searchContainer.getOrderByComparator());
 
 						roles = EnterpriseAdminUtil.filterGroupRoles(permissionChecker, groupId, roles);
 
@@ -179,8 +179,8 @@ if (step == 1) {
 						results = ListUtil.subList(roles, searchContainer.getStart(), searchContainer.getEnd());
 					}
 					else {
-						results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer[] {RoleConstants.TYPE_COMMUNITY}, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-						total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer[] {RoleConstants.TYPE_COMMUNITY});
+						results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), new Integer[] {RoleConstants.TYPE_COMMUNITY}, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+						total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getKeywords(), new Integer[] {RoleConstants.TYPE_COMMUNITY});
 					}
 
 					pageContext.setAttribute("results", results);

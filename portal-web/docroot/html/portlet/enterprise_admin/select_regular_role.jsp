@@ -43,7 +43,7 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_regular_role"
 
 			<%
 			if (filterManageableRoles) {
-				List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer[] {RoleConstants.TYPE_REGULAR}, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+				List<Role> roles = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), new Integer[] {RoleConstants.TYPE_REGULAR}, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
 				roles = EnterpriseAdminUtil.filterRoles(permissionChecker, roles);
 
@@ -51,8 +51,8 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_regular_role"
 				results = ListUtil.subList(roles, searchContainer.getStart(), searchContainer.getEnd());
 			}
 			else {
-				results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer[] {RoleConstants.TYPE_REGULAR}, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-				total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer[] {RoleConstants.TYPE_REGULAR});
+				results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), new Integer[] {RoleConstants.TYPE_REGULAR}, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+				total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getKeywords(), new Integer[] {RoleConstants.TYPE_REGULAR});
 			}
 
 			pageContext.setAttribute("results", results);

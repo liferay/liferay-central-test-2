@@ -1019,8 +1019,9 @@
 				[$WHERE$]
 				(Role_.companyId = ?) AND
 				(Role_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ROLE$]) AND
-				(lower(Role_.name) LIKE ? OR ? IS NULL) AND
-				(lower(Role_.description) LIKE ? OR ? IS NULL) AND ([$TYPE$])
+				((lower(Role_.name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				(lower(Role_.description) LIKE ? [$AND_OR_NULL_CHECK$]))
+				[$TYPE$]
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.findBySystem">
@@ -1132,8 +1133,9 @@
 				[$WHERE$]
 				(Role_.companyId = ?) AND
 				(Role_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ROLE$]) AND
-				(lower(Role_.name) LIKE ? OR ? IS NULL) AND
-				(lower(Role_.description) LIKE ? OR ? IS NULL) AND ([$TYPE$])
+				((lower(Role_.name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				(lower(Role_.description) LIKE ? [$AND_OR_NULL_CHECK$]))
+				[$TYPE$]
 			ORDER BY
 				Role_.name ASC
 		]]>
