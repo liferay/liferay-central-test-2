@@ -68,8 +68,6 @@
 <%@ page import="com.liferay.portal.kernel.facebook.FacebookConnectUtil" %>
 <%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
 <%@ page import="com.liferay.portal.liveusers.LiveUsers" %>
-<%@ page import="com.liferay.portal.security.auth.CompanyThreadLocal" %>
-<%@ page import="com.liferay.portal.service.impl.UserLocalServiceImpl" %>
 <%@ page import="com.liferay.portal.security.ldap.LDAPSettingsUtil" %>
 <%@ page import="com.liferay.portal.security.ldap.PortalLDAPUtil" %>
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
@@ -131,24 +129,6 @@
 <%@ page import="javax.naming.ldap.LdapContext" %>
 
 <%
-PortletPreferences preferences = renderRequest.getPreferences();
-
-boolean showOrganizationMenu = true;
-boolean showSuborganization = true;
-
-int organizationsPerPage = PrefsParamUtil.getInteger(preferences, request, "organizationsPerPage", SearchContainer.DEFAULT_DELTA);
-
-String defaultOrganizationColumns = "name,type,city,region,country,action";
-String[] organizationColumns = StringUtil.split(PrefsParamUtil.getString(preferences, request, "organizationColumns", defaultOrganizationColumns));
-
-PortalPreferences portalPreferences =	PortletPreferencesFactoryUtil.getPortalPreferences(renderRequest);
-
-String organizationView = ParamUtil.getString(request, "organizationView");
-
-if (Validator.isNull(organizationView)) {
-	organizationView = portalPreferences.getValue(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS, "organization-view", OrganizationConstants.ORGANIZATION_VIEW_TREE);
-}
-
 String tabs1 = ParamUtil.getString(request, "tabs1");
 
 boolean showTabs1 = false;

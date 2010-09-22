@@ -206,31 +206,6 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 		return organizationLocalService.getOrganizationId(companyId, name);
 	}
 
-	public List<Organization> getOrganizations(
-			long companyId, long parentOrganizationId)
-		throws PortalException, SystemException {
-
-		return filterOrganizations(
-			organizationLocalService.getOrganizations(
-				companyId, parentOrganizationId));
-	}
-
-	public List<Organization> getOrganizations(
-			long companyId, long parentOrganizationId, int start, int end)
-		throws PortalException, SystemException {
-
-		return filterOrganizations(
-			organizationLocalService.getOrganizations(
-				companyId, parentOrganizationId, start, end));
-	}
-
-	public int getOrganizationsCount(
-			long companyId, long parentOrganizationId)
-		throws PortalException, SystemException {
-
-		return getOrganizations(companyId, parentOrganizationId).size();
-	}
-
 	public List<Organization> getUserOrganizations(long userId)
 		throws PortalException, SystemException {
 
@@ -319,30 +294,6 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			regionId, countryId, statusId, comments, serviceContext);
 
 		return organization;
-	}
-
-	protected List<Organization> filterOrganizations(
-			List<Organization> organizations)
-		throws PortalException, SystemException {
-
-		PermissionChecker permissionChecker = getPermissionChecker();
-
-		organizations = ListUtil.copy(organizations);
-
-		Iterator<Organization> itr = organizations.iterator();
-
-		while (itr.hasNext()) {
-			Organization organization = itr.next();
-
-			if (!OrganizationPermissionUtil.contains(
-				getPermissionChecker(), organization.getOrganizationId(),
-				ActionKeys.VIEW)) {
-
-				itr.remove();
-			};
-		}
-
-		return organizations;
 	}
 
 }

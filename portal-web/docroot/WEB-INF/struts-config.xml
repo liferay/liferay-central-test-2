@@ -704,11 +704,6 @@
 
 		<action path="/enterprise_admin/view" forward="portlet.enterprise_admin.view" />
 
-		<action path="/enterprise_admin/view_organization" type="com.liferay.portlet.enterpriseadmin.action.ViewOrganizationAction">
-			<forward name="portlet.enterprise_admin.view" path="portlet.enterprise_admin.view" />
-			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
-		</action>
-
 		<action path="/enterprise_admin/view_teams" forward="portlet.communities.view_teams" />
 
 		<!-- Enterprise Admin Communities -->
@@ -875,11 +870,6 @@
 		<action path="/enterprise_admin_organizations/select_user_group" forward="portlet.enterprise_admin.select_user_group" />
 
 		<action path="/enterprise_admin_organizations/view" forward="portlet.enterprise_admin.view" />
-
-		<action path="/enterprise_admin_organizations/view_organization" type="com.liferay.portlet.enterpriseadmin.action.ViewOrganizationAction">
-			<forward name="portlet.enterprise_admin.view" path="portlet.enterprise_admin.view" />
-			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
-		</action>
 
 		<action path="/enterprise_admin_organizations/view_teams" forward="portlet.communities.view_teams" />
 

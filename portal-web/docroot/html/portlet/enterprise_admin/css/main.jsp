@@ -75,23 +75,6 @@
 	width: 100px;
 }
 
-.portlet-enterprise-admin .organization-information {
-	overflow: hidden;
-}
-
-.ie6 .portlet-enterprise-admin .organization-information {
-	height: 1%;
-}
-
-.portlet-enterprise-admin .organization-search {
-	float: right;
-	margin: 0 0 0.5em 0.5em;
-}
-
-.portlet-enterprise-admin .organization-view-icon {
-	float:right;
-}
-
 .portlet-enterprise-admin .aui-field.action-ctrl, .portlet-enterprise-admin .aui-field.mailing-ctrl, .portlet-enterprise-admin .aui-field.primary-ctrl {
 	margin: 1.8em 0;
 }
@@ -105,67 +88,8 @@
 	padding: 15px 0 5px;
 }
 
-.portlet-enterprise-admin .section {
-	float: left;
-	margin-left: 10px;
-	width: 47%;
-}
-
-.portlet-enterprise-admin .section h3 {
-	background: url() no-repeat 2px 50%;
-	border-bottom: 1px solid #CCC;
-	line-height: 1.5;
-	margin-bottom: 0.5em;
-	padding-left: 25px;
-}
-
-.portlet-enterprise-admin .section li {
-	list-style: none;
-	margin: 0;
-	padding-left: 25px;
-}
-
-.portlet-enterprise-admin .section ul {
-	margin: 0;
-}
-
-.portlet-enterprise-admin .entity-comments h3 {
-	background-image: url(<%= themeImagesPath %>/dock/welcome_message.png);
-}
-
-.portlet-enterprise-admin .entity-addresses .mailing-name {
-	display: block;
-	font-style: italic;
-}
-
-.portlet-enterprise-admin .entity-phones h3 {
-	background-image: url(<%= themeImagesPath %>/common/telephone.png);
-}
-
-.portlet-enterprise-admin .entity-addresses h3 {
-	background-image: url(<%= themeImagesPath %>/dock/home.png);
-}
-
-.portlet-enterprise-admin .entity-addresses .primary {
-	background-position: 3px 5px;
-}
-
-
-
 .portlet-enterprise-admin .radio-holder {
 	line-height: 12px;
-}
-
-.portlet-enterprise-admin .entity-details {
-	clear: both;
-}
-
-.portlet-enterprise-admin .entity-email-addresses h3 {
-	background-image: url(<%= themeImagesPath %>/mail/unread.png);
-}
-
-.portlet-enterprise-admin .entity-websites h3 {
-	background-image: url(<%= themeImagesPath %>/common/history.png);
 }
 
 .portlet-enterprise-admin .form-navigation {
