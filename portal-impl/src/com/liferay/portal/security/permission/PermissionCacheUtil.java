@@ -31,10 +31,11 @@ import org.apache.commons.collections.map.LRUMap;
  */
 public class PermissionCacheUtil {
 
-	public static final String PERMISSION_CHECKER_BAG_CACHE_NAME =
-		PermissionCacheUtil.class.getName() + "_PERMISSION_CHECKER_BAG";
 	public static final String PERMISSION_CACHE_NAME =
 		PermissionCacheUtil.class.getName() + "_PERMISSION";
+
+	public static final String PERMISSION_CHECKER_BAG_CACHE_NAME =
+		PermissionCacheUtil.class.getName() + "_PERMISSION_CHECKER_BAG";
 
 	public static void clearCache() {
 		clearLocalCache();
