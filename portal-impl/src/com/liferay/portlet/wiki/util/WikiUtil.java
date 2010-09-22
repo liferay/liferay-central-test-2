@@ -545,50 +545,49 @@ public class WikiUtil {
 	private WikiEngine _getEngine(String format) throws WikiFormatException {
 		WikiEngine engine = _engines.get(format);
 
-		if (engine == null) {
-			synchronized(_engines) {
-				engine = _engines.get(format);
-
-				if (engine == null) {
-					try {
-						String engineClass = PropsUtil.get(
-							PropsKeys.WIKI_FORMATS_ENGINE,
-							new Filter(format));
-
-						if (engineClass != null) {
-							if (!InstancePool.contains(engineClass)) {
-								engine = (WikiEngine)InstancePool.get(
-									engineClass);
-
-								engine.setMainConfiguration(
-									_readConfigurationFile(
-										PropsKeys.WIKI_FORMATS_CONFIGURATION_MAIN,
-										format));
-
-								engine.setInterWikiConfiguration(
-									_readConfigurationFile(
-										PropsKeys.WIKI_FORMATS_CONFIGURATION_INTERWIKI,
-										format));
-							}
-							else {
-								engine = (WikiEngine)InstancePool.get(
-									engineClass);
-							}
-
-							_engines.put(format, engine);
-						}
-					}
-					catch (Exception e) {
-						throw new WikiFormatException(e);
-					}
-				}
-			}
-			if (engine == null) {
-				throw new WikiFormatException(format);
-			}
+		if (engine != null) {
+			return engine;
 		}
 
-		return engine;
+		synchronized (_engines) {
+			engine = _engines.get(format);
+
+			if (engine != null) {
+				return engine;
+			}
+
+			try {
+				String engineClass = PropsUtil.get(
+					PropsKeys.WIKI_FORMATS_ENGINE, new Filter(format));
+
+				if (engineClass == null) {
+					throw new WikiFormatException(format);
+				}
+
+				if (!InstancePool.contains(engineClass)) {
+					engine = (WikiEngine)InstancePool.get(engineClass);
+
+					engine.setMainConfiguration(
+						_readConfigurationFile(
+							PropsKeys.WIKI_FORMATS_CONFIGURATION_MAIN, format));
+
+					engine.setInterWikiConfiguration(
+						_readConfigurationFile(
+							PropsKeys.WIKI_FORMATS_CONFIGURATION_INTERWIKI,
+							format));
+				}
+				else {
+					engine = (WikiEngine)InstancePool.get(engineClass);
+				}
+
+				_engines.put(format, engine);
+
+				return engine;
+			}
+			catch (Exception e) {
+				throw new WikiFormatException(e);
+			}
+		}
 	}
 
 	private String _getHelpPage(String format) {
