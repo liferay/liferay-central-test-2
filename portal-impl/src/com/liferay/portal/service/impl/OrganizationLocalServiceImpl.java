@@ -817,15 +817,6 @@ public class OrganizationLocalServiceImpl
 
 		organizationPersistence.update(organization, false);
 
-		// Group
-
-		Group group = groupLocalService.getOrganizationGroup(
-			companyId, organizationId);
-
-		group.setFriendlyURL(StringPool.SLASH + name);
-
-		groupPersistence.update(group, false);
-
 		// Asset
 
 		if (serviceContext != null) {
