@@ -416,10 +416,10 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			throw new UserGroupNameException();
 		}
 
-		if ((Validator.isNumber(name)) &&
-			(!name.equals(String.valueOf(userGroupId)))) {
+		if (Validator.isNumber(name) &&
+			!name.equals(String.valueOf(userGroupId))) {
 
-			if (!PropsValues.USERGROUP_NAME_ALLOW_NUMERIC) {
+			if (!PropsValues.USER_GROUPS_NAME_ALLOW_NUMERIC) {
 				throw new UserGroupNameException();
 			}
 

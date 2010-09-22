@@ -124,13 +124,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		while (true) {
 			groupId = counterLocalService.increment();
 
-			User userScreenName = userPersistence.fetchByC_SN(
+			User screenNameUser = userPersistence.fetchByC_SN(
 				user.getCompanyId(), String.valueOf(groupId));
-
 			UserGroup userGroup = userGroupPersistence.fetchByC_N(
 				user.getCompanyId(), String.valueOf(groupId));
 
-			if (userScreenName == null && userGroup == null) {
+			if ((screenNameUser == null) && (userGroup == null)) {
 				break;
 			}
 		}
