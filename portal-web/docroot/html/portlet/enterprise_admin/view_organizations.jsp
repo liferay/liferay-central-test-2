@@ -24,6 +24,15 @@ String viewOrganizationsRedirect = ParamUtil.getString(request, "viewOrganizatio
 if (Validator.isNotNull(viewOrganizationsRedirect)) {
 	portletURL.setParameter("viewOrganizationsRedirect", viewOrganizationsRedirect);
 }
+
+long organizationId = GetterUtil.getLong(request.getParameter("organizationId"));
+long defaultOrganizationId = GetterUtil.getLong(preferences.getValue("rootOrganizationId", StringPool.BLANK), OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
+
+request.setAttribute("view_organizations.jsp-organizationId", organizationId);
+request.setAttribute("view_organizations.jsp-defaultOrganizationId", defaultOrganizationId);
+request.setAttribute("view_organizations.jsp-organizationView", organizationView);
+request.setAttribute("view_organizations.jsp-portletURL", portletURL);
+request.setAttribute("view_organizations.jsp-viewOrganizationsRedirect", viewOrganizationsRedirect);
 %>
 
 <liferay-ui:error exception="<%= RequiredOrganizationException.class %>" message="you-cannot-delete-organizations-that-have-suborganizations-or-users" />
@@ -36,79 +45,11 @@ if (Validator.isNotNull(viewOrganizationsRedirect)) {
 	<aui:input name="viewOrganizationsRedirect" type="hidden" value="<%= viewOrganizationsRedirect %>" />
 </c:if>
 
-<liferay-ui:search-container
-	rowChecker="<%= new RowChecker(renderResponse) %>"
-	searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
->
-	<aui:input name="deleteOrganizationIds" type="hidden" />
-	<aui:input name="organizationsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
-
-	<liferay-ui:search-form
-		page="/html/portlet/enterprise_admin/organization_search.jsp"
-	/>
-
-	<%
-	OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
-
-	LinkedHashMap organizationParams = new LinkedHashMap();
-
-	if (filterManageableOrganizations) {
-		Long[][] leftAndRightOrganizationIds = EnterpriseAdminUtil.getLeftAndRightOrganizationIds(user.getOrganizations());
-
-		organizationParams.put("organizationsTree", leftAndRightOrganizationIds);
-	}
-
-	long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
-
-	if (parentOrganizationId <= 0) {
-		parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
-	}
-	%>
-
-	<liferay-ui:search-container-results>
-		<c:choose>
-			<c:when test="<%= PropsValues.ORGANIZATIONS_SEARCH_WITH_INDEX %>">
-				<%@ include file="/html/portlet/enterprise_admin/organization_search_results_index.jspf" %>
-			</c:when>
-			<c:otherwise>
-				<%@ include file="/html/portlet/enterprise_admin/organization_search_results_database.jspf" %>
-			</c:otherwise>
-		</c:choose>
-	</liferay-ui:search-container-results>
-
-	<liferay-ui:search-container-row
-		className="com.liferay.portal.model.Organization"
-		escapedModel="<%= true %>"
-		keyProperty="organizationId"
-		modelVar="organization"
-	>
-		<portlet:renderURL var="rowURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
-			<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
-			<portlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" />
-		</portlet:renderURL>
-
-		<%
-		if (!OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE)) {
-			rowURL = null;
-		}
-		%>
-
-		<%@ include file="/html/portlet/enterprise_admin/organization/search_columns.jspf" %>
-
-		<liferay-ui:search-container-column-jsp
-			align="right"
-			path="/html/portlet/enterprise_admin/organization_action.jsp"
-		/>
-	</liferay-ui:search-container-row>
-
-	<c:if test="<%= !results.isEmpty() %>">
-		<div class="separator"><!-- --></div>
-
-		<aui:button onClick='<%= renderResponse.getNamespace() + "deleteOrganizations();" %>' value="delete" />
-	</c:if>
-
-	<br />
-
-	<liferay-ui:search-iterator />
-</liferay-ui:search-container>
+<c:choose>
+	<c:when test="<%= organizationView.equals(OrganizationConstants.ORGANIZATION_VIEW_FLAT) %>">
+		<liferay-util:include page="/html/portlet/enterprise_admin/organization/view_organizations_flat.jsp" />
+	</c:when>
+	<c:when test="<%= organizationView.equals(OrganizationConstants.ORGANIZATION_VIEW_TREE) %>">
+		<liferay-util:include page="/html/portlet/enterprise_admin/organization/view_organizations_tree.jsp" />
+	</c:when>
+</c:choose>

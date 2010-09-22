@@ -28,4 +28,8 @@ public class OrganizationConstants {
 
 	public static final String TYPE_LOCATION = "location";
 
+	public static final String ORGANIZATION_VIEW_FLAT = "flat";
+
+	public static final String ORGANIZATION_VIEW_TREE = "tree";
+
 }
