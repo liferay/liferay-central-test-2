@@ -55,10 +55,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -546,35 +546,43 @@ public class WikiUtil {
 		WikiEngine engine = _engines.get(format);
 
 		if (engine == null) {
-			try {
-				String engineClass = PropsUtil.get(
-					PropsKeys.WIKI_FORMATS_ENGINE, new Filter(format));
+			synchronized(_engines) {
+				engine = _engines.get(format);
 
-				if (engineClass != null) {
-					if (!InstancePool.contains(engineClass)) {
-						engine = (WikiEngine)InstancePool.get(engineClass);
+				if (engine == null) {
+					try {
+						String engineClass = PropsUtil.get(
+							PropsKeys.WIKI_FORMATS_ENGINE,
+							new Filter(format));
 
-						engine.setMainConfiguration(
-							_readConfigurationFile(
-								PropsKeys.WIKI_FORMATS_CONFIGURATION_MAIN,
-								format));
+						if (engineClass != null) {
+							if (!InstancePool.contains(engineClass)) {
+								engine = (WikiEngine)InstancePool.get(
+									engineClass);
 
-						engine.setInterWikiConfiguration(
-							_readConfigurationFile(
-								PropsKeys.WIKI_FORMATS_CONFIGURATION_INTERWIKI,
-								format));
+								engine.setMainConfiguration(
+									_readConfigurationFile(
+										PropsKeys.WIKI_FORMATS_CONFIGURATION_MAIN,
+										format));
+
+								engine.setInterWikiConfiguration(
+									_readConfigurationFile(
+										PropsKeys.WIKI_FORMATS_CONFIGURATION_INTERWIKI,
+										format));
+							}
+							else {
+								engine = (WikiEngine)InstancePool.get(
+									engineClass);
+							}
+
+							_engines.put(format, engine);
+						}
 					}
-					else {
-						engine = (WikiEngine)InstancePool.get(engineClass);
+					catch (Exception e) {
+						throw new WikiFormatException(e);
 					}
-
-					_engines.put(format, engine);
 				}
 			}
-			catch (Exception e) {
-				throw new WikiFormatException(e);
-			}
-
 			if (engine == null) {
 				throw new WikiFormatException(format);
 			}
@@ -680,6 +688,6 @@ public class WikiUtil {
 		"[\\[]{2,2}(.+?)[\\]]{2,2}");
 
 	private Map<String, WikiEngine> _engines =
-		new HashMap<String, WikiEngine>();
+		new ConcurrentHashMap<String, WikiEngine>();
 
 }
