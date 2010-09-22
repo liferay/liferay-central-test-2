@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
 import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.Map;
@@ -31,12 +32,16 @@ import org.apache.commons.collections.map.LRUMap;
  */
 public class PermissionCacheUtil {
 
-	public static final String CACHE_NAME = PermissionCacheUtil.class.getName();
+	public static final String PERMISSION_CHECKER_BAG_CACHE_NAME =
+		PermissionCacheUtil.class.getName() + "_PERMISSION_CHECKER_BAG";
+	public static final String PERMISSION_CACHE_NAME =
+		PermissionCacheUtil.class.getName() + "_PERMISSION";
 
 	public static void clearCache() {
 		clearLocalCache();
 
-		_portalCache.removeAll();
+		_permissionCheckerBagPortalCache.removeAll();
+		_permissionPortalCache.removeAll();
 	}
 
 	public static void clearLocalCache() {
@@ -59,7 +64,8 @@ public class PermissionCacheUtil {
 		}
 
 		if (bag == null) {
-			bag = (PermissionCheckerBag)_portalCache.get(key);
+			bag = (PermissionCheckerBag)_permissionCheckerBagPortalCache.get(
+				key);
 		}
 
 		return bag;
@@ -80,7 +86,7 @@ public class PermissionCacheUtil {
 		}
 
 		if (value == null) {
-			value = (Boolean)_portalCache.get(key);
+			value = (Boolean)_permissionPortalCache.get(key);
 		}
 
 		return value;
@@ -98,7 +104,7 @@ public class PermissionCacheUtil {
 				localCache.put(key, bag);
 			}
 
-			_portalCache.put(key, bag);
+			_permissionCheckerBagPortalCache.put(key, bag);
 		}
 
 		return bag;
@@ -117,7 +123,7 @@ public class PermissionCacheUtil {
 				localCache.put(key, value);
 			}
 
-			_portalCache.put(key, value);
+			_permissionPortalCache.put(key, value);
 		}
 
 		return value;
@@ -125,10 +131,11 @@ public class PermissionCacheUtil {
 
 	private static String _encodeKey(long userId, long groupId) {
 		CacheKeyGenerator cacheKeyGenerator =
-			CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME);
+			CacheKeyGeneratorUtil.getCacheKeyGenerator(
+				PERMISSION_CHECKER_BAG_CACHE_NAME);
 
-		cacheKeyGenerator.append(String.valueOf(userId));
-		cacheKeyGenerator.append(String.valueOf(groupId));
+		cacheKeyGenerator.append(StringUtil.toHexString(userId));
+		cacheKeyGenerator.append(StringUtil.toHexString(groupId));
 
 		return cacheKeyGenerator.finish();
 	}
@@ -138,10 +145,11 @@ public class PermissionCacheUtil {
 		String actionId) {
 
 		CacheKeyGenerator cacheKeyGenerator =
-			CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME);
+			CacheKeyGeneratorUtil.getCacheKeyGenerator(
+				PERMISSION_CHECKER_BAG_CACHE_NAME);
 
-		cacheKeyGenerator.append(String.valueOf(userId));
-		cacheKeyGenerator.append(String.valueOf(groupId));
+		cacheKeyGenerator.append(StringUtil.toHexString(userId));
+		cacheKeyGenerator.append(StringUtil.toHexString(groupId));
 		cacheKeyGenerator.append(name);
 		cacheKeyGenerator.append(primKey);
 		cacheKeyGenerator.append(actionId);
@@ -151,8 +159,14 @@ public class PermissionCacheUtil {
 
 	private static ThreadLocal<LRUMap> _localCache;
 	private static boolean _localCacheAvailable;
-	private static PortalCache _portalCache = MultiVMPoolUtil.getCache(
-		CACHE_NAME, PropsValues.PERMISSIONS_OBJECT_BLOCKING_CACHE);
+	private static PortalCache _permissionCheckerBagPortalCache =
+		MultiVMPoolUtil.getCache(
+			PERMISSION_CHECKER_BAG_CACHE_NAME,
+			PropsValues.PERMISSIONS_OBJECT_BLOCKING_CACHE);
+	private static PortalCache _permissionPortalCache =
+		MultiVMPoolUtil.getCache(
+			PERMISSION_CACHE_NAME,
+			PropsValues.PERMISSIONS_OBJECT_BLOCKING_CACHE);
 
 	static {
 		if (PropsValues.PERMISSIONS_THREAD_LOCAL_CACHE_MAX_SIZE > 0) {
