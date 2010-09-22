@@ -204,12 +204,13 @@ public class PHPPortlet extends GenericPortlet {
 	}
 
 	protected String rewriteURLs(String page, PortletURL portletURL) {
-		ScriptPostProcess processor = new ScriptPostProcess();
+		ScriptPostProcess scriptPostProcess = new ScriptPostProcess();
 
-		processor.setInitalPage(new StringBundler(page));
-		processor.postProcessPage(portletURL, _PHP_URI_PARAM);
+		scriptPostProcess.setInitalPage(new StringBundler(page));
 
-		return processor.getFinalizedPage();
+		scriptPostProcess.postProcessPage(portletURL, _PHP_URI_PARAM);
+
+		return scriptPostProcess.getFinalizedPage();
 	}
 
 	private static final String _PHP_URI_PARAM = "phpURI";

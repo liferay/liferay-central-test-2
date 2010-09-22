@@ -24,12 +24,14 @@ import javax.portlet.PortletURL;
 
 /**
  * @author Gavin Wan
+ * @author Brian Wing Shun Chan
+ * @see	   org.apache.portals.bridges.common.ScriptPostProcess
  */
 public class ScriptPostProcess {
 
 	public String getFinalizedPage() {
-		if (_internalPage != null) {
-			return _internalPage.toString();
+		if (_sb != null) {
+			return _sb.toString();
 		}
 
 		return StringPool.BLANK;
@@ -62,136 +64,126 @@ public class ScriptPostProcess {
 		String startTag, String endTag, String ref, PortletURL actionURL,
 		String actionParameterName) {
 
-		StringBundler sb = new StringBundler();
-
-		String page = _internalPage.toString();
-
-		int ixTagOpen = page.indexOf(startTag);
-
-		int ixTagEnd = 0;
-		int ixRefStart = 0; 
-		int ixRefEnd = 0;
-
 		try {
-			while (ixTagOpen != -1) {
-				sb.append(page.substring(0, ixTagOpen));
-
-				page = page.substring(ixTagOpen);
-
-				ixTagEnd = page.indexOf(endTag);
-				ixRefStart = page.indexOf(ref);
-
-				if ((ixRefStart == -1) || (ixRefStart > ixTagEnd)) {
-					sb.append(page.substring(0, ixTagEnd));
-
-					page = page.substring(ixTagEnd);
-				}
-				else {
-					String strQuote = StringPool.BLANK;
-					String url = StringPool.BLANK;
-
-					ixRefStart = ixRefStart + ref.length();
-
-					sb.append(page.substring(0, ixRefStart));
-
-					page = page.substring(ixRefStart);
-
-					// Check if the argument starts with a single or double
-					// quote or no quote
-
-					if (page.startsWith(StringPool.APOSTROPHE)) {
-						strQuote = StringPool.APOSTROPHE;
-					}
-					else if (page.startsWith(StringPool.QUOTE)) {
-						strQuote = StringPool.QUOTE;
-					}
-
-					if (strQuote.length() > 0) {
-						sb.append(strQuote);
-
-						page = page.substring(1);
-
-						ixRefEnd = page.indexOf(strQuote);
-
-						// Extract the URL
-
-						url = page.substring(0, ixRefEnd);
-					}
-					else {
-
-						// Make sure that we don't parse over the tag end
-
-						ixTagEnd = page.indexOf(endTag);
-
-						// No quote just the first space or tagEnd index
-
-						ixRefEnd = 0;
-
-						StringBundler nqurl = new StringBundler();
-
-						boolean bEnd = false;
-
-						while (bEnd == false) {
-							char c = page.charAt(ixRefEnd);
-
-							if ((Character.isSpaceChar(c) == false) &&
-								(ixRefEnd < ixTagEnd)) {
-
-								ixRefEnd++;
-
-								nqurl.append(c);
-							}
-							else {
-								bEnd = true;
-
-								ixRefEnd--;
-							}
-						}
-
-						// Get the string
-
-						url = nqurl.toString();
-					}
-
-					if (url.charAt(0) == CharPool.POUND ||
-						url.startsWith("http")) {
-
-						sb.append(url).append(strQuote);
-					}
-					else {
-						
-						// Prepend the Action URL
-
-						actionURL.setParameter(actionParameterName, url);
-						
-						sb.append(actionURL.toString()).append(strQuote);
-					}
-
-					// Remainder
-
-					page = page.substring(ixRefEnd + 1);
-				}
-
-				// Continue scan
-
-				ixTagOpen = page.indexOf(startTag);
-			}
-
-			sb.append(page);
+			doProcessPage(
+			startTag, endTag, ref, actionURL, actionParameterName);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
-
-		_internalPage = sb;
 	}
 
-	public void setInitalPage(StringBundler page) {
-		_internalPage = page;
+	public void setInitalPage(StringBundler initialPage) {
+		_sb = initialPage;
+	}
+
+	protected void doProcessPage(
+		String startTag, String endTag, String ref, PortletURL actionURL,
+		String actionParameterName) {
+
+		StringBundler sb = new StringBundler();
+
+		String content = _sb.toString();
+
+		int startTagPos = content.indexOf(startTag);
+		int endTagPos = 0;
+
+		int startRefPos = 0;
+		int endRefPos = 0;
+
+		while (startTagPos != -1) {
+			sb.append(content.substring(0, startTagPos));
+
+			content = content.substring(startTagPos);
+
+			endTagPos = content.indexOf(endTag);
+			startRefPos = content.indexOf(ref);
+
+			if ((startRefPos == -1) || (startRefPos > endTagPos)) {
+				sb.append(content.substring(0, endTagPos));
+
+				content = content.substring(endTagPos);
+			}
+			else {
+				startRefPos = startRefPos + ref.length();
+
+				sb.append(content.substring(0, startRefPos));
+
+				content = content.substring(startRefPos);
+
+				String quote = StringPool.BLANK;
+
+				if (content.startsWith(StringPool.APOSTROPHE)) {
+					quote = StringPool.APOSTROPHE;
+				}
+				else if (content.startsWith(StringPool.QUOTE)) {
+					quote = StringPool.QUOTE;
+				}
+
+				String url = StringPool.BLANK;
+
+				if (quote.length() > 0) {
+					sb.append(quote);
+
+					content = content.substring(1);
+
+					endRefPos = content.indexOf(quote);
+
+					url = content.substring(0, endRefPos);
+				}
+				else {
+					endTagPos = content.indexOf(endTag);
+
+					endRefPos = 0;
+
+					StringBundler unquotedURL = new StringBundler();
+
+					while (true) {
+						char c = content.charAt(endRefPos);
+
+						if (!Character.isSpaceChar(c) &&
+							(endRefPos < endTagPos)) {
+
+							endRefPos++;
+
+							unquotedURL.append(c);
+						}
+						else {
+							endRefPos--;
+
+							break;
+						}
+					}
+
+					url = unquotedURL.toString();
+				}
+
+				if ((url.charAt(0) == CharPool.POUND) ||
+					url.startsWith("http")) {
+
+					sb.append(url);
+					sb.append(quote);
+				}
+				else {
+					actionURL.setParameter(actionParameterName, url);
+
+					sb.append(actionURL.toString());
+					sb.append(quote);
+				}
+
+				content = content.substring(endRefPos + 1);
+			}
+
+			startTagPos = content.indexOf(startTag);
+		}
+
+		sb.append(content);
+
+		_sb = sb;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ScriptPostProcess.class);
 
-	private StringBundler _internalPage;
+	private StringBundler _sb;
 
 }
