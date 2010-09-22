@@ -154,31 +154,33 @@ public class JSPWikiEngine implements WikiEngine {
 
 		LiferayJSPWikiEngine engine = _engines.get(nodeId);
 
-		if (engine == null) {
-			synchronized(_engines) {
-				engine = _engines.get(nodeId);
-
-				if (engine == null) {
-					Properties nodeProperties = new Properties(_properties);
-
-					nodeProperties.setProperty(
-						"nodeId", String.valueOf(nodeId));
-
-					String appName = nodeProperties.getProperty(
-						"jspwiki.applicationName");
-
-					nodeProperties.setProperty(
-						"jspwiki.applicationName",
-						appName + " for node " + nodeId);
-
-					engine = new LiferayJSPWikiEngine(nodeProperties);
-
-					_engines.put(nodeId, engine);
-				}
-			}
+		if (engine != null) {
+			return engine;
 		}
 
-		return engine;
+		synchronized (_engines) {
+			engine = _engines.get(nodeId);
+
+			if (engine != null) {
+				return engine;
+			}
+
+			Properties nodeProperties = new Properties(_properties);
+
+			nodeProperties.setProperty("nodeId", String.valueOf(nodeId));
+
+			String appName = nodeProperties.getProperty(
+				"jspwiki.applicationName");
+
+			nodeProperties.setProperty(
+				"jspwiki.applicationName", appName + " for node " + nodeId);
+
+			engine = new LiferayJSPWikiEngine(nodeProperties);
+
+			_engines.put(nodeId, engine);
+
+			return engine;
+		}
 	}
 
 	protected synchronized void setProperties(String configuration) {
