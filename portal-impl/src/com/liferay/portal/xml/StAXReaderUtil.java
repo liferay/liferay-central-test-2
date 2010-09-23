@@ -46,7 +46,13 @@ public class StAXReaderUtil {
 		}
 	}
 
-	private static XMLInputFactory _xmlInputFactory =
-		XMLInputFactory.newInstance();
+	private static XMLInputFactory _createXMLInputFactory() {
+		XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
+		xmlInputFactory
+				.setProperty(XMLInputFactory.IS_COALESCING, Boolean.TRUE);
+		return xmlInputFactory;
+	}
+
+	private static XMLInputFactory _xmlInputFactory = _createXMLInputFactory();
 
 }
