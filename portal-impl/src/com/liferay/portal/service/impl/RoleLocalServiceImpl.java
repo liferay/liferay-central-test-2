@@ -44,6 +44,7 @@ import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.RoleLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
 import java.util.ArrayList;
@@ -581,9 +582,14 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if ((classNameId == PortalUtil.getClassNameId(Role.class)) &&
-			((Validator.isNull(name)) || (Validator.isNumber(name)) ||
-			 (name.indexOf(CharPool.COMMA) != -1) ||
-			 (name.indexOf(CharPool.STAR) != -1))) {
+			((Validator.isNull(name)) || (name.indexOf(CharPool.COMMA) != -1) ||
+			(name.indexOf(CharPool.STAR) != -1))) {
+
+			throw new RoleNameException();
+		}
+
+		if ((Validator.isNumber(name)) &&
+			(!PropsValues.ROLES_NAME_ALLOW_NUMERIC)) {
 
 			throw new RoleNameException();
 		}
