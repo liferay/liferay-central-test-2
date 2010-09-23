@@ -103,7 +103,7 @@ if (organization != null) {
 
 	<liferay-ui:error exception="<%= NoSuchCountryException.class %>" message="please-select-a-country" />
 
-	<div id="<portlet:namespace />countryDiv" <%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_ENABLED, new Filter(String.valueOf(type))))? StringPool.BLANK : "style=\"display: none;\"" %>>
+	<div class='<%= GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_COUNTRY_ENABLED, new Filter(String.valueOf(type))))? StringPool.BLANK : "aui-helper-hidden" %>' id="<portlet:namespace />countryDiv" >
 		<aui:select label="country" name="countryId" />
 
 		<aui:select label="region" name="regionId" />
