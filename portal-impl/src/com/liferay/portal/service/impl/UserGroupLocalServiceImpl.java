@@ -407,18 +407,9 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		}
 
 		if (Validator.isNumber(name) &&
-			!name.equals(String.valueOf(userGroupId))) {
+			!PropsValues.USER_GROUPS_NAME_ALLOW_NUMERIC) {
 
-			if (!PropsValues.USER_GROUPS_NAME_ALLOW_NUMERIC) {
-				throw new UserGroupNameException();
-			}
-
-			Group group = groupPersistence.fetchByPrimaryKey(
-				GetterUtil.getLong(name));
-
-			if (group != null) {
-				throw new UserGroupNameException();
-			}
+			throw new UserGroupNameException();
 		}
 
 		try {
