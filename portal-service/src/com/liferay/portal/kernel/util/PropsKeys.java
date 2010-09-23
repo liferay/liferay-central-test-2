@@ -1513,6 +1513,10 @@ public interface PropsKeys {
 
 	public static final String SITEMINDER_USER_HEADER = "siteminder.user.header";
 
+	public static final String SLOWNESS_DETECTER_ENABLED = "slowness.detecter.enabled";
+
+	public static final String SLOWNESS_DETECTER_THRESHOLD = "slowness.detecter.threshold";
+	
 	public static final String SOCIAL_BOOKMARK_POST_URL = "social.bookmark.post.url";
 
 	public static final String SOCIAL_BOOKMARK_TYPES = "social.bookmark.types";

@@ -1044,6 +1044,10 @@ public class PropsValues {
 
 	public static final String SITEMINDER_USER_HEADER = PropsUtil.get(PropsKeys.SITEMINDER_USER_HEADER);
 
+	public static final boolean SLOWNESS_DETECTER_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SLOWNESS_DETECTER_ENABLED));
+
+	public static final int SLOWNESS_DETECTER_THRESHOLD = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SLOWNESS_DETECTER_THRESHOLD));
+
 	public static final int SOCIAL_EQUITY_EQUITY_LOG_CHECK_INTERVAL = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SOCIAL_EQUITY_EQUITY_LOG_CHECK_INTERVAL));
 
 	public static final boolean SOCIAL_EQUITY_EQUITY_LOG_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SOCIAL_EQUITY_EQUITY_LOG_ENABLED));

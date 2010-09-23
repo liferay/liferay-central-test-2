@@ -39,9 +39,9 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.ThreadUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
@@ -348,52 +348,8 @@ public class EditServerAction extends PortletAction {
 	}
 
 	protected void threadDump() throws Exception {
-		String jvm =
-			System.getProperty("java.vm.name") + " " +
-				System.getProperty("java.vm.version");
-
-		StringBundler sb = new StringBundler(
-			"Full thread dump " + jvm + "\n\n");
-
-		Map<Thread, StackTraceElement[]> stackTraces =
-			Thread.getAllStackTraces();
-
-		for (Map.Entry<Thread, StackTraceElement[]> entry :
-				stackTraces.entrySet()) {
-
-			Thread thread = entry.getKey();
-			StackTraceElement[] elements = entry.getValue();
-
-			sb.append(StringPool.QUOTE);
-			sb.append(thread.getName());
-			sb.append(StringPool.QUOTE);
-
-			if (thread.getThreadGroup() != null) {
-				sb.append(StringPool.SPACE);
-				sb.append(StringPool.OPEN_PARENTHESIS);
-				sb.append(thread.getThreadGroup().getName());
-				sb.append(StringPool.CLOSE_PARENTHESIS);
-			}
-
-			sb.append(", priority=");
-			sb.append(thread.getPriority());
-			sb.append(", id=");
-			sb.append(thread.getId());
-			sb.append(", state=");
-			sb.append(thread.getState());
-			sb.append("\n");
-
-			for (int i = 0; i < elements.length; i++) {
-				sb.append("\t");
-				sb.append(elements[i]);
-				sb.append("\n");
-			}
-
-			sb.append("\n");
-		}
-
 		if (_log.isInfoEnabled()) {
-			_log.info(sb.toString());
+			_log.info(ThreadUtil.threadDump());
 		}
 		else {
 			_log.error(
