@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.asset.service.impl;
 
+import com.liferay.portal.kernel.cache.ThreadLocalCachable;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -224,6 +225,7 @@ public class AssetCategoryLocalServiceImpl
 		return assetCategoryPersistence.findAll();
 	}
 
+	@ThreadLocalCachable
 	public List<AssetCategory> getCategories(long classNameId, long classPK)
 		throws SystemException {
 
