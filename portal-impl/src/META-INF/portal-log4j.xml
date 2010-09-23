@@ -508,6 +508,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.servlet.filters.threaddump">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.portal.servlet.filters.virtualhost.VirtualHostFilter">
 		<priority value="ERROR" />
 	</category>

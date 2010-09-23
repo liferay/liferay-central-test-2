@@ -1046,10 +1046,6 @@ public class PropsValues {
 
 	public static final String SITEMINDER_USER_HEADER = PropsUtil.get(PropsKeys.SITEMINDER_USER_HEADER);
 
-	public static final boolean SLOWNESS_DETECTER_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SLOWNESS_DETECTER_ENABLED));
-
-	public static final int SLOWNESS_DETECTER_THRESHOLD = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SLOWNESS_DETECTER_THRESHOLD));
-
 	public static final int SOCIAL_EQUITY_EQUITY_LOG_CHECK_INTERVAL = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SOCIAL_EQUITY_EQUITY_LOG_CHECK_INTERVAL));
 
 	public static final boolean SOCIAL_EQUITY_EQUITY_LOG_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SOCIAL_EQUITY_EQUITY_LOG_ENABLED));
@@ -1095,6 +1091,10 @@ public class PropsValues {
 	public static final boolean THEME_SYNC_ON_GROUP = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.THEME_SYNC_ON_GROUP));
 
 	public static final String THEME_VIRTUAL_PATH = PropsUtil.get(PropsKeys.THEME_VIRTUAL_PATH);
+
+	public static int THREAD_DUMP_MEMORY_THRESHOLD = GetterUtil.getInteger(PropsUtil.get(PropsKeys.THREAD_DUMP_MEMORY_THRESHOLD));
+
+	public static int THREAD_DUMP_SPEED_THRESHOLD = GetterUtil.getInteger(PropsUtil.get(PropsKeys.THREAD_DUMP_SPEED_THRESHOLD));
 
 	public static int TRANSACTION_ISOLATION_COUNTER = GetterUtil.getInteger(PropsUtil.get(PropsKeys.TRANSACTION_ISOLATION_COUNTER));
 
