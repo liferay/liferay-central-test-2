@@ -403,6 +403,18 @@ public class StringUtil_IW {
 		return StringUtil.stripBetween(s, begin, end);
 	}
 
+	public java.lang.String toHexString(int i) {
+		return StringUtil.toHexString(i);
+	}
+
+	public java.lang.String toHexString(long l) {
+		return StringUtil.toHexString(l);
+	}
+
+	public java.lang.String toHexString(java.lang.Object obj) {
+		return StringUtil.toHexString(obj);
+	}
+
 	public java.lang.String trim(java.lang.String s) {
 		return StringUtil.trim(s);
 	}
