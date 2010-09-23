@@ -1372,10 +1372,10 @@ public class StringUtil {
 
 	public static String toHexString(Object obj) {
 		if (obj instanceof Integer) {
-			return toHexString((Integer)obj);
+			return toHexString(((Integer)obj).intValue());
 		}
 		else if (obj instanceof Long) {
-			return toHexString((Long)obj);
+			return toHexString(((Long)obj).longValue());
 		}
 		else {
 			return String.valueOf(obj);
