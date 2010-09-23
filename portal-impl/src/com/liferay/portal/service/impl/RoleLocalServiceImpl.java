@@ -582,15 +582,13 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if ((classNameId == PortalUtil.getClassNameId(Role.class)) &&
-			((Validator.isNull(name)) || (name.indexOf(CharPool.COMMA) != -1) ||
-			(name.indexOf(CharPool.STAR) != -1))) {
+			(Validator.isNull(name) || (name.indexOf(CharPool.COMMA) != -1) ||
+			 (name.indexOf(CharPool.STAR) != -1))) {
 
 			throw new RoleNameException();
 		}
 
-		if ((Validator.isNumber(name)) &&
-			(!PropsValues.ROLES_NAME_ALLOW_NUMERIC)) {
-
+		if (Validator.isNumber(name) && !PropsValues.ROLES_NAME_ALLOW_NUMERIC) {
 			throw new RoleNameException();
 		}
 
