@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PropsValues;
 
@@ -289,7 +290,8 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		CacheKeyGenerator cacheKeyGenerator =
 			CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME);
 
-		return cacheKeyGenerator.getCacheKey(primaryKeyObj.toString());
+		return cacheKeyGenerator.getCacheKey(
+			StringUtil.toCacheKeyString(primaryKeyObj));
 	}
 
 	private String _encodeLocalCacheKey(
@@ -299,7 +301,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME);
 
 		cacheKeyGenerator.append(classObj.getName());
-		cacheKeyGenerator.append(primaryKeyObj.toString());
+		cacheKeyGenerator.append(StringUtil.toCacheKeyString(primaryKeyObj));
 
 		return cacheKeyGenerator.finish();
 	}

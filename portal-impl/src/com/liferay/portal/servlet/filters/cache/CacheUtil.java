@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.servlet.filters.CacheResponseData;
 
@@ -66,7 +67,7 @@ public class CacheUtil {
 
 		sb.append(CACHE_NAME);
 		sb.append(StringPool.POUND);
-		sb.append(companyId);
+		sb.append(StringUtil.toHexString(companyId));
 		sb.append(StringPool.POUND);
 		sb.append(key);
 

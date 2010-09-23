@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.PortletApp;
@@ -98,7 +99,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 
 		StringBundler sb = new StringBundler(5);
 
-		sb.append(plid);
+		sb.append(StringUtil.toHexString(plid));
 		sb.append(StringPool.UNDERLINE);
 		sb.append(portletId);
 		sb.append(StringPool.UNDERLINE);

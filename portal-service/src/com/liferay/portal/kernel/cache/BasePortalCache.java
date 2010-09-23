@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.cache;
 
+import com.liferay.portal.kernel.util.StringUtil;
+
 /**
  * @author Michael C. Han
  */
@@ -32,7 +34,7 @@ public abstract class BasePortalCache implements PortalCache {
 
 	protected String processKey(String key) {
 		if (!_debug && key.length() > CACHE_KEY_LENGTH_SHORTEN_THRESHOLD) {
-			return String.valueOf(key.hashCode());
+			return StringUtil.toHexString(key.hashCode());
 		}
 		else {
 			return key;

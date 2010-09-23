@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.cache.ThreadLocalCacheManager;
 import com.liferay.portal.kernel.util.MethodTargetClassKey;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.aop.AnnotationChainableMethodAdvice;
 
 import java.lang.annotation.Annotation;
@@ -96,7 +97,7 @@ public class ThreadLocalCacheAdvice
 		StringBundler sb = new StringBundler(arguments.length * 2 - 1);
 
 		for (int i = 0; i < arguments.length; i++) {
-			sb.append(String.valueOf(arguments[i]));
+			sb.append(StringUtil.toCacheKeyString(arguments[i]));
 
 			if ((i + 1) < arguments.length) {
 				sb.append(StringPool.POUND);

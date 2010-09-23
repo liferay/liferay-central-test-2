@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.increment.IncrementFactory;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.util.MethodTargetClassKey;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.aop.AnnotationChainableMethodAdvice;
 
 import java.lang.annotation.Annotation;
@@ -59,7 +60,7 @@ public class BufferedIncrementAdvice
 		cacheKeyGenerator.append(methodTargetClassKey.toString());
 
 		for (int i = 0; i < arguments.length - 1; i++) {
-			cacheKeyGenerator.append(String.valueOf(arguments[i]));
+			cacheKeyGenerator.append(StringUtil.toCacheKeyString(arguments[i]));
 		}
 
 		String batchKey = cacheKeyGenerator.finish();

@@ -15,6 +15,7 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.util.servlet.SharedSessionServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +43,7 @@ public class SessionLayoutClone implements LayoutClone {
 
 	protected String encodeKey(long plid) {
 		return SessionLayoutClone.class.getName().concat(
-			StringPool.POUND).concat(String.valueOf(plid));
+			StringPool.POUND).concat(StringUtil.toHexString(plid));
 	}
 
 	protected HttpSession getPortalSession(HttpServletRequest request) {

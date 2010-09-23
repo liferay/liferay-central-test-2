@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
 import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 
 /**
  * @author Brian Wing Shun Chan
@@ -45,7 +46,7 @@ public class FinderPath {
 
 		for (Object arg : args) {
 			sb.append(StringPool.PERIOD);
-			sb.append(String.valueOf(arg));
+			sb.append(StringUtil.toCacheKeyString(arg));
 		}
 
 		CacheKeyGenerator cacheKeyGenerator =
@@ -62,7 +63,7 @@ public class FinderPath {
 
 		for (Object arg : args) {
 			sb.append(StringPool.PERIOD);
-			sb.append(String.valueOf(arg));
+			sb.append(StringUtil.toCacheKeyString(arg));
 		}
 
 		CacheKeyGenerator cacheKeyGenerator =

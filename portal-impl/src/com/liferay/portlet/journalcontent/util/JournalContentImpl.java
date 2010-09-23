@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
@@ -232,7 +233,7 @@ public class JournalContentImpl implements JournalContent {
 
 		sb.append(CACHE_NAME);
 		sb.append(StringPool.POUND);
-		sb.append(groupId);
+		sb.append(StringUtil.toHexString(groupId));
 		sb.append(ARTICLE_SEPARATOR);
 		sb.append(articleId);
 		sb.append(TEMPLATE_SEPARATOR);
@@ -240,7 +241,7 @@ public class JournalContentImpl implements JournalContent {
 
 		if (layoutSetId > 0) {
 			sb.append(LAYOUT_SET_SEPARATOR);
-			sb.append(layoutSetId);
+			sb.append(StringUtil.toHexString(layoutSetId));
 		}
 
 		if (Validator.isNotNull(viewMode)) {
@@ -255,7 +256,7 @@ public class JournalContentImpl implements JournalContent {
 
 		if (page > 0) {
 			sb.append(PAGE_SEPARATOR);
-			sb.append(page);
+			sb.append(StringUtil.toHexString(page));
 		}
 
 		sb.append(SECURE_SEPARATOR);

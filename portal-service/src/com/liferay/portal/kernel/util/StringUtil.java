@@ -38,6 +38,7 @@ import java.util.regex.Pattern;
  * @author Brian Wing Shun Chan
  * @author Sandeep Soni
  * @author Ganesh Ram
+ * @author Shuyang Zhou
  */
 public class StringUtil {
 
@@ -1339,6 +1340,40 @@ public class StringUtil {
 		return sb.toString();
 	}
 
+	public static String toCacheKeyString(Object obj) {
+		if (obj instanceof Long) {
+			return toHexString((Long)obj);
+		}
+		else if (obj instanceof Integer) {
+			return toHexString((Integer) obj);
+		}
+		else {
+			return String.valueOf(obj);
+		}
+	}
+
+	public static String toHexString(int i) {
+		char[] buffer = new char[8];
+		int index = 8;
+		do {
+			buffer[--index] = _HEX_DIGITS[i & 15];
+			i >>>= 4;
+		}
+		while (i != 0);
+		return new String(buffer, index, 8 - index);
+	}
+
+	public static String toHexString(long l) {
+		char[] buffer = new char[16];
+		int index = 16;
+		do {
+			buffer[--index] = _HEX_DIGITS[(int) (l & 15)];
+			l >>>= 4;
+		}
+		while (l != 0);
+		return new String(buffer, index, 16 - index);
+	}
+
 	public static String trim(String s) {
 		return trim(s, null);
 	}
@@ -1641,6 +1676,11 @@ public class StringUtil {
 
 		return sb.toString();
 	}
+
+	private static final char[] _HEX_DIGITS = {
+		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd',
+		'e', 'f'
+	};
 
 	private static Log _log = LogFactoryUtil.getLog(StringUtil.class);
 

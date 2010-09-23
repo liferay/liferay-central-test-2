@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.WikiPageDisplay;
@@ -104,7 +105,7 @@ public class WikiCacheUtil {
 
 		sb.append(CACHE_NAME);
 		sb.append(StringPool.POUND);
-		sb.append(nodeId);
+		sb.append(StringUtil.toHexString(nodeId));
 		sb.append(title);
 
 		if (postfix != null) {

@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
 
 import java.util.Map;
@@ -64,9 +65,9 @@ public class PortletPreferencesLocalUtil {
 
 		sb.append(CACHE_NAME);
 		sb.append(StringPool.POUND);
-		sb.append(ownerId);
+		sb.append(StringUtil.toHexString(ownerId));
 		sb.append(StringPool.POUND);
-		sb.append(ownerType);
+		sb.append(StringUtil.toHexString(ownerType));
 
 		return sb.toString();
 	}

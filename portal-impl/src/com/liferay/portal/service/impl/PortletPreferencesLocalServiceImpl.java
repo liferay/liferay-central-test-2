@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
@@ -322,7 +323,8 @@ public class PortletPreferencesLocalServiceImpl
 	}
 
 	protected String encodeKey(long plid, String portletId) {
-		return String.valueOf(plid).concat(StringPool.POUND).concat(portletId);
+		return StringUtil.toHexString(plid).concat(StringPool.POUND).concat(
+			portletId);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.ResourceConstants;
@@ -144,11 +145,11 @@ public class ResourceCodeLocalServiceImpl
 	protected String encodeKey(long companyId, String name, int scope) {
 		StringBundler sb = new StringBundler(5);
 
-		sb.append(companyId);
+		sb.append(StringUtil.toHexString(companyId));
 		sb.append(StringPool.POUND);
 		sb.append(name);
 		sb.append(StringPool.POUND);
-		sb.append(scope);
+		sb.append(StringUtil.toHexString(scope));
 
 		return sb.toString();
 	}
