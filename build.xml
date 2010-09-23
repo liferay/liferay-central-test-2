@@ -181,7 +181,7 @@
 		</if>
 
 		<copy todir="${app.server.lib.portal.dir}">
-			<fileset dir="lib/portal" />
+			<fileset dir="lib/portal" excludes="alloy/" />
 		</copy>
 
 		<if>

@@ -6,6 +6,7 @@
 	<property name="war.file" value="${ant.project.name}" />
 
 	<property name="alloy.file" value="alloy-1.0.1.zip" />
+	<property name="alloy-taglibs.file" value="alloy-taglibs-1.0.war" />
 
 	<!--
 	When upgrading CKEditor, make sure to delete
@@ -140,6 +141,42 @@
 				<!-- Clean up -->
 
 				<delete dir="docroot/html/ALLOY_ZIP" />
+			</then>
+		</if>
+	</target>
+
+	<target name="build-alloy-taglibs">
+		<if>
+			<not>
+				<uptodate
+					srcfile="third-party/${alloy-taglibs.file}"
+					targetfile="${project.dir}/lib/portal/alloy/alloy-taglib.jar"
+				/>
+			</not>
+			<then>
+				<var name="temp.dir" value="ALLOY_TAGLIBS_TEMP" />
+
+				<mkdir dir="${temp.dir}" />
+
+				<unzip src="third-party/${alloy-taglibs.file}" dest="${temp.dir}" overwrite="true" />
+
+				<!--
+				<delete dir="${temp.dir}/html/demos" />
+
+				<copy todir="docroot/html/taglib" overwrite="true">
+					<fileset dir="${temp.dir}/html/taglib" />
+				</copy>
+
+				<copy todir="docroot/WEB-INF/tld" overwrite="true">
+					<fileset dir="${temp.dir}/WEB-INF/tld" />
+				</copy>
+				-->
+
+				<copy todir="${project.dir}/lib/portal/alloy" overwrite="true">
+					<fileset dir="${temp.dir}/WEB-INF/lib" includes="alloy-taglib.jar,flexjson-2.0.jar" />
+				</copy>
+
+				<delete dir="${temp.dir}" />
 			</then>
 		</if>
 	</target>
@@ -785,6 +822,7 @@
 
 	<target name="deploy">
 		<antcall target="build-alloy" />
+		<antcall target="build-alloy-taglibs" />
 		<antcall target="build-ckeditor" />
 		<antcall target="build-codepress" />
 		<antcall target="build-dtd" />
@@ -792,7 +830,10 @@
 		<antcall target="build-tinymce" />
 		<antcall target="build-vaadin" />
 
-		<copy todir="docroot/WEB-INF/lib" file="${project.dir}/portal-client/portal-client.jar" failonerror="false" />
+		<copy todir="docroot/WEB-INF/lib" failonerror="false">
+			<fileset dir="${project.dir}/lib/portal/alloy" includes="*.jar" />
+			<fileset file="${project.dir}/portal-client/portal-client.jar" />
+		</copy>
 
 		<antcall target="build-common-web.deploy" />
 
