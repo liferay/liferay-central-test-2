@@ -303,7 +303,7 @@ if (!access) {
 
 long previousScopeGroupId = themeDisplay.getScopeGroupId();
 
-if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION) && portletResourcePortlet != null) {
+if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION) && (portletResourcePortlet != null)) {
 	themeDisplay.setScopeGroupId(PortalUtil.getScopeGroupId(request, portletResourcePortlet.getPortletId()));
 }
 else {
