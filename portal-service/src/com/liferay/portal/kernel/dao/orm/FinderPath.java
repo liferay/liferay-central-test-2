@@ -46,7 +46,7 @@ public class FinderPath {
 
 		for (Object arg : args) {
 			sb.append(StringPool.PERIOD);
-			sb.append(StringUtil.toCacheKeyString(arg));
+			sb.append(StringUtil.toHexString(arg));
 		}
 
 		CacheKeyGenerator cacheKeyGenerator =
@@ -63,7 +63,7 @@ public class FinderPath {
 
 		for (Object arg : args) {
 			sb.append(StringPool.PERIOD);
-			sb.append(StringUtil.toCacheKeyString(arg));
+			sb.append(StringUtil.toHexString(arg));
 		}
 
 		CacheKeyGenerator cacheKeyGenerator =

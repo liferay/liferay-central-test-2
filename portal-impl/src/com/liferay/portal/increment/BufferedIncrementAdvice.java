@@ -60,7 +60,7 @@ public class BufferedIncrementAdvice
 		cacheKeyGenerator.append(methodTargetClassKey.toString());
 
 		for (int i = 0; i < arguments.length - 1; i++) {
-			cacheKeyGenerator.append(StringUtil.toCacheKeyString(arguments[i]));
+			cacheKeyGenerator.append(StringUtil.toHexString(arguments[i]));
 		}
 
 		String batchKey = cacheKeyGenerator.finish();

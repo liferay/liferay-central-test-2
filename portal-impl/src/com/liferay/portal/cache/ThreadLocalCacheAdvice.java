@@ -97,7 +97,7 @@ public class ThreadLocalCacheAdvice
 		StringBundler sb = new StringBundler(arguments.length * 2 - 1);
 
 		for (int i = 0; i < arguments.length; i++) {
-			sb.append(StringUtil.toCacheKeyString(arguments[i]));
+			sb.append(StringUtil.toHexString(arguments[i]));
 
 			if ((i + 1) < arguments.length) {
 				sb.append(StringPool.POUND);

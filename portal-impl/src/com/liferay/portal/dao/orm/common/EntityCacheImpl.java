@@ -291,7 +291,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME);
 
 		return cacheKeyGenerator.getCacheKey(
-			StringUtil.toCacheKeyString(primaryKeyObj));
+			StringUtil.toHexString(primaryKeyObj));
 	}
 
 	private String _encodeLocalCacheKey(
@@ -301,7 +301,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME);
 
 		cacheKeyGenerator.append(classObj.getName());
-		cacheKeyGenerator.append(StringUtil.toCacheKeyString(primaryKeyObj));
+		cacheKeyGenerator.append(StringUtil.toHexString(primaryKeyObj));
 
 		return cacheKeyGenerator.finish();
 	}
