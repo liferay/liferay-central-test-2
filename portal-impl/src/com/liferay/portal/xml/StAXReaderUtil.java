@@ -48,8 +48,10 @@ public class StAXReaderUtil {
 
 	private static XMLInputFactory _createXMLInputFactory() {
 		XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
-		xmlInputFactory
-				.setProperty(XMLInputFactory.IS_COALESCING, Boolean.TRUE);
+
+		xmlInputFactory.setProperty(
+			XMLInputFactory.IS_COALESCING, Boolean.TRUE);
+
 		return xmlInputFactory;
 	}
 
