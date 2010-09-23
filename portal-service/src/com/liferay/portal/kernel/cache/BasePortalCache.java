@@ -34,7 +34,7 @@ public abstract class BasePortalCache implements PortalCache {
 
 	protected String processKey(String key) {
 		if (!_debug && (key.length() > _CACHE_KEY_LENGTH_THRESHOLD)) {
-			return StringUtil.valueOf(key.hashCode());
+			return StringUtil.toHexString(key.hashCode());
 		}
 		else {
 			return key;
