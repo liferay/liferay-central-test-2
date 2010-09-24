@@ -225,9 +225,12 @@ public class PluginsEnvironmentBuilder {
 			sb.append("\t<classpathentry kind=\"con\" ");
 			sb.append("path=\"org.eclipse.jdt.launching.JRE_CONTAINER\" />\n");
 
-			if (FileUtil.exists(projectDirName + "/docroot/WEB-INF/test")) {
+			if (FileUtil.exists(projectDirName + "/test")) {
 				sb.append("\t<classpathentry excluding=\"**/.svn/**|.svn/\" ");
-				sb.append("kind=\"src\" path=\"docroot/WEB-INF/test\" />\n");
+				sb.append("kind=\"src\" path=\"test\" />\n");
+
+				_addClasspathEntry(sb, "/portal/lib/development/junit.jar");
+				_addClasspathEntry(sb, "/portal/lib/portal/commons-io.jar");
 			}
 
 			_addClasspathEntry(sb, "/portal/lib/development/activation.jar");
