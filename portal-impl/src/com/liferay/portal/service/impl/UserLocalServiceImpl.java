@@ -3331,18 +3331,18 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			throw new UserScreenNameException();
 		}
 
-		if (Validator.isNumber(screenName) &&
-			!screenName.equals(String.valueOf(userId))) {
-
+		if (Validator.isNumber(screenName)) {
 			if (!PropsValues.USERS_SCREEN_NAME_ALLOW_NUMERIC) {
 				throw new UserScreenNameException();
 			}
 
-			Group group = groupPersistence.fetchByPrimaryKey(
-				GetterUtil.getLong(screenName));
+			if (!screenName.equals(String.valueOf(userId))) {
+				Group group = groupPersistence.fetchByPrimaryKey(
+					GetterUtil.getLong(screenName));
 
-			if (group != null) {
-				throw new UserScreenNameException();
+				if (group != null) {
+					throw new UserScreenNameException();
+				}
 			}
 		}
 
