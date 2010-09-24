@@ -544,7 +544,7 @@ public class LayoutExporter {
 				if (Validator.isNotNull(scopeLayoutUuid)) {
 					Layout scopeLayout =
 						LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-							scopeLayoutUuid, scopeGroupId);
+							scopeLayoutUuid, context.getGroupId());
 
 					Group scopeGroup = scopeLayout.getScopeGroup();
 
