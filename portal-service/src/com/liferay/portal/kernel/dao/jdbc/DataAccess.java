@@ -35,19 +35,20 @@ import javax.sql.DataSource;
 public class DataAccess {
 
 	public static Connection getConnection() throws SQLException {
-		DataSource ds = InfrastructureUtil.getDataSource();
+		DataSource dataSource = InfrastructureUtil.getDataSource();
 
-		return ds.getConnection();
+		return dataSource.getConnection();
 	}
 
 	public static Connection getConnection(String location)
 		throws NamingException, SQLException {
 
-		InitialContext ctx = new InitialContext();
+		InitialContext initialContext = new InitialContext();
 
-		DataSource ds = (DataSource)JNDIUtil.lookup(ctx, location);
+		DataSource dataSource = (DataSource)JNDIUtil.lookup(
+			initialContext, location);
 
-		return ds.getConnection();
+		return dataSource.getConnection();
 	}
 
 	public static void cleanUp(Connection connection) {
