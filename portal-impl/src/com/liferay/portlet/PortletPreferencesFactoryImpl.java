@@ -177,8 +177,6 @@ public class PortletPreferencesFactoryImpl
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			themeDisplay.getCompanyId(), portletId);
 
-		long scopeGroupId = PortalUtil.getScopeGroupId(layout, portletId);
-
 		long ownerId = 0;
 		int ownerType = 0;
 		long plid = 0;
@@ -239,6 +237,9 @@ public class PortletPreferencesFactoryImpl
 				plid = PortletKeys.PREFS_PLID_SHARED;
 
 				if (portlet.isPreferencesOwnedByGroup()) {
+					long scopeGroupId = PortalUtil.getScopeGroupId(
+						layout, portletId);
+
 					ownerId = scopeGroupId;
 					ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
 					portletId = PortletConstants.getRootPortletId(portletId);
