@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.Renderer;
 import com.liferay.portal.kernel.bean.RendererException;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
@@ -365,6 +366,8 @@ public class RendererImpl implements Renderer {
 			try {
 				preferences = PortletPreferencesFactoryUtil.getPortletSetup(
 					request, portletResource);
+			}
+			catch (PortalException pe) {
 			}
 			catch (SystemException se) {
 			}

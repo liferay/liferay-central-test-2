@@ -177,6 +177,8 @@ public class PortletPreferencesFactoryImpl
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			themeDisplay.getCompanyId(), portletId);
 
+		long scopeGroupId = PortalUtil.getScopeGroupId(layout, portletId);
+
 		long ownerId = 0;
 		int ownerType = 0;
 		long plid = 0;
@@ -237,7 +239,7 @@ public class PortletPreferencesFactoryImpl
 				plid = PortletKeys.PREFS_PLID_SHARED;
 
 				if (portlet.isPreferencesOwnedByGroup()) {
-					ownerId = themeDisplay.getScopeGroupId();
+					ownerId = scopeGroupId;
 					ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
 					portletId = PortletConstants.getRootPortletId(portletId);
 				}
@@ -270,7 +272,7 @@ public class PortletPreferencesFactoryImpl
 
 	public PortletPreferences getPortletSetup(
 			HttpServletRequest request, String portletId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return getPortletSetup(request, portletId, null);
 	}
@@ -278,18 +280,20 @@ public class PortletPreferencesFactoryImpl
 	public PortletPreferences getPortletSetup(
 			HttpServletRequest request, String portletId,
 			String defaultPreferences)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		long scopeGroupId = PortalUtil.getScopeGroupId(request, portletId);
+
 		return getPortletSetup(
-			themeDisplay.getScopeGroupId(), themeDisplay.getLayout(), portletId,
+			scopeGroupId, themeDisplay.getLayout(), portletId,
 			defaultPreferences);
 	}
 
 	public PortletPreferences getPortletSetup(PortletRequest portletRequest)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			portletRequest);
@@ -300,7 +304,7 @@ public class PortletPreferencesFactoryImpl
 
 	public PortletPreferences getPortletSetup(
 			PortletRequest portletRequest, String portletId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			portletRequest);

@@ -59,19 +59,19 @@ public interface PortletPreferencesFactory {
 
 	public PortletPreferences getPortletSetup(
 			HttpServletRequest request, String portletId)
-		throws SystemException;
+		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(
 			HttpServletRequest request, String portletId,
 			String defaultPreferences)
-		throws SystemException;
+		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(PortletRequest portletRequest)
-		throws SystemException;
+		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(
 			PortletRequest portletRequest, String portletId)
-		throws SystemException;
+		throws PortalException, SystemException;
 
 	public PortletPreferences getPreferences(HttpServletRequest request);
 

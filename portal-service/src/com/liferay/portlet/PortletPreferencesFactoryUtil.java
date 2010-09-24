@@ -92,7 +92,7 @@ public class PortletPreferencesFactoryUtil {
 
 	public static PortletPreferences getPortletSetup(
 			HttpServletRequest request, String portletId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return getPortletPreferencesFactory().getPortletSetup(
 			request, portletId);
@@ -101,7 +101,7 @@ public class PortletPreferencesFactoryUtil {
 	public static PortletPreferences getPortletSetup(
 			HttpServletRequest request, String portletId,
 			String defaultPreferences)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return getPortletPreferencesFactory().getPortletSetup(
 			request, portletId, defaultPreferences);
@@ -109,14 +109,14 @@ public class PortletPreferencesFactoryUtil {
 
 	public static PortletPreferences getPortletSetup(
 			PortletRequest portletRequest)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return getPortletPreferencesFactory().getPortletSetup(portletRequest);
 	}
 
 	public static PortletPreferences getPortletSetup(
 			PortletRequest portletRequest, String portletId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return getPortletPreferencesFactory().getPortletSetup(
 			portletRequest, portletId);
