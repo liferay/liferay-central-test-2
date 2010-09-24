@@ -300,7 +300,13 @@ public class PluginsEnvironmentBuilder {
 			File tempFile = File.createTempFile("svn-ignores-", null, null);
 
 			try {
-				FileUtil.write(tempFile, "bin\ntmp");
+				if (FileUtil.exists(projectDirName + "/test")) {
+					FileUtil.write(
+						tempFile, "bin\ntest-classes\ntest-results\ntmp");
+				}
+				else {
+					FileUtil.write(tempFile, "bin\ntmp");
+				}
 
 				_exec(
 					_SVN_SET_IGNORES + "-F \"" + tempFile.getCanonicalPath() +
