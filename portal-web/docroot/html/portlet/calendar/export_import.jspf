@@ -24,7 +24,7 @@
 	</portlet:actionURL>
 
 	<%
-	String taglibOnClick = "document." + renderResponse.getNamespace() + "fm.action = '" + exportEventsURL + "'; document." + renderResponse.getNamespace() + "fm.submit();";
+	String taglibOnClick = "document." + renderResponse.getNamespace() + "fm.action = '" + exportEventsURL + "&etag=0'; document." + renderResponse.getNamespace() + "fm.submit();";
 	%>
 
 	<aui:button-row>

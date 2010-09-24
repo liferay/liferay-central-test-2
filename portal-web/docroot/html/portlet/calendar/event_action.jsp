@@ -56,7 +56,7 @@ else {
 
 		<liferay-ui:icon
 			image="export"
-			url='<%= exportURL %>'
+			url='<%= exportURL + "&etag=0" %>'
 		/>
 	</c:if>
 
