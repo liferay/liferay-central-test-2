@@ -1,7 +1,9 @@
 AUI().add(
 	'liferay-poller',
 	function(A) {
-		var _browserKey = Liferay.Util.randomInt();
+		var Util = Liferay.Util;
+
+		var _browserKey = Util.randomInt();
 		var _enabled = false;
 		var _supportsComet = false;
 		var _encryptedUserId = null;
@@ -80,7 +82,7 @@ AUI().add(
 		var _processResponse = function(id, obj) {
 			var response = A.JSON.parse(obj.responseText);
 
-			if (Liferay.Util.isArray(response)) {
+			if (Util.isArray(response)) {
 				var meta = response.shift();
 				var chunk;
 

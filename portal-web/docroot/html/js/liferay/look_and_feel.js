@@ -1,6 +1,7 @@
 AUI().add(
 	'liferay-look-and-feel',
 	function(A) {
+		var Browser = Liferay.Browser;
 		var Lang = A.Lang;
 
 		var PortletCSS = {
@@ -42,7 +43,7 @@ AUI().add(
 								{
 									on: {
 										close: function() {
-											if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() == 6) {
+											if (Browser.isIe() && Browser.getMajorVersion() == 6) {
 												window.location.reload(true);
 											}
 										}
@@ -480,7 +481,7 @@ AUI().add(
 
 				Liferay.Util.enableTextareaTabs(customCSS.getDOM());
 
-				if (!Liferay.Browser.isSafari()) {
+				if (!Browser.isSafari()) {
 					refreshText = Liferay.Language.get('update-the-styles-on-this-page');
 
 					var refreshLink = A.Node.create('<a href="javascript:;">' + refreshText + '</a>');

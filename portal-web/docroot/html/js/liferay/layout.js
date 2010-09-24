@@ -1,6 +1,8 @@
 AUI().add(
 	'liferay-layout',
 	function(A) {
+		var Util = Liferay.Util;
+
 		var DDM = A.DD.DDM;
 
 		var CSS_DRAGGABLE = A.ClassNameManager.getClassName('dd', 'draggable');
@@ -12,7 +14,7 @@ AUI().add(
 				var portletTitle = portletBoundary.one('.portlet-title');
 
 				if (!portletTitle) {
-					portletTitle = Liferay.Layout.PROXY_NODE_ITEM.one('.portlet-title');
+					portletTitle = Layout.PROXY_NODE_ITEM.one('.portlet-title');
 
 					var title = portletBoundary.one('.portlet-title-default');
 
@@ -78,11 +80,11 @@ AUI().add(
 					lazyStart: true,
 					on: {
 						'drop:enter': function(event) {
-							Liferay.Layout.updateOverNestedPortletInfo();
+							Layout.updateOverNestedPortletInfo();
 						},
 
 						'drop:exit': function(event) {
-							Liferay.Layout.updateOverNestedPortletInfo();
+							Layout.updateOverNestedPortletInfo();
 						},
 						placeholderAlign: function(event) {
 							var portalLayout = event.currentTarget;
@@ -100,7 +102,7 @@ AUI().add(
 									var start = (isStatic == 'start');
 									var siblingPos = (start ? 'nextSibling' : 'previousSibling');
 
-									var siblingPortlet = Liferay.Layout.findSiblingPortlet(activeDropNode, siblingPos);
+									var siblingPortlet = Layout.findSiblingPortlet(activeDropNode, siblingPos);
 									var staticSibling = (siblingPortlet && (siblingPortlet.isStatic == isStatic));
 
 									if (staticSibling ||
@@ -119,12 +121,12 @@ AUI().add(
 
 									if (!emptyColumn) {
 										if (activeDropNode != lastActiveDropNode) {
-											var referencePortlet = Liferay.Layout.getLastPortletNode(activeDropNode);
+											var referencePortlet = Layout.getLastPortletNode(activeDropNode);
 
 											if (referencePortlet && referencePortlet.isStatic) {
-												var options = Liferay.Layout.options;
+												var options = Layout.options;
 												var dropColumn = activeDropNode.one(options.dropContainer);
-												var foundReferencePortlet = Liferay.Layout.findReferencePortlet(dropColumn);
+												var foundReferencePortlet = Layout.findReferencePortlet(dropColumn);
 
 												if (foundReferencePortlet) {
 													referencePortlet = foundReferencePortlet;
@@ -181,7 +183,7 @@ AUI().add(
 			getLastPortletNode: function(column) {
 				var instance = this;
 
-				var portlets = column.all(Liferay.Layout.options.portletBoundary);
+				var portlets = column.all(Layout.options.portletBoundary);
 				var lastIndex = portlets.size() - 1;
 
 				return portlets.item(lastIndex);
@@ -195,7 +197,7 @@ AUI().add(
 			},
 
 			findReferencePortlet: function(dropColumn) {
-				var portletBoundary = Liferay.Layout.options.portletBoundary;
+				var portletBoundary = Layout.options.portletBoundary;
 				var portlets = dropColumn.all('>' + portletBoundary);
 				var firstPortlet = portlets.item(0);
 
@@ -227,7 +229,7 @@ AUI().add(
 			},
 
 			findSiblingPortlet: function(portletNode, siblingPos) {
-				var dragNodes = Liferay.Layout.options.dragNodes;
+				var dragNodes = Layout.options.dragNodes;
 				var sibling = portletNode.get(siblingPos);
 
 				while (sibling && !sibling.test(dragNodes)) {
@@ -338,13 +340,13 @@ AUI().add(
 				if (portlet) {
 					layoutHandler.delegate.syncTargets();
 
-					Liferay.Layout.updatePortletDropZones(portlet);
+					Layout.updatePortletDropZones(portlet);
 				}
 			},
 
 			saveIndex: function(portletNode, columnNode) {
-				var currentColumnId = Liferay.Util.getColumnId(columnNode.get('id'));
-				var portletId = Liferay.Util.getPortletId(portletNode.get('id'));
+				var currentColumnId = Util.getColumnId(columnNode.get('id'));
+				var portletId = Util.getPortletId(portletNode.get('id'));
 				var position = Layout.findIndex(portletNode);
 
 				if (Layout.hasMoved(portletNode)) {
@@ -579,7 +581,7 @@ AUI().add(
 					},
 
 					savePosition: function(portletNode) {
-						var portletId = Liferay.Util.getPortletId(portletNode.get('id'));
+						var portletId = Util.getPortletId(portletNode.get('id'));
 
 						Layout.saveLayout(
 							{

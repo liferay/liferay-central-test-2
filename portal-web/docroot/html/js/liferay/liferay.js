@@ -1,184 +1,188 @@
 Liferay = window.Liferay || {};
 
-Liferay.namespace = AUI().namespace;
+;(function(A, Liferay) {
+	var Lang = A.Lang;
 
-AUI().mix(
-	AUI.defaults.io,
-	{
-		dataFormatter: function(data) {
-			return AUI().Lang.toQueryString(data);
+	Liferay.namespace = A.namespace;
+
+	A.mix(
+		AUI.defaults.io,
+		{
+			dataFormatter: function(data) {
+				return Lang.toQueryString(data);
+			},
+			method: 'POST',
+			uriFormatter: function(value) {
+				return Liferay.Util.getURLWithSessionId(value);
+			}
 		},
-		method: 'POST',
-		uriFormatter: function(value) {
-			return Liferay.Util.getURLWithSessionId(value);
-		}
-	},
-	true
-);
+		true
+	);
 
-Liferay.Service = {
-	actionUrl: themeDisplay.getPathMain() + '/portal/json_service',
+	var Service = {
+		actionUrl: themeDisplay.getPathMain() + '/portal/json_service',
 
-	tunnelUrl: themeDisplay.getPathContext() + '/tunnel-web/secure/json',
+		tunnelUrl: themeDisplay.getPathContext() + '/tunnel-web/secure/json',
 
-	classNameSuffix: 'ServiceUtil',
+		classNameSuffix: 'ServiceUtil',
 
-	ajax: function(options, callback) {
-		var instance = this;
+		ajax: function(options, callback) {
+			var instance = this;
 
-		var type = 'POST';
+			var type = 'POST';
 
-		if (Liferay.PropsValues.NTLM_AUTH_ENABLED && Liferay.Browser.isIe()) {
-			type = 'GET';
-		}
+			if (Liferay.PropsValues.NTLM_AUTH_ENABLED && Liferay.Browser.isIe()) {
+				type = 'GET';
+			}
 
-		var serviceUrl = instance.actionUrl;
+			var serviceUrl = instance.actionUrl;
 
-		var tunnelEnabled = (Liferay.ServiceAuth && Liferay.ServiceAuth.header);
-
-		if (tunnelEnabled) {
-			serviceUrl = instance.tunnelUrl;
-		}
-
-		if (options.servletContextName) {
-			serviceUrl = '/' + options.servletContextName + '/json';
+			var tunnelEnabled = (Liferay.ServiceAuth && Liferay.ServiceAuth.header);
 
 			if (tunnelEnabled) {
-				serviceUrl = '/' + options.servletContextName + '/secure/json';
+				serviceUrl = instance.tunnelUrl;
 			}
-		}
 
-		options.serviceParameters = Liferay.Service.getParameters(options);
-		options.doAsUserId = themeDisplay.getDoAsUserIdEncoded();
+			if (options.servletContextName) {
+				serviceUrl = '/' + options.servletContextName + '/json';
 
-		var config = {
-			cache: false,
-			data: options,
-			dataType: 'json',
-			on: {}
-		};
+				if (tunnelEnabled) {
+					serviceUrl = '/' + options.servletContextName + '/secure/json';
+				}
+			}
 
-		var xHR = null;
+			options.serviceParameters = Service.getParameters(options);
+			options.doAsUserId = themeDisplay.getDoAsUserIdEncoded();
 
-		if (Liferay.PropsValues.NTLM_AUTH_ENABLED && Liferay.Browser.isIe()) {
-			config.method = 'GET';
-		}
-
-		if (callback) {
-			config.on.success = function(event, id, obj) {
-				callback.call(this, this.get('responseData'), obj);
+			var config = {
+				cache: false,
+				data: options,
+				dataType: 'json',
+				on: {}
 			};
 
-			if (tunnelEnabled) {
-				config.headers = {
-					Authorization: Liferay.ServiceAuth.header
+			var xHR = null;
+
+			if (Liferay.PropsValues.NTLM_AUTH_ENABLED && Liferay.Browser.isIe()) {
+				config.method = 'GET';
+			}
+
+			if (callback) {
+				config.on.success = function(event, id, obj) {
+					callback.call(this, this.get('responseData'), obj);
 				};
-			}
-		}
-		else {
-			config.on.success = function(event, id, obj) {
-				xHR = obj;
-			};
 
-			config.sync = true;
-		}
-
-		AUI().io.request(serviceUrl, config);
-
-		if (xHR) {
-			return eval('(' + xHR.responseText + ')');
-		}
-	},
-
-	getParameters: function(options) {
-		var instance = this;
-
-		var serviceParameters = [];
-
-		for (var key in options) {
-			if ((key != 'servletContextName') && (key != 'serviceClassName') && (key != 'serviceMethodName') && (key != 'serviceParameterTypes')) {
-				serviceParameters.push(key);
-			}
-		}
-
-		return instance._getJSONParser().stringify(serviceParameters);
-	},
-
-	namespace: function(namespace) {
-		var curLevel = Liferay || {};
-
-		if (typeof namespace == 'string') {
-			var levels = namespace.split('.');
-
-			for (var i = (levels[0] == 'Liferay') ? 1 : 0; i < levels.length; i++) {
-				curLevel[levels[i]] = curLevel[levels[i]] || {};
-				curLevel = curLevel[levels[i]];
-			}
-		}
-		else {
-			curLevel = namespace || {};
-		}
-
-		return curLevel;
-	},
-
-	register: function(serviceName, servicePackage, servletContextName) {
-		var module = Liferay.Service.namespace(serviceName);
-
-		module.servicePackage = servicePackage.replace(/[.]$/, '') + '.';
-
-		if (servletContextName) {
-			module.servletContextName = servletContextName;
-		}
-
-		return module;
-	},
-
-	registerClass: function(serviceName, className, prototype) {
-		var module = serviceName || {};
-		var moduleClassName = module[className] = {};
-
-		moduleClassName.serviceClassName = module.servicePackage + className + Liferay.Service.classNameSuffix;
-
-		var Lang = AUI().Lang;
-
-		AUI().Object.each(
-			prototype,
-			function(item, index, collection) {
-				var handler = item;
-
-				if (!Lang.isFunction(handler)) {
-					handler = function(params, callback) {
-						params.serviceClassName = moduleClassName.serviceClassName;
-						params.serviceMethodName = index;
-						params.servletContextName = module.servletContextName;
-
-						return Liferay.Service.ajax(params, callback);
+				if (tunnelEnabled) {
+					config.headers = {
+						Authorization: Liferay.ServiceAuth.header
 					};
 				}
-
-				moduleClassName[index] = handler;
 			}
-		);
-	},
+			else {
+				config.on.success = function(event, id, obj) {
+					xHR = obj;
+				};
 
-	_getJSONParser: function() {
-		var instance = this;
-
-		if (!instance._JSONParser) {
-			var A = AUI();
-
-			if (!A.JSON) {
-				A = AUI({}).use('json');
+				config.sync = true;
 			}
 
-			instance._JSONParser = A.JSON;
+			A.io.request(serviceUrl, config);
+
+			if (xHR) {
+				return eval('(' + xHR.responseText + ')');
+			}
+		},
+
+		getParameters: function(options) {
+			var instance = this;
+
+			var serviceParameters = [];
+
+			for (var key in options) {
+				if ((key != 'servletContextName') && (key != 'serviceClassName') && (key != 'serviceMethodName') && (key != 'serviceParameterTypes')) {
+					serviceParameters.push(key);
+				}
+			}
+
+			return instance._getJSONParser().stringify(serviceParameters);
+		},
+
+		namespace: function(namespace) {
+			var curLevel = Liferay || {};
+
+			if (typeof namespace == 'string') {
+				var levels = namespace.split('.');
+
+				for (var i = (levels[0] == 'Liferay') ? 1 : 0; i < levels.length; i++) {
+					curLevel[levels[i]] = curLevel[levels[i]] || {};
+					curLevel = curLevel[levels[i]];
+				}
+			}
+			else {
+				curLevel = namespace || {};
+			}
+
+			return curLevel;
+		},
+
+		register: function(serviceName, servicePackage, servletContextName) {
+			var module = Service.namespace(serviceName);
+
+			module.servicePackage = servicePackage.replace(/[.]$/, '') + '.';
+
+			if (servletContextName) {
+				module.servletContextName = servletContextName;
+			}
+
+			return module;
+		},
+
+		registerClass: function(serviceName, className, prototype) {
+			var module = serviceName || {};
+			var moduleClassName = module[className] = {};
+
+			moduleClassName.serviceClassName = module.servicePackage + className + Service.classNameSuffix;
+
+			A.Object.each(
+				prototype,
+				function(item, index, collection) {
+					var handler = item;
+
+					if (!Lang.isFunction(handler)) {
+						handler = function(params, callback) {
+							params.serviceClassName = moduleClassName.serviceClassName;
+							params.serviceMethodName = index;
+							params.servletContextName = module.servletContextName;
+
+							return Service.ajax(params, callback);
+						};
+					}
+
+					moduleClassName[index] = handler;
+				}
+			);
+		},
+
+		_getJSONParser: function() {
+			var instance = this;
+
+			if (!instance._JSONParser) {
+				var JSONParser = A.JSON;
+
+				if (!JSONParser) {
+					JSONParser = AUI({}).use('json').JSON;
+				}
+
+				instance._JSONParser = JSONParser;
+			}
+
+			return instance._JSONParser;
 		}
+	};
 
-		return instance._JSONParser;
-	}
-};
+	Liferay.Service = Service;
 
-Liferay.Template = {
-	PORTLET: '<div class="portlet"><div class="portlet-topper"><div class="portlet-title"></div></div><div class="portlet-content"></div><div class="forbidden-action"></div></div>'
-}
+	Liferay.Template = {
+		PORTLET: '<div class="portlet"><div class="portlet-topper"><div class="portlet-title"></div></div><div class="portlet-content"></div><div class="forbidden-action"></div></div>'
+	};
+})(AUI(), Liferay);

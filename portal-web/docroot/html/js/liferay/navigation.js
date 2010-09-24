@@ -1,6 +1,8 @@
 AUI().add(
 	'liferay-navigation',
 	function(A) {
+		var Dockbar = Liferay.Dockbar;
+		var Util = Liferay.Util;
 		var Lang = A.Lang;
 
 		var TPL_DELETE_BUTTON = '<span class="delete-tab aui-helper-hidden">X</span>';
@@ -104,8 +106,8 @@ AUI().add(
 						var instance = this;
 
 						if (!event.shiftKey) {
-							Liferay.Dockbar.MenuManager.hideAll();
-							Liferay.Dockbar.UnderlayManager.hideAll();
+							Dockbar.MenuManager.hideAll();
+							Dockbar.UnderlayManager.hideAll();
 						}
 
 						var navBlock = instance.get('navBlock');
@@ -268,7 +270,7 @@ AUI().add(
 						comboContentBox.swallowEvent('click');
 						overlayContentBox.swallowEvent('click');
 
-						Liferay.Util.focusFormField(comboField.get('node'));
+						Util.focusFormField(comboField.get('node'));
 
 						var realign = A.bind(optionsOverlay.fire, optionsOverlay, 'align');
 

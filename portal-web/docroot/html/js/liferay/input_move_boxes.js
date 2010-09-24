@@ -2,6 +2,7 @@ AUI().add(
 	'liferay-input-move-boxes',
 	function(A) {
 		var Lang = A.Lang;
+		var Util = Liferay.Util;
 
 		var getClassName = A.ClassNameManager.getClassName;
 
@@ -104,7 +105,7 @@ AUI().add(
 							sort = !instance.get('rightReorder');
 						}
 
-						Liferay.Util.moveItem(from, to, sort);
+						Util.moveItem(from, to, sort);
 					},
 
 					_afterOrderClick: function(event, box) {
@@ -118,7 +119,7 @@ AUI().add(
 							direction = 0;
 						}
 
-						Liferay.Util.reorder(box, direction);
+						Util.reorder(box, direction);
 					},
 
 					_onSelectFocus: function(event, box) {

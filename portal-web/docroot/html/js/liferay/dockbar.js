@@ -1,7 +1,13 @@
 AUI().add(
 	'liferay-dockbar',
 	function(A) {
-		Liferay.Dockbar = {
+		var LayoutConfiguration = Liferay.LayoutConfiguration;
+		var Portlet = Liferay.Portlet;
+		var Util = Liferay.Util;
+
+		var BODY = A.getBody();
+
+		var Dockbar = {
 			init: function() {
 				var instance = this;
 
@@ -14,7 +20,7 @@ AUI().add(
 
 					Liferay.once('initDockbar', instance._init, instance);
 
-					instance.dockBar.once('mousemove',
+					dockBar.once('mousemove',
 						function(event) {
 							Liferay.fire('initDockbar');
 						}
@@ -41,8 +47,10 @@ AUI().add(
 			addMenu: function(options) {
 				var instance = this;
 
-				if (options.name && A.one(options.trigger)) {
-					var name = options.name;
+				var menu;
+				var name = options.name;
+
+				if (name && A.one(options.trigger)) {
 
 					delete options.name;
 
@@ -57,11 +65,13 @@ AUI().add(
 						}
 					);
 
-					if (options.boundingBox && !('contentBox' in options)) {
-						options.contentBox = options.boundingBox + '> .aui-menu-content';
+					var boundingBox = options.boundingBox;
+
+					if (boundingBox && !('contentBox' in options)) {
+						options.contentBox = boundingBox + '> .aui-menu-content';
 					}
 
-					var menu = new A.OverlayContext(options);
+					menu = new A.OverlayContext(options);
 
 					var contentBox = menu.get('contentBox');
 
@@ -96,14 +106,16 @@ AUI().add(
 						'li'
 					);
 
-					Liferay.Dockbar.MenuManager.register(menu);
+					var MenuManager = Dockbar.MenuManager;
+
+					MenuManager.register(menu);
 
 					menu.on(
 						'show',
 						function(event) {
 							var instance = this;
 
-							Liferay.Dockbar.MenuManager.hideAll();
+							MenuManager.hideAll();
 
 							instance.get('trigger').addClass('menu-button-active');
 						}
@@ -118,10 +130,10 @@ AUI().add(
 						}
 					);
 
-					menu.render(instance.dockBar);
-
-					instance[name] = menu;
+					instance[name] = menu.render(instance.dockBar);
 				}
+
+				return menu;
 			},
 
 			addMessage: function(message, messageId) {
@@ -167,12 +179,15 @@ AUI().add(
 
 				var autoShow = true;
 
-				if (options.name) {
-					var name = options.name;
+				var underlay;
+				var name = options.name;
 
+				if (name) {
 					autoShow = options.visible !== false;
 
-					if (!instance[name]) {
+					underlay = instance[name];
+
+					if (!underlay) {
 						delete options.name;
 
 						options.zIndex = instance.underlayZIndex++;
@@ -182,27 +197,29 @@ AUI().add(
 							points: ['tl', 'bl']
 						};
 
-						var underlay = new instance.Underlay(options);
+						underlay = new instance.Underlay(options);
 
 						underlay.render(instance.dockBar);
 
-						if (options.io) {
-							options.io.loadingMask = {
+						var ioOptions = options.io;
+
+						if (ioOptions) {
+							ioOptions.loadingMask = {
 								background: 'transparent'
 							};
 
-							underlay.plug(A.Plugin.IO, options.io);
+							underlay.plug(A.Plugin.IO, ioOptions);
 						}
 
 						instance[name] = underlay;
 					}
 
-					if (autoShow && instance[name] && instance[name] instanceof A.Overlay) {
-						instance[name].show();
+					if (autoShow && underlay && underlay instanceof A.Overlay) {
+						underlay.show();
 					}
-
-					return instance[name];
 				}
+
+				return underlay;
 			},
 
 			clearMessages: function(event) {
@@ -255,15 +272,14 @@ AUI().add(
 				var instance = this;
 
 				var dockBar = instance.dockBar;
-
-				var body = A.getBody();
+				var namespace = instance._namespace;
 
 				dockBar.one('.pin-dockbar').on(
 					'click',
 					function(event) {
-						body.toggleClass('lfr-dockbar-pinned');
+						BODY.toggleClass('lfr-dockbar-pinned');
 
-						var pinned = body.hasClass('lfr-dockbar-pinned');
+						var pinned = BODY.hasClass('lfr-dockbar-pinned');
 
 						A.io.request(
 							themeDisplay.getPathMain() + '/portal/session_click',
@@ -285,41 +301,44 @@ AUI().add(
 					}
 				);
 
-				instance.MenuManager = new A.OverlayManager(
+				var MenuManager = new A.OverlayManager(
 					{
 						zIndexBase: 100000
 					}
 				);
 
-				instance.UnderlayManager = new A.OverlayManager(
+				var UnderlayManager = new A.OverlayManager(
 					{
 						zIndexBase: 300
 					}
 				);
 
+				Dockbar.MenuManager = MenuManager;
+				Dockbar.UnderlayManager = UnderlayManager;
+
 				instance._toolbarItems = {};
 
-				instance.addUnderlay(
+				var messages = instance.addUnderlay(
 					{
 						align: {
 							node: instance.dockBar,
 							points: ['tc', 'bc']
 						},
 						bodyContent: '',
-						boundingBox: '#' + instance._namespace + 'dockbarMessages',
+						boundingBox: '#' + namespace + 'dockbarMessages',
 						header: 'My messages',
 						name: 'messages',
 						visible: false
 					}
 				);
 
-				instance.messages.on(
+				messages.on(
 					'visibleChange',
 					function(event) {
 						if (event.newVal) {
 							A.getBody().addClass('showing-messages');
 
-							Liferay.Dockbar.MenuManager.hideAll();
+							MenuManager.hideAll();
 						}
 						else {
 							A.getBody().removeClass('showing-messages');
@@ -327,18 +346,18 @@ AUI().add(
 					}
 				);
 
-				instance.messages.closeTool.on('click', instance.clearMessages, instance);
+				messages.closeTool.on('click', instance.clearMessages, instance);
 
-				instance.addMenu(
+				var addContent = instance.addMenu(
 					{
-						boundingBox: '#' + instance._namespace + 'addContentContainer',
+						boundingBox: '#' + namespace + 'addContentContainer',
 						name: 'addContent',
-						trigger: '#' + instance._namespace + 'addContent'
+						trigger: '#' + namespace + 'addContent'
 					}
 				);
 
-				if (instance.addContent) {
-					instance.addContent.on(
+				if (addContent) {
+					addContent.on(
 						'show',
 						function() {
 							Liferay.fire('initLayout');
@@ -346,7 +365,7 @@ AUI().add(
 						}
 					);
 
-					instance.addContent.get('boundingBox').delegate(
+					addContent.get('boundingBox').delegate(
 						'click',
 						function(event) {
 							var item = event.currentTarget;
@@ -354,7 +373,7 @@ AUI().add(
 							var portletId = item.attr('data-portlet-id');
 
 							if ((/^\d+$/).test(portletId)) {
-								Liferay.Portlet.add(
+								Portlet.add(
 									{
 										portletId: portletId
 									}
@@ -362,7 +381,7 @@ AUI().add(
 							}
 
 							if (!event.shiftKey) {
-								Liferay.Dockbar.MenuManager.hideAll();
+								MenuManager.hideAll();
 							}
 
 							event.halt();
@@ -371,63 +390,63 @@ AUI().add(
 					);
 				}
 
-				instance.addMenu(
+				var manageContent = instance.addMenu(
 					{
-						boundingBox: '#' + instance._namespace + 'manageContentContainer',
+						boundingBox: '#' + namespace + 'manageContentContainer',
 						name: 'manageContent',
-						trigger: '#' + instance._namespace + 'manageContent'
+						trigger: '#' + namespace + 'manageContent'
 					}
 				);
 
 				instance.addMenu(
 					{
-						boundingBox: '#' + instance._namespace + 'myPlacesContainer',
+						boundingBox: '#' + namespace + 'myPlacesContainer',
 						name: 'myPlaces',
-						trigger: '#' + instance._namespace + 'myPlaces'
+						trigger: '#' + namespace + 'myPlaces'
 					}
 				);
 
-				var userOptionsContainer = A.one('#' + instance._namespace + 'userOptionsContainer');
+				var userOptionsContainer = A.one('#' + namespace + 'userOptionsContainer');
 
 				if (userOptionsContainer) {
 					instance.addMenu(
 						{
 							boundingBox: userOptionsContainer,
 							name: 'userOptions',
-							trigger: '#' + instance._namespace + 'userAvatar'
+							trigger: '#' + namespace + 'userAvatar'
 						}
 					);
 				}
 
-				var isStaging = body.hasClass('staging') || body.hasClass('remote-staging');
-				var isLiveView = body.hasClass('live-view');
+				var isStaging = BODY.hasClass('staging') || BODY.hasClass('remote-staging');
+				var isLiveView = BODY.hasClass('live-view');
 
 				if (isStaging || isLiveView) {
 					instance.addMenu(
 						{
-							boundingBox: '#' + instance._namespace + 'stagingContainer',
+							boundingBox: '#' + namespace + 'stagingContainer',
 							name: 'staging',
-							trigger: '#' + instance._namespace + 'staging'
+							trigger: '#' + namespace + 'staging'
 						}
 					);
 				}
 
-				var addApplication = A.one('#' + instance._namespace + 'addApplication');
+				var addApplicationLink = A.one('#' + namespace + 'addApplication');
 
-				if (addApplication) {
-					addApplication.on(
+				if (addApplicationLink) {
+					addApplicationLink.on(
 						'click',
 						function(event) {
-							Liferay.Dockbar.addContent.hide();
+							addContent.hide();
 
-							if (!Liferay.Dockbar.addApplication) {
+							var addApplication = Dockbar.addApplication;
+
+							if (!addApplication) {
 								var setAddApplicationUI = function(visible) {
-									var body = A.getBody();
-
-									body.toggleClass('lfr-has-sidebar', visible);
+									BODY.toggleClass('lfr-has-sidebar', visible);
 								};
 
-								instance.addUnderlay(
+								addApplication = instance.addUnderlay(
 									{
 										after: {
 											render: function(event) {
@@ -437,7 +456,7 @@ AUI().add(
 										className: 'add-application',
 										io: {
 											after: {
-												success: Liferay.Dockbar._loadAddApplications
+												success: Dockbar._loadAddApplications
 											},
 											data: {
 												doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
@@ -452,11 +471,11 @@ AUI().add(
 									}
 								);
 
-								Liferay.Dockbar.addApplication.after(
+								addApplication.after(
 									'visibleChange',
 									function(event) {
 										if (event.newVal) {
-											Liferay.Util.focusFormField('#layout_configuration_content');
+											Util.focusFormField('#layout_configuration_content');
 										}
 
 										setAddApplicationUI(event.newVal);
@@ -464,10 +483,10 @@ AUI().add(
 								);
 							}
 							else {
-								Liferay.Dockbar.addApplication.show();
+								addApplication.show();
 							}
 
-							Liferay.Dockbar.addApplication.focus();
+							addApplication.focus();
 						}
 					);
 				}
@@ -478,10 +497,12 @@ AUI().add(
 					pageTemplate.on(
 						'click',
 						function(event) {
-							Liferay.Dockbar.manageContent.hide();
+							manageContent.hide();
 
-							if (!Liferay.Dockbar.manageLayouts) {
-								instance.addUnderlay(
+							var manageLayouts = Dockbar.manageLayouts;
+
+							if (!manageLayouts) {
+								manageLayouts = instance.addUnderlay(
 									{
 										className: 'manage-layouts',
 										io: {
@@ -498,10 +519,10 @@ AUI().add(
 								);
 							}
 							else {
-								Liferay.Dockbar.manageLayouts.show();
+								manageLayouts.show();
 							}
 
-							Liferay.Dockbar.manageLayouts.focus();
+							manageLayouts.focus();
 						}
 					);
 				}
@@ -533,7 +554,7 @@ AUI().add(
 					initializer: function() {
 						var instance = this;
 
-						Liferay.Dockbar.UnderlayManager.register(instance);
+						Dockbar.UnderlayManager.register(instance);
 					},
 
 					renderUI: function() {
@@ -563,20 +584,22 @@ AUI().add(
 			}
 		);
 
-		Liferay.Dockbar.Underlay = Underlay;
+		Dockbar.Underlay = Underlay;
 
 		Liferay.provide(
-			Liferay.Dockbar,
+			Dockbar,
 			'_loadAddApplications',
 			function(event, id, obj) {
-				var contentBox = Liferay.Dockbar.addApplication.get('contentBox');
+				var contentBox = Dockbar.addApplication.get('contentBox');
 
-				Liferay.LayoutConfiguration._dialogBody = contentBox;
+				LayoutConfiguration._dialogBody = contentBox;
 
-				Liferay.LayoutConfiguration._loadContent();
+				LayoutConfiguration._loadContent();
 			},
 			['liferay-layout-configuration']
 		);
+
+		Liferay.Dockbar = Dockbar;
 	},
 	'',
 	{

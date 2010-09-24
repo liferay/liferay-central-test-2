@@ -16,8 +16,10 @@ AUI().add(
 					trigger: null
 				};
 
-				if (Liferay.Layout) {
-					Liferay.Layout.on('drag:start', instance._closeActiveMenu, instance);
+				var Layout = Liferay.Layout;
+
+				if (Layout) {
+					Layout.on('drag:start', instance._closeActiveMenu, instance);
 				}
 
 				instance._window.on('resize', instance._positionActiveMenu, instance);

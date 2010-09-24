@@ -1,9 +1,11 @@
-;(function(){
-	var COMBINE = Liferay.AUI.getCombine();
+;(function(A, Liferay) {
+	var LiferayAUI = Liferay.AUI;
+
+	var COMBINE = LiferayAUI.getCombine();
 
 	var GROUPS = AUI.defaults.groups;
 
-	var PATH_COMBO = Liferay.AUI.getComboPath();
+	var PATH_COMBO = LiferayAUI.getComboPath();
 
 	var PATH_JAVASCRIPT = themeDisplay.getPathJavaScript();
 
@@ -93,4 +95,4 @@
 			}
 		}
 	};
-})();
+})(AUI(), Liferay);
