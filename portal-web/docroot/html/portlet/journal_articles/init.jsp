@@ -18,6 +18,7 @@
 
 <%@ page import="com.liferay.portal.NoSuchGroupException" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetEntryServiceUtil" %>
+<%@ page import="com.liferay.portlet.journal.NoSuchArticleException" %>
 <%@ page import="com.liferay.portlet.journal.NoSuchStructureException" %>
 <%@ page import="com.liferay.portlet.journal.action.EditArticleAction" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
