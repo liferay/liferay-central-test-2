@@ -37,11 +37,9 @@ public class ThreadDumpFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		ThreadDumper threadDumper = new ThreadDumper();
-
 		ScheduledFuture<?> scheduledFuture =
 			_scheduledExecutorService.schedule(
-				threadDumper, PropsValues.THREAD_DUMP_SPEED_THRESHOLD,
+				_threadDumper, PropsValues.THREAD_DUMP_SPEED_THRESHOLD,
 				TimeUnit.SECONDS);
 
 		try {
@@ -51,26 +49,12 @@ public class ThreadDumpFilter extends BasePortalFilter {
 		finally {
 			scheduledFuture.cancel(true);
 		}
-
-		if (!threadDumper.isExecuted()) {
-			Runtime runtime = Runtime.getRuntime();
-
-			long freeMemory = runtime.freeMemory();
-			long maxMemory = runtime.maxMemory();
-
-			long usedMemory = maxMemory - freeMemory;
-
-			double usedMemoryPercent = (usedMemory / (double)maxMemory) * 100;
-
-			if (usedMemoryPercent > PropsValues.THREAD_DUMP_MEMORY_THRESHOLD) {
-				threadDumper.run();
-			}
-		}
 	}
 
 	private static int _MAX_THREAD_DUMPERS = 5;
 
 	private static ScheduledExecutorService _scheduledExecutorService =
 		Executors.newScheduledThreadPool(_MAX_THREAD_DUMPERS);
+	private static ThreadDumper _threadDumper = new ThreadDumper();
 
 }

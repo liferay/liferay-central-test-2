@@ -1092,8 +1092,6 @@ public class PropsValues {
 
 	public static final String THEME_VIRTUAL_PATH = PropsUtil.get(PropsKeys.THEME_VIRTUAL_PATH);
 
-	public static int THREAD_DUMP_MEMORY_THRESHOLD = GetterUtil.getInteger(PropsUtil.get(PropsKeys.THREAD_DUMP_MEMORY_THRESHOLD));
-
 	public static int THREAD_DUMP_SPEED_THRESHOLD = GetterUtil.getInteger(PropsUtil.get(PropsKeys.THREAD_DUMP_SPEED_THRESHOLD));
 
 	public static int TRANSACTION_ISOLATION_COUNTER = GetterUtil.getInteger(PropsUtil.get(PropsKeys.TRANSACTION_ISOLATION_COUNTER));

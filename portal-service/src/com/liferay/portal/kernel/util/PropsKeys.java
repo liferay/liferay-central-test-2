@@ -1593,8 +1593,6 @@ public interface PropsKeys {
 
 	public static final String TIME_ZONES = "time.zones";
 
-	public static final String THREAD_DUMP_MEMORY_THRESHOLD = "thread.dump.memory.threshold";
-
 	public static final String THREAD_DUMP_SPEED_THRESHOLD = "thread.dump.speed.threshold";
 
 	public static final String TRANSACTION_ISOLATION_COUNTER = "transaction.isolation.counter";
