@@ -23,18 +23,18 @@ import java.util.Map;
 public class RulesEngineUtil {
 
 	public static void add(
-			String domainName, RulesResourceRetriever RulesResourceRetriever)
+			String domainName, RulesResourceRetriever rulesResourceRetriever)
 		throws RulesEngineException {
 
-		_rulesEngine.add(domainName, RulesResourceRetriever);
+		_rulesEngine.add(domainName, rulesResourceRetriever);
 	}
 
 	public static void add(
-			String domainName, RulesResourceRetriever RulesResourceRetriever,
+			String domainName, RulesResourceRetriever rulesResourceRetriever,
 			ClassLoader... classloaders)
 		throws RulesEngineException {
 
-		_rulesEngine.add(domainName, RulesResourceRetriever, classloaders);
+		_rulesEngine.add(domainName, rulesResourceRetriever, classloaders);
 	}
 
 	public static boolean containsRuleDomain(String domainName)
@@ -44,35 +44,35 @@ public class RulesEngineUtil {
 	}
 
 	public static void execute(
-			RulesResourceRetriever RulesResourceRetriever, List<Fact<?>> facts)
+			RulesResourceRetriever rulesResourceRetriever, List<Fact<?>> facts)
 		throws RulesEngineException {
 
-		_rulesEngine.execute(RulesResourceRetriever, facts);
+		_rulesEngine.execute(rulesResourceRetriever, facts);
 	}
 
 	public static void execute(
-			RulesResourceRetriever RulesResourceRetriever, List<Fact<?>> facts,
+			RulesResourceRetriever rulesResourceRetriever, List<Fact<?>> facts,
 			ClassLoader... classloaders)
 		throws RulesEngineException {
 
-		_rulesEngine.execute(RulesResourceRetriever, facts, classloaders);
+		_rulesEngine.execute(rulesResourceRetriever, facts, classloaders);
 	}
 
 	public static Map<String, ?> execute(
-			RulesResourceRetriever RulesResourceRetriever, List<Fact<?>> facts,
+			RulesResourceRetriever rulesResourceRetriever, List<Fact<?>> facts,
 			Query query)
 		throws RulesEngineException {
 
-		return _rulesEngine.execute(RulesResourceRetriever, facts, query);
+		return _rulesEngine.execute(rulesResourceRetriever, facts, query);
 	}
 
 	public static Map<String, ?> execute(
-			RulesResourceRetriever RulesResourceRetriever, List<Fact<?>> facts,
+			RulesResourceRetriever rulesResourceRetriever, List<Fact<?>> facts,
 			Query query, ClassLoader... classloaders)
 		throws RulesEngineException {
 
 		return _rulesEngine.execute(
-			RulesResourceRetriever, facts, query, classloaders);
+			rulesResourceRetriever, facts, query, classloaders);
 	}
 
 	public static void execute(String domainName, List<Fact<?>> facts)
@@ -108,18 +108,18 @@ public class RulesEngineUtil {
 	}
 
 	public static void update(
-			String domainName, RulesResourceRetriever RulesResourceRetriever)
+			String domainName, RulesResourceRetriever rulesResourceRetriever)
 		throws RulesEngineException {
 
-		_rulesEngine.update(domainName, RulesResourceRetriever);
+		_rulesEngine.update(domainName, rulesResourceRetriever);
 	}
 
 	public static void update(
-			String domainName, RulesResourceRetriever RulesResourceRetriever,
+			String domainName, RulesResourceRetriever rulesResourceRetriever,
 			ClassLoader... classloaders)
 		throws RulesEngineException {
 
-		_rulesEngine.update(domainName, RulesResourceRetriever, classloaders);
+		_rulesEngine.update(domainName, rulesResourceRetriever, classloaders);
 	}
 
 	public void setRulesEngine(RulesEngine rulesEngine) {

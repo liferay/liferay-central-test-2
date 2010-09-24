@@ -29,8 +29,8 @@ public interface RulesEngine {
 
 	@MessagingProxy(mode = ProxyMode.SYNC)
 	public void add(
-			String domainName, RulesResourceRetriever RulesResourceRetriever,
-			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
+			String domainName, RulesResourceRetriever rulesResourceRetriever,
+			@ExecutingClassLoaders ClassLoader... classloaders)
 		throws RulesEngineException;
 
 	@MessagingProxy(mode = ProxyMode.SYNC)
@@ -39,27 +39,26 @@ public interface RulesEngine {
 
 	@MessagingProxy(mode = ProxyMode.ASYNC)
 	public void execute(
-			RulesResourceRetriever RulesResourceRetriever, List<Fact<?>> facts,
-			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
+			RulesResourceRetriever rulesResourceRetriever, List<Fact<?>> facts,
+			@ExecutingClassLoaders ClassLoader... classloaders)
 		throws RulesEngineException;
 
 	@MessagingProxy(mode = ProxyMode.SYNC)
 	public Map<String, ?> execute(
-			RulesResourceRetriever RulesResourceRetriever, List<Fact<?>> facts,
-			Query query,
-			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
+			RulesResourceRetriever rulesResourceRetriever, List<Fact<?>> facts,
+			Query query, @ExecutingClassLoaders ClassLoader... classloaders)
 		throws RulesEngineException;
 
 	@MessagingProxy(mode = ProxyMode.ASYNC)
 	public void execute(
 			String domainName, List<Fact<?>> facts,
-			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
+			@ExecutingClassLoaders ClassLoader... classloaders)
 		throws RulesEngineException;
 
 	@MessagingProxy(mode = ProxyMode.SYNC)
 	public Map<String, ?> execute(
 			String domainName, List<Fact<?>> facts, Query query,
-			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
+			@ExecutingClassLoaders ClassLoader... classloaders)
 		throws RulesEngineException;
 
 	@MessagingProxy(mode = ProxyMode.SYNC)
@@ -67,8 +66,8 @@ public interface RulesEngine {
 
 	@MessagingProxy(mode = ProxyMode.SYNC)
 	public void update(
-			String domainName, RulesResourceRetriever RulesResourceRetriever,
-			@ExecutingClassLoaders ClassLoader... clientClassLoaders)
+			String domainName, RulesResourceRetriever rulesResourceRetriever,
+			@ExecutingClassLoaders ClassLoader... classloaders)
 		throws RulesEngineException;
 
 }
