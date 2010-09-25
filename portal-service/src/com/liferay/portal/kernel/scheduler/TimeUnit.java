@@ -45,6 +45,10 @@ public enum TimeUnit {
 		return _value;
 	}
 
+	public String toString() {
+		return _value;
+	}
+
 	private TimeUnit(String value) {
 		_value = value;
 	}
