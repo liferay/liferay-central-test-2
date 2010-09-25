@@ -82,6 +82,12 @@ public interface DestinationNames {
 
 	public static final String POLLER_RESPONSE = "liferay/poller_response";
 
+	public static final String REPORT_COMPILER = "liferay/report_compiler";
+
+	public static final String REPORT_REQUEST = "liferay/report_request";
+
+	public static final String REPORT_RESULT = "liferay/report_result";
+
 	public static final String SCHEDULER_DISPATCH =
 		"liferay/scheduler_dispatch";
 

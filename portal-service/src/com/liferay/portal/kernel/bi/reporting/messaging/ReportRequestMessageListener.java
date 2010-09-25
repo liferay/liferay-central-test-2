@@ -30,14 +30,6 @@ import com.liferay.portal.kernel.messaging.MessageListener;
  */
 public class ReportRequestMessageListener implements MessageListener {
 
-	public ReportRequestMessageListener(
-		ReportEngine reportEngine,
-		ReportResultContainer reportResultContainer) {
-
-		_reportEngine = reportEngine;
-		_reportResultContainer = reportResultContainer;
-	}
-
 	public void receive(Message message) {
 		ReportRequest reportRequest = (ReportRequest)message.getPayload();
 
@@ -64,6 +56,16 @@ public class ReportRequestMessageListener implements MessageListener {
 			MessageBusUtil.sendMessage(
 				responseMessage.getDestinationName(), responseMessage);
 		}
+	}
+
+	public void setReportEngine(ReportEngine reportEngine) {
+		_reportEngine = reportEngine;
+	}
+
+	public void setReportResultContainer(
+		ReportResultContainer reportResultContainer) {
+
+		_reportResultContainer = reportResultContainer;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
