@@ -22,19 +22,21 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ReportFormatExporterRegistry {
 
-	public ReportFormatExporter getExporter(ReportFormat reportFormat) {
+	public ReportFormatExporter getReportFormatExporter(
+		ReportFormat reportFormat) {
+
 		ReportFormatExporter reportFormatExporter = _reportFormatExporters.get(
 			reportFormat);
 
 		if (reportFormatExporter == null) {
 			throw new IllegalArgumentException(
-				"No exporter found for format " + reportFormat);
+				"No report format exporter found for " + reportFormat);
 		}
 
 		return reportFormatExporter;
 	}
 
-	public void setExporters(
+	public void setReportFormatExporters(
 		Map<String, ReportFormatExporter> reportFormatExporters) {
 
 		for (Map.Entry<String, ReportFormatExporter> entry :

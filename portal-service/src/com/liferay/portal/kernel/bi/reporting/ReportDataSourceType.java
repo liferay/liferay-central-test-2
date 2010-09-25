@@ -14,9 +14,6 @@
 
 package com.liferay.portal.kernel.bi.reporting;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author Gavin Wan
  */
@@ -26,35 +23,30 @@ public enum ReportDataSourceType {
 	XML("xml");
 
 	public static ReportDataSourceType parse(String value) {
-		ReportDataSourceType reportDataSourceType = _reportDataSourceTypes.get(
-			value);
-
-		if (reportDataSourceType != null) {
-			return reportDataSourceType;
-		}
-
-		if (CSV.toString().equalsIgnoreCase(value)) {
+		if (CSV.getValue().equals(value)) {
 			return CSV;
 		}
-		else if (EMPTY.toString().equalsIgnoreCase(value)) {
+		else if (EMPTY.getValue().equals(value)) {
 			return EMPTY;
 		}
-		else if (JDBC.toString().equalsIgnoreCase(value)) {
+		else if (JDBC.getValue().equals(value)) {
 			return JDBC;
 		}
-		else if (PORTAL.toString().equalsIgnoreCase(value)) {
+		else if (PORTAL.getValue().equals(value)) {
 			return PORTAL;
 		}
-		else if (XLS.toString().equalsIgnoreCase(value)) {
+		else if (XLS.getValue().equals(value)) {
 			return XLS;
 		}
-		else if (XML.toString().equalsIgnoreCase(value)) {
+		else if (XML.getValue().equals(value)) {
 			return XML;
 		}
-		else {
-			throw new IllegalArgumentException(
-				"Invalid data source type " + value);
-		}
+
+		throw new IllegalArgumentException("Invalid value " + value);
+	}
+
+	public String getValue() {
+		return _value;
 	}
 
 	public String toString() {
@@ -63,18 +55,6 @@ public enum ReportDataSourceType {
 
 	private ReportDataSourceType(String value) {
 		_value = value;
-	}
-
-	private static final Map<String, ReportDataSourceType>
-		_reportDataSourceTypes = new HashMap<String, ReportDataSourceType>();
-
-	static {
-		_reportDataSourceTypes.put(CSV.toString(), CSV);
-		_reportDataSourceTypes.put(EMPTY.toString(), EMPTY);
-		_reportDataSourceTypes.put(JDBC.toString(), JDBC);
-		_reportDataSourceTypes.put(PORTAL.toString(), PORTAL);
-		_reportDataSourceTypes.put(XLS.toString(), XLS);
-		_reportDataSourceTypes.put(XML.toString(), XML);
 	}
 
 	private String _value;

@@ -24,12 +24,12 @@ import java.util.Map;
  */
 public class ReportRequestContext implements Serializable {
 
+	public static final String DATA_SOURCE_BYTE_ARRAY = "dataSource.byteArray";
+
 	public static final String DATA_SOURCE_CHARSET = "dataSource.charset";
 
 	public static final String DATA_SOURCE_COLUMN_NAMES =
 		"dataSource.columnNames";
-
-	public static final String DATA_SOURCE_FILE = "dataSource.file";
 
 	public static final String JDBC_DRIVER_CLASS = "jdbc.driverClassName";
 

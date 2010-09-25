@@ -14,36 +14,42 @@
 
 package com.liferay.portal.kernel.bi.reporting;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author Michael C. Han
  */
 public enum ReportFormat {
 
-	CSV("csv"), EXCEL("excel"), HTML("html"), PDF("pdf"), RTF("rtf"),
-	TEXT("text"), XML("xml");
+	CSV("csv"), HTML("html"), PDF("pdf"), RTF("rtf"), TXT("txt"), XLS("xls"),
+	XML("xml");
 
 	public static ReportFormat parse(String value) {
-		ReportFormat reportFormat = _reportFormats.get(value);
-
-		if (reportFormat != null) {
-			return reportFormat;
+		if (CSV.getValue().equals(value)) {
+			return CSV;
 		}
-
-		if (EXCEL.toString().equalsIgnoreCase(value)) {
-			return EXCEL;
-		}
-		else if (HTML.toString().equalsIgnoreCase(value)) {
+		else if (HTML.getValue().equals(value)) {
 			return HTML;
 		}
-		else if (PDF.toString().equalsIgnoreCase(value)) {
+		else if (PDF.getValue().equals(value)) {
 			return PDF;
 		}
-		else {
-			throw new IllegalArgumentException("Invalid format " + value);
+		else if (RTF.getValue().equals(value)) {
+			return RTF;
 		}
+		else if (TXT.getValue().equals(value)) {
+			return TXT;
+		}
+		else if (XLS.getValue().equals(value)) {
+			return XLS;
+		}
+		else if (XML.getValue().equals(value)) {
+			return XML;
+		}
+
+		throw new IllegalArgumentException("Invalid value " + value);
+	}
+
+	public String getValue() {
+		return _value;
 	}
 
 	public String toString() {
@@ -52,19 +58,6 @@ public enum ReportFormat {
 
 	private ReportFormat(String value) {
 		_value = value;
-	}
-
-	private static final Map<String, ReportFormat> _reportFormats =
-		new HashMap<String, ReportFormat>();
-
-	static {
-		_reportFormats.put(CSV.toString(), CSV);
-		_reportFormats.put(EXCEL.toString(), EXCEL);
-		_reportFormats.put(HTML.toString(), HTML);
-		_reportFormats.put(PDF.toString(), PDF);
-		_reportFormats.put(RTF.toString(), RTF);
-		_reportFormats.put(TEXT.toString(), TEXT);
-		_reportFormats.put(XML.toString(), XML);
 	}
 
 	private String _value;
