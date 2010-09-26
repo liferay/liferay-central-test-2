@@ -23,8 +23,9 @@ import com.liferay.portal.kernel.management.PortalManager;
  */
 public class BasePortalManager implements PortalManager {
 
-	public void manage(ManageAction manageAction) throws ManageActionException {
-		manageAction.action();
+	public <T> T manage(ManageAction<T> manageAction)
+		throws ManageActionException {
+		return manageAction.action();
 	}
 
 }

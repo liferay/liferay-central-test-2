@@ -19,18 +19,12 @@ import javax.management.MBeanServer;
 /**
  * @author Shuyang Zhou
  */
-public class ListDomainsAction extends BaseJMXManageAction {
+public class ListDomainsAction extends BaseJMXManageAction<String[]> {
 
-	public void action() {
+	public String[] action() {
 		MBeanServer mBeanServer = getMBeanServer();
 
-		_domains = mBeanServer.getDomains();
+		return mBeanServer.getDomains();
 	}
-
-	public String[] getDomains() {
-		return _domains;
-	}
-
-	private String[] _domains;
 
 }

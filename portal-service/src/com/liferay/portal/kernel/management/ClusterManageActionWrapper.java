@@ -17,27 +17,30 @@ package com.liferay.portal.kernel.management;
 import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
 import com.liferay.portal.kernel.cluster.ClusterNode;
 import com.liferay.portal.kernel.cluster.ClusterRequest;
+import com.liferay.portal.kernel.cluster.FutureClusterResponses;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.model.ClusterGroup;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * @author Shuyang Zhou
  */
-public class ClusterManageActionWrapper implements ManageAction {
+public class ClusterManageActionWrapper
+	implements ManageAction<FutureClusterResponses> {
 
  	public ClusterManageActionWrapper(
-		ClusterGroup clusterGroup, ManageAction manageAction) {
+		ClusterGroup clusterGroup, ManageAction<?> manageAction) {
 
 		_clusterGroup = clusterGroup;
 		_manageAction = manageAction;
 	}
 
-	public void action() throws ManageActionException {
+	public FutureClusterResponses action() throws ManageActionException {
 		try {
-			doAction();
+			return doAction();
 		}
 		catch (SystemException se) {
 			throw new ManageActionException(
@@ -45,7 +48,8 @@ public class ClusterManageActionWrapper implements ManageAction {
 		}
 	}
 
-	private void doAction() throws ManageActionException, SystemException {
+	private FutureClusterResponses doAction()
+		throws ManageActionException, SystemException {
 		MethodHandler manageActionMethodHandler =
 			PortalManagerUtil.createManageActionMethodHandler(_manageAction);
 
@@ -63,7 +67,7 @@ public class ClusterManageActionWrapper implements ManageAction {
 				_clusterGroup.getClusterNodeIdsArray());
 		}
 
-		ClusterExecutorUtil.execute(clusterRequest);
+		return ClusterExecutorUtil.execute(clusterRequest);
 	}
 
 	private void verifyClusterGroup() throws ManageActionException {
@@ -72,14 +76,17 @@ public class ClusterManageActionWrapper implements ManageAction {
 		String[] requiredClusterNodesIds =
 			_clusterGroup.getClusterNodeIdsArray();
 
+		Required:
 		for (String requiredClusterNodeId : requiredClusterNodesIds) {
-			for (ClusterNode clusterNode : clusterNodes) {
+			Iterator<ClusterNode> iterator = clusterNodes.iterator();
+			while (iterator.hasNext()) {
+				ClusterNode clusterNode = iterator.next();
 				String clusterNodeId = clusterNode.getClusterNodeId();
 
 				if (clusterNodeId.equals(requiredClusterNodeId)) {
 					clusterNodes.remove(clusterNode);
 
-					continue;
+					continue Required;
 				}
 			}
 
@@ -89,6 +96,6 @@ public class ClusterManageActionWrapper implements ManageAction {
 	}
 
 	private ClusterGroup _clusterGroup;
-	private ManageAction _manageAction;
+	private ManageAction<?> _manageAction;
 
 }

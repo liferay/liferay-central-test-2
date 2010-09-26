@@ -19,8 +19,8 @@ import java.io.Serializable;
 /**
  * @author Shuyang Zhou
  */
-public interface ManageAction extends Serializable {
+public interface ManageAction<T> extends Serializable {
 
-	public void action() throws ManageActionException;
+	public T action() throws ManageActionException;
 
 }

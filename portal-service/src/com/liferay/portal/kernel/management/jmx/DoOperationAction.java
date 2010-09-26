@@ -22,7 +22,7 @@ import javax.management.ObjectName;
 /**
  * @author Shuyang Zhou
  */
-public class DoOperationAction extends BaseJMXManageAction {
+public class DoOperationAction extends BaseJMXManageAction<Object> {
 
 	public DoOperationAction(
 		ObjectName objectName, String operationName, Object[] parameters,
@@ -34,11 +34,11 @@ public class DoOperationAction extends BaseJMXManageAction {
 		_signature = signature;
 	}
 
-	public void action() throws ManageActionException {
+	public Object action() throws ManageActionException {
 		try {
 			MBeanServer mBeanServer = getMBeanServer();
 
-			_result = mBeanServer.invoke(
+			return mBeanServer.invoke(
 				_objectName, _operationName, _parameters, _signature);
 
 		}
@@ -47,14 +47,9 @@ public class DoOperationAction extends BaseJMXManageAction {
 		}
 	}
 
-	public Object getResult() {
-		return _result;
-	}
-
 	private ObjectName _objectName;
 	private String _operationName;
 	private Object[] _parameters;
-	private Object _result;
 	private String[] _signature;
 
 }

@@ -24,7 +24,7 @@ import javax.management.MBeanServer;
 /**
  * @author Shuyang Zhou
  */
-public abstract class BaseJMXManageAction implements ManageAction {
+public abstract class BaseJMXManageAction<T> implements ManageAction<T> {
 
 	protected MBeanServer getMBeanServer() {
 		MBeanServer mBeanServer = _mBeanServerReference.get();

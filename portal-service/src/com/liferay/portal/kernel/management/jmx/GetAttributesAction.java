@@ -26,13 +26,13 @@ import javax.management.ObjectName;
 /**
  * @author Shuyang Zhou
  */
-public class GetAttributesAction extends BaseJMXManageAction {
+public class GetAttributesAction extends BaseJMXManageAction<AttributeList> {
 
 	public GetAttributesAction(MBean mBean) {
 		_mBean = mBean;
 	}
 
-	public void action() throws ManageActionException {
+	public AttributeList action() throws ManageActionException {
 		try {
 			ObjectName objectName = _mBean.getObjectName();
 
@@ -49,19 +49,13 @@ public class GetAttributesAction extends BaseJMXManageAction {
 				attributeNames[i] = mBeanAttributeInfos[i].getName();
 			}
 
-			_attributeList = mBeanServer.getAttributes(
-				objectName, attributeNames);
+			return mBeanServer.getAttributes(objectName, attributeNames);
 		}
 		catch (Exception e) {
 			throw new ManageActionException(e);
 		}
 	}
 
-	public AttributeList getAttributeList() {
-		return _attributeList;
-	}
-
-	private AttributeList _attributeList;
 	private MBean _mBean;
 
 }

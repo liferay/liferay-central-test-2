@@ -27,35 +27,32 @@ import javax.management.ObjectName;
 /**
  * @author Shuyang Zhou
  */
-public class ListMBeansAction extends BaseJMXManageAction {
+public class ListMBeansAction extends BaseJMXManageAction<Set<MBean>> {
 
 	public ListMBeansAction(String domainName) {
 		_domainName = domainName;
 	}
 
-	public void action() throws ManageActionException {
+	public Set<MBean> action() throws ManageActionException {
 		try {
 			MBeanServer mBeanServer = getMBeanServer();
 
 			Set<ObjectName> objectNames = mBeanServer.queryNames(
 				null, new ObjectName(_domainName.concat(":*")));
 
-			_mBeans = new HashSet<MBean>(objectNames.size());
+			Set<MBean> mBeans = new HashSet<MBean>(objectNames.size());
 
 			for (ObjectName objectName : objectNames) {
-				_mBeans.add(new MBean(objectName));
+				mBeans.add(new MBean(objectName));
 			}
+
+			return mBeans;
 		}
 		catch (MalformedObjectNameException mone) {
 			throw new ManageActionException(mone);
 		}
 	}
 
-	public Set<MBean> getMBeans() {
-		return _mBeans;
-	}
-
 	private String _domainName;
-	private Set<MBean> _mBeans;
 
 }

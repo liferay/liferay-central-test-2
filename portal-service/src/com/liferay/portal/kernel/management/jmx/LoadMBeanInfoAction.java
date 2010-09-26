@@ -24,13 +24,13 @@ import javax.management.ObjectName;
 /**
  * @author Shuyang Zhou
  */
-public class LoadMBeanInfoAction extends BaseJMXManageAction {
+public class LoadMBeanInfoAction extends BaseJMXManageAction<MBean> {
 
 	public LoadMBeanInfoAction(MBean mBean) {
 		_mBean = mBean;
 	}
 
-	public void action() throws ManageActionException {
+	public MBean action() throws ManageActionException {
 		try {
 			ObjectName objectName = _mBean.getObjectName();
 
@@ -38,15 +38,11 @@ public class LoadMBeanInfoAction extends BaseJMXManageAction {
 
 			MBeanInfo mBeanInfo = mBeanServer.getMBeanInfo(objectName);
 
-			_mBean = new MBean(objectName, mBeanInfo);
+			return new MBean(objectName, mBeanInfo);
 		}
 		catch (Exception e) {
 			throw new ManageActionException(e);
 		}
-	}
-
-	public MBean getMBean() {
-		return _mBean;
 	}
 
 	private MBean _mBean;

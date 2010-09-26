@@ -23,7 +23,7 @@ import javax.management.ObjectName;
 /**
  * @author Shuyang Zhou
  */
-public class SetAttributeAction extends BaseJMXManageAction {
+public class SetAttributeAction extends BaseJMXManageAction<Void> {
 
 	public SetAttributeAction(
 		ObjectName objectName, String name, Object value) {
@@ -33,11 +33,13 @@ public class SetAttributeAction extends BaseJMXManageAction {
 		_value = value;
 	}
 
-	public void action() throws ManageActionException {
+	public Void action() throws ManageActionException {
 		try {
 			MBeanServer mBeanServer = getMBeanServer();
 
 			mBeanServer.setAttribute(_objectName, new Attribute(_name, _value));
+
+			return null;
 		}
 		catch (Exception e) {
 			throw new ManageActionException(e);

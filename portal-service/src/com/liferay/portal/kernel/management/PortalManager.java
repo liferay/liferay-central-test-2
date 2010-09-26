@@ -19,6 +19,7 @@ package com.liferay.portal.kernel.management;
  */
 public interface PortalManager {
 
-	public void manage(ManageAction manageAction) throws ManageActionException;
+	public <T> T manage(ManageAction<T> manageAction)
+		throws ManageActionException;
 
 }
