@@ -14,10 +14,16 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.exception.SystemException;
+
 import java.io.IOException;
+
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class ProcessUtil {
 
@@ -48,6 +54,23 @@ public class ProcessUtil {
 		}
 		catch (IOException ioe) {
 			ioe.printStackTrace();
+		}
+	}
+
+	public static int getCurrentProcessId() throws SystemException {
+		RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
+		String name = runtimeMXBean.getName();
+		int index = name.indexOf(CharPool.AT);
+		if (index == -1) {
+			throw new SystemException("Fail to parse process name " + name);
+		}
+		String idString = name.substring(0, index);
+		try {
+			return Integer.parseInt(idString);
+		}
+		catch(NumberFormatException nfe) {
+			throw new SystemException("Fail to parse process name " + name,
+				nfe);
 		}
 	}
 
