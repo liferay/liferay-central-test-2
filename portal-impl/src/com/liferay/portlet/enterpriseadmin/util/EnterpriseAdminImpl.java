@@ -104,7 +104,7 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 		PortletURL portletURL = renderResponse.createRenderURL();
 
 		portletURL.setParameter(
-			"struts_action", "/enterprise_admin/edit_organization");
+			"struts_action", "/enterprise_admin/view");
 
 		List<Organization> ancestorOrganizations = organization.getAncestors();
 
