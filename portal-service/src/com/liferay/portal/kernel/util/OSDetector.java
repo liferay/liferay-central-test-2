@@ -21,6 +21,20 @@ import java.io.File;
  */
 public class OSDetector {
 
+	public static boolean isAIX() {
+		if (_aix == null) {
+			String osName = System.getProperty("os.name");
+
+			if (osName.equalsIgnoreCase("aix")) {
+				_aix = Boolean.TRUE;
+			} else {
+				_aix = Boolean.FALSE;
+			}
+		}
+
+		return _aix.booleanValue();
+	}
+
 	public static boolean isUnix() {
 		if (_unix == null) {
 			if (File.pathSeparator.equals(StringPool.COLON)) {
@@ -47,6 +61,7 @@ public class OSDetector {
 		return _windows.booleanValue();
 	}
 
+	private static Boolean _aix;
 	private static Boolean _unix;
 	private static Boolean _windows;
 
