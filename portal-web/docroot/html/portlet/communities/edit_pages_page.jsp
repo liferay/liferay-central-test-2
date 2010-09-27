@@ -312,6 +312,8 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 				if (curTarget == null) {
 					curTarget = StringPool.BLANK;
 				}
+
+				curTarget = HtmlUtil.escapeAttribute(curTarget);
 				%>
 				<input name="TypeSettingsProperties--target--" size="15" type="text" value="<%= curTarget %>" />
 			</td>

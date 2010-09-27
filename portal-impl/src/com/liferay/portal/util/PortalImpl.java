@@ -1898,7 +1898,7 @@ public class PortalImpl implements Portal {
 			target = StringPool.BLANK;
 		}
 		else {
-			target = "target=\"" + target + "\"";
+			target = "target=\"" + HtmlUtil.escapeAttribute(target) + "\"";
 		}
 
 		return target;
