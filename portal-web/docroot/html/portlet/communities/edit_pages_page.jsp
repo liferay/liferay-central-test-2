@@ -306,8 +306,9 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 				<liferay-ui:message key="target" />
 			</td>
 			<td>
+
 				<%
-				String curTarget = (String) selLayout.getTypeSettingsProperties().getProperty("target");
+				String curTarget = (String)selLayout.getTypeSettingsProperties().getProperty("target");
 
 				if (curTarget == null) {
 					curTarget = StringPool.BLANK;
@@ -315,6 +316,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 
 				curTarget = HtmlUtil.escapeAttribute(curTarget);
 				%>
+
 				<input name="TypeSettingsProperties--target--" size="15" type="text" value="<%= curTarget %>" />
 			</td>
 		</tr>
