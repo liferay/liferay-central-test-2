@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.model.ClusterGroup;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -50,6 +49,7 @@ public class ClusterManageActionWrapper
 
 	private FutureClusterResponses doAction()
 		throws ManageActionException, SystemException {
+
 		MethodHandler manageActionMethodHandler =
 			PortalManagerUtil.createManageActionMethodHandler(_manageAction);
 
@@ -76,22 +76,26 @@ public class ClusterManageActionWrapper
 		String[] requiredClusterNodesIds =
 			_clusterGroup.getClusterNodeIdsArray();
 
-		Required:
 		for (String requiredClusterNodeId : requiredClusterNodesIds) {
-			Iterator<ClusterNode> iterator = clusterNodes.iterator();
-			while (iterator.hasNext()) {
-				ClusterNode clusterNode = iterator.next();
+			boolean verified = false;
+
+			for (ClusterNode clusterNode : clusterNodes) {
 				String clusterNodeId = clusterNode.getClusterNodeId();
 
 				if (clusterNodeId.equals(requiredClusterNodeId)) {
 					clusterNodes.remove(clusterNode);
 
-					continue Required;
+					verified = true;
+
+					break;
 				}
 			}
 
-			throw new ManageActionException(
-				"Cluster node " + requiredClusterNodeId + " is not available");
+			if (!verified) {
+				throw new ManageActionException(
+					"Cluster node " + requiredClusterNodeId +
+						" is not available");
+			}
 		}
 	}
 

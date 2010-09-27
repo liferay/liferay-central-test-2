@@ -25,6 +25,7 @@ public class BasePortalManager implements PortalManager {
 
 	public <T> T manage(ManageAction<T> manageAction)
 		throws ManageActionException {
+
 		return manageAction.action();
 	}
 

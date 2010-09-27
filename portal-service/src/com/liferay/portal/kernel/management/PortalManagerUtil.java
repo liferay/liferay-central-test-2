@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.management;
 
 import com.liferay.portal.kernel.cluster.ClusterNode;
+import com.liferay.portal.kernel.cluster.ClusterNodeResponses;
 import com.liferay.portal.kernel.cluster.FutureClusterResponses;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -30,7 +31,7 @@ import java.lang.reflect.Method;
 public class PortalManagerUtil {
 
 	public static MethodHandler createManageActionMethodHandler(
-		ManageAction manageAction) {
+		ManageAction<?> manageAction) {
 
 		return new MethodHandler(_manageMethod, manageAction);
 	}
@@ -39,10 +40,10 @@ public class PortalManagerUtil {
 			ClusterGroup clusterGroup, ManageAction<?> manageAction)
 		throws ManageActionException {
 
-		ManageAction<FutureClusterResponses> action =
+		ManageAction<FutureClusterResponses> manageActionWrapper =
 			new ClusterManageActionWrapper(clusterGroup, manageAction);
 
-		return _portalManager.manage(action);
+		return _portalManager.manage(manageActionWrapper);
 	}
 
 	public static <T> T manage(ManageAction<T> manageAction)
@@ -55,26 +56,32 @@ public class PortalManagerUtil {
 			ClusterNode clusterNode, ManageAction<?> manageAction)
 		throws Exception {
 
-		ClusterGroup tempClusterGroup =
+		ClusterGroup clusterGroup =
 			ClusterGroupLocalServiceUtil.createClusterGroup(0);
-		tempClusterGroup.setClusterNodeIds(clusterNode.getClusterNodeId());
 
-		manage(tempClusterGroup, manageAction);
+		clusterGroup.setClusterNodeIds(clusterNode.getClusterNodeId());
+
+		manage(clusterGroup, manageAction);
  	}
 
 	public static <T> T manageSync(
 			ClusterNode clusterNode, ManageAction<T> manageAction)
 		throws Exception {
 
-		ClusterGroup tempClusterGroup =
+		ClusterGroup clusterGroup =
 			ClusterGroupLocalServiceUtil.createClusterGroup(0);
-		tempClusterGroup.setClusterNodeIds(clusterNode.getClusterNodeId());
 
-		FutureClusterResponses futureClusterResponses =
-			manage(tempClusterGroup, manageAction);
-		return (T) futureClusterResponses.get().getClusterResponse(
+		clusterGroup.setClusterNodeIds(clusterNode.getClusterNodeId());
+
+		FutureClusterResponses futureClusterResponses = manage(
+			clusterGroup, manageAction);
+
+		ClusterNodeResponses clusterNodeResponses =
+			futureClusterResponses.get();
+
+		return (T)clusterNodeResponses.getClusterResponse(
 			clusterNode).getResult();
- 	}
+	}
 
 	public void setPortalManager(PortalManager portalManager) {
 		_portalManager = portalManager;
