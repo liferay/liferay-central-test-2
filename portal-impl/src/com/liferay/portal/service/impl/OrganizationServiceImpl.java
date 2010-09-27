@@ -206,6 +206,30 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 		return organizationLocalService.getOrganizationId(companyId, name);
 	}
 
+	public List<Organization> getOrganizations(
+			long companyId, long parentOrganizationId)
+		throws PortalException, SystemException {
+
+		return organizationLocalService.getOrganizations(
+				companyId, parentOrganizationId);
+	}
+
+	public List<Organization> getOrganizations(
+			long companyId, long parentOrganizationId, int start, int end)
+		throws PortalException, SystemException {
+
+		return organizationLocalService.getOrganizations(
+				companyId, parentOrganizationId, start, end);
+	}
+
+	public int getOrganizationsCount(
+			long companyId, long parentOrganizationId)
+		throws PortalException, SystemException {
+
+		return organizationLocalService.getOrganizationsCount(
+			companyId, parentOrganizationId);
+	}
+
 	public List<Organization> getUserOrganizations(long userId)
 		throws PortalException, SystemException {
 
