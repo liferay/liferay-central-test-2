@@ -19,27 +19,11 @@
 <%
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
-long organizationId = GetterUtil.getLong(request.getParameter("organizationId"), OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
-long defaultOrganizationId = GetterUtil.getLong(preferences.getValue("rootOrganizationId", StringPool.BLANK), OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
-
-String organizationViewPref = GetterUtil.getString(request.getParameter("organizationViewPref"));
-
-if (Validator.isNotNull(organizationViewPref) && ArrayUtil.contains(PropsValues.ORGANIZATIONS_VIEWS, organizationViewPref)) {
-	portalPreferences.setValue(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS, "organization-view", organizationViewPref);
-}
-else if (Validator.isNotNull(organizationViewPref) && !ArrayUtil.contains(PropsValues.ORGANIZATIONS_VIEWS, organizationViewPref)){
-	organizationViewPref = PropsValues.ORGANIZATIONS_VIEWS_DEFAULT;
-
-	portalPreferences.setValue(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS, "organization-view", organizationViewPref);
-}
-
 String viewOrganizationsRedirect = ParamUtil.getString(request, "viewOrganizationsRedirect");
 
 if (Validator.isNotNull(viewOrganizationsRedirect)) {
 	portletURL.setParameter("viewOrganizationsRedirect", viewOrganizationsRedirect);
 }
-
-renderRequest.setAttribute("tabs1", "organizations");
 %>
 
 <liferay-ui:error exception="<%= RequiredOrganizationException.class %>" message="you-cannot-delete-organizations-that-have-suborganizations-or-users" />
@@ -52,56 +36,79 @@ renderRequest.setAttribute("tabs1", "organizations");
 	<aui:input name="viewOrganizationsRedirect" type="hidden" value="<%= viewOrganizationsRedirect %>" />
 </c:if>
 
-<c:choose>
-	<c:when test="<%= organizationView.equals(OrganizationConstants.ORGANIZATION_VIEW_FLAT) %>">
-		<%@ include file="/html/portlet/enterprise_admin/organization/view_organizations_flat.jspf" %>
-	</c:when>
-	<c:otherwise>
-		<%@ include file="/html/portlet/enterprise_admin/organization/view_organizations_tree.jspf" %>
-	</c:otherwise>
-</c:choose>
+<liferay-ui:search-container
+	rowChecker="<%= new RowChecker(renderResponse) %>"
+	searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
+>
+	<aui:input name="deleteOrganizationIds" type="hidden" />
+	<aui:input name="organizationsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
-<%!
-private static List<Organization> _getResults(Hits hits) throws Exception {
-	List<Organization> organizations = new ArrayList<Organization>();
+	<liferay-ui:search-form
+		page="/html/portlet/enterprise_admin/organization_search.jsp"
+	/>
 
-	List<Document> hitsList = hits.toList();
+	<%
+	OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
-	for (Document doc : hitsList) {
-		long organizationId = GetterUtil.getLong(doc.get(Field.ORGANIZATION_ID));
+	LinkedHashMap organizationParams = new LinkedHashMap();
 
-		try {
-			organizations.add(OrganizationLocalServiceUtil.getOrganization(organizationId));
-		}
-		catch (NoSuchOrganizationException nsoe) {
-			_log.error("Organization " + organizationId + " does not exist in the search index. Please reindex.");
-		}
+	if (filterManageableOrganizations) {
+		Long[][] leftAndRightOrganizationIds = EnterpriseAdminUtil.getLeftAndRightOrganizationIds(user.getOrganizations());
+
+		organizationParams.put("organizationsTree", leftAndRightOrganizationIds);
 	}
 
-	return organizations;
-}
+	long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
 
-private static Sort _getSort(String orderByCol, String orderByType) {
-	String sortField = "name";
-
-	if (Validator.isNotNull(orderByCol)) {
-		if (orderByCol.equals("name")) {
-			sortField = "name";
-		}
-		else if (orderByCol.equals("type")) {
-			sortField = "type";
-		}
-		else {
-			sortField = orderByCol;
-		}
+	if (parentOrganizationId <= 0) {
+		parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
 	}
+	%>
 
-	if (Validator.isNull(orderByType)) {
-		orderByType = "asc";
-	}
+	<liferay-ui:search-container-results>
+		<c:choose>
+			<c:when test="<%= PropsValues.ORGANIZATIONS_SEARCH_WITH_INDEX %>">
+				<%@ include file="/html/portlet/enterprise_admin/organization_search_results_index.jspf" %>
+			</c:when>
+			<c:otherwise>
+				<%@ include file="/html/portlet/enterprise_admin/organization_search_results_database.jspf" %>
+			</c:otherwise>
+		</c:choose>
+	</liferay-ui:search-container-results>
 
-	return new Sort(sortField, Sort.STRING_TYPE, !orderByType.equalsIgnoreCase("asc"));
-}
+	<liferay-ui:search-container-row
+		className="com.liferay.portal.model.Organization"
+		escapedModel="<%= true %>"
+		keyProperty="organizationId"
+		modelVar="organization"
+	>
+		<portlet:renderURL var="rowURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
+			<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
+			<portlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" />
+		</portlet:renderURL>
 
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.enterprise_admin.view_organizations.jsp");
-%>
+		<%
+		if (!OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.UPDATE)) {
+			rowURL = null;
+		}
+		%>
+
+		<%@ include file="/html/portlet/enterprise_admin/organization/search_columns.jspf" %>
+
+		<liferay-ui:search-container-column-jsp
+			align="right"
+			path="/html/portlet/enterprise_admin/organization_action.jsp"
+		/>
+	</liferay-ui:search-container-row>
+
+	<c:if test="<%= !results.isEmpty() %>">
+		<div class="separator"><!-- --></div>
+
+		<aui:button onClick='<%= renderResponse.getNamespace() + "deleteOrganizations();" %>' value="delete" />
+	</c:if>
+
+	<br />
+
+	<liferay-ui:search-iterator />
+</liferay-ui:search-container>
