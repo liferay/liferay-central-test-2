@@ -169,6 +169,8 @@ Liferay.Service.registerClass(
 		getManageableOrganizations: true,
 		getOrganization: true,
 		getOrganizationId: true,
+		getOrganizations: true,
+		getOrganizationsCount: true,
 		getUserOrganizations: true,
 		setGroupOrganizations: true,
 		unsetGroupOrganizations: true,
