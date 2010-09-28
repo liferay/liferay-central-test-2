@@ -55,6 +55,7 @@ String userMappingMiddleName = StringPool.BLANK;
 String userMappingLastName = StringPool.BLANK;
 String userMappingJobTitle = StringPool.BLANK;
 String userMappingGroup = StringPool.BLANK;
+String userMappingUuid = StringPool.BLANK;
 
 for (int i = 0 ; i < userMappingArray.length ; i++) {
 	if (userMappingArray[i].indexOf("=") == -1) {
@@ -93,6 +94,9 @@ for (int i = 0 ; i < userMappingArray.length ; i++) {
 	}
 	else if (mapping[0].equals("group")) {
 		userMappingGroup = mapping[1];
+	}
+	else if (mapping[0].equals("uuid")) {
+		userMappingUuid = mapping[1];
 	}
 
 	mapping[1] = "";
@@ -209,6 +213,8 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 		<aui:input cssClass="lfr-input-text-container" label="group" name="userMappingGroup" type="text" value="<%= userMappingGroup %>" />
 
+		<aui:input cssClass="lfr-input-text-container" label="uuid" name="userMappingUuid" type="text" value="<%= userMappingUuid %>" />
+
 		<aui:input name='<%= "settings--" + PropsKeys.LDAP_USER_MAPPINGS + postfix + "--" %>' type="hidden" />
 
 		<aui:input name='<%= "settings--" + PropsKeys.LDAP_USER_CUSTOM_MAPPINGS + postfix + "--" %>' type="hidden" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USER_CUSTOM_MAPPINGS + postfix, PropsUtil.get(PropsKeys.LDAP_USER_CUSTOM_MAPPINGS)) %>" />
@@ -274,8 +280,8 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 <aui:script>
 	function <portlet:namespace />saveLdap() {
-		var userMappingFields = ['screenName','password','emailAddress','fullName','firstName','middleName','lastName','jobTitle','group'];
-		var userMappingFieldValues = ['userMappingScreenName','userMappingPassword','userMappingEmailAddress','userMappingFullName','userMappingFirstName','userMappingMiddleName','userMappingLastName','userMappingJobTitle','userMappingGroup'];
+		var userMappingFields = ['screenName','password','emailAddress','fullName','firstName','middleName','lastName','jobTitle','group','uuid'];
+		var userMappingFieldValues = ['userMappingScreenName','userMappingPassword','userMappingEmailAddress','userMappingFullName','userMappingFirstName','userMappingMiddleName','userMappingLastName','userMappingJobTitle','userMappingGroup','userMappingUuid'];
 		var userMappingInput = document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.LDAP_USER_MAPPINGS + postfix %>--'];
 
 		userMappingInput.value = '';
@@ -343,6 +349,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 				data.<portlet:namespace />userMappingLastName = document.<portlet:namespace />fm['<portlet:namespace />userMappingLastName'].value;
 				data.<portlet:namespace />userMappingJobTitle = document.<portlet:namespace />fm['<portlet:namespace />userMappingJobTitle'].value;
 				data.<portlet:namespace />userMappingGroup = document.<portlet:namespace />fm['<portlet:namespace />userMappingGroup'].value;
+				data.<portlet:namespace />userMappingUuid = document.<portlet:namespace />fm['<portlet:namespace />userMappingUuid'].value;
 			}
 
 			if (url != null) {
@@ -395,6 +402,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			var userMappingLastName = "";
 			var userMappingJobTitle = "";
 			var userMappingGroup = "";
+			var userMappingUuid = "";
 			var importGroupSearchFilter = "";
 			var groupMappingGroupName = "";
 			var groupMappingDescription = "";
@@ -430,6 +438,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 				userMappingLastName = "sn";
 				userMappingJobTitle = "";
 				userMappingGroup = "";
+				userMappingUuid = "";
 				importGroupSearchFilter = "";
 				groupMappingGroupName = "";
 				groupMappingDescription = "";
@@ -451,6 +460,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 				userMappingLastName = "sn";
 				userMappingJobTitle = "title";
 				userMappingGroup = "";
+				userMappingUuid = "";
 				importGroupSearchFilter = "";
 				groupMappingGroupName = "";
 				groupMappingDescription = "";
@@ -472,6 +482,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 				userMappingLastName = "sn";
 				userMappingJobTitle = "";
 				userMappingGroup = "memberOf";
+				userMappingUuid = "";
 				importGroupSearchFilter = "(objectClass=group)";
 				groupMappingGroupName = "cn";
 				groupMappingDescription = "sAMAccountName";
@@ -493,6 +504,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 				userMappingLastName = "sn";
 				userMappingJobTitle = "title";
 				userMappingGroup = "";
+				userMappingUuid = "";
 				importGroupSearchFilter = "";
 				groupMappingGroupName = "";
 				groupMappingDescription = "";
@@ -514,6 +526,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 				userMappingLastName = "sn";
 				userMappingJobTitle = "title";
 				userMappingGroup = "";
+				userMappingUuid = "";
 				importGroupSearchFilter = "(objectClass=groupOfUniqueNames)";
 				groupMappingGroupName = "cn";
 				groupMappingDescription = "description";
@@ -535,6 +548,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			document.<portlet:namespace />fm['<portlet:namespace />userMappingLastName'].value = userMappingLastName;
 			document.<portlet:namespace />fm['<portlet:namespace />userMappingJobTitle'].value = userMappingJobTitle;
 			document.<portlet:namespace />fm['<portlet:namespace />userMappingGroup'].value = userMappingGroup;
+			document.<portlet:namespace />fm['<portlet:namespace />userMappingUuid'].value = userMappingUuid;
 			document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.LDAP_IMPORT_GROUP_SEARCH_FILTER + postfix %>--'].value = importGroupSearchFilter;
 			document.<portlet:namespace />fm['<portlet:namespace />groupMappingGroupName'].value = groupMappingGroupName;
 			document.<portlet:namespace />fm['<portlet:namespace />groupMappingDescription'].value = groupMappingDescription;

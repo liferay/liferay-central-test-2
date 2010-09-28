@@ -102,6 +102,8 @@ public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 			attributes, userMappings, UserConverterKeys.MIDDLE_NAME);
 		String lastName = LDAPUtil.getAttributeValue(
 			attributes, userMappings, UserConverterKeys.LAST_NAME);
+		String uuid = LDAPUtil.getAttributeValue(
+			attributes, userMappings, UserConverterKeys.UUID);
 
 		if (Validator.isNull(firstName) || Validator.isNull(lastName)) {
 			String fullName = LDAPUtil.getAttributeValue(
@@ -133,6 +135,8 @@ public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 		boolean sendEmail = false;
 
 		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setUuid(uuid);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
