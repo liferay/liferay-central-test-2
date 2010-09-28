@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -812,11 +813,8 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 				return user;
 			}
 			else {
-				DateFormat dateFormat =
-					DateFormatFactoryUtil.getSimpleDateFormat(
-						"yyyyMMddHHmmss");
-
-				ldapUserModifiedDate = dateFormat.parse(modifiedDate);
+				ldapUserModifiedDate = LDAPUtil.getGeneralizedTime(
+					modifiedDate);
 			}
 
 			if (ldapUserModifiedDate.equals(user.getModifiedDate()) &&

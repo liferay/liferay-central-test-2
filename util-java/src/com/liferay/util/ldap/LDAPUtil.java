@@ -14,9 +14,15 @@
 
 package com.liferay.util.ldap;
 
+import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
+import java.util.Date;
 import java.util.Properties;
+
+import java.text.DateFormat;
+import java.text.ParseException;
 
 import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
@@ -68,6 +74,35 @@ public class LDAPUtil {
 		catch (NullPointerException npe) {
 			return defaultValue;
 		}
+	}
+
+	public static Date getGeneralizedTime(String date) throws Exception {
+		String format = "yyyyMMddHHmmss";
+
+		if (date.endsWith("Z")) {
+			if (date.indexOf(CharPool.PERIOD) != -1) {
+				format = "yyyyMMddHHmmss.S'Z'";
+			}
+			else {
+				format = "yyyyMMddHHmmss'Z'";
+			}
+		}
+		else if ((date.indexOf('-') != -1) || (date.indexOf('+') != -1)) {
+			if (date.indexOf(CharPool.PERIOD) != -1) {
+				format = "yyyyMMddHHmmss.SZ";
+			}
+			else {
+				format = "yyyyMMddHHmmssZ";
+			}
+		}
+		else if (date.indexOf(CharPool.PERIOD) != -1) {
+			format = "yyyyMMddHHmmss.S";
+		}
+
+		DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
+			format);
+
+		return dateFormat.parse(date);
 	}
 
 	public static String getFullProviderURL(String baseURL, String baseDN) {
