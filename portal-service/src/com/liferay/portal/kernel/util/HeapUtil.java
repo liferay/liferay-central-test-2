@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.exception.SystemException;
-
 import java.io.IOException;
 
 /**
@@ -23,29 +21,33 @@ import java.io.IOException;
  */
 public class HeapUtil {
 
-	public static void heapDump(boolean live, boolean binary, String file)
-		throws SystemException {
-
-		int processId = ProcessUtil.getCurrentProcessId();
+	public static void heapDump(boolean live, boolean binary, String file) {
+		int processId = ProcessUtil.getProcessId();
 
 		StringBundler sb = new StringBundler(7);
+
 		sb.append("jmap -dump:");
+
 		if (live) {
 			sb.append("live,");
 		}
+
 		if (binary) {
 			sb.append("format=b,");
 		}
+
 		sb.append("file=");
 		sb.append(file);
 		sb.append(StringPool.SPACE);
 		sb.append(processId);
 
 		try {
-			Runtime.getRuntime().exec(sb.toString());
+			Runtime runtime = Runtime.getRuntime();
+
+			runtime.exec(sb.toString());
 		}
-		catch(IOException ioe) {
-			throw new SystemException("Fail to dump deap.", ioe);
+		catch (IOException ioe) {
+			throw new RuntimeException("Unable to perform heap dump", ioe);
 		}
 	}
 

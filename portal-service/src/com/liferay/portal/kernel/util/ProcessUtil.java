@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.exception.SystemException;
-
 import java.io.IOException;
 
 import java.lang.management.ManagementFactory;
@@ -27,50 +25,55 @@ import java.lang.management.RuntimeMXBean;
  */
 public class ProcessUtil {
 
-	public static void close(Process p) {
+	public static void close(Process process) {
 		try {
-			p.waitFor();
+			process.waitFor();
 		}
 		catch (InterruptedException ie) {
 			ie.printStackTrace();
 		}
 
 		try {
-			p.getInputStream().close();
+			process.getInputStream().close();
 		}
 		catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
 
 		try {
-			p.getOutputStream().close();
+			process.getOutputStream().close();
 		}
 		catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
 
 		try {
-			p.getErrorStream().close();
+			process.getErrorStream().close();
 		}
 		catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
 	}
 
-	public static int getCurrentProcessId() throws SystemException {
+	public static int getProcessId() {
 		RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
+
 		String name = runtimeMXBean.getName();
+
 		int index = name.indexOf(CharPool.AT);
+
 		if (index == -1) {
-			throw new SystemException("Fail to parse process name " + name);
+			throw new RuntimeException("Unable to parse process name " + name);
 		}
-		String idString = name.substring(0, index);
+
+		String id = name.substring(0, index);
+
 		try {
-			return Integer.parseInt(idString);
+			return Integer.parseInt(id);
 		}
-		catch(NumberFormatException nfe) {
-			throw new SystemException("Fail to parse process name " + name,
-				nfe);
+		catch (NumberFormatException nfe) {
+			throw new RuntimeException(
+				"Unable to parse process name " + name, nfe);
 		}
 	}
 
