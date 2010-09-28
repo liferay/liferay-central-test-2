@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.login.util;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -69,7 +70,7 @@ public class LoginUtil {
 	public static long getAuthenticatedUserId(
 			HttpServletRequest request, String login, String password,
 			String authType)
-		throws Exception{
+		throws PortalException, SystemException {
 
 		long userId = GetterUtil.getLong(login);
 
@@ -257,8 +258,7 @@ public class LoginUtil {
 		companyIdCookie.setPath(StringPool.SLASH);
 
 		Cookie idCookie = new Cookie(
-			CookieKeys.ID,
-			UserLocalServiceUtil.encryptUserId(userIdString));
+			CookieKeys.ID, UserLocalServiceUtil.encryptUserId(userIdString));
 
 		if (Validator.isNotNull(domain)) {
 			idCookie.setDomain(domain);
@@ -299,11 +299,11 @@ public class LoginUtil {
 		}
 		else {
 
-			// This was explicitly changed from 0 to -1 so that the cookie
-			// lasts as long as the browser. This allows an external servlet
-			// wrapped in AutoLoginFilter to work throughout the client
-			// connection. The cookies ARE removed on an actual logout, so
-			// there is no security issue. See LEP-4678 and LEP-5177.
+			// This was explicitly changed from 0 to -1 so that the cookie lasts
+			// as long as the browser. This allows an external servlet wrapped
+			// in AutoLoginFilter to work throughout the client connection. The
+			// cookies ARE removed on an actual logout, so there is no security
+			// issue. See LEP-4678 and LEP-5177.
 
 			companyIdCookie.setMaxAge(-1);
 			idCookie.setMaxAge(-1);
@@ -348,7 +348,6 @@ public class LoginUtil {
 		CookieKeys.addCookie(request, response, rememberMeCookie, secure);
 		CookieKeys.addCookie(request, response, loginCookie, secure);
 		CookieKeys.addCookie(request, response, screenNameCookie, secure);
-
 	}
 
 	public static void sendPassword(ActionRequest actionRequest)

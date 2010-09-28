@@ -855,9 +855,6 @@ public class PortalImpl implements Portal {
 		}
 		catch (AuthException ae) {
 		}
-		catch (Exception e) {
-			_log.error(e);
-		}
 
 		return userId;
 	}
