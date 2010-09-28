@@ -18,11 +18,10 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
+import java.text.DateFormat;
+
 import java.util.Date;
 import java.util.Properties;
-
-import java.text.DateFormat;
-import java.text.ParseException;
 
 import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
@@ -76,7 +75,7 @@ public class LDAPUtil {
 		}
 	}
 
-	public static Date getGeneralizedTime(String date) throws Exception {
+	public static Date parseDate(String date) throws Exception {
 		String format = "yyyyMMddHHmmss";
 
 		if (date.endsWith("Z")) {
@@ -87,7 +86,9 @@ public class LDAPUtil {
 				format = "yyyyMMddHHmmss'Z'";
 			}
 		}
-		else if ((date.indexOf('-') != -1) || (date.indexOf('+') != -1)) {
+		else if ((date.indexOf(CharPool.DASH) != -1) ||
+				 (date.indexOf(CharPool.PLUS) != -1)) {
+
 			if (date.indexOf(CharPool.PERIOD) != -1) {
 				format = "yyyyMMddHHmmss.SZ";
 			}

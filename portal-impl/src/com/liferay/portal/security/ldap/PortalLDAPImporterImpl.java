@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
-import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -56,7 +54,6 @@ import com.liferay.util.ldap.LDAPUtil;
 
 import java.io.Serializable;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 
 import java.util.ArrayList;
@@ -813,8 +810,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 				return user;
 			}
 			else {
-				ldapUserModifiedDate = LDAPUtil.getGeneralizedTime(
-					modifiedDate);
+				ldapUserModifiedDate = LDAPUtil.parseDate(modifiedDate);
 			}
 
 			if (ldapUserModifiedDate.equals(user.getModifiedDate()) &&
