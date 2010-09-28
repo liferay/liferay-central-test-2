@@ -264,7 +264,7 @@ public class SecureFilter extends BasePortalFilter {
 				StringBundler sb = new StringBundler(4);
 
 				sb.append(_DIGEST_REALM);
-				sb.append(",\nnonce=\"");
+				sb.append(", nonce=\"");
 				sb.append(nonce);
 				sb.append("\"");
 
