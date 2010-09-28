@@ -175,6 +175,24 @@ if (Validator.isNull(tabs1)) {
 	tabs1 = "users";
 }
 
+PortletPreferences preferences = renderRequest.getPreferences();
+
+boolean showOrganizationMenu = true;
+boolean showSuborganization = true;
+
+int organizationsPerPage = PrefsParamUtil.getInteger(preferences, request, "organizationsPerPage", SearchContainer.DEFAULT_DELTA);
+
+String defaultOrganizationColumns = "name,type,city,region,country,action";
+String[] organizationColumns = StringUtil.split(PrefsParamUtil.getString(preferences, request, "organizationColumns", defaultOrganizationColumns));
+
+PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(renderRequest);
+
+String organizationView = ParamUtil.getString(request, "organizationView");
+
+if (Validator.isNull(organizationView)) {
+	organizationView = portalPreferences.getValue(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS, "organization-view", OrganizationConstants.ORGANIZATION_VIEW_TREE);
+}
+
 boolean filterManageableGroups = true;
 boolean filterManageableOrganizations = true;
 boolean filterManageableRoles = true;
