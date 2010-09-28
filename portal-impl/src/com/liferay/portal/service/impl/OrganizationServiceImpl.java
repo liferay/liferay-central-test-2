@@ -56,39 +56,6 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			groupId, organizationIds);
 	}
 
-	public void addPasswordPolicyOrganizations(
-			long passwordPolicyId, long[] organizationIds)
-		throws PortalException, SystemException {
-
-		PasswordPolicyPermissionUtil.check(
-			getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
-
-		organizationLocalService.addPasswordPolicyOrganizations(
-			passwordPolicyId, organizationIds);
-	}
-
-	public Organization addOrganization(
-			long parentOrganizationId, String name, String type,
-			boolean recursable, long regionId, long countryId, int statusId,
-			String comments, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		if (!OrganizationPermissionUtil.contains(
-				getPermissionChecker(), parentOrganizationId,
-				ActionKeys.MANAGE_SUBORGANIZATIONS) &&
-			!PortalPermissionUtil.contains(
-				getPermissionChecker(), ActionKeys.ADD_ORGANIZATION)) {
-
-			throw new PrincipalException(
-				"User " + getUserId() + " does not have permissions to add " +
-					"an organization with parent " + parentOrganizationId);
-		}
-
-		return organizationLocalService.addOrganization(
-			getUserId(), parentOrganizationId, name, type, recursable,
-			regionId, countryId, statusId, comments, serviceContext);
-	}
-
 	public Organization addOrganization(
 			long parentOrganizationId, String name, String type,
 			boolean recursable, long regionId, long countryId, int statusId,
@@ -122,6 +89,39 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			websites);
 
 		return organization;
+	}
+
+	public Organization addOrganization(
+			long parentOrganizationId, String name, String type,
+			boolean recursable, long regionId, long countryId, int statusId,
+			String comments, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		if (!OrganizationPermissionUtil.contains(
+				getPermissionChecker(), parentOrganizationId,
+				ActionKeys.MANAGE_SUBORGANIZATIONS) &&
+			!PortalPermissionUtil.contains(
+				getPermissionChecker(), ActionKeys.ADD_ORGANIZATION)) {
+
+			throw new PrincipalException(
+				"User " + getUserId() + " does not have permissions to add " +
+					"an organization with parent " + parentOrganizationId);
+		}
+
+		return organizationLocalService.addOrganization(
+			getUserId(), parentOrganizationId, name, type, recursable,
+			regionId, countryId, statusId, comments, serviceContext);
+	}
+
+	public void addPasswordPolicyOrganizations(
+			long passwordPolicyId, long[] organizationIds)
+		throws PortalException, SystemException {
+
+		PasswordPolicyPermissionUtil.check(
+			getPermissionChecker(), passwordPolicyId, ActionKeys.UPDATE);
+
+		organizationLocalService.addPasswordPolicyOrganizations(
+			passwordPolicyId, organizationIds);
 	}
 
 	public void deleteLogo(long organizationId)
@@ -278,21 +278,6 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	public Organization updateOrganization(
 			long organizationId, long parentOrganizationId, String name,
 			String type, boolean recursable, long regionId, long countryId,
-			int statusId, String comments, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		OrganizationPermissionUtil.check(
-			getPermissionChecker(), organizationId, ActionKeys.UPDATE);
-
-		return organizationLocalService.updateOrganization(
-			getUser().getCompanyId(), organizationId, parentOrganizationId,
-			name, type, recursable, regionId, countryId, statusId, comments,
-			serviceContext);
-	}
-
-	public Organization updateOrganization(
-			long organizationId, long parentOrganizationId, String name,
-			String type, boolean recursable, long regionId, long countryId,
 			int statusId, String comments, List<Address> addresses,
 			List<EmailAddress> emailAddresses, List<OrgLabor> orgLabors,
 			List<Phone> phones, List<Website> websites,
@@ -318,6 +303,21 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			regionId, countryId, statusId, comments, serviceContext);
 
 		return organization;
+	}
+
+	public Organization updateOrganization(
+			long organizationId, long parentOrganizationId, String name,
+			String type, boolean recursable, long regionId, long countryId,
+			int statusId, String comments, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), organizationId, ActionKeys.UPDATE);
+
+		return organizationLocalService.updateOrganization(
+			getUser().getCompanyId(), organizationId, parentOrganizationId,
+			name, type, recursable, regionId, countryId, statusId, comments,
+			serviceContext);
 	}
 
 }

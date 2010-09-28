@@ -341,6 +341,22 @@ public class OrganizationLocalServiceImpl
 		}
 	}
 
+	public List<Organization> getOrganizations(
+			long companyId, long parentOrganizationId)
+		throws SystemException {
+
+		return organizationPersistence.findByC_P(
+			companyId, parentOrganizationId);
+	}
+
+	public List<Organization> getOrganizations(
+			long companyId, long parentOrganizationId, int start, int end)
+		throws SystemException {
+
+		return organizationPersistence.findByC_P(
+			companyId, parentOrganizationId, start, end);
+	}
+
 	public List<Organization> getOrganizations(long[] organizationIds)
 		throws PortalException, SystemException {
 
@@ -356,25 +372,8 @@ public class OrganizationLocalServiceImpl
 		return organizations;
 	}
 
-	public List<Organization> getOrganizations(
-			long companyId, long parentOrganizationId)
-		throws PortalException, SystemException {
-
-		return organizationPersistence.findByC_P(
-			companyId, parentOrganizationId);
-	}
-
-	public List<Organization> getOrganizations(
-			long companyId, long parentOrganizationId, int start, int end)
-		throws PortalException, SystemException {
-
-		return organizationPersistence.findByC_P(
-			companyId, parentOrganizationId, start, end);
-	}
-
-	public int getOrganizationsCount(
-			long companyId, long parentOrganizationId)
-		throws PortalException, SystemException {
+	public int getOrganizationsCount(long companyId, long parentOrganizationId)
+		throws SystemException {
 
 		return organizationPersistence.countByC_P(
 			companyId, parentOrganizationId);
