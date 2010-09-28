@@ -48,7 +48,7 @@ public class JavaProps {
 	}
 
 	public static String getJavaVendor() {
-		return _instance._javaVersion;
+		return _instance._javaVendor;
 	}
 
 	public static String getJavaVersion() {
@@ -63,8 +63,8 @@ public class JavaProps {
 		return _instance._64bit;
 	}
 
-	public static boolean isIBMJDK() {
-		return _instance._IBMJDK;
+	public static boolean isIBM() {
+		return _instance._ibm;
 	}
 
 	public static boolean isJDK4() {
@@ -122,10 +122,11 @@ public class JavaProps {
 		_javaVersion = System.getProperty("java.version");
 		_javaVmVersion = System.getProperty("java.vm.version");
 
-		_64bit = "64".equals(System.getProperty("sun.arch.data.model"));
+		_64bit = Validator.equals(
+			"64", System.getProperty("sun.arch.data.model"));
 
 		if (_javaVendor != null) {
-			_IBMJDK = _javaVendor.startsWith("IBM");
+			_ibm = _javaVendor.startsWith("IBM");
 		}
 
 		LogUtil.debug(_log, System.getProperties());
@@ -136,8 +137,7 @@ public class JavaProps {
 	private static JavaProps _instance = new JavaProps();
 
 	private boolean _64bit;
-	private boolean _IBMJDK;
-
+	private boolean _ibm;
 	private String _javaClassPath;
 	private double _javaClassVersion;
 	private String _javaRuntimeVersion;

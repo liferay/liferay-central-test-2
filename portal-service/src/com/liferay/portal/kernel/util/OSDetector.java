@@ -27,7 +27,8 @@ public class OSDetector {
 
 			if (osName.equalsIgnoreCase("aix")) {
 				_aix = Boolean.TRUE;
-			} else {
+			}
+			else {
 				_aix = Boolean.FALSE;
 			}
 		}
