@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.model.ClusterGroup;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -79,11 +80,15 @@ public class ClusterManageActionWrapper
 		for (String requiredClusterNodeId : requiredClusterNodesIds) {
 			boolean verified = false;
 
-			for (ClusterNode clusterNode : clusterNodes) {
+			Iterator<ClusterNode> itr = clusterNodes.iterator();
+
+			while (itr.hasNext()) {
+				ClusterNode clusterNode = itr.next();
+
 				String clusterNodeId = clusterNode.getClusterNodeId();
 
 				if (clusterNodeId.equals(requiredClusterNodeId)) {
-					clusterNodes.remove(clusterNode);
+					itr.remove();
 
 					verified = true;
 
