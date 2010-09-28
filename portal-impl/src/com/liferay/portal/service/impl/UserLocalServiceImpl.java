@@ -386,10 +386,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		User user = userPersistence.create(userId);
 
-		String uuid = serviceContext.getUuid();
+		if (serviceContext != null) {
+			String uuid = serviceContext.getUuid();
 
-		if ((serviceContext != null) && Validator.isNotNull(uuid)) {
-			user.setUuid(uuid);
+			if (Validator.isNotNull(uuid)) {
+				user.setUuid(uuid);
+			}
 		}
 
 		user.setCompanyId(companyId);
@@ -2427,6 +2429,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		setEmailAddress(
 			user, password, firstName, middleName, lastName, emailAddress);
+
+		if (serviceContext != null) {
+			String uuid = serviceContext.getUuid();
+
+			if (Validator.isNotNull(uuid)) {
+				user.setUuid(uuid);
+			}
+		}
 
 		user.setOpenId(openId);
 		user.setLanguageId(languageId);
