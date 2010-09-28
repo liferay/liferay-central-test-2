@@ -32,7 +32,9 @@ import javax.persistence.PersistenceUnit;
 public class SessionFactoryImpl implements SessionFactory {
 
 	public void closeSession(Session session) throws ORMException {
-		session.close();
+		if (session != null) {
+			session.close();
+		}
 	}
 
 	public Dialect getDialect() throws ORMException {

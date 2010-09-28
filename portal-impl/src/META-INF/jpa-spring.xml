@@ -13,6 +13,10 @@
 	<context:load-time-weaver />
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 	<bean id="entityManagerFactory" class="com.liferay.portal.spring.jpa.LocalContainerEntityManagerFactoryBean" p:dataSource-ref="liferayDataSource" />
+	<bean id="counterSession" class="com.liferay.portal.dao.orm.jpa.SessionImpl" />
+	<bean id="counterSessionFactory" class="com.liferay.portal.dao.orm.jpa.SessionFactoryImpl">
+		<property name="session" ref="counterSession" />
+	</bean>
 	<bean id="liferaySession" class="com.liferay.portal.dao.orm.jpa.SessionImpl" />
 	<bean id="liferaySessionFactory" class="com.liferay.portal.dao.orm.jpa.SessionFactoryImpl">
 		<property name="session" ref="liferaySession" />
