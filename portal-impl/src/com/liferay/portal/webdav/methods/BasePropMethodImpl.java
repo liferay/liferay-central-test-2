@@ -398,6 +398,7 @@ public abstract class BasePropMethodImpl implements Method {
 
 			try {
 				ServletResponseUtil.write(response, xml);
+
 				response.flushBuffer();
 			}
 			catch (Exception e) {
