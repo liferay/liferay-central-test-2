@@ -311,7 +311,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			</tr>
 			<tr>
 				<td>
-					<aui:input cssClass="journal-article-localized-checkbox" disabled="<%= article == null %>" label="localize" name="enableLocalization" type="checkbox" value="<%= localizationEnabled %>" />
+					<aui:input cssClass="journal-article-localized-checkbox" disabled="<%= article == null %>" label="localized" name="enableLocalization" type="checkbox" value="<%= localizationEnabled %>" />
 				</td>
 			</tr>
 			<tr class="journal-article-language-options">
