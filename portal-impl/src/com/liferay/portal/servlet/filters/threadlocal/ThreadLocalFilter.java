@@ -14,6 +14,7 @@
 
 package com.liferay.portal.servlet.filters.threadlocal;
 
+import com.liferay.portal.kernel.util.ConcurrentCharBufferPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ThreadLocalRegistry;
@@ -36,11 +37,13 @@ public class ThreadLocalFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
+		ConcurrentCharBufferPool.recordBorrow();
 		try {
 			processFilter(
 				ThreadLocalFilter.class, request, response, filterChain);
 		}
 		finally {
+			ConcurrentCharBufferPool.returnCharBuffers();
 			ThreadLocalRegistry.resetThreadLocals();
 		}
 	}

@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.memory.SoftReferenceThreadLocal;
 import java.io.IOException;
 import java.io.Writer;
 
+import java.lang.reflect.Constructor;
+
 /**
  * <p>
  * See http://issues.liferay.com/browse/LPS-6072.
@@ -224,6 +226,10 @@ public class StringBundler {
 	}
 
 	public String toString() {
+		return toString(true);
+	}
+
+	public String toString(boolean unsafeCreate) {
 		if (_arrayIndex == 0) {
 			return StringPool.BLANK;
 		}
@@ -248,7 +254,27 @@ public class StringBundler {
 
 		StringBuilder sb = null;
 
-		if (length > _threadLocalBufferLimit) {
+		if (length > _unsafeCreateLimit && _stringConstructor != null &&
+			ConcurrentCharBufferPool.isEnabled() && unsafeCreate) {
+
+			char[] charBuffer = ConcurrentCharBufferPool.borrowCharBuffer(
+				length);
+			int offset = 0;
+			for(int i = 0; i < _arrayIndex; i++) {
+				String s = _array[i];
+				s.getChars(0, s.length(), charBuffer, offset);
+				offset += s.length();
+			}
+
+			try {
+				return _stringConstructor.newInstance(0, length, charBuffer);
+			}
+			catch(Exception e) {
+				_stringConstructor = null;
+				return sb.toString();
+			}
+		}
+		else if (length > _threadLocalBufferLimit) {
 			sb = _stringBuilderThreadLocal.get();
 
 			if (sb == null) {
@@ -297,8 +323,14 @@ public class StringBundler {
 
 	private static final String _TRUE = "true";
 
+	private static final int _UNSAFE_CREATE_LIMIT = GetterUtil.getInteger(
+		System.getProperty(
+			StringBundler.class.getName() + ".unsafe.create.limit"));
+
 	private static ThreadLocal<StringBuilder> _stringBuilderThreadLocal;
 	private static int _threadLocalBufferLimit;
+	private static int _unsafeCreateLimit;
+	private static Constructor<String> _stringConstructor;
 
 	static {
 		if (_THREADLOCAL_BUFFER_LIMIT > 0) {
@@ -309,6 +341,21 @@ public class StringBundler {
 		else {
 			_stringBuilderThreadLocal = null;
 			_threadLocalBufferLimit = Integer.MAX_VALUE;
+		}
+
+		if (_UNSAFE_CREATE_LIMIT > 0) {
+			try {
+				_unsafeCreateLimit = _UNSAFE_CREATE_LIMIT;
+				_stringConstructor = String.class.getDeclaredConstructor(
+					int.class, int.class, char[].class);
+				_stringConstructor.setAccessible(true);
+			}
+			catch(Exception e) {
+			}
+		}
+		else {
+			_unsafeCreateLimit = Integer.MAX_VALUE;
+			_stringConstructor = null;
 		}
 	}
 
