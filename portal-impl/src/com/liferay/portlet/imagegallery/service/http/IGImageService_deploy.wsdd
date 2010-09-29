@@ -17,6 +17,10 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nameWithExtension" type="tns:string"></parameter>
 		</operation>
+		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getFoldersImagesCount" qname="operNS:getFoldersImagesCount" returnQName="getFoldersImagesCountReturn" returnType="rtns:int" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+			<parameter xmlns:tns="urn:http.service.imagegallery.portlet.liferay.com" qname="folderIds" type="tns:ArrayOf_xsd_long"></parameter>
+		</operation>
 		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" xmlns:rtns="urn:http.service.imagegallery.portlet.liferay.com" xmlns:tns2="http://model.imagegallery.portlet.liferay.com" name="getGroupImages" qname="operNS:getGroupImages" returnQName="getGroupImagesReturn" returnType="rtns:ArrayOf_tns2_IGImageSoap" returnItemType="tns2:IGImageSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
@@ -41,12 +45,12 @@
 		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" xmlns:rtns="urn:http.service.imagegallery.portlet.liferay.com" xmlns:tns2="http://model.imagegallery.portlet.liferay.com" name="getImages" qname="operNS:getImages" returnQName="getImagesReturn" returnType="rtns:ArrayOf_tns2_IGImageSoap" returnItemType="tns2:IGImageSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="start" type="tns:int"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" xmlns:rtns="urn:http.service.imagegallery.portlet.liferay.com" xmlns:tns2="http://model.imagegallery.portlet.liferay.com" name="getImages" qname="operNS:getImages" returnQName="getImagesReturn" returnType="rtns:ArrayOf_tns2_IGImageSoap" returnItemType="tns2:IGImageSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="start" type="tns:int"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getImagesCount" qname="operNS:getImagesCount" returnQName="getImagesCountReturn" returnType="rtns:int" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
@@ -55,8 +59,9 @@
 		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" xmlns:rtns="http://model.imagegallery.portlet.liferay.com" name="getImage" qname="operNS:getImage" returnQName="getImageReturn" returnType="rtns:IGImageSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="imageId" type="tns:long"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="getImage deleteImage deleteImageByFolderIdAndNameWithExtension getImages getImageBySmallImageId getGroupImages getImageByFolderIdAndNameWithExtension getGroupImagesCount getImagesCount getImageByLargeImageId" />
+		<parameter name="allowedMethods" value="getImage getFoldersImagesCount deleteImage deleteImageByFolderIdAndNameWithExtension getImages getImageBySmallImageId getGroupImages getImageByFolderIdAndNameWithExtension getGroupImagesCount getImagesCount getImageByLargeImageId" />
 		<typeMapping xmlns:ns="http://model.imagegallery.portlet.liferay.com" qname="ns:IGImageSoap" type="java:com.liferay.portlet.imagegallery.model.IGImageSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<arrayMapping xmlns:ns="urn:http.service.imagegallery.portlet.liferay.com" xmlns:cmp-ns="http://model.imagegallery.portlet.liferay.com" qname="ns:ArrayOf_tns2_IGImageSoap" type="java:com.liferay.portlet.imagegallery.model.IGImageSoap[]" innerType="cmp-ns:IGImageSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<arrayMapping xmlns:ns="urn:http.service.imagegallery.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_long" type="java:long[]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 	</service>
 </deployment>

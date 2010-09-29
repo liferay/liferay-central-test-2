@@ -383,6 +383,19 @@ public class PasswordPolicyUtil {
 	}
 
 	/**
+	* Filters by the user's permissions and counts all the password policies where companyId = &#63; and defaultPolicy = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @param defaultPolicy the default policy to search with
+	* @return the number of matching password policies that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByC_DP(long companyId, boolean defaultPolicy)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByC_DP(companyId, defaultPolicy);
+	}
+
+	/**
 	* Counts all the password policies where companyId = &#63; and name = &#63;.
 	*
 	* @param companyId the company id to search with
@@ -393,6 +406,19 @@ public class PasswordPolicyUtil {
 	public static int countByC_N(long companyId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_N(companyId, name);
+	}
+
+	/**
+	* Filters by the user's permissions and counts all the password policies where companyId = &#63; and name = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @param name the name to search with
+	* @return the number of matching password policies that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByC_N(long companyId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByC_N(companyId, name);
 	}
 
 	/**

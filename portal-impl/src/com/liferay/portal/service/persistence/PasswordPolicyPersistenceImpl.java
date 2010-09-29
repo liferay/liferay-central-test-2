@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -39,6 +40,7 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.impl.PasswordPolicyImpl;
 import com.liferay.portal.model.impl.PasswordPolicyModelImpl;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.io.Serializable;
@@ -985,6 +987,60 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 	}
 
 	/**
+	 * Filters by the user's permissions and counts all the password policies where companyId = &#63; and defaultPolicy = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param defaultPolicy the default policy to search with
+	 * @return the number of matching password policies that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int filterCountByC_DP(long companyId, boolean defaultPolicy)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByC_DP(companyId, defaultPolicy);
+		}
+
+		StringBundler query = new StringBundler(3);
+
+		query.append(_FILTER_SQL_COUNT_PASSWORDPOLICY_WHERE);
+
+		query.append(_FINDER_COLUMN_C_DP_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_DP_DEFAULTPOLICY_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				PasswordPolicy.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			qPos.add(defaultPolicy);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
 	 * Counts all the password policies where companyId = &#63; and name = &#63;.
 	 *
 	 * @param companyId the company id to search with
@@ -1053,6 +1109,72 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		}
 
 		return count.intValue();
+	}
+
+	/**
+	 * Filters by the user's permissions and counts all the password policies where companyId = &#63; and name = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @return the number of matching password policies that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int filterCountByC_N(long companyId, String name)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByC_N(companyId, name);
+		}
+
+		StringBundler query = new StringBundler(3);
+
+		query.append(_FILTER_SQL_COUNT_PASSWORDPOLICY_WHERE);
+
+		query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
+
+		if (name == null) {
+			query.append(_FINDER_COLUMN_C_N_NAME_1);
+		}
+		else {
+			if (name.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_C_N_NAME_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_C_N_NAME_2);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				PasswordPolicy.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			if (name != null) {
+				qPos.add(name);
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	/**
@@ -1244,6 +1366,13 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 	private static final String _FINDER_COLUMN_C_N_NAME_1 = "passwordPolicy.name IS NULL";
 	private static final String _FINDER_COLUMN_C_N_NAME_2 = "passwordPolicy.name = ?";
 	private static final String _FINDER_COLUMN_C_N_NAME_3 = "(passwordPolicy.name IS NULL OR passwordPolicy.name = ?)";
+	private static final String _FILTER_SQL_SELECT_PASSWORDPOLICY_WHERE = "SELECT DISTINCT {passwordPolicy.*} FROM PasswordPolicy passwordPolicy WHERE ";
+	private static final String _FILTER_SQL_SELECT_PASSWORDPOLICY_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {passwordPolicy.*} FROM (SELECT DISTINCT passwordPolicyId FROM PasswordPolicy) passwordPolicy2 INNER JOIN PasswordPolicy passwordPolicy ON (passwordPolicy2.passwordPolicyId = passwordPolicy.passwordPolicyId) WHERE ";
+	private static final String _FILTER_SQL_COUNT_PASSWORDPOLICY_WHERE = "SELECT COUNT(DISTINCT passwordPolicy.passwordPolicyId) AS COUNT_VALUE FROM PasswordPolicy passwordPolicy WHERE ";
+	private static final String _FILTER_COLUMN_PK = "passwordPolicy.passwordPolicyId";
+	private static final String _FILTER_COLUMN_USERID = "passwordPolicy.userId";
+	private static final String _FILTER_ENTITY_ALIAS = "passwordPolicy";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "passwordPolicy.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No PasswordPolicy exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No PasswordPolicy exists with the key {";

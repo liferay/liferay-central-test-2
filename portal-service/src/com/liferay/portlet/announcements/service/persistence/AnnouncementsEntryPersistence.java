@@ -208,6 +208,53 @@ public interface AnnouncementsEntryPersistence extends BasePersistence<Announcem
 			com.liferay.portlet.announcements.NoSuchEntryException;
 
 	/**
+	* Filters by the user's permissions and finds all the announcements entries where uuid = &#63;.
+	*
+	* @param uuid the uuid to search with
+	* @return the matching announcements entries that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> filterFindByUuid(
+		java.lang.String uuid)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds a range of all the announcements entries where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param start the lower bound of the range of announcements entries to return
+	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @return the range of matching announcements entries that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> filterFindByUuid(
+		java.lang.String uuid, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the announcements entries where uuid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param uuid the uuid to search with
+	* @param start the lower bound of the range of announcements entries to return
+	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching announcements entries that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> filterFindByUuid(
+		java.lang.String uuid, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Finds all the announcements entries where userId = &#63;.
 	*
 	* @param userId the user id to search with
@@ -310,6 +357,52 @@ public interface AnnouncementsEntryPersistence extends BasePersistence<Announcem
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchEntryException;
+
+	/**
+	* Filters by the user's permissions and finds all the announcements entries where userId = &#63;.
+	*
+	* @param userId the user id to search with
+	* @return the matching announcements entries that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> filterFindByUserId(
+		long userId) throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds a range of all the announcements entries where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param start the lower bound of the range of announcements entries to return
+	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @return the range of matching announcements entries that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> filterFindByUserId(
+		long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the announcements entries where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userId the user id to search with
+	* @param start the lower bound of the range of announcements entries to return
+	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching announcements entries that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> filterFindByUserId(
+		long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Finds all the announcements entries where classNameId = &#63; and classPK = &#63;.
@@ -421,6 +514,56 @@ public interface AnnouncementsEntryPersistence extends BasePersistence<Announcem
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.announcements.NoSuchEntryException;
+
+	/**
+	* Filters by the user's permissions and finds all the announcements entries where classNameId = &#63; and classPK = &#63;.
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @return the matching announcements entries that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> filterFindByC_C(
+		long classNameId, long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds a range of all the announcements entries where classNameId = &#63; and classPK = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param start the lower bound of the range of announcements entries to return
+	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @return the range of matching announcements entries that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> filterFindByC_C(
+		long classNameId, long classPK, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the announcements entries where classNameId = &#63; and classPK = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param start the lower bound of the range of announcements entries to return
+	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching announcements entries that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> filterFindByC_C(
+		long classNameId, long classPK, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Finds all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
@@ -540,6 +683,59 @@ public interface AnnouncementsEntryPersistence extends BasePersistence<Announcem
 			com.liferay.portlet.announcements.NoSuchEntryException;
 
 	/**
+	* Filters by the user's permissions and finds all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param alert the alert to search with
+	* @return the matching announcements entries that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> filterFindByC_C_A(
+		long classNameId, long classPK, boolean alert)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds a range of all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param alert the alert to search with
+	* @param start the lower bound of the range of announcements entries to return
+	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @return the range of matching announcements entries that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> filterFindByC_C_A(
+		long classNameId, long classPK, boolean alert, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param alert the alert to search with
+	* @param start the lower bound of the range of announcements entries to return
+	* @param end the upper bound of the range of announcements entries to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching announcements entries that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> filterFindByC_C_A(
+		long classNameId, long classPK, boolean alert, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Finds all the announcements entries.
 	*
 	* @return the announcements entries
@@ -640,6 +836,16 @@ public interface AnnouncementsEntryPersistence extends BasePersistence<Announcem
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Filters by the user's permissions and counts all the announcements entries where uuid = &#63;.
+	*
+	* @param uuid the uuid to search with
+	* @return the number of matching announcements entries that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByUuid(java.lang.String uuid)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Counts all the announcements entries where userId = &#63;.
 	*
 	* @param userId the user id to search with
@@ -647,6 +853,16 @@ public interface AnnouncementsEntryPersistence extends BasePersistence<Announcem
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByUserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and counts all the announcements entries where userId = &#63;.
+	*
+	* @param userId the user id to search with
+	* @return the number of matching announcements entries that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByUserId(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -661,6 +877,17 @@ public interface AnnouncementsEntryPersistence extends BasePersistence<Announcem
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Filters by the user's permissions and counts all the announcements entries where classNameId = &#63; and classPK = &#63;.
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @return the number of matching announcements entries that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByC_C(long classNameId, long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Counts all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
 	*
 	* @param classNameId the class name id to search with
@@ -670,6 +897,18 @@ public interface AnnouncementsEntryPersistence extends BasePersistence<Announcem
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByC_C_A(long classNameId, long classPK, boolean alert)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and counts all the announcements entries where classNameId = &#63; and classPK = &#63; and alert = &#63;.
+	*
+	* @param classNameId the class name id to search with
+	* @param classPK the class p k to search with
+	* @param alert the alert to search with
+	* @return the number of matching announcements entries that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByC_C_A(long classNameId, long classPK, boolean alert)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
