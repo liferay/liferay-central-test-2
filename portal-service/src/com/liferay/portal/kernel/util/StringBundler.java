@@ -254,24 +254,28 @@ public class StringBundler {
 
 		StringBuilder sb = null;
 
-		if (length > _unsafeCreateLimit && _stringConstructor != null &&
-			ConcurrentCharBufferPool.isEnabled() && unsafeCreate) {
+		if ((length > _unsafeCreateLimit) && (_stringConstructor != null) &&
+			CharBufferPool.isEnabled() && unsafeCreate) {
 
-			char[] charBuffer = ConcurrentCharBufferPool.borrowCharBuffer(
-				length);
+			char[] charBuffer = CharBufferPool.borrow(length);
+
 			int offset = 0;
-			for(int i = 0; i < _arrayIndex; i++) {
+
+			for (int i = 0; i < _arrayIndex; i++) {
 				String s = _array[i];
+
 				s.getChars(0, s.length(), charBuffer, offset);
+
 				offset += s.length();
 			}
 
 			try {
 				return _stringConstructor.newInstance(0, length, charBuffer);
 			}
-			catch(Exception e) {
+			catch (Exception e) {
 				_stringConstructor = null;
-				return sb.toString();
+
+				return StringPool.BLANK;
 			}
 		}
 		else if (length > _threadLocalBufferLimit) {
@@ -346,11 +350,13 @@ public class StringBundler {
 		if (_UNSAFE_CREATE_LIMIT > 0) {
 			try {
 				_unsafeCreateLimit = _UNSAFE_CREATE_LIMIT;
+
 				_stringConstructor = String.class.getDeclaredConstructor(
 					int.class, int.class, char[].class);
+
 				_stringConstructor.setAccessible(true);
 			}
-			catch(Exception e) {
+			catch (Exception e) {
 			}
 		}
 		else {

@@ -12,11 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.servlet.filters.threadlocal;
+package com.liferay.portal.servlet.filters.charbufferpool;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PropsUtil;
-import com.liferay.portal.kernel.util.ThreadLocalRegistry;
+import com.liferay.portal.kernel.util.CharBufferPool;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 
 import javax.servlet.FilterChain;
@@ -26,22 +24,21 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Brian Wing Shun Chan
  */
-public class ThreadLocalFilter extends BasePortalFilter {
-
-	public static final boolean ENABLED = GetterUtil.getBoolean(
-		PropsUtil.get(ThreadLocalFilter.class.getName()));
+public class CharBufferPoolFilter extends BasePortalFilter {
 
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
 		throws Exception {
 
+		CharBufferPool.setEnabled(true);
+
 		try {
 			processFilter(
-				ThreadLocalFilter.class, request, response, filterChain);
+				CharBufferPoolFilter.class, request, response, filterChain);
 		}
 		finally {
-			ThreadLocalRegistry.resetThreadLocals();
+			CharBufferPool.cleanUp();
 		}
 	}
 
