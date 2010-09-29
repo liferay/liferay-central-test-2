@@ -842,10 +842,6 @@ public class PropsValues {
 
 	public static final boolean ORGANIZATIONS_SEARCH_WITH_INDEX = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_SEARCH_WITH_INDEX));
 
-	public static final String[] ORGANIZATIONS_VIEWS = PropsUtil.getArray(PropsKeys.ORGANIZATIONS_VIEWS);
-
-	public static final String ORGANIZATIONS_VIEWS_DEFAULT = PropsUtil.get(PropsKeys.ORGANIZATIONS_VIEWS_DEFAULT);
-
 	public static String[] ORGANIZATIONS_TYPES = PropsUtil.getArray(PropsKeys.ORGANIZATIONS_TYPES);
 
 	public static final boolean ORGANIZATIONS_USER_GROUP_MEMBERSHIP_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_USER_GROUP_MEMBERSHIP_ENABLED));

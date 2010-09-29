@@ -81,21 +81,8 @@
 	overflow: hidden;
 }
 
-.lfr-asset-column-details .lfr-asset-organizations {
-	background: url(<%= themeImagesPath %>/common/organization_icon.png) no-repeat 0 50%;
-}
-
 .lfr-asset-column-details .lfr-asset-subfolders {
 	background: url(<%= themeImagesPath %>/common/folder.png) no-repeat 0 50%;
-}
-
-.lfr-asset-column-details .lfr-asset-teams {
-	background: url(<%= themeImagesPath %>/common/team_icon.png) no-repeat 0 50%;
-	border-right: none;	
-}
-
-.lfr-asset-column-details .lfr-asset-users {
-	background: url(<%= themeImagesPath %>/common/view_users.png) no-repeat 0 50%;
 }
 
 .lfr-asset-column-details .lfr-asset-items {
