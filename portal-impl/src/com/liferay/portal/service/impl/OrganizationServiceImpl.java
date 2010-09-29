@@ -211,7 +211,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return organizationLocalService.getOrganizations(
-				companyId, parentOrganizationId);
+			companyId, parentOrganizationId);
 	}
 
 	public List<Organization> getOrganizations(
@@ -219,7 +219,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return organizationLocalService.getOrganizations(
-				companyId, parentOrganizationId, start, end);
+			companyId, parentOrganizationId, start, end);
 	}
 
 	public int getOrganizationsCount(
