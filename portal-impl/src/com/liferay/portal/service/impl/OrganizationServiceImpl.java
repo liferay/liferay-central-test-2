@@ -210,7 +210,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			long companyId, long parentOrganizationId)
 		throws SystemException {
 
-		return organizationLocalService.getOrganizations(
+		return organizationPersistence.filterFindByC_P(
 			companyId, parentOrganizationId);
 	}
 
@@ -218,7 +218,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			long companyId, long parentOrganizationId, int start, int end)
 		throws SystemException {
 
-		return organizationLocalService.getOrganizations(
+		return organizationPersistence.filterFindByC_P(
 			companyId, parentOrganizationId, start, end);
 	}
 
@@ -226,7 +226,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			long companyId, long parentOrganizationId)
 		throws SystemException {
 
-		return organizationLocalService.getOrganizationsCount(
+		return organizationPersistence.filterCountByC_P(
 			companyId, parentOrganizationId);
 	}
 
