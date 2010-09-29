@@ -318,6 +318,61 @@ public class OrganizationUtil {
 	}
 
 	/**
+	* Filters by the user's permissions and finds all the organizations where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the matching organizations that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Organization> filterFindByCompanyId(
+		long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByCompanyId(companyId);
+	}
+
+	/**
+	* Filters by the user's permissions and finds a range of all the organizations where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of organizations to return
+	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @return the range of matching organizations that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Organization> filterFindByCompanyId(
+		long companyId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByCompanyId(companyId, start, end);
+	}
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the organizations where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of organizations to return
+	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching organizations that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Organization> filterFindByCompanyId(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByCompanyId(companyId, start, end,
+			orderByComparator);
+	}
+
+	/**
 	* Finds all the organizations where companyId = &#63;.
 	*
 	* @param companyId the company id to search with
@@ -436,6 +491,61 @@ public class OrganizationUtil {
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByLocations_PrevAndNext(organizationId, companyId,
+			orderByComparator);
+	}
+
+	/**
+	* Filters by the user's permissions and finds all the organizations where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the matching organizations that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Organization> filterFindByLocations(
+		long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByLocations(companyId);
+	}
+
+	/**
+	* Filters by the user's permissions and finds a range of all the organizations where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of organizations to return
+	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @return the range of matching organizations that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Organization> filterFindByLocations(
+		long companyId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByLocations(companyId, start, end);
+	}
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the organizations where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of organizations to return
+	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching organizations that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Organization> filterFindByLocations(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByLocations(companyId, start, end,
 			orderByComparator);
 	}
 
@@ -569,6 +679,65 @@ public class OrganizationUtil {
 		return getPersistence()
 				   .findByC_P_PrevAndNext(organizationId, companyId,
 			parentOrganizationId, orderByComparator);
+	}
+
+	/**
+	* Filters by the user's permissions and finds all the organizations where companyId = &#63; and parentOrganizationId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @param parentOrganizationId the parent organization id to search with
+	* @return the matching organizations that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Organization> filterFindByC_P(
+		long companyId, long parentOrganizationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByC_P(companyId, parentOrganizationId);
+	}
+
+	/**
+	* Filters by the user's permissions and finds a range of all the organizations where companyId = &#63; and parentOrganizationId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param parentOrganizationId the parent organization id to search with
+	* @param start the lower bound of the range of organizations to return
+	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @return the range of matching organizations that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Organization> filterFindByC_P(
+		long companyId, long parentOrganizationId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByC_P(companyId, parentOrganizationId, start, end);
+	}
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the organizations where companyId = &#63; and parentOrganizationId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param parentOrganizationId the parent organization id to search with
+	* @param start the lower bound of the range of organizations to return
+	* @param end the upper bound of the range of organizations to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching organizations that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Organization> filterFindByC_P(
+		long companyId, long parentOrganizationId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByC_P(companyId, parentOrganizationId, start,
+			end, orderByComparator);
 	}
 
 	/**
@@ -734,6 +903,18 @@ public class OrganizationUtil {
 	}
 
 	/**
+	* Filters by the user's permissions and counts all the organizations where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the number of matching organizations that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByCompanyId(long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByCompanyId(companyId);
+	}
+
+	/**
 	* Counts all the organizations where companyId = &#63;.
 	*
 	* @param companyId the company id to search with
@@ -743,6 +924,18 @@ public class OrganizationUtil {
 	public static int countByLocations(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByLocations(companyId);
+	}
+
+	/**
+	* Filters by the user's permissions and counts all the organizations where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the number of matching organizations that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByLocations(long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByLocations(companyId);
 	}
 
 	/**
@@ -759,6 +952,19 @@ public class OrganizationUtil {
 	}
 
 	/**
+	* Filters by the user's permissions and counts all the organizations where companyId = &#63; and parentOrganizationId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @param parentOrganizationId the parent organization id to search with
+	* @return the number of matching organizations that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByC_P(long companyId, long parentOrganizationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByC_P(companyId, parentOrganizationId);
+	}
+
+	/**
 	* Counts all the organizations where companyId = &#63; and name = &#63;.
 	*
 	* @param companyId the company id to search with
@@ -769,6 +975,19 @@ public class OrganizationUtil {
 	public static int countByC_N(long companyId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_N(companyId, name);
+	}
+
+	/**
+	* Filters by the user's permissions and counts all the organizations where companyId = &#63; and name = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @param name the name to search with
+	* @return the number of matching organizations that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByC_N(long companyId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByC_N(companyId, name);
 	}
 
 	/**

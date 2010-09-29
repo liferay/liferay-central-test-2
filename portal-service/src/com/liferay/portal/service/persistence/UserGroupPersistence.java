@@ -201,6 +201,53 @@ public interface UserGroupPersistence extends BasePersistence<UserGroup> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Filters by the user's permissions and finds all the user groups where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the matching user groups that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.UserGroup> filterFindByCompanyId(
+		long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds a range of all the user groups where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of user groups to return
+	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @return the range of matching user groups that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.UserGroup> filterFindByCompanyId(
+		long companyId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the user groups where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of user groups to return
+	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching user groups that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.UserGroup> filterFindByCompanyId(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Finds all the user groups where companyId = &#63; and parentUserGroupId = &#63;.
 	*
 	* @param companyId the company id to search with
@@ -310,6 +357,56 @@ public interface UserGroupPersistence extends BasePersistence<UserGroup> {
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserGroupException,
 			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds all the user groups where companyId = &#63; and parentUserGroupId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @param parentUserGroupId the parent user group id to search with
+	* @return the matching user groups that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.UserGroup> filterFindByC_P(
+		long companyId, long parentUserGroupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds a range of all the user groups where companyId = &#63; and parentUserGroupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param parentUserGroupId the parent user group id to search with
+	* @param start the lower bound of the range of user groups to return
+	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @return the range of matching user groups that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.UserGroup> filterFindByC_P(
+		long companyId, long parentUserGroupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the user groups where companyId = &#63; and parentUserGroupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param parentUserGroupId the parent user group id to search with
+	* @param start the lower bound of the range of user groups to return
+	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching user groups that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.UserGroup> filterFindByC_P(
+		long companyId, long parentUserGroupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Finds the user group where companyId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchUserGroupException} if it could not be found.
@@ -441,6 +538,16 @@ public interface UserGroupPersistence extends BasePersistence<UserGroup> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Filters by the user's permissions and counts all the user groups where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the number of matching user groups that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByCompanyId(long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Counts all the user groups where companyId = &#63; and parentUserGroupId = &#63;.
 	*
 	* @param companyId the company id to search with
@@ -452,6 +559,17 @@ public interface UserGroupPersistence extends BasePersistence<UserGroup> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Filters by the user's permissions and counts all the user groups where companyId = &#63; and parentUserGroupId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @param parentUserGroupId the parent user group id to search with
+	* @return the number of matching user groups that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByC_P(long companyId, long parentUserGroupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Counts all the user groups where companyId = &#63; and name = &#63;.
 	*
 	* @param companyId the company id to search with
@@ -460,6 +578,17 @@ public interface UserGroupPersistence extends BasePersistence<UserGroup> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByC_N(long companyId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and counts all the user groups where companyId = &#63; and name = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @param name the name to search with
+	* @return the number of matching user groups that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByC_N(long companyId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

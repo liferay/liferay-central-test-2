@@ -46,6 +46,7 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.model.impl.RoleModelImpl;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.io.Serializable;
@@ -863,6 +864,111 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
+	 * Filters by the user's permissions and finds all the roles where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the matching roles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Role> filterFindByCompanyId(long companyId)
+		throws SystemException {
+		return filterFindByCompanyId(companyId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds a range of all the roles where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of roles to return
+	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @return the range of matching roles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Role> filterFindByCompanyId(long companyId, int start, int end)
+		throws SystemException {
+		return filterFindByCompanyId(companyId, start, end, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the roles where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company id to search with
+	 * @param start the lower bound of the range of roles to return
+	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching roles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Role> filterFindByCompanyId(long companyId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByCompanyId(companyId, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(3 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_ROLE_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_ROLE_NO_INLINE_DISTINCT_WHERE);
+		}
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		if (orderByComparator != null) {
+			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+				orderByComparator);
+		}
+
+		else {
+			query.append(RoleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_FILTER_ENTITY_ALIAS, RoleImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			return (List<Role>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
 	 * Finds all the roles where subtype = &#63;.
 	 *
 	 * @param subtype the subtype to search with
@@ -1217,6 +1323,123 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 		else {
 			return null;
+		}
+	}
+
+	/**
+	 * Filters by the user's permissions and finds all the roles where subtype = &#63;.
+	 *
+	 * @param subtype the subtype to search with
+	 * @return the matching roles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Role> filterFindBySubtype(String subtype)
+		throws SystemException {
+		return filterFindBySubtype(subtype, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds a range of all the roles where subtype = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param subtype the subtype to search with
+	 * @param start the lower bound of the range of roles to return
+	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @return the range of matching roles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Role> filterFindBySubtype(String subtype, int start, int end)
+		throws SystemException {
+		return filterFindBySubtype(subtype, start, end, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the roles where subtype = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param subtype the subtype to search with
+	 * @param start the lower bound of the range of roles to return
+	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching roles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Role> filterFindBySubtype(String subtype, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findBySubtype(subtype, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(3 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_ROLE_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_ROLE_NO_INLINE_DISTINCT_WHERE);
+		}
+
+		if (subtype == null) {
+			query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_1);
+		}
+		else {
+			if (subtype.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+				orderByComparator);
+		}
+
+		else {
+			query.append(RoleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_FILTER_ENTITY_ALIAS, RoleImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (subtype != null) {
+				qPos.add(subtype);
+			}
+
+			return (List<Role>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
@@ -1754,6 +1977,130 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
+	 * Filters by the user's permissions and finds all the roles where type = &#63; and subtype = &#63;.
+	 *
+	 * @param type the type to search with
+	 * @param subtype the subtype to search with
+	 * @return the matching roles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Role> filterFindByT_S(int type, String subtype)
+		throws SystemException {
+		return filterFindByT_S(type, subtype, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds a range of all the roles where type = &#63; and subtype = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param type the type to search with
+	 * @param subtype the subtype to search with
+	 * @param start the lower bound of the range of roles to return
+	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @return the range of matching roles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Role> filterFindByT_S(int type, String subtype, int start,
+		int end) throws SystemException {
+		return filterFindByT_S(type, subtype, start, end, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the roles where type = &#63; and subtype = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param type the type to search with
+	 * @param subtype the subtype to search with
+	 * @param start the lower bound of the range of roles to return
+	 * @param end the upper bound of the range of roles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching roles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Role> filterFindByT_S(int type, String subtype, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByT_S(type, subtype, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_ROLE_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_ROLE_NO_INLINE_DISTINCT_WHERE);
+		}
+
+		query.append(_FINDER_COLUMN_T_S_TYPE_2);
+
+		if (subtype == null) {
+			query.append(_FINDER_COLUMN_T_S_SUBTYPE_1);
+		}
+		else {
+			if (subtype.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_T_S_SUBTYPE_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_T_S_SUBTYPE_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+				orderByComparator);
+		}
+
+		else {
+			query.append(RoleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_FILTER_ENTITY_ALIAS, RoleImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(type);
+
+			if (subtype != null) {
+				qPos.add(subtype);
+			}
+
+			return (List<Role>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
 	 * Finds the role where companyId = &#63; and classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portal.NoSuchRoleException} if it could not be found.
 	 *
 	 * @param companyId the company id to search with
@@ -2140,6 +2487,53 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
+	 * Filters by the user's permissions and counts all the roles where companyId = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @return the number of matching roles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int filterCountByCompanyId(long companyId) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByCompanyId(companyId);
+		}
+
+		StringBundler query = new StringBundler(2);
+
+		query.append(_FILTER_SQL_COUNT_ROLE_WHERE);
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
 	 * Counts all the roles where subtype = &#63;.
 	 *
 	 * @param subtype the subtype to search with
@@ -2202,6 +2596,65 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 
 		return count.intValue();
+	}
+
+	/**
+	 * Filters by the user's permissions and counts all the roles where subtype = &#63;.
+	 *
+	 * @param subtype the subtype to search with
+	 * @return the number of matching roles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int filterCountBySubtype(String subtype) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countBySubtype(subtype);
+		}
+
+		StringBundler query = new StringBundler(2);
+
+		query.append(_FILTER_SQL_COUNT_ROLE_WHERE);
+
+		if (subtype == null) {
+			query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_1);
+		}
+		else {
+			if (subtype.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_SUBTYPE_SUBTYPE_2);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (subtype != null) {
+				qPos.add(subtype);
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	/**
@@ -2276,6 +2729,71 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
+	 * Filters by the user's permissions and counts all the roles where companyId = &#63; and name = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param name the name to search with
+	 * @return the number of matching roles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int filterCountByC_N(long companyId, String name)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByC_N(companyId, name);
+		}
+
+		StringBundler query = new StringBundler(3);
+
+		query.append(_FILTER_SQL_COUNT_ROLE_WHERE);
+
+		query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
+
+		if (name == null) {
+			query.append(_FINDER_COLUMN_C_N_NAME_1);
+		}
+		else {
+			if (name.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_C_N_NAME_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_C_N_NAME_2);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			if (name != null) {
+				qPos.add(name);
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
 	 * Counts all the roles where type = &#63; and subtype = &#63;.
 	 *
 	 * @param type the type to search with
@@ -2346,6 +2864,71 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
+	 * Filters by the user's permissions and counts all the roles where type = &#63; and subtype = &#63;.
+	 *
+	 * @param type the type to search with
+	 * @param subtype the subtype to search with
+	 * @return the number of matching roles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int filterCountByT_S(int type, String subtype)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByT_S(type, subtype);
+		}
+
+		StringBundler query = new StringBundler(3);
+
+		query.append(_FILTER_SQL_COUNT_ROLE_WHERE);
+
+		query.append(_FINDER_COLUMN_T_S_TYPE_2);
+
+		if (subtype == null) {
+			query.append(_FINDER_COLUMN_T_S_SUBTYPE_1);
+		}
+		else {
+			if (subtype.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_T_S_SUBTYPE_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_T_S_SUBTYPE_2);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(type);
+
+			if (subtype != null) {
+				qPos.add(subtype);
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
 	 * Counts all the roles where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * @param companyId the company id to search with
@@ -2407,6 +2990,64 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 
 		return count.intValue();
+	}
+
+	/**
+	 * Filters by the user's permissions and counts all the roles where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param companyId the company id to search with
+	 * @param classNameId the class name id to search with
+	 * @param classPK the class p k to search with
+	 * @return the number of matching roles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int filterCountByC_C_C(long companyId, long classNameId, long classPK)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByC_C_C(companyId, classNameId, classPK);
+		}
+
+		StringBundler query = new StringBundler(4);
+
+		query.append(_FILTER_SQL_COUNT_ROLE_WHERE);
+
+		query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
+
+		query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			qPos.add(classNameId);
+
+			qPos.add(classPK);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	/**
@@ -4543,6 +5184,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	private static final String _FINDER_COLUMN_C_C_C_COMPANYID_2 = "role.companyId = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_C_CLASSNAMEID_2 = "role.classNameId = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_C_CLASSPK_2 = "role.classPK = ?";
+	private static final String _FILTER_SQL_SELECT_ROLE_WHERE = "SELECT DISTINCT {role.*} FROM Role_ role WHERE ";
+	private static final String _FILTER_SQL_SELECT_ROLE_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {role.*} FROM (SELECT DISTINCT roleId FROM Role_) role2 INNER JOIN Role_ role ON (role2.roleId = role.roleId) WHERE ";
+	private static final String _FILTER_SQL_COUNT_ROLE_WHERE = "SELECT COUNT(DISTINCT role.roleId) AS COUNT_VALUE FROM Role_ role WHERE ";
+	private static final String _FILTER_COLUMN_PK = "role.roleId";
+	private static final String _FILTER_COLUMN_USERID = null;
+	private static final String _FILTER_ENTITY_ALIAS = "role";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "role.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Role exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Role exists with the key {";

@@ -470,6 +470,60 @@ public class LayoutUtil {
 	}
 
 	/**
+	* Filters by the user's permissions and finds all the layouts where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the matching layouts that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Layout> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId);
+	}
+
+	/**
+	* Filters by the user's permissions and finds a range of all the layouts where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of layouts to return
+	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @return the range of matching layouts that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Layout> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId, start, end);
+	}
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the layouts where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param start the lower bound of the range of layouts to return
+	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching layouts that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Layout> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByGroupId(groupId, start, end, orderByComparator);
+	}
+
+	/**
 	* Finds all the layouts where companyId = &#63;.
 	*
 	* @param companyId the company id to search with
@@ -804,6 +858,65 @@ public class LayoutUtil {
 	}
 
 	/**
+	* Filters by the user's permissions and finds all the layouts where groupId = &#63; and privateLayout = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param privateLayout the private layout to search with
+	* @return the matching layouts that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Layout> filterFindByG_P(
+		long groupId, boolean privateLayout)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_P(groupId, privateLayout);
+	}
+
+	/**
+	* Filters by the user's permissions and finds a range of all the layouts where groupId = &#63; and privateLayout = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param privateLayout the private layout to search with
+	* @param start the lower bound of the range of layouts to return
+	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @return the range of matching layouts that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Layout> filterFindByG_P(
+		long groupId, boolean privateLayout, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_P(groupId, privateLayout, start, end);
+	}
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the layouts where groupId = &#63; and privateLayout = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param privateLayout the private layout to search with
+	* @param start the lower bound of the range of layouts to return
+	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching layouts that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Layout> filterFindByG_P(
+		long groupId, boolean privateLayout, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_P(groupId, privateLayout, start, end,
+			orderByComparator);
+	}
+
+	/**
 	* Finds the layout where groupId = &#63; and privateLayout = &#63; and layoutId = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
 	*
 	* @param groupId the group id to search with
@@ -994,6 +1107,71 @@ public class LayoutUtil {
 	}
 
 	/**
+	* Filters by the user's permissions and finds all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param privateLayout the private layout to search with
+	* @param parentLayoutId the parent layout id to search with
+	* @return the matching layouts that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Layout> filterFindByG_P_P(
+		long groupId, boolean privateLayout, long parentLayoutId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_P_P(groupId, privateLayout, parentLayoutId);
+	}
+
+	/**
+	* Filters by the user's permissions and finds a range of all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param privateLayout the private layout to search with
+	* @param parentLayoutId the parent layout id to search with
+	* @param start the lower bound of the range of layouts to return
+	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @return the range of matching layouts that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Layout> filterFindByG_P_P(
+		long groupId, boolean privateLayout, long parentLayoutId, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_P_P(groupId, privateLayout, parentLayoutId,
+			start, end);
+	}
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param privateLayout the private layout to search with
+	* @param parentLayoutId the parent layout id to search with
+	* @param start the lower bound of the range of layouts to return
+	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching layouts that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Layout> filterFindByG_P_P(
+		long groupId, boolean privateLayout, long parentLayoutId, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_P_P(groupId, privateLayout, parentLayoutId,
+			start, end, orderByComparator);
+	}
+
+	/**
 	* Finds the layout where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutException} if it could not be found.
 	*
 	* @param groupId the group id to search with
@@ -1179,6 +1357,69 @@ public class LayoutUtil {
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .findByG_P_T_PrevAndNext(plid, groupId, privateLayout, type,
+			orderByComparator);
+	}
+
+	/**
+	* Filters by the user's permissions and finds all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param privateLayout the private layout to search with
+	* @param type the type to search with
+	* @return the matching layouts that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Layout> filterFindByG_P_T(
+		long groupId, boolean privateLayout, java.lang.String type)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByG_P_T(groupId, privateLayout, type);
+	}
+
+	/**
+	* Filters by the user's permissions and finds a range of all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param privateLayout the private layout to search with
+	* @param type the type to search with
+	* @param start the lower bound of the range of layouts to return
+	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @return the range of matching layouts that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Layout> filterFindByG_P_T(
+		long groupId, boolean privateLayout, java.lang.String type, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_P_T(groupId, privateLayout, type, start, end);
+	}
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group id to search with
+	* @param privateLayout the private layout to search with
+	* @param type the type to search with
+	* @param start the lower bound of the range of layouts to return
+	* @param end the upper bound of the range of layouts to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching layouts that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Layout> filterFindByG_P_T(
+		long groupId, boolean privateLayout, java.lang.String type, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_P_T(groupId, privateLayout, type, start, end,
 			orderByComparator);
 	}
 
@@ -1419,6 +1660,18 @@ public class LayoutUtil {
 	}
 
 	/**
+	* Filters by the user's permissions and counts all the layouts where groupId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @return the number of matching layouts that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByGroupId(groupId);
+	}
+
+	/**
 	* Counts all the layouts where companyId = &#63;.
 	*
 	* @param companyId the company id to search with
@@ -1468,6 +1721,19 @@ public class LayoutUtil {
 	}
 
 	/**
+	* Filters by the user's permissions and counts all the layouts where groupId = &#63; and privateLayout = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param privateLayout the private layout to search with
+	* @return the number of matching layouts that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByG_P(long groupId, boolean privateLayout)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_P(groupId, privateLayout);
+	}
+
+	/**
 	* Counts all the layouts where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
 	*
 	* @param groupId the group id to search with
@@ -1480,6 +1746,22 @@ public class LayoutUtil {
 		long layoutId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_P_L(groupId, privateLayout, layoutId);
+	}
+
+	/**
+	* Filters by the user's permissions and counts all the layouts where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param privateLayout the private layout to search with
+	* @param layoutId the layout id to search with
+	* @return the number of matching layouts that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByG_P_L(long groupId, boolean privateLayout,
+		long layoutId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterCountByG_P_L(groupId, privateLayout, layoutId);
 	}
 
 	/**
@@ -1499,6 +1781,22 @@ public class LayoutUtil {
 	}
 
 	/**
+	* Filters by the user's permissions and counts all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param privateLayout the private layout to search with
+	* @param parentLayoutId the parent layout id to search with
+	* @return the number of matching layouts that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByG_P_P(long groupId, boolean privateLayout,
+		long parentLayoutId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterCountByG_P_P(groupId, privateLayout, parentLayoutId);
+	}
+
+	/**
 	* Counts all the layouts where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63;.
 	*
 	* @param groupId the group id to search with
@@ -1514,6 +1812,22 @@ public class LayoutUtil {
 	}
 
 	/**
+	* Filters by the user's permissions and counts all the layouts where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param privateLayout the private layout to search with
+	* @param friendlyURL the friendly u r l to search with
+	* @return the number of matching layouts that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByG_P_F(long groupId, boolean privateLayout,
+		java.lang.String friendlyURL)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterCountByG_P_F(groupId, privateLayout, friendlyURL);
+	}
+
+	/**
 	* Counts all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
 	*
 	* @param groupId the group id to search with
@@ -1526,6 +1840,21 @@ public class LayoutUtil {
 		java.lang.String type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_P_T(groupId, privateLayout, type);
+	}
+
+	/**
+	* Filters by the user's permissions and counts all the layouts where groupId = &#63; and privateLayout = &#63; and type = &#63;.
+	*
+	* @param groupId the group id to search with
+	* @param privateLayout the private layout to search with
+	* @param type the type to search with
+	* @return the number of matching layouts that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByG_P_T(long groupId, boolean privateLayout,
+		java.lang.String type)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByG_P_T(groupId, privateLayout, type);
 	}
 
 	/**

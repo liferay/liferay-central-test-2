@@ -205,6 +205,53 @@ public interface LayoutPrototypePersistence extends BasePersistence<LayoutProtot
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Filters by the user's permissions and finds all the layout prototypes where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the matching layout prototypes that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.LayoutPrototype> filterFindByCompanyId(
+		long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds a range of all the layout prototypes where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of layout prototypes to return
+	* @param end the upper bound of the range of layout prototypes to return (not inclusive)
+	* @return the range of matching layout prototypes that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.LayoutPrototype> filterFindByCompanyId(
+		long companyId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the layout prototypes where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param start the lower bound of the range of layout prototypes to return
+	* @param end the upper bound of the range of layout prototypes to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching layout prototypes that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.LayoutPrototype> filterFindByCompanyId(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Finds all the layout prototypes where companyId = &#63; and active = &#63;.
 	*
 	* @param companyId the company id to search with
@@ -316,6 +363,56 @@ public interface LayoutPrototypePersistence extends BasePersistence<LayoutProtot
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Filters by the user's permissions and finds all the layout prototypes where companyId = &#63; and active = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @param active the active to search with
+	* @return the matching layout prototypes that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.LayoutPrototype> filterFindByC_A(
+		long companyId, boolean active)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds a range of all the layout prototypes where companyId = &#63; and active = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param active the active to search with
+	* @param start the lower bound of the range of layout prototypes to return
+	* @param end the upper bound of the range of layout prototypes to return (not inclusive)
+	* @return the range of matching layout prototypes that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.LayoutPrototype> filterFindByC_A(
+		long companyId, boolean active, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the layout prototypes where companyId = &#63; and active = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company id to search with
+	* @param active the active to search with
+	* @param start the lower bound of the range of layout prototypes to return
+	* @param end the upper bound of the range of layout prototypes to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching layout prototypes that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.LayoutPrototype> filterFindByC_A(
+		long companyId, boolean active, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Finds all the layout prototypes.
 	*
 	* @return the layout prototypes
@@ -396,6 +493,16 @@ public interface LayoutPrototypePersistence extends BasePersistence<LayoutProtot
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Filters by the user's permissions and counts all the layout prototypes where companyId = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @return the number of matching layout prototypes that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByCompanyId(long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Counts all the layout prototypes where companyId = &#63; and active = &#63;.
 	*
 	* @param companyId the company id to search with
@@ -404,6 +511,17 @@ public interface LayoutPrototypePersistence extends BasePersistence<LayoutProtot
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByC_A(long companyId, boolean active)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and counts all the layout prototypes where companyId = &#63; and active = &#63;.
+	*
+	* @param companyId the company id to search with
+	* @param active the active to search with
+	* @return the number of matching layout prototypes that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByC_A(long companyId, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
