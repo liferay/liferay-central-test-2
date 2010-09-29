@@ -487,16 +487,20 @@ public class Entity {
 	}
 
 	public boolean isPermissionCheckEnabled(EntityFinder finder) {
-		if (!finder.getName().equals("UUID_G") && hasPrimitivePK() &&
-			hasColumn("userId") && finder.hasColumn("groupId") &&
-			ResourceActionsUtil.hasModelResourceActions(
+		if (_name.equals("Group") || _name.equals("User") ||
+			finder.getName().equals("UUID_G") || !hasPrimitivePK() ||
+			!hasColumn("userId") ||
+			!ResourceActionsUtil.hasModelResourceActions(
 				_packagePath + ".model." + _name)) {
 
-			return true;
-		}
-		else {
 			return false;
 		}
+
+		if (hasColumn("groupId") && !finder.hasColumn("groupId")) {
+			return false;
+		}
+
+		return true;
 	}
 
 	public boolean isPortalReference() {
