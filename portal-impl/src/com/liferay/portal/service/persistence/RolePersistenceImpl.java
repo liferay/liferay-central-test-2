@@ -2729,71 +2729,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the roles where companyId = &#63; and name = &#63;.
-	 *
-	 * @param companyId the company id to search with
-	 * @param name the name to search with
-	 * @return the number of matching roles that the user has permission to view
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int filterCountByC_N(long companyId, String name)
-		throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
-			return countByC_N(companyId, name);
-		}
-
-		StringBundler query = new StringBundler(3);
-
-		query.append(_FILTER_SQL_COUNT_ROLE_WHERE);
-
-		query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
-
-		if (name == null) {
-			query.append(_FINDER_COLUMN_C_N_NAME_1);
-		}
-		else {
-			if (name.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_C_N_NAME_3);
-			}
-			else {
-				query.append(_FINDER_COLUMN_C_N_NAME_2);
-			}
-		}
-
-		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME,
-				com.liferay.portal.kernel.dao.orm.Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-
-			if (name != null) {
-				qPos.add(name);
-			}
-
-			Long count = (Long)q.uniqueResult();
-
-			return count.intValue();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	/**
 	 * Counts all the roles where type = &#63; and subtype = &#63;.
 	 *
 	 * @param type the type to search with
@@ -2990,64 +2925,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 
 		return count.intValue();
-	}
-
-	/**
-	 * Filters by the user's permissions and counts all the roles where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
-	 *
-	 * @param companyId the company id to search with
-	 * @param classNameId the class name id to search with
-	 * @param classPK the class p k to search with
-	 * @return the number of matching roles that the user has permission to view
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int filterCountByC_C_C(long companyId, long classNameId, long classPK)
-		throws SystemException {
-		if (!InlineSQLHelperUtil.isEnabled()) {
-			return countByC_C_C(companyId, classNameId, classPK);
-		}
-
-		StringBundler query = new StringBundler(4);
-
-		query.append(_FILTER_SQL_COUNT_ROLE_WHERE);
-
-		query.append(_FINDER_COLUMN_C_C_C_COMPANYID_2);
-
-		query.append(_FINDER_COLUMN_C_C_C_CLASSNAMEID_2);
-
-		query.append(_FINDER_COLUMN_C_C_C_CLASSPK_2);
-
-		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME,
-				com.liferay.portal.kernel.dao.orm.Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-
-			qPos.add(classNameId);
-
-			qPos.add(classPK);
-
-			Long count = (Long)q.uniqueResult();
-
-			return count.intValue();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
 	}
 
 	/**

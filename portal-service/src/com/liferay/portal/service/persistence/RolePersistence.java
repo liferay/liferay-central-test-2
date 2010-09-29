@@ -788,17 +788,6 @@ public interface RolePersistence extends BasePersistence<Role> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and counts all the roles where companyId = &#63; and name = &#63;.
-	*
-	* @param companyId the company id to search with
-	* @param name the name to search with
-	* @return the number of matching roles that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public int filterCountByC_N(long companyId, java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Counts all the roles where type = &#63; and subtype = &#63;.
 	*
 	* @param type the type to search with
@@ -830,18 +819,6 @@ public interface RolePersistence extends BasePersistence<Role> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByC_C_C(long companyId, long classNameId, long classPK)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Filters by the user's permissions and counts all the roles where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
-	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
-	* @param classPK the class p k to search with
-	* @return the number of matching roles that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public int filterCountByC_C_C(long companyId, long classNameId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

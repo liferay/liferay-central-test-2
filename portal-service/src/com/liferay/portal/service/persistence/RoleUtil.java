@@ -997,19 +997,6 @@ public class RoleUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the roles where companyId = &#63; and name = &#63;.
-	*
-	* @param companyId the company id to search with
-	* @param name the name to search with
-	* @return the number of matching roles that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int filterCountByC_N(long companyId, java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().filterCountByC_N(companyId, name);
-	}
-
-	/**
 	* Counts all the roles where type = &#63; and subtype = &#63;.
 	*
 	* @param type the type to search with
@@ -1048,22 +1035,6 @@ public class RoleUtil {
 		long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByC_C_C(companyId, classNameId, classPK);
-	}
-
-	/**
-	* Filters by the user's permissions and counts all the roles where companyId = &#63; and classNameId = &#63; and classPK = &#63;.
-	*
-	* @param companyId the company id to search with
-	* @param classNameId the class name id to search with
-	* @param classPK the class p k to search with
-	* @return the number of matching roles that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int filterCountByC_C_C(long companyId, long classNameId,
-		long classPK)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .filterCountByC_C_C(companyId, classNameId, classPK);
 	}
 
 	/**
