@@ -1419,19 +1419,6 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and counts all the layouts where groupId = &#63; and privateLayout = &#63; and layoutId = &#63;.
-	*
-	* @param groupId the group id to search with
-	* @param privateLayout the private layout to search with
-	* @param layoutId the layout id to search with
-	* @return the number of matching layouts that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public int filterCountByG_P_L(long groupId, boolean privateLayout,
-		long layoutId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Counts all the layouts where groupId = &#63; and privateLayout = &#63; and parentLayoutId = &#63;.
 	*
 	* @param groupId the group id to search with
@@ -1467,19 +1454,6 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByG_P_F(long groupId, boolean privateLayout,
-		java.lang.String friendlyURL)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Filters by the user's permissions and counts all the layouts where groupId = &#63; and privateLayout = &#63; and friendlyURL = &#63;.
-	*
-	* @param groupId the group id to search with
-	* @param privateLayout the private layout to search with
-	* @param friendlyURL the friendly u r l to search with
-	* @return the number of matching layouts that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public int filterCountByG_P_F(long groupId, boolean privateLayout,
 		java.lang.String friendlyURL)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
