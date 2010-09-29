@@ -529,7 +529,8 @@ public abstract class BaseDB implements DB {
 		throws IOException {
 
 		String templateKey = sqlDir.concat(fileName);
-		String template = _templateCache.get(templateKey);
+
+		String template = _templatesMap.get(templateKey);
 
 		if (template != null) {
 			return template;
@@ -592,7 +593,7 @@ public abstract class BaseDB implements DB {
 			template = removeBooleanIndexes(sqlDir, template);
 		}
 
-		_templateCache.put(templateKey, template);
+		_templatesMap.put(templateKey, template);
 
 		return template;
 	}
@@ -951,9 +952,8 @@ public abstract class BaseDB implements DB {
 
 	private static Log _log = LogFactoryUtil.getLog(BaseDB.class);
 
-	private static Map<String, String> _templateCache =
+	private Map<String, String> _templatesMap =
 		new ConcurrentHashMap<String, String>();
-
 	private String _type;
 	private boolean _supportsStringCaseSensitiveQuery;
 
