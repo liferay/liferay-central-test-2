@@ -345,12 +345,27 @@ public class LDAPAuth implements Authenticator {
 			_log.debug("Authenticator is enabled");
 		}
 
+		for (int ldapServerId = 0; ; ldapServerId++) {
+			String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
+
+			String providerUrl = PrefsPropsUtil.getString(
+				companyId, PropsKeys.LDAP_BASE_PROVIDER_URL + postfix);
+
+			if (Validator.isNull(providerUrl)) {
+				break;
+			}
+
+			int result = authenticate(
+				companyId, ldapServerId, emailAddress, screenName, userId,
+				password);
+
+			if (result == SUCCESS) {
+				return result;
+			}
+		}
+
 		long[] ldapServerIds = StringUtil.split(
 			PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
-
-		if (ldapServerIds.length <= 0) {
-			ldapServerIds = new long[] {0};
-		}
 
 		for (long ldapServerId : ldapServerIds) {
 			int result = authenticate(

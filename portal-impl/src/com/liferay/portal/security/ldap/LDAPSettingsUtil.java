@@ -112,11 +112,7 @@ public class LDAPSettingsUtil {
 	}
 
 	public static String getPropertyPostfix(long ldapServerId) {
-		if (ldapServerId > 0) {
-			return StringPool.PERIOD + ldapServerId;
-		}
-
-		return StringPool.BLANK;
+		return StringPool.PERIOD + ldapServerId;
 	}
 
 	public static Properties getUserExpandoMappings(

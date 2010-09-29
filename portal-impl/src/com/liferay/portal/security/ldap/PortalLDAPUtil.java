@@ -276,6 +276,25 @@ public class PortalLDAPUtil {
 	public static long getLdapServerId(long companyId, String screenName)
 		throws Exception {
 
+		boolean hasProperties = false;
+
+		for (int ldapServerId = 0; ; ldapServerId++) {
+			String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
+
+			String providerUrl = PrefsPropsUtil.getString(
+				companyId, PropsKeys.LDAP_BASE_PROVIDER_URL + postfix);
+
+			if (Validator.isNull(providerUrl)) {
+				break;
+			}
+
+			hasProperties = true;
+
+			if (hasUser(ldapServerId, companyId, screenName)) {
+				return ldapServerId;
+			}
+		}
+
 		long[] ldapServerIds = StringUtil.split(
 			PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
 
@@ -285,11 +304,11 @@ public class PortalLDAPUtil {
 			}
 		}
 
-		if (ldapServerIds.length > 0) {
-			return ldapServerIds[0];
+		if (hasProperties || (ldapServerIds.length <= 0)) {
+			return 0;
 		}
 
-		return 0;
+		return ldapServerIds[0];
 	}
 
 	public static Attribute getMultivaluedAttribute(

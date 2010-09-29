@@ -25,7 +25,7 @@ boolean ldapExportEnabled = ParamUtil.getBoolean(request, "settings--" + PropsKe
 boolean ldapPasswordPolicyEnabled = ParamUtil.getBoolean(request, "settings--" + PropsKeys.LDAP_PASSWORD_POLICY_ENABLED + "--", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_PASSWORD_POLICY_ENABLED));
 long[] ldapServerIds = StringUtil.split(ParamUtil.getString(request, "settings--ldap.server.ids--", PrefsPropsUtil.getString(company.getCompanyId(), "ldap.server.ids")), 0L);
 
-if (ldapAuthEnabled && (ldapServerIds.length <= 0)) {
+if (ldapAuthEnabled && (ldapServerIds.length <= 0) && Validator.isNull(PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_BASE_PROVIDER_URL + ".0", StringPool.BLANK))) {
 	String ldapServerName = themeDisplay.translate("default");
 	String ldapBaseProviderUrl = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_BASE_PROVIDER_URL + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_BASE_PROVIDER_URL, StringPool.BLANK));
 	String ldapBaseDN = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_BASE_DN + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_BASE_DN));

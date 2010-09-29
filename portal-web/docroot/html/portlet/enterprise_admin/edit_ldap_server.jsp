@@ -21,7 +21,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 long ldapServerId = ParamUtil.getLong(request, "ldapServerId", 0);
 
-String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
+String postfix = StringPool.BLANK;
+
+if (ldapServerId > 0) {
+	postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
+}
 
 String ldapServerName = ParamUtil.getString(request, "settings--ldap.server.name"+ postfix + "--", PrefsPropsUtil.getString(company.getCompanyId(), "ldap.server.name" + postfix, StringPool.BLANK));
 String ldapBaseProviderUrl = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_BASE_PROVIDER_URL + postfix + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_BASE_PROVIDER_URL + postfix));
@@ -44,7 +48,11 @@ String ldapGroupDefaultObjectClasses = ParamUtil.getString(request, "settings--"
 
 String ldapUserMappings = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_USER_MAPPINGS + postfix + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_USER_MAPPINGS + postfix));
 
-String[] userMappingArray = ldapUserMappings.split("\n");
+String[] userMappingArray = new String[0];
+
+if (ldapUserMappings != null) {
+	ldapUserMappings.split("\n");
+}
 
 String userMappingScreenName = StringPool.BLANK;
 String userMappingPassword = StringPool.BLANK;
@@ -104,7 +112,11 @@ for (int i = 0 ; i < userMappingArray.length ; i++) {
 
 String ldapGroupMappings = ParamUtil.getString(request, "settings--" + PropsKeys.LDAP_GROUP_MAPPINGS + postfix + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_GROUP_MAPPINGS + postfix));
 
-String[] groupMappingArray = ldapGroupMappings.split("\n");
+String[] groupMappingArray = new String[0];
+
+if (ldapGroupMappings != null) {
+	ldapGroupMappings.split("\n");
+}
 
 String groupMappingGroupName = StringPool.BLANK;
 String groupMappingDescription = StringPool.BLANK;
@@ -224,6 +236,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<aui:input name='<%= "settings--" + PropsKeys.LDAP_CONTACT_CUSTOM_MAPPINGS + postfix + "--" %>' type="hidden" value="<%= PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_CONTACT_CUSTOM_MAPPINGS + postfix, PropsUtil.get(PropsKeys.LDAP_CONTACT_CUSTOM_MAPPINGS)) %>" />
 
 		<aui:button-row>
+
 			<%
 			String taglibOnClick = renderResponse.getNamespace() + "testSettings('ldapUsers');";
 			%>
@@ -248,6 +261,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		<aui:input name='<%= "settings--" + PropsKeys.LDAP_GROUP_MAPPINGS + postfix + "--" %>' type="hidden" />
 
 		<aui:button-row>
+
 			<%
 			String taglibOnClick = renderResponse.getNamespace() + "testSettings('ldapGroups');";
 			%>
@@ -269,9 +283,11 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 	</aui:fieldset>
 
 	<aui:button-row>
+
 		<%
 		String taglibOnClick = renderResponse.getNamespace() + "saveLdap();";
 		%>
+
 		<aui:button name="saveButton" onClick='<%= taglibOnClick %>' type="button" value="save" />
 
 		<aui:button name="cancelButton" onClick="<%= redirect %>" type="cancel" />
@@ -384,7 +400,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 	Liferay.provide(
 		window,
 		'<portlet:namespace />updateDefaultLdap',
-		function() {
+		function(ldapType) {
 			var A = AUI();
 
 			var baseProviderURL = "";
@@ -408,19 +424,19 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			var groupMappingDescription = "";
 			var groupMappingUser = "";
 
-			var ldapType = '';
+			if (!ldapType) {
+				A.all(document.<portlet:namespace />fm.<portlet:namespace />defaultLdap).some(
+					function(item, index, collection) {
+						var checked = item.get('checked');
 
-			A.all(document.<portlet:namespace />fm.<portlet:namespace />defaultLdap).some(
-				function(item, index, collection) {
-					var checked = item.get('checked');
+						if (checked) {
+							ldapType = item.val();
+						}
 
-					if (checked) {
-						ldapType = item.val();
+						return checked;
 					}
-
-					return checked;
-				}
-			);
+				);
+			}
 
 			if (ldapType == "apache") {
 				baseProviderURL = "ldap://localhost:10389";
@@ -558,4 +574,8 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		},
 		['aui-base']
 	);
+
+	<c:if test="<%= ldapServerId <= 0 %>">
+		<portlet:namespace />updateDefaultLdap('apache');
+	</c:if>
 </aui:script>
