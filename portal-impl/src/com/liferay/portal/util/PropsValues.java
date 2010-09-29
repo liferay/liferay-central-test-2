@@ -838,6 +838,10 @@ public class PropsValues {
 
 	public static final String[] ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS = PropsUtil.getArray(PropsKeys.ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS);
 
+	public static final String[] ORGANIZATIONS_LIST_VIEWS = PropsUtil.getArray(PropsKeys.ORGANIZATIONS_LIST_VIEWS);
+
+	public static final String ORGANIZATIONS_LIST_VIEWS_DEFAULT = PropsUtil.get(PropsKeys.ORGANIZATIONS_LIST_VIEWS_DEFAULT);
+
 	public static final boolean ORGANIZATIONS_MEMBERSHIP_STRICT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_MEMBERSHIP_STRICT));
 
 	public static final boolean ORGANIZATIONS_SEARCH_WITH_INDEX = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.ORGANIZATIONS_SEARCH_WITH_INDEX));

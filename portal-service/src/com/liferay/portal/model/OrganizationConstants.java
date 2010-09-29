@@ -23,6 +23,10 @@ public class OrganizationConstants {
 
 	public static final int DEFAULT_PARENT_ORGANIZATION_ID = 0;
 
+	public static final String LIST_VIEW_FLAT = "flat";
+
+	public static final String LIST_VIEW_TREE = "tree";
+
 	public static final String TYPE_LOCATION = "location";
 
 	public static final String TYPE_REGULAR_ORGANIZATION =

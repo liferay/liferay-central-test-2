@@ -1245,6 +1245,10 @@ public interface PropsKeys {
 
 	public static final String ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS = "organizations.form.update.miscellaneous";
 
+	public static final String ORGANIZATIONS_LIST_VIEWS = "organizations.list.views";
+
+	public static final String ORGANIZATIONS_LIST_VIEWS_DEFAULT = "organizations.list.views.default";
+
 	public static final String ORGANIZATIONS_MEMBERSHIP_STRICT = "organizations.membership.strict";
 
 	public static final String ORGANIZATIONS_ROOTABLE = "organizations.rootable";
@@ -1591,9 +1595,9 @@ public interface PropsKeys {
 
 	public static final String THEME_VIRTUAL_PATH = "theme.virtual.path";
 
-	public static final String TIME_ZONES = "time.zones";
-
 	public static final String THREAD_DUMP_SPEED_THRESHOLD = "thread.dump.speed.threshold";
+
+	public static final String TIME_ZONES = "time.zones";
 
 	public static final String TRANSACTION_ISOLATION_COUNTER = "transaction.isolation.counter";
 
