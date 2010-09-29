@@ -489,7 +489,6 @@ public class Entity {
 	public boolean isPermissionCheckEnabled(EntityFinder finder) {
 		if (_name.equals("Group") || _name.equals("User") ||
 			finder.getName().equals("UUID_G") || !hasPrimitivePK() ||
-			!hasColumn("userId") ||
 			!ResourceActionsUtil.hasModelResourceActions(
 				_packagePath + ".model." + _name)) {
 
