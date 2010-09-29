@@ -144,7 +144,7 @@
 				<xs:enumeration value="ruby" />
 			</xs:restriction>
 		</xs:simpleType>
-	</xs:element>	
+	</xs:element>
 	<xs:element name="state">
 		<xs:complexType>
 			<xs:sequence>
