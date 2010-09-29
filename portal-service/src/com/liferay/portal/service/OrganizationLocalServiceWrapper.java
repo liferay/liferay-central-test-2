@@ -277,31 +277,28 @@ public class OrganizationLocalServiceWrapper implements OrganizationLocalService
 	}
 
 	public java.util.List<com.liferay.portal.model.Organization> getOrganizations(
-		long[] organizationIds)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _organizationLocalService.getOrganizations(organizationIds);
-	}
-
-	public java.util.List<com.liferay.portal.model.Organization> getOrganizations(
 		long companyId, long parentOrganizationId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _organizationLocalService.getOrganizations(companyId,
 			parentOrganizationId);
 	}
 
 	public java.util.List<com.liferay.portal.model.Organization> getOrganizations(
 		long companyId, long parentOrganizationId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _organizationLocalService.getOrganizations(companyId,
 			parentOrganizationId, start, end);
 	}
 
-	public int getOrganizationsCount(long companyId, long parentOrganizationId)
+	public java.util.List<com.liferay.portal.model.Organization> getOrganizations(
+		long[] organizationIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
+		return _organizationLocalService.getOrganizations(organizationIds);
+	}
+
+	public int getOrganizationsCount(long companyId, long parentOrganizationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _organizationLocalService.getOrganizationsCount(companyId,
 			parentOrganizationId);
 	}

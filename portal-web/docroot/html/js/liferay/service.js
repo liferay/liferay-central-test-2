@@ -162,8 +162,8 @@ Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Organization",
 	{
 		addGroupOrganizations: true,
-		addPasswordPolicyOrganizations: true,
 		addOrganization: true,
+		addPasswordPolicyOrganizations: true,
 		deleteLogo: true,
 		deleteOrganization: true,
 		getManageableOrganizations: true,
