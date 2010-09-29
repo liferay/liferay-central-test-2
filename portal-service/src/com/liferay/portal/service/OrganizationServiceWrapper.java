@@ -105,23 +105,20 @@ public class OrganizationServiceWrapper implements OrganizationService {
 
 	public java.util.List<com.liferay.portal.model.Organization> getOrganizations(
 		long companyId, long parentOrganizationId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _organizationService.getOrganizations(companyId,
 			parentOrganizationId);
 	}
 
 	public java.util.List<com.liferay.portal.model.Organization> getOrganizations(
 		long companyId, long parentOrganizationId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _organizationService.getOrganizations(companyId,
 			parentOrganizationId, start, end);
 	}
 
 	public int getOrganizationsCount(long companyId, long parentOrganizationId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _organizationService.getOrganizationsCount(companyId,
 			parentOrganizationId);
 	}
