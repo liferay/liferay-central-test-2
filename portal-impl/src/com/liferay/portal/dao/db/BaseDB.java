@@ -51,7 +51,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.naming.NamingException;
 
@@ -528,15 +527,7 @@ public abstract class BaseDB implements DB {
 	protected String buildTemplate(String sqlDir, String fileName)
 		throws IOException {
 
-		String templateKey = sqlDir.concat(fileName);
-
-		String template = _templatesMap.get(templateKey);
-
-		if (template != null) {
-			return template;
-		}
-
-		template = readFile(sqlDir + "/" + fileName + ".sql");
+		String template = readFile(sqlDir + "/" + fileName + ".sql");
 
 		if (fileName.equals("portal") || fileName.equals("portal-minimal") ||
 			fileName.equals("update-5.0.1-5.1.0")) {
@@ -592,8 +583,6 @@ public abstract class BaseDB implements DB {
 		if (fileName.equals("indexes") && (this instanceof SybaseDB)) {
 			template = removeBooleanIndexes(sqlDir, template);
 		}
-
-		_templatesMap.put(templateKey, template);
 
 		return template;
 	}
@@ -952,8 +941,6 @@ public abstract class BaseDB implements DB {
 
 	private static Log _log = LogFactoryUtil.getLog(BaseDB.class);
 
-	private Map<String, String> _templatesMap =
-		new ConcurrentHashMap<String, String>();
 	private String _type;
 	private boolean _supportsStringCaseSensitiveQuery;
 
