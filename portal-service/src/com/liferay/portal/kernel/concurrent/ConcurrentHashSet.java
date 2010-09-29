@@ -12,27 +12,30 @@
  * details.
  */
 
-package com.liferay.portal.kernel.util;
+package com.liferay.portal.kernel.concurrent;
+
+import com.liferay.portal.kernel.util.MapBackedSet;
 
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Brian Wing Shun Chan
- * @deprecated {@link com.liferay.portal.kernel.concurrent.ConcurrentHashSet}
  */
-public class ConcurrentHashSet<E>
-	extends com.liferay.portal.kernel.concurrent.ConcurrentHashSet<E> {
+public class ConcurrentHashSet<E> extends MapBackedSet<E> {
 
 	public ConcurrentHashSet() {
-		super();
+		super(new ConcurrentHashMap<E, Boolean>());
 	}
 
 	public ConcurrentHashSet(int capacity) {
-		super(capacity);
+		super(new ConcurrentHashMap<E, Boolean>(capacity));
 	}
 
 	public ConcurrentHashSet(Set<E> set) {
-		super(set);
+		super(new ConcurrentHashMap<E, Boolean>());
+
+		addAll(set);
 	}
 
 }

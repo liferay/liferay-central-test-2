@@ -14,9 +14,9 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.kernel.concurrent.ConcurrentHashSet;
 import com.liferay.portal.kernel.servlet.ServletVersionDetector;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.ConcurrentHashSet;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.Set;

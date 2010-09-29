@@ -14,11 +14,11 @@
 
 package com.liferay.portal.liveusers;
 
+import com.liferay.portal.kernel.concurrent.ConcurrentHashSet;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ConcurrentHashSet;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
