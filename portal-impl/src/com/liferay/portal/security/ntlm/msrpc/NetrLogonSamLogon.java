@@ -44,6 +44,7 @@ public class NetrLogonSamLogon extends DcerpcMessage {
 		ptype = 0;
 		flags = DCERPC_FIRST_FRAG | DCERPC_LAST_FRAG;
 	}
+
 	public void decode_out(NdrBuffer ndrBuffer) throws NdrException {
 		int returnAuthenticator = ndrBuffer.dec_ndr_long();
 
@@ -63,6 +64,7 @@ public class NetrLogonSamLogon extends DcerpcMessage {
 		_authoritative = (byte)ndrBuffer.dec_ndr_small();
 		_status = ndrBuffer.dec_ndr_long();
 	}
+
 	public void encode_in(NdrBuffer ndrBuffer) {
 		ndrBuffer.enc_ndr_referent(_logonServer, 1);
 		ndrBuffer.enc_ndr_string(_logonServer);
