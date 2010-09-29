@@ -763,19 +763,6 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the user groups where companyId = &#63; and name = &#63;.
-	*
-	* @param companyId the company id to search with
-	* @param name the name to search with
-	* @return the number of matching user groups that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int filterCountByC_N(long companyId, java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().filterCountByC_N(companyId, name);
-	}
-
-	/**
 	* Counts all the user groups.
 	*
 	* @return the number of user groups

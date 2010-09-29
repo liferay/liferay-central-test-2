@@ -383,17 +383,6 @@ public interface TeamPersistence extends BasePersistence<Team> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and counts all the teams where groupId = &#63; and name = &#63;.
-	*
-	* @param groupId the group id to search with
-	* @param name the name to search with
-	* @return the number of matching teams that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public int filterCountByG_N(long groupId, java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Counts all the teams.
 	*
 	* @return the number of teams
