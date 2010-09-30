@@ -275,7 +275,7 @@ public class StringBundler {
 			catch (Exception e) {
 				_stringConstructor = null;
 
-				return StringPool.BLANK;
+				return toString(false);
 			}
 		}
 		else if (length > _threadLocalBufferLimit) {
