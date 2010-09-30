@@ -31,4 +31,6 @@ public interface LiferaySelenium extends Selenium {
 
 	public boolean isPartialText(String locator, String value);
 
+	public void saveScreenShotAndSource() throws Exception;
+
 }

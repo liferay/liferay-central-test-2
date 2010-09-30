@@ -906,9 +906,25 @@ public class SeleneseToJavaBuilder {
 				System.out.println(param1 + " was not translated");
 			}
 
-			if (param1.equals("open")) {
-				sb.append("saveScreenShot();");
-				sb.append("saveSource();");
+			if (param1.equals("assertConfirmation") ||
+				param1.equals("clickAtAndWait") || param1.equals("open") ||
+				param1.equals("waitForVisible")) {
+
+				sb.append("selenium.saveScreenShotAndSource();");
+			}
+			else if (param1.equals("clickAndWait") &&
+					!param2.equals("link=Delete") &&
+					!param2.equals("//input[@value='Delete']")) {
+
+				sb.append("selenium.saveScreenShotAndSource();");
+			}
+			else if (param1.equals("type") && !param2.equals("//body")) {
+				sb.append("selenium.saveScreenShotAndSource();");
+			}
+			else if (param1.equals("selectFrame") &&
+					 param2.equals("relative=top")) {
+
+				sb.append("selenium.saveScreenShotAndSource();");
 			}
 		}
 

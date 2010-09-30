@@ -16,6 +16,7 @@ package com.liferay.portalweb.portal.util;
 
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import com.thoughtworks.selenium.CommandProcessor;
 import com.thoughtworks.selenium.DefaultSelenium;
@@ -62,34 +63,20 @@ public class LiferayDefaultSelenium
 			"isPartialText", new String[] {locator, value,});
 	}
 
-	public void saveScreenShot() {
-		if (!TestPropsValues.SAVE_SCREENSHOT) {
-			return;
-		}
-
-		windowMaximize();
-
-		FileUtil.mkdirs(_OUTPUT_SCREENSHOTS_DIR);
-
+	public void saveScreenShotAndSource() throws Exception {
 		String screenShotName = getScreenshotFileName();
 
-		captureEntirePageScreenshot(
-			_OUTPUT_SCREENSHOTS_DIR + screenShotName + ".jpg", "");
-	}
-
-	public void saveSource() throws Exception {
-		if (!TestPropsValues.SAVE_SOURCE) {
-			return;
+		if (TestPropsValues.SAVE_SCREENSHOT) {
+			captureEntirePageScreenshot(
+				_OUTPUT_SCREENSHOTS_DIR + screenShotName + ".jpg", "");
 		}
 
-		String content = HttpUtil.URLtoString(getLocation());
+		if (TestPropsValues.SAVE_SOURCE) {
+			String content = HttpUtil.URLtoString(getLocation());
 
-		FileUtil.mkdirs(_OUTPUT_SCREENSHOTS_DIR);
-
-		String screenShotName = getScreenshotFileName();
-
-		FileUtil.write(
-			_OUTPUT_SCREENSHOTS_DIR + screenShotName + ".html", content);
+			FileUtil.write(
+				_OUTPUT_SCREENSHOTS_DIR + screenShotName + ".html", content);
+		}
 	}
 
 	protected String getScreenshotFileName() {
@@ -106,13 +93,18 @@ public class LiferayDefaultSelenium
 				 className.startsWith("com.liferay.portalweb.portal") ||
 				 className.startsWith("com.liferay.portalweb.portlet") ||
 				 className.startsWith("com.liferay.portalweb.properties")) &&
-				 !className.startsWith("com.liferay.portalweb.portal.util") &&
 				 className.endsWith("Test")) {
 
+				String fileDir = className.substring(
+					22, className.lastIndexOf(".") + 1);
 				String fileName = stackTraceElement.getFileName();
 				int lineNumber = stackTraceElement.getLineNumber();
 
-				return fileName + "-" + lineNumber;
+				fileDir = StringUtil.replace(fileDir, ".", "/");
+
+				FileUtil.mkdirs(_OUTPUT_SCREENSHOTS_DIR + fileDir);
+
+				return fileDir + fileName + "-" + lineNumber;
 			}
 		}
 
