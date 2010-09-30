@@ -221,7 +221,7 @@ public class ImageServlet extends HttpServlet {
 
 				if ((igImageId > 0) && igSmallImage) {
 					if (checkIGImageThumbnailMaxDimensions(image, igImageId)) {
-						image = ImageLocalServiceUtil.getImage(imageId);
+						image = ImageServiceUtil.getImage(imageId);
 					}
 				}
 			}
@@ -236,7 +236,7 @@ public class ImageServlet extends HttpServlet {
 						IGImageLocalServiceUtil.getImageByUuidAndGroupId(
 							uuid, groupId);
 
-					image = ImageLocalServiceUtil.getImage(
+					image = ImageServiceUtil.getImage(
 						igImage.getLargeImageId());
 				}
 			}
