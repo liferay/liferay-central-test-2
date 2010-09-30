@@ -235,7 +235,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		_sessionFactory = sessionFactory;
 		_dialect = _sessionFactory.getDialect();
-		_db = DBFactoryUtil.getDB(_dialect);
+		_db = DBFactoryUtil.getDB();
 	}
 
 	public void unregisterListener(ModelListener<T> listener) {
