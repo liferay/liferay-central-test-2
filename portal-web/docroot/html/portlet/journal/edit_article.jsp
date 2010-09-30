@@ -403,7 +403,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					<c:when test="<%= structure == null %>">
 						<div id="<portlet:namespace />structureTreeWrapper">
 							<ul class="structure-tree" id="<portlet:namespace />structureTree">
-								<li class="structure-field" dataName="content" dataType="text_area">
+								<li class="structure-field" dataName="<liferay-ui:message key="content" />" dataType="text_area">
 									<span class="journal-article-close"></span>
 
 									<span class="folder">
