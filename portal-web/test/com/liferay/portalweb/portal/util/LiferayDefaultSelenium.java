@@ -14,6 +14,9 @@
 
 package com.liferay.portalweb.portal.util;
 
+import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
+
 import com.thoughtworks.selenium.CommandProcessor;
 import com.thoughtworks.selenium.DefaultSelenium;
 
@@ -23,15 +26,15 @@ import com.thoughtworks.selenium.DefaultSelenium;
 public class LiferayDefaultSelenium
 	extends DefaultSelenium implements LiferaySelenium {
 
+	public LiferayDefaultSelenium(CommandProcessor processor) {
+		super(processor);
+	}
+
 	public LiferayDefaultSelenium(
 		String serverHost, int serverPort, String browserStartCommand,
 		String browserURL) {
 
 		super(serverHost, serverPort, browserStartCommand, browserURL);
-	}
-
-	public LiferayDefaultSelenium(CommandProcessor processor) {
-		super(processor);
 	}
 
 	public String getCurrentDay() {
@@ -58,5 +61,65 @@ public class LiferayDefaultSelenium
 		return commandProcessor.getBoolean(
 			"isPartialText", new String[] {locator, value,});
 	}
+
+	public void saveScreenShot() {
+		if (!TestPropsValues.SAVE_SCREENSHOT) {
+			return;
+		}
+
+		windowMaximize();
+
+		FileUtil.mkdirs(_OUTPUT_SCREENSHOTS_DIR);
+
+		String screenShotName = getScreenshotFileName();
+
+		captureEntirePageScreenshot(
+			_OUTPUT_SCREENSHOTS_DIR + screenShotName + ".jpg", "");
+	}
+
+	public void saveSource() throws Exception {
+		if (!TestPropsValues.SAVE_SOURCE) {
+			return;
+		}
+
+		String content = HttpUtil.URLtoString(getLocation());
+
+		FileUtil.mkdirs(_OUTPUT_SCREENSHOTS_DIR);
+
+		String screenShotName = getScreenshotFileName();
+
+		FileUtil.write(
+			_OUTPUT_SCREENSHOTS_DIR + screenShotName + ".html", content);
+	}
+
+	protected String getScreenshotFileName() {
+		Thread currentThread = Thread.currentThread();
+
+		StackTraceElement[] stackTraceElements = currentThread.getStackTrace();
+
+		for (int i = 1; i < stackTraceElements.length; i++) {
+			StackTraceElement stackTraceElement = stackTraceElements[i];
+
+			String className = stackTraceElement.getClassName();
+
+			if ((className.startsWith("com.liferay.portalweb.plugins") ||
+				 className.startsWith("com.liferay.portalweb.portal") ||
+				 className.startsWith("com.liferay.portalweb.portlet") ||
+				 className.startsWith("com.liferay.portalweb.properties")) &&
+				 !className.startsWith("com.liferay.portalweb.portal.util") &&
+				 className.endsWith("Test")) {
+
+				String fileName = stackTraceElement.getFileName();
+				int lineNumber = stackTraceElement.getLineNumber();
+
+				return fileName + "-" + lineNumber;
+			}
+		}
+
+		throw new RuntimeException("Unable to find screenshot file name");
+	}
+
+	private static final String _OUTPUT_SCREENSHOTS_DIR =
+		TestPropsValues.OUTPUT_DIR + "screenshots/";
 
 }

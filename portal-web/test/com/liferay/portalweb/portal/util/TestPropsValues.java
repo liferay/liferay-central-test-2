@@ -33,7 +33,15 @@ public class TestPropsValues {
 	public static final String CLUSTER_NODE_2 =
 		TestPropsUtil.get("cluster.node2");
 
+	public static final String OUTPUT_DIR = TestPropsUtil.get("output.dir");
+
 	public static final String PORTAL_URL = TestPropsUtil.get("portal.url");
+
+	public static final boolean SAVE_SCREENSHOT = GetterUtil.getBoolean(
+		TestPropsUtil.get("save.screenshot"));
+
+	public static final boolean SAVE_SOURCE = GetterUtil.getBoolean(
+		TestPropsUtil.get("save.source"));
 
 	public static final String SELENIUM_HOST =
 		TestPropsUtil.get("selenium.host");

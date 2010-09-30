@@ -57,6 +57,11 @@ public class SeleneseToJavaBuilder {
 				"**\\IterateThemeTest.java", "**\\StopSeleniumTest.java"
 			});
 		ds.setIncludes(new String[] {"**\\*Test.html", "**\\*Test.java"});
+		/*ds.setIncludes(
+			new String[] {
+				"**\\liferay\\portalweb\\portal\\login\\*Test.html",
+				"**\\liferay\\portalweb\\portal\\login\\*Test.java"
+			});*/
 
 		ds.scan();
 
@@ -899,6 +904,11 @@ public class SeleneseToJavaBuilder {
 			}
 			else {
 				System.out.println(param1 + " was not translated");
+			}
+
+			if (param1.equals("open")) {
+				sb.append("saveScreenShot();");
+				sb.append("saveSource();");
 			}
 		}
 
