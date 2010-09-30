@@ -50,26 +50,15 @@ public class DBFactoryImpl implements DBFactory {
 
 	public DB getDB() {
 		if (_db == null) {
-			try {				
-				if (PropsValues.PERSISTENCE_PROVIDER.equalsIgnoreCase("jpa")) {
-					if (_log.isInfoEnabled()) {
-						_log.info(
-							"Using DB type " + PropsValues.JPA_DATABASE_TYPE);
-					}
-					
-					setDB(PropsValues.JPA_DATABASE_TYPE);
+			try {
+				if (_log.isInfoEnabled()) {
+					_log.info("Using dialect " + PropsValues.HIBERNATE_DIALECT);
 				}
-				else {
-					if (_log.isInfoEnabled()) {
-						_log.info(
-							"Using dialect " + PropsValues.HIBERNATE_DIALECT);
-					}
 
-					Dialect dialect = (Dialect)Class.forName(
-						PropsValues.HIBERNATE_DIALECT).newInstance();
+				Dialect dialect = (Dialect)Class.forName(
+					PropsValues.HIBERNATE_DIALECT).newInstance();
 
-					setDB(dialect);
-				}
+				setDB(dialect);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
