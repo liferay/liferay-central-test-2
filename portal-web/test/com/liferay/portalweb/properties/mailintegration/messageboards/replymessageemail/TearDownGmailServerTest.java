@@ -112,7 +112,7 @@ public class TearDownGmailServerTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[1]/div[1]/div/div/div[2]/div[3]")) {
+									"//div/div/div/div[1]/div[1]/div[1]/div/div/div[2]/div[3]")) {
 							break;
 						}
 					}
@@ -122,7 +122,10 @@ public class TearDownGmailServerTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[1]/div[1]/div/div/div[2]/div[3]",
+				assertEquals(RuntimeVariables.replace("Delete"),
+					selenium.getText(
+						"//div/div/div/div[1]/div[1]/div[1]/div/div/div[2]/div[3]"));
+				selenium.clickAt("//div/div/div/div[1]/div[1]/div[1]/div/div/div[2]/div[3]",
 					RuntimeVariables.replace("Delete"));
 				Thread.sleep(5000);
 				Thread.sleep(5000);

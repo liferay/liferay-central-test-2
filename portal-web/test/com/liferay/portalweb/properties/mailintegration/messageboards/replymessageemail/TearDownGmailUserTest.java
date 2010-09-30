@@ -84,6 +84,7 @@ public class TearDownGmailUserTest extends BaseTestCase {
 			case 3:
 				selenium.clickAt("signIn", RuntimeVariables.replace("Sign In"));
 				selenium.waitForPageToLoad("30000");
+				Thread.sleep(5000);
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -91,7 +92,8 @@ public class TearDownGmailUserTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("//input[@type='checkbox']")) {
+						if (selenium.isElementPresent(
+									"//input[@type='checkbox']")) {
 							break;
 						}
 					}
@@ -112,7 +114,7 @@ public class TearDownGmailUserTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[1]/div[1]/div/div/div[2]/div[3]")) {
+									"//div/div/div/div[1]/div[1]/div[1]/div/div/div[2]/div[3]")) {
 							break;
 						}
 					}
@@ -122,7 +124,10 @@ public class TearDownGmailUserTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.clickAt("//div[1]/div[1]/div/div/div[2]/div[3]",
+				assertEquals(RuntimeVariables.replace("Delete"),
+					selenium.getText(
+						"//div/div/div/div[1]/div[1]/div[1]/div/div/div[2]/div[3]"));
+				selenium.clickAt("//div/div/div/div[1]/div[1]/div[1]/div/div/div[2]/div[3]",
 					RuntimeVariables.replace("Delete"));
 				Thread.sleep(5000);
 				Thread.sleep(5000);
