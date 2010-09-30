@@ -113,7 +113,7 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 			_log.error(e, e);
 		}
 
-		return query;
+		return null;
 	}
 
 	public void updatePermissionFields(long resourceId) {
