@@ -3,6 +3,7 @@ package ${packagePath}.service;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ClassLoaderProxy;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 <#if sessionTypeName == "Local">
@@ -98,6 +99,8 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 
 	<#if pluginName != "">
 		public static void clearService() {
+			MethodCache.remove(${entity.name}${sessionTypeName}Service.class);
+
 			_service = null;
 		}
 	</#if>
@@ -124,6 +127,8 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 	}
 
 	public void setService(${entity.name}${sessionTypeName}Service service) {
+		MethodCache.remove(${entity.name}${sessionTypeName}Service.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(${entity.name}${sessionTypeName}ServiceUtil.class, "_service");

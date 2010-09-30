@@ -61,7 +61,7 @@ public class ClassLoaderProxy {
 		try {
 			currentThread.setContextClassLoader(_classLoader);
 
-			return methodHandler.invoke(_obj);
+			return _invoke(methodHandler);
 		}
 		catch (InvocationTargetException ite) {
 			throw translateThrowable(ite.getCause(), contextClassLoader);
@@ -206,6 +206,48 @@ public class ClassLoaderProxy {
 			_log.error(t2, t2);
 
 			return t2;
+		}
+	}
+
+	private Object _invoke(MethodHandler methodHandler) throws Exception {
+		try {
+			return methodHandler.invoke(_obj);
+		}
+		catch (NoSuchMethodException nsme) {
+			String name = methodHandler.getMethodName();
+			Class<?>[] parameterTypes = methodHandler.getArgumentsClasses();
+
+			Class<?> classObj = Class.forName(_className, true, _classLoader);
+
+			for (Method method : classObj.getMethods()) {
+				String curName = method.getName();
+				Class<?>[] curParameterTypes = method.getParameterTypes();
+
+				if (!curName.equals(name) ||
+					(curParameterTypes.length != parameterTypes.length)) {
+
+					continue;
+				}
+
+				boolean correctParams = true;
+
+				for (int j = 0; j < parameterTypes.length; j++) {
+					Class<?> a = parameterTypes[j];
+					Class<?> b = curParameterTypes[j];
+
+					if (!ClassUtil.isSubclass(a, b.getName())) {
+						correctParams = false;
+
+						break;
+					}
+				}
+
+				if (correctParams) {
+					return method.invoke(_obj, methodHandler.getArguments());
+				}
+			}
+
+			throw nsme;
 		}
 	}
 

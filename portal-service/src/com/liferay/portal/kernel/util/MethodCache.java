@@ -66,6 +66,10 @@ public class MethodCache {
 		return _instance._put(methodKey, method);
 	}
 
+	public static void remove(Class<?> classObj) {
+		_instance._remove(classObj);
+	}
+
 	public static void reset() {
 		_instance._reset();
 	}
@@ -118,6 +122,14 @@ public class MethodCache {
 
 	private Method _put(MethodKey methodKey, Method method) {
 		return _methodsMap.put(methodKey, method);
+	}
+
+	private void _remove(Class<?> classObj) {
+		_classesMap.remove(classObj.getName());
+
+		for (Method method : classObj.getMethods()) {
+			_methodsMap.remove(new MethodKey(method));
+		}
 	}
 
 	private void _reset() {

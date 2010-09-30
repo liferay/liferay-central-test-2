@@ -65,7 +65,13 @@ public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name
 				MethodHandler methodHandler = new MethodHandler(_${method.name}MethodKey${method_index}
 
 				<#list parameters as parameter>
-					, ${parameter.name}
+					<#assign parameterTypeName = serviceBuilder.getTypeGenericsName(parameter.type)>
+
+					<#if (parameterTypeName == "boolean") || (parameterTypeName == "double") || (parameterTypeName == "float") || (parameterTypeName == "int") || (parameterTypeName == "long") || (parameterTypeName == "short")>
+						, ${parameter.name}
+					<#else>
+						, ClpSerializer.translateInput(${parameter.name})
+					</#if>
 				</#list>
 
 				);
