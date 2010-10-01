@@ -339,7 +339,7 @@ if (articleDisplay != null) {
 							<portlet:param name="portletResource" value="<%= portletDisplay.getId() %>" />
 							<portlet:param name="redirect" value="<%= currentURL %>" />
 							<portlet:param name="referringPortletResource" value="<%= PortletKeys.JOURNAL_CONTENT %>" />
-							<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+							<portlet:param name="groupId" value="<%= String.valueOf(scopeGroupId) %>" />
 						</liferay-portlet:renderURL>
 
 						<liferay-ui:icon
