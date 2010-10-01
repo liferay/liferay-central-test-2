@@ -156,7 +156,7 @@ public class LangBuilder {
 			new UnsyncStringReader(content));
 		UnsyncBufferedWriter unsyncBufferedWriter = new UnsyncBufferedWriter(
 			new OutputStreamWriter(
-				new FileOutputStream(propertiesFile), "UTF8"));
+				new FileOutputStream(propertiesFile), StringPool.UTF8));
 
 		String line = null;
 
