@@ -40,6 +40,19 @@ public class PortletPermissionImpl implements PortletPermission {
 	public static final boolean DEFAULT_STRICT = false;
 
 	public void check(
+		PermissionChecker permissionChecker, long groupId, long plid,
+		String portletId, String actionId, boolean strict)
+		throws PortalException, SystemException {
+
+		if (!contains(
+				permissionChecker, groupId, plid, portletId, actionId,
+				strict)) {
+
+			throw new PrincipalException();
+		}
+	}
+
+	public void check(
 			PermissionChecker permissionChecker, long plid, String portletId,
 			String actionId)
 		throws PortalException, SystemException {
@@ -65,6 +78,16 @@ public class PortletPermissionImpl implements PortletPermission {
 		if (!contains(permissionChecker, portletId, actionId)) {
 			throw new PrincipalException();
 		}
+	}
+
+	public boolean contains(
+		PermissionChecker permissionChecker, long groupId, long plid,
+		Portlet portlet, String actionId, boolean strict)
+		throws PortalException, SystemException {
+
+		return contains(
+			permissionChecker, groupId, plid, portlet, actionId,
+			DEFAULT_STRICT);
 	}
 
 	public boolean contains(
@@ -101,21 +124,12 @@ public class PortletPermissionImpl implements PortletPermission {
 		}
 	}
 
-	public boolean contains(
-			PermissionChecker permissionChecker, long plid, String portletId,
-			String actionId)
-		throws PortalException, SystemException {
-
-		return contains(
-			permissionChecker, plid, portletId, actionId, DEFAULT_STRICT);
-	}
 
 	public boolean contains(
-			PermissionChecker permissionChecker, long plid, String portletId,
-			String actionId, boolean strict)
+		PermissionChecker permissionChecker, long groupId, long plid,
+		String portletId, String actionId, boolean strict)
 		throws PortalException, SystemException {
 
-		long groupId = 0;
 		String name = null;
 		String primKey = null;
 
@@ -167,6 +181,24 @@ public class PortletPermissionImpl implements PortletPermission {
 
 		return permissionChecker.hasPermission(
 			groupId, name, primKey, actionId);
+	}
+
+	public boolean contains(
+			PermissionChecker permissionChecker, long plid, String portletId,
+			String actionId)
+		throws PortalException, SystemException {
+
+		return contains(
+			permissionChecker, plid, portletId, actionId, DEFAULT_STRICT);
+	}
+
+	public boolean contains(
+			PermissionChecker permissionChecker, long plid, String portletId,
+			String actionId, boolean strict)
+		throws PortalException, SystemException {
+
+		return contains(
+			permissionChecker, 0, plid, portletId, actionId, strict);
 	}
 
 	public boolean contains(

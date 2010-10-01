@@ -25,6 +25,11 @@ import com.liferay.portal.security.permission.PermissionChecker;
 public interface PortletPermission {
 
 	public void check(
+			PermissionChecker permissionChecker, long groupId, long plid,
+			String portletId, String actionId, boolean strict)
+		throws PortalException, SystemException;
+
+	public void check(
 			PermissionChecker permissionChecker, long plid, String portletId,
 			String actionId)
 		throws PortalException, SystemException;
@@ -40,6 +45,11 @@ public interface PortletPermission {
 		throws PortalException, SystemException;
 
 	public boolean contains(
+			PermissionChecker permissionChecker, long groupId, long plid,
+			Portlet portlet, String actionId, boolean strict)
+		throws PortalException, SystemException;
+
+	public boolean contains(
 			PermissionChecker permissionChecker, long plid, Portlet portlet,
 			String actionId)
 		throws PortalException, SystemException;
@@ -47,6 +57,11 @@ public interface PortletPermission {
 	public boolean contains(
 			PermissionChecker permissionChecker, long plid, Portlet portlet,
 			String actionId, boolean strict)
+		throws PortalException, SystemException;
+
+	public boolean contains(
+			PermissionChecker permissionChecker, long groupId, long plid,
+			String portletId, String actionId, boolean strict)
 		throws PortalException, SystemException;
 
 	public boolean contains(
