@@ -582,7 +582,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (classNameId == PortalUtil.getClassNameId(Role.class)) {
-			if ((Validator.isNull(name)) ||
+			if (Validator.isNull(name) ||
 				(name.indexOf(CharPool.COMMA) != -1) ||
 				(name.indexOf(CharPool.STAR) != -1)) {
 
