@@ -78,55 +78,82 @@ public class LoginUtil {
 
 		Company company = PortalUtil.getCompany(request);
 
-		Map<String, String[]> headerMap = new HashMap<String, String[]>();
+		if (request.getRequestURI().startsWith("/tunnel-web/liferay") ||
+			request.getRequestURI().startsWith("/tunnel-web/secure/liferay")) {
+			//tunnel web requests are serialized objects, thus
+			//cannot manipulate the request input stream in any way.
+			//do not use the auth pipeline to authenticate tunnel-web requests
 
-		Enumeration<String> enu1 = request.getHeaderNames();
+			long companyId = company.getCompanyId();
+			
+			userId = UserLocalServiceUtil.authenticateForBasic(
+				companyId, CompanyConstants.AUTH_TYPE_EA, login, password);
 
-		while (enu1.hasMoreElements()) {
-			String name = enu1.nextElement();
-
-			Enumeration<String> enu2 = request.getHeaders(name);
-
-			List<String> headers = new ArrayList<String>();
-
-			while (enu2.hasMoreElements()) {
-				String value = enu2.nextElement();
-
-				headers.add(value);
+			if (userId > 0) {
+				return userId;
 			}
 
-			headerMap.put(name, headers.toArray(new String[headers.size()]));
+			userId = UserLocalServiceUtil.authenticateForBasic(
+				companyId, CompanyConstants.AUTH_TYPE_SN, login, password);
+
+			if (userId > 0) {
+				return userId;
+			}
+
+			userId = UserLocalServiceUtil.authenticateForBasic(
+				companyId, CompanyConstants.AUTH_TYPE_ID, login, password);
 		}
+		else {
+			Map<String, String[]> headerMap = new HashMap<String, String[]>();
 
-		Map<String, String[]> parameterMap = request.getParameterMap();
-		Map<String, Object> resultsMap = new HashMap<String, Object>();
+			Enumeration<String> enu1 = request.getHeaderNames();
 
-		if (Validator.isNull(authType)) {
-			authType = company.getAuthType();
-		}
+			while (enu1.hasMoreElements()) {
+				String name = enu1.nextElement();
 
-		if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
-			authResult = UserLocalServiceUtil.authenticateByEmailAddress(
-				company.getCompanyId(), login, password, headerMap,
-				parameterMap, resultsMap);
+				Enumeration<String> enu2 = request.getHeaders(name);
 
-			userId = MapUtil.getLong(resultsMap, "userId", userId);
-		}
-		else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
-			authResult = UserLocalServiceUtil.authenticateByScreenName(
-				company.getCompanyId(), login, password, headerMap,
-				parameterMap, resultsMap);
+				List<String> headers = new ArrayList<String>();
 
-			userId = MapUtil.getLong(resultsMap, "userId", userId);
-		}
-		else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
-			authResult = UserLocalServiceUtil.authenticateByUserId(
-				company.getCompanyId(), userId, password, headerMap,
-				parameterMap, resultsMap);
-		}
+				while (enu2.hasMoreElements()) {
+					String value = enu2.nextElement();
 
-		if (authResult != Authenticator.SUCCESS) {
-			throw new AuthException();
+					headers.add(value);
+				}
+
+				headerMap.put(name, headers.toArray(new String[headers.size()]));
+			}
+
+			Map<String, String[]> parameterMap = request.getParameterMap();
+			Map<String, Object> resultsMap = new HashMap<String, Object>();
+
+			if (Validator.isNull(authType)) {
+				authType = company.getAuthType();
+			}
+
+			if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
+				authResult = UserLocalServiceUtil.authenticateByEmailAddress(
+					company.getCompanyId(), login, password, headerMap,
+					parameterMap, resultsMap);
+
+				userId = MapUtil.getLong(resultsMap, "userId", userId);
+			}
+			else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
+				authResult = UserLocalServiceUtil.authenticateByScreenName(
+					company.getCompanyId(), login, password, headerMap,
+					parameterMap, resultsMap);
+
+				userId = MapUtil.getLong(resultsMap, "userId", userId);
+			}
+			else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
+				authResult = UserLocalServiceUtil.authenticateByUserId(
+					company.getCompanyId(), userId, password, headerMap,
+					parameterMap, resultsMap);
+			}
+
+			if (authResult != Authenticator.SUCCESS) {
+				throw new AuthException();
+			}
 		}
 
 		return userId;
