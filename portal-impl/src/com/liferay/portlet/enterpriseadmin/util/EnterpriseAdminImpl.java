@@ -14,9 +14,17 @@
 
 package com.liferay.portlet.enterpriseadmin.util;
 
+import com.liferay.portal.NoSuchOrganizationException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -556,6 +564,31 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 		return leftAndRightOrganizationIds;
 	}
 
+	public List<Organization> getOrganizations(Hits hits)
+		throws Exception {
+
+		List<Organization> organizations = new ArrayList<Organization>();
+
+		List<Document> hitsList = hits.toList();
+
+		for (Document doc : hitsList) {
+			long organizationId = GetterUtil.getLong(
+				doc.get(Field.ORGANIZATION_ID));
+
+			try {
+				organizations.add(OrganizationLocalServiceUtil.getOrganization(
+					organizationId));
+			}
+			catch (NoSuchOrganizationException nsoe) {
+				_log.error(
+					"Organization " + organizationId + " does not exist in " +
+						"the search index. Please reindex.");
+			}
+		}
+
+		return organizations;
+	}
+
 	public Long[] getOrganizationIds(List<Organization> organizations) {
 		if ((organizations == null) || organizations.isEmpty()) {
 			return new Long[0];
@@ -761,6 +794,29 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 		}
 
 		return orderByComparator;
+	}
+
+	public Sort getSort(String orderByCol, String orderByType) {
+		String sortField = "name";
+
+		if (Validator.isNotNull(orderByCol)) {
+			if (orderByCol.equals("name")) {
+				sortField = "name";
+			}
+			else if (orderByCol.equals("type")) {
+				sortField = "type";
+			}
+			else {
+				sortField = orderByCol;
+			}
+		}
+
+		if (Validator.isNull(orderByType)) {
+			orderByType = "asc";
+		}
+
+		return new Sort(
+			sortField, Sort.STRING_TYPE, !orderByType.equalsIgnoreCase("asc"));
 	}
 
 	public OrderByComparator getUserGroupOrderByComparator(
@@ -1191,5 +1247,7 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 			}
 		}
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(EnterpriseAdminImpl.class);
 
 }

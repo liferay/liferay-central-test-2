@@ -175,6 +175,26 @@ if (Validator.isNull(tabs1)) {
 	tabs1 = "users";
 }
 
+PortletPreferences preferences = renderRequest.getPreferences();
+
+boolean showOrganizationMenu = true;
+boolean showSuborganization = true;
+
+int organizationsPerPage = ParamUtil.getInteger(request, "organizationsPerPage", SearchContainer.DEFAULT_DELTA);
+String organizationView = ParamUtil.getString(request, "organizationView");
+
+PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(renderRequest);
+
+if (Validator.isNull(organizationView)) {
+	organizationView = portalPreferences.getValue(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS, "organization-view", PropsValues.ORGANIZATIONS_LIST_VIEWS_DEFAULT);
+}
+
+if (!ArrayUtil.contains(PropsValues.ORGANIZATIONS_LIST_VIEWS, organizationView)){
+	organizationView = PropsValues.ORGANIZATIONS_LIST_VIEWS_DEFAULT;
+}
+
+String[] organizationColumns = new String[]{"name", "type", "action"};
+
 boolean filterManageableGroups = true;
 boolean filterManageableOrganizations = true;
 boolean filterManageableRoles = true;

@@ -16,6 +16,8 @@ package com.liferay.portlet.enterpriseadmin.util;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.EmailAddress;
@@ -156,6 +158,12 @@ public class EnterpriseAdminUtil {
 			organizations);
 	}
 
+	public static List<Organization> getOrganizations(Hits hits)
+		throws Exception {
+
+		return getEnterpriseAdmin().getOrganizations(hits);
+	}
+
 	public static Long[] getOrganizationIds(List<Organization> organizations) {
 		return getEnterpriseAdmin().getOrganizationIds(organizations);
 	}
@@ -187,6 +195,11 @@ public class EnterpriseAdminUtil {
 
 		return getEnterpriseAdmin().getRoleOrderByComparator(
 			orderByCol, orderByType);
+	}
+
+	public static Sort getSort(String orderByCol, String orderByType) {
+
+		return getEnterpriseAdmin().getSort(orderByCol, orderByType);
 	}
 
 	public static OrderByComparator getUserGroupOrderByComparator(
