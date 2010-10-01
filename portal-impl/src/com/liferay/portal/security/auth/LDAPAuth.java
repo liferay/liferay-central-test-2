@@ -345,7 +345,7 @@ public class LDAPAuth implements Authenticator {
 			_log.debug("Authenticator is enabled");
 		}
 
-		for (int ldapServerId = 0; ; ldapServerId++) {
+		for (int ldapServerId = 0;; ldapServerId++) {
 			String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 			String providerUrl = PrefsPropsUtil.getString(

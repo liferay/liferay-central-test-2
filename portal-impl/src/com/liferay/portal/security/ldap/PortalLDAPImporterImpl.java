@@ -109,7 +109,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			PortalLDAPImporterImpl.class.getName(), false, Time.DAY);
 
 		try {
-			for (int ldapServerId = 0; ; ldapServerId++) {
+			for (int ldapServerId = 0;; ldapServerId++) {
 				String postfix = LDAPSettingsUtil.getPropertyPostfix(
 					ldapServerId);
 

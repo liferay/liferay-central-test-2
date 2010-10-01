@@ -51,7 +51,7 @@ String ldapUserMappings = ParamUtil.getString(request, "settings--" + PropsKeys.
 String[] userMappingArray = new String[0];
 
 if (ldapUserMappings != null) {
-	ldapUserMappings.split("\n");
+	userMappingArray = ldapUserMappings.split("\n");
 }
 
 String userMappingScreenName = StringPool.BLANK;
@@ -115,7 +115,7 @@ String ldapGroupMappings = ParamUtil.getString(request, "settings--" + PropsKeys
 String[] groupMappingArray = new String[0];
 
 if (ldapGroupMappings != null) {
-	ldapGroupMappings.split("\n");
+	groupMappingArray = ldapGroupMappings.split("\n");
 }
 
 String groupMappingGroupName = StringPool.BLANK;
