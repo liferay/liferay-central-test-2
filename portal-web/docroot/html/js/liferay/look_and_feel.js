@@ -1829,7 +1829,7 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-color-picker', 'aui-dialog', 'aui-io-request', 'aui-tabs'],
+		requires: ['aui-color-picker', 'aui-dialog', 'aui-io-request', 'aui-tabs-base'],
 		use: []
 	}
 );

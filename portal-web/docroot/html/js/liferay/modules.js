@@ -32,7 +32,7 @@
 			'input-move-boxes': ['aui-base', 'aui-toolbar'],
 			'layout': ['aui-io-request', 'aui-portal-layout', 'aui-resize', 'dd'],
 			'layout-configuration': ['aui-live-search', 'dd', 'liferay-layout'],
-			'look-and-feel': ['aui-color-picker', 'aui-dialog', 'aui-io-request', 'aui-tabs'],
+			'look-and-feel': ['aui-color-picker', 'aui-dialog', 'aui-io-request', 'aui-tabs-base'],
 			'menu': ['aui-base', 'node-focusmanager', 'selector-css3'],
 			'navigation': ['aui-form-combobox', 'aui-io-request', 'dd-constrain', 'json-parse', 'node-event-simulate', 'overlay', 'selector-css3', 'sortable', 'substitute'],
 			'notice': ['aui-base'],
