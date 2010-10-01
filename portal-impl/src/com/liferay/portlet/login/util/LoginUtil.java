@@ -76,14 +76,17 @@ public class LoginUtil {
 
 		Company company = PortalUtil.getCompany(request);
 
-		if (request.getRequestURI().startsWith("/tunnel-web/liferay") ||
-			request.getRequestURI().startsWith("/tunnel-web/secure/liferay")) {
-			//tunnel web requests are serialized objects, thus
-			//cannot manipulate the request input stream in any way.
-			//do not use the auth pipeline to authenticate tunnel-web requests
+		String requestURI = request.getRequestURI();
+
+		if (requestURI.startsWith("/tunnel-web/liferay") ||
+			requestURI.startsWith("/tunnel-web/secure/liferay")) {
+
+			// Tunnel requests are serialized objects and cannot manipulate the
+			// request input stream in any way. Do not use the auth pipeline to
+			// authenticate tunnel requests.
 
 			long companyId = company.getCompanyId();
-			
+
 			userId = UserLocalServiceUtil.authenticateForBasic(
 				companyId, CompanyConstants.AUTH_TYPE_EA, login, password);
 
@@ -100,10 +103,12 @@ public class LoginUtil {
 
 			userId = UserLocalServiceUtil.authenticateForBasic(
 				companyId, CompanyConstants.AUTH_TYPE_ID, login, password);
+
+			if (userId <= 0) {
+				throw new AuthException();
+			}
 		}
 		else {
-			int authResult = Authenticator.FAILURE;
-
 			Map<String, String[]> headerMap = new HashMap<String, String[]>();
 
 			Enumeration<String> enu1 = request.getHeaderNames();
@@ -121,7 +126,8 @@ public class LoginUtil {
 					headers.add(value);
 				}
 
-				headerMap.put(name, headers.toArray(new String[headers.size()]));
+				headerMap.put(
+					name, headers.toArray(new String[headers.size()]));
 			}
 
 			Map<String, String[]> parameterMap = request.getParameterMap();
@@ -130,6 +136,8 @@ public class LoginUtil {
 			if (Validator.isNull(authType)) {
 				authType = company.getAuthType();
 			}
+
+			int authResult = Authenticator.FAILURE;
 
 			if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 				authResult = UserLocalServiceUtil.authenticateByEmailAddress(
