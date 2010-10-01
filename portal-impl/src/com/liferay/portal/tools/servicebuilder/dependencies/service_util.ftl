@@ -99,8 +99,6 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 
 	<#if pluginName != "">
 		public static void clearService() {
-			MethodCache.remove(${entity.name}${sessionTypeName}Service.class);
-
 			_service = null;
 		}
 	</#if>
@@ -121,6 +119,7 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 			</#if>
 
 			ReferenceRegistry.registerReference(${entity.name}${sessionTypeName}ServiceUtil.class, "_service");
+			MethodCache.remove(${entity.name}${sessionTypeName}Service.class);
 		}
 
 		return _service;
@@ -132,6 +131,7 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 		_service = service;
 
 		ReferenceRegistry.registerReference(${entity.name}${sessionTypeName}ServiceUtil.class, "_service");
+		MethodCache.remove(${entity.name}${sessionTypeName}Service.class);
 	}
 
 	private static ${entity.name}${sessionTypeName}Service _service;
