@@ -14,6 +14,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.io.OutputStreamWriter;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedWriter;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
@@ -29,6 +30,7 @@ import com.liferay.portlet.translator.util.TranslationWebCacheItem;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -153,7 +155,8 @@ public class LangBuilder {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(content));
 		UnsyncBufferedWriter unsyncBufferedWriter = new UnsyncBufferedWriter(
-			new FileWriter(propertiesFile));
+			new OutputStreamWriter(
+				new FileOutputStream(propertiesFile), "UTF8"));
 
 		String line = null;
 
