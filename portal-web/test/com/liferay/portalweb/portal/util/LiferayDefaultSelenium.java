@@ -95,16 +95,17 @@ public class LiferayDefaultSelenium
 				 className.startsWith("com.liferay.portalweb.properties")) &&
 				 className.endsWith("Test")) {
 
-				String fileDir = className.substring(
+				String dirName = className.substring(
 					22, className.lastIndexOf(".") + 1);
+
+				dirName = StringUtil.replace(dirName, ".", "/");
+
 				String fileName = stackTraceElement.getFileName();
 				int lineNumber = stackTraceElement.getLineNumber();
 
-				fileDir = StringUtil.replace(fileDir, ".", "/");
+				FileUtil.mkdirs(_OUTPUT_SCREENSHOTS_DIR + dirName);
 
-				FileUtil.mkdirs(_OUTPUT_SCREENSHOTS_DIR + fileDir);
-
-				return fileDir + fileName + "-" + lineNumber;
+				return dirName + fileName + "-" + lineNumber;
 			}
 		}
 
