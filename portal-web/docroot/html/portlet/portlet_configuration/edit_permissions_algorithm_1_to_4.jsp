@@ -269,7 +269,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 				for (int i = 0; i < actions2.size(); i++) {
 					String actionId = (String)actions2.get(i);
 
-					if (!guestUnsupportedActions.contains(actionId)) {
+					if (!guestUnsupportedActions.contains(actionId) && !actionId.equals(ActionKeys.ACCESS_IN_CONTROL_PANEL)) {
 						leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
 					}
 				}
@@ -283,7 +283,7 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 				for (int i = 0; i < actions1.size(); i++) {
 					String actionId = (String)actions1.get(i);
 
-					if (!guestUnsupportedActions.contains(actionId)) {
+					if (!guestUnsupportedActions.contains(actionId) && !actionId.equals(ActionKeys.ACCESS_IN_CONTROL_PANEL)) {
 						if (!actions2.contains(actionId)) {
 							rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
 						}

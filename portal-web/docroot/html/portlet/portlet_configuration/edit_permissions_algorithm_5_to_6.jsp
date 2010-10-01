@@ -294,6 +294,10 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 					if (name.equals(RoleConstants.GUEST) && guestUnsupportedActions.contains(action)) {
 						disabled = true;
 					}
+
+					if (action.equals(ActionKeys.ACCESS_IN_CONTROL_PANEL)) {
+						disabled = true;
+					}
 				%>
 
 					<liferay-ui:search-container-column-text
