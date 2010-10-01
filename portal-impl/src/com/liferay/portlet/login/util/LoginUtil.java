@@ -74,8 +74,6 @@ public class LoginUtil {
 
 		long userId = GetterUtil.getLong(login);
 
-		int authResult = Authenticator.FAILURE;
-
 		Company company = PortalUtil.getCompany(request);
 
 		if (request.getRequestURI().startsWith("/tunnel-web/liferay") ||
@@ -104,6 +102,8 @@ public class LoginUtil {
 				companyId, CompanyConstants.AUTH_TYPE_ID, login, password);
 		}
 		else {
+			int authResult = Authenticator.FAILURE;
+
 			Map<String, String[]> headerMap = new HashMap<String, String[]>();
 
 			Enumeration<String> enu1 = request.getHeaderNames();
