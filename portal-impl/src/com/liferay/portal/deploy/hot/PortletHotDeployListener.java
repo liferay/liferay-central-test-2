@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webdav.WebDAVUtil;
@@ -594,7 +595,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 
 		String[] resourceActionConfigs = StringUtil.split(
-			portletProperties.getProperty("resource.actions.configs"));
+			portletProperties.getProperty(PropsKeys.RESOURCE_ACTIONS_CONFIGS));
 
 		for (int i = 0; i < resourceActionConfigs.length; i++) {
 			ResourceActionsUtil.read(
