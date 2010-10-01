@@ -345,6 +345,19 @@ public class LDAPAuth implements Authenticator {
 			_log.debug("Authenticator is enabled");
 		}
 
+		long[] ldapServerIds = StringUtil.split(
+			PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
+
+		for (long ldapServerId : ldapServerIds) {
+			int result = authenticate(
+				companyId, ldapServerId, emailAddress, screenName, userId,
+				password);
+
+			if (result == SUCCESS) {
+				return result;
+			}
+		}
+
 		for (int ldapServerId = 0;; ldapServerId++) {
 			String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
@@ -355,19 +368,6 @@ public class LDAPAuth implements Authenticator {
 				break;
 			}
 
-			int result = authenticate(
-				companyId, ldapServerId, emailAddress, screenName, userId,
-				password);
-
-			if (result == SUCCESS) {
-				return result;
-			}
-		}
-
-		long[] ldapServerIds = StringUtil.split(
-			PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
-
-		for (long ldapServerId : ldapServerIds) {
 			int result = authenticate(
 				companyId, ldapServerId, emailAddress, screenName, userId,
 				password);

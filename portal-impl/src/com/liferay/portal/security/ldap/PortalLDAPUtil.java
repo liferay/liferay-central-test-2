@@ -276,6 +276,15 @@ public class PortalLDAPUtil {
 	public static long getLdapServerId(long companyId, String screenName)
 		throws Exception {
 
+		long[] ldapServerIds = StringUtil.split(
+			PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
+
+		for (long ldapServerId : ldapServerIds) {
+			if (hasUser(ldapServerId, companyId, screenName)) {
+				return ldapServerId;
+			}
+		}
+
 		boolean hasProperties = false;
 
 		for (int ldapServerId = 0;; ldapServerId++) {
@@ -290,15 +299,6 @@ public class PortalLDAPUtil {
 
 			hasProperties = true;
 
-			if (hasUser(ldapServerId, companyId, screenName)) {
-				return ldapServerId;
-			}
-		}
-
-		long[] ldapServerIds = StringUtil.split(
-			PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
-
-		for (long ldapServerId : ldapServerIds) {
 			if (hasUser(ldapServerId, companyId, screenName)) {
 				return ldapServerId;
 			}

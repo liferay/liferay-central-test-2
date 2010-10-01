@@ -109,6 +109,13 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			PortalLDAPImporterImpl.class.getName(), false, Time.DAY);
 
 		try {
+			long[] ldapServerIds = StringUtil.split(
+				PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
+
+			for (long ldapServerId : ldapServerIds) {
+				importFromLDAP(ldapServerId, companyId);
+			}
+
 			for (int ldapServerId = 0;; ldapServerId++) {
 				String postfix = LDAPSettingsUtil.getPropertyPostfix(
 					ldapServerId);
@@ -120,13 +127,6 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 					break;
 				}
 
-				importFromLDAP(ldapServerId, companyId);
-			}
-
-			long[] ldapServerIds = StringUtil.split(
-				PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
-
-			for (long ldapServerId : ldapServerIds) {
 				importFromLDAP(ldapServerId, companyId);
 			}
 		}
