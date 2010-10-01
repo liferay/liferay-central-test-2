@@ -89,7 +89,12 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 						%>
 
 						<c:if test="<%= layout.hasScopeGroup() %>">
-							<aui:option label='<%= LanguageUtil.get(pageContext,"current-page") + " (" + HtmlUtil.escape(layout.getName(locale)) + ")" %>' selected="<%= displayTerms.getGroupId() == layout.getScopeGroup().getGroupId() %>" value="<%= layout.getScopeGroup().getGroupId() %>" />
+
+							<%
+							Group scopeGroup = layout.getScopeGroup();
+							%>
+
+							<aui:option label='<%= LanguageUtil.get(pageContext, "current-page") + " (" + HtmlUtil.escape(layout.getName(locale)) + ")" %>' selected="<%= displayTerms.getGroupId() == scopeGroup.getGroupId() %>" value="<%= scopeGroup.getGroupId() %>" />
 						</c:if>
 					</aui:select>
 				</c:otherwise>
