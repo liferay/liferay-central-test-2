@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.security.auth.AuthSettingsUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
@@ -47,7 +48,7 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 
 		long companyId = contact.getCompanyId();
 
-		if (!LDAPSettingsUtil.isAuthEnabled(companyId) ||
+		if (!AuthSettingsUtil.isLDAPAuthEnabled(companyId) ||
 			!LDAPSettingsUtil.isExportEnabled(companyId)) {
 
 			return;
@@ -119,7 +120,7 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 
 		long companyId = user.getCompanyId();
 
-		if (!LDAPSettingsUtil.isAuthEnabled(companyId) ||
+		if (!AuthSettingsUtil.isLDAPAuthEnabled(companyId) ||
 			!LDAPSettingsUtil.isExportEnabled(companyId)) {
 
 			return;
@@ -184,7 +185,7 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 
 		long companyId = user.getCompanyId();
 
-		if (!LDAPSettingsUtil.isAuthEnabled(companyId) ||
+		if (!AuthSettingsUtil.isLDAPAuthEnabled(companyId) ||
 			!LDAPSettingsUtil.isExportEnabled(companyId)) {
 
 			return;

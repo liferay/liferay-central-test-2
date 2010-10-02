@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.security.ldap.LDAPSettingsUtil;
+import com.liferay.portal.security.auth.AuthSettingsUtil;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
 
@@ -36,7 +36,7 @@ public class SiteMinderLogoutAction extends Action {
 		try {
 			long companyId = PortalUtil.getCompanyId(request);
 
-			if (!LDAPSettingsUtil.isSiteMinderEnabled(companyId)) {
+			if (!AuthSettingsUtil.isSiteMinderEnabled(companyId)) {
 				return;
 			}
 

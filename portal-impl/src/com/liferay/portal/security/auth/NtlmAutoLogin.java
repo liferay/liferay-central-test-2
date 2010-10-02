@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.security.ldap.PortalLDAPImporterUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -40,7 +39,7 @@ public class NtlmAutoLogin implements AutoLogin {
 		try {
 			long companyId = PortalUtil.getCompanyId(request);
 
-			if (!LDAPSettingsUtil.isNtlmEnabled(companyId)) {
+			if (!AuthSettingsUtil.isNtlmEnabled(companyId)) {
 				return credentials;
 			}
 

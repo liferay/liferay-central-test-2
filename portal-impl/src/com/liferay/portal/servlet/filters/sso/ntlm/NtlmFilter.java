@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.security.ldap.LDAPSettingsUtil;
+import com.liferay.portal.security.auth.AuthSettingsUtil;
 import com.liferay.portal.security.ntlm.NtlmManager;
 import com.liferay.portal.security.ntlm.NtlmUserAccount;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
@@ -146,7 +146,7 @@ public class NtlmFilter extends BasePortalFilter {
 
 		long companyId = PortalInstances.getCompanyId(request);
 
-		if (LDAPSettingsUtil.isNtlmEnabled(companyId)) {
+		if (AuthSettingsUtil.isNtlmEnabled(companyId)) {
 
 			// Type 1 NTLM requests from browser can (and should) always
 			// immediately be replied to with an Type 2 NTLM response, no
