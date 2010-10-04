@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -268,16 +269,20 @@ public class EmailAddressLocalServiceUtil {
 
 			ReferenceRegistry.registerReference(EmailAddressLocalServiceUtil.class,
 				"_service");
+			MethodCache.remove(EmailAddressLocalService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(EmailAddressLocalService service) {
+		MethodCache.remove(EmailAddressLocalService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(EmailAddressLocalServiceUtil.class,
 			"_service");
+		MethodCache.remove(EmailAddressLocalService.class);
 	}
 
 	private static EmailAddressLocalService _service;

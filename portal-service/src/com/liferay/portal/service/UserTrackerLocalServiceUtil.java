@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -249,16 +250,20 @@ public class UserTrackerLocalServiceUtil {
 
 			ReferenceRegistry.registerReference(UserTrackerLocalServiceUtil.class,
 				"_service");
+			MethodCache.remove(UserTrackerLocalService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(UserTrackerLocalService service) {
+		MethodCache.remove(UserTrackerLocalService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(UserTrackerLocalServiceUtil.class,
 			"_service");
+		MethodCache.remove(UserTrackerLocalService.class);
 	}
 
 	private static UserTrackerLocalService _service;

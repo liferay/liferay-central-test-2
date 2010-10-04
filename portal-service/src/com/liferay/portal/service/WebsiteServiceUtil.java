@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -75,15 +76,19 @@ public class WebsiteServiceUtil {
 
 			ReferenceRegistry.registerReference(WebsiteServiceUtil.class,
 				"_service");
+			MethodCache.remove(WebsiteService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(WebsiteService service) {
+		MethodCache.remove(WebsiteService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(WebsiteServiceUtil.class, "_service");
+		MethodCache.remove(WebsiteService.class);
 	}
 
 	private static WebsiteService _service;

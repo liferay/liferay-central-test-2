@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -187,15 +188,19 @@ public class GroupServiceUtil {
 
 			ReferenceRegistry.registerReference(GroupServiceUtil.class,
 				"_service");
+			MethodCache.remove(GroupService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(GroupService service) {
+		MethodCache.remove(GroupService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(GroupServiceUtil.class, "_service");
+		MethodCache.remove(GroupService.class);
 	}
 
 	private static GroupService _service;

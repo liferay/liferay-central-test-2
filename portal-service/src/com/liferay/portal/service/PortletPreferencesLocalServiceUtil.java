@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -333,16 +334,20 @@ public class PortletPreferencesLocalServiceUtil {
 
 			ReferenceRegistry.registerReference(PortletPreferencesLocalServiceUtil.class,
 				"_service");
+			MethodCache.remove(PortletPreferencesLocalService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(PortletPreferencesLocalService service) {
+		MethodCache.remove(PortletPreferencesLocalService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(PortletPreferencesLocalServiceUtil.class,
 			"_service");
+		MethodCache.remove(PortletPreferencesLocalService.class);
 	}
 
 	private static PortletPreferencesLocalService _service;

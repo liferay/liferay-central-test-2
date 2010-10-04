@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -242,16 +243,20 @@ public class ShardLocalServiceUtil {
 
 			ReferenceRegistry.registerReference(ShardLocalServiceUtil.class,
 				"_service");
+			MethodCache.remove(ShardLocalService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(ShardLocalService service) {
+		MethodCache.remove(ShardLocalService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(ShardLocalServiceUtil.class,
 			"_service");
+		MethodCache.remove(ShardLocalService.class);
 	}
 
 	private static ShardLocalService _service;

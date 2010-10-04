@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -77,15 +78,19 @@ public class RegionServiceUtil {
 
 			ReferenceRegistry.registerReference(RegionServiceUtil.class,
 				"_service");
+			MethodCache.remove(RegionService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(RegionService service) {
+		MethodCache.remove(RegionService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(RegionServiceUtil.class, "_service");
+		MethodCache.remove(RegionService.class);
 	}
 
 	private static RegionService _service;

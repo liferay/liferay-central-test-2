@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -287,16 +288,20 @@ public class TeamLocalServiceUtil {
 
 			ReferenceRegistry.registerReference(TeamLocalServiceUtil.class,
 				"_service");
+			MethodCache.remove(TeamLocalService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(TeamLocalService service) {
+		MethodCache.remove(TeamLocalService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(TeamLocalServiceUtil.class,
 			"_service");
+		MethodCache.remove(TeamLocalService.class);
 	}
 
 	private static TeamLocalService _service;

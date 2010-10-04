@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -447,16 +448,20 @@ public class PermissionLocalServiceUtil {
 
 			ReferenceRegistry.registerReference(PermissionLocalServiceUtil.class,
 				"_service");
+			MethodCache.remove(PermissionLocalService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(PermissionLocalService service) {
+		MethodCache.remove(PermissionLocalService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(PermissionLocalServiceUtil.class,
 			"_service");
+		MethodCache.remove(PermissionLocalService.class);
 	}
 
 	private static PermissionLocalService _service;

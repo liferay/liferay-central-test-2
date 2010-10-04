@@ -15,6 +15,7 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -69,16 +70,20 @@ public class UserGroupGroupRoleServiceUtil {
 
 			ReferenceRegistry.registerReference(UserGroupGroupRoleServiceUtil.class,
 				"_service");
+			MethodCache.remove(UserGroupGroupRoleService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(UserGroupGroupRoleService service) {
+		MethodCache.remove(UserGroupGroupRoleService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(UserGroupGroupRoleServiceUtil.class,
 			"_service");
+		MethodCache.remove(UserGroupGroupRoleService.class);
 	}
 
 	private static UserGroupGroupRoleService _service;
