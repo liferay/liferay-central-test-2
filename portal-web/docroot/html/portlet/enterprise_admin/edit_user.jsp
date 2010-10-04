@@ -293,7 +293,7 @@ String taglibOnSubmit = renderResponse.getNamespace() + "saveUser('" + ((selUser
 
 <%
 if (selUser != null) {
-	PortalUtil.setPageSubtitle(HtmlUtil.escape(selUser.getFullName()), request);
+	PortalUtil.setPageSubtitle(selUser.getFullName(), request);
 }
 %>
 
