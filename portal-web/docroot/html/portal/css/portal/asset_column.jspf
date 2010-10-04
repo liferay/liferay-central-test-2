@@ -91,7 +91,7 @@
 
 .lfr-asset-column-details .lfr-asset-teams {
 	background: url(<%= themeImagesPath %>/common/team_icon.png) no-repeat 0 50%;
-	border-right: none;	
+	border-right-width: 0;	
 }
 
 .lfr-asset-column-details .lfr-asset-users {

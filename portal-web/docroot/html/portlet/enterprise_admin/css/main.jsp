@@ -112,7 +112,7 @@
 }
 
 .portlet-enterprise-admin .section h3 {
-	background: url("") no-repeat scroll 2px #EEEEEE;
+	background: url() no-repeat scroll 2px 50%;
 	border-bottom: 1px solid #CCC;
 	line-height: 1.5;
 	margin-bottom: 0.5em;
@@ -134,57 +134,32 @@
 	font-style: italic;
 }
 
-.portlet-enterprise-admin .entity-addresses h3 {
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	background-image: url(<%= themeImagesPath %>/dock/home.png);
-	border-bottom: 1px solid #CCCCCC;
-	border-radius: 5px;
-	border-right: 1px solid #CCCCCC;
-}
-
 .portlet-enterprise-admin .entity-addresses .primary {
 	background-position: 3px 5px;
-}
-
-.portlet-enterprise-admin .entity-comments h3 {
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	background-image: url(<%= themeImagesPath %>/dock/welcome_message.png);
-	border-bottom: 1px solid #CCCCCC;
-	border-radius: 5px;
-	border-right: 1px solid #CCCCCC;
 }
 
 .portlet-enterprise-admin .entity-details {
 	clear: both;
 }
 
+.portlet-enterprise-admin .entity-addresses h3 {
+	background-image: url(<%= themeImagesPath %>/dock/home.png);
+}
+
+.portlet-enterprise-admin .entity-comments h3 {
+	background-image: url(<%= themeImagesPath %>/dock/welcome_message.png);
+}
+
 .portlet-enterprise-admin .entity-email-addresses h3 {
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
 	background-image: url(<%= themeImagesPath %>/mail/unread.png);
-	border-bottom: 1px solid #CCCCCC;
-	border-radius: 5px;
-	border-right: 1px solid #CCCCCC;
 }
 
 .portlet-enterprise-admin .entity-phones h3 {
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
 	background-image: url(<%= themeImagesPath %>/common/telephone.png);
-	border-bottom: 1px solid #CCCCCC;
-	border-radius: 5px;
-	border-right: 1px solid #CCCCCC;
 }
 
 .portlet-enterprise-admin .entity-websites h3 {
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
 	background-image: url(<%= themeImagesPath %>/common/history.png);
-	border-bottom: 1px solid #CCCCCC;
-	border-radius: 5px;
-	border-right: 1px solid #CCCCCC;
 }
 
 .portlet-enterprise-admin .radio-holder {
