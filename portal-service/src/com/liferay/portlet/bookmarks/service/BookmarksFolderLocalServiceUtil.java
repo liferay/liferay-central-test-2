@@ -15,6 +15,7 @@
 package com.liferay.portlet.bookmarks.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -375,16 +376,20 @@ public class BookmarksFolderLocalServiceUtil {
 
 			ReferenceRegistry.registerReference(BookmarksFolderLocalServiceUtil.class,
 				"_service");
+			MethodCache.remove(BookmarksFolderLocalService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(BookmarksFolderLocalService service) {
+		MethodCache.remove(BookmarksFolderLocalService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(BookmarksFolderLocalServiceUtil.class,
 			"_service");
+		MethodCache.remove(BookmarksFolderLocalService.class);
 	}
 
 	private static BookmarksFolderLocalService _service;

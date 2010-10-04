@@ -871,17 +871,6 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and counts all the journal structures where groupId = &#63; and structureId = &#63;.
-	*
-	* @param groupId the group id to search with
-	* @param structureId the structure id to search with
-	* @return the number of matching journal structures that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public int filterCountByG_S(long groupId, java.lang.String structureId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Counts all the journal structures where groupId = &#63; and parentStructureId = &#63;.
 	*
 	* @param groupId the group id to search with

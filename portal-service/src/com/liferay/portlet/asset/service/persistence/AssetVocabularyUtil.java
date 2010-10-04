@@ -892,19 +892,6 @@ public class AssetVocabularyUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the asset vocabularies where groupId = &#63; and name = &#63;.
-	*
-	* @param groupId the group id to search with
-	* @param name the name to search with
-	* @return the number of matching asset vocabularies that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int filterCountByG_N(long groupId, java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().filterCountByG_N(groupId, name);
-	}
-
-	/**
 	* Counts all the asset vocabularies.
 	*
 	* @return the number of asset vocabularies

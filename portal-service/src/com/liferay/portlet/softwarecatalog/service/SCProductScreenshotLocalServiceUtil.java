@@ -15,6 +15,7 @@
 package com.liferay.portlet.softwarecatalog.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -273,16 +274,20 @@ public class SCProductScreenshotLocalServiceUtil {
 
 			ReferenceRegistry.registerReference(SCProductScreenshotLocalServiceUtil.class,
 				"_service");
+			MethodCache.remove(SCProductScreenshotLocalService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(SCProductScreenshotLocalService service) {
+		MethodCache.remove(SCProductScreenshotLocalService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(SCProductScreenshotLocalServiceUtil.class,
 			"_service");
+		MethodCache.remove(SCProductScreenshotLocalService.class);
 	}
 
 	private static SCProductScreenshotLocalService _service;

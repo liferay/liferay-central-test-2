@@ -15,6 +15,7 @@
 package com.liferay.portlet.tasks.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -80,16 +81,20 @@ public class TasksProposalServiceUtil {
 
 			ReferenceRegistry.registerReference(TasksProposalServiceUtil.class,
 				"_service");
+			MethodCache.remove(TasksProposalService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(TasksProposalService service) {
+		MethodCache.remove(TasksProposalService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(TasksProposalServiceUtil.class,
 			"_service");
+		MethodCache.remove(TasksProposalService.class);
 	}
 
 	private static TasksProposalService _service;

@@ -15,6 +15,7 @@
 package com.liferay.portlet.imagegallery.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -116,16 +117,20 @@ public class IGFolderServiceUtil {
 
 			ReferenceRegistry.registerReference(IGFolderServiceUtil.class,
 				"_service");
+			MethodCache.remove(IGFolderService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(IGFolderService service) {
+		MethodCache.remove(IGFolderService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(IGFolderServiceUtil.class,
 			"_service");
+		MethodCache.remove(IGFolderService.class);
 	}
 
 	private static IGFolderService _service;

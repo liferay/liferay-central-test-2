@@ -15,6 +15,7 @@
 package com.liferay.portlet.calendar.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -442,16 +443,20 @@ public class CalEventLocalServiceUtil {
 
 			ReferenceRegistry.registerReference(CalEventLocalServiceUtil.class,
 				"_service");
+			MethodCache.remove(CalEventLocalService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(CalEventLocalService service) {
+		MethodCache.remove(CalEventLocalService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(CalEventLocalServiceUtil.class,
 			"_service");
+		MethodCache.remove(CalEventLocalService.class);
 	}
 
 	private static CalEventLocalService _service;

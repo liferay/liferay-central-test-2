@@ -15,6 +15,7 @@
 package com.liferay.portlet.softwarecatalog.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -86,16 +87,20 @@ public class SCFrameworkVersionServiceUtil {
 
 			ReferenceRegistry.registerReference(SCFrameworkVersionServiceUtil.class,
 				"_service");
+			MethodCache.remove(SCFrameworkVersionService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(SCFrameworkVersionService service) {
+		MethodCache.remove(SCFrameworkVersionService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(SCFrameworkVersionServiceUtil.class,
 			"_service");
+		MethodCache.remove(SCFrameworkVersionService.class);
 	}
 
 	private static SCFrameworkVersionService _service;

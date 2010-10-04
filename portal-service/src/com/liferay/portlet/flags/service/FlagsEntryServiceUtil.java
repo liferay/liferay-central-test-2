@@ -15,6 +15,7 @@
 package com.liferay.portlet.flags.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -51,16 +52,20 @@ public class FlagsEntryServiceUtil {
 
 			ReferenceRegistry.registerReference(FlagsEntryServiceUtil.class,
 				"_service");
+			MethodCache.remove(FlagsEntryService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(FlagsEntryService service) {
+		MethodCache.remove(FlagsEntryService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(FlagsEntryServiceUtil.class,
 			"_service");
+		MethodCache.remove(FlagsEntryService.class);
 	}
 
 	private static FlagsEntryService _service;

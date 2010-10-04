@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -35,6 +36,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
@@ -773,6 +775,113 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 	}
 
 	/**
+	 * Filters by the user's permissions and finds all the expando columns where tableId = &#63;.
+	 *
+	 * @param tableId the table id to search with
+	 * @return the matching expando columns that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<ExpandoColumn> filterFindByTableId(long tableId)
+		throws SystemException {
+		return filterFindByTableId(tableId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds a range of all the expando columns where tableId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param tableId the table id to search with
+	 * @param start the lower bound of the range of expando columns to return
+	 * @param end the upper bound of the range of expando columns to return (not inclusive)
+	 * @return the range of matching expando columns that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<ExpandoColumn> filterFindByTableId(long tableId, int start,
+		int end) throws SystemException {
+		return filterFindByTableId(tableId, start, end, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the expando columns where tableId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param tableId the table id to search with
+	 * @param start the lower bound of the range of expando columns to return
+	 * @param end the upper bound of the range of expando columns to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching expando columns that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<ExpandoColumn> filterFindByTableId(long tableId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByTableId(tableId, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(3 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_EXPANDOCOLUMN_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_EXPANDOCOLUMN_NO_INLINE_DISTINCT_WHERE);
+		}
+
+		query.append(_FINDER_COLUMN_TABLEID_TABLEID_2);
+
+		if (orderByComparator != null) {
+			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+				orderByComparator);
+		}
+
+		else {
+			query.append(ExpandoColumnModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				ExpandoColumn.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_FILTER_ENTITY_ALIAS, ExpandoColumnImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(tableId);
+
+			return (List<ExpandoColumn>)QueryUtil.list(q, getDialect(), start,
+				end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
 	 * Finds the expando column where tableId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.expando.NoSuchColumnException} if it could not be found.
 	 *
 	 * @param tableId the table id to search with
@@ -1122,6 +1231,54 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 	}
 
 	/**
+	 * Filters by the user's permissions and counts all the expando columns where tableId = &#63;.
+	 *
+	 * @param tableId the table id to search with
+	 * @return the number of matching expando columns that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int filterCountByTableId(long tableId) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByTableId(tableId);
+		}
+
+		StringBundler query = new StringBundler(2);
+
+		query.append(_FILTER_SQL_COUNT_EXPANDOCOLUMN_WHERE);
+
+		query.append(_FINDER_COLUMN_TABLEID_TABLEID_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				ExpandoColumn.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(tableId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
 	 * Counts all the expando columns where tableId = &#63; and name = &#63;.
 	 *
 	 * @param tableId the table id to search with
@@ -1283,6 +1440,13 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 	private static final String _FINDER_COLUMN_T_N_NAME_1 = "expandoColumn.name IS NULL";
 	private static final String _FINDER_COLUMN_T_N_NAME_2 = "expandoColumn.name = ?";
 	private static final String _FINDER_COLUMN_T_N_NAME_3 = "(expandoColumn.name IS NULL OR expandoColumn.name = ?)";
+	private static final String _FILTER_SQL_SELECT_EXPANDOCOLUMN_WHERE = "SELECT DISTINCT {expandoColumn.*} FROM ExpandoColumn expandoColumn WHERE ";
+	private static final String _FILTER_SQL_SELECT_EXPANDOCOLUMN_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {expandoColumn.*} FROM (SELECT DISTINCT columnId FROM ExpandoColumn) expandoColumn2 INNER JOIN ExpandoColumn expandoColumn ON (expandoColumn2.columnId = expandoColumn.columnId) WHERE ";
+	private static final String _FILTER_SQL_COUNT_EXPANDOCOLUMN_WHERE = "SELECT COUNT(DISTINCT expandoColumn.columnId) AS COUNT_VALUE FROM ExpandoColumn expandoColumn WHERE ";
+	private static final String _FILTER_COLUMN_PK = "expandoColumn.columnId";
+	private static final String _FILTER_COLUMN_USERID = null;
+	private static final String _FILTER_ENTITY_ALIAS = "expandoColumn";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "expandoColumn.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ExpandoColumn exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ExpandoColumn exists with the key {";

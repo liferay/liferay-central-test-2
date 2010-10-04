@@ -1623,19 +1623,6 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and counts all the d l file entries where groupId = &#63; and folderId = &#63; and name = &#63;.
-	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
-	* @param name the name to search with
-	* @return the number of matching d l file entries that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public int filterCountByG_F_N(long groupId, long folderId,
-		java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Counts all the d l file entries where groupId = &#63; and folderId = &#63; and title = &#63;.
 	*
 	* @param groupId the group id to search with
@@ -1645,19 +1632,6 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByG_F_T(long groupId, long folderId, java.lang.String title)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Filters by the user's permissions and counts all the d l file entries where groupId = &#63; and folderId = &#63; and title = &#63;.
-	*
-	* @param groupId the group id to search with
-	* @param folderId the folder id to search with
-	* @param title the title to search with
-	* @return the number of matching d l file entries that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public int filterCountByG_F_T(long groupId, long folderId,
-		java.lang.String title)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

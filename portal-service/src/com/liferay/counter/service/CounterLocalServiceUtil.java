@@ -15,6 +15,7 @@
 package com.liferay.counter.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -266,16 +267,20 @@ public class CounterLocalServiceUtil {
 
 			ReferenceRegistry.registerReference(CounterLocalServiceUtil.class,
 				"_service");
+			MethodCache.remove(CounterLocalService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(CounterLocalService service) {
+		MethodCache.remove(CounterLocalService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(CounterLocalServiceUtil.class,
 			"_service");
+		MethodCache.remove(CounterLocalService.class);
 	}
 
 	private static CounterLocalService _service;

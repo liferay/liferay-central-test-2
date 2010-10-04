@@ -2551,19 +2551,6 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and counts all the journal articles where groupId = &#63; and articleId = &#63; and version = &#63;.
-	*
-	* @param groupId the group id to search with
-	* @param articleId the article id to search with
-	* @param version the version to search with
-	* @return the number of matching journal articles that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public int filterCountByG_A_V(long groupId, java.lang.String articleId,
-		double version)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Counts all the journal articles where groupId = &#63; and articleId = &#63; and status = &#63;.
 	*
 	* @param groupId the group id to search with

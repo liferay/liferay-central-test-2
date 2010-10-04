@@ -208,6 +208,53 @@ public interface SCLicensePersistence extends BasePersistence<SCLicense> {
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
 
 	/**
+	* Filters by the user's permissions and finds all the s c licenses where active = &#63;.
+	*
+	* @param active the active to search with
+	* @return the matching s c licenses that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> filterFindByActive(
+		boolean active)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds a range of all the s c licenses where active = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param active the active to search with
+	* @param start the lower bound of the range of s c licenses to return
+	* @param end the upper bound of the range of s c licenses to return (not inclusive)
+	* @return the range of matching s c licenses that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> filterFindByActive(
+		boolean active, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the s c licenses where active = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param active the active to search with
+	* @param start the lower bound of the range of s c licenses to return
+	* @param end the upper bound of the range of s c licenses to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching s c licenses that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> filterFindByActive(
+		boolean active, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Finds all the s c licenses where active = &#63; and recommended = &#63;.
 	*
 	* @param active the active to search with
@@ -319,6 +366,56 @@ public interface SCLicensePersistence extends BasePersistence<SCLicense> {
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
 
 	/**
+	* Filters by the user's permissions and finds all the s c licenses where active = &#63; and recommended = &#63;.
+	*
+	* @param active the active to search with
+	* @param recommended the recommended to search with
+	* @return the matching s c licenses that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> filterFindByA_R(
+		boolean active, boolean recommended)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds a range of all the s c licenses where active = &#63; and recommended = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param active the active to search with
+	* @param recommended the recommended to search with
+	* @param start the lower bound of the range of s c licenses to return
+	* @param end the upper bound of the range of s c licenses to return (not inclusive)
+	* @return the range of matching s c licenses that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> filterFindByA_R(
+		boolean active, boolean recommended, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the s c licenses where active = &#63; and recommended = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param active the active to search with
+	* @param recommended the recommended to search with
+	* @param start the lower bound of the range of s c licenses to return
+	* @param end the upper bound of the range of s c licenses to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching s c licenses that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> filterFindByA_R(
+		boolean active, boolean recommended, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Finds all the s c licenses.
 	*
 	* @return the s c licenses
@@ -399,6 +496,16 @@ public interface SCLicensePersistence extends BasePersistence<SCLicense> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Filters by the user's permissions and counts all the s c licenses where active = &#63;.
+	*
+	* @param active the active to search with
+	* @return the number of matching s c licenses that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByActive(boolean active)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Counts all the s c licenses where active = &#63; and recommended = &#63;.
 	*
 	* @param active the active to search with
@@ -407,6 +514,17 @@ public interface SCLicensePersistence extends BasePersistence<SCLicense> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByA_R(boolean active, boolean recommended)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and counts all the s c licenses where active = &#63; and recommended = &#63;.
+	*
+	* @param active the active to search with
+	* @param recommended the recommended to search with
+	* @return the number of matching s c licenses that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByA_R(boolean active, boolean recommended)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

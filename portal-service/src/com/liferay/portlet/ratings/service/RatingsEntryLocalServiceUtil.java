@@ -15,6 +15,7 @@
 package com.liferay.portlet.ratings.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -270,16 +271,20 @@ public class RatingsEntryLocalServiceUtil {
 
 			ReferenceRegistry.registerReference(RatingsEntryLocalServiceUtil.class,
 				"_service");
+			MethodCache.remove(RatingsEntryLocalService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(RatingsEntryLocalService service) {
+		MethodCache.remove(RatingsEntryLocalService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(RatingsEntryLocalServiceUtil.class,
 			"_service");
+		MethodCache.remove(RatingsEntryLocalService.class);
 	}
 
 	private static RatingsEntryLocalService _service;

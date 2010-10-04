@@ -15,6 +15,7 @@
 package com.liferay.portlet.messageboards.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -434,16 +435,20 @@ public class MBCategoryLocalServiceUtil {
 
 			ReferenceRegistry.registerReference(MBCategoryLocalServiceUtil.class,
 				"_service");
+			MethodCache.remove(MBCategoryLocalService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(MBCategoryLocalService service) {
+		MethodCache.remove(MBCategoryLocalService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(MBCategoryLocalServiceUtil.class,
 			"_service");
+		MethodCache.remove(MBCategoryLocalService.class);
 	}
 
 	private static MBCategoryLocalService _service;

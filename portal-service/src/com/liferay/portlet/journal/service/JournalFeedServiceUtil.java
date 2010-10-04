@@ -15,6 +15,7 @@
 package com.liferay.portlet.journal.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -105,16 +106,20 @@ public class JournalFeedServiceUtil {
 
 			ReferenceRegistry.registerReference(JournalFeedServiceUtil.class,
 				"_service");
+			MethodCache.remove(JournalFeedService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(JournalFeedService service) {
+		MethodCache.remove(JournalFeedService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(JournalFeedServiceUtil.class,
 			"_service");
+		MethodCache.remove(JournalFeedService.class);
 	}
 
 	private static JournalFeedService _service;

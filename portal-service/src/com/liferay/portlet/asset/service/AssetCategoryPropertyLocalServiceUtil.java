@@ -15,6 +15,7 @@
 package com.liferay.portlet.asset.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -298,16 +299,20 @@ public class AssetCategoryPropertyLocalServiceUtil {
 
 			ReferenceRegistry.registerReference(AssetCategoryPropertyLocalServiceUtil.class,
 				"_service");
+			MethodCache.remove(AssetCategoryPropertyLocalService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(AssetCategoryPropertyLocalService service) {
+		MethodCache.remove(AssetCategoryPropertyLocalService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(AssetCategoryPropertyLocalServiceUtil.class,
 			"_service");
+		MethodCache.remove(AssetCategoryPropertyLocalService.class);
 	}
 
 	private static AssetCategoryPropertyLocalService _service;

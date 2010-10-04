@@ -15,6 +15,7 @@
 package com.liferay.portlet.blogs.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -164,16 +165,20 @@ public class BlogsEntryServiceUtil {
 
 			ReferenceRegistry.registerReference(BlogsEntryServiceUtil.class,
 				"_service");
+			MethodCache.remove(BlogsEntryService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(BlogsEntryService service) {
+		MethodCache.remove(BlogsEntryService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(BlogsEntryServiceUtil.class,
 			"_service");
+		MethodCache.remove(BlogsEntryService.class);
 	}
 
 	private static BlogsEntryService _service;

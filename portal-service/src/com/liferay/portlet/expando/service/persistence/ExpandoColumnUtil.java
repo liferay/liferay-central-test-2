@@ -318,6 +318,60 @@ public class ExpandoColumnUtil {
 	}
 
 	/**
+	* Filters by the user's permissions and finds all the expando columns where tableId = &#63;.
+	*
+	* @param tableId the table id to search with
+	* @return the matching expando columns that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> filterFindByTableId(
+		long tableId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByTableId(tableId);
+	}
+
+	/**
+	* Filters by the user's permissions and finds a range of all the expando columns where tableId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param tableId the table id to search with
+	* @param start the lower bound of the range of expando columns to return
+	* @param end the upper bound of the range of expando columns to return (not inclusive)
+	* @return the range of matching expando columns that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> filterFindByTableId(
+		long tableId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByTableId(tableId, start, end);
+	}
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the expando columns where tableId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param tableId the table id to search with
+	* @param start the lower bound of the range of expando columns to return
+	* @param end the upper bound of the range of expando columns to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of matching expando columns that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> filterFindByTableId(
+		long tableId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByTableId(tableId, start, end, orderByComparator);
+	}
+
+	/**
 	* Finds the expando column where tableId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.expando.NoSuchColumnException} if it could not be found.
 	*
 	* @param tableId the table id to search with
@@ -454,6 +508,18 @@ public class ExpandoColumnUtil {
 	public static int countByTableId(long tableId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByTableId(tableId);
+	}
+
+	/**
+	* Filters by the user's permissions and counts all the expando columns where tableId = &#63;.
+	*
+	* @param tableId the table id to search with
+	* @return the number of matching expando columns that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByTableId(long tableId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByTableId(tableId);
 	}
 
 	/**

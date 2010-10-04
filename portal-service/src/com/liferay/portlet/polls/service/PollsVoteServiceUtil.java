@@ -15,6 +15,7 @@
 package com.liferay.portlet.polls.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -49,16 +50,20 @@ public class PollsVoteServiceUtil {
 
 			ReferenceRegistry.registerReference(PollsVoteServiceUtil.class,
 				"_service");
+			MethodCache.remove(PollsVoteService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(PollsVoteService service) {
+		MethodCache.remove(PollsVoteService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(PollsVoteServiceUtil.class,
 			"_service");
+		MethodCache.remove(PollsVoteService.class);
 	}
 
 	private static PollsVoteService _service;

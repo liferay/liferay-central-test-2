@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
@@ -738,6 +739,112 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
+	 * Filters by the user's permissions and finds all the s c licenses where active = &#63;.
+	 *
+	 * @param active the active to search with
+	 * @return the matching s c licenses that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<SCLicense> filterFindByActive(boolean active)
+		throws SystemException {
+		return filterFindByActive(active, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds a range of all the s c licenses where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param start the lower bound of the range of s c licenses to return
+	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @return the range of matching s c licenses that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<SCLicense> filterFindByActive(boolean active, int start, int end)
+		throws SystemException {
+		return filterFindByActive(active, start, end, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the s c licenses where active = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param start the lower bound of the range of s c licenses to return
+	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching s c licenses that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<SCLicense> filterFindByActive(boolean active, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByActive(active, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(3 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_SCLICENSE_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_SCLICENSE_NO_INLINE_DISTINCT_WHERE);
+		}
+
+		query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
+
+		if (orderByComparator != null) {
+			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+				orderByComparator);
+		}
+
+		else {
+			query.append(SCLicenseModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				SCLicense.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_FILTER_ENTITY_ALIAS, SCLicenseImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(active);
+
+			return (List<SCLicense>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
 	 * Finds all the s c licenses where active = &#63; and recommended = &#63;.
 	 *
 	 * @param active the active to search with
@@ -1098,6 +1205,120 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
+	 * Filters by the user's permissions and finds all the s c licenses where active = &#63; and recommended = &#63;.
+	 *
+	 * @param active the active to search with
+	 * @param recommended the recommended to search with
+	 * @return the matching s c licenses that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<SCLicense> filterFindByA_R(boolean active, boolean recommended)
+		throws SystemException {
+		return filterFindByA_R(active, recommended, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds a range of all the s c licenses where active = &#63; and recommended = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param recommended the recommended to search with
+	 * @param start the lower bound of the range of s c licenses to return
+	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @return the range of matching s c licenses that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<SCLicense> filterFindByA_R(boolean active, boolean recommended,
+		int start, int end) throws SystemException {
+		return filterFindByA_R(active, recommended, start, end, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the s c licenses where active = &#63; and recommended = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param active the active to search with
+	 * @param recommended the recommended to search with
+	 * @param start the lower bound of the range of s c licenses to return
+	 * @param end the upper bound of the range of s c licenses to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching s c licenses that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<SCLicense> filterFindByA_R(boolean active, boolean recommended,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByA_R(active, recommended, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_SCLICENSE_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_SCLICENSE_NO_INLINE_DISTINCT_WHERE);
+		}
+
+		query.append(_FINDER_COLUMN_A_R_ACTIVE_2);
+
+		query.append(_FINDER_COLUMN_A_R_RECOMMENDED_2);
+
+		if (orderByComparator != null) {
+			appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+				orderByComparator);
+		}
+
+		else {
+			query.append(SCLicenseModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				SCLicense.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity(_FILTER_ENTITY_ALIAS, SCLicenseImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(active);
+
+			qPos.add(recommended);
+
+			return (List<SCLicense>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
 	 * Finds all the s c licenses.
 	 *
 	 * @return the s c licenses
@@ -1294,6 +1515,54 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	}
 
 	/**
+	 * Filters by the user's permissions and counts all the s c licenses where active = &#63;.
+	 *
+	 * @param active the active to search with
+	 * @return the number of matching s c licenses that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int filterCountByActive(boolean active) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByActive(active);
+		}
+
+		StringBundler query = new StringBundler(2);
+
+		query.append(_FILTER_SQL_COUNT_SCLICENSE_WHERE);
+
+		query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				SCLicense.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(active);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
 	 * Counts all the s c licenses where active = &#63; and recommended = &#63;.
 	 *
 	 * @param active the active to search with
@@ -1350,6 +1619,60 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 
 		return count.intValue();
+	}
+
+	/**
+	 * Filters by the user's permissions and counts all the s c licenses where active = &#63; and recommended = &#63;.
+	 *
+	 * @param active the active to search with
+	 * @param recommended the recommended to search with
+	 * @return the number of matching s c licenses that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int filterCountByA_R(boolean active, boolean recommended)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByA_R(active, recommended);
+		}
+
+		StringBundler query = new StringBundler(3);
+
+		query.append(_FILTER_SQL_COUNT_SCLICENSE_WHERE);
+
+		query.append(_FINDER_COLUMN_A_R_ACTIVE_2);
+
+		query.append(_FINDER_COLUMN_A_R_RECOMMENDED_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				SCLicense.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(active);
+
+			qPos.add(recommended);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	/**
@@ -2112,6 +2435,13 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	private static final String _FINDER_COLUMN_ACTIVE_ACTIVE_2 = "scLicense.active = ?";
 	private static final String _FINDER_COLUMN_A_R_ACTIVE_2 = "scLicense.active = ? AND ";
 	private static final String _FINDER_COLUMN_A_R_RECOMMENDED_2 = "scLicense.recommended = ?";
+	private static final String _FILTER_SQL_SELECT_SCLICENSE_WHERE = "SELECT DISTINCT {scLicense.*} FROM SCLicense scLicense WHERE ";
+	private static final String _FILTER_SQL_SELECT_SCLICENSE_NO_INLINE_DISTINCT_WHERE =
+		"SELECT {scLicense.*} FROM (SELECT DISTINCT licenseId FROM SCLicense) scLicense2 INNER JOIN SCLicense scLicense ON (scLicense2.licenseId = scLicense.licenseId) WHERE ";
+	private static final String _FILTER_SQL_COUNT_SCLICENSE_WHERE = "SELECT COUNT(DISTINCT scLicense.licenseId) AS COUNT_VALUE FROM SCLicense scLicense WHERE ";
+	private static final String _FILTER_COLUMN_PK = "scLicense.licenseId";
+	private static final String _FILTER_COLUMN_USERID = null;
+	private static final String _FILTER_ENTITY_ALIAS = "scLicense";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "scLicense.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No SCLicense exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No SCLicense exists with the key {";

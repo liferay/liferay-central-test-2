@@ -15,6 +15,7 @@
 package com.liferay.portlet.shopping.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -76,16 +77,20 @@ public class ShoppingCategoryServiceUtil {
 
 			ReferenceRegistry.registerReference(ShoppingCategoryServiceUtil.class,
 				"_service");
+			MethodCache.remove(ShoppingCategoryService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(ShoppingCategoryService service) {
+		MethodCache.remove(ShoppingCategoryService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(ShoppingCategoryServiceUtil.class,
 			"_service");
+		MethodCache.remove(ShoppingCategoryService.class);
 	}
 
 	private static ShoppingCategoryService _service;

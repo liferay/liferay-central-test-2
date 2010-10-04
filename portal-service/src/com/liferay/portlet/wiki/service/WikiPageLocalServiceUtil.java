@@ -15,6 +15,7 @@
 package com.liferay.portlet.wiki.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -660,16 +661,20 @@ public class WikiPageLocalServiceUtil {
 
 			ReferenceRegistry.registerReference(WikiPageLocalServiceUtil.class,
 				"_service");
+			MethodCache.remove(WikiPageLocalService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(WikiPageLocalService service) {
+		MethodCache.remove(WikiPageLocalService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(WikiPageLocalServiceUtil.class,
 			"_service");
+		MethodCache.remove(WikiPageLocalService.class);
 	}
 
 	private static WikiPageLocalService _service;

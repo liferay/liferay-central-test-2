@@ -742,19 +742,6 @@ public class JournalFeedUtil {
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the journal feeds where groupId = &#63; and feedId = &#63;.
-	*
-	* @param groupId the group id to search with
-	* @param feedId the feed id to search with
-	* @return the number of matching journal feeds that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int filterCountByG_F(long groupId, java.lang.String feedId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().filterCountByG_F(groupId, feedId);
-	}
-
-	/**
 	* Counts all the journal feeds.
 	*
 	* @return the number of journal feeds

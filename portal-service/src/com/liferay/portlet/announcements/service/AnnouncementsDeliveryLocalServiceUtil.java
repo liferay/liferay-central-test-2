@@ -15,6 +15,7 @@
 package com.liferay.portlet.announcements.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -286,16 +287,20 @@ public class AnnouncementsDeliveryLocalServiceUtil {
 
 			ReferenceRegistry.registerReference(AnnouncementsDeliveryLocalServiceUtil.class,
 				"_service");
+			MethodCache.remove(AnnouncementsDeliveryLocalService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(AnnouncementsDeliveryLocalService service) {
+		MethodCache.remove(AnnouncementsDeliveryLocalService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(AnnouncementsDeliveryLocalServiceUtil.class,
 			"_service");
+		MethodCache.remove(AnnouncementsDeliveryLocalService.class);
 	}
 
 	private static AnnouncementsDeliveryLocalService _service;

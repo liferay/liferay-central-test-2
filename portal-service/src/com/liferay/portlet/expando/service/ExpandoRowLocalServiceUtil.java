@@ -15,6 +15,7 @@
 package com.liferay.portlet.expando.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -373,16 +374,20 @@ public class ExpandoRowLocalServiceUtil {
 
 			ReferenceRegistry.registerReference(ExpandoRowLocalServiceUtil.class,
 				"_service");
+			MethodCache.remove(ExpandoRowLocalService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(ExpandoRowLocalService service) {
+		MethodCache.remove(ExpandoRowLocalService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(ExpandoRowLocalServiceUtil.class,
 			"_service");
+		MethodCache.remove(ExpandoRowLocalService.class);
 	}
 
 	private static ExpandoRowLocalService _service;

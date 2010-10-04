@@ -926,17 +926,6 @@ public interface JournalTemplatePersistence extends BasePersistence<JournalTempl
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Filters by the user's permissions and counts all the journal templates where groupId = &#63; and templateId = &#63;.
-	*
-	* @param groupId the group id to search with
-	* @param templateId the template id to search with
-	* @return the number of matching journal templates that the user has permission to view
-	* @throws SystemException if a system exception occurred
-	*/
-	public int filterCountByG_T(long groupId, java.lang.String templateId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Counts all the journal templates where groupId = &#63; and structureId = &#63;.
 	*
 	* @param groupId the group id to search with

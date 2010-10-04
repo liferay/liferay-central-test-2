@@ -15,6 +15,7 @@
 package com.liferay.portlet.messageboards.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -55,15 +56,19 @@ public class MBBanServiceUtil {
 
 			ReferenceRegistry.registerReference(MBBanServiceUtil.class,
 				"_service");
+			MethodCache.remove(MBBanService.class);
 		}
 
 		return _service;
 	}
 
 	public void setService(MBBanService service) {
+		MethodCache.remove(MBBanService.class);
+
 		_service = service;
 
 		ReferenceRegistry.registerReference(MBBanServiceUtil.class, "_service");
+		MethodCache.remove(MBBanService.class);
 	}
 
 	private static MBBanService _service;
