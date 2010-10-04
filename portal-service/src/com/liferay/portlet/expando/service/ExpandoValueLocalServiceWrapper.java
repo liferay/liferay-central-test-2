@@ -690,11 +690,11 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	}
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
-		java.lang.String className, java.lang.String tableName,
+		long companyId, java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, java.lang.String data, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _expandoValueLocalService.getColumnValues(className, tableName,
-			columnName, data, start, end);
+		return _expandoValueLocalService.getColumnValues(companyId, className,
+			tableName, columnName, data, start, end);
 	}
 
 	public int getColumnValuesCount(long columnId)
@@ -724,12 +724,12 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 			className, tableName, columnName);
 	}
 
-	public int getColumnValuesCount(java.lang.String className,
+	public int getColumnValuesCount(long companyId, java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName,
 		java.lang.String data)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _expandoValueLocalService.getColumnValuesCount(className,
-			tableName, columnName, data);
+		return _expandoValueLocalService.getColumnValuesCount(companyId,
+			className, tableName, columnName, data);
 	}
 
 	public java.io.Serializable getData(long companyId,

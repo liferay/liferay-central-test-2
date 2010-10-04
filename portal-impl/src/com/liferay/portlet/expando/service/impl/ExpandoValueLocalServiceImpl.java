@@ -964,14 +964,14 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public List<ExpandoValue> getColumnValues(
-			String className, String tableName, String columnName, String data,
-			int start, int end)
+			long companyId, String className, String tableName,
+			String columnName, String data, int start, int end)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		return getColumnValues(
-			classNameId, tableName, columnName, data, start, end);
+			companyId, classNameId, tableName, columnName, data, start, end);
 	}
 
 	public int getColumnValuesCount(long columnId) throws SystemException {
@@ -1036,12 +1036,14 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public int getColumnValuesCount(
-			String className, String tableName, String columnName, String data)
+			long companyId, String className, String tableName,
+			String columnName, String data)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getColumnValuesCount(classNameId, tableName, columnName, data);
+		return getColumnValuesCount(
+			companyId, classNameId, tableName, columnName, data);
 	}
 
 	public Serializable getData(
