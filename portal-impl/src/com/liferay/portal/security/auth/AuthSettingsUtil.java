@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -20,12 +20,13 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 /**
- * <a href="AuthSettingsUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Michael C. Han
  */
 public class AuthSettingsUtil {
-	public static boolean isLDAPAuthEnabled(long companyId) throws SystemException {
+
+	public static boolean isLDAPAuthEnabled(long companyId)
+		throws SystemException {
+
 		if (PrefsPropsUtil.getBoolean(
 				companyId, PropsKeys.LDAP_AUTH_ENABLED,
 				PropsValues.LDAP_AUTH_ENABLED)) {
@@ -41,8 +42,8 @@ public class AuthSettingsUtil {
 		throws SystemException {
 
 		if (PrefsPropsUtil.getBoolean(
-			companyId, PropsKeys.NTLM_AUTH_ENABLED,
-			PropsValues.NTLM_AUTH_ENABLED)) {
+				companyId, PropsKeys.NTLM_AUTH_ENABLED,
+				PropsValues.NTLM_AUTH_ENABLED)) {
 
 			return true;
 		}
@@ -55,8 +56,8 @@ public class AuthSettingsUtil {
 		throws SystemException {
 
 		if (PrefsPropsUtil.getBoolean(
-			companyId, PropsKeys.SITEMINDER_AUTH_ENABLED,
-			PropsValues.SITEMINDER_AUTH_ENABLED)) {
+				companyId, PropsKeys.SITEMINDER_AUTH_ENABLED,
+				PropsValues.SITEMINDER_AUTH_ENABLED)) {
 
 			return true;
 		}
