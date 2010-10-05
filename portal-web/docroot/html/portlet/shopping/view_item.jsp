@@ -26,8 +26,8 @@ item = item.toEscapedModel();
 ShoppingItemField[] itemFields = (ShoppingItemField[])ShoppingItemFieldLocalServiceUtil.getItemFields(item.getItemId()).toArray(new ShoppingItemField[0]);
 ShoppingItemPrice[] itemPrices = (ShoppingItemPrice[])ShoppingItemPriceLocalServiceUtil.getItemPrices(item.getItemId()).toArray(new ShoppingItemPrice[0]);
 
-String orderByCol = portalPrefs.getValue(PortletKeys.SHOPPING, "items-order-by-col", "sku");
-String orderByType = portalPrefs.getValue(PortletKeys.SHOPPING, "items-order-by-type", "asc");
+String orderByCol = portalPreferences.getValue(PortletKeys.SHOPPING, "items-order-by-col", "sku");
+String orderByType = portalPreferences.getValue(PortletKeys.SHOPPING, "items-order-by-type", "asc");
 
 OrderByComparator orderByComparator = ShoppingUtil.getItemOrderByComparator(orderByCol, orderByType);
 

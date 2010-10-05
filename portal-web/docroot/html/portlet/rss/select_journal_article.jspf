@@ -15,7 +15,7 @@
 --%>
 
 <%
-PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
+PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 

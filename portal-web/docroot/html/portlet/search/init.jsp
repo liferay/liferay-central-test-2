@@ -31,7 +31,7 @@
 <%@ page import="com.liferay.portlet.wiki.util.WikiUtil" %>
 
 <%
-PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
+PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 boolean dlLinkToViewURL = false;
 boolean includeSystemPortlets = false;

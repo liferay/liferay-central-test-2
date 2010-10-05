@@ -20,10 +20,10 @@
 String editorType = ParamUtil.getString(request, "editorType");
 
 if (Validator.isNotNull(editorType)) {
-	portalPrefs.setValue(PortletKeys.JOURNAL, "editor-type", editorType);
+	portalPreferences.setValue(PortletKeys.JOURNAL, "editor-type", editorType);
 }
 else {
-	editorType = portalPrefs.getValue(PortletKeys.JOURNAL, "editor-type", "html");
+	editorType = portalPreferences.getValue(PortletKeys.JOURNAL, "editor-type", "html");
 }
 
 boolean useEditorCodepress = editorType.equals("codepress");

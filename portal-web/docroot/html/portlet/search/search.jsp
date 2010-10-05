@@ -20,10 +20,10 @@
 String primarySearch = ParamUtil.getString(request, "primarySearch");
 
 if (Validator.isNotNull(primarySearch)) {
-	portalPrefs.setValue(PortletKeys.SEARCH, "primary-search", primarySearch);
+	portalPreferences.setValue(PortletKeys.SEARCH, "primary-search", primarySearch);
 }
 else {
-	primarySearch = portalPrefs.getValue(PortletKeys.SEARCH, "primary-search", StringPool.BLANK);
+	primarySearch = portalPreferences.getValue(PortletKeys.SEARCH, "primary-search", StringPool.BLANK);
 }
 
 long groupId = ParamUtil.getLong(request, "groupId");
