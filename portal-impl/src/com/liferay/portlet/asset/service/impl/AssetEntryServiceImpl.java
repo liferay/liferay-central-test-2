@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PortalUtil;
@@ -57,32 +56,6 @@ import java.util.List;
  * @author Raymond Augé
  */
 public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
-
-	public void deleteEntry(long entryId)
-		throws PortalException, SystemException {
-
-		AssetEntry entry = assetEntryLocalService.getEntry(entryId);
-
-		String className = entry.getClassName();
-		long classPK = entry.getClassPK();
-
-		AssetRendererFactory assetRendererFactory =
-			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
-				className);
-
-		try {
-			if (!assetRendererFactory.hasPermission(
-					getPermissionChecker(), classPK, ActionKeys.DELETE)) {
-
-				throw new PrincipalException();
-			}
-		}
-		catch (Exception e) {
-			throw new PortalException(e);
-		}
-
-		assetEntryLocalService.deleteAssetEntry(entryId);
-	}
 
 	public List<AssetEntry> getCompanyEntries(
 			long companyId, int start, int end)
