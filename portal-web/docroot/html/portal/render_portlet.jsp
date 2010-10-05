@@ -180,7 +180,7 @@ boolean showEditIcon = false;
 boolean showEditDefaultsIcon = false;
 boolean showEditGuestIcon = false;
 boolean showExportImportIcon = false;
-boolean showHelpIcon = portlet.hasPortletMode(responseContentType, PortletMode.HELP);
+boolean showHelpIcon = false;
 boolean showMaxIcon = portlet.hasWindowState(responseContentType, WindowState.MAXIMIZED);
 boolean showMinIcon = portlet.hasWindowState(responseContentType, WindowState.MINIMIZED);
 boolean showMoveIcon = !stateMax && !themeDisplay.isStateExclusive();
@@ -235,6 +235,12 @@ if (portlet.hasPortletMode(responseContentType, LiferayPortletMode.EDIT_DEFAULTS
 if (portlet.hasPortletMode(responseContentType, LiferayPortletMode.EDIT_GUEST)) {
 	if (showEditIcon && !layout.isPrivateLayout() && themeDisplay.isShowAddContentIcon()) {
 		showEditGuestIcon = true;
+	}
+}
+
+if (portlet.hasPortletMode(responseContentType, PortletMode.HELP)) {
+	if (PortletPermissionUtil.contains(permissionChecker, plid, portletId, ActionKeys.HELP)) {
+		showHelpIcon = true;
 	}
 }
 
