@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 
@@ -53,7 +54,9 @@ public class PageCommentsPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletPreferences preferences)
 		throws Exception {
 
-		context.addComments(Layout.class, context.getPlid());
+		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
+			context.addComments(Layout.class, context.getPlid());
+		}
 
 		return String.valueOf(context.getPlid());
 	}
