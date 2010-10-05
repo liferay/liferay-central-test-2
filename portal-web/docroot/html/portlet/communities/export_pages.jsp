@@ -406,7 +406,14 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 					dialog.io.after(
 						'success',
 						function(event){
-							window.location.reload(true);
+							<c:choose>
+								<c:when test="<%= proposalId > 0 %>">
+									window.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_pages" /><portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" /><portlet:param name="tabs2" value="proposals" /></portlet:renderURL>';
+								</c:when>
+								<c:otherwise>
+									window.location.reload(true);
+								</c:otherwise>
+							</c:choose>
 						}
 					);
 
