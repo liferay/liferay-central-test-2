@@ -992,6 +992,9 @@ public class PortalUtil {
 		return getPortal().getUserName(userId, defaultUserName);
 	}
 
+	/**
+	 * @deprecated {@link #getUserName(long, String)}
+	 */
 	public static String getUserName(
 		long userId, String defaultUserName, HttpServletRequest request) {
 
@@ -1004,6 +1007,9 @@ public class PortalUtil {
 		return getPortal().getUserName(userId, defaultUserName, userAttribute);
 	}
 
+	/**
+	 * @deprecated {@link #getUserName(long, String, String)}
+	 */
 	public static String getUserName(
 		long userId, String defaultUserName, String userAttribute,
 		HttpServletRequest request) {

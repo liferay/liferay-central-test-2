@@ -3216,6 +3216,9 @@ public class PortalImpl implements Portal {
 			userId, defaultUserName, UserAttributes.USER_NAME_FULL);
 	}
 
+	/**
+	 * @deprecated {@link #getUserName(long, String)}
+	 */
 	public String getUserName(
 		long userId, String defaultUserName, HttpServletRequest request) {
 
@@ -3226,9 +3229,27 @@ public class PortalImpl implements Portal {
 	public String getUserName(
 		long userId, String defaultUserName, String userAttribute) {
 
-		return getUserName(userId, defaultUserName, userAttribute, null);
+		String userName = defaultUserName;
+
+		try {
+			User user = UserLocalServiceUtil.getUserById(userId);
+
+			if (userAttribute.equals(UserAttributes.USER_NAME_FULL)) {
+				userName = user.getFullName();
+			}
+			else {
+				userName = user.getScreenName();
+			}
+		}
+		catch (Exception e) {
+		}
+
+		return userName;
 	}
 
+	/**
+	 * @deprecated {@link #getUserName(long, String, String)}
+	 */
 	public String getUserName(
 		long userId, String defaultUserName, String userAttribute,
 		HttpServletRequest request) {
