@@ -961,6 +961,13 @@ public class UserWrapper implements User {
 		return _user.getMyPlaces(max);
 	}
 
+	public java.util.List<com.liferay.portal.model.Group> getMyPlaces(
+		java.lang.String[] classNames, int max)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _user.getMyPlaces(classNames, max);
+	}
+
 	public long[] getOrganizationIds()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

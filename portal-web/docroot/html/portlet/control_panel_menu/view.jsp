@@ -31,10 +31,6 @@
 		for (String curCategory : PortletCategoryKeys.ALL) {
 			List<Portlet> portlets = PortalUtil.getControlPanelPortlets(curCategory, themeDisplay);
 
-			if (portlets.isEmpty()) {
-				continue;
-			}
-
 			List<Layout> scopeLayouts = new ArrayList<Layout>();
 
 			String curGroupLabel = null;
@@ -108,8 +104,17 @@
 				<liferay-ui:panel-floating-container id="groupSelectorPanel" paging="<%= true %>" trigger=".lfr-group-selector">
 
 					<%
-					List<Group> manageableGroups = GroupServiceUtil.getManageableGroups(ActionKeys.MANAGE_LAYOUTS, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
-					List<Organization> manageableOrganizations = OrganizationServiceUtil.getManageableOrganizations(ActionKeys.MANAGE_LAYOUTS, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS);
+					List<Group> manageableGroups = null;
+					List manageableOrganizations = null;
+
+					if (permissionChecker.isCompanyAdmin()) {
+						manageableGroups = GroupServiceUtil.getManageableGroups(ActionKeys.MANAGE_LAYOUTS, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
+						manageableOrganizations = OrganizationServiceUtil.getManageableOrganizations(ActionKeys.MANAGE_LAYOUTS, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS);
+					}
+					else {
+						manageableGroups = user.getMyPlaces(new String[] {Group.class.getName()}, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
+						manageableOrganizations = user.getMyPlaces(new String[] {Organization.class.getName()}, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS);
+					}
 					%>
 
 					<c:if test="<%= !manageableGroups.isEmpty() %>">
@@ -144,7 +149,21 @@
 
 								<%
 								for (int i = 0; i < manageableOrganizations.size(); i++) {
-									Organization organization = manageableOrganizations.get(i);
+									Object orgObject = manageableOrganizations.get(i);
+									Organization organization = null;
+
+									if (orgObject instanceof Organization) {
+										organization = (Organization)orgObject;
+									}
+									else {
+										Group organizationGroup = (Group)orgObject;
+
+										if (!organizationGroup.isOrganization()) {
+											continue;
+										}
+
+										organization = OrganizationLocalServiceUtil.getOrganization(organizationGroup.getOrganizationId());
+									}
 								%>
 
 									<c:if test="<%= (i != 0) && (i % 7 == 0 ) %>">

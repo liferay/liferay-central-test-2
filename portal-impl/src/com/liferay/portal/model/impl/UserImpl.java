@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.cache.ThreadLocalCacheManager;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Digester;
 import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -246,10 +247,16 @@ public class UserImpl extends UserModelImpl implements User {
 	}
 
 	public List<Group> getMyPlaces() throws PortalException, SystemException {
-		return getMyPlaces(QueryUtil.ALL_POS);
+		return getMyPlaces(null, QueryUtil.ALL_POS);
 	}
 
 	public List<Group> getMyPlaces(int max)
+		throws PortalException, SystemException {
+
+		return getMyPlaces(null, max);
+	}
+
+	public List<Group> getMyPlaces(String[] classNames, int max)
 		throws PortalException, SystemException {
 
 		if (isDefaultUser()) {
@@ -261,6 +268,11 @@ public class UserImpl extends UserModelImpl implements User {
 				Lifecycle.REQUEST, _GET_MY_PLACES_CACHE_NAME);
 
 		String key = StringUtil.toHexString(max);
+
+		if ((classNames != null) && (classNames.length > 0)) {
+			key = StringUtil.merge(classNames).concat(StringPool.POUND).concat(
+				key);
+		}
 
 		List<Group> myPlaces = threadLocalCache.get(key);
 
@@ -278,43 +290,55 @@ public class UserImpl extends UserModelImpl implements User {
 			end = max;
 		}
 
-		LinkedHashMap<String, Object> groupParams =
-			new LinkedHashMap<String, Object>();
+		if ((classNames == null) ||
+			ArrayUtil.contains(classNames, Group.class.getName())) {
 
-		groupParams.put("usersGroups", new Long(getUserId()));
-		//groupParams.put("pageCount", StringPool.BLANK);
+			LinkedHashMap<String, Object> groupParams =
+				new LinkedHashMap<String, Object>();
 
-		myPlaces.addAll(
-			GroupLocalServiceUtil.search(
-				getCompanyId(), null, null, groupParams, start, end));
+			groupParams.put("usersGroups", new Long(getUserId()));
+			//groupParams.put("pageCount", StringPool.BLANK);
 
-		LinkedHashMap<String, Object> organizationParams =
-			new LinkedHashMap<String, Object>();
+			myPlaces.addAll(
+				GroupLocalServiceUtil.search(
+					getCompanyId(), null, null, groupParams, start, end));
+		}
 
-		organizationParams.put("usersOrgs", new Long(getUserId()));
+		if ((classNames == null) ||
+			ArrayUtil.contains(classNames, Organization.class.getName())) {
 
-		List<Organization> userOrgs = OrganizationLocalServiceUtil.search(
-			getCompanyId(), OrganizationConstants.ANY_PARENT_ORGANIZATION_ID,
-			null, null, null, null, organizationParams, start, end);
+			LinkedHashMap<String, Object> organizationParams =
+				new LinkedHashMap<String, Object>();
 
-		for (Organization organization : userOrgs) {
-			myPlaces.add(0, organization.getGroup());
+			organizationParams.put("usersOrgs", new Long(getUserId()));
 
-			if (!PropsValues.ORGANIZATIONS_MEMBERSHIP_STRICT) {
-				for (Organization ancestorOrganization :
-						organization.getAncestors()) {
+			List<Organization> userOrgs = OrganizationLocalServiceUtil.search(
+				getCompanyId(), OrganizationConstants.ANY_PARENT_ORGANIZATION_ID,
+				null, null, null, null, organizationParams, start, end);
 
-					myPlaces.add(0, ancestorOrganization.getGroup());
+			for (Organization organization : userOrgs) {
+				myPlaces.add(0, organization.getGroup());
+
+				if (!PropsValues.ORGANIZATIONS_MEMBERSHIP_STRICT) {
+					for (Organization ancestorOrganization :
+							organization.getAncestors()) {
+
+						myPlaces.add(0, ancestorOrganization.getGroup());
+					}
 				}
 			}
 		}
 
-		if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED ||
-			PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED) {
+		if ((classNames == null) ||
+			ArrayUtil.contains(classNames, User.class.getName())) {
 
-			Group userGroup = getGroup();
+			if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED ||
+				PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED) {
 
-			myPlaces.add(0, userGroup);
+				Group userGroup = getGroup();
+
+				myPlaces.add(0, userGroup);
+			}
 		}
 
 		if ((max != QueryUtil.ALL_POS) && (myPlaces.size() > max)) {
