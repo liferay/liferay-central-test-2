@@ -53,6 +53,10 @@ public class GetterUtil {
 
 	public static final long[] DEFAULT_LONG_VALUES = new long[0];
 
+	public static final Number DEFAULT_NUMBER = 0;
+
+	public static final Number DEFAULT_OBJECT = null;
+
 	public static final short DEFAULT_SHORT = 0;
 
 	public static final short[] DEFAULT_SHORT_VALUES = new short[0];
@@ -146,6 +150,48 @@ public class GetterUtil {
 		}
 		else if (value.getClass().isAssignableFrom(Long.class)) {
 			return (Long)value;
+		}
+
+		return defaultValue;
+	}
+
+	public static Number get(Serializable value, Number defaultValue) {
+		if (value == null) {
+			return defaultValue;
+		}
+
+		if (value instanceof String) {
+			if (Validator.isNull(value)) {
+				return defaultValue;
+			}
+
+			if (getFloat(value) == getInteger(value)) {
+				return getInteger(value);
+			}
+			else {
+				return getFloat(value);
+			}
+		}
+		else if (value.getClass().isAssignableFrom(Byte.class)) {
+			return (Byte)value;
+		}
+		else if (value.getClass().isAssignableFrom(Double.class)) {
+			return (Double)value;
+		}
+		else if (value.getClass().isAssignableFrom(Float.class)) {
+			return (Float)value;
+		}
+		else if (value.getClass().isAssignableFrom(Integer.class)) {
+			return (Integer)value;
+		}
+		else if (value.getClass().isAssignableFrom(Long.class)) {
+			return (Long)value;
+		}
+		else if (value.getClass().isAssignableFrom(Number.class)) {
+			return (Number)value;
+		}
+		else if (value.getClass().isAssignableFrom(Short.class)) {
+			return (Short)value;
 		}
 
 		return defaultValue;
@@ -637,6 +683,34 @@ public class GetterUtil {
 		}
 
 		return longValues;
+	}
+
+	public static Number getNumber(Serializable value) {
+		return getNumber(value, DEFAULT_NUMBER);
+	}
+
+	public static Number getNumber(Serializable value, Number defaultValue) {
+		return get(value, defaultValue);
+	}
+
+	public static Number getNumber(String value) {
+		return getNumber(value, DEFAULT_NUMBER);
+	}
+
+	public static Number getNumber(String value, Number defaultValue) {
+		return get(value, defaultValue);
+	}
+
+	public static Object getObject(Object value) {
+		return getObject(value, DEFAULT_OBJECT);
+	}
+
+	public static Object getObject(Object value, Object defaultValue) {
+		if (value == null) {
+			return defaultValue;
+		}
+
+		return value;
 	}
 
 	public static short getShort(Serializable value) {

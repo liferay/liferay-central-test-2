@@ -47,6 +47,11 @@ public class GetterUtil_IW {
 		return GetterUtil.get(value, defaultValue);
 	}
 
+	public java.lang.Number get(java.io.Serializable value,
+		java.lang.Number defaultValue) {
+		return GetterUtil.get(value, defaultValue);
+	}
+
 	public short get(java.io.Serializable value, short defaultValue) {
 		return GetterUtil.get(value, defaultValue);
 	}
@@ -294,6 +299,33 @@ public class GetterUtil_IW {
 
 	public long[] getLongValues(java.lang.String[] values, long[] defaultValue) {
 		return GetterUtil.getLongValues(values, defaultValue);
+	}
+
+	public java.lang.Number getNumber(java.io.Serializable value) {
+		return GetterUtil.getNumber(value);
+	}
+
+	public java.lang.Number getNumber(java.io.Serializable value,
+		java.lang.Number defaultValue) {
+		return GetterUtil.getNumber(value, defaultValue);
+	}
+
+	public java.lang.Number getNumber(java.lang.String value) {
+		return GetterUtil.getNumber(value);
+	}
+
+	public java.lang.Number getNumber(java.lang.String value,
+		java.lang.Number defaultValue) {
+		return GetterUtil.getNumber(value, defaultValue);
+	}
+
+	public java.lang.Object getObject(java.lang.Object value) {
+		return GetterUtil.getObject(value);
+	}
+
+	public java.lang.Object getObject(java.lang.Object value,
+		java.lang.Object defaultValue) {
+		return GetterUtil.getObject(value, defaultValue);
 	}
 
 	public short getShort(java.io.Serializable value) {
