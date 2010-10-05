@@ -88,6 +88,10 @@ public class TextFormatter {
 
 	public static final int O = 14;
 
+	// formatID --> format-id
+
+	public static final int P = 15;
+
 	public static String format(String s, int style) {
 		if (Validator.isNull(s)) {
 			return null;
@@ -139,6 +143,9 @@ public class TextFormatter {
 		}
 		else if (style == O) {
 			return _formatO(s);
+		}
+		else if (style == P) {
+			return _formatP(s);
 		}
 		else {
 			return s;
@@ -346,6 +353,28 @@ public class TextFormatter {
 
 	private static String _formatO(String s) {
 		return StringUtil.replace(s, CharPool.UNDERLINE, CharPool.DASH);
+	}
+
+	private static String _formatP(String s) {
+		char[] charArray = s.toCharArray();
+
+		StringBuilder sb = new StringBuilder(charArray.length * 2);
+
+		for (int i = 0; i < charArray.length; i++) {
+			if (Character.isUpperCase(charArray[i]) && (i > 0) &&
+				((i + 1) < charArray.length)) {
+
+				if (Character.isUpperCase(charArray[i - 1]) &&
+					Character.isLowerCase(charArray[i + 1])) {
+
+					sb.append(CharPool.DASH);
+				}
+			}
+
+			sb.append(Character.toLowerCase(charArray[i]));
+		}
+
+		return sb.toString();
 	}
 
 }
