@@ -28,12 +28,6 @@ public class AssetEntryServiceWrapper implements AssetEntryService {
 		_assetEntryService = assetEntryService;
 	}
 
-	public void deleteEntry(long entryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_assetEntryService.deleteEntry(entryId);
-	}
-
 	public java.util.List<com.liferay.portlet.asset.model.AssetEntry> getCompanyEntries(
 		long companyId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

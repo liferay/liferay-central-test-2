@@ -54,43 +54,12 @@ import com.liferay.portlet.asset.service.AssetEntryServiceUtil;
  * @generated
  */
 public class AssetEntryServiceHttp {
-	public static void deleteEntry(HttpPrincipal httpPrincipal, long entryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"deleteEntry", _deleteEntryParameterTypes0);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
-
-			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> getCompanyEntries(
 		HttpPrincipal httpPrincipal, long companyId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"getCompanyEntries", _getCompanyEntriesParameterTypes1);
+					"getCompanyEntries", _getCompanyEntriesParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, start, end);
@@ -123,7 +92,7 @@ public class AssetEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
 					"getCompanyEntriesCount",
-					_getCompanyEntriesCountParameterTypes2);
+					_getCompanyEntriesCountParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, companyId);
 
@@ -157,7 +126,7 @@ public class AssetEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"getCompanyEntriesRSS", _getCompanyEntriesRSSParameterTypes3);
+					"getCompanyEntriesRSS", _getCompanyEntriesRSSParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, max, type, version, displayStyle, feedURL, tagURL);
@@ -195,7 +164,7 @@ public class AssetEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
 					"getCompanyEntryDisplays",
-					_getCompanyEntryDisplaysParameterTypes4);
+					_getCompanyEntryDisplaysParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, start, end, languageId);
@@ -229,7 +198,7 @@ public class AssetEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"getEntries", _getEntriesParameterTypes5);
+					"getEntries", _getEntriesParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					entryQuery);
@@ -266,7 +235,7 @@ public class AssetEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"getEntriesCount", _getEntriesCountParameterTypes6);
+					"getEntriesCount", _getEntriesCountParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					entryQuery);
@@ -306,7 +275,7 @@ public class AssetEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"getEntriesRSS", _getEntriesRSSParameterTypes7);
+					"getEntriesRSS", _getEntriesRSSParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					entryQuery, name, type, version, displayStyle, feedURL,
@@ -344,7 +313,7 @@ public class AssetEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"getEntry", _getEntryParameterTypes8);
+					"getEntry", _getEntryParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, entryId);
 
@@ -380,7 +349,7 @@ public class AssetEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"incrementViewCounter", _incrementViewCounterParameterTypes9);
+					"incrementViewCounter", _incrementViewCounterParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK);
@@ -414,7 +383,7 @@ public class AssetEntryServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"searchEntryDisplays", _searchEntryDisplaysParameterTypes10);
+					"searchEntryDisplays", _searchEntryDisplaysParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, portletId, keywords, languageId, start, end);
@@ -448,7 +417,7 @@ public class AssetEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
 					"searchEntryDisplaysCount",
-					_searchEntryDisplaysCountParameterTypes11);
+					_searchEntryDisplaysCountParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, portletId, keywords, languageId);
@@ -488,7 +457,7 @@ public class AssetEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"updateEntry", _updateEntryParameterTypes12);
+					"updateEntry", _updateEntryParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					className, classPK, classUuid, categoryIds, tagNames,
@@ -523,50 +492,47 @@ public class AssetEntryServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(AssetEntryServiceHttp.class);
-	private static final Class<?>[] _deleteEntryParameterTypes0 = new Class[] {
-			long.class
-		};
-	private static final Class<?>[] _getCompanyEntriesParameterTypes1 = new Class[] {
+	private static final Class<?>[] _getCompanyEntriesParameterTypes0 = new Class[] {
 			long.class, int.class, int.class
 		};
-	private static final Class<?>[] _getCompanyEntriesCountParameterTypes2 = new Class[] {
+	private static final Class<?>[] _getCompanyEntriesCountParameterTypes1 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getCompanyEntriesRSSParameterTypes3 = new Class[] {
+	private static final Class<?>[] _getCompanyEntriesRSSParameterTypes2 = new Class[] {
 			long.class, int.class, java.lang.String.class, double.class,
 			java.lang.String.class, java.lang.String.class,
 			java.lang.String.class
 		};
-	private static final Class<?>[] _getCompanyEntryDisplaysParameterTypes4 = new Class[] {
+	private static final Class<?>[] _getCompanyEntryDisplaysParameterTypes3 = new Class[] {
 			long.class, int.class, int.class, java.lang.String.class
 		};
-	private static final Class<?>[] _getEntriesParameterTypes5 = new Class[] {
+	private static final Class<?>[] _getEntriesParameterTypes4 = new Class[] {
 			com.liferay.portlet.asset.service.persistence.AssetEntryQuery.class
 		};
-	private static final Class<?>[] _getEntriesCountParameterTypes6 = new Class[] {
+	private static final Class<?>[] _getEntriesCountParameterTypes5 = new Class[] {
 			com.liferay.portlet.asset.service.persistence.AssetEntryQuery.class
 		};
-	private static final Class<?>[] _getEntriesRSSParameterTypes7 = new Class[] {
+	private static final Class<?>[] _getEntriesRSSParameterTypes6 = new Class[] {
 			com.liferay.portlet.asset.service.persistence.AssetEntryQuery.class,
 			java.lang.String.class, java.lang.String.class, double.class,
 			java.lang.String.class, java.lang.String.class,
 			java.lang.String.class
 		};
-	private static final Class<?>[] _getEntryParameterTypes8 = new Class[] {
+	private static final Class<?>[] _getEntryParameterTypes7 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _incrementViewCounterParameterTypes9 = new Class[] {
+	private static final Class<?>[] _incrementViewCounterParameterTypes8 = new Class[] {
 			java.lang.String.class, long.class
 		};
-	private static final Class<?>[] _searchEntryDisplaysParameterTypes10 = new Class[] {
+	private static final Class<?>[] _searchEntryDisplaysParameterTypes9 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
 			java.lang.String.class, int.class, int.class
 		};
-	private static final Class<?>[] _searchEntryDisplaysCountParameterTypes11 = new Class[] {
+	private static final Class<?>[] _searchEntryDisplaysCountParameterTypes10 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
 			java.lang.String.class
 		};
-	private static final Class<?>[] _updateEntryParameterTypes12 = new Class[] {
+	private static final Class<?>[] _updateEntryParameterTypes11 = new Class[] {
 			long.class, java.lang.String.class, long.class,
 			java.lang.String.class, long[].class, java.lang.String[].class,
 			boolean.class, java.util.Date.class, java.util.Date.class,

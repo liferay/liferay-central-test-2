@@ -465,7 +465,6 @@ Liferay.Service.registerClass(
 Liferay.Service.registerClass(
 	Liferay.Service.Asset, "AssetEntry",
 	{
-		deleteEntry: true,
 		getCompanyEntries: true,
 		getCompanyEntriesCount: true,
 		getCompanyEntriesRSS: true,

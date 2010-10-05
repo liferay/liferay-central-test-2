@@ -36,12 +36,6 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * @generated
  */
 public class AssetEntryServiceUtil {
-	public static void deleteEntry(long entryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteEntry(entryId);
-	}
-
 	public static java.util.List<com.liferay.portlet.asset.model.AssetEntry> getCompanyEntries(
 		long companyId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

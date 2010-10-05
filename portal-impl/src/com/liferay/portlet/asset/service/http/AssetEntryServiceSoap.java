@@ -65,17 +65,6 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class AssetEntryServiceSoap {
-	public static void deleteEntry(long entryId) throws RemoteException {
-		try {
-			AssetEntryServiceUtil.deleteEntry(entryId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portlet.asset.model.AssetEntrySoap[] getCompanyEntries(
 		long companyId, int start, int end) throws RemoteException {
 		try {
