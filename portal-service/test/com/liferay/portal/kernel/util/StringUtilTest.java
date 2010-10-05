@@ -51,4 +51,64 @@ public class StringUtilTest extends TestCase {
 		assertEquals(expected, actual);
 	}
 
+	public void testReplaceFirstChar() throws Exception {
+		String original = "127.0.0.1";
+		String expected = "127_0.0.1";
+
+		String actual = StringUtil.replaceFirst(original, '.', '_');
+
+		assertEquals(expected, actual);
+	}
+
+	public void testReplaceFirstString() throws Exception {
+		String original = "Hello World HELLO WORLD Hello World";
+		String expected = "Aloha World HELLO WORLD Hello World";
+
+		String actual = StringUtil.replaceFirst(original, "Hello", "Aloha");
+
+		assertEquals(expected, actual);
+	}
+
+	public void testReplaceFirstStringArray() throws Exception {
+		String original = "Hello World HELLO WORLD Hello World HELLO WORLD";
+		String expected = "Aloha World ALOHA WORLD Hello World HELLO WORLD";
+
+		String actual = StringUtil.replaceFirst(
+			original,
+			new String[] {"Hello", "HELLO"},
+			new String[] {"Aloha", "ALOHA"});
+
+		assertEquals(expected, actual);
+	}
+
+	public void testReplaceLastChar() throws Exception {
+		String original = "127.0.0.1";
+		String expected = "127.0.0_1";
+
+		String actual = StringUtil.replaceLast(original, '.', '_');
+
+		assertEquals(expected, actual);
+	}
+
+	public void testReplaceLastString() throws Exception {
+		String original = "Hello World HELLO WORLD Hello World";
+		String expected = "Hello World HELLO WORLD Aloha World";
+
+		String actual = StringUtil.replaceLast(original, "Hello", "Aloha");
+
+		assertEquals(expected, actual);
+	}
+
+	public void testReplaceLastStringArray() throws Exception {
+		String original = "Hello World HELLO WORLD Hello World HELLO WORLD";
+		String expected = "Hello World HELLO WORLD Aloha World ALOHA WORLD";
+
+		String actual = StringUtil.replaceLast(
+			original,
+			new String[] {"Hello", "HELLO"},
+			new String[] {"Aloha", "ALOHA"});
+
+		assertEquals(expected, actual);
+	}
+
 }
