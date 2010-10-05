@@ -816,20 +816,13 @@ public class StringUtil {
 		int y = s.indexOf(oldSub);
 
 		if (y >= 0) {
-			StringBundler sb = new StringBundler();
+			StringBundler sb = new StringBundler(3);
 
 			int length = oldSub.length();
-			int x = 0;
 
-			while (x <= y) {
-				sb.append(s.substring(x, y));
-				sb.append(newSub);
-
-				x = y + length;
-				y = s.indexOf(oldSub, x);
-			}
-
-			sb.append(s.substring(x));
+			sb.append(s.substring(0, y));
+			sb.append(newSub);
+			sb.append(s.substring(y + length));
 
 			return sb.toString();
 		}
@@ -884,20 +877,13 @@ public class StringUtil {
 		int y = s.lastIndexOf(oldSub);
 
 		if (y >= 0) {
-			StringBundler sb = new StringBundler();
+			StringBundler sb = new StringBundler(3);
 
 			int length = oldSub.length();
-			int x = 0;
 
-			while (x <= y) {
-				sb.append(s.substring(x, y));
-				sb.append(newSub);
-
-				x = y + length;
-				y = s.indexOf(oldSub, x);
-			}
-
-			sb.append(s.substring(x));
+			sb.append(s.substring(0, y));
+			sb.append(newSub);
+			sb.append(s.substring(y + length));
 
 			return sb.toString();
 		}
