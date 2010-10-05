@@ -1515,7 +1515,15 @@ public class StringUtil {
 			return s;
 		}
 
-		if (s.startsWith(StringPool.QUOTE) && s.endsWith(StringPool.QUOTE)) {
+		if (s.startsWith(StringPool.APOSTROPHE) &&
+			s.endsWith(StringPool.APOSTROPHE)) {
+
+			s = s.replaceAll("'$", StringPool.BLANK);
+			s = s.replaceAll("^'", StringPool.BLANK);
+		}
+		else if (s.startsWith(StringPool.QUOTE) &&
+				 s.endsWith(StringPool.QUOTE)) {
+
 			s = s.replaceAll("\"$", StringPool.BLANK);
 			s = s.replaceAll("^\"", StringPool.BLANK);
 		}
