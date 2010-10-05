@@ -906,7 +906,7 @@ public class SeleneseToJavaBuilder {
 				System.out.println(param1 + " was not translated");
 			}
 
-			if (param1.equals("assertConfirmation") ||
+			/*if (param1.equals("assertConfirmation") ||
 				param1.equals("clickAtAndWait") || param1.equals("open") ||
 				param1.equals("waitForVisible")) {
 
@@ -925,7 +925,7 @@ public class SeleneseToJavaBuilder {
 					 param2.equals("relative=top")) {
 
 				sb.append("selenium.saveScreenShotAndSource();");
-			}
+			}*/
 		}
 
 		if (labels.size() > 0) {
