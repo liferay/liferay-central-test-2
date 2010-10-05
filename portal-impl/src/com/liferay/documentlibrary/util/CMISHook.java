@@ -30,6 +30,9 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
@@ -68,7 +71,20 @@ public class CMISHook extends BaseHook {
 		Entry repositoryFolderEntry = getRepositoryFolderEntry(
 			companyId, repositoryId);
 
-		CMISUtil.createFolder(repositoryFolderEntry, dirName);
+		String[] folders = StringUtil.split(dirName, StringPool.SLASH);
+
+		for (String folder : folders) {
+			Link link =
+				repositoryFolderEntry.getLink(_cmisConstants.LINK_DESCENDANTS);
+
+			String url = link.getHref().toString();
+
+			repositoryFolderEntry = CMISUtil.getFolder(url, folder);
+
+			if (repositoryFolderEntry == null) {
+				repositoryFolderEntry = CMISUtil.createFolder(url, folder);
+			}
+		}
 	}
 
 	public void addFile(
@@ -173,7 +189,28 @@ public class CMISHook extends BaseHook {
 		Entry repositoryFolderEntry = getRepositoryFolderEntry(
 			companyId, repositoryId);
 
+		String[] folders = StringUtil.split(dirName, StringPool.SLASH);
+
+		for (String folder : folders) {
+			Link link =
+				repositoryFolderEntry.getLink(_cmisConstants.LINK_DESCENDANTS);
+
+			String url = link.getHref().toString();
+
+			repositoryFolderEntry = CMISUtil.getFolder(url, folder);
+		}
+
 		List<String> fileNames = CMISUtil.getFolders(repositoryFolderEntry);
+
+		for (int i=0 ; i < fileNames.size() ; i++) {
+			String fileName = fileNames.get(i);
+
+			StringBundler sb = new StringBundler(dirName);
+			sb.append(StringPool.SLASH);
+			sb.append(fileName);
+
+			fileNames.set(i, sb.toString());
+		}
 
 		return fileNames.toArray(new String[fileNames.size()]);
 	}
@@ -482,16 +519,21 @@ public class CMISHook extends BaseHook {
 		Entry repositoryFolderEntry = getRepositoryFolderEntry(
 			companyId, repositoryId);
 
-		Link link = repositoryFolderEntry.getLink(
-			_cmisConstants.LINK_DESCENDANTS);
+		Entry versioningFolderEntry = repositoryFolderEntry;
 
-		String url = link.getHref().toString();
+		String[] folders = StringUtil.split(fileName, StringPool.SLASH);
 
-		Entry versioningFolderEntry = CMISUtil.getEntry(
-			url, fileName, _cmisConstants.BASE_TYPE_FOLDER);
+		for (String folder : folders) {
+			Link link = versioningFolderEntry.getLink(
+				_cmisConstants.LINK_DESCENDANTS);
 
-		if (create && (versioningFolderEntry == null)) {
-			versioningFolderEntry = CMISUtil.createFolder(url, fileName);
+			String url = link.getHref().toString();
+
+			versioningFolderEntry = CMISUtil.getFolder(url, folder);
+
+			if (create && versioningFolderEntry == null) {
+				versioningFolderEntry = CMISUtil.createFolder(url, folder);
+			}
 		}
 
 		return versioningFolderEntry;
