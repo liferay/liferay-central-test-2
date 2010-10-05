@@ -104,6 +104,11 @@ public class VelocityEngineImpl implements VelocityEngine {
 			PropsUtil.get(PropsKeys.VELOCITY_ENGINE_VELOCIMACRO_LIBRARY));
 
 		extendedProperties.setProperty(
+			org.apache.velocity.app.VelocityEngine.VM_LIBRARY_AUTORELOAD,
+			String.valueOf(
+				!PropsValues.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED));
+
+		extendedProperties.setProperty(
 			org.apache.velocity.app.VelocityEngine.RUNTIME_LOG_LOGSYSTEM_CLASS,
 			PropsUtil.get(PropsKeys.VELOCITY_ENGINE_LOGGER));
 

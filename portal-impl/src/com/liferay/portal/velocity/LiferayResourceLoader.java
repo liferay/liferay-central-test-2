@@ -16,9 +16,7 @@ package com.liferay.portal.velocity;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.InputStream;
 
@@ -87,14 +85,11 @@ public class LiferayResourceLoader extends ResourceLoader {
 	}
 
 	public void init(ExtendedProperties props) {
-		boolean cachingOn = GetterUtil.getBoolean(PropsUtil.get(
-			PropsKeys.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED));
-		int modificationCheckInterval = GetterUtil.getInteger(PropsUtil.get(
-			PropsKeys.
-				VELOCITY_ENGINE_RESOURCE_MANAGER_MODIFICATION_CHECK_INTERVAL));
-
-		setCachingOn(cachingOn);
-		setModificationCheckInterval(modificationCheckInterval);
+		setCachingOn(
+			PropsValues.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE_ENABLED);
+		setModificationCheckInterval(
+			PropsValues.
+				VELOCITY_ENGINE_RESOURCE_MANAGER_MODIFICATION_CHECK_INTERVAL);
 	}
 
 	public boolean isSourceModified(Resource resource) {
