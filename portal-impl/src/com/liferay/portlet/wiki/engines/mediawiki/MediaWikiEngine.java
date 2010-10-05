@@ -112,8 +112,7 @@ public class MediaWikiEngine implements WikiEngine {
 	}
 
 	protected ParserInput getParserInput(long nodeId, String topicName) {
-		ParserInput parserInput = new ParserInput(
-			"Special:Node:" + nodeId, topicName);
+		ParserInput parserInput = new ParserInput();
 
 		// Dummy values
 
@@ -125,6 +124,11 @@ public class MediaWikiEngine implements WikiEngine {
 		// Useful values
 
 		parserInput.setAllowSectionEdit(false);
+		parserInput.setTopicName(topicName);
+
+		// Encode node id
+
+		parserInput.setVirtualWiki("Special:Node:" + nodeId);
 
 		// Table of contents
 
