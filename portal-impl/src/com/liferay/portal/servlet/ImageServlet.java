@@ -240,6 +240,9 @@ public class ImageServlet extends HttpServlet {
 						igImage.getLargeImageId());
 				}
 			}
+			catch (PrincipalException pe) {
+				throw pe;
+			}
 			catch (Exception e) {
 			}
 		}
