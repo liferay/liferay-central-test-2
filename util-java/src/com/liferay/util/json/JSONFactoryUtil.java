@@ -14,72 +14,10 @@
 
 package com.liferay.util.json;
 
-import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
-import org.jabsorb.JSONSerializer;
-import org.jabsorb.serializer.MarshallException;
-import org.jabsorb.serializer.UnmarshallException;
-
 /**
- * @author Brian Wing Shun Chan
+ * @author	  Brian Wing Shun Chan
+ * @deprecate {@link com.liferay.portal.kernel.json.JSONFactoryUtil}
  */
-public class JSONFactoryUtil {
-
-	public static Object deserialize(JSONObject jsonObj) {
-		return _instance._deserialize(jsonObj);
-	}
-
-	public static Object deserialize(String json) {
-		return _instance._deserialize(json);
-	}
-
-	public static String serialize(Object obj) {
-		return _instance._serialize(obj);
-	}
-
-	private JSONFactoryUtil() {
-		_serializer = new JSONSerializer();
-
-		 try {
-			 _serializer.registerDefaultSerializers();
-		 }
-		 catch (Exception e) {
-			 _log.error(e, e);
-		 }
-	}
-
-	private Object _deserialize(JSONObject jsonObj) {
-		return _deserialize(jsonObj.toString());
-	}
-
-	private Object _deserialize(String json) {
-		try {
-			return _serializer.fromJSON(json);
-		}
-		catch (UnmarshallException ue) {
-			 _log.error(ue, ue);
-
-			throw new IllegalStateException("Unable to deserialize oject", ue);
-		}
-	}
-
-	private String _serialize(Object obj) {
-		try {
-			return _serializer.toJSON(obj);
-		}
-		catch (MarshallException me) {
-			_log.error(me, me);
-
-			throw new IllegalStateException("Unable to serialize oject", me);
-		}
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(JSONFactoryUtil.class);
-
-	private static JSONFactoryUtil _instance = new JSONFactoryUtil();
-
-	private JSONSerializer _serializer;
-
+public class JSONFactoryUtil
+	extends com.liferay.portal.kernel.json.JSONFactoryUtil {
 }
