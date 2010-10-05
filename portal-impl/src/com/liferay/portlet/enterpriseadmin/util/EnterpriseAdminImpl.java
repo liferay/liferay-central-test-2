@@ -565,24 +565,27 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 	}
 
 	public List<Organization> getOrganizations(Hits hits)
-		throws Exception {
+		throws PortalException, SystemException {
 
 		List<Organization> organizations = new ArrayList<Organization>();
 
-		List<Document> hitsList = hits.toList();
+		List<Document> documents = hits.toList();
 
-		for (Document doc : hitsList) {
+		for (Document document : documents) {
 			long organizationId = GetterUtil.getLong(
-				doc.get(Field.ORGANIZATION_ID));
+				document.get(Field.ORGANIZATION_ID));
 
 			try {
-				organizations.add(OrganizationLocalServiceUtil.getOrganization(
-					organizationId));
+				Organization organization =
+					OrganizationLocalServiceUtil.getOrganization(
+						organizationId);
+
+				organizations.add(organization);
 			}
 			catch (NoSuchOrganizationException nsoe) {
 				_log.error(
 					"Organization " + organizationId + " does not exist in " +
-						"the search index. Please reindex.");
+						"the search index");
 			}
 		}
 

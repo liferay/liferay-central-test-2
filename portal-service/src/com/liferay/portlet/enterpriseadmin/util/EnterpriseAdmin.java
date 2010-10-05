@@ -102,7 +102,7 @@ public interface EnterpriseAdmin {
 		List<Organization> organizations);
 
 	public List<Organization> getOrganizations(Hits hits)
-		throws Exception;
+		throws PortalException, SystemException;
 
 	public Long[] getOrganizationIds(List<Organization> organizations);
 

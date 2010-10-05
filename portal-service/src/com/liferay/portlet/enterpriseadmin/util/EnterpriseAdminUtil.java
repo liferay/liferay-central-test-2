@@ -159,7 +159,7 @@ public class EnterpriseAdminUtil {
 	}
 
 	public static List<Organization> getOrganizations(Hits hits)
-		throws Exception {
+		throws PortalException, SystemException {
 
 		return getEnterpriseAdmin().getOrganizations(hits);
 	}
