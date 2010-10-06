@@ -18,12 +18,12 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.json.JSONTransformer;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import org.jabsorb.JSONSerializer;
 import org.jabsorb.serializer.MarshallException;
-import org.jabsorb.serializer.UnmarshallException;
 
 /**
  * @author Brian Wing Shun Chan
@@ -31,6 +31,9 @@ import org.jabsorb.serializer.UnmarshallException;
 public class JSONFactoryImpl implements JSONFactory {
 
 	public JSONFactoryImpl() {
+		_flexjsonDeserializer = new flexjson.JSONDeserializer<Object>();
+		_flexjsonSerializer = new flexjson.JSONSerializer();
+
 		_serializer = new JSONSerializer();
 
 		 try {
@@ -65,16 +68,42 @@ public class JSONFactoryImpl implements JSONFactory {
 		try {
 			return _serializer.fromJSON(json);
 		}
-		catch (UnmarshallException ue) {
-			 _log.error(ue, ue);
+		catch (Exception e) {
+			 _log.error(e, e);
 
-			throw new IllegalStateException("Unable to deserialize oject", ue);
+			throw new IllegalStateException("Unable to deserialize oject", e);
 		}
 	}
 
-	public String serialize(Object obj) {
+	public Object looseDeserialize(String json) {
 		try {
-			return _serializer.toJSON(obj);
+			return _flexjsonDeserializer.deserialize(json);
+		}
+		catch (Exception e) {
+			 _log.error(e, e);
+
+			throw new IllegalStateException("Unable to deserialize oject", e);
+		}
+	}
+
+	public String looseSerialize(Object object) {
+		return looseSerialize(object, null, null);
+	}
+
+	public String looseSerialize(
+		Object object, JSONTransformer jsonTransformer, Class<?> clazz) {
+
+		if ((jsonTransformer != null) && (clazz != null)) {
+			_flexjsonSerializer.transform(
+				new FlexjsonTransformer(jsonTransformer), clazz);
+		}
+
+		return _flexjsonSerializer.deepSerialize(object);
+	}
+
+	public String serialize(Object object) {
+		try {
+			return _serializer.toJSON(object);
 		}
 		catch (MarshallException me) {
 			_log.error(me, me);
@@ -85,6 +114,8 @@ public class JSONFactoryImpl implements JSONFactory {
 
 	private static Log _log = LogFactoryUtil.getLog(JSONFactoryImpl.class);
 
+	private flexjson.JSONDeserializer<Object> _flexjsonDeserializer;
+	private flexjson.JSONSerializer _flexjsonSerializer;
 	private JSONSerializer _serializer;
 
 }

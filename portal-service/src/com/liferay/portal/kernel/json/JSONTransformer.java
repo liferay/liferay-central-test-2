@@ -15,29 +15,10 @@
 package com.liferay.portal.kernel.json;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Bruno Basto
  */
-public interface JSONFactory {
+public interface JSONTransformer {
 
-	public JSONArray createJSONArray();
-
-	public JSONArray createJSONArray(String json) throws JSONException;
-
-	public JSONObject createJSONObject();
-
-	public JSONObject createJSONObject(String json) throws JSONException;
-
-	public Object deserialize(JSONObject jsonObj);
-
-	public Object deserialize(String json);
-
-	public Object looseDeserialize(String json);
-
-	public String looseSerialize(Object object);
-
-	public String looseSerialize(
-		Object object, JSONTransformer jsonTransformer, Class<?> clazz);
-
-	public String serialize(Object object);
+	public void transform(Object object);
 
 }

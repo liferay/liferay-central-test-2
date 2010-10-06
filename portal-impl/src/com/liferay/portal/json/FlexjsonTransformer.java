@@ -12,32 +12,25 @@
  * details.
  */
 
-package com.liferay.portal.kernel.json;
+package com.liferay.portal.json;
+
+import com.liferay.portal.kernel.json.JSONTransformer;
+
+import flexjson.transformer.Transformer;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public interface JSONFactory {
+public class FlexjsonTransformer implements Transformer {
 
-	public JSONArray createJSONArray();
+	public FlexjsonTransformer(JSONTransformer jsonTransformer) {
+		_jsonTransformer = jsonTransformer;
+	}
 
-	public JSONArray createJSONArray(String json) throws JSONException;
+	public void transform(Object object) {
+		_jsonTransformer.transform(object);
+	}
 
-	public JSONObject createJSONObject();
-
-	public JSONObject createJSONObject(String json) throws JSONException;
-
-	public Object deserialize(JSONObject jsonObj);
-
-	public Object deserialize(String json);
-
-	public Object looseDeserialize(String json);
-
-	public String looseSerialize(Object object);
-
-	public String looseSerialize(
-		Object object, JSONTransformer jsonTransformer, Class<?> clazz);
-
-	public String serialize(Object object);
+	private JSONTransformer _jsonTransformer;
 
 }
