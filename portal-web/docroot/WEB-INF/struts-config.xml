@@ -1590,11 +1590,6 @@
 			<forward name="portlet.polls.error" path="portlet.polls.error" />
 		</action>
 
-		<action path="/polls/view_user" type="com.liferay.portlet.enterpriseadmin.action.EditUserAction">
-			<forward name="portlet.enterprise_admin.edit_user" path="portlet.directory.view_user" />
-			<forward name="portlet.enterprise_admin.error" path="portlet.directory.error" />
-		</action>
-
 		<!-- Polls Display -->
 
 		<action path="/polls_display/view" type="com.liferay.portlet.pollsdisplay.action.ViewAction">
