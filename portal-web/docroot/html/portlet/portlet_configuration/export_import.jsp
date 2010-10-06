@@ -24,8 +24,6 @@ String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL")
 
 String selPortletPrimaryKey = PortletPermissionUtil.getPrimaryKey(layout.getPlid(), selPortlet.getPortletId());
 
-String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
-
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/portlet_configuration/export_import");
@@ -40,11 +38,18 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 boolean controlPanel = false;
 
 if (layout.isTypeControlPanel()) {
+	Group scopeGroup = themeDisplay.getScopeGroup();
+
+	if (scopeGroup.isLayout()) {
+		layout = LayoutLocalServiceUtil.getLayout(scopeGroup.getClassPK());
+	}
+	else {
+		layout = LayoutLocalServiceUtil.getLayout(LayoutLocalServiceUtil.getDefaultPlid(scopeGroupId));
+	}
+
 	supportsSetup = false;
 
 	controlPanel = true;
-
-	layout = LayoutLocalServiceUtil.getLayout(LayoutLocalServiceUtil.getDefaultPlid(scopeGroupId));
 }
 %>
 
