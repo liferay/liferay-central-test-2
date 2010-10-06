@@ -14,6 +14,7 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.annotation.AutoEscape;
 import com.liferay.portal.kernel.cache.Lifecycle;
 import com.liferay.portal.kernel.cache.ThreadLocalCache;
 import com.liferay.portal.kernel.cache.ThreadLocalCacheManager;
@@ -189,6 +190,7 @@ public class UserImpl extends UserModelImpl implements User {
 		return !getMale();
 	}
 
+	@AutoEscape
 	public String getFullName() {
 		FullNameGenerator fullNameGenerator =
 			FullNameGeneratorFactory.getInstance();

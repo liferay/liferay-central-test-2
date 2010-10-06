@@ -64,6 +64,7 @@ public interface User extends UserModel {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	@com.liferay.portal.kernel.annotation.AutoEscape()
 	public java.lang.String getFullName();
 
 	public com.liferay.portal.model.Group getGroup()
