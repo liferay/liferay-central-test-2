@@ -30,27 +30,6 @@ public class StringUtilTest extends TestCase {
 		assertEquals(expected, actual);
 	}
 
-	public void testReplaceString() throws Exception {
-		String original = "Hello World HELLO WORLD Hello World";
-		String expected = "Aloha World HELLO WORLD Aloha World";
-
-		String actual = StringUtil.replace(original, "Hello", "Aloha");
-
-		assertEquals(expected, actual);
-	}
-
-	public void testReplaceStringArray() throws Exception {
-		String original = "Hello World HELLO WORLD Hello World";
-		String expected = "Aloha World ALOHA WORLD Aloha World";
-
-		String actual = StringUtil.replace(
-			original,
-			new String[] {"Hello", "HELLO"},
-			new String[] {"Aloha", "ALOHA"});
-
-		assertEquals(expected, actual);
-	}
-
 	public void testReplaceFirstChar() throws Exception {
 		String original = "127.0.0.1";
 		String expected = "127_0.0.1";
@@ -74,8 +53,7 @@ public class StringUtilTest extends TestCase {
 		String expected = "Aloha World ALOHA WORLD Hello World HELLO WORLD";
 
 		String actual = StringUtil.replaceFirst(
-			original,
-			new String[] {"Hello", "HELLO"},
+			original, new String[] {"Hello", "HELLO"},
 			new String[] {"Aloha", "ALOHA"});
 
 		assertEquals(expected, actual);
@@ -104,8 +82,27 @@ public class StringUtilTest extends TestCase {
 		String expected = "Hello World HELLO WORLD Aloha World ALOHA WORLD";
 
 		String actual = StringUtil.replaceLast(
-			original,
-			new String[] {"Hello", "HELLO"},
+			original, new String[] {"Hello", "HELLO"},
+			new String[] {"Aloha", "ALOHA"});
+
+		assertEquals(expected, actual);
+	}
+
+	public void testReplaceString() throws Exception {
+		String original = "Hello World HELLO WORLD Hello World";
+		String expected = "Aloha World HELLO WORLD Aloha World";
+
+		String actual = StringUtil.replace(original, "Hello", "Aloha");
+
+		assertEquals(expected, actual);
+	}
+
+	public void testReplaceStringArray() throws Exception {
+		String original = "Hello World HELLO WORLD Hello World";
+		String expected = "Aloha World ALOHA WORLD Aloha World";
+
+		String actual = StringUtil.replace(
+			original, new String[] {"Hello", "HELLO"},
 			new String[] {"Aloha", "ALOHA"});
 
 		assertEquals(expected, actual);

@@ -816,15 +816,8 @@ public class StringUtil {
 		int y = s.indexOf(oldSub);
 
 		if (y >= 0) {
-			StringBundler sb = new StringBundler(3);
-
-			int length = oldSub.length();
-
-			sb.append(s.substring(0, y));
-			sb.append(newSub);
-			sb.append(s.substring(y + length));
-
-			return sb.toString();
+			return s.substring(0, y).concat(newSub).concat(
+				s.substring(y + oldSub.length()));
 		}
 		else {
 			return s;
@@ -877,15 +870,8 @@ public class StringUtil {
 		int y = s.lastIndexOf(oldSub);
 
 		if (y >= 0) {
-			StringBundler sb = new StringBundler(3);
-
-			int length = oldSub.length();
-
-			sb.append(s.substring(0, y));
-			sb.append(newSub);
-			sb.append(s.substring(y + length));
-
-			return sb.toString();
+			return s.substring(0, y).concat(newSub).concat(
+				s.substring(y + oldSub.length()));
 		}
 		else {
 			return s;
