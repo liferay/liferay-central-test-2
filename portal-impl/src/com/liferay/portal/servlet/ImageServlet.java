@@ -261,6 +261,10 @@ public class ImageServlet extends HttpServlet {
 	}
 
 	protected byte[] getImageBytes(HttpServletRequest request, Image image) {
+		if (!PropsValues.IMAGE_AUTO_SCALE) {
+			return image.getTextObj();
+		}
+
 		int height = ParamUtil.getInteger(request, "height", image.getHeight());
 		int width = ParamUtil.getInteger(request, "width", image.getWidth());
 

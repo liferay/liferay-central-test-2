@@ -635,6 +635,8 @@ public interface PropsKeys {
 
 	public static final String IG_PUBLISH_TO_LIVE_BY_DEFAULT = "ig.publish.to.live.by.default";
 
+	public static final String IMAGE_AUTO_SCALE = "image.auto.scale";
+
 	public static final String IMAGE_DEFAULT_COMPANY_LOGO = "image.default.company.logo";
 
 	public static final String IMAGE_DEFAULT_ORGANIZATION_LOGO = "image.default.organization.logo";
