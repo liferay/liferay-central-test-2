@@ -12,11 +12,9 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.controlpanel.communities;
+package com.liferay.portalweb.portal.controlpanel.communities.community.leavecommunity;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portal.controlpanel.communities.community.CommunityTests;
-import com.liferay.portalweb.portal.controlpanel.communities.general.GeneralTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -24,13 +22,22 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class CommunitiesTests extends BaseTests {
+public class LeaveCommunityTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(CommunityTests.suite());
-		testSuite.addTest(GeneralTests.suite());
+		testSuite.addTestSuite(AddCommunityOpenTest.class);
+		testSuite.addTestSuite(AddUserTest.class);
+		testSuite.addTestSuite(AddUserPasswordTest.class);
+		testSuite.addTestSuite(SignOutTest.class);
+		testSuite.addTestSuite(User_SignInTest.class);
+		testSuite.addTestSuite(User_JoinCommunityOpenTest.class);
+		testSuite.addTestSuite(User_LeaveCommunityTest.class);
+		testSuite.addTestSuite(SignOutTest.class);
+		testSuite.addTestSuite(SignInTest.class);
+		testSuite.addTestSuite(TearDownUserTest.class);
+		testSuite.addTestSuite(TearDownCommunityOpenTest.class);
 
 		return testSuite;
 	}
