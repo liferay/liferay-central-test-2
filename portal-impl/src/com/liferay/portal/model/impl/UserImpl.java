@@ -313,8 +313,9 @@ public class UserImpl extends UserModelImpl implements User {
 			organizationParams.put("usersOrgs", new Long(getUserId()));
 
 			List<Organization> userOrgs = OrganizationLocalServiceUtil.search(
-				getCompanyId(), OrganizationConstants.ANY_PARENT_ORGANIZATION_ID,
-				null, null, null, null, organizationParams, start, end);
+				getCompanyId(),
+				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, null, null,
+				null, null, organizationParams, start, end);
 
 			for (Organization organization : userOrgs) {
 				myPlaces.add(0, organization.getGroup());
