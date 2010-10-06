@@ -539,7 +539,11 @@ AUI().add(
 
 							movieContentBox.setStyles(regionStyles);
 
-							instance._uploader.setButtonDimensions(buttonWidth, buttonHeight);
+							try {
+								instance._uploader.setButtonDimensions(buttonWidth, buttonHeight);
+							}
+							catch (e) {
+							}
 						};
 
 						calculateOffset();
@@ -587,7 +591,13 @@ AUI().add(
 								var newUploaderClass = 'using-new-uploader';
 								var fallbackClass = 'using-classic-uploader';
 
+								var movieBoundingBox = instance._movieBoundingBox;
+
 								if (fallback && fallback.hasClass(newUploaderClass)) {
+									if (movieBoundingBox) {
+										movieBoundingBox.hide();
+									}
+
 									instance._container.hide();
 									instance._fallbackContainer.show();
 
@@ -605,6 +615,10 @@ AUI().add(
 									location.hash += classicUploaderUrl + instance._classicUploaderParam;
 								}
 								else {
+									if (movieBoundingBox) {
+										movieBoundingBox.show();
+									}
+
 									instance._container.show();
 									instance._fallbackContainer.hide();
 									fallback.text(instance._useFallbackText);
