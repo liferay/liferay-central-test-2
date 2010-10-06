@@ -369,6 +369,9 @@ public class TextFormatter {
 
 					sb.append(CharPool.DASH);
 				}
+				else if (Character.isUpperCase(charArray[i])) {
+					sb.append(CharPool.DASH);
+				}
 			}
 
 			sb.append(Character.toLowerCase(charArray[i]));
