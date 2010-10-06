@@ -105,7 +105,7 @@
 
 					<%
 					List<Group> manageableGroups = null;
-					List manageableOrganizations = null;
+					List<? extends BaseModel<?>> manageableOrganizations = null;
 
 					if (permissionChecker.isCompanyAdmin()) {
 						manageableGroups = GroupServiceUtil.getManageableGroups(ActionKeys.MANAGE_LAYOUTS, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
@@ -149,14 +149,15 @@
 
 								<%
 								for (int i = 0; i < manageableOrganizations.size(); i++) {
-									Object orgObject = manageableOrganizations.get(i);
+									BaseModel baseModel = manageableOrganizations.get(i);
+
 									Organization organization = null;
 
-									if (orgObject instanceof Organization) {
-										organization = (Organization)orgObject;
+									if (baseModel instanceof Organization) {
+										organization = (Organization)baseModel;
 									}
 									else {
-										Group organizationGroup = (Group)orgObject;
+										Group organizationGroup = (Group)baseModel;
 
 										if (!organizationGroup.isOrganization()) {
 											continue;
