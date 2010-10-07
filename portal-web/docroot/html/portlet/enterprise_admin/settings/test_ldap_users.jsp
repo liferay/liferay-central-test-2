@@ -59,8 +59,6 @@ String userFilter = ParamUtil.getString(request, "importUserSearchFilter");
 
 List<SearchResult> searchResults = new ArrayList<SearchResult>();
 
-PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ldapContext, new byte[0], 20, baseDN, userFilter, searchResults);
-
 String userMappingsParams =
 	"screenName=" + ParamUtil.getString(request, "userMappingScreenName") +
 	"\npassword=" + ParamUtil.getString(request, "userMappingPassword") +
@@ -72,6 +70,10 @@ String userMappingsParams =
 	"\ngroup=" + ParamUtil.getString(request, "userMappingGroup");
 
 Properties userMappings = PropertiesUtil.load(userMappingsParams);
+
+String[] attributeIds = StringUtil.split(StringUtil.merge(userMappings.values()));
+
+PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ldapContext, new byte[0], 20, baseDN, userFilter, attributeIds, searchResults);
 %>
 
 <liferay-ui:message key="test-ldap-users" />
