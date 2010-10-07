@@ -43,17 +43,9 @@ public class RevertEditWikiFrontPageMinorChangeTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Test Wiki Article"),
-			selenium.getText("//div[@class='wiki-body']/h2"));
-		assertEquals(RuntimeVariables.replace("this is italics"),
-			selenium.getText("//i"));
-		assertEquals(RuntimeVariables.replace("bold"), selenium.getText("//b"));
-		assertTrue(selenium.isElementPresent("link=Link to website"));
 		assertEquals(RuntimeVariables.replace(
-				"this is a list item this is a sub list item"),
-			selenium.getText("//div[@class='wiki-body']/ul/li"));
-		assertEquals(RuntimeVariables.replace("Minor Edit."),
-			selenium.getText("//div[@class='wiki-body']/p[4]"));
+				"This is an edited wiki frontpage article test. Minor edit."),
+			selenium.getText("//div[@class='wiki-body']"));
 		selenium.clickAt("link=Details", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=History", RuntimeVariables.replace(""));
@@ -86,15 +78,9 @@ public class RevertEditWikiFrontPageMinorChangeTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Test Wiki Article"),
-			selenium.getText("//div[@class='wiki-body']/h2"));
-		assertEquals(RuntimeVariables.replace("this is italics"),
-			selenium.getText("//i"));
-		assertEquals(RuntimeVariables.replace("bold"), selenium.getText("//b"));
-		assertTrue(selenium.isElementPresent("link=Link to website"));
 		assertEquals(RuntimeVariables.replace(
-				"this is a list item this is a sub list item"),
-			selenium.getText("//div[@class='wiki-body']/ul/li"));
-		assertFalse(selenium.isTextPresent("Minor Edit."));
+				"This is a wiki frontpage article test."),
+			selenium.getText("//div[@class='wiki-body']"));
+		assertFalse(selenium.isTextPresent("Minor edit."));
 	}
 }

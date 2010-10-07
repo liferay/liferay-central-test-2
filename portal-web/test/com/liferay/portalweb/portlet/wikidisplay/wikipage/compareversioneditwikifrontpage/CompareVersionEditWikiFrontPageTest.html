@@ -59,19 +59,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertTextPresent</td>
-	<td>Test Wiki Article Edited</td>
-	<td></td>
-</tr>
-<tr>
 	<td>assertText</td>
-	<td>//span[@id='changed-diff-0']</td>
-	<td>Test Wiki Article</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//span[@id='added-diff-0']</td>
-	<td>Edited</td>
+	<td>//div/div[4]</td>
+	<td>This is a an edited wiki frontpage article test.</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -86,12 +76,12 @@
 <tr>
 	<td>assertText</td>
 	<td>//table[@id='taglib-diff-results']/tbody/tr[3]/td[1]/table/tbody/tr/td</td>
-	<td>==Test Wiki Article==</td>
+	<td>This is a wiki frontpage article test.</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//table[@id='taglib-diff-results']/tbody/tr[3]/td[2]/table/tbody/tr/td</td>
-	<td>==Test Wiki Article Edited==</td>
+	<td>This is an edited wiki frontpage article test.</td>
 </tr>
 
 </tbody></table>

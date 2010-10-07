@@ -46,7 +46,7 @@ public class AddWDFrontPageChildPageNameDuplicateTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("//span/input",
+		selenium.type("//div/span[1]/span/span/input",
 			RuntimeVariables.replace("Front Page Child Page Test"));
 		selenium.type("//textarea",
 			RuntimeVariables.replace("This is a front page child page test."));

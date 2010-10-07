@@ -44,8 +44,46 @@ public class SelectMainNodeFrontPageChildPageTest extends BaseTestCase {
 		selenium.clickAt("link=Wiki Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("Configuration"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
+		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_86_nodeId")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.select("_86_nodeId", RuntimeVariables.replace("label=Main"));
 		selenium.select("_86_title",
 			RuntimeVariables.replace("label=Front Page Child Page Test"));
@@ -78,8 +116,9 @@ public class SelectMainNodeFrontPageChildPageTest extends BaseTestCase {
 		selenium.clickAt("link=Wiki Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
-				"Front Page Child Page Test Edited"));
+		assertEquals(RuntimeVariables.replace(
+				"Front Page Child Page Test Edited"),
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace(
 				"(Redirected from Front Page Child Page Test)"),
 			selenium.getText("//div[@class='page-redirect']"));

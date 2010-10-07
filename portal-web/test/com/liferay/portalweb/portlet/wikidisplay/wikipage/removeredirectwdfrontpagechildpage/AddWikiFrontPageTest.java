@@ -46,21 +46,14 @@ public class AddWikiFrontPageTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_36_content",
-			RuntimeVariables.replace(
-				"==Test Wiki Article==\n\n//this is italics//\n\n**bold**\n\n[[http://www.liferay.com|Link to website]]\n\n*this is a list item\n**this is a sub list item"));
+			RuntimeVariables.replace("This is a wiki frontpage article test."));
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertEquals(RuntimeVariables.replace("Test Wiki Article"),
-			selenium.getText("//div[@class='wiki-body']/h2"));
-		assertEquals(RuntimeVariables.replace("this is italics"),
-			selenium.getText("//i"));
-		assertEquals(RuntimeVariables.replace("bold"), selenium.getText("//b"));
-		assertTrue(selenium.isElementPresent("link=Link to website"));
 		assertEquals(RuntimeVariables.replace(
-				"this is a list item this is a sub list item"),
-			selenium.getText("//div[@class='wiki-body']/ul/li"));
+				"This is a wiki frontpage article test."),
+			selenium.getText("//div[6]/div"));
 	}
 }

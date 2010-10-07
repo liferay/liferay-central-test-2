@@ -49,21 +49,14 @@ public class EditWikiFrontPageMinorChangeTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"link=Wiki Display Test Page"));
 				selenium.waitForPageToLoad("30000");
-				assertEquals(RuntimeVariables.replace("Test Wiki Article"),
-					selenium.getText("//div[@class='wiki-body']/h2"));
-				assertEquals(RuntimeVariables.replace("this is italics"),
-					selenium.getText("//i"));
-				assertEquals(RuntimeVariables.replace("bold"),
-					selenium.getText("//b"));
-				assertTrue(selenium.isElementPresent("link=Link to website"));
 				assertEquals(RuntimeVariables.replace(
-						"this is a list item this is a sub list item"),
-					selenium.getText("//div[@class='wiki-body']/ul/li"));
+						"This is a wiki frontpage article test."),
+					selenium.getText("//div[5]/div"));
 				selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.type("//textarea",
 					RuntimeVariables.replace(
-						"==Test Wiki Article==\n\n//this is italics//\n\n**bold**\n\n[[http://www.liferay.com|Link to website]]\n\n*this is a list item\n**this is a sub list item\n\nMinor Edit."));
+						"This is an edited wiki frontpage article test. Minor edit."));
 
 				boolean minorEditChecked = selenium.isChecked("//span/input[2]");
 
@@ -79,18 +72,11 @@ public class EditWikiFrontPageMinorChangeTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Publish']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				assertEquals(RuntimeVariables.replace("Test Wiki Article"),
-					selenium.getText("//div[@class='wiki-body']/h2"));
-				assertEquals(RuntimeVariables.replace("this is italics"),
-					selenium.getText("//i"));
-				assertEquals(RuntimeVariables.replace("bold"),
-					selenium.getText("//b"));
-				assertTrue(selenium.isElementPresent("link=Link to website"));
 				assertEquals(RuntimeVariables.replace(
-						"this is a list item this is a sub list item"),
-					selenium.getText("//div[@class='wiki-body']/ul/li"));
-				assertEquals(RuntimeVariables.replace("Minor Edit."),
-					selenium.getText("//div[@class='wiki-body']/p[4]"));
+						"Your request processed successfully."),
+					selenium.getText("//section/div/div/div/div[1]"));
+				assertTrue(selenium.isPartialText("//div[@class='wiki-body']",
+						"Minor edit."));
 				selenium.open("/web/guest/home/");
 
 				for (int second = 0;; second++) {

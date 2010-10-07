@@ -47,7 +47,7 @@ public class CopyWDFrontPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Copy", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("//span/input",
+		selenium.type("//div/span[1]/span/span/input",
 			RuntimeVariables.replace("Copy Front Page Test"));
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
@@ -79,16 +79,10 @@ public class CopyWDFrontPageTest extends BaseTestCase {
 		selenium.clickAt("link=Copy Front Page Test",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
-				"Copy Front Page Test"));
-		assertEquals(RuntimeVariables.replace("Test Wiki Article"),
-			selenium.getText("//div[@class='wiki-body']/h2"));
-		assertEquals(RuntimeVariables.replace("this is italics"),
-			selenium.getText("//i"));
-		assertEquals(RuntimeVariables.replace("bold"), selenium.getText("//b"));
-		assertTrue(selenium.isElementPresent("link=Link to website"));
+		assertEquals(RuntimeVariables.replace("Copy Front Page Test"),
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace(
-				"this is a list item this is a sub list item"),
-			selenium.getText("//div[@class='wiki-body']/ul/li"));
+				"This is a wiki frontpage article test."),
+			selenium.getText("//div[@class='wiki-body']"));
 	}
 }

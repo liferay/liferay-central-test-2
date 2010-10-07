@@ -51,6 +51,7 @@ public class AddFrontPageAttachmentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.selectWindow("null");
+		Thread.sleep(5000);
 		selenium.windowFocus();
 
 		for (int second = 0;; second++) {

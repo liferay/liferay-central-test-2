@@ -46,7 +46,8 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("//span/input", RuntimeVariables.replace("Test@"));
+		selenium.type("//div/span[1]/span/span/input",
+			RuntimeVariables.replace("Test\\"));
 		selenium.type("//textarea",
 			RuntimeVariables.replace("This is a front page child page test."));
 		selenium.clickAt("//input[@value='Publish']",
@@ -77,7 +78,8 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("//span/input", RuntimeVariables.replace("Test%"));
+		selenium.type("//div/span[1]/span/span/input",
+			RuntimeVariables.replace("Test["));
 		selenium.type("//textarea",
 			RuntimeVariables.replace("This is a front page child page test."));
 		selenium.clickAt("//input[@value='Publish']",
@@ -108,7 +110,8 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("//span/input", RuntimeVariables.replace("Test&amp;"));
+		selenium.type("//div/span[1]/span/span/input",
+			RuntimeVariables.replace("Test]"));
 		selenium.type("//textarea",
 			RuntimeVariables.replace("This is a front page child page test."));
 		selenium.clickAt("//input[@value='Publish']",
@@ -139,7 +142,8 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("//span/input", RuntimeVariables.replace("Test/"));
+		selenium.type("//div/span[1]/span/span/input",
+			RuntimeVariables.replace("Test|"));
 		selenium.type("//textarea",
 			RuntimeVariables.replace("This is a front page child page test."));
 		selenium.clickAt("//input[@value='Publish']",
@@ -170,7 +174,136 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("//span/input", RuntimeVariables.replace("Test?"));
+		selenium.type("//div/span[1]/span/span/input",
+			RuntimeVariables.replace("Test:"));
+		selenium.type("//textarea",
+			RuntimeVariables.replace("This is a front page child page test."));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again."));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Wiki Display Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Wiki Display Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("//div/span[1]/span/span/input",
+			RuntimeVariables.replace("Test;"));
+		selenium.type("//textarea",
+			RuntimeVariables.replace("This is a front page child page test."));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again."));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Wiki Display Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Wiki Display Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("//div/span[1]/span/span/input",
+			RuntimeVariables.replace("Test%"));
+		selenium.type("//textarea",
+			RuntimeVariables.replace("This is a front page child page test."));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again."));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Wiki Display Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Wiki Display Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("//div/span[1]/span/span/input",
+			RuntimeVariables.replace("Test<"));
+		selenium.type("//textarea",
+			RuntimeVariables.replace("This is a front page child page test."));
+		selenium.clickAt("//input[@value='Publish']",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again."));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Wiki Display Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Wiki Display Test Page",
+			RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("//div/span[1]/span/span/input",
+			RuntimeVariables.replace("Test>"));
 		selenium.type("//textarea",
 			RuntimeVariables.replace("This is a front page child page test."));
 		selenium.clickAt("//input[@value='Publish']",

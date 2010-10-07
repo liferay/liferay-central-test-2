@@ -52,15 +52,16 @@ public class RenameWDFrontPageChildPageTest extends BaseTestCase {
 		selenium.clickAt("link=Move", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Rename", RuntimeVariables.replace(""));
-		selenium.type("//span/input",
+		selenium.type("//div/span[1]/span/span/input",
 			RuntimeVariables.replace("Front Page Child Page Test Edited"));
 		selenium.clickAt("//input[@value='Rename']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
-				"Front Page Child Page Test Edited"));
+		assertEquals(RuntimeVariables.replace(
+				"Front Page Child Page Test Edited"),
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace(
 				"(Redirected from Front Page Child Page Test)"),
 			selenium.getText("//div[@class='page-redirect']"));

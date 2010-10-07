@@ -45,7 +45,8 @@ public class AddWDFrontPageChildPageNameNullTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("//span/input", RuntimeVariables.replace(""));
+		selenium.type("//div/span[1]/span/span/input",
+			RuntimeVariables.replace(""));
 		selenium.type("//textarea",
 			RuntimeVariables.replace("This is a front page child page test."));
 		selenium.clickAt("//input[@value='Publish']",

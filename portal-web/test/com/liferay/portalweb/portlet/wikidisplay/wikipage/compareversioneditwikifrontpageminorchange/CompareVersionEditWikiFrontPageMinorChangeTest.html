@@ -54,34 +54,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div[@class='taglib-diff-html']/h2</td>
-	<td>Test Wiki Article</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//i</td>
-	<td>this is italics</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//b</td>
-	<td>bold</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=Link to website</td>
+	<td>assertTextPresent</td>
+	<td>Comparing Versions 1.1 and 1.2 (Last Version)</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='taglib-diff-html']/ul/li</td>
-	<td>this is a list item this is a sub list item</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//span[@id='added-diff-0']</td>
-	<td>Minor Edit.</td>
+	<td>//div/div[4]</td>
+	<td>This is a an edited wiki frontpage article test. Minor edit.</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -95,13 +75,13 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//table[@id='taglib-diff-results']/tbody/tr[3]/td[1]/table/tbody/tr[4]/td</td>
+	<td>//td[@class='taglib-diff-context']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//table[@id='taglib-diff-results']/tbody/tr[3]/td[2]/table/tbody/tr[4]/td/ins</td>
-	<td>Minor Edit.</td>
+	<td>//ins</td>
+	<td>This is an edited wiki frontpage article test. Minor edit.</td>
 </tr>
 
 </tbody></table>

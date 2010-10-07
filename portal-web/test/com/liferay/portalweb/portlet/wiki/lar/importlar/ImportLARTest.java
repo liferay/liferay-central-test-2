@@ -22,57 +22,96 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class ImportLARTest extends BaseTestCase {
 	public void testImportLAR() throws Exception {
-		selenium.open("/web/guest/home/");
+		int label = 1;
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+				selenium.open("/web/guest/home/");
 
-			try {
-				if (selenium.isElementPresent("link=Wiki Test Page")) {
-					break;
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent("link=Wiki Test Page")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("link=Wiki Test Page",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
 
-		selenium.clickAt("link=Wiki Test Page", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//strong/a", RuntimeVariables.replace(""));
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isElementPresent("link=Export / Import")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isElementPresent("link=Export / Import")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				selenium.clickAt("link=Export / Import",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("link=Import", RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.type("_86_importFileName",
+					RuntimeVariables.replace(
+						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\wiki\\lar\\importlar\\dependencies\\Wiki-Selenium.portlet.lar"));
+
+				boolean deleteBeforeChecked = selenium.isChecked(
+						"_86_DELETE_PORTLET_DATACheckbox");
+
+				if (deleteBeforeChecked) {
+					label = 2;
+
+					continue;
+				}
+
+				selenium.clickAt("_86_DELETE_PORTLET_DATACheckbox",
+					RuntimeVariables.replace(
+						"Delete portlet data before importing."));
+
+			case 2:
+
+				boolean dataChecked = selenium.isChecked(
+						"_86_PORTLET_DATACheckbox");
+
+				if (dataChecked) {
+					label = 3;
+
+					continue;
+				}
+
+				selenium.clickAt("_86_PORTLET_DATACheckbox",
+					RuntimeVariables.replace(""));
+
+			case 3:
+				selenium.clickAt("//input[@value='Import']",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				assertTrue(selenium.isTextPresent(
+						"Your request processed successfully."));
+
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.clickAt("link=Export / Import", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Import", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.type("_86_importFileName",
-			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\wiki\\lar\\importlar\\dependencies\\Wiki-Selenium.portlet.lar"));
-		selenium.check("_86_DELETE_PORTLET_DATACheckbox");
-		selenium.check("_86_PORTLET_DATACheckbox");
-		selenium.clickAt("//input[@value='Import']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
 	}
 }

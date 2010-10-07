@@ -53,17 +53,11 @@ public class CompareVersionEditWikiFrontPageMinorChangeTest extends BaseTestCase
 		selenium.clickAt("//input[@value='Compare Versions']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Test Wiki Article"),
-			selenium.getText("//div[@class='taglib-diff-html']/h2"));
-		assertEquals(RuntimeVariables.replace("this is italics"),
-			selenium.getText("//i"));
-		assertEquals(RuntimeVariables.replace("bold"), selenium.getText("//b"));
-		assertTrue(selenium.isElementPresent("link=Link to website"));
+		assertTrue(selenium.isTextPresent(
+				"Comparing Versions 1.1 and 1.2 (Last Version)"));
 		assertEquals(RuntimeVariables.replace(
-				"this is a list item this is a sub list item"),
-			selenium.getText("//div[@class='taglib-diff-html']/ul/li"));
-		assertEquals(RuntimeVariables.replace("Minor Edit."),
-			selenium.getText("//span[@id='added-diff-0']"));
+				"This is a an edited wiki frontpage article test. Minor edit."),
+			selenium.getText("//div/div[4]"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -84,10 +78,9 @@ public class CompareVersionEditWikiFrontPageMinorChangeTest extends BaseTestCase
 		selenium.clickAt("link=Text Mode", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace(""),
-			selenium.getText(
-				"//table[@id='taglib-diff-results']/tbody/tr[3]/td[1]/table/tbody/tr[4]/td"));
-		assertEquals(RuntimeVariables.replace("Minor Edit."),
-			selenium.getText(
-				"//table[@id='taglib-diff-results']/tbody/tr[3]/td[2]/table/tbody/tr[4]/td/ins"));
+			selenium.getText("//td[@class='taglib-diff-context']"));
+		assertEquals(RuntimeVariables.replace(
+				"This is an edited wiki frontpage article test. Minor edit."),
+			selenium.getText("//ins"));
 	}
 }

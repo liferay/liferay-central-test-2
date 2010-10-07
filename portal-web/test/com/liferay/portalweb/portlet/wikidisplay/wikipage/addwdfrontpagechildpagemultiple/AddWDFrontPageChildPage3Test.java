@@ -45,7 +45,7 @@ public class AddWDFrontPageChildPage3Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Add Child Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("//span/input",
+		selenium.type("//div/span[1]/span/span/input",
 			RuntimeVariables.replace("Front3 Page3 Child3 Page3 Test3"));
 		selenium.type("//textarea",
 			RuntimeVariables.replace(
@@ -60,8 +60,8 @@ public class AddWDFrontPageChildPage3Test extends BaseTestCase {
 		selenium.clickAt("link=Front3 Page3 Child3 Page3 Test3",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
-				"Front3 Page3 Child3 Page3 Test3"));
+		assertEquals(RuntimeVariables.replace("Front3 Page3 Child3 Page3 Test3"),
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace(
 				"This is a front3 page3 child3 page3 test3."),
 			selenium.getText("//div[@class='wiki-body']"));

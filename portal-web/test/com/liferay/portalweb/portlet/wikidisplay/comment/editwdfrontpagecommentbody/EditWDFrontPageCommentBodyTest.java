@@ -71,7 +71,7 @@ public class EditWDFrontPageCommentBodyTest extends BaseTestCase {
 			RuntimeVariables.replace("\\48"));
 		selenium.keyPress("//tr[2]/td/div/textarea",
 			RuntimeVariables.replace("\\8"));
-		selenium.clickAt("//input[@value='Update']",
+		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(

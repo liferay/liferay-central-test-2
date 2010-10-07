@@ -51,6 +51,7 @@ public class AddWDFrontPageAttachmentTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.selectWindow("null");
+		Thread.sleep(5000);
 		selenium.windowFocus();
 
 		for (int second = 0;; second++) {
@@ -77,7 +78,7 @@ public class AddWDFrontPageAttachmentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//span/input")) {
+				if (selenium.isVisible("//div/span[1]/span/span/input")) {
 					break;
 				}
 			}
@@ -87,7 +88,7 @@ public class AddWDFrontPageAttachmentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("//span/input",
+		selenium.type("//div/span[1]/span/span/input",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\wikidisplay\\attachment\\addwdfrontpageattachment\\dependencies\\Wiki_Attachment.jpg"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

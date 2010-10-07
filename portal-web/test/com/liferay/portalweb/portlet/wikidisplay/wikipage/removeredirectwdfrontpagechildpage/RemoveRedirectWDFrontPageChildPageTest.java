@@ -44,8 +44,9 @@ public class RemoveRedirectWDFrontPageChildPageTest extends BaseTestCase {
 		selenium.clickAt("link=Wiki Display Test Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
-				"Front Page Child Page Test Edited"));
+		assertEquals(RuntimeVariables.replace(
+				"Front Page Child Page Test Edited"),
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace(
 				"(Redirected from Front Page Child Page Test)"),
 			selenium.getText("//div[@class='page-redirect']"));
@@ -62,12 +63,11 @@ public class RemoveRedirectWDFrontPageChildPageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		assertTrue(selenium.isPartialText("//h1[@class='page-title']",
-				"Front Page Child Page Test"));
+		assertEquals(RuntimeVariables.replace("Front Page Child Page Test"),
+			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("This is a remove redirect test."),
 			selenium.getText("//div[@class='wiki-body']"));
-		assertFalse(selenium.isPartialText("//h1[@class='page-title']",
-				"Front Page Child Page Test Edited"));
+		assertFalse(selenium.isTextPresent("//h1[@class='header-title']"));
 		assertFalse(selenium.isTextPresent(
 				"(Redirected from Front Page Child Page Test)"));
 	}

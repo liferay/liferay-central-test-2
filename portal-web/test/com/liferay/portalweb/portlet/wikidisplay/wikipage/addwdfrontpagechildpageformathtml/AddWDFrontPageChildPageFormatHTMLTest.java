@@ -56,7 +56,7 @@ public class AddWDFrontPageChildPageFormatHTMLTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//span/input")) {
+				if (selenium.isElementPresent("//div/span[1]/span/span/input")) {
 					break;
 				}
 			}
@@ -66,15 +66,15 @@ public class AddWDFrontPageChildPageFormatHTMLTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("//span/input",
+		selenium.type("//div/span[1]/span/span/input",
 			RuntimeVariables.replace("WD Wiki Page Format HTML Test"));
-		selenium.clickAt("cke_38_label", RuntimeVariables.replace(""));
+		selenium.clickAt("cke_40", RuntimeVariables.replace("Source"));
 		selenium.type("//td[@id='cke_contents_CKEditor1']/textarea",
 			RuntimeVariables.replace(
 				"<a href=http://www.liferay.com>Welcome to LIFERAY</a>"));
 		selenium.selectFrame("relative=top");
 		Thread.sleep(5000);
-		selenium.clickAt("cke_38_label", RuntimeVariables.replace(""));
+		selenium.clickAt("cke_40", RuntimeVariables.replace("Source"));
 		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));

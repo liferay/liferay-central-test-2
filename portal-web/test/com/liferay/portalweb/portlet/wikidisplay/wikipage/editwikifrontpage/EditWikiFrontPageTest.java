@@ -42,43 +42,23 @@ public class EditWikiFrontPageTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Wiki Display Test Page"));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Test Wiki Article"),
-			selenium.getText("//div[@class='wiki-body']/h2"));
-		assertEquals(RuntimeVariables.replace("this is italics"),
-			selenium.getText("//i"));
-		assertEquals(RuntimeVariables.replace("bold"), selenium.getText("//b"));
-		assertTrue(selenium.isElementPresent("link=Link to website"));
 		assertEquals(RuntimeVariables.replace(
-				"this is a list item this is a sub list item"),
-			selenium.getText("//div[@class='wiki-body']/ul/li"));
+				"This is a wiki frontpage article test."),
+			selenium.getText("//div[5]/div"));
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("//textarea",
 			RuntimeVariables.replace(
-				"==Test Wiki Article Edited==\n\n//this is italics. edited.//\n\n**bold edited**\n\n[[http://www.liferay.com|Link to website. Edited.]]\n\n*this is a list item. edited.\n**this is a sub list item. edited."));
+				"This is an edited wiki frontpage article test."));
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		assertEquals(RuntimeVariables.replace("Test Wiki Article Edited"),
-			selenium.getText("//div[@class='wiki-body']/h2"));
-		assertEquals(RuntimeVariables.replace("this is italics. edited."),
-			selenium.getText("//i"));
-		assertEquals(RuntimeVariables.replace("bold edited"),
-			selenium.getText("//b"));
-		assertTrue(selenium.isElementPresent("link=Link to website. Edited."));
 		assertEquals(RuntimeVariables.replace(
-				"this is a list item. edited. this is a sub list item. edited."),
-			selenium.getText("//div[@class='wiki-body']/ul/li"));
-		assertNotEquals(RuntimeVariables.replace("Test Wiki Article"),
-			selenium.getText("//div[@class='wiki-body']/h2"));
-		assertNotEquals(RuntimeVariables.replace("this is italics"),
-			selenium.getText("//i"));
-		assertNotEquals(RuntimeVariables.replace("bold"),
-			selenium.getText("//b"));
-		assertFalse(selenium.isElementPresent("link=Link to website"));
+				"This is an edited wiki frontpage article test."),
+			selenium.getText("//div[6]/div"));
 		assertNotEquals(RuntimeVariables.replace(
-				"this is a list item this is a sub list item"),
-			selenium.getText("//div[@class='wiki-body']/ul/li"));
+				"This is a wiki frontpage article test."),
+			selenium.getText("//div[6]/div"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

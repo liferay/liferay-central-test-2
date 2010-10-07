@@ -49,13 +49,43 @@
 	<td>L:\portal\build\portal-web\test\com\liferay\portalweb\portlet\wiki\lar\importlar\dependencies\Wiki-Selenium.portlet.lar</td>
 </tr>
 <tr>
-	<td>check</td>
+	<td>store</td>
+	<td>eval(selenium.isChecked('_86_DELETE_PORTLET_DATACheckbox'))</td>
+	<td>deleteBeforeChecked</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${deleteBeforeChecked}</td>
+	<td>DeleteBeforeChecked</td>
+</tr>
+<tr>
+	<td>clickAt</td>
 	<td>_86_DELETE_PORTLET_DATACheckbox</td>
+	<td>Delete portlet data before importing.</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>DeleteBeforeChecked</td>
 	<td></td>
 </tr>
 <tr>
-	<td>check</td>
+	<td>store</td>
+	<td>eval(selenium.isChecked('_86_PORTLET_DATACheckbox'))</td>
+	<td>dataChecked</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${dataChecked}</td>
+	<td>DataChecked</td>
+</tr>
+<tr>
+	<td>clickAt</td>
 	<td>_86_PORTLET_DATACheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>DataChecked</td>
 	<td></td>
 </tr>
 <tr>

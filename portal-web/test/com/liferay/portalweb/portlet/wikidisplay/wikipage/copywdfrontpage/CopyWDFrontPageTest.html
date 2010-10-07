@@ -35,7 +35,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>//span/input</td>
+	<td>//div/span[1]/span/span/input</td>
 	<td>Copy Front Page Test</td>
 </tr>
 <tr>
@@ -74,34 +74,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertPartialText</td>
-	<td>//h1[@class='page-title']</td>
+	<td>assertText</td>
+	<td>//h1[@class='header-title']/span</td>
 	<td>Copy Front Page Test</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='wiki-body']/h2</td>
-	<td>Test Wiki Article</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//i</td>
-	<td>this is italics</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//b</td>
-	<td>bold</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>link=Link to website</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='wiki-body']/ul/li</td>
-	<td>this is a list item this is a sub list item</td>
+	<td>//div[@class='wiki-body']</td>
+	<td>This is a wiki frontpage article test.</td>
 </tr>
 
 </tbody></table>
