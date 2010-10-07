@@ -41,6 +41,16 @@ public class PortletPermissionImpl implements PortletPermission {
 
 	public void check(
 			PermissionChecker permissionChecker, long groupId, long plid,
+			String portletId, String actionId)
+		throws PortalException, SystemException {
+
+		check(
+			permissionChecker, groupId, plid, portletId, actionId,
+			DEFAULT_STRICT);
+	}
+
+	public void check(
+			PermissionChecker permissionChecker, long groupId, long plid,
 			String portletId, String actionId, boolean strict)
 		throws PortalException, SystemException {
 
@@ -82,11 +92,47 @@ public class PortletPermissionImpl implements PortletPermission {
 
 	public boolean contains(
 			PermissionChecker permissionChecker, long groupId, long plid,
-			Portlet portlet, String actionId, boolean strict)
+			Portlet portlet, String actionId)
 		throws PortalException, SystemException {
 
 		return contains(
 			permissionChecker, groupId, plid, portlet, actionId,
+			DEFAULT_STRICT);
+	}
+
+	public boolean contains(
+			PermissionChecker permissionChecker, long groupId, long plid,
+			Portlet portlet, String actionId, boolean strict)
+		throws PortalException, SystemException {
+
+		if (portlet.isUndeployedPortlet()) {
+			return false;
+		}
+
+		boolean value = contains(
+			permissionChecker, groupId, plid, portlet.getPortletId(), actionId,
+			strict);
+
+		if (value) {
+			return true;
+		}
+		else {
+			if (portlet.isSystem() && actionId.equals(ActionKeys.VIEW)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	}
+
+	public boolean contains(
+			PermissionChecker permissionChecker, long groupId, long plid,
+			String portletId, String actionId)
+		throws PortalException, SystemException {
+
+		return contains(
+			permissionChecker, groupId, plid, portletId, actionId,
 			DEFAULT_STRICT);
 	}
 
@@ -162,24 +208,8 @@ public class PortletPermissionImpl implements PortletPermission {
 			String actionId, boolean strict)
 		throws PortalException, SystemException {
 
-		if (portlet.isUndeployedPortlet()) {
-			return false;
-		}
-
-		boolean value = contains(
-			permissionChecker, plid, portlet.getPortletId(), actionId, strict);
-
-		if (value) {
-			return true;
-		}
-		else {
-			if (portlet.isSystem() && actionId.equals(ActionKeys.VIEW)) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
+		return contains(
+			permissionChecker, 0, plid, portlet, actionId, strict);
 	}
 
 	public boolean contains(
