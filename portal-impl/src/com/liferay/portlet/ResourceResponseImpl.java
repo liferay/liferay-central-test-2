@@ -109,8 +109,10 @@ public class ResourceResponseImpl
 		_response.setHeader(name, value);
 
 		if (name.equals(ResourceResponse.HTTP_STATUS_CODE)) {
-			_response.setStatus(
-				GetterUtil.getInteger(value, HttpServletResponse.SC_OK));
+			int status = GetterUtil.getInteger(
+				value, HttpServletResponse.SC_OK);
+
+			_response.setStatus(status);
 		}
 	}
 
