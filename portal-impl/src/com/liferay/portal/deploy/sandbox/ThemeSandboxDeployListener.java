@@ -32,7 +32,7 @@ public class ThemeSandboxDeployListener
 	extends ThemeDeployer implements SandboxDeployListener {
 
 	public ThemeSandboxDeployListener() {
-		_sandboxHandler = new ThemeSandboxHandler();
+		_sandboxHandler = new ThemeSandboxHandler(this);
 
 		appServerType = ServerDetector.getServerId();
 

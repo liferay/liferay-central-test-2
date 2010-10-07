@@ -35,7 +35,8 @@ import java.io.IOException;
  */
 public abstract class BaseSandboxHandler implements SandboxHandler {
 
-	public BaseSandboxHandler() {
+	public BaseSandboxHandler(Deployer deployer) {
+		_deployer = deployer;
 		_engineHostDir = getEngineHostDir();
 	}
 
