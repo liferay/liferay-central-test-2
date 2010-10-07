@@ -152,7 +152,7 @@ public class WebServerServlet extends HttpServlet {
 							return false;
 						}
 
-						pathArray = {
+						pathArray = new String[] {
 							String.valueOf(groupId),
 							String.valueOf(folderId),
 							pathArray[i]
