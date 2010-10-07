@@ -15,6 +15,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.util.Locale;
 
@@ -106,6 +107,11 @@ public class ResourceResponseImpl
 
 	public void setHeader(String name, String value) {
 		_response.setHeader(name, value);
+
+		if (name.equals(ResourceResponse.HTTP_STATUS_CODE)) {
+			_response.setStatus(
+				GetterUtil.getInteger(value, HttpServletResponse.SC_OK));
+		}
 	}
 
 	public void setIntHeader(String name, int value) {
