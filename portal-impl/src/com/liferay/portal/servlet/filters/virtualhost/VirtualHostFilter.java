@@ -33,6 +33,7 @@ import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.webserver.WebServerServlet;
 
 import java.util.Set;
 
@@ -75,7 +76,6 @@ public class VirtualHostFilter extends BasePortalFilter {
 			friendlyURL.startsWith(_PATH_COMBO) ||
 			friendlyURL.startsWith(_PATH_DELEGATE) ||
 			friendlyURL.startsWith(_PATH_DISPLAY_CHART) ||
-			friendlyURL.startsWith(_PATH_DOCUMENTS) ||
 			friendlyURL.startsWith(_PATH_DTD) ||
 			friendlyURL.startsWith(_PATH_FACEBOOK) ||
 			friendlyURL.startsWith(_PATH_GOOGLE_GADGET) ||
@@ -201,6 +201,16 @@ public class VirtualHostFilter extends BasePortalFilter {
 				VirtualHostFilter.class, request, response, filterChain);
 
 			return;
+		}
+		else if (friendlyURL.startsWith(_PATH_DOCUMENTS)) {
+			if (WebServerServlet.hasFiles(
+					PortalUtil.getUser(request), request.getPathInfo())) {
+
+				processFilter(
+					VirtualHostFilter.class, request, response, filterChain);
+
+				return;
+			}
 		}
 
 		LayoutSet layoutSet = (LayoutSet)request.getAttribute(
