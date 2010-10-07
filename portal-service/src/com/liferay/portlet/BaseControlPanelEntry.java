@@ -42,6 +42,7 @@ public abstract class BaseControlPanelEntry implements ControlPanelEntry {
 		Group group = themeDisplay.getScopeGroup();
 
 		long plid = LayoutConstants.DEFAULT_PLID;
+		long groupId = group.getGroupId();
 
 		if (category.equals(PortletCategoryKeys.CONTENT)) {
 			plid = group.getDefaultPublicPlid();
@@ -52,15 +53,20 @@ public abstract class BaseControlPanelEntry implements ControlPanelEntry {
 		}
 
 		if (category.equals(PortletCategoryKeys.CONTENT) &&
-			permissionChecker.isCommunityAdmin(group.getGroupId())) {
+			permissionChecker.isCommunityAdmin(groupId) && !group.isUser()) {
 
 			return true;
 		}
 
+		if (category.equals(PortletCategoryKeys.PORTAL) ||
+			category.equals(PortletCategoryKeys.SERVER)) {
+
+			groupId = 0;
+		}
+
 		if (PortletPermissionUtil.contains(
-				permissionChecker, group.getGroupId(), plid,
-				portlet.getPortletId(), ActionKeys.ACCESS_IN_CONTROL_PANEL,
-				true)) {
+				permissionChecker, groupId, plid, portlet.getPortletId(),
+				ActionKeys.ACCESS_IN_CONTROL_PANEL, true)) {
 
 			return true;
 		}
