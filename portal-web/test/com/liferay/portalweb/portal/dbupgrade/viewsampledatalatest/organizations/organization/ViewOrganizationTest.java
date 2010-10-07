@@ -66,7 +66,7 @@ public class ViewOrganizationTest extends BaseTestCase {
 
 			case 2:
 				selenium.type("_126_keywords",
-					RuntimeVariables.replace("organization sample test"));
+					RuntimeVariables.replace("Sample"));
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
@@ -150,10 +150,15 @@ public class ViewOrganizationTest extends BaseTestCase {
 				assertEquals(RuntimeVariables.replace(""),
 					selenium.getText(
 						"//tr[@class='portlet-section-body results-row last']/td[5]"));
-				assertEquals(RuntimeVariables.replace(
-						"Liferay Los Angeles, Liferay, Inc., Organization Sample Test"),
-					selenium.getText(
-						"//tr[@class='portlet-section-body results-row last']/td[6]"));
+				assertTrue(selenium.isPartialText(
+						"//tr[@class='portlet-section-body results-row last']/td[6]",
+						"Liferay Los Angeles"));
+				assertTrue(selenium.isPartialText(
+						"//tr[@class='portlet-section-body results-row last']/td[6]",
+						"Liferay, Inc."));
+				assertTrue(selenium.isPartialText(
+						"//tr[@class='portlet-section-body results-row last']/td[6]",
+						"Organization Sample Test"));
 
 			case 100:
 				label = -1;

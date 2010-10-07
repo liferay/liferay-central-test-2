@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ViewDocumentTest</title>
 </head>
 <body>
@@ -13,68 +10,53 @@
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/user/joebloggs/home/</td>
+	<td>/web/guest/home/</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Communities I Own</td>
+	<td>link=Control Panel</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Communities I Own</td>
+	<td>link=Control Panel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Communities</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_29_name</td>
+	<td>_134_name</td>
 	<td>Document Library Document Community</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//form/span/span[2]/span/input</td>
+	<td>//input[@value='Search']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Open</td>
+	<td>//td[2]/a</td>
 	<td>Open</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Document Library Page</td>
-	<td></td>
-</tr>
-<tr>
 	<td>clickAtAndWait</td>
 	<td>link=Document Library Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//a[2]/strong</td>
+	<td>//a/strong</td>
 	<td>Test1 Folder1</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//a/span/span</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>//a/span/span</td>
-	<td>Test1 Document1.txt</td>
 </tr>
 <tr>
 	<td>assertText</td>
 	<td>//a/span/span</td>
-	<td>Test1 Document1.txt</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>//a/div</td>
-	<td>This is test1 document1.</td>
+	<td>Test1 Document1</td>
 </tr>
 <tr>
 	<td>assertText</td>

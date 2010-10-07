@@ -53,5 +53,7 @@ public class ViewAnnouncementsEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Announcements Entry Name"),
 			selenium.getText("//div/h3/a"));
+		assertEquals(RuntimeVariables.replace(
+				"General Announcements Entry Content"), selenium.getText("//p"));
 	}
 }

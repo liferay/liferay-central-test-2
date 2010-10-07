@@ -49,14 +49,11 @@ public class ViewWebFormTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//tr[@class='portlet-section-body results-row last']/td[1]/a",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//td[2]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Web Form Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Configuration", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Form Fields", RuntimeVariables.replace(""));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -64,8 +61,8 @@ public class ViewWebFormTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"There is existing form data. Please export and delete it before making changes to the fields.")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
 					break;
 				}
 			}
@@ -75,10 +72,34 @@ public class ViewWebFormTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isTextPresent(
-				"There is existing form data. Please export and delete it before making changes to the fields."));
+		assertEquals(RuntimeVariables.replace("Configuration"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
+		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace(
+							"There is existing form data. Please export and delete it before making changes to the fields.")
+										.equals(selenium.getText(
+								"//div[3]/div[2]/fieldset/div/div[1]"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace(
+				"There is existing form data. Please export and delete it before making changes to the fields."),
+			selenium.getText("//div[3]/div[2]/fieldset/div/div[1]"));
 		assertTrue(selenium.isElementPresent("//input[@value='Export Data']"));
 		assertTrue(selenium.isElementPresent("//input[@value='Delete Data']"));
-		assertFalse(selenium.isElementPresent("link=Add Row"));
 	}
 }

@@ -48,12 +48,13 @@ public class ViewPageLayoutTest extends BaseTestCase {
 			RuntimeVariables.replace("Group Page Layout Community"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//tr[@class='portlet-section-body results-row last']/td/a",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("Open"));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Page Layout Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
+		selenium.clickAt("main-content", RuntimeVariables.replace(""));
+		selenium.clickAt("dockbar", RuntimeVariables.replace(""));
+		selenium.clickAt("navigation", RuntimeVariables.replace(""));
 		assertTrue(selenium.isElementPresent(
 				"//div[@id='column-1' and @class='aui-w50 portlet-column portlet-column-first aui-dd-drop']"));
 		assertTrue(selenium.isElementPresent(

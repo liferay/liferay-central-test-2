@@ -49,8 +49,7 @@ public class ViewBlogsEntryScopeTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//tr[@class='portlet-section-body results-row last']/td/a",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("Open"));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Blogs Page Scope Current Page",
 			RuntimeVariables.replace(""));

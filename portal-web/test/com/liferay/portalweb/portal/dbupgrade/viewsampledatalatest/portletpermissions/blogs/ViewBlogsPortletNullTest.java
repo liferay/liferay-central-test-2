@@ -22,7 +22,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class ViewBlogsPortletNullTest extends BaseTestCase {
 	public void testViewBlogsPortletNull() throws Exception {
-		selenium.open("/web/guest/home");
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

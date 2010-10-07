@@ -49,8 +49,7 @@ public class SearchTagsTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//tr[@class='portlet-section-body results-row last']/td[1]/a",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("Open"));
 		selenium.waitForPageToLoad("30000");
 		selenium.clickAt("link=Message Boards Page",
 			RuntimeVariables.replace(""));
@@ -152,8 +151,8 @@ public class SearchTagsTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=MessageA TagA TestA"));
 		assertTrue(selenium.isElementPresent("link=MessageB TagB TestB"));
 		assertTrue(selenium.isElementPresent("link=MessageC TagC TestC"));
-		assertTrue(selenium.isElementPresent("link=Message1 Tag1 Test1"));
-		assertTrue(selenium.isElementPresent("link=Message2 Tag2 Test2"));
-		assertTrue(selenium.isElementPresent("link=Message3 Tag3 Test3"));
+		assertFalse(selenium.isElementPresent("link=Message1 Tag1 Test1"));
+		assertFalse(selenium.isElementPresent("link=Message2 Tag2 Test2"));
+		assertFalse(selenium.isElementPresent("link=Message3 Tag3 Test3"));
 	}
 }

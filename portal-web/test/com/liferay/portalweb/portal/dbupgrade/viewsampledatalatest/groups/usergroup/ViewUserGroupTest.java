@@ -122,9 +122,14 @@ public class ViewUserGroupTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(""),
 			selenium.getText(
 				"//tr[@class='portlet-section-body results-row last']/td[5]"));
-		assertEquals(RuntimeVariables.replace(
-				"Liferay Los Angeles, Liferay, Inc., Organization Sample Test"),
-			selenium.getText(
-				"//tr[@class='portlet-section-body results-row last']/td[6]"));
+		assertTrue(selenium.isPartialText(
+				"//tr[@class='portlet-section-body results-row last']/td[6]",
+				"Liferay Los Angeles"));
+		assertTrue(selenium.isPartialText(
+				"//tr[@class='portlet-section-body results-row last']/td[6]",
+				"Liferay, Inc."));
+		assertTrue(selenium.isPartialText(
+				"//tr[@class='portlet-section-body results-row last']/td[6]",
+				"Organization Sample Test"));
 	}
 }

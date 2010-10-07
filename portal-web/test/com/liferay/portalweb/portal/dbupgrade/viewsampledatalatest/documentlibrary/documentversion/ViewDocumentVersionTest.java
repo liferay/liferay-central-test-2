@@ -22,7 +22,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class ViewDocumentVersionTest extends BaseTestCase {
 	public void testViewDocumentVersion() throws Exception {
-		selenium.open("/user/joebloggs/home/");
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -30,7 +30,7 @@ public class ViewDocumentVersionTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Communities I Own")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -40,97 +40,35 @@ public class ViewDocumentVersionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Communities I Own", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_29_name",
+		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_134_name",
 			RuntimeVariables.replace(
 				"Document Library Document Version Community"));
-		selenium.clickAt("//form/span/span[2]/span/input",
+		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Open", RuntimeVariables.replace("Open"));
+		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("Open"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Document Library Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Document Library Page",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("//a[2]/strong",
-			RuntimeVariables.replace("Test1 Folder1"));
+		selenium.clickAt("//a/strong", RuntimeVariables.replace("Test1 Folder1"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//a/span/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//a/span/span", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("Test2 Document2"),
+			selenium.getText("//a/span/span"));
+		assertEquals(RuntimeVariables.replace("This is test2 document2."),
+			selenium.getText("//a/div"));
+		selenium.clickAt("//a/span/span",
+			RuntimeVariables.replace("Test2 Document2"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace("1.0")
-										.equals(selenium.getText(
-								"//tr[4]/td[2]/a"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace("1.1")
-										.equals(selenium.getText("//td[2]/a"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertEquals(RuntimeVariables.replace("1.1"),
-			selenium.getText("//td[2]/a"));
+			selenium.getText("//span[1]/strong"));
+		assertEquals(RuntimeVariables.replace("1.1"),
+			selenium.getText("//tr[3]/td[1]/a"));
 		assertEquals(RuntimeVariables.replace("1.0"),
-			selenium.getText("//tr[4]/td[2]/a"));
+			selenium.getText("//tr[4]/td[1]/a"));
 	}
 }
