@@ -272,7 +272,7 @@ public interface ContactModel extends BaseModel<Contact> {
 	public boolean isMale();
 
 	/**
-	 * Sets whether this {$entity.humanName} is male.
+	 * Sets whether this contact is male.
 	 *
 	 * @param male the male of this contact
 	 */

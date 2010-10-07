@@ -388,7 +388,7 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 	public boolean isIndexable();
 
 	/**
-	 * Sets whether this {$entity.humanName} is indexable.
+	 * Sets whether this journal article is indexable.
 	 *
 	 * @param indexable the indexable of this journal article
 	 */
@@ -409,7 +409,7 @@ public interface JournalArticleModel extends BaseModel<JournalArticle> {
 	public boolean isSmallImage();
 
 	/**
-	 * Sets whether this {$entity.humanName} is small image.
+	 * Sets whether this journal article is small image.
 	 *
 	 * @param smallImage the small image of this journal article
 	 */

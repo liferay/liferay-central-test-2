@@ -258,7 +258,7 @@ public interface TasksReviewModel extends BaseModel<TasksReview> {
 	public boolean isCompleted();
 
 	/**
-	 * Sets whether this {$entity.humanName} is completed.
+	 * Sets whether this tasks review is completed.
 	 *
 	 * @param completed the completed of this tasks review
 	 */
@@ -279,7 +279,7 @@ public interface TasksReviewModel extends BaseModel<TasksReview> {
 	public boolean isRejected();
 
 	/**
-	 * Sets whether this {$entity.humanName} is rejected.
+	 * Sets whether this tasks review is rejected.
 	 *
 	 * @param rejected the rejected of this tasks review
 	 */

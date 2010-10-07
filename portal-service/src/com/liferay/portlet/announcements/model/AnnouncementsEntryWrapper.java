@@ -382,7 +382,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is alert.
+	* Sets whether this announcements entry is alert.
 	*
 	* @param alert the alert of this announcements entry
 	*/

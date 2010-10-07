@@ -287,7 +287,7 @@ public interface CalEventModel extends BaseModel<CalEvent> {
 	public boolean isAllDay();
 
 	/**
-	 * Sets whether this {$entity.humanName} is all day.
+	 * Sets whether this cal event is all day.
 	 *
 	 * @param allDay the all day of this cal event
 	 */
@@ -308,7 +308,7 @@ public interface CalEventModel extends BaseModel<CalEvent> {
 	public boolean isTimeZoneSensitive();
 
 	/**
-	 * Sets whether this {$entity.humanName} is time zone sensitive.
+	 * Sets whether this cal event is time zone sensitive.
 	 *
 	 * @param timeZoneSensitive the time zone sensitive of this cal event
 	 */
@@ -344,7 +344,7 @@ public interface CalEventModel extends BaseModel<CalEvent> {
 	public boolean isRepeating();
 
 	/**
-	 * Sets whether this {$entity.humanName} is repeating.
+	 * Sets whether this cal event is repeating.
 	 *
 	 * @param repeating the repeating of this cal event
 	 */

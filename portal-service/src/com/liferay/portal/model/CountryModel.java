@@ -157,7 +157,7 @@ public interface CountryModel extends BaseModel<Country> {
 	public boolean isActive();
 
 	/**
-	 * Sets whether this {$entity.humanName} is active.
+	 * Sets whether this country is active.
 	 *
 	 * @param active the active of this country
 	 */

@@ -209,7 +209,7 @@ public class CompanyWrapper implements Company {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is system.
+	* Sets whether this company is system.
 	*
 	* @param system the system of this company
 	*/

@@ -260,7 +260,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 	public boolean isAllowPingbacks();
 
 	/**
-	 * Sets whether this {$entity.humanName} is allow pingbacks.
+	 * Sets whether this blogs entry is allow pingbacks.
 	 *
 	 * @param allowPingbacks the allow pingbacks of this blogs entry
 	 */
@@ -281,7 +281,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry> {
 	public boolean isAllowTrackbacks();
 
 	/**
-	 * Sets whether this {$entity.humanName} is allow trackbacks.
+	 * Sets whether this blogs entry is allow trackbacks.
 	 *
 	 * @param allowTrackbacks the allow trackbacks of this blogs entry
 	 */

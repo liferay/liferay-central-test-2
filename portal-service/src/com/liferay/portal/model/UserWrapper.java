@@ -175,7 +175,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is default user.
+	* Sets whether this user is default user.
 	*
 	* @param defaultUser the default user of this user
 	*/
@@ -238,7 +238,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is password encrypted.
+	* Sets whether this user is password encrypted.
 	*
 	* @param passwordEncrypted the password encrypted of this user
 	*/
@@ -265,7 +265,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is password reset.
+	* Sets whether this user is password reset.
 	*
 	* @param passwordReset the password reset of this user
 	*/
@@ -724,7 +724,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is lockout.
+	* Sets whether this user is lockout.
 	*
 	* @param lockout the lockout of this user
 	*/
@@ -769,7 +769,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is agreed to terms of use.
+	* Sets whether this user is agreed to terms of use.
 	*
 	* @param agreedToTermsOfUse the agreed to terms of use of this user
 	*/
@@ -796,7 +796,7 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is active.
+	* Sets whether this user is active.
 	*
 	* @param active the active of this user
 	*/

@@ -274,7 +274,7 @@ public class WebsiteWrapper implements Website {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is primary.
+	* Sets whether this website is primary.
 	*
 	* @param primary the primary of this website
 	*/

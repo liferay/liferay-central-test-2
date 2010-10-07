@@ -137,7 +137,7 @@ public class RegionWrapper implements Region {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is active.
+	* Sets whether this region is active.
 	*
 	* @param active the active of this region
 	*/

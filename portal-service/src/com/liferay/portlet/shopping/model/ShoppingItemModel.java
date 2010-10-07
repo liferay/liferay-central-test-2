@@ -260,7 +260,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 	public boolean isFields();
 
 	/**
-	 * Sets whether this {$entity.humanName} is fields.
+	 * Sets whether this shopping item is fields.
 	 *
 	 * @param fields the fields of this shopping item
 	 */
@@ -352,7 +352,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 	public boolean isTaxable();
 
 	/**
-	 * Sets whether this {$entity.humanName} is taxable.
+	 * Sets whether this shopping item is taxable.
 	 *
 	 * @param taxable the taxable of this shopping item
 	 */
@@ -387,7 +387,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 	public boolean isUseShippingFormula();
 
 	/**
-	 * Sets whether this {$entity.humanName} is use shipping formula.
+	 * Sets whether this shopping item is use shipping formula.
 	 *
 	 * @param useShippingFormula the use shipping formula of this shopping item
 	 */
@@ -408,7 +408,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 	public boolean isRequiresShipping();
 
 	/**
-	 * Sets whether this {$entity.humanName} is requires shipping.
+	 * Sets whether this shopping item is requires shipping.
 	 *
 	 * @param requiresShipping the requires shipping of this shopping item
 	 */
@@ -443,7 +443,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 	public boolean isFeatured();
 
 	/**
-	 * Sets whether this {$entity.humanName} is featured.
+	 * Sets whether this shopping item is featured.
 	 *
 	 * @param featured the featured of this shopping item
 	 */
@@ -464,7 +464,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 	public boolean isSale();
 
 	/**
-	 * Sets whether this {$entity.humanName} is sale.
+	 * Sets whether this shopping item is sale.
 	 *
 	 * @param sale the sale of this shopping item
 	 */
@@ -485,7 +485,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 	public boolean isSmallImage();
 
 	/**
-	 * Sets whether this {$entity.humanName} is small image.
+	 * Sets whether this shopping item is small image.
 	 *
 	 * @param smallImage the small image of this shopping item
 	 */
@@ -535,7 +535,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 	public boolean isMediumImage();
 
 	/**
-	 * Sets whether this {$entity.humanName} is medium image.
+	 * Sets whether this shopping item is medium image.
 	 *
 	 * @param mediumImage the medium image of this shopping item
 	 */
@@ -585,7 +585,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem> {
 	public boolean isLargeImage();
 
 	/**
-	 * Sets whether this {$entity.humanName} is large image.
+	 * Sets whether this shopping item is large image.
 	 *
 	 * @param largeImage the large image of this shopping item
 	 */

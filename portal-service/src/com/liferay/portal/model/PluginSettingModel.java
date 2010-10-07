@@ -141,7 +141,7 @@ public interface PluginSettingModel extends BaseModel<PluginSetting> {
 	public boolean isActive();
 
 	/**
-	 * Sets whether this {$entity.humanName} is active.
+	 * Sets whether this plugin setting is active.
 	 *
 	 * @param active the active of this plugin setting
 	 */

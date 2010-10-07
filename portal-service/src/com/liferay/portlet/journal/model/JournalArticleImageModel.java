@@ -171,7 +171,7 @@ public interface JournalArticleImageModel extends BaseModel<JournalArticleImage>
 	public boolean isTempImage();
 
 	/**
-	 * Sets whether this {$entity.humanName} is temp image.
+	 * Sets whether this journal article image is temp image.
 	 *
 	 * @param tempImage the temp image of this journal article image
 	 */

@@ -303,7 +303,7 @@ public class TasksReviewWrapper implements TasksReview {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is completed.
+	* Sets whether this tasks review is completed.
 	*
 	* @param completed the completed of this tasks review
 	*/
@@ -330,7 +330,7 @@ public class TasksReviewWrapper implements TasksReview {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is rejected.
+	* Sets whether this tasks review is rejected.
 	*
 	* @param rejected the rejected of this tasks review
 	*/

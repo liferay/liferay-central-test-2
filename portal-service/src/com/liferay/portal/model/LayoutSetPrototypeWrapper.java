@@ -227,7 +227,7 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is active.
+	* Sets whether this layout set prototype is active.
 	*
 	* @param active the active of this layout set prototype
 	*/

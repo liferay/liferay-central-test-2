@@ -199,7 +199,7 @@ public interface LayoutPrototypeModel extends BaseModel<LayoutPrototype> {
 	public boolean isActive();
 
 	/**
-	 * Sets whether this {$entity.humanName} is active.
+	 * Sets whether this layout prototype is active.
 	 *
 	 * @param active the active of this layout prototype
 	 */

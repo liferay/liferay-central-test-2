@@ -119,7 +119,7 @@ public class ClusterGroupWrapper implements ClusterGroup {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is whole cluster.
+	* Sets whether this cluster group is whole cluster.
 	*
 	* @param wholeCluster the whole cluster of this cluster group
 	*/

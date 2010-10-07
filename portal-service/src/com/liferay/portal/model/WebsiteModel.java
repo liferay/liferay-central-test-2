@@ -235,7 +235,7 @@ public interface WebsiteModel extends BaseModel<Website> {
 	public boolean isPrimary();
 
 	/**
-	 * Sets whether this {$entity.humanName} is primary.
+	 * Sets whether this website is primary.
 	 *
 	 * @param primary the primary of this website
 	 */

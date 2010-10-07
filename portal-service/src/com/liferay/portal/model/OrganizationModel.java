@@ -167,7 +167,7 @@ public interface OrganizationModel extends BaseModel<Organization> {
 	public boolean isRecursable();
 
 	/**
-	 * Sets whether this {$entity.humanName} is recursable.
+	 * Sets whether this organization is recursable.
 	 *
 	 * @param recursable the recursable of this organization
 	 */

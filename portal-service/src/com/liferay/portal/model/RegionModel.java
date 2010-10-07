@@ -126,7 +126,7 @@ public interface RegionModel extends BaseModel<Region> {
 	public boolean isActive();
 
 	/**
-	 * Sets whether this {$entity.humanName} is active.
+	 * Sets whether this region is active.
 	 *
 	 * @param active the active of this region
 	 */

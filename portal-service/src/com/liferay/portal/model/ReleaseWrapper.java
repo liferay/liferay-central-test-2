@@ -173,7 +173,7 @@ public class ReleaseWrapper implements Release {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is verified.
+	* Sets whether this release is verified.
 	*
 	* @param verified the verified of this release
 	*/

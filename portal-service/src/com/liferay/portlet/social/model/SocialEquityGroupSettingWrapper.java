@@ -165,7 +165,7 @@ public class SocialEquityGroupSettingWrapper implements SocialEquityGroupSetting
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is enabled.
+	* Sets whether this social equity group setting is enabled.
 	*
 	* @param enabled the enabled of this social equity group setting
 	*/

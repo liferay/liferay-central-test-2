@@ -283,7 +283,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is repo store artifact.
+	* Sets whether this s c product version is repo store artifact.
 	*
 	* @param repoStoreArtifact the repo store artifact of this s c product version
 	*/

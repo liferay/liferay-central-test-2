@@ -211,7 +211,7 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is active.
+	* Sets whether this social equity log is active.
 	*
 	* @param active the active of this social equity log
 	*/

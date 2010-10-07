@@ -111,7 +111,7 @@ public interface JournalContentSearchModel extends BaseModel<JournalContentSearc
 	public boolean isPrivateLayout();
 
 	/**
-	 * Sets whether this {$entity.humanName} is private layout.
+	 * Sets whether this journal content search is private layout.
 	 *
 	 * @param privateLayout the private layout of this journal content search
 	 */

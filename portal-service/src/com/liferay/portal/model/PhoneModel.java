@@ -250,7 +250,7 @@ public interface PhoneModel extends BaseModel<Phone> {
 	public boolean isPrimary();
 
 	/**
-	 * Sets whether this {$entity.humanName} is primary.
+	 * Sets whether this phone is primary.
 	 *
 	 * @param primary the primary of this phone
 	 */

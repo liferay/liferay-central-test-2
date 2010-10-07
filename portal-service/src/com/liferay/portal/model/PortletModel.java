@@ -126,7 +126,7 @@ public interface PortletModel extends BaseModel<Portlet> {
 	public boolean isActive();
 
 	/**
-	 * Sets whether this {$entity.humanName} is active.
+	 * Sets whether this portlet is active.
 	 *
 	 * @param active the active of this portlet
 	 */

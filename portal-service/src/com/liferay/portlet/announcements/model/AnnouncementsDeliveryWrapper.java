@@ -158,7 +158,7 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is email.
+	* Sets whether this announcements delivery is email.
 	*
 	* @param email the email of this announcements delivery
 	*/
@@ -185,7 +185,7 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is sms.
+	* Sets whether this announcements delivery is sms.
 	*
 	* @param sms the sms of this announcements delivery
 	*/
@@ -212,7 +212,7 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is website.
+	* Sets whether this announcements delivery is website.
 	*
 	* @param website the website of this announcements delivery
 	*/

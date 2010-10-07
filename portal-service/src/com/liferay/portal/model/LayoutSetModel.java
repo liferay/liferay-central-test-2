@@ -110,7 +110,7 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	public boolean isPrivateLayout();
 
 	/**
-	 * Sets whether this {$entity.humanName} is private layout.
+	 * Sets whether this layout set is private layout.
 	 *
 	 * @param privateLayout the private layout of this layout set
 	 */
@@ -131,7 +131,7 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	public boolean isLogo();
 
 	/**
-	 * Sets whether this {$entity.humanName} is logo.
+	 * Sets whether this layout set is logo.
 	 *
 	 * @param logo the logo of this layout set
 	 */

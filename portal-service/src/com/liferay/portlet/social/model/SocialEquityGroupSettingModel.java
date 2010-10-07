@@ -145,7 +145,7 @@ public interface SocialEquityGroupSettingModel extends BaseModel<SocialEquityGro
 	public boolean isEnabled();
 
 	/**
-	 * Sets whether this {$entity.humanName} is enabled.
+	 * Sets whether this social equity group setting is enabled.
 	 *
 	 * @param enabled the enabled of this social equity group setting
 	 */

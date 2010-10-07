@@ -258,7 +258,7 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 	public boolean isMinorEdit();
 
 	/**
-	 * Sets whether this {$entity.humanName} is minor edit.
+	 * Sets whether this wiki page is minor edit.
 	 *
 	 * @param minorEdit the minor edit of this wiki page
 	 */
@@ -324,7 +324,7 @@ public interface WikiPageModel extends BaseModel<WikiPage> {
 	public boolean isHead();
 
 	/**
-	 * Sets whether this {$entity.humanName} is head.
+	 * Sets whether this wiki page is head.
 	 *
 	 * @param head the head of this wiki page
 	 */

@@ -289,7 +289,7 @@ public interface JournalTemplateModel extends BaseModel<JournalTemplate> {
 	public boolean isCacheable();
 
 	/**
-	 * Sets whether this {$entity.humanName} is cacheable.
+	 * Sets whether this journal template is cacheable.
 	 *
 	 * @param cacheable the cacheable of this journal template
 	 */
@@ -310,7 +310,7 @@ public interface JournalTemplateModel extends BaseModel<JournalTemplate> {
 	public boolean isSmallImage();
 
 	/**
-	 * Sets whether this {$entity.humanName} is small image.
+	 * Sets whether this journal template is small image.
 	 *
 	 * @param smallImage the small image of this journal template
 	 */

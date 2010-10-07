@@ -189,7 +189,7 @@ public interface SocialEquitySettingModel extends BaseModel<SocialEquitySetting>
 	public boolean isUniqueEntry();
 
 	/**
-	 * Sets whether this {$entity.humanName} is unique entry.
+	 * Sets whether this social equity setting is unique entry.
 	 *
 	 * @param uniqueEntry the unique entry of this social equity setting
 	 */

@@ -382,7 +382,7 @@ public class AddressWrapper implements Address {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is mailing.
+	* Sets whether this address is mailing.
 	*
 	* @param mailing the mailing of this address
 	*/
@@ -409,7 +409,7 @@ public class AddressWrapper implements Address {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is primary.
+	* Sets whether this address is primary.
 	*
 	* @param primary the primary of this address
 	*/

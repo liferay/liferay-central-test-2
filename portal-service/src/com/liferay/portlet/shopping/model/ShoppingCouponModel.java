@@ -259,7 +259,7 @@ public interface ShoppingCouponModel extends BaseModel<ShoppingCoupon> {
 	public boolean isActive();
 
 	/**
-	 * Sets whether this {$entity.humanName} is active.
+	 * Sets whether this shopping coupon is active.
 	 *
 	 * @param active the active of this shopping coupon
 	 */

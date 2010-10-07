@@ -319,7 +319,7 @@ public class ContactWrapper implements Contact {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is male.
+	* Sets whether this contact is male.
 	*
 	* @param male the male of this contact
 	*/

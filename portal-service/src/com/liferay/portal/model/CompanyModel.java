@@ -185,7 +185,7 @@ public interface CompanyModel extends BaseModel<Company> {
 	public boolean isSystem();
 
 	/**
-	 * Sets whether this {$entity.humanName} is system.
+	 * Sets whether this company is system.
 	 *
 	 * @param system the system of this company
 	 */

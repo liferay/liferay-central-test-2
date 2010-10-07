@@ -263,7 +263,7 @@ public interface GroupModel extends BaseModel<Group> {
 	public boolean isActive();
 
 	/**
-	 * Sets whether this {$entity.humanName} is active.
+	 * Sets whether this group is active.
 	 *
 	 * @param active the active of this group
 	 */

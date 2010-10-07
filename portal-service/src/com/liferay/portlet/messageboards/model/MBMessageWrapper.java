@@ -400,7 +400,7 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is attachments.
+	* Sets whether this message-boards message is attachments.
 	*
 	* @param attachments the attachments of this message-boards message
 	*/
@@ -427,7 +427,7 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is anonymous.
+	* Sets whether this message-boards message is anonymous.
 	*
 	* @param anonymous the anonymous of this message-boards message
 	*/
@@ -472,7 +472,7 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is allow pingbacks.
+	* Sets whether this message-boards message is allow pingbacks.
 	*
 	* @param allowPingbacks the allow pingbacks of this message-boards message
 	*/

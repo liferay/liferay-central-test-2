@@ -323,7 +323,7 @@ public interface AddressModel extends BaseModel<Address> {
 	public boolean isMailing();
 
 	/**
-	 * Sets whether this {$entity.humanName} is mailing.
+	 * Sets whether this address is mailing.
 	 *
 	 * @param mailing the mailing of this address
 	 */
@@ -344,7 +344,7 @@ public interface AddressModel extends BaseModel<Address> {
 	public boolean isPrimary();
 
 	/**
-	 * Sets whether this {$entity.humanName} is primary.
+	 * Sets whether this address is primary.
 	 *
 	 * @param primary the primary of this address
 	 */

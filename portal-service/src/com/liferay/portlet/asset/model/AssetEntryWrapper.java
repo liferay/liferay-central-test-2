@@ -274,7 +274,7 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is visible.
+	* Sets whether this asset entry is visible.
 	*
 	* @param visible the visible of this asset entry
 	*/

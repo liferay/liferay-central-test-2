@@ -274,7 +274,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList> {
 	public boolean isInUseSSL();
 
 	/**
-	 * Sets whether this {$entity.humanName} is in use s s l.
+	 * Sets whether this message boards mailing list is in use s s l.
 	 *
 	 * @param inUseSSL the in use s s l of this message boards mailing list
 	 */
@@ -354,7 +354,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList> {
 	public boolean isOutCustom();
 
 	/**
-	 * Sets whether this {$entity.humanName} is out custom.
+	 * Sets whether this message boards mailing list is out custom.
 	 *
 	 * @param outCustom the out custom of this message boards mailing list
 	 */
@@ -404,7 +404,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList> {
 	public boolean isOutUseSSL();
 
 	/**
-	 * Sets whether this {$entity.humanName} is out use s s l.
+	 * Sets whether this message boards mailing list is out use s s l.
 	 *
 	 * @param outUseSSL the out use s s l of this message boards mailing list
 	 */
@@ -455,7 +455,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList> {
 	public boolean isActive();
 
 	/**
-	 * Sets whether this {$entity.humanName} is active.
+	 * Sets whether this message boards mailing list is active.
 	 *
 	 * @param active the active of this message boards mailing list
 	 */

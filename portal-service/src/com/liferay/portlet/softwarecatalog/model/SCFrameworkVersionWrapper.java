@@ -247,7 +247,7 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is active.
+	* Sets whether this s c framework version is active.
 	*
 	* @param active the active of this s c framework version
 	*/

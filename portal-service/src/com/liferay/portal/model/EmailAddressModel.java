@@ -235,7 +235,7 @@ public interface EmailAddressModel extends BaseModel<EmailAddress> {
 	public boolean isPrimary();
 
 	/**
-	 * Sets whether this {$entity.humanName} is primary.
+	 * Sets whether this email address is primary.
 	 *
 	 * @param primary the primary of this email address
 	 */

@@ -173,7 +173,7 @@ public class CountryWrapper implements Country {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is active.
+	* Sets whether this country is active.
 	*
 	* @param active the active of this country
 	*/

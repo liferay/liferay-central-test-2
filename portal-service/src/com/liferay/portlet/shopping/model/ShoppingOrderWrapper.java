@@ -283,7 +283,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is requires shipping.
+	* Sets whether this shopping order is requires shipping.
 	*
 	* @param requiresShipping the requires shipping of this shopping order
 	*/
@@ -310,7 +310,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is insure.
+	* Sets whether this shopping order is insure.
 	*
 	* @param insure the insure of this shopping order
 	*/
@@ -571,7 +571,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is ship to billing.
+	* Sets whether this shopping order is ship to billing.
 	*
 	* @param shipToBilling the ship to billing of this shopping order
 	*/
@@ -994,7 +994,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is send order email.
+	* Sets whether this shopping order is send order email.
 	*
 	* @param sendOrderEmail the send order email of this shopping order
 	*/
@@ -1021,7 +1021,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is send shipping email.
+	* Sets whether this shopping order is send shipping email.
 	*
 	* @param sendShippingEmail the send shipping email of this shopping order
 	*/

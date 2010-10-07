@@ -113,7 +113,7 @@ public interface SCLicenseModel extends BaseModel<SCLicense> {
 	public boolean isOpenSource();
 
 	/**
-	 * Sets whether this {$entity.humanName} is open source.
+	 * Sets whether this s c license is open source.
 	 *
 	 * @param openSource the open source of this s c license
 	 */
@@ -134,7 +134,7 @@ public interface SCLicenseModel extends BaseModel<SCLicense> {
 	public boolean isActive();
 
 	/**
-	 * Sets whether this {$entity.humanName} is active.
+	 * Sets whether this s c license is active.
 	 *
 	 * @param active the active of this s c license
 	 */
@@ -155,7 +155,7 @@ public interface SCLicenseModel extends BaseModel<SCLicense> {
 	public boolean isRecommended();
 
 	/**
-	 * Sets whether this {$entity.humanName} is recommended.
+	 * Sets whether this s c license is recommended.
 	 *
 	 * @param recommended the recommended of this s c license
 	 */

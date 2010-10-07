@@ -112,7 +112,7 @@ public interface ClusterGroupModel extends BaseModel<ClusterGroup> {
 	public boolean isWholeCluster();
 
 	/**
-	 * Sets whether this {$entity.humanName} is whole cluster.
+	 * Sets whether this cluster group is whole cluster.
 	 *
 	 * @param wholeCluster the whole cluster of this cluster group
 	 */

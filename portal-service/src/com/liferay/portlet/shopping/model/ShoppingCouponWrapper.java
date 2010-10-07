@@ -301,7 +301,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is active.
+	* Sets whether this shopping coupon is active.
 	*
 	* @param active the active of this shopping coupon
 	*/

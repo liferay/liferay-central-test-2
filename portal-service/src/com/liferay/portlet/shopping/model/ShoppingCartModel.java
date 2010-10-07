@@ -230,7 +230,7 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart> {
 	public boolean isInsure();
 
 	/**
-	 * Sets whether this {$entity.humanName} is insure.
+	 * Sets whether this shopping cart is insure.
 	 *
 	 * @param insure the insure of this shopping cart
 	 */

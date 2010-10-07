@@ -137,7 +137,7 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is active.
+	* Sets whether this portlet is active.
 	*
 	* @param active the active of this portlet
 	*/

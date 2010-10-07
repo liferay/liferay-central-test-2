@@ -217,7 +217,7 @@ public interface LockModel extends BaseModel<Lock> {
 	public boolean isInheritable();
 
 	/**
-	 * Sets whether this {$entity.humanName} is inheritable.
+	 * Sets whether this lock is inheritable.
 	 *
 	 * @param inheritable the inheritable of this lock
 	 */

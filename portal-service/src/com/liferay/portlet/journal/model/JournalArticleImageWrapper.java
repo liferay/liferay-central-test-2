@@ -191,7 +191,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is temp image.
+	* Sets whether this journal article image is temp image.
 	*
 	* @param tempImage the temp image of this journal article image
 	*/

@@ -310,7 +310,7 @@ public class GroupWrapper implements Group {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is active.
+	* Sets whether this group is active.
 	*
 	* @param active the active of this group
 	*/

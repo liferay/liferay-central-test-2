@@ -193,7 +193,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is default policy.
+	* Sets whether this password policy is default policy.
 	*
 	* @param defaultPolicy the default policy of this password policy
 	*/
@@ -256,7 +256,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is changeable.
+	* Sets whether this password policy is changeable.
 	*
 	* @param changeable the changeable of this password policy
 	*/
@@ -283,7 +283,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is change required.
+	* Sets whether this password policy is change required.
 	*
 	* @param changeRequired the change required of this password policy
 	*/
@@ -328,7 +328,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is check syntax.
+	* Sets whether this password policy is check syntax.
 	*
 	* @param checkSyntax the check syntax of this password policy
 	*/
@@ -355,7 +355,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is allow dictionary words.
+	* Sets whether this password policy is allow dictionary words.
 	*
 	* @param allowDictionaryWords the allow dictionary words of this password policy
 	*/
@@ -490,7 +490,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is history.
+	* Sets whether this password policy is history.
 	*
 	* @param history the history of this password policy
 	*/
@@ -535,7 +535,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is expireable.
+	* Sets whether this password policy is expireable.
 	*
 	* @param expireable the expireable of this password policy
 	*/
@@ -616,7 +616,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is lockout.
+	* Sets whether this password policy is lockout.
 	*
 	* @param lockout the lockout of this password policy
 	*/
@@ -679,7 +679,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is require unlock.
+	* Sets whether this password policy is require unlock.
 	*
 	* @param requireUnlock the require unlock of this password policy
 	*/

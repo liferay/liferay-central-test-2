@@ -173,7 +173,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is taxable.
+	* Sets whether this shopping item price is taxable.
 	*
 	* @param taxable the taxable of this shopping item price
 	*/
@@ -218,7 +218,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is use shipping formula.
+	* Sets whether this shopping item price is use shipping formula.
 	*
 	* @param useShippingFormula the use shipping formula of this shopping item price
 	*/

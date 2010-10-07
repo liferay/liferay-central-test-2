@@ -292,7 +292,7 @@ public class PhoneWrapper implements Phone {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is primary.
+	* Sets whether this phone is primary.
 	*
 	* @param primary the primary of this phone
 	*/

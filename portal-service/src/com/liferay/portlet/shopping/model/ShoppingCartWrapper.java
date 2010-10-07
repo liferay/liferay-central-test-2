@@ -265,7 +265,7 @@ public class ShoppingCartWrapper implements ShoppingCart {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is insure.
+	* Sets whether this shopping cart is insure.
 	*
 	* @param insure the insure of this shopping cart
 	*/

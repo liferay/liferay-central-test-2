@@ -125,7 +125,7 @@ public interface LayoutModel extends BaseModel<Layout> {
 	public boolean isPrivateLayout();
 
 	/**
-	 * Sets whether this {$entity.humanName} is private layout.
+	 * Sets whether this layout is private layout.
 	 *
 	 * @param privateLayout the private layout of this layout
 	 */
@@ -249,7 +249,7 @@ public interface LayoutModel extends BaseModel<Layout> {
 	public boolean isHidden();
 
 	/**
-	 * Sets whether this {$entity.humanName} is hidden.
+	 * Sets whether this layout is hidden.
 	 *
 	 * @param hidden the hidden of this layout
 	 */
@@ -285,7 +285,7 @@ public interface LayoutModel extends BaseModel<Layout> {
 	public boolean isIconImage();
 
 	/**
-	 * Sets whether this {$entity.humanName} is icon image.
+	 * Sets whether this layout is icon image.
 	 *
 	 * @param iconImage the icon image of this layout
 	 */

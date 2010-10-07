@@ -301,7 +301,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is minor edit.
+	* Sets whether this wiki page is minor edit.
 	*
 	* @param minorEdit the minor edit of this wiki page
 	*/
@@ -382,7 +382,7 @@ public class WikiPageWrapper implements WikiPage {
 	}
 
 	/**
-	* Sets whether this {$entity.humanName} is head.
+	* Sets whether this wiki page is head.
 	*
 	* @param head the head of this wiki page
 	*/
