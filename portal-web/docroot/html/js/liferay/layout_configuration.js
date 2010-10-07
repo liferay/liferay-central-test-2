@@ -2,38 +2,101 @@
 	var Browser = Liferay.Browser;
 	var Util = Liferay.Util;
 
-	var LayoutConfiguration = {
-		toggle: function(){}
-	};
+	var LayoutConfiguration = {};
 
 	Liferay.provide(
 		LayoutConfiguration,
 		'showTemplates',
 		function() {
-			var url = themeDisplay.getPathMain() + '/layout_configuration/templates';
+			var instance = this;
 
-			var dialog = new A.Dialog(
-				{
-					centered: true,
-					modal: true,
-					title: Liferay.Language.get('layout'),
-					width: 700
-				}
-			).render();
+			var dialog = instance._layoutDialog;
 
-			dialog.plug(
-				A.Plugin.IO,
-				{
-					data: {
-						doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-						p_l_id: themeDisplay.getPlid(),
-						redirect: Liferay.currentURL
-					},
-					uri: url
-				}
-			);
+			if (!dialog) {
+				var url = themeDisplay.getPathMain() + '/layout_configuration/templates';
+
+				var dialog = new A.Dialog(
+					{
+						centered: true,
+						modal: true,
+						title: Liferay.Language.get('layout'),
+						width: 700
+					}
+				).render();
+
+				dialog.plug(
+					A.Plugin.IO,
+					{
+						data: {
+							doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+							p_l_id: themeDisplay.getPlid(),
+							redirect: Liferay.currentURL
+						},
+						uri: url
+					}
+				);
+
+				instance._layoutDialog = dialog;
+			}
+
+			dialog.show();
 		},
 		['aui-dialog']
+	);
+
+	Liferay.provide(
+		LayoutConfiguration,
+		'toggle',
+		function(ppid) {
+			var instance = this;
+
+			var dialog = instance._applicationsDialog;
+
+			if (!dialog) {
+				var body = A.getBody();
+
+				var url = themeDisplay.getPathMain() + '/portal/render_portlet';
+
+				var dialog = new A.Dialog(
+					{
+						on: {
+							visibleChange: function(event) {
+								body.toggleClass('lfr-has-sidebar', event.newVal);
+							}
+						},
+						title: Liferay.Language.get('add-application'),
+						width: 250
+					}
+				).render();
+
+				var contentBox = dialog.get('contentBox');
+
+				dialog.plug(
+					A.Plugin.IO,
+					{
+						data: {
+							doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+							p_l_id: themeDisplay.getPlid(),
+							p_p_id: ppid,
+							p_p_state: 'exclusive'
+						},
+						after: {
+							success: function(event) {
+								instance._dialogBody = contentBox;
+
+								instance._loadContent();
+							}
+						},
+						uri: url
+					}
+				);
+
+				instance._applicationsDialog = dialog;
+			}
+
+			dialog.show();
+		},
+		['aui-dialog', 'liferay-layout-configuration']
 	);
 
 	A.add(
