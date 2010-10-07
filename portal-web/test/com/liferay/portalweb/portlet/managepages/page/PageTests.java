@@ -18,6 +18,7 @@ import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portlet.managepages.page.addchildpage.AddChildPageTests;
 import com.liferay.portalweb.portlet.managepages.page.addchildpagemultiple.AddChildPageMultipleTests;
 import com.liferay.portalweb.portlet.managepages.page.addpage.AddPageTests;
+import com.liferay.portalweb.portlet.managepages.page.addpagefriendlyurlreservedwords.AddPageFriendlyURLReservedWordsTests;
 import com.liferay.portalweb.portlet.managepages.page.addpagemultiple.AddPageMultipleTests;
 import com.liferay.portalweb.portlet.managepages.page.copypagechildpage.CopyPageChildPageTests;
 import com.liferay.portalweb.portlet.managepages.page.copypagepage.CopyPagePageTests;
@@ -43,6 +44,7 @@ public class PageTests extends BaseTests {
 		testSuite.addTest(AddChildPageTests.suite());
 		testSuite.addTest(AddChildPageMultipleTests.suite());
 		testSuite.addTest(AddPageTests.suite());
+		testSuite.addTest(AddPageFriendlyURLReservedWordsTests.suite());
 		testSuite.addTest(AddPageMultipleTests.suite());
 		testSuite.addTest(CopyPageChildPageTests.suite());
 		testSuite.addTest(CopyPagePageTests.suite());
