@@ -141,7 +141,7 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 
 		/**
 		<#if column.type == "boolean">
-		 * Sets whether this {$entity.humanName} is ${column.humanName}.
+		 * Sets whether this ${entity.humanName} is ${column.humanName}.
 		<#else>
 		 * Sets the ${column.humanName} of this ${entity.humanName}.
 		</#if>
