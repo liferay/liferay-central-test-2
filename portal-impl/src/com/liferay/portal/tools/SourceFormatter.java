@@ -1368,7 +1368,7 @@ public class SourceFormatter {
 				"**\\portal-service\\**\\model\\*Wrapper.java",
 				"**\\portal-web\\classes\\**\\*.java",
 				"**\\portal-web\\test\\**\\*Test.java",
-				"**\\portlet\\**\\service\\**", "**\\tmp\\**", "**\\tools\\**"
+				"**\\portlet\\**\\service\\**", "**\\tmp\\**", "**\\tools\\tck\\**"
 			});
 		directoryScanner.setIncludes(new String[] {"**\\*.java"});
 

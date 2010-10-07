@@ -129,7 +129,7 @@ public class ComparableRoute implements Comparable<ComparableRoute> {
 		// Having fewer implicit parameters is more general
 
 		Map<String, String> implicitParameters =
-			comparableRoute.getImplicitParameters(); 
+			comparableRoute.getImplicitParameters();
 
 		if (_implicitParameters.size() > implicitParameters.size()) {
 			return -1;
