@@ -26,7 +26,7 @@ import java.util.Map;
  */
 public class MVCPortletAutoDeployer extends PortletAutoDeployer {
 
-	protected void copyXmls(
+	public void copyXmls(
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
 

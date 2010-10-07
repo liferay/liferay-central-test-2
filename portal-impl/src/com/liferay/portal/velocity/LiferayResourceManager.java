@@ -14,7 +14,7 @@
 
 package com.liferay.portal.velocity;
 
-import com.liferay.portal.kernel.deploy.sandbox.SandboxDeployListener;
+import com.liferay.portal.deploy.sandbox.SandboxHandler;
 
 import org.apache.velocity.runtime.resource.Resource;
 import org.apache.velocity.runtime.resource.ResourceManagerImpl;
@@ -41,7 +41,7 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 			String resourceName, int resourceType, String encoding)
 		throws Exception {
 
-		if (resourceName.contains(SandboxDeployListener.SANDBOX_MARKER)) {
+		if (resourceName.contains(SandboxHandler.SANDBOX_MARKER)) {
 			return loadResource(resourceName, resourceType, encoding);
 		}
 		else {

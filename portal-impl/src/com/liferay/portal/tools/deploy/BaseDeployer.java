@@ -14,6 +14,7 @@
 
 package com.liferay.portal.tools.deploy;
 
+import com.liferay.portal.kernel.deploy.Deployer;
 import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.log.Log;
@@ -69,7 +70,7 @@ import org.apache.oro.io.GlobFilenameFilter;
  * @author Brian Wing Shun Chan
  * @author Sandeep Soni
  */
-public class BaseDeployer {
+public class BaseDeployer implements Deployer {
 
 	public static final String DEPLOY_TO_PREFIX = "DEPLOY_TO__";
 
@@ -93,10 +94,10 @@ public class BaseDeployer {
 		new BaseDeployer(wars, jars);
 	}
 
-	protected BaseDeployer() {
+	public BaseDeployer() {
 	}
 
-	protected BaseDeployer(List<String> wars, List<String> jars) {
+	public BaseDeployer(List<String> wars, List<String> jars) {
 		baseDir = System.getProperty("deployer.base.dir");
 		destDir = System.getProperty("deployer.dest.dir");
 		appServerType = System.getProperty("deployer.app.server.type");
@@ -127,7 +128,7 @@ public class BaseDeployer {
 		}
 	}
 
-	protected void addExtJar(List<String> jars, String resource)
+	public void addExtJar(List<String> jars, String resource)
 		throws Exception {
 
 		Set<String> servletContextNames = ExtRegistry.getServletContextNames();
@@ -154,7 +155,7 @@ public class BaseDeployer {
 		}
 	}
 
-	protected void addRequiredJar(List<String> jars, String resource)
+	public void addRequiredJar(List<String> jars, String resource)
 		throws Exception {
 
 		String path = DeployUtil.getResourcePath(resource);
@@ -171,7 +172,7 @@ public class BaseDeployer {
 		jars.add(path);
 	}
 
-	protected void checkArguments() {
+	public void checkArguments() {
 		if (Validator.isNull(baseDir)) {
 			throw new IllegalArgumentException(
 				"The system property deployer.base.dir is not set");
@@ -215,20 +216,20 @@ public class BaseDeployer {
 		}
 	}
 
-	protected void copyDependencyXml(String fileName, String targetDir)
+	public void copyDependencyXml(String fileName, String targetDir)
 		throws Exception {
 
 		copyDependencyXml(fileName, targetDir, null);
 	}
 
-	protected void copyDependencyXml(
+	public void copyDependencyXml(
 			String fileName, String targetDir, Map<String, String> filterMap)
 		throws Exception {
 
 		copyDependencyXml(fileName, targetDir, filterMap, false);
 	}
 
-	protected void copyDependencyXml(
+	public void copyDependencyXml(
 			String fileName, String targetDir, Map<String, String> filterMap,
 			boolean overwrite)
 		throws Exception {
@@ -242,7 +243,7 @@ public class BaseDeployer {
 		}
 	}
 
-	protected void copyJars(File srcFile, PluginPackage pluginPackage)
+	public void copyJars(File srcFile, PluginPackage pluginPackage)
 		throws Exception {
 
 		for (int i = 0; i < jars.size(); i++) {
@@ -263,7 +264,7 @@ public class BaseDeployer {
 		FileUtil.delete(srcFile + "/WEB-INF/lib/util-jsf.jar");
 	}
 
-	protected void copyPortalDependencies(File srcFile) throws Exception {
+	public void copyPortalDependencies(File srcFile) throws Exception {
 		Properties properties = getPluginPackageProperties(srcFile);
 
 		if (properties == null) {
@@ -349,14 +350,14 @@ public class BaseDeployer {
 		}
 	}
 
-	protected void copyProperties(File srcFile, PluginPackage pluginPackage)
+	public void copyProperties(File srcFile, PluginPackage pluginPackage)
 		throws Exception {
 
 		copyDependencyXml("log4j.properties", srcFile + "/WEB-INF/classes");
 		copyDependencyXml("logging.properties", srcFile + "/WEB-INF/classes");
 	}
 
-	protected void copyTlds(File srcFile, PluginPackage pluginPackage)
+	public void copyTlds(File srcFile, PluginPackage pluginPackage)
 		throws Exception {
 
 		if (Validator.isNotNull(auiTaglibDTD)) {
@@ -399,7 +400,7 @@ public class BaseDeployer {
 		}
 	}
 
-	protected void copyXmls(
+	public void copyXmls(
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
 
@@ -416,7 +417,7 @@ public class BaseDeployer {
 		copyDependencyXml("web.xml", srcFile + "/WEB-INF");
 	}
 
-	protected void deploy() throws Exception {
+	public void deploy() throws Exception {
 		try {
 			File baseDirFile = new File(baseDir);
 
@@ -460,7 +461,7 @@ public class BaseDeployer {
 		}
 	}
 
-	protected void deployDirectory(
+	public void deployDirectory(
 			File srcFile, String displayName, boolean override,
 			PluginPackage pluginPackage)
 		throws Exception {
@@ -469,7 +470,7 @@ public class BaseDeployer {
 			srcFile, null, null, displayName, override, pluginPackage);
 	}
 
-	protected void deployDirectory(
+	public void deployDirectory(
 			File srcFile, File mergeDir, File deployDir, String displayName,
 			boolean overwrite, PluginPackage pluginPackage)
 		throws Exception {
@@ -656,7 +657,7 @@ public class BaseDeployer {
 		}
 	}
 
-	protected void deployFile(File srcFile) throws Exception {
+	public void deployFile(File srcFile) throws Exception {
 		PluginPackage pluginPackage = readPluginPackage(srcFile);
 
 		if (_log.isInfoEnabled()) {
@@ -787,7 +788,7 @@ public class BaseDeployer {
 		}
 	}
 
-	protected boolean deployFile(
+	public boolean deployFile(
 			File srcFile, File mergeDir, File deployDir, String displayName,
 			boolean overwrite, PluginPackage pluginPackage)
 		throws Exception {
@@ -834,7 +835,7 @@ public class BaseDeployer {
 		return true;
 	}
 
-	protected String downloadJar(String jar) throws Exception {
+	public String downloadJar(String jar) throws Exception {
 		String tmpDir = SystemProperties.get(SystemProperties.TMP_DIR);
 
 		File file = new File(
@@ -859,7 +860,7 @@ public class BaseDeployer {
 		return FileUtil.getAbsolutePath(file);
 	}
 
-	protected String getDisplayName(File srcFile) {
+	public String getDisplayName(File srcFile) {
 		String displayName = srcFile.getName();
 
 		if (StringUtil.endsWith(displayName, ".war") ||
@@ -878,7 +879,7 @@ public class BaseDeployer {
 		return displayName;
 	}
 
-	protected DeploymentHandler getDeploymentHandler() {
+	public DeploymentHandler getDeploymentHandler() {
 		String prefix = "auto.deploy." + ServerDetector.getServerId() + ".jee.";
 
 		String dmId = PropsUtil.get(prefix + "dm.id");
@@ -889,7 +890,7 @@ public class BaseDeployer {
 		return new DeploymentHandler(dmId, dmUser, dmPassword, dfClassName);
 	}
 
-	protected String getExtraContent(
+	public String getExtraContent(
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
 
@@ -1025,7 +1026,7 @@ public class BaseDeployer {
 		return sb.toString();
 	}
 
-	protected String getIgnoreFiltersContent(File srcFile) throws Exception {
+	public String getIgnoreFiltersContent(File srcFile) throws Exception {
 		boolean ignoreFiltersEnabled = true;
 
 		Properties properties = getPluginPackageProperties(srcFile);
@@ -1046,7 +1047,7 @@ public class BaseDeployer {
 		}
 	}
 
-	protected String getPluginPackageLicensesXml(List<License> licenses) {
+	public String getPluginPackageLicensesXml(List<License> licenses) {
 		if (licenses.isEmpty()) {
 			return StringPool.BLANK;
 		}
@@ -1074,7 +1075,7 @@ public class BaseDeployer {
 		return sb.toString();
 	}
 
-	protected String getPluginPackageLiferayVersionsXml(
+	public String getPluginPackageLiferayVersionsXml(
 		List<String> liferayVersions) {
 
 		if (liferayVersions.isEmpty()) {
@@ -1102,7 +1103,7 @@ public class BaseDeployer {
 		return sb.toString();
 	}
 
-	protected Properties getPluginPackageProperties(File srcFile)
+	public Properties getPluginPackageProperties(File srcFile)
 		throws Exception {
 
 		File propertiesFile = new File(
@@ -1117,7 +1118,7 @@ public class BaseDeployer {
 		return PropertiesUtil.load(propertiesString);
 	}
 
-	protected String getPluginPackageTagsXml(List<String> tags) {
+	public String getPluginPackageTagsXml(List<String> tags) {
 		if (tags.isEmpty()) {
 			return StringPool.BLANK;
 		}
@@ -1143,7 +1144,7 @@ public class BaseDeployer {
 		return sb.toString();
 	}
 
-	protected String getSpeedFiltersContent(File srcFile) throws Exception {
+	public String getSpeedFiltersContent(File srcFile) throws Exception {
 		boolean speedFiltersEnabled = true;
 
 		Properties properties = getPluginPackageProperties(srcFile);
@@ -1164,13 +1165,13 @@ public class BaseDeployer {
 		}
 	}
 
-	protected boolean isJEEDeploymentEnabled() {
+	public boolean isJEEDeploymentEnabled() {
 		return GetterUtil.getBoolean(PropsUtil.get(
 			"auto.deploy." + ServerDetector.getServerId() +
 				".jee.deployment.enabled"));
 	}
 
-	protected void mergeDirectory(File mergeDir, File targetDir) {
+	public void mergeDirectory(File mergeDir, File targetDir) {
 		if ((mergeDir == null) || (!mergeDir.exists())) {
 			return;
 		}
@@ -1178,12 +1179,12 @@ public class BaseDeployer {
 		CopyTask.copyDirectory(mergeDir, targetDir, null, null, true, false);
 	}
 
-	protected void processPluginPackageProperties(
+	public void processPluginPackageProperties(
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
 	}
 
-	protected PluginPackage readPluginPackage(File file) {
+	public PluginPackage readPluginPackage(File file) {
 		if (!file.exists()) {
 			return null;
 		}
@@ -1326,7 +1327,7 @@ public class BaseDeployer {
 		return null;
 	}
 
-	protected void rewriteFiles(File srcDir) throws Exception {
+	public void rewriteFiles(File srcDir) throws Exception {
 		String[] files = FileUtil.listFiles(srcDir + "/WEB-INF/");
 
 		for (int i = 0; i < files.length; i++) {
@@ -1366,10 +1367,10 @@ public class BaseDeployer {
 		}
 	}
 
-	protected void updateDeployDirectory(File srcFile) throws Exception {
+	public void updateDeployDirectory(File srcFile) throws Exception {
 	}
 
-	protected void updateGeronimoWebXml(
+	public void updateGeronimoWebXml(
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
 
@@ -1404,7 +1405,7 @@ public class BaseDeployer {
 		}
 	}
 
-	protected void updateWebXml(
+	public void updateWebXml(
 			File webXml, File srcFile, String displayName,
 			PluginPackage pluginPackage)
 		throws Exception {

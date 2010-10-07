@@ -45,14 +45,14 @@ public class LayoutTemplateDeployer extends BaseDeployer {
 		new LayoutTemplateDeployer(wars, jars);
 	}
 
-	protected LayoutTemplateDeployer() {
+	public LayoutTemplateDeployer() {
 	}
 
-	protected LayoutTemplateDeployer(List<String> wars, List<String> jars) {
+	public LayoutTemplateDeployer(List<String> wars, List<String> jars) {
 		super(wars, jars);
 	}
 
-	protected String getExtraContent(
+	public String getExtraContent(
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
 

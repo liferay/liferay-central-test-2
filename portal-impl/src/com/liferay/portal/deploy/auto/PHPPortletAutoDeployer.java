@@ -27,7 +27,7 @@ import java.util.Map;
  */
 public class PHPPortletAutoDeployer extends PortletAutoDeployer {
 
-	protected PHPPortletAutoDeployer() throws AutoDeployException {
+	public PHPPortletAutoDeployer() throws AutoDeployException {
 		try {
 			String[] phpJars = new String[] {
 				"quercus.jar", "resin-util.jar", "script-10.jar"
@@ -46,7 +46,7 @@ public class PHPPortletAutoDeployer extends PortletAutoDeployer {
 		}
 	}
 
-	protected void copyXmls(
+	public void copyXmls(
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
 

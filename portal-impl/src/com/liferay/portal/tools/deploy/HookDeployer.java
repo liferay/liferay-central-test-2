@@ -47,14 +47,14 @@ public class HookDeployer extends BaseDeployer {
 		new HookDeployer(wars, jars);
 	}
 
-	protected HookDeployer() {
+	public HookDeployer() {
 	}
 
-	protected HookDeployer(List<String> wars, List<String> jars) {
+	public HookDeployer(List<String> wars, List<String> jars) {
 		super(wars, jars);
 	}
 
-	protected void copyXmls(
+	public void copyXmls(
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
 
@@ -65,7 +65,7 @@ public class HookDeployer extends BaseDeployer {
 		}
 	}
 
-	protected String getExtraContent(
+	public String getExtraContent(
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
 

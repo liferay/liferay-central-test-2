@@ -45,14 +45,14 @@ public class WebDeployer extends BaseDeployer {
 		new WebDeployer(wars, jars);
 	}
 
-	protected WebDeployer() {
+	public WebDeployer() {
 	}
 
-	protected WebDeployer(List<String> wars, List<String> jars) {
+	public WebDeployer(List<String> wars, List<String> jars) {
 		super(wars, jars);
 	}
 
-	protected String getExtraContent(
+	public String getExtraContent(
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
 

@@ -33,7 +33,7 @@ import java.util.Properties;
  */
 public class WAIAutoDeployer extends PortletAutoDeployer {
 
-	protected WAIAutoDeployer() throws AutoDeployException {
+	public WAIAutoDeployer() throws AutoDeployException {
 		try {
 			addRequiredJar(jars, "portals-bridges.jar");
 		}
@@ -42,7 +42,7 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 		}
 	}
 
-	protected void copyXmls(
+	public void copyXmls(
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
 

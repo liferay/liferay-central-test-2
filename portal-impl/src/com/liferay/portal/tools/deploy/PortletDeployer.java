@@ -84,14 +84,14 @@ public class PortletDeployer extends BaseDeployer {
 		new PortletDeployer(wars, jars);
 	}
 
-	protected PortletDeployer() {
+	public PortletDeployer() {
 	}
 
-	protected PortletDeployer(List<String> wars, List<String> jars) {
+	public PortletDeployer(List<String> wars, List<String> jars) {
 		super(wars, jars);
 	}
 
-	protected void checkArguments() {
+	public void checkArguments() {
 		super.checkArguments();
 
 		if (Validator.isNull(portletTaglibDTD)) {
@@ -100,7 +100,7 @@ public class PortletDeployer extends BaseDeployer {
 		}
 	}
 
-	protected void copyXmls(
+	public void copyXmls(
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
 
@@ -111,7 +111,7 @@ public class PortletDeployer extends BaseDeployer {
 		}
 	}
 
-	protected String getExtraContent(
+	public String getExtraContent(
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
 
@@ -174,7 +174,7 @@ public class PortletDeployer extends BaseDeployer {
 		return sb.toString();
 	}
 
-	protected String getServletContent(File portletXML, File webXML)
+	public String getServletContent(File portletXML, File webXML)
 		throws Exception {
 
 		StringBundler sb = new StringBundler();
@@ -375,7 +375,7 @@ public class PortletDeployer extends BaseDeployer {
 		return sb.toString();
 	}
 
-	protected void processPluginPackageProperties(
+	public void processPluginPackageProperties(
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
 
@@ -437,7 +437,7 @@ public class PortletDeployer extends BaseDeployer {
 			true);
 	}
 
-	protected void setupJSF(File facesXML, File portletXML) throws Exception {
+	public void setupJSF(File facesXML, File portletXML) throws Exception {
 		_myFacesPortlet = false;
 		_sunFacesPortlet = false;
 
@@ -517,7 +517,7 @@ public class PortletDeployer extends BaseDeployer {
 		FileUtil.write(facesXML, doc.formattedString(), true);
 	}
 
-	protected void updateDeployDirectory(File srcFile) throws Exception {
+	public void updateDeployDirectory(File srcFile) throws Exception {
 		try {
 			if (!PrefsPropsUtil.getBoolean(
 					PropsKeys.AUTO_DEPLOY_CUSTOM_PORTLET_XML,
@@ -552,7 +552,7 @@ public class PortletDeployer extends BaseDeployer {
 		}
 	}
 
-	protected void updatePortletXML(File portletXML) throws Exception {
+	public void updatePortletXML(File portletXML) throws Exception {
 		if (!portletXML.exists()) {
 			return;
 		}

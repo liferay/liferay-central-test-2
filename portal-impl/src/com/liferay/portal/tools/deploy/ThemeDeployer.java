@@ -53,14 +53,14 @@ public class ThemeDeployer extends BaseDeployer {
 		new ThemeDeployer(wars, jars);
 	}
 
-	protected ThemeDeployer() {
+	public ThemeDeployer() {
 	}
 
-	protected ThemeDeployer(List<String> wars, List<String> jars) {
+	public ThemeDeployer(List<String> wars, List<String> jars) {
 		super(wars, jars);
 	}
 
-	protected void checkArguments() {
+	public void checkArguments() {
 		super.checkArguments();
 
 		if (Validator.isNull(themeTaglibDTD)) {
@@ -74,7 +74,7 @@ public class ThemeDeployer extends BaseDeployer {
 		}
 	}
 
-	protected String getExtraContent(
+	public String getExtraContent(
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
 
@@ -100,7 +100,7 @@ public class ThemeDeployer extends BaseDeployer {
 		return sb.toString();
 	}
 
-	protected void processPluginPackageProperties(
+	public void processPluginPackageProperties(
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
 
