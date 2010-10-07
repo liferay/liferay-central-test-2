@@ -78,20 +78,14 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 		return "view-in-context";
 	}
 
-	/**
-	 * @throws PortalException
-	 * @throws SystemException
-	 */
+	@SuppressWarnings("unused")
 	public boolean hasEditPermission(PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 
 		return false;
 	}
 
-	/**
-	 * @throws PortalException
-	 * @throws SystemException
-	 */
+	@SuppressWarnings("unused")
 	public boolean hasViewPermission(PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 
