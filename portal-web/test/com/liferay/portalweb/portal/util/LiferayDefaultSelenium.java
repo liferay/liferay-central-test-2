@@ -79,6 +79,16 @@ public class LiferayDefaultSelenium
 		}
 	}
 
+	public void setTimeout(String timeout) {
+		super.setTimeout(timeout);
+
+		_timeout = timeout;
+	}
+
+	public void waitForPageToLoad(String timeout) {
+		super.waitForPageToLoad(_timeout);
+	}
+
 	protected String getScreenshotFileName() {
 		Thread currentThread = Thread.currentThread();
 
@@ -114,5 +124,7 @@ public class LiferayDefaultSelenium
 
 	private static final String _OUTPUT_SCREENSHOTS_DIR =
 		TestPropsValues.OUTPUT_DIR + "screenshots/";
+
+	private static String _timeout = "30000";
 
 }
