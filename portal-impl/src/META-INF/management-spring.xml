@@ -18,7 +18,4 @@
 		<property name="MBeanRegistry" ref="mBeanRegistry" />
 		<property name="MBeanServer" ref="mBeanServer" />
 	</bean>
-	<bean id="com.liferay.portal.kernel.jmx.RegistryAwareMBeanServerUtil" class="com.liferay.portal.kernel.jmx.RegistryAwareMBeanServerUtil">
-		<property name="MBeanServer" ref="registryAwareMBeanServer" />
-	</bean>
 </beans>
