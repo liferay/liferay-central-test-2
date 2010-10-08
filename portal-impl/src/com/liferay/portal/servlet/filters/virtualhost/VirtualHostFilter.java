@@ -203,9 +203,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 			return;
 		}
 		else if (friendlyURL.startsWith(_PATH_DOCUMENTS)) {
-			if (WebServerServlet.hasFiles(
-					PortalUtil.getUser(request), request.getPathInfo())) {
-
+			if (WebServerServlet.hasFiles(request)) {
 				processFilter(
 					VirtualHostFilter.class, request, response, filterChain);
 

@@ -78,55 +78,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class WebServerServlet extends HttpServlet {
 
-	public static DLFileEntry getFile(String[] pathArray) throws Exception {
-		if (pathArray.length == 1) {
-			long fileShortcutId = GetterUtil.getLong(pathArray[0]);
-
-			DLFileShortcut fileShortcut =
-				DLFileShortcutServiceUtil.getFileShortcut(fileShortcutId);
-
-			return DLFileEntryServiceUtil.getFileEntry(
-				fileShortcut.getGroupId(), fileShortcut.getToFolderId(),
-				fileShortcut.getToName());
-		}
-		else if (pathArray.length == 2) {
-			long groupId = GetterUtil.getLong(pathArray[0]);
-
-			return DLFileEntryServiceUtil.getFileEntryByUuidAndGroupId(
-				pathArray[1], groupId);
-		}
-		else {
-			long groupId = GetterUtil.getLong(pathArray[0]);
-			long folderId = GetterUtil.getLong(pathArray[1]);
-			String fileName = HttpUtil.decodeURL(pathArray[2], true);
-
-			return DLFileEntryServiceUtil.getFileEntryByTitle(
-				groupId, folderId, fileName);
-		}
-	}
-
-	public static long getGroupId(long companyId, String name)
-		throws Exception {
-
+	public static boolean hasFiles(HttpServletRequest request) {
 		try {
-			Group group = GroupLocalServiceUtil.getFriendlyURLGroup(
-				companyId, StringPool.SLASH + name);
+			User user = PortalUtil.getUser(request);
 
-			return group.getGroupId();
-		}
-		catch (NoSuchGroupException nsge) {
-		}
-
-		User user = UserLocalServiceUtil.getUserByScreenName(companyId, name);
-
-		Group group = user.getGroup();
-
-		return group.getGroupId();
-	}
-
-	public static boolean hasFiles(User user, String path) {
-		try {
-			path = HttpUtil.fixPath(path);
+			String path = HttpUtil.fixPath(request.getPathInfo());
 
 			String[] pathArray = StringUtil.split(path, StringPool.SLASH);
 
@@ -134,18 +90,18 @@ public class WebServerServlet extends HttpServlet {
 				return true;
 			}
 			else if (Validator.isNumber(pathArray[0])) {
-				getFile(pathArray);
+				_getDLFileEntry(pathArray);
 			}
 			else {
-				long groupId = getGroupId(user.getCompanyId(), pathArray[0]);
-				long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+				long groupId = _getGroupId(user.getCompanyId(), pathArray[0]);
+				long dlFolderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
 				for (int i = 1; i < pathArray.length; i++) {
 					try {
-						DLFolder folder = DLFolderServiceUtil.getFolder(
-							groupId, folderId, pathArray[i]);
+						DLFolder dlFolder = DLFolderServiceUtil.getFolder(
+							groupId, dlFolderId, pathArray[i]);
 
-						folderId = folder.getFolderId();
+						dlFolderId = dlFolder.getFolderId();
 					}
 					catch (NoSuchFolderException nsfe) {
 						if (i != pathArray.length - 1) {
@@ -153,12 +109,11 @@ public class WebServerServlet extends HttpServlet {
 						}
 
 						pathArray = new String[] {
-							String.valueOf(groupId),
-							String.valueOf(folderId),
+							String.valueOf(groupId), String.valueOf(dlFolderId),
 							pathArray[i]
 						};
 
-						getFile(pathArray);
+						_getDLFileEntry(pathArray);
 					}
 				}
 			}
@@ -226,7 +181,7 @@ public class WebServerServlet extends HttpServlet {
 			String path, String[] pathArray)
 		throws Exception {
 
-		long groupId = getGroupId(user.getCompanyId(), pathArray[0]);
+		long groupId = _getGroupId(user.getCompanyId(), pathArray[0]);
 		long dlFolderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
 		for (int i = 1; i < pathArray.length; i++) {
@@ -309,14 +264,14 @@ public class WebServerServlet extends HttpServlet {
 			User user, String[] pathArray)
 		throws Exception {
 
-		DLFileEntry dlFileEntry = getFile(pathArray);
+		DLFileEntry dlFileEntry = _getDLFileEntry(pathArray);
 
 		if (dlFileEntry == null) {
 			throw new NoSuchFileEntryException();
 		}
 
 		long groupId = dlFileEntry.getGroupId();
-		long folderId = dlFileEntry.getFolderId();
+		long dlFolderId = dlFileEntry.getFolderId();
 		String name = dlFileEntry.getName();
 		String fileName = dlFileEntry.getTitle();
 
@@ -334,23 +289,23 @@ public class WebServerServlet extends HttpServlet {
 			}
 		}
 
-		DLFileVersion fileVersion =
+		DLFileVersion dlFileVersion =
 			DLFileVersionLocalServiceUtil.getFileVersion(
-				groupId, folderId, name, version);
+				groupId, dlFolderId, name, version);
 
-		fileName = fileVersion.getTitle();
+		fileName = dlFileVersion.getTitle();
 
 		String extension = GetterUtil.getString(
 			FileUtil.getExtension(fileName));
 
 		if (Validator.isNull(extension) ||
-			!extension.equals(fileVersion.getExtension())) {
+			!extension.equals(dlFileVersion.getExtension())) {
 
-			fileName += StringPool.PERIOD + fileVersion.getExtension();
+			fileName += StringPool.PERIOD + dlFileVersion.getExtension();
 		}
 
-		InputStream is = DLFileEntryLocalServiceUtil.getFileAsStream(
-			user.getCompanyId(), user.getUserId(), groupId, folderId, name,
+		InputStream inputStream = DLFileEntryLocalServiceUtil.getFileAsStream(
+			user.getCompanyId(), user.getUserId(), groupId, dlFolderId, name,
 			version);
 
 		boolean converted = false;
@@ -361,14 +316,16 @@ public class WebServerServlet extends HttpServlet {
 
 			String sourceExtension = FileUtil.getExtension(fileName);
 
-			InputStream convertedIS = DocumentConversionUtil.convert(
-				id, is, sourceExtension, targetExtension);
+			InputStream convertedInputStream = DocumentConversionUtil.convert(
+				id, inputStream, sourceExtension, targetExtension);
 
-			if ((convertedIS != null) && (convertedIS != is)) {
+			if ((convertedInputStream != null) &&
+				(convertedInputStream != inputStream)) {
+
 				fileName = FileUtil.stripExtension(fileName).concat(
 					StringPool.PERIOD).concat(targetExtension);
 
-				is = convertedIS;
+				inputStream = convertedInputStream;
 
 				converted = true;
 			}
@@ -383,14 +340,15 @@ public class WebServerServlet extends HttpServlet {
 				contentLength = (int)dlFileEntry.getSize();
 			}
 			else {
-				contentLength = (int)fileVersion.getSize();
+				contentLength = (int)dlFileVersion.getSize();
 			}
 		}
 
 		String contentType = MimeTypesUtil.getContentType(fileName);
 
 		ServletResponseUtil.sendFile(
-			request, response, fileName, is, contentLength, contentType);
+			request, response, fileName, inputStream, contentLength,
+			contentType);
 	}
 
 	protected void sendFile(
@@ -452,6 +410,54 @@ public class WebServerServlet extends HttpServlet {
 		response.setContentType(ContentTypes.TEXT_HTML_UTF8);
 
 		ServletResponseUtil.write(response, html);
+	}
+
+	private static DLFileEntry _getDLFileEntry(String[] pathArray)
+		throws Exception {
+
+		if (pathArray.length == 1) {
+			long dlFileShortcutId = GetterUtil.getLong(pathArray[0]);
+
+			DLFileShortcut dlFileShortcut =
+				DLFileShortcutServiceUtil.getFileShortcut(dlFileShortcutId);
+
+			return DLFileEntryServiceUtil.getFileEntry(
+				dlFileShortcut.getGroupId(), dlFileShortcut.getToFolderId(),
+				dlFileShortcut.getToName());
+		}
+		else if (pathArray.length == 2) {
+			long groupId = GetterUtil.getLong(pathArray[0]);
+
+			return DLFileEntryServiceUtil.getFileEntryByUuidAndGroupId(
+				pathArray[1], groupId);
+		}
+		else {
+			long groupId = GetterUtil.getLong(pathArray[0]);
+			long dlFolderId = GetterUtil.getLong(pathArray[1]);
+			String fileName = HttpUtil.decodeURL(pathArray[2], true);
+
+			return DLFileEntryServiceUtil.getFileEntryByTitle(
+				groupId, dlFolderId, fileName);
+		}
+	}
+
+	private static long _getGroupId(long companyId, String name)
+		throws Exception {
+
+		try {
+			Group group = GroupLocalServiceUtil.getFriendlyURLGroup(
+				companyId, StringPool.SLASH + name);
+
+			return group.getGroupId();
+		}
+		catch (NoSuchGroupException nsge) {
+		}
+
+		User user = UserLocalServiceUtil.getUserByScreenName(companyId, name);
+
+		Group group = user.getGroup();
+
+		return group.getGroupId();
 	}
 
 	private static final String _DATE_FORMAT_PATTERN = "d MMM yyyy HH:mm z";
