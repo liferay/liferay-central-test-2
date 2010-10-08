@@ -42,6 +42,10 @@ int firstDayOfWeek = GetterUtil.getInteger((String)request.getAttribute("liferay
 String imageInputId = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-date:imageInputId"));
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:disabled"));
 
+final String DATE_FORMAT_MDY = "['m', 'd', 'y']";
+final String DATE_FORMAT_YMD = "['y', 'm', 'd']";
+final String DATE_FORMAT_DMY = "['d', 'm', 'y']";
+
 if (Validator.isNull(imageInputId)) {
 	imageInputId = randomNamespace + "imageInputId";
 }
@@ -49,12 +53,15 @@ else {
 	imageInputId = namespace + imageInputId;
 }
 
-String dateFormatPattern = ((SimpleDateFormat)(DateFormat.getDateInstance(DateFormat.SHORT))).toPattern();
+String dateFormatPattern = ((SimpleDateFormat)(DateFormat.getDateInstance(DateFormat.SHORT, locale))).toPattern();
 
-boolean dateFormatMDY = true;
+String dateFormatOrder = DATE_FORMAT_MDY;
 
 if (dateFormatPattern.indexOf("y") == 0) {
-	dateFormatMDY = false;
+	dateFormatOrder = DATE_FORMAT_YMD;
+}
+else if (dateFormatPattern.indexOf("d") == 0) {
+	dateFormatOrder = DATE_FORMAT_DMY;
 }
 
 Date selectedDate = new Date();
@@ -87,13 +94,33 @@ if (yearValue > 0) {
 					String[] months = CalendarUtil.getMonths(locale);
 					%>
 
-					<%@ include file="select_month.jspf" %>
+					<c:choose>
+						<c:when test="<%= dateFormatOrder.equals(DATE_FORMAT_MDY) %>">
+							<%@ include file="select_month.jspf" %>
+			
+							<%@ include file="select_day.jspf" %>
+			
+							<%@ include file="select_year.jspf" %>
+						</c:when>
+	
+						<c:when test="<%= dateFormatOrder.equals(DATE_FORMAT_YMD) %>">
+							<%@ include file="select_year.jspf" %>
+			
+							<%@ include file="select_month.jspf" %>
+			
+							<%@ include file="select_day.jspf" %>
+						</c:when>
+	
+						<c:otherwise>
+							<%@ include file="select_day.jspf" %>
+			
+							<%@ include file="select_month.jspf" %>
+			
+							<%@ include file="select_year.jspf" %>
+						</c:otherwise>
+					</c:choose>
 				</c:when>
 			</c:choose>
-
-			<%@ include file="select_day.jspf" %>
-
-			<%@ include file="select_year.jspf" %>
 		</div>
 		<div class="aui-datepicker-button-wrapper">
 			<button class="aui-buttonitem aui-buttonitem-content aui-buttonitem-icon-only aui-component aui-state-default aui-widget" id="buttonTest" type="button">
@@ -108,7 +135,7 @@ if (yearValue > 0) {
 <aui:script use="aui-datepicker-select">
 	var datePicker = new A.DatePickerSelect(
 		{
-			appendOrder: <%= dateFormatMDY ? "['m', 'd', 'y']" : "['y', 'm', 'd']" %>,
+			appendOrder: <%= dateFormatOrder %>,
 			boundingBox: '#<%= randomNamespace %>displayDate',
 			calendar: {
 				dates: [
