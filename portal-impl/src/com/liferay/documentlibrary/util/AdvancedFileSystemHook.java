@@ -181,6 +181,10 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 	protected File getFileNameDir(
 		long companyId, long repositoryId, String fileName) {
 
+		if (fileName.indexOf(CharPool.SLASH) != -1) {
+			return getDirNameDir(companyId, repositoryId, fileName);
+		}
+
 		String ext = StringPool.PERIOD + FileUtil.getExtension(fileName);
 
 		if (ext.equals(StringPool.PERIOD)) {
