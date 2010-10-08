@@ -538,7 +538,7 @@ public class AnnouncementsEntryLocalServiceImpl
 			throw new EntryContentException();
 		}
 
-		if (!Validator.isUrl(url)) {
+		if (Validator.isNotNull(url) && !Validator.isUrl(url)) {
 			throw new EntryURLException();
 		}
 	}
