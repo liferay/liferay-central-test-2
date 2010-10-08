@@ -101,7 +101,7 @@
 	margin: 0 0 0.5em 0.5em;
 }
 
-.portlet-enterprise-admin .organization-view-icon {
+.portlet-enterprise-admin .organizations-list-view-icon {
 	float:right;
 }
 
