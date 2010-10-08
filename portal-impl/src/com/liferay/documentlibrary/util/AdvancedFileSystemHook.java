@@ -187,30 +187,25 @@ public class AdvancedFileSystemHook extends FileSystemHook {
 			ext += _HOOK_EXTENSION;
 		}
 
-		int pos = fileName.lastIndexOf(CharPool.SLASH);
+		StringBundler sb = new StringBundler();
 
-		if (pos == -1) {
-			StringBundler sb = new StringBundler();
+		String fileNameFragment = FileUtil.stripExtension(fileName);
 
-			String fileNameFragment = FileUtil.stripExtension(fileName);
+		if (fileNameFragment.startsWith("DLFE-")) {
+			fileNameFragment = fileNameFragment.substring(5);
 
-			if (fileNameFragment.startsWith("DLFE-")) {
-				fileNameFragment = fileNameFragment.substring(5);
-
-				sb.append("DLFE" + StringPool.SLASH);
-			}
-
-			buildPath(sb, fileNameFragment);
-
-			File repositoryDir = getRepositoryDir(companyId, repositoryId);
-
-			return new File(
-				repositoryDir + StringPool.SLASH + sb.toString() +
-					StringPool.SLASH + fileNameFragment + ext);
+			sb.append("DLFE" + StringPool.SLASH);
 		}
-		else {
-			return getDirNameDir(companyId, repositoryId, fileName);
-		}
+
+		buildPath(sb, fileNameFragment);
+
+		File repositoryDir = getRepositoryDir(companyId, repositoryId);
+
+		File fileNameDir = new File(
+			repositoryDir + StringPool.SLASH + sb.toString() +
+				StringPool.SLASH + fileNameFragment + ext);
+
+		return fileNameDir;
 	}
 
 	protected File getFileNameVersionFile(
