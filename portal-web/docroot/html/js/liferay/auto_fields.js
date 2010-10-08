@@ -128,15 +128,9 @@ AUI().add(
 						}
 
 						Liferay.on(
-							'submitForm',
+							'saveAutoFields',
 							function(event) {
-								var form = event.form;
-
-								form.all('.lfr-form-row').each(instance._clearHiddenRows, instance);
-
-								var fieldOrder = instance.serialize();
-
-								instance._fieldIndexes.val(fieldOrder);
+								instance.save(event.form);
 							}
 						);
 
@@ -146,6 +140,8 @@ AUI().add(
 								contentBox.all('.lfr-form-row').each(instance._clearHiddenRows, instance);
 							}
 						);
+
+						instance._attachSubmitListener();
 					},
 
 					addRow: function(node) {
@@ -205,6 +201,18 @@ AUI().add(
 						}
 					},
 
+					save: function(form) {
+						var instance = this;
+
+						var contentBox = form || instance._contentBox;
+
+						contentBox.all('.lfr-form-row').each(instance._clearHiddenRows, instance);
+
+						var fieldOrder = instance.serialize();
+
+						instance._fieldIndexes.val(fieldOrder);
+					},
+
 					serialize: function(filter) {
 						var instance = this;
 
@@ -245,6 +253,14 @@ AUI().add(
 						if (sortableHandle) {
 							node.all(sortableHandle).addClass('handle-sort-vertical');
 						}
+					},
+
+					_attachSubmitListener: function() {
+						var instance = this;
+
+						Liferay.on('submitForm', A.bind(Liferay.fire, Liferay, 'saveAutoFields'));
+
+						AutoFields.prototype._attachSubmitListener = Lang.emptyFn;
 					},
 
 					_clearForm: function(node) {
