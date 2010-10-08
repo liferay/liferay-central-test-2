@@ -64,15 +64,19 @@ public class LiferayDefaultSelenium
 	}
 
 	public void saveScreenShotAndSource() throws Exception {
-		String screenShotName = getScreenshotFileName();
+		String screenShotName = null;
 
 		if (TestPropsValues.SAVE_SCREENSHOT) {
+			screenShotName = getScreenshotFileName();
+
 			captureEntirePageScreenshot(
 				_OUTPUT_SCREENSHOTS_DIR + screenShotName + ".jpg", "");
 		}
 
 		if (TestPropsValues.SAVE_SOURCE) {
 			String content = HttpUtil.URLtoString(getLocation());
+
+			screenShotName = getScreenshotFileName();
 
 			FileUtil.write(
 				_OUTPUT_SCREENSHOTS_DIR + screenShotName + ".html", content);
@@ -106,9 +110,10 @@ public class LiferayDefaultSelenium
 				 className.endsWith("Test")) {
 
 				String dirName = className.substring(
-					22, className.lastIndexOf(".") + 1);
+					22, className.length());
 
 				dirName = StringUtil.replace(dirName, ".", "/");
+				dirName = dirName + "/";
 
 				String fileName = stackTraceElement.getFileName();
 				int lineNumber = stackTraceElement.getLineNumber();
